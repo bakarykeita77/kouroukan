@@ -1,0 +1,453 @@
+.evaluation_btn { 
+    display: none;
+    margin: 0;
+    padding: 0;
+}
+#teste {
+    width: calc(100% - 64px);
+    overflow: auto;
+    margin: 0;
+    padding: 0 32px;
+    background-color: #ddd;
+}
+#fermer_teste {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin: 4px;
+    text-align: center;
+    line-height: 20px;
+    color: #fff;
+    font-weight: bold;
+    background-color: #ccc;
+    cursor: pointer;
+}
+#fermer_teste:active { background-color: #888; }
+#teste_entete {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+    border: 1px solid transparent;
+    border-bottom-color: #aaa;
+    height: 5vh;
+    font-weight: normal;
+    margin: 0 0 8px 0; 
+    padding: 0 
+}
+#titre_teste { 
+    margin: 0 16px; 
+    padding: 0; 
+}
+#nivo { margin: 0; }
+.centrer_parfait{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#teste_corps{
+    position: relative;
+    top: 0;
+    height: 54vh;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+#questionneur, #repeteur, #correcteur{
+    position: relative;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    background-color: #666;
+    cursor: pointer;
+    transition: 0.4s;
+}
+#repeteur {
+    display: none;
+}
+#correcteur {
+    display: none;
+}
+#questionneur:active{
+    background-color: #aaa;
+}
+#repeteur:active{
+    background-color: #aaa;
+}
+#correcteur:active{
+    background-color: #aaa;
+}
+#epreuves {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    left: 0;
+    width: 100%;
+    height: 40vh;
+    box-sizing: border-box;
+}
+#sujet, #correction, #progress_bar{
+    position: absolute;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+#sujet{
+    right: 0;
+    width: 50%;
+}
+#correction{
+    right: 52%;
+    width: 35%;
+}
+#progress_bar{
+    display: none;
+    height: 8px;
+    width: 98.5%;
+    border: 1px solid #aaa;
+    background-color: #fff;
+}
+#question_progress_bar, #bonne_reponse_progress_bar{
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    bottom: 0;
+    right: 0;
+    width: 0;
+    height: 8px;
+    transition: 1s;
+}
+#question_progress_bar{
+    background-color: #aaa;
+}
+#bonne_reponse_progress_bar{
+    background-color: yellow;
+}
+#question, #reponse_teste, #felicitation, #ducourrage {
+    position:absolute;
+    margin: 0 2.5%;
+    padding: 0 2.5%;
+    text-align: right;
+    color: #000;
+    text-shadow: 5px 5px 5px #888;
+}
+#question {
+	display: none;
+	width: 10%;
+	height: 10vh;
+}
+#reponse_teste{
+    width: auto;
+    font-size: 112px;
+    line-height: 112px;
+    font-weight: bold;
+    text-align: center;
+}
+#fausse_reponse{
+    z-index: 0;
+}
+#fausse_reponse_signe{
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    left: 0;
+    width: 100%;
+    color: red;
+    opacity: 0.6;
+    text-align: center;
+    transform: scale(0,0);
+    z-index: 1;
+    transition: transform 200ms;
+}
+#questionneur p {
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+#questionneur:active, #repeteur:active { background-color: #888; }
+#cqp1, #cqp2 { margin: 6px; }
+#vraie_reponse { color: black; }
+#felicitation {
+    margin: 0;
+    padding: 0;
+    left: 0;
+    transform: scale(0);
+    transition: transform 300ms;
+ }
+#felicitation p {
+    background-color:transparent;
+    display: block;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+
+ }
+.main_animee {
+    animation-name: animer_la_main;
+    animation-delay: 600ms;
+    animation-duration: 0.4s;
+    animation-iteration-count: 4;
+ }
+#felicitation #p1 {
+    font-size:  3em;
+ }
+#felicitation #p2 {
+    width: 85%;
+    padding-right: 15%;
+ }
+
+#resultat_div, #deliberation_div{
+    position: absolute;
+    margin: 0;
+    height: 0;
+    bottom: 0;
+    overflow: hidden;
+    transition: 0.3s;
+ }
+#resultat_div{
+    background-color: transparent;
+    z-index: 1;
+ }
+#resultat_content{
+}
+#deliberation_div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    background-color: #eee;
+    z-index: 0;
+ }
+#deliberation_fermeture{
+    float: right;
+ }
+#resultat_du_teste, #deliberation_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: 32px;
+    left: 10%;
+    width: 80%;
+    height: 65vh;
+    background-color: #fff;
+    box-shadow: 4px 0 12px #666;
+    overflow: auto;
+ }
+#deliberation_container{
+    width: 80%;
+}
+#deliberation_container div{
+    width: 80%;
+}
+#note_resume_container{
+    padding: 0;
+}
+#note_resume_container{
+    position: absolute;
+    display: none;
+    width: 100%;
+    margin: 16px 0;
+}
+#resume_note{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    margin: 16px 0;
+    padding: 16px;
+    background-color: #ccc;
+}
+#resume_note:active{
+    background-color: #888;
+}
+#resume_note p{
+    padding: 0;
+    margin: 0;
+    border: 1px solid transparent;
+}
+#resume_note p span{
+    display: inline-block;
+}
+.resume_note_libele{
+    width: 160px;
+}
+.resume_note_valeur{
+    width: 64px;
+    text-align: center;
+    background-color: #bbb;
+}
+.resume_chiffre{
+    background-color: #bbb;
+    width: 64px;
+    text-align: center;
+}
+#deliberation_container p{
+    margin: 0;
+    padding: 0;
+}
+#afficheur_du_resultat{
+    position: absolute;
+    display: none;
+}
+#resultat_fermeture{
+    position: relative;
+    height: 24px;
+    width: 24px;
+    line-height: 24px;
+    text-align: center;
+    font-weight: bold;
+    color: black;
+    margin: 4px 8px;
+    border-radius: 50%;
+    background-color: #ddd;
+    cursor: pointer;
+}
+#resultat_th, #resultat_tfoot{
+    background-color: #bbb;
+    color: #444;
+}
+#resultat_entete, #resultat_corps, #resultat_pied{
+    position: relative;
+    width: 80%;
+}
+#resultat_table tr:first-child td{
+    padding: 0 8px;
+}
+#resultat_table tr:not(:first-child){
+    width: auto;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+}
+#resultat_table, #resultat_table td{
+    border: 1px solid #eee;
+    border-collapse: collapse;
+}
+#resultat_table td:not(#total_libele){
+    text-align: center;
+}
+#total_libele{
+    padding: 0 16px;
+    text-align: right;
+}
+#total_valeur{
+    color: red;
+}
+.fausse_reponse_td{
+    position: relative;
+    padding: 0;
+    margin: 0;
+}
+.fausse_rps{
+    display: block;
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    width: 100%;
+    text-align: center;
+}
+.rouge{
+    color: red;
+    opacity: 0.5;
+    transform: scaleX(2);
+}
+.erreur_back_color{
+    background-color: #eee;
+}
+
+#ducourrage {
+    top: 0.5em;
+    left: 0.5em;
+    color: #000;
+    margin: 0;
+    padding: 1em;
+    border-radius: 2.5%;
+    background-color: #fff;
+    transform:scale(0);
+    overflow: hidden;
+    transition-duration: 0.4s;
+}
+#ducourrage div p {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+#a_ecrire, #ecris { width: 52px; }
+#ex1, #ex2 {
+    margin: 0;
+    padding: 0;
+    min-width: 32px;
+    min-height: 16px;
+    background-color: #ddd;
+    border: 1px solid #fff;
+    color: black;
+    text-align: center;
+    font-weight: bold;
+}
+#indication {
+	width: 6em;
+	margin: 0 0.5em;
+	transform: scale(0);
+	transition: transform 300ms;
+}
+#doigt { font-size: 3em; margin: 0; padding: 0; }
+table {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+.fausse_reponse {
+	color: #666;
+	text-decoration: line-through;
+	text-decoration-color: red;
+}
+.table_explicative { border-collapse: collapse; }
+.table_explicative td { border: 1px solid #ccc; padding: 0 8px; }
+.table_explicative th { border: 1px solid #ccc; background-color: #ddd; }
+.table_ordinaire td { text-align: center; font-weight: bold; }
+#teste_clavier {
+    width: 100%;
+    height: 25vh;
+    margin: 0;
+    background-color: #666;
+}
+
+#archive_form_container{
+    display: block;
+}
+
+@keyframes animer_la_main {
+    0%   { transform: scale(1);    }
+    50%  { transform: scale(0.75); }
+    100% { transform: scale(1);    }
+}
+@keyframes animer_indication {
+    0%   { transform:translateY(0); }
+    50%  { transform:translateY(-0.5em); }
+    100% { transform:translateY(0); }
+}
+@keyframes appuier {
+	0%   { transform:scale(1); }
+	50%  { transform:scale(0.75); }
+	100% { transform:scale(1); }
+}
+.ai {
+    animation-name: animer_indication;
+    animation-duration: 1s;
+    animation-delay: 300ms;
+}
+.appui {
+    animation-name: appuier;
+    animation-duration: 300ms;
+    animation-delay: 1500ms;
+}

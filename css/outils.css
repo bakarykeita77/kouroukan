@@ -1,0 +1,239 @@
+#outils{
+	direction: rtl;
+	display: none;
+}
+
+#pratiques{
+	position: relative;
+	border: 1px solid blue;
+	width: 20%;
+	right: -20%;
+	transition: 0.5s;
+}
+
+#pratiques:hover{
+	right: 0%;
+}
+
+#pratiques #bouton button{
+	display: block;
+	margin: 10px 0;
+}
+
+#bouton{
+	position: absolute;
+	right: 0;
+	background-color: #555;
+	height: 100%;
+	width: 200px;
+	padding: 10px;
+}
+
+#bouton button{
+	cursor: pointer;
+}
+
+#bouton button:hover{
+	background-color: yellow;
+}
+
+#bouton div:hover{
+	background-color: #333;
+}
+
+#bouton div .img, #bouton div .cmt{
+	display: inline-block;
+	height: 50px;
+}
+
+#bouton div .img{
+	width: 25%;
+	overflow: hidden;
+}
+
+#bouton div .img img{height: 100%;}
+
+#bouton div .cmt{
+	color: #fff;
+	width: 50%;
+	margin: 0 0 0 10px;
+}
+
+.titre_lettres{
+	margin:10px auto;
+	font-size:30px;
+	color:#eee;
+	text-align:center;
+}
+
+.table{
+	border: 15px solid grey;
+	border-top-style:none;
+	border-left-style:none;
+	border-bottom-style:none;
+	color:white;
+	background-color:rgb(25, 25, 25);
+	width: 75%;
+	max-width: 400px;
+	height:80%;
+	margin:5px auto;
+	font-weight:bold;
+	font-size:25px;
+}
+
+.table, .t{
+	display: inline-block;
+	vertical-align: top;
+}
+
+.table tr td{
+	float: right;
+}
+
+.table td{
+	border:1px solid none;
+	border-radius: 50%;
+	text-align:center;
+	display: inline-block;
+	width:50px;
+	height:50px;
+}
+
+.table td:hover{
+	background-color:yellow;
+	color: black;
+}
+
+.t{
+	width: 20%;
+	float: right;
+	position: relative;
+	top: 5px;
+	height:20px;
+	color:grey;
+}
+
+.t tr{
+	width: 100%;
+	height:10px;
+}
+
+.t th h4{
+	display: block;
+	position: absolute;
+	top: -20px;
+	width: 100%;
+	text-align:right;
+}
+
+.t th h4:hover{
+	color:white;
+}
+
+.cadre{
+	display: block;
+	margin: 5px auto;
+	padding: 5px;
+	border:1px solid rgb(25, 25, 25);
+}
+
+hr{
+	margin-bottom: 25px;
+	border-color:grey;
+}
+
+.cadre:hover{
+	border-color:blue;
+}
+
+
+
+
+
+
+
+#afficher, #masquer{
+	cursor: pointer;
+	margin: 2px;
+}
+
+#pratique{
+	display: block;
+	position: relative;
+	width: 80%;
+	height: 580px;
+	margin: auto;
+	overflow: hidden;
+	right: -2000px;
+	transition: 0.5s;
+	top: 0;
+}
+
+#commande, #pratique{
+	display: inline-block;
+}
+
+#commande{
+	vertical-align: top;
+}
+
+#ecran, #boutons{
+	overflow: hidden;
+	background-color: #aaa;
+}
+
+#boutons{
+	display: block;
+	margin: auto;
+	width: 475px;
+	position: relative;
+	bottom: 155px;
+	padding: 5px;
+	direction: rtl;
+}
+
+#ecran{
+	width: 100%;
+	height: 100%;
+	margin: auto;
+	padding: 5px;
+}
+
+#tableau{
+	width: 88.5%;
+	height: 78%;
+	background-color: black;
+	color: #fff;
+	padding: 5%;
+	margin: auto;
+	font-size: 3em;
+	font-weight: bold;
+	direction: rtl;
+}
+
+#lettre, #phonetique{
+	display: inline-block;
+	background-color: black;
+	padding: 5px;
+}
+
+#lettre td{
+	width: 10%;
+}
+
+#lettre td button{
+	width: 100%;
+	margin-left: 5px;
+	font-weight: bold;
+	background-color: #333;
+	color: #fff;
+	border-color: #333;
+	border-radius: 10%;
+	cursor: pointer;
+}
+
+.mini{
+	font-weight: normal;
+	font-size: 10px;
+}
+		

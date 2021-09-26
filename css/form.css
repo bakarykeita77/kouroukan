@@ -1,0 +1,62 @@
+#inscription_form{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	width: 40%;
+	border: 1px solid #ddd;
+	box-shadow: 4px 4px 4px #999;
+	margin: 32px auto;
+	padding: 16px;
+}
+#inscription_form form{
+	margin: auto;
+	width: 80%;
+}
+.input_box{
+	position: relative;
+	height: 32px;
+	width: 100%;
+	padding: 0 16px;
+	margin: 16px 0;
+	border: 1px solid transparent;
+	border-bottom-color: #aaa;
+}
+.input_box:hover{
+	background-color: #aaa;
+}
+.input_box:hover label{
+	color: #fff;
+}
+.input_box label{ 
+	top: 0;
+	color: #bbb;
+	z-index: 0; 
+}
+.input_box input{ 
+	border-style: none;
+	top: 0;
+	background-color: transparent;
+	z-index: 1; 
+}
+.input_box input:invalid{
+	border-style: none;
+}
+#inscription_form button{
+	width: 100%;
+	margin: auto;
+}
+.input_box input, .input_box label{
+	position: absolute;
+	margin: 0;
+	width: 100%;
+	font-size: 24px;
+} 
+.input_box input:focus ~ label,
+.input_box input:valid ~ label{
+	color: cornflowerblue;
+	top: -16px;
+	font-size: 12px;
+	transition: 0.5s;
+}

@@ -1,0 +1,442 @@
+body{
+    padding: 0;
+    margin: 0;
+    direction: rtl;
+}
+#alphabetisation {
+    
+}
+#table_de_matieres_container {
+    padding: 0;
+    margin: 0;
+    width: 300px;
+    overflow: hidden;
+}
+#table_de_matieres_container ul{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+#table_de_matieres_container ul li{
+    list-style: none;
+    padding: 4px 16px;
+    background-color: #ddd;
+    margin: 1px;
+    width: 100%;
+}
+#table_de_matieres_container ul li a{
+    font-size: 16px;
+    font-weight: bold;
+    color: rgba(0,0,0,0.5);
+    text-decoration: none;
+    background-color: #ddd;
+}
+#table_de_matieres_container ul li:hover{
+    transform: scaleY(1.2);
+    color: #000;
+    background-color: #aaa;
+    transition: 0.2s;
+}
+#table_de_matieres_container ul li:hover a{
+    transform: scaleY(1.2);
+    color: #000;
+    background-color: #aaa;
+    transition: 0.2s;
+}
+
+#table_de_matieres_container ul li a:hover{
+    transform: scaleY(1.2);
+    color: #000;
+    background-color: #aaa;
+    transition: 0.2s;
+}:hover{
+    transform: scaleY(1.2);
+    color: #000;
+    background-color: #aaa;
+    transition: 0.2s;
+}
+#grand_titre {
+    padding: 0 16px 0 0;
+    margin: 0 0 16px 0;
+    width: calc(100%-32px);
+    border: 1px solid transparent;
+    border-bottom-color: #eee;
+    overflow: auto;
+}
+#programme_container { position: relative; }
+.matieres {
+    position: relative;
+    height: 32px;
+    width: 100%;
+    margin: 0;
+    padding: 0 8px;
+    border: 1px solid transparent;
+    border-bottom-color: #ccc;
+    background-color: #eee;
+    cursor: pointer;
+}
+.matieres:hover { background-color: #ddd; }
+#table_de_matieres_titre { padding: 0 16px; }
+#matiere_menu { box-shadow: 0 4px 4px #aaa; }
+.menu_phases{
+    position: relative;
+    background-color: #eee;
+    transition: 400ms;
+}
+#sous_menu_phase_content { position: fixed; }
+#menu_flotant_container {
+    position: absolute;
+    display: none;
+    padding: 8px 0;
+    border-right: 4px solid orange;
+    overflow: hidden;
+    z-index: 16;
+}
+.menu_table{ width: 100%; }
+.phases_corps_container {
+    position: relative;
+    width: 100%;
+}
+#phase_menu_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    width: 100%;
+    box-shadow: -4px 4px 4px #aaa;
+}
+.menu_content td{
+    position: relative;
+    width: 200px;
+}
+#menu_flotant {
+    position: absolute;
+    width: 160px;
+    margin: auto;
+    padding: 0;
+    z-index: 21;
+    background-color: #eee;
+    box-shadow: 0 4px 4px #666;
+}
+#lesson_div {
+    display: none;
+    position: fixed;
+    margin: 0;
+    padding: 0;
+    transform: scale(0.75);
+    transition: 200ms;
+    z-index: 15
+}
+#teste_div{
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    bottom: 4px;
+    background-color: #eee;
+    overflow: hidden;
+    transition: 0.3s;
+    z-index: 1000;
+}
+#teste_container{
+    display: none;
+    position: relative;
+    padding: 4px 16px;
+    margin: 0 auto;
+    top: 4px;
+    transition: 0.3s;
+}
+#lesson_container{
+    position: relative;
+    height: 80vh;
+    background-color: #eee;
+}
+
+
+#lesson_entete {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    margin: 4px 16px 12px 16px;
+    padding: 2px;
+    height: 8vh;
+    max-height: 40px;
+    width: 90%;
+    border: 1px solid #ddd;
+}
+#lesson_entete table {
+    position: relative;
+    background-color: #ddd;
+}
+#lesson_entete table:active { background-color: #aaa; }
+#lesson_parametres_btn, #lesson_sonorisation_btn {
+    margin: 0 1px;
+    width: 15%;
+}
+#lesson_matiere_menu_btn, #lesson_phase_menu_btn{
+    margin: 0 1px;
+    width: 30%;
+}
+
+#lesson_parametres_container{
+    position: relative;
+    height: 8px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    z-index: 5;
+}
+#lesson_parametres_glissiere {
+    position: relative;
+    margin: 0 auto;
+    padding: 0;
+    background-color: #ccc;
+    overflow: hidden;
+    transition: 300ms;
+}
+#lesson_parametres{
+    position: relative;
+    width: 95%;
+    height: 8px;
+    margin: 0 auto;
+    padding: 0;
+    z-index: 5;
+    overflow: hidden;
+    background-color: #ddd;
+}
+#submit_btn{ 
+    position:absolute;
+    background-color: #ddd;
+    top: 120px;
+    height:24px; 
+    width:calc(100% - 8px); 
+    border-style:none; 
+    margin: auto; 
+    font-weight:bold; 
+    font-size:16px; 
+}
+#croix {
+    position: absolute;
+    opacity: 0.6;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    font-weight: bold;
+    text-align: center;
+    font-size: 20px;
+    right: 0;
+    transform: scale(0);
+    transition: 0.25s;
+}
+#reponse {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    line-height: 200%;
+    border-radius: 50%;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 24px;
+    right: 0;
+    top: 0;
+}
+#cosh {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border-radius: 50%;
+    background-image: radial-gradient(yellow, #ddd);
+    right: 0;
+    top: 0;
+    transform: scale(0);
+    z-index: 0;
+}
+
+#lesson_corps {
+    position: relative;
+    top: 0;
+    margin: 4px auto 1px;
+    height: 70vh;
+    width: 90%;
+    background-color: #ddd;
+    overflow: auto;
+    transition: 1s;
+}
+.table_parlante_container{
+    border: 1px solid transparent;
+    border-bottom: 4px solid #eee;
+    height: 3;
+    overflow: auto;
+    transition: 0.6s;
+}
+#lesson_pied{
+    background-color: #ddd;
+    height: 8px;
+    width: 95%;
+    margin: 1px auto 8px;
+}
+
+#table2{
+    position: relative;
+    background-color: #aaa;
+    top: 160px;
+}
+
+.checkbox_titre{
+    position: relative;
+    width: 90%;
+}
+.check_btn_container{
+    position: absolute;
+    height: 400px;
+    width: 90%;
+    background-color: #ccc;
+    border: 1px solid #aaa;
+    overflow: auto;
+}
+.check_btn{
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+}
+.check_btn input, .checkbox_titre input{ margin: 0 6px; }
+.ton_signe, .nasalisation_signe{
+    position: absolute;
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    text-align: left;
+    padding: 4px;
+    border: 1px dashed #aaa;
+}
+.ton_signe{ line-height: 16px; }
+.nasalisation_signe{ line-height: 0; }
+#phase_div {
+    position: absolute;
+    display: none;
+    min-width: 250px;
+    width: 25vw;
+    margin: 72px 0;
+    right: 46vw;
+    background-color: #fff;
+    transform: scale(0);
+    z-index: 1;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 4px #999;
+    transition: 400ms;
+}
+#phase_titre {
+    background-color: #eee;
+    margin: 0;
+    padding: 16px 32px;
+}
+#phase_menu_btn_nom { padding: 0 32px; }
+#phases_container {
+    display: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow: hidden;
+}
+#lesson_phase_menu_btn .cadena_ouvert { display: none; }
+#phases_container p:hover { color: orange; }
+#lesson_matiere_menu_btn, #lesson_phase_menu_btn{ min-width: 15vw; }
+#teste_content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    height: 4vh;
+    max-height: 32px;
+    width: calc(95% - 32px);
+    background: #ddd;
+    padding: 0 16px;
+    font-weight: bold;
+}
+#niveau_d_etude { display: none; }
+#teste_btn{
+    width: 100%;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #ccc;
+}
+#aide {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 48px;
+    background-color: orange;
+}
+
+.afficher{display: block;}
+.masquer{display: none;}
+.cadena_ferme, .cadena_ouvert {
+    position: relative;
+    float: left;
+}
+.cadena_ferme { display: none; }
+.fond_blanc { background-color: #fff; }
+.fond_blanc_casse { background-color: #aaa; }
+.fond_noir_clair { background-color: #ccc; }
+.menu_btn{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+ }
+.menu_content {
+    position: absolute;
+    display: none;
+    background-color: #eee;
+    box-shadow: 0 8px 8px #aaa;
+    margin: 0;
+    padding: 0;
+    height: 0;
+    overflow: hidden;
+    z-index: 20;
+    transition: 0.15s;
+}
+.menu_content p {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-width: 150px;
+    background-color: #eee;
+}
+.menu_table { z-index: 20; }
+#menu_flotant_container{ z-index: 21; }
+.menu_table tr:last-child{}
+.noshadow { box-shadow: none; }
+.phase {
+    margin: 0;
+    padding: 0 px;
+    height: 32px;
+    width: 100%;
+    border: 1px solid transparent;
+    border-bottom-color: #ccc;
+    background-color: #fff;
+    line-height: 32px;
+}
+.phase:hover { background-color: #ddd; }
+.phase_entete, .phase_corps, .phase_pied {
+    padding: 0;
+    cursor: pointer;
+}
+.phase_nom {
+    position: relative;
+    height: 32px;
+    line-height: 32px;
+    float: right;
+}
+.play_btn, .stop_btn, .dicter_btn, .repet_btn { margin: 0 4px; }
+.stop_btn, .repeat_btn { display: none; }
+.sous_titre1 { margin: 0; }
+.shadow { box-shadow: 0 12px 32px black; }

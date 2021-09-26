@@ -1,0 +1,26 @@
+#programmes_container{
+    width: 60%;
+    border: 16px solid red;
+}
+#programmes_container ul{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    list-style-type: none;
+    right: 0;
+}
+#programmes_container li{
+    background-color: #ddd;
+    padding: 0 16px;
+    margin: 1px 0;
+    height: 32px;
+    line-height: 32px;
+    font-weight: bold;
+    cursor: pointer;
+}
+#programmes_container li:hover{
+    background-color: #aaa;
+}
+#programmes_container a{
+    text-decoration: none;
+}

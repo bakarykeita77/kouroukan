@@ -1,0 +1,49 @@
+body{
+	margin: 0;
+	padding: 0;
+}
+
+#notre_equipe{
+	position: relative;
+	width: 75%;
+	margin: auto;
+	padding: 0;
+	background-color: #000;
+}
+
+#notre_equipe .membre{
+    display: inline−block;
+    margin: 1px;
+    padding: 1px;
+    background-color: #bbb;
+    overflow: hidden;
+}
+
+@media (min-width: 801px) {
+    #notre_equipe .membre{width: 20%;}
+    .biographie p{display: block;}
+}
+
+@media (max-width: 800px) {
+	#notre_equipe .membre{width: 30%; display: inline−block;}
+	.biographie p{display: none;}
+}
+
+#notre_equipe .membre div{
+	width: 90%;
+	margin: auto;
+	text-align: justify;
+	direction: rtl;
+}
+
+#notre_equipe div div.image{
+	width: 18vw;
+	height: 18vw;
+	border: 1px solid black;
+	border-radius: 50%;
+	overflow: hidden;
+}
+
+#notre_equipe .image img{
+	width: 100%;
+}

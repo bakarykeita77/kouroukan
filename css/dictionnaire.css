@@ -1,0 +1,15 @@
+.dictionnaire {
+	display: none;
+	width: 9em;
+	border: 1px solid red;
+}
+
+.dictionnaire td {
+	margin: 0;
+	padding: 0.5em;
+	height: 2em;
+	line-height: 2em;
+    background-color: #eee;
+    width: 2em;
+    overflow: auto;
+}

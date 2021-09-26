@@ -1,0 +1,38 @@
+#recherche_form {
+    display: none;
+    margin: 0;
+    padding: 0;
+}
+#recherche_input {
+    margin: 0;
+    padding: 0;
+}
+#liste_recherche_div {
+    margin: 0;
+    padding: 0;
+    background-color: #444;
+    color: #fff;
+}
+#suggestions {
+    display: none;
+    max-height: 10em;
+    overflow: auto;
+}
+#suggestions table {
+    border-collapse: collapse;
+    padding: 0;
+    margin: 0.125em ;
+    list-style-type: none;
+}
+
+#suggestions tr {
+    height: 2em;
+    line-height: 2em;
+    padding: 0 0.5em;
+    background-color: #555;
+    border: 1px solid #222;
+}
+#suggestions td:active { background-color: yellow; color: black; }
+#suggestions td {
+    padding: 0 1em;
+}

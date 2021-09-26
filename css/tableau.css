@@ -1,0 +1,218 @@
+#body{
+	margin: 0;
+	padding: 0;
+	direction: rtl;
+}
+
+#parametres_tableau  {
+    position: absolute;
+    display: none;
+    margin: 0;
+    padding: 0;
+    height: 25%;
+	background-color: #444;
+	overflow: hidden;
+	z-index: 1500;
+}
+
+#options_tableau {
+    position:absolute;
+    color: #fff;
+    font-weight: bold;
+    width: 25%;
+    height: 80%;
+    top: 10%;
+    right: 5%;
+    overflow: auto;
+    z-index: 1;
+}
+
+		#options_tableau table {
+			margin: 0;
+			padding: 0;
+			height: 100%;
+		    list-style: none;
+		}
+		
+		#options_tableau table tr {
+		    background-color: #333;
+		    width: 60%;
+		    height: 10%;
+		    padding: 20%;
+		}
+		
+		#options_tableau table tr td { text-align: center; }
+		#options_tableau table tr:active { background-color: #444; }
+		
+#details_parametres {
+    position: absolute;
+    width: 100%;
+    height: 200%;
+
+    overflow: auto;
+    z-index: 0;
+    transition: top 100ms;
+}
+
+#couleurs, #zoomer {
+    position:relative;
+    display:block;
+    width: 60%;
+    margin-right: 40%;
+}
+
+#couleurs {
+    height: 45%;
+	margin-top:5%; 
+}
+
+#couleurs #noir   { background-color: #222;    }
+#couleurs #blanc  { background-color: #fff;    }
+#couleurs #teal   { background-color: teal;    }
+#couleurs #jaune  { background-color: yellow;  }
+#couleurs #bleue  { background-color: #006699; }
+#couleurs #orange { background-color: orange;  }
+
+#couleurs td {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+
+#couleurs td p {
+	margin: 0;
+	padding: 0;
+	margin: 0 2em;
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
+}
+
+#zoomer { height: 50%; }
+#zoomer p { 
+	text-align: center; 
+}
+
+#plus, #moin {
+    width: 2em;
+    height: 2em;
+    line-height: 2em;
+    margin: 0 2em;
+    border-radius: 50%;
+    background-color: #222;
+    color: #fff;
+}
+
+
+
+
+
+#tableau_form {
+	margin: 0;
+	padding: 0;
+	overflow:auto;
+}
+
+#tableau_noir, #cadre_memoire, #cadre_smartboard, #cadre_assistant, #clavier_tableau {
+}
+
+#tableau_noir {
+    margin: 0;
+	padding: 5%;
+	color: #fff;
+	border-style: none;
+	background-color: #222;
+	font-weight: bold;
+	font-size: 32px;
+	direction: rtl;
+	overflow: auto;
+}
+
+#cadre_memoire {
+    left: -60vw;
+    overflow: auto;
+}
+
+#cadre_assistant {
+    display: block;
+}
+
+#cadre_smartboard {
+    display: none;
+    margin: 0;
+    padding: 0;
+    right: 5%;
+    color: #fff;
+    max-height: 12em;
+}
+
+#clavier_tableau {
+    display: none;
+    background-color: #444;
+    margin: auto;
+    height: 28vh;
+    transition: transform 0.4s;
+}
+
+#fermer_clavier {
+    position: relative;
+    display: block;
+    height: 1em;
+    width: 1em;
+    color: #fff;
+    margin: 0.25em 0.5em 0 ;
+    padding: 0.25em;
+    line-height: 1em;
+    text-align: center;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#fermer_clavier:hover{
+	background-color: #fff;
+	color: #000;
+	font-weight: bold;
+}
+
+.outils ils {
+}
+
+#btnCadre{
+	position: relative;
+	width: 4em;
+	margin: auto;
+	padding: 1em;
+}
+
+#btnComandes{
+	position: absolute;
+	background-color: #000;
+	height: 1.75em;
+	padding: 0;
+	margin: 0;
+	bottom: 0;
+}
+
+
+#btnCadre button{
+	position: relative;
+	margin: 0.25em;
+	border: 1px solid transparent;
+	border-radius: 50%;
+	cursor: pointer;
+	color: #fff;
+	background-color: #555;
+	font-weight: bold;
+}
+
+#table_de_mots{
+	display: none;
+	position: absolute;
+	bottom: 150px;
+	left: 0;
+	min-width: 200px;
+	min-height: 250px;
+	background-color: teal;
+	margin: 32px;
+	padding: 16px;
+}

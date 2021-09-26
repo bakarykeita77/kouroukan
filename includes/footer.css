@@ -1,0 +1,23 @@
+body{
+	margin:10%;
+}
+
+.cj{
+	color:yellow;
+}
+
+.gras{
+	font-weight: bold;
+}
+
+.bcg{
+	background-color: grey;
+}
+
+.shadow{
+	box-shadow: 2px 2px 2px black;
+}
+
+.cr{
+	color:red;
+}

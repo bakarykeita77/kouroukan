@@ -1,0 +1,119 @@
+
+body{
+	margin:0;
+	padding:0;
+}
+
+#banniere, #nav{
+	margin:0;
+	padding:0;
+	width: 100%;
+	display: block;
+	position: absolute;
+}
+
+#banniere{
+	top:0;
+	height:8%;
+	background-color: rgb(30, 30, 30);
+}
+
+		#logo, #contener{
+			margin:0;
+			padding:0;
+			display: inline-block;
+			position: absolute;
+		}
+
+		#logo{
+			height:80%;
+			left:5px;
+			top:10%;
+			border: 1px solid black;
+			border-radius: 50%
+		}
+
+		#contener{
+			height:80%;
+			top:10%;
+			right:0%;
+			min-width:400px;
+			max-width:600px;
+		}
+
+				#recherche, #connexion, #inscription{
+					z-index: 0;
+					display:inline-block;
+					position:absolute;
+					top:15%;
+				}
+
+				#connexion, #inscription, #accueil{
+					text-decoration: none;
+				}
+
+						
+				#connexion, #inscription{
+						background-color:black;
+						color:white;
+						padding:2px;
+				}
+
+				#recherche{
+					left:0%;
+				}
+					#loupe, #i{
+						margin:0;
+				        padding:0;
+						display: inline-block;
+						position:absolute;
+					}
+
+					#i{
+						float:right;
+					}
+
+				#inscription{
+					right:2%;
+				}
+
+				#connexion{
+					left:60%;
+				}
+
+#nav{
+	top:8%;
+	height:4%;
+	background-color:#cccccc;
+}
+
+		#accueil, #af, #menu{
+			position: absolute;
+			display:inline-block;
+		}
+
+		#accueil:hover, #menu:hover{
+					background-color:yellow;
+				}
+
+		#accueil{
+			left:2%;
+		}
+
+		#af{
+			left:15%;
+		}
+		
+		#menu{
+			right:122px;
+		}
+		
+		ul{
+			display: none;
+			position: absolute;
+			right: 100px;
+			top:100%;
+			list-style:none;
+			margin:0;
+			padding:0;
+		}

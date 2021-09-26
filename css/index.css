@@ -1,0 +1,219 @@
+body {
+    margin: 0;
+    padding: 0;
+    direction: rtl;
+    font-family:Courier new, monospace;
+ }
+.corps_de_page{
+    width: 80%;
+    position: relative;
+	z-index: 1500;
+    margin: 0 8px;
+    padding: 0 8px;
+    box-sizing: border-box;
+    
+}
+#aside02{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    
+    height: 6%;
+    width: 100%;
+}
+#aside02 p{
+    display: inline-block;
+    margin: 0;
+    padding: 0 8px;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    box-sizing: border-box;
+    height: 24px;
+    line-height: 24px;
+    font-size: 12px;
+    background-color: dodgerblue;
+}
+#asides_container2{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    
+    position: absolute;
+    height: 32px;
+    width: 100%;
+    right: 0;
+    bottom: 32px;
+}
+#asides_container2 div{
+    height: 100%;
+    width: 20%;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.2);
+}
+#asides_container2 div:hover{
+    transform: scale(1.1);
+    transition: 0.25s;
+}
+.pied_de_page { display: none; }
+#affiche_de_tableau {
+    display: none;
+ }
+.afficher {
+    transform:scaleX(1);
+ }
+.cacher {
+	transform:scaleX(0);
+ }
+
+#pied_de_page { position:relative; width: 100vw; }
+
+.page p, .page h1, .page h2, .page h3 {
+    padding: 8px;
+ }
+
+.page h1 {
+    background-color: #eee;
+    border-bottom: 4px solid #aaa;
+ }
+
+.page h2, .page h3, .page h4 {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-bottom: 1px solid #ccc;
+ }
+
+.page p {
+    margin: 0;
+ }
+.page table {
+    margin: 0 0 16px 0;
+ }
+
+#dictionnaireCadre {
+    display: none;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+#inscriptionCadre {
+    display: none;
+	position: relative;
+	margin: 0;
+	padding: 0;
+	top: 0;
+}
+
+#pop {
+	display: none;
+	position: fixed;
+	top: 15vh;
+	left: 5vw;
+	width: 600px;
+	height: 0;
+	max-width: 80vw;
+	max-height: 600px;
+	overflow: auto;
+	border: 1px solid #ddd;
+	box-shadow: 10px 10px 10px #555;
+	background-color: #fff;
+	opacity: 1;
+	z-index: 1000;
+}
+
+#cadre_content {
+    position: relative;
+    top: 8px;
+}
+
+#pop_content {
+    position: relative;
+    margin: 16px;
+    padding: 4px;
+    height:  63vh;
+    text-align: justify;
+    overflow: auto;
+    background-color: #eee;
+}
+
+a {
+    text-decoration: none;
+    color: blue;
+    cursor: pointer;
+}
+
+.evaluation {
+    color: orange;
+}
+.surbrillance {
+    display: inline-block;
+    padding: 0 6px;
+    text-align: center;
+    background-color: #ddd;
+    font-weight: bold;
+    border: 1px solid #ddd;
+}
+.active { background-color: #eee; }
+.tableau_active { background-color: #222; }
+.fixe { position: fixed; }
+#zoom {
+  padding: 50px;
+  background-color: green;
+  transition: transform .3s; /* Animation */
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+}
+.zoom {
+  transform: scale(5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+.rotation{
+    transform:rotate(45deg);
+}
+.g {
+    width: 250px;
+    height: 250px;
+}
+.p {
+    width: 0;
+    height: 0;
+}
+.triangle_down {
+    width: 0;
+    height: 0;
+    border-right: 6px solid transparent;
+    border-left: 6px solid transparent;
+    border-top: 12px solid black;
+}
+
+.triangle_up {
+    width: 0;
+    height: 0;
+    border-right: 6px solid transparent;
+    border-left: 6px solid transparent;
+    border-bottom: 12px solid black;
+}
+
+.triangle_right {
+    width: 0;
+    height: 0;
+    border-left: 12px solid black;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+}
+
+.triangle_left {
+    width: 0;
+    height: 0;
+    border-right: 12px solid black;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+}
+
+
+button:active {
+    background-color: #ccc;
+}

@@ -1,0 +1,24 @@
+body{ 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    direction: rtl; 
+}
+#clients_table{}
+#clients_table tr{ border-style: none; }
+#clients_table tr:nth-child(odd){ background-color: #ccc; }
+#clients_table tr:hover{ background-color: #aaa; }
+#clients_table td{ padding: 2px 8px; }
+
+.crud_btn{
+    background-color: #fff;
+    border: 1px solid #999;
+    border-radius: 5px;
+}
+.delete_btn a{ color: red;  }
+.update_btn a{ color: blue;  }
+.crud_btn a{ 
+    text-decoration: none;
+}

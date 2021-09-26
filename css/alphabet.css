@@ -1,0 +1,49 @@
+
+#clavier_container{
+    position: absolute;
+    background-color: #888;
+    margin: 0;
+    padding: 16px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+#teste_container{
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+#teste_input_container, #teste_annexes_container{
+    display: inline-block;
+    vertical-align: top;
+    height: 100%;
+}
+#teste_input_container{
+    width: 70%;
+    right: 0;
+}
+#teste_input{
+    width: 100%;
+}
+#teste_annexes_container{
+    width: 25%;
+    left: 0;
+}
+#progress_bar_container{
+    position: absolute;
+    height: 8px;
+    width: 100%;
+    left: 0;
+    overflow: hidden;
+}
+#progress_bar{
+    display: block;
+    position: relative;
+    border: 1px solid #ccc;
+    height: 6px;
+    top: -8px;
+    transition: 0.25s;
+}

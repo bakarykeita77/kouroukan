@@ -1,0 +1,79 @@
+
+#assistant {
+	position: fixed;
+	top: 120px;
+    display: block;
+    width: 60%;
+    max-width: 300px;
+    left: 20%;
+	transform: scale(0);
+    overflow: auto;
+    background-color: #555;
+    transition: transform 200ms;
+}
+
+#corps_assistant {
+    position: relative;
+    width: 80%;
+    margin: auto;
+}
+
+#assistant p{
+	padding: 4px;
+	margin: 0;
+	font-weight: bold;
+}
+
+#fermer_assistant{
+	margin: 8px;
+	border: 2px solid #555;
+	cursor: pointer;
+}
+
+#fermer_assistant:hover{
+	border-color: #fff;
+}
+#titre_assistant{
+	font-weight: bold;
+	font-size: 24px;
+	text-align: center;
+}
+
+#ecrit_correcte, #ecrit_errone{
+	padding: 0;
+	margin: 0;
+} 
+
+#ecrit_correcte{
+	color: white;
+}
+
+#ecrit_errone{
+	color: red;
+} 
+
+#message_erreur, #erreur{
+	display: inline-block;
+}
+
+#erreur{
+	background-color: #000;
+	font-weight: bolder;
+	font-size: 32px;
+	padding: 2px 5px;
+	max-width: 100%;
+	word-wrap: break-word;
+}
+
+@keyframes clignoter {
+    0%    { opacity: 1; }
+    40%   { opacity: 1; }
+    47.5% { opacity: 0; }
+    52.5% { opacity: 0; }
+    100%  { opacity: 1; }
+}
+.clignote {
+	animation-name: clignoter;
+	animation-duration: 1s;
+	animation-iteration-count: infinite;
+}

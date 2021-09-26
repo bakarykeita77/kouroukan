@@ -1,0 +1,30 @@
+
+#lesson_parametres_glissiere{
+    position: relative;
+}
+#parametres{
+    position: absolute;
+    display: none;
+    margin: 0;
+    padding: 8px 32px 0;
+    top: 136px;
+    overflow: hidden;
+    background-color: #ddd;
+    border-radius: 6px;
+    border: 1px solid #bbb;
+    z-index: 1;
+}
+#table1{
+    margin: 0;
+    padding: 0;
+}
+#table2{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    text-align: center;
+}
+#submit_btn{
+    width: 200px;
+    border-radius: 6px;
+}

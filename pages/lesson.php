@@ -16,6 +16,9 @@ if(isset($_SESSION['connected'])){
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/parametres.css"/>
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/evaluation.css"/>
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/class.css"/>
+	
+    <script src="http://localhost:8080/kouroukan/js/jquery-3.3.1.js"></script>
+    <script src="http://localhost:8080/kouroukan/js/html2canvas.js"></script>
 </head>
 <body style="direction:rtl">
     
@@ -63,6 +66,7 @@ if(isset($_SESSION['connected'])){
                     </div>
                 </div>
              <!-------------------------------------------------------------------->
+    	            <button id = 'shoot_btn'>Prendre photo de la page web</button>
                 <div class="course" id="lesson">
                     <div class="course_head" id="lesson_entete"></div> 
                     <div class="course_body" id="lesson_corps"></div>

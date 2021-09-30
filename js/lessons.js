@@ -604,7 +604,6 @@ $('document').ready(function() {
                     }
                 }
     	    }
-
             function lessonCourante(){
                
                 if(phase_id=='alphabet_apprentissage'){ lesson_courante = alphabetApprentissageHTML(); }
@@ -620,9 +619,8 @@ $('document').ready(function() {
                 return lesson_courante;
                 
                 function alphabetApprentissageHTML() {
-                    var table = "<div class='loupe'></div>";
-                  
-                    table += "<table class = 'table_parlante'>\n";
+
+                    var table = "<table class = 'table_parlante'>\n";
                     for(var i=0;i<lettres.length-lettres.length%7;i+=7) {
                         table += "<tr>\n";
                         for(var j=0;j<7;j++) {
@@ -747,7 +745,6 @@ $('document').ready(function() {
                 
                 return lq;
             }
-            
         	function syllab() {
                 var slb = [];
                 for(var k=0;k<caracteres_coches[4].length;k++){
@@ -760,7 +757,6 @@ $('document').ready(function() {
         
                 return slb;
             }
-        	
             function tonification(){
                 var tonifies = [];
             

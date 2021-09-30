@@ -22,7 +22,6 @@ if(isset($_SESSION['connected'])){
 </head>
 <body style="direction:rtl">
     
-    <div>new div</div>
     <div class="container">
         <div class="page_head"><?php require('tete-de-page.php'); ?></div>
         <div class="page_body">

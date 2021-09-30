@@ -83,7 +83,7 @@
     margin: 0;
     left: 50%;
     transform: translateX(-50%);
-    height: calc(100vh - 72px);
+    height: calc(100vh - 16px);
     background-color: #eee;
     overflow: auto;
 }
@@ -272,14 +272,6 @@
     height: 40px;
     line-height: 40px;
     box-sizing: border-box;
-}
-.loupe {
-    position: absolute;
-    border: 1px solid #ccc;
-    border-radius: 32px;
-    height: 64px;
-    width: 64px;
-    background-image: url("http://localhost:8080/kouroukan/image/keita.jpg");
 }
 
 .matiere {

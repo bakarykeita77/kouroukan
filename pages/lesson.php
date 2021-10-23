@@ -25,7 +25,7 @@ if(isset($_SESSION['connected'])){
     <div class="container">
         <div class="page_head"><?php require('tete-de-page.php'); ?></div>
         <div class="page_body">
-            
+         
             <div class="phases_container centerH" align="right" style="width:70%">
                 <p id='niveau' style='display:none'><?= $chiffres[$niveau] ?></p>
                 <h4>ߘߋ߰ߟߌ ߞߛߊߞߊ : <span><?= $chiffres[$niveau] ?><span class='rang'></span></h4>
@@ -55,8 +55,8 @@ if(isset($_SESSION['connected'])){
                         </table>
                         <table id='table2'><tr><td><input type='submit' name='submit_btn' value='ߏ߬ ߛߓߍߦߊ߫. ' id='submit_btn'></td></tr></table>
                     </div>
-                    
-                    <div style='display:none'>
+              
+                     <div style='display:none'>
                         <div id='voyelles_cochees'></div>
                         <div id='consonnes_cochees'></div>
                         <div id='tedos_coches'></div>
@@ -130,7 +130,7 @@ if(isset($_SESSION['connected'])){
                         </div>
                     </div>
                     
-    	            <div class='progress_bar'><span class='progress_question_bar'></span><span class='progress_bonne_reponse_bar'></span></div>
+ 	            <div class='progress_bar'><span class='progress_question_bar'></span><span class='progress_bonne_reponse_bar'></span></div>
                     
                     <div class="clavier_container"><?php include "clavier.php"; ?></div>
                 </div>

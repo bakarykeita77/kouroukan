@@ -30,7 +30,7 @@ if(isset($_SESSION['connected'])){
                 <p id='niveau' style='display:none'><?= $chiffres[$niveau] ?></p>
                 <h4>ߘߋ߰ߟߌ ߞߛߊߞߊ : <span><?= $chiffres[$niveau] ?><span class='rang'></span></h4>
                 
-                <h1 class="lesson_title" id="<?= $matiere_id ?>"> <?= $matiere_nom ?> ߥߟߊ߬ߘߊ  </h2>
+                <h2 class="lesson_title" id="<?= $matiere_id ?>"> <?= $matiere_nom ?> ߥߟߊ߬ߘߊ  </h2>
                 <div class="phases"></div>
             </div>
 
@@ -39,9 +39,9 @@ if(isset($_SESSION['connected'])){
     </div>
     
     <div class="course_container">
-             <!-------------------------------------------------------------------->
-                <span class="fermeture" id="course_fermeture">&times;</span>
-             <!-------------------------------------------------------------------->
+      <!-------------------------------------------------------------------->
+        <span class="fermeture" id="course_fermeture">&times;</span>
+      <!-------------------------------------------------------------------->
                 <div id="parametres">
                     <div id='lesson_parametres_glissiere'>
                         <table id='table1'>
@@ -64,8 +64,7 @@ if(isset($_SESSION['connected'])){
                         <div id='nasalisations_cochees'></div>
                     </div>
                 </div>
-             <!-------------------------------------------------------------------->
-    	            <button id = 'shoot_btn'>Prendre photo de la page web</button>
+      <!-------------------------------------------------------------------->
                 <div class="course" id="lesson">
                     <div class="course_head" id="lesson_entete"></div> 
                     <div class="course_body" id="lesson_corps"></div>
@@ -81,7 +80,7 @@ if(isset($_SESSION['connected'])){
                         </form>
                     </div>
                 </div>
-             <!-------------------------------------------------------------------->
+      <!-------------------------------------------------------------------->
                 <div class="course" id="evaluation">
                     <div class="course_head" id="evaluation_entete">
                             
@@ -134,10 +133,10 @@ if(isset($_SESSION['connected'])){
                     
                     <div class="clavier_container"><?php include "clavier.php"; ?></div>
                 </div>
-             <!-------------------------------------------------------------------->
-                <p class='hand'> &#128070;&#127999; </p>
-             <!-------------------------------------------------------------------->
-            </div>
+      <!-------------------------------------------------------------------->
+        <p class='hand'> &#128070;&#127999; </p>
+      <!-------------------------------------------------------------------->
+    </div>
     <audio id="audio"></audio>
 
     <script src="http://localhost:8080/kouroukan/js/icones.js"></script>

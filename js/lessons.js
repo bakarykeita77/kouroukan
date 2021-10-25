@@ -1,5 +1,6 @@
 $('document').ready(function() {
-    var token = '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  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';
+    
+    var token = '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';
     var voyelles_cochees, consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees;
     var rang = '';
     

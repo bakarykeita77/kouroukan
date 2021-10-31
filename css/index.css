@@ -48,7 +48,14 @@ body {
     height: 24px;
     line-height: 24px;
     font-size: 12px;
-    background-color: dodgerblue;
+    font-weight: bolder;
+    background-color: #666;
+}
+#aside03 p:active {
+    background-color: #bbb;
+}
+#aside03 p a {
+    color: #fff;
 }
 #asides_container2{
     display: flex;

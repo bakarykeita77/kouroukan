@@ -1,0 +1,65 @@
+[33mcommit 9f9590ce8b170a1823bbe503429d9b17626d1532[m[33m ([m[1;36mHEAD -> [m[1;32minscription-design[m[33m, [m[1;32mmaster[m[33m)[m
+Author: Bakary Keita <bakarykeita77@gmail.com>
+Date:   Sun Oct 31 03:09:42 2021 +0000
+
+     Correction de inscription.inscription.css
+
+[33mcommit 065a40d244a98624bcedf7c080a7d98c0118ded2[m
+Author: Bakary Keita <bakarykeita77@gmail.com>
+Date:   Sat Oct 30 09:39:01 2021 +0000
+
+     Ajout de ngrok
+
+[33mcommit 80b263b057a14118cf2fb0e0f735c0a03e15b609[m
+Author: Bakary Keita <bakarykeita77@gmail.com>
+Date:   Sat Oct 30 09:37:44 2021 +0000
+
+    Ajout de ngrok wq
+
+[33mcommit 529a1ddb9f47057def27fb4dddc74937d0749a81[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Bakary Keita <bakarykeita77@gmail.com>
+Date:   Tue Oct 26 06:38:41 2021 +0000
+
+     suppression de token
+
+[33mcommit 924a41c9ffcf68aad6dfde12b74391754e6a9544[m
+Author: Bakary Keita <bakarykeita77@gmail.com>
+Date:   Mon Oct 25 20:38:33 2021 +0000
+
+     token
+
+[33mcommit e1bbbcb93057be1dce8f626fc781e2872261b99f[m
+Author: Bakary Keita <bakarykeita77@gmail.com>
+Date:   Sun Oct 24 22:59:12 2021 +0000
+
+     modification de lesson.lesson.php
+
+[33mcommit 5881bf10f3cb842f5c027a9c3c071c20bef4d475[m
+Author: Bakary Keita <bakarykeita77@gmail.com>
+Date:   Sat Oct 23 19:26:51 2021 +0000
+
+    modification de lesson.lesson.php
+
+[33mcommit 7ec2a310eb6f3350d8fc97843f7c982701cfef6b[m
+Author: Bakary Keita <bakarykeita77@gmail.com>
+Date:   Thu Sep 30 19:02:53 2021 +0000
+
+    Coreection
+
+[33mcommit 27977a8e4229f6e370a07c09cf8a1ca81b563e23[m
+Author: Bakary Keita <bakarykeita77@gmail.com>
+Date:   Mon Sep 27 22:32:39 2021 +0000
+
+    token
+
+[33mcommit 1e7c1634b0a6f30ec56f29790c0ebb4e46e6a5be[m
+Author: Bakary Keita <bakarykeita77@gmail.com>
+Date:   Mon Sep 27 22:02:47 2021 +0000
+
+    Telechargement et liaison a lesson.php
+
+[33mcommit 3c99e696d432eb70bfdb56fddaa7b89f71a0b2de[m
+Author: Bakary Keita <bakarykeita77@gmail.com>
+Date:   Sun Sep 26 21:06:16 2021 +0000
+
+    Premier commit

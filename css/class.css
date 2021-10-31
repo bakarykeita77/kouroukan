@@ -303,7 +303,7 @@
 .page_body{
     position: absolute;
     margin: 0;
-    width: 80%;
+    width: 100%;
     left: 50%;
     top: 72px;
     transform: translateX(-50%);
@@ -323,7 +323,7 @@
     position: absolute;
     margin: 0;
     height: 72px;
-    width: 80%;
+    width: 100%;
     left: 50%;
     transform: translateX(-50%);
     box-sizing: border-box;

@@ -15,16 +15,15 @@ session_start();
     <div class="container" align="center">
         
         <div class="page_head"><?php include("pages/tete-de-page.php"); ?></div>
-        <div id='fond_de_container' class='centerH' style='background:url("http://localhost:8080/kouroukan/image/keita.jpg") no-repeat; top:76px; width:80%; height:100%; opacity:0.25'></div>        
+        <div id='fond_de_container' class='centerH' style='background:url("http://localhost:8080/kouroukan/image/keita.jpg") no-repeat;'></div>        
         <div class="page_body">
             
-            <div id="asides_container0" align='center' style="position:absolute; top:64px; left:50%; transform:translateX(-50%); width:90%; height:60%">
-                <div id="aside01" style="top:0; height:32px; font-size:24px; padding-bottom:16px">ߒߞߏ ߘߋ߰ߟߌ ߦߙߐ ߓߟߐߟߐ ߞߊ߲߬</div>
-                <div>ߞߊ߬ ߒߞߏ ߘߋ߰߸ ߞߊߟߌߦߊ ߘߐ߫ ߊ߬ ߣߌ߫ ߣߐ߰ߦߊ ߘߐ߫.</div>
-                <div>ߞߙߎ߬ߞߊ߲߬ ߞߣߍ ߦߴߊߟߎ߫ ߟߊߓߌ߬ߟߊ ߘߐ߫߸ ߦߙߐ ߓߍ߯ ߘߐ߫ ߊ߬ ߣߌ߫ ߕߎߡߊ ߓߍ߯ ߟߊ߫.</div>
-                <div id="aside02" align="center" style="width:40%; margin:32px">
-                    <p id="inscription_btn" style="width:45%"><a href="http://localhost:8080/kouroukan/pages/inscription.php">ߌ ߕߐ߮ ߛߓߍ߫ </a></p>
-                    <p id="connexion_btn" style="width:45%"><a href="pages/connexion.php">ߌ ߜߊ߲߬ߞߎ߲߬</a></p>
+            <div id="asides_container0" align="center">
+                <div class="aside" id="aside01" style="font-size:24px">ߒߞߏ ߘߋ߰ߟߌ ߦߙߐ ߓߟߐߟߐ ߞߊ߲߬</div>
+                <div class="aside" id="aside02">ߞߙߎ߬ߞߊ߲߬ ߞߣߍ ߦߴߊߟߎ߫ ߟߊߓߌ߬ߟߊ ߘߐ߫߸ ߞߊ߬ ߒߞߏ ߘߋ߰߸ ߞߊߟߌߦߊ ߘߐ߫ ߊ߬ ߣߌ߫ ߣߐ߰ߦߊ ߘߐ߫. ߦߙߐ ߓߍ߯ ߘߐ߫ ߊ߬ ߣߌ߫ ߕߎߡߊ ߓߍ߯ ߟߊ߫.</div>
+                <div class="aside" id="aside03" align="center">
+                    <p id="inscription_btn"><a href="http://localhost:8080/kouroukan/pages/inscription.php">ߌ ߕߐ߮ ߛߓߍ߫ </a></p>
+                    <p id="connexion_btn"><a href="pages/connexion.php">ߌ ߜߊ߲߬ߞߎ߲߬</a></p>
                 </div>
             </div>
             <div id="asides_container2">

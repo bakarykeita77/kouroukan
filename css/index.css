@@ -13,22 +13,38 @@ body {
     box-sizing: border-box;
     
 }
-#aside02{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    
-    height: 6%;
+#fond_de_container {
+    background:url("http://localhost:8080/kouroukan/image/keita.jpg");
+    top: 76px;
     width: 100%;
+    height: 100%;
+    opacity: 0.25;
 }
-#aside02 p{
+#asides_container0 {
+    position: relative;
+    top: 10%;
+    width: 90%;
+    height: 60%;
+}
+.aside {
+    height: 32%;
+}
+.aside p{
+    position: relative;
+    top: 30%;
+}
+#aside03{
+    position: relative;
+    width: 250px;
+}
+#aside03 p{
     display: inline-block;
     margin: 0;
     padding: 0 8px;
     border: 1px solid #bbb;
     border-radius: 4px;
     box-sizing: border-box;
+    width: 120px;
     height: 24px;
     line-height: 24px;
     font-size: 12px;

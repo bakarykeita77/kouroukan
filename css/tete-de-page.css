@@ -3,7 +3,7 @@ body{
 #tete_de_page_container{
     position: absolute;
     height: 72px;
-    width: 80%;
+    width: 100%;
     top: 0;
 }
 #header, #topbar{
@@ -30,7 +30,7 @@ body{
 }
 
 .nav_bar{
-    width: 75%;
+    width: 100%;
     margin: 0 auto;
     padding: 0;
 	height: 48px;
@@ -41,7 +41,7 @@ body{
     margin: 0;
     padding: 0;
     top: -16px;
-    right: 0;
+    right: 4%;
 	width: 80px;
 	height: 80px;
 	border-radius: 50%;
@@ -52,11 +52,10 @@ body{
 #nav{
     position: absolute;
     height: 100%;
-    width: calc(100% - 82px);
-    left: 0;
-	border: 1px solid transparent;
+    width: 96%;
+    left: 2%;
 	border-radius: 4px;
-	background-color: rgba(0,0,0,0.075);
+	background-color: #005580;
 }
 #logo img { width: 80px; }
 .afficher { display:block; }

@@ -44,7 +44,7 @@
     	<div id="inscription_form" align="center">
     		
     		<h3>ߕߐ߯ߛߓߍߥߟߊ<h3>
-    		<form method="POST" action="">
+    		<form method="POST" action="" align='center'>
     		    <table>
         			<tr>
         				<td><label>ߕߐ߮</label></td>

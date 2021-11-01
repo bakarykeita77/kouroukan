@@ -1,7 +1,7 @@
 #programmes_container{
     position: absolute;
-    top: 16px;
-    width: 60%;
+    top: 64px;
+    width: 80%;
     padding: 8px;
     border: 1px solid #ccc;
 }

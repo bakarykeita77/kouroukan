@@ -15,7 +15,7 @@ session_start();
     <div class="container" align="center">
         
         <div class="page_head"><?php include("pages/tete-de-page.php"); ?></div>
-        <div id='fond_de_container' class='centerH' style='background:url("http://localhost:8080/kouroukan/image/keita.jpg") no-repeat;'></div>        
+        <div id='fond_de_container' class='centerH'></div>        
         <div class="page_body">
             
             <div id="asides_container0" align="center">

@@ -85,7 +85,6 @@
     transform: translateX(-50%);
     height: calc(100vh - 16px);
     background-color: #eee;
-    overflow: auto;
 }
 .course {
     position: absolute;
@@ -310,6 +309,7 @@
     box-sizing: border-box;
     height: calc(100% - 80px);
     z-index: 0;
+    overflow: auto;
 }
 .page_foot {
     position: absolute;

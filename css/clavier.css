@@ -21,6 +21,7 @@
     font-weight: bold;
     cursor: pointer;
     text-shadow: 0 0 8px #000;
+    height: 32px;
 }
 #clavier_nko table tr td:not(.espace) { border-radius: 15%; }
 #clavier_nko table tr td .espace { border-radius: 5%; }

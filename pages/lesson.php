@@ -30,7 +30,6 @@ if(isset($_SESSION['connected'])){
             <div class="phases_container centerH" align="right">
                 <p id='niveau' style='display:none'><?= $chiffres[$niveau] ?></p>
                 <h4>ߘߋ߰ߟߌ ߞߛߊߞߊ : <span><?= $chiffres[$niveau] ?><span class='rang'></span></h4>
-
                 <h2 class="lesson_title" id="<?= $matiere_id ?>"> <?= $matiere_nom ?> ߥߟߊ߬ߘߊ  </h2>
                 <div class="phases"></div>
             </div>

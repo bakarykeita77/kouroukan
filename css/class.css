@@ -61,7 +61,6 @@
 .centercell{ margin: auto; }
 .clavier_container{
     position: absolute;
-    height: 35vh;
     width: 100%;
     margin: auto;
     bottom: 0;

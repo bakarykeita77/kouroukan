@@ -2,8 +2,11 @@
     position: absolute;
     top: 64px;
     width: 80%;
-    padding: 8px;
-    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 32px;
+    border: 1px solid transparent;
+    box-shadow: 0 0 16px #ccc;
+    box-sizing: border-box;
 }
 #programmes_container ul{
     margin: 0;
@@ -14,6 +17,7 @@
 }
 #programmes_container li{
     background-color: #ddd;
+    border-radius: 6px;
     padding: 0 16px;
     margin: 1px 0;
     height: 32px;

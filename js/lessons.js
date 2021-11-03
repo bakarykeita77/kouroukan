@@ -60,7 +60,7 @@ $('document').ready(function() {
             	function afficherLesson(){
                     evaluation.css('display','none');
                 	    
-            	    $('.course_container').css({'display':'flex'});
+            	    $('.course_container').css({'display':'block'});
                     lesson.css('display','block');
                     lesson.css({'transform':'scale(0.75)', 'opacity':0});
                     setTimeout(function() { lesson.css({'transform':'scale(1)'});}, 5);
@@ -69,7 +69,7 @@ $('document').ready(function() {
             	function afficherEvaluation(){
                     lesson.css('display','none');
                
-            	    $('.course_container').css({'display':'flex'});
+            	    $('.course_container').css({'display':'block'});
                     evaluation.css({'display':'block', 'transform':'scale(0.75)', 'opacity':0});
                     setTimeout(function() { evaluation.css({'transform':'scale(1)'});}, 5);
                     setTimeout(function() { evaluation.css({'opacity':'1'});}, 5);

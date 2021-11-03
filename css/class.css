@@ -90,8 +90,9 @@
     position: absolute;
     padding: 0;
     margin: 0;
-    top: 96px;
-    width: 100%;
+    top: 112px;
+    width: 90%;
+    left: 5%;
     height: 70vh;
     box-sizing: border-box;
     border: 4px solid #fff;
@@ -111,12 +112,11 @@
 }
 .course_container {
     display: none;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    
-    position: fixed;
+    position: absolute;
     top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
     height: 100vh;
     width: 100vw;
     background-color: rgba(0,0,0,0.5);
@@ -333,11 +333,12 @@
 }
 .phases_container{
     position: absolute;
-    top: 32px;
-    width: 75%;
+    top: 64px;
+    width: 80%;
     border-radius: 6px;
     padding: 32px;
-    border: 1px solid #ddd;
+    border: 1px solid transparent;
+    box-shadow: 0 0 16px #ccc;
     box-sizing: border-box;
 }
 .phases_container h1, .phases_container h4 {

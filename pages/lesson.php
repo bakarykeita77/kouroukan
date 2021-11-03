@@ -1,12 +1,13 @@
 <?php
 session_start();
 if(isset($_SESSION['connected'])){
-    $matiere_id = $_GET['matiere_id'];
-    $matiere_nom = $_GET['matiere_nom'];
-    $niveau = $_GET['niveau']+1;
+   $matiere_id = $_GET['matiere_id'];
+   $matiere_nom = $_GET['matiere_nom'];
+   $niveau = $_GET['niveau']+1;
 
-    $chiffres = ['߀','߁','߂','߃','߄','߅','߆','߇','߈','߉'];
+   $chiffres = ['߀','߁','߂','߃','߄','߅','߆','߇','߈','߉'];
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,7 +27,7 @@ if(isset($_SESSION['connected'])){
         <div class="page_head"><?php require('tete-de-page.php'); ?></div>
         <div class="page_body">
 
-            <div class="phases_container centerH" align="right" style="width:70%">
+            <div class="phases_container centerH" align="right">
                 <p id='niveau' style='display:none'><?= $chiffres[$niveau] ?></p>
                 <h4>ߘߋ߰ߟߌ ߞߛߊߞߊ : <span><?= $chiffres[$niveau] ?><span class='rang'></span></h4>
 
@@ -56,7 +57,7 @@ if(isset($_SESSION['connected'])){
                 <table id='table2'><tr><td><input type='submit' name='submit_btn' value='ߏ߬ ߛߓߍߦߊ߫. ' id='submit_btn'></td></tr></table>
             </div>
 
-             <div style='display:none'>
+            <div style='display:none'>
                 <div id='voyelles_cochees'></div>
                 <div id='consonnes_cochees'></div>
                 <div id='tedos_coches'></div>
@@ -81,7 +82,7 @@ if(isset($_SESSION['connected'])){
             </div>
         </div>
       <!-------------------------------------------------------------------->
-        <div class="course" id="evaluation">
+        <div class="course" id="evaluation" align="center">
             <div class="course_head" id="evaluation_entete">
 
                 <div class="question_btn">
@@ -129,7 +130,7 @@ if(isset($_SESSION['connected'])){
                 </div>
             </div>
 
-         <div class='progress_bar'><span class='progress_question_bar'></span><span class='progress_bonne_reponse_bar'></span></div>
+            <div class='progress_bar'><span class='progress_question_bar'></span><span class='progress_bonne_reponse_bar'></span></div>
 
             <div class="clavier_container"><?php include "clavier.php"; ?></div>
         </div>
@@ -137,6 +138,7 @@ if(isset($_SESSION['connected'])){
         <p class='hand'> &#128070;&#127999; </p>
       <!-------------------------------------------------------------------->
     </div>
+    
     <audio id="audio"></audio>
 
     <script src="http://localhost:8080/kouroukan/js/icones.js"></script>
@@ -146,26 +148,9 @@ if(isset($_SESSION['connected'])){
     <script src="http://localhost:8080/kouroukan/js/lessons.js"></script>
     <script src="http://localhost:8080/kouroukan/js/evaluations.js"></script>
     <script src="http://localhost:8080/kouroukan/js/class.js"></script>
-
+    
 </body>
 </html>
 <?php
-    }else { header("location:programmes.php"); }
-?>
------------------------------------------------------>
-    </div>
-    <audio id="audio"></audio>
-
-    <script src="http://localhost:8080/kouroukan/js/icones.js"></script>
-    <script src="http://localhost:8080/kouroukan/fonctions.js"></script>
-    <script src="http://localhost:8080/kouroukan/js/caracteres.js"></script>
-    <script src="http://localhost:8080/kouroukan/js/parametres.js"></script>
-    <script src="http://localhost:8080/kouroukan/js/lessons.js"></script>
-    <script src="http://localhost:8080/kouroukan/js/evaluations.js"></script>
-    <script src="http://localhost:8080/kouroukan/js/class.js"></script>
-
-</body>
-</html>
-<?php
-    }else { header("location:programmes.php"); }
+   }else { header("location:programmes.php"); }
 ?>

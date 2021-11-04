@@ -382,20 +382,21 @@
     justify-content: center;
     align-items: center;
 
+    display: none;
     position: relative;
-    padding: 0;
     margin: 0;
-    box-sizing: border-box;
 }
 .profile_menu_head{
     height: 32px;
-    width: 80%;
+    width: 95%;
     line-height: 32px;
+    text-align: right;
     margin: 0;
     padding: 0 8px;
     background-color: #eee;
     border: 1px solid transparent;
     border-bottom-color: #fff;
+    border-radius: 6px;
 }
 .profile_menu_body{
 }

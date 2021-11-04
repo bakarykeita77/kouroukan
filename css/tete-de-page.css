@@ -133,33 +133,21 @@ body{
     #nav_outils li { display:inline-block; }
 }
 
-#profile_entete_container{
+#profile_container{
     position: absolute;
-    right: 0;
+    border: 1px solid transparent; 
+    border-radius: 6px;
+    box-shadow: 0 0 16px #ccc;
+    width: 90vw;
+    right: 5vw;
+    box-sizing: border-box;
+    top: 32px;
     margin: 32px 0;
+    padding: 8px;
     background-color: #fff;
     display: none;
-    width: 90%;
-    height: 0;
-    top: 75%;
     direction: rtl;
     overflow: hidden;
-    transition: 0.25s;
-}
-#profile_entete{
-    position: absolute;
-    display: none;
-    margin: 0;
-    padding: 16px;
-    width: 100%;
-    height: 100%;
-    border: 1px solid transparent;
-    border-radius: 5px;
-    background-color: #fff;
-    z-index: 1005;
-}
-#profile_entete:active{
-    box-shadow: none;
 }
 #profile_entete ul{
     direction: rtl;
@@ -171,6 +159,7 @@ body{
 #profile_teste_menu{
     display: none;
     height: 0;
+    width: 100%;
     overflow: auto;
     transition: height 0.25s;
 }
@@ -322,24 +311,26 @@ body{
     position: relative;
     display: none;
     height: 0;
-    width: 80%;
+    width: 100%;
     overflow: auto;
     box-sizing: border-box;
     transition: 0.25s;
     z-index: 1005;
 }
 #profile_utilisateur_renseignements, #profile_utilisateur_image_container{
-    position: relative;
+    position: absolute;
+    display: inline-block;
     margin: 4px;
     height: 172px;
-    border-radius: 8px;
+    border-radius: 6px;
     overflow: auto;
     vertical-align: top;
 }
 #profile_utilisateur_renseignements{
-    float: right;
-    width: 55%;
+    right: 0;
+    width: 60%;
     text-align: right;
+    z-index: 1;
 }
 #profile_utilisateur_renseignements div span:first-child{
     display: inline-block;
@@ -351,9 +342,10 @@ body{
     font-weight: bold;
 }
 #profile_utilisateur_image_container{
-    float: left;
-    width: 40%;
+    left: 0;
+    width: 50%;
     overflow: hidden;
+    z-index: 0;
 }
 #profile_utilisateur_image_container img{
     right: 0;

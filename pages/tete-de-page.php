@@ -28,9 +28,7 @@ session_start();
      	<div id="logo"> <img src="http://localhost:8080/kouroukan/pages/get-avatar.php?client_id=<?= $_SESSION['id'] ?>" alt="logo"/></div>
         <?php endif ?>
         
-     	<div id='profile_entete_container'>
-         	<div id='profile_entete'>
-         	    <span class="fermeture">&times;</span>
+     	<div id='profile_container'>
 
          	    <div id="client_name" style="display: none"><h2><?=$_SESSION['prenom'].' '.$_SESSION['nom'] ?> ߹</h2></div>
          	    <div id="profile_client_id" style="display: none"><?=$_SESSION['id']; ?></div>
@@ -47,7 +45,7 @@ session_start();
  	                </div>
              	    
              	    <div class="profile_menu_head" id="profile_teste_btn">ߘߋ߰ߟߌ ߗߏߦߊ</div>
-             	    <div class="profile_menu_body" id="profile_teste_menu" style="width:80%">
+             	    <div class="profile_menu_body" id="profile_teste_menu">
              	        <div align="center" id= "profile_menu_body_content">
              	            <div style="width:48%; float:right">
              	                <h4  id="titre_des_matieres_apprises" style="margin:4px 0">ߥߟߊ߬ߘߊ߫ ߘߋ߰ߣߍ߲ ߠߎ߬</h4>
@@ -62,7 +60,6 @@ session_start();
  	                
              	    <div class="profile_menu_head"><a href="deconnexion.php">Deconnexion</a></div>
          	    </div>
-         	</div>
      	</div>
  	    <div id="profile_teste" style="direction:rtl; left:-10%; top:48px"></div>
  	    <div id="profile_teste_point"></div>

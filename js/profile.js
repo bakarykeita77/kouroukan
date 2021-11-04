@@ -1,5 +1,5 @@
  
-    var profile_entete, profile_teste_btn, profile_teste_menu, profile_teste = '';
+    var profile_container, profile_entete, profile_teste_btn, profile_teste_menu, profile_teste;
     var profile_utilisateur_btn, profile_utilisateur_container, profile_utilisateur, modifier_avatar = '';
     var profile_clients_bruts = '';
     var lessons_studied_titles, profile_teste_content = '';
@@ -133,9 +133,8 @@
     }
     function affichageDeProfileEntete(){
         $('#logo').click(function(){
-            profile_entete_container.css({'display':'block', 'height':'60vh'});
-            $('#profile_entete').css({'display':'block', 'top':'-100px'});
-            $('#profile_entete').animate({'top':0},300);
+            $(".profile_menu").toggle(100);
+            profile_container.slideToggle(150);
         });
     }
     function manipulationDeProfileEntete(){
@@ -450,7 +449,7 @@
                 
             var profile_utilisateur_html  = '<div> <span>ߕߐ߮ </span><span id="profile_prenom"></span></div>\n';
                 profile_utilisateur_html += '<div> <span>ߖߊ߬ߡߎ߲ </span><span id="profile_nom"></span></div>\n';
-                profile_utilisateur_html += '<div> <span>ߡߐߦߌߕߎߡߊ </span><span id="profile_naissance"></span></div>\n';
+                profile_utilisateur_html += '<div> <span>ߡߐߦߌߛߊ߲ </span><span id="profile_naissance"></span></div>\n';
                 profile_utilisateur_html += '<div> <span>ߖߊ߲߭ </span><span id="profile_sexe"></span></div>\n';
                 profile_utilisateur_html += '<div> <span>ߛߊ߲߬ߓߊ߬ߕߐ߮ </span><span id="profile_adresse"></span></div>\n';
                 profile_utilisateur_html += '<div> <table><tr><td><span style="font-weight:normal">Mail</span></td><td style="display:inline-block; overflow:auto; width:180px"><span id="profile_mail"></span></td> </tr></table></div>\n';
@@ -572,7 +571,7 @@
     }
     function selectionDesElementsDeProfile(){
         
-        profile_entete_container = $('#profile_entete_container');
+        profile_container = $('#profile_container');
         profile_entete = document.getElementById('profile_entete');
         profile_testes_bruts = document.getElementById('profile_testes_bruts');
         nbr_teste = document.getElementById('nbr_teste');

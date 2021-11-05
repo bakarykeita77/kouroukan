@@ -452,7 +452,7 @@
                 profile_utilisateur_html += '<div> <span>ߡߐߦߌߛߊ߲ </span><span id="profile_naissance"></span></div>\n';
                 profile_utilisateur_html += '<div> <span>ߖߊ߲߭ </span><span id="profile_sexe"></span></div>\n';
                 profile_utilisateur_html += '<div> <span>ߛߊ߲߬ߓߊ߬ߕߐ߮ </span><span id="profile_adresse"></span></div>\n';
-                profile_utilisateur_html += '<div> <table><tr><td><span style="font-weight:normal">Mail</span></td><td style="display:inline-block; overflow:auto; width:180px"><span id="profile_mail"></span></td> </tr></table></div>\n';
+                profile_utilisateur_html += '<div> <table><tr><td><span style="font-weight:normal">Mail</span></td><td style="display:inline-block; overflow:visible; width:180px"><span id="profile_mail"></span></td> </tr></table></div>\n';
 
                 return profile_utilisateur_html;
             }

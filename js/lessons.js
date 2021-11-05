@@ -247,8 +247,9 @@ $('document').ready(function() {
             	    function questionReponse(){
             	        
                 	    var i=0;
-                	    var question_posee, reponse_montree, point = ''; 
+                	    var question_posee, reponse_montree, point; 
     
+                	    question_posee = '';
                 	    poserQuestion();
                 	    repondreQuestion();
                 	    
@@ -540,6 +541,7 @@ $('document').ready(function() {
                             }
                             function effacer(){
                                 setTimeout(function(){
+                                    question_posee = '';
                                     reponse_tapee.splice(0,reponse_tapee.length);
                                     $('#reponse').html(reponse_tapee);
                                     $('#check_mark').empty();

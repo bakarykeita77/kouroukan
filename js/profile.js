@@ -452,7 +452,7 @@
                 profile_utilisateur_html += '<div> <span>ߡߐߦߌߛߊ߲ </span><span id="profile_naissance"></span></div>\n';
                 profile_utilisateur_html += '<div> <span>ߖߊ߲߭ </span><span id="profile_sexe"></span></div>\n';
                 profile_utilisateur_html += '<div> <span>ߛߊ߲߬ߓߊ߬ߕߐ߮ </span><span id="profile_adresse"></span></div>\n';
-                profile_utilisateur_html += '<div> <table><tr><td><span style="font-weight:normal">Mail</span></td><td style="display:inline-block; overflow:visible; width:180px"><span id="profile_mail"></span></td> </tr></table></div>\n';
+                profile_utilisateur_html += '<div> <table><tr><td><span style="font-weight:normal">Mail</span></td><td style="display:inline-block; width:180px"><span id="profile_mail"></span></td> </tr></table></div>\n';
 
                 return profile_utilisateur_html;
             }
@@ -464,11 +464,11 @@
                     function toggleProfileUtilisateur(){
                         if(profile_utilisateur_container.style.height == '180px'){
                             profile_utilisateur_container.style.height = 0;
-                            setTimeout(function() { profile_utilisateur_container.style.display = 'none'; }, (250));
+                            setTimeout(function() { profile_utilisateur_container.style.display = 'none'; }, (150));
                         }else{
                             profile_utilisateur_container.style.display = 'block';
                             setTimeout(function() { profile_utilisateur_container.style.height = '180px'; }, (10));
-                        }
+                        } 
                     }
             }
             function chargementDuProfileUtilisateur(){

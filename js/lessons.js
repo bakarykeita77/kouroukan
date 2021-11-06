@@ -99,10 +99,9 @@ $('document').ready(function() {
                      	
                     	function lessonEnteteHTML(){
                     	    
-                    	    var lesson_entete_html = "<div class='loupe_btn_container'><span class='menu_label'>ߥߙߊ߬ߟߊ߲</span><span class='menu_icon'>"+menu_icon+"</span></div>";
-                    	    lesson_entete_html += "<div class='play_btn_container'><span class='play_label'>ߝߐߟߊ߲</span><span class='play_icon'>"+play_icon+"</span></div>";
+                    	    var lesson_entete_html = "<div class='play_btn_container'><span class='play_label'>ߝߐߟߊ߲</span><span class='play_icon'>"+play_icon+"</span></div>";
                     	    lesson_entete_html += "<div class='stop_btn_container'><span class='stop_label'>ߘߊ߬ߘߋ߬ߟߊ߲ </span> <span class='stop_icon'>"+stop_icon+"</span></div>";
-                    	    lesson_entete_html += "<div class='parametre_btn_container'><span class='parametre_label'>ߘߏ߲߬ߖߟߎ߬ߡߊ߬ߟߊ߲ </span>  <span class='parametre_icon'>"+parametre_icon+"</span></div>";
+                    	    lesson_entete_html += "<div class='parametre_btn_container'><span class='parametre_label'>ߛߏ߯ߙߏߟߊ߲</span>  <span class='parametre_icon'>"+parametre_icon+"</span></div>";
                             
                             return lesson_entete_html;
                     	}

@@ -21,12 +21,14 @@
     top: 50%;
     transform: translateY(-50%);
 }
-.checkbox{
+.checkbox {
+    br
+    position: relative;
     display: inline-block;
     background-color: #eee;
     top: 0;
     height: 216px;
-    overflow: auto;
+    min-width: 72px;
 }
 .checkbox_titre{
     background-color: #bbb;
@@ -35,23 +37,27 @@
     padding-right: 6px;
     box-sizing: border-box;
 }
-.check_consonnes{
+.check_btn_container {
     position: relative;
+    background-color: #eee;
+    height: 186px;
+    padding-right: 8px;
+    overflow: auto
+}
+.check_consonnes {
+    position: relative;
+    border: 1px solid transparent; 
+    border-right-color: #ddd;
     display: inline-block;
     margin: 0;
-    padding: 0 8px;
+    padding: 0;
     background-color: #eee;
     height: 170px;
 }
 .check_btn{
     display: block;
-}
-.check_btn_container{
-    position: relative;
-    background-color: #eee;
-    height: 186px;
-    padding-right: 8px;
-    overflow: auto;
+    min-width: 36px;
+    margin: 0
 }
 .parentgrid{ display: grid; }
 .parentcell{

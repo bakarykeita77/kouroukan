@@ -261,7 +261,7 @@ $('document').ready(function() {
         function voyellesCheckerHTML(){
             var vch = '';
             
-            vch += "<table class='checkbox'>\n";
+            vch += "<table class='checkbox' id='checkbox_voyelles'>\n";
                 vch += "<tr class='checkbox_titre'><td><input type='checkbox' name='voyelle_checkbox' class='checkbox_parent'><label for='voyelle_checkbox'>ߛߌ߬ߙߊ߬ߟߊ߲</label></td></tr>\n";
                 vch += "<tr class='check_btn_container'>\n";
                     for(i=0;i<voyelles.length;i++){
@@ -274,8 +274,8 @@ $('document').ready(function() {
         }
         function consonnesCheckerHTML(){
             var cch = '';
-    
-            cch += "<table class='checkbox'>\n";
+   
+            cch += "<table class='checkbox' id='checkbox_consonnes'>\n";
                 cch += "<tr class='checkbox_titre'><td colspan='3'><input type='checkbox' name='consonne_checkbox' class='checkbox_parent'><label for='consonne_checkbox'>ߛߌ߬ߙߊ߬ߕߊ</label></td></tr>\n";
                 cch += "<tr class='check_btn_container'>\n";
                     for(var i=0;i<14;i+=7){
@@ -303,7 +303,7 @@ $('document').ready(function() {
         function tedoCheckerHTML(){
             var tdch = '';
             
-            tdch += "<table class='checkbox'>\n";
+            tdch += "<table class='checkbox' id='checkbox_tedo'>\n";
                 tdch += "<tr class='checkbox_titre'><td><input type='checkbox' name='tedo_checkbox' class='checkbox_parent'><label for='tedo_checkbox'>ߕߍߘߐ</label></td></tr>\n";
                 tdch += "<tr class='check_btn_container'>\n";
                     for(var i=0;i<tedoo.length;i++){
@@ -316,7 +316,7 @@ $('document').ready(function() {
         }
         function tonsCheckerHTML(){
             var tch = '';
-            tch += "<table class='checkbox'>\n";
+            tch += "<table class='checkbox' id='checkbox_tons'>\n";
                 tch += "<tr class='checkbox_titre'><td><input type='checkbox' name='tons_checkbox' class='checkbox_parent'><label for='tons_checkbox'>ߞߊ߲ߡߊߛߙߋ</label></td></tr>\n";
                 tch += "<tr class='check_btn_container ponctuations'>\n";
                     for(var i=0;i<tons.length;i++){
@@ -330,7 +330,7 @@ $('document').ready(function() {
         function nasalisationCheckerHTML(){
             var nch = '';
             
-            nch += "<table class='checkbox'>\n";
+            nch += "<table class='checkbox' id='checkbox_nasalisation'>\n";
                 nch += "<tr class='checkbox_titre'><td><input type='checkbox' name='nasalisation_checkbox' class='checkbox_parent'><label for='nasalisation_checkbox'>ߞߊ߲ߠߊߘߌߦߊߟߊ߲</label></td></tr>\n";
                 nch += "<tr class='check_btn_container nasalisations_btn_container'>\n";
                     for(var i=0;i<nasalisations.length;i++){

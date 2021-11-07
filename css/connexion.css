@@ -1,70 +1,69 @@
-#connexion_form{
+#connexion_form {
     position: relative;
-	width: 50%;
+	width: 80%;
 	border: 1px solid #ddd;
 	background-color: #fff;
 	box-shadow: 0 4px 16px #666;
+	border-radius: 6px;
 	margin: 32px auto;
 	padding: 16px;
 	top: 32px;
+	box-sizing: border-box;
 	direction: rtl;
 }
-#connexion_form form{
-	margin: auto;
-	width: 80%;
+#connexion_form form {
+	margin: 48px auto;
+	width: 100%;
 }
-.input_box, #button_box{
+.input_box, #button_box {
 	position: relative;
 	margin: 16px 0;
 	height: 32px;
 	width: 100%;
-	border: 1px solid transparent;
 }
-.input_box{
+.input_box {
+    border: 1px solid transparent;
 	border-bottom-color: #aaa;
+	overflow: auto;
 }
-#button_box input{
-	margin: 32px 0;
-	margin: 16px 0;
-	height: 32px;
-	width: 100%;
-	background-color: #ccc;
-}
-.input_box:hover label{
+.input_box:hover label {
 	color: cornflowerblue;
-}
-.input_box label{ 
-	top: 0;
+} 
+.input_box input, 
+.input_box label {
+	position: absolute;
+	margin: 0;
 	padding: 0 16px;
-	color: #bbb;
+	top: 0;
+	width: 100%;
+	height: 32px;
+	font-size: 16px;
+}
+.input_box label { 
+    color: #bbb;
 	z-index: 0; 
 }
-.input_box input{ 
+.input_box input { 
 	border-style: none;
-	top: 0;
-	padding: 0 16px;
 	background-color: transparent;
 	z-index: 1; 
 }
-.input_box input:invalid{
-	border-style: none;
+.input_box input:focus ~ label,
+.input_box input:valid ~ label {
+	top: -16px;
+	font-size: 12px;
+	transition: 0.5s;
 }
-#connexion_form button{
+#button_box input {
+	padding: 16px 0;
+	height: 32px;
+	width: 100%;
+	background-color: #ccc;
+	border-radius: 6px;
+}
+#connexion_form button {
 	position: absolute;
 	width: 100%;
 	padding: 8px;
 	margin: 0;
-}
-.input_box input, .input_box label{
-	position: absolute;
-	margin: 0;
-	width: 100%;
-	font-size: 24px;
-} 
-.input_box input:focus ~ label,
-.input_box input:valid ~ label{
-	color: cornflowerblue;
-	top: -16px;
-	font-size: 12px;
-	transition: 0.5s;
 }

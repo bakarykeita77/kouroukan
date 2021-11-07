@@ -57,7 +57,7 @@
     <div class="container">
         <?php include "http://localhost:8080/kouroukan/pages/tete-de-page.php"; ?>
         <div id = "connexion_form">
-    		<h2>ߜߊ߲߬ߞߎ߲߬ ߥߟߊ</h2>
+    		<h2>ߜߊ߲߬ߞߎ߲߬ߥߟߊ</h2>
     		
     		<form methode="GET" action="">
     			<div class="input_box">

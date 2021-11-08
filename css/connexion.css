@@ -22,9 +22,10 @@
 	width: 100%;
 }
 .input_box {
+    position: relative;
     border: 1px solid transparent;
 	border-bottom-color: #aaa;
-	overflow: auto;
+	margin: 24px 0;
 }
 .input_box:hover label {
 	color: cornflowerblue;
@@ -33,32 +34,35 @@
 .input_box label {
 	position: absolute;
 	margin: 0;
-	padding: 0 16px;
-	top: 0;
+	padding: 0 16px; 
 	width: 100%;
 	height: 32px;
 	font-size: 16px;
 }
 .input_box label { 
     color: #bbb;
+    font-weight: bold;
 	z-index: 0; 
+	transition: 0.6s ease-out;
 }
 .input_box input { 
 	border-style: none;
 	background-color: transparent;
 	z-index: 1; 
 }
-.input_box input:focus ~ label,
-.input_box input:valid ~ label {
+.box_anime input:focus ~ label,
+.box_anime input:valid ~ label {
 	top: -16px;
+	font-weight: normal;
 	font-size: 12px;
-	transition: 0.5s;
+	color: cornflowerblue;
 }
 #button_box input {
 	padding: 16px 0;
 	height: 32px;
 	width: 100%;
 	background-color: #ccc;
+	color: cornflowerblue;
 	border-radius: 6px;
 }
 #connexion_form button {

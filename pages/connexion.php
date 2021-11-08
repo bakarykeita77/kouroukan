@@ -59,7 +59,7 @@
         <div id = "connexion_form">
     		<h2>ߜߊ߲߬ߞߎ߲߬ߥߟߊ</h2>
     		
-    		<form methode="GET" action="">
+    		<form methode="GET" action="" id='formulaire_de_connexion'>
     			<div class="input_box">
     				<input type="email" name="client_email" id="client_email">
     				<label>Email</label>
@@ -82,7 +82,7 @@
                     case 3:
                         echo "Utilisateur non trouve. Vueillez vous inscrire";
                     break;
-                    case "no_conncted_to_change_avatar":
+                    case "no_connected_to_change_avatar":
                         echo "Connectez vous pour charger ou changer l'avatar";
                     break;
                 }
@@ -91,5 +91,26 @@
 
 	</div>
 	
+	<script>
+	
+	    var input = $('#formulaire_de_connexion div input');
+	    input.val('');
+	    
+	    $.each(input, function(){
+	        
+	        $(this).on('focus', function(){
+	            $(this).parent().addClass('box_anime');
+	            
+	        });
+	        $(this).on('blur', function(){
+	            if($(this).val()==''){
+	                $(this).parent().removeClass('box_anime');
+	            }
+	        });
+
+	    });
+	
+	</script>
+	
 </body>
-</html>
+</html> 

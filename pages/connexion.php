@@ -93,19 +93,17 @@
 	
 	<script>
 	
-	    var input = $('#formulaire_de_connexion div input');
+	    var input = $('#formulaire_de_connexion div input:not("#button_box input")');
 	    input.val('');
 	    
 	    $.each(input, function(){
 	        
 	        $(this).on('focus', function(){
 	            $(this).parent().addClass('box_anime');
-	            
 	        });
 	        $(this).on('blur', function(){
-	            if($(this).val()==''){
-	                $(this).parent().removeClass('box_anime');
-	            }
+	            if($(this).val()=='')
+	            { $(this).parent().removeClass('box_anime'); }
 	        });
 
 	    });

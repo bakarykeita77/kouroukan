@@ -512,7 +512,7 @@ $('document').ready(function() {
                                 }else{
                                     point = 0;
                                     
-                                    $('#cross').html( '&#10187;' );
+                                    $('#cross').html( '&#10060;' );
                                     $('#cross_container').css({'display':'block', 'transform':'scale(0.5)', 'opacity':0});
                                     setTimeout(function(){ $('#cross_container').css({'transform':'scale(1)', 'opacity':0.75}); }, 100);
                                     setTimeout(function(){ $('#cross_container').css({'display':'none'}); },2000);

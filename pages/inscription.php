@@ -55,7 +55,7 @@
         				<td><input type="text" name="nom" id="nom" value=''/></td>
         			</tr>
         			<tr>
-        				<td><label>ߡߐߦߌ߫ ߕߎߡߊ</label></td>
+        				<td><label>ߡߐߦߌߕߎߡߊ</label></td>
         				<td><input type="text" name="naissance" id="naissance"/></td>
         			</tr>
         			<tr>

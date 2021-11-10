@@ -151,7 +151,7 @@ $(document).ready(function() {
             parametrageDuClavier();
             afficherTestDiv();
         	chargerTesteEntete();
-    		initialisationDuLibeleDeBoutonQuestionneur();
+    		initialisationDuLabeleDeBoutonQuestionneur();
             permutationDeTesteBoutons();
         	
         	questions();
@@ -192,7 +192,7 @@ $(document).ready(function() {
             	if(nda===1){ rang = '߭'; }else{ rang = '߲'; }
             	$('#nivo').html( "ߞߛߊߞߊ_"+niveau_d_apprentissage+rang+": "+nom_de_la_matiere );
         	 }
-    		function initialisationDuLibeleDeBoutonQuestionneur(){
+    		function initialisationDuLabeleDeBoutonQuestionneur(){
     		    	
                 var premier_tour_du_compteur = compteur();
             	tableau_questions = les_caracteres[nda-1];

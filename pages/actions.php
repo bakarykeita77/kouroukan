@@ -55,16 +55,16 @@
         
         case 'archiver_exercice':
             $client_id = securiser($_SESSION['id']);
-            $niveau = securiser($_POST['niveau']);
-            $course = securiser($_POST['course_input']);
+            $niveau    = securiser($_POST['niveau']);
+            $course    = securiser($_POST['course_input']);
           
             archiverExercice($client_id,$niveau,$course);
             header('location:lesson.php');
         break;
         case 'archiver_lesson' :
             $client_id = securiser($_SESSION['id']);
-            $niveau = securiser($_POST['niveau']);
-            $course = securiser($_POST['course_input']);
+            $niveau    = securiser($_POST['niveau']);
+            $course    = securiser($_POST['course_input']);
      
             archiverLesson($client_id,$niveau,$course);
             header('location:lesson.php');

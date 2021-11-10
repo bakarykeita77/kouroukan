@@ -8,14 +8,14 @@
         $sql = "INSERT INTO users(prenom,nom,naissance,sexe,adresse,email,password) 
                 VALUES(:prenom,:nom,:naissance,:sexe,:adresse,:email,:password)";
         $requette = $connexion->prepare($sql);
-        
-        $requette->bindValue(':prenom',$prenom,PDO::PARAM_STR);
-        $requette->bindValue(':nom',$nom,PDO::PARAM_STR);
+    
+        $requette->bindValue(':prenom',   $prenom,   PDO::PARAM_STR);
+        $requette->bindValue(':nom',      $nom,      PDO::PARAM_STR);
         $requette->bindValue(':naissance',$naissance,PDO::PARAM_STR);
-        $requette->bindValue(':sexe',$sexe,PDO::PARAM_STR);
-        $requette->bindValue(':adresse',$adresse,PDO::PARAM_STR);
-        $requette->bindValue(':email',$email,PDO::PARAM_STR);
-        $requette->bindValue(':password',$password,PDO::PARAM_STR);
+        $requette->bindValue(':sexe',     $sexe,     PDO::PARAM_STR);
+        $requette->bindValue(':adresse',  $adresse,  PDO::PARAM_STR);
+        $requette->bindValue(':email',    $email,    PDO::PARAM_STR);
+        $requette->bindValue(':password', $password, PDO::PARAM_STR);
         
         $new_client = $requette->execute();
         return $new_client;
@@ -28,9 +28,9 @@
         $requette = $connexion->prepare($sql);
         
         $requette->bindValue(':id_client',$id_client,PDO::PARAM_INT);
-        $requette->bindValue(':niveau',$niveau,PDO::PARAM_STR);
-        $requette->bindValue(':teste',$teste,PDO::PARAM_STR);
-        $requette->bindValue(':point',$point,PDO::PARAM_STR);
+        $requette->bindValue(':niveau',   $niveau,   PDO::PARAM_STR);
+        $requette->bindValue(':teste',    $teste,    PDO::PARAM_STR);
+        $requette->bindValue(':point',    $point,    PDO::PARAM_STR);
         
         $testes = $requette->execute();
         return $testes;
@@ -54,8 +54,8 @@
         
         $requette = $connexion->prepare($sql);
         $requette->bindValue(':client_id',$client_id,PDO::PARAM_INT);
-        $requette->bindValue(':niveau',$niveau,PDO::PARAM_INT);
-        $requette->bindValue(':exercice',$course,PDO::PARAM_STR);
+        $requette->bindValue(':niveau',   $niveau,   PDO::PARAM_INT);
+        $requette->bindValue(':exercice', $course,   PDO::PARAM_STR);
         $requette->execute();
         
         return $nouvelle_exercice;
@@ -118,14 +118,14 @@
         $sql = "UPDATE users SET prenom=:prenom, nom=:nom, naissance=:naissance, sexe=:sexe, adresse=:adresse, email=:email, password=:password WHERE id=:id";
         $requette = $connexion->prepare($sql);
         
-        $requette->bindValue(':id',$id,PDO::PARAM_INT);
-        $requette->bindValue(':prenom',$prenom,PDO::PARAM_STR);
-        $requette->bindValue(':nom',$nom,PDO::PARAM_STR);
+        $requette->bindValue(':id',       $id,       PDO::PARAM_INT);
+        $requette->bindValue(':prenom',   $prenom,   PDO::PARAM_STR);
+        $requette->bindValue(':nom',      $nom,      PDO::PARAM_STR);
         $requette->bindValue(':naissance',$naissance,PDO::PARAM_STR);
-        $requette->bindValue(':sexe',$sexe,PDO::PARAM_STR);
-        $requette->bindValue(':adresse',$adresse,PDO::PARAM_STR);
-        $requette->bindValue(':email',$email,PDO::PARAM_STR);
-        $requette->bindValue(':password',$password,PDO::PARAM_STR);
+        $requette->bindValue(':sexe',     $sexe,     PDO::PARAM_STR);
+        $requette->bindValue(':adresse',  $adresse,  PDO::PARAM_STR);
+        $requette->bindValue(':email',    $email,    PDO::PARAM_STR);
+        $requette->bindValue(':password', $password, PDO::PARAM_STR);
         
         $clients = $requette->execute();
         return $clients;

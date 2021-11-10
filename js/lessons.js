@@ -189,9 +189,22 @@ $('document').ready(function() {
                                 nbr_clicked_elements = td.length - non_clicked_elements.length;
                                 $('#course_fermeture').on('click',function(){
                                     
-                                    chargementDeLessonForm(); 
-                                    sendLessonToDB(); 
+                                    var table_elements_click_nbr = [];
                                     
+                                    for(var i=0;i<lesson_clicks.length;i++) {
+                                        table_elements_click_nbr[table_elements_click_nbr.length] = lesson_clicks[i][1];
+                                    }
+                                   
+                                    var nbr_click_min = Math.min.apply(null, table_elements_click_nbr);
+                                    var nbr_click_max = Math.max.apply(null, table_elements_click_nbr);
+                                    
+                                    if(nbr_click_min == 0) {
+                                        alert("ߌ ߡߊ߫ ߛߓߍߘߋ߲ ߥߟߊ ߜߋ߭ ߠߎ߬ ߓߍ߯ ߟߊߡߍ߲߫");
+                                    }
+                                    if(nbr_click_min >= 1) {
+                                        chargerLessonForm(); 
+                                        sendLessonToDB(); 
+                                    }
                                 });
                                
                                 function nonClickedElementsTable(){
@@ -203,7 +216,7 @@ $('document').ready(function() {
                                     
                                     return table_elements_non_cliques;
                                 }
-                                function chargementDeLessonForm(){ $('#course_input').val(lesson_clicks.join(';')); }
+                                function chargerLessonForm(){ $('#course_input').val(lesson_clicks.join(';')); }
                                 function sendLessonToDB(){
                                     
                                     var course_form = $('#course_form');

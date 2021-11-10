@@ -28,6 +28,7 @@
 			$utilisateurs =  $requette->execute();
 			return $utilisateurs;
 		 }
+		function archiverLesson($client_id,$niveau,$course){
 		function archiverNotes($numero, $question, $reponse, $points){
 			global $db;
 

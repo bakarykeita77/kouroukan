@@ -62,11 +62,11 @@
             header('location:lesson.php');
         break;
         case 'archiver_lesson' :
-            $client_id = securiser($_SESSION['id']);
+            $id_client = securiser($_SESSION['id']);
             $niveau    = securiser($_POST['niveau']);
             $course    = securiser($_POST['course_input']);
-     
-            archiverLesson($client_id,$niveau,$course);
+   
+            archiverLesson($id_client,$niveau,$course);
             header('location:lesson.php');
         break;
         case 'archiver_teste':

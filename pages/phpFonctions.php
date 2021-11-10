@@ -35,14 +35,14 @@
         $testes = $requette->execute();
         return $testes;
     }
-    function archiverLesson($client_id,$niveau,$course){
+    function archiverLesson($id_client,$niveau,$course){
         global $connexion;
         
-        $sql = "INSERT INTO lessons(client_id,niveau,lesson) VALUES(:client_id,:niveau,:lesson)";
+        $sql = "INSERT INTO lessons(id_client,niveau,lesson) VALUES(:client_id,:niveau,:lesson)";
         $requette = $connexion->prepare($sql);
-        $requette->bindValue(':client_id',$client_id,PDO::PARAM_INT);
-        $requette->bindValue(':niveau',$niveau,PDO::PARAM_INT);
-        $requette->bindValue(':lesson',$course,PDO::PARAM_STR);
+        $requette->bindValue(':client_id',$id_client,PDO::PARAM_INT);
+        $requette->bindValue(':niveau',   $niveau,   PDO::PARAM_INT);
+        $requette->bindValue(':lesson',   $course,   PDO::PARAM_STR);
         $nouvelle_lesson = $requette->execute();
         
         return $nouvelle_lesson;

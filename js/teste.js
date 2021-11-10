@@ -300,6 +300,7 @@ $(document).ready(function() {
         	 }
     	    function correctionEtResultat(){
         	    correcteur.on('click', function(){
+        	        alert('reponses_memoire');
         	        correction();
         	        proclamationDuresultat();
                     reload();
@@ -318,7 +319,7 @@ $(document).ready(function() {
                             reponse_tapee = '<span class="fausse_rps">'+reponse.join("")+'</span><span class="fausse_rps rouge">&#10005;</span>';
                          }
                         
-
+                      /* Memorisat */
                         reponses_memoire[reponses_memoire.length] = reponse_tapee;
                 	    reponses_tapees_memoire[reponses_tapees_memoire.length] = reponse.join("");
                         points_memoire[points_memoire.length] = point;

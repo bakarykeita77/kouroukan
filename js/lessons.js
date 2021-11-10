@@ -88,7 +88,7 @@ $('document').ready(function() {
                     parametrageDeLesson();
                     masquerLessonBarrProgress();
                     etudierLesson();
-            	    //stockerLesson();
+            	    stockerLesson();
     
                     function masquerLessonBarrProgress(){
                         $('.lesson_progress_bar').css('display','none');
@@ -182,13 +182,18 @@ $('document').ready(function() {
                                 var new_click_value = [clicked_element,element_click_counter];
                                 var non_clicked_elements = '';
                                 var nbr_clicked_elements = 0;
-                        
+                       
                                 lesson_clicks.splice(element_index,1,new_click_value);
                                
                                 non_clicked_elements = nonClickedElementsTable();
                                 nbr_clicked_elements = td.length - non_clicked_elements.length;
-                                $('#course_fermeture').on('click',function(){ chargementDeLessonForm(); sendCourseToDB(); });
-                                
+                                $('#course_fermeture').on('click',function(){
+                                    
+                                    chargementDeLessonForm(); 
+                                    sendLessonToDB(); 
+                                    
+                                });
+                               
                                 function nonClickedElementsTable(){
                                     var table_elements_non_cliques = [];
         
@@ -199,7 +204,7 @@ $('document').ready(function() {
                                     return table_elements_non_cliques;
                                 }
                                 function chargementDeLessonForm(){ $('#course_input').val(lesson_clicks.join(';')); }
-                                function sendCourseToDB(){
+                                function sendLessonToDB(){
                                     
                                     var course_form = $('#course_form');
                                     course_form.attr('action','actions.php?get_action=archiver_lesson');

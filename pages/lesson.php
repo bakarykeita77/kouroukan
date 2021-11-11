@@ -1,11 +1,11 @@
 <?php
 session_start();
 if(isset($_SESSION['connected'])){
-   $matiere_id = $_GET['matiere_id'];
-   $matiere_nom = $_GET['matiere_nom'];
-   $niveau = $_GET['niveau']+1;
+    $matiere_id  = $_GET['matiere_id'];
+    $matiere_nom = $_GET['matiere_nom'];
+    $niveau      = $_GET['niveau']+1;
 
-   $chiffres = ['߀','߁','߂','߃','߄','߅','߆','߇','߈','߉'];
+    $chiffres = ['߀','߁','߂','߃','߄','߅','߆','߇','߈','߉'];
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +26,6 @@ if(isset($_SESSION['connected'])){
     <div class="container">
         <div class="page_head"><?php require('tete-de-page.php'); ?></div>
         <div class="page_body">
-
             <div class="phases_container centerH" align="right">
                 <p id='niveau' style='display:none'><?= $chiffres[$niveau] ?></p>
                 <h4>ߘߋ߰ߟߌ ߞߛߊߞߊ : <span><?= $chiffres[$niveau] ?><span class='rang'></span></h4>

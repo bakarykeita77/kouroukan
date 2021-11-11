@@ -36,20 +36,6 @@
             
             updateClient($id,$prenom,$nom,$naissance,$sexe,$adresse,$email,$password);
         break;
-        case 'get_client':
-            $client_email = securiser($_POST['client_email']);
-            getClientByEmail($client_email);      
-
-        break;
-        case 'archiver_teste':
-            
-            $id_client = securiser($_POST['id_client_input']);
-            $niveau    = securiser($_POST['niveau_input']);
-            $testes    = securiser($_POST['testes_input']);
-            
-            archiverTeste($id_client,$niveau,$testes);
-            header("location:correction.php");
-        break;
     }
     switch($get_action){
         
@@ -71,7 +57,7 @@
         break;
         case 'archiver_teste':
             
-            $id_client = $_SESSION['id'];
+            $id_client = parseIntNko($_SESSION['id']);
             $niveau    = securiser($_GET['niveau']);
             $teste     = securiser($_POST['teste']);
             $point     = securiser($_POST['point']);

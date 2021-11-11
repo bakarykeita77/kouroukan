@@ -235,7 +235,7 @@ $('document').ready(function() {
             	    chargerExercices();
             	    afficherLessonBarrProgress();
             	    questionReponse();
-            	   // stockerExercice();
+            	    stockerExercice();
             	   
                     function quantiteDeQuestion(){
                         if(niveau==1){ var nq = parseIntNko(lettres.length); return nq; }
@@ -355,13 +355,14 @@ $('document').ready(function() {
             	                
             	                p = (q==r)?'ߞߎߟߎ߲ߖߋ߫':'ߝߏߦߊ߲߫';     
             	                nouvel_exercice = [q,r,p];
-            	                
+            	               
             	                exercices_table.splice(exercice_counter,1,nouvel_exercice);
             	             
                                 $('#course_fermeture').on('click',function(){ chargementDeLessonForm(); sendExerciceToDB(); });
             	                exercice_counter++;
             	                
             	                function chargementDeLessonForm(){
+            	                    
             	                    $('#course_input').val(exercices_table.join(';'));
             	                }
             	                function sendExerciceToDB(){

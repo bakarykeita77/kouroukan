@@ -40,11 +40,11 @@
     switch($get_action){
         
         case 'archiver_exercice':
-            $client_id = securiser($_SESSION['id']);
+            $id_client = securiser($_SESSION['id']);
             $niveau    = securiser($_POST['niveau']);
-            $course    = securiser($_POST['course_input']);
+            $exercice  = securiser($_POST['course_input']);
           
-            archiverExercice($client_id,$niveau,$course);
+            archiverExercice($id_client,$niveau,$exercice);
             header('location:lesson.php');
         break;
         case 'archiver_lesson' :

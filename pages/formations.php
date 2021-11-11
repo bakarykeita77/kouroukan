@@ -97,7 +97,6 @@ if(isset($_SESSION['prenom'])){
     		</div>		
 		</div>
 		
-		<script src="http://localhost:8080/kouroukan/js/formations.js"></script>
 		<script src="http://localhost:8080/kouroukan/js/lesson_parametres.js"></script>
 		<script src="http://localhost:8080/kouroukan/js/teste.js"></script>
 		<script src="http://localhost:8080/kouroukan/js/class.js"></script>

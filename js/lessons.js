@@ -81,9 +81,9 @@ $('document').ready(function() {
                     case 'exercices'    :exercices();     break;
                     case 'evaluation'   :evaluations();   break;
         	    }
-        	    
+        	  
             	function apprentissage(){
-            	    
+               
             	    chargerLesson();
                     parametrageDeLesson();
                     masquerLessonBarrProgress();
@@ -677,6 +677,32 @@ $('document').ready(function() {
             	    
             	    return exercices_corps_html;
             	}
+                function chiffresApprentissageHTML(){
+                    var n_chiffres = chiffres.length;
+                
+                    table = "<table class='table_parlante'>\n";
+                        table += "<tr>\n";
+                        for(var n=0;n<n_chiffres;n++){    
+                            table += "<td>"+chiffres[n]+"</td>\n";
+                        }
+                        table += "</tr>\n";
+                    table += "</table>\n";
+                
+                    return table;
+                };
+                function chiffresExercicesHTML(){
+                    ligne_aleatoire = Math.floor(Math.random()*10);
+                    
+                    table = "<table class='table_parlante'>\n";
+                        table += "<tr>\n";
+                        for(var n=0;n<n_chiffres;n++){    
+                            table += "<td>"+chiffres[ligne_aleatoire]+"</td>\n";
+                        }
+                        table += "</tr>\n";
+                    table += "</table>\n";
+                    
+                    return table;
+                }
                 function syllabesApprentissageHTML() {
                     var table = '';
                     for(var k=0;k<caracteres_coches[4].length;k++){

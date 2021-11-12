@@ -1,10 +1,10 @@
  
     var profile_container, profile_entete, profile_teste_btn, profile_teste_menu, profile_teste;
-    var profile_utilisateur_btn, profile_utilisateur_container, profile_utilisateur, modifier_avatar = '';
+    var profile_utilisateur_btn, profile_utilisateur_container, profile_utilisateur, modifier_avatar;
     var profile_clients_bruts = '';
-    var lessons_studied_titles, profile_teste_content = '';
-    var titre_des_matieres_apprises, titre_des_matieres_a_apprendre = '';
-    var liste_des_matieres_apprises, liste_des_matieres_a_apprendre = '';
+    var lessons_studied_titles, profile_teste_content;
+    var titre_des_matieres_apprises, titre_des_matieres_a_apprendre;
+    var liste_des_matieres_apprises, liste_des_matieres_a_apprendre;
    
     var global_testes = [];
 
@@ -31,16 +31,17 @@
         var testes_bruts = JSON.parse(response);
 
         var testes_traites = traitementDeTestesBruts();
-        testes_traites = testes_traites.split('_');
-            
+        testes_traites = testes_traites.split('/');
+          
         for(var i=0;i<testes_traites.length;i++){
             var teste_traite = testes_traites[i].split('/');
             for(var j=0;j<teste_traite.length;j++){
                 var teste = teste_traite[3];
             }
         }
+      
         profile_testes.innerHTML = testes_traites;
-        
+      
         nombre_de_teste_par_niveau = triDesTestesParNiveau();
         nombre_de_teste_par_niveau = nombre_de_teste_par_niveau.join(';');
         nbr_teste.innerHTML = nombre_de_teste_par_niveau;
@@ -48,9 +49,9 @@
         function traitementDeTestesBruts(){
             var resultat_du_traitement = [];
             for(var i=0;i<testes_bruts.length;i++){
-                
-                var id_client = testes_bruts[i].id_client;
+               
                 var date = testes_bruts[i].Date;
+                var id_client = testes_bruts[i].id_client;
                 var niveau = reverseIntNko(testes_bruts[i].Niveau);
                 var teste = testes_bruts[i].Teste;
                 var point = testes_bruts[i].Point;
@@ -58,17 +59,19 @@
                 point = point[0];
                 var teste_traite = [];
                 
-                teste_traite[0] = id_client;
-                teste_traite[1] = date;
+                teste_traite[0] = date;
+                teste_traite[1] = id_client;
                 teste_traite[2] = niveau;
                 teste_traite[3] = teste;
                 teste_traite[4] = point;
                 
                 resultat_du_traitement[resultat_du_traitement.length] = teste_traite.join('/');
             }
+            
             resultat_du_traitement = resultat_du_traitement.join('%');
             return resultat_du_traitement;
         }
+        
         function triDesTestesParNiveau(){
             
             var testes_par_niveau = []; 
@@ -82,21 +85,32 @@
             var testes_3 = [];
             var testes_4 = [];
             
-            testes_traites = testes_traites.split('_');
+            testes_traites = traitementDeTestesBruts(); 
+            testes_traites = testes_traites.split('%');
 
-   
-            for(var j=0;j<5;j++){
-                
+  
+            for(var j=0;j<testes_traites.length;j++){
+          
                 if(testes_traites[j].split('/')[2] == 1){ nbr_teste_niveau_1++;   testes_1[testes_1.length] = [testes_traites[j].split('/')[3]+','+testes_traites[j].split('/')[4]]; }
                 if(testes_traites[j].split('/')[2] == 2){ nbr_teste_niveau_2++;   testes_2[testes_2.length] = [testes_traites[j].split('/')[3]+','+testes_traites[j].split('/')[4]]; }
                 if(testes_traites[j].split('/')[2] == 3){ nbr_teste_niveau_3++;   testes_3[testes_3.length] = [testes_traites[j].split('/')[3]+','+testes_traites[j].split('/')[4]]; }
                 if(testes_traites[j].split('/')[2] == 4){ nbr_teste_niveau_4++;   testes_4[testes_4.length] = [testes_traites[j].split('/')[3]+','+testes_traites[j].split('/')[4]]; }
             }
             
+            testes_1 = testes_1.join("/");
+            testes_2 = testes_2.join("/");
+            testes_3 = testes_3.join("/");
+            testes_4 = testes_4.join("/");
+            
             testes_niveau_1[0] = 1;    testes_niveau_1[1] = nbr_teste_niveau_1;    testes_niveau_1[2] = testes_1+'\n\n'; 
             testes_niveau_2[0] = 2;    testes_niveau_2[1] = nbr_teste_niveau_2;    testes_niveau_2[2] = testes_2+'\n\n';
             testes_niveau_3[0] = 3;    testes_niveau_3[1] = nbr_teste_niveau_3;    testes_niveau_3[2] = testes_3+'\n\n';
             testes_niveau_4[0] = 4;    testes_niveau_4[1] = nbr_teste_niveau_4;    testes_niveau_4[2] = testes_4+'\n\n';
+            
+            testes_niveau_1 = testes_niveau_1.join('/');    
+            testes_niveau_2 = testes_niveau_2.join('/');    
+            testes_niveau_3 = testes_niveau_3.join('/');    
+            testes_niveau_4 = testes_niveau_4.join('/');    
             
             testes_par_niveau[0] = testes_niveau_1+'\n\n';
             testes_par_niveau[1] = testes_niveau_2+'\n\n';
@@ -165,7 +179,7 @@
                 
                 testes = reconstitutionDeTestes();
                 var matieres_apprises = matieresApprises();
-                
+       //  alert(testes);       
                 titre_des_matieres_apprises.innerHTML = titre1();
                 titre_des_matieres_a_apprendre.innerHTML = titre2();
            
@@ -300,7 +314,7 @@
 
                     chargementDeProfileTeste();
                     document.getElementsByClassName('bouton_afficheur_de_teste')[0].click();
-
+            
                     function triDesTestesParNiveau(){
                     /* Regroupement des testes de meme niveau dans un tableau. */
                         var groupe_de_teste = [];
@@ -336,6 +350,8 @@
                              
                             var affiche_html = '<div id="profile_teste_content">\n';
                                 affiche_html += '<span id="fermeture_affiche" onclick="fermerProfileCorps()">&times;</span>\n\n';
+                                
+                                affiche_html += '<div id="profile_table_container">';
                                 affiche_html += '<div id="teste_switcher">\n<span>'+nom_de_matiere_a_renseigne+' ߞߘߐߓߐߟߌ</span><table id="nbr_table"><tr id="nbr_testes"></tr>'+testes_btn+'</table>\n</div>\n';
                                 affiche_html += '<div>\n<span id="profile_teste_date"></span></div>';
                                 
@@ -363,6 +379,8 @@
                                     affiche_html += '</tfoot>\n\n';
                 
                                 affiche_html += '</table>\n';
+                                affiche_html += '</div>';
+                            
                             affiche_html += '</div>\n\n';
                              
                             return affiche_html;
@@ -385,14 +403,16 @@
                     function chargementDeProfileTeste(){
                         $('.bouton_afficheur_de_teste').on('click', function(){
                             
-                            $(this).css({'fontWeight':'bold', 'boxShadow':'0 0 16px #666', 'border':'none', 'transform':'scale(1.5)'});
+                            $(this).css({'fontWeight':'bold', 'boxShadow':'0 0 6px #666', 'border':'none', 'transform':'scale(1.5)'});
                             $(this).siblings().css({'fontWeight':'normal', 'boxShadow':'none', 'border':'1px solid #ddd', 'transform':'scale(1)'});
                             
                             n = $(this).index();
+                            
                             var date_du_teste = testes_de_meme_niveau[n][1];
                             date_du_teste = date_du_teste.split(' ');
                             date_du_teste = date_du_teste[0].split('-');
                             date_du_teste = mois[parseInt(date_du_teste[1])]+' ߕߟߋ߬ '+parseIntNko(date_du_teste[2])+' ߛߊ߲߭ '+parseIntNko(date_du_teste[0]);
+                     // alert(testes_de_meme_niveau);     
                             var teste = testes_de_meme_niveau[n][3];
                             var points = testes_de_meme_niveau[n][4];
                             

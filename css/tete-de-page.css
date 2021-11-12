@@ -139,9 +139,9 @@ body{
     border-radius: 6px;
     box-shadow: 0 0 16px #ccc;
     width: 90vw;
-    right: 5vw;
+    left: 5vw;
     box-sizing: border-box;
-    top: 32px;
+    top: 48px;
     margin: 32px 0;
     padding: 8px;
     background-color: #fff;
@@ -166,12 +166,15 @@ body{
 #profile_teste{
     position: absolute;
     display: none;
-    top: 72px;
-    left: 40px;
+    direction: rtl;
+    width: 94vw;
+    top: 80px;
+    left: 3vw;
     border: 1px solid transparent;
     overflow: hidden;
     border-radius: 6px;
-    box-shadow: 0 8px 8px #666;
+    box-sizing: border-box;
+    box-shadow: 0 0 16px #666;
     transform: scale(0.6);
     z-index: 1010;
     transition: 0.3s;
@@ -224,16 +227,11 @@ body{
     line-height: 24px;
 }
 #profile_teste_content{
-    top: 1vh;
-    left: 1vw;
-    border: 1px solid #ddd;
-    border-radius: 8px;
     background-color: #fff;
-    box-shadow: 0 8px 8px #666;
     height: 70vh;
-    padding: 16px 64px;
+    margin: 0;
+    padding-top: 32px;
     box-sizing: border-box;
-    transition: 0.6s;
 }
 #fermeture_affiche{
     position: absolute;
@@ -248,13 +246,16 @@ body{
     left: 0;
     top: 0;
 }
+#profile_table_container {
+    width: 96%;
+    margin: auto;
+    overflow: hidden;
+}
 #affiche_table{
     position: relative;
+    display: block;
     border-collapse: collapse;
-    padding: 64px;
-    margin: 0;
     height: 42vh;
-    width: 300px;
     overflow: hidden;
 }
 #teste_switcher span, #teste_switcher table { display: inline-block; }
@@ -276,8 +277,7 @@ body{
 }
 #profile_teste_thead, #profile_teste_tbody, #profile_teste_tfoot {
     display: block;
-    margin: 0;
-    padding: 0;
+    box-sizing: border-box;
 }
 #affiche_table td, #affiche_table th{
     display: inline-block;
@@ -289,7 +289,7 @@ body{
 #affiche_table tr{
     display: flex;
     flex-direction: row;
-    justify-content: stretch;
+    justify-content: center;
     align-items: center;
 }
 #profile_teste_thead th, #profile_teste_tfoot td{ 

@@ -61,7 +61,7 @@ session_start();
              	    <div class="profile_menu_head"><a href="deconnexion.php">Deconnexion</a></div>
          	    </div>
      	</div>
- 	    <div id="profile_teste" style="direction:rtl; left:-10%; top:48px"></div>
+ 	    <div id="profile_teste"></div>
  	    <div id="profile_teste_point"></div>
 
 		<div id = "nav">

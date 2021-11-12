@@ -47,7 +47,7 @@
             archiverExercice($id_client,$niveau,$exercice);
             header('location:lesson.php');
         break;
-        case 'archiver_lesson' :
+        case 'archiver_lesson':
             $id_client = securiser($_SESSION['id']);
             $niveau    = securiser($_POST['niveau']);
             $course    = securiser($_POST['course_input']);
@@ -57,11 +57,11 @@
         break;
         case 'archiver_teste':
             
-            $id_client = parseIntNko($_SESSION['id']);
+            $id_client = $_SESSION['id'];
             $niveau    = securiser($_GET['niveau']);
             $teste     = securiser($_POST['teste']);
             $point     = securiser($_POST['point']);
-           
+          
             archiverTeste($id_client,$niveau,$teste,$point);
             header("location:lesson.php");
         break;

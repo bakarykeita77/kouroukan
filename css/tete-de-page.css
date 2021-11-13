@@ -133,7 +133,7 @@ body{
     #nav_outils li { display:inline-block; }
 }
 
-#profile_container{
+#profile_menu_container{
     position: absolute;
     border: 1px solid transparent; 
     border-radius: 6px;
@@ -305,6 +305,11 @@ body{
 }
 #profile_teste_tfoot{
     bottom: 0;
+}
+#profile_teste_tfoot tr td:first-child {
+    width: 228px;
+    padding: 0 16px;
+    text-align: right;
 }
 
 #profile_utilisateur_container{

@@ -1,5 +1,5 @@
  
-    var profile_container, profile_entete, profile_teste_btn, profile_teste_menu, profile_teste;
+    var profile_menu_container, profile_entete, profile_teste_btn, profile_teste_menu, profile_teste;
     var profile_utilisateur_btn, profile_utilisateur_container, profile_utilisateur, modifier_avatar;
     var profile_clients_bruts = '';
     var lessons_studied_titles, profile_teste_content;
@@ -19,7 +19,7 @@
     var nombre_de_teste_par_niveau = [];
     var profile_teste_point = [];
     var profile_testes = '';
-    var testes = '';
+    var testes = [];
     var nbr_teste_niveau_1 = 0;
     var nbr_teste_niveau_2 = 0;
     var nbr_teste_niveau_3 = 0;
@@ -29,17 +29,8 @@
     ajaxGet("/kouroukan/pages/testes-data.php",function(response){
         
         var testes_bruts = JSON.parse(response);
-
         var testes_traites = traitementDeTestesBruts();
-        testes_traites = testes_traites.split('/');
-          
-        for(var i=0;i<testes_traites.length;i++){
-            var teste_traite = testes_traites[i].split('/');
-            for(var j=0;j<teste_traite.length;j++){
-                var teste = teste_traite[3];
-            }
-        }
-      
+
         profile_testes.innerHTML = testes_traites;
       
         nombre_de_teste_par_niveau = triDesTestesParNiveau();
@@ -49,7 +40,7 @@
         function traitementDeTestesBruts(){
             var resultat_du_traitement = [];
             for(var i=0;i<testes_bruts.length;i++){
-               
+              
                 var date = testes_bruts[i].Date;
                 var id_client = testes_bruts[i].id_client;
                 var niveau = reverseIntNko(testes_bruts[i].Niveau);
@@ -67,7 +58,7 @@
                 
                 resultat_du_traitement[resultat_du_traitement.length] = teste_traite.join('/');
             }
-            
+             
             resultat_du_traitement = resultat_du_traitement.join('%');
             return resultat_du_traitement;
         }
@@ -116,7 +107,7 @@
             testes_par_niveau[1] = testes_niveau_2+'\n\n';
             testes_par_niveau[2] = testes_niveau_3+'\n\n';
             testes_par_niveau[3] = testes_niveau_4+'\n\n';
-              
+             
             return testes_par_niveau;
         }
 
@@ -148,7 +139,7 @@
     function affichageDeProfileEntete(){
         $('#logo').click(function(){
             $(".profile_menu").toggle(100);
-            profile_container.slideToggle(150);
+            profile_menu_container.slideToggle(150);
         });
     }
     function manipulationDeProfileEntete(){
@@ -160,6 +151,7 @@
             manipulationDeProfileTesteMenu();
             
             function affichageDeProfileTesteMenu(){
+                
                 liste_des_matieres_apprises.innerHTML = '<p class="rien">ߝߏߦߊ߲߫߹</p>';
                 liste_des_matieres_a_apprendre.innerHTML = listeDesMatieres();
                 profile_teste_btn.onclick = toggleProfileTesteMenu();
@@ -179,7 +171,7 @@
                 
                 testes = reconstitutionDeTestes();
                 var matieres_apprises = matieresApprises();
-       //  alert(testes);       
+               
                 titre_des_matieres_apprises.innerHTML = titre1();
                 titre_des_matieres_a_apprendre.innerHTML = titre2();
            
@@ -190,13 +182,16 @@
                 
 
                 function reconstitutionDeTestes(){
+              
                     var testes_collection = profile_testes.innerHTML;
                     var testes_reconstitues = [];
                     testes_collection = testes_collection.split('%');
+                    
                     for(var i=0;i<testes_collection.length;i++){
+                   
                         var profile_teste = testes_collection[i].split('/');
                         var teste = [];
-                        
+                       
                         teste[0] = profile_teste[0];
                         teste[1] = profile_teste[1];
                         teste[2] = profile_teste[2];
@@ -299,19 +294,11 @@
                     nom_de_matiere_a_renseigne = $(this).html(); 
                     matiere_index = $(this).index(); 
                     testes_de_meme_niveau = triDesTestesParNiveau();
-            
+          
                     miseEnSurbrillanceDeLaMatiereARenseigne();
                     elementsHTMLDeProfileTeste();
                     affichageDeProfileTeste();
  
-                    var date_du_teste = testes_de_meme_niveau[n][1];
-                    date_du_teste = date_du_teste.split(' ');
-                    date_du_teste = date_du_teste[0].split('-');
-                    date_du_teste = mois[parseInt(date_du_teste[1])]+' ߕߟߋ߬ '+parseIntNko(date_du_teste[2])+' ߛߊ߲߭ '+parseIntNko(date_du_teste[0]);
-                   
-                    var teste = testes_de_meme_niveau[n][3];
-                    var points = testes_de_meme_niveau[n][4];
-
                     chargementDeProfileTeste();
                     document.getElementsByClassName('bouton_afficheur_de_teste')[0].click();
             
@@ -319,7 +306,7 @@
                     /* Regroupement des testes de meme niveau dans un tableau. */
                         var groupe_de_teste = [];
                         for(i=0;i<testes.length;i++){
-                            
+                          
                             niveau_teste = testes[i][2];
                             if(matiere_index+1==niveau_teste){
                                 groupe_de_teste[groupe_de_teste.length] = testes[i];
@@ -329,8 +316,8 @@
                         return groupe_de_teste;
                     }
                     function miseEnSurbrillanceDeLaMatiereARenseigne(){
-                        matiere_a_renseigne.addClass('flowerblue');
-                        matiere_a_renseigne.siblings().removeClass('flowerblue');
+                        matiere_a_renseigne.addClass('yellow');
+                        matiere_a_renseigne.siblings().removeClass('yellow');
                     }
                     function elementsHTMLDeProfileTeste(){
                 
@@ -339,25 +326,29 @@
                         { profile_teste.innerHTML = testeNonEffectueHTML(); }
 
                         function testeEffectueHTML(){
+                            var testes_btn = '';
+                            var nth = '';
                             function testesBoutons(){
+                                
                                 for(var m=testes_de_meme_niveau.length;m>0;m--){ 
-                                    testes_btn += '<td class="bouton_afficheur_de_teste">'+parseIntNko(m)+'</td>';
+                                    if(m==1) { nth = '߭'; }else{ nth = '߲'; }
+                                    testes_btn += '<td class="bouton_afficheur_de_teste">'+parseIntNko(m)+nth+'</td>';
                                 }
                                 return testes_btn;
                             }
                                     
-                            var testes_btn = testesBoutons();
+                            testes_btn = testesBoutons();
                              
                             var affiche_html = '<div id="profile_teste_content">\n';
                                 affiche_html += '<span id="fermeture_affiche" onclick="fermerProfileCorps()">&times;</span>\n\n';
                                 
                                 affiche_html += '<div id="profile_table_container">';
-                                affiche_html += '<div id="teste_switcher">\n<span>'+nom_de_matiere_a_renseigne+' ߞߘߐߓߐߟߌ</span><table id="nbr_table"><tr id="nbr_testes"></tr>'+testes_btn+'</table>\n</div>\n';
+                                affiche_html += '<div id="teste_switcher">\n<span>'+nom_de_matiere_a_renseigne+' ߞߘߐߓߐߟߌ</span><table id="nbr_table"><tr id="nbr_testes">'+testes_btn+'</tr></table>\n</div>\n';
                                 affiche_html += '<div>\n<span id="profile_teste_date"></span></div>';
                                 
                                 affiche_html += '<br/>';
                                 
-                                affiche_html += '<div>\n<span>ߓߙߍ߬ߦߊ߬ߥߟߊ</span>\n</div>\n\n';
+                                affiche_html += '<div>\n<span style="font-weight:bold; font-size:24px">ߓߙߍ߬ߦߊ߬ߥߟߊ</span>\n</div>\n\n';
                                 affiche_html += '<table id="affiche_table">\n\n';
                                     
                                     affiche_html += '<thead id="profile_teste_thead">\n';
@@ -373,7 +364,7 @@
                                     
                                     affiche_html += '<tfoot id="profile_teste_tfoot">\n';
                                     affiche_html += '<tr>\n';
-                                        affiche_html += '<td colspan="3" style="width:228px">ߓߙߍ߬ߦߊ ߡߎ߬ߡߍ</td>\n';
+                                        affiche_html += '<td colspan="3" >ߓߙߍ߬ߦߊ ߡߎ߬ߡߍ</td>\n';
                                         affiche_html += '<td id="profile_total_points"></td>\n';
                                     affiche_html += '</tr>\n';
                                     affiche_html += '</tfoot>\n\n';
@@ -408,11 +399,11 @@
                             
                             n = $(this).index();
                             
-                            var date_du_teste = testes_de_meme_niveau[n][1];
+                            var date_du_teste = testes_de_meme_niveau[n][0];
                             date_du_teste = date_du_teste.split(' ');
                             date_du_teste = date_du_teste[0].split('-');
                             date_du_teste = mois[parseInt(date_du_teste[1])]+' ߕߟߋ߬ '+parseIntNko(date_du_teste[2])+' ߛߊ߲߭ '+parseIntNko(date_du_teste[0]);
-                     // alert(testes_de_meme_niveau);     
+                         
                             var teste = testes_de_meme_niveau[n][3];
                             var points = testes_de_meme_niveau[n][4];
                             
@@ -559,8 +550,7 @@
                 var recapitulatif_des_testes = [];
                 var teste = [];
                 var point = [];
-                var testes = [];
-    
+
                 for(var i=0;i<response.length;i++){
                     
                     id_teste     = response[i]['id'];
@@ -571,6 +561,8 @@
                     point        = response[i]['Point'].split('\\');
                     
                     testes = [id_teste, id_client, date_teste, niveau_teste, teste, point];
+                    testes = testes.join('/');
+                  
                     recapitulatif_des_testes[recapitulatif_des_testes.length] = testes;
                 }
 
@@ -591,7 +583,7 @@
     }
     function selectionDesElementsDeProfile(){
         
-        profile_container = $('#profile_container');
+        profile_menu_container = $('#profile_menu_container');
         profile_entete = document.getElementById('profile_entete');
         profile_testes_bruts = document.getElementById('profile_testes_bruts');
         nbr_teste = document.getElementById('nbr_teste');

@@ -453,6 +453,9 @@
 .transparent {
     animation: transperer;
 }
+.yellow {
+    background-color: yellow;
+}
 
 @keyframes animate_hand {
     0%{ text-shadow: 16px 16px 16px #666; transform: scale(1); }

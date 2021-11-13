@@ -28,7 +28,7 @@ session_start();
      	<div id="logo"> <img src="http://localhost:8080/kouroukan/pages/get-avatar.php?client_id=<?= $_SESSION['id'] ?>" alt="logo"/></div>
         <?php endif ?>
         
-     	<div id='profile_container'>
+     	<div id='profile_menu_container'>
 
          	    <div id="client_name" style="display: none"><h2><?=$_SESSION['prenom'].' '.$_SESSION['nom'] ?> ߹</h2></div>
          	    <div id="profile_client_id" style="display: none"><?=$_SESSION['id']; ?></div>
@@ -36,7 +36,7 @@ session_start();
          	    <div class="profile_menu">
              	    
              	    <div class="profile_menu_head" id="profile_utilisateur_btn">Profile</div>
- 	                <div id='profile_utilisateur_container'>
+ 	                <div class="profile_menu_body" id='profile_utilisateur_container'>
  	                    <div id="profile_utilisateur_renseignements"></div>
  	                    <div id="profile_utilisateur_image_container" align='center'>
  	                        <img height="100%" src="http://localhost:8080/kouroukan/pages/get-avatar.php?client_id=<?= $_SESSION['id'] ?>" alt="logo"/>

@@ -1,0 +1,3 @@
+:q
+alert x -y
+

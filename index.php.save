@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 ?>
@@ -18,7 +17,7 @@ session_start();
         <div class="page_head"><?php include("pages/tete-de-page.php"); ?></div>
         <div id='fond_de_container' class='centerH'></div>        
         <div class="page_body">
-           
+            
             <div id="asides_container0" align="center">
                 <div class="aside" id="aside01" style="font-size:24px">ߒߞߏ ߘߋ߰ߟߌ ߦߙߐ ߓߟߐߟߐ ߞߊ߲߬</div>
                 <div class="aside" id="aside02">ߞߙߎ߬ߞߊ߲߬ ߞߣߍ ߦߴߊߟߎ߫ ߟߊߓߌ߬ߟߊ ߘߐ߫߸ ߞߊ߬ ߒߞߏ ߘߋ߰߸ ߞߊߟߌߦߊ ߘߐ߫ ߊ߬ ߣߌ߫ ߣߐ߰ߦߊ ߘߐ߫. ߦߙߐ ߓߍ߯ ߘߐ߫ ߊ߬ ߣߌ߫ ߕߎߡߊ ߓߍ߯ ߟߊ߫.</div>
@@ -36,9 +35,7 @@ session_start();
         </div>
         <div class="page_foot"></div>
     </div>
-    <script src="http://localhost:8080/kouroukan/js/index.js"></script>
-    <script src="http://localhost:8080/kouroukan/js/jquery-3.3.1.js"></script>
+    <script src="http://localhost:8080/kouroukan/js/index.js"></script    <script src="http://localhost:8080/kouroukan/js/jquery-3.3.1.js"></script>
 
  </body>
  </html>
-

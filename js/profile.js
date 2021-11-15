@@ -1,7 +1,7 @@
  
     var profile_menu_container, profile_entete, profile_teste_btn, profile_teste_menu, profile_teste;
     var profile_utilisateur_btn, profile_utilisateur_container, profile_utilisateur, modifier_avatar;
-    var profile_clients_bruts = '';
+    var profile_clients_bruts;
     var lessons_studied_titles, profile_teste_content;
     var titre_des_matieres_apprises, titre_des_matieres_a_apprendre;
     var liste_des_matieres_apprises, liste_des_matieres_a_apprendre;
@@ -126,16 +126,6 @@
     affichageDeProfileEntete();
     manipulationDeProfileEntete();
 
-    function ajaxGet(url,onSuccess,onError){
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET",url,true);
-        xhr.onreadystatechange = function(){
-            if(xhr.readyState == 4 && xhr.status == 200)
-            { onSuccess(xhr.responseText); }else
-            { onError(xhr); }
-        };
-        xhr.send();
-    }
     function affichageDeProfileEntete(){
         $('#logo').click(function(){
             $(".profile_menu").toggle(100);

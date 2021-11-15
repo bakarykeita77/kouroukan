@@ -1,3 +1,0 @@
-:q
-alert x -y
-

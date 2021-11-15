@@ -10,15 +10,11 @@ if($_SESSION['connected']){
     $testes = $rqt->fetchAll();
     
     if($testes==Array()){
-        echo("Cet utilisateur n'a pas pcompose");
+        echo("Cet utilisateur n'a pas composé");
     }else{
         $testes_json = json_encode($testes);
         echo($testes_json);
     }
 }else{
-    echo("Veuillez vous connecte.");
+    echo("Veuillez vous connecter.");
 }
-
-//echo'<pre>';
-//    print_r($testes);
-//echo'</pre>';

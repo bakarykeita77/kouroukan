@@ -15,10 +15,13 @@ session_start();
 <body>
     
     <div id="donnees_ajax" style="display:none">
+
         <div id="profile_clients_bruts"></div>
  	    <div id="profile_testes_bruts"></div>
  	    <div id="profile_testes"></div>
  	    <div id="nbr_teste"></div>
+ 	    
+        <div id="client_lessons_bruts"></div>
     </div>
     
     <div id="header"><h3 id="nom_ecole">ߞߙߎ߬ߞߊ߲߬</h3></div>
@@ -81,8 +84,9 @@ session_start();
     <script src="http://localhost:8080/kouroukan/fonctions.js"></script>
     <script src="http://localhost:8080/kouroukan/js/caracteres.js"></script>
     <script src="http://localhost:8080/kouroukan/js/class.js"></script>
+	<script src="http://localhost:8080/kouroukan/js/tete-de-page.js"></script>
     <script src="http://localhost:8080/kouroukan/js/profile.js"></script>
-    <script src="http://localhost:8080/kouroukan/js/tete-de-page.js"></script>
-
+    <script src="http://localhost:8080/kouroukan/js/lesson.js"></script>
+	
 </body>
 </html>

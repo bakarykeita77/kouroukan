@@ -1,15 +1,21 @@
+$(document).ready(function() {
+    
+    var programmes_container = $('#programmes_container');
+    var client_lessons_bruts_container = document.querySelector('.page_head #client_lessons_bruts_container');
+    var client_lessons_bruts = client_lessons_bruts_container.innerHTML;
+    
+    programmes_container.html(programme());
 
-     var programmes_container = $('#programmes_container');
-     programmes_container.html(programme());
-     
-     function programme(){
-      
-         var programme_html = '<h2>ߘߋ߰ߟߌ ߢߍߥߟߊ </h2>';
-         programme_html += '<ul>';
-         for(var i=0;i<liste_de_matieres.length;i++){
-             programme_html += '<li><a href="lesson.php?matiere_id='+liste_de_matieres[i][0]+'&matiere_nom='+liste_de_matieres[i][1]+'&niveau='+i+'">'+liste_de_matieres[i][1]+'</a></li>';
-         }
-         programme_html += '</ul>';
+    
+    function programme(){
+
+        var programme_html = '<h2>ߘߋ߰ߟߌ ߢߍߥߟߊ </h2>';
+        programme_html += '<ul>';
+        for(var i=0;i<liste_de_matieres.length;i++){
+            programme_html += '<li><a href="lesson.php?matiere_id='+liste_de_matieres[i][0]+'&matiere_nom='+liste_de_matieres[i][1]+'&niveau='+i+'">'+liste_de_matieres[i][1]+'</a></li>';
+        }
+        programme_html += '</ul>';
          
-         return programme_html;
-     }
+        return programme_html;
+    }
+});

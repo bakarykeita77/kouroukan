@@ -62,7 +62,6 @@
             resultat_du_traitement = resultat_du_traitement.join('%');
             return resultat_du_traitement;
         }
-        
         function triDesTestesParNiveau(){
             
             var testes_par_niveau = []; 

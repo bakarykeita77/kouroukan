@@ -10,5 +10,5 @@
     echo(json_encode($clients));
 
 //echo'<pre>';
-//    print_r($testes);
+//    print_r($clients);
 //echo'</pre>';

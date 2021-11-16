@@ -17,11 +17,11 @@ session_start();
     <div id="donnees_ajax" style="display:none">
 
         <div id="profile_clients_bruts"></div>
+        <div id="client_lessons_bruts_container"></div>
  	    <div id="profile_testes_bruts"></div>
  	    <div id="profile_testes"></div>
  	    <div id="nbr_teste"></div>
  	    
-        <div id="client_lessons_bruts"></div>
     </div>
     
     <div id="header"><h3 id="nom_ecole">ߞߙߎ߬ߞߊ߲߬</h3></div>

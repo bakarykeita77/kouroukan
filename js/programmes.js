@@ -1,11 +1,6 @@
 $(document).ready(function() {
     
     var programmes_container = $('#programmes_container');
-    var client_lessons_bruts_container = document.querySelector('.page_head #client_lessons_bruts_container');
-    var client_lessons_bruts = client_lessons_bruts_container.innerHTML;
-    
-    programmes_container.html(programme());
-
     
     function programme(){
 

@@ -11,10 +11,16 @@ if(isset($_SESSION['connected'])){
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/class.css"/>
 </head>
 <body>
-
+  
     <div class="container">
         <div class="page_head"><?php require('tete-de-page.php'); ?></div>
-        <div class="page_body"><div id="programmes_container" class="centerH" align="right"></div></div>
+        <div class="page_body">
+            <div id="client_reception" align="center">
+                Réception
+            
+            </div>   
+            <div id="programmes_container" class="centerH" align="right"></div>
+        </div>
         <div class="page_foot"><?php include("pied-de-lesson.php"); ?></div>
     </div>
     

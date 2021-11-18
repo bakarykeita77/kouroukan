@@ -1,4 +1,5 @@
- 
+$(document).ready(function(){
+    
     var profile_menu_container, profile_entete, profile_teste_btn, profile_teste_menu, profile_teste;
     var profile_utilisateur_btn, profile_utilisateur_container, profile_utilisateur, modifier_avatar;
     var profile_clients_bruts;
@@ -594,3 +595,4 @@
         liste_des_matieres_a_apprendre = document.getElementById('liste_des_matieres_a_apprendre');
     }  
     
+});

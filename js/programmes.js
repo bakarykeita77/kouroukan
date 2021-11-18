@@ -106,7 +106,7 @@ $(document).ready(function() {
                 default:
                     verifierLesson1();
             }
-alert( niveau_max ); 
+
             function verifierLesson1() {
                 
                 var lessons = [];

@@ -1,9 +1,8 @@
 $(document).ready(function() {
 
     var programmes_container = $('#programmes_container');
-<<<<<<< HEAD
-=======
-    var client_lessons_bruts_container = document.querySelector('.page_head #client_lessons_bruts_container'); var client_lessons_bruts = client_lessons_bruts_container.innerHTML;
+    var client_lessons_bruts_container = document.querySelector('.page_head #client_lessons_bruts_container'); 
+  //  var client_lessons_bruts = client_lessons_bruts_container.innerHTML;
     var click_min_nbr = 0;
     
     $('#client_reception').on('click', function() {
@@ -15,56 +14,44 @@ $(document).ready(function() {
         var click_statistic = [];
         var element_click_statistic = [];
 
-        var lesson_suivie = [];
         var id, date, id_client, niveau, lesson_brute;
 
         var lessons_1 = [];
         var lessons_2 = [];
         var lessons_3 = [];
         var lessons_4 = [];
-
+        
+        
         recuperationGlobaleDesLessons();
         separationDesLessons();
         calculDuNiveauMaxDuClient();
         triDesLessonsParNiveau();
         verificationDesLessonsEtudiees();
-
+        
+   
         function recuperationGlobaleDesLessons() {
             lessons_suivies = client_lessons_bruts_container.innerHTML;
+            lessons_suivies = lessons_suivies.split('%');
         }
         function separationDesLessons() {
-            lessons_suivies = lessons_suivies.split('%');
->>>>>>> reception-page
-    
+
             for (var i = 0; i < lessons_suivies.length; i++) {
 
-                lesson_suivie = lessons_suivies[i].split('/');
-        
-                id = lesson_suivie[0];
-                date = lesson_suivie[1];
-                id_client = lesson_suivie[2];
-                niveau = lesson_suivie[3];
-                lesson_brute = lesson_suivie[4];
-
-                lesson_suivie[0] = id;
-                lesson_suivie[1] = date;
-                lesson_suivie[2] = id_client;
-                lesson_suivie[3] = niveau;
-                lesson_suivie[4] = lesson_brute;
-                    
+                var lesson_suivie = lessons_suivies[i].split('/');
                 lessons_separees.push(lesson_suivie);
             }
+    
         }
         function calculDuNiveauMaxDuClient() {
             niveau_max = niveauMax();
             function niveauMax() {
                 var niveaux = [];
-
+                 
                 for (var i = 0; i < lessons_separees.length; i++) {
                     niveaux.push(lessons_separees[i][3]);
                 }
-                
                 niveau_max = Math.max(...niveaux);
+
                 return niveau_max;
             }
         }
@@ -161,7 +148,7 @@ $(document).ready(function() {
                 }
 
                 click_min_nbr = Math.max(...click_table);
-            
+          //  alert( click_min_nbr ); 
             }
             function verifierLesson2() {
                 

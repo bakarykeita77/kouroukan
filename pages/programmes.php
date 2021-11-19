@@ -15,13 +15,10 @@ if(isset($_SESSION['connected'])){
     <div class="container">
         <div class="page_head"><?php require('tete-de-page.php'); ?></div>
         <div class="page_body">
-<<<<<<< HEAD
-=======
             <div id="client_reception" align="center">
                 Réception
             
             </div>   
->>>>>>> reception-page
             <div id="programmes_container" class="centerH" align="right"></div>
         </div>
         <div class="page_foot"><?php include("pied-de-lesson.php"); ?></div>

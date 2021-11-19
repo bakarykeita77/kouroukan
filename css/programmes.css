@@ -1,5 +1,20 @@
+#reception {
+    position: absolute;
+}
+#affiche_programme {
+    width: 100px;
+    margin: auto;
+    padding: 16px;
+    background-color: #ccc;
+    font-weight: bolder;
+    border-radius: 6px;
+}
+#affiche_programme:active {
+    background-color: #aaa;
+}
 #programmes_container{
     position: absolute;
+    display: none;
     top: 64px;
     width: 80%;
     border-radius: 6px;
@@ -16,7 +31,6 @@
     right: 0;
 }
 #programmes_container li{
-    background-color: #ddd;
     border-radius: 6px;
     padding: 0 16px;
     margin: 1px 0;

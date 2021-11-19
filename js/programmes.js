@@ -2,10 +2,9 @@ $(document).ready(function() {
 
     var programmes_container = $('#programmes_container');
     var client_lessons_bruts_container = document.querySelector('.page_head #client_lessons_bruts_container'); 
-  //  var client_lessons_bruts = client_lessons_bruts_container.innerHTML;
     var click_min_nbr = 0;
     
-    $('#client_reception').on('click', function() {
+    $('#affiche_programme').on('click', function() {
 
         var lessons_suivies = '';
         var lessons_separees = [];
@@ -27,7 +26,7 @@ $(document).ready(function() {
         calculDuNiveauMaxDuClient();
         triDesLessonsParNiveau();
         verificationDesLessonsEtudiees();
-        
+        afficherProgramme();
    
         function recuperationGlobaleDesLessons() {
             lessons_suivies = client_lessons_bruts_container.innerHTML;
@@ -51,7 +50,7 @@ $(document).ready(function() {
                     niveaux.push(lessons_separees[i][3]);
                 }
                 niveau_max = Math.max(...niveaux);
-
+                
                 return niveau_max;
             }
         }
@@ -78,6 +77,9 @@ $(document).ready(function() {
         function verificationDesLessonsEtudiees() {
 
             switch (niveau_max) {
+                case 'NaN':
+                    verifierLesson1();
+                    break;
                 case 1:
                     verifierLesson1();
                     break;
@@ -147,8 +149,7 @@ $(document).ready(function() {
                     click_table.push(nbr_click);
                 }
 
-                click_min_nbr = Math.max(...click_table);
-          //  alert( click_min_nbr ); 
+                click_min_nbr = Math.min(...click_table);
             }
             function verifierLesson2() {
                 
@@ -206,6 +207,19 @@ $(document).ready(function() {
                 click_min_nbr = Math.min(...click_table);
             }
         }
+        function afficherProgramme() {
+            $('#programmes_container').css({'display':'block'});
+            $('#reception').css({'display':'none'});
+            
+            var lesson_active = $('#programme_ul li:nth-child('+niveau_max+')');
+            var lessons_apprises = lesson_active.prevAll();
+            var lessons_a_apprendre = lesson_active.nextAll();
+            
+            lessons_apprises.addClass('lessons_apprises');
+            lesson_active.addClass('lesson_active');
+            lessons_a_apprendre.addClass('lessons_a_apprendre');
+            lessons_a_apprendre.click(off);
+        }
     });
 
     programmes_container.html(programme());
@@ -213,7 +227,7 @@ $(document).ready(function() {
     function programme() {
 
         var programme_html = '<h2>ߘߋ߰ߟߌ ߢߍߥߟߊ </h2>';
-        programme_html += '<ul>';
+        programme_html += '<ul id="programme_ul">';
         for (var i = 0; i < liste_de_matieres.length; i++) {
             programme_html += '<li><a href="lesson.php?matiere_id='+liste_de_matieres[i][0]+'&matiere_nom='+liste_de_matieres[i][1]+'&niveau='+i+'">'+liste_de_matieres[i][1]+'</a></li>';
         }

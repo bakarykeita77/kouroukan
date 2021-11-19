@@ -266,6 +266,20 @@
 .lesson_progress_question_bar{
     
 }
+.lesson_active {
+    background-color: yellow;
+    box-shadow: 0 0 16px yellow;
+}
+.lessons_apprises {
+    border: 1px solid #ccc;
+    text-shadow: 0 0 8px #000;
+}
+.lessons_apprises a {
+    color: yellow;
+}
+.lessons_a_apprendre {
+    background-color: #ccc;
+}
 .lesson_pied {}
 .lesson_title {
     position: relative;

@@ -3,12 +3,12 @@ $(document).ready(function() {
     var programmes_container = $('#programmes_container');
     var client_lessons_bruts_container = document.querySelector('.page_head #client_lessons_bruts_container'); 
     var click_min_nbr = 0;
+    var niveau_max = 1;
     
     $('#affiche_programme').on('click', function() {
 
         var lessons_suivies = '';
         var lessons_separees = [];
-        var niveau_max = 1;
         var lessons = [];
         var click_statistic = [];
         var element_click_statistic = [];
@@ -26,7 +26,9 @@ $(document).ready(function() {
         calculDuNiveauMaxDuClient();
         triDesLessonsParNiveau();
         verificationDesLessonsEtudiees();
+        programmes_container.html(programme());
         afficherProgramme();
+        
    
         function recuperationGlobaleDesLessons() {
             lessons_suivies = client_lessons_bruts_container.innerHTML;
@@ -207,6 +209,23 @@ $(document).ready(function() {
                 click_min_nbr = Math.min(...click_table);
             }
         }
+        function programme() {
+    
+            var programme_html = '<h2>ߘߋ߰ߟߌ ߢߍߥߟߊ </h2>';
+            programme_html += '<ul id="programme_ul">';
+            for (var i = 0; i < liste_de_matieres.length; i++) {
+                var matiere_index = liste_de_matieres.indexOf(liste_de_matieres[i])+1;       
+                
+                if(niveau_max >= matiere_index) {
+                    programme_html += '<li><a href="lesson.php?matiere_id='+liste_de_matieres[i][0]+'&matiere_nom='+liste_de_matieres[i][1]+'&niveau='+i+'">'+liste_de_matieres[i][1]+'</a></li>';
+                }else{
+                    programme_html += '<li><a href="#">'+liste_de_matieres[i][1]+'</a></li>';
+                }
+            }   
+            programme_html += '</ul>';
+    
+            return programme_html;
+        }
         function afficherProgramme() {
             $('#programmes_container').css({'display':'block'});
             $('#reception').css({'display':'none'});
@@ -220,19 +239,6 @@ $(document).ready(function() {
             lessons_a_apprendre.addClass('lessons_a_apprendre');
             lessons_a_apprendre.click(off);
         }
+        
     });
-
-    programmes_container.html(programme());
-
-    function programme() {
-
-        var programme_html = '<h2>ߘߋ߰ߟߌ ߢߍߥߟߊ </h2>';
-        programme_html += '<ul id="programme_ul">';
-        for (var i = 0; i < liste_de_matieres.length; i++) {
-            programme_html += '<li><a href="lesson.php?matiere_id='+liste_de_matieres[i][0]+'&matiere_nom='+liste_de_matieres[i][1]+'&niveau='+i+'">'+liste_de_matieres[i][1]+'</a></li>';
-        }
-        programme_html += '</ul>';
-
-        return programme_html;
-    }
 });

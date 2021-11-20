@@ -270,6 +270,9 @@
     background-color: yellow;
     box-shadow: 0 0 16px yellow;
 }
+.lesson_active:active {
+    background-color: #FFFFBF;
+}
 .lessons_apprises {
     border: 1px solid #ccc;
     text-shadow: 0 0 8px #000;

@@ -7,16 +7,6 @@
 		});
 	}
 	function aggrandir_caractere_de(element) { element.css( 'font-size','+=32px' ); }
-    function ajaxGet(url,onSuccess,onError){
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET",url,true);
-        xhr.onreadystatechange = function(){
-            if(xhr.readyState == 4 && xhr.status == 200)
-            { onSuccess(xhr.responseText); }else
-            { onError(xhr); }
-        };
-        xhr.send();
-    }
 	function appetir_caractere_de(element) { element.css( 'font-size','-=32px' ); }
     function arreterLecture(lessonHTML){
         $('.stop_icon').parent().on('click',function(){ 

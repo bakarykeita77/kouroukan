@@ -136,7 +136,7 @@ if(isset($_SESSION['connected'])){
         <p class='hand'> &#128070;&#127999; </p>
       <!-------------------------------------------------------------------->
     </div>
-    
+
     <audio id="audio"></audio>
 
     <script src="http://localhost:8080/kouroukan/js/icones.js"></script>
@@ -146,7 +146,7 @@ if(isset($_SESSION['connected'])){
     <script src="http://localhost:8080/kouroukan/js/lessons.js"></script>
     <script src="http://localhost:8080/kouroukan/js/evaluations.js"></script>
     <script src="http://localhost:8080/kouroukan/js/class.js"></script>
-    
+
 </body>
 </html>
 <?php

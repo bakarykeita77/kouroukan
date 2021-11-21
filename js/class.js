@@ -6,25 +6,9 @@ $(document).ready(function() {
     });
     
     var fermeture = $('.fermeture');
-    fermeture.css({
-        'position': 'absolute',
-        'margin': '4px',
-        'width': '20px',
-        'height': '20px',
-        'line-height': '20px',
-        'text-align': 'center',
-        'background-color': '#ddd',
-        'border-radius': '50%',
-        'cursor': 'pointer',
-        'left': 0,
-        'top': 0
-    });
     fermeture.on('click', function(){
         $(this).parent().css({'display':'none'});
     });
-    var fermeture_btn = document.getElementsByClassName('fermeture_btn');
-    fermeture_btn.forEach(function(){ this.style.color = 'red'; });
-    fermeture_btn.onclick = function(){ alert('fermeture_btn'); };
     var menu_icone = "&#9776;";
     $('.menu_icone').html(menu_icone);
     

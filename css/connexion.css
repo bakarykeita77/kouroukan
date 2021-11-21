@@ -33,6 +33,7 @@
 .input_box input, 
 .input_box label {
 	position: absolute;
+	top: 0;
 	margin: 0;
 	padding: 0 16px; 
 	width: 100%;
@@ -44,7 +45,6 @@
     color: #bbb;
     font-weight: bold;
 	z-index: 0; 
-	transition: 0.6s ease-out;
 }
 .input_box input { 
 	border-style: none;
@@ -57,6 +57,7 @@
 	font-weight: normal;
 	font-size: 12px;
 	color: cornflowerblue;
+	transition: 0.6s;
 }
 #connexion_btn {
 	padding: 16px 0;

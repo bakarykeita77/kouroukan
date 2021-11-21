@@ -39,9 +39,6 @@
     font-weight: bold;
     cursor: pointer;
 }
-#programmes_container li:hover{
-    background-color: #aaa;
-}
 #programmes_container a{
     text-decoration: none;
 }

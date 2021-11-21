@@ -7,6 +7,7 @@ $('document').ready(function() {
      
 	actualiserCochage();
 	chargerPhases();
+	styliserPhases();
 	cours();
 	
     function actualiserCochage(){
@@ -30,6 +31,9 @@ $('document').ready(function() {
             content += '</ul>';
             return content;
         }
+	}
+	function styliserPhases() {
+//alert( $('.phases').html() ); 	
 	}
 	function cours(){
     	$('.phases ul li').on('click', function(){

@@ -26,8 +26,9 @@ $(document).ready(function() {
         calculDuNiveauMaxDuClient();
         triDesLessonsParNiveau();
         verificationDesLessonsEtudiees();
-        programmes_container.html(programme());
-        afficherProgramme();
+        chargementDuProgramme();
+        affichageProgramme();
+        affichageDesPhases();
         
    
         function recuperationGlobaleDesLessons() {
@@ -209,24 +210,30 @@ $(document).ready(function() {
                 click_min_nbr = Math.min(...click_table);
             }
         }
-        function programme() {
-    
-            var programme_html = '<h2>ߘߋ߰ߟߌ ߢߍߥߟߊ </h2>';
-            programme_html += '<ul id="programme_ul">';
-            for (var i = 0; i < liste_de_matieres.length; i++) {
-                var matiere_index = liste_de_matieres.indexOf(liste_de_matieres[i])+1;       
+        function chargementDuProgramme() {
+            
+            programmes_container.html(programmeHTML());
+            function programmeHTML() {
                 
-                if(niveau_max >= matiere_index) {
-                    programme_html += '<li><a href="lesson.php?matiere_id='+liste_de_matieres[i][0]+'&matiere_nom='+liste_de_matieres[i][1]+'&niveau='+i+'">'+liste_de_matieres[i][1]+'</a></li>';
-                }else{
-                    programme_html += '<li><a href="#">'+liste_de_matieres[i][1]+'</a></li>';
-                }
-            }   
-            programme_html += '</ul>';
-    
-            return programme_html;
+                var programme_html = '<span class="fermeture" id="fermeture_programme">&times;</span>';
+                
+                programme_html += '<h2>ߘߋ߰ߟߌ ߢߍߥߟߊ </h2>';
+                programme_html += '<ul id="programme_ul">';
+                for (var i = 0; i < liste_de_matieres.length; i++) {
+                    var matiere_index = liste_de_matieres.indexOf(liste_de_matieres[i])+1;       
+                    
+                    if(niveau_max >= matiere_index) {
+                        programme_html += '<li><a href="lesson.php?matiere_id='+liste_de_matieres[i][0]+'&matiere_nom='+liste_de_matieres[i][1]+'&niveau='+i+'">'+liste_de_matieres[i][1]+'</a></li>';
+                    }else{
+                        programme_html += '<li><a href="#">'+liste_de_matieres[i][1]+'</a></li>';
+                    }
+                }   
+                programme_html += '</ul>';
+        
+                return programme_html;
+            }
         }
-        function afficherProgramme() {
+        function affichageProgramme() {
             $('#programmes_container').css({'display':'block'});
             $('#reception').css({'display':'none'});
             
@@ -237,7 +244,13 @@ $(document).ready(function() {
             lessons_apprises.addClass('lessons_apprises');
             lesson_active.addClass('lesson_active');
             lessons_a_apprendre.addClass('lessons_a_apprendre');
-            lessons_a_apprendre.click(off);
+        }
+        function affichageDesPhases() {
+            $('#programmes_container ul li').on('click', function() {
+                if($(this).find('a').attr('href')!=='#') {
+                    alert( 'ok' ); 
+                }
+            });
         }
         
     });

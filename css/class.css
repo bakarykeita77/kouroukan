@@ -215,6 +215,19 @@
     background-color: rgba(0,0,0,0.5);
 }
 
+.fermeture {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    background-color: #ccc;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+}
 .fermeture:hover {
     background-color: #aaa;
     font-weight: bold;
@@ -271,17 +284,24 @@
     box-shadow: 0 0 16px yellow;
 }
 .lesson_active:active {
-    background-color: #FFFFBF;
+    background-color: #FFF000;
 }
 .lessons_apprises {
-    border: 1px solid #ccc;
+    border: 1px solid transparent;
+    box-shadow: 0 0 16px #ccc;
     text-shadow: 0 0 8px #000;
+}
+.lessons_apprises:active {
+    background-color: #ddd;
 }
 .lessons_apprises a {
     color: yellow;
 }
 .lessons_a_apprendre {
     background-color: #ccc;
+}
+.lessons_a_apprendre a {
+    color: #aaa;
 }
 .lesson_pied {}
 .lesson_title {

@@ -24,11 +24,11 @@ $(document).ready(function() {
         recuperationGlobaleDesLessons();
         separationDesLessons();
         calculDuNiveauMaxDuClient();
+        chargementDuNiveauMaxContainer();
         triDesLessonsParNiveau();
         verificationDesLessonsEtudiees();
         chargementDuProgramme();
-        affichageProgramme();
-        affichageDesPhases();
+        affichageEtStylesDuProgramme();
         
    
         function recuperationGlobaleDesLessons() {
@@ -56,6 +56,9 @@ $(document).ready(function() {
                 
                 return niveau_max;
             }
+        }
+        function chargementDuNiveauMaxContainer() {
+            document.getElementById ('niveau_max_containner').innerHTML = niveau_max; 
         }
         function triDesLessonsParNiveau() {
  
@@ -233,7 +236,7 @@ $(document).ready(function() {
                 return programme_html;
             }
         }
-        function affichageProgramme() {
+        function affichageEtStylesDuProgramme() {
             $('#programmes_container').css({'display':'block'});
             $('#reception').css({'display':'none'});
             
@@ -241,17 +244,10 @@ $(document).ready(function() {
             var lessons_apprises = lesson_active.prevAll();
             var lessons_a_apprendre = lesson_active.nextAll();
             
-            lessons_apprises.addClass('lessons_apprises');
-            lesson_active.addClass('lesson_active');
-            lessons_a_apprendre.addClass('lessons_a_apprendre');
+            lessons_apprises.addClass('apprises');
+            lesson_active.addClass('active');
+            lessons_a_apprendre.addClass('a_apprendre');
         }
-        function affichageDesPhases() {
-            $('#programmes_container ul li').on('click', function() {
-                if($(this).find('a').attr('href')!=='#') {
-                    alert( 'ok' ); 
-                }
-            });
-        }
-        
+
     });
 });

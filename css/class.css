@@ -1,4 +1,29 @@
 
+.active {
+    background-color: yellow;
+    box-shadow: 0 0 16px yellow;
+}
+.active:active {
+    background-color: #FFF000;
+}
+.apprises {
+    border: 1px solid transparent;
+    box-shadow: 0 0 16px #ccc;
+    text-shadow: 0 0 8px #000;
+}
+.apprises:active {
+    background-color: #ddd;
+}
+.apprises a {
+    color: yellow;
+}
+.a_apprendre {
+    background-color: #ccc;
+}
+.a_apprendre a {
+    color: #aaa;
+}
+
 .centerflex{
     display: flex;
     justify-content: center;
@@ -271,14 +296,6 @@
 .left {
     float: left;
 }
-.lesson_progess_bar{
-}
-.lesson_progress_bonne_reponse_bar{
-    
-}
-.lesson_progress_question_bar{
-    
-}
 .lesson_active {
     background-color: yellow;
     box-shadow: 0 0 16px yellow;
@@ -303,6 +320,15 @@
 .lessons_a_apprendre a {
     color: #aaa;
 }
+.lesson_progess_bar{
+}
+.lesson_progress_bonne_reponse_bar{
+    
+}
+.lesson_progress_question_bar{
+    
+}
+
 .lesson_pied {}
 .lesson_title {
     position: relative;
@@ -398,7 +424,6 @@
     margin: 1px 0;
     box-sizing: border-box;
     font-weight: bold;
-    background-color: #ddd;
     border-radius: 6px;
     cursor: pointer;
 }

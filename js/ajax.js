@@ -17,7 +17,7 @@ $(document).ready(function(){
             let ajax_client = [clients[i].id, clients[i].prenom, clients[i].nom, clients[i].naissance, clients[i].sexe, clients[i].adresse, clients[i].email];
             ajax_clients.push(ajax_client);
         }
-        profile_clients_bruts.innerHTML = ajax_clients.join(';');
+        document.getElementById('profile_clients_bruts').innerHTML = ajax_clients.join(';');
     }, function(){});
     ajaxGet("/kouroukan/pages/lesson-data.php",    function(response){
         var lessons_data = JSON.parse(response);
@@ -36,9 +36,11 @@ $(document).ready(function(){
             lesson_brute = lesson_brute.join('/');
             
             lessons_brutes.push(lesson_brute); 
+            document.getElementById('client_lessons_bruts_container').innerHTML = lessons_brutes;
         }
      
         document.getElementById('client_lessons_bruts_container').innerHTML = lessons_brutes.join('%');
+   
     }, function(){});
     ajaxGet("/kouroukan/pages/exercices-data.php", function(response){
         
@@ -60,7 +62,7 @@ $(document).ready(function(){
             exercices.push(exercice);
         }
         
-        client_exercices_bruts_container.innerHTML = exercices.join('%');
+        document.getElementById('client_exercices_bruts_container').innerHTML = exercices.join('%');
     }, function(){});
     ajaxGet("/kouroukan/pages/testes-data.php",    function(response){
         
@@ -71,7 +73,7 @@ $(document).ready(function(){
       
         nombre_de_teste_par_niveau = triDesTestesParNiveau();
         nombre_de_teste_par_niveau = nombre_de_teste_par_niveau.join(';');
-        nbr_teste.innerHTML = nombre_de_teste_par_niveau;
+        document.getElementById('nbr_teste').innerHTML = nombre_de_teste_par_niveau;
       
         function traitementDeTestesBruts(){
             var resultat_du_traitement = [];
@@ -145,8 +147,10 @@ $(document).ready(function(){
              
             return testes_par_niveau;
         }
-
+    
     }, function(){});
+
+
 
 /*
     function effectuerLaRequeteAjax(){

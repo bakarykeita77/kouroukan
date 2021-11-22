@@ -33,11 +33,18 @@ $('document').ready(function() {
         }
 	}
 	function styliserPhases() {
-//alert( $('.phases').html() ); 	
+	  
+	  /* Par défaut, la première phase est active */
+	   $('.phases ul li:nth-child(1)').addClass('active');
+	   
+	   $('.active').prevAll().css({'background-color':'#fff', 'color':'yellow', 'text-shadow':'0 0 16px #000'});
+	   $('.active').nextAll().css({'background-color':'#ccc', 'color':'#bbb'});
+ 	
 	}
 	function cours(){
+    alert( document.getElementById('donnees_ajax').innerHTML ); 	    
     	$('.phases ul li').on('click', function(){
-            
+       
             var lettres = voyelles_cochees.concat(consonnes_cochees,tedos_coches);  
             var syllabes = syllab();  
             var syllabes_tonifies = tonification();  

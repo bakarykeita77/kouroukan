@@ -3,7 +3,7 @@ session_start();
 ?>
 <!DOCTYPE html>
 <html>
-<head>
+<head id='head'>
 	<title>topbar</title>
 	<meta charset="utf-8">
     <link rel="stylesheet" href="http://localhost:8080/kouroukan/css/tete-de-page.css"/>
@@ -22,6 +22,7 @@ session_start();
  	    <div id="profile_testes_bruts"></div>
  	    <div id="profile_testes"></div>
  	    <div id="nbr_teste"></div>
+ 	    <div id="niveau_max_containner"></div>
  	    
     </div>
     
@@ -82,10 +83,12 @@ session_start();
 		</div>
 	</div>
 
+
     <script src="http://localhost:8080/kouroukan/fonctions.js"></script>
+	<script src="http://localhost:8080/kouroukan/js/ajax.js"></script>
+    <script src="http://localhost:8080/kouroukan/js/tete-de-page.js"></script>
     <script src="http://localhost:8080/kouroukan/js/caracteres.js"></script>
     <script src="http://localhost:8080/kouroukan/js/class.js"></script>
-	<script src="http://localhost:8080/kouroukan/js/ajax.js"></script>
     <script src="http://localhost:8080/kouroukan/js/profile.js"></script>
     <script src="http://localhost:8080/kouroukan/js/lesson.js"></script>
 	

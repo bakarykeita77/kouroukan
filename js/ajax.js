@@ -17,30 +17,28 @@ $(document).ready(function(){
             let ajax_client = [clients[i].id, clients[i].prenom, clients[i].nom, clients[i].naissance, clients[i].sexe, clients[i].adresse, clients[i].email];
             ajax_clients.push(ajax_client);
         }
-        document.getElementById('profile_clients_bruts').innerHTML = ajax_clients.join(';');
+        document.getElementById('client_identification_brute_container').innerHTML = ajax_clients.join(';');
     }, function(){});
     ajaxGet("/kouroukan/pages/lesson-data.php",    function(response){
         var lessons_data = JSON.parse(response);
-     //   var client_lessons_bruts_container = document.getElementById('#client_lessons_bruts_container');
         var lessons_brutes = [];
         
         for (var i = 0; i < lessons_data.length; i++) {
             
+            var phase = liste_de_phases[0][1];
             var id = lessons_data[i].id;
             var date = lessons_data[i].date;
             var id_client = lessons_data[i].id_client;
             var niveau = lessons_data[i].niveau;
             var lesson = lessons_data[i].lesson;
             
-            var lesson_brute = [id, date, id_client, niveau, lesson];
+            var lesson_brute = [phase, date, id_client, niveau, lesson];
             lesson_brute = lesson_brute.join('/');
             
             lessons_brutes.push(lesson_brute); 
-            document.getElementById('client_lessons_bruts_container').innerHTML = lessons_brutes;
         }
      
         document.getElementById('client_lessons_bruts_container').innerHTML = lessons_brutes.join('%');
-   
     }, function(){});
     ajaxGet("/kouroukan/pages/exercices-data.php", function(response){
         
@@ -51,12 +49,13 @@ $(document).ready(function(){
         for (var i = 0; i < exercices_data.length; i++) {
             var exercice = [];
             
-            exercice[0] = exercices_data[i].id;
-            exercice[1] = exercices_data[i].date;
-            exercice[2] = exercices_data[i].id_client;
-            exercice[3] = exercices_data[i].niveau;
-            exercice[4] = exercices_data[i].exercice;
+            var phase     = liste_de_phases[1][1];
+            var date      = exercices_data[i].date;
+            var id_client = exercices_data[i].id_client;
+            var niveau    = exercices_data[i].niveau;
+            var exercice  = exercices_data[i].exercice;
             
+            exercice = [phase, date, id_client, niveau, exercice];
             exercice = exercice.join('/');
             
             exercices.push(exercice);
@@ -70,6 +69,7 @@ $(document).ready(function(){
         var testes_traites = traitementDeTestesBruts();
 
         profile_testes.innerHTML = testes_traites;
+        document.getElementById('client_evaluations_brutes_container').innerHTML = testes_traites.join('%');
       
         nombre_de_teste_par_niveau = triDesTestesParNiveau();
         nombre_de_teste_par_niveau = nombre_de_teste_par_niveau.join(';');
@@ -79,25 +79,22 @@ $(document).ready(function(){
             var resultat_du_traitement = [];
             for(var i=0;i<testes_bruts.length;i++){
               
-                var date = testes_bruts[i].Date;
+                var phase     = liste_de_phases[2][1];
+                var date      = testes_bruts[i].Date;
                 var id_client = testes_bruts[i].id_client;
-                var niveau = reverseIntNko(testes_bruts[i].Niveau);
-                var teste = testes_bruts[i].Teste;
-                var point = testes_bruts[i].Point;
+                var niveau    = reverseIntNko(testes_bruts[i].Niveau);
+                var teste     = testes_bruts[i].Teste;
+                var point     = testes_bruts[i].Point;
+                
                 point = point.split(',');
                 point = point[0];
                 var teste_traite = [];
                 
-                teste_traite[0] = date;
-                teste_traite[1] = id_client;
-                teste_traite[2] = niveau;
-                teste_traite[3] = teste;
-                teste_traite[4] = point;
-                
+                teste_traite = [phase, date, id_client, niveau, teste, point];
                 resultat_du_traitement[resultat_du_traitement.length] = teste_traite.join('/');
             }
              
-            resultat_du_traitement = resultat_du_traitement.join('%');
+            resultat_du_traitement = resultat_du_traitement;
             return resultat_du_traitement;
         }
         function triDesTestesParNiveau(){

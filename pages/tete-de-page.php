@@ -16,10 +16,10 @@ session_start();
     
     <div id="donnees_ajax" style="display:none">
 
-        <div id="profile_clients_bruts"></div>
+        <div id="client_identification_brute_container"></div>
         <div id="client_lessons_bruts_container"></div>
         <div id="client_exercices_bruts_container"></div>
- 	    <div id="profile_testes_bruts"></div>
+ 	    <div id="client_evaluations_brutes_container"></div>
  	    <div id="profile_testes"></div>
  	    <div id="nbr_teste"></div>
  	    <div id="niveau_max_containner"></div>

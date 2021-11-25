@@ -1,15 +1,30 @@
 $(document).ready(function() {
 
     var programmes_container = $('#programmes_container');
-    var client_lessons_bruts_container = document.querySelector('.page_head #client_lessons_bruts_container'); 
+    
+    var client_lessons_bruts_container      = document.querySelector('.page_head #client_lessons_bruts_container'); 
+    var client_exercices_bruts_container    = document.querySelector('.page_head #client_exercices_bruts_container'); 
+    var client_evaluations_brutes_container = document.querySelector('.page_head #client_evaluations_brutes_container'); 
+    
     var click_min_nbr = 0;
     var niveau_max = 1;
     
     $('#affiche_programme').on('click', function() {
 
+        var data = [];
+        
         var lessons_suivies = '';
+        var exercices_effectues = '';
+        var evaluations_effectuees = '';
+        
         var lessons_separees = [];
+        var exercices_separes = [];
+        var evaluations_separees = [];
+        
         var lessons = [];
+        var exercices = [];
+        var evaluatons = [];
+        
         var click_statistic = [];
         var element_click_statistic = [];
 
@@ -18,23 +33,87 @@ $(document).ready(function() {
         var lessons_1 = [];
         var lessons_2 = [];
         var lessons_3 = [];
-        var lessons_4 = [];
         
-        
+        var phases_1 = [];
+        var phases_2 = [];
+        var phases_3 = [];
+        var phases_4 = [];
+
+        var client_info = [];
+        var niveaux_client = [];
+        var phases = [];
+
+
+
         recuperationGlobaleDesLessons();
+        recuperationGlobaleDesExercices();
+        recuperationGlobaleDesEvaluations();
+        
         separationDesLessons();
+        separationDesExercices();
+        separationDesEvaluations();
+        
         calculDuNiveauMaxDuClient();
         chargementDuNiveauMaxContainer();
         triDesLessonsParNiveau();
         verificationDesLessonsEtudiees();
         chargementDuProgramme();
         affichageEtStylesDuProgramme();
+        clientInfo();
+
+
         
-   
+        function clientInfo() {
+            
+            var phases_par_niveau = [];
+            
+            for (var i = 0; i < data.length; i++) {
+            for (var j = 0; j < data[i].length; j++) {
+                
+                var niveau = data[i][j][3];
+            
+              /* Mettre les cours du niveau 1 ensemble  */    
+                if(niveau==1) {
+                if(phases_1.indexOf(data[i][j][0]) == -1) {
+                    phases_1[phases_1.length] = data[i][j][0];
+                }}
+
+              /* Mettre les cours du niveau 2 ensemble  */    
+                if(niveau==2) {
+                if(phases_2.indexOf(data[i][j][0]) == -1) {
+                    phases_2[phases_2.length] = data[i][j][0];
+                }}
+
+              /* Mettre les cours du niveau 3 ensemble  */    
+                if(niveau==3) {
+                if(phases_3.indexOf(data[i][j][0]) == -1) {
+                    phases_3[phases_3.length] = data[i][j][0];
+                }}
+
+              /* Mettre les cours du niveau 4 ensemble  */    
+                if(niveau==4) {
+                if(phases_4.indexOf(data[i][j][0]) == -1) {
+                    phases_4[phases_4.length] = data[i][j][0];
+                }}
+
+            }}
+            client_info = [[1,phases_1].join('_'), [2,phases_2].join('_'), [3,phases_3].join('_'), [4,phases_4].join('_')];
+            client_info = client_info.join('/');
+            return client_info;
+        } 
         function recuperationGlobaleDesLessons() {
             lessons_suivies = client_lessons_bruts_container.innerHTML;
             lessons_suivies = lessons_suivies.split('%');
-        }
+        } 
+        function recuperationGlobaleDesExercices() {
+            exercices_effectues = client_exercices_bruts_container.innerHTML;
+            exercices_effectues = exercices_effectues.split('%');
+        } 
+        function recuperationGlobaleDesEvaluations() {
+            evaluations_effectuees = client_evaluations_brutes_container.innerHTML;
+            evaluations_effectuees = evaluations_effectuees.split('%');
+        } 
+        
         function separationDesLessons() {
 
             for (var i = 0; i < lessons_suivies.length; i++) {
@@ -42,8 +121,28 @@ $(document).ready(function() {
                 var lesson_suivie = lessons_suivies[i].split('/');
                 lessons_separees.push(lesson_suivie);
             }
-    
+            data[data.length] = lessons_separees
         }
+        function separationDesExercices() {
+
+            for (var i = 0; i < exercices_effectues.length; i++) {
+
+                var exercice_effectuee = exercices_effectues[i].split('/');
+                exercices_separes.push(exercice_effectuee);
+            }
+            data[data.length] = exercices_separes;
+        }
+        function separationDesEvaluations() {
+
+            for (var i = 0; i < evaluations_effectuees.length; i++) {
+
+                var evaluation_effectuee = evaluations_effectuees[i].split('/');
+                evaluations_separees.push(evaluation_effectuee);
+            }
+            
+            data[data.length] = evaluations_separees;
+        }
+        
         function calculDuNiveauMaxDuClient() {
             niveau_max = niveauMax();
             function niveauMax() {
@@ -53,7 +152,7 @@ $(document).ready(function() {
                     niveaux.push(lessons_separees[i][3]);
                 }
                 niveau_max = Math.max(...niveaux);
-                
+           
                 return niveau_max;
             }
         }
@@ -67,7 +166,7 @@ $(document).ready(function() {
                 var niveau = lessons_separees[i][3];
 
                 if (niveau == 1) {
-                    lessons_1.push(lessons_separees[i]);
+              //      lessons_1.push(lessons_separees[i]);
                 }
                 if (niveau == 2) {
                     lessons_2.push(lessons_separees[i]);
@@ -218,15 +317,17 @@ $(document).ready(function() {
             programmes_container.html(programmeHTML());
             function programmeHTML() {
                 
+                var code = clientInfo();  
                 var programme_html = '<span class="fermeture" id="fermeture_programme">&times;</span>';
                 
                 programme_html += '<h2>ߘߋ߰ߟߌ ߢߍߥߟߊ </h2>';
                 programme_html += '<ul id="programme_ul">';
+                
                 for (var i = 0; i < liste_de_matieres.length; i++) {
                     var matiere_index = liste_de_matieres.indexOf(liste_de_matieres[i])+1;       
                     
                     if(niveau_max >= matiere_index) {
-                        programme_html += '<li><a href="lesson.php?matiere_id='+liste_de_matieres[i][0]+'&matiere_nom='+liste_de_matieres[i][1]+'&niveau='+i+'">'+liste_de_matieres[i][1]+'</a></li>';
+                        programme_html += '<li><a href="lesson.php?matiere_id='+liste_de_matieres[i][0]+'&matiere_index='+matiere_index+'&matiere_nom='+liste_de_matieres[i][1]+'&niveau='+i+'&client_code='+code+'">'+liste_de_matieres[i][1]+'</a></li>';
                     }else{
                         programme_html += '<li><a href="#">'+liste_de_matieres[i][1]+'</a></li>';
                     }

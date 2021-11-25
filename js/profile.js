@@ -2,7 +2,7 @@ $(document).ready(function(){
     
     var profile_menu_container, profile_entete, profile_teste_btn, profile_teste_menu, profile_teste;
     var profile_utilisateur_btn, profile_utilisateur_container, profile_utilisateur, modifier_avatar;
-    var profile_clients_bruts;
+    var client_identification_brute_container;
     var lessons_studied_titles, profile_teste_content;
     var titre_des_matieres_apprises, titre_des_matieres_a_apprendre;
     var liste_des_matieres_apprises, liste_des_matieres_a_apprendre;
@@ -390,7 +390,7 @@ $(document).ready(function(){
                 var profile_client_id = document.getElementById('profile_client_id').innerHTML;
                 var id, prenom, nom, naissance, sexe, adresse, email = '';
                 
-                var clients_bruts = profile_clients_bruts.innerHTML;
+                var clients_bruts = client_identification_brute_container.innerHTML;
                 clients_bruts = clients_bruts.split(';');
                 
                 var clients_collection = [];
@@ -439,7 +439,7 @@ $(document).ready(function(){
         
         profile_menu_container = $('#profile_menu_container');
         profile_entete = document.getElementById('profile_entete');
-        profile_testes_bruts = document.getElementById('profile_testes_bruts');
+        client_evaluations_brutes_container = document.getElementById('client_evaluations_brutes_container');
         nbr_teste = document.getElementById('nbr_teste');
         profile_teste_point = document.getElementById('profile_teste_point');
         profile_teste_btn = document.getElementById('profile_teste_btn');
@@ -448,7 +448,7 @@ $(document).ready(function(){
         profile_teste = document.getElementById('profile_teste');
         modifier_avatar = document.getElementById('modifier_avatar');
         
-        profile_clients_bruts = document.getElementById('profile_clients_bruts');
+        client_identification_brute_container = document.getElementById('client_identification_brute_container');
         profile_utilisateur_btn = document.getElementById('profile_utilisateur_btn');
         profile_utilisateur_container = document.getElementById('profile_utilisateur_container');
         profile_utilisateur = document.getElementById('profile_utilisateur');

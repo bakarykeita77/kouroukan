@@ -20,9 +20,9 @@ session_start();
         <div id="client_lessons_bruts_container"></div>
         <div id="client_exercices_bruts_container"></div>
  	    <div id="client_evaluations_brutes_container"></div>
- 	    <div id="profile_testes"></div>
- 	    <div id="nbr_teste"></div>
- 	    <div id="niveau_max_containner"></div>
+ 	    <p id="profile_testes"></p>
+ 	    <p id="nbr_teste"></p>
+ 	    <span id="niveau_max_containner"></span>
  	    
     </div>
     

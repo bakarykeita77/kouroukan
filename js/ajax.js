@@ -31,7 +31,8 @@ $(document).ready(function(){
             var id_client = lessons_data[i].id_client;
             var niveau = lessons_data[i].niveau;
             var lesson = lessons_data[i].lesson;
-            
+
+ // alert( lesson );          
             var lesson_brute = [phase, date, id_client, niveau, lesson];
             lesson_brute = lesson_brute.join('/');
             
@@ -68,7 +69,7 @@ $(document).ready(function(){
         var testes_bruts = JSON.parse(response);
         var testes_traites = traitementDeTestesBruts();
 
-        profile_testes.innerHTML = testes_traites;
+        profile_testes.innerHTML = testes_traites.join('%');
         document.getElementById('client_evaluations_brutes_container').innerHTML = testes_traites.join('%');
       
         nombre_de_teste_par_niveau = triDesTestesParNiveau();
@@ -77,8 +78,8 @@ $(document).ready(function(){
       
         function traitementDeTestesBruts(){
             var resultat_du_traitement = [];
-            for(var i=0;i<testes_bruts.length;i++){
-              
+            for(var i=0;i<testes_bruts.length;i++) {
+          
                 var phase     = liste_de_phases[2][1];
                 var date      = testes_bruts[i].Date;
                 var id_client = testes_bruts[i].id_client;

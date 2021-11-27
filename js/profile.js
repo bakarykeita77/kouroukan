@@ -66,7 +66,7 @@ $(document).ready(function(){
                 
                 testes = reconstitutionDeTestes();
                 var matieres_apprises = matieresApprises();
-               
+           
                 titre_des_matieres_apprises.innerHTML = titre1();
                 titre_des_matieres_a_apprendre.innerHTML = titre2();
            
@@ -80,6 +80,7 @@ $(document).ready(function(){
               
                     var testes_collection = profile_testes.innerHTML;
                     var testes_reconstitues = [];
+                     
                     testes_collection = testes_collection.split('%');
                     
                     for(var i=0;i<testes_collection.length;i++){
@@ -87,12 +88,14 @@ $(document).ready(function(){
                         var profile_teste = testes_collection[i].split('/');
                         var teste = [];
                        
-                        teste[0] = profile_teste[0];
-                        teste[1] = profile_teste[1];
-                        teste[2] = profile_teste[2];
-                        teste[3] = profile_teste[3].split(';');
-                        teste[4] = profile_teste[4];
-                       
+                        var phase     = profile_teste[0];
+                        var date      = profile_teste[1];
+                        var id_client = profile_teste[2];
+                        var niveau    = profile_teste[3];
+                        var test      = profile_teste[4].split(';');
+                        var point     = profile_teste[5];
+                        
+                        teste = [phase, date, id_client, niveau, test, point];
                         testes_reconstitues[testes_reconstitues.length] = teste;
                     }
                   
@@ -152,14 +155,15 @@ $(document).ready(function(){
                 function matieresApprises(){
                     var matieres1 = [];
                     for(var i=0;i<testes.length;i++){
-                       var point = testes[i][4];
+                       var point = testes[i][5];
                        point = reverseIntNko(point);
                        if(point>10){
-                           var id_matiere_apprise = testes[i][2]-1;
+                           var id_matiere_apprise = testes[i][3]-1;
+                           
                            if(matieres1.indexOf(liste_de_matieres[id_matiere_apprise][1]) == -1){
                                matieres1[matieres1.length] = liste_de_matieres[id_matiere_apprise][1];
                            }
-                       }  
+                       } 
                     }
            
                     return matieres1;
@@ -193,21 +197,23 @@ $(document).ready(function(){
                     miseEnSurbrillanceDeLaMatiereARenseigne();
                     elementsHTMLDeProfileTeste();
                     affichageDeProfileTeste();
- 
                     chargementDeProfileTeste();
+                    
                     document.getElementsByClassName('bouton_afficheur_de_teste')[0].click();
+            
+            
             
                     function triDesTestesParNiveau(){
                     /* Regroupement des testes de meme niveau dans un tableau. */
                         var groupe_de_teste = [];
                         for(i=0;i<testes.length;i++){
-                          
-                            niveau_teste = testes[i][2];
+                            niveau_teste = testes[i][3];
+                            
                             if(matiere_index+1==niveau_teste){
                                 groupe_de_teste[groupe_de_teste.length] = testes[i];
                             }
                         }
-                
+                  
                         return groupe_de_teste;
                     }
                     function miseEnSurbrillanceDeLaMatiereARenseigne(){
@@ -294,14 +300,14 @@ $(document).ready(function(){
                             
                             n = $(this).index();
                             
-                            var date_du_teste = testes_de_meme_niveau[n][0];
+                            var date_du_teste = testes_de_meme_niveau[n][1];
                             date_du_teste = date_du_teste.split(' ');
                             date_du_teste = date_du_teste[0].split('-');
                             date_du_teste = mois[parseInt(date_du_teste[1])]+' ߕߟߋ߬ '+parseIntNko(date_du_teste[2])+' ߛߊ߲߭ '+parseIntNko(date_du_teste[0]);
-                         
-                            var teste = testes_de_meme_niveau[n][3];
-                            var points = testes_de_meme_niveau[n][4];
-                            
+                   
+                            var teste = testes_de_meme_niveau[n][4]; 
+                            var points = testes_de_meme_niveau[n][5];
+                           
                             chargerProfileTeste();
                             reAfficherProfileTeste();
                             
@@ -320,6 +326,7 @@ $(document).ready(function(){
                                     var profile_teste_body_content = '';
                                     for(var i=0;i<teste.length;i++){
                                         var data = teste[i].split(',');
+                                       
                                         profile_teste_body_content += '<tr style="border:1px solid #fff; width:302px"><td>'+data[0]+'</td><td>'+data[1]+'</td><td>'+data[2]+'</td><td>'+data[3]+'</td></tr>\n';
                                     }
                                     return profile_teste_body_content;

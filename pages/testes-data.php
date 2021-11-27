@@ -8,7 +8,7 @@ if($_SESSION['connected']){
     $rqt = $connexion->prepare($sql);
     $rqt->execute();
     $testes = $rqt->fetchAll();
-    
+
     if($testes==Array()){
         echo("Cet utilisateur n'a pas composé");
     }else{

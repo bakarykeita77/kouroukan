@@ -48,11 +48,12 @@ $('document').ready(function() {
         var niveaux_passes = [];
         var client_code    = code_container.html();
         
-        client_code = client_code.split('/');
-	    
+        client_code = client_code.split(';');
+	   
 	    for (var i = 0; i < client_code.length; i++) {
-	        var etape = client_code[i].split('_');
-	        
+alert( client_code[i] ); 	        
+	        var etape = client_code[i].split(',');
+	         
 	        if(etape[1] !== '') { etapes_passees[etapes_passees.length] = etape; }
 	        else{ etapes_a_faire[etapes_a_faire.length] = etape; }
 	    }

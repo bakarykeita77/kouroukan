@@ -176,13 +176,13 @@ $(document).ready(function() {
             }
             function listeDesPhasesEtudies() {
 
-                var phases_1 = [], phases_11 = [], phases_12, phases_13 = [];
-                var phases_2 = [], phases_21 = [], phases_22, phases_23 = [];
-                var phases_3 = [], phases_31 = [], phases_32, phases_33 = [];
+                var phases_1 = [], phases_11 = [], phases_12, phases_13 = [], phases_14 = [];
+                var phases_2 = [], phases_21 = [], phases_22, phases_23 = [], phases_24 = [];
+                var phases_3 = [], phases_31 = [], phases_32, phases_33 = [], phases_34 = [];
 
-                var n_11 = 0, n_12 = 0, n_13 = 0;
-                var n_21 = 0, n_22 = 0, n_23 = 0;
-                var n_31 = 0, n_32 = 0, n_33 = 0;
+                var n_11 = 0, n_12 = 0, n_13 = 0, n_14 = 0;
+                var n_21 = 0, n_22 = 0, n_23 = 0, n_24 = 0;
+                var n_31 = 0, n_32 = 0, n_33 = 0, n_34 = 0;
 
                 for (var i = 0; i < data_cours_tries_par_phase.length; i++) {
                     for (var j = 0; j < data_cours_tries_par_phase[i].length; j++) {
@@ -191,87 +191,65 @@ $(document).ready(function() {
                         var phaze = data_cours_tries_par_phase[i][j][0];
                         var list_element = [niveau, phaze];
                         liste_des_phases[liste_des_phases.length] = list_element;
-                    }}
+                    }
+                }
 
                 for (var i = 0; i < liste_des_phases.length; i++) {
 
                     var nivo = liste_des_phases[i][0];
                     var phase = liste_des_phases[i][1];
-
+                    var p = liste_des_phases[i][1];
+                    
                     if (nivo == 1 && phase == liste_de_phases[0][1]) {
-                        var p = liste_des_phases[i][1];
                         n_11++;
-
                         phases_11 = [nivo, p, n_11];
                     }
-                    if (nivo == 1 && phase == liste_de_phases[1][1]) {
-                        var p = liste_des_phases[i][1];
+                    if (nivo == 2 && phase == liste_de_phases[0][1]) {
                         n_12++;
-
                         phases_12 = [nivo, p, n_12];
                     }
-                    if (nivo == 1 && phase == liste_de_phases[2][1]) {
-                        var p = liste_des_phases[i][1];
+                    if (nivo == 3 && phase == liste_de_phases[0][1]) {
                         n_13++;
-
                         phases_13 = [nivo, p, n_13];
                     }
+                    if (nivo == 4 && phase == liste_de_phases[0][1]) {
+                        n_14++;
 
-                    if (nivo == 2 && phase == liste_de_phases[0][1]) {
-                        var p = liste_des_phases[i][1];
+                        phases_14 = [nivo, p, n_14];
+                    }
+                   
+                    if (nivo == 1 && phase == liste_de_phases[1][1]) {
                         n_21++;
-
                         phases_21 = [nivo, p, n_21];
                     }
                     if (nivo == 2 && phase == liste_de_phases[1][1]) {
-                        var p = liste_des_phases[i][1];
                         n_22++;
-
                         phases_22 = [nivo, p, n_22];
                     }
-                    if (nivo == 2 && phase == liste_de_phases[2][1]) {
-                        var p = liste_des_phases[i][1];
+                    if (nivo == 3 && phase == liste_de_phases[1][1]) {
                         n_23++;
-
                         phases_23 = [nivo, p, n_23];
                     }
-              
-                    if (nivo == 3 && phase == liste_de_phases[0][1]) {
-                        var p = liste_des_phases[i][1];
+                    if (nivo == 4 && phase == liste_de_phases[1][1]) {
+                        n_24++;
+                        phases_24 = [nivo, p, n_24];
+                    }
+                    
+                    if (nivo == 1 && phase == liste_de_phases[2][1]) {
                         n_31++;
-
                         phases_31 = [nivo, p, n_31];
                     }
-                    if (nivo == 3 && phase == liste_de_phases[1][1]) {
-                        var p = liste_des_phases[i][1];
+                    if (nivo == 2 && phase == liste_de_phases[2][1]) {
                         n_32++;
-
                         phases_32 = [nivo, p, n_32];
                     }
                     if (nivo == 3 && phase == liste_de_phases[2][1]) {
-                        var p = liste_des_phases[i][1];
                         n_33++;
-
                         phases_33 = [nivo, p, n_33];
                     }
-               
-                    if (nivo == 4 && phase == liste_de_phases[0][1]) {
-                        var p = liste_des_phases[i][1];
-                        n_41++;
-
-                        phases_41 = [nivo, p, n_41];
-                    }
-                    if (nivo == 4 && phase == liste_de_phases[1][1]) {
-                        var p = liste_des_phases[i][1];
-                        n_42++;
-
-                        phases_42 = [nivo, p, n_42];
-                    }
                     if (nivo == 4 && phase == liste_de_phases[2][1]) {
-                        var p = liste_des_phases[i][1];
-                        n_43++;
-
-                        phases_43 = [nivo, p, n_43];
+                        n_34++;
+                        phases_34 = [nivo, p, n_34];
                     }
                
                 }
@@ -280,8 +258,7 @@ $(document).ready(function() {
                 phases_2 = [phases_12, phases_22, phases_32].join(';');
                 phases_3 = [phases_13, phases_23, phases_33].join(';');
 
-                code_des_etudes = [phases_1, phases_2, phases_3, phases_4];
- alert( code_des_etudes ); 
+                code_des_etudes = [phases_1, phases_2, phases_3];
                 situations[situations.length] = code_des_etudes;
             }
         }
@@ -449,56 +426,56 @@ $(document).ready(function() {
                     click_min_nbr = Math.min(...click_table);
                 }
             }
-            function programme() {
+        function programme() {
 
-                var programmes_container = $('#programmes_container');
-                var reception = $('#reception');
+            var programmes_container = $('#programmes_container');
+            var reception = $('#reception');
 
-                programmes_container.html(programmeHTML());
-                affichageDuProgramme();
-                stylesDuProgramme();
+            programmes_container.html(programmeHTML());
+            affichageDuProgramme();
+            stylesDuProgramme();
 
-                function programmeHTML() {
+            function programmeHTML() {
 
-                    var code = code_des_etudes;
-                    var programme_html = '<span class="fermeture" id="fermeture_programme">&times;</span>';
+                var code = code_des_etudes;
+                var programme_html = '<span class="fermeture" id="fermeture_programme">&times;</span>';
 
-                    programme_html += '<h2>ߘߋ߰ߟߌ ߢߍߥߟߊ </h2>';
-                    programme_html += '<ul id="programme_ul">';
+                programme_html += '<h2>ߘߋ߰ߟߌ ߢߍߥߟߊ </h2>';
+                programme_html += '<ul id="programme_ul">';
 
-                    for (var i = 0; i < liste_de_matieres.length; i++) {
-                        var matiere_index = liste_de_matieres.indexOf(liste_de_matieres[i])+1;
+                for (var i = 0; i < liste_de_matieres.length; i++) {
+                    var matiere_index = liste_de_matieres.indexOf(liste_de_matieres[i])+1;
 
-                        if (niveau_max >= matiere_index-1) {
-                            programme_html += '<li><a href="lesson.php?matiere_id='+liste_de_matieres[i][0]+'&matiere_index='+matiere_index+'&matiere_nom='+liste_de_matieres[i][1]+'&niveau='+i+'&client_code='+code+'">'+liste_de_matieres[i][1]+'</a></li>';
-                        } else {
-                            programme_html += '<li><a href="#">'+liste_de_matieres[i][1]+'</a></li>';
-                        }
+                    if (niveau_max >= matiere_index-1) {
+                        programme_html += '<li><a href="lesson.php?matiere_id='+liste_de_matieres[i][0]+'&matiere_index='+matiere_index+'&matiere_nom='+liste_de_matieres[i][1]+'&niveau='+i+'&client_code='+code_des_etudes.join('/')+'">'+liste_de_matieres[i][1]+'</a></li>';
+                    } else {
+                        programme_html += '<li><a href="#">'+liste_de_matieres[i][1]+'</a></li>';
                     }
-                    programme_html += '</ul>';
-
-                    return programme_html;
                 }
-                function affichageDuProgramme() {
-                    programmes_container.css({
-                        'display': 'block'
-                    });
-                    reception.css({
-                        'display': 'none'
-                    });
-                }
-                function stylesDuProgramme() {
+                programme_html += '</ul>';
 
-                    var lesson_active_index = niveau_max+1;
-                    var lesson_active = $('#programme_ul li:nth-child('+lesson_active_index+')');
-                    var lessons_apprises = lesson_active.prevAll();
-                    var lessons_a_apprendre = lesson_active.nextAll();
-
-                    lessons_apprises.addClass('apprises');
-                    lesson_active.addClass('active');
-                    lessons_a_apprendre.addClass('a_apprendre');
-                }
+                return programme_html;
             }
+            function affichageDuProgramme() {
+                programmes_container.css({
+                    'display': 'block'
+                });
+                reception.css({
+                    'display': 'none'
+                });
+            }
+            function stylesDuProgramme() {
 
-        });
+                var lesson_active_index = niveau_max+1;
+                var lesson_active = $('#programme_ul li:nth-child('+lesson_active_index+')');
+                var lessons_apprises = lesson_active.prevAll();
+                var lessons_a_apprendre = lesson_active.nextAll();
+
+                lessons_apprises.addClass('apprises');
+                lesson_active.addClass('active');
+                lessons_a_apprendre.addClass('a_apprendre');
+            }
+        }
+
     });
+});

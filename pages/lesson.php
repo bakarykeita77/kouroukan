@@ -30,7 +30,7 @@ if(isset($_SESSION['connected'])){
         <div class="page_body">
             <div class="phases_container centerH" align="right">
                 
-                <p id='niveau' style='display:none'><?= $chiffres[$niveau] ?></p>
+                <p id='niveau_container' style='display:none'><?= $chiffres[$niveau] ?></p>
                 <p id='matiere_index_container' style='display:none'><?= $matiere_index ?></p>
                 <p id='code_container' style='display:none'><?= $client_code ?></p>
                 

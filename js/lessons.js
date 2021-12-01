@@ -1,18 +1,21 @@
 $('document').ready(function() {
-	
+	    
+    var niveau = $('#niveau_container').html();
+    var niveau_max;
 	var matiere_index  = $('#matiere_index_container').html();
+    var client_code    = $('#code_container').html();
+    
     var voyelles_cochees, consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees;
+    
     var rang = '';
-	var etapes_passees = [];
+	var etapes_passees = '';
 	var etape_actuelle = [];
 	var etapes_a_faire = [];
+	var etape_max = [];
 	
 	var phases_actuelles, phase_precedante, phase_active;
 	var index_phase_actuelle, index_phase_precedante, index_phase_active;
-    
-    var niveau_max;
-    
-    rang = (niveau==1)?'߭':'߲';
+
      
 	actualiserCochage();
 	chargerPhases();
@@ -29,6 +32,9 @@ $('document').ready(function() {
         caracteres_coches = [voyelles_cochees, consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees];
     }
 	function chargerPhases(){
+  
+        rang = (niveau=='߁')?'߭':'߲';
+    	
     	$('.rang').html(rang);
     	$('.phases').html(phasesHTML());
     	
@@ -43,32 +49,68 @@ $('document').ready(function() {
         }
 	}
 	function controlDeNiveauDEtude() {
-	    
-	    var code_container = $('#code_container');  
-        var niveaux_passes = [];
-        var client_code    = code_container.html();
         
-        client_code = client_code.split(';');
-	   
-	    for (var i = 0; i < client_code.length; i++) {
-alert( client_code[i] ); 	        
-	        var etape = client_code[i].split(',');
-	         
-	        if(etape[1] !== '') { etapes_passees[etapes_passees.length] = etape; }
-	        else{ etapes_a_faire[etapes_a_faire.length] = etape; }
-	    }
+        var niveaux_passes = [];
+        var phases_etudiees = [];
+        var phases_restantes = [];
+        
+        var tableau_de_niveaux_passes = [];
+        var tableau_de_niveaux_restants = [];
+        var tableau_de_phases_passees = '';
+        var tableau_de_phases_restantes = [];
+               
+        
+        niveau = reverseIntNko(niveau);
+        client_code = client_code.split('/');
+        etapes_passees = etapesPassees();
+        niveau_max = niveauMax();
+        etape_actuelle = client_code[matiere_index-1].split(';'); 
+	    phases_etudiees = phasesEtudiees();
+    
 	    
 	    
-	    for (var i = 0; i < etapes_passees.length; i++) {
-	        niveaux_passes[niveaux_passes.length] = etapes_passees[i][0];
-	    }
-	    niveau_max = Math.max(...niveaux_passes);
-	    
-	    etape_actuelle = client_code[matiere_index-1].split('_'); 
-	    phases_actuelles = etape_actuelle[1].split (',');
 	    index_phase_precedante = phases_actuelles.length;
 	    index_phase_actuelle = phases_actuelles.length+1;
 	    phase_precedante = phases_actuelles[index_phase_precedante-1];
+
+
+
+	    function etapesPassees() {
+    	    var etapes_passees = [];
+    	    for (var i = 0; i < client_code.length; i++) {
+     	       
+    	        var etape = client_code[i].split(';');
+    	        for (var j = 0; j < etape.length; j++) {
+    	            
+    	            if(etape[j].split(',')[1] !== '') {
+    	                var etape_passee = [etape[j].split(',')[0], etape[j].split(',')[1]];
+    	                etapes_passees[etapes_passees.length] = etape_passee;
+    	            }
+    	        }
+    	    }
+    	    return etapes_passees;
+	    }
+	    function niveauMax() {
+    	    
+    	    for (var k = 0; k < etapes_passees.length; k++) {
+    	        var niveau_passe = etapes_passees[k][0];
+    	        tableau_de_niveaux_passes[tableau_de_niveaux_passes.length] = [niveau_passe];
+    	    }
+	        var niveau_max = Math.max(...tableau_de_niveaux_passes);
+	        
+	        return niveau_max;
+	    }
+	    function phasesEtudiees() {
+	        
+	        $.each(etape_actuelle, function(){
+	            if(etapes_passees.indexOf(this) == -1) {
+	                phases_etudiees[phases_etudiees.length] = this;
+	            }
+	        });
+	        
+	        
+	        alert( phases_etudiees ); 
+	    }
 	    
 	}
 	

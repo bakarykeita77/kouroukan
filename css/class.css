@@ -8,8 +8,10 @@
 }
 .apprises {
     border: 1px solid transparent;
-    box-shadow: 0 0 16px #ccc;
-    text-shadow: 0 0 8px #000;
+    background-color: #fff;
+    color: yellow;
+    box-shadow: 0 0 2px #ccc;
+    text-shadow: 0 0 16px #000;
 }
 .apprises:active {
     background-color: #ddd;
@@ -19,6 +21,7 @@
 }
 .a_apprendre {
     background-color: #ccc;
+    color: #bbb;
 }
 .a_apprendre a {
     color: #aaa;

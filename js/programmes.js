@@ -73,7 +73,7 @@ $(document).ready(function() {
         verificationDesLessonsEtudiees();
         programme();
 
-
+    
         function situationDesEtudes() {
 
             var donnees_ajax = document.getElementById('donnees_ajax');
@@ -296,11 +296,8 @@ $(document).ready(function() {
         function verificationDesLessonsEtudiees() {
 
             switch (niveau_max) {
-                case 'NaN':
-                    
-                    break;
+ 
                 case 1:
-                    verifierLesson1();
                     break;
                 case 2:
                     verifierLesson2();
@@ -312,8 +309,8 @@ $(document).ready(function() {
                     verifierLesson4();
                     break;
                 default:
-                    
-                }
+                    verifierLesson1();
+            }
 
                 function verifierLesson1() {
 
@@ -425,7 +422,13 @@ $(document).ready(function() {
 
                     click_min_nbr = Math.min(...click_table);
                 }
-            }
+                function verifierLesson3() {
+                    alert( 'On est au niveau de verifierLesson3 qui ne contient rien pour le moment' ); 
+                }
+                function verifierLesson4() {
+                    alert( 'On est au niveau de verifierLesson4 qui ne contient rien pour le moment' ); 
+                }
+        }
         function programme() {
 
             var programmes_container = $('#programmes_container');

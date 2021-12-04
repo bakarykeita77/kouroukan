@@ -21,7 +21,7 @@ session_start();
         <div id="client_exercices_bruts_container"></div>
  	    <div id="client_evaluations_brutes_container"></div>
  	    
- 	    <p id="code_des_etudes_container"></p>
+ 	    <p id="situation_des_etudes_container"></p>
  	    <p id="profile_testes"></p>
  	    <p id="nbr_teste"></p>
  	    <span id="niveau_max_containner"></span>

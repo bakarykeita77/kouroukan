@@ -5,6 +5,7 @@ if(isset($_SESSION['connected'])){
     $matiere_index  = $_GET['matiere_index'];
     $matiere_nom = $_GET['matiere_nom'];
     $niveau      = $_GET['niveau']+1;
+    $niveau_max  = $_GET['niveau_max'];
     $client_code = $_GET['client_code'];
 
     $chiffres = ['߀','߁','߂','߃','߄','߅','߆','߇','߈','߉'];
@@ -30,9 +31,11 @@ if(isset($_SESSION['connected'])){
         <div class="page_body">
             <div class="phases_container centerH" align="right">
                 
-                <p id='niveau_container' style='display:none'><?= $chiffres[$niveau] ?></p>
+                <p id='matiere_nom_container'   style='display:none'><?= $matiere_nom ?></p>
                 <p id='matiere_index_container' style='display:none'><?= $matiere_index ?></p>
-                <p id='code_container' style='display:none'><?= $client_code ?></p>
+                <p id='niveau_container'        style='display:none'><?= $chiffres[$niveau] ?></p>
+                <p id='niveau_max_container'    style='display:none'><?= $niveau_max ?></p>
+                <p id='code_container'          style='display:none'><?= $client_code ?></p>
                 
                 <h4>ߘߋ߰ߟߌ ߞߛߊߞߊ : <span><?= $chiffres[$niveau] ?><span class='rang'></span></h4>
                 <h2 class="lesson_title" id="<?= $matiere_id ?>"> <?= $matiere_nom ?> ߥߟߊ߬ߘߊ  </h2>

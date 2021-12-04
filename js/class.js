@@ -1,4 +1,6 @@
 $(document).ready(function() {
+    
+    $('.a_apprendre').off('click');
 
     $.each($('.cacher'), function(){
         $(this).css({'transform':'scale(0)'});

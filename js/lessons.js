@@ -1,7 +1,7 @@
 $('document').ready(function() {
 	    
     var niveau = $('#niveau_container').html();
-    var niveau_max;
+    var niveau_max = $('#niveau_max_container').html();
 	var matiere_index  = $('#matiere_index_container').html();
     var client_code    = $('#code_container').html();
     
@@ -12,21 +12,23 @@ $('document').ready(function() {
 	var etape_actuelle = [];
 	var etapes_a_faire = [];
 	var etape_max = [];
-	
+        
+    var niveaux_passes = [];
+    var phases_etudiees = [];
+    var phases_a_etudier = [];
     var noms_des_phases = '';
+        
 	var phases_actuelles, phases_actuelles_etudiees, phase_precedante, phase_active;
 	var index_phase_actuelle, index_phase_precedante, index_phase_active;
+
 
     noms_des_phases = nomsDesPhases();
 	controlDeNiveauDEtude();
 	phases_actuelles_etudiees = phasesActuellesEtudiees();
+	phases();
 	actualiserCochage();
-	chargerPhases();
-	styliserPhases();
 	cours();
 	
-	
-alert( phases_actuelles_etudiees ); 	
 	
     function actualiserCochage(){
         voyelles_cochees = $('#voyelles_cochees').html().split('');
@@ -36,15 +38,17 @@ alert( phases_actuelles_etudiees );
         nasalisations_cochees = [''].concat($('#nasalisations_cochees').html().split(''));
         caracteres_coches = [voyelles_cochees, consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees];
     }
-	function chargerPhases(){
+	function phases(){
   
         rang = (niveau=='߁')?'߭':'߲';
     	
     	$('.rang').html(rang);
     	$('.phases').html(phasesHTML());
-    	
+	    stylesDesPhases();
+        
+        
         function phasesHTML(){
-   // alert( noms_des_phases_etudiees );     
+    
             var content = '<ul>';
             for(var i=0;i<liste_de_phases.length;i++){
                 var lesson_id = $('.lesson_title').attr('id');
@@ -53,28 +57,41 @@ alert( phases_actuelles_etudiees );
             content += '</ul>';
             return content;
         }
+    	function stylesDesPhases() {
+            var derniere_phase = phases_etudiees[phases_etudiees.length-1].split(',')[1]; 
+            index_phase_actuelle = noms_des_phases.indexOf(derniere_phase)+2;
+      	    
+    alert( etapes_passees );	   
+    	    if(index_phase_actuelle == undefined) {
+                $('.phases ul li:nth-child('+1+')').addClass('active'); 
+    	    }
+    	    if(index_phase_actuelle <= noms_des_phases.length) {
+                $('.phases ul li:nth-child('+index_phase_actuelle+')').addClass('active'); 
+    	    }
+    	    if(index_phase_actuelle > noms_des_phases.length) {
+                $('.phases ul li').addClass('apprises'); 
+    	    }
+    	    
+        	$('.active').prevAll().addClass('apprises');
+        	$('.active').nextAll().addClass('a_apprendre');	
+    	    
+    	}
+	    
 	}
 	function controlDeNiveauDEtude() {
-        
-        var niveaux_passes = [];
-        var phases_etudiees = [];
-        var phases_a_etudier = [];
-        
+
         var tableau_de_niveaux_passes = [];
         var tableau_de_niveaux_restants = [];
         var tableau_de_phases_passees = '';
         var tableau_de_phases_restantes = [];
                
-        
         niveau = reverseIntNko(niveau);
         client_code = client_code.split('/');
         etapes_passees = etapesPassees();
-        niveau_max = niveauMax();
         etape_actuelle = client_code[matiere_index-1].split(';'); 
 	    phases_etudiees = phasesEtudiees();
 	    phases_a_etudier = phasesAEtudier();
 	    index_phase_actuelle = phases_etudiees.length;
-
 
 
 	    function etapesPassees() {
@@ -91,16 +108,6 @@ alert( phases_actuelles_etudiees );
     	        }
     	    }
     	    return etapes_passees;
-	    }
-	    function niveauMax() {
-    	    
-    	    for (var k = 0; k < etapes_passees.length; k++) {
-    	        var niveau_passe = etapes_passees[k][0];
-    	        tableau_de_niveaux_passes[tableau_de_niveaux_passes.length] = [niveau_passe];
-    	    }
-	        var niveau_max = Math.max(...tableau_de_niveaux_passes);
-	        
-	        return niveau_max;
 	    }
 	    function phasesEtudiees() {
 	        var phases_etudiees = [];
@@ -136,26 +143,12 @@ alert( phases_actuelles_etudiees );
 	    
 	    var phases_actuelles_etudiees = [];
 	    for (var i = 0; i < etape_actuelle.length; i++) {
-	        phases_actuelles_etudiees.push(etape_actuelle[i].split(',')[1]); 
+	        if(etape_actuelle[i].split(',')[1] !== undefined) {
+	            phases_actuelles_etudiees.push(etape_actuelle[i].split(',')[1]); 
+	        }
 	    }
 	    
 	    return phases_actuelles_etudiees;
-	}
-	function styliserPhases() {
-    
-	    if(index_phase_actuelle == 0) {
-            $('.phases ul li:nth-child('+1+')').addClass('active'); 
-	    }
-	    if(index_phase_actuelle < noms_des_phases.length) {
-            $('.phases ul li:nth-child('+index_phase_actuelle+')').addClass('active'); 
-	    }
-	    if(index_phase_actuelle == noms_des_phases.length) {
-            $('.phases ul li').addClass('apprises'); 
-	    }
-	    
-    	$('.active').prevAll().addClass('apprises');
-    	$('.active').nextAll().addClass('a_apprendre');	
-	    
 	}
 	function cours(){
     	

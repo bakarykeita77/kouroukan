@@ -87,7 +87,7 @@ $(document).ready(function() {
             recuperationDesDonneesAjax();
             triDesCoursParPhase();
             triDesCoursParNiveau();
-            situationsDesEtudes();
+            situations();
 
     
             function recuperationDesDonneesAjax() {
@@ -99,7 +99,7 @@ $(document).ready(function() {
             }
             function triDesCoursParPhase() {
                 for (var i = 1; i < cours.length; i++) {
-                        
+                         
                     if(cours[i] !== '') {    
                         var cours_par_phase = cours[i].split('%');
                         var cours_traite_par_phase = [];
@@ -107,7 +107,7 @@ $(document).ready(function() {
                         for (var j = 0; j < cours_par_phase.length; j++) {
         
                             var cour = cours_par_phase[j].split('/');
-        
+                
                             var phase = cour[0];
                             var date = cour[1];
                             var id_client = cour[2];
@@ -124,11 +124,9 @@ $(document).ready(function() {
                             cours_traite_par_phase[cours_traite_par_phase.length] = [phase, date, id_client, niveau, cour_traite];
                         }
                         data_cours_tries_par_phase.push(cours_traite_par_phase);
-                    }else{
-                        data_cours_tries_par_phase = '';
                     }
                 }
-                
+              
                 situations[situations.length] = data_cours_tries_par_phase;    
             }
             function triDesCoursParNiveau() {
@@ -175,7 +173,7 @@ $(document).ready(function() {
 
                 situations[situations.length] = data_cours_tries_par_niveau;
             }
-            function situationsDesEtudes() {
+            function situations() {
 
                 var phases_1 = [], phases_11 = [], phases_12, phases_13 = [], phases_14 = [];
                 var phases_2 = [], phases_21 = [], phases_22, phases_23 = [], phases_24 = [];
@@ -187,7 +185,7 @@ $(document).ready(function() {
 
                 for (var i = 0; i < data_cours_tries_par_phase.length; i++) {
                     for (var j = 0; j < data_cours_tries_par_phase[i].length; j++) {
-
+        
                         var niveau = data_cours_tries_par_phase[i][j][3];
                         var phaze = data_cours_tries_par_phase[i][j][0];
                         var list_element = [niveau, phaze];
@@ -284,15 +282,15 @@ $(document).ready(function() {
                   
                   /* L'apprenant doit passer les 3 étapes pour avoir le niveau */
                     for (var j = 0; j < sous_codes_1.length; j++) {
+                  
                     if(sous_codes_1[0] !== '' && sous_codes_1[1] !== '' && sous_codes_1[2] !== '') {
                         sous_codes_2 = sous_codes_1[j].split(',');
-                        
                         niveaux_client[niveaux_client.length] = sous_codes_2[0];
                     }else{
-                        niveaux_client = [0];
+                        niveaux_client[niveaux_client.length] = [0];
                     }}
                 }
-
+        alert( niveau_max ); 
                 niveau_max = Math.max(...niveaux_client);
                 return niveau_max;
             }

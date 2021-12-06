@@ -290,7 +290,7 @@ $(document).ready(function() {
                         niveaux_client[niveaux_client.length] = [0];
                     }}
                 }
-        alert( niveau_max ); 
+        
                 niveau_max = Math.max(...niveaux_client);
                 return niveau_max;
             }

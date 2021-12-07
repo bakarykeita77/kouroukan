@@ -8,7 +8,7 @@ $(document).ready(function() {
     var situation_des_etudes_container = document.getElementById('situation_des_etudes_container');
 
     var click_min_nbr = 0;
-    var niveau_max = 1;
+    var niveau_max = 0;
 
     $('#affiche_programme').on('click', function() {
 
@@ -74,7 +74,7 @@ $(document).ready(function() {
         verificationDesLessonsEtudiees();
         programme();
         
-        
+      
 
         function situationDesEtudes() {
 
@@ -299,45 +299,43 @@ $(document).ready(function() {
             document.getElementById ('niveau_max_containner').innerHTML = niveau_max;
         }
         function verificationDesLessonsEtudiees() {
-       
-           switch (niveau_max) {
- 
+        
+            var niveau_en_cours = niveau_max+1;
+            var lessons_du_niveau_en_cours = '';    // Varie en fonction du niveau_en_cours.
+            var lessons = [], lesson = [], lesson_verifiee = [], lessons_verifiees = [];
+
+            switch (niveau_en_cours) {
+
                 case 1:
-                    verifierLesson1();
+                    lessons_du_niveau_en_cours = lessons_1;
                     break;
                 case 2:
-                    verifierLesson2();
+                    lessons_du_niveau_en_cours = lessons_2;
                     break;
                 case 3:
-                    verifierLesson3();
+                    lessons_du_niveau_en_cours = lessons_3;
                     break;
                 case 4:
-                    verifierLesson4();
+                    lessons_du_niveau_en_cours = lessons_4;
                     break;
             }
+            verifications();
 
-                function verifierLesson1() {
-   
-                    var lessons = [];
-                    var lesson = [];
-                    var lesson_verifiee = [];
-                    var lessons_verifiees = [];
-
-                    for (var i = 0; i < lessons_1.length; i++) {
+            function verifications() {
+                    for (var i = 0; i < lessons_du_niveau_en_cours.length; i++) {
                         
-                        var lesson = lessons_1[i][4];
+                        var lesson = lessons_du_niveau_en_cours[i][4];
                         lessons[lessons.length] = lesson;                        
                     }
                     for (var i = 0; i < lessons.length; i++) {
                         for (var j = 0; j < lessons[i].length; j++) {
 
                             var lesson_element = lessons[0][j];
-                            lesson_element = lesson_element.split(',');
                             lesson_verifiee.push([lesson_element[0], parseInt(lesson_element[1])]);
                         }
                     }
                     lessons_verifiees.push(lesson_verifiee);
-
+        
 
                     /* Calcul du nombre de click pour chaque élément */
                     for (var i = 0; i < lessons_verifiees.length; i++) {
@@ -370,68 +368,7 @@ $(document).ready(function() {
                     }
 
                     click_min_nbr = Math.min(...click_table);
-                }
-                function verifierLesson2() {
-
-                    var lessons = [];
-                    var lesson = [];
-                    var lesson_verifiee = [];
-                    var lessons_verifiees = [];
-
-                    for (var i = 0; i < lessons_2.length; i++) {
-
-                        var lesson = lessons_2[i][4];
-                        lessons[lessons.length] = lesson;
-                    }
-                    for (var i = 0; i < lessons.length; i++) {
-
-                        for (var j = 0; j < lessons[i].length; j++) {
-
-                            var lesson_element = lessons[0][j];
-                            lesson_verifiee.push([lesson_element[0], parseInt(lesson_element[1])]);
-                        }
-                    }
-                    lessons_verifiees.push(lesson_verifiee);
-
-
-                    /* Calcul du nombre de click pour chaque élément */
-                    for (var i = 0; i < lessons_verifiees.length; i++) {
-                        for (var j = 0; j < lessons_verifiees[i].length; j++) {
-
-                            var index = lessons_verifiees[i].indexOf(lessons_verifiees[i][j]);
-                            var element = lessons_verifiees[i][j][0];
-                            var click = lessons_verifiees[i][j][1];
-                            var element_click = [];
-
-                            element_click[0] = index;
-                            element_click[1] = element;
-                            element_click[2] = click;
-
-                            click_statistic.push(element_click);
-                        }
-                    }
-
-                    var click_table = [];
-                    for (var i = 0; i < 266; i++) {
-                        var nbr_click = 0;
-                        $.each(click_statistic, function() {
-
-                            if ($(this)[0] == i) {
-                                nbr_click += $(this)[2];
-                            }
-                        });
-
-                        click_table.push(nbr_click);
-                    }
-
-                    click_min_nbr = Math.min(...click_table);
-                }
-                function verifierLesson3() {
-                    alert( 'On est au niveau de verifierLesson3 qui ne contient rien pour le moment' ); 
-                }
-                function verifierLesson4() {
-                    alert( 'On est au niveau de verifierLesson4 qui ne contient rien pour le moment' ); 
-                }
+            }    
         }
         function programme() {
 
@@ -440,26 +377,34 @@ $(document).ready(function() {
 
             programmes_container.html(programmeHTML());
             affichageDuProgramme();
+            
             stylesDuProgramme();
+            navigationDuProgramme();
+
 
             function programmeHTML() {
 
                 var code = situation_des_etudes;
-                var programme_html = '<span class="fermeture" id="fermeture_programme">&times;</span>';
 
-                programme_html += '<h2>ߘߋ߰ߟߌ ߢߍߥߟߊ </h2>';
+                programme_html = '<h2>ߘߋ߰ߟߌ ߢߍߥߟߊ </h2>';
                 programme_html += '<ul id="programme_ul">';
 
                 for (var i = 0; i < liste_de_matieres.length; i++) {
                     var matiere_index = liste_de_matieres.indexOf(liste_de_matieres[i])+1;
     
                     if (niveau_max >= matiere_index-1) {
-                        programme_html += '<li><a href="lesson.php?matiere_id='+liste_de_matieres[i][0]+'&matiere_index='+matiere_index+'&matiere_nom='+liste_de_matieres[i][1]+'&niveau='+i+'&niveau_max='+niveau_max+'&client_code='+situation_des_etudes.join('/')+'">'+liste_de_matieres[i][1]+'</a></li>';
+                        var phases_lien = 'lesson.php?matiere_id='+liste_de_matieres[i][0]+'&matiere_index='+matiere_index+'&matiere_nom='+liste_de_matieres[i][1]+'&niveau='+i+'&niveau_max='+niveau_max+'&client_code='+situation_des_etudes.join('/');
+                        programme_html += '<li><a href="'+phases_lien+'">'+liste_de_matieres[i][1]+'</a></li>';
                     } else {
                         programme_html += '<li><a href="#">'+liste_de_matieres[i][1]+'</a></li>';
                     }
                 }
                 programme_html += '</ul>';
+                
+                programme_html += '<div class="nav_fleches_container">';
+                programme_html += '<span id="back_to_accueil">ߛߋ߬ߦߌ߬ ߞߐ߫</span>';
+                programme_html += '<span id="go_to_phases"><a href="'+phases_lien+'">ߥߊ߫ ߢߍ߫</a></span>';
+                programme_html += '</div>';
 
                 return programme_html;
             }
@@ -481,6 +426,17 @@ $(document).ready(function() {
                 lessons_apprises.addClass('apprises');
                 lesson_active.addClass('active');
                 lessons_a_apprendre.addClass('a_apprendre');
+            }
+            function navigationDuProgramme() {
+
+                $('#back_to_accueil').on('click', function() {
+                    programmes_container.css('display','none');
+                    reception.css('display','block');
+                });
+                
+                $('#go_to_phases').on('click', function() {
+                    var phases_lien = $('.active a');
+                });
             }
         }
 

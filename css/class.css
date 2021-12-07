@@ -2,9 +2,11 @@
 .active {
     background-color: yellow;
     box-shadow: 0 0 16px yellow;
+    transition: 0.15s;
 }
 .active:active {
     background-color: #FFF000;
+    box-shadow: 0 0 1px yellow;
 }
 .apprises {
     border: 1px solid transparent;
@@ -340,6 +342,7 @@
     height: 40px;
     line-height: 40px;
     box-sizing: border-box;
+    border-bottom-color: #666;
 }
 
 .matiere {
@@ -359,6 +362,29 @@
     font-weight: bold;
     text-align: center;
     box-sizing: border-box;
+}
+.nav_fleches_container {
+    position: absolute;
+    width: 90%;
+    left: 5%;
+    bottom: 0;
+}
+.nav_fleches_container span {
+    position: relative;
+    width: 100px;
+    height: 24px;
+    border: 1px solid transparent;
+    box-shadow: 0 0 32px #ccc;
+    border-radius: 12px;
+    text-align: center;
+    transition: 0.15s;
+}
+.nav_fleches_container span:active { box-shadow: 0 0 1px #ccc; }
+.nav_fleches_container span:nth-child(1) {
+    float: right;
+}
+.nav_fleches_container span:nth-child(2) {
+    float: left;
 }
 
 .opaque {
@@ -404,20 +430,29 @@
     position: absolute;
     top: 64px;
     width: 80%;
+    height: 60vh;
     border-radius: 6px;
-    padding: 32px;
-    border: 1px solid transparent;
-    box-shadow: 0 0 16px #ccc;
+    padding: 8px;
     box-sizing: border-box;
 }
-.phases_container h1, .phases_container h4 {
+.phases_container h2, .phases_container h4 {
     padding: 0 16px;
+}
+.phases_container h2 {
+    height: 48px;
+    width: 100%;
+    line-height: 48px;
+    border: 1px solid transparent;
+    border-bottom: 4px  solid #ccc;
+    border-radius: 6px;
+    box-shadow: 0 0 32px #ccc;
 }
 .phases ul{
     list-style-type: none;
     margin: 0;
     padding: 0;
-    width: 100%;
+    width: 80%;
+    left: 10%;
 }
 .phases ul li{
     height: 32px;
@@ -426,6 +461,7 @@
     padding: 0 16px;
     margin: 1px 0;
     box-sizing: border-box;
+    text-align: right;
     font-weight: bold;
     border-radius: 6px;
     cursor: pointer;

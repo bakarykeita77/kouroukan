@@ -37,9 +37,9 @@ if(isset($_SESSION['connected'])){
                 <p id='niveau_max_container'    style='display:none'><?= $niveau_max ?></p>
                 <p id='code_container'          style='display:none'><?= $client_code ?></p>
                 
-                <h4>ߘߋ߰ߟߌ ߞߛߊߞߊ : <span><?= $chiffres[$niveau] ?><span class='rang'></span></h4>
+                <h4>ߘߋ߰ߟߌ ߞߛߊߞߊ : <span class="niveau_courant"><?= $chiffres[$niveau] ?><span class='rang'></span></h4>
                 <h2 class="lesson_title" id="<?= $matiere_id ?>"> <?= $matiere_nom ?> ߥߟߊ߬ߘߊ  </h2>
-                <div class="phases"></div>
+                <div class="phases" align="center"></div>
             </div>
 
         </div>

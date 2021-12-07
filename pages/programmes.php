@@ -1,6 +1,7 @@
 <?php
 session_start();
 if(isset($_SESSION['connected'])){
+    
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,11 +17,13 @@ if(isset($_SESSION['connected'])){
         <div class="page_head"><?php require('tete-de-page.php'); ?></div>
         <div class="page_body">
             <div id="reception" align="center">
+                
                 <p>ߖߐ ߦߴߌ ߡߊ߬ ߞߟߊߓߎߡߊ</p>
                 <h2><?= $_SESSION['prenom']." ".$_SESSION['nom'];  ?></h2>
                 <p>ߌ ߣߌ߫ ߛߣߍ߫ ߞߙߎ߬ߞߊ߲߫ ߘߋ߰ߘߊ ߟߊ߫߸ ߒߞߏ ߟߐ߲ߠߌ ߛߌߟߊ߫ ߛߎߘߎ߲߸ ߓߟߐߟߐ ߛߌߟߊ ߝߍ߬.</p>
                 <p>ߞߏ߫ ߛߎ ߦߋ߫ ߞߏ߬ ߟߊ߫ ߛߐ߭ ߟߋ߬ ߡߊ߬߸ ߒ߬ߓߊ߬߹ ߌ ߖߌߖߊ߬ ߸ ߌ ߦߋ߫ ߥߟߊ߬ߘߊ ߕߊ߬ ߌߞߘߐ߫߹ ߦߊ߲߬.</p>
                 <p id="affiche_programme">ߥߟߊ߬ߘߊ ߟߎ߬</p>
+               
             </div>   
             <div id="programmes_container" class="centerH" align="right"></div>
         </div>

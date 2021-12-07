@@ -170,14 +170,19 @@ $('document').ready(function() {
 	    return phases_actuelles_etudiees;
 	}
 	function phases(){
-  
-        rang = (niveau=='߁ ')?'߭':'߲';
+        var niveau = $('.niveau_courant').text();
+      
+        rang = (niveau=='߁')?'߭':'߲';
     	
     	$('.rang').html(rang);
     	$('.phases').html(phasesHTML());
+    	$('#go_to_lesson').on('click', function() {
+    	   // $('.phases ul .active').click();
+    	});
 
         
         function phasesHTML(){
+            var lesson_lien = 'http://localhost:8080/kouroukan/pages/lesson.php?matiere_id=tons&matiere_index=3&matiere_nom=%DF%9E%DF%8A%DF%B2%DF%A1%DF%8A%DF%9B%DF%99%DF%8B&niveau=2&niveau_max=2&client_code=1,%DF%9F%DF%8A%DF%AC%DF%93%DF%8C%DF%AC%DF%9F%DF%8A%DF%AC%DF%9F%DF%8C,2;1,%DF%A1%DF%8A%DF%AC%DF%9E%DF%9F%DF%8F%DF%AC%DF%9F%DF%8C,8;1,%DF%9E%DF%98%DF%90%DF%93%DF%90%DF%9F%DF%8C,2/2,%DF%9F%DF%8A%DF%AC%DF%93%DF%8C%DF%AC%DF%9F%DF%8A%DF%AC%DF%9F%DF%8C,1;2,%DF%A1%DF%8A%DF%AC%DF%9E%DF%9F%DF%8F%DF%AC%DF%9F%DF%8C,1;2,%DF%9E%DF%98%DF%90%DF%93%DF%90%DF%9F%DF%8C,1/;;';
     
             var content = '<ul>';
             for(var i=0;i<liste_de_phases.length;i++){
@@ -185,6 +190,12 @@ $('document').ready(function() {
                 content += '<li id="'+lesson_id+'_'+liste_de_phases[i][0]+'">'+liste_de_phases[i][1]+'</li>';
             }
             content += '</ul>';
+                            
+            content += '<div class="nav_fleches_container">';
+            content += '<span id="back_to_programmes"><a href="programmes.php">ߛߋ߬ߦߌ߬ ߞߐ߫</a></span>';
+            content += '<span id="go_to_lesson"><a href="'+lesson_lien+'">ߥߊ߫ ߢߍ߫</a></span>';
+            content += '</div>';
+
             return content;
         }
 

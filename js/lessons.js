@@ -1,11 +1,13 @@
 $('document').ready(function() {
 	    
+	var matiere_id = $('#matiere_id_container').html();
+	var matiere_index = $('#matiere_index_container').html();
+	var matiere_nom = $('#matiere_nom_container').html();
     var niveau = $('#niveau_container').html();
     var niveau_max = $('#niveau_max_container').html();
-	var matiere_index = $('#matiere_index_container').html();
     var client_code = $('#code_container').html();
     var voyelles_cochees, consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees;
-    
+      
     var rang = '';
 	var etapes_passees = '';
 	var etape_actuelle = [];
@@ -19,6 +21,7 @@ $('document').ready(function() {
         
 	var phases_actuelles, phases_actuelles_etudiees, phase_precedante, phase_active;
 	var index_phase_actuelle, index_phase_precedante, index_phase_active;
+	var avancer_btn = '';
 
 
     noms_des_phases = nomsDesPhases();
@@ -27,8 +30,9 @@ $('document').ready(function() {
 	phases_actuelles_etudiees = phasesActuellesEtudiees();
 	actualiserCochage();
 	cours();
+	naviguerSurLesson();
 	
-	
+
 	function nomsDesPhases() {
 	    var noms_des_phases = [];
 	        
@@ -144,6 +148,8 @@ $('document').ready(function() {
     	                $(this).addClass('a_apprendre');
     	            }
     	        });
+    	        
+    	        $('.apprises').wrapAll('<div class="wraped"></div>');
 	        }
 	    }
 	    function phasesAEtudier() {
@@ -176,13 +182,10 @@ $('document').ready(function() {
     	
     	$('.rang').html(rang);
     	$('.phases').html(phasesHTML());
-    	$('#go_to_lesson').on('click', function() {
-    	   // $('.phases ul .active').click();
-    	});
 
-        
+
         function phasesHTML(){
-            var lesson_lien = 'http://localhost:8080/kouroukan/pages/lesson.php?matiere_id=tons&matiere_index=3&matiere_nom=%DF%9E%DF%8A%DF%B2%DF%A1%DF%8A%DF%9B%DF%99%DF%8B&niveau=2&niveau_max=2&client_code=1,%DF%9F%DF%8A%DF%AC%DF%93%DF%8C%DF%AC%DF%9F%DF%8A%DF%AC%DF%9F%DF%8C,2;1,%DF%A1%DF%8A%DF%AC%DF%9E%DF%9F%DF%8F%DF%AC%DF%9F%DF%8C,8;1,%DF%9E%DF%98%DF%90%DF%93%DF%90%DF%9F%DF%8C,2/2,%DF%9F%DF%8A%DF%AC%DF%93%DF%8C%DF%AC%DF%9F%DF%8A%DF%AC%DF%9F%DF%8C,1;2,%DF%A1%DF%8A%DF%AC%DF%9E%DF%9F%DF%8F%DF%AC%DF%9F%DF%8C,1;2,%DF%9E%DF%98%DF%90%DF%93%DF%90%DF%9F%DF%8C,1/;;';
+            var lesson_lien = 'http://localhost:8080/kouroukan/pages/lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max+'&client_code='+client_code;
     
             var content = '<ul>';
             for(var i=0;i<liste_de_phases.length;i++){
@@ -192,13 +195,12 @@ $('document').ready(function() {
             content += '</ul>';
                             
             content += '<div class="nav_fleches_container">';
-            content += '<span id="back_to_programmes"><a href="programmes.php">ߛߋ߬ߦߌ߬ ߞߐ߫</a></span>';
-            content += '<span id="go_to_lesson"><a href="'+lesson_lien+'">ߥߊ߫ ߢߍ߫</a></span>';
+            content += '<span id="back_to_programmes"><a href="programmes.php?programmes_visibility=visible">ߛߋ߬ߦߌ߬ ߞߐ߫</a></span>';
+            content += '<span id="go_to_lesson">ߥߊ߫ ߢߍ߫</</span>';
             content += '</div>';
 
             return content;
         }
-
 	}
     function actualiserCochage(){
         voyelles_cochees = $('#voyelles_cochees').html().split('');
@@ -230,6 +232,8 @@ $('document').ready(function() {
            
     	    affichageDeCours();
     	    dispenserCours();
+    	 
+    	    
     
             function affichageDeCours(){
                 if(course_id=='apprentissage' || course_id=='exercices'){ afficherLesson(); }
@@ -995,5 +999,9 @@ $('document').ready(function() {
             }
       	});
 	}
-
+	function naviguerSurLesson() {
+    	$('#go_to_lesson').on('click', function() {
+	        $('.phases ul li').click();
+	    });
+	}
 });

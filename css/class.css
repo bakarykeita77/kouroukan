@@ -1,5 +1,7 @@
 
 .active {
+    border: 1px solid transparent;
+    border-radius: 6px;
     background-color: yellow;
     box-shadow: 0 0 16px yellow;
     transition: 0.15s;
@@ -10,10 +12,11 @@
 }
 .apprises {
     border: 1px solid transparent;
-    background-color: #fff;
     color: yellow;
-    box-shadow: 0 0 2px #ccc;
     text-shadow: 0 0 16px #000;
+}
+.apprises {
+    border-bottom-color: #ccc;
 }
 .apprises:active {
     background-color: #ddd;
@@ -22,6 +25,8 @@
     color: yellow;
 }
 .a_apprendre {
+    border: 1px solid transparent;
+    border-radius: 6px;
     background-color: #ccc;
     color: #bbb;
 }
@@ -463,7 +468,6 @@
     box-sizing: border-box;
     text-align: right;
     font-weight: bold;
-    border-radius: 6px;
     cursor: pointer;
 }
 .ponctuations input, .ponctuations label{
@@ -481,7 +485,6 @@
     text-align: center;
     box-sizing: border-box;
 }
-
 .profile_menu {
     display: flex;
     flex-direction: column;
@@ -503,6 +506,9 @@
     border: 1px solid transparent;
     border-bottom-color: #fff;
     border-radius: 6px;
+}
+.profile_menu_head a {
+    text-decoration: none;
 }
 .profile_menu_body{
 }
@@ -553,6 +559,11 @@
 }
 .transparent {
     animation: transperer;
+}
+.wraped {
+    border: 1px solid transparent;
+    border-radius: 6px;
+    box-shadow: 0 0 32px #ccc;
 }
 .yellow {
     background-color: yellow;

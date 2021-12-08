@@ -65,7 +65,7 @@ session_start();
              	        </div>
              	    </div>
  	                
-             	    <div class="profile_menu_head"><a href="deconnexion.php">Deconnexion</a></div>
+             	    <div class="profile_menu_head"><a href="deconnexion.php">ߌ ߜߊ߲߬ߞߎ߲߬ߣߍ߲߬ ߓߐ߫</a></div>
          	    </div>
      	</div>
  	    <div id="profile_teste"></div>

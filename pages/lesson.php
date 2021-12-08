@@ -15,7 +15,7 @@ if(isset($_SESSION['connected'])){
 <html>
 <head>
     <title>lesson</title>
- 	<meta charset="utf-8" name="viewport" content="width=device-width, initial- scale=1"/>
+ 	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1"/>
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/lesson.css"/>
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/parametres.css"/>
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/evaluation.css"/>
@@ -31,8 +31,9 @@ if(isset($_SESSION['connected'])){
         <div class="page_body">
             <div class="phases_container centerH" align="right">
                 
-                <p id='matiere_nom_container'   style='display:none'><?= $matiere_nom ?></p>
+                <p id='matiere_id_container'    style='display:none'><?= $matiere_id ?></p>
                 <p id='matiere_index_container' style='display:none'><?= $matiere_index ?></p>
+                <p id='matiere_nom_container'   style='display:none'><?= $matiere_nom ?></p>
                 <p id='niveau_container'        style='display:none'><?= $chiffres[$niveau] ?></p>
                 <p id='niveau_max_container'    style='display:none'><?= $niveau_max ?></p>
                 <p id='code_container'          style='display:none'><?= $client_code ?></p>

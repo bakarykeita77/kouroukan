@@ -377,7 +377,6 @@ $(document).ready(function() {
 
             programmes_container.html(programmeHTML());
             affichageDuProgramme();
-            
             stylesDuProgramme();
             navigationDuProgramme();
 
@@ -426,6 +425,8 @@ $(document).ready(function() {
                 lessons_apprises.addClass('apprises');
                 lesson_active.addClass('active');
                 lessons_a_apprendre.addClass('a_apprendre');
+                
+    	        $('.apprises').wrapAll('<div class="wraped"></div>');
             }
             function navigationDuProgramme() {
 

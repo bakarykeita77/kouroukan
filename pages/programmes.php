@@ -1,9 +1,6 @@
 <?php
 session_start();
 if(isset($_SESSION['connected'])){
-    
-    $visible = $_GET['programmes_visibility']; 
-    echo($visible);
 ?>
 <!DOCTYPE html>
 <html>
@@ -18,7 +15,6 @@ if(isset($_SESSION['connected'])){
     <div class="container">
         <div class="page_head"><?php require('tete-de-page.php'); ?></div>
         <div class="page_body">
-            <div id="visibility"><? $visible ?></div>
             <div id="reception" align="center">
                 
                 <p>ߖߐ ߦߴߌ ߡߊ߬ ߞߟߊߓߎߡߊ</p>

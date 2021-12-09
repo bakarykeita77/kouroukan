@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
     var programmes_container = $('#programmes_container');
+    var reception = $('#reception');
 
     var client_lessons_bruts_container = document.querySelector('.page_head #client_lessons_bruts_container');
     var client_exercices_bruts_container = document.querySelector('.page_head #client_exercices_bruts_container');
@@ -9,6 +10,7 @@ $(document).ready(function() {
 
     var click_min_nbr = 0;
     var niveau_max = 0;
+    
 
     $('#affiche_programme').on('click', function() {
 
@@ -74,7 +76,7 @@ $(document).ready(function() {
         verificationDesLessonsEtudiees();
         programme();
         
-      
+
 
         function situationDesEtudes() {
 
@@ -372,9 +374,6 @@ $(document).ready(function() {
         }
         function programme() {
 
-            var programmes_container = $('#programmes_container');
-            var reception = $('#reception');
-
             programmes_container.html(programmeHTML());
             affichageDuProgramme();
             stylesDuProgramme();
@@ -434,12 +433,9 @@ $(document).ready(function() {
                     programmes_container.css('display','none');
                     reception.css('display','block');
                 });
-                
-                $('#go_to_phases').on('click', function() {
-                    var phases_lien = $('.active a');
-                });
             }
         }
 
     });
+
 });

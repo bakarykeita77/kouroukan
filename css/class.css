@@ -1,22 +1,26 @@
 
-.active {
+.active, .apprises, .a_apprendre {
     border: 1px solid transparent;
-    border-radius: 6px;
+    padding: 0 16px;
+    margin: 1px 0;
+    height: 32px;
+    line-height: 32px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.15s;
+}
+.active {
+    border-radius:  6px ;
     background-color: yellow;
     box-shadow: 0 0 16px yellow;
-    transition: 0.15s;
 }
 .active:active {
     background-color: #FFF000;
     box-shadow: 0 0 1px yellow;
 }
 .apprises {
-    border: 1px solid transparent;
     color: yellow;
     text-shadow: 0 0 16px #000;
-}
-.apprises {
-    border-bottom-color: #ccc;
 }
 .apprises:active {
     background-color: #ddd;
@@ -25,7 +29,6 @@
     color: yellow;
 }
 .a_apprendre {
-    border: 1px solid transparent;
     border-radius: 6px;
     background-color: #ccc;
     color: #bbb;
@@ -370,6 +373,10 @@
 }
 .nav_fleches_container {
     position: absolute;
+    border: 2px solid transparent;
+    border-top-color: #ccc;
+    padding-top: 8px;
+    height: 32px;
     width: 90%;
     left: 5%;
     bottom: 0;
@@ -564,6 +571,12 @@
     border: 1px solid transparent;
     border-radius: 6px;
     box-shadow: 0 0 32px #ccc;
+}
+.wraped li:last-child {
+    border-bottom-color: transparent;
+}
+.wraped li {
+    border-bottom-color: #ccc;
 }
 .yellow {
     background-color: yellow;

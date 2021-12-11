@@ -32,7 +32,6 @@ $(document).ready(function(){
             var niveau = lessons_data[i].niveau;
             var lesson = lessons_data[i].lesson;
 
- // alert( lesson );          
             var lesson_brute = [phase, date, id_client, niveau, lesson];
             lesson_brute = lesson_brute.join('/');
             

@@ -23,6 +23,10 @@ if(isset($_SESSION['connected'])){
 
     <script src="http://localhost:8080/kouroukan/js/jquery-3.3.1.js"></script>
     <script src="http://localhost:8080/kouroukan/js/html2canvas.js"></script>
+    <script src="http://localhost:8080/kouroukan/js/icones.js"></script>
+    <script src="http://localhost:8080/kouroukan/js/caracteres.js"></script>
+    <script src="http://localhost:8080/kouroukan/js/monosyllabes.js"></script>
+    
 </head>
 <body style="direction:rtl">
 
@@ -42,7 +46,6 @@ if(isset($_SESSION['connected'])){
                 <h2 class="lesson_title" id="<?= $matiere_id ?>"> <?= $matiere_nom ?> ߥߟߊ߬ߘߊ  </h2>
                 <div class="phases" align="center"></div>
             </div>
-
         </div>
         <div class="page_foot"><?php include("pied-de-lesson.php"); ?></div>
     </div>
@@ -51,7 +54,7 @@ if(isset($_SESSION['connected'])){
       <!-------------------------------------------------------------------->
         <span class="fermeture" id="course_fermeture">&times;</span>
       <!-------------------------------------------------------------------->
-        <div id="parametres">
+        <div id="parametres">   <!--Les éléments de paramètres sont chargés dans js/parametres.js-->
             <div id='lesson_parametres_glissiere'>
                 <table id='table1'>
                     <tr id='tr11'>
@@ -148,14 +151,14 @@ if(isset($_SESSION['connected'])){
     </div>
 
     <audio id="audio"></audio>
-
-    <script src="http://localhost:8080/kouroukan/js/icones.js"></script>
+    
     <script src="http://localhost:8080/kouroukan/fonctions.js"></script>
-    <script src="http://localhost:8080/kouroukan/js/caracteres.js"></script>
-    <script src="http://localhost:8080/kouroukan/js/parametres.js"></script>
     <script src="http://localhost:8080/kouroukan/js/lessons.js"></script>
-    <script src="http://localhost:8080/kouroukan/js/evaluations.js"></script>
+    <script src="http://localhost:8080/kouroukan/js/parametres.js"></script>
+    <script src="http://localhost:8080/kouroukan/js/alphabet.js"></script>
+    <script src="http://localhost:8080/kouroukan/js/syllabes.js"></script>
     <script src="http://localhost:8080/kouroukan/js/class.js"></script>
+    <script src="http://localhost:8080/kouroukan/js/evaluations.js"></script>
 
 </body>
 </html>

@@ -24,6 +24,7 @@ $('document').ready(function() {
 	var avancer_btn = '';
 
 
+
     noms_des_phases = nomsDesPhases();
 	phases();
 	controlDesEtapesDEtude();
@@ -32,6 +33,7 @@ $('document').ready(function() {
 	cours();
 	naviguerSurLesson();
 	
+ 	
 
 	function nomsDesPhases() {
 	    var noms_des_phases = [];
@@ -214,8 +216,6 @@ $('document').ready(function() {
     	
     	$('.phases ul li').on('click', function(){
        
-            var lettres = voyelles_cochees.concat(consonnes_cochees,tedos_coches);  
-            var syllabes = syllab();  
             var syllabes_tonifies = tonification();  
             var lesson_questions = lessonQuestions();
             var chiffre = '';
@@ -229,12 +229,12 @@ $('document').ready(function() {
             var lesson = $('#lesson');
             var evaluation = $('#evaluation');
             var parametres_html = parametres.html();
-           
+         
+         
     	    affichageDeCours();
     	    dispenserCours();
     	 
-    	    
-    
+
             function affichageDeCours(){
                 if(course_id=='apprentissage' || course_id=='exercices'){ afficherLesson(); }
                 if(course_id=='evaluation'){ afficherEvaluation(); }
@@ -807,8 +807,8 @@ $('document').ready(function() {
                 }
     	    }
             function lessonCourante(){
-               
-                if(phase_id=='alphabet_apprentissage'){ lesson_courante = alphabetApprentissageHTML(); }
+              
+                if(phase_id=='alphabet_apprentissage'){ lesson_courante = alphabetApprentissageHTML(); }   //Cette fonction provient de alphabet.js
                 if(phase_id=='syllabes_apprentissage'){ lesson_courante = syllabesApprentissageHTML(); }
                 if(phase_id=='tons_apprentissage'){ lesson_courante = tonsApprentissageHTML(); }
                 if(phase_id=='chiffres_apprentissage'){ lesson_courante = chiffresApprentissageHTML(); }
@@ -820,45 +820,6 @@ $('document').ready(function() {
                 
                 return lesson_courante;
                 
-                function alphabetApprentissageHTML() {
-
-                    var table = "<table class = 'table_parlante'>\n";
-                    for(var i=0;i<lettres.length-lettres.length%7;i+=7) {
-                        table += "<tr>\n";
-                        for(var j=0;j<7;j++) {
-                            table += "<td>"+lettres[i+j]+"</td>\n";
-                        }
-                        table += "</tr>\n";
-                    }
-                    for(var k=lettres.length-lettres.length%7;k<lettres.length;k+=lettres.length%7){
-                        table += "<tr>\n";
-                        for(var l=0;l<lettres.length%7;l++) {
-                            table += "<td>"+lettres[k+l]+"</td>\n";
-                        }
-                        table += "</tr>\n";
-                    }
-                    table += "</table>";
-                
-                    return table;
-                 }
-            	function alphabetExercicesHTML(){
-            	    lettres = mix1D(lettres);
-        
-            	    var exercices_corps_html = '<table class="table_muette">';
-                        for(var i=0;i<lettres.length-lettres.length%7;i+=7){
-            	        exercices_corps_html += '<tr>';
-            	            for(var j=0;j<7;j++){ exercices_corps_html += '<td>'+lettres[i+j]+'</td>'; }
-            	        exercices_corps_html += '</tr>'; 
-                        }
-                        for(var k=lettres.length-lettres.length%7;k<lettres.length;k+=lettres.length%7){
-            	        exercices_corps_html += '<tr>';
-            	            for(var l=0;l<lettres.length%7;l++){ exercices_corps_html += '<td>'+lettres[k+l]+'</td>'; }
-            	        exercices_corps_html += '</tr>'; 
-                        }
-            	    exercices_corps_html += '</table>';
-            	    
-            	    return exercices_corps_html;
-            	}
                 function chiffresApprentissageHTML(){
                     var n_chiffres = chiffres.length;
                 
@@ -885,43 +846,6 @@ $('document').ready(function() {
                     
                     return table;
                 }
-                function syllabesApprentissageHTML() {
-                    var table = '';
-                    for(var k=0;k<caracteres_coches[4].length;k++){
-                    table += "<table class = 'table_parlante'>\n";
-                        for(var i=0;i<caracteres_coches[1].length;i++) {
-                            table += "<tr>\n";
-                            for(var j=0;j<caracteres_coches[0].length;j++) {
-                                table += "<td>"+[caracteres_coches[1][i]+caracteres_coches[0][j]+caracteres_coches[4][k]]+"</td>\n";
-                            }
-                            table += "</tr>\n";
-                        }                                                                                                                            
-                    table += "</table><br/><br/>";
-                    }
-        
-                    return table;
-                }
-            	function syllabesExercicesHTML(){
-            	    
-            	    var exercices_corps_html = '<table class="table_muette">';
-                    for(var i=0;i<lesson_questions.length-lesson_questions.length%7;i+=7){
-                        exercices_corps_html += '<tr>\n';
-                        for(var j=0;j<7;j++){
-                            exercices_corps_html += '<td>'+lesson_questions[i+j]+'</td>\n';
-                        }
-                        exercices_corps_html += '</tr>\n';
-                    }
-                    for(var i=lesson_questions.length-lesson_questions.length%7;i<lesson_questions.length;i+=lesson_questions.length%7){
-                        exercices_corps_html += '<tr>\n';
-                        for(var j=0;j<lesson_questions.length%7;j++){
-                            exercices_corps_html += '<td>'+lesson_questions[i+j]+'</td>\n';
-                        }
-                        exercices_corps_html += '</tr>\n';
-                    }
-            	    exercices_corps_html += '</table>';
-            	    
-            	    return exercices_corps_html;
-            	}
                 function tonsApprentissageHTML() {
                    
                     var tons_apprentissage_html = '';
@@ -972,18 +896,6 @@ $('document').ready(function() {
                 if(niveau==4){ lq = mix1D(chiffre); }
                 
                 return lq;
-            }
-        	function syllab() {
-                var slb = [];
-                for(var k=0;k<caracteres_coches[4].length;k++){
-                    for(var i=0;i<caracteres_coches[1].length;i++) {
-                        for(var j=0;j<caracteres_coches[0].length;j++) {
-                            slb[slb.length] = caracteres_coches[1][i]+caracteres_coches[0][j]+caracteres_coches[4][k];
-                        }
-                    }                                                                                                                            
-                }
-        
-                return slb;
             }
             function tonification(){
                 var tonifies = [];

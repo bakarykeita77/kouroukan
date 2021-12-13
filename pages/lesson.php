@@ -157,6 +157,8 @@ if(isset($_SESSION['connected'])){
     <script src="http://localhost:8080/kouroukan/js/parametres.js"></script>
     <script src="http://localhost:8080/kouroukan/js/alphabet.js"></script>
     <script src="http://localhost:8080/kouroukan/js/syllabes.js"></script>
+    <script src="http://localhost:8080/kouroukan/js/tons.js"></script>
+    <script src="http://localhost:8080/kouroukan/js/chiffres.js"></script>
     <script src="http://localhost:8080/kouroukan/js/class.js"></script>
     <script src="http://localhost:8080/kouroukan/js/evaluations.js"></script>
 

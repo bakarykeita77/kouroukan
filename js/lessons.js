@@ -557,7 +557,7 @@ $('document').ready(function() {
                 }
     	    }
             function lessonCourante(){
-              
+            
                 if(phase_id=='alphabet_apprentissage'){ lesson_courante = alphabetApprentissageHTML(); }   //Cette fonction provient de alphabet.js
                 if(phase_id=='syllabes_apprentissage'){ lesson_courante = syllabesApprentissageHTML(); }
                 if(phase_id=='tons_apprentissage'){ lesson_courante = tonsApprentissageHTML(); }
@@ -570,32 +570,6 @@ $('document').ready(function() {
                 
                 return lesson_courante;
                 
-                function chiffresApprentissageHTML(){
-                    var n_chiffres = chiffres.length;
-                
-                    table = "<table class='table_parlante'>\n";
-                        table += "<tr>\n";
-                        for(var n=0;n<n_chiffres;n++){    
-                            table += "<td>"+chiffres[n]+"</td>\n";
-                        }
-                        table += "</tr>\n";
-                    table += "</table>\n";
-                
-                    return table;
-                };
-                function chiffresExercicesHTML(){
-                    ligne_aleatoire = Math.floor(Math.random()*10);
-                    
-                    table = "<table class='table_parlante'>\n";
-                        table += "<tr>\n";
-                        for(var n=0;n<n_chiffres;n++){    
-                            table += "<td>"+chiffres[ligne_aleatoire]+"</td>\n";
-                        }
-                        table += "</tr>\n";
-                    table += "</table>\n";
-                    
-                    return table;
-                }
             }
             function lessonQuestions(){
                 var lq = '';
@@ -605,18 +579,6 @@ $('document').ready(function() {
                 if(niveau==4){ lq = mix1D(chiffre); }
                 
                 return lq;
-            }
-            function tonification(){
-                var tonifies = [];
-            
-                for(var consonne=0;consonne<caracteres_coches[1].length;consonne++) {
-                for(var voyelle=0;voyelle<caracteres_coches[0].length;voyelle++) {
-                for(var nasalisation=0;nasalisation<caracteres_coches[4].length;nasalisation++) {
-                for(var ton=0;ton<caracteres_coches[3].length;ton++) {
-                        tonifies[tonifies.length] = caracteres_coches[1][consonne]+caracteres_coches[0][voyelle]+caracteres_coches[3][ton]+caracteres_coches[4][nasalisation];
-                }}}}
-        
-                return tonifies;
             }
       	});
 	}

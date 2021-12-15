@@ -35,13 +35,14 @@ if(isset($_SESSION['connected'])){
         <div class="page_body">
             <div class="phases_container centerH" align="right">
                 
-                <p id='matiere_id_container'    style='display:none'><?= $matiere_id ?></p>
-                <p id='matiere_index_container' style='display:none'><?= $matiere_index ?></p>
-                <p id='matiere_nom_container'   style='display:none'><?= $matiere_nom ?></p>
-                <p id='niveau_container'        style='display:none'><?= $chiffres[$niveau] ?></p>
-                <p id='niveau_max_container'    style='display:none'><?= $niveau_max ?></p>
-                <p id='code_container'          style='display:none'><?= $client_code ?></p>
-                
+                <div id="donnees_recues_de_prorammes" style="display:none">
+                    <p id='matiere_id_container'    ><?= $matiere_id ?></p>
+                    <p id='matiere_index_container' ><?= $matiere_index ?></p>
+                    <p id='matiere_nom_container'   ><?= $matiere_nom ?></p>
+                    <p id='niveau_container'        ><?= $chiffres[$niveau] ?></p>
+                    <p id='niveau_max_container'    ><?= $niveau_max ?></p>
+                    <p id='code_container'          ><?= $client_code ?></p>
+                </div>
                 <h4>ߘߋ߰ߟߌ ߞߛߊߞߊ : <span class="niveau_courant"><?= $chiffres[$niveau] ?><span class='rang'></span></h4>
                 <h2 class="lesson_title" id="<?= $matiere_id ?>"> <?= $matiere_nom ?> ߥߟߊ߬ߘߊ  </h2>
                 <div class="phases" align="center"></div>
@@ -161,8 +162,6 @@ if(isset($_SESSION['connected'])){
     <script src="http://localhost:8080/kouroukan/js/chiffres.js"></script>
     <script src="http://localhost:8080/kouroukan/js/evaluations.js"></script>
     <script src="http://localhost:8080/kouroukan/js/class.js"></script>
-    <script src="http://localhost:8080/kouroukan/js/evaluations.js"></script>
-
 </body>
 </html>
 <?php

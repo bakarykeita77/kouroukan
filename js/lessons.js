@@ -7,7 +7,7 @@ $('document').ready(function() {
     var niveau_max = $('#niveau_max_container').html();
     var client_code = $('#code_container').html();
     var voyelles_cochees, consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees;
-      
+   
     var rang = '';
 	var etapes_passees = '';
 	var etape_actuelle = [];
@@ -184,11 +184,15 @@ $('document').ready(function() {
     	
     	$('.rang').html(rang);
     	$('.phases').html(phasesHTML());
-
+    	
+    	if(niveau =='߁') {
+    	    document.querySelector('.phases ul li:nth-child(3)').style.display = 'none';
+    	}
+    
 
         function phasesHTML(){
             var lesson_lien = 'http://localhost:8080/kouroukan/pages/lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max+'&client_code='+client_code;
-    
+            
             var content = '<ul>';
             for(var i=0;i<liste_de_phases.length;i++){
                 var lesson_id = $('.lesson_title').attr('id');

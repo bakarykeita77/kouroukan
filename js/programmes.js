@@ -18,13 +18,8 @@ $(document).ready(function() {
         var exercices_effectues = '';
         var evaluations_effectuees = '';
 
-        var lessons_separees = [];
-        var exercices_separes = [];
-        var evaluations_separees = [];
-
-        var lessons = [];
-        var exercices = [];
-        var evaluatons = [];
+        var lessons_separees = [], exercices_separes = [], evaluations_separees = [];
+        var exercices = [], evaluatons = [];
 
         var click_statistic = [];
         var element_click_statistic = [];
@@ -33,41 +28,23 @@ $(document).ready(function() {
 
         var cours_par_phase = [];
 
-        var cours = [];
-        var cours_1 = [];
-        var cours_2 = [];
-        var cours_3 = [];
 
         var situations = [];
         var situation_des_etudes = [];
         var data_cours_tries_par_phase = [];
         var data_cours_tries_par_niveau = [];
-        var etape_1 = [];
-        var etape_2 = [];
-        var etape_3 = [];
-        var etape_4 = [];
+        
+        var etape_1 = [], etape_2   = [], etape_3   = [], etape_4   = [];
+        var cours   = [], cours_1   = [], cours_2   = [], cours_3   = [];
+        var lessons = [], lessons_1 = [], lessons_2 = [], lessons_3 = [];
+        var phases  = [], phases_1  = [], phases_2  = [], phases_3  = [];
 
-        var lessons = [];
-        var lessons_1 = [];
-        var lessons_2 = [];
-        var lessons_3 = [];
-
-        var phases = [];
-        var phases_1 = [];
-        var phases_2 = [];
-        var phases_3 = [];
-        var phases_4 = [];
-
-        var client_info = [];
-        var niveaux_client = [];
-        var phases = [];
-
-        var liste_des_niveaux = [];
-        var liste_des_phases = [];
+        var client_info = [], niveaux_client = [], phases = [];
+        var liste_des_niveaux = [], liste_des_phases = [];
 
         var p = [];
 
-
+     
 
         situationDesEtudes();
         chargementDeCodeDesEtudesContainer();
@@ -90,7 +67,7 @@ $(document).ready(function() {
             triDesCoursParPhase();
             triDesCoursParNiveau();
             situations();
-
+alert( cours ); 
     
             function recuperationDesDonneesAjax() {
                 var data_container = document.querySelectorAll('#donnees_ajax div');
@@ -254,7 +231,7 @@ $(document).ready(function() {
                     }
                
                 }
-
+    
                 phases_1 = [phases_11, phases_21, phases_31].join(';');
                 phases_2 = [phases_12, phases_22, phases_32].join(';');
                 phases_3 = [phases_13, phases_23, phases_33].join(';');

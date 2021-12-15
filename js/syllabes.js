@@ -53,3 +53,33 @@
             	    
         return exercices_corps_html;
     }
+    
+    function monoSyllabesApprentissageHTML() {
+        //CODE
+    }    
+    function monoSyllabes() {
+        //code
+    }
+    function monoSyllabesExercicesHTML() {
+        //CODE
+    }   
+    
+    function biSyllabesApprentissageHTML() {
+        //CODE
+    }    
+    function biSyllabes() {
+        //code
+    }
+    function biSyllabesExercicesHTML() {
+        //CODE
+    }   
+    
+    function triSyllabesApprentissageHTML() {
+        //CODE
+    }    
+    function triSyllabes() {
+        //code
+    }
+    function triSyllabesExercicesHTML() {
+        //CODE
+    }

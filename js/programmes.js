@@ -53,7 +53,7 @@ $(document).ready(function() {
         verificationDesLessonsEtudiees();
         programme();
         
-
+alert( situations ); 
 
         function situationDesEtudes() {
 
@@ -61,13 +61,14 @@ $(document).ready(function() {
             var phases_par_niveau = [];
             var cours_par_phase = [];
             var cour = [];
+            var points = [], points_1 = [], points_2 = [], points_3 = [], points_4 = [];
 
     
             recuperationDesDonneesAjax();
             triDesCoursParPhase();
             triDesCoursParNiveau();
-            situations();
-alert( cours ); 
+            situationss();
+
     
             function recuperationDesDonneesAjax() {
                 var data_container = document.querySelectorAll('#donnees_ajax div');
@@ -86,26 +87,34 @@ alert( cours );
                         for (var j = 0; j < cours_par_phase.length; j++) {
         
                             var cour = cours_par_phase[j].split('/');
-                
+                            
+
                             var phase = cour[0];
                             var date = cour[1];
                             var id_client = cour[2];
                             var niveau = cour[3];
                             var cour_c = cour[4].split(';');
+                            if(cour.length == 6) {
+                                var point = cour[5]; 
+                            }
+                            
                             var cour_traite = [];
-        
+         
+                            
                             for (var k = 0; k < cour_c.length; k++) {
-                                    
+                                
                                 element = cour_c[k];
                                 element = element.split(',');
                                 cour_traite[cour_traite.length] = element;
                             }
-                            cours_traite_par_phase[cours_traite_par_phase.length] = [phase, date, id_client, niveau, cour_traite];
+                            
+                             
+                            cours_traite_par_phase[cours_traite_par_phase.length] = [phase, date, id_client, niveau, cour_traite, point];
                         }
                         data_cours_tries_par_phase.push(cours_traite_par_phase);
                     }
                 }
-              
+
                 situations[situations.length] = data_cours_tries_par_phase;    
             }
             function triDesCoursParNiveau() {
@@ -152,7 +161,8 @@ alert( cours );
 
                 situations[situations.length] = data_cours_tries_par_niveau;
             }
-            function situations() {
+            function situationss() {
+                
 
                 var phases_1 = [], phases_11 = [], phases_12, phases_13 = [], phases_14 = [];
                 var phases_2 = [], phases_21 = [], phases_22, phases_23 = [], phases_24 = [];
@@ -168,6 +178,20 @@ alert( cours );
                         var niveau = data_cours_tries_par_phase[i][j][3];
                         var phaze = data_cours_tries_par_phase[i][j][0];
                         var list_element = [niveau, phaze];
+                    
+                        if(niveau == 1 && phaze == 'ߓߟߏߦߊߟߌ') {
+                            points_1[points_1.length] = data_cours_tries_par_phase[i][j][5];
+                        }
+                        if(niveau == 2 && phaze == 'ߓߟߏߦߊߟߌ') {
+                            points_2[points_2.length] = data_cours_tries_par_phase[i][j][5];
+                        }
+                        if(niveau == 3 && phaze == 'ߓߟߏߦߊߟߌ') {
+                            points_3[points_3.length] = data_cours_tries_par_phase[i][j][5];
+                        }
+                        if(niveau == 4 && phaze == 'ߓߟߏߦߊߟߌ') {
+                            points_4[points_4.length] = data_cours_tries_par_phase[i][j][5];
+                        }
+                        
                         liste_des_phases[liste_des_phases.length] = list_element;
                     }
                 }
@@ -177,6 +201,7 @@ alert( cours );
                     var nivo = liste_des_phases[i][0];
                     var phase = liste_des_phases[i][1];
                     var p = liste_des_phases[i][1];
+                    
                     
                     if (nivo == 1 && phase == liste_de_phases[0][1]) {
                         n_11++;
@@ -192,9 +217,9 @@ alert( cours );
                     }
                     if (nivo == 4 && phase == liste_de_phases[0][1]) {
                         n_14++;
-
                         phases_14 = [nivo, p, n_14];
                     }
+                    
                    
                     if (nivo == 1 && phase == liste_de_phases[1][1]) {
                         n_21++;
@@ -213,24 +238,26 @@ alert( cours );
                         phases_24 = [nivo, p, n_24];
                     }
                     
+                    
                     if (nivo == 1 && phase == liste_de_phases[2][1]) {
                         n_31++;
-                        phases_31 = [nivo, p, n_31];
+                        phases_31 = [nivo, p, n_31, points_1];
                     }
                     if (nivo == 2 && phase == liste_de_phases[2][1]) {
                         n_32++;
-                        phases_32 = [nivo, p, n_32];
+                        phases_32 = [nivo, p, n_32, points_2];
                     }
                     if (nivo == 3 && phase == liste_de_phases[2][1]) {
                         n_33++;
-                        phases_33 = [nivo, p, n_33];
+                        phases_33 = [nivo, p, n_33, points_3];
                     }
                     if (nivo == 4 && phase == liste_de_phases[2][1]) {
                         n_34++;
-                        phases_34 = [nivo, p, n_34];
+                        phases_34 = [nivo, p, n_34, points_4];
                     }
                
                 }
+                
     
                 phases_1 = [phases_11, phases_21, phases_31].join(';');
                 phases_2 = [phases_12, phases_22, phases_32].join(';');
@@ -238,6 +265,8 @@ alert( cours );
 
                 situation_des_etudes = [phases_1, phases_2, phases_3];
                 situations[situations.length] = situation_des_etudes;
+                
+                return situations;
             }
         }
         function chargementDeCodeDesEtudesContainer() {

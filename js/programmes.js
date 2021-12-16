@@ -255,7 +255,6 @@ alert( situations );
                         n_34++;
                         phases_34 = [nivo, p, n_34, points_4];
                     }
-               
                 }
                 
     

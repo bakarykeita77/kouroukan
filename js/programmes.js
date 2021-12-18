@@ -9,11 +9,11 @@ $(document).ready(function() {
     var situation_des_etudes_container = document.getElementById('situation_des_etudes_container');
 
     var click_min_nbr = 0;
-    var niveau_max = 0;
-    
+
 
     $('#affiche_programme').on('click', function() {
-
+        
+        var niveau_max = '';
         var lessons_suivies = '';
         var exercices_effectues = '';
         var evaluations_effectuees = '';
@@ -43,17 +43,14 @@ $(document).ready(function() {
         var liste_des_niveaux = [], liste_des_phases = [];
 
         var p = [];
+        var point_max = '';
 
-     
 
         situationDesEtudes();
-        chargementDeCodeDesEtudesContainer();
-        calculDuNiveauMaxDuClient();
-        chargementDuNiveauMaxContainer();
         verificationDesLessonsEtudiees();
         programme();
         
-alert( situations ); 
+     
 
         function situationDesEtudes() {
 
@@ -67,9 +64,11 @@ alert( situations );
             recuperationDesDonneesAjax();
             triDesCoursParPhase();
             triDesCoursParNiveau();
-            situationss();
+            situation();
+           
+            return situations; 
 
-    
+
             function recuperationDesDonneesAjax() {
                 var data_container = document.querySelectorAll('#donnees_ajax div');
     
@@ -161,7 +160,7 @@ alert( situations );
 
                 situations[situations.length] = data_cours_tries_par_niveau;
             }
-            function situationss() {
+            function situation() {
                 
 
                 var phases_1 = [], phases_11 = [], phases_12, phases_13 = [], phases_14 = [];
@@ -241,19 +240,19 @@ alert( situations );
                     
                     if (nivo == 1 && phase == liste_de_phases[2][1]) {
                         n_31++;
-                        phases_31 = [nivo, p, n_31, points_1];
+                        phases_31 = [nivo, p, n_31, points_1.join('_')];
                     }
                     if (nivo == 2 && phase == liste_de_phases[2][1]) {
                         n_32++;
-                        phases_32 = [nivo, p, n_32, points_2];
+                        phases_32 = [nivo, p, n_32, points_2.join('_')];
                     }
                     if (nivo == 3 && phase == liste_de_phases[2][1]) {
                         n_33++;
-                        phases_33 = [nivo, p, n_33, points_3];
+                        phases_33 = [nivo, p, n_33, points_3.join('_')];
                     }
                     if (nivo == 4 && phase == liste_de_phases[2][1]) {
                         n_34++;
-                        phases_34 = [nivo, p, n_34, points_4];
+                        phases_34 = [nivo, p, n_34, points_4.join('_')];
                     }
                 }
                 
@@ -264,47 +263,29 @@ alert( situations );
 
                 situation_des_etudes = [phases_1, phases_2, phases_3];
                 situations[situations.length] = situation_des_etudes;
-                
-                return situations;
             }
+            
         }
-        function chargementDeCodeDesEtudesContainer() {
-            situation_des_etudes_container.innerHTML = situation_des_etudes.join('%');
-        }
-        function calculDuNiveauMaxDuClient() {
-
-            niveau_max = niveauMax();
+        function niveauMaxDuClient() {
+ 
+            var resume_etudes = convertirResumeDeSituationsEnObjet();
+            var niveaux = [];
+            var niveau_max = niveauMax();
+            
+            return niveau_max;   
+              
             function niveauMax() {
-
-                var codes;
-                var sous_codes_1 = [];
-                var sous_codes_2 = [];
-                var sous_codes_3 = [];
-
-                codes = situation_des_etudes_container.innerHTML;
-                codes = codes.split('%');
-        
-                for (var i = 0; i < codes.length; i++) {
-                    sous_codes_1 = codes[i].split(';');
-                  
-                  /* L'apprenant doit passer les 3 étapes pour avoir le niveau */
-                    for (var j = 0; j < sous_codes_1.length; j++) {
-                  
-                    if(sous_codes_1[0] !== '' && sous_codes_1[1] !== '' && sous_codes_1[2] !== '') {
-                        sous_codes_2 = sous_codes_1[j].split(',');
-                        niveaux_client[niveaux_client.length] = sous_codes_2[0];
-                    }else{
-                        niveaux_client[niveaux_client.length] = [0];
-                    }}
+                var niveau_max = '';
+                    
+                for (var i = 0; i < resume_etudes.length; i++) {
+                    niveaux[niveaux.length] = resume_etudes[i][resume_etudes[i].length-1][0];
+                    niveau_max = Math.max(...niveaux);
+                        
                 }
-        
-                niveau_max = Math.max(...niveaux_client);
+                    
                 return niveau_max;
             }
-        }
-        function chargementDuNiveauMaxContainer() {
-            document.getElementById ('niveau_max_containner').innerHTML = niveau_max;
-        }
+        }                
         function verificationDesLessonsEtudiees() {
         
             var niveau_en_cours = niveau_max+1;
@@ -378,7 +359,9 @@ alert( situations );
             }    
         }
         function programme() {
-
+            
+            var niveau_max = niveauMaxDuClient();
+            
             programmes_container.html(programmeHTML());
             affichageDuProgramme();
             stylesDuProgramme();
@@ -386,16 +369,16 @@ alert( situations );
 
 
             function programmeHTML() {
-
-                var code = situation_des_etudes;
-
+ 
+        
                 programme_html = '<h2>ߘߋ߰ߟߌ ߢߍߥߟߊ </h2>';
                 programme_html += '<ul id="programme_ul">';
 
                 for (var i = 0; i < liste_de_matieres.length; i++) {
+                    
                     var matiere_index = liste_de_matieres.indexOf(liste_de_matieres[i])+1;
-    
-                    if (niveau_max >= matiere_index-1) {
+        
+                    if (niveau_max+1 >= matiere_index) {
                         var phases_lien = 'lesson.php?matiere_id='+liste_de_matieres[i][0]+'&matiere_index='+matiere_index+'&matiere_nom='+liste_de_matieres[i][1]+'&niveau='+i+'&niveau_max='+niveau_max+'&client_code='+situation_des_etudes.join('/');
                         programme_html += '<li><a href="'+phases_lien+'">'+liste_de_matieres[i][1]+'</a></li>';
                     } else {
@@ -412,6 +395,7 @@ alert( situations );
                 return programme_html;
             }
             function affichageDuProgramme() {
+ 
                 programmes_container.css({
                     'display': 'block'
                 });
@@ -420,16 +404,15 @@ alert( situations );
                 });
             }
             function stylesDuProgramme() {
+  
+                $.each($('#programmes_container ul li'), function() {
+                            
+                    var matiere_index = $(this).index()+1;
 
-                var lesson_active_index = niveau_max+1;
-                var lesson_active = $('#programme_ul li:nth-child('+lesson_active_index+')');
-                var lessons_apprises = lesson_active.prevAll();
-                var lessons_a_apprendre = lesson_active.nextAll();
-
-                lessons_apprises.addClass('apprises');
-                lesson_active.addClass('active');
-                lessons_a_apprendre.addClass('a_apprendre');
-                
+                    if(matiere_index  < niveau_max+1) { $(this).addClass('apprises');    }
+                    if(matiere_index == niveau_max+1) { $(this).addClass('active');      }
+                    if(matiere_index  > niveau_max+1) { $(this).addClass('a_apprendre'); }
+                });
     	        $('.apprises').wrapAll('<div class="wraped"></div>');
             }
             function navigationDuProgramme() {
@@ -440,7 +423,34 @@ alert( situations );
                 });
             }
         }
-
+        function convertirResumeDeSituationsEnObjet() {
+            var resume = situations[situations.length-1];
+                    
+            for (var i = 0; i < resume.length; i++) {
+                resume[i] = resume[i].split(';');
+                for (var j = 0; j < resume[i].length; j++) {
+                    resume[i][j] = resume[i][j].split(',');
+                    for (var k = 0; k < resume[i][j].length; k++) {
+                                
+                        if(k == 0 && resume[i][j][k] !== '') {
+                            resume[i][j][k] = parseInt(resume[i][j][k]);
+                        }
+                        if(k == 2 && resume[i][j][k] !== '') {
+                            resume[i][j][k] = parseInt(resume[i][j][k]);
+                        }
+                        if(k == 3) {
+                            resume[i][j][k] = resume[i][j][k].split('_');
+                            for (var l = 0; l < resume[i][j][k].length; l++) {
+                                resume[i][j][k][l] = reverseIntNko(resume[i][j][k][l]);
+                                resume[i][j][k][l] = parseInt(resume[i][j][k][l]); 
+                            }
+                        }
+                    }
+                }
+            }
+           
+            return resume; 
+        }
     });
 
 });

@@ -19,6 +19,7 @@
     box-shadow: 0 0 1px yellow;
 }
 .apprises {
+    border-bottom-color: #ccc;
     color: yellow;
     text-shadow: 0 0 16px #000;
 }

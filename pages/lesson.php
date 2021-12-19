@@ -1,12 +1,12 @@
 <?php
 session_start();
 if(isset($_SESSION['connected'])){
-    $matiere_id  = $_GET['matiere_id'];
-    $matiere_index  = $_GET['matiere_index'];
-    $matiere_nom = $_GET['matiere_nom'];
-    $niveau      = $_GET['niveau']+1;
-    $niveau_max  = $_GET['niveau_max'];
-    $client_code = $_GET['client_code'];
+    $matiere_id    = $_GET['matiere_id'];
+    $matiere_index = $_GET['matiere_index'];
+    $matiere_nom   = $_GET['matiere_nom'];
+    $niveau        = $_GET['niveau'];
+    $niveau_max    = $_GET['niveau_max'];
+    $client_code   = $_GET['client_code'];
 
     $chiffres = ['߀','߁','߂','߃','߄','߅','߆','߇','߈','߉'];
 ?>
@@ -36,15 +36,15 @@ if(isset($_SESSION['connected'])){
             <div class="phases_container centerH" align="right">
                 
                 <div id="donnees_recues_de_prorammes" style="display:none">
-                    <p id='matiere_id_container'    ><?= $matiere_id ?></p>
-                    <p id='matiere_index_container' ><?= $matiere_index ?></p>
-                    <p id='matiere_nom_container'   ><?= $matiere_nom ?></p>
-                    <p id='niveau_container'        ><?= $chiffres[$niveau] ?></p>
-                    <p id='niveau_max_container'    ><?= $niveau_max ?></p>
-                    <p id='code_container'          ><?= $client_code ?></p>
+                    <p id='matiere_id_container'    ><?= $matiere_id; ?></p>
+                    <p id='matiere_index_container' ><?= $matiere_index; ?></p>
+                    <p id='matiere_nom_container'   ><?= $matiere_nom; ?></p>
+                    <p id='niveau_container'        ><?= $niveau; ?></p>
+                    <p id='niveau_max_container'    ><?= $niveau_max; ?></p>
+                    <p id='code_container'          ><?= $client_code; ?></p>
                 </div>
-                <h4>ߘߋ߰ߟߌ ߞߛߊߞߊ : <span class="niveau_courant"><?= $chiffres[$niveau] ?><span class='rang'></span></h4>
-                <h2 class="lesson_title" id="<?= $matiere_id ?>"> <?= $matiere_nom ?> ߥߟߊ߬ߘߊ  </h2>
+                <h4>ߘߋ߰ߟߌ ߞߛߊߞߊ : <span class="niveau_courant"><?= $chiffres[$niveau+1]; ?><span class='rang'></span></h4>
+                <h2 class="lesson_title" id="<?= $matiere_id ?>"> <?= $matiere_nom; ?> ߥߟߊ߬ߘߊ  </h2>
                 <div class="phases" align="center"></div>
             </div>
         </div>

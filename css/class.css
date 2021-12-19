@@ -19,20 +19,24 @@
     box-shadow: 0 0 1px yellow;
 }
 .apprises {
-    border-bottom-color: #ccc;
+    border: 1px  solid #ccc;
+    border-radius: 6px ;
     color: yellow;
+    box-shadow: 0 0 16px #fff;
     text-shadow: 0 0 16px #000;
-}
+} 
 .apprises:active {
-    background-color: #ddd;
+    border: 1px  solid #ddd;
+    box-shadow: 0 0 1px #fff;
+    text-shadow: 0 0 1px #000;
 }
 .apprises a {
-    color: yellow;
+    color: yellow; 
 }
 .a_apprendre {
     border-radius: 6px;
-    background-color: #ccc;
-    color: #bbb;
+    background-color: #bbb;
+    color: #999;
 }
 .a_apprendre a {
     color: #aaa;

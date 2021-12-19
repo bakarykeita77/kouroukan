@@ -1,10 +1,10 @@
 $('document').ready(function() {
 	    
 	var matiere_id = $('#matiere_id_container').html();
-	var matiere_index = $('#matiere_index_container').html();
+	var matiere_index = parseInt($('#matiere_index_container').html());
 	var matiere_nom = $('#matiere_nom_container').html();
-    var niveau = $('#niveau_container').html();
-    var niveau_max = $('#niveau_max_container').html();
+    var niveau = parseInt($('#niveau_container').html());
+    var niveau_max = parseInt($('#niveau_max_container').html())+1;
     var client_code = $('#code_container').html();
     var voyelles_cochees, consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees;
    
@@ -18,13 +18,19 @@ $('document').ready(function() {
     var phases_etudiees = [];
     var phases_a_etudier = [];
     var noms_des_phases = '';
+    
+    var resume_des_etudes = '';
         
 	var phases_actuelles, phases_actuelles_etudiees, phase_precedante, phase_active;
 	var index_phase_actuelle, index_phase_precedante, index_phase_active;
 	var avancer_btn = '';
 
-
-
+//alert( phasesEtudiees() );  	
+    phasesEtudiees();
+    
+    resume_des_etudes = convertirClientCodeEnObjet();
+   alert( resume_des_etudes );
+   
     noms_des_phases = nomsDesPhases();
 	phases();
 	controlDesEtapesDEtude();
@@ -33,7 +39,7 @@ $('document').ready(function() {
 	cours();
 	naviguerSurLesson();
 	
- 	
+	
 
 	function nomsDesPhases() {
 	    var noms_des_phases = [];
@@ -177,6 +183,55 @@ $('document').ready(function() {
 	    
 	    return phases_actuelles_etudiees;
 	}
+    function phasesEtudiees() {
+            
+        var niveaux_passes = niveauxPasses();
+        var index_matiere_active = niveau_max+1;
+            
+
+        var index_matiere_clickee = matiere_index; 
+        phases_etudiees = phasesPassees();
+            
+        return phases_etudiees;
+            
+        function niveauxPasses() {
+            var niveaux_passes = [];
+
+            for (var i = 0; i < niveau_max; i++) {
+                niveaux_passes[niveaux_passes.length] = liste_de_matieres.indexOf(liste_de_matieres[i])+1; 
+            }
+                
+            return niveaux_passes;
+        }
+        function phasesPassees() {
+            var phases_etudiees = [];
+                    
+            if(niveau_max > index_matiere_clickee - 1) {
+                for (var i = 0; i < liste_de_phases.length; i++) {
+                    phases_etudiees[phases_etudiees.length] = liste_de_phases[i][1];
+                }
+            } 
+            if(niveau_max == index_matiere_clickee) {
+                var etapes_non_vide = [];
+                var etape_active = [];
+                       
+                for (var i = 0; i < niveau_max; i++) {
+           // alert( resume_des_etudes );         
+                   // etapes_non_vide.push(resume_des_etudes[i]); 
+                }
+                 
+                etape_active = etapes_non_vide[etapes_non_vide.length-1];
+                       
+                for (var i = 0; i < etape_active.length; i++) {
+                    if(etape_active[i][1] !== undefined) {
+                        phases_etudiees[phases_etudiees.length] = etape_active[i][1];
+                    }
+                }
+            }
+                    
+            return phases_etudiees;
+        }
+    }
 	function phases(){
         var niveau = $('.niveau_courant').text();
       
@@ -591,4 +646,34 @@ $('document').ready(function() {
 	        $('.phases ul li').click();
 	    });
 	}
+        function convertirClientCodeEnObjet() {
+            var resume = client_code.split('%');
+                    
+            for (var i = 0; i < resume.length; i++) {
+                resume[i] = resume[i].split(',');
+        
+                for (var j = 0; j < resume[i].length; j++) {
+                    resume[i][j] = resume[i][j].split(',');
+           alert( resume[i][j] ); 
+            /*        for (var k = 0; k < resume[i][j].length; k++) {
+                                
+                        if(k == 0 && resume[i][j][k] !== '') {
+                            resume[i][j][k] = parseInt(resume[i][j][k]);
+                        }
+                        if(k == 2 && resume[i][j][k] !== '') {
+                            resume[i][j][k] = parseInt(resume[i][j][k]);
+                        }
+                        if(k == 3) {
+                            resume[i][j][k] = resume[i][j][k].split('_');
+                            for (var l = 0; l < resume[i][j][k].length; l++) {
+                                resume[i][j][k][l] = reverseIntNko(resume[i][j][k][l]);
+                                resume[i][j][k][l] = parseInt(resume[i][j][k][l]); 
+                            }
+                        }*/
+                    }
+                }   
+            }
+           
+            return resume; 
+        }
 });

@@ -6,7 +6,7 @@ if(isset($_SESSION['connected'])){
     $matiere_nom   = $_GET['matiere_nom'];
     $niveau        = $_GET['niveau'];
     $niveau_max    = $_GET['niveau_max'];
-    $client_code   = $_GET['client_code'];
+    $resume_brut_des_etudes   = $_GET['resume_brut_des_etudes'];
 
     $chiffres = ['߀','߁','߂','߃','߄','߅','߆','߇','߈','߉'];
 ?>
@@ -41,7 +41,7 @@ if(isset($_SESSION['connected'])){
                     <p id='matiere_nom_container'   ><?= $matiere_nom; ?></p>
                     <p id='niveau_container'        ><?= $niveau; ?></p>
                     <p id='niveau_max_container'    ><?= $niveau_max; ?></p>
-                    <p id='code_container'          ><?= $client_code; ?></p>
+                    <p id='resume_brut_des_etudes_container' ><?= $resume_brut_des_etudes; ?></p>
                 </div>
                 <h4>ߘߋ߰ߟߌ ߞߛߊߞߊ : <span class="niveau_courant"><?= $chiffres[$niveau+1]; ?><span class='rang'></span></h4>
                 <h2 class="lesson_title" id="<?= $matiere_id ?>"> <?= $matiere_nom; ?> ߥߟߊ߬ߘߊ  </h2>

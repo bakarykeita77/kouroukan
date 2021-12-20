@@ -44,6 +44,7 @@ $(document).ready(function() {
         var client_info = [], niveaux_client = [], phases = [];
         var liste_des_niveaux = [], liste_des_phases = [];
 
+        var resume_brut_des_etudes = [];
         var resume_des_etudes = [];
         var p = [];
         var point_max = '';
@@ -51,12 +52,13 @@ $(document).ready(function() {
 
 
         situationDesEtudes();
+        resume_brut_des_etudes = situations[situations.length-1];
         resume_des_etudes = convertirResumeDeSituationsEnObjet();
         niveau_max = niveauMaxDuClient();
         verificationDesLessonsEtudiees();
         programme();
         
-      
+
 
         function situationDesEtudes() {
 
@@ -267,7 +269,7 @@ $(document).ready(function() {
                 phases_2 = [phases_12, phases_22, phases_32].join(';');
                 phases_3 = [phases_13, phases_23, phases_33].join(';');
 
-                situation_des_etudes = [phases_1, phases_2, phases_3];
+                situation_des_etudes = [phases_1, phases_2, phases_3].join('/');
                 situations[situations.length] = situation_des_etudes;
             }
             
@@ -381,7 +383,7 @@ $(document).ready(function() {
                     var matiere_index = liste_de_matieres.indexOf(liste_de_matieres[i])+1;
         
                     if (niveau_max+1 >= matiere_index) {
-                        var phases_lien = 'lesson.php?matiere_id='+liste_de_matieres[i][0]+'&matiere_index='+matiere_index+'&matiere_nom='+liste_de_matieres[i][1]+'&niveau='+i+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees+'&client_code='+situation_des_etudes.join('/');
+                        var phases_lien = 'lesson.php?matiere_id='+liste_de_matieres[i][0]+'&matiere_index='+matiere_index+'&matiere_nom='+liste_de_matieres[i][1]+'&niveau='+i+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees+'&resume_brut_des_etudes='+resume_brut_des_etudes;
                         programme_html += '<li><a href="'+phases_lien+'">'+liste_de_matieres[i][1]+'</a></li>';
                     } else {
                         programme_html += '<li><a href="#">'+liste_de_matieres[i][1]+'</a></li>';
@@ -426,8 +428,8 @@ $(document).ready(function() {
             }
         }
         function convertirResumeDeSituationsEnObjet() {
-            var resume = situations[situations.length-1];
-                    
+            var resume = situations[situations.length-1].split('/');
+                   
             for (var i = 0; i < resume.length; i++) {
                 resume[i] = resume[i].split(';');
                 for (var j = 0; j < resume[i].length; j++) {
@@ -450,7 +452,7 @@ $(document).ready(function() {
                     }
                 }
             }
-           
+         
             return resume; 
         }
     });

@@ -40,7 +40,6 @@ $('document').ready(function() {
 	naviguerSurLesson();
 	
 
-
 	function nomsDesPhases() {
 	    var noms_des_phases = [];
 	        
@@ -195,10 +194,16 @@ $('document').ready(function() {
         }
     }
     function phaseActive() {
+        var index_phase_active = '';
         
-        var index_phase_active = phases_etudiees.length+1;   
-        var phase_active = liste_de_phases[index_phase_active][1];
+        if(phases_etudiees != '') {
+            index_phase_active = phases_etudiees.length+1;  
+        }else{
+            index_phase_active = 0;
+        }
         
+        var phase_active = noms_des_phases[index_phase_active];
+         
         return phase_active;
     }
     function phasesAEtudier() {
@@ -207,28 +212,20 @@ $('document').ready(function() {
         $.each(liste_de_phases, function() {
             var phase_a_etudier = this[1];
 
-            if(phases_etudiees.indexOf(phase_a_etudier) == -1) {
+            if(phases_etudiees.indexOf(phase_a_etudier) == -1 && phase_active !== phase_a_etudier) {
                 phases_a_etudier[phases_a_etudier.length] = phase_a_etudier;
             }
         });
-        
+       
         return phases_a_etudier;
     }
 	function phases() {
-        var niveau = $('.niveau_courant').text();
-      
-        rang = (niveau=='߁')?'߭':'߲';
-    	
-    	$('.rang').html(rang);
+        
     	$('.phases').html(phasesHTML());
-    	
-    	if(niveau =='߁') {
-    	    document.querySelector('.phases ul li:nth-child(3)').style.display = 'none';
-    	}
-    	
+        actualiserTitre();	   
 	    stylesDesPhases();
     
-
+    
         function phasesHTML(){
 
             var content = '<ul>';
@@ -245,13 +242,20 @@ $('document').ready(function() {
 
             return content;
         }
+        function actualiserTitre() {
+            var niveau = $('.niveau_courant').text();
+      
+            rang = (niveau=='߁')?'߭':'߲';
+    	    $('.rang').html(rang);
+    	
+        	if(niveau =='߁') {
+        	    document.querySelector('.phases ul li:nth-child(3)').style.display = 'none';
+        	}
+        }
 	    function stylesDesPhases() {
 
     	    $.each($('.phases ul li'), function(){
 
-        	    if(phases_etudiees == '') {
-        	        $('.phases ul li:nth-child(1)').addClass('active');
-        	    }
         	    if(phase_active == $(this).html()) {
         	        $(this).addClass('active');
         	    }
@@ -263,9 +267,8 @@ $('document').ready(function() {
         	    }
             });
 	    }
-        
 	}
-    function actualiserCochage(){
+    function actualiserCochage() {
         voyelles_cochees = $('#voyelles_cochees').html().split('');
         consonnes_cochees = $('#consonnes_cochees').html().split('');
         tedos_coches = $('#tedos_coches').html().split('');
@@ -273,7 +276,7 @@ $('document').ready(function() {
         nasalisations_cochees = [''].concat($('#nasalisations_cochees').html().split(''));
         caracteres_coches = [voyelles_cochees, consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees];
     }
-	function cours(){
+	function cours() {
     	
     	$('.phases ul li').on('click', function(){
        

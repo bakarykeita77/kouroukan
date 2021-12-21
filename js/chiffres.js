@@ -1,7 +1,7 @@
 
     var n_chiffres = chiffres.length;
 
-    function chiffresApprentissageHTML(){
+    function chiffresApprentissageHTML() {
                 
         table = "<table class='table_parlante'>\n";
             table += "<tr>\n";
@@ -13,7 +13,7 @@
                 
         return table;
     };
-    function chiffresExercicesHTML(){
+    function chiffresExercicesHTML() {
                     
         table = "<table class='table_parlante'>\n";
             table += "<tr>\n";
@@ -25,4 +25,7 @@
         table += "</table>\n";
                     
         return table;
+    }
+    function chiffresPratiquesHTML() {
+        // Code
     }

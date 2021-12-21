@@ -35,6 +35,7 @@ $('document').ready(function() {
 	phase_active = phaseActive(); 
 	phases_a_etudier = phasesAEtudier();
 	phases();
+	parametrageDeLesson();
 	actualiserCochage();
 	cours();
 	naviguerSurLesson();
@@ -229,6 +230,7 @@ $('document').ready(function() {
         function phasesHTML(){
 
             var content = '<ul>';
+            
             for(var i=0;i<liste_de_phases.length;i++){
                 var lesson_id = $('.lesson_title').attr('id');
                 content += '<li id="'+lesson_id+'_'+liste_de_phases[i][0]+'">'+liste_de_phases[i][1]+'</li>';
@@ -248,7 +250,7 @@ $('document').ready(function() {
             rang = (niveau=='߁')?'߭':'߲';
     	    $('.rang').html(rang);
     	
-        	if(niveau =='߁') {
+        	if(matiere_index == 1) {
         	    document.querySelector('.phases ul li:nth-child(3)').style.display = 'none';
         	}
         }
@@ -335,7 +337,7 @@ $('document').ready(function() {
                     masquerLessonBarrProgress();
                     etudierLesson();
             	    stockerLesson();
-    
+   
                     function masquerLessonBarrProgress(){
                         $('.lesson_progress_bar').css('display','none');
                     }
@@ -359,7 +361,7 @@ $('document').ready(function() {
                             
                 	        actualiserCochage(); 
                 	        lettres = voyelles_cochees.concat(consonnes_cochees,tedos_coches);
-                       
+                      
                 	        syllabes = syllab();
                 	        syllabes_tonifies = tonification();
                 	        
@@ -474,7 +476,7 @@ $('document').ready(function() {
                         });
             	    }
             	}
-            	function exercices(){
+            	function exercices() {
             	    
             	    var compteur_de_question = 1;
             	    var quantite_de_question = quantiteDeQuestion();
@@ -622,9 +624,9 @@ $('document').ready(function() {
             	    }
                 }
     	    }
-            function lessonCourante(){
-            
-                if(phase_id=='alphabet_apprentissage'){ lesson_courante = alphabetApprentissageHTML(); }   //Cette fonction provient de alphabet.js
+            function lessonCourante() {
+         
+                if(phase_id=='alphabet_apprentissage'){ lesson_courante = alphabetApprentissageHTML(); } //Cette fonction provient de alphabet.js
                 if(phase_id=='syllabes_apprentissage'){ lesson_courante = syllabesApprentissageHTML(); }
                 if(phase_id=='tons_apprentissage'){ lesson_courante = tonsApprentissageHTML(); }
                 if(phase_id=='chiffres_apprentissage'){ lesson_courante = chiffresApprentissageHTML(); }
@@ -634,10 +636,14 @@ $('document').ready(function() {
                 if(phase_id=='tons_exercices'){ lesson_courante = tonsExercicesHTML(); }
                 if(phase_id=='chiffres_exercices'){ lesson_courante = chiffresExercicesHTML(); }
                 
+                if(phase_id=='syllabes_pratiques'){ lesson_courante = syllabesPratiquesHTML(); }
+                if(phase_id=='tons_pratiques'){ lesson_courante = tonsPratiquesHTML(); }
+                if(phase_id=='chiffres_pratiques'){ lesson_courante = chiffresPratiquesHTML(); }
+             
                 return lesson_courante;
                 
             }
-            function lessonQuestions(){
+            function lessonQuestions() {
                 var lq = '';
                 if(niveau==1){ lq = mix1D(lettres); }
                 if(niveau==2){ lq = mix1D(syllabes); }

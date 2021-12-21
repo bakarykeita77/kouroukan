@@ -5,7 +5,7 @@
     var checkbox_titre, check_btn_container, checkbox_parent, check_btn, checkbox_children;
     var voyelle, consonne, tedo, ton, nasalisation;
     var voyelles, consonnes, tedos, tons, nasalisations;
-    var voyelles_cochees, consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees, caracteres_coches,syllabes_coches = [];
+    var voyelles_cochees = [], consonnes_cochees = [], tedos_coches = [], tons_coches = [], nasalisations_cochees = [], caracteres_coches = [],syllabes_coches = [];
 
  /* Les variables tableaux regroupant les caracteres par types */  
     voyelles = lesVoyelles();
@@ -15,6 +15,8 @@
     tons = lesTons();
 
     parametrageDeLesson();
+    
+
  
     function lesVoyelles(){
         var v = [];
@@ -50,7 +52,7 @@
         for(var i=0;i<caracteres[4].length;i++){ n[i] = caracteres[4][i]; }
         return n;
     }
-    function lesTons(){
+    function lesTons() {
         var t = [];
         for(var i=0;i<caracteres[5].length;i++){ t[i] = caracteres[5][i]; }
         return t;
@@ -90,13 +92,6 @@
             tons_checker = $('#tons_checker');
             nasalisation_checker = $('#nasalisation_checker');
 
-            voyelles_cochees = [];
-            consonnes_cochees = [];
-            tedos_coches = [];
-            tons_coches = [];
-            nasalisations_cochees = [];
-            caracteres_coches = [];
-            syllabes_tonifiees = [];
          }
         function chargementDesElementsDeLessonParametres(){
             consonnes_checker.html(consonnesCheckerHTML());

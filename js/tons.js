@@ -56,3 +56,6 @@
             	    
         return exercices_corps_html;
     }
+    function tonsPratiquesHTML() {
+        // Code
+    }

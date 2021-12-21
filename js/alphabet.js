@@ -2,7 +2,7 @@
     var lettres = voyelles_cochees.concat(consonnes_cochees,tedos_coches);  
     var alphabet_questions = mix1D(lettres);
 
-     
+
     function alphabetApprentissageHTML() {
 
         var table = "<table class = 'table_parlante'>\n";
@@ -24,7 +24,7 @@
                 
         return table;
     }  // Cette fonction est appelée dans lesson.js    	
-    function alphabetExercicesHTML(){
+    function alphabetExercicesHTML() {
 
         var exercices_corps_html = '<table class="table_muette">';
         for(var i=0;i<alphabet_questions.length-alphabet_questions.length%7;i+=7){

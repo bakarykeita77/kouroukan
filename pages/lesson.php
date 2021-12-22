@@ -17,6 +17,7 @@ if(isset($_SESSION['connected'])){
     <title>lesson</title>
  	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1"/>
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/lesson.css"/>
+	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/syllabes.css"/>
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/parametres.css"/>
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/evaluation.css"/>
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/class.css"/>

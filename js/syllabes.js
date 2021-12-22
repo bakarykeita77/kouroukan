@@ -35,6 +35,7 @@
     function syllabesExercicesHTML(){
             	    
         var exercices_corps_html = '<table class="table_muette">';
+        
         for(var i=0;i<syllabes_questions.length-syllabes_questions.length%7;i+=7){
             exercices_corps_html += '<tr>\n';
             for(var j=0;j<7;j++){
@@ -55,13 +56,47 @@
     }
     function syllabesPratiquesHTML() {
     
-        function monoSyllabes() {
-        //code
-        }
-        function biSyllabes() {
-        //code
-        }
-        function triSyllabes() {
-        //code
-        }
+        syllabes_pratiques_html = '<div id="pratiques_container">';
+        
+            syllabes_pratiques_html += '<input name="pratiques_titre" id="pratiques_titre" placeholder="ߛߓߍߟߌ ߞߍ߫ ߦߊ߲߬">';
+            syllabes_pratiques_html += '<div id="pratiques_image_container" align="center"><img src="" id="pratiques_image" alt="?"></div>';
+        
+        syllabes_pratiques_html += '</div>';
+        
+        
+        return syllabes_pratiques_html;
     }
+    
+    function monoSyllabes() {
+       
+        var mono_syllabes = [
+            ['ߓߊ','ߓߐ','ߖߌ','ߖߎ','ߖߏ','ߖߐ','ߗߋ','ߗߍ','ߗߏ','ߘߊ','ߛߊ','ߛߋ','ߛߌ','ߛߍ','ߛߎ','ߛߏ','ߛߐ','ߜߊ','ߜߍ','ߜߎ','ߜߐ','ߝߊ','ߝߍ','ߝߏ','ߞߏ','ߞߎ','ߞߐ','ߟߌ','ߟߍ','ߟߎ','ߟߐ','ߡߎ','ߢߊ','ߢߍ','ߣߊ','ߣߌ','ߣߐ'],
+            ['ߓߌ߲','ߓߎ߲','ߓߏ߲','ߖߎ߲','ߗߍ߲','ߘߋ߲','ߘߎ߲','ߘߐ߲','ߛߊ߲','ߛߌ߲','ߛߎ߲','ߛߏ߲','ߛߐ߲','ߜߊ߲','ߜߋ߲','ߝߊ߲','ߞߊ߲','ߞߏ߲','ߟߍ߲','ߟߏ߲','ߢߌ߲','ߣߎ߲']
+        ];       
+            
+        return mono_syllabes;
+    }
+    function biSyllabes() {
+        var bi_syllabes = [
+            [
+                ߓߊߓߊ,
+                ߓߊߘߊ,
+                ߓߊߛߊ,
+                ߓߊߟߊ
+            ],
+            [
+                ߓߊ߲ߘߊ,
+                ߓߊߞߊ߲
+            ]
+        ];
+        
+        return bi_syllabes;
+    }
+    function triSyllabes() {
+        var tri_syllabes = [];
+        
+        
+        
+        return tri_syllabes;
+    }
+        

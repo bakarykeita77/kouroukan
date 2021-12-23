@@ -759,7 +759,7 @@ $('document').ready(function() {
                 	    function repondreQuestion(){
             	            var nbr_de_questions_a_poser = 20;
                         	        
-                    	    $('#pratiques_titre').on('click', function(){
+                    	    $('#pratiques_input').on('click', function(){
                     	        if(question_posee=='')
                     	        {   guiderClient(); }
                     	        else

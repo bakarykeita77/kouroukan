@@ -67,8 +67,8 @@
             syllabes_pratiques_html += '</div>';
         
             syllabes_pratiques_html += '<div id="pratiques">';
-                syllabes_pratiques_html += '<input name="pratiques_titre" id="pratiques_titre" placeholder="ߛߓߍߟߌ ߞߍ߫ ߦߊ߲߬">';
                 syllabes_pratiques_html += '<div id="pratiques_image_container" align="center"><img src="" id="pratiques_image" alt="?"></div>';
+                syllabes_pratiques_html += '<div id="pratiques_input_container"><input name="pratiques_input" id="pratiques_input" placeholder="ߛߓߍߟߌ ߞߍ߫ ߦߊ߲߬"></div>';
             syllabes_pratiques_html += '</div>';
         
         syllabes_pratiques_html += '</div>';

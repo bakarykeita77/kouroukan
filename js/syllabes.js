@@ -55,11 +55,21 @@
         return exercices_corps_html;
     }
     function syllabesPratiquesHTML() {
+        
     
         syllabes_pratiques_html = '<div id="pratiques_container">';
         
-            syllabes_pratiques_html += '<input name="pratiques_titre" id="pratiques_titre" placeholder="ߛߓߍߟߌ ߞߍ߫ ߦߊ߲߬">';
-            syllabes_pratiques_html += '<div id="pratiques_image_container" align="center"><img src="" id="pratiques_image" alt="?"></div>';
+            syllabes_pratiques_html += '<div id="pratiques_programme">';
+                syllabes_pratiques_html += '<span>ߜߋ߲߬ ߁ ߡߊ</span>';
+                syllabes_pratiques_html += '<span>ߜߋ߲߬ ߂ ߡߊ</span>';
+                syllabes_pratiques_html += '<span>ߜߋ߲߬ ߃ ߡߊ</span>';
+                syllabes_pratiques_html += '<span>ߜߋ߲߬ ߄ ߡߊ</span>';
+            syllabes_pratiques_html += '</div>';
+        
+            syllabes_pratiques_html += '<div id="pratiques">';
+                syllabes_pratiques_html += '<input name="pratiques_titre" id="pratiques_titre" placeholder="ߛߓߍߟߌ ߞߍ߫ ߦߊ߲߬">';
+                syllabes_pratiques_html += '<div id="pratiques_image_container" align="center"><img src="" id="pratiques_image" alt="?"></div>';
+            syllabes_pratiques_html += '</div>';
         
         syllabes_pratiques_html += '</div>';
         
@@ -79,14 +89,14 @@
     function biSyllabes() {
         var bi_syllabes = [
             [
-                ߓߊߓߊ,
-                ߓߊߘߊ,
-                ߓߊߛߊ,
-                ߓߊߟߊ
+                'ߓߊߓߊ',
+                'ߓߊߘߊ',
+                'ߓߊߛߊ',
+                'ߓߊߟߊ'
             ],
             [
-                ߓߊ߲ߘߊ,
-                ߓߊߞߊ߲
+                'ߓߊ߲ߘߊ',
+                'ߓߊߞߊ߲'
             ]
         ];
         
@@ -98,5 +108,12 @@
         
         
         return tri_syllabes;
+    }
+    function quadriSyllabes() {
+        var quadri_syllabes = [];
+        
+        
+        
+        return quadri_syllabes;
     }
         

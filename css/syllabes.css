@@ -1,12 +1,38 @@
 
 #pratiques_container {
-    padding: 0 32px;
+    margin: 0;
+    padding: 0 16px;
     height: 100%;
+}
+#pratiques_programme {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+    margin-top: 16px;
+    padding: 0;
+    font-size: 12px;
+    box-shadow: 0 0 16px #bbb;
+}
+#pratiques_programme span:not(.actif) {
+    background-color: #ccc;
+    margin: 0 1px;
+    padding: 0;
+    height: 16px;
+    width: 25%;
+    text-align: center;
+}
+.actif { width: 25%; margin: 1px; height: 16px; }
+#pratiques {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 #pratiques_titre {
     border: 1px solid transparent;
     border-bottom-color: #ccc;
-    width: 100%;
     height: 32px;
     line-height: 32px;
     margin: 16px 0 8px;
@@ -17,7 +43,6 @@
 }
 #pratiques_image {
     width: 100%;
-    min-height: 64px;
     font-size: 96px;
     font-weight: bold;
     color: #ddd;

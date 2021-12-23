@@ -499,7 +499,7 @@ $('document').ready(function() {
                 	    $('#lesson_corps').html( lesson_courante ); 
                 	    
                     	function exercicesEnteteHTML(){
-                    	    var exercices_entete_html = "<div class='play_icon_container' style='width:auto'>";
+                    	    var exercices_entete_html = "<div class='play_icon_container' id='exercices_player' style='width:auto'>";
                     	        exercices_entete_html += "<span class='play_label'>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ </span>";
                     	        exercices_entete_html += "<span class='qtite_question'>"+quantite_de_question+"</span> : <span class='ordre_question'>"+parseIntNko(compteur_de_question)+question_rang+" </span>";
                     	        exercices_entete_html += "<span class='ecouter_question'> ߟߊߡߍ߲߫</span><span class='play_icon'>"+play_icon+"</span>";
@@ -522,7 +522,7 @@ $('document').ready(function() {
                 	    repondreQuestion();
                 	    
                 	    function poserQuestion(){
-                    	    $('.play_icon_container').on('click',function(){
+                    	    $('#exercices_player').on('click',function(){
                   	        
                     	        compteur_de_question++;
                     	        question_rang = '߲';
@@ -632,9 +632,10 @@ $('document').ready(function() {
                     
                     
             	    chargerPratiques();
-            	    afficherLessonBarrProgress();
+            	    stylesPratiquesProgramme();
+            	    //afficherLessonBarrProgress();
             	    questionReponse();
-            	    stockerPratiques();
+            	    //stockerPratiques();
             	    
             	    
             	    function chargerPratiques() {
@@ -643,7 +644,7 @@ $('document').ready(function() {
                 	    $('#lesson_corps').html( lesson_courante ); 
                 	    
                 	     function pratiquesEnteteHTML() {
-                	         var pratiques_entete_html = "<div class='play_icon_container' style='width:auto'>";
+                	         var pratiques_entete_html = "<div class='play_icon_container' id='pratiques_player' style='width:auto'>";
                     	        pratiques_entete_html += "<span class='play_label'>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ </span>";
                     	        pratiques_entete_html += "<span class='qtite_question'>"+quantite_de_question+"</span> : <span class='ordre_question'>"+parseIntNko(compteur_de_question)+question_rang+" </span>";
                     	        pratiques_entete_html += "<span class='ecouter_question'> ߟߊߡߍ߲߫</span><span class='play_icon'>"+play_icon+"</span>";
@@ -653,24 +654,43 @@ $('document').ready(function() {
                             return pratiques_entete_html;
                 	     }  
             	    }
+            	    function stylesPratiquesProgramme() {
+            	        $('#pratiques_programme span:nth-child(1)').addClass('actif');
+            	    }
             	    function questionReponse() {
-            	        
+                   
                 	    var i=0;
-                	    var question_posee, reponse_montree, point; 
+                	    var question_posee, reponse_tapee, point; 
     
                 	    question_posee = '';
                 	    poserQuestion();
                 	    repondreQuestion();
                 	    
                 	    function poserQuestion(){
-                    	    $('.play_icon_container').on('click',function(){
-                  	        
+                    	    $('#pratiques_player').on('click',function(){
+                    	  
+                    	        var pratiques_syllabes_active_index = $('.actif').index();
+                    	        var questions = '';
+                    	        
+                    	        var mono_syllabes   = monoSyllabesTotal();
+                    	        var bi_syllabes     = biSyllabesTotal();
+                    	        var tri_syllabes    = triSyllabesTotal();
+                    	        var quadri_syllabes = quadriSyllabesTotal();
+                    	        
+                    	        switch(pratiques_syllabes_active_index) {
+                    	            case 0: questions = mix1D(mono_syllabes);   break;
+                    	            case 1: questions = mix1D(bi_syllabes);     break;
+                    	            case 2: questions = mix1D(tri_syllabes);    break;
+                    	            case 3: questions = mix1D(quadri_syllabes); break;
+                    	        }
+                    	     
                     	        compteur_de_question++;
                     	        question_rang = '߲';
                     	        $('.ecouter_question').html(' ߠߊߡߍ߲߫');
                     	        $('.ordre_question').html(parseIntNko(compteur_de_question)+question_rang);
-                    	        question_posee = mono_syllabes[i];
-
+                    	        
+                    	        question_posee = questions[i];
+                    
                     	        $(this).css('display','none');
                     	        $('.oreille_icon_container').css('display','block');
                     	        
@@ -685,22 +705,70 @@ $('document').ready(function() {
                     	        function repeteQuestion(){
                     	            $('.oreille_icon_container').on('click', function(){ lireQuestion(); });
                     	        }
+                    	        
+                    	        function monoSyllabesTotal() {
+                    	            var mono_syllabes = monoSyllabes(); // Cette fonction provient de syllabes.js 
+                    	            var ms = [];
+                    	            
+                        	        for (var i = 0; i < mono_syllabes.length; i++) {
+                        	        for (var j = 0; j < mono_syllabes[i].length; j++) {
+                        	            ms[ms.length] = mono_syllabes[i][j];
+                        	            
+                        	        }}
+                    	        
+                    	            return ms;
+                    	        }
+                    	        function biSyllabesTotal() {
+                    	            var bi_syllabes = biSyllabes(); // Cette fonction provient de syllabes.js 
+                    	            var bs = [];
+                    	            
+                        	        for (var i = 0; i < bi_syllabes.length; i++) {
+                        	        for (var j = 0; j < bi_syllabes[i].length; j++) {
+                        	            bs[bs.length] = bi_syllabes[i][j];
+                        	            
+                        	        }}
+                    	        
+                    	            return bs;
+                    	        }
+                    	        function triSyllabesTotal() {
+                    	            var tri_syllabes = triSyllabes(); // Cette fonction provient de syllabes.js 
+                    	            var ts = [];
+                    	            
+                        	        for (var i = 0; i < tri_syllabes.length; i++) {
+                        	        for (var j = 0; j < tri_syllabes[i].length; j++) {
+                        	            ts[ts.length] = tri_syllabes[i][j];
+                        	            
+                        	        }}
+                    	        
+                    	            return ts;
+                    	        }
+                    	        function quadriSyllabesTotal() {
+                    	            var quadri_syllabes = quadriSyllabes(); // Cette fonction provient de syllabes.js 
+                    	            var qs = [];
+                    	            
+                        	        for (var i = 0; i < quadri_syllabes.length; i++) {
+                        	        for (var j = 0; j < quadri_syllabes[i].length; j++) {
+                        	            qs[qs.length] = quadri_syllabes[i][j];
+                        	            
+                        	        }}
+                    	        
+                    	            return qs;
+                    	        }
                     	    });
                 	    }
                 	    function repondreQuestion(){
-            	            var nbr_de_questions_a_poser = $('.table_muette td').length;
+            	            var nbr_de_questions_a_poser = 20;
                         	        
-                    	    $('.table_muette').on('click', function(e){
+                    	    $('#pratiques_titre').on('click', function(){
                     	        if(question_posee=='')
                     	        {   guiderClient(); }
                     	        else
                     	        {   
-                    	            var td = $(e.target);
-                        	        reponse_montree = td.html();
-            	                    point = (question_posee==reponse_montree)?1:0;
+                        	        reponse_tapee = $(this).val();
+            	                    point = (question_posee == reponse_tapee)?1:0;
     
-                        	        if(question_posee!=reponse_montree){ barrerLaFausseReponse(td); clignotage(question_posee); }
-                        	        if(question_posee==reponse_montree){ td.addClass('ombrage'); }
+                        	        if(question_posee != reponse_tapee){ barrerLaFausseReponse(td); clignotage(question_posee); }
+                        	        if(question_posee == reponse_tapee){ td.addClass('ombrage'); }
                         	        actualiserLessonProgressBar();
                         	        setTimeout(function(){ td.removeClass('ombrage'); },1000);
                         	        
@@ -712,7 +780,7 @@ $('document').ready(function() {
                                     function actualiserLessonProgressBar(){
                                         var progress_unity = $('.lesson_progress_bar').width()/nbr_de_questions_a_poser;
                                        
-                                        if(question_posee!=reponse_montree){ 
+                                        if(question_posee!=reponse_tapee){ 
                                             $('.lesson_progress_question_bar').css('width','+='+progress_unity+'px');
                                         }else{ 
                                             $('.lesson_progress_question_bar, .lesson_progress_bonne_reponse_bar').css('width','+='+progress_unity+'px');

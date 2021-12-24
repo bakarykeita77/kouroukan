@@ -32,7 +32,7 @@
     text-align: center;
 }
 .actif { width: 25%; margin: 1px; height: 16px; }
-#pratiques  {
+#pratiques {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -40,10 +40,23 @@
     
     height: 90%;
 }
+#pratiques_image_container {
+    position: relative;
+    margin-top: 16px;
+    width: 0;
+    height: 0;
+}
+#pratiques_image {
+    width: 100%;
+    font-size: 96px;
+    font-weight: bold;
+    color: #ddd;
+}
 #pratiques_input_container {
-    border: 1px solid transparent;
-    border-top-color: #ccc;
     position: absolute;
+    border: 1px solid transparent;
+    background-color: #fff;
+    border-top-color: #ccc;
     bottom: 16px;
     padding: 4px 0;
     height: 32px;
@@ -58,15 +71,10 @@
     right: 5%;
     height: 32px;
     line-height: 32px;
+    text-align: center;
     margin: 0;
     padding: 0 16px;
     font-size: 16px;
     font-weight: bold;
     box-sizing: border-box;
-}
-#pratiques_image {
-    width: 100%;
-    font-size: 96px;
-    font-weight: bold;
-    color: #ddd;
 }

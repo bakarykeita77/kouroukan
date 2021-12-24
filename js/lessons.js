@@ -760,16 +760,30 @@ $('document').ready(function() {
             	            var nbr_de_questions_a_poser = 20;
                         	        
                     	    $('#pratiques_input').on('click', function(){
-                    	        if(question_posee=='')
-                    	        {   guiderClient(); }
-                    	        else
-                    	        {   
+                    	       
                         	        reponse_tapee = $(this).val();
-            	                    point = (question_posee == reponse_tapee)?1:0;
+            	                    //point = (question_posee == reponse_tapee)?1:0;
+            	                    imageMonoSyllabes();
+            	                    function imageMonoSyllabes() {
+            	                        
+            	                        chargerImageMonoSyllabes();
+            	                        afficherImageMonoSyllabes();
+            	                        
+            	                        function chargerImageMonoSyllabes() {
+            	                            $('#pratiques_image').attr('src','http://localhost:8080/kouroukan/image/mono_syllabes/'+reponse_tapee+'.jpg');
+            	                        }
+            	                        function afficherImageMonoSyllabes() {
+            	                           $('#pratiques_image_container').css({'width':0, 'height':0});
+            	                            
+            	                            setTimeout(function() {
+            	                                $('#pratiques_image_container').animate({'width':'100%', 'height':'100%'},300);
+            	                            },50);
+            	                        }
+            	                    }
     
                         	        if(question_posee != reponse_tapee){ barrerLaFausseReponse(td); clignotage(question_posee); }
                         	        if(question_posee == reponse_tapee){ td.addClass('ombrage'); }
-                        	        actualiserLessonProgressBar();
+                        	        //actualiserLessonProgressBar();
                         	        setTimeout(function(){ td.removeClass('ombrage'); },1000);
                         	        
                         	        question_posee = '';    /* Vider la variable question_posee. */
@@ -786,7 +800,7 @@ $('document').ready(function() {
                                             $('.lesson_progress_question_bar, .lesson_progress_bonne_reponse_bar').css('width','+='+progress_unity+'px');
                                         }
                                     }
-                    	        }
+                    	        
                     	    });
                 	    }
             	    }

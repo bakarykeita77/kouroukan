@@ -41,12 +41,6 @@
     padding: 0; 
 }
 #nivo { margin: 0; }
-.centrer_parfait{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
 #teste_corps{
     position: relative;
     top: 0;

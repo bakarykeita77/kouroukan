@@ -114,6 +114,12 @@
     vertical-align: middle;
 }
 .centercell{ margin: auto; }
+.centrer_parfait{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .clavier_container{
     position: absolute;
     width: 100%;

@@ -26,7 +26,7 @@ if(isset($_SESSION['connected'])){
     <script src="http://localhost:8080/kouroukan/js/html2canvas.js"></script>
     <script src="http://localhost:8080/kouroukan/js/icones.js"></script>
     <script src="http://localhost:8080/kouroukan/js/caracteres.js"></script>
-    <script src="http://localhost:8080/kouroukan/js/monosyllabes.js"></script>
+    <script src="http://localhost:8080/kouroukan/js/class.js"></script>
     
 </head>
 <body style="direction:rtl">
@@ -161,8 +161,10 @@ if(isset($_SESSION['connected'])){
     <script src="http://localhost:8080/kouroukan/js/syllabes.js"></script>
     <script src="http://localhost:8080/kouroukan/js/tons.js"></script>
     <script src="http://localhost:8080/kouroukan/js/chiffres.js"></script>
+    <script src="http://localhost:8080/kouroukan/js/apprentissage.js"></script>
+    <script src="http://localhost:8080/kouroukan/js/exercises.js"></script>
+    <script src="http://localhost:8080/kouroukan/js/pratiques.js"></script>
     <script src="http://localhost:8080/kouroukan/js/evaluations.js"></script>
-    <script src="http://localhost:8080/kouroukan/js/class.js"></script>
 </body>
 </html>
 <?php

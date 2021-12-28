@@ -328,7 +328,7 @@ $('document').ready(function() {
         	        case 'apprentissage':apprentissage(); break;
                     case 'exercices'    :exercices();     break;
                     case 'pratiques'    :pratiques();     break;
-                    case 'evaluation'   :evaluations();   break;
+                    case 'evaluation'   :evaluations();   break;  // Cette fonction est dans evaluation.js
         	    }
         	  
             	function apprentissage(){
@@ -361,8 +361,8 @@ $('document').ready(function() {
                 	    $('#parametres td').on('click', function(){ 
                             
                 	        actualiserCochage(); 
+                	        
                 	        lettres = voyelles_cochees.concat(consonnes_cochees,tedos_coches);
-                      
                 	        syllabes = syllab();
                 	        syllabes_tonifies = tonification();
                 	        

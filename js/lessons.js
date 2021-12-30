@@ -23,7 +23,7 @@ $('document').ready(function() {
     
     var resume_des_etudes = [];
         
-	var phases_actuelles, phases_actuelles_etudiees, phase_precedante, phase_active;
+	var phases_actuelles, phases_actuelles_etudiees, phase_precedante;
 	var index_phase_actuelle, index_phase_precedante, index_phase_active;
 	var avancer_btn = '';
 
@@ -178,13 +178,13 @@ $('document').ready(function() {
                  
                 etape_active = etapes_non_vide[etapes_non_vide.length-1];
                      
-                for (var i = 0; i < etape_active.length; i++) {
-                    if(etape_active[i][1] !== undefined) {
-                        phases_etudiees[phases_etudiees.length] = etape_active[i][1];
+                for (var j = 0; j < etape_active.length; j++) {
+                    if(etape_active[j][1] !== undefined) {
+                        phases_etudiees[phases_etudiees.length] = etape_active[j][1];
                     }
                 }
             }
-            
+          
             if(niveau_en_coure > index_matiere_clickee) {
                 for (var i = 0; i < liste_de_phases.length; i++) {
                     phases_etudiees[phases_etudiees.length] = liste_de_phases[i][1];
@@ -482,7 +482,7 @@ $('document').ready(function() {
             	    var compteur_de_question = 1;
             	    var quantite_de_question = quantiteDeQuestion();
             	    var question_rang = '߭';
-                    
+            alert( quantite_de_question );        
             	    chargerExercices();
             	    afficherLessonBarrProgress();
             	    questionReponse();
@@ -643,7 +643,7 @@ $('document').ready(function() {
                         $('#lesson_entete').html( pratiquesEnteteHTML() );
                 	    $('#lesson_corps').html( lesson_courante ); 
                 	    
-                	     function pratiquesEnteteHTML() {
+                	    function pratiquesEnteteHTML() {
                 	         var pratiques_entete_html = "<div class='play_icon_container' id='pratiques_player' style='width:auto'>";
                     	        pratiques_entete_html += "<span class='play_label'>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ </span>";
                     	        pratiques_entete_html += "<span class='qtite_question'>"+quantite_de_question+"</span> : <span class='ordre_question'>"+parseIntNko(compteur_de_question)+question_rang+" </span>";
@@ -806,6 +806,49 @@ $('document').ready(function() {
             	    }
                 }
     	    }
+    	 coursEnteteHTML();   
+    	    function coursEnteteHTML() {
+    	        var ceh = '';
+    	       
+    	        if(course_id=='apprentissage'){ ceh = apprentissageEnteteHTML(); }
+    	        if(course_id=='exercices'){ ceh = exercicesEnteteHTML(); }
+    	        if(course_id=='pratiques'){ ceh = pratiquesEnteteHTML(); }
+    	  alert( quantite_de_question );       
+    	        return ceh;
+    	        
+    	        
+    	        function apprentissageEnteteHTML() {
+    	            
+                    var apprentissage_entete_html = "<div class='play_btn_container'><span class='play_label'>ߝߐߟߊ߲</span><span class='play_icon'>"+play_icon+"</span></div>";
+                    apprentissage_entete_html += "<div class='stop_btn_container'><span class='stop_label'>ߘߊ߬ߘߋ߬ߟߊ߲ </span> <span class='stop_icon'>"+stop_icon+"</span></div>";
+                    apprentissage_entete_html += "<div class='parametre_btn_container'><span class='parametre_label'>ߛߏ߯ߙߏߟߊ߲</span>  <span class='parametre_icon'>"+parametre_icon+"</span></div>";
+                            
+                    return apprentissage_entete_html;
+    	        }
+    	        function exercicesEnteteHTML() {
+    	            
+                    var exercices_entete_html = "<div class='play_icon_container' id='exercices_player' style='width:auto'>";
+                        exercices_entete_html += "<span class='play_label'>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ </span>";
+                    	exercices_entete_html += "<span class='qtite_question'>"+quantite_de_question+"</span> : <span class='ordre_question'>"+parseIntNko(compteur_de_question)+question_rang+" </span>";
+                    	exercices_entete_html += "<span class='ecouter_question'> ߟߊߡߍ߲߫</span><span class='play_icon'>"+play_icon+"</span>";
+                    exercices_entete_html += "</div>";
+                    exercices_entete_html += "<div class='oreille_icon_container'><span class='reecoute_label'>ߊ߬ ߟߊߡߍ߲߫ ߕߎ߯ߣߌ߫  </span> <span class='oreille_icon'>"+oreille_icon+"</span></div>";
+                    
+                    return exercices_entete_html;
+    	        }
+    	        function pratiquesEnteteHTML() {
+    	            
+                    var pratiques_entete_html = "<div class='play_icon_container' id='pratiques_player' style='width:auto'>";
+                    	pratiques_entete_html += "<span class='play_label'>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ </span>";
+                    	pratiques_entete_html += "<span class='qtite_question'>"+quantite_de_question+"</span> : <span class='ordre_question'>"+parseIntNko(compteur_de_question)+question_rang+" </span>";
+                        pratiques_entete_html += "<span class='ecouter_question'> ߟߊߡߍ߲߫</span><span class='play_icon'>"+play_icon+"</span>";
+                    pratiques_entete_html += "</div>";
+                    pratiques_entete_html += "<div class='oreille_icon_container'><span class='reecoute_label'>ߊ߬ ߟߊߡߍ߲߫ ߕߎ߯ߣߌ߫  </span> <span class='oreille_icon'>"+oreille_icon+"</span></div>";
+                    
+                    return pratiques_entete_html;
+    	        }
+    	        
+    	    }
             function lessonCourante() {
          
                 if(phase_id=='alphabet_apprentissage'){ lesson_courante = alphabetApprentissageHTML(); } //Cette fonction provient de alphabet.js 
@@ -871,4 +914,5 @@ $('document').ready(function() {
            
         return resume; 
     }
+
 });

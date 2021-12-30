@@ -56,7 +56,7 @@ if(isset($_SESSION['connected'])){
       <!-------------------------------------------------------------------->
         <span class="fermeture" id="course_fermeture">&times;</span>
       <!-------------------------------------------------------------------->
-        <div id="parametres">   <!--Les éléments de paramètres sont chargés dans js/parametres.js-->
+	    <div id="parametres">   <!--Les éléments de paramètres sont chargés dans js/parametres.js-->
             <div id='lesson_parametres_glissiere'>
                 <table id='table1'>
                     <tr id='tr11'>
@@ -169,4 +169,5 @@ if(isset($_SESSION['connected'])){
 </html>
 <?php
    }else { header("location:programmes.php"); }
+?>
 ?>

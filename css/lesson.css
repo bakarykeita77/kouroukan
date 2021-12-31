@@ -1,4 +1,4 @@
 
-#vues {
-    border: 1px solid red;
+#lesson_corps {
+    height: calc(100vh - 192px);
 }

@@ -19,6 +19,7 @@ if(isset($_SESSION['connected'])){
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/lesson.css"/>
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/syllabes.css"/>
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/parametres.css"/>
+	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/pratiques.css"/>
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/evaluation.css"/>
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/class.css"/>
 
@@ -44,6 +45,7 @@ if(isset($_SESSION['connected'])){
                     <p id='niveau_max_container'    ><?= $niveau_max; ?></p>
                     <p id='resume_brut_des_etudes_container' ><?= $resume_brut_des_etudes; ?></p>
                 </div>
+                
                 <h4>ߘߋ߰ߟߌ ߞߛߊߞߊ : <span class="niveau_courant"><?= $chiffres[$niveau+1]; ?><span class='rang'></span></h4>
                 <h2 class="lesson_title" id="<?= $matiere_id ?>"> <?= $matiere_nom; ?> ߥߟߊ߬ߘߊ  </h2>
                 <div class="phases" align="center"></div>
@@ -79,7 +81,7 @@ if(isset($_SESSION['connected'])){
             </div>
         </div>
       <!-------------------------------------------------------------------->
-        <div class="course" id="lesson">
+        <div class="course" id="lesson" align="center">
             <div class="course_head" id="lesson_entete"></div>
             <div class="course_body" id="lesson_corps"></div>
             <div class='lesson_progress_bar' style="position:absolute; bottom:0; box-shadow:0 0 4px #999; border:1px solid #ddd; border-radius:6px; height:8px; width:calc(100% - 2px)">
@@ -93,6 +95,45 @@ if(isset($_SESSION['connected'])){
                     <input type='submit' name='submit_course' id='submit_course'/>
                 </form>
             </div>
+        </div>
+      <!-------------------------------------------------------------------->
+        <div class="course" id="pratique" align="center">
+            
+            <div id="pratiques_programme">
+                <span>ߜߋ߲߬ ߁ ߡߊ</span>
+                <span>ߜߋ߲߬ ߂ ߡߊ</span>
+                <span>ߜߋ߲߬ ߃ ߡߊ</span>
+                <span>ߜߋ߲߬ ߄ ߡߊ</span>
+            </div> 
+            <div class="course_head" id="pratiques_entete">
+
+                <div class="question_btn">
+                    <span class="question_label"></span>
+                    <span class="question_total"></span> :
+                    <span class="question_ordre"></span>
+                    <span class="question_action"></span>
+                    <span class="question_icon"></span>
+                </div>
+
+                <div class="repetition_btn">
+                    <span class="repetition_label">ߊ߬ ߟߊߡߍ߲߫ ߕߎ߯ߣߌ߫</span>
+                    <span class="repetition_icon"></span>
+                </div>
+
+                <div class="correction_btn">
+                    <span class="correction_label">ߏ߬ ߛߊߞߍ߫</span>
+                    <span class="correction_icon"></span>
+                </div>
+            </div>
+           
+            <div class="course_body" id="pratiques_corps">
+                <div id="pratiques_images_container" align="center"><img src="" id="pratiques_image" alt="?"></div>
+                <div id="pratiques_reponse_container">
+                    <table id="pratiques_reponse"></table>
+                </div>
+            </div>
+            <div class='progress_bar'><span class='progress_question_bar'></span><span class='progress_bonne_reponse_bar'></span></div>
+            <div class="clavier_container" id="clavier_pratique"><?php include "clavier.php"; ?></div>
         </div>
       <!-------------------------------------------------------------------->
         <div class="course" id="evaluation" align="center">
@@ -142,7 +183,6 @@ if(isset($_SESSION['connected'])){
                     </div>
                 </div>
             </div>
-
             <div class='progress_bar'><span class='progress_question_bar'></span><span class='progress_bonne_reponse_bar'></span></div>
 
             <div class="clavier_container"><?php include "clavier.php"; ?></div>

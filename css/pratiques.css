@@ -1,0 +1,13 @@
+
+#pratiques_programme {
+    margin: 0;
+}
+#pratiques_corps {
+    
+}
+#pratiques_images_container, #pratiques_reponse_container {
+    border-radius: 8px;
+}
+#pratiques_reponse_container {
+    border: 1px solid #ccc;
+}

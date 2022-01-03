@@ -283,7 +283,7 @@ $('document').ready(function() {
     	$('.phases ul li').on('click', function(){
        
             var syllabes_tonifies = tonification();  
-            var lesson_questions = lessonQuestions();
+            var questions_a_poser = questions();
             var chiffre = '';
           
     	    var phase_id = $(this).attr('id');
@@ -293,31 +293,34 @@ $('document').ready(function() {
             var parametres_btn = $('.parametre_btn_container');
             var parametres = $('#parametres');
             var lesson = $('#lesson');
+            var pratiques = $('#pratique');
             var evaluation = $('#evaluation');
             var parametres_html = parametres.html();
-         
+        
          
     	    affichageDeCours();
     	    dispenserCours();
     	 
 
             function affichageDeCours(){
-                if(course_id=='apprentissage' || course_id=='exercices' || course_id=='pratiques'){ afficherLesson(); }
+            	$('.course_container').css({'display':'block'});
+                $('.course').css('display','none');
+                
+                if(course_id=='apprentissage' || course_id=='exercices' ){ afficherLesson(); }
+                if(course_id=='pratiques'){ afficherPratiques(); }
                 if(course_id=='evaluation'){ afficherEvaluation(); }
             	
             	function afficherLesson(){
-                    evaluation.css('display','none');
-                	    
-            	    $('.course_container').css({'display':'block'});
-                    lesson.css('display','block');
-                    lesson.css({'transform':'scale(0.75)', 'opacity':0});
+                    lesson.css({'display':'block', 'transform':'scale(0.75)', 'opacity':0});
                     setTimeout(function() { lesson.css({'transform':'scale(1)'});}, 5);
                     setTimeout(function() { lesson.css({'opacity':'1'});}, 5);
             	}
+            	function afficherPratiques(){
+                    pratiques.css({'display':'block', 'transform':'scale(0.75)', 'opacity':0});
+                    setTimeout(function() { pratiques.css({'transform':'scale(1)'});}, 5);
+                    setTimeout(function() { pratiques.css({'opacity':'1'});}, 5);
+            	}
             	function afficherEvaluation(){
-                    lesson.css('display','none');
-               
-            	    $('.course_container').css({'display':'block'});
                     evaluation.css({'display':'block', 'transform':'scale(0.75)', 'opacity':0});
                     setTimeout(function() { evaluation.css({'transform':'scale(1)'});}, 5);
                     setTimeout(function() { evaluation.css({'opacity':'1'});}, 5);
@@ -482,12 +485,12 @@ $('document').ready(function() {
             	    var compteur_de_question = 1;
             	    var quantite_de_question = quantiteDeQuestion();
             	    var question_rang = '߭';
-            alert( quantite_de_question );        
+                
             	    chargerExercices();
             	    afficherLessonBarrProgress();
             	    questionReponse();
             	    stockerExercice();
-            	   
+           	   
                     function quantiteDeQuestion(){
                         if(niveau==1){ var nq = parseIntNko(lettres.length); return nq; }
                         if(niveau==2){ var nq = parseIntNko(syllabes.length); return nq; }
@@ -528,7 +531,7 @@ $('document').ready(function() {
                     	        question_rang = '߲';
                     	        $('.ecouter_question').html(' ߠߊߡߍ߲߫');
                     	        $('.ordre_question').html(parseIntNko(compteur_de_question)+question_rang);
-                    	        question_posee = lesson_questions[i];
+                    	        question_posee = questions_a_poser[i];
 
                     	        $(this).css('display','none');
                     	        $('.oreille_icon_container').css('display','block');
@@ -589,8 +592,8 @@ $('document').ready(function() {
             	        var course_form = $('#course_form');
             	        var nbr_max_exercice = '';
             	        
-            	        for(var i=0;i<lesson_questions.length;i++){
-            	            var q = lesson_questions[i];
+            	        for(var i=0;i<questions_a_poser.length;i++){
+            	            var q = questions_a_poser[i];
             	            var r,p = '';
             	            
             	            exercices_table[exercices_table.length] = [q,r,p];
@@ -627,36 +630,13 @@ $('document').ready(function() {
                 function pratiques() {
                     
             	    var compteur_de_question = 1;
-            	    var quantite_de_question = parseIntNko( 20 );
+            	    var quantite_de_question = parseIntNko(20);
             	    var question_rang = '߭';
                     
-                    
-            	    chargerPratiques();
-            	    stylesPratiquesProgramme();
-            	    //afficherLessonBarrProgress();
-            	    questionReponse();
+                    afficherProgressBar();
+            	   // questionReponse();
             	    //stockerPratiques();
             	    
-            	    
-            	    function chargerPratiques() {
-            	    
-                        $('#lesson_entete').html( pratiquesEnteteHTML() );
-                	    $('#lesson_corps').html( lesson_courante ); 
-                	    
-                	    function pratiquesEnteteHTML() {
-                	         var pratiques_entete_html = "<div class='play_icon_container' id='pratiques_player' style='width:auto'>";
-                    	        pratiques_entete_html += "<span class='play_label'>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ </span>";
-                    	        pratiques_entete_html += "<span class='qtite_question'>"+quantite_de_question+"</span> : <span class='ordre_question'>"+parseIntNko(compteur_de_question)+question_rang+" </span>";
-                    	        pratiques_entete_html += "<span class='ecouter_question'> ߟߊߡߍ߲߫</span><span class='play_icon'>"+play_icon+"</span>";
-                    	    pratiques_entete_html += "</div>";
-                    	    pratiques_entete_html += "<div class='oreille_icon_container'><span class='reecoute_label'>ߊ߬ ߟߊߡߍ߲߫ ߕߎ߯ߣߌ߫  </span> <span class='oreille_icon'>"+oreille_icon+"</span></div>";
-                    
-                            return pratiques_entete_html;
-                	     }  
-            	    }
-            	    function stylesPratiquesProgramme() {
-            	        $('#pratiques_programme span:nth-child(1)').addClass('actif');
-            	    }
             	    function questionReponse() {
                    
                 	    var i=0;
@@ -804,9 +784,11 @@ $('document').ready(function() {
                     	    });
                 	    }
             	    }
-                }
+                    function afficherProgressBar(){
+        	            $('.progress_bar').css({'opacity':1});
+        	        }
+                } 
     	    }
-    	 coursEnteteHTML();   
     	    function coursEnteteHTML() {
     	        var ceh = '';
     	       
@@ -868,7 +850,7 @@ $('document').ready(function() {
                 return lesson_courante;
                 
             }
-            function lessonQuestions() {
+            function questions() {
                 var lq = '';
                 if(niveau==1){ lq = mix1D(lettres); }
                 if(niveau==2){ lq = mix1D(syllabes); }

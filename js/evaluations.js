@@ -1,5 +1,5 @@
 
-                function evaluations(){
+                function evaluations() {
                             
                     var syllabes = syllab();
                     var syllabes_tonifies = tonification();
@@ -26,7 +26,7 @@
                     
                     
                    
-                    evaluationCorpsStyle();
+                   // evaluationCorpsStyle();
                     initialisationDEvaluationEntete();
                     afficherProgressBar();
                     poserQuestion();

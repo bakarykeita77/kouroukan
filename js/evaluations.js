@@ -95,7 +95,7 @@
                     function taperReponse(){
                         $('#clavier_nko td').on('click', function(){
                             
-                            if(question_posee=='')
+                            if(question_a_poser=='')
                             {   guiderClient(); }
                             else
                             {
@@ -105,7 +105,7 @@
                                 $('#reponse').html(reponse_tapee.join(''));
                                 afficherCorrectionButton();
                             }
-                            
+                      alert( reponse_tapee );      
                             function afficherCorrectionButton(){
                                 $('.question_btn').css('display','none');
                                 $('.repetition_btn').css('display','none');

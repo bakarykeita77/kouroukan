@@ -701,7 +701,7 @@ $('document').ready(function() {
                     	            $('#audio').attr({'src':'http://localhost:8080/kouroukan/son/mp3/'+question_a_poser+'.mp3', 'autoplay':'on'});
                     	        }
                     	        function repeteQuestion(){
-                    	            $('.repetition_btn').on('click', function(){ lireQuestion(); });
+                    	            $('.repetition_btn').on('click', function(){ $('#audio').attr({'src':'http://localhost:8080/kouroukan/son/mp3/'+question_a_poser+'.mp3', 'autoplay':'on'}); });
                     	        }
                     	        
                     	        function monoSyllabesTotal() {
@@ -782,42 +782,23 @@ $('document').ready(function() {
             	            
             	            $('.correction_btn').on('click',  function() {
             	                
-            	                   
+            	                
+            	                reponse_tapee = reponse_tapee.join('');
             	                point = (question_a_poser == reponse_tapee)?1:0;
             	                  
-            	                imageMonoSyllabes();
-            	                    function imageMonoSyllabes() {
-            	                        
-            	                        chargerImageMonoSyllabes();
-            	                        afficherImageMonoSyllabes();
-            	                        
-            	                        function chargerImageMonoSyllabes() {
-            	                            $('#pratiques_image').attr('src','http://localhost:8080/kouroukan/image/mono_syllabes/'+reponse_tapee+'.jpg');
-            	                        }
-            	                        function afficherImageMonoSyllabes() {
-            	                           $('#pratiques_image_container').css({'width':0, 'height':0});
-            	                            
-            	                            setTimeout(function() {
-            	                                $('#pratiques_image_container').animate({'width':'100%', 'height':'100%'},300);
-            	                            },50);
-            	                        }
-            	                    }
-    
-                        	    //if(question_posee != reponse_tapee){ barrerLaFausseReponse(td); clignotage(question_posee); }
-                            	if(question_a_poser == reponse_tapee){
-    
-                            	    afficherImage();
-                            	    question_a_poser = '';    /* Vider la variable question_posee. */
-                            	    
-                            	    
-                            	    function afficherImage() {
-                            	        
-                            	    }    
-                            	}
-                            	afficherQuestionBouton();
-                            	actualiserLessonProgressBar
-                            	question_posee();
+                            	if(question_a_poser == reponse_tapee){ afficherImage(); }
                             	
+                            	afficherQuestionBouton();
+                            	actualiserLessonProgressBar();
+                            	    
+                            	    
+                            	function afficherImage() {
+            	                    $('#pratiques_image').attr('src','http://localhost:8080/kouroukan/image/mono_syllabes/'+reponse_tapee+'.jpg');
+                            	    $('#pratiques_image_container').css({'width':0, 'height':0});
+            	                    setTimeout(function() {
+            	                        $('#pratiques_image_container').animate({'width':'100%', 'height':'100%'},300);
+            	                    },50);
+                            	}    
                             	function afficherQuestionBouton() {
                 	                $('.repetition_btn').css('display','none');
                 	                $('.correction_btn').css('display','none');
@@ -835,10 +816,11 @@ $('document').ready(function() {
                                 }
                             }
                 	    }
- ď                    function afficherProgressBar(){
+            	    }
+                    function afficherProgressBar(){
         	            $('.progress_bar').css({'opacity':1});
         	        }
-                } yup 
+                } 
     	    }
     	    function coursEnteteHTML() {
     	        var ceh = '';

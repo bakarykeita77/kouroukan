@@ -8,6 +8,9 @@
 #pratiques_images_container, #pratiques_reponse_container {
     border-radius: 8px;
 }
+#pratiques_images_container img {
+    height: 100%;
+}
 #pratiques_reponse_container {
     border: 1px solid #ccc;
 }

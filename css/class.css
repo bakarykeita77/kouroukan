@@ -165,7 +165,7 @@
 }
 .course_body{
     margin: 16px 0 4px 0;
-    height: calc(50vh - 38px);
+    height: calc(55vh - 38px);
     overflow: auto;
 }
 .course_container {

@@ -105,7 +105,7 @@ if(isset($_SESSION['connected'])){
                 <span>ߜߋ߲߬ ߃ ߡߊ</span>
                 <span>ߜߋ߲߬ ߄ ߡߊ</span>
             </div> 
-            <div class="course_head" id="pratiques_entete">
+            <div class="course_head" id="pratiques_entete" style="display:none">
 
                 <div class="question_btn">
                     <span class="question_label">ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</span>
@@ -128,7 +128,12 @@ if(isset($_SESSION['connected'])){
            
             <div class="course_body" id="pratiques_corps">
                 <div id="pratiques_images_container" align="center"><img src="" id="pratiques_image" alt="?"></div>
-                <div id="pratiques_reponse_container"></div>
+                <div id="pratiques_reponse_container">
+                    <table id="table_1" border=1 width="100%"></table>
+                </div>
+                <div>
+                    <table id="table_2" border=1 width="100%"><tr> <td>xxx</td><td></td> </tr></table>
+                </div>
             </div>
             <div class='progress_bar'><span class='progress_question_bar'></span><span class='progress_bonne_reponse_bar'></span></div>
             <div class="clavier_container" id="clavier_pratique"><?php include "clavier.php"; ?></div>

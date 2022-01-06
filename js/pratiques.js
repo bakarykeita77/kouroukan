@@ -1,7 +1,6 @@
                 
-var pratiques_corps_height = $('#pratiques_corps').height();
-var pratiques_images_container_height = pratiques_corps_height*2/3;
-var pratiques_reponse_container_height = pratiques_corps_height*1/3;
+var pratiques_programme_height = $('#pratiques_programme').height();
+var pratiques_corps = $('#pratiques_corps');
 
 
 $('#pratiques_images_container').css('height', pratiques_images_container_height+'px');

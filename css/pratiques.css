@@ -1,16 +1,39 @@
 
 #pratiques_programme {
     margin: 0;
+    height: 24px;
 }
 #pratiques_corps {
-    
+    border: 1px solid red;
+    margin: 0;
 }
 #pratiques_images_container, #pratiques_reponse_container {
     border-radius: 8px;
 }
 #pratiques_images_container img {
+    position: relative;
     height: 100%;
+    width: auto;
 }
 #pratiques_reponse_container {
     border: 1px solid #ccc;
+    text-align: right;
+}
+#pratiques_reponse_container {
+    position: relative;
+    height: 96px;
+    overflow: auto;
+}
+#pratiques_reponse_container #table_1 {
+    position: absolute;
+    bottom: 0;
+}
+#table_1 tr {
+    height: 24px;
+}
+#table_2 {
+    position: relative;
+}
+#table_2 td:last-child {
+    width: 60%;
 }

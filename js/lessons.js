@@ -294,10 +294,12 @@ $('document').ready(function() {
             var parametres = $('#parametres');
             var lesson = $('#lesson');
             var pratiques = $('#pratique');
+            var pratiques_entete_html = $('#pratiques_entete').html();
             var evaluation = $('#evaluation');
             var parametres_html = parametres.html();
-        
-         
+
+    	    
+    	    
     	    affichageDeCours();
     	    dispenserCours();
     	 
@@ -633,15 +635,17 @@ $('document').ready(function() {
             	    var quantite_de_question = parseIntNko(20);
             	    var question_rang = '߭';
                     
-                    afficherProgressBar();
+                    $('#table_2 tr td:last-child').html(pratiques_entete_html);
             	    questionReponse();
             	    //stockerPratiques();
+                    afficherProgressBar();
+            	    
             	    
             	    function questionReponse() {
                    
                     	var pratiques_syllabes_active_index = $('.actif').index();
                     	var questions='', question_a_poser='', reponse_tapee=[], point='';
-                     	
+                        var table = $('#pratiques_reponse_container table tbody').html();
                      	
                      	affichageParDefautDesBoutonsDEntete();
                 	    poserQuestion();
@@ -666,8 +670,8 @@ $('document').ready(function() {
                     	        var bi_syllabes     = biSyllabesTotal();
                     	        var tri_syllabes    = triSyllabesTotal();
                     	        var quadri_syllabes = quadriSyllabesTotal();
+                    	        var tr = $('#pratiques_reponse_container table tr');
                     	        
-                        	        
                     	        questions = pratiquesQuestions();
                     	        question_a_poser = questions[compteur_de_question-1];
                     	        lireQuestion();
@@ -767,8 +771,8 @@ $('document').ready(function() {
                                     var caractere = $(this).html();
                                 
                                     reponse_tapee[reponse_tapee.length] = caractere;
-                                    $('#pratiques_reponse_container').html(reponse_tapee.join(''));
                                     afficherCorrectionButton();
+                                    $('#table_2 td:first-child').html(reponse_tapee);
                                     
                                     function afficherCorrectionButton() {
                 	                    $('.repetition_btn').css('display','none');
@@ -789,7 +793,10 @@ $('document').ready(function() {
                             	if(question_a_poser == reponse_tapee){ afficherImage(); }
                             	
                             	afficherQuestionBouton();
-                            	actualiserLessonProgressBar();
+                            	table += "<tr> <td>"+question_a_poser+"</td><td>"+reponse_tapee+"</td><td>"+parseIntNko(point)+"</td> </tr>";
+                                $('#pratiques_reponse_container #table_1').html(table);
+                            //	actualiserLessonProgressBar();
+                            	effacerReponse();
                             	    
                             	    
                             	function afficherImage() {
@@ -803,6 +810,10 @@ $('document').ready(function() {
                 	                $('.repetition_btn').css('display','none');
                 	                $('.correction_btn').css('display','none');
                 	                $('.question_btn').css('display','block');
+                            	}
+                            	function effacerReponse() {
+                            	    reponse_tapee = reponse_tapee.split(',');
+                            	    reponse_tapee.splice(0,reponse_tapee.length);
                             	}
                         	}); 
                         	
@@ -851,18 +862,7 @@ $('document').ready(function() {
                     
                     return exercices_entete_html;
     	        }
-    	        function pratiquesEnteteHTML() {
-    	            
-                    var pratiques_entete_html = "<div class='play_icon_container' id='pratiques_player' style='width:auto'>";
-                    	pratiques_entete_html += "<span class='play_label'>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ </span>";
-                    	pratiques_entete_html += "<span class='qtite_question'>"+quantite_de_question+"</span> : <span class='ordre_question'>"+parseIntNko(compteur_de_question)+question_rang+" </span>";
-                        pratiques_entete_html += "<span class='ecouter_question'> ߟߊߡߍ߲߫</span><span class='play_icon'>"+play_icon+"</span>";
-                    pratiques_entete_html += "</div>";
-                    pratiques_entete_html += "<div class='oreille_icon_container'><span class='reecoute_label'>ߊ߬ ߟߊߡߍ߲߫ ߕߎ߯ߣߌ߫  </span> <span class='oreille_icon'>"+oreille_icon+"</span></div>";
-                    
-                    return pratiques_entete_html;
-    	        }
-    	        
+
     	    }
             function lessonCourante() {
          

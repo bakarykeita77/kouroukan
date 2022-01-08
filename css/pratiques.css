@@ -4,11 +4,27 @@
     height: 24px;
 }
 #pratiques_corps {
-    border: 1px solid red;
     margin: 0;
 }
-#pratiques_images_container, #pratiques_reponse_container {
-    border-radius: 8px;
+#pratique_guide {
+    border: 1px solid red;
+    padding: 4px;
+    margin: 4px;
+}
+#bulles_container {
+    border: 1px solid blue;
+}
+#pratique_guide span {
+    display: inline-block;
+    height: 48px;
+    width: 48px;
+    border: 1px solid blue;
+    border-radius: 48px;
+}
+#pratiques_images_container {
+    position: relative;
+    height: 164px;
+    transition: transform 0.4s;
 }
 #pratiques_images_container img {
     position: relative;
@@ -16,24 +32,36 @@
     width: auto;
 }
 #pratiques_reponse_container {
-    border: 1px solid #ccc;
-    text-align: right;
-}
-#pratiques_reponse_container {
     position: relative;
-    height: 96px;
+    border: 1px solid transparent;
+    border-top-color: #bbb;
+    border-bottom-color: #bbb;
+    margin: 4px 0;
+    height: 84px;
+    text-align: right;
+    box-sizing: border-box;
     overflow: auto;
 }
-#pratiques_reponse_container #table_1 {
-    position: absolute;
-    bottom: 0;
-}
-#table_1 tr {
-    height: 24px;
-}
-#table_2 {
+#table_1_cadre {
     position: relative;
+    height: 72px;
+    margin: 4px 0;
+    padding: 0;
+    overflow: auto;
 }
-#table_2 td:last-child {
-    width: 60%;
+#table_1 {
+    position: relative;
+    border-collapse: collapse;
+    width: 90%;
+    margin: 0 auto;
+    padding: 0;
+}
+#table_1 tr { 
+    height: 24px;
+    margin: 0;
+}
+#table_1 td {
+    border: 1px solid #fff;
+    background-color: #eee;
+    padding: 0 16px;
 }

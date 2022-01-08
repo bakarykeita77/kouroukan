@@ -635,24 +635,30 @@ $('document').ready(function() {
             	    var quantite_de_question = parseIntNko(20);
             	    var question_rang = '߭';
                     
-                    $('#table_2 tr td:last-child').html(pratiques_entete_html);
             	    questionReponse();
             	    //stockerPratiques();
                     afficherProgressBar();
             	    
             	    
             	    function questionReponse() {
-                   
+            	        
+                    	var mono_syllabes   = monoSyllabesTotal();
+                    	var bi_syllabes     = biSyllabesTotal();
+                    	var tri_syllabes    = triSyllabesTotal();
+                    	var quadri_syllabes = quadriSyllabesTotal();                   
+                    
                     	var pratiques_syllabes_active_index = $('.actif').index();
                     	var questions='', question_a_poser='', reponse_tapee=[], point='';
                         var table = $('#pratiques_reponse_container table tbody').html();
                      	
+                     	
                      	affichageParDefautDesBoutonsDEntete();
+                    	questions = pratiquesQuestions();
                 	    poserQuestion();
                 	    repondreQuestion();
                 	    correction();
-                	    
 
+           
                 	    function affichageParDefautDesBoutonsDEntete() {
                 	        
                 	        $('.repetition_btn').css('display','none');
@@ -663,22 +669,95 @@ $('document').ready(function() {
                 	        $('.question_ordre').html(parseIntNko(1)+'߭');
                 	        $('.question_action').html('ߟߊߡߍ߲߫');
                 	    }
-                	    function poserQuestion(){
+      	        
+                    	function monoSyllabesTotal() {
+                    	    var mono_syllabes = monoSyllabes(); // Cette fonction provient de syllabes.js 
+                    	    var ms = [];
+                    	            
+                        	for (var i = 0; i < mono_syllabes.length; i++) {
+                        	for (var j = 0; j < mono_syllabes[i].length; j++) {
+                        	    ms[ms.length] = mono_syllabes[i][j];
+                        	}}
+                    	        
+                    	    return ms;
+                    	}
+                    	function biSyllabesTotal() {
+                    	    var bi_syllabes = biSyllabes(); // Cette fonction provient de syllabes.js 
+                    	    var bs = [];
+                    	            
+                        	for (var i = 0; i < bi_syllabes.length; i++) {
+                        	for (var j = 0; j < bi_syllabes[i].length; j++) {
+                        	    bs[bs.length] = bi_syllabes[i][j];
+                        	}}
+                    	        
+                    	    return bs;
+                    	}
+                    	function triSyllabesTotal() {
+                    	    var tri_syllabes = triSyllabes(); // Cette fonction provient de syllabes.js 
+                    	    var ts = [];
+                    	            
+                            for (var i = 0; i < tri_syllabes.length; i++) {
+                        	for (var j = 0; j < tri_syllabes[i].length; j++) {
+                        	    ts[ts.length] = tri_syllabes[i][j];
+                        	}}
+                    	        
+                    	    return ts;
+                    	}
+                    	function quadriSyllabesTotal() {
+                    	    var quadri_syllabes = quadriSyllabes(); // Cette fonction provient de syllabes.js 
+                    	    var qs = [];
+                    	            
+                        	for (var i = 0; i < quadri_syllabes.length; i++) {
+                        	for (var j = 0; j < quadri_syllabes[i].length; j++) {
+                        	    qs[qs.length] = quadri_syllabes[i][j];
+                        	}}
+                    	        
+                    	    return qs;
+                    	}   
+                    	function pratiquesQuestions() {
+                    	    var questions = '';
+                    	            
+                    	    switch(pratiques_syllabes_active_index) {
+                        	    case 0: questions = mix1D(mono_syllabes);   break;
+                        	    case 1: questions = mix1D(bi_syllabes);     break;
+                        	    case 2: questions = mix1D(tri_syllabes);    break;
+                        	    case 3: questions = mix1D(quadri_syllabes); break;
+                        	}
+                    alert( questions );     
+                        	return questions;
+                    	}
+                    	        
+                	    function poserQuestion() {
                     	    $('.question_btn').on('click',function(){
      
-                    	        var mono_syllabes   = monoSyllabesTotal();
-                    	        var bi_syllabes     = biSyllabesTotal();
-                    	        var tri_syllabes    = triSyllabesTotal();
-                    	        var quadri_syllabes = quadriSyllabesTotal();
-                    	        var tr = $('#pratiques_reponse_container table tr');
-                    	        
-                    	        questions = pratiquesQuestions();
+                    	        pratiqueGuide();
                     	        question_a_poser = questions[compteur_de_question-1];
                     	        lireQuestion();
                     	        actualiserLesBoutonsDEntete();
                     	        repeteQuestion();
                     	       
                     alert( question_a_poser );
+                    
+                    	        function pratiqueGuide() {
+                    	            
+                    	            var pratique_guide_html = pratiqueGuideHTML();
+                    	        alert( pratique_guide_html );    
+                    	            $('#pratiques_images_container img').css('display','none');
+                    	            $('#pratiques_images_container #pratique_guide').css('display','block');
+                    	            $('#pratique_guide #bulles_container').html(pratique_guide_html);
+                    	        
+                    	          
+                    	            function pratiqueGuideHTML() {
+                    	                var pratique_guide_html = '';
+                    	                var nbr_de_bulle = pratiques_syllabes_active_index+1; 
+                    	                
+                    	                for (var i = 0; i < nbr_de_bulle; i++) {
+                    	                    pratique_guide_html += '<span id="span_'+i+'"></span>';
+                    	                }
+                    	                
+                    	                return pratique_guide_html;
+                    	            }
+                    	        }
                     	        function actualiserLesBoutonsDEntete() {
                     	            compteur_de_question++;
                     	        
@@ -689,73 +768,13 @@ $('document').ready(function() {
                 	                $('.repetition_btn').css('display','block');
                 	                $('.correction_btn').css('display','none');
                     	        }
-                    	        function pratiquesQuestions() {
-                    	            var questions = '';
-                    	            
-                    	            switch(pratiques_syllabes_active_index) {
-                        	            case 0: questions = mix1D(mono_syllabes);   break;
-                        	            case 1: questions = mix1D(bi_syllabes);     break;
-                        	            case 2: questions = mix1D(tri_syllabes);    break;
-                        	            case 3: questions = mix1D(quadri_syllabes); break;
-                        	        }
-                        	        
-                        	        return questions;
-                    	        }
                     	        function lireQuestion(){
                     	            $('#audio').attr({'src':'http://localhost:8080/kouroukan/son/mp3/'+question_a_poser+'.mp3', 'autoplay':'on'});
                     	        }
                     	        function repeteQuestion(){
                     	            $('.repetition_btn').on('click', function(){ $('#audio').attr({'src':'http://localhost:8080/kouroukan/son/mp3/'+question_a_poser+'.mp3', 'autoplay':'on'}); });
                     	        }
-                    	        
-                    	        function monoSyllabesTotal() {
-                    	            var mono_syllabes = monoSyllabes(); // Cette fonction provient de syllabes.js 
-                    	            var ms = [];
-                    	            
-                        	        for (var i = 0; i < mono_syllabes.length; i++) {
-                        	        for (var j = 0; j < mono_syllabes[i].length; j++) {
-                        	            ms[ms.length] = mono_syllabes[i][j];
-                        	            
-                        	        }}
-                    	        
-                    	            return ms;
-                    	        }
-                    	        function biSyllabesTotal() {
-                    	            var bi_syllabes = biSyllabes(); // Cette fonction provient de syllabes.js 
-                    	            var bs = [];
-                    	            
-                        	        for (var i = 0; i < bi_syllabes.length; i++) {
-                        	        for (var j = 0; j < bi_syllabes[i].length; j++) {
-                        	            bs[bs.length] = bi_syllabes[i][j];
-                        	            
-                        	        }}
-                    	        
-                    	            return bs;
-                    	        }
-                    	        function triSyllabesTotal() {
-                    	            var tri_syllabes = triSyllabes(); // Cette fonction provient de syllabes.js 
-                    	            var ts = [];
-                    	            
-                        	        for (var i = 0; i < tri_syllabes.length; i++) {
-                        	        for (var j = 0; j < tri_syllabes[i].length; j++) {
-                        	            ts[ts.length] = tri_syllabes[i][j];
-                        	            
-                        	        }}
-                    	        
-                    	            return ts;
-                    	        }
-                    	        function quadriSyllabesTotal() {
-                    	            var quadri_syllabes = quadriSyllabes(); // Cette fonction provient de syllabes.js 
-                    	            var qs = [];
-                    	            
-                        	        for (var i = 0; i < quadri_syllabes.length; i++) {
-                        	        for (var j = 0; j < quadri_syllabes[i].length; j++) {
-                        	            qs[qs.length] = quadri_syllabes[i][j];
-                        	            
-                        	        }}
-                    	        
-                    	            return qs;
-                    	        }
+              
                     	    });
                 	    }
                 	    function repondreQuestion(){
@@ -772,7 +791,7 @@ $('document').ready(function() {
                                 
                                     reponse_tapee[reponse_tapee.length] = caractere;
                                     afficherCorrectionButton();
-                                    $('#table_2 td:first-child').html(reponse_tapee);
+                                    $('#table_2 td:last-child').html(reponse_tapee);
                                     
                                     function afficherCorrectionButton() {
                 	                    $('.repetition_btn').css('display','none');
@@ -786,25 +805,37 @@ $('document').ready(function() {
             	            
             	            $('.correction_btn').on('click',  function() {
             	                
-            	                
             	                reponse_tapee = reponse_tapee.join('');
             	                point = (question_a_poser == reponse_tapee)?1:0;
             	                  
                             	if(question_a_poser == reponse_tapee){ afficherImage(); }
                             	
                             	afficherQuestionBouton();
-                            	table += "<tr> <td>"+question_a_poser+"</td><td>"+reponse_tapee+"</td><td>"+parseIntNko(point)+"</td> </tr>";
+                            	table += "<tr>\n <td>"+question_a_poser+"</td>\n<td>"+reponse_tapee+"</td>\n<td>"+parseIntNko(point)+"</td>\n </tr>\n\n";
                                 $('#pratiques_reponse_container #table_1').html(table);
+                                $('#table_1 tr:last-child').addClass('pratique_tr_actif'); 
+                                $('#table_1 tr:last-child').siblings().removeClass('pratique_tr_actif'); 
+                                afficherImage();
+                                
                             //	actualiserLessonProgressBar();
                             	effacerReponse();
-                            	    
-                            	    
+                            	revisionDePratique();
+                            	
+
+                            	   
                             	function afficherImage() {
-            	                    $('#pratiques_image').attr('src','http://localhost:8080/kouroukan/image/mono_syllabes/'+reponse_tapee+'.jpg');
-                            	    $('#pratiques_image_container').css({'width':0, 'height':0});
-            	                    setTimeout(function() {
-            	                        $('#pratiques_image_container').animate({'width':'100%', 'height':'100%'},300);
-            	                    },50);
+
+                    	            $('#pratiques_images_container img').css('display','block');
+                    	            $('#pratiques_images_container #pratique_guide').css('display','none');
+            	                    
+                        	        var image_name = $('.pratique_tr_actif').children('td:nth(0)').html(); 
+                                    var image_src = 'http://localhost:8080/kouroukan/image/mono_syllabes/'+image_name+'.jpg';
+                                
+            	                    $('#pratiques_image').attr('src', image_src);
+                            	    $('#pratiques_image_container').css({'transform':'scale(0)'});
+            	                   // setTimeout(function() {
+            	                        $('#pratiques_image_container').css({'transform':'scale(1)'});
+            	                   // },200);
                             	}    
                             	function afficherQuestionBouton() {
                 	                $('.repetition_btn').css('display','none');
@@ -815,9 +846,17 @@ $('document').ready(function() {
                             	    reponse_tapee = reponse_tapee.split(',');
                             	    reponse_tapee.splice(0,reponse_tapee.length);
                             	}
+                        	    function revisionDePratique() {
+                        	        
+                        	        $('#table_1 tr').on('click', function() {
+                        	            $(this).siblings().removeClass('pratique_tr_actif');
+                        	            $(this).addClass('pratique_tr_actif'); 
+                        	            afficherImage();
+                        	        });
+                        	    }
                         	}); 
                         	
-                            function actualiserLessonProgressBar(){
+                            function  actualiserLessonProgressBar(){
                                 var progress_unity = $('.lesson_progress_bar').width()/nbr_de_questions_a_poser;
                                            
                                 if(question_posee!=reponse_tapee){ 

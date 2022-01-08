@@ -1,7 +1,6 @@
                 
-var pratiques_programme_height = $('#pratiques_programme').height();
-var pratiques_corps = $('#pratiques_corps');
+    var pratiques_corps_height = $('#pratiques_corps').height();
+    
 
-
-$('#pratiques_images_container').css('height', pratiques_images_container_height+'px');
-$('#pratiques_reponse_container').css('height', pratiques_reponse_container_height+'px');
+    $('#pratiques_images_container').css('height', pratiques_images_container_height+'px');
+    $('#pratiques_reponse_container').css('height', pratiques_reponse_container_height+'px');    

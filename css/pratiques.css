@@ -7,19 +7,36 @@
     margin: 0;
 }
 #pratique_guide {
-    border: 1px solid red;
     padding: 4px;
     margin: 4px;
 }
-#bulles_container {
-    border: 1px solid blue;
+#bulles_container, #signe_egal, #cumule_des_caracteres {
+    margin: 0;
 }
-#pratique_guide span {
+#bulles_container {
+    height: 48px;
+    line-height: 56px;
+}
+#pratique_guide span:not(.plus) {
     display: inline-block;
     height: 48px;
     width: 48px;
-    border: 1px solid blue;
+    margin: 0;
+    border: 1px solid transparent;
+    box-shadow: 0 0 8px #ccc;
     border-radius: 48px;
+}
+#pratique_guide span {
+    vertical-align: middle;
+    margin: 2px;
+}
+#cumule_des_caracteres {
+    border: 1px solid transparent;
+    box-shadow: 0 0 8px #ccc;
+    height: 48px;
+    line-height: 48px;
+    font-size: 32px;
+    font-weight: bold;
 }
 #pratiques_images_container {
     position: relative;
@@ -27,6 +44,7 @@
     transition: transform 0.4s;
 }
 #pratiques_images_container img {
+    display: none;
     position: relative;
     height: 100%;
     width: auto;

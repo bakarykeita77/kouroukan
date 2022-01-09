@@ -100,8 +100,8 @@ if(isset($_SESSION['connected'])){
         <div class="course" id="pratique" align="center">
             
             <div id="pratiques_programme">
-                <span class="actif">ߜߋ߲߬ ߁ ߡߊ</span>
-                <span>ߜߋ߲߬ ߂ ߡߊ</span>
+                <span>ߜߋ߲߬ ߁ ߡߊ</span>
+                <span class="actif">ߜߋ߲߬ ߂ ߡߊ</span>
                 <span>ߜߋ߲߬ ߃ ߡߊ</span>
                 <span>ߜߋ߲߬ ߄ ߡߊ</span>
             </div> 
@@ -110,7 +110,7 @@ if(isset($_SESSION['connected'])){
                 <div id="pratiques_images_container" align="center">
                     <div id="pratique_guide">
                         <div id="bulles_container"></div>
-                        <p>=</p>
+                        <p id="signe_egal">=</p>
                         <p id="cumule_des_caracteres"></p>
                     </div>
                     <img src="" id="pratiques_image" alt="?">

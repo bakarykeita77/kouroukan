@@ -741,18 +741,18 @@ $('document').ready(function() {
                     	        function pratiqueGuide() {
                     	            
                     	            var pratique_guide_html = pratiqueGuideHTML();
-                    	        alert( pratique_guide_html );    
+                    	          
                     	            $('#pratiques_images_container img').css('display','none');
                     	            $('#pratiques_images_container #pratique_guide').css('display','block');
                     	            $('#pratique_guide #bulles_container').html(pratique_guide_html);
-                    	        
+                    	            $('#bulles_container span:last').remove();
                     	          
                     	            function pratiqueGuideHTML() {
                     	                var pratique_guide_html = '';
                     	                var nbr_de_bulle = pratiques_syllabes_active_index+1; 
                     	                
                     	                for (var i = 0; i < nbr_de_bulle; i++) {
-                    	                    pratique_guide_html += '<span id="span_'+i+'"></span>';
+                    	                    pratique_guide_html += '<span id="span_'+i+'"></span><span class="plus">+</span>';
                     	                }
                     	                
                     	                return pratique_guide_html;
@@ -790,6 +790,7 @@ $('document').ready(function() {
                                     var caractere = $(this).html();
                                 
                                     reponse_tapee[reponse_tapee.length] = caractere;
+                                    $('#cumule_des_caracteres').html(reponse_tapee);
                                     afficherCorrectionButton();
                                     $('#table_2 td:last-child').html(reponse_tapee);
                                     
@@ -828,14 +829,33 @@ $('document').ready(function() {
                     	            $('#pratiques_images_container img').css('display','block');
                     	            $('#pratiques_images_container #pratique_guide').css('display','none');
             	                    
-                        	        var image_name = $('.pratique_tr_actif').children('td:nth(0)').html(); 
-                                    var image_src = 'http://localhost:8080/kouroukan/image/mono_syllabes/'+image_name+'.jpg';
+                        	        var image_name = $('.pratique_tr_actif').children('td:nth(1)').html(); 
+                                    var image_src = imageSource();
                                 
             	                    $('#pratiques_image').attr('src', image_src);
                             	    $('#pratiques_image_container').css({'transform':'scale(0)'});
             	                   // setTimeout(function() {
             	                        $('#pratiques_image_container').css({'transform':'scale(1)'});
             	                   // },200);
+                            
+                                	function imageSource() {
+                                	    var image_src = '';
+                                	    
+                                	    if(pratiques_syllabes_active_index == 0) {
+                                	        image_src = 'http://localhost:8080/kouroukan/image/mono_syllabes/'+image_name+'.jpg';
+                                	    }
+                                	    if(pratiques_syllabes_active_index == 1) {
+                                	        image_src = 'http://localhost:8080/kouroukan/image/bi_syllabes/'+image_name+'.jpg';
+                                	    }
+                                	    if(pratiques_syllabes_active_index == 2) {
+                                	        image_src = 'http://localhost:8080/kouroukan/image/tri_syllabes/'+image_name+'.jpg';
+                                	    }
+                                	    if(pratiques_syllabes_active_index == 3) {
+                                	        image_src = 'http://localhost:8080/kouroukan/image/quadri_syllabes/'+image_name+'.jpg';
+                                	    }
+                                	    
+                                	    return image_src;
+                                	}
                             	}    
                             	function afficherQuestionBouton() {
                 	                $('.repetition_btn').css('display','none');

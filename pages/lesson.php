@@ -105,7 +105,6 @@ if(isset($_SESSION['connected'])){
                 <span>ߜߋ߲߬ ߃ ߡߊ</span>
                 <span>ߜߋ߲߬ ߄ ߡߊ</span>
             </div> 
-           
             <div class="course_body" id="pratiques_corps">
                 <div id="pratiques_images_container" align="center">
                     <div id="pratique_guide">
@@ -143,6 +142,7 @@ if(isset($_SESSION['connected'])){
                     <span class="correction_icon"></span>
                 </div>
             </div>
+            
             <div class="clavier_container" id="clavier_pratique"><?php include "clavier.php"; ?></div>
         </div>
       <!-------------------------------------------------------------------->

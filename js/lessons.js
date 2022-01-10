@@ -299,11 +299,33 @@ $('document').ready(function() {
             var parametres_html = parametres.html();
 
     	    
-    	    
+    	    dimensionnementDeCourseBody();
     	    affichageDeCours();
     	    dispenserCours();
     	 
 
+            function dimensionnementDeCourseBody() {
+                
+                var course_height = $('.course').height();
+    	        var course_head_height = $('.course_head').height();
+    	        var pratiques_programme_height = $('#pratiques_programme').height();
+    	        var progress_bar_height = $('.progress_bar').height();
+    	        var clavier_container_height = $('.clavier_container').height();
+    	        var course_body_height = '';
+    	    
+
+    	        if(course_id == 'apprentissage' || course_id == 'exercices') {
+    	            course_body_height = course_height - (course_head_height+progress_bar_height+6);
+    	        }
+    	        if(course_id == 'pratiques'){
+    	            course_body_height = course_height - (course_head_height+pratiques_programme_height+progress_bar_height+clavier_container_height+6);
+    	        }
+    	        if(course_id == 'evaluation'){
+    	            course_body_height = course_height - (course_head_height+progress_bar_height+clavier_container_height+6);
+    	        }
+    	        
+    	        $('.course_body').css('height', course_body_height-26+'px');
+            }
             function affichageDeCours(){
             	$('.course_container').css({'display':'block'});
                 $('.course').css('display','none');

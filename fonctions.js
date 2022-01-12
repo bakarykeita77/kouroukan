@@ -218,8 +218,10 @@
         for(i=0;i<nombre_a_convertir.length;i++){
             nombre_converti[nombre_converti.length] = chiffres_latins[ chiffres.indexOf(nombre_a_convertir[i]) ];
         }
+        nombre_converti = nombre_converti.join('');
+        nombre_converti = parseInt(nombre_converti);
         
-        return nombre_converti.join('');
+        return nombre_converti;
      }
 	function prononcer(){
 		id=this.id;

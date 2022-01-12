@@ -161,13 +161,8 @@
     transition: 0.6s;
 }
 .course_body{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    
     margin: 16px 0 4px 0;
-    height: 44vh;
+    height: 45vh;
     overflow: auto;
 }
 .course_container {
@@ -518,7 +513,6 @@
     box-sizing: border-box;
 }
 .pratique_tr_actif {
-    background-color: #ddd;
     color: orange;
     font-weight: bold;
 }

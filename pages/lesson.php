@@ -100,9 +100,9 @@ if(isset($_SESSION['connected'])){
         <div class="course" id="pratique" align="center">
             
             <div id="pratiques_programme">
-                <span>ߜߋ߲߬ ߁ ߡߊ</span>
+                <span class="actif">ߜߋ߲߬ ߁ ߡߊ</span>
                 <span>ߜߋ߲߬ ߂ ߡߊ</span>
-                <span class="actif">ߜߋ߲߬ ߃ ߡߊ</span>
+                <span>ߜߋ߲߬ ߃ ߡߊ</span>
                 <span>ߜߋ߲߬ ߄ ߡߊ</span>
             </div> 
             <div class="course_body" id="pratiques_corps">

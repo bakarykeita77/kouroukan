@@ -850,8 +850,8 @@ $('document').ready(function() {
                                 $('#table_1 tr:last-child').addClass('pratique_tr_actif'); 
                                 $('#table_1 tr:last-child').siblings().removeClass('pratique_tr_actif'); 
                                 afficherImage();
-                                
-                            //	actualiserLessonProgressBar();
+
+                            	actualiserPratiquesProgressBar();
                             	effacerReponse();
                             	finDePratique();
                             	revisionDePratique();
@@ -864,7 +864,7 @@ $('document').ready(function() {
                                     var image_src = imageSource();
                                 
             	                    $('#pratiques_image').attr('src', image_src);
-                    	            $('#pratique_guide').animate({'top':'-100%'},400);
+                    	            setTimeout(function(){ $('#pratique_guide').animate({'top':'-100%'},400); }, 200);
                                 	
                                 	function imageSource() {
                                 	    var image_src = '';
@@ -894,6 +894,15 @@ $('document').ready(function() {
                             	    reponse_tapee = reponse_tapee.split(',');
                             	    reponse_tapee.splice(0,reponse_tapee.length);
                             	}
+                                function actualiserPratiquesProgressBar(){
+                                    var progress_unity = $('.progress_bar').width()/reverseIntNko(quantite_de_question);
+                                          
+                                    if(question_a_poser!=reponse_tapee){ 
+                                        $('.progress_question_bar').css('width','+='+progress_unity+'px');
+                                    }else{ 
+                                        $('.progress_question_bar, .progress_bonne_reponse_bar').css('width','+='+progress_unity+'px');
+                                    }
+                                }
                         	    function revisionDePratique() {
                         	        
                         	        $('#table_1 tr').on('click', function() {
@@ -919,21 +928,20 @@ $('document').ready(function() {
                         	        }
                         	    }
                         	}); 
-                        	
-                            function  actualiserLessonProgressBar(){
-                                var progress_unity = $('.lesson_progress_bar').width()/nbr_de_questions_a_poser;
-                                           
-                                if(question_posee!=reponse_tapee){ 
-                                    $('.lesson_progress_question_bar').css('width','+='+progress_unity+'px');
-                                }else{ 
-                                    $('.lesson_progress_question_bar, .lesson_progress_bonne_reponse_bar').css('width','+='+progress_unity+'px');
-                                }
-                            }
                 	    }
             	    }
                     function afficherProgressBar(){
         	            $('.progress_bar').css({'opacity':1});
         	        }
+                    function actualiserProgressBar(){
+                        var progress_unity = $('.progress_bar').width()/nbr_max_de_questions_a_poser;
+                               
+                        if(reponse_tapee.join('')==question_posee){
+                            $('.progress_question_bar, .progress_bonne_reponse_bar').css('width','+='+progress_unity+'px');
+                        }else{
+                            $('.progress_question_bar').css('width','+='+progress_unity+'px');
+                        }
+                    }
                 } 
     	    }
     	    function coursEnteteHTML() {

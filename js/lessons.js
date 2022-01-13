@@ -656,9 +656,24 @@ $('document').ready(function() {
             	    var compteur_de_question = 1;
             	    var quantite_de_question = parseIntNko(20);
             	    var question_rang = '߭';
+
+                    var mono_syllabes   = monoSyllabesTotal();
+                    var bi_syllabes     = biSyllabesTotal();
+                    var tri_syllabes    = triSyllabesTotal();
+                    var quadri_syllabes = quadriSyllabesTotal();                   
                     
-            	    dimensionnementDePratiquesReponseContainer();
-            	    questionReponse();
+                    var pratiques_syllabes_active_index = $('.actif').index();
+                    var questions='', question_a_poser='', reponse_tapee=[], point='';
+                    var table = $('#pratiques_reponse_container table tbody').html();
+                    
+                    
+                    dimensionnementDePratiquesReponseContainer();
+            	    affichageParDefautDesBoutonsDEntete();
+                    questions = pratiquesQuestions();
+                	poserQuestion();
+                	repondreQuestion();
+                	correction();
+
             	    //stockerPratiques();
                     afficherProgressBar();
             	    
@@ -672,35 +687,16 @@ $('document').ready(function() {
             	        $('#pratiques_reponse_container').css('height', pratiques_reponse_container_height-10+'px');
             	        $('#table_1_cadre').css('height', pratiques_reponse_container_height-24+'px');
             	    }
-            	    function questionReponse() {
-            	        
-                    	var mono_syllabes   = monoSyllabesTotal();
-                    	var bi_syllabes     = biSyllabesTotal();
-                    	var tri_syllabes    = triSyllabesTotal();
-                    	var quadri_syllabes = quadriSyllabesTotal();                   
-                    
-                    	var pratiques_syllabes_active_index = $('.actif').index();
-                    	var questions='', question_a_poser='', reponse_tapee=[], point='';
-                        var table = $('#pratiques_reponse_container table tbody').html();
-                     	
-                     	
-                     	affichageParDefautDesBoutonsDEntete();
-                    	questions = pratiquesQuestions();
-                	    poserQuestion();
-                	    repondreQuestion();
-                	    correction();
-
-           
-                	    function affichageParDefautDesBoutonsDEntete() {
+                	function affichageParDefautDesBoutonsDEntete() {
                 	        
-                	        $('.repetition_btn').css('display','none');
-                	        $('.correction_btn').css('display','none');
-                	        $('.question_btn').css('display','block');
+                	    $('.repetition_btn').css('display','none');
+                	    $('.correction_btn').css('display','none');
+                	    $('.question_btn').css('display','block');
                 	        
-                	        $('.question_total').html(quantite_de_question);
-                	        $('.question_ordre').html(parseIntNko(1)+'߭');
-                	        $('.question_action').html('ߟߊߡߍ߲߫');
-                	    }
+                	    $('.question_total').html(quantite_de_question);
+                	    $('.question_ordre').html(parseIntNko(1)+'߭');
+                	    $('.question_action').html('ߟߊߡߍ߲߫');
+                	}
       	        
                     	function monoSyllabesTotal() {
                     	    var mono_syllabes = monoSyllabes(); // Cette fonction provient de syllabes.js 
@@ -852,11 +848,13 @@ $('document').ready(function() {
                                 afficherImage();
 
                             	actualiserPratiquesProgressBar();
+                            	
+                            	effacerQuestion();
                             	effacerReponse();
                             	finDePratique();
                             	revisionDePratique();
                             	
-
+actualiserProgressBar(); 
                             	   
                             	function afficherImage() {
 
@@ -889,6 +887,9 @@ $('document').ready(function() {
                 	                $('.repetition_btn').css('display','none');
                 	                $('.correction_btn').css('display','none');
                 	                $('.question_btn').css('display','block');
+                            	}
+                            	function effacerQuestion() {
+                            	    question_a_poser = '';
                             	}
                             	function effacerReponse() {
                             	    reponse_tapee = reponse_tapee.split(',');
@@ -929,7 +930,7 @@ $('document').ready(function() {
                         	    }
                         	}); 
                 	    }
-            	    }
+            	    
                     function afficherProgressBar(){
         	            $('.progress_bar').css({'opacity':1});
         	        }

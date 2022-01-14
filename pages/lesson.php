@@ -106,6 +106,7 @@ if(isset($_SESSION['connected'])){
                 <span>ߜߋ߲߬ ߄ ߡߊ</span>
             </div> 
             <div class="course_body" id="pratiques_corps">
+                
                 <div id="pratiques_demo_container" align="center">
                     <div id="pratique_guide">
                         <div id="bulles_container"></div>
@@ -118,6 +119,10 @@ if(isset($_SESSION['connected'])){
                     <div id="table_1_cadre">
                         <table id="table_1" border=1></table>
                     </div>
+                </div>
+                <div id="message_de_fin_container">
+                    <p id="message_de_fin"></p>
+                    <div id="message_btn_container"> <button id="message_btn_1"></button><button id="message_btn_2"></button> </div>
                 </div>
                 
             </div>

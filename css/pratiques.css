@@ -113,22 +113,40 @@
 }
 #message_de_fin_container {
     position: relative;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    height: 78px;
-    width: 100%;
+    display: none;
+    height: 108px;
+    width: 90%;
+    margin: auto;
+    padding: 0;
 }
 #message_de_fin {
-    position: absolute;
-    top: 0;
-    margin-top: 0;
+    position: relative;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin: 0 auto 4px auto;
+    padding: 8px;
     border: 1px solid blue ;
-    height: 75px;
+    height: 76px;
+    text-align: right;
+    font-size: 12px;
+    box-sizing: border-box;
 }
 #message_btn_container {
-    position: absolute;
+    position: relative;
     height: 24px;
+    margin: 0 auto;
     width: 100%;
-    bottom: 0;
-    border: 1px solid blue ;
+}
+#message_btn_container button {
+    position: absolute;
+    width: 45%;
+    height: 24px;
+    background-color: #ccc;
+    border-radius: 8px;
+}
+#message_btn_container button:first-child {
+    right: 0;
+}
+#message_btn_container button:last-child {
+    left: 0;
 }

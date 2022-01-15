@@ -671,23 +671,21 @@ $('document').ready(function() {
                                 	   
             	    $('#pratiques_programme span').on('click', function() {
 
-                    var pratiques_syllabes_active_index = 0;
+                        var pratiques_syllabes_active_index = 0;
 
-            	    $(this).addClass('actif');
-            	    $(this).siblings().removeClass('actif');
+            	        $(this).addClass('actif');
+            	        $(this).siblings().removeClass('actif');
             	        
-                    pratiques_syllabes_active_index = $('.actif').index();
-                    questions = pratiquesQuestions();
+                        pratiques_syllabes_active_index = $('.actif').index();
+                        questions = pratiquesQuestions();
             	                           
-                    dimensionnementDePratiquesReponseContainer();
-            	    affichageParDefautDesBoutonsDEntete();
-                	poserQuestion();
-                	repondreQuestion();
-                	correction();
-                    afficherProgressBar();
+            	        affichageParDefautDesBoutonsDEntete();
+                	    poserQuestion();
+                	    repondreQuestion();
+                	    correction();
+                        afficherProgressBar();
             	    
             	    
-            	       alert( questions ); 
                         	function pratiquesQuestions() {
                         	    var questions = '';
                         	            
@@ -860,6 +858,10 @@ $('document').ready(function() {
                             	}
                             	function finDePratique() {
                             	    
+                            	    var effort = parseIntNko((total_point/total_question)*100)+'%';
+                            	    var message_1 = 'ߌ ߞߎߟߎ߲ߖߋ߫. ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߎ߬ ߟߊߡߌ߬ߘߊ ߢߊ߬ߣߍ߲߬ ߁߀߀% ߟߊ߫<br/> ߌ ߘߌ߫ ߛߋ߫ ߥߊ߫ ߟߊ߫ ߢߍߝߍ߬.';
+                            	    var message_2 = 'ߌ ߘߐߖߊ߬. ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߎ߬ ߟߊߡߌ߬ߘߊ ߢߊ߬ߣߍ߲߬ '+effort+' ߟߊ߫.<br/> ߘߌ߬ߢߍ߬ ߞߵߌ ߞߐߛߍ߬ߦߌ߬ ߦߙߐ ߣߌ߲߬ ߡߊ߬.';
+                            	    
                             	    if( total_question+1 === compteur_de_question ) {
     
                             	        var course_height = $('.course').height();
@@ -873,8 +875,20 @@ $('document').ready(function() {
                             	        course_body_height = course_height - pratiques_programme_height + 6;
                             	        $('.progress_bar, .course_head, .clavier_container').css('display','none');
         	                            $('.course_body').css('height', course_body_height-26+'px');
-                            	        dimensionnementDePratiquesReponseContainer();
-                            	        changerNombreDeSyllabe();
+                            	        $('#message_de_fin_container').css('display','block');
+                            	        redimensionnementDePratiquesReponseContainer();
+                            	        
+                            	        if(effort == '߁߀߀%') {
+                            	            $('#message_de_fin').html(message_1);
+                            	            $('#message_btn_2').html('ߥߊߢߍ߫');
+                            	            
+                            	            $('#message_btn_2').on('click', function() {
+                            	                changerNombreDeSyllabe();
+                            	            });
+                            	        }else{
+                            	            $('#message_de_fin').html(message_2);
+                            	            $('#message_btn_2').html('ߛߍ߬ߦߌ߬ߞߐ߫');
+                            	        }
                             	            
                                         function memoriserPratiques() {
                                             memoire_pratiques = [pratiques_syllabes_active_index, memoire_pratique.join(';')].join('%');
@@ -891,6 +905,7 @@ $('document').ready(function() {
                         }
             	    });
             	    
+            	    
             	    function dimensionnementDePratiquesReponseContainer() {
             	        
             	        var pratiques_corps_height = $('#pratiques_corps').height();
@@ -898,7 +913,17 @@ $('document').ready(function() {
             	        var pratiques_reponse_container_height = pratiques_corps_height - pratiques_demo_container_height;
             	        
             	        $('#pratiques_reponse_container').css('height', pratiques_reponse_container_height-10+'px');
-            	        $('#table_1_cadre').css('height', pratiques_reponse_container_height-24+'px');
+            	       // $('#table_1_cadre').css('height', pratiques_reponse_container_height-24+'px');
+            	    }
+            	    function redimensionnementDePratiquesReponseContainer() {
+            	        
+            	        var pratiques_corps_height = $('#pratiques_corps').height();
+            	        var pratiques_demo_container_height = $('#pratiques_demo_container').height();
+        	            var message_de_fin_container_height = $('#message_de_fin_container').height();
+            	        var pratiques_reponse_container_height = pratiques_corps_height - pratiques_demo_container_height - message_de_fin_container_height;
+            	        
+            	        $('#pratiques_reponse_container').css('height', pratiques_reponse_container_height-10+'px');
+            	       // $('#table_1_cadre').css('height', pratiques_reponse_container_height-24+'px');
             	    }
                 	function affichageParDefautDesBoutonsDEntete() {
                 	        

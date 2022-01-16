@@ -654,7 +654,7 @@ $('document').ready(function() {
                 function pratiques() {
             	    
             	    var compteur_de_question = 1;
-            	    var total_question = 4;
+            	    var total_question = 5;
             	    var quantite_de_question = parseIntNko(total_question);
             	    var question_rang = '߭';
             	    
@@ -792,6 +792,7 @@ $('document').ready(function() {
                                 $('#table_1 tr:last-child').siblings().removeClass('pratique_tr_actif'); 
                                 afficherImage();
     
+                                defilementDeTableReponseVersLeBas();
                                 actualiserPratiquesProgressBar();
                                 effacerQuestion();
                                 effacerReponse();
@@ -799,7 +800,11 @@ $('document').ready(function() {
                                 revisionDePratique();
                                 	
     
-                                	   
+                                function defilementDeTableReponseVersLeBas() {
+                                    $('#table_1_cadre').animate({
+                                        scrollTop:$('#table_1_cadre')[0].scrollHeight
+                                    }, 1000);
+                                }	   
                                 function afficherImage() {
     
                             	    var image_name = $('.pratique_tr_actif').children('td:nth(1)').html(); 
@@ -859,8 +864,8 @@ $('document').ready(function() {
                             	function finDePratique() {
                             	    
                             	    var effort = parseIntNko((total_point/total_question)*100)+'%';
-                            	    var message_1 = 'ߌ ߞߎߟߎ߲ߖߋ߫. ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߎ߬ ߟߊߡߌ߬ߘߊ ߢߊ߬ߣߍ߲߬ ߁߀߀% ߟߊ߫<br/> ߌ ߘߌ߫ ߛߋ߫ ߥߊ߫ ߟߊ߫ ߢߍߝߍ߬.';
-                            	    var message_2 = 'ߌ ߘߐߖߊ߬. ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߎ߬ ߟߊߡߌ߬ߘߊ ߢߊ߬ߣߍ߲߬ '+effort+' ߟߊ߫.<br/> ߘߌ߬ߢߍ߬ ߞߵߌ ߞߐߛߍ߬ߦߌ߬ ߦߙߐ ߣߌ߲߬ ߡߊ߬.';
+                            	    var message_1 = 'ߌ ߞߎߟߎ߲ߖߋ߫.<br/> ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߎ߬ ߟߊߡߌ߬ߘߊ ߢߊ߬ߣߍ߲߬ ߁߀߀% ߟߊ߫<br/> ߌ ߘߌ߫ ߛߋ߫ ߥߊ߫ ߟߊ߫ ߢߍ ߝߍ߬.';
+                            	    var message_2 = 'ߌ ߘߐߖߊ߬. <br/>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߎ߬ ߟߊߡߌ߬ߘߊ ߢߊ߬ߣߍ߲߬ '+effort+' ߟߊ߫.<br/> ߘߌ߬ߢߍ߬ ߞߵߌ ߞߐߛߍ߬ߦߌ߬ ߦߙߐ ߣߌ߲߬ ߡߊ߬.';
                             	    
                             	    if( total_question+1 === compteur_de_question ) {
     
@@ -880,15 +885,21 @@ $('document').ready(function() {
                             	        
                             	        if(effort == '߁߀߀%') {
                             	            $('#message_de_fin').html(message_1);
-                            	            $('#message_btn_2').html('ߥߊߢߍ߫');
+                            	            $('#message_btn_1').html('ߛߍ߬ߦߌ߬ ߞߐ߫');
+                            	            $('#message_btn_2').html('ߥߊ ߫ߢߍ߫');
                             	            
                             	            $('#message_btn_2').on('click', function() {
                             	                changerNombreDeSyllabe();
                             	            });
                             	        }else{
                             	            $('#message_de_fin').html(message_2);
-                            	            $('#message_btn_2').html('ߛߍ߬ߦߌ߬ߞߐ߫');
+                            	            $('#message_btn_1').html('ߛߍ߬ߦߌ߬ ߞߐ߫');
+                            	            $('#message_btn_2').html('ߛߍ߬ߦߵߊ߬ ߡߊ߬');
                             	        }
+                            	            
+                            	            setTimeout(function() {
+                            	                $('#message_de_fin').css('display','none');
+                            	            }, 6000);
                             	            
                                         function memoriserPratiques() {
                                             memoire_pratiques = [pratiques_syllabes_active_index, memoire_pratique.join(';')].join('%');
@@ -921,6 +932,17 @@ $('document').ready(function() {
             	        var pratiques_demo_container_height = $('#pratiques_demo_container').height();
         	            var message_de_fin_container_height = $('#message_de_fin_container').height();
             	        var pratiques_reponse_container_height = pratiques_corps_height - pratiques_demo_container_height - message_de_fin_container_height;
+            	        
+            	        $('#pratiques_reponse_container').css('height', pratiques_reponse_container_height-10+'px');
+            	       // $('#table_1_cadre').css('height', pratiques_reponse_container_height-24+'px');
+            	    }
+            	    function reredimensionnementDePratiquesReponseContainer() {
+            	        
+            	        var pratiques_corps_height = $('#pratiques_corps').height();
+            	        var pratiques_images_container_height = $('#pratiques_images_container').height();
+        	            var message_de_fin_height = $('#message_de_fin').height();
+        	            var pratiques_reponse_container_height = $('#pratiques_reponse_container').height();
+            	        var pratiques_reponse_container_height = pratiques_reponse_container_height + message_de_fin_height;
             	        
             	        $('#pratiques_reponse_container').css('height', pratiques_reponse_container_height-10+'px');
             	       // $('#table_1_cadre').css('height', pratiques_reponse_container_height-24+'px');

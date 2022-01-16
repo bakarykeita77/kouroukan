@@ -4,6 +4,10 @@
     height: 24px;
 }
 #pratiques_corps {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
     margin: 0;
 }
 #pratiques_demo_container {
@@ -88,7 +92,7 @@
     position: relative;
     margin: 4px 0;
     padding: 0;
-    overflow: auto;
+    overflow: scroll;
 }
 #table_1 {
     position: relative;
@@ -116,23 +120,25 @@
     display: none;
     height: 108px;
     width: 90%;
-    margin: auto;
+    margin: 0 auto;
     padding: 0;
 }
 #message_de_fin {
-    position: relative;
-    border: 1px solid #ccc;
+    position: absolute;
+    background-color: #000;
+    color: #fff;
     border-radius: 8px;
-    margin: 0 auto 4px auto;
-    padding: 8px;
-    border: 1px solid blue ;
-    height: 76px;
+    margin: 12px auto;
+    padding: 4px 16px;
+    height: 60px;
+    width: 100%;
     text-align: right;
     font-size: 12px;
     box-sizing: border-box;
 }
 #message_btn_container {
-    position: relative;
+    position: absolute;
+    bottom: 0;
     height: 24px;
     margin: 0 auto;
     width: 100%;
@@ -141,6 +147,7 @@
     position: absolute;
     width: 45%;
     height: 24px;
+    margin: 0;
     background-color: #ccc;
     border-radius: 8px;
 }

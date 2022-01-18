@@ -4,10 +4,6 @@
     height: 24px;
 }
 #pratiques_corps {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    
     margin: 0;
 }
 #pratiques_demo_container {
@@ -90,7 +86,7 @@
 }
 #table_1_cadre {
     position: relative;
-    margin: 4px 0;
+    margin: 16px 0;
     padding: 0;
     overflow: scroll;
 }

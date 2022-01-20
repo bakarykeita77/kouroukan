@@ -677,25 +677,14 @@ $('document').ready(function() {
             	        $(this).addClass('actif');
             	        $(this).siblings().removeClass('actif');
             	        compteur_de_question = 1;
-            	        
+            	        table = '';
+
                         pratiques_syllabes_active_index = $('.actif').index();
                         questions = pratiquesQuestions();
             	                           
             	        affichageParDefautDesBoutonsDEntete();
                         afficherProgressBar();
             	    
-                        function pratiquesQuestions() {
-                            var questions = '';
-                        	            
-                        	switch(pratiques_syllabes_active_index) {
-                                case 0: questions = mix1D(mono_syllabes);   break;
-                            	case 1: questions = mix1D(bi_syllabes);     break;
-                            	case 2: questions = mix1D(tri_syllabes);    break;
-                            	case 3: questions = mix1D(quadri_syllabes); break;
-                            }
-                            
-                            return questions;
-                        }
             	    });
                 	poserQuestion();
                 	repondreQuestion();
@@ -738,7 +727,28 @@ $('document').ready(function() {
                 	    $('.question_ordre').html(parseIntNko(1)+'߭');
                 	    $('.question_action').html('ߟߊߡߍ߲߫');
                 	}
+                    function initialiserLesBoutonsDEntete() {
+
+                	    $('.question_ordre').html(parseIntNko(1)+'߭');
+                	    $('.question_action').html('ߟߊߡߍ߲߫');
+                	                
+                	    $('.question_btn').css('display','none');
+                	    $('.repetition_btn').css('display','block');
+                	    $('.correction_btn').css('display','none');
+                    }
                 	    
+                    function pratiquesQuestions() {
+                        var questions = '';
+                        	            
+                        switch(pratiques_syllabes_active_index) {
+                            case 0: questions = mix1D(mono_syllabes);   break;
+                            case 1: questions = mix1D(bi_syllabes);     break;
+                            case 2: questions = mix1D(tri_syllabes);    break;
+                            case 3: questions = mix1D(quadri_syllabes); break;
+                        }
+                            
+                        return questions;
+                    }
                 	    function poserQuestion() {
                     	    $('.question_btn').on('click',function(){
             
@@ -922,7 +932,7 @@ $('document').ready(function() {
         	                            var pratiques_programme_height = $('#pratiques_programme').height();
         	                            var course_body_height = '';
         	    
-    
+
                             	        memoriserPratiques();
                             	        //stockerPratiques();
                             	        masquerClavierEtConsoles();
@@ -931,44 +941,68 @@ $('document').ready(function() {
                             	        $('#message_de_fin_container').css('display','block');
                             	        redimensionnementDePratiquesReponseContainer();
                             	        initialiserProgressBarr();
-                            	        
+                            	        table = '';
+                            	                    
                             	        if(effort == '߁߀߀%') {
-                            	            $('#message_de_fin').html(message_1);
-                            	            $('#message_btn_1').html('ߛߍ߬ߦߌ߬ ߞߐ߫');
-                            	            $('#message_btn_2').html('ߥߊ ߫ߢߍ߫');
+                            	            if(pratiques_syllabes_active_index <= 2) {
                             	            
-                            	            $('#message_btn_2').on('click', function() {
-                            	                changerNombreDeSyllabe();
-                            	                
-                            	                $('#pratiques_corps').css('height','45vh');
-                            	                $('#pratiques_demo_container').css('height','168px');
-                            	                $('#pratiques_reponse_container').css('height','84px');
-                            	                $('#pratiques_reponse_container #table_1').empty();
-                            	                $('#message_de_fin_container').css('display','none');
-    	                                        
-    	                                        $('#pratiques_images_container img').attr('src','#');
-    	                                        
-    	                                        afficherClavierEtConsoles();
-    	                                        course_body_height = course_height - (course_head_height+pratiques_programme_height+progress_bar_height+clavier_container_height+6);
-        	                                    $('.course_body').css('height', course_body_height-26+'px');
-
-                            	            });
+                            	                $('#message_de_fin').html(message_1);
+                            	                $('#message_btn_1').html('ߛߍ߬ߦߌ߬ ߞߐ߫');
+                            	                $('#message_btn_2').html('ߥߊ߫ ߢߍ߫');
+                            	            }
+                            	            if(pratiques_syllabes_active_index > 2) {
+                            	         alert( matiere_nom );       
+                            	                $('#message_de_fin').html(message_1);
+                            	                $('#message_btn_1').css('display','none');
+                            	                $('#message_btn_2').html(matiere_nom+' ߓߟߏߦߊߟߌ ߓߘߊ߫ ߓߊ߲߫');
+                            	                $('#message_btn_2').css('width','100%');
+                            	            }
+                            	            
                             	        }else{
+                            	            
                             	            $('#message_de_fin').html(message_2);
                             	            $('#message_btn_1').html('ߛߍ߬ߦߌ߬ ߞߐ߫');
                             	            $('#message_btn_2').html('ߛߍ߬ߦߵߊ߬ ߡߊ߬');
+                            	            
                             	        }
+                            	        
+                            	            $('#message_btn_2').on('click', function() {
+                            	                
+                            	                questions = pratiquesQuestions();
+                            	                compteur_de_question = 1;
+            	                                affichageParDefautDesBoutonsDEntete();
+            	                                dimensionnementParDefautDePratiquesCorps();
+
+                            	                if($('#message_btn_2').text() == 'ߥߊ߫ ߢߍ߫') {
+                            	                    
+                            	                    changerNombreDeSyllabe();
+                            	                    total_point = 0;
+                            	                }
+                            	                if($('#message_btn_2').text() == 'ߛߍ߬ߦߵߊ߬ ߡߊ߬') {
+                            	                    
+                            	                    questions = pratiquesQuestions();
+                            	                    total_point = 0;
+                            	                 
+                            	                }
+
+                            	            });
                             	            
-                            	            
+                                        function dimensionnementParDefautDePratiquesCorps() {
+                            	            $('#pratiques_corps').css('height','45vh');
+                            	            $('#pratiques_demo_container').css('height','168px');
+                            	            $('#pratiques_reponse_container').css('height','84px');
+                            	            $('#pratiques_reponse_container #table_1').empty();
+                            	            $('#message_de_fin_container').css('display','none');
+    	                                        
+    	                                    $('#pratiques_images_container img').attr('src','#');
+    	                                    afficherClavierEtConsoles();
+                                        }
                                         function memoriserPratiques() {
                                             memoire_pratiques = [pratiques_syllabes_active_index, memoire_pratique.join(';')].join('%');
                                         }
                                         function changerNombreDeSyllabe() {
                                             if(total_point === total_question) {
                                                 $('#pratiques_programme .actif').next().click();
-                                                $('#table_1').empty();
-                                                questions = [];
-                                                rechargerTableDeReponses();
                                             }
                                         }  
                             	        function initialiserProgressBarr() {

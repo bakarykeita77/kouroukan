@@ -664,20 +664,10 @@ $('document').ready(function() {
                     var tri_syllabes    = triSyllabesTotal();
                     var quadri_syllabes = quadriSyllabesTotal();                   
                     
-                    var questions='', question_a_poser='', reponse_tapee=[], point='';
+                    var questions=[], question_a_poser='', reponse_tapee=[], point='';
                     var table = $('#pratiques_reponse_container table tbody').html();
                                 	   
-            	    
-            	    $('#course_fermeture').on('click', function() {
-            	        
-            	        $('#pratiques_programme span').removeClass('actif');
-            	        
-            	        dimensionnementParDefautDePratiquesCorps()                   
-            	        affichageParDefautDesBoutonsDEntete();
-                        afficherProgressBar();
-                        initialiserProgressBarr();
-            	        questions.splice(0,questions.length);
-            	    });
+            	    initialiserPratiques();
             	    affichageParDefautDesBoutonsDEntete();
             	    $('#pratiques_programme span').on('click', function() {
 
@@ -713,6 +703,18 @@ $('document').ready(function() {
                 	repondreQuestion();
                 	correction();
             	    
+                    
+            	    function initialiserPratiques() {
+            	        
+            	        $('#pratiques_programme span').removeClass('actif');
+            	        questions.splice(0,questions.length);
+            	       
+            	        dimensionnementParDefautDePratiquesCorps()                   
+            	        affichageParDefautDesBoutonsDEntete();
+                        
+                        afficherProgressBar();
+                        initialiserProgressBarr();
+            	    }
                     function dimensionnementParDefautDePratiquesCorps() {
                         $('#pratiques_corps').css('height','45vh');
                         $('#pratiques_demo_container').css('height','168px');
@@ -784,7 +786,7 @@ $('document').ready(function() {
                     }
                 	    function poserQuestion() {
                     	    $('.question_btn').on('click',function(){
-            
+            alert( questions ); 
                     	        pratiqueGuide();
                     	        question_a_poser = questions[compteur_de_question-1];
                     	        lireQuestion();

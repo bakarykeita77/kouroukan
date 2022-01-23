@@ -48,6 +48,19 @@
 .a_apprendre a {
     color: #aaa;
 }
+.bulle {
+    position: relative;
+    display: inline-block;
+    background-color: #ccc;
+    height: 48px;
+    width: 48px;
+    line-height: 48px;
+    margin: 0;
+    border: 1px solid transparent;
+    box-shadow: 0 0 8px #ccc;
+    border-radius: 48px;
+    transition: 0.4s;
+}
 
 .centerflex{
     display: flex;

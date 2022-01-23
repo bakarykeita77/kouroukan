@@ -835,9 +835,49 @@ $('document').ready(function() {
               
                     	    });
                 	    }
+                	    function decomposerEnSyllabes() {
+                	        
+                	        var character = question_pratique.split('');
+                	        var c_1, c_2, c_3, c_4, c_5, c_6, c_7, c_8, c_9, c_10, c_11, c_12;
+                	        var syllabe_1 = [], syllabe_2 = [], syllabe_3 = [], syllabe_4 = [];
+
+                	        if(option_index == 0) {
+                    	        if(character.length == 2) {
+                    	        for (var i = 0; i < 2; i++) {
+                    	            syllabe_1[syllabe_1.length] = character[i];
+                    	        }}
+                    	        if(character.length == 3) {
+                    	        for (var i = 0; i < 3; i++) {
+                    	            syllabe_1[syllabe_1.length] = character[i];
+                    	        }}
+                	        }
+                	        if(option_index > 0) {
+                	            var syllabes = [];
+                    	        for(var i = 0; i < option_index; i++) {
+    
+                        	        var syllabe = [];
+                        	        
+                        	        if($.inArray(character[2],caracteres[1]) !== -1) {
+                            	        for (var i = 0; i < 2; i++) {
+                            	            syllabe[syllabe.length] = character[i];
+                            	        }
+                        	            syllabes[syllabes.length] = syllabe;
+                        	        }
+                        	        if(character[2] == caracteres[4][1]) {
+                            	        for (var i = 0; i < 3; i++) {
+                            	            syllabe[syllabe.length] = character[i];
+                            	        }
+                        	            syllabes[syllabes.length] = syllabe;
+                        	        }
+                        	        character.splice(0,2);
+                    	        }
+                	        alert( syllabes ); 
+                	        }
+                	    }
                 	    function repondreQuestionPratique(){
 
                     	    $('.clavier_container td').on('click', function(){
+                    	       
 
                                 if(question_pratique=='')
                                 {   
@@ -967,6 +1007,8 @@ $('document').ready(function() {
                     	            compteur_de_caractere = 0;
                                 }
                                 function effacerLesBulles() {
+                                    
+                                    bulle_index = -1;
                                     
                                     s_0.splice(0,s_0.length);
                                     s_1.splice(0,s_1.length);

@@ -28,6 +28,8 @@ var play_icon = "&#9664;";
 
 var refaire_icon = "&#8635;";
 
+var surbrace = "&#9182;";
+var UnderBrace = "&#9183;";
 var stop_icon = "&#x25A0;";
 
 var telephone = "&#9990;";

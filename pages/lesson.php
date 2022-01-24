@@ -110,10 +110,13 @@ if(isset($_SESSION['connected'])){
                 <div id="pratiques_demo_container" align="center">
                     <div id="pratique_guide">
                         <div id="bulles_container"></div>
-                        <p id="signe_egal">=</p>
+                        <p id="signe_egal">&#9183;</p>
                         <p id="cumule_des_caracteres"></p>
                     </div>
-                    <div id="pratiques_images_container" align="center"><img src="" id="pratiques_image" alt="?"></div>
+                    <div id="pratiques_images_container" align="center">
+                        <img src="" id="pratiques_image" alt="?">
+                        <div id="croix">&#10060;</div>
+                    </div>
                 </div>
                 <div id="pratiques_reponse_container">
                     <div id="table_1_cadre">

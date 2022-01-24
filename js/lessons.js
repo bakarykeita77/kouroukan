@@ -55,9 +55,9 @@ $('document').ready(function() {
         var tableau_de_niveaux_restants = [];
         var tableau_de_phases_passees = '';
         var tableau_de_phases_restantes = [];
+         
         
-             
-               
+        
         niveau = reverseIntNko(niveau);
         resume_brut_des_etudes = resume_brut_des_etudes.split('/');
         etapes_passees = etapesPassees();
@@ -981,9 +981,11 @@ $('document').ready(function() {
                         	       
                         	        if(question_pratique == reponse_tapee) {
                         	            $('#pratiques_image').css('opacity',1);
+                        	            $('#croix').css('display','none');
                         	        }
                         	        if(question_pratique !== reponse_tapee) {
                         	            $('#pratiques_image').css('opacity','0.15');
+                        	            $('#croix').css('display','flex');
                         	        }
                         	        
                         	        setTimeout(function(){ $('#pratique_guide').animate({'top':'-100%'},400); }, 200);
@@ -1056,9 +1058,11 @@ $('document').ready(function() {
                             	        var r = $('.pratique_tr_actif td:nth(1)').html(); 
                             	        if(q == r) {
                         	                $('#pratiques_image').css('opacity',1);
+                        	                $('#croix').css('display','none');
                         	            }
                             	        if(q !== r) {
                             	            $('#pratiques_image').css('opacity','0.15');
+                        	                $('#croix').css('display','flex');
                             	        }
                         	        
                             	    });

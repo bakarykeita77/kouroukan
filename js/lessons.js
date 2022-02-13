@@ -26,19 +26,23 @@ $('document').ready(function() {
 	var phases_actuelles, phases_actuelles_etudiees, phase_precedante;
 	var index_phase_actuelle, index_phase_precedante, index_phase_active;
 	var avancer_btn = '';
-
-    
-    
-    resume_des_etudes = convertirResuneBrutDesEtudesEnObjet();
-    noms_des_phases = nomsDesPhases();
-	phases_etudiees = phasesEtudiees();
-	phase_active = phaseActive(); 
-	phases_a_etudier = phasesAEtudier();
-	phases();
-	parametrageDeLesson();
-	actualiserCochage();
-	cours();
-	naviguerSurLesson();
+	
+	
+	try{
+        resume_des_etudes = convertirResuneBrutDesEtudesEnObjet();
+        noms_des_phases = nomsDesPhases();
+	    phases_etudiees = phasesEtudiees();
+	    phase_active = phaseActive(); 
+	    phases_a_etudier = phasesAEtudier();
+	    phases();
+	    parametrageDeLesson();
+	    actualiserCochage();
+	    cours();
+	    naviguerSurLesson();
+alert( typeof(5) ); 
+	}catch(error){
+	    alert( 'Erreur: '+error ); 
+	}
 	
 
 	function nomsDesPhases() {
@@ -669,7 +673,10 @@ $('document').ready(function() {
                     
                     var questions_pratiques=[], question_pratique='', reponse_tapee=[], point='';
                     var table = $('#pratiques_reponse_container table tbody').html();
-                                	   
+                    
+                    let cook = document.cookie; 
+                    alert( cook );          	  
+                              	   
             	    
             	    affichageParDefautDesBoutonsDEntete();
             	    $('#pratiques_programme span').on('click', function() {

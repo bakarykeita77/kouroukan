@@ -61,11 +61,11 @@
     		
     		<form methode="GET" action="" id='formulaire_de_connexion'>
     			<div class="input_box">
-    				<input type="email" name="client_email" id="client_email">
+    				<input type="email" autocomplete="off" name="client_email" id="client_email">
     				<label>Email</label>
     			</div>
     			<div class="input_box">
-    				<input type="password" name="client_password" id="client_password">
+    				<input type="password" autocomplete="off" name="client_password" id="client_password">
     				<label>ߜߎ߲߬ߘߎ߬ߕߐ߮</label>
     			</div>
     			<div id="button_box">

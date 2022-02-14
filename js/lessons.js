@@ -28,23 +28,7 @@ $('document').ready(function() {
 	var avancer_btn = '';
 	
 	
-	try{
-        resume_des_etudes = convertirResuneBrutDesEtudesEnObjet();
-        noms_des_phases = nomsDesPhases();
-	    phases_etudiees = phasesEtudiees();
-	    phase_active = phaseActive(); 
-	    phases_a_etudier = phasesAEtudier();
-	    phases();
-	    parametrageDeLesson();
-	    actualiserCochage();
-	    cours();
-	    naviguerSurLesson();
-alert( typeof(5) ); 
-	}catch(error){
-	    alert( 'Erreur: '+error ); 
-	}
 	
-
 	function nomsDesPhases() {
 	    var noms_des_phases = [];
 	        
@@ -1315,5 +1299,24 @@ alert( typeof(5) );
            
         return resume; 
     }
+
+	
+    
+	try{
+        resume_des_etudes = convertirResuneBrutDesEtudesEnObjet();
+        noms_des_phases = nomsDesPhases();
+	    phases_etudiees = phasesEtudiees();
+	    phase_active = phaseActive(); 
+	    phases_a_etudier = phasesAEtudier();
+	    phases();
+	    parametrageDeLesson();
+	    actualiserCochage();
+	    cours();
+	    naviguerSurLesson();
+
+	}catch(error){
+	    alert( 'Erreur: '+error ); 
+	}
+	
 
 });

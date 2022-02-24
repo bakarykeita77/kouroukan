@@ -1,13 +1,13 @@
-$('document').ready(function() {
+    $('document').ready(function() {
 	    
-	var matiere_id = $('#matiere_id_container').html();
-	var matiere_index = parseInt($('#matiere_index_container').html());
-	var matiere_nom = $('#matiere_nom_container').html();
+    var matiere_id = $('#matiere_id_container').html();
+    var matiere_index = parseInt($('#matiere_index_container').html());
+    var matiere_nom = $('#matiere_nom_container').html();
     var niveau = parseInt($('#niveau_container').html());
     var niveau_max = parseInt($('#niveau_max_container').html());
     var resume_brut_des_etudes = $('#resume_brut_des_etudes_container').html();
     var voyelles_cochees, consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees;
-   
+      
     var rang = '';
 	var etapes_passees = '';
 	var etape_actuelle = [];
@@ -52,7 +52,6 @@ $('document').ready(function() {
         etape_actuelle = etapeActuelle(); 
 	    changementDePhase();
 	    index_phase_actuelle = phases_etudiees.length;
-
 
 	    function etapeActuelle() {
             var etape_actuelle = resume_brut_des_etudes[matiere_index-1].split(';'); 

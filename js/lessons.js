@@ -284,13 +284,9 @@
             var pratiques_entete_html = $('#pratiques_entete').html();
             var evaluation = $('#evaluation');
             var parametres_html = parametres.html();
-
-    	    
-    	    dimensionnementDeCourseBody();
-    	    affichageDeCours();
-    	    dispenserCours();
-    	 
-
+        
+          /*--------------------------------------------------------------------*/    
+            
             function dimensionnementDeCourseBody() {
                 
                 var course_height = $('.course').height();
@@ -657,9 +653,7 @@
                     var questions_pratiques=[], question_pratique='', reponse_tapee=[], point='';
                     var table = $('#pratiques_reponse_container table tbody').html();
                     
-                    let cook = document.cookie; 
-                    alert( cook );          	  
-                              	   
+
             	    
             	    affichageParDefautDesBoutonsDEntete();
             	    $('#pratiques_programme span').on('click', function() {
@@ -861,7 +855,6 @@
                         	        }
                         	        character.splice(0,2);
                     	        }
-                	        alert( syllabes ); 
                 	        }
                 	    }
                 	    function repondreQuestionPratique(){
@@ -1261,6 +1254,14 @@
                 
                 return lq;
             }
+
+          /*--------------------------------------------------------------------*/    
+    	    
+    	    dimensionnementDeCourseBody();
+    	    affichageDeCours();
+    	    dispenserCours();
+    	 
+
       	});
 	}
 	function naviguerSurLesson() {

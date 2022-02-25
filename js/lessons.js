@@ -670,9 +670,17 @@
             	        
             	        dimensionnementParDefautDePratiquesCorps()                   
             	        affichageParDefautDesBoutonsDEntete();
+                        animerCourseBtn();
                         afficherProgressBar();
                         initialiserProgressBarr();
             	    
+                    	function animerCourseBtn() {
+                    	    var course_head_btn = $('.course_head .btn span:first-child'); 
+                    	    
+                    	    course_head_btn.on('click', function(){
+                    	        alert( $(this).html() ); 
+                    	    });
+                    	}
                 	    function optionDeSyllabe() {
                 	        var option_de_syllabe = '';
                 	        
@@ -768,6 +776,7 @@
                             
                         return questions_pratiques;
                     }
+                	    
                 	    function poserQuestionPratique() {
                     	    $('.question_btn').on('click',function(){
             
@@ -1188,7 +1197,7 @@
                     	}   
                     	        
             	    function stockerPratiques() {
-            	        //
+            	        
             	    }
                     function afficherProgressBar(){
         	            $('.progress_bar').css({'opacity':1});

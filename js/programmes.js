@@ -9,7 +9,8 @@ $(document).ready(function() {
     var situation_des_etudes_container = document.getElementById('situation_des_etudes_container');
 
     var click_min_nbr = 0;
-
+  
+  /*-----------------------------------------------------------------------------------------------------------------------*/
 
     $('#affiche_programme').on('click', function() {
         
@@ -27,8 +28,6 @@ $(document).ready(function() {
         var id, date, id_client, niveau, lesson_brute;
 
         var cours_par_phase = [];
-
-
         var situations = [];
         var situation_des_etudes = [];
         var data_cours_tries_par_phase = [];
@@ -48,18 +47,9 @@ $(document).ready(function() {
         var resume_des_etudes = [];
         var p = [];
         var point_max = '';
-
-
-
-        situationDesEtudes();
-        resume_brut_des_etudes = situations[situations.length-1];
-        resume_des_etudes = convertirResumeDeSituationsEnObjet();
-        niveau_max = niveauMaxDuClient();
-        verificationDesLessonsEtudiees();
-        programme();
         
-
-
+    /*-----------------------------------------------------------------------------------------------------------------------*/
+        
         function situationDesEtudes() {
 
             var donnees_ajax = document.getElementById('donnees_ajax');
@@ -364,68 +354,6 @@ $(document).ready(function() {
                     click_min_nbr = Math.min(...click_table);
             }    
         }
-        function programme() {
-            
-            programmes_container.html(programmeHTML());
-            affichageDuProgramme();
-            stylesDuProgramme();
-            navigationDuProgramme();
-
-
-            function programmeHTML() {
- 
-        
-                programme_html = '<h2>ߘߋ߰ߟߌ ߢߍߥߟߊ </h2>';
-                programme_html += '<ul id="programme_ul">';
-
-                for (var i = 0; i < liste_de_matieres.length; i++) {
-                    
-                    var matiere_index = liste_de_matieres.indexOf(liste_de_matieres[i])+1;
-        
-                    if (niveau_max+1 >= matiere_index) {
-                        var phases_lien = 'lesson.php?matiere_id='+liste_de_matieres[i][0]+'&matiere_index='+matiere_index+'&matiere_nom='+liste_de_matieres[i][1]+'&niveau='+matiere_index+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees+'&resume_brut_des_etudes='+resume_brut_des_etudes;
-                        programme_html += '<li><a href="'+phases_lien+'">'+liste_de_matieres[i][1]+'</a></li>';
-                    } else {
-                        programme_html += '<li><a href="#">'+liste_de_matieres[i][1]+'</a></li>';
-                    }
-                }
-                programme_html += '</ul>';
-                
-                programme_html += '<div class="nav_fleches_container">';
-                programme_html += '<span id="back_to_accueil">ߛߋ߬ߦߌ߬ ߞߐ߫</span>';
-                programme_html += '<span id="go_to_phases"><a href="'+phases_lien+'">ߥߊ߫ ߢߍ߫</a></span>';
-                programme_html += '</div>';
-
-                return programme_html;
-            }
-            function affichageDuProgramme() {
- 
-                programmes_container.css({
-                    'display': 'block'
-                });
-                reception.css({
-                    'display': 'none'
-                });
-            }
-            function stylesDuProgramme() {
-  
-                $.each($('#programmes_container ul li'), function() {
-                            
-                    var matiere_index = $(this).index()+1;
-
-                    if(matiere_index  < niveau_max+1) { $(this).addClass('apprises');    }
-                    if(matiere_index == niveau_max+1) { $(this).addClass('active');      }
-                    if(matiere_index  > niveau_max+1) { $(this).addClass('a_apprendre'); }
-                });
-            }
-            function navigationDuProgramme() {
-
-                $('#back_to_accueil').on('click', function() {
-                    programmes_container.css('display','none');
-                    reception.css('display','block');
-                });
-            }
-        }
         function convertirResumeDeSituationsEnObjet() {
             var resume = situations[situations.length-1].split('/');
                    
@@ -454,6 +382,80 @@ $(document).ready(function() {
          
             return resume; 
         }
+        function programme() {
+            
+            programmes_container.html(programmeHTML());
+            programmeStyle();
+            programmeAffichage();
+            programmeNavigation();
+
+
+            function programmeHTML() {
+ 
+        
+                programme_html = '<h2>ߘߋ߰ߟߌ ߢߍߥߟߊ </h2>';
+                programme_html += '<ul id="programme_ul">';
+
+                for (var i = 0; i < liste_de_matieres.length; i++) {
+                    
+                    var matiere_index = liste_de_matieres.indexOf(liste_de_matieres[i])+1;
+        
+                    if (niveau_max+1 >= matiere_index) {
+                        var phases_lien = 'lesson.php?matiere_id='+liste_de_matieres[i][0]+'&matiere_index='+matiere_index+'&matiere_nom='+liste_de_matieres[i][1]+'&niveau='+matiere_index+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees+'&resume_brut_des_etudes='+resume_brut_des_etudes;
+                        programme_html += '<li><a href="'+phases_lien+'">'+liste_de_matieres[i][1]+'</a></li>';
+                    } else {
+                        programme_html += '<li><a href="#">'+liste_de_matieres[i][1]+'</a></li>';
+                    }
+                }
+                programme_html += '</ul>';
+                
+                programme_html += '<div class="nav_fleches_container">';
+                programme_html += '<span id="back_to_accueil">ߛߋ߬ߦߌ߬ ߞߐ߫</span>';
+                programme_html += '<span id="go_to_phases"><a href="'+phases_lien+'">ߥߊ߫ ߢߍ߫</a></span>';
+                programme_html += '</div>';
+
+                return programme_html;
+            }
+            function programmeStyle() {
+  
+                $.each($('#programmes_container ul li'), function() {
+                            
+                    var matiere_index = $(this).index()+1;
+
+                    if(matiere_index  < niveau_max+1) { $(this).addClass('apprises');    }
+                    if(matiere_index == niveau_max+1) { $(this).addClass('active');      }
+                    if(matiere_index  > niveau_max+1) { $(this).addClass('a_apprendre'); }
+                });
+            }
+            function programmeAffichage() {
+                programmes_container.css({'display': 'block'});
+                reception.css({'display': 'none'});
+            }
+            function programmeNavigation() {
+
+                $('#back_to_accueil').on('click', function() {
+                    programmes_container.css('display','none');
+                    reception.css('display','block');
+                });
+            }
+        }
+      
+    /*-----------------------------------------------------------------------------------------------------------------------*//*
+
+        
+        Au click sur l'afficheur du programme 
+        
+        1)- On obtient le niveau d'étude de l'apprenant par analyse de sa situation.
+        2)- On determine le programme en fonction du niveau d'étude */
+        
+        situationDesEtudes();
+        resume_brut_des_etudes = situations[situations.length-1];
+        resume_des_etudes = convertirResumeDeSituationsEnObjet();
+        niveau_max = niveauMaxDuClient();
+        verificationDesLessonsEtudiees();
+        
+        programme();
+
     });
 
 });

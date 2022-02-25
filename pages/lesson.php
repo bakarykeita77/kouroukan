@@ -132,7 +132,7 @@ if(isset($_SESSION['connected'])){
             <div class='progress_bar'><span class='progress_question_bar'></span><span class='progress_bonne_reponse_bar'></span></div>
             <div class="course_head" id="pratiques_entete">
 
-                <div class="question_btn">
+                <div class="btn question_btn">
                     <span class="question_label">ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</span>
                     <span class="question_total"></span> :
                     <span class="question_ordre"></span>
@@ -140,12 +140,12 @@ if(isset($_SESSION['connected'])){
                     <span class="question_icon"></span>
                 </div>
 
-                <div class="repetition_btn">
+                <div class="btn repetition_btn">
                     <span class="repetition_label">ߊ߬ ߟߊߡߍ߲߫ ߕߎ߯ߣߌ߫</span>
                     <span class="repetition_icon"></span>
                 </div>
 
-                <div class="correction_btn">
+                <div class="btn correction_btn">
                     <span class="correction_label">ߏ߬ ߛߊߞߍ߫</span>
                     <span class="correction_icon"></span>
                 </div>

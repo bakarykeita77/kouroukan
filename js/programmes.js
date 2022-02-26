@@ -386,9 +386,6 @@ $(document).ready(function() {
             
             programmes_container.html(programmeHTML());
             programmeStyle();
-            programmeAffichage();
-            programmeNavigation();
-
 
             function programmeHTML() {
  
@@ -427,34 +424,40 @@ $(document).ready(function() {
                     if(matiere_index  > niveau_max+1) { $(this).addClass('a_apprendre'); }
                 });
             }
-            function programmeAffichage() {
-                programmes_container.css({'display': 'block'});
-                reception.css({'display': 'none'});
-            }
-            function programmeNavigation() {
-
-                $('#back_to_accueil').on('click', function() {
-                    programmes_container.css('display','none');
-                    reception.css('display','block');
-                });
-            }
         }
-      
+        function programmeAffichage() {
+            programmes_container.css({'display': 'block'});
+            reception.css({'display': 'none'});
+        }
+        function programmeNavigation() {
+
+            $('#back_to_accueil').on('click', function() {
+                programmes_container.css('display','none');
+                reception.css('display','block');
+            });
+            
+          //Le click sur le bouton next redirige sur la page de lessons.
+        }
+       
     /*-----------------------------------------------------------------------------------------------------------------------*//*
 
-        
-        Au click sur l'afficheur du programme 
-        
+    Au click sur l'afficheur du programme 
         1)- On obtient le niveau d'étude de l'apprenant par analyse de sa situation.
-        2)- On determine le programme en fonction du niveau d'étude */
+        2)- On determine le programme en fonction du niveau d'étude.
+        3)- On l'affiche et 
+        4)- On navigue dessus */
         
-        situationDesEtudes();
+        
+   /*1*/situationDesEtudes();
         resume_brut_des_etudes = situations[situations.length-1];
         resume_des_etudes = convertirResumeDeSituationsEnObjet();
         niveau_max = niveauMaxDuClient();
         verificationDesLessonsEtudiees();
         
-        programme();
+   /*2*/programme();
+   /*3*/programmeAffichage();
+   /*4*/programmeNavigation();
+
 
     });
 

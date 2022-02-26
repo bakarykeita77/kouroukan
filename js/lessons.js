@@ -215,18 +215,19 @@
     
     
         function phasesHTML(){
-
+          
+          // Liste des phases
             var content = '<ul>';
-            
             for(var i=0;i<liste_de_phases.length;i++){
                 var lesson_id = $('.lesson_title').attr('id');
                 content += '<li id="'+lesson_id+'_'+liste_de_phases[i][0]+'">'+liste_de_phases[i][1]+'</li>';
             }
             content += '</ul>';
-                            
+            
+          //Barre de navigation               
             content += '<div class="nav_fleches_container">';
-            content += '<span id="back_to_programmes"><a href="programmes.php?programmes_visibility=visible">ߛߋ߬ߦߌ߬ ߞߐ߫</a></span>';
-            content += '<span id="go_to_lesson">ߥߊ߫ ߢߍ߫</</span>';
+                content += '<span id="back_to_programmes"><a href="programmes.php?programmes_visibility=visible">ߛߋ߬ߦߌ߬ ߞߐ߫</a></span>';
+                content += '<span id="go_to_lesson">ߥߊ߫ ߢߍ߫</</span>';
             content += '</div>';
 
             return content;
@@ -1312,6 +1313,12 @@
 	
     
 	try{
+	    
+	  /*
+	    Faire la situation des études par récupération et traitement des données reçues sur l'apprenant.
+	    Faire la liste des phases en fonction du niveau d'étude de l'apprenant (selon les phases étudiées ou pas)
+	    */
+	    
         resume_des_etudes = convertirResuneBrutDesEtudesEnObjet();
         noms_des_phases = nomsDesPhases();
 	    phases_etudiees = phasesEtudiees();

@@ -446,7 +446,7 @@ $(document).ready(function() {
         2)- On determine le programme en fonction du niveau d'étude.
         3)- On l'affiche et 
         4)- On navigue dessus */
-        
+      
         
    /*1*/situationDesEtudes();
         resume_brut_des_etudes = situations[situations.length-1];

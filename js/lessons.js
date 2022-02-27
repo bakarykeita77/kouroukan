@@ -266,7 +266,11 @@
         nasalisations_cochees = [''].concat($('#nasalisations_cochees').html().split(''));
         caracteres_coches = [voyelles_cochees, consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees];
     }
-	function cours() {
+	function affichageDesPhses() {
+
+	    affichageListeEnCascade();
+	}
+	function naviguerSurLesson() {
     	
     	$('.phases ul li').on('click', function(){
        
@@ -309,6 +313,56 @@
     	        }
     	        
     	        $('.course_body').css('height', course_body_height-26+'px');
+            }
+    	    function coursEnteteHTML() {
+    	        var ceh = '';
+    	       
+    	        if(course_id=='apprentissage'){ ceh = apprentissageEnteteHTML(); }
+    	        if(course_id=='exercices'){ ceh = exercicesEnteteHTML(); }
+    	        if(course_id=='pratiques'){ ceh = pratiquesEnteteHTML(); }
+    	  alert( quantite_de_question );       
+    	        return ceh;
+    	        
+    	        
+    	        function apprentissageEnteteHTML() {
+    	            
+                    var apprentissage_entete_html = "<div class='play_btn_container'><span class='play_label'>ߝߐߟߊ߲</span><span class='play_icon'>"+play_icon+"</span></div>";
+                    apprentissage_entete_html += "<div class='stop_btn_container'><span class='stop_label'>ߘߊ߬ߘߋ߬ߟߊ߲ </span> <span class='stop_icon'>"+stop_icon+"</span></div>";
+                    apprentissage_entete_html += "<div class='parametre_btn_container'><span class='parametre_label'>ߛߏ߯ߙߏߟߊ߲</span>  <span class='parametre_icon'>"+parametre_icon+"</span></div>";
+                            
+                    return apprentissage_entete_html;
+    	        }
+    	        function exercicesEnteteHTML() {
+    	            
+                    var exercices_entete_html = "<div class='play_icon_container' id='exercices_player' style='width:auto'>";
+                        exercices_entete_html += "<span class='play_label'>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ </span>";
+                    	exercices_entete_html += "<span class='qtite_question'>"+quantite_de_question+"</span> : <span class='ordre_question'>"+parseIntNko(compteur_de_question)+question_rang+" </span>";
+                    	exercices_entete_html += "<span class='ecouter_question'> ߟߊߡߍ߲߫</span><span class='play_icon'>"+play_icon+"</span>";
+                    exercices_entete_html += "</div>";
+                    exercices_entete_html += "<div class='oreille_icon_container'><span class='reecoute_label'>ߊ߬ ߟߊߡߍ߲߫ ߕߎ߯ߣߌ߫  </span> <span class='oreille_icon'>"+oreille_icon+"</span></div>";
+                    
+                    return exercices_entete_html;
+    	        }
+
+    	    }
+            function lessonCourante() {
+         
+                if(phase_id=='alphabet_apprentissage'){ lesson_courante = alphabetApprentissageHTML(); } //Cette fonction provient de alphabet.js 
+                if(phase_id=='syllabes_apprentissage'){ lesson_courante = syllabesApprentissageHTML(); } //Cette fonction provient de syllabes.js
+                if(phase_id=='tons_apprentissage'){ lesson_courante = tonsApprentissageHTML(); } //Cette fonction provient de tons.js
+                if(phase_id=='chiffres_apprentissage'){ lesson_courante = chiffresApprentissageHTML(); } //Cette fonction provient de chiffres.js
+                
+                if(phase_id=='alphabet_exercices'){ lesson_courante = alphabetExercicesHTML(); } //Cette fonction provient de alphabet.js
+                if(phase_id=='syllabes_exercices'){ lesson_courante = syllabesExercicesHTML(); } //Cette fonction provient de syllabes.js
+                if(phase_id=='tons_exercices'){ lesson_courante = tonsExercicesHTML(); } //Cette fonction provient de tons.js
+                if(phase_id=='chiffres_exercices'){ lesson_courante = chiffresExercicesHTML(); } //Cette fonction provient de chiffres.js
+                
+                if(phase_id=='syllabes_pratiques'){ lesson_courante = syllabesPratiquesHTML(); } //Cette fonction provient de syllabes.js
+                if(phase_id=='tons_pratiques'){ lesson_courante = tonsPratiquesHTML(); } //Cette fonction provient de tons.js
+                if(phase_id=='chiffres_pratiques'){ lesson_courante = chiffresPratiquesHTML(); } //Cette fonction provient de chiffres.js
+             
+                return lesson_courante;
+                
             }
             function affichageDeCours(){
             	$('.course_container').css({'display':'block'});
@@ -1205,56 +1259,6 @@
         	        }
                 } 
     	    }
-    	    function coursEnteteHTML() {
-    	        var ceh = '';
-    	       
-    	        if(course_id=='apprentissage'){ ceh = apprentissageEnteteHTML(); }
-    	        if(course_id=='exercices'){ ceh = exercicesEnteteHTML(); }
-    	        if(course_id=='pratiques'){ ceh = pratiquesEnteteHTML(); }
-    	  alert( quantite_de_question );       
-    	        return ceh;
-    	        
-    	        
-    	        function apprentissageEnteteHTML() {
-    	            
-                    var apprentissage_entete_html = "<div class='play_btn_container'><span class='play_label'>ߝߐߟߊ߲</span><span class='play_icon'>"+play_icon+"</span></div>";
-                    apprentissage_entete_html += "<div class='stop_btn_container'><span class='stop_label'>ߘߊ߬ߘߋ߬ߟߊ߲ </span> <span class='stop_icon'>"+stop_icon+"</span></div>";
-                    apprentissage_entete_html += "<div class='parametre_btn_container'><span class='parametre_label'>ߛߏ߯ߙߏߟߊ߲</span>  <span class='parametre_icon'>"+parametre_icon+"</span></div>";
-                            
-                    return apprentissage_entete_html;
-    	        }
-    	        function exercicesEnteteHTML() {
-    	            
-                    var exercices_entete_html = "<div class='play_icon_container' id='exercices_player' style='width:auto'>";
-                        exercices_entete_html += "<span class='play_label'>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ </span>";
-                    	exercices_entete_html += "<span class='qtite_question'>"+quantite_de_question+"</span> : <span class='ordre_question'>"+parseIntNko(compteur_de_question)+question_rang+" </span>";
-                    	exercices_entete_html += "<span class='ecouter_question'> ߟߊߡߍ߲߫</span><span class='play_icon'>"+play_icon+"</span>";
-                    exercices_entete_html += "</div>";
-                    exercices_entete_html += "<div class='oreille_icon_container'><span class='reecoute_label'>ߊ߬ ߟߊߡߍ߲߫ ߕߎ߯ߣߌ߫  </span> <span class='oreille_icon'>"+oreille_icon+"</span></div>";
-                    
-                    return exercices_entete_html;
-    	        }
-
-    	    }
-            function lessonCourante() {
-         
-                if(phase_id=='alphabet_apprentissage'){ lesson_courante = alphabetApprentissageHTML(); } //Cette fonction provient de alphabet.js 
-                if(phase_id=='syllabes_apprentissage'){ lesson_courante = syllabesApprentissageHTML(); } //Cette fonction provient de syllabes.js
-                if(phase_id=='tons_apprentissage'){ lesson_courante = tonsApprentissageHTML(); } //Cette fonction provient de tons.js
-                if(phase_id=='chiffres_apprentissage'){ lesson_courante = chiffresApprentissageHTML(); } //Cette fonction provient de chiffres.js
-                
-                if(phase_id=='alphabet_exercices'){ lesson_courante = alphabetExercicesHTML(); } //Cette fonction provient de alphabet.js
-                if(phase_id=='syllabes_exercices'){ lesson_courante = syllabesExercicesHTML(); } //Cette fonction provient de syllabes.js
-                if(phase_id=='tons_exercices'){ lesson_courante = tonsExercicesHTML(); } //Cette fonction provient de tons.js
-                if(phase_id=='chiffres_exercices'){ lesson_courante = chiffresExercicesHTML(); } //Cette fonction provient de chiffres.js
-                
-                if(phase_id=='syllabes_pratiques'){ lesson_courante = syllabesPratiquesHTML(); } //Cette fonction provient de syllabes.js
-                if(phase_id=='tons_pratiques'){ lesson_courante = tonsPratiquesHTML(); } //Cette fonction provient de tons.js
-                if(phase_id=='chiffres_pratiques'){ lesson_courante = chiffresPratiquesHTML(); } //Cette fonction provient de chiffres.js
-             
-                return lesson_courante;
-                
-            }
             function questions() {
                 var lq = '';
                 if(niveau==1){ lq = mix1D(lettres); }
@@ -1270,11 +1274,9 @@
     	    dimensionnementDeCourseBody();
     	    affichageDeCours();
     	    dispenserCours();
-    	 
 
       	});
-	}
-	function naviguerSurLesson() {
+    	
     	$('#go_to_lesson').on('click', function() {
 	        $('.phases ul li').click();
 	    });
@@ -1315,20 +1317,24 @@
 	try{
 	    
 	  /*
-	    Faire la situation des études par récupération et traitement des données reçues sur l'apprenant.
-	    Faire la liste des phases en fonction du niveau d'étude de l'apprenant (selon les phases étudiées ou pas)
-	    */
+	    1)- La situation des études est faite par récupération et traitement des données reçues sur l'apprenant.
+	    2)- La liste des phases est établie en fonction du niveau d'étude de l'apprenant (selon les phases étudiées ou pas)
+	    3)- Le paramétrage conséquent est défini pour la leçon future.
+	    4)- Les phases s'affichent et
+	    5)- On peut surfer*/
 	    
-        resume_des_etudes = convertirResuneBrutDesEtudesEnObjet();
+   /*1*/resume_des_etudes = convertirResuneBrutDesEtudesEnObjet();
         noms_des_phases = nomsDesPhases();
 	    phases_etudiees = phasesEtudiees();
 	    phase_active = phaseActive(); 
 	    phases_a_etudier = phasesAEtudier();
-	    phases();
-	    parametrageDeLesson();
+	    
+   /*2*/phases();
+   softDisplay();
+   /*4*/affichageDesPhses();
+   /*3*/parametrageDeLesson();
 	    actualiserCochage();
-	    cours();
-	    naviguerSurLesson();
+   /*5*/naviguerSurLesson();
 
 	}catch(error){
 	    alert( 'Erreur: '+error ); 

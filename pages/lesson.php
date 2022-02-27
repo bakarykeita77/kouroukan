@@ -48,7 +48,7 @@ if(isset($_SESSION['connected'])){
                 
                 <h4>ߘߋ߰ߟߌ ߞߛߊߞߊ : <span class="niveau_courant"><?= $chiffres[$niveau+1]; ?><span class='rang'></span></h4>
                 <h2 class="lesson_title" id="<?= $matiere_id ?>"> <?= $matiere_nom; ?> ߥߟߊ߬ߘߊ  </h2>
-                <div class="phases" align="center"></div>
+                <div class="phases liste_affichage_cascade" align="center"></div>
             </div>
         </div>
         <div class="page_foot"><?php include("pied-de-lesson.php"); ?></div>

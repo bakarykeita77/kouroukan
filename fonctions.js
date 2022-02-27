@@ -6,9 +6,24 @@
 			son.attr({src: source_son, autoplay: "on"});
 		});
 	}
+	function affichageListeEnCascade() {
+	    
+	    var liste = $('.liste_affichage_cascade');
+	    var li = $('.liste_affichage_cascade li');
+	    
+	    liste.css('display','block');
+	    $.each(li, function(){
+	        var liste = $(this);
+	        var index = $(this).index();
+	        setTimeout(function(){
+	            liste.css({'display':'block', 'height':'32px'});
+	        }, index*200);
+	    });
+
+	}
 	function aggrandir_caractere_de(element) { element.css( 'font-size','+=32px' ); }
 	function appetir_caractere_de(element) { element.css( 'font-size','-=32px' ); }
-    function arreterLecture(lessonHTML){
+    function arreterLecture(lessonHTML) {
         $('.stop_icon').parent().on('click',function(){ 
              $('#lesson_corps').html(lessonHTML());
              lecturePersonnalisee();
@@ -231,6 +246,13 @@
 		son.src = "son/mp4"+id+".mp4";
 		
 		son.play();
+	}
+	
+	function softDisplay() {
+	    var element = $('.soft_display');
+	    var elements_secondaires = element.children();
+	    
+	   // alert( elements_secondaires ); 
 	}
 
     function zoomArriere(element) { element.css('fontSize','-=16px'); }

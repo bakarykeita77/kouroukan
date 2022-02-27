@@ -380,6 +380,17 @@
     box-sizing: border-box;
     border-bottom-color: #666;
 }
+.liste_affichage_cascade{
+    display: none;
+}
+.liste_affichage_cascade li {
+    position: relative;
+    height: 0;
+    display: none;
+    transition: display 0.15s;
+    transition: height 0.45s;
+}
+
 
 .matiere {
     position: relative;
@@ -469,8 +480,6 @@
     display: table-cell;
     vertical-align: middle;
 }
-.phases{
-}
 .phases_container{
     position: absolute;
     top: 64px;
@@ -500,7 +509,6 @@
     left: 10%;
 }
 .phases ul li{
-    height: 32px;
     line-height: 32px;
     width: 100%;
     padding: 0 16px;
@@ -508,6 +516,7 @@
     box-sizing: border-box;
     text-align: right;
     font-weight: bold;
+    overflow: hidden;
     cursor: pointer;
 }
 .ponctuations input, .ponctuations label{
@@ -581,6 +590,9 @@
 }
 
 .shadow{ box-shadow: 0 8px 8px #666; }
+.soft_display {
+    
+}
 
 .table_parlante, .table_muette {
     position: relative;

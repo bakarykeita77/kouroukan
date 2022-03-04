@@ -28,10 +28,9 @@ if(isset($_SESSION['connected'])){
     <script src="http://localhost:8080/kouroukan/js/icones.js"></script>
     <script src="http://localhost:8080/kouroukan/js/caracteres.js"></script>
     <script src="http://localhost:8080/kouroukan/js/class.js"></script>
-    
 </head>
 <body style="direction:rtl">
-
+<p></p>
     <div class="container">
         <div class="page_head"><?php require('tete-de-page.php'); ?></div>
         <div class="page_body">

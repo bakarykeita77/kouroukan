@@ -1,6 +1,6 @@
 <?php
 
-    $server = "127.0.0.1";
+    $server = "localhost";
     $dbname = "kouroukan";
     $user = "root";
     $pass = "";

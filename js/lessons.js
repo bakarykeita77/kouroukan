@@ -389,6 +389,7 @@
             	}
             }
     	    function dispenserCours(){
+                
                 switch (course_id) {
         	        case 'apprentissage':apprentissage(); break;
                     case 'exercices'    :exercices();     break;
@@ -725,7 +726,7 @@
             	        
             	        dimensionnementParDefautDePratiquesCorps()                   
             	        affichageParDefautDesBoutonsDEntete();
-                        animerCourseBtn();
+                       // animerCourseBtn();
                         afficherProgressBar();
                         initialiserProgressBarr();
             	    
@@ -752,6 +753,7 @@
                 	poserQuestionPratique();
                 	repondreQuestionPratique();
                 	correctionPratique();
+                	
                     
             	    function initialiserPratiques() {
             	        
@@ -998,7 +1000,6 @@
                                 effacerReponse();
                                 effacerLesBulles();
                                 initialiserCompteurDeCaractere();
-                                
                                 finDePratique();
                                 revisionDePratique();
                                 	
@@ -1126,10 +1127,11 @@
                             	        dimensionnementDeFinDePratiquesBody();
                             	        masquerClavierEtConsoles();
                             	        initialiserProgressBarr();
-                            	        //stockerPratiques();
                             	        table = '';
                             	                    
                             	        if(effort == '߁߀߀%') {
+                            	            stockerPratiques();
+                            	            
                             	            if(option_index <= 2) {
                             	            
                             	                $('#message_de_fin').html(message_1);
@@ -1151,27 +1153,26 @@
                             	            $('#message_btn_2').html('ߛߍ߬ߦߵߊ߬ ߡߊ߬');
                             	        }
                             	        
-                            	            $('#message_btn_2').on('click', function() {
+                            	        $('#message_btn_2').on('click', function() {
                             	                
-                            	                questions_pratiques = questionsPratiques();
-                            	                compteur_de_question = 1;
-            	                                affichageParDefautDesBoutonsDEntete();
-            	                                dimensionnementParDefautDePratiquesCorps();
+                            	            questions_pratiques = questionsPratiques();
+                            	            compteur_de_question = 1;
+            	                            affichageParDefautDesBoutonsDEntete();
+            	                            dimensionnementParDefautDePratiquesCorps();
 
-                            	                if($('#message_btn_2').text() == 'ߥߊ߫ ߢߍ߫') {
+                            	            if($('#message_btn_2').text() == 'ߥߊ߫ ߢߍ߫') {
                             	                    
-                            	                    changerNombreDeSyllabe();
-                            	                    total_point = 0;
-                            	                }
-                            	                if($('#message_btn_2').text() == 'ߛߍ߬ߦߵߊ߬ ߡߊ߬') {
+                            	                changerNombreDeSyllabe();
+                            	                total_point = 0;
+                            	            }
+                            	            if($('#message_btn_2').text() == 'ߛߍ߬ߦߵߊ߬ ߡߊ߬') {
                             	                    
-                            	                    questions = questionsPratiques();
-                            	                    total_point = 0;
-                            	                }
+                            	                questions = questionsPratiques();
+                            	                total_point = 0;
+                            	            }
 
-                            	            });
+                            	        });
                             	            
-                                        
                                         
                             	        function dimensionnementDeFinDePratiquesBody() {
                             	            
@@ -1192,10 +1193,19 @@
                                                 $('#pratiques_programme .actif').next().click();
                                             }
                                         }  
+                                        function stockerPratiques() {
+                                                    
+                                            var pratique_input = $('#pratique_input');
+                                            var pratique_submit = $('#pratique_submit');
+                                                    
+                                            pratique_input.val( memoire_pratiques );
+                                            pratique_submit.click(); 
+                                        }  
                                     }
                                 }
                             }); 
                         }
+                        
                         function afficherClavierEtConsoles() {
                             $('.progress_bar, .course_head, .clavier_container').css('display','block');
                         }
@@ -1251,9 +1261,6 @@
                     	    return qs;
                     	}   
                     	        
-            	    function stockerPratiques() {
-            	        
-            	    }
                     function afficherProgressBar(){
         	            $('.progress_bar').css({'opacity':1});
         	        }
@@ -1330,7 +1337,7 @@
 	    phases_a_etudier = phasesAEtudier();
 	    
    /*2*/phases();
-   softDisplay();
+        softDisplay();
    /*4*/affichageDesPhses();
    /*3*/parametrageDeLesson();
 	    actualiserCochage();

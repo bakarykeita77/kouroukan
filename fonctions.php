@@ -1,13 +1,14 @@
 <?php 
 	
-	$server = "127.0.0.1";
+	$server = "localhost";
 	$login = "root";
 	$pass = "";
 
 	try{
 		$db = new PDO("mysql:host=$server;dbname=kouroukan;charset=utf8",$login,$pass);
 		$db -> setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-
+        $connexion->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+		
 		function ajouterClient($prenom, $nom, $naissance, $sexe, $adresse, $email, $password){
 			global $db;
 

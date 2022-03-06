@@ -9,6 +9,26 @@
 		$db -> setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
         $connexion->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 		
+		function addClient($prenom, $nom, $naissance, $sexe, $adresse, $email, $password){
+			global $db;
+
+			$sql = "INSERT INTO users(prenom, nom, naissance, sexe, adresse, email, password)
+					VALUES(:prenom, :nom, :naissance, :sexe, :adresse, :email, :password)
+			";
+
+			$requette = $db->prepare($sql);
+
+			$requette->bindValue(':prenom',   $prenom,   PDO::PARAM_STR);
+			$requette->bindValue(':nom',      $nom,      PDO::PARAM_STR);
+			$requette->bindValue(':naissance',$naissance,PDO::PARAM_STR);
+			$requette->bindValue(':sexe',     $sexe,     PDO::PARAM_STR);
+			$requette->bindValue(':adresse',  $adresse,  PDO::PARAM_STR);
+			$requette->bindValue(':email',    $email,    PDO::PARAM_STR);
+			$requette->bindValue(':password', $password, PDO::PARAM_STR);
+
+			$utilisateurs =  $requette->execute();
+			return $utilisateurs;
+		 }
 		function ajouterClient($prenom, $nom, $naissance, $sexe, $adresse, $email, $password){
 			global $db;
 
@@ -29,7 +49,21 @@
 			$utilisateurs =  $requette->execute();
 			return $utilisateurs;
 		 }
-		function archiverLesson($client_id,$niveau,$course){
+		function archiverPratique($id_user,$pratique){
+		    global $db;
+
+			$sql = "INSERT INTO pratiques(id_user, pratique) 
+					VALUES(:id_user, :pratique)";
+			$requette = $db -> prepare($sql);
+
+			$requette->bindValue(':id_user',  $id_user,   PDO::PARAM_STR);
+			$requette->bindValue(':pratique', $pratique,  PDO::PARAM_STR);
+
+			$pratiques = $requette->execute();
+
+			return $pratiques;
+		}
+		function archiverLesson($client_id,$niveau,$course){}
 		function archiverNotes($numero, $question, $reponse, $points){
 			global $db;
 

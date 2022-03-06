@@ -1,6 +1,7 @@
 <?php
 session_start();
 if(isset($_SESSION['connected'])){
+    
     $matiere_id    = $_GET['matiere_id'];
     $matiere_index = $_GET['matiere_index'];
     $matiere_nom   = $_GET['matiere_nom'];
@@ -8,17 +9,6 @@ if(isset($_SESSION['connected'])){
     $niveau_max    = $_GET['niveau_max'];
     $resume_brut_des_etudes   = $_GET['resume_brut_des_etudes'];
     
-    
-    require("connexionToDB.php");
-    global $connexion;
-    
-    $id_user = $_SESSION['id'];
-    $pratique = isset($_POST['pratique'])? $_POST['pratique']:'';
-    
-    $sql = "INSERT INTO pratiques(id_user, pratique) VALUES(?, ?)";
-    $requete = $connexion->prepare($sql);
-    $requete-> execute(array($id_user, $pratique));
-
     $chiffres = ['߀','߁','߂','߃','߄','߅','߆','߇','߈','߉'];
 ?>
 
@@ -138,7 +128,9 @@ if(isset($_SESSION['connected'])){
                     <div id="message_btn_container"> <button id="message_btn_1"></button><button id="message_btn_2"></button> </div>
                 </div>
                 
-                <form method="POST" action="http://localhost:8080/kouroukan/pages/lesson.php" id="pratique_form" style="display:block">
+                <form method="POST" action="http://localhost:8080/kouroukan/pages/actions.php" id="pratique_form" style="display:block">
+                    <input type="text" name="post_action" value="archiver_pratique">
+                    <input type="number" name="id_user" value="<?= $_SESSION['id']; ?>">
                     <input type="text" name="pratique" id="pratique_input">
                     <input type="submit" id="pratique_submit" value="Envoyer">
                 </form>

@@ -1220,51 +1220,51 @@
                         $('.progress_question_bar, .progress_bonne_reponse_bar').css('width',0);
                     }
                 	
-                      	function monoSyllabesTotal() {
-                    	    var mono_syllabes = monoSyllabes(); // Cette fonction provient de syllabes.js 
-                    	    var ms = [];
-                    	            
-                        	for (var i = 0; i < mono_syllabes.length; i++) {
-                        	for (var j = 0; j < mono_syllabes[i].length; j++) {
-                        	    ms[ms.length] = mono_syllabes[i][j];
-                        	}}
-                    	        
-                    	    return ms;
-                    	}
-                    	function biSyllabesTotal() {
-                    	    var bi_syllabes = biSyllabes(); // Cette fonction provient de syllabes.js 
-                    	    var bs = [];
-                    	            
-                        	for (var i = 0; i < bi_syllabes.length; i++) {
-                        	for (var j = 0; j < bi_syllabes[i].length; j++) {
-                        	    bs[bs.length] = bi_syllabes[i][j];
-                        	}}
-                    	        
-                    	    return bs;
-                    	}
-                    	function triSyllabesTotal() {
-                    	    var tri_syllabes = triSyllabes(); // Cette fonction provient de syllabes.js 
-                    	    var ts = [];
-                    	            
-                            for (var i = 0; i < tri_syllabes.length; i++) {
-                        	for (var j = 0; j < tri_syllabes[i].length; j++) {
-                        	    ts[ts.length] = tri_syllabes[i][j];
-                        	}}
-                    	        
-                    	    return ts;
-                    	}
-                    	function quadriSyllabesTotal() {
-                    	    var quadri_syllabes = quadriSyllabes(); // Cette fonction provient de syllabes.js 
-                    	    var qs = [];
-                    	            
-                        	for (var i = 0; i < quadri_syllabes.length; i++) {
-                        	for (var j = 0; j < quadri_syllabes[i].length; j++) {
-                        	    qs[qs.length] = quadri_syllabes[i][j];
-                        	}}
-                    	        
-                    	    return qs;
-                    	}   
-                    	        
+                  	function monoSyllabesTotal() {
+                	    var mono_syllabes = monoSyllabes(); // Cette fonction provient de syllabes.js 
+                	    var ms = [];
+                	            
+                    	for (var i = 0; i < mono_syllabes.length; i++) {
+                    	for (var j = 0; j < mono_syllabes[i].length; j++) {
+                    	    ms[ms.length] = mono_syllabes[i][j];
+                    	}}
+                	        
+                	    return ms;
+                	}
+                	function biSyllabesTotal() {
+                	    var bi_syllabes = biSyllabes(); // Cette fonction provient de syllabes.js 
+                	    var bs = [];
+                	            
+                    	for (var i = 0; i < bi_syllabes.length; i++) {
+                    	for (var j = 0; j < bi_syllabes[i].length; j++) {
+                    	    bs[bs.length] = bi_syllabes[i][j];
+                    	}}
+                	        
+                	    return bs;
+                	}
+                	function triSyllabesTotal() {
+                	    var tri_syllabes = triSyllabes(); // Cette fonction provient de syllabes.js 
+                	    var ts = [];
+                	            
+                        for (var i = 0; i < tri_syllabes.length; i++) {
+                    	for (var j = 0; j < tri_syllabes[i].length; j++) {
+                    	    ts[ts.length] = tri_syllabes[i][j];
+                    	}}
+                	        
+                	    return ts;
+                	}
+                	function quadriSyllabesTotal() {
+                	    var quadri_syllabes = quadriSyllabes(); // Cette fonction provient de syllabes.js 
+                	    var qs = [];
+                	            
+                    	for (var i = 0; i < quadri_syllabes.length; i++) {
+                    	for (var j = 0; j < quadri_syllabes[i].length; j++) {
+                    	    qs[qs.length] = quadri_syllabes[i][j];
+                    	}}
+                	        
+                	    return qs;
+                	}   
+                	        
                    function afficherProgressBar(){
         	            $('.progress_bar').css({'opacity':1});
         	        }

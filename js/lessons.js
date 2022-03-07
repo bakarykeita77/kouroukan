@@ -27,7 +27,7 @@
 	var index_phase_actuelle, index_phase_precedante, index_phase_active;
 	var avancer_btn = '';
 	
-	
+
 	
 	function nomsDesPhases() {
 	    var noms_des_phases = [];
@@ -270,6 +270,36 @@
 
 	    affichageListeEnCascade();
 	}
+    function convertirResuneBrutDesEtudesEnObjet() {
+        var resume = resume_brut_des_etudes.split('/');
+                    
+        for (var i = 0; i < resume.length; i++) {
+            resume[i] = resume[i].split(';');
+        
+            for (var j = 0; j < resume[i].length; j++) {
+                resume[i][j] = resume[i][j].split(',');
+           
+                for (var k = 0; k < resume[i][j].length; k++) {
+                                
+                    if(k == 0 && resume[i][j][k] !== '') {
+                        resume[i][j][k] = parseInt(resume[i][j][k]);
+                    }
+                    if(k == 2 && resume[i][j][k] !== '') {
+                        resume[i][j][k] = parseInt(resume[i][j][k]);
+                    }
+                    if(k == 3) {
+                        resume[i][j][k] = resume[i][j][k].split('_');
+                        for (var l = 0; l < resume[i][j][k].length; l++) {
+                            resume[i][j][k][l] = reverseIntNko(resume[i][j][k][l]);
+                            resume[i][j][k][l] = parseInt(resume[i][j][k][l]); 
+                        }
+                    }
+                }
+            }   
+        }
+           
+        return resume; 
+    }
 	function naviguerSurLesson() {
     	
     	$('.phases ul li').on('click', function(){
@@ -289,7 +319,7 @@
             var pratiques_entete_html = $('#pratiques_entete').html();
             var evaluation = $('#evaluation');
             var parametres_html = parametres.html();
-        
+	
           /*--------------------------------------------------------------------*/    
             
             function dimensionnementDeCourseBody() {
@@ -387,6 +417,15 @@
                     setTimeout(function() { evaluation.css({'transform':'scale(1)'});}, 5);
                     setTimeout(function() { evaluation.css({'opacity':'1'});}, 5);
             	}
+            }
+            function questions() {
+                var lq = '';
+                if(niveau==1){ lq = mix1D(lettres); }
+                if(niveau==2){ lq = mix1D(syllabes); }
+                if(niveau==3){ lq = mix1D(syllabes_tonifies); }
+                if(niveau==4){ lq = mix1D(chiffre); }
+                
+                return lq;
             }
     	    function dispenserCours(){
                 
@@ -709,52 +748,8 @@
                     var questions_pratiques=[], question_pratique='', reponse_tapee=[], point='';
                     var table = $('#pratiques_reponse_container table tbody').html();
                     
+                  /*--------------------------------------------------------------------*/
 
-            	    
-            	    affichageParDefautDesBoutonsDEntete();
-            	    $('#pratiques_programme span').on('click', function() {
-
-            	        option_index = $(this).index();
-            	        
-            	        $(this).addClass('actif');
-            	        $(this).siblings().removeClass('actif');
-            	        compteur_de_question = 1;
-            	        option_de_syllabe = optionDeSyllabe();
-            	        table = '';
-             
-                        questions_pratiques = questionsPratiques();
-            	        
-            	        dimensionnementParDefautDePratiquesCorps()                   
-            	        affichageParDefautDesBoutonsDEntete();
-                       // animerCourseBtn();
-                        afficherProgressBar();
-                        initialiserProgressBarr();
-            	    
-                    	function animerCourseBtn() {
-                    	    var course_head_btn = $('.course_head .btn span:first-child'); 
-                    	    
-                    	    course_head_btn.on('click', function(){
-                    	        alert( $(this).html() ); 
-                    	    });
-                    	}
-                	    function optionDeSyllabe() {
-                	        var option_de_syllabe = '';
-                	        
-                	        switch(option_index) {
-                	            case 0: option_de_syllabe='ߞߎߡߊߘߋ߲߫ ߜߋ߲߬ ߞߋ߬ߟߋ߲߬ߡߊ'; break;
-                	            case 1: option_de_syllabe='ߞߎߡߊߘߋ߲߫ ߜߋ߲߬ ߝߌ߬ߟߊ߬ߡߊ'; break;
-                	            case 2: option_de_syllabe='ߞߎߡߊߘߋ߲߫ ߜߋ߲߬ ߛߓߊ߬ߡߊ'; break;
-                	            case 3: option_de_syllabe='ߞߎߡߊߘߋ߲߫ ߜߋ߲߬ ߣߊ߰ߣߌ߲߬ߡߊ'; break;
-                	        }
-                	        
-                	        return option_de_syllabe;
-                	    }
-            	    });
-                	poserQuestionPratique();
-                	repondreQuestionPratique();
-                	correctionPratique();
-                	
-                    
             	    function initialiserPratiques() {
             	        
             	        $('#pratiques_programme span').removeClass('actif');
@@ -924,7 +919,7 @@
             	        }
             	    }
             	    function repondreQuestionPratique(){
-
+            
                 	    $('.clavier_container td').on('click', function(){
                 	       
 
@@ -936,7 +931,6 @@
                             {
                                 var caractere = $(this).html();
                                 
-<<<<<<< HEAD
                                 reponse_tapee[reponse_tapee.length] = caractere;
                                 chargementDesBulles();
                                 bullesStyles();
@@ -983,9 +977,9 @@
             	    }
                 	function correctionPratique() {
             	        var total_point = 0;
-            	        
+            	       
             	        $('.correction_btn').on('click',  function() {
-            	            
+            	          
             	            reponse_tapee = reponse_tapee.join('');
             	            point = (question_pratique == reponse_tapee)?1:0;
                     	    total_point = total_point + point;
@@ -1039,15 +1033,7 @@
                     	        }
                     	        
                     	        setTimeout(function(){ $('#pratique_guide').animate({'top':'-100%'},400); }, 200);
-=======
-                                effacerQuestion();
-                                effacerReponse();
-                                effacerLesBulles();
-                                initialiserCompteurDeCaractere();
-                                finDePratique();
-                                revisionDePratique();
->>>>>>> b2e63fc ( debut de stockage)
-                                	
+                              	
                                 function imageSource() {
                                     var image_src = '';
                                 	    
@@ -1067,7 +1053,7 @@
                                 	return image_src;
                                 }
                             } 
-                            
+                          
                             function afficherQuestionBouton() {
                 	            $('.repetition_btn').css('display','none');
                 	            $('.correction_btn').css('display','none');
@@ -1200,14 +1186,13 @@
                                     function memoriserPratiques() {
                                         memoire_pratiques = [option_index, memoire_pratique.join(';')].join('%');
                                     }
-<<<<<<< HEAD
                                     function changerNombreDeSyllabe() {
                                         if(total_point === total_question) {
                                             $('#pratiques_programme .actif').next().click();
                                         }
                                     }  
                                 }
-                            }
+                            }  
                         }); 
                     }
                     function afficherClavierEtConsoles() {
@@ -1268,18 +1253,55 @@
                     function afficherProgressBar(){
         	            $('.progress_bar').css({'opacity':1});
         	        }
+                                    
+                  /*--------------------------------------------------------------------*/
+            	    
+            	    affichageParDefautDesBoutonsDEntete();
+            	    $('#pratiques_programme span').on('click', function() {
+
+            	        option_index = $(this).index();
+            	        
+            	        $(this).addClass('actif');
+            	        $(this).siblings().removeClass('actif');
+            	        compteur_de_question = 1;
+            	        option_de_syllabe = optionDeSyllabe();
+            	        table = '';
+             
+                        questions_pratiques = questionsPratiques();
+            	        
+            	        dimensionnementParDefautDePratiquesCorps()                   
+            	        affichageParDefautDesBoutonsDEntete();
+                       // animerCourseBtn();
+                        afficherProgressBar();
+                        initialiserProgressBarr();
+            	    
+                    	function animerCourseBtn() {
+                    	    var course_head_btn = $('.course_head .btn span:first-child'); 
+                    	    
+                    	    course_head_btn.on('click', function(){
+                    	        alert( $(this).html() ); 
+                    	    });
+                    	}
+                	    function optionDeSyllabe() {
+                	        var option_de_syllabe = '';
+                	        
+                	        switch(option_index) {
+                	            case 0: option_de_syllabe='ߞߎߡߊߘߋ߲߫ ߜߋ߲߬ ߞߋ߬ߟߋ߲߬ߡߊ'; break;
+                	            case 1: option_de_syllabe='ߞߎߡߊߘߋ߲߫ ߜߋ߲߬ ߝߌ߬ߟߊ߬ߡߊ'; break;
+                	            case 2: option_de_syllabe='ߞߎߡߊߘߋ߲߫ ߜߋ߲߬ ߛߓߊ߬ߡߊ'; break;
+                	            case 3: option_de_syllabe='ߞߎߡߊߘߋ߲߫ ߜߋ߲߬ ߣߊ߰ߣߌ߲߬ߡߊ'; break;
+                	        }
+                	        
+                	        return option_de_syllabe;
+                	    }
+            	    });
+                	poserQuestionPratique();
+                	repondreQuestionPratique();
+                	correctionPratique();
+                	
                 } 
     	    }
-            function questions() {
-                var lq = '';
-                if(niveau==1){ lq = mix1D(lettres); }
-                if(niveau==2){ lq = mix1D(syllabes); }
-                if(niveau==3){ lq = mix1D(syllabes_tonifies); }
-                if(niveau==4){ lq = mix1D(chiffre); }
-                
-                return lq;
-            }
-
+          
           /*--------------------------------------------------------------------*/    
     	    
     	    dimensionnementDeCourseBody();
@@ -1292,37 +1314,6 @@
 	        $('.phases ul li').click();
 	    });
 	}
-    function convertirResuneBrutDesEtudesEnObjet() {
-        var resume = resume_brut_des_etudes.split('/');
-                    
-        for (var i = 0; i < resume.length; i++) {
-            resume[i] = resume[i].split(';');
-        
-            for (var j = 0; j < resume[i].length; j++) {
-                resume[i][j] = resume[i][j].split(',');
-           
-                for (var k = 0; k < resume[i][j].length; k++) {
-                                
-                    if(k == 0 && resume[i][j][k] !== '') {
-                        resume[i][j][k] = parseInt(resume[i][j][k]);
-                    }
-                    if(k == 2 && resume[i][j][k] !== '') {
-                        resume[i][j][k] = parseInt(resume[i][j][k]);
-                    }
-                    if(k == 3) {
-                        resume[i][j][k] = resume[i][j][k].split('_');
-                        for (var l = 0; l < resume[i][j][k].length; l++) {
-                            resume[i][j][k][l] = reverseIntNko(resume[i][j][k][l]);
-                            resume[i][j][k][l] = parseInt(resume[i][j][k][l]); 
-                        }
-                    }
-                }
-            }   
-        }
-           
-        return resume; 
-    }
-
 	
     
 	try{

@@ -387,8 +387,8 @@
     position: relative;
     height: 0;
     display: none;
-    transition: display 0.15s;
-    transition: height 0.45s;
+    transition: display 0.1s;
+    transition: height 0.2s;
 }
 
 

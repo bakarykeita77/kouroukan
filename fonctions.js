@@ -7,7 +7,7 @@
 		});
 	}
 	function affichageListeEnCascade() {
-alert( 'pk' ); 	    
+	    
 	    var liste = $('.liste_affichage_cascade');
 	    var li = $('.liste_affichage_cascade li');
 	    
@@ -17,7 +17,7 @@ alert( 'pk' );
 	        var index = $(this).index();
 	        setTimeout(function(){
 	            liste.css({'display':'block', 'height':'32px'});
-	        }, index*200);
+	        }, index*50);
 	    });
 
 	}

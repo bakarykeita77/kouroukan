@@ -1,13 +1,14 @@
 <?php
 session_start();
 if(isset($_SESSION['connected'])){
+    
     $matiere_id    = $_GET['matiere_id'];
     $matiere_index = $_GET['matiere_index'];
     $matiere_nom   = $_GET['matiere_nom'];
     $niveau        = $_GET['niveau'];
     $niveau_max    = $_GET['niveau_max'];
     $resume_brut_des_etudes   = $_GET['resume_brut_des_etudes'];
-
+    
     $chiffres = ['߀','߁','߂','߃','߄','߅','߆','߇','߈','߉'];
 ?>
 
@@ -30,7 +31,7 @@ if(isset($_SESSION['connected'])){
     <script src="http://localhost:8080/kouroukan/js/class.js"></script>
 </head>
 <body style="direction:rtl">
-<p></p>
+
     <div class="container">
         <div class="page_head"><?php require('tete-de-page.php'); ?></div>
         <div class="page_body">
@@ -105,7 +106,7 @@ if(isset($_SESSION['connected'])){
                 <span>ߜߋ߲߬ ߄ ߡߊ</span>
             </div> 
             <div class="course_body" id="pratiques_corps">
-                
+            
                 <div id="pratiques_demo_container" align="center">
                     <div id="pratique_guide">
                         <div id="bulles_container"></div>
@@ -126,6 +127,13 @@ if(isset($_SESSION['connected'])){
                     <p id="message_de_fin"></p>
                     <div id="message_btn_container"> <button id="message_btn_1"></button><button id="message_btn_2"></button> </div>
                 </div>
+                
+                <form method="POST" action="http://localhost:8080/kouroukan/pages/actions.php" id="pratique_form" style="display:block">
+                    <input type="text" name="post_action" value="archiver_pratique">
+                    <input type="number" name="id_user" value="<?= $_SESSION['id']; ?>">
+                    <input type="text" name="pratique" id="pratique_input">
+                    <input type="submit" id="pratique_submit" value="Envoyer">
+                </form>
                 
             </div>
             <div class='progress_bar'><span class='progress_question_bar'></span><span class='progress_bonne_reponse_bar'></span></div>

@@ -389,6 +389,7 @@
             	}
             }
     	    function dispenserCours(){
+                
                 switch (course_id) {
         	        case 'apprentissage':apprentissage(); break;
                     case 'exercices'    :exercices();     break;
@@ -725,7 +726,7 @@
             	        
             	        dimensionnementParDefautDePratiquesCorps()                   
             	        affichageParDefautDesBoutonsDEntete();
-                        animerCourseBtn();
+                       // animerCourseBtn();
                         afficherProgressBar();
                         initialiserProgressBarr();
             	    
@@ -752,6 +753,7 @@
                 	poserQuestionPratique();
                 	repondreQuestionPratique();
                 	correctionPratique();
+                	
                     
             	    function initialiserPratiques() {
             	        
@@ -934,6 +936,7 @@
                             {
                                 var caractere = $(this).html();
                                 
+<<<<<<< HEAD
                                 reponse_tapee[reponse_tapee.length] = caractere;
                                 chargementDesBulles();
                                 bullesStyles();
@@ -1036,6 +1039,14 @@
                     	        }
                     	        
                     	        setTimeout(function(){ $('#pratique_guide').animate({'top':'-100%'},400); }, 200);
+=======
+                                effacerQuestion();
+                                effacerReponse();
+                                effacerLesBulles();
+                                initialiserCompteurDeCaractere();
+                                finDePratique();
+                                revisionDePratique();
+>>>>>>> b2e63fc ( debut de stockage)
                                 	
                                 function imageSource() {
                                     var image_src = '';
@@ -1055,7 +1066,8 @@
                                 	    
                                 	return image_src;
                                 }
-                            }    
+                            } 
+                            
                             function afficherQuestionBouton() {
                 	            $('.repetition_btn').css('display','none');
                 	            $('.correction_btn').css('display','none');
@@ -1126,10 +1138,11 @@
                         	        dimensionnementDeFinDePratiquesBody();
                         	        masquerClavierEtConsoles();
                         	        initialiserProgressBarr();
-                        	        //stockerPratiques();
                         	        table = '';
                         	                    
                         	        if(effort == '߁߀߀%') {
+                        	            stockerPratiques();
+                        	            
                         	            if(option_index <= 2) {
                         	            
                         	                $('#message_de_fin').html(message_1);
@@ -1187,6 +1200,7 @@
                                     function memoriserPratiques() {
                                         memoire_pratiques = [option_index, memoire_pratique.join(';')].join('%');
                                     }
+<<<<<<< HEAD
                                     function changerNombreDeSyllabe() {
                                         if(total_point === total_question) {
                                             $('#pratiques_programme .actif').next().click();
@@ -1206,55 +1220,52 @@
                         $('.progress_question_bar, .progress_bonne_reponse_bar').css('width',0);
                     }
                 	
-                	function monoSyllabesTotal() {
-                	    var mono_syllabes = monoSyllabes(); // Cette fonction provient de syllabes.js 
-                	    var ms = [];
-                	            
-                    	for (var i = 0; i < mono_syllabes.length; i++) {
-                    	for (var j = 0; j < mono_syllabes[i].length; j++) {
-                    	    ms[ms.length] = mono_syllabes[i][j];
-                    	}}
-                	        
-                	    return ms;
-                	}
-                	function biSyllabesTotal() {
-                	    var bi_syllabes = biSyllabes(); // Cette fonction provient de syllabes.js 
-                	    var bs = [];
-                	            
-                    	for (var i = 0; i < bi_syllabes.length; i++) {
-                    	for (var j = 0; j < bi_syllabes[i].length; j++) {
-                    	    bs[bs.length] = bi_syllabes[i][j];
-                    	}}
-                	        
-                	    return bs;
-                	}
-                	function triSyllabesTotal() {
-                	    var tri_syllabes = triSyllabes(); // Cette fonction provient de syllabes.js 
-                	    var ts = [];
-                	            
-                        for (var i = 0; i < tri_syllabes.length; i++) {
-                    	for (var j = 0; j < tri_syllabes[i].length; j++) {
-                    	    ts[ts.length] = tri_syllabes[i][j];
-                    	}}
-                	        
-                	    return ts;
-                	}
-                	function quadriSyllabesTotal() {
-                	    var quadri_syllabes = quadriSyllabes(); // Cette fonction provient de syllabes.js 
-                	    var qs = [];
-                	            
-                    	for (var i = 0; i < quadri_syllabes.length; i++) {
-                    	for (var j = 0; j < quadri_syllabes[i].length; j++) {
-                    	    qs[qs.length] = quadri_syllabes[i][j];
-                    	}}
-                	        
-                	    return qs;
-                	}   
-                	        
-            	    function stockerPratiques() {
-            	        
-            	    }
-                    function afficherProgressBar(){
+                      	function monoSyllabesTotal() {
+                    	    var mono_syllabes = monoSyllabes(); // Cette fonction provient de syllabes.js 
+                    	    var ms = [];
+                    	            
+                        	for (var i = 0; i < mono_syllabes.length; i++) {
+                        	for (var j = 0; j < mono_syllabes[i].length; j++) {
+                        	    ms[ms.length] = mono_syllabes[i][j];
+                        	}}
+                    	        
+                    	    return ms;
+                    	}
+                    	function biSyllabesTotal() {
+                    	    var bi_syllabes = biSyllabes(); // Cette fonction provient de syllabes.js 
+                    	    var bs = [];
+                    	            
+                        	for (var i = 0; i < bi_syllabes.length; i++) {
+                        	for (var j = 0; j < bi_syllabes[i].length; j++) {
+                        	    bs[bs.length] = bi_syllabes[i][j];
+                        	}}
+                    	        
+                    	    return bs;
+                    	}
+                    	function triSyllabesTotal() {
+                    	    var tri_syllabes = triSyllabes(); // Cette fonction provient de syllabes.js 
+                    	    var ts = [];
+                    	            
+                            for (var i = 0; i < tri_syllabes.length; i++) {
+                        	for (var j = 0; j < tri_syllabes[i].length; j++) {
+                        	    ts[ts.length] = tri_syllabes[i][j];
+                        	}}
+                    	        
+                    	    return ts;
+                    	}
+                    	function quadriSyllabesTotal() {
+                    	    var quadri_syllabes = quadriSyllabes(); // Cette fonction provient de syllabes.js 
+                    	    var qs = [];
+                    	            
+                        	for (var i = 0; i < quadri_syllabes.length; i++) {
+                        	for (var j = 0; j < quadri_syllabes[i].length; j++) {
+                        	    qs[qs.length] = quadri_syllabes[i][j];
+                        	}}
+                    	        
+                    	    return qs;
+                    	}   
+                    	        
+                   function afficherProgressBar(){
         	            $('.progress_bar').css({'opacity':1});
         	        }
                 } 
@@ -1330,7 +1341,7 @@
 	    phases_a_etudier = phasesAEtudier();
 	    
    /*2*/phases();
-   softDisplay();
+        softDisplay();
    /*4*/affichageDesPhses();
    /*3*/parametrageDeLesson();
 	    actualiserCochage();

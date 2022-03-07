@@ -30,20 +30,6 @@
 			$utilisateurs =  $requette->execute();
 			return $utilisateurs;
 		 }
-		function archiverPratique($id_user,$pratique){
-		    global $db;
-
-			$sql = "INSERT INTO pratiques(id_user, pratique) 
-					VALUES(:id_user, :pratique)";
-			$requette = $db -> prepare($sql);
-
-			$requette->bindValue(':id_user',  $id_user,   PDO::PARAM_INT);
-			$requette->bindValue(':pratique', $pratique,  PDO::PARAM_STR);
-
-			$pratiques = $requette->execute();
-
-			return $pratiques;
-		}
 		function archiverLesson($client_id,$niveau,$course){}
 		function archiverNotes($numero, $question, $reponse, $points){
 			global $db;
@@ -60,6 +46,20 @@
 			$notes = $requette->execute();
 
 			return $notes;
+		}
+		function archiverPratique($id_user,$pratique){
+		    global $db;
+
+			$sql = "INSERT INTO pratiques(id_user, pratique) 
+					VALUES(:id_user, :pratique)";
+			$requette = $db -> prepare($sql);
+
+			$requette->bindValue(':id_user',  $id_user,   PDO::PARAM_INT);
+			$requette->bindValue(':pratique', $pratique,  PDO::PARAM_STR);
+
+			$pratiques = $requette->execute();
+
+			return $pratiques;
 		}
 		function getAllClients(){
 			global $db;

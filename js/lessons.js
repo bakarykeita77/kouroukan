@@ -319,7 +319,13 @@
             var pratiques_entete_html = $('#pratiques_entete').html();
             var evaluation = $('#evaluation');
             var parametres_html = parametres.html();
-	
+          
+          /*--------------------------------------------------------------------*/    
+    	    
+    	    dimensionnementDeCourseBody();
+    	    affichageDeCours();
+    	    dispenserCours();
+          
           /*--------------------------------------------------------------------*/    
             
             function dimensionnementDeCourseBody() {
@@ -1125,7 +1131,7 @@
                         	        masquerClavierEtConsoles();
                         	        initialiserProgressBarr();
                         	        table = '';
-                        	                    
+                        	                   
                         	        if(effort == '߁߀߀%') {
                         	            stockerPratiques();
                         	            
@@ -1184,7 +1190,17 @@
                         	            redimensionnementDePratiquesReponseContainer();
                         	        }
                                     function memoriserPratiques() {
-                                        memoire_pratiques = [option_index, memoire_pratique.join(';')].join('%');
+                                        memoire_pratiques = [option_index, memoire_pratique.join(';')].join('_');
+                                    }
+                                    function stockerPratiques() {
+                                        
+                                        var pratique_input = $('#pratique_input');
+                                        var pratique_submit = $('#pratique_submit');
+                                    
+                                        pratique_input.val( memoire_pratiques );
+                                        pratique_submit.click();
+                                        $('.phases').css('display','none');
+                                        afficherPratiques();
                                     }
                                     function changerNombreDeSyllabe() {
                                         if(total_point === total_question) {
@@ -1302,12 +1318,6 @@
                 } 
     	    }
           
-          /*--------------------------------------------------------------------*/    
-    	    
-    	    dimensionnementDeCourseBody();
-    	    affichageDeCours();
-    	    dispenserCours();
-
       	});
     	
     	$('#go_to_lesson').on('click', function() {

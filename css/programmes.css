@@ -1,6 +1,9 @@
 #reception {
-    position: absolute;
-}
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+ }
 #affiche_programme {
     width: 100px;
     margin: auto;

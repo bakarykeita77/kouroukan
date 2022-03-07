@@ -7,7 +7,7 @@
 		});
 	}
 	function affichageListeEnCascade() {
-	    
+alert( 'pk' ); 	    
 	    var liste = $('.liste_affichage_cascade');
 	    var li = $('.liste_affichage_cascade li');
 	    

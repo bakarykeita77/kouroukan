@@ -1,7 +1,7 @@
 <?php
     
     require_once("phpFonctions.php");
-    global $connexion;
+    global $db;
     
     $get_action = $_GET['get_action'];
     $id = $_GET['id'];

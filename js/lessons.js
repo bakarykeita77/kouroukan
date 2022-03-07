@@ -266,7 +266,7 @@
         nasalisations_cochees = [''].concat($('#nasalisations_cochees').html().split(''));
         caracteres_coches = [voyelles_cochees, consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees];
     }
-	function affichageDesPhses() {
+	function affichageDesPhases() {
 
 	    affichageListeEnCascade();
 	}
@@ -1265,7 +1265,7 @@
                 	    return qs;
                 	}   
                 	        
-                   function afficherProgressBar(){
+                    function afficherProgressBar(){
         	            $('.progress_bar').css({'opacity':1});
         	        }
                 } 
@@ -1342,7 +1342,7 @@
 	    
    /*2*/phases();
         softDisplay();
-   /*4*/affichageDesPhses();
+   /*4*/affichageDesPhases();
    /*3*/parametrageDeLesson();
 	    actualiserCochage();
    /*5*/naviguerSurLesson();

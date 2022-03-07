@@ -3,8 +3,8 @@
         if(!empty($_POST['prenom']) AND !empty($_POST['nom']) AND !empty($_POST['naissance']) AND !empty($_POST['sexe']) AND !empty($_POST['adresse']) AND !empty($_POST['email']) AND !empty($_POST['password'])){
           /*Voyons si le mail envoye par l'utilisateur n'est pas deja utilise*/
             require("connexionToDB.php");
-            global $connexion;
-            $requette = $connexion->prepare("SELECT email FROM users");
+            global $db;
+            $requette = $db->prepare("SELECT email FROM users");
             $requette->execute();
             $emails = $requette->fetchAll();
             
@@ -23,7 +23,7 @@
                 $password = sha1(securiser($_POST['password']));
                 
               /*Insertion des donnees dans la base de donnees*/
-                $requette = $connexion->prepare("INSERT INTO users(prenom,nom,naissance,sexe,adresse,email,password) VALUES(?,?,?,?,?,?,?)");
+                $requette = $db->prepare("INSERT INTO users(prenom,nom,naissance,sexe,adresse,email,password) VALUES(?,?,?,?,?,?,?)");
                 $requette->execute(array($prenom,$nom,$naissance,$sexe,$adresse,$email,$password));
                 
             }else{ $error = "L'email envoye est deja utilise. Essayer un autre"; }

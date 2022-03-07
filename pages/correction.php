@@ -1,10 +1,10 @@
 <?php
 
     require("connexionToDB.php");
-    global $connexion;
+    global $db;
     
     $sql = "SELECT * FROM teste ORDER BY id DESC LIMIT 5";
-    $requette = $connexion->prepare($sql);
+    $requette = $db->prepare($sql);
     $requette->execute();
     $testes = $requette->fetchAll();
     

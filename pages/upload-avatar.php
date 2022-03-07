@@ -6,7 +6,7 @@
         if($_POST['submit']){
             
             include('connexionToDB.php');
-            global $connexion;
+            global $db;
             
             if(!empty($_FILES['image']['tmp_name'])){
                 
@@ -15,7 +15,7 @@
                 $type = $_FILES['image']['type'];
                 $image = file_get_contents($_FILES['image']['tmp_name']);
                 
-                $requette = $connexion->prepare("INSERT INTO avatar(client_id,nom,taille,type,image) VALUES(:client_id,:nom,:taille,:type,:image)");
+                $requette = $db->prepare("INSERT INTO avatar(client_id,nom,taille,type,image) VALUES(:client_id,:nom,:taille,:type,:image)");
                 
                 $requette->bindValue(':client_id',$client_id,PDO::PARAM_INT);
                 $requette->bindValue(':nom',$nom,PDO::PARAM_STR);

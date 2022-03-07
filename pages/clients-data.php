@@ -1,14 +1,10 @@
 <?php
     require 'connexionToDB.php';
-    global $connexion;
+    global $db;
     
     $sql = "SELECT * FROM users";
-    $requete = $connexion->prepare($sql);
+    $requete = $db->prepare($sql);
     $requete->execute();
     $clients = $requete->fetchAll(PDO::FETCH_ASSOC);
     
     echo(json_encode($clients));
-
-//echo'<pre>';
-//    print_r($clients);
-//echo'</pre>';

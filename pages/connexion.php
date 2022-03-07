@@ -8,9 +8,9 @@
         
         /* Recuperation de tous les emails de DB, dans un tableau $emails */
             require("connexionToDB.php");
-            global $connexion;
+            global $db;
             
-            $requette = $connexion->prepare("SELECT * FROM users WHERE email = ?");
+            $requette = $db->prepare("SELECT * FROM users WHERE email = ?");
             $requette->execute(array($client_email));
             $client = $requette->fetchAll();
             

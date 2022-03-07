@@ -1,11 +1,11 @@
 <?php
 session_start();
 include("connexionToDB.php");
-global $connexion;
+global $db;
 
 if($_SESSION['connected']){
     $sql = "SELECT * FROM teste WHERE id_client = ".$_SESSION['id']." ORDER BY Date DESC";
-    $rqt = $connexion->prepare($sql);
+    $rqt = $db->prepare($sql);
     $rqt->execute();
     $testes = $rqt->fetchAll();
 

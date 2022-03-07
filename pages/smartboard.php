@@ -16,10 +16,10 @@
 				$login = 'root';
 				$pass = "";
 
-				$connexion = new PDO("mysql:host=$serveur;dbname=$db;charset=utf8",$login,$pass);
-				$connexion->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+				$db = new PDO("mysql:host=$serveur;dbname=$db;charset=utf8",$login,$pass);
+				$db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
-					$requete = $connexion->prepare("SELECT * FROM dictionnaire");
+					$requete = $db->prepare("SELECT * FROM dictionnaire");
 					$requete->execute();
 					$resultat = $requete->fetchall(PDO::FETCH_ASSOC);
 

@@ -27,7 +27,7 @@
 	var index_phase_actuelle, index_phase_precedante, index_phase_active;
 	var avancer_btn = '';
 	
-console.log("Keita");
+
 	
 	function nomsDesPhases() {
 	    var noms_des_phases = [];

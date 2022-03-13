@@ -2,6 +2,8 @@
 session_start();
 if(isset($_SESSION['connected'])){
     
+    require('actions.php');
+    
     $matiere_id    = $_GET['matiere_id'];
     $matiere_index = $_GET['matiere_index'];
     $matiere_nom   = $_GET['matiere_nom'];
@@ -128,7 +130,7 @@ if(isset($_SESSION['connected'])){
                     <div id="message_btn_container"> <button id="message_btn_1"></button><button id="message_btn_2"></button> </div>
                 </div>
                 
-                <form method="POST" action="http://localhost:8080/kouroukan/pages/actions.php" id="pratique_form" style="display:none">
+                <form method="POST" id="pratique_form" style="display:none">
                     <input type="text" name="post_action" value="archiver_pratique">
                     <input type="number" name="id_user" value="<?= $_SESSION['id']; ?>">
                     <input type="text" name="pratique" id="pratique_input">

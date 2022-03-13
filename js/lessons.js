@@ -1194,10 +1194,16 @@
                                     }
                                     function stockerPratiques() {
                                         
-                                        var pratique_input = $('#pratique_input');
-                                        var pratique_submit = $('#pratique_submit');
-                                    
-                                        pratique_input.val( memoire_pratiques );
+                                        var pratique_submit = document.getElementById('pratique_submit');
+                                        pratique_submit.addEventListener('click', e => {
+                                            e.preventDefault();
+                                            
+                                            var post_action = document.getElementById('post_action');
+                                            var pratique_input = document.getElementById('pratique_input');
+                                        
+                                            alert('pratique_input.value = memoire_pratiques');
+                                        });
+                                        
                                         pratique_submit.click();
                                     }
                                     function changerNombreDeSyllabe() {

@@ -30,7 +30,7 @@
 			$utilisateurs =  $requette->execute();
 			return $utilisateurs;
 		 }
-		function archiverPratique($id_user,$pratique){
+		function ($id_user,$pratique){
 		    global $db;
 
 			$sql = "INSERT INTO pratiques(id_user, pratique) 

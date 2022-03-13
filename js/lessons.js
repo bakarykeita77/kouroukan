@@ -27,7 +27,7 @@
 	var index_phase_actuelle, index_phase_precedante, index_phase_active;
 	var avancer_btn = '';
 	
-
+console.log("Keita");
 	
 	function nomsDesPhases() {
 	    var noms_des_phases = [];
@@ -1199,8 +1199,6 @@
                                     
                                         pratique_input.val( memoire_pratiques );
                                         pratique_submit.click();
-                                        $('.phases').css('display','none');
-                                        afficherPratiques();
                                     }
                                     function changerNombreDeSyllabe() {
                                         if(total_point === total_question) {
@@ -1327,6 +1325,10 @@
 	
     
 	try{
+	    
+	    fetch('http://localhost:8080/kouroukan/pages/programmes.php')
+	    .then((res) => res.text())
+	    .then((r) => alert( r ));
 	    
 	  /*
 	    1)- La situation des études est faite par récupération et traitement des données reçues sur l'apprenant.

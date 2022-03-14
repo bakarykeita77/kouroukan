@@ -1,5 +1,5 @@
-    $('document').ready(function() {
-	    
+$('document').ready(function() {
+
     var matiere_id = $('#matiere_id_container').html();
     var matiere_index = parseInt($('#matiere_index_container').html());
     var matiere_nom = $('#matiere_nom_container').html();
@@ -27,7 +27,6 @@
 	var index_phase_actuelle, index_phase_precedante, index_phase_active;
 	var avancer_btn = '';
 	
-
 	
 	function nomsDesPhases() {
 	    var noms_des_phases = [];
@@ -356,7 +355,7 @@
     	        if(course_id=='apprentissage'){ ceh = apprentissageEnteteHTML(); }
     	        if(course_id=='exercices'){ ceh = exercicesEnteteHTML(); }
     	        if(course_id=='pratiques'){ ceh = pratiquesEnteteHTML(); }
-    	  alert( quantite_de_question );       
+    	         
     	        return ceh;
     	        
     	        
@@ -1194,17 +1193,33 @@
                                     }
                                     function stockerPratiques() {
                                         
+                                      /* Selection de submit bouton dont le click declenche le stockage de la pratique*/
                                         var pratique_submit = document.getElementById('pratique_submit');
+                                        
                                         pratique_submit.addEventListener('click', e => {
                                             e.preventDefault();
                                             
-                                            var post_action = document.getElementById('post_action');
-                                            var pratique_input = document.getElementById('pratique_input');
-                                        
-                                            alert('pratique_input.value = memoire_pratiques');
+                                          /* Extration du contenu des inputs pour leur envoie a la page actions.php qui se chargé de les envoyer au serveur */  
+                                            document.getElementById('pratique_input').value = memoire_pratique;
+                                            const post_action = document.getElementById('post_action').value;
+                                            const id_user = document.getElementById('id_user').value;
+                                            const pratique = document.getElementById('pratique_input').value;
+                                            
+                                            const params = new URLSearchParams({
+                                                post_action: post_action,
+                                                id_user: id_user,
+                                                pratique: pratique
+                                            });
+                                            
+                                            fetch('actions.php', {
+                                                method: 'POST',
+                                                body: params
+                                            })
+                                            .then(response => response.text());
+
                                         });
                                         
-                                        pratique_submit.click();
+                                       pratique_submit.click();
                                     }
                                     function changerNombreDeSyllabe() {
                                         if(total_point === total_question) {
@@ -1332,10 +1347,7 @@
     
 	try{
 	    
-	    fetch('http://localhost:8080/kouroukan/pages/programmes.php')
-	    .then((res) => res.text())
-	    .then((r) => alert( r ));
-	    
+	
 	  /*
 	    1)- La situation des études est faite par récupération et traitement des données reçues sur l'apprenant.
 	    2)- La liste des phases est établie en fonction du niveau d'étude de l'apprenant (selon les phases étudiées ou pas)

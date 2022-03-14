@@ -399,7 +399,7 @@ $(document).ready(function() {
         
                     if (niveau_max+1 >= matiere_index) {
                         var phases_lien = 'lesson.php?matiere_id='+liste_de_matieres[i][0]+'&matiere_index='+matiere_index+'&matiere_nom='+liste_de_matieres[i][1]+'&niveau='+matiere_index+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees+'&resume_brut_des_etudes='+resume_brut_des_etudes;
-                      
+                     
                         programme_html += '<li><a href="'+phases_lien+'">'+liste_de_matieres[i][1]+'</a></li>';
                     } else {
                         programme_html += '<li><a href="#">'+liste_de_matieres[i][1]+'</a></li>';

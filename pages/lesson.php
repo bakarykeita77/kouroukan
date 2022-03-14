@@ -2,16 +2,16 @@
 session_start();
 if(isset($_SESSION['connected'])){
     
-    require('actions.php');
-    
     $matiere_id    = $_GET['matiere_id'];
     $matiere_index = $_GET['matiere_index'];
     $matiere_nom   = $_GET['matiere_nom'];
     $niveau        = $_GET['niveau'];
     $niveau_max    = $_GET['niveau_max'];
-    $resume_brut_des_etudes   = $_GET['resume_brut_des_etudes'];
-    
+    $resume_brut_des_etudes = $_GET['resume_brut_des_etudes'];
+
     $chiffres = ['߀','߁','߂','߃','߄','߅','߆','߇','߈','߉'];
+
+
 ?>
 
 <!DOCTYPE html>
@@ -130,9 +130,9 @@ if(isset($_SESSION['connected'])){
                     <div id="message_btn_container"> <button id="message_btn_1"></button><button id="message_btn_2"></button> </div>
                 </div>
                 
-                <form method="POST" id="pratique_form" style="display:none">
-                    <input type="text" name="post_action" value="archiver_pratique">
-                    <input type="number" name="id_user" value="<?= $_SESSION['id']; ?>">
+                <form id="pratique_form" style="display:none">
+                    <input type="text" name="post_action" id="post_action" value="archiver_pratique">
+                    <input type="number" name="id_user" id="id_user" value="<?= $_SESSION['id']; ?>">
                     <input type="text" name="pratique" id="pratique_input">
                     <input type="submit" id="pratique_submit" value="Envoyer">
                 </form>
@@ -232,6 +232,7 @@ if(isset($_SESSION['connected'])){
     <script src="http://localhost:8080/kouroukan/js/exercises.js"></script>
     <script src="http://localhost:8080/kouroukan/js/pratiques.js"></script>
     <script src="http://localhost:8080/kouroukan/js/evaluations.js"></script>
+    
 </body>
 </html>
 <?php

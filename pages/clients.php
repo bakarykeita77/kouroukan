@@ -2,8 +2,17 @@
     
     require_once('actions.php');
 
-    $clients = json_encode(getAllClients());
+    if(isset($_GET['cherche'])) {
 
-    echo "<pre>";
-    print_r($clients);
-    echo "</pre>"; 
+        switch($_GET['cherche']) {
+            case 'users':
+                // code...
+                $clients = getAllClients();
+                echo("<pre>");
+                print_r($clients);
+                echo("</pre>");
+                break;
+            default: echo("Cet expression de recherche n'existe pas" );
+        }
+    }
+    

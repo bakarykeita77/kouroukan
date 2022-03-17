@@ -8,7 +8,8 @@
 </head>
 <body>
     
-    <div id="ci"></div>
+    <center><h2>Users</h2></center>
+    <center><div id="users"></div></center>
     <script src="http://localhost:8080/kouroukan/js/clients-info.js"></script>
 </body>
 </html>

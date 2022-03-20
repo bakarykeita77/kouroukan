@@ -1,70 +1,84 @@
 <?php
     
-    header('Content-Type: application/json; charset=utf8');
+header('Content-Type: application/json; charset=utf8');
     
-    $id_user = $_GET['id_user'];
+$search = $_GET['search'];
+$id_user = $_GET['id_user'];
 
-
-  /* Connections à la base de donnees*/
-    $server = 'localhost';
-    $dbname = 'kouroukan';
-    $user = 'root';
-    $pass = '';
+        
     
+/* Connections à la base de donnees*/
+$server = 'localhost';
+$dbname = 'kouroukan';
+$user = 'root';
+$pass = '';
+
+try {
     $db = new PDO("mysql:host=$server;dbname=$dbname;charset=utf8", $user, $pass);
-
-
-/* Récupération des données de la database*/
-    $sql = "SELECT * FROM users WHERE id = ".$id_user;
-          
-    $requete = $db -> prepare($sql);
-    $requete -> execute();
-    $user = $requete -> fetchAll(PDO::FETCH_ASSOC);
-    $user = json_encode($user, JSON_PRETTY_PRINT);
-            
-    echo($user);
-
-
-/* Récupération des données de la database*/
-    $sql = "SELECT * FROM lessons WHERE id_client = ".$id_user;
-          
-    $requete = $db -> prepare($sql);
-    $requete -> execute();
-    $lesson = $requete -> fetchAll(PDO::FETCH_ASSOC);
-    $lesson = json_encode($lesson, JSON_PRETTY_PRINT);
-            
-    echo($lesson);
+    $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+    $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     
+    switch($search) {
+    
+     /* Récupération des données de la database*/
+        case 'user':
+            $sql = "SELECT * FROM users WHERE id = ".$id_user;
+                  
+            $requete = $db -> prepare($sql);
+            $requete -> execute();
+            $user = $requete -> fetchAll(PDO::FETCH_ASSOC);
+        
+            echo json_encode($user, JSON_PRETTY_PRINT);
+            break;
+ 
+     /* Récupération des données de la database*/
+        case 'lessons':
+            $sql = "SELECT * FROM lessons WHERE id_client = ".$id_user;
+                  
+            $requete = $db -> prepare($sql);
+            $requete -> execute();
+            $lessons = $requete -> fetchAll(PDO::FETCH_ASSOC);
+        
+            echo json_encode($lessons, JSON_PRETTY_PRINT);
+            break;
 
-/* Récupération des données de la database*/
-    $sql = "SELECT * FROM exercices WHERE id = ".$id_user;
-          
-    $requete = $db -> prepare($sql);
-    $requete -> execute();
-    $exercice = $requete -> fetchAll(PDO::FETCH_ASSOC);
-    $exercice = json_encode($exercice, JSON_PRETTY_PRINT);
-            
-    echo($exercice);
+     /* Récupération des données de la database*/
+        case 'exercices':
+            $sql = "SELECT * FROM exercices WHERE id = ".$id_user;
+                  
+            $requete = $db -> prepare($sql);
+            $requete -> execute();
+            $exercices = $requete -> fetchAll(PDO::FETCH_ASSOC);
+        
+            echo json_encode($exercices, JSON_PRETTY_PRINT);
+            break;
 
 
-/* Récupération des données de la database*/
-    $sql = "SELECT * FROM pratiques WHERE id = ".$id_user;
-          
-    $requete = $db -> prepare($sql);
-    $requete -> execute();
-    $pratique = $requete -> fetchAll(PDO::FETCH_ASSOC);
-    $pratique = json_encode($pratique, JSON_PRETTY_PRINT);
-            
-    echo($pratique);
+     /* Récupération des données de la database*/
+        case 'pratiques':
+            $sql = "SELECT * FROM pratiques WHERE id = ".$id_user;
+                  
+            $requete = $db -> prepare($sql);
+            $requete -> execute();
+            $pratiques = $requete -> fetchAll(PDO::FETCH_ASSOC);
+        
+            echo json_encode($pratiques, JSON_PRETTY_PRINT);
+            break;
 
 
-/* Récupération des données de la database*/
-    $sql = "SELECT * FROM teste WHERE id = ".$id_user;
-          
-    $requete = $db -> prepare($sql);
-    $requete -> execute();
-    $teste = $requete -> fetchAll(PDO::FETCH_ASSOC);
-    $teste = json_encode($teste, JSON_PRETTY_PRINT);
-            
-    echo($teste);
-?>
+     /* Récupération des données de la database*/
+        case 'testes':
+            $sql = "SELECT * FROM teste WHERE id = ".$id_user;
+                  
+            $requete = $db -> prepare($sql);
+            $requete -> execute();
+            $testes = $requete -> fetchAll(PDO::FETCH_ASSOC);
+        
+            echo json_encode($testes, JSON_PRETTY_PRINT);
+            break; 
+        
+    }
+}    
+catch(PDOException $e){
+    echo("Echec: ".$e->getMessage());
+}

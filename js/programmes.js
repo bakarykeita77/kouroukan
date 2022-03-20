@@ -289,27 +289,107 @@ $(document).ready(function() {
         
             let id_user = parseInt(document.getElementById('id_user').innerHTML);
 
-        
-         /* Recherche des donnees de l'étudiant stockées dans la table users*/
-            let url = `http://localhost:8080/kouroukan/api/index.php?id_user=${id_user}`;
+         
+         /*-------------------------------------------------------------------------------------------------------------------- 
+          Recherche des donnees de l'étudiant stockées dans la table users
+         --------------------------------------------------------------------------------------------------------------------*/
+            let url1 = `http://localhost:8080/kouroukan/api/index.php?search=user&id_user=${id_user}`;
             
-            fetch(url)
+            fetch(url1)
             .then(response => response.json()) 
             .then(client_info => {
-                alert(client_info[0][0]);
+                console.log(client_info);
+
+             /* Identification de l'étudiant */
+                sessionStorage.setItem("date"     , client_info[0].date);
+                sessionStorage.setItem("prenom"   , client_info[0].prenom);
+                sessionStorage.setItem("nom"      , client_info[0].nom);
+                sessionStorage.setItem("naissance", client_info[0].naissance);
+                sessionStorage.setItem("sexe"     , client_info[0].sexe);
+                sessionStorage.setItem("adresse"  , client_info[0].adresse);
+                sessionStorage.setItem("email"    , client_info[0].email);
+            })
+            .catch(error => console.log( error )); 
+
+
+         /*-------------------------------------------------------------------------------------------------------------------- 
+          Recherche des donnees de l'étudiant stockées dans la table users
+         --------------------------------------------------------------------------------------------------------------------*/
+            let url2 = `http://localhost:8080/kouroukan/api/index.php?search=lessons&id_user=${id_user}`;
+            
+            fetch(url2)
+            .then(response => response.json()) 
+            .then(lessons => {
+                console.log(lessons);
+                
+             /* Identification de l'étudiant */
+                for(let lesson of lessons) {
+                    
+                    for(const [key, value] of Object.entries(lesson)) {
+                    //sessionStorage.setItem();
+                    alert( `${key}, ${value}` ); 
+                    }
+                }
+            })
+            .catch(error => console.log( error ));             
+
+        
+         /*-------------------------------------------------------------------------------------------------------------------- 
+          Recherche des donnees de l'étudiant stockées dans la table users
+         --------------------------------------------------------------------------------------------------------------------*/
+            let url3 = `http://localhost:8080/kouroukan/api/index.php?search=exercices&id_user=${id_user}`;
+            
+            fetch(url3)
+            .then(response => response.json()) 
+            .then(exercices => {
+                console.log(exercices);
                 
        
              /* Identification de l'étudiant */
-              //  for(const [key, value] of Object.entries(client_info[0]) ) {
-               //     sessionStorage.setItem(`${key}`, `${value}`);
-                //}   
+             /*  for(const [key, value] of Object.entries(client_info[0]) ) {
+                    sessionStorage.setItem(`${key}, ${value}`);
+                }  */
             })
-            .catch(error => alert( error )); 
+            .catch(error => console.log( error )); 
+
+        
+         /*-------------------------------------------------------------------------------------------------------------------- 
+          Recherche des donnees de l'étudiant stockées dans la table users
+         --------------------------------------------------------------------------------------------------------------------*/
+            let url4 = `http://localhost:8080/kouroukan/api/index.php?search=pratiques&id_user=${id_user}`;
             
+            fetch(url4)
+            .then(response => response.json()) 
+            .then(pratiques => {
+                console.log(pratiques);
+                
+       
+             /* Identification de l'étudiant */
+             /*  for(const [key, value] of Object.entries(client_info[0]) ) {
+                    sessionStorage.setItem(`${key}, ${value}`);
+                }  */
+            })
+            .catch(error => console.log( error ));
 
+        
+         /*-------------------------------------------------------------------------------------------------------------------- 
+          Recherche des donnees de l'étudiant stockées dans la table users
+         --------------------------------------------------------------------------------------------------------------------*/
+            let url5 = `http://localhost:8080/kouroukan/api/index.php?search=testes&id_user=${id_user}`;
+            
+            fetch(url5)
+            .then(response => response.json()) 
+            .then(testes => {
+                console.log(testes);
+                
+       
+             /* Identification de l'étudiant */
+             /*  for(const [key, value] of Object.entries(client_info[0]) ) {
+                    sessionStorage.setItem(`${key}, ${value}`);
+                }  */
+            })
+            .catch(error => console.log( error ));        
 
-         /* Chargement des variables locales*/
-         /* Chargement des variables de session*/
         }
         function niveauMaxDuClient() {
  

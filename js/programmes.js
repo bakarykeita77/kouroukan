@@ -47,6 +47,27 @@ $(document).ready(function() {
         var resume_des_etudes = [];
         var p = [];
         var point_max = '';
+
+    /*-----------------------------------------------------------------------------------------------------------------------*//*
+
+    Au click sur l'afficheur du programme 
+        1)- On obtient le niveau d'étude de l'apprenant par analyse de sa situation.
+        2)- On determine le programme en fonction du niveau d'étude.
+        3)- On l'affiche et 
+        4)- On navigue dessus */
+      
+        
+   /*1*/situationDesEtudes();
+        getUserInfo();
+        resume_brut_des_etudes = situations[situations.length-1];
+        resume_des_etudes = convertirResumeDeSituationsEnObjet();
+        niveau_max = niveauMaxDuClient();
+        verificationDesLessonsEtudiees();
+        
+   /*2*/programme();
+   /*3*/programmeAffichage();
+   /*4*/programmeNavigation();
+
         
     /*-----------------------------------------------------------------------------------------------------------------------*/
         
@@ -264,6 +285,32 @@ $(document).ready(function() {
             }
             
         }
+        function getUserInfo() {
+        
+            let id_user = parseInt(document.getElementById('id_user').innerHTML);
+
+        
+         /* Recherche des donnees de l'étudiant stockées dans la table users*/
+            let url = `http://localhost:8080/kouroukan/api/index.php?id_user=${id_user}`;
+            
+            fetch(url)
+            .then(response => response.json()) 
+            .then(client_info => {
+                alert(client_info[0][0]);
+                
+       
+             /* Identification de l'étudiant */
+              //  for(const [key, value] of Object.entries(client_info[0]) ) {
+               //     sessionStorage.setItem(`${key}`, `${value}`);
+                //}   
+            })
+            .catch(error => alert( error )); 
+            
+
+
+         /* Chargement des variables locales*/
+         /* Chargement des variables de session*/
+        }
         function niveauMaxDuClient() {
  
             var niveaux = [];
@@ -440,26 +487,6 @@ $(document).ready(function() {
           //Le click sur le bouton next redirige sur la page de lessons.
         }
        
-    /*-----------------------------------------------------------------------------------------------------------------------*//*
-
-    Au click sur l'afficheur du programme 
-        1)- On obtient le niveau d'étude de l'apprenant par analyse de sa situation.
-        2)- On determine le programme en fonction du niveau d'étude.
-        3)- On l'affiche et 
-        4)- On navigue dessus */
-      
-        
-   /*1*/situationDesEtudes();
-        resume_brut_des_etudes = situations[situations.length-1];
-        resume_des_etudes = convertirResumeDeSituationsEnObjet();
-        niveau_max = niveauMaxDuClient();
-        verificationDesLessonsEtudiees();
-        
-   /*2*/programme();
-   /*3*/programmeAffichage();
-   /*4*/programmeNavigation();
-
-
     });
 
 });

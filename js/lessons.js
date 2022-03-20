@@ -302,7 +302,8 @@ $('document').ready(function() {
 	function naviguerSurLesson() {
     	
     	$('.phases ul li').on('click', function(){
-       
+alert( sessionStorage.getItem('prenom') ); 
+
             var syllabes_tonifies = tonification();  
             var questions_a_poser = questions();
             var chiffre = '';

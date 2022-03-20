@@ -1,41 +1,34 @@
 
-    let liste_clients = "";
+    let id_user = parseInt(document.getElementById('id_user').innerHTML);
+    let url = `http://localhost:8080/kouroukan/api/index.php?get=${id_user}`;
+
+   /* 
     
-    fetch('http://localhost:8080/api/index.php?get=users')
-    .then(response => response.json())
-    .then(clients => {
+    fetch(url)
+    .then(response => response.json()) 
+    .then(client => {
         
-        liste_clients = "<table border=1 style='direction:rtl'>";
+        var id,date,prenom,nom,naissance,sexe,adresse,email;
         
-        liste_clients += "<thead>";
-        liste_clients += "<tr>";
-            liste_clients += "<th>ߕߐ߮</th>";
-            liste_clients += "<th>ߖߊ߬ߡߎ߲</th>";
-            liste_clients += "<th>ߡߐߦߌ߫ ߛߊ߲</th>";
-            liste_clients += "<th>ߖߊ߲߭</th>";
-            liste_clients += "<th>ߖߌ߬ߦߊ߬ ߦߙߐ</th>";
-            liste_clients += "<th>ߛߊ߲߬ߓߊ߬ߕߐ߮</th>";
-            liste_clients += "<th>ߜߎ߲߬ߘߎ߬ߕߐ߮</th>";
-        liste_clients += "</tr>";
-        liste_clients += "</thead>";
+        console.log(client);
         
-        liste_clients += "<tbody>";
-        for(client of clients) {
-        liste_clients += "<tr>";
-            liste_clients += `<td>${client.prenom}</td>`;
-            liste_clients += `<td>${client.nom}</td>`;
-            liste_clients += `<td>${client.naissance}</td>`;
-            liste_clients += `<td>${client.sexe}</td>`;
-            liste_clients += `<td>${client.adresse}</td>`;
-            liste_clients += `<td>${client.mail}</td>`;
-            liste_clients += `<td>${client.password}</td>`;
-        liste_clients += "</tr>";
-        }
-        liste_clients += "</tbody>";
-        liste_clients += "</table>";
+        let user_id        = client[0].id; 
+        let user_date      = client[0].date; 
+        let user_prenom    = client[0].prenom; 
+        let user_nom       = client[0].nom; 
+        let user_naissance = client[0].naissance; 
+        let user_sexe      = client[0].sexe; 
+        let user_adresse   = client[0].adresse; 
+        let user_email     = client[0].email; 
+
+        sessionStorage.setItem('id',user_id);
+        sessionStorage.setItem('date',user_date);
+        sessionStorage.setItem('prenom',user_prenom);
+        sessionStorage.setItem('nom',user_nom);
+        sessionStorage.setItem('Namespace',user_naissance);
+        sessionStorage.setItem('sexe',user_sexe);
+        sessionStorage.setItem('adresse',user_adresse);
+        sessionStorage.setItem('email',user_email);
         
-        document.getElementById('users').innerHTML = liste_clients;
     })
     .catch(error => alert( error ));
-    
-    

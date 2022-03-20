@@ -57,6 +57,7 @@ if(isset($_SESSION['connected'])){
     </div>
 
     <div class="course_container">
+        
       <!-------------------------------------------------------------------->
         <span class="fermeture" id="course_fermeture">&times;</span>
       <!-------------------------------------------------------------------->

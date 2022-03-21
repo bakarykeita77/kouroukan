@@ -291,29 +291,28 @@ $(document).ready(function() {
 
          
          /*-------------------------------------------------------------------------------------------------------------------- 
-          Recherche des donnees de l'étudiant stockées dans la table users
+          Recherche des donnees d'identité de l'étudiant, extraites de la table users.
          --------------------------------------------------------------------------------------------------------------------*/
             let url1 = `http://localhost:8080/kouroukan/api/index.php?search=user&id_user=${id_user}`;
             
             fetch(url1)
             .then(response => response.json()) 
-            .then(client_info => {
-                console.log(client_info);
+            .then(client_infos => {
+                console.log(client_infos);
 
-             /* Identification de l'étudiant */
-                sessionStorage.setItem("date"     , client_info[0].date);
-                sessionStorage.setItem("prenom"   , client_info[0].prenom);
-                sessionStorage.setItem("nom"      , client_info[0].nom);
-                sessionStorage.setItem("naissance", client_info[0].naissance);
-                sessionStorage.setItem("sexe"     , client_info[0].sexe);
-                sessionStorage.setItem("adresse"  , client_info[0].adresse);
-                sessionStorage.setItem("email"    , client_info[0].email);
+                sessionStorage.setItem("date"     , client_infos[0].date);
+                sessionStorage.setItem("prenom"   , client_infos[0].prenom);
+                sessionStorage.setItem("nom"      , client_infos[0].nom); 
+                sessionStorage.setItem("naissance", client_infos[0].naissance);
+                sessionStorage.setItem("sexe"     , client_infos[0].sexe);
+                sessionStorage.setItem("adresse"  , client_infos[0].adresse);
+                sessionStorage.setItem("email"    , client_infos[0].email);
             })
             .catch(error => console.log( error )); 
 
 
          /*-------------------------------------------------------------------------------------------------------------------- 
-          Recherche des donnees de l'étudiant stockées dans la table users
+          Recherche des leçons étudiées par l'étudiant, extraites de la table lessons.
          --------------------------------------------------------------------------------------------------------------------*/
             let url2 = `http://localhost:8080/kouroukan/api/index.php?search=lessons&id_user=${id_user}`;
             
@@ -321,21 +320,13 @@ $(document).ready(function() {
             .then(response => response.json()) 
             .then(lessons => {
                 console.log(lessons);
-                
-             /* Identification de l'étudiant */
-                for(let lesson of lessons) {
-                    
-                    for(const [key, value] of Object.entries(lesson)) {
-                    //sessionStorage.setItem();
-                    alert( `${key}, ${value}` ); 
-                    }
-                }
+                localStorage.setItem('lessons', JSON.stringify(lessons));
             })
             .catch(error => console.log( error ));             
 
         
          /*-------------------------------------------------------------------------------------------------------------------- 
-          Recherche des donnees de l'étudiant stockées dans la table users
+          Recherche des exercices effectuées par l'étudiant, extraites de la table exercices.
          --------------------------------------------------------------------------------------------------------------------*/
             let url3 = `http://localhost:8080/kouroukan/api/index.php?search=exercices&id_user=${id_user}`;
             
@@ -343,18 +334,13 @@ $(document).ready(function() {
             .then(response => response.json()) 
             .then(exercices => {
                 console.log(exercices);
-                
-       
-             /* Identification de l'étudiant */
-             /*  for(const [key, value] of Object.entries(client_info[0]) ) {
-                    sessionStorage.setItem(`${key}, ${value}`);
-                }  */
+                localStorage.setItem('exercices', JSON.stringify(exercices));
             })
             .catch(error => console.log( error )); 
 
         
          /*-------------------------------------------------------------------------------------------------------------------- 
-          Recherche des donnees de l'étudiant stockées dans la table users
+          Recherche des pratiques effectuées par l'étudiant, extraites de la table pratiques.
          --------------------------------------------------------------------------------------------------------------------*/
             let url4 = `http://localhost:8080/kouroukan/api/index.php?search=pratiques&id_user=${id_user}`;
             
@@ -362,18 +348,13 @@ $(document).ready(function() {
             .then(response => response.json()) 
             .then(pratiques => {
                 console.log(pratiques);
-                
-       
-             /* Identification de l'étudiant */
-             /*  for(const [key, value] of Object.entries(client_info[0]) ) {
-                    sessionStorage.setItem(`${key}, ${value}`);
-                }  */
+                localStorage.setItem('pratiques', JSON.stringify(pratiques));
             })
             .catch(error => console.log( error ));
 
         
          /*-------------------------------------------------------------------------------------------------------------------- 
-          Recherche des donnees de l'étudiant stockées dans la table users
+          Recherche des testes effectués par l'étudiant, extraits de la table testes.
          --------------------------------------------------------------------------------------------------------------------*/
             let url5 = `http://localhost:8080/kouroukan/api/index.php?search=testes&id_user=${id_user}`;
             
@@ -381,12 +362,7 @@ $(document).ready(function() {
             .then(response => response.json()) 
             .then(testes => {
                 console.log(testes);
-                
-       
-             /* Identification de l'étudiant */
-             /*  for(const [key, value] of Object.entries(client_info[0]) ) {
-                    sessionStorage.setItem(`${key}, ${value}`);
-                }  */
+                localStorage.setItem('testes', JSON.stringify(testes));
             })
             .catch(error => console.log( error ));        
 

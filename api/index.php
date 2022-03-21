@@ -20,9 +20,11 @@ try {
     
     switch($search) {
     
-     /* Récupération des données de la database*/
+     /* ------------------------------------------------------------------------------------
+      Extraction des données d'identité de l'étudiant à partir de la database
+     -------------------------------------------------------------------------------------*/   
         case 'user':
-            $sql = "SELECT * FROM users WHERE id = ".$id_user;
+            $sql = "SELECT date,prenom,nom,naissance,sexe,adresse,email FROM users WHERE id = ".$id_user;
                   
             $requete = $db -> prepare($sql);
             $requete -> execute();
@@ -30,8 +32,11 @@ try {
         
             echo json_encode($user, JSON_PRETTY_PRINT);
             break;
+            
  
-     /* Récupération des données de la database*/
+     /* ------------------------------------------------------------------------------------
+      Extraction des leçons étudiées par l'étudiant, à partir de la database
+     -------------------------------------------------------------------------------------*/   
         case 'lessons':
             $sql = "SELECT * FROM lessons WHERE id_client = ".$id_user;
                   
@@ -42,7 +47,10 @@ try {
             echo json_encode($lessons, JSON_PRETTY_PRINT);
             break;
 
-     /* Récupération des données de la database*/
+
+     /* ------------------------------------------------------------------------------------
+      Extraction des exercices effectuées par l'étudiant, à partir de la database
+     -------------------------------------------------------------------------------------*/   
         case 'exercices':
             $sql = "SELECT * FROM exercices WHERE id = ".$id_user;
                   
@@ -54,7 +62,9 @@ try {
             break;
 
 
-     /* Récupération des données de la database*/
+     /* ------------------------------------------------------------------------------------
+      Extraction des pratiques effectuées par l'étudiant, à partir de la database
+     -------------------------------------------------------------------------------------*/   
         case 'pratiques':
             $sql = "SELECT * FROM pratiques WHERE id = ".$id_user;
                   
@@ -66,7 +76,9 @@ try {
             break;
 
 
-     /* Récupération des données de la database*/
+     /* ------------------------------------------------------------------------------------
+      Extraction des testes effectués par l'étudiant, à partir de la database
+     -------------------------------------------------------------------------------------*/   
         case 'testes':
             $sql = "SELECT * FROM teste WHERE id = ".$id_user;
                   

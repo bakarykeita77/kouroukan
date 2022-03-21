@@ -47,6 +47,27 @@ $(document).ready(function() {
         var resume_des_etudes = [];
         var p = [];
         var point_max = '';
+
+    /*-----------------------------------------------------------------------------------------------------------------------*//*
+
+    Au click sur l'afficheur du programme 
+        1)- On obtient le niveau d'étude de l'apprenant par analyse de sa situation.
+        2)- On determine le programme en fonction du niveau d'étude.
+        3)- On l'affiche et 
+        4)- On navigue dessus */
+      
+        
+   /*1*/situationDesEtudes();
+        getUserInfo();
+        resume_brut_des_etudes = situations[situations.length-1];
+        resume_des_etudes = convertirResumeDeSituationsEnObjet();
+        niveau_max = niveauMaxDuClient();
+        verificationDesLessonsEtudiees();
+        
+   /*2*/programme();
+   /*3*/programmeAffichage();
+   /*4*/programmeNavigation();
+
         
     /*-----------------------------------------------------------------------------------------------------------------------*/
         
@@ -264,6 +285,88 @@ $(document).ready(function() {
             }
             
         }
+        function getUserInfo() {
+        
+            let id_user = parseInt(document.getElementById('id_user').innerHTML);
+
+         
+         /*-------------------------------------------------------------------------------------------------------------------- 
+          Recherche des donnees d'identité de l'étudiant, extraites de la table users.
+         --------------------------------------------------------------------------------------------------------------------*/
+            let url1 = `http://localhost:8080/kouroukan/api/index.php?search=user&id_user=${id_user}`;
+            
+            fetch(url1)
+            .then(response => response.json()) 
+            .then(client_infos => {
+                console.log(client_infos);
+
+                sessionStorage.setItem("date"     , client_infos[0].date);
+                sessionStorage.setItem("prenom"   , client_infos[0].prenom);
+                sessionStorage.setItem("nom"      , client_infos[0].nom); 
+                sessionStorage.setItem("naissance", client_infos[0].naissance);
+                sessionStorage.setItem("sexe"     , client_infos[0].sexe);
+                sessionStorage.setItem("adresse"  , client_infos[0].adresse);
+                sessionStorage.setItem("email"    , client_infos[0].email);
+            })
+            .catch(error => console.log( error )); 
+
+
+         /*-------------------------------------------------------------------------------------------------------------------- 
+          Recherche des leçons étudiées par l'étudiant, extraites de la table lessons.
+         --------------------------------------------------------------------------------------------------------------------*/
+            let url2 = `http://localhost:8080/kouroukan/api/index.php?search=lessons&id_user=${id_user}`;
+            
+            fetch(url2)
+            .then(response => response.json()) 
+            .then(lessons => {
+                console.log(lessons);
+                localStorage.setItem('lessons', JSON.stringify(lessons));
+            })
+            .catch(error => console.log( error ));             
+
+        
+         /*-------------------------------------------------------------------------------------------------------------------- 
+          Recherche des exercices effectuées par l'étudiant, extraites de la table exercices.
+         --------------------------------------------------------------------------------------------------------------------*/
+            let url3 = `http://localhost:8080/kouroukan/api/index.php?search=exercices&id_user=${id_user}`;
+            
+            fetch(url3)
+            .then(response => response.json()) 
+            .then(exercices => {
+                console.log(exercices);
+                localStorage.setItem('exercices', JSON.stringify(exercices));
+            })
+            .catch(error => console.log( error )); 
+
+        
+         /*-------------------------------------------------------------------------------------------------------------------- 
+          Recherche des pratiques effectuées par l'étudiant, extraites de la table pratiques.
+         --------------------------------------------------------------------------------------------------------------------*/
+            let url4 = `http://localhost:8080/kouroukan/api/index.php?search=pratiques&id_user=${id_user}`;
+            
+            fetch(url4)
+            .then(response => response.json()) 
+            .then(pratiques => {
+                console.log(pratiques);
+                localStorage.setItem('pratiques', JSON.stringify(pratiques));
+            })
+            .catch(error => console.log( error ));
+
+        
+         /*-------------------------------------------------------------------------------------------------------------------- 
+          Recherche des testes effectués par l'étudiant, extraits de la table testes.
+         --------------------------------------------------------------------------------------------------------------------*/
+            let url5 = `http://localhost:8080/kouroukan/api/index.php?search=testes&id_user=${id_user}`;
+            
+            fetch(url5)
+            .then(response => response.json()) 
+            .then(testes => {
+                console.log(testes);
+                localStorage.setItem('testes', JSON.stringify(testes));
+            })
+            .catch(error => console.log( error ));        
+
+        }
         function niveauMaxDuClient() {
  
             var niveaux = [];
@@ -440,26 +543,6 @@ $(document).ready(function() {
           //Le click sur le bouton next redirige sur la page de lessons.
         }
        
-    /*-----------------------------------------------------------------------------------------------------------------------*//*
-
-    Au click sur l'afficheur du programme 
-        1)- On obtient le niveau d'étude de l'apprenant par analyse de sa situation.
-        2)- On determine le programme en fonction du niveau d'étude.
-        3)- On l'affiche et 
-        4)- On navigue dessus */
-      
-        
-   /*1*/situationDesEtudes();
-        resume_brut_des_etudes = situations[situations.length-1];
-        resume_des_etudes = convertirResumeDeSituationsEnObjet();
-        niveau_max = niveauMaxDuClient();
-        verificationDesLessonsEtudiees();
-        
-   /*2*/programme();
-   /*3*/programmeAffichage();
-   /*4*/programmeNavigation();
-
-
     });
 
 });

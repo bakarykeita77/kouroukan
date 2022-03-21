@@ -6,7 +6,6 @@
         
         if($client_email !== '' OR $client_password !== ''){
         
-        /* Recuperation de tous les emails de DB, dans un tableau $emails */
             require("connexionToDB.php");
             global $db;
             
@@ -91,6 +90,7 @@
 
 	</div>
 	
+	<script src="http://localhost:8080/kouroukan/js/connexion.js"></script>
 	<script>
 	
 	    var input = $('#formulaire_de_connexion div input:not("#button_box input")');

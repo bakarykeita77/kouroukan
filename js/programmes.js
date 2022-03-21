@@ -518,6 +518,13 @@ $(document).ready(function() {
                 return programme_html;
             }
             function programmeStyle() {
+             /*--------------------------------------------------------------------------------------------------------------------
+              A chaque élément de la liste du programme correspondant un index.
+              Cet index est comparé au niveau max de l'étudiant : 
+                a)- Si l'index est inférieur au niveau max, l'élément prend la classe apprises définie dans class.css;
+                b)- Si l'index est égal au niveau max, l'élément prend la classe active définie dans class.css;
+                c)- Si l'index est supérieur au niveau max, l'élément prend la classe a_apprendre définie dans class.css.
+             --------------------------------------------------------------------------------------------------------------------*/
   
                 $.each($('#programmes_container ul li'), function() {
                             

@@ -27,6 +27,39 @@ $('document').ready(function() {
 	var index_phase_actuelle, index_phase_precedante, index_phase_active;
 	var avancer_btn = '';
 	
+
+  /*--------------------------------------------------------------------*/
+    
+	try{
+
+	  /*--------------------------------------------------------------------
+	    1)- La situation des études est faite par récupération et traitement des données reçues sur l'apprenant.
+	    2)- La liste des phases est établie en fonction du niveau d'étude de l'apprenant (selon les phases étudiées ou pas)
+	    3)- Le paramétrage conséquent est défini pour la leçon future.
+	    4)- Les phases s'affichent et
+	    5)- On peut surfer
+	  --------------------------------------------------------------------*/
+	    
+   /*1*/resume_des_etudes = convertirResuneBrutDesEtudesEnObjet();
+        noms_des_phases = nomsDesPhases();
+	    phases_etudiees = phasesEtudiees();
+	    phase_active = phaseActive(); 
+	    phases_a_etudier = phasesAEtudier();
+	    
+   /*2*/phases();
+        softDisplay();
+   /*4*/affichageDesPhases();
+   /*3*/parametrageDeLesson();
+	    actualiserCochage();
+   /*5*/naviguerSurLesson();
+
+	}catch(error){
+	    alert( 'Erreur: '+error ); 
+	}
+	
+	
+	
+  /*--------------------------------------------------------------------*/
 	
 	function nomsDesPhases() {
 	    var noms_des_phases = [];
@@ -216,7 +249,7 @@ $('document').ready(function() {
         function phasesHTML(){
           
           // Liste des phases
-            var content = '<ul>';
+            var content = '<ul class="liste_affichage_cascade">';
             for(var i=0;i<liste_de_phases.length;i++){
                 var lesson_id = $('.lesson_title').attr('id');
                 content += '<li id="'+lesson_id+'_'+liste_de_phases[i][0]+'">'+liste_de_phases[i][1]+'</li>';
@@ -302,7 +335,6 @@ $('document').ready(function() {
 	function naviguerSurLesson() {
     	
     	$('.phases ul li').on('click', function(){
-alert( sessionStorage.getItem('prenom') ); 
 
             var syllabes_tonifies = tonification();  
             var questions_a_poser = questions();
@@ -316,7 +348,7 @@ alert( sessionStorage.getItem('prenom') );
             var parametres = $('#parametres');
             var lesson = $('#lesson');
             var pratiques = $('#pratique');
-            var pratiques_entete_html = $('#pratiques_entete').html();
+            var dialogue_btn_html = $('#dialogue_btn').html();
             var evaluation = $('#evaluation');
             var parametres_html = parametres.html();
           
@@ -325,14 +357,14 @@ alert( sessionStorage.getItem('prenom') );
     	    dimensionnementDeCourseBody();
     	    affichageDeCours();
     	    dispenserCours();
-          
+         
           /*--------------------------------------------------------------------*/    
             
             function dimensionnementDeCourseBody() {
                 
                 var course_height = $('.course').height();
     	        var course_head_height = $('.course_head').height();
-    	        var pratiques_programme_height = $('#pratiques_programme').height();
+    	        var pratique_head_height = $('#pratique_head').height();
     	        var progress_bar_height = $('.progress_bar').height();
     	        var clavier_container_height = $('.clavier_container').height();
     	        var course_body_height = '';
@@ -342,7 +374,7 @@ alert( sessionStorage.getItem('prenom') );
     	            course_body_height = course_height - (course_head_height+progress_bar_height+6);
     	        }
     	        if(course_id == 'pratiques'){
-    	            course_body_height = course_height - (course_head_height+pratiques_programme_height+progress_bar_height+clavier_container_height+6);
+    	            course_body_height = course_height - (course_head_height+pratique_head_height+progress_bar_height+clavier_container_height+6);
     	        }
     	        if(course_id == 'evaluation'){
     	            course_body_height = course_height - (course_head_height+progress_bar_height+clavier_container_height+6);
@@ -754,11 +786,60 @@ alert( sessionStorage.getItem('prenom') );
                     var questions_pratiques=[], question_pratique='', reponse_tapee=[], point='';
                     var table = $('#pratiques_reponse_container table tbody').html();
                     
+                
+                
+                  /*--------------------------------------------------------------------*/
+            	    
+            	    affichageParDefautDesBoutonsDEntete();
+            	    $('#pratique_head span').on('click', function() {
+
+            	        option_index = $(this).index();
+            	        
+            	        $(this).addClass('actif');
+            	        $(this).siblings().removeClass('actif');
+            	        compteur_de_question = 1;
+            	        option_de_syllabe = optionDeSyllabe();
+            	        table = '';
+             
+                        questions_pratiques = questionsPratiques();
+            	        
+            	        dimensionnementParDefautDePratiquesCorps()                   
+            	        affichageParDefautDesBoutonsDEntete();
+                       // animerCourseBtn();
+                        afficherProgressBar();
+                        initialiserProgressBarr();
+            	    
+                    	function animerCourseBtn() {
+                    	    var course_head_btn = $('.course_head .btn span:first-child'); 
+                    	    
+                    	    course_head_btn.on('click', function(){
+                    	        alert( $(this).html() ); 
+                    	    });
+                    	}
+                	    function optionDeSyllabe() {
+                	        var option_de_syllabe = '';
+                	        
+                	        switch(option_index) {
+                	            case 0: option_de_syllabe='ߞߎߡߊߘߋ߲߫ ߜߋ߲߬ ߞߋ߬ߟߋ߲߬ߡߊ'; break;
+                	            case 1: option_de_syllabe='ߞߎߡߊߘߋ߲߫ ߜߋ߲߬ ߝߌ߬ߟߊ߬ߡߊ'; break;
+                	            case 2: option_de_syllabe='ߞߎߡߊߘߋ߲߫ ߜߋ߲߬ ߛߓߊ߬ߡߊ'; break;
+                	            case 3: option_de_syllabe='ߞߎߡߊߘߋ߲߫ ߜߋ߲߬ ߣߊ߰ߣߌ߲߬ߡߊ'; break;
+                	        }
+                	        
+                	        return option_de_syllabe;
+                	    }
+            	    });
+                	poserQuestionPratique();
+                	repondreQuestionPratique();
+                	correctionPratique();
+                	
+                	
+                	
                   /*--------------------------------------------------------------------*/
 
             	    function initialiserPratiques() {
             	        
-            	        $('#pratiques_programme span').removeClass('actif');
+            	        $('#pratique_head span').removeClass('actif');
             	        dimensionnementParDefautDePratiquesCorps()                   
             	        affichageParDefautDesBoutonsDEntete();
                         
@@ -766,7 +847,7 @@ alert( sessionStorage.getItem('prenom') );
                         initialiserProgressBarr();
             	    }
                     function dimensionnementParDefautDePratiquesCorps() {
-                        $('#pratiques_corps').css('height','45vh');
+                        $('#pratique_body').css('height','45vh');
                         $('#pratiques_demo_container').css('height','168px');
                         $('#pratiques_reponse_container').css('height','84px');
                         $('#pratiques_reponse_container #table_1').empty();
@@ -777,27 +858,27 @@ alert( sessionStorage.getItem('prenom') );
                     }
             	    function dimensionnementDePratiquesReponseContainer() {
             	        
-            	        var pratiques_corps_height = $('#pratiques_corps').height();
+            	        var pratique_body_height = $('#pratique_body').height();
             	        var pratiques_demo_container_height = $('#pratiques_demo_container').height();
-            	        var pratiques_reponse_container_height = pratiques_corps_height - pratiques_demo_container_height;
+            	        var pratiques_reponse_container_height = pratique_body_height - pratiques_demo_container_height;
             	        
             	        $('#pratiques_reponse_container').css('height', pratiques_reponse_container_height-10+'px');
             	    }
             	    function redimensionnementDePratiquesReponseContainer() {
             	        
-            	        var pratiques_corps_height = $('#pratiques_corps').height();
+            	        var pratique_body_height = $('#pratique_body').height();
             	        var pratiques_demo_container_height = $('#pratiques_demo_container').height();
         	            var message_de_fin_container_height = $('#message_de_fin_container').height();
-            	        var pratiques_reponse_container_height = pratiques_corps_height - pratiques_demo_container_height - message_de_fin_container_height;
+            	        var pratiques_reponse_container_height = pratique_body_height - pratiques_demo_container_height - message_de_fin_container_height;
             	        
             	        $('#pratiques_reponse_container').css('height', pratiques_reponse_container_height-10+'px');
             	    }
             	    function reredimensionnementDePratiquesReponseContainer() {
             	        
-            	        var pratiques_corps_height = $('#pratiques_corps').height();
+            	        var pratique_body_height = $('#pratique_body').height();
             	        var pratiques_images_container_height = $('#pratiques_images_container').height();
         	            var message_de_fin_container_height = $('#message_de_fin').height();
-            	        var pratiques_reponse_container_height = pratiques_corps_height - pratiques_images_container_height;
+            	        var pratiques_reponse_container_height = pratique_body_height - pratiques_images_container_height;
             	        
             	        $('#pratiques_reponse_container').css('height', pratiques_reponse_container_height-10+'px');
             	       // $('#table_1_cadre').css('height', pratiques_reponse_container_height-24+'px');
@@ -1004,6 +1085,8 @@ alert( sessionStorage.getItem('prenom') );
                             
                             finDePratique();
                             revisionDePratique();
+                            
+                    alert( sessionStorage.getItem('apprentissages') );        
                             	
                             function chargerTableDeReponses() {
                                 table += "<tr>\n <td>"+question_pratique+"</td>\n<td>"+reponse_tapee+"</td>\n<td>"+parseIntNko(point)+"</td>\n </tr>\n\n";
@@ -1182,8 +1265,8 @@ alert( sessionStorage.getItem('prenom') );
                         	            
                         	            var course_height = $('.course').height();
     	                                var course_head_height = $('.course_head').height();
-    	                                var pratiques_programme_height = $('#pratiques_programme').height();
-                        	            var course_body_height = course_height - pratiques_programme_height + 6;
+    	                                var pratique_head_height = $('#pratique_head').height();
+                        	            var course_body_height = course_height - pratique_head_height + 6;
     	                                
     	                                $('.course_body').css('height', course_body_height-26+'px');
                         	            $('#message_de_fin_container').css('display','block');
@@ -1200,8 +1283,9 @@ alert( sessionStorage.getItem('prenom') );
                                         pratique_submit.addEventListener('click', e => {
                                             e.preventDefault();
                                             
-                                          /* Extration du contenu des inputs pour leur envoie a la page actions.php qui se chargé de les envoyer au serveur */  
                                             document.getElementById('pratique_input').value = memoire_pratique;
+                                            
+                                          /* Extration du contenu des inputs pour leur envoie a la page actions.php qui se chargé de les envoyer au serveur */  
                                             const post_action = document.getElementById('post_action').value;
                                             const id_user = document.getElementById('id_user').value;
                                             const pratique = document.getElementById('pratique_input').value;
@@ -1217,14 +1301,13 @@ alert( sessionStorage.getItem('prenom') );
                                                 body: params
                                             })
                                             .then(response => response.text());
-
                                         });
                                         
                                        pratique_submit.click();
                                     }
                                     function changerNombreDeSyllabe() {
                                         if(total_point === total_question) {
-                                            $('#pratiques_programme .actif').next().click();
+                                            $('#pratique_head .actif').next().click();
                                         }
                                     }  
                                 }
@@ -1289,52 +1372,7 @@ alert( sessionStorage.getItem('prenom') );
                     function afficherProgressBar(){
         	            $('.progress_bar').css({'opacity':1});
         	        }
-                                    
-                  /*--------------------------------------------------------------------*/
-            	    
-            	    affichageParDefautDesBoutonsDEntete();
-            	    $('#pratiques_programme span').on('click', function() {
-
-            	        option_index = $(this).index();
-            	        
-            	        $(this).addClass('actif');
-            	        $(this).siblings().removeClass('actif');
-            	        compteur_de_question = 1;
-            	        option_de_syllabe = optionDeSyllabe();
-            	        table = '';
-             
-                        questions_pratiques = questionsPratiques();
-            	        
-            	        dimensionnementParDefautDePratiquesCorps()                   
-            	        affichageParDefautDesBoutonsDEntete();
-                       // animerCourseBtn();
-                        afficherProgressBar();
-                        initialiserProgressBarr();
-            	    
-                    	function animerCourseBtn() {
-                    	    var course_head_btn = $('.course_head .btn span:first-child'); 
-                    	    
-                    	    course_head_btn.on('click', function(){
-                    	        alert( $(this).html() ); 
-                    	    });
-                    	}
-                	    function optionDeSyllabe() {
-                	        var option_de_syllabe = '';
-                	        
-                	        switch(option_index) {
-                	            case 0: option_de_syllabe='ߞߎߡߊߘߋ߲߫ ߜߋ߲߬ ߞߋ߬ߟߋ߲߬ߡߊ'; break;
-                	            case 1: option_de_syllabe='ߞߎߡߊߘߋ߲߫ ߜߋ߲߬ ߝߌ߬ߟߊ߬ߡߊ'; break;
-                	            case 2: option_de_syllabe='ߞߎߡߊߘߋ߲߫ ߜߋ߲߬ ߛߓߊ߬ߡߊ'; break;
-                	            case 3: option_de_syllabe='ߞߎߡߊߘߋ߲߫ ߜߋ߲߬ ߣߊ߰ߣߌ߲߬ߡߊ'; break;
-                	        }
-                	        
-                	        return option_de_syllabe;
-                	    }
-            	    });
-                	poserQuestionPratique();
-                	repondreQuestionPratique();
-                	correctionPratique();
-                	
+                                    	
                 } 
     	    }
           
@@ -1345,33 +1383,4 @@ alert( sessionStorage.getItem('prenom') );
 	    });
 	}
 	
-    
-	try{
-	    
-	
-	  /*
-	    1)- La situation des études est faite par récupération et traitement des données reçues sur l'apprenant.
-	    2)- La liste des phases est établie en fonction du niveau d'étude de l'apprenant (selon les phases étudiées ou pas)
-	    3)- Le paramétrage conséquent est défini pour la leçon future.
-	    4)- Les phases s'affichent et
-	    5)- On peut surfer*/
-	    
-   /*1*/resume_des_etudes = convertirResuneBrutDesEtudesEnObjet();
-        noms_des_phases = nomsDesPhases();
-	    phases_etudiees = phasesEtudiees();
-	    phase_active = phaseActive(); 
-	    phases_a_etudier = phasesAEtudier();
-	    
-   /*2*/phases();
-        softDisplay();
-   /*4*/affichageDesPhases();
-   /*3*/parametrageDeLesson();
-	    actualiserCochage();
-   /*5*/naviguerSurLesson();
-
-	}catch(error){
-	    alert( 'Erreur: '+error ); 
-	}
-	
-
 });

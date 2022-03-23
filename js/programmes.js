@@ -42,19 +42,22 @@ $(document).ready(function() {
 
         var client_info = [], niveaux_client = [], phases = [];
         var liste_des_niveaux = [], liste_des_phases = [];
+        var situations_container = '', situation_globale = [];
 
         var resume_brut_des_etudes = [];
         var resume_des_etudes = [];
         var p = [];
         var point_max = '';
+        
+        
 
-    /*-----------------------------------------------------------------------------------------------------------------------*//*
+    /*-------------------------------------------------------------------------------------------------------------------------
 
-    Au click sur l'afficheur du programme 
+     Au click sur l'afficheur du programme 
         1)- On obtient le niveau d'étude de l'apprenant par analyse de sa situation.
         2)- On determine le programme en fonction du niveau d'étude.
-        3)- On l'affiche et 
-        4)- On navigue dessus */
+
+    -------------------------------------------------------------------------------------------------------------------------*/
       
         
    /*1*/situationDesEtudes();
@@ -65,10 +68,8 @@ $(document).ready(function() {
         verificationDesLessonsEtudiees();
         
    /*2*/programme();
-   /*3*/programmeAffichage();
-   /*4*/programmeNavigation();
+   
 
-        
     /*-----------------------------------------------------------------------------------------------------------------------*/
         
         function situationDesEtudes() {
@@ -288,14 +289,15 @@ $(document).ready(function() {
         function getUserInfo() {
         
             let id_user = parseInt(document.getElementById('id_user').innerHTML);
+            situations_container = document.getElementById('situations_container');
 
          
          /*-------------------------------------------------------------------------------------------------------------------- 
           Recherche des donnees d'identité de l'étudiant, extraites de la table users.
          --------------------------------------------------------------------------------------------------------------------*/
-            let url1 = `http://localhost:8080/kouroukan/api/index.php?search=user&id_user=${id_user}`;
+            let url_user = `http://localhost:8080/kouroukan/api/index.php?search=user&id_user=${id_user}`;
             
-            fetch(url1)
+            fetch(url_user)
             .then(response => response.json()) 
             .then(client_infos => {
                 console.log(client_infos);
@@ -314,13 +316,13 @@ $(document).ready(function() {
          /*-------------------------------------------------------------------------------------------------------------------- 
           Recherche des leçons étudiées par l'étudiant, extraites de la table lessons.
          --------------------------------------------------------------------------------------------------------------------*/
-            let url2 = `http://localhost:8080/kouroukan/api/index.php?search=lessons&id_user=${id_user}`;
+            let url_apprentissages = `http://localhost:8080/kouroukan/api/index.php?search=apprentissages&id_user=${id_user}`;
             
-            fetch(url2)
+            fetch(url_apprentissages)
             .then(response => response.json()) 
-            .then(lessons => {
-                console.log(lessons);
-                localStorage.setItem('lessons', JSON.stringify(lessons));
+            .then(apprentissages => {
+                console.log(apprentissages);
+                localStorage.setItem('apprentissages', JSON.stringify(apprentissages));
             })
             .catch(error => console.log( error ));             
 
@@ -328,9 +330,9 @@ $(document).ready(function() {
          /*-------------------------------------------------------------------------------------------------------------------- 
           Recherche des exercices effectuées par l'étudiant, extraites de la table exercices.
          --------------------------------------------------------------------------------------------------------------------*/
-            let url3 = `http://localhost:8080/kouroukan/api/index.php?search=exercices&id_user=${id_user}`;
+            let url_exercices = `http://localhost:8080/kouroukan/api/index.php?search=exercices&id_user=${id_user}`;
             
-            fetch(url3)
+            fetch(url_exercices)
             .then(response => response.json()) 
             .then(exercices => {
                 console.log(exercices);
@@ -342,9 +344,9 @@ $(document).ready(function() {
          /*-------------------------------------------------------------------------------------------------------------------- 
           Recherche des pratiques effectuées par l'étudiant, extraites de la table pratiques.
          --------------------------------------------------------------------------------------------------------------------*/
-            let url4 = `http://localhost:8080/kouroukan/api/index.php?search=pratiques&id_user=${id_user}`;
+            let url_pratiques = `http://localhost:8080/kouroukan/api/index.php?search=pratiques&id_user=${id_user}`;
             
-            fetch(url4)
+            fetch(url_pratiques)
             .then(response => response.json()) 
             .then(pratiques => {
                 console.log(pratiques);
@@ -356,16 +358,24 @@ $(document).ready(function() {
          /*-------------------------------------------------------------------------------------------------------------------- 
           Recherche des testes effectués par l'étudiant, extraits de la table testes.
          --------------------------------------------------------------------------------------------------------------------*/
-            let url5 = `http://localhost:8080/kouroukan/api/index.php?search=testes&id_user=${id_user}`;
+            let url_testes = `http://localhost:8080/kouroukan/api/index.php?search=testes&id_user=${id_user}`;
             
-            fetch(url5)
+            fetch(url_testes)
             .then(response => response.json()) 
             .then(testes => {
                 console.log(testes);
                 localStorage.setItem('testes', JSON.stringify(testes));
             })
-            .catch(error => console.log( error ));        
-
+            .catch(error => console.log( error ));   
+            
+            
+            
+            situation_globale[0] = localStorage.getItem('apprentissages');
+            situation_globale[1] = localStorage.getItem('exercices');
+            situation_globale[2] = localStorage.getItem('pratiques');
+            situation_globale[3] = localStorage.getItem('testes');
+           
+            situations_container.innerHTML = situation_globale;
         }
         function niveauMaxDuClient() {
  
@@ -381,7 +391,7 @@ $(document).ready(function() {
                     niveaux[niveaux.length] = resume_des_etudes[i][resume_des_etudes[i].length-1][0];
                     niveau_max = Math.max(...niveaux);
                 }
-                    
+                     
                 return niveau_max;
             }
         }   
@@ -489,10 +499,11 @@ $(document).ready(function() {
             
             programmes_container.html(programmeHTML());
             programmeStyle();
+            programmeAffichage();
+            programmeNavigation();
 
             function programmeHTML() {
  
-        
                 programme_html = '<h2>ߘߋ߰ߟߌ ߢߍߥߟߊ </h2>';
                 programme_html += '<ul id="programme_ul">';
 
@@ -502,7 +513,7 @@ $(document).ready(function() {
         
                     if (niveau_max+1 >= matiere_index) {
                         var phases_lien = 'lesson.php?matiere_id='+liste_de_matieres[i][0]+'&matiere_index='+matiere_index+'&matiere_nom='+liste_de_matieres[i][1]+'&niveau='+matiere_index+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees+'&resume_brut_des_etudes='+resume_brut_des_etudes;
-                     
+                    
                         programme_html += '<li><a href="'+phases_lien+'">'+liste_de_matieres[i][1]+'</a></li>';
                     } else {
                         programme_html += '<li><a href="#">'+liste_de_matieres[i][1]+'</a></li>';
@@ -514,7 +525,7 @@ $(document).ready(function() {
                 programme_html += '<span id="back_to_accueil">ߛߋ߬ߦߌ߬ ߞߐ߫</span>';
                 programme_html += '<span id="go_to_phases"><a href="'+phases_lien+'">ߥߊ߫ ߢߍ߫</a></span>';
                 programme_html += '</div>';
-
+ 
                 return programme_html;
             }
             function programmeStyle() {
@@ -535,19 +546,19 @@ $(document).ready(function() {
                     if(matiere_index  > niveau_max+1) { $(this).addClass('a_apprendre'); }
                 });
             }
-        }
-        function programmeAffichage() {
-            programmes_container.css({'display': 'block'});
-            reception.css({'display': 'none'});
-        }
-        function programmeNavigation() {
-
-            $('#back_to_accueil').on('click', function() {
-                programmes_container.css('display','none');
-                reception.css('display','block');
-            });
-            
-          //Le click sur le bouton next redirige sur la page de lessons.
+            function programmeAffichage() {
+                programmes_container.css({'display': 'block'});
+                reception.css({'display': 'none'});
+            }
+            function programmeNavigation() {
+    
+                $('#back_to_accueil').on('click', function() {
+                    programmes_container.css('display','none');
+                    reception.css('display','block');
+                });
+                
+              //Le click sur le bouton next redirige sur la page de lessons.
+            }
         }
        
     });

@@ -101,14 +101,24 @@ if(isset($_SESSION['connected'])){
         </div>
       <!-------------------------------------------------------------------->
         <div class="course" id="pratique" align="center">
+         <!--------------------------------------------------------------------
+            La partie pratique de lesson est composée de 3 divisions dont:
             
-            <div id="pratiques_programme">
+            1)- pratique_head
+            2)- pratique_body
+            2)- pratique_foot
+         ---------------------------------------------------------------------->
+            
+          <!--pratique_head---------------------------------------------------->
+            <div id="pratique_head">
                 <span>ߜߋ߲߬ ߁ ߡߊ</span>
                 <span>ߜߋ߲߬ ߂ ߡߊ</span>
                 <span>ߜߋ߲߬ ߃ ߡߊ</span>
                 <span>ߜߋ߲߬ ߄ ߡߊ</span>
             </div> 
-            <div class="course_body" id="pratiques_corps">
+            
+          <!--pratique_body---------------------------------------------------->
+            <div class="course_body" id="pratique_body">
             
                 <div id="pratiques_demo_container" align="center">
                     <div id="pratique_guide">
@@ -132,36 +142,43 @@ if(isset($_SESSION['connected'])){
                 </div>
                 
                 <form id="pratique_form" style="display:none">
-                    <input type="text" name="post_action" id="post_action" value="archiver_pratique">
-                    <input type="number" name="id_user" id="id_user" value="<?= $_SESSION['id']; ?>">
-                    <input type="text" name="pratique" id="pratique_input">
+                    
+                    <input type="text"   name="post_action"   id="post_action"     value="archiver_pratique">
+                    <input type="number" name="id_user"       id="id_user"         value="<?= $_SESSION['id']; ?>">
+                    <input type="text"   name="course_name"   id="course_name">
+                    <input type="text"   name="pratique"      id="pratique_input">
+                    <input type="number" name="point"         id="point_input">
                     <input type="submit" id="pratique_submit" value="Envoyer">
                 </form>
                 
             </div>
-            <div class='progress_bar'><span class='progress_question_bar'></span><span class='progress_bonne_reponse_bar'></span></div>
-            <div class="course_head" id="pratiques_entete">
-
-                <div class="btn question_btn">
-                    <span class="question_label">ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</span>
-                    <span class="question_total"></span> :
-                    <span class="question_ordre"></span>
-                    <span class="question_action"></span>
-                    <span class="question_icon"></span>
-                </div>
-
-                <div class="btn repetition_btn">
-                    <span class="repetition_label">ߊ߬ ߟߊߡߍ߲߫ ߕߎ߯ߣߌ߫</span>
-                    <span class="repetition_icon"></span>
-                </div>
-
-                <div class="btn correction_btn">
-                    <span class="correction_label">ߏ߬ ߛߊߞߍ߫</span>
-                    <span class="correction_icon"></span>
-                </div>
-            </div>
             
-            <div class="clavier_container" id="clavier_pratique"><?php include "clavier.php"; ?></div>
+          <!--pratique_foot---------------------------------------------------->
+            <div id="pratique_foot">
+                <div class='progress_bar'><span class='progress_question_bar'></span><span class='progress_bonne_reponse_bar'></span></div>
+                <div id="dialogue_btn">
+    
+                    <div class="btn question_btn">
+                        <span class="question_label">ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</span>
+                        <span class="question_total"></span> :
+                        <span class="question_ordre"></span>
+                        <span class="question_action"></span>
+                        <span class="question_icon"></span>
+                    </div>
+    
+                    <div class="btn repetition_btn">
+                        <span class="repetition_label">ߊ߬ ߟߊߡߍ߲߫ ߕߎ߯ߣߌ߫</span>
+                        <span class="repetition_icon"></span>
+                    </div>
+    
+                    <div class="btn correction_btn">
+                        <span class="correction_label">ߏ߬ ߛߊߞߍ߫</span>
+                        <span class="correction_icon"></span>
+                    </div>
+                </div>
+            
+                <div class="clavier_container" id="clavier_pratique"><?php include "clavier.php"; ?></div>
+            </div>
         </div>
       <!-------------------------------------------------------------------->
         <div class="course" id="evaluation" align="center">

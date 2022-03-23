@@ -37,8 +37,8 @@ try {
      /* ------------------------------------------------------------------------------------
       Extraction des leçons étudiées par l'étudiant, à partir de la database
      -------------------------------------------------------------------------------------*/   
-        case 'lessons':
-            $sql = "SELECT * FROM lessons WHERE id_client = ".$id_user;
+        case 'apprentissages':
+            $sql = "SELECT * FROM apprentissages WHERE id_client = ".$id_user." ORDER BY niveau";
                   
             $requete = $db -> prepare($sql);
             $requete -> execute();
@@ -52,7 +52,7 @@ try {
       Extraction des exercices effectuées par l'étudiant, à partir de la database
      -------------------------------------------------------------------------------------*/   
         case 'exercices':
-            $sql = "SELECT * FROM exercices WHERE id = ".$id_user;
+            $sql = "SELECT * FROM exercices WHERE id = ".$id_user." ORDER BY niveau";
                   
             $requete = $db -> prepare($sql);
             $requete -> execute();
@@ -66,7 +66,7 @@ try {
       Extraction des pratiques effectuées par l'étudiant, à partir de la database
      -------------------------------------------------------------------------------------*/   
         case 'pratiques':
-            $sql = "SELECT * FROM pratiques WHERE id = ".$id_user;
+            $sql = "SELECT * FROM pratiques WHERE id = ".$id_user." ORDER BY niveau";
                   
             $requete = $db -> prepare($sql);
             $requete -> execute();
@@ -80,7 +80,7 @@ try {
       Extraction des testes effectués par l'étudiant, à partir de la database
      -------------------------------------------------------------------------------------*/   
         case 'testes':
-            $sql = "SELECT * FROM teste WHERE id = ".$id_user;
+            $sql = "SELECT * FROM teste WHERE id = ".$id_user." ORDER BY niveau";
                   
             $requete = $db -> prepare($sql);
             $requete -> execute();

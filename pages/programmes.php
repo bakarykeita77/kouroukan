@@ -20,6 +20,7 @@ if(isset($_SESSION['connected'])){
                 <p>ߖߐ ߦߴߌ ߡߊ߬ ߞߟߊߓߎߡߊ</p>
                 
                 <p id="id_user" style="display:none"><?= $_SESSION['id']; ?></p>
+                <p id="situations_container" style="display:none"></p>
                 <h2><?= $_SESSION['prenom']." ".$_SESSION['nom'];  ?></h2>
                 
                 <div id="user_info">

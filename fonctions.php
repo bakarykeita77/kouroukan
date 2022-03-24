@@ -80,6 +80,12 @@
 
 			return $pratiques;
 		}
+		function archiverPratiques($id_user,$course,$phase,$pratiques,$point) {
+		    global $db;
+		    
+		    $sql = "INSERT INTO alphabet (id_client,matiere,phase,cour,note)
+		            VALUES ($id_user,$course,$phase,$course,$point)";
+		}
 		function getAllClients(){
 			global $db;
 

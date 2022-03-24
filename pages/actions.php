@@ -7,6 +7,99 @@
     $post_action = isset($_POST['post_action']) ? $_POST['post_action']:'';
     $get_action  = isset($_GET['get_action']) ? $_GET['get_action']:'';
     $referer     = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/pages/index.php';
+
+  /*----------------------------------------------------------------------------------------------*/
+    
+    switch($post_action){
+        case 'add_client':
+           
+            $prenom    = securiser($_POST['prenom']);
+            $nom       = securiser($_POST['nom']);
+            $naissance = securiser($_POST['naissance']);
+            $sexe      = securiser($_POST['sexe']);
+            $adresse   = securiser($_POST['adresse']);
+            $email     = securiser($_POST['email']);
+            $password  = securiser($_POST['password']);
+           
+            addClient($prenom,$nom,$naissance,$sexe,$adresse,$email,$password);
+            header('location:http://localhost:8080/kouroukan/index.php?message=1');
+        break;
+        case 'archiver_pratique':
+            
+            $id_user  = securiser($_POST['id_user']);
+            $pratique = securiser($_POST['pratique']);
+           
+            archiverPratique($id_user,$pratique);  
+            header('location:'.$referer);
+        break;
+        case 'archiver_pratiques':
+            
+            $id_client = securiser($_POST['id_client']);
+            $matiere   = securiser($_POST['matiere']);
+            $phase     = securiser($_POST['phase']);
+            $lesson    = securiser($_POST['lesson']);
+            $note      = securiser($_POST['note']);
+            
+            archiverPratiques($id_client,$matiere,$phase,$lesson,$note);
+            
+            break;
+        case 'get_client':
+            $client_email = securiser($_POST['client_email']);
+            getClientByEmail($client_email);      
+        break;
+        case 'update_client':
+            
+            $id        = securiser($_POST['post_id']);
+            $prenom    = securiser($_POST['prenom_updated']);
+            $nom       = securiser($_POST['nom_updated']);
+            $naissance = securiser($_POST['naissance_updated']);
+            $sexe      = securiser($_POST['sexe_updated']);
+            $adresse   = securiser($_POST['adresse_updated']);
+            $email     = securiser($_POST['email_updated']);
+            $password  = securiser($_POST['password_updated']);
+            
+            updateClient($id,$prenom,$nom,$naissance,$sexe,$adresse,$email,$password);
+        break;
+    }
+    switch($get_action) {
+        
+        case 'archiver_exercice':
+            $id_client = securiser($_SESSION['id']);
+            $niveau    = securiser($_POST['niveau']);
+            $exercice  = securiser($_POST['course_input']);
+          
+            archiverExercice($id_client,$niveau,$exercice);
+            header('location:lesson.php');
+        break;
+        case 'archiver_lesson':
+            $id_client = securiser($_SESSION['id']);
+            $niveau    = securiser($_POST['niveau']);
+            $course    = securiser($_POST['course_input']);
+   
+            archiverLesson($id_client,$niveau,$course);
+            header('location:lesson.php');
+        break;
+        case 'archiver_teste':
+            
+            $id_client = $_SESSION['id'];
+            $niveau    = securiser($_GET['niveau']);
+            $teste     = securiser($_POST['teste']);
+            $point     = securiser($_POST['point']);
+          
+            archiverTeste($id_client,$niveau,$teste,$point);
+            header("location:lesson.php");
+        break;
+        case 'delete_client':
+            $id = securiser($_GET['id']);
+            deleteClient($id);
+            
+            header('location:clients.php');
+        break;
+        case 'get_clients':
+            getAllClients();      
+        break;
+    }
+    
  
   /*----------------------------------------------------------------------------------------------*/
   
@@ -43,6 +136,24 @@
 			$pratiques = $requette->execute();
 
 			return $pratiques;
+		}
+		function archiverPratiques($id_client,$matiere,$phase,$lesson,$note) {
+		    global $db;
+		    
+		    $sql = "INSERT INTO ".$matiere." (id_client,matiere,phase,lesson,note)
+		            VALUES (:id_client,:matiere,:phase,:lesson,:note)";
+		           
+		    $requete = $db -> prepare($sql);
+		    
+		    $requete -> bindValue(':id_client', $id_client, PDO::PARAM_INT);
+		    $requete -> bindValue(':matiere',   $matiere,   PDO::PARAM_STR);
+		    $requete -> bindValue(':phase',     $phase,     PDO::PARAM_STR);
+		    $requete -> bindValue(':lesson',    $lesson,    PDO::PARAM_STR);
+		    $requete -> bindValue(':note',      $note,      PDO::PARAM_STR);
+		    
+		    $data = $requete-> execute();
+		    
+		    return $data;
 		}
 		function archiverLesson($client_id,$niveau,$course){}
 		function archiverNotes($numero, $question, $reponse, $points){
@@ -150,85 +261,5 @@
 			$utilisateurs =  $requette->execute();
 			return $utilisateurs;
 		 }
-    
-  /*----------------------------------------------------------------------------------------------*/
-    
-    switch($post_action){
-        case 'add_client':
-           
-            $prenom    = securiser($_POST['prenom']);
-            $nom       = securiser($_POST['nom']);
-            $naissance = securiser($_POST['naissance']);
-            $sexe      = securiser($_POST['sexe']);
-            $adresse   = securiser($_POST['adresse']);
-            $email     = securiser($_POST['email']);
-            $password  = securiser($_POST['password']);
-           
-            addClient($prenom,$nom,$naissance,$sexe,$adresse,$email,$password);
-            header('location:http://localhost:8080/kouroukan/index.php?message=1');
-        break;
-        case 'archiver_pratique':
-            
-            $id_user  = securiser($_POST['id_user']);
-            $pratique = securiser($_POST['pratique']);
-           
-            archiverPratique($id_user,$pratique);  
-            header('location:'.$referer);
-        break;
-        case 'get_client':
-            $client_email = securiser($_POST['client_email']);
-            getClientByEmail($client_email);      
-        break;
-        case 'update_client':
-            
-            $id        = securiser($_POST['post_id']);
-            $prenom    = securiser($_POST['prenom_updated']);
-            $nom       = securiser($_POST['nom_updated']);
-            $naissance = securiser($_POST['naissance_updated']);
-            $sexe      = securiser($_POST['sexe_updated']);
-            $adresse   = securiser($_POST['adresse_updated']);
-            $email     = securiser($_POST['email_updated']);
-            $password  = securiser($_POST['password_updated']);
-            
-            updateClient($id,$prenom,$nom,$naissance,$sexe,$adresse,$email,$password);
-        break;
-    }
-    switch($get_action){
         
-        case 'archiver_exercice':
-            $id_client = securiser($_SESSION['id']);
-            $niveau    = securiser($_POST['niveau']);
-            $exercice  = securiser($_POST['course_input']);
-          
-            archiverExercice($id_client,$niveau,$exercice);
-            header('location:lesson.php');
-        break;
-        case 'archiver_lesson':
-            $id_client = securiser($_SESSION['id']);
-            $niveau    = securiser($_POST['niveau']);
-            $course    = securiser($_POST['course_input']);
-   
-            archiverLesson($id_client,$niveau,$course);
-            header('location:lesson.php');
-        break;
-        case 'archiver_teste':
-            
-            $id_client = $_SESSION['id'];
-            $niveau    = securiser($_GET['niveau']);
-            $teste     = securiser($_POST['teste']);
-            $point     = securiser($_POST['point']);
-          
-            archiverTeste($id_client,$niveau,$teste,$point);
-            header("location:lesson.php");
-        break;
-        case 'delete_client':
-            $id = securiser($_GET['id']);
-            deleteClient($id);
-            
-            header('location:clients.php');
-        break;
-        case 'get_clients':
-            getAllClients();      
-        break;
-    }
 ?>

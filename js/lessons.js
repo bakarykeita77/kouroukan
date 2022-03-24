@@ -354,12 +354,16 @@ $('document').ready(function() {
           
           /*--------------------------------------------------------------------*/    
     	    
+    	    phaseActiveName();
     	    dimensionnementDeCourseBody();
     	    affichageDeCours();
     	    dispenserCours();
          
           /*--------------------------------------------------------------------*/    
             
+            function phaseActiveName() {
+                sessionStorage.setItem('phase', course_id); 
+            }
             function dimensionnementDeCourseBody() {
                 
                 var course_height = $('.course').height();
@@ -541,7 +545,7 @@ $('document').ready(function() {
                     }
             	    function stockerLesson(){
             	        
-                        var table, tr, td, nbr_table, nbr_tr, nbr_td, nbr_table_td = '';
+                        var table, tr, td, nbr_table, nbr_tr, nbr_td, nbr_table_td;
                         var lesson_clicks = [];
                         
                         table = $('.table_parlante'); 
@@ -915,7 +919,6 @@ $('document').ready(function() {
                             
                         return questions_pratiques;
                     }
-                	    
             	    function poserQuestionPratique() {
                 	    $('.question_btn').on('click',function(){
         
@@ -1086,8 +1089,8 @@ $('document').ready(function() {
                             finDePratique();
                             revisionDePratique();
                             
-                    alert( sessionStorage.getItem('apprentissages') );        
-                            	
+                            
+                            
                             function chargerTableDeReponses() {
                                 table += "<tr>\n <td>"+question_pratique+"</td>\n<td>"+reponse_tapee+"</td>\n<td>"+parseIntNko(point)+"</td>\n </tr>\n\n";
                                 $('#pratiques_reponse_container #table_1').html(table);
@@ -1283,24 +1286,40 @@ $('document').ready(function() {
                                         pratique_submit.addEventListener('click', e => {
                                             e.preventDefault();
                                             
-                                            document.getElementById('pratique_input').value = memoire_pratique;
+                                            let id_input          = document.getElementById('id_input');
+                                            let matiere_nom_input = document.getElementById('matiere_nom_input');
+                                            let phase_input       = document.getElementById('phase_input');
+                                            let lesson_input      = document.getElementById('lesson_input')
+                                            let note_input        = document.getElementById('note_input')
+                                            
+                                            matiere_nom_input.value = sessionStorage.getItem('matiere');
+                                            phase_input.value       = sessionStorage.getItem('phase');
+                                            lesson_input.value      = memoire_pratiques;
+                                            note_input.value        = total_point;
                                             
                                           /* Extration du contenu des inputs pour leur envoie a la page actions.php qui se chargé de les envoyer au serveur */  
-                                            const post_action = document.getElementById('post_action').value;
-                                            const id_user = document.getElementById('id_user').value;
-                                            const pratique = document.getElementById('pratique_input').value;
+                                            let id_client   = id_input.value;
+                                            let matiere_nom = matiere_nom_input.value;
+                                            let lesson      = lesson_input.value;
+                                            let phase       = phase_input.value;
+                                            let note        = note_input.value;
+                                          
+                                          /*--------------------------------------------------------------------*/
                                             
-                                            const params = new URLSearchParams({
-                                                post_action: post_action,
-                                                id_user: id_user,
-                                                pratique: pratique
+                                            const param = new URLSearchParams({
+                                                post_action: 'archiver_pratiques',
+                                                id_client: id_client,
+                                                matiere: sessionStorage.getItem('matiere'),
+                                                phase: phase,
+                                                lesson: lesson,
+                                                note: note
                                             });
-                                            
-                                            fetch('actions.php', {
+                                      
+                                            fetch('actions.php',{
                                                 method: 'POST',
-                                                body: params
+                                                body: param
                                             })
-                                            .then(response => response.text());
+                                            .then(response => response.json())
                                         });
                                         
                                        pratique_submit.click();

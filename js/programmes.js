@@ -69,7 +69,6 @@ $(document).ready(function() {
         
    /*2*/programme();
    
-
     /*-----------------------------------------------------------------------------------------------------------------------*/
         
         function situationDesEtudes() {
@@ -500,7 +499,9 @@ $(document).ready(function() {
             programmes_container.html(programmeHTML());
             programmeStyle();
             programmeAffichage();
+            nomDeLaMatiereActive();
             programmeNavigation();
+            
 
             function programmeHTML() {
  
@@ -513,8 +514,7 @@ $(document).ready(function() {
         
                     if (niveau_max+1 >= matiere_index) {
                         var phases_lien = 'lesson.php?matiere_id='+liste_de_matieres[i][0]+'&matiere_index='+matiere_index+'&matiere_nom='+liste_de_matieres[i][1]+'&niveau='+matiere_index+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees+'&resume_brut_des_etudes='+resume_brut_des_etudes;
-                    
-                        programme_html += '<li><a href="'+phases_lien+'">'+liste_de_matieres[i][1]+'</a></li>';
+                        programme_html += '<li id="'+liste_de_matieres[i][0]+'"><a href="'+phases_lien+'">'+liste_de_matieres[i][1]+'</a></li>';
                     } else {
                         programme_html += '<li><a href="#">'+liste_de_matieres[i][1]+'</a></li>';
                     }
@@ -549,6 +549,11 @@ $(document).ready(function() {
             function programmeAffichage() {
                 programmes_container.css({'display': 'block'});
                 reception.css({'display': 'none'});
+            }
+            function nomDeLaMatiereActive() {
+                $('#programme_ul li').on('click', function(){
+                    sessionStorage.setItem('matiere', $(this).attr('id')); 
+                });
             }
             function programmeNavigation() {
     

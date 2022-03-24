@@ -143,12 +143,12 @@ if(isset($_SESSION['connected'])){
                 
                 <form id="pratique_form" style="display:none">
                     
-                    <input type="text"   name="post_action"   id="post_action"     value="archiver_pratique">
-                    <input type="number" name="id_user"       id="id_user"         value="<?= $_SESSION['id']; ?>">
-                    <input type="text"   name="course_name"   id="course_name">
-                    <input type="text"   name="pratique"      id="pratique_input">
-                    <input type="number" name="point"         id="point_input">
-                    <input type="submit" id="pratique_submit" value="Envoyer">
+                    <input type="number" name="id_input"          id="id_input"         value="<?= $_SESSION['id']; ?>">
+                    <input type="text"   name="matiere_nom_input" id="matiere_nom_input">
+                    <input type="text"   name="phase_input"       id="phase_input">
+                    <input type="text"   name="lesson_input"      id="lesson_input">
+                    <input type="number" name="note_input"        id="note_input">
+                    <input type="submit" id="pratique_submit"     value="Envoyer">
                 </form>
                 
             </div>

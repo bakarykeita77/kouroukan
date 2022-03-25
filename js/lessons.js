@@ -27,18 +27,19 @@ $('document').ready(function() {
 	var index_phase_actuelle, index_phase_precedante, index_phase_active;
 	var avancer_btn = '';
 	
+alert( sessionStorage.getItem('matiere') ); 
+alert( sessionStorage.getItem('phase') ); 
+	
 
-  /*--------------------------------------------------------------------*/
+  /*--------------------------------------------------------------------
     
-	try{
-
-	  /*--------------------------------------------------------------------
-	    1)- La situation des études est faite par récupération et traitement des données reçues sur l'apprenant.
-	    2)- La liste des phases est établie en fonction du niveau d'étude de l'apprenant (selon les phases étudiées ou pas)
-	    3)- Le paramétrage conséquent est défini pour la leçon future.
-	    4)- Les phases s'affichent et
-	    5)- On peut surfer
-	  --------------------------------------------------------------------*/
+    1)- La situation des études est faite par récupération et traitement des données reçues sur l'apprenant.
+	2)- La liste des phases est établie en fonction du niveau d'étude de l'apprenant (selon les phases étudiées ou pas)
+	3)- Le paramétrage conséquent est défini pour la leçon future.
+	4)- Les phases s'affichent et
+	5)- On peut surfer
+    
+    --------------------------------------------------------------------*/
 	    
    /*1*/resume_des_etudes = convertirResuneBrutDesEtudesEnObjet();
         noms_des_phases = nomsDesPhases();
@@ -53,11 +54,6 @@ $('document').ready(function() {
 	    actualiserCochage();
    /*5*/naviguerSurLesson();
 
-	}catch(error){
-	    alert( 'Erreur: '+error ); 
-	}
-	
-	
 	
   /*--------------------------------------------------------------------*/
 	
@@ -1401,5 +1397,6 @@ $('document').ready(function() {
 	        $('.phases ul li').click();
 	    });
 	}
+	
 	
 });

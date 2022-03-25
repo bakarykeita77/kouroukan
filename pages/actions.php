@@ -5,12 +5,18 @@
     global $db;
     
     $post_action = isset($_POST['post_action']) ? $_POST['post_action']:'';
+    $lesson      = isset($_POST['lesson']) ? $_POST['lesson']:'';
     $get_action  = isset($_GET['get_action']) ? $_GET['get_action']:'';
     $referer     = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/pages/index.php';
 
   /*----------------------------------------------------------------------------------------------*/
     
     switch($post_action){
+        case $lesson:
+            $lesson = securiser($lesson);
+            
+            getAllInfo($lesson);
+            break;
         case 'add_client':
            
             $prenom    = securiser($_POST['prenom']);
@@ -191,6 +197,15 @@
 			$requette->execute();
 			return $utilisateurs = $requette->fetch(PDO::FETCH_ASSOC);
 		 }
+		function getAllInfo($lesson) {
+		    global $db;
+		    
+		    $id = $_SESSION['id'];
+		    $sql = "SELECT * FROM ".$lesson." WHERE id ".$id;
+		    
+		    $requete = $db -> prepare($sql);
+		    $data = $requete.execute();
+		}
 		function getEmailsAndPasswords(){
 			global $db;
 

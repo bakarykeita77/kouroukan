@@ -11,7 +11,6 @@ if(isset($_SESSION['connected'])){
 
     $chiffres = ['߀','߁','߂','߃','߄','߅','߆','߇','߈','߉'];
 
-
 ?>
 
 <!DOCTYPE html>
@@ -47,7 +46,7 @@ if(isset($_SESSION['connected'])){
                     <p id='niveau_max_container'    ><?= $niveau_max; ?></p>
                     <p id='resume_brut_des_etudes_container' ><?= $resume_brut_des_etudes; ?></p>
                 </div>
-                
+        <p id="p"></p>        
                 <h4>ߘߋ߰ߟߌ ߞߛߊߞߊ : <span class="niveau_courant"><?= $chiffres[$niveau+1]; ?><span class='rang'></span></h4>
                 <h2 class="lesson_title" id="<?= $matiere_id ?>"> <?= $matiere_nom; ?> ߥߟߊ߬ߘߊ  </h2>
                 <div class="phases liste_affichage_cascade" align="center"></div>
@@ -213,13 +212,13 @@ if(isset($_SESSION['connected'])){
       <!-------------------------------------------------------------------->
         <form id="lesson_form" style="display:none">
                     
-            <input type="number" name="id_input"   id="id_input"           value="<?= $_SESSION['id']; ?>">
-            <input type="text"   name="matiere"    id="matiere_nom_input">
-            <input type="text"   name="niveau"     id="niveau_input">
-            <input type="text"   name="phase"      id="phase_input">
-            <input type="text"   name="lesson"     id="lesson_input">
-            <input type="number" name="note_input" id="note_input">
-            <input type="submit" id="submit_btn"   value="Envoyer">
+            <input type="number" name="id"       id="id_input"           value="<?= $_SESSION['id']; ?>">
+            <input type="number" name="niveau"   id="niveau_input">
+            <input type="text"   name="matiere"  id="matiere_nom_input">
+            <input type="text"   name="phase"    id="phase_input">
+            <input type="text"   name="lesson"   id="lesson_input">
+            <input type="number" name="note"     id="note_input">
+            <input type="submit" id="submit_btn" value="Envoyer">
         </form>
       <!-------------------------------------------------------------------->
         <p class='hand'> &#128070;&#127999; </p>

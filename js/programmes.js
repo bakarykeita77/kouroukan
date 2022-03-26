@@ -58,8 +58,7 @@ $(document).ready(function() {
         2)- On determine le programme en fonction du niveau d'étude.
 
     -------------------------------------------------------------------------------------------------------------------------*/
-      
-        
+
    /*1*/situationDesEtudes();
         getUserInfo();
         resume_brut_des_etudes = situations[situations.length-1];
@@ -70,7 +69,13 @@ $(document).ready(function() {
    /*2*/programme();
    
     /*-----------------------------------------------------------------------------------------------------------------------*/
-        
+        /*function getUserInfo() {
+            
+            fetch("http://localhost:8080/kouroukan/api/index.php?lesson=tons&id_user=1")
+            .then(response => response.json())
+            .then (info => console.log( info ))
+            .catch(error => alert(error));
+        }   */
         function situationDesEtudes() {
 
             var donnees_ajax = document.getElementById('donnees_ajax');

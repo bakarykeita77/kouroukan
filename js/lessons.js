@@ -27,8 +27,8 @@ $('document').ready(function() {
 	var index_phase_actuelle, index_phase_precedante, index_phase_active;
 	var avancer_btn = '';
 	
-alert( sessionStorage.getItem('matiere') ); 
-alert( sessionStorage.getItem('phase') ); 
+//alert( sessionStorage.getItem('matiere') ); 
+//alert( sessionStorage.getItem('phase') ); 
 	
 
   /*--------------------------------------------------------------------
@@ -40,6 +40,8 @@ alert( sessionStorage.getItem('phase') );
 	5)- On peut surfer
     
     --------------------------------------------------------------------*/
+	    recuperationDesInnfos();
+	    
 	    
    /*1*/resume_des_etudes = convertirResuneBrutDesEtudesEnObjet();
         noms_des_phases = nomsDesPhases();
@@ -56,6 +58,17 @@ alert( sessionStorage.getItem('phase') );
 
 	
   /*--------------------------------------------------------------------*/
+	function recuperationDesInnfos() {
+	    
+	    fetch("http://localhost:8080/kouroukan/api/index.php?lesson=alphabet&id_user=1")
+	    .then(response => response.json())
+	    .then(infos => {
+	        console.log( infos );
+	    })
+	    .catch(error => alert( error ));
+
+	}
+	
 	
 	function nomsDesPhases() {
 	    var noms_des_phases = [];
@@ -1318,7 +1331,7 @@ alert( sessionStorage.getItem('phase') );
                                             .then(response => response.json())
                                         });
                                         
-                                       pratique_submit.click();
+                                        pratique_submit.click();
                                     }
                                     function changerNombreDeSyllabe() {
                                         if(total_point === total_question) {

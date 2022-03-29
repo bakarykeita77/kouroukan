@@ -40,9 +40,8 @@ $('document').ready(function() {
 	5)- On peut surfer
     
     --------------------------------------------------------------------*/
-	    recuperationDesInnfos();
-	    
-	    
+	    elementsActifs();
+
    /*1*/resume_des_etudes = convertirResuneBrutDesEtudesEnObjet();
         noms_des_phases = nomsDesPhases();
 	    phases_etudiees = phasesEtudiees();
@@ -58,18 +57,11 @@ $('document').ready(function() {
 
 	
   /*--------------------------------------------------------------------*/
-	function recuperationDesInnfos() {
-	    
-	    fetch("http://localhost:8080/kouroukan/api/index.php?lesson=alphabet&id_user=1")
-	    .then(response => response.json())
-	    .then(infos => {
-	        console.log( infos );
-	    })
-	    .catch(error => alert( error ));
-
+	function elementsActifs() {
+	    sessionStorage.setItem('niveau_actif',   document.getElementById('matiere_index_container' ).innerHTML);
+        sessionStorage.setItem('matiere_active', document.getElementById('matiere_nom_container').innerHTML);
+        sessionStorage.setItem('niveau_max',     document.getElementById('niveau_max_container' ).innerHTML);
 	}
-	
-	
 	function nomsDesPhases() {
 	    var noms_des_phases = [];
 	        
@@ -253,7 +245,6 @@ $('document').ready(function() {
     	$('.phases').html(phasesHTML());
         actualiserTitre();	   
 	    stylesDesPhases();
-    
     
         function phasesHTML(){
           
@@ -489,25 +480,25 @@ $('document').ready(function() {
         	  
             	function apprentissage(){
                
-            	    chargerLesson();
-                    parametrageDeLesson();
+            	    chargerApprentissage();
+                    parametrageDeApprentissage();
                     etudierLesson();
             	    stockerLesson();
    
-                	function chargerLesson(){   
-                        $('#lesson_entete').html( lessonEnteteHTML() );
-                	    $('#lesson_corps').html( lesson_courante ); 
+                	function chargerApprentissage(){   
+                        $('#apprentissage_entete').html( apprentissageEnteteHTML() );
+                	    $('#apprentissage_corps').html( lesson_courante ); 
                      	
-                    	function lessonEnteteHTML(){
+                    	function apprentissageEnteteHTML(){
                     	    
-                    	    var lesson_entete_html = "<div class='play_btn_container'><span class='play_label'>ߝߐߟߊ߲</span><span class='play_icon'>"+play_icon+"</span></div>";
-                    	    lesson_entete_html += "<div class='stop_btn_container'><span class='stop_label'>ߘߊ߬ߘߋ߬ߟߊ߲ </span> <span class='stop_icon'>"+stop_icon+"</span></div>";
-                    	    lesson_entete_html += "<div class='parametre_btn_container'><span class='parametre_label'>ߛߏ߯ߙߏߟߊ߲</span>  <span class='parametre_icon'>"+parametre_icon+"</span></div>";
+                    	    var entete_html = "<div class='play_btn_container'><span class='play_label'>ߝߐߟߊ߲</span><span class='play_icon'>"+play_icon+"</span></div>";
+                    	    entete_html += "<div class='stop_btn_container'><span class='stop_label'>ߘߊ߬ߘߋ߬ߟߊ߲ </span> <span class='stop_icon'>"+stop_icon+"</span></div>";
+                    	    entete_html += "<div class='parametre_btn_container'><span class='parametre_label'>ߛߏ߯ߙߏߟߊ߲</span>  <span class='parametre_icon'>"+parametre_icon+"</span></div>";
                             
-                            return lesson_entete_html;
+                            return entete_html;
                     	}
                 	}
-                    function parametrageDeLesson(){
+                    function parametrageDeApprentissage(){
                         affichageDeParametres();
                         
                 	    $('#parametres td').on('click', function(){ 
@@ -555,7 +546,7 @@ $('document').ready(function() {
             	    function stockerLesson(){
             	        
                         var table, tr, td, nbr_table, nbr_tr, nbr_td, nbr_table_td;
-                        var lesson_clicks = [];
+                        var clicks_memo = [];
                         
                         table = $('.table_parlante'); 
                         tr = $('.table_parlante tr'); 
@@ -568,6 +559,16 @@ $('document').ready(function() {
                         
                         $.each(td, function(){
                             
+                          /* 
+                          --------------------------------------------------------------------
+                           Pour chaque click sur un bouton:
+                              1)- Un compteur de click individuel est activé qui calcule combien de fois chaque bouton est clické.
+                              2)- Une identification est faite pour savoir, quel bouton est clické.
+                              3)- Un enregistrement capte le nombre de click pour chaque bouton.
+                              4)- Et le memo de l'enregistrement est envoyé au serveur quand on ferme la leçon.
+                          --------------------------------------------------------------------
+                          */
+                            
                             var table_courante = $(this).parent().parent().parent();
                             var table_index = table.index(table_courante);
                             var tr_index = $(this).parent().index();
@@ -575,51 +576,113 @@ $('document').ready(function() {
                             var element_click_counter = 0;
                             var element = $(this).html();
         
-                            lesson_clicks[element_index] = [element,element_click_counter];
+                            
+                          /*--------------------------------------------------------------------
+                           Initialisation de mémoire d'enregistrement qui est un tableau bidimentionnel.
+                           Il contient des petits tableaux de deux éléments chacun:
+                           - Le premier est le nom de l'élément clické;
+                           - Le deuxième est le nombre de fois que cet élément est clické.
+                             
+                           L'initialisation consiste à donner la valeur 0 click à tous les éléments.
+                           On considère qu'aucun élément n'est clické pour le moment. */
+                            
+                            clicks_memo[element_index] = [element,element_click_counter];
          
                             $(this).on('click', function(){
         
-                                element_click_counter++;
-                                var clicked_element = $(this).html();
-                                var new_click_value = [clicked_element,element_click_counter];
+                                
+                              /*--------------------------------------------------------------------
+                               3)- Enregistrement des clicks 
+                               
+                               L'enregistrement par bouton ou élémentaire est un tableau de deux éléments dont
+                               - L'élément clické;
+                               - Le nombre de fois que cet élément est  clické. */
+                                                              
+                                var clicked_element = $(this).html(); // Élément clické.
+                                element_click_counter++; // Compteur de click pour chaque élément.
+                     
+                                var new_click_value = [clicked_element,element_click_counter];  // Enregistrement elementaire.
                                 var non_clicked_elements = '';
                                 var nbr_clicked_elements = 0;
+                                var table_elements_click_nbr = [];
                        
-                                lesson_clicks.splice(element_index,1,new_click_value);
-                               
+                              /*Actualisation de mémoire d'enregistrement
+                                C'est à dire qu'après chaque click,les anciennes valeurs de chaque enregistrement elementaire sont remplacés par les nouvelles valeurs.                 */
+                                
+                                clicks_memo.splice(element_index,1,new_click_value);
                                 non_clicked_elements = nonClickedElementsTable();
                                 nbr_clicked_elements = td.length - non_clicked_elements.length;
+                                
+                                
                                 $('#course_fermeture').on('click',function(){
                                     
-                                    var table_elements_click_nbr = [];
                                     
-                                    for(var i=0;i<lesson_clicks.length;i++) {
-                                        table_elements_click_nbr[table_elements_click_nbr.length] = lesson_clicks[i][1];
+                                  /*
+                                  A la fermeture, on s'assure que chaque élément est clické au moins un nombre de fois défini.
+                                  - Si oui le mémoire de click est envoyé au serveur;
+                                  - Sinon, un message s'affiche et le mémoire n'est pas envoyé.
+                                  */
+                    
+                                    for(var i=0;i<clicks_memo.length;i++) {
+                                        table_elements_click_nbr[table_elements_click_nbr.length] = clicks_memo[i][1];
                                     }
-                                   
+                                    
+                                    
                                     var nbr_click_min = Math.min.apply(null, table_elements_click_nbr);
                                     var nbr_click_max = Math.max.apply(null, table_elements_click_nbr);
                                     
+                                    var id = parseInt(sessionStorage.getItem('user_id'));
+                                    var matiere_active = sessionStorage.getItem('matiere_active');
+                                    var niveau_actif = parseInt(sessionStorage.getItem('niveau_actif'));
+                                    var phase_active = sessionStorage.getItem('phase');
+                                    var lesson_active = clicks_memo;
+
+                            alert( params );        
                                     if(nbr_click_min == 0) {
                                         alert("ߌ ߡߊ߫ ߛߓߍߘߋ߲ ߥߟߊ ߜߋ߭ ߠߎ߬ ߓߍ߯ ߟߊߡߍ߲߫");
                                     }
                                     if(nbr_click_min >= 1) {
-                                        chargerLessonForm(); 
-                                        sendLessonToDB(); 
+
+                                        const params = new URLSearchParams({
+                                            id     :id,
+                                            matiere:matiere_active,
+                                            niveau :niveau_actif,
+                                            phase  :phase_active,
+                                            lesson :lesson_active,
+                                            note   :18
+                                        });
+                                        
+                                        fetch("http://localhost:8080/kouroukan/pages/actions.php", {
+                                            method: 'POST',
+                                            body: params 
+                                        })
+                                        .then(response => response.json())
+                                        .then(data => alert(data))
+                                        .catch(error => alert(error));
+                                    
+                                        
+                                      //  chargerLessonForm(); 
+                                       // sendLessonToDB(); 
                                     }
                                 });
                                
                                 function nonClickedElementsTable(){
                                     var table_elements_non_cliques = [];
         
-                                    $.each(lesson_clicks, function(){
+                                    $.each(clicks_memo, function(){
                                         if($(this)[1]==0){ table_elements_non_cliques[table_elements_non_cliques.length] = $(this); }
                                     });
                                     
                                     return table_elements_non_cliques;
                                 }
-                                function chargerLessonForm(){ $('#course_input').val(lesson_clicks.join(';')); }
+                                function chargerLessonForm(){ $('#course_input').val(clicks_memo.join(';')); }
                                 function sendLessonToDB(){
+                                    
+                       
+                                    let params = new URLSearchParams({
+                                        id: user.prenom,
+                                        matiere: "matiere"
+                                    });
                                     
                                     var course_form = $('#course_form');
                                     course_form.attr('action','actions.php?get_action=archiver_lesson');

@@ -1,57 +1,106 @@
 <?php
-    
-header('Content-Type: application/json; charset=utf8');
-    
-$search = $_GET['search'];
-$id_user = $_GET['id_user'];
-$lesson = $_GET['lesson'];
-
-    
-    
-/* Connections à la base de donnees*/
-$server = 'localhost';
-$dbname = 'kouroukan';
-$user = 'root';
-$pass = '';
-
-try {
-    $db = new PDO("mysql:host=$server;dbname=$dbname;charset=utf8", $user, $pass);
-    $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-    $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-    
-
-  /* 
-  -------------------------------------------------------------------------------------
-   Extraction des données d'identité de l'étudiant à partir de la database
-  -------------------------------------------------------------------------------------
-  */   
-    $sql = "SELECT date,prenom,nom,naissance,sexe,adresse,email FROM users WHERE id = :id ORDER BY prenom";
-                  
-    $requete = $db -> prepare($sql);
-    $requete -> bindValue(':id', $id_user, PDO::PARAM_INT);
-    $requete -> execute();
-    $user = $requete -> fetch(PDO::FETCH_ASSOC);
         
-    echo json_encode($user, JSON_PRETTY_PRINT);
-
-
-  /* 
-  -------------------------------------------------------------------------------------
-   Extraction des leçons étudiées par l'étudiant, à partir de la database
-  -------------------------------------------------------------------------------------
-  */   
-    $sql = "SELECT * FROM ".$lesson." WHERE id_client = :id_client ORDER BY phase";
-                  
-    $requete = $db -> prepare($sql);
-    $requete -> bindValue(':id_client',$id_user,PDO::PARAM_INT);
-    $requete -> execute();
-    $lessons = $requete -> fetch(PDO::FETCH_ASSOC);
+    header('Content-Type: application/json; charset=utf8');
         
-    echo json_encode($lessons, JSON_PRETTY_PRINT);
-
+    $search = $_GET['search'];
+    $id_user = $_GET['id_user'];
+    $lesson = $_GET['lesson'];
+    
+        
+        
+ /* Connections à la base de donnees*/
+    $server = 'localhost';
+    $dbname = 'kouroukan';
+    $user = 'root';
+    $pass = '';
+    
+    try {
+        $db = new PDO("mysql:host=$server;dbname=$dbname;charset=utf8", $user, $pass);
+        $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+        $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+        
+    
+     /*
+     -------------------------------------------------------------------------------------
+      Extraction des leçons étudiées par l'étudiant, à partir de la database
+     -------------------------------------------------------------------------------------
+     */   
+        $matieres = ["alphabet","syllabes","tons","chiffres"];
      
+     /*-------------------------------------------------------------------------------------*/   
+        if($lesson == '' && $id_user == '') {
+        for($i=0;$i<count($matieres);$i++) {   
+            
+            $sql = "SELECT * FROM ".$matieres[$i];
+                          
+            $requete = $db -> prepare($sql);
+            $requete -> execute();
+            $resultat = $requete -> fetchAll(PDO::FETCH_ASSOC);
 
-}    
-catch(PDOException $e){
-    echo("Echec: ".$e->getMessage());
-}
+            echo json_encode($resultat, JSON_PRETTY_PRINT);
+
+        }}
+        
+     
+     /*-------------------------------------------------------------------------------------*/   
+        if($lesson == '' && $id_user != '') {
+        for($i=0;$i<count($matieres);$i++) {   
+            
+            $sql = "SELECT * FROM ".$matieres[$i]." WHERE id_client = :id_client ORDER BY id_client";
+                          
+            $requete = $db -> prepare($sql);
+            $requete -> bindValue(':id_client',$id_user,PDO::PARAM_INT);
+            $requete -> execute();
+            $resultat = $requete -> fetchAll(PDO::FETCH_ASSOC);
+
+            echo json_encode($resultat, JSON_PRETTY_PRINT);
+
+        }}
+        
+
+     /*-------------------------------------------------------------------------------------*/   
+        if($lesson != '' && $id_user == '') {
+        
+            $sql = "SELECT * FROM ".$lesson;
+                          
+            $requete = $db -> prepare($sql);
+            $requete -> execute();
+            $resultat = $requete -> fetchAll(PDO::FETCH_ASSOC);
+
+            echo json_encode($resultat, JSON_PRETTY_PRINT);
+        }
+     /*-------------------------------------------------------------------------------------*/   
+        if($lesson != '' && $id_user != '') {
+            $sql = "SELECT * FROM ".$lesson." WHERE id_client = :id_client ORDER BY phase";
+                          
+            $requete = $db -> prepare($sql);
+            $requete -> bindValue(':id_client',$id_user,PDO::PARAM_INT);
+            $requete -> execute();
+            $resultat = $requete -> fetchAll(PDO::FETCH_ASSOC);
+            
+            
+            
+         /*-------------------------------------------------------------------------------------
+          Les donnees sont extraites et placées dans la variable $resultat.
+          Maintenant classons les composants de $resultat dans un tableau $lessons.
+          Ensuite mettons $lessons au format json pour être envoyé à la demande.
+         -------------------------------------------------------------------------------------*/
+            
+            for($i=0;$i<count($resultat);$i++) {
+                
+                $lessons[$i]['id']        = $resultat[$i]['id'];
+                $lessons[$i]['id_client'] = $resultat[$i]['id_client'];
+                $lessons[$i]['niveau']    = $resultat[$i]['niveau'];
+                $lessons[$i]['date']      = $resultat[$i]['date'];
+                $lessons[$i]['phase']     = $resultat[$i]['phase'];
+                $lessons[$i]['lesson']    = $resultat[$i]['lesson'];
+                $lessons[$i]['note']      = $resultat[$i]['note'];
+            }
+            
+            echo json_encode($lessons, JSON_PRETTY_PRINT);
+        }
+         
+    }    
+    catch(PDOException $e){
+        echo("Echec: ".$e->getMessage());
+    }

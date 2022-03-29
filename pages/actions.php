@@ -5,7 +5,7 @@
     global $db;
     
     
-    $id_client = $_SESSION['id'];
+    $id_client = isset($_POST['id'])        ? $_POST['id']:'';
     
     $prenom    = isset($_POST['prenom'])    ? $_POST['prenom']:'';
     $nom       = isset($_POST['nom'])       ? $_POST['nom']:'';
@@ -42,9 +42,10 @@
     
   /*----------------------------------------------------------------------------------------------*/
     
-            
-    archiverLesson($id,$matiere,$niveau,$phase,$lesson,$note);
-    getAllInfo($lesson);
+    if($id!=='' && $matiere!=='' && $niveau!=='' && $phase!=='' && $lesson!=='' && $note!=='') {      
+        archiverLesson($id,$matiere,$niveau,$phase,$lesson,$note);
+    }
+    getAllInfo($lesson,$id);
                 
  
   /*----------------------------------------------------------------------------------------------*/
@@ -83,7 +84,7 @@
 
 			return $pratiques;
 		}
-		function archiverLesson($id,$matiere,$phase,$lesson,$note) {
+		function archiverLesson($id,$matiere,$niveau,$phase,$lesson,$note) {
 		    global $db;
 		    
 		    $sql = "INSERT INTO ".$matiere." (id_client,niveau,phase,lesson,note)
@@ -137,7 +138,7 @@
 			$requette->execute();
 			return $utilisateurs = $requette->fetch(PDO::FETCH_ASSOC);
 		 }
-		function getAllInfo($lesson) {
+		function getAllInfo($lesson,$id) {
 		    global $db;
 		    
 		    $sql = "SELECT * FROM ".$lesson." WHERE id = :id";

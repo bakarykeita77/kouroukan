@@ -37,16 +37,19 @@ if(isset($_SESSION['connected'])){
         <div class="page_head"><?php require('tete-de-page.php'); ?></div>
         <div class="page_body">
             <div class="phases_container centerH" align="right">
-                
+              <!----------------------------------------------------------------------------------------------------->  
                 <div id="donnees_recues_de_prorammes" style="display:none">
+                    
+                    <p id="id_user"><?= $_SESSION['id']; ?></p>
                     <p id='matiere_id_container'    ><?= $matiere_id; ?></p>
                     <p id='matiere_index_container' ><?= $matiere_index; ?></p>
                     <p id='matiere_nom_container'   ><?= $matiere_nom; ?></p>
                     <p id='niveau_container'        ><?= $niveau; ?></p>
                     <p id='niveau_max_container'    ><?= $niveau_max; ?></p>
                     <p id='resume_brut_des_etudes_container' ><?= $resume_brut_des_etudes; ?></p>
+                    
                 </div>
-        <p id="p"></p>        
+              <!----------------------------------------------------------------------------------------------------->  
                 <h4>ߘߋ߰ߟߌ ߞߛߊߞߊ : <span class="niveau_courant"><?= $chiffres[$niveau+1]; ?><span class='rang'></span></h4>
                 <h2 class="lesson_title" id="<?= $matiere_id ?>"> <?= $matiere_nom; ?> ߥߟߊ߬ߘߊ  </h2>
                 <div class="phases liste_affichage_cascade" align="center"></div>
@@ -85,8 +88,8 @@ if(isset($_SESSION['connected'])){
       <!-------------------------------------------------------------------->
         <div class="course" id="lesson" align="center">
             
-            <div class="course_head" id="lesson_entete"></div>
-            <div class="course_body" id="lesson_corps"></div>
+            <div class="course_head" id="apprentissage_entete"></div>
+            <div class="course_body" id="apprentissage_corps"></div>
             <div class='lesson_progress_bar' style="position:absolute; bottom:0; box-shadow:0 0 4px #999; border:1px solid #ddd; border-radius:6px; height:8px; width:calc(100% - 2px)">
                 <span class='lesson_progress_question_bar' style="position:absolute; border-radius:6px; right:0; height:8px; width:0; background-color:#ddd; transition:0.6s"></span>
                 <span class='lesson_progress_bonne_reponse_bar' style="position:absolute; border-radius:6px; right:0; height:8px; width:0; background-color:yellow; transition:0.6s"></span>

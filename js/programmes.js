@@ -49,7 +49,7 @@ $(document).ready(function() {
         var p = [];
         var point_max = '';
         
-        
+
 
     /*-------------------------------------------------------------------------------------------------------------------------
 
@@ -59,23 +59,67 @@ $(document).ready(function() {
 
     -------------------------------------------------------------------------------------------------------------------------*/
 
-   /*1*/situationDesEtudes();
-        getUserInfo();
+   /*1*/getUserInfo();
+        getUserIdentity();
+        situationDesEtudes();
         resume_brut_des_etudes = situations[situations.length-1];
         resume_des_etudes = convertirResumeDeSituationsEnObjet();
         niveau_max = niveauMaxDuClient();
         verificationDesLessonsEtudiees();
         
    /*2*/programme();
-   
+
+alert( localStorage.getItem('alphabet') ); 
     /*-----------------------------------------------------------------------------------------------------------------------*/
-        /*function getUserInfo() {
+        
+        function getUserInfo() {
+
+    	    fetch("http://localhost:8080//kouroukan/api/index.php?lesson=alphabet&id_user=1")
+    	    .then(response => response.json())
+    	    .then(alphabet => {
+    	        localStorage.setItem('alphabet', JSON.stringify(alphabet));
+    	    })
+    	    .catch(error => alert( error ));
+         
+         /*-----------------------------------------------------------------------------------------------------------------------*/
+    	    
+    	    fetch("http://localhost:8080//kouroukan/api/index.php?lesson=syllabes&id_user=1")
+    	    .then(response => response.json())
+    	    .then(syllabes => {
+    	        localStorage.setItem('syllabes', JSON.stringify(syllabes));
+    	    })
+    	    .catch(error => alert( error ));
+         
+         /*-----------------------------------------------------------------------------------------------------------------------*/
+    	    
+    	    fetch("http://localhost:8080//kouroukan/api/index.php?lesson=tons&id_user=1")
+    	    .then(response => response.json())
+    	    .then(tons => {
+    	        localStorage.setItem('tons', JSON.stringify(tons));
+    	    })
+    	    .catch(error => alert( error ));
+         
+         /*-----------------------------------------------------------------------------------------------------------------------*/
+    
+    	    fetch("http://localhost:8080//kouroukan/api/index.php?lesson=chiffres&id_user=1")
+    	    .then(response => response.json())
+    	    .then(chiffres => {
+    	        localStorage.setItem('chiffres', JSON.stringify(chiffres));
+    	    })
+    	    .catch(error => alert( error ));
+	    
+        }
+        function getUserIdentity() {
             
-            fetch("http://localhost:8080/kouroukan/api/index.php?lesson=tons&id_user=1")
-            .then(response => response.json())
-            .then (info => console.log( info ))
-            .catch(error => alert(error));
-        }   */
+            sessionStorage.setItem('user_id',        document.getElementById('user_id').innerHTML);
+            sessionStorage.setItem('user_prenom',    document.getElementById('user_prenom').innerHTML);
+            sessionStorage.setItem('user_nom',       document.getElementById('user_nom').innerHTML);
+            sessionStorage.setItem('user_naissance', document.getElementById('user_naissance').innerHTML);
+            sessionStorage.setItem('user_sexe',      document.getElementById('user_sexe').innerHTML);
+            sessionStorage.setItem('user_adresse',   document.getElementById('user_adresse').innerHTML);
+            sessionStorage.setItem('user_email',     document.getElementById('user_email').innerHTML);
+            
+        }
         function situationDesEtudes() {
 
             var donnees_ajax = document.getElementById('donnees_ajax');
@@ -83,6 +127,13 @@ $(document).ready(function() {
             var cours_par_phase = [];
             var cour = [];
             var points = [], points_1 = [], points_2 = [], points_3 = [], points_4 = [];
+            
+            var user          = JSON.parse(sessionStorage.getItem('users'));
+            var user_alphabet = JSON.parse(localStorage.getItem('alphabet'));
+            var user_syllabes = JSON.parse(localStorage.getItem('syllabes'));
+            var user_tons     = JSON.parse(localStorage.getItem('tons'));
+            var user_chiffres = JSON.parse(localStorage.getItem('chiffres'));
+             
 
     
             recuperationDesDonneesAjax();
@@ -289,97 +340,6 @@ $(document).ready(function() {
                 situations[situations.length] = situation_des_etudes;
             }
             
-        }
-        function getUserInfo() {
-        
-            let id_user = parseInt(document.getElementById('id_user').innerHTML);
-            situations_container = document.getElementById('situations_container');
-
-         
-         /*-------------------------------------------------------------------------------------------------------------------- 
-          Recherche des donnees d'identité de l'étudiant, extraites de la table users.
-         --------------------------------------------------------------------------------------------------------------------*/
-            let url_user = `http://localhost:8080/kouroukan/api/index.php?search=user&id_user=${id_user}`;
-            
-            fetch(url_user)
-            .then(response => response.json()) 
-            .then(client_infos => {
-                console.log(client_infos);
-
-                sessionStorage.setItem("date"     , client_infos[0].date);
-                sessionStorage.setItem("prenom"   , client_infos[0].prenom);
-                sessionStorage.setItem("nom"      , client_infos[0].nom); 
-                sessionStorage.setItem("naissance", client_infos[0].naissance);
-                sessionStorage.setItem("sexe"     , client_infos[0].sexe);
-                sessionStorage.setItem("adresse"  , client_infos[0].adresse);
-                sessionStorage.setItem("email"    , client_infos[0].email);
-            })
-            .catch(error => console.log( error )); 
-
-
-         /*-------------------------------------------------------------------------------------------------------------------- 
-          Recherche des leçons étudiées par l'étudiant, extraites de la table lessons.
-         --------------------------------------------------------------------------------------------------------------------*/
-            let url_apprentissages = `http://localhost:8080/kouroukan/api/index.php?search=apprentissages&id_user=${id_user}`;
-            
-            fetch(url_apprentissages)
-            .then(response => response.json()) 
-            .then(apprentissages => {
-                console.log(apprentissages);
-                localStorage.setItem('apprentissages', JSON.stringify(apprentissages));
-            })
-            .catch(error => console.log( error ));             
-
-        
-         /*-------------------------------------------------------------------------------------------------------------------- 
-          Recherche des exercices effectuées par l'étudiant, extraites de la table exercices.
-         --------------------------------------------------------------------------------------------------------------------*/
-            let url_exercices = `http://localhost:8080/kouroukan/api/index.php?search=exercices&id_user=${id_user}`;
-            
-            fetch(url_exercices)
-            .then(response => response.json()) 
-            .then(exercices => {
-                console.log(exercices);
-                localStorage.setItem('exercices', JSON.stringify(exercices));
-            })
-            .catch(error => console.log( error )); 
-
-        
-         /*-------------------------------------------------------------------------------------------------------------------- 
-          Recherche des pratiques effectuées par l'étudiant, extraites de la table pratiques.
-         --------------------------------------------------------------------------------------------------------------------*/
-            let url_pratiques = `http://localhost:8080/kouroukan/api/index.php?search=pratiques&id_user=${id_user}`;
-            
-            fetch(url_pratiques)
-            .then(response => response.json()) 
-            .then(pratiques => {
-                console.log(pratiques);
-                localStorage.setItem('pratiques', JSON.stringify(pratiques));
-            })
-            .catch(error => console.log( error ));
-
-        
-         /*-------------------------------------------------------------------------------------------------------------------- 
-          Recherche des testes effectués par l'étudiant, extraits de la table testes.
-         --------------------------------------------------------------------------------------------------------------------*/
-            let url_testes = `http://localhost:8080/kouroukan/api/index.php?search=testes&id_user=${id_user}`;
-            
-            fetch(url_testes)
-            .then(response => response.json()) 
-            .then(testes => {
-                console.log(testes);
-                localStorage.setItem('testes', JSON.stringify(testes));
-            })
-            .catch(error => console.log( error ));   
-            
-            
-            
-            situation_globale[0] = localStorage.getItem('apprentissages');
-            situation_globale[1] = localStorage.getItem('exercices');
-            situation_globale[2] = localStorage.getItem('pratiques');
-            situation_globale[3] = localStorage.getItem('testes');
-           
-            situations_container.innerHTML = situation_globale;
         }
         function niveauMaxDuClient() {
  

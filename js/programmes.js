@@ -74,7 +74,7 @@ alert( localStorage.getItem('alphabet') );
         
         function getUserInfo() {
 
-    	    fetch("http://localhost:8080//kouroukan/api/index.php?lesson=alphabet&id_user=1")
+    	    fetch("http://localhost:8080//kouroukan/api/index.php?matiere=alphabet&id_user=1")
     	    .then(response => response.json())
     	    .then(alphabet => {
     	        localStorage.setItem('alphabet', JSON.stringify(alphabet));
@@ -83,7 +83,7 @@ alert( localStorage.getItem('alphabet') );
          
          /*-----------------------------------------------------------------------------------------------------------------------*/
     	    
-    	    fetch("http://localhost:8080//kouroukan/api/index.php?lesson=syllabes&id_user=1")
+    	    fetch("http://localhost:8080//kouroukan/api/index.php?matiere=syllabes&id_user=1")
     	    .then(response => response.json())
     	    .then(syllabes => {
     	        localStorage.setItem('syllabes', JSON.stringify(syllabes));
@@ -92,7 +92,7 @@ alert( localStorage.getItem('alphabet') );
          
          /*-----------------------------------------------------------------------------------------------------------------------*/
     	    
-    	    fetch("http://localhost:8080//kouroukan/api/index.php?lesson=tons&id_user=1")
+    	    fetch("http://localhost:8080//kouroukan/api/index.php?matiere=tons&id_user=1")
     	    .then(response => response.json())
     	    .then(tons => {
     	        localStorage.setItem('tons', JSON.stringify(tons));
@@ -101,7 +101,7 @@ alert( localStorage.getItem('alphabet') );
          
          /*-----------------------------------------------------------------------------------------------------------------------*/
     
-    	    fetch("http://localhost:8080//kouroukan/api/index.php?lesson=chiffres&id_user=1")
+    	    fetch("http://localhost:8080//kouroukan/api/index.php?matiere=chiffres&id_user=1")
     	    .then(response => response.json())
     	    .then(chiffres => {
     	        localStorage.setItem('chiffres', JSON.stringify(chiffres));

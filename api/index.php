@@ -2,10 +2,12 @@
         
     header('Content-Type: application/json; charset=utf8');
         
-    $search = $_GET['search'];
-    $id_user = $_GET['id_user'];
-    $lesson = $_GET['lesson'];
-    
+    $id_user = isset($_GET['id_user']) ? $_GET['id_user']:'';
+    $matiere = isset($_GET['matiere']) ? $_GET['matiere']:'';
+    $niveau  = isset($_GET['niveau'])  ? $_GET['niveau'] :'';
+    $phase   = isset($_GET['phase'])   ? $_GET['phase']  :'';
+    $lesson  = isset($_GET['lesson'])  ? $_GET['lesson'] :'';
+    $note    = isset($_GET['note'])    ? $_GET['note']   :'';
         
         
  /* Connections à la base de donnees*/
@@ -27,9 +29,12 @@
      */   
         $matieres = ["alphabet","syllabes","tons","chiffres"];
      
-     /*-------------------------------------------------------------------------------------*/   
-        if($lesson == '' && $id_user == '') {
-        for($i=0;$i<count($matieres);$i++) {   
+     
+     /*------------------------------------------------------------------------------------- 
+     Toutes les matieres 
+     -------------------------------------------------------------------------------------*/
+        if($id_user == '' && $matiere == '' && $phase == '') {
+        for($i=0;$i<count($matieres);$i++) { 
             
             $sql = "SELECT * FROM ".$matieres[$i];
                           
@@ -42,8 +47,10 @@
         }}
         
      
-     /*-------------------------------------------------------------------------------------*/   
-        if($lesson == '' && $id_user != '') {
+     /*-------------------------------------------------------------------------------------  
+     Toutes les matieres pour un client 
+     -------------------------------------------------------------------------------------*/
+        if($id_user != '' && $matiere == '' && $phase == '') {
         for($i=0;$i<count($matieres);$i++) {   
             
             $sql = "SELECT * FROM ".$matieres[$i]." WHERE id_client = :id_client ORDER BY id_client";
@@ -58,10 +65,12 @@
         }}
         
 
-     /*-------------------------------------------------------------------------------------*/   
-        if($lesson != '' && $id_user == '') {
+     /*-------------------------------------------------------------------------------------  
+     Toute une matiere 
+     -------------------------------------------------------------------------------------*/
+        if($id_user == '' && $matiere != '' && $phase == '') {
         
-            $sql = "SELECT * FROM ".$lesson;
+            $sql = "SELECT * FROM ".$matiere;
                           
             $requete = $db -> prepare($sql);
             $requete -> execute();
@@ -69,9 +78,13 @@
 
             echo json_encode($resultat, JSON_PRETTY_PRINT);
         }
-     /*-------------------------------------------------------------------------------------*/   
-        if($lesson != '' && $id_user != '') {
-            $sql = "SELECT * FROM ".$lesson." WHERE id_client = :id_client ORDER BY phase";
+        
+        
+     /*-------------------------------------------------------------------------------------  
+     Une matiere pour un client 
+     -------------------------------------------------------------------------------------*/
+        if($id_user != '' && $matiere != '' && $phase == '') {
+            $sql = "SELECT * FROM ".$matiere." WHERE id_client = :id_client ORDER BY phase";
                           
             $requete = $db -> prepare($sql);
             $requete -> bindValue(':id_client',$id_user,PDO::PARAM_INT);
@@ -99,7 +112,62 @@
             
             echo json_encode($lessons, JSON_PRETTY_PRINT);
         }
-         
+          
+                      
+     /*-------------------------------------------------------------------------------------  
+     Une phase pour toutes les matieres 
+     -------------------------------------------------------------------------------------*/
+        if($id_user == '' && $matiere == '' && $phase != '') {
+        for($i=0;$i<count($matieres);$i++) {   
+            
+            $sql = "SELECT * FROM ".$matieres[$i]." WHERE phase = :phase ORDER BY niveau";
+                          
+            $requete = $db -> prepare($sql);
+            $requete -> bindValue(':phase',$phase,PDO::PARAM_STR);
+            $requete -> execute();
+            $resultat = $requete -> fetchAll(PDO::FETCH_ASSOC);
+
+            echo json_encode($resultat, JSON_PRETTY_PRINT);
+
+        }}
+        
+             
+     /*-------------------------------------------------------------------------------------  
+     Une phase de toutes les matieres pour un client 
+     -------------------------------------------------------------------------------------*/
+        if($id_user != '' && $matiere == '' && $phase != '') {
+        for($i=0;$i<count($matieres);$i++) {   
+            
+            $sql = "SELECT * FROM ".$matieres[$i]." WHERE id_client = :id_client AND phase = :phase ORDER BY niveau";
+                          
+            $requete = $db -> prepare($sql);
+            $requete -> bindValue(':id_client',$id_user,PDO::PARAM_INT);
+            $requete -> bindValue(':phase',$phase,PDO::PARAM_STR);
+            $requete -> execute();
+            $resultat = $requete -> fetchAll(PDO::FETCH_ASSOC);
+
+            echo json_encode($resultat, JSON_PRETTY_PRINT);
+
+        }}
+        
+             
+     /*-------------------------------------------------------------------------------------  
+     Une phase d'une matiere pour un client 
+     -------------------------------------------------------------------------------------*/
+        if($id_user != '' && $matiere != '' && $phase != '') {
+
+            $sql = "SELECT * FROM ".$matiere." WHERE id_client = :id_client AND phase = :phase ORDER BY niveau";
+                          
+            $requete = $db -> prepare($sql);
+            $requete -> bindValue(':id_client',$id_user,PDO::PARAM_INT);
+            $requete -> bindValue(':phase',$phase,PDO::PARAM_STR);
+            $requete -> execute();
+            $resultat = $requete -> fetchAll(PDO::FETCH_ASSOC);
+
+            echo json_encode($resultat, JSON_PRETTY_PRINT);
+
+        }
+
     }    
     catch(PDOException $e){
         echo("Echec: ".$e->getMessage());

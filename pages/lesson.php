@@ -11,7 +11,6 @@ if(isset($_SESSION['connected'])){
 
     $chiffres = ['߀','߁','߂','߃','߄','߅','߆','߇','߈','߉'];
 
-
 ?>
 
 <!DOCTYPE html>
@@ -38,16 +37,19 @@ if(isset($_SESSION['connected'])){
         <div class="page_head"><?php require('tete-de-page.php'); ?></div>
         <div class="page_body">
             <div class="phases_container centerH" align="right">
-                
+              <!----------------------------------------------------------------------------------------------------->  
                 <div id="donnees_recues_de_prorammes" style="display:none">
+                    
+                    <p id="id_user"><?= $_SESSION['id']; ?></p>
                     <p id='matiere_id_container'    ><?= $matiere_id; ?></p>
                     <p id='matiere_index_container' ><?= $matiere_index; ?></p>
                     <p id='matiere_nom_container'   ><?= $matiere_nom; ?></p>
                     <p id='niveau_container'        ><?= $niveau; ?></p>
                     <p id='niveau_max_container'    ><?= $niveau_max; ?></p>
                     <p id='resume_brut_des_etudes_container' ><?= $resume_brut_des_etudes; ?></p>
+                    
                 </div>
-                
+              <!----------------------------------------------------------------------------------------------------->  
                 <h4>ߘߋ߰ߟߌ ߞߛߊߞߊ : <span class="niveau_courant"><?= $chiffres[$niveau+1]; ?><span class='rang'></span></h4>
                 <h2 class="lesson_title" id="<?= $matiere_id ?>"> <?= $matiere_nom; ?> ߥߟߊ߬ߘߊ  </h2>
                 <div class="phases liste_affichage_cascade" align="center"></div>
@@ -85,19 +87,14 @@ if(isset($_SESSION['connected'])){
         </div>
       <!-------------------------------------------------------------------->
         <div class="course" id="lesson" align="center">
-            <div class="course_head" id="lesson_entete"></div>
-            <div class="course_body" id="lesson_corps"></div>
+            
+            <div class="course_head" id="apprentissage_entete"></div>
+            <div class="course_body" id="apprentissage_corps"></div>
             <div class='lesson_progress_bar' style="position:absolute; bottom:0; box-shadow:0 0 4px #999; border:1px solid #ddd; border-radius:6px; height:8px; width:calc(100% - 2px)">
                 <span class='lesson_progress_question_bar' style="position:absolute; border-radius:6px; right:0; height:8px; width:0; background-color:#ddd; transition:0.6s"></span>
                 <span class='lesson_progress_bonne_reponse_bar' style="position:absolute; border-radius:6px; right:0; height:8px; width:0; background-color:yellow; transition:0.6s"></span>
             </div>
-            <div style='display:none'>
-                <form id='course_form' method='POST' action=''>
-                    <input type='text' name='niveau' id='niveau' value='<?=$niveau?>'/>
-                    <input type='text' name='course_input' id='course_input'/>
-                    <input type='submit' name='submit_course' id='submit_course'/>
-                </form>
-            </div>
+            
         </div>
       <!-------------------------------------------------------------------->
         <div class="course" id="pratique" align="center">
@@ -140,16 +137,6 @@ if(isset($_SESSION['connected'])){
                     <p id="message_de_fin"></p>
                     <div id="message_btn_container"> <button id="message_btn_1"></button><button id="message_btn_2"></button> </div>
                 </div>
-                
-                <form id="pratique_form" style="display:none">
-                    
-                    <input type="number" name="id_input"          id="id_input"         value="<?= $_SESSION['id']; ?>">
-                    <input type="text"   name="matiere_nom_input" id="matiere_nom_input">
-                    <input type="text"   name="phase_input"       id="phase_input">
-                    <input type="text"   name="lesson_input"      id="lesson_input">
-                    <input type="number" name="note_input"        id="note_input">
-                    <input type="submit" id="pratique_submit"     value="Envoyer">
-                </form>
                 
             </div>
             
@@ -219,19 +206,23 @@ if(isset($_SESSION['connected'])){
                         <div id='autre'></div>
                     </div>
 
-                    <div style='display:none'>
-                        <form id='upload_teste_form' method='POST' action='actions.php?get_action=archiver_teste&niveau=<?=$chiffres[$niveau]?>'>
-                            <input type='text' name='teste' id='teste'/>
-                            <input type='text' name='point' id='point'/>
-                            <input type='submit' name='submit' id='submit'/>
-                        </form>
-                    </div>
                 </div>
             </div>
             <div class='progress_bar'><span class='progress_question_bar'></span><span class='progress_bonne_reponse_bar'></span></div>
 
             <div class="clavier_container"><?php include "clavier.php"; ?></div>
         </div>
+      <!-------------------------------------------------------------------->
+        <form id="lesson_form" style="display:none">
+                    
+            <input type="number" name="id"       id="id_input"           value="<?= $_SESSION['id']; ?>">
+            <input type="number" name="niveau"   id="niveau_input">
+            <input type="text"   name="matiere"  id="matiere_nom_input">
+            <input type="text"   name="phase"    id="phase_input">
+            <input type="text"   name="lesson"   id="lesson_input">
+            <input type="number" name="note"     id="note_input">
+            <input type="submit" id="submit_btn" value="Envoyer">
+        </form>
       <!-------------------------------------------------------------------->
         <p class='hand'> &#128070;&#127999; </p>
       <!-------------------------------------------------------------------->

@@ -55,6 +55,7 @@
     
     <div class="container">
         <?php include "http://localhost:8080/kouroukan/pages/tete-de-page.php"; ?>
+      <!----------------------------------------------------------------------------------------------------->  
         <div id = "connexion_form">
     		<h2>ߜߊ߲߬ߞߎ߲߬ߥߟߊ</h2>
     		
@@ -72,7 +73,7 @@
     			</div>
     		</form>
     	</div>
-        
+      <!----------------------------------------------------------------------------------------------------->  
         <p class="error_message" align="center">	
             <?php 
                 if($warning){ echo($warning); }
@@ -87,7 +88,6 @@
                 }
             ?>
         </p>
-
 	</div>
 	
 	<script src="http://localhost:8080/kouroukan/js/connexion.js"></script>

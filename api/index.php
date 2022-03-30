@@ -1,96 +1,174 @@
 <?php
+        
+    header('Content-Type: application/json; charset=utf8');
+        
+    $id_user = isset($_GET['id_user']) ? $_GET['id_user']:'';
+    $matiere = isset($_GET['matiere']) ? $_GET['matiere']:'';
+    $niveau  = isset($_GET['niveau'])  ? $_GET['niveau'] :'';
+    $phase   = isset($_GET['phase'])   ? $_GET['phase']  :'';
+    $lesson  = isset($_GET['lesson'])  ? $_GET['lesson'] :'';
+    $note    = isset($_GET['note'])    ? $_GET['note']   :'';
+        
+        
+ /* Connections à la base de donnees*/
+    $server = 'localhost';
+    $dbname = 'kouroukan';
+    $user = 'root';
+    $pass = '';
     
-header('Content-Type: application/json; charset=utf8');
-    
-$search = $_GET['search'];
-$id_user = $_GET['id_user'];
-
+    try {
+        $db = new PDO("mysql:host=$server;dbname=$dbname;charset=utf8", $user, $pass);
+        $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+        $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
         
     
-/* Connections à la base de donnees*/
-$server = 'localhost';
-$dbname = 'kouroukan';
-$user = 'root';
-$pass = '';
-
-try {
-    $db = new PDO("mysql:host=$server;dbname=$dbname;charset=utf8", $user, $pass);
-    $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-    $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-    
-    switch($search) {
-    
-     /* ------------------------------------------------------------------------------------
-      Extraction des données d'identité de l'étudiant à partir de la database
-     -------------------------------------------------------------------------------------*/   
-        case 'user':
-            $sql = "SELECT date,prenom,nom,naissance,sexe,adresse,email FROM users WHERE id = ".$id_user;
-                  
-            $requete = $db -> prepare($sql);
-            $requete -> execute();
-            $user = $requete -> fetchAll(PDO::FETCH_ASSOC);
-        
-            echo json_encode($user, JSON_PRETTY_PRINT);
-            break;
-            
- 
-     /* ------------------------------------------------------------------------------------
+     /*
+     -------------------------------------------------------------------------------------
       Extraction des leçons étudiées par l'étudiant, à partir de la database
-     -------------------------------------------------------------------------------------*/   
-        case 'apprentissages':
-            $sql = "SELECT * FROM apprentissages WHERE id_client = ".$id_user." ORDER BY niveau";
-                  
+     -------------------------------------------------------------------------------------
+     */   
+        $matieres = ["alphabet","syllabes","tons","chiffres"];
+     
+     
+     /*------------------------------------------------------------------------------------- 
+     Toutes les matieres 
+     -------------------------------------------------------------------------------------*/
+        if($id_user == '' && $matiere == '' && $phase == '') {
+        for($i=0;$i<count($matieres);$i++) { 
+            
+            $sql = "SELECT * FROM ".$matieres[$i];
+                          
             $requete = $db -> prepare($sql);
             $requete -> execute();
-            $lessons = $requete -> fetchAll(PDO::FETCH_ASSOC);
+            $resultat = $requete -> fetchAll(PDO::FETCH_ASSOC);
+
+            echo json_encode($resultat, JSON_PRETTY_PRINT);
+
+        }}
         
+     
+     /*-------------------------------------------------------------------------------------  
+     Toutes les matieres pour un client 
+     -------------------------------------------------------------------------------------*/
+        if($id_user != '' && $matiere == '' && $phase == '') {
+        for($i=0;$i<count($matieres);$i++) {   
+            
+            $sql = "SELECT * FROM ".$matieres[$i]." WHERE id_client = :id_client ORDER BY id_client";
+                          
+            $requete = $db -> prepare($sql);
+            $requete -> bindValue(':id_client',$id_user,PDO::PARAM_INT);
+            $requete -> execute();
+            $resultat = $requete -> fetchAll(PDO::FETCH_ASSOC);
+
+            echo json_encode($resultat, JSON_PRETTY_PRINT);
+
+        }}
+        
+
+     /*-------------------------------------------------------------------------------------  
+     Toute une matiere 
+     -------------------------------------------------------------------------------------*/
+        if($id_user == '' && $matiere != '' && $phase == '') {
+        
+            $sql = "SELECT * FROM ".$matiere;
+                          
+            $requete = $db -> prepare($sql);
+            $requete -> execute();
+            $resultat = $requete -> fetchAll(PDO::FETCH_ASSOC);
+
+            echo json_encode($resultat, JSON_PRETTY_PRINT);
+        }
+        
+        
+     /*-------------------------------------------------------------------------------------  
+     Une matiere pour un client 
+     -------------------------------------------------------------------------------------*/
+        if($id_user != '' && $matiere != '' && $phase == '') {
+            $sql = "SELECT * FROM ".$matiere." WHERE id_client = :id_client ORDER BY phase";
+                          
+            $requete = $db -> prepare($sql);
+            $requete -> bindValue(':id_client',$id_user,PDO::PARAM_INT);
+            $requete -> execute();
+            $resultat = $requete -> fetchAll(PDO::FETCH_ASSOC);
+            
+            
+            
+         /*-------------------------------------------------------------------------------------
+          Les donnees sont extraites et placées dans la variable $resultat.
+          Maintenant classons les composants de $resultat dans un tableau $lessons.
+          Ensuite mettons $lessons au format json pour être envoyé à la demande.
+         -------------------------------------------------------------------------------------*/
+            
+            for($i=0;$i<count($resultat);$i++) {
+                
+                $lessons[$i]['id']        = $resultat[$i]['id'];
+                $lessons[$i]['id_client'] = $resultat[$i]['id_client'];
+                $lessons[$i]['niveau']    = $resultat[$i]['niveau'];
+                $lessons[$i]['date']      = $resultat[$i]['date'];
+                $lessons[$i]['phase']     = $resultat[$i]['phase'];
+                $lessons[$i]['lesson']    = $resultat[$i]['lesson'];
+                $lessons[$i]['note']      = $resultat[$i]['note'];
+            }
+            
             echo json_encode($lessons, JSON_PRETTY_PRINT);
-            break;
-
-
-     /* ------------------------------------------------------------------------------------
-      Extraction des exercices effectuées par l'étudiant, à partir de la database
-     -------------------------------------------------------------------------------------*/   
-        case 'exercices':
-            $sql = "SELECT * FROM exercices WHERE id = ".$id_user." ORDER BY niveau";
-                  
+        }
+          
+                      
+     /*-------------------------------------------------------------------------------------  
+     Une phase pour toutes les matieres 
+     -------------------------------------------------------------------------------------*/
+        if($id_user == '' && $matiere == '' && $phase != '') {
+        for($i=0;$i<count($matieres);$i++) {   
+            
+            $sql = "SELECT * FROM ".$matieres[$i]." WHERE phase = :phase ORDER BY niveau";
+                          
             $requete = $db -> prepare($sql);
+            $requete -> bindValue(':phase',$phase,PDO::PARAM_STR);
             $requete -> execute();
-            $exercices = $requete -> fetchAll(PDO::FETCH_ASSOC);
+            $resultat = $requete -> fetchAll(PDO::FETCH_ASSOC);
+
+            echo json_encode($resultat, JSON_PRETTY_PRINT);
+
+        }}
         
-            echo json_encode($exercices, JSON_PRETTY_PRINT);
-            break;
-
-
-     /* ------------------------------------------------------------------------------------
-      Extraction des pratiques effectuées par l'étudiant, à partir de la database
-     -------------------------------------------------------------------------------------*/   
-        case 'pratiques':
-            $sql = "SELECT * FROM pratiques WHERE id = ".$id_user." ORDER BY niveau";
-                  
+             
+     /*-------------------------------------------------------------------------------------  
+     Une phase de toutes les matieres pour un client 
+     -------------------------------------------------------------------------------------*/
+        if($id_user != '' && $matiere == '' && $phase != '') {
+        for($i=0;$i<count($matieres);$i++) {   
+            
+            $sql = "SELECT * FROM ".$matieres[$i]." WHERE id_client = :id_client AND phase = :phase ORDER BY niveau";
+                          
             $requete = $db -> prepare($sql);
+            $requete -> bindValue(':id_client',$id_user,PDO::PARAM_INT);
+            $requete -> bindValue(':phase',$phase,PDO::PARAM_STR);
             $requete -> execute();
-            $pratiques = $requete -> fetchAll(PDO::FETCH_ASSOC);
+            $resultat = $requete -> fetchAll(PDO::FETCH_ASSOC);
+
+            echo json_encode($resultat, JSON_PRETTY_PRINT);
+
+        }}
         
-            echo json_encode($pratiques, JSON_PRETTY_PRINT);
-            break;
+             
+     /*-------------------------------------------------------------------------------------  
+     Une phase d'une matiere pour un client 
+     -------------------------------------------------------------------------------------*/
+        if($id_user != '' && $matiere != '' && $phase != '') {
 
-
-     /* ------------------------------------------------------------------------------------
-      Extraction des testes effectués par l'étudiant, à partir de la database
-     -------------------------------------------------------------------------------------*/   
-        case 'testes':
-            $sql = "SELECT * FROM teste WHERE id = ".$id_user." ORDER BY niveau";
-                  
+            $sql = "SELECT * FROM ".$matiere." WHERE id_client = :id_client AND phase = :phase ORDER BY niveau";
+                          
             $requete = $db -> prepare($sql);
+            $requete -> bindValue(':id_client',$id_user,PDO::PARAM_INT);
+            $requete -> bindValue(':phase',$phase,PDO::PARAM_STR);
             $requete -> execute();
-            $testes = $requete -> fetchAll(PDO::FETCH_ASSOC);
-        
-            echo json_encode($testes, JSON_PRETTY_PRINT);
-            break; 
-        
+            $resultat = $requete -> fetchAll(PDO::FETCH_ASSOC);
+
+            echo json_encode($resultat, JSON_PRETTY_PRINT);
+
+        }
+
+    }    
+    catch(PDOException $e){
+        echo("Echec: ".$e->getMessage());
     }
-}    
-catch(PDOException $e){
-    echo("Echec: ".$e->getMessage());
-}

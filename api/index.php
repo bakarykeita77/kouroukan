@@ -34,35 +34,41 @@
      Toutes les matieres 
      -------------------------------------------------------------------------------------*/
         if($id_user == '' && $matiere == '' && $phase == '') {
-        for($i=0;$i<count($matieres);$i++) { 
             
-            $sql = "SELECT * FROM ".$matieres[$i];
-                          
-            $requete = $db -> prepare($sql);
-            $requete -> execute();
-            $resultat = $requete -> fetchAll(PDO::FETCH_ASSOC);
-
-            echo json_encode($resultat, JSON_PRETTY_PRINT);
-
-        }}
+            for($i=0;$i<count($matieres);$i++) { 
+                
+                $sql = "SELECT * FROM ".$matieres[$i];
+                              
+                $requete = $db -> prepare($sql);
+                $requete -> execute();
+                $resultat = $requete -> fetchAll(PDO::FETCH_ASSOC);
+    
+                $final_array[] = $resultat;
+            }
+            
+            echo json_encode($final_array, JSON_PRETTY_PRINT);
+        }
         
      
      /*-------------------------------------------------------------------------------------  
      Toutes les matieres pour un client 
      -------------------------------------------------------------------------------------*/
         if($id_user != '' && $matiere == '' && $phase == '') {
-        for($i=0;$i<count($matieres);$i++) {   
+
+            for($i=0;$i<count($matieres);$i++) {   
+                
+                $sql = "SELECT * FROM ".$matieres[$i]." WHERE id_client = :id_client ORDER BY id_client";
+                              
+                $requete = $db -> prepare($sql);
+                $requete -> bindValue(':id_client',$id_user,PDO::PARAM_INT);
+                $requete -> execute();
+                $resultat = $requete -> fetchAll(PDO::FETCH_ASSOC);
+                
+                $final_array[] = $resultat;
+            }
             
-            $sql = "SELECT * FROM ".$matieres[$i]." WHERE id_client = :id_client ORDER BY id_client";
-                          
-            $requete = $db -> prepare($sql);
-            $requete -> bindValue(':id_client',$id_user,PDO::PARAM_INT);
-            $requete -> execute();
-            $resultat = $requete -> fetchAll(PDO::FETCH_ASSOC);
-
-            echo json_encode($resultat, JSON_PRETTY_PRINT);
-
-        }}
+            echo json_encode($final_array, JSON_PRETTY_PRINT);
+        }
         
 
      /*-------------------------------------------------------------------------------------  
@@ -76,7 +82,9 @@
             $requete -> execute();
             $resultat = $requete -> fetchAll(PDO::FETCH_ASSOC);
 
-            echo json_encode($resultat, JSON_PRETTY_PRINT);
+            $final_array[] = $resultat;
+
+            echo json_encode($final_array, JSON_PRETTY_PRINT);
         }
         
         
@@ -95,22 +103,12 @@
             
          /*-------------------------------------------------------------------------------------
           Les donnees sont extraites et placées dans la variable $resultat.
-          Maintenant classons les composants de $resultat dans un tableau $lessons.
-          Ensuite mettons $lessons au format json pour être envoyé à la demande.
+          Maintenant classons les composants de $resultat dans un tableau $final_array pour être envoyé à la demande.
          -------------------------------------------------------------------------------------*/
             
-            for($i=0;$i<count($resultat);$i++) {
-                
-                $lessons[$i]['id']        = $resultat[$i]['id'];
-                $lessons[$i]['id_client'] = $resultat[$i]['id_client'];
-                $lessons[$i]['niveau']    = $resultat[$i]['niveau'];
-                $lessons[$i]['date']      = $resultat[$i]['date'];
-                $lessons[$i]['phase']     = $resultat[$i]['phase'];
-                $lessons[$i]['lesson']    = $resultat[$i]['lesson'];
-                $lessons[$i]['note']      = $resultat[$i]['note'];
-            }
-            
-            echo json_encode($lessons, JSON_PRETTY_PRINT);
+            $final_array[] = $resultat;
+
+            echo json_encode($final_array, JSON_PRETTY_PRINT);
         }
           
                       
@@ -118,37 +116,43 @@
      Une phase pour toutes les matieres 
      -------------------------------------------------------------------------------------*/
         if($id_user == '' && $matiere == '' && $phase != '') {
-        for($i=0;$i<count($matieres);$i++) {   
             
-            $sql = "SELECT * FROM ".$matieres[$i]." WHERE phase = :phase ORDER BY niveau";
-                          
-            $requete = $db -> prepare($sql);
-            $requete -> bindValue(':phase',$phase,PDO::PARAM_STR);
-            $requete -> execute();
-            $resultat = $requete -> fetchAll(PDO::FETCH_ASSOC);
-
-            echo json_encode($resultat, JSON_PRETTY_PRINT);
-
-        }}
+            for($i=0;$i<count($matieres);$i++) {   
+                
+                $sql = "SELECT * FROM ".$matieres[$i]." WHERE phase = :phase ORDER BY niveau";
+                              
+                $requete = $db -> prepare($sql);
+                $requete -> bindValue(':phase',$phase,PDO::PARAM_STR);
+                $requete -> execute();
+                $resultat = $requete -> fetchAll(PDO::FETCH_ASSOC);
+    
+                $final_array[] = $resultat;
+            }
+            
+            echo json_encode($final_array, JSON_PRETTY_PRINT);
+        }
         
              
      /*-------------------------------------------------------------------------------------  
      Une phase de toutes les matieres pour un client 
      -------------------------------------------------------------------------------------*/
         if($id_user != '' && $matiere == '' && $phase != '') {
-        for($i=0;$i<count($matieres);$i++) {   
             
-            $sql = "SELECT * FROM ".$matieres[$i]." WHERE id_client = :id_client AND phase = :phase ORDER BY niveau";
-                          
-            $requete = $db -> prepare($sql);
-            $requete -> bindValue(':id_client',$id_user,PDO::PARAM_INT);
-            $requete -> bindValue(':phase',$phase,PDO::PARAM_STR);
-            $requete -> execute();
-            $resultat = $requete -> fetchAll(PDO::FETCH_ASSOC);
-
-            echo json_encode($resultat, JSON_PRETTY_PRINT);
-
-        }}
+            for($i=0;$i<count($matieres);$i++) {   
+                
+                $sql = "SELECT * FROM ".$matieres[$i]." WHERE id_client = :id_client AND phase = :phase ORDER BY niveau";
+                              
+                $requete = $db -> prepare($sql);
+                $requete -> bindValue(':id_client',$id_user,PDO::PARAM_INT);
+                $requete -> bindValue(':phase',$phase,PDO::PARAM_STR);
+                $requete -> execute();
+                $resultat = $requete -> fetchAll(PDO::FETCH_ASSOC);
+    
+                $final_array[] = $resultat;
+            }
+            
+            echo json_encode($final_array, JSON_PRETTY_PRINT);
+        }
         
              
      /*-------------------------------------------------------------------------------------  
@@ -164,8 +168,9 @@
             $requete -> execute();
             $resultat = $requete -> fetchAll(PDO::FETCH_ASSOC);
 
-            echo json_encode($resultat, JSON_PRETTY_PRINT);
+            $final_array[] = $resultat;
 
+            echo json_encode($final_array, JSON_PRETTY_PRINT);
         }
 
     }    

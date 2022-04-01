@@ -99,7 +99,7 @@
 		    $requete -> bindValue(':note',      $note,   PDO::PARAM_STR);
 		    
 		    $requete -> execute();
-		    $data = $requete -> fetch(PDO::FETCH_ASSOC);
+		    $data = $requete -> fetchAll(PDO::FETCH_ASSOC);
 		    
 		    return $data;
 		}

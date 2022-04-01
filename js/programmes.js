@@ -15,6 +15,7 @@ $(document).ready(function() {
     $('#affiche_programme').on('click', function() {
         
         var niveau_max = '';
+        var phase_max_index = '';
         var lessons_suivies = '';
         var exercices_effectues = '';
         var evaluations_effectuees = '';
@@ -58,67 +59,78 @@ $(document).ready(function() {
         2)- On determine le programme en fonction du niveau d'étude.
 
     -------------------------------------------------------------------------------------------------------------------------*/
-
-   /*1*/getUserInfo();
+     
         getUserIdentity();
-        situationDesEtudes();
-        resume_brut_des_etudes = situations[situations.length-1];
-        resume_des_etudes = convertirResumeDeSituationsEnObjet();
-        niveau_max = niveauMaxDuClient();
-        verificationDesLessonsEtudiees();
+   /*1*/dataStorage();
+        niveau_max = parseInt(sessionStorage.getItem('niveau_max'));
+        phase_max_index = parseInt(sessionStorage.getItem('phase_max_index'))
+       // situationDesEtudes();
+       // resume_brut_des_etudes = situations[situations.length-1];
+       // resume_des_etudes = convertirResumeDeSituationsEnObjet();
+       // verificationDesLessonsEtudiees();
         
    /*2*/programme();
+   
+   
 
-alert( localStorage.getItem('alphabet') ); 
     /*-----------------------------------------------------------------------------------------------------------------------*/
         
-        function getUserInfo() {
-
-    	    fetch("http://localhost:8080//kouroukan/api/index.php?matiere=alphabet&id_user=1")
-    	    .then(response => response.json())
-    	    .then(alphabet => {
-    	        localStorage.setItem('alphabet', JSON.stringify(alphabet));
-    	    })
-    	    .catch(error => alert( error ));
-         
-         /*-----------------------------------------------------------------------------------------------------------------------*/
-    	    
-    	    fetch("http://localhost:8080//kouroukan/api/index.php?matiere=syllabes&id_user=1")
-    	    .then(response => response.json())
-    	    .then(syllabes => {
-    	        localStorage.setItem('syllabes', JSON.stringify(syllabes));
-    	    })
-    	    .catch(error => alert( error ));
-         
-         /*-----------------------------------------------------------------------------------------------------------------------*/
-    	    
-    	    fetch("http://localhost:8080//kouroukan/api/index.php?matiere=tons&id_user=1")
-    	    .then(response => response.json())
-    	    .then(tons => {
-    	        localStorage.setItem('tons', JSON.stringify(tons));
-    	    })
-    	    .catch(error => alert( error ));
-         
-         /*-----------------------------------------------------------------------------------------------------------------------*/
-    
-    	    fetch("http://localhost:8080//kouroukan/api/index.php?matiere=chiffres&id_user=1")
-    	    .then(response => response.json())
-    	    .then(chiffres => {
-    	        localStorage.setItem('chiffres', JSON.stringify(chiffres));
-    	    })
-    	    .catch(error => alert( error ));
-	    
-        }
         function getUserIdentity() {
             
-            sessionStorage.setItem('user_id',        document.getElementById('user_id').innerHTML);
-            sessionStorage.setItem('user_prenom',    document.getElementById('user_prenom').innerHTML);
-            sessionStorage.setItem('user_nom',       document.getElementById('user_nom').innerHTML);
-            sessionStorage.setItem('user_naissance', document.getElementById('user_naissance').innerHTML);
-            sessionStorage.setItem('user_sexe',      document.getElementById('user_sexe').innerHTML);
-            sessionStorage.setItem('user_adresse',   document.getElementById('user_adresse').innerHTML);
-            sessionStorage.setItem('user_email',     document.getElementById('user_email').innerHTML);
+            sessionStorage.setItem('id',        document.getElementById('id').innerHTML);
+            sessionStorage.setItem('prenom',    document.getElementById('prenom').innerHTML);
+            sessionStorage.setItem('nom',       document.getElementById('nom').innerHTML);
+            sessionStorage.setItem('naissance', document.getElementById('naissance').innerHTML);
+            sessionStorage.setItem('sexe',      document.getElementById('sexe').innerHTML);
+            sessionStorage.setItem('adresse',   document.getElementById('adresse').innerHTML);
+            sessionStorage.setItem('email',     document.getElementById('email').innerHTML);
             
+        }
+        function dataStorage() {
+            let user_id = parseInt(sessionStorage.getItem('id')); 
+
+    	    fetch("http://localhost:8080//kouroukan/api/index.php?id_user="+user_id)
+    	    .then(response => response.json())
+    	    .then(matiere => {
+    	        
+    	        let matieres = matiere;
+    	        let niveau_max = niveauMaximal();
+    	        let phase_max_index = phaseMaxIndex();
+    	           
+    	        
+    	        sessionStorage.setItem('niveau_max',niveau_max);
+    	        sessionStorage.setItem('phase_max_index',phase_max_index);
+    	        
+
+        	    function niveauMaximal() {
+        	        let niveaux = [];
+        	        let niveau_max = '';
+    
+        	        for (var i = 0; i < matieres.length; i++) {
+        	        for (var j = 0; j < matieres[i].length; j++) {
+        	            niveaux[niveaux.length] = parseInt(matieres[i][j].niveau);
+        	        }}
+        	        sessionStorage.setItem('niveaux',niveaux); 
+        	        
+        	        if(niveaux != '') niveau_max = Math.max(...niveaux);
+        	        if(niveaux == '') niveau_max = 1;
+        	        
+        	        return niveau_max;
+        	        
+        	    } 	
+            	function phaseMaxIndex() {
+            	    let phases = [];
+        	        
+        	        for (var k = 0; k < matieres[niveau_max-1].length; k++) {
+        	            phases[k] = matieres[niveau_max-1][k].phase;
+        	        }
+        	      
+        	        let phase_max_index = phases.length; 
+        	        return phase_max_index;
+            	}
+            	
+    	    })
+    	    .catch(error => alert( error ));
         }
         function situationDesEtudes() {
 
@@ -135,7 +147,7 @@ alert( localStorage.getItem('alphabet') );
             var user_chiffres = JSON.parse(localStorage.getItem('chiffres'));
              
 
-    
+            
             recuperationDesDonneesAjax();
             triDesCoursParPhase();
             triDesCoursParNiveau();
@@ -341,24 +353,6 @@ alert( localStorage.getItem('alphabet') );
             }
             
         }
-        function niveauMaxDuClient() {
- 
-            var niveaux = [];
-            var niveau_max = niveauMax();
-            
-            return niveau_max;   
-              
-            function niveauMax() {
-                var niveau_max = '';
-                    
-                for (var i = 0; i < resume_des_etudes.length; i++) {
-                    niveaux[niveaux.length] = resume_des_etudes[i][resume_des_etudes[i].length-1][0];
-                    niveau_max = Math.max(...niveaux);
-                }
-                     
-                return niveau_max;
-            }
-        }   
         function verificationDesLessonsEtudiees() {
         
             var niveau_en_cours = niveau_max+1;
@@ -467,6 +461,7 @@ alert( localStorage.getItem('alphabet') );
             nomDeLaMatiereActive();
             programmeNavigation();
             
+            
 
             function programmeHTML() {
  
@@ -501,15 +496,23 @@ alert( localStorage.getItem('alphabet') );
                 b)- Si l'index est égal au niveau max, l'élément prend la classe active définie dans class.css;
                 c)- Si l'index est supérieur au niveau max, l'élément prend la classe a_apprendre définie dans class.css.
              --------------------------------------------------------------------------------------------------------------------*/
-  
+
                 $.each($('#programmes_container ul li'), function() {
-                            
+                    
+                    var niveaux = sessionStorage.getItem('niveaux');
                     var matiere_index = $(this).index()+1;
 
-                    if(matiere_index  < niveau_max+1) { $(this).addClass('apprises');    }
-                    if(matiere_index == niveau_max+1) { $(this).addClass('active');      }
-                    if(matiere_index  > niveau_max+1) { $(this).addClass('a_apprendre'); }
-                });
+                    if(niveaux != '') {
+                        if(matiere_index  < niveau_max+1) { $(this).addClass('apprises');    }
+                        if(matiere_index == niveau_max+1) { $(this).addClass('active');      }
+                        if(matiere_index  > niveau_max) { $(this).addClass('a_apprendre'); }
+                    }
+                    if(niveaux == '') {
+                        if(matiere_index  < niveau_max) { $(this).addClass('apprises');    }
+                        if(matiere_index == niveau_max) { $(this).addClass('active');      }
+                        if(matiere_index  > niveau_max) { $(this).addClass('a_apprendre'); }
+                    }
+                }); 
             }
             function programmeAffichage() {
                 programmes_container.css({'display': 'block'});

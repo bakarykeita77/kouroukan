@@ -13,30 +13,30 @@
             $requette->execute(array($client_email));
             $client = $requette->fetchAll();
             
-            if(!empty($client)){
+            if(!empty($client)) {
                 
-                $data_id = $client[0]['id'];
-                $data_prenom = $client[0]['prenom'];
-                $data_nom = $client[0]['nom'];
+                $data_id        = $client[0]['id'];
+                $data_prenom    = $client[0]['prenom'];
+                $data_nom       = $client[0]['nom'];
                 $data_naissance = $client[0]['naissance'];
-                $data_sexe = $client[0]['sexe'];
-                $data_adresse = $client[0]['adresse'];
-                $data_password = $client[0]['password'];
+                $data_sexe      = $client[0]['sexe'];
+                $data_adresse   = $client[0]['adresse'];
+                $data_password  = $client[0]['password'];
                 
-                if($client_password==$data_password){
+                if($client_password == $data_password) {
                     session_start();
                     
-                    $_SESSION['id'] = $data_id;
-                    $_SESSION['prenom'] = $data_prenom;
-                    $_SESSION['nom'] = $data_nom;
+                    $_SESSION['id'       ] = $data_id;
+                    $_SESSION['prenom'   ] = $data_prenom;
+                    $_SESSION['nom'      ] = $data_nom;
                     $_SESSION['naissance'] = $data_naissance;
-                    $_SESSION['sexe'] = $data_sexe;
-                    $_SESSION['adresse'] = $data_adresse;
-                    $_SESSION['email'] = $data_email;
-                    $_SESSION['password'] = $data_password;
+                    $_SESSION['sexe'     ] = $data_sexe;
+                    $_SESSION['adresse'  ] = $data_adresse;
+                    $_SESSION['email'    ] = $data_email;
+                    $_SESSION['password' ] = $data_password;
                     $_SESSION['connected'] = true;
                     
-                    header("location:programmes.php");
+                    header("location:accueil.php?"); 
         
                 }else{ $warning = "Les mots de passe ne correspondent pas";  }
             }else{ $warning = "Cet utilisateur n'est pas inscrit"; }

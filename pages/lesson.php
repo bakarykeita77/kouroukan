@@ -2,11 +2,12 @@
 session_start();
 if(isset($_SESSION['connected'])){
     
-    $matiere_id    = $_GET['matiere_id'];
-    $matiere_index = $_GET['matiere_index'];
-    $matiere_nom   = $_GET['matiere_nom'];
-    $niveau        = $_GET['niveau'];
-    $niveau_max    = $_GET['niveau_max'];
+    $matiere_id             = $_GET['matiere_id'];
+    $matiere_index          = $_GET['matiere_index'];
+    $matiere_nom            = $_GET['matiere_nom'];
+    $niveau                 = $_GET['niveau'];
+    $niveau_max             = $_GET['niveau_max'];
+    $phases_etudiees        = $_GET['phases_etudiees'];
     $resume_brut_des_etudes = $_GET['resume_brut_des_etudes'];
 
     $chiffres = ['߀','߁','߂','߃','߄','߅','߆','߇','߈','߉'];

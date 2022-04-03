@@ -276,18 +276,36 @@ $('document').ready(function() {
         }
 	    function stylesDesPhases() {
 
-    	    $.each($('.phases ul li'), function(){
-
-        	    if(phase_active == $(this).html()) {
-        	        $(this).addClass('active');
-        	    }
-        	    if(phases_etudiees.indexOf($(this).html()) !== -1 ) {
-        	        $(this).addClass('apprises');
-        	    }
-        	    if(phases_a_etudier.indexOf($(this).html()) !== -1 && phase_active !== $(this).html()) {
-        	        $(this).addClass('a_apprendre');
-        	    }
+    	    var niveaux = sessionStorage.getItem('niveaux');  	    
+    	    var niveaux_distincts = sessionStorage.getItem('niveaux_distincts');  	    
+    	    var phases_collection = phasesCollection();
+    alert( niveaux_distincts );     
+    	    $.each($('.phases ul li'), function() {
+    	        
+    	        if(niveaux != '') {
+        	        var phase_index = phases_collection.indexOf($(this).html());
+    
+            	    if(phase_active == $(this).html()) {
+            	        $(this).addClass('active');
+            	    }
+            	    if(phases_etudiees.indexOf($(this).html()) !== -1 ) {
+            	        $(this).addClass('apprises');
+            	    }
+            	    if(phases_a_etudier.indexOf($(this).html()) !== -1 && phase_active !== $(this).html()) {
+            	        $(this).addClass('a_apprendre');
+            	    }
+    	        }
             });
+            
+            function phasesCollection() {
+                let collection = [];
+                
+                for (var i = 0; i < liste_de_phases.length; i++) {
+                    collection[i] = liste_de_phases[i][1];
+                }
+               
+                return collection;
+            }
 	    }
 	}
     function actualiserCochage() {

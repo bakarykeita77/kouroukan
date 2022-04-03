@@ -1,24 +1,7 @@
-#reception {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
- }
-#affiche_programme {
-    width: 100px;
-    margin: auto;
-    padding: 16px;
-    background-color: #ccc;
-    font-weight: bolder;
-    border-radius: 6px;
-}
-#affiche_programme:active {
-    background-color: #aaa;
-}
-#programmes_container{
+
+#programmes_container {
     position: absolute;
     border: 1px solid transparent;
-    display: none;
     top: 64px;
     height: 60vh;
     width: 80%;
@@ -35,15 +18,16 @@
     border-radius: 6px;
     box-shadow: 0 0 32px #ccc;
 }
-#programmes_container ul {
-    position: absolute;
-    margin: 0;
+#programme_ul {
+    margin-top: 32px;
     padding: 0;
-    width: 80%;
+    min-height: 100px;
     left: 10%;
     list-style-type: none;
     right: 0;
 }
-#programmes_container a{
+#programme_ul a {
     text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
 }

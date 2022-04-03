@@ -1,48 +1,4 @@
-<?php
-    if($_GET['submit']){
-    /* Reception des donnees envoyes de form de connexion */
-        $client_email = isset($_GET['client_email'])? $_GET['client_email']:'';
-        $client_password = isset($_GET['client_password'])? $_GET['client_password']:'';
-        
-        if($client_email !== '' OR $client_password !== ''){
-        
-            require("connexionToDB.php");
-            global $db;
-            
-            $requette = $db->prepare("SELECT * FROM users WHERE email = ?");
-            $requette->execute(array($client_email));
-            $client = $requette->fetchAll();
-            
-            if(!empty($client)) {
-                
-                $data_id        = $client[0]['id'];
-                $data_prenom    = $client[0]['prenom'];
-                $data_nom       = $client[0]['nom'];
-                $data_naissance = $client[0]['naissance'];
-                $data_sexe      = $client[0]['sexe'];
-                $data_adresse   = $client[0]['adresse'];
-                $data_password  = $client[0]['password'];
-                
-                if($client_password == $data_password) {
-                    session_start();
-                    
-                    $_SESSION['id'       ] = $data_id;
-                    $_SESSION['prenom'   ] = $data_prenom;
-                    $_SESSION['nom'      ] = $data_nom;
-                    $_SESSION['naissance'] = $data_naissance;
-                    $_SESSION['sexe'     ] = $data_sexe;
-                    $_SESSION['adresse'  ] = $data_adresse;
-                    $_SESSION['email'    ] = $data_email;
-                    $_SESSION['password' ] = $data_password;
-                    $_SESSION['connected'] = true;
-                    
-                    header("location:accueil.php?"); 
-        
-                }else{ $warning = "Les mots de passe ne correspondent pas";  }
-            }else{ $warning = "Cet utilisateur n'est pas inscrit"; }
-        }else{ $warning = "Veuillez remplir tous les champs !"; }
-    }
-?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,7 +15,7 @@
         <div id = "connexion_form">
     		<h2>ߜߊ߲߬ߞߎ߲߬ߥߟߊ</h2>
     		
-    		<form methode="GET" action="" id='formulaire_de_connexion'>
+    		<form action="http://localhost:8080/kouroukan/pages/accueil.php" method="POST" id="formulaire_de_connexion">
     			<div class="input_box">
     				<input type="email" autocomplete="off" name="client_email" id="client_email">
     				<label>Email</label>

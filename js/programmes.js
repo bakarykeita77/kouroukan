@@ -2,6 +2,7 @@ $(document).ready(function() {
 
     var programmes_container = $('#programmes_container');
     var reception = $('#reception');
+    var programme_ul = $('#programme_ul');
 
     var client_lessons_bruts_container = document.querySelector('.page_head #client_lessons_bruts_container');
     var client_exercices_bruts_container = document.querySelector('.page_head #client_exercices_bruts_container');
@@ -12,10 +13,8 @@ $(document).ready(function() {
   
   /*-----------------------------------------------------------------------------------------------------------------------*/
 
-    $('#affiche_programme').on('click', function() {
-        
-        var niveau_max = '';
-        var phase_max_index = '';
+
+        var matieres_etudiees, niveau_max, phases_etudiees, phase_max_index;
         var lessons_suivies = '';
         var exercices_effectues = '';
         var evaluations_effectuees = '';
@@ -39,8 +38,6 @@ $(document).ready(function() {
         var lessons = [], lessons_1 = [], lessons_2 = [], lessons_3 = [];
         var phases  = [], phases_1  = [], phases_2  = [], phases_3  = [];
         
-        var phases_etudiees = '';
-
         var client_info = [], niveaux_client = [], phases = [];
         var liste_des_niveaux = [], liste_des_phases = [];
         var situations_container = '', situation_globale = [];
@@ -59,79 +56,22 @@ $(document).ready(function() {
         2)- On determine le programme en fonction du niveau d'étude.
 
     -------------------------------------------------------------------------------------------------------------------------*/
-     
-        getUserIdentity();
-   /*1*/dataStorage();
-        niveau_max = parseInt(sessionStorage.getItem('niveau_max'));
-        phase_max_index = parseInt(sessionStorage.getItem('phase_max_index'))
+
+        niveau_max        = parseInt(sessionStorage.getItem('niveau_max'));
+        matieres_etudiees = sessionStorage.getItem('matieres_etudiees');
+        phases_etudiees   = sessionStorage.getItem('phases_etudiees');
        // situationDesEtudes();
        // resume_brut_des_etudes = situations[situations.length-1];
        // resume_des_etudes = convertirResumeDeSituationsEnObjet();
        // verificationDesLessonsEtudiees();
-        
+       
    /*2*/programme();
    
    
 
     /*-----------------------------------------------------------------------------------------------------------------------*/
         
-        function getUserIdentity() {
-            
-            sessionStorage.setItem('id',        document.getElementById('id').innerHTML);
-            sessionStorage.setItem('prenom',    document.getElementById('prenom').innerHTML);
-            sessionStorage.setItem('nom',       document.getElementById('nom').innerHTML);
-            sessionStorage.setItem('naissance', document.getElementById('naissance').innerHTML);
-            sessionStorage.setItem('sexe',      document.getElementById('sexe').innerHTML);
-            sessionStorage.setItem('adresse',   document.getElementById('adresse').innerHTML);
-            sessionStorage.setItem('email',     document.getElementById('email').innerHTML);
-            
-        }
-        function dataStorage() {
-            let user_id = parseInt(sessionStorage.getItem('id')); 
-
-    	    fetch("http://localhost:8080//kouroukan/api/index.php?id_user="+user_id)
-    	    .then(response => response.json())
-    	    .then(matiere => {
-    	        
-    	        let matieres = matiere;
-    	        let niveau_max = niveauMaximal();
-    	        let phase_max_index = phaseMaxIndex();
-    	           
-    	        
-    	        sessionStorage.setItem('niveau_max',niveau_max);
-    	        sessionStorage.setItem('phase_max_index',phase_max_index);
-    	        
-
-        	    function niveauMaximal() {
-        	        let niveaux = [];
-        	        let niveau_max = '';
-    
-        	        for (var i = 0; i < matieres.length; i++) {
-        	        for (var j = 0; j < matieres[i].length; j++) {
-        	            niveaux[niveaux.length] = parseInt(matieres[i][j].niveau);
-        	        }}
-        	        sessionStorage.setItem('niveaux',niveaux); 
-        	        
-        	        if(niveaux != '') niveau_max = Math.max(...niveaux);
-        	        if(niveaux == '') niveau_max = 1;
-        	        
-        	        return niveau_max;
-        	        
-        	    } 	
-            	function phaseMaxIndex() {
-            	    let phases = [];
-        	        
-        	        for (var k = 0; k < matieres[niveau_max-1].length; k++) {
-        	            phases[k] = matieres[niveau_max-1][k].phase;
-        	        }
-        	      
-        	        let phase_max_index = phases.length; 
-        	        return phase_max_index;
-            	}
-            	
-    	    })
-    	    .catch(error => alert( error ));
-        }
+        
         function situationDesEtudes() {
 
             var donnees_ajax = document.getElementById('donnees_ajax');
@@ -455,39 +395,30 @@ $(document).ready(function() {
         }
         function programme() {
             
-            programmes_container.html(programmeHTML());
+            programme_ul.html(programmeHTML());
             programmeStyle();
-            programmeAffichage();
             nomDeLaMatiereActive();
             programmeNavigation();
             
-            
 
             function programmeHTML() {
- 
-                programme_html = '<h2>ߘߋ߰ߟߌ ߢߍߥߟߊ </h2>';
-                programme_html += '<ul id="programme_ul">';
-
+                var programme_html = '<ul id="programme_ul">';
+              
                 for (var i = 0; i < liste_de_matieres.length; i++) {
-                    
+                                
                     var matiere_index = liste_de_matieres.indexOf(liste_de_matieres[i])+1;
-        
-                    if (niveau_max+1 >= matiere_index) {
-                        var phases_lien = 'lesson.php?matiere_id='+liste_de_matieres[i][0]+'&matiere_index='+matiere_index+'&matiere_nom='+liste_de_matieres[i][1]+'&niveau='+matiere_index+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees+'&resume_brut_des_etudes='+resume_brut_des_etudes;
-                        programme_html += '<li id="'+liste_de_matieres[i][0]+'"><a href="'+phases_lien+'">'+liste_de_matieres[i][1]+'</a></li>';
+                   
+                   if (niveau_max+1 >= matiere_index) {
+                        var phases_lien = 'lesson.php?matiere_id='+liste_de_matieres[i][0]+'&matiere_index='+matiere_index+'&matiere_nom='+liste_de_matieres[i][1]+'&niveau='+matiere_index+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees+'&resume_brut_des_etudes=';
+                        programme_html += '<li id="'+liste_de_matieres[i][0]+'"><a href="'+phases_lien+'">'+liste_de_matieres[i][1]+'</a></li>\n\n';
                     } else {
                         programme_html += '<li><a href="#">'+liste_de_matieres[i][1]+'</a></li>';
-                    }
+                    } 
                 }
                 programme_html += '</ul>';
                 
-                programme_html += '<div class="nav_fleches_container">';
-                programme_html += '<span id="back_to_accueil">ߛߋ߬ߦߌ߬ ߞߐ߫</span>';
-                programme_html += '<span id="go_to_phases"><a href="'+phases_lien+'">ߥߊ߫ ߢߍ߫</a></span>';
-                programme_html += '</div>';
- 
                 return programme_html;
-            }
+            }           
             function programmeStyle() {
              /*--------------------------------------------------------------------------------------------------------------------
               A chaque élément de la liste du programme correspondant un index.
@@ -514,10 +445,6 @@ $(document).ready(function() {
                     }
                 }); 
             }
-            function programmeAffichage() {
-                programmes_container.css({'display': 'block'});
-                reception.css({'display': 'none'});
-            }
             function nomDeLaMatiereActive() {
                 $('#programme_ul li').on('click', function(){
                     sessionStorage.setItem('matiere', $(this).attr('id')); 
@@ -534,6 +461,5 @@ $(document).ready(function() {
             }
         }
        
-    });
 
 });

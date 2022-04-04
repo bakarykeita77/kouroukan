@@ -408,7 +408,7 @@ $(document).ready(function() {
                                 
                     var matiere_index = liste_de_matieres.indexOf(liste_de_matieres[i])+1;
                    
-                   if (niveau_max+1 >= matiere_index) {
+                   if (niveau_max >= matiere_index) {
                         var phases_lien = 'lesson.php?matiere_id='+liste_de_matieres[i][0]+'&matiere_index='+matiere_index+'&matiere_nom='+liste_de_matieres[i][1]+'&niveau='+matiere_index+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees+'&resume_brut_des_etudes=';
                         programme_html += '<li id="'+liste_de_matieres[i][0]+'"><a href="'+phases_lien+'">'+liste_de_matieres[i][1]+'</a></li>\n\n';
                     } else {
@@ -431,11 +431,11 @@ $(document).ready(function() {
                 $.each($('#programmes_container ul li'), function() {
                     
                     var niveaux = sessionStorage.getItem('niveaux');
-                    var matiere_index = $(this).index()+1;
+                    var matiere_index = $(this).index();
 
                     if(niveaux != '') {
-                        if(matiere_index  < niveau_max+1) { $(this).addClass('apprises');    }
-                        if(matiere_index == niveau_max+1) { $(this).addClass('active');      }
+                        if(matiere_index  < niveau_max) { $(this).addClass('apprises');    }
+                        if(matiere_index == niveau_max) { $(this).addClass('active');      }
                         if(matiere_index  > niveau_max) { $(this).addClass('a_apprendre'); }
                     }
                     if(niveaux == '') {

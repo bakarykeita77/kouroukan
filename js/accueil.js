@@ -48,16 +48,15 @@
         	        niveaux_distincts.push(niveaux[i]);
         	    }
         	} 
-       alert( niveaux.length ); 	    
         	sessionStorage.setItem('niveaux_distincts',niveaux_distincts); 
         	    
         /*-------------------------------------------------------------------------   
           Niveau max
         -------------------------------------------------------------------------*/          	
         	if(niveaux != '') niveau_max = Math.max(...niveaux);
-        	if(niveaux == '') niveau_max = 1;
+        	if(niveaux == '') niveau_max = 0;
         	sessionStorage.setItem('niveau_max',niveau_max);
-       	    
+        	
         /*-------------------------------------------------------------------------   
           Matières étudiées 
         -------------------------------------------------------------------------*/         	    
@@ -69,12 +68,18 @@
         /*-------------------------------------------------------------------------   
           Phases étudiées 
         -------------------------------------------------------------------------*/              
-            for (var i = 0; i < matieres[niveau_max-1].length; i++) {
-        	    phases_etudiees[i] = matieres[niveau_max-1][i].phase;
-        	}
-        	sessionStorage.setItem('phases_etudiees',phases_etudiees);
-        	   
-        	     
+            if(niveau_max > 0) {
+                for (var i = 0; i < matieres[niveau_max-1].length; i++) {
+                    phases_etudiees[i] = matieres[niveau_max-1][i].phase;
+                }
+        	    sessionStorage.setItem('phases_etudiees',phases_etudiees);
+            }
+            
+            if(niveau_max === 0) {
+                phases_etudiees[0] = '';
+        	    sessionStorage.setItem('phases_etudiees',phases_etudiees);
+            }
+    	    
     	})
     	.catch(error => alert( error ));
     }

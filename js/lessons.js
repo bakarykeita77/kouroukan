@@ -1,10 +1,11 @@
 $('document').ready(function() {
 
+    var matieres_etudiees = sessionStorage.getItem('matieres_etudiees');     
     var matiere_id = $('#matiere_id_container').html();
     var matiere_index = parseInt($('#matiere_index_container').html());
     var matiere_nom = $('#matiere_nom_container').html();
     var niveau = parseInt($('#niveau_container').html());
-    var niveau_max = parseInt($('#niveau_max_container').html());
+    var niveau_max = parseInt(sessionStorage.getItem('niveau_max'));
     var resume_brut_des_etudes = $('#resume_brut_des_etudes_container').html();
     var voyelles_cochees, consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees;
       
@@ -277,23 +278,29 @@ $('document').ready(function() {
 	    function stylesDesPhases() {
 
     	    var niveaux = sessionStorage.getItem('niveaux');  	    
-    	    var niveaux_distincts = sessionStorage.getItem('niveaux_distincts');  	    
+    	    var niveaux_distincts = sessionStorage.getItem('niveaux_distincts').split(',');  	    
     	    var phases_collection = phasesCollection();
-    alert( niveaux_distincts );     
+    	    var phase_nbr = sessionStorage.getItem('phases_etudiees').split(',').length; 
+
     	    $.each($('.phases ul li'), function() {
     	        
-    	        if(niveaux != '') {
-        	        var phase_index = phases_collection.indexOf($(this).html());
+        	    var phase_index = phases_collection.indexOf($(this).html());
+    	        
+    	        if(matieres_etudiees != '' && niveau == niveau_max+1) {
     
-            	    if(phase_active == $(this).html()) {
-            	        $(this).addClass('active');
-            	    }
-            	    if(phases_etudiees.indexOf($(this).html()) !== -1 ) {
-            	        $(this).addClass('apprises');
-            	    }
-            	    if(phases_a_etudier.indexOf($(this).html()) !== -1 && phase_active !== $(this).html()) {
-            	        $(this).addClass('a_apprendre');
-            	    }
+            	    if(phase_index-1 <  phase_nbr) $(this).addClass('apprises');
+            	    if(phase_index-1 == phase_nbr) $(this).addClass('active');
+            	    if(phase_index-1 >  phase_nbr) $(this).addClass('a_apprendre');
+
+    	        }    	        
+    	        if(matieres_etudiees != '' && niveau <= niveau_max) {
+            	    $(this).addClass('apprises');
+    	        }
+    	        if(matieres_etudiees == '') {
+            	    
+            	    if(phase_index == 0) $(this).addClass('active');
+            	    if(phase_index >  0) $(this).addClass('a_apprendre');
+
     	        }
             });
             

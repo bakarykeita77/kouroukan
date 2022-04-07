@@ -57,17 +57,23 @@ $(document).ready(function() {
 
     -------------------------------------------------------------------------------------------------------------------------*/
 
+
+        niveaux           = sessionStorage.getItem('niveaux');
         niveau_max        = parseInt(sessionStorage.getItem('niveau_max'));
         matieres_etudiees = sessionStorage.getItem('matieres_etudiees');
+        derniere_matiere  = sessionStorage.getItem('derniere_matiere');
         phases_etudiees   = sessionStorage.getItem('phases_etudiees');
+        derniere_phase    = sessionStorage.getItem('derniere_phase');
+
+   /*2*/programme();
+   
+
        // situationDesEtudes();
        // resume_brut_des_etudes = situations[situations.length-1];
        // resume_des_etudes = convertirResumeDeSituationsEnObjet();
        // verificationDesLessonsEtudiees();
        
-   /*2*/programme();
-   
-   
+
 
     /*-----------------------------------------------------------------------------------------------------------------------*/
         
@@ -408,8 +414,9 @@ $(document).ready(function() {
                                 
                     var matiere_index = liste_de_matieres.indexOf(liste_de_matieres[i])+1;
                    
-                   if (niveau_max >= matiere_index) {
-                        var phases_lien = 'lesson.php?matiere_id='+liste_de_matieres[i][0]+'&matiere_index='+matiere_index+'&matiere_nom='+liste_de_matieres[i][1]+'&niveau='+matiere_index+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees+'&resume_brut_des_etudes=';
+                   if (niveau_max+1 >= matiere_index) {
+                        var phases_lien = 'lesson.php?matiere_id='+liste_de_matieres[i][0]+'&matiere_index='+matiere_index+'&matiere_nom='+liste_de_matieres[i][1]+'&niveau='+matiere_index+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees+'&derniere_phase='+derniere_phase;
+                     
                         programme_html += '<li id="'+liste_de_matieres[i][0]+'"><a href="'+phases_lien+'">'+liste_de_matieres[i][1]+'</a></li>\n\n';
                     } else {
                         programme_html += '<li><a href="#">'+liste_de_matieres[i][1]+'</a></li>';
@@ -430,20 +437,12 @@ $(document).ready(function() {
 
                 $.each($('#programmes_container ul li'), function() {
                     
-                    var niveaux = sessionStorage.getItem('niveaux');
                     var matiere_index = $(this).index();
-
-                    if(niveaux != '') {
-                        if(matiere_index  < niveau_max) { $(this).addClass('apprises');    }
-                        if(matiere_index == niveau_max) { $(this).addClass('active');      }
-                        if(matiere_index  > niveau_max) { $(this).addClass('a_apprendre'); }
-                    }
-                    if(niveaux == '') {
-                        if(matiere_index  < niveau_max) { $(this).addClass('apprises');    }
-                        if(matiere_index == niveau_max) { $(this).addClass('active');      }
-                        if(matiere_index  > niveau_max) { $(this).addClass('a_apprendre'); }
-                    }
-                }); 
+                  
+                    if(matiere_index  < niveau_max) $(this).addClass('apprises');
+                    if(matiere_index == niveau_max) $(this).addClass('active');
+                    if(matiere_index  > niveau_max) $(this).addClass('a_apprendre');
+                });
             }
             function nomDeLaMatiereActive() {
                 $('#programme_ul li').on('click', function(){

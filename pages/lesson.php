@@ -64,7 +64,7 @@ if(isset($_SESSION['connected'])){
       <!-------------------------------------------------------------------->
         <span class="fermeture" id="course_fermeture">&times;</span>
       <!-------------------------------------------------------------------->
-	    <div id="parametres">   <!--Les éléments de paramètres sont chargés dans js/parametres.js-->
+	    <div id="parametres">   <!--Les éléments de paramètres sont chargés depuis js/parametres.js-->
             <div id='lesson_parametres_glissiere'>
                 <table id='table1'>
                     <tr id='tr11'>
@@ -87,10 +87,21 @@ if(isset($_SESSION['connected'])){
             </div>
         </div>
       <!-------------------------------------------------------------------->
-        <div class="course" id="lesson" align="center">
+        <div class="course" id="apprentissage" align="center">
             
             <div class="course_head" id="apprentissage_entete"></div>
             <div class="course_body" id="apprentissage_corps"></div>
+            <div class='lesson_progress_bar' style="position:absolute; bottom:0; box-shadow:0 0 4px #999; border:1px solid #ddd; border-radius:6px; height:8px; width:calc(100% - 2px)">
+                <span class='lesson_progress_question_bar' style="position:absolute; border-radius:6px; right:0; height:8px; width:0; background-color:#ddd; transition:0.6s"></span>
+                <span class='lesson_progress_bonne_reponse_bar' style="position:absolute; border-radius:6px; right:0; height:8px; width:0; background-color:yellow; transition:0.6s"></span>
+            </div>
+            
+        </div>
+      <!-------------------------------------------------------------------->
+        <div class="course" id="exercice" align="center">
+            
+            <div class="course_head" id="exercice_entete"></div>
+            <div class="course_body" id="exercice_corps"></div>
             <div class='lesson_progress_bar' style="position:absolute; bottom:0; box-shadow:0 0 4px #999; border:1px solid #ddd; border-radius:6px; height:8px; width:calc(100% - 2px)">
                 <span class='lesson_progress_question_bar' style="position:absolute; border-radius:6px; right:0; height:8px; width:0; background-color:#ddd; transition:0.6s"></span>
                 <span class='lesson_progress_bonne_reponse_bar' style="position:absolute; border-radius:6px; right:0; height:8px; width:0; background-color:yellow; transition:0.6s"></span>

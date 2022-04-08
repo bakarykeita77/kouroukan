@@ -362,12 +362,22 @@
     color: #aaa;
 }
 .lesson_progess_bar{
+    position:absolute; 
+    bottom:0; 
+    box-shadow:0 0 4px #999; 
+    border:1px solid #ddd; 
+    border-radius:6px; 
+    height:8px; 
+    width:calc(100% - 2px);
 }
-.lesson_progress_bonne_reponse_bar{
-    
-}
-.lesson_progress_question_bar{
-    
+.lesson_progess_bar span {
+    position:absolute; 
+    border-radius:6px; 
+    right:0; 
+    height:8px; 
+    width:0; 
+    background-color:yellow; 
+    transition:0.6s
 }
 
 .lesson_pied {}

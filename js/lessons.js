@@ -147,7 +147,6 @@ $('document').ready(function() {
     	    affichageListeEnCascade();
     	}
 	}
-	
 	function matiere() {
     	actualiserCochage();
     	
@@ -447,39 +446,69 @@ $('document').ready(function() {
                                     
                                     var nbr_click_min = Math.min.apply(null, table_elements_click_nbr);
                                     var nbr_click_max = Math.max.apply(null, table_elements_click_nbr);
+                                    var click_min_admis = 1;
                                     
-                                    var id = parseInt(sessionStorage.getItem('user_id'));
+                                    var id             = sessionStorage.getItem('id');
                                     var matiere_active = sessionStorage.getItem('matiere_active');
-                                    var niveau_actif = parseInt(sessionStorage.getItem('niveau_actif'));
-                                    var phase_active = sessionStorage.getItem('phase');
-                                    var lesson_active = clicks_memo;
-
-                            alert( params );        
-                                    if(nbr_click_min == 0) {
+                                    var niveau_actif   = sessionStorage.getItem('niveau_actif');
+                                    var phase_active   = sessionStorage.getItem('phase');
+                                    var lesson_active  = clicks_memo;
+                                    var nbr_btn_clicke = nombreDeB9utonClicke();
+                                    var note = 8;
+                    
+                                  
+                                    if(nbr_click_min < click_min_admis) {
                                         alert("ߌ ߡߊ߫ ߛߓߍߘߋ߲ ߥߟߊ ߜߋ߭ ߠߎ߬ ߓߍ߯ ߟߊߡߍ߲߫");
+                               // alert( id+'\n'+matiere_active+'\n'+niveau_actif+'\n'+phase_active+'\n'+lesson_active+'\n'+note );        
+                                        
+                                        
+                                        const params = new URLSearchParams({
+                                            id     : id,
+                                            matiere:matiere_active,
+                                            niveau : niveau_actif,
+                                            phase  : phase_active,
+                                            lesson : JSON.stringify(lesson_active),
+                                          //  note   : toString(note)
+                                        });
+                                alert(toString(note));    
+                                        fetch("http://localhost:8080/kouroukan/pages/actions.php", {
+                                            method: 'POST',
+                                            body: params,
+                                            headers:{'Content-type': 'application/json; charset=UTF-8'}
+                                        })
+                                        .then(response => response.json())
+                                        .then(data => alert(data))
+                                        .catch(error => alert(error));
+                                        
                                     }
-                                    if(nbr_click_min >= 1) {
+                                    if(nbr_click_min >= click_min_admis) {
 
                                         const params = new URLSearchParams({
-                                            id     :id,
-                                            matiere:matiere_active,
-                                            niveau :niveau_actif,
-                                            phase  :phase_active,
-                                            lesson :lesson_active,
-                                            note   :18
+                                            id     : id,
+                                            matiere: matiere_active,
+                                            niveau : niveau_actif,
+                                            phase  : phase_active,
+                                            lesson : lesson_active,
+                                            note   : note
                                         });
                                         
                                         fetch("http://localhost:8080/kouroukan/pages/actions.php", {
                                             method: 'POST',
                                             body: params 
                                         })
-                                        .then(response => response.json())
+                                        .then(response => response.jso())
                                         .then(data => alert(data))
                                         .catch(error => alert(error));
+
+                                    }
                                     
-                                        
-                                      //  chargerLessonForm(); 
-                                       // sendLessonToDB(); 
+                                    function nombreDeB9utonClicke() {
+                                        var sum_click = 0;
+                                        for (var i = 0; i < table_elements_click_nbr.length; i++) {
+                                        if(table_elements_click_nbr[i] >= click_min_admis) {    
+                                            sum_click ++;
+                                        }}
+                                        return sum_click;
                                     }
                                 });
                                
@@ -1299,7 +1328,6 @@ $('document').ready(function() {
 	        $('.phases ul li').click();
 	    });
 	    
-
         function actualiserCochage() {
             voyelles_cochees = $('#voyelles_cochees').html().split('');
             consonnes_cochees = $('#consonnes_cochees').html().split('');

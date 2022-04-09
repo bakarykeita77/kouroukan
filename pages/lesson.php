@@ -228,8 +228,8 @@ if(isset($_SESSION['connected'])){
         <form id="lesson_form" style="display:none">
                     
             <input type="number" name="id"       id="id_input"           value="<?= $_SESSION['id']; ?>">
-            <input type="number" name="niveau"   id="niveau_input">
             <input type="text"   name="matiere"  id="matiere_nom_input">
+            <input type="number" name="niveau"   id="niveau_input">
             <input type="text"   name="phase"    id="phase_input">
             <input type="text"   name="lesson"   id="lesson_input">
             <input type="number" name="note"     id="note_input">

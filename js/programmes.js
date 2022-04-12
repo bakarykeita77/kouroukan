@@ -409,14 +409,17 @@ $(document).ready(function() {
 
             function programmeHTML() {
                 var programme_html = '<ul id="programme_ul">';
-              
+            
                 for (var i = 0; i < liste_de_matieres.length; i++) {
                                 
-                    var matiere_index = liste_de_matieres.indexOf(liste_de_matieres[i])+1;
+                    var matiere_id    = liste_de_matieres[i][0];
+                    var matiere_nom   = liste_de_matieres[i][1];
+                    var matiere_index = liste_de_matieres.indexOf(liste_de_matieres[i]);
+                    var niveau        = matiere_index+1;
                    
-                   if (niveau_max+1 >= matiere_index) {
-                        var phases_lien = 'lesson.php?matiere_id='+liste_de_matieres[i][0]+'&matiere_index='+matiere_index+'&matiere_nom='+liste_de_matieres[i][1]+'&niveau='+matiere_index+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees+'&derniere_phase='+derniere_phase;
-                     
+                   if (niveau_max >= matiere_index) 
+                   {
+                        var phases_lien = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees+'&derniere_phase='+derniere_phase;
                         programme_html += '<li id="'+liste_de_matieres[i][0]+'"><a href="'+phases_lien+'">'+liste_de_matieres[i][1]+'</a></li>\n\n';
                     } else {
                         programme_html += '<li><a href="#">'+liste_de_matieres[i][1]+'</a></li>';
@@ -446,7 +449,12 @@ $(document).ready(function() {
             }
             function nomDeLaMatiereActive() {
                 $('#programme_ul li').on('click', function(){
-                    sessionStorage.setItem('matiere', $(this).attr('id')); 
+                    
+                    sessionStorage.setItem('matiere_active', $(this).attr('id')); 
+                    sessionStorage.setItem('matiere_nom'   , $(this).text()    ); 
+                    sessionStorage.setItem('matiere_index' , $(this).index()   ); 
+                    sessionStorage.setItem('niveau_actif'  , $(this).index()+1 ); 
+                    
                 });
             }
             function programmeNavigation() {

@@ -41,10 +41,9 @@ if(isset($_SESSION['connected'])){
               <!----------------------------------------------------------------------------------------------------->  
                 <div id="donnees_recues_de_prorammes" style="display:none">
                     
-                    <p id="id_user"><?= $_SESSION['id']; ?></p>
                     <p id='matiere_id_container'    ><?= $matiere_id; ?></p>
                     <p id='matiere_index_container' ><?= $matiere_index; ?></p>
-                    <p id='matiere_nom_container'   ><?= $matiere_nom; ?></p>
+                    <p id='matiere_nom_container'   ><?= $matiere_id; ?></p>
                     <p id='niveau_container'        ><?= $niveau; ?></p>
                     <p id='niveau_max_container'    ><?= $niveau_max; ?></p>
                     <p id='resume_brut_des_etudes_container' ><?= $resume_brut_des_etudes; ?></p>
@@ -225,7 +224,7 @@ if(isset($_SESSION['connected'])){
             <div class="clavier_container"><?php include "clavier.php"; ?></div>
         </div>
       <!-------------------------------------------------------------------->
-        <form id="lesson_form" style="display:none">
+        <form method="POST" action="actions.php" id="lesson_form" style="display:none">
                     
             <input type="number" name="id"       id="id_input"           value="<?= $_SESSION['id']; ?>">
             <input type="text"   name="matiere"  id="matiere_nom_input">

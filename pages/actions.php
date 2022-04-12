@@ -1,9 +1,12 @@
 <?php
     session_start();
     
+  /*----------------------------------------------------------------------------------------------*/
+    
     require_once("connexionToDB.php");
     global $db;
     
+  /*----------------------------------------------------------------------------------------------*/
     
     $id_client = isset($_POST['id'])        ? $_POST['id']:'';
     
@@ -22,9 +25,10 @@
     $note      = isset($_POST['note'])      ? $_POST['note']:'';
     $referer   = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/pages/index.php';
 
+ 
     
-    
-    $id        = securiser($id);
+    $id_client = securiser($id_client);
+    $id_client = (int) $id_client;
     
     $prenom    = securiser($_POST['prenom']);
     $nom       = securiser($_POST['nom']);
@@ -36,21 +40,23 @@
            
     $matiere   = securiser($matiere);
     $niveau    = securiser($niveau);
+    $niveau    = (int) $niveau;
     $phase     = securiser($phase);
     $lesson    = securiser($lesson);
     $note      = securiser($note);
+    $note      = (int) $note;
     
+ 
   /*----------------------------------------------------------------------------------------------*/
+
+    if($id_client != '' && $matiere != '' && $niveau == '' && $phase == '' && $lesson == '' && $note == '') getAllInfo($lesson,$id_client);
+    if($id_client != '' && $matiere != '' && $niveau != '' && $phase != '' && $lesson != '' && $note != '') archiverLesson($id_client,$matiere,$niveau,$phase,$lesson,$note);
     
-    if($id!=='' && $matiere!=='' && $niveau!=='' && $phase!=='' && $lesson!=='' && $note!=='') {      
-        archiverLesson($id,$matiere,$niveau,$phase,$lesson,$note);
-    }
-    getAllInfo($lesson,$id);
                 
  
   /*----------------------------------------------------------------------------------------------*/
   
-        function addClient($prenom, $nom, $naissance, $sexe, $adresse, $email, $password){
+        function addClient($prenom, $nom, $naissance, $sexe, $adresse, $email, $password) {
 			global $db;
 
 			$sql = "INSERT INTO users(prenom, nom, naissance, sexe, adresse, email, password)
@@ -84,7 +90,7 @@
 
 			return $pratiques;
 		}
-		function archiverLesson($id,$matiere,$niveau,$phase,$lesson,$note) {
+		function archiverLesson($id_client,$matiere,$niveau,$phase,$lesson,$note) {
 		    global $db;
 		    
 		    $sql = "INSERT INTO ".$matiere." (id_client,niveau,phase,lesson,note)
@@ -92,11 +98,11 @@
 		           
 		    $requete = $db -> prepare($sql);
 		    
-		    $requete -> bindValue(':id_client', $id,     PDO::PARAM_INT);
-		    $requete -> bindValue(':niveau',    $niveau, PDO::PARAM_INT);
-		    $requete -> bindValue(':phase',     $phase,  PDO::PARAM_STR);
-		    $requete -> bindValue(':lesson',    $lesson, PDO::PARAM_STR);
-		    $requete -> bindValue(':note',      $note,   PDO::PARAM_STR);
+		    $requete -> bindValue(':id_client', $id_client, PDO::PARAM_INT);
+		    $requete -> bindValue(':niveau',    $niveau,    PDO::PARAM_INT);
+		    $requete -> bindValue(':phase',     $phase,     PDO::PARAM_STR);
+		    $requete -> bindValue(':lesson',    $lesson,    PDO::PARAM_STR);
+		    $requete -> bindValue(':note',      $note,      PDO::PARAM_INT);
 		    
 		    $requete -> execute();
 		    $data = $requete -> fetchAll(PDO::FETCH_ASSOC);
@@ -131,20 +137,20 @@
 		function getClient($id){
 			global $db;
 
-			$sql = "SELECT * FROM users WHERE id=:id";
+			$sql = "SELECT * FROM users WHERE id=:id_client";
 
 			$requette = $db->prepare($sql);
-			$requette->bindValue(':id',$id,PDO::PARAM_INT);
+			$requette->bindValue(':id_client',$id_client,PDO::PARAM_INT);
 			$requette->execute();
 			return $utilisateurs = $requette->fetch(PDO::FETCH_ASSOC);
 		 }
-		function getAllInfo($lesson,$id) {
+		function getAllInfo($matiere,$id_client) {
 		    global $db;
 		    
-		    $sql = "SELECT * FROM ".$lesson." WHERE id = :id";
+		    $sql = "SELECT * FROM ".$matiere." WHERE id_client = :id_client";
 		    
 		    $requete = $db -> prepare($sql);
-		    $requete -> bindValue(':id', $id, PDO::PARAM_INT);
+		    $requete -> bindValue(':id_client', $id_client, PDO::PARAM_INT);
 		    $requete -> execute();
 		    $data = $requete-> fetch(PDO::FETCH_ASSOC);
 		    

@@ -1,7 +1,5 @@
 $(document).ready(function() {
     
-    $('.a_apprendre').off('click');
-    $('.a_apprendre').attr('id','');
 
     $.each($('.cacher'), function(){
         $(this).css({'transform':'scale(0)'});

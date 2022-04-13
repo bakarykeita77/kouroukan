@@ -33,24 +33,27 @@
     function barrerLaFausseReponse(td) {
         var fausse_reponse = td.html();
         td.html(fausse_reponse+"<p id='croix'>&#10060;</p>");
-        
+       
         $('#croix').css({
             'position':'absolute', 
+            'display':'block',
             'margin':0,
             'padding':'8px 0',
             'width':'100%', 
             'height':'100%', 
-            'top':0,
+            'top':'4px',
             'left':0,
+            'font-size':'16px',
             'textAlign':'center', 
             'boxSizing':'border-box',
             'transform':'scale(0)',
             'opacity':0,
             'transition':'transform 0.6s'
         });
-        setTimeout(function() { $('#croix').css({'transform': 'scale(1.5)' });}, 50);
-        setTimeout(function() { $('#croix').css({'opacity': 0.6 });}, 50);
-        setTimeout(function() {td.html(fausse_reponse);}, 2000);
+        
+        setTimeout(function() { $('#croix').css('transform', 'scale(1.5)'); }, 50);
+        setTimeout(function() { $('#croix').css('opacity', 0.6 ); }, 50);
+        setTimeout(function() { td.html(fausse_reponse); }, 2000);
     }
 	
     function clignotage(reponse_ratee) {
@@ -60,18 +63,20 @@
 
                 td.addClass('fond_blanc_casse');
                 setTimeout((function() { td.removeClass('fond_blanc_casse'); }), 200);
-                setTimeout((function() { td.addClass('fond_blanc_casse');    }), 350);
-                setTimeout((function() { td.removeClass('fond_blanc_casse'); }), 500);
-                setTimeout((function() { td.addClass('fond_blanc_casse');    }), 650);
-                setTimeout((function() { td.removeClass('fond_blanc_casse'); }), 800);
-                setTimeout((function() { td.addClass('fond_blanc_casse');    }), 950);
-                setTimeout((function() { td.removeClass('fond_blanc_casse'); }), 1100);
-                setTimeout((function() { td.addClass('fond_blanc_casse');    }), 1250);
-                setTimeout((function() { td.removeClass('fond_blanc_casse'); }), 1400);
-                setTimeout((function() { td.addClass('fond_blanc_casse');    }), 1550);
+                setTimeout((function() { td.addClass('fond_blanc_casse');    }), 325);
+                setTimeout((function() { td.removeClass('fond_blanc_casse'); }), 450);
+                setTimeout((function() { td.addClass('fond_blanc_casse');    }), 575);
+                setTimeout((function() { td.removeClass('fond_blanc_casse'); }), 700);
+                setTimeout((function() { td.addClass('fond_blanc_casse');    }), 825);
+                setTimeout((function() { td.removeClass('fond_blanc_casse'); }), 950);
+                setTimeout((function() { td.addClass('fond_blanc_casse');    }), 1075);
+                setTimeout((function() { td.removeClass('fond_blanc_casse'); }), 1200);
+                setTimeout((function() { td.addClass('fond_blanc_casse');    }), 1325);
+                setTimeout((function() { td.removeClass('fond_blanc_casse'); }), 1450);
+                setTimeout((function() { td.addClass('fond_blanc_casse');    }), 1575);
                 setTimeout((function() { td.removeClass('fond_blanc_casse'); }), 1700);
-                setTimeout((function() { td.addClass('fond_blanc_casse');    }), 1850);
-                setTimeout((function() { td.removeClass('fond_blanc_casse'); }), 2000);
+                setTimeout((function() { td.addClass('fond_blanc_casse');    }), 1825);
+                setTimeout((function() { td.removeClass('fond_blanc_casse'); }), 1950);
             }
         });
     }

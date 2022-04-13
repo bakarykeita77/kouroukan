@@ -279,12 +279,22 @@ $('document').ready(function() {
             }
             function questions() {
                 var lq = '';
-                if(niveau==1){ lq = mix1D(lettres); }
-                if(niveau==2){ lq = mix1D(syllabes); }
-                if(niveau==3){ lq = mix1D(syllabes_tonifies); }
-                if(niveau==4){ lq = mix1D(chiffre); }
+                
+                if(niveau==1) lq = mix1D(lettres);
+                if(niveau==2) lq = mix1D(syllabes);
+                if(niveau==3) lq = mix1D(syllabes_tonifies);
+                if(niveau==4) lq = mix1D(chiffre);
                 
                 return lq;
+            }
+            function quantiteDeQuestion(){
+                let nq = 0;
+                
+                if(niveau==1) nq = 20;
+                if(niveau==2) nq = 40;
+                if(niveau==3) nq = 40;
+                
+                return nq; 
             }
     	    function cours() {
     	        
@@ -342,9 +352,9 @@ $('document').ready(function() {
                     	        $('.stop_btn_container').css({'display':'none'});
                     	        $('.play_btn_container').css({'display':'block'});
                         	        
-                        	    lectureSemiAutomatique();
-                        	    lecturePersonnalisee();
-                        	    arreterLecture(lessonCourante);
+                        	    lectureSemiAutomatique(); // Voir fonctions.js
+                        	    lecturePersonnalisee();   // Voir fonctions.js
+                        	    arreterLecture(lessonCourante); // Voir fonctions.js
                     	    });
                     	    
                             function affichageDeParametres(){
@@ -356,9 +366,9 @@ $('document').ready(function() {
                         function apprendre() {
                             
                             changementDesBoutonsMedia();
-                    	    lectureSemiAutomatique();
-                    	    lecturePersonnalisee();
-                    	    arreterLecture(lessonCourante);
+                    	    lectureSemiAutomatique(); // Voir fonctions.js
+                    	    lecturePersonnalisee();   // Voir fonctions.js
+                    	    arreterLecture(lessonCourante); // Voir fonctions.js
                     	    
                             function changementDesBoutonsMedia(){
                         	    $('.play_btn_container').on('click', function(){
@@ -541,17 +551,16 @@ $('document').ready(function() {
                 	    var compteur_de_question = 1;
                 	    var quantite_de_question = quantiteDeQuestion();
                 	    var question_rang = '߭';
-                    
+                	    var exercices_table = [];
+                	    
+                	    
                 	    chargerExercice();
                 	    afficherExercice();
                 	    exercer();
+                	    enregistrerExercice();
                 	    stockerExercice();
-              alert( niveau ); 	   
-                        function quantiteDeQuestion(){
-                            if(niveau==1){ var nq = parseIntNko(20); return nq; }
-                            if(niveau==2){ var nq = parseIntNko(40); return nq; }
-                            if(niveau==3){ var nq = parseIntNko(40); return nq; }
-                        }
+                	    
+              	   
                     	function chargerExercice(){ 
                             
                             $('#exercice_entete').html( exerciceEnteteHTML() );
@@ -560,7 +569,7 @@ $('document').ready(function() {
                         	function exerciceEnteteHTML(){
                         	    var exercices_entete_html = "<div class='play_icon_container' id='exercices_player' style='width:auto'>";
                         	        exercices_entete_html += "<span class='play_label'>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ </span>";
-                        	        exercices_entete_html += "<span class='qtite_question'>"+quantite_de_question+"</span> : <span class='ordre_question'>"+parseIntNko(compteur_de_question)+question_rang+" </span>";
+                        	        exercices_entete_html += "<span class='qtite_question'>"+parseIntNko(quantite_de_question)+"</span> : <span class='ordre_question'>"+parseIntNko(compteur_de_question)+question_rang+" </span>";
                         	        exercices_entete_html += "<span class='ecouter_question'> ߟߊߡߍ߲߫</span><span class='play_icon'>"+play_icon+"</span>";
                         	    exercices_entete_html += "</div>";
                         	    exercices_entete_html += "<div class='oreille_icon_container'><span class='reecoute_label'>ߊ߬ ߟߊߡߍ߲߫ ߕߎ߯ߣߌ߫  </span> <span class='oreille_icon'>"+oreille_icon+"</span></div>";
@@ -609,7 +618,7 @@ $('document').ready(function() {
                         	    });
                     	    }
                     	    function repondreQuestion(){
-                	            var nbr_de_questions_a_poser = $('.table_muette td').length;
+                	            var nbr_de_questions_a_poser = 40;
                             	        
                         	    $('.table_muette').on('click', function(e){
                         	        if(question_posee=='')
@@ -619,7 +628,7 @@ $('document').ready(function() {
                         	            var td = $(e.target);
                             	        reponse_montree = td.html();
                 	                    point = (question_posee==reponse_montree)?1:0;
-        
+                        
                             	        if(question_posee!=reponse_montree){ barrerLaFausseReponse(td); clignotage(question_posee); }
                             	        if(question_posee==reponse_montree){ td.addClass('ombrage'); }
                             	        actualiserLessonProgressBar();
@@ -631,8 +640,12 @@ $('document').ready(function() {
                             	        $('.play_icon_container').css('display','block');
                             	        
                                         function actualiserLessonProgressBar(){
+                                            
+                                            var course_width = $('.course').width();
+                                            $('.lesson_progress_bar').width( course_width - 2 );
                                             var progress_unity = $('.lesson_progress_bar').width()/nbr_de_questions_a_poser;
-                                           
+                                            
+                                          
                                             if(question_posee!=reponse_montree){ 
                                                 $('.lesson_progress_question_bar').css('width','+='+progress_unity+'px');
                                             }else{ 
@@ -643,17 +656,16 @@ $('document').ready(function() {
                         	    });
                     	    }
                 	    }
-                	    function stockerExercice(){
+                	    function enregistrerExercice(){
                 	        
                 	        var td = $('.table_muette td');
-                	        var exercices_table = [];
                 	        var exercice_counter = 0;
                 	        var course_form = $('#course_form');
                 	        var nbr_max_exercice = '';
                 	        
                 	        for(var i=0;i<questions_a_poser.length;i++){
                 	            var q = questions_a_poser[i];
-                	            var r,p = '';
+                	            var r = '',p = 0;
                 	            
                 	            exercices_table[exercices_table.length] = [q,r,p];
                 	        }
@@ -663,27 +675,71 @@ $('document').ready(function() {
                 	               
                 	                var q = exercices_table[exercice_counter][0];
                 	                var r = $(this).html();
-                	                var p = '';
+                	                var p = 0;
                 	                var nouvel_exercice = [];
                 	                
-                	                p = (q==r)?'ߞߎߟߎ߲ߖߋ߫':'ߝߏߦߊ߲߫';     
+                	                p = (q==r) ? 1:0;
                 	                nouvel_exercice = [q,r,p];
                 	               
                 	                exercices_table.splice(exercice_counter,1,nouvel_exercice);
-                	             
-                                    $('#course_fermeture').on('click',function(){ chargementDeLessonForm(); sendExerciceToDB(); });
-                	                exercice_counter++;
                 	                
-                	                function chargementDeLessonForm(){
-                	                    
-                	                    $('#course_input').val(exercices_table.join(';'));
-                	                }
-                	                function sendExerciceToDB(){
-                                        course_form.attr('action','actions.php?get_action=archiver_exercice');
-                	                    $('#submit_course').click();
-                	                }
+                	                exercice_counter++;
                 	            });
                 	        });
+                	    }
+                	    function stockerExercice() {
+                	                        	             
+                            $('#course_fermeture').on('click',function(){ 
+                             /*--------------------------------------------------------------------
+                              Pourquoi exercice soit valable, il faut que chaque question ait une réponse.
+                             --------------------------------------------------------------------*/  
+                               
+                                var exercice_valide = [];
+                                var note_valide = [];
+                                var note_total = 0;
+                                
+                                for (var i = 0; i < quantite_de_question; i++) {
+                                    if(exercices_table[i][1] != '') {
+                                        exercice_valide.push(exercices_table[i]);
+                                    }
+                                }
+                                for (var i = 0; i < quantite_de_question; i++) {
+                                    if(exercices_table[i][2] == 1) {
+                                        note_valide.push(exercices_table[i][2]);
+                                        note_total += exercices_table[i][2];
+                                    }
+                                }
+                        alert( note );        
+
+                                let id             = parseInt(sessionStorage.getItem('id'));
+                                let matiere_active = sessionStorage.getItem('matiere_active');
+                                let phase_active   = sessionStorage.getItem('phase');
+                                let lesson_active  = exercice_valide;
+                                        
+                                let moyenne = 3;
+                               // let not = Math.floor(note_total*20)/quantite_de_question);
+                                
+                                
+                                const params = new URLSearchParams({
+                                    id     : id,
+                                    matiere: matiere_active,
+                                    niveau : niveau_actif,
+                                    phase  : phase_active,
+                                    lesson : lesson_active,
+                                  //  note   : note
+                                });
+                       alert( params );         
+                                fetch('http://localhost:8080/kouroukan/pages/actions.php', {
+                                    method: 'POST',
+                                    body: params 
+                                })
+                                .then(response => response.json())
+                                .then(data => alert( data ))
+                                .then(error => alert(error)); 
+                                
+                            });
+                	        
+                	                
                 	    }
                     }
                     function pratique() {

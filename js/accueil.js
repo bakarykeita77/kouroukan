@@ -48,7 +48,7 @@
         	    var phase_nom = matieres[i][j].phase;
         	    var note      = matieres[i][j].note;
         	    
-        	    var phase     = [niveau, date, phase_nom, note]+'\n';
+        	    var phase     = [niveau, date, phase_nom, note];
             
 
             	if(phase[0] == 1 && note >= 15) phases_1[phases_1.length] = phase;
@@ -57,21 +57,22 @@
             	if(phase[0] == 4 && note >= 15) phases_4[phases_4.length] = phase;
         	}}
         	
-        	sessionStorage.setItem('phases_1', phases_1);  
-        	sessionStorage.setItem('phases_2', phases_2);  
-        	sessionStorage.setItem('phases_3', phases_3);  
-        	sessionStorage.setItem('phases_4', phases_4);  
+        	
+        	sessionStorage.setItem('phases_1', JSON.stringify(phases_1));  
+        	sessionStorage.setItem('phases_2', JSON.stringify(phases_2));  
+        	sessionStorage.setItem('phases_3', JSON.stringify(phases_3));  
+        	sessionStorage.setItem('phases_4', JSON.stringify(phases_4));  
         	
         	
           /* A chaque niveau, toutes les phases doivent être passées au moins une fois 
            pour qu'il soit considéré comme effectué et est enregistré dans la liste des niveaux.
           */
         	var liste_des_phases_1 = [], liste_des_phases_2 = [], liste_des_phases_3 = [], liste_des_phases_4 = [];
-        	
-        	for (var i = 0; i < phases_1.length; i++) liste_des_phases_1.push(phases_1[i].split(',')[2]);
-        	for (var i = 0; i < phases_2.length; i++) liste_des_phases_2.push(phases_2[i].split(',')[2]);
-        	for (var i = 0; i < phases_3.length; i++) liste_des_phases_3.push(phases_3[i].split(',')[2]);
-        	for (var i = 0; i < phases_4.length; i++) liste_des_phases_4.push(phases_4[i].split(',')[2]);
+     	
+        	for (var i = 0; i < phases_1.length; i++) liste_des_phases_1.push(phases_1[i][2]);
+        	for (var i = 0; i < phases_2.length; i++) liste_des_phases_2.push(phases_2[i][2]);
+        	for (var i = 0; i < phases_3.length; i++) liste_des_phases_3.push(phases_3[i][2]);
+        	for (var i = 0; i < phases_4.length; i++) liste_des_phases_4.push(phases_4[i][2]);
         	
         	var noms_des_phases = [];
         	
@@ -81,15 +82,15 @@
         	if(liste_des_phases_2.indexOf(noms_des_phases[0]) != -1 && liste_des_phases_2.indexOf(noms_des_phases[1]) != -1 && liste_des_phases_2.indexOf(noms_des_phases[2]) != -1 && liste_des_phases_2.indexOf(noms_des_phases[3]) != -1) niveaux.push(2);
         	if(liste_des_phases_3.indexOf(noms_des_phases[0]) != -1 && liste_des_phases_3.indexOf(noms_des_phases[1]) != -1 && liste_des_phases_3.indexOf(noms_des_phases[2]) != -1 && liste_des_phases_3.indexOf(noms_des_phases[3]) != -1) niveaux.push(3);
         	if(liste_des_phases_4.indexOf(noms_des_phases[0]) != -1 && liste_des_phases_4.indexOf(noms_des_phases[1]) != -1 && liste_des_phases_4.indexOf(noms_des_phases[2]) != -1 && liste_des_phases_4.indexOf(noms_des_phases[3]) != -1) niveaux.push(4); 
-            
-            sessionStorage.setItem('niveaux', niveaux); 
+             
+            sessionStorage.setItem('niveaux', JSON.stringify(niveaux)); 
      
-        	phases_etudiees[0] = phases_1+'\n';
-        	phases_etudiees[1] = phases_2+'\n';
-        	phases_etudiees[2] = phases_3+'\n';
-        	phases_etudiees[3] = phases_4+'\n';        	
+        	phases_etudiees[0] = phases_1;
+        	phases_etudiees[1] = phases_2;
+        	phases_etudiees[2] = phases_3;
+        	phases_etudiees[3] = phases_4;        	
 
-        	sessionStorage.setItem('phases_etudiees',phases_etudiees);
+        	sessionStorage.setItem('phases_etudiees',JSON.stringify(phases_etudiees));
      	    
         /*-------------------------------------------------------------------------   
           Niveaux distincts
@@ -99,7 +100,7 @@
         	        niveaux_distincts.push(niveaux[i]);
         	    }
         	} 
-        	sessionStorage.setItem('niveaux_distincts',niveaux_distincts); 
+        	sessionStorage.setItem('niveaux_distincts',JSON.stringify(niveaux_distincts)); 
         	    
         /*-------------------------------------------------------------------------   
           Niveau max
@@ -112,9 +113,10 @@
           Matières étudiées 
         -------------------------------------------------------------------------*/         	    
        	    for (var i = 0; i < niveau_max; i++) {
-        	    matieres_etudiees[i] = liste_de_matieres[i][1];
+        	    matieres_etudiees[i] = liste_de_matieres[i][0];
         	}
-        	sessionStorage.setItem('matieres_etudiees',matieres_etudiees);
+      	
+        	sessionStorage.setItem('matieres_etudiees',JSON.stringify(matieres_etudiees));
         	
         /*-------------------------------------------------------------------------   
           Derniere matiere 
@@ -128,14 +130,14 @@
             for (var i = 0; i < matieres[niveau_max].length; i++) {
                 dernieres_phases[i] = matieres[niveau_max][i].phase;
             }
-        	sessionStorage.setItem('dernieres_phases',dernieres_phases);
+        	sessionStorage.setItem('dernieres_phases',JSON.stringify(dernieres_phases));
             
         /*-------------------------------------------------------------------------   
           Derniere phase
         -------------------------------------------------------------------------*/              
             derniere_phase = liste_de_phases[dernieres_phases.length][0];
         	sessionStorage.setItem('derniere_phase',derniere_phase);
-             
+            
     	})
     	.catch(error => alert( error ));
     }

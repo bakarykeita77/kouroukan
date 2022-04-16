@@ -8,21 +8,21 @@
     
   /*----------------------------------------------------------------------------------------------*/
     
-    $id_client = isset($_POST['id'])        ? $_POST['id']:'';
+    $id_client = isset($_POST['id'])        ? $_POST['id']:null;
     
-    $prenom    = isset($_POST['prenom'])    ? $_POST['prenom']:'';
-    $nom       = isset($_POST['nom'])       ? $_POST['nom']:'';
-    $naissance = isset($_POST['naissance']) ? $_POST['naissance']:'';
-    $sexe      = isset($_POST['sexe'])      ? $_POST['sexe']:'';
-    $adresse   = isset($_POST['adresse'])   ? $_POST['adresse']:'';
-    $email     = isset($_POST['email'])     ? $_POST['email']:'';
-    $password  = isset($_POST['password'])  ? $_POST['password']:'';
+    $prenom    = isset($_POST['prenom'])    ? $_POST['prenom']:null;
+    $nom       = isset($_POST['nom'])       ? $_POST['nom']:null;
+    $naissance = isset($_POST['naissance']) ? $_POST['naissance']:null;
+    $sexe      = isset($_POST['sexe'])      ? $_POST['sexe']:null;
+    $adresse   = isset($_POST['adresse'])   ? $_POST['adresse']:null;
+    $email     = isset($_POST['email'])     ? $_POST['email']:null;
+    $password  = isset($_POST['password'])  ? $_POST['password']:null;
     
-    $matiere   = isset($_POST['matiere'])   ? $_POST['matiere']:'';
-    $niveau    = isset($_POST['niveau'])    ? $_POST['niveau']:'';
-    $phase     = isset($_POST['phase'])     ? $_POST['phase']:'';
-    $lesson    = isset($_POST['lesson'])    ? $_POST['lesson']:'';
-    $note      = isset($_POST['note'])      ? $_POST['note']:'';
+    $matiere   = isset($_POST['matiere'])   ? $_POST['matiere']:null;
+    $niveau    = isset($_POST['niveau'])    ? $_POST['niveau']:null;
+    $phase     = isset($_POST['phase'])     ? $_POST['phase']:null;
+    $lesson    = isset($_POST['lesson'])    ? $_POST['lesson']:null;
+    $note      = isset($_POST['note'])      ? $_POST['note']:null;
     $referer   = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/pages/index.php';
 
  

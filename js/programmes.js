@@ -437,7 +437,7 @@ $(document).ready(function() {
                 b)- Si l'index est égal au niveau max, l'élément prend la classe active définie dans class.css;
                 c)- Si l'index est supérieur au niveau max, l'élément prend la classe a_apprendre définie dans class.css.
              --------------------------------------------------------------------------------------------------------------------*/
-
+ 
                 $.each($('#programmes_container ul li'), function() {
                     
                     var matiere_index = $(this).index();
@@ -468,5 +468,4 @@ $(document).ready(function() {
             }
         }
        
-
 });

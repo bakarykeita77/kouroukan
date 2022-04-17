@@ -27,6 +27,7 @@
     function alphabetExercicesHTML() {
 
         var exercices_corps_html = '<table class="table_muette">\n\n';
+        
         for(var i=0;i<alphabet_questions.length-alphabet_questions.length%7;i+=7){
             exercices_corps_html += '<tr>\n';
             for(var j=0;j<7;j++){ exercices_corps_html += '<td>'+alphabet_questions[i+j]+'</td>\n'; }

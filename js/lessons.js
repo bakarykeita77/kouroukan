@@ -14,8 +14,9 @@ $('document').ready(function() {
     var niveau            = parseInt(sessionStorage.getItem('niveau_actif'));
     
     var phases_etudiees   = JSON.parse(sessionStorage.getItem('phases_etudiees')); 
-    var phase_nbr         = JSON.parse(sessionStorage.getItem('dernieres_phases')).length; 
     var dernieres_phases  = JSON.parse(sessionStorage.getItem('dernieres_phases'));     
+    var dernieres_phases_distinctes  = JSON.parse(sessionStorage.getItem('dernieres_phases_distinctes'));     
+    var phase_nbr         = JSON.parse(sessionStorage.getItem('dernieres_phases_distinctes')).length; 
     var derniere_phase    = sessionStorage.getItem('derniere_phase');     
     
   
@@ -161,8 +162,7 @@ $('document').ready(function() {
     	$('.phases ul li').on('click', function(){
 
             var syllabes_tonifies = tonification();  
-            
-            
+
             var questionnaires = questions();
             var questions_quantity = quantiteDeQuestion();
             var quantite_de_question = quantiteDeQuestion();
@@ -284,7 +284,7 @@ $('document').ready(function() {
             }
             function questions() {
                 var lq = '';
-                
+               
                 if(niveau==1) lq = mix1D(lettres);
                 if(niveau==2) lq = mix1D(syllabes);
                 if(niveau==3) lq = mix1D(syllabes_tonifies);
@@ -549,8 +549,8 @@ $('document').ready(function() {
                 	function exercices() {
                 	    
                 	    var compteur_de_question = 1;
-                	    var questions_exer
                 	    var question_rang = '߭';
+                	    var exercice_questions = [];
                 	    
                 	    
                 	    chargerExercice();
@@ -559,12 +559,12 @@ $('document').ready(function() {
                 	    enregistrerExercice();
                 	    stockerExercice();
                 	    
-              	   
                     	function chargerExercice(){ 
-                            
+
                             $('#exercice_entete').html( exerciceEnteteHTML() );
                     	    $('#exercice_corps').html( lesson_courante ); 
-                    	    
+                	        reductionDesElementsDeLessonCouranteA49();
+                        	
                         	function exerciceEnteteHTML(){
                         	    var exercices_entete_html = "<div class='play_icon_container' id='exercices_player' style='width:auto'>";
                         	        exercices_entete_html += "<span class='play_label'>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ </span>";
@@ -575,6 +575,16 @@ $('document').ready(function() {
                         
                                 return exercices_entete_html;
                         	}
+                    	    function reductionDesElementsDeLessonCouranteA49() {
+                        	    for( var i = $('.table_muette tr').length-1; i > 6; i--) {
+                        	        document.querySelector('.table_muette').deleteRow(i);
+                        	    }
+                                $.each($('.table_muette tr td'), function() {
+                                    exercice_questions.push($(this).html());
+                                });
+                                
+                                exercice_questions = mix1D(exercice_questions);
+                    	    }
                     	}
                     	function afficherExercice(){
                             
@@ -598,8 +608,10 @@ $('document').ready(function() {
                         	        question_rang = '߲';
                         	        $('.ecouter_question').html(' ߠߊߡߍ߲߫');
                         	        $('.ordre_question').html(parseIntNko(compteur_de_question)+question_rang);
-                        	        question_posee = questionnaires[i];
-                      alert( question_posee ); 
+                        	        question_posee = exercice_questions[i];
+                        	        
+                        alert( question_posee ); 
+                      
                         	        $(this).css('display','none');
                         	        $('.oreille_icon_container').css('display','block');
                         	        
@@ -664,7 +676,7 @@ $('document').ready(function() {
                 	        
                 	        $.each(td, function(){
                 	            $(this).on('click', function(){
-                	               
+                    	               
                 	                var q = lesson_a_stocker[exercice_counter][0];
                 	                var r = $(this).html();
                 	                var p = (q==r) ? 1:0;
@@ -686,8 +698,8 @@ $('document').ready(function() {
                                 var questionnaires = [];
                                 var note_valide = [];
                                 var note_total = 0;
-
-
+                            
+                        alert( lesson_a_stocker ); 
                                 for (var i = 0; i < questions_quantity; i++) {
                                     if(lesson_a_stocker[i][2] == 1) {
                                         note_total += lesson_a_stocker[i][2];
@@ -701,7 +713,7 @@ $('document').ready(function() {
                                         
                                 let moyenne = 1;
                                 let note = Math.floor((note_total*20)/quantite_de_question);
-                                
+                              
                                 const exercice_data = new URLSearchParams({
                                     id     : id,
                                     matiere: matiere,

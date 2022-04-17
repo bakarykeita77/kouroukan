@@ -27,7 +27,7 @@
     	    
         	let niveaux = [], niveaux_distincts = [], niveau_max = '';
         	let matieres_etudiees = [], derniere_matiere = '';
-        	let phases_etudiees = [], dernieres_phases = [], derniere_phase = '';
+        	let phases_etudiees = [], dernieres_phases = [], dernieres_phases_distinctes = [], derniere_phase = '';
         	let phases_1 = [], phases_2 = [], phases_3 = [], phases_4 = [];
         	
         	
@@ -131,11 +131,22 @@
                 dernieres_phases[i] = matieres[niveau_max][i].phase;
             }
         	sessionStorage.setItem('dernieres_phases',JSON.stringify(dernieres_phases));
-            
+        
+        /*-------------------------------------------------------------------------   
+          Dernieres phases distinctes
+        -------------------------------------------------------------------------*/              
+            for (var i = 0; i < dernieres_phases.length; i++) {
+                
+                if(dernieres_phases_distinctes.indexOf(dernieres_phases[i]) === -1) {
+                    dernieres_phases_distinctes.push(dernieres_phases[i]);
+                }
+            }
+        	sessionStorage.setItem('dernieres_phases_distinctes',JSON.stringify(dernieres_phases_distinctes));
+          
         /*-------------------------------------------------------------------------   
           Derniere phase
         -------------------------------------------------------------------------*/              
-            derniere_phase = liste_de_phases[dernieres_phases.length][0];
+            derniere_phase = liste_de_phases[dernieres_phases.length];
         	sessionStorage.setItem('derniere_phase',derniere_phase);
             
     	})

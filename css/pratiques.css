@@ -3,6 +3,11 @@
     margin: 0;
     height: 24px;
 }
+#pratique_head span {
+    padding: 2px 8px;
+    font-size: 12px;
+    font-weight: bold;
+}
 #pratique_body {
     margin: 0;
 }

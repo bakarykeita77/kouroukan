@@ -529,7 +529,7 @@ $('document').ready(function() {
                                  */
                                     var matiere = sessionStorage.getItem('matiere_active');
                                     var phase   = sessionStorage.getItem('phase');
-                                    var lesson  = clicks_memo;
+                                    var lesson  = JSON.stringify(clicks_memo);
             
                              
                                     const apprentissage_data = new URLSearchParams({
@@ -732,7 +732,7 @@ $('document').ready(function() {
 
                                     let matiere = sessionStorage.getItem('matiere_active');
                                     let phase   = sessionStorage.getItem('phase');
-                                    let lesson  = exercice_a_stocker;
+                                    let lesson  = JSON.stringify(exercice_a_stocker);
                                             
 
                                     const exercice_data = new URLSearchParams({
@@ -759,6 +759,7 @@ $('document').ready(function() {
                     function pratique() {
                             
                         var option_index = 0;
+                        var option_active = '';
                 	    var option_de_syllabe = '';
                 	    var compteur_de_question = 1;
                 	    var compteur = 0;
@@ -798,7 +799,7 @@ $('document').ready(function() {
                     	function chargerPratique() {
                     	    
                     	}
-                    	function afficherPratique(){
+                    	function afficherPratique() {
                             
                             pratiques.css({'display':'block', 'transform':'scale(0.75)', 'opacity':0});
                 	        affichageParDefautDesBoutonsDEntete();
@@ -819,7 +820,13 @@ $('document').ready(function() {
                             }
                     	}
                     	function pratiquer() {
-                        	
+                    	    
+                    	    let mono_syllabe   = [];
+                    	    let bi_syllabe     = [];
+                    	    let tri_syllabe    = [];
+                    	    let quadri_syllabe = [];
+                    	    
+                    	    let pratic = [mono_syllabe, bi_syllabe, tri_syllabe, quadri_syllabe];
                         	
                         	initialiserPratique();
                         	poserQuestionPratique();
@@ -830,6 +837,7 @@ $('document').ready(function() {
                     	    function initialiserPratique() {
                         	    $('#pratique_head span').on('click', function() {
         
+                        	        option_active = $(this);
                         	        option_index = $(this).index();
     
                         	        compteur_de_question = 1;
@@ -1046,19 +1054,11 @@ $('document').ready(function() {
                                         function imageSource() {
                                             var image_src = '';
                                         	    
-                                        	if(option_index == 0) {
-                                        	    image_src = 'http://localhost:8080/kouroukan/image/mono_syllabes/'+image_name+'.jpg';
-                                        	}
-                                        	if(option_index == 1) {
-                                        	    image_src = 'http://localhost:8080/kouroukan/image/bi_syllabes/'+image_name+'.jpg';
-                                        	}
-                                        	if(option_index == 2) {
-                                        	    image_src = 'http://localhost:8080/kouroukan/image/tri_syllabes/'+image_name+'.jpg';
-                                        	}
-                                        	if(option_index == 3) {
-                                        	    image_src = 'http://localhost:8080/kouroukan/image/quadri_syllabes/'+image_name+'.jpg';
-                                        	}
-                                        	    
+                                        	if(option_index == 0) image_src = 'http://localhost:8080/kouroukan/image/mono_syllabes/'+image_name+'.jpg';
+                                        	if(option_index == 1) image_src = 'http://localhost:8080/kouroukan/image/bi_syllabes/'+image_name+'.jpg';
+                                        	if(option_index == 2) image_src = 'http://localhost:8080/kouroukan/image/tri_syllabes/'+image_name+'.jpg';
+                                        	if(option_index == 3) image_src = 'http://localhost:8080/kouroukan/image/quadri_syllabes/'+image_name+'.jpg';
+
                                         	return image_src;
                                         }
                                     } 
@@ -1115,6 +1115,7 @@ $('document').ready(function() {
                                                 pratique_a_stocker.splice(pratique_index,1,question_reponse);
                                             }
                                         });
+                                        
                                 	}
                                     
                                 	function revisionDePratique() {
@@ -1144,15 +1145,21 @@ $('document').ready(function() {
                                 	    var message_2 = 'ߌ ߘߐߖߊ߬. <br/>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߎ߬ ߟߊߡߌ߬ߘߊ ߢߊ߬ߣߍ߲߬ '+effort+' ߟߊ߫.<br/> ߘߌ߬ߢߍ߬ ߞߵߌ ߞߐߛߍ߬ߦߌ߬ ߦߙߐ ߣߌ߲߬ ߡߊ߬.';
                                	    
                                 	    if( total_question+1 === compteur_de_question ) {
-        
+                        
                                 	        memoriserPratiques();
                                 	        dimensionnementDeFinDePratiquesBody();
                                 	        masquerClavierEtConsoles();
                                 	        initialiserProgressBarr();
                                 	        table = '';
-                                	                   
+                                	        
+                                	        switch(option_de_syllabe) {
+                                	            case '': mono_syllabe
+                                	        }
+                                	        
+                                alert( option_de_syllabe );
+                                
                                 	        if(effort == '߁߀߀%') {
-                                	            stockerPratiques();
+                                	           // stockerPratiques();
                                 	            
                                 	            if(option_index <= 2) {
                                 	            
@@ -1271,31 +1278,52 @@ $('document').ready(function() {
                     	    
                     	    $('#course_fermeture').on('click',function(){
                     	        
-                    	        
-                    	                                
                                 note = noterPratique(); 
-                                if(note <  moyenne) alert( "reprendre" ); 
-                                if(note >= moyenne) sendExerciceToDB();
-                        alert( note );        
+                                if(note <  moyenne) reprendrePratique(); 
+                                if(note >= moyenne) sendPratiqueToDB();
+                               
 
                                 function noterPratique() {
+                                    
                     	            var note_total = 0;
                                     
-                                    for (var i = 0; i < questions_quantity; i++) {
+                                    for (var i = 0; i < questions_quantity/10; i++) {
                                         if(pratique_a_stocker[i][2] == 1) {
                                             note_total += pratique_a_stocker[i][2];
                                         }
                                     }
                                     
-                                    var note = Math.floor((note_total*20)/quantite_de_question);
+                                    var note = Math.floor((note_total*20)/(questions_quantity/4));
                                     return note;
-                                }                                
-                                function sendExerciceToDB() {
+                                }
+                                function reprendrePratique() {
+                                    
+                                    $('.course_container').css('display','block');
+                                    reinitialiserPratique();
+                                    
+                                    function reinitialiserPratique() {
+                                        option_active.click();
+                                        $('#croix').html('&#10067;');
+                                        reactualiserLesBoutonsDEntete();
+
+                            	        
+                            	        function reactualiserLesBoutonsDEntete() {
+                            	        
+                        	                $('.question_ordre').html(parseIntNko(1)+'߭');
+                        	                $('.question_action').html('ߟߊߡߍ߲߫');
+                        	                
+                        	                $('.question_btn').css('display','block');
+                        	                $('.repetition_btn').css('display','none');
+                        	                $('.correction_btn').css('display','none');
+                            	        }
+                                    }
+                                }
+                                function sendPratiqueToDB() {
 
                                     let matiere = sessionStorage.getItem('matiere_active');
                                     let phase   = sessionStorage.getItem('phase');
-                                    let lesson  = pratique_a_stocker;
-                                            
+                                    let lesson  = JSON.stringify(pratique_a_stocker);
+                                           
 
                                     const pratique_data = new URLSearchParams({
                                         id     : id,

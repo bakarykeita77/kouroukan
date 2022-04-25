@@ -1,5 +1,5 @@
 $('document').ready(function() {
-
+console.log( 'Hello' ); 
     var id                = parseInt(sessionStorage.getItem('id'));     
 
     var matieres_etudiees = sessionStorage.getItem('matieres_etudiees');     
@@ -1156,7 +1156,7 @@ $('document').ready(function() {
                                 	            case '': mono_syllabe
                                 	        }
                                 	        
-                                alert( option_de_syllabe );
+                                alert( memoire_pratiques );
                                 
                                 	        if(effort == '߁߀߀%') {
                                 	           // stockerPratiques();

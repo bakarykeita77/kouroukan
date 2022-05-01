@@ -320,7 +320,7 @@ $('document').ready(function() {
                         case 'evaluation'   :evaluations();   break;  // Cette fonction est dans evaluation.js
             	    }
             	  
-                	function apprentissages(){
+                	function apprentissages() {
                 	                    	    
                 	    var compteur_de_question = 1;
                         var apprentissage_a_stocker = [];
@@ -795,14 +795,12 @@ $('document').ready(function() {
                     	let quadri_syllabe = [];
                     	    
                     	let pratique_a_stocker = [];
-                    	let all_options = [];
+                    	let all_options = [], DB_options = '', local_options = '';
             
                         var questions_pratiques=[], questions=[], question='', reponse=[], point='';
                         var table = $('#pratiques_reponse_container table tbody').html();
                         
 
-                    
-                    
                       /*--------------------------------------------------------------------*/
                 	    
                 	    chargerPratique();
@@ -814,9 +812,51 @@ $('document').ready(function() {
                     	
                       /*--------------------------------------------------------------------*/
     
+                    	function getDBOptions() {
+                    	    
+                    	    
+                    	    let DB_pratiques = JSON.parse(sessionStorage.getItem('pratiques'));
+                    	    let pratiques_niveaux = [], niveau_max = '';
+                    	    let niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));
+                    	    
+                    	    for (var i = 0; i < DB_pratiques.length; i++) {
+                    	    if(i == niveau_actif) { 
+                    	        DB_options = JSON.parse(DB_pratiques[i][1]);
+                    	      
+                    	    }}
+                    	    
+                    	    return DB_options;    
+                    	    /*
+                    	    niveau_max = Math.max(...pratiques_niveaux);
+                    	    $.each($('#pratique_head span'), function() {
+                    	        let index = $(this).index();
+                    	        
+                    	        if(niveau_actif <= niveau_max)   $(this).addClass('apprises');
+                    	        if(niveau_actif == niveau_max+1) {
+                    	            
+                    	            //$(this).addClass('actif');
+                    	        }
+                    	    }); */
+                    	}
+                    	function getLocalOptions() {
+                    	    
+                    	    let options = [];
+                    	                                
+                            let option_1 = JSON.parse(localStorage.getItem(id+'_'+0));
+                        	let option_2 = JSON.parse(localStorage.getItem(id+'_'+1));
+                        	let option_3 = JSON.parse(localStorage.getItem(id+'_'+2));
+                        	let option_4 = JSON.parse(localStorage.getItem(id+'_'+3));
+                        	    
+                        	options = [option_1, option_2, option_3, option_4];
+                        	return options;
+                    	}
                     	function chargerPratique() {
-
-                        	all_options = getOptions();
+                    	    
+                    	    DB_options = getDBOptions();
+                    	    local_options = getLocalOptions();
+                            
+                            all_options = (DB_options != '') ? DB_options:local_options;
+                    alert( all_options ); 
                     	}
                     	function afficherPratique() {
                             
@@ -832,18 +872,10 @@ $('document').ready(function() {
                         	    $.each($('#pratique_head span'), function() {
                         	        
                         	        let index = $(this).index();
-
-                        	        if(all_options[index] != null ) {
-                        	            
-                        	            if(all_options[index][1] >= 3) $(this).addClass('apprises');
-                        	            if(all_options[index][1] <  3) $(this).addClass('a_apprendre');
-                        	        }
-                        	        if(all_options[index] == null ) {
-                        	            index_actif += 1;
-
-                        	            if(index_actif == 1) $(this).addClass('active');
-                        	            if(index_actif >  1) $(this).addClass('a_apprendre');
-                        	        }
+                            
+                        	        if(all_options[index] != null) $(this).addClass('apprises');
+                        	        if(all_options[index] == null &&  $(this).prev().hasClass('apprises')) $(this).addClass('active');
+                        	        if(all_options[index] == null && !$(this).prev().hasClass('apprises')) $(this).addClass('a_apprendre');
                         	    });
                         	    
                             }
@@ -1254,7 +1286,7 @@ $('document').ready(function() {
                                                 mono_syllabe = [mono_syllabe,note];
                                                 
                                              // Stockage de l'option dans localstore
-                                                localStorage.setItem(id+'_'+option_index, JSON.stringify(mono_syllabe));
+                                                if(note >= 4) localStorage.setItem(id+'_'+option_index, JSON.stringify(mono_syllabe));
                                             }
                                         }
                                         function actualiserBiSyllabe() {
@@ -1278,7 +1310,7 @@ $('document').ready(function() {
                                                 bi_syllabe = [bi_syllabe,note];
                                                 
                                              // Stockage de l'option dans localstore
-                                                localStorage.setItem(id+'_'+option_index, JSON.stringify(bi_syllabe));
+                                                if(note >= 4) localStorage.setItem(id+'_'+option_index, JSON.stringify(bi_syllabe));
                                             }
                                         }
                                         function actualiserTriSyllabe() {
@@ -1302,7 +1334,7 @@ $('document').ready(function() {
                                                 tri_syllabe = [tri_syllabe,note];
                                                 
                                              // Stockage de l'option dans localstore
-                                                localStorage.setItem(id+'_'+option_index, JSON.stringify(tri_syllabe));                                             
+                                                if(note >= 4) localStorage.setItem(id+'_'+option_index, JSON.stringify(tri_syllabe));                                             
                                             }                                           
                                         }
                                         function actualiserQuadriSyllabe() {
@@ -1326,7 +1358,7 @@ $('document').ready(function() {
                                                 quadri_syllabe = [quadri_syllabe,note];
                                                 
                                              // Stockage de l'option dans localstore
-                                                localStorage.setItem(id+'_'+option_index, JSON.stringify(quadri_syllabe));   
+                                                if(note >= 4) localStorage.setItem(id+'_'+option_index, JSON.stringify(quadri_syllabe));   
                                             }                                            
                                         }
                                 	}
@@ -1367,8 +1399,8 @@ $('document').ready(function() {
                                 	            $('#message_btn_2').on('click', function() {
                                 	                
                                 	                questions_pratiques = questionsPratiques();
-                                	                                affichageParDefautDesBoutonsDEntete();
-                                	                                dimensionnementParDefautDePratiquesCorps();
+                                	                affichageParDefautDesBoutonsDEntete();
+                                	                dimensionnementParDefautDePratiquesCorps();
                                                     total_point = 0;
                                 	                
                                 	                if($('#message_btn_2').text() == 'ߥߊ߫ ߢߍ߫') changerDOption();
@@ -1428,19 +1460,8 @@ $('document').ready(function() {
                                 }); 
                             }
                     	}
-                    	function getOptions() {
-                    	    
-                    	    let options = [];
-                    	                                
-                            let option_1 = JSON.parse(localStorage.getItem(id+'_'+0));
-                        	let option_2 = JSON.parse(localStorage.getItem(id+'_'+1));
-                        	let option_3 = JSON.parse(localStorage.getItem(id+'_'+2));
-                        	let option_4 = JSON.parse(localStorage.getItem(id+'_'+3));
-                        	    
-                        	options = [option_1, option_2, option_3, option_4];
-                        	return options;
-                    	}
-                        function deleteOptions() {
+                    	
+                        function deleteLocalOptions() {
                             
                             localStorage.removeItem(id+'_'+0);
                         	localStorage.removeItem(id+'_'+1);
@@ -1452,33 +1473,23 @@ $('document').ready(function() {
                     	    $('#course_fermeture').on('click',function(){
                     	        
                     	     /* Récupération des options passées. */                 	        
-                    	        all_options = getOptions();
-                    	        
+                    	        all_options = getLocalOptions();
+                    	   alert( all_options );      
                     	     /* Vérification de la validité de pratique:
                     	     
                     	      Pourqu'une pratique soit valable, il faut que chaque option soit passée.
                     	      - Si non, la pratique est invalide et est retournée;
                     	      - Si oui, la pratique est valable et le processus de stockage est engagé. */
                     	        
-                    	        let nbr_option_valide = 0;
-                    	        
-                    	        validiteDePratique();
                                 note = noterPratique(); 
-                                if(note <  moyenne) reprendrePratique(); 
-                                if(note >= moyenne) { sendPratiqueToDB(); deleteOptions(); }
+                                
+                                if(note >= moyenne) { sendPratiqueToDB(); deleteLocalOptions(); }
                                
                                 
-                                function validiteDePratique() {
-                                    
-                                    for (var i = 0; i < all_options.length; i++) {
-                                        if( all_options[i] == null ) return; 
-                                        if( all_options[i] != null ) nbr_option_valide += 1; 
-                                    }
-                                }
                                 function noterPratique() {
                                     
                     	            let note_total = 0;
-                                    
+                                alert( all_options );     
                                     for (var i = 0; i < nbr_option_valide; i++) {
                                     if(all_options[i]) {  
                                         note_total += all_options[i][1];
@@ -1487,28 +1498,6 @@ $('document').ready(function() {
                                     let note = Math.floor((note_total*20)/40);
                                    
                                     return note;
-                                }
-                                function reprendrePratique() {
-                                    
-                                    $('.course_container').css('display','block');
-                                    reinitialiserPratique();
-                                    
-                                    function reinitialiserPratique() {
-                                        option_active.click();
-                                        $('#croix').html('&#10067;');
-                                        reactualiserLesBoutonsDEntete();
-
-                            	        
-                            	        function reactualiserLesBoutonsDEntete() {
-                            	        
-                        	                $('.question_ordre').html(parseIntNko(1)+'߭');
-                        	                $('.question_action').html('ߟߊߡߍ߲߫');
-                        	                
-                        	                $('.question_btn').css('display','block');
-                        	                $('.repetition_btn').css('display','none');
-                        	                $('.correction_btn').css('display','none');
-                            	        }
-                                    }
                                 }
                                 function sendPratiqueToDB() {
 

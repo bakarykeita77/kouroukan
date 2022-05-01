@@ -49,7 +49,7 @@
         	    var note      = matieres[i][j].note;
         	    
         	    var phase     = [niveau, date, phase_nom, note];
-            
+             
 
             	if(phase[0] == 1 && note >= 15) phases_1[phases_1.length] = phase;
             	if(phase[0] == 2 && note >= 15) phases_2[phases_2.length] = phase;
@@ -148,7 +148,26 @@
         -------------------------------------------------------------------------*/              
             derniere_phase = liste_de_phases[dernieres_phases.length];
         	sessionStorage.setItem('derniere_phase',derniere_phase);
-            
+        	
+          
+        /*-------------------------------------------------------------------------   
+          Les pratiques 
+        -------------------------------------------------------------------------*/              
+        	let pratiques = [];
+        	
+        	for (var i = 0; i < matieres.length; i++) {
+        	for (var j = 0; j < matieres[i].length; j++) {
+        	    if(matieres[i][j]['phase'] == "pratique") {
+        	        
+        	        let niveau = matieres[i][j]['niveau'];
+        	        let lesson = matieres[i][j]['lesson'];
+        	        let note   = matieres[i][j]['note'];
+        	        
+        	        pratiques.push([niveau,lesson,note]);
+        	    }
+        	}}
+        	
+            sessionStorage.setItem('pratiques', JSON.stringify(pratiques));
     	})
     	.catch(error => alert( error ));
     }

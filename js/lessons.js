@@ -71,7 +71,7 @@ $('document').ready(function() {
             var lesson_id = $('.lesson_title').attr('id');
             
           // Liste des phases
-            var content = '<ul class="liste_affichage_cascade">';
+            var content = '<ul class="liste_affichage_cascade" id="phases_list">';
             if(niveau != 1) {
                 for(var i=0;i<liste_de_phases.length;i++){
                     var phase_id = liste_de_phases[i][0];
@@ -117,8 +117,8 @@ $('document').ready(function() {
         	}
         }
 	    function stylesDesPhases() {
-   	    
-    	    $.each($('.phases ul li'), function() {
+   	 alert( $('#phases_list').html() );   
+    	    $.each($('#phases_list li'), function() {
     	       
         	    var phase_index = phases_collection.indexOf($(this).html());
              
@@ -803,7 +803,7 @@ $('document').ready(function() {
 
                       /*--------------------------------------------------------------------*/
                 	    
-                	    chargerPratique();
+                	    pratiquesEffectuees();
                 	    afficherPratique();
                         initialiserPratiques();
                 	    pratiquer();
@@ -811,52 +811,40 @@ $('document').ready(function() {
 
                     	
                       /*--------------------------------------------------------------------*/
-    
-                    	function getDBOptions() {
-                    	    
-                    	    
-                    	    let DB_pratiques = JSON.parse(sessionStorage.getItem('pratiques'));
-                    	    let pratiques_niveaux = [], niveau_max = '';
-                    	    let niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));
-                    	    
-                    	    for (var i = 0; i < DB_pratiques.length; i++) {
-                    	    if(i == niveau_actif) { 
-                    	        DB_options = JSON.parse(DB_pratiques[i][1]);
-                    	      
-                    	    }}
-                    	    
-                    	    return DB_options;    
-                    	    /*
-                    	    niveau_max = Math.max(...pratiques_niveaux);
-                    	    $.each($('#pratique_head span'), function() {
-                    	        let index = $(this).index();
-                    	        
-                    	        if(niveau_actif <= niveau_max)   $(this).addClass('apprises');
-                    	        if(niveau_actif == niveau_max+1) {
-                    	            
-                    	            //$(this).addClass('actif');
-                    	        }
-                    	    }); */
-                    	}
-                    	function getLocalOptions() {
-                    	    
-                    	    let options = [];
-                    	                                
-                            let option_1 = JSON.parse(localStorage.getItem(id+'_'+0));
-                        	let option_2 = JSON.parse(localStorage.getItem(id+'_'+1));
-                        	let option_3 = JSON.parse(localStorage.getItem(id+'_'+2));
-                        	let option_4 = JSON.parse(localStorage.getItem(id+'_'+3));
-                        	    
-                        	options = [option_1, option_2, option_3, option_4];
-                        	return options;
-                    	}
-                    	function chargerPratique() {
+
+                    	function pratiquesEffectuees() {
                     	    
                     	    DB_options = getDBOptions();
                     	    local_options = getLocalOptions();
                             
                             all_options = (DB_options != '') ? DB_options:local_options;
-                    alert( all_options ); 
+    
+                        	function getDBOptions() {
+                        	    
+                        	    let DB_pratiques = JSON.parse(sessionStorage.getItem('pratiques'));
+                        	    let pratiques_niveaux = [], niveau_max = '';
+                        	    let niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));
+                        	    
+                        	    for (var i = 0; i < DB_pratiques.length; i++) {
+                        	    if(i == niveau_actif) { 
+                        	        DB_options = JSON.parse(DB_pratiques[i][1]);
+                        	      
+                        	    }}
+                        	    
+                        	    return DB_options;    
+                        	}
+                        	function getLocalOptions() {
+                        	    
+                        	    let options = [];
+                        	                                
+                                let option_1 = JSON.parse(localStorage.getItem(id+'_'+0));
+                            	let option_2 = JSON.parse(localStorage.getItem(id+'_'+1));
+                            	let option_3 = JSON.parse(localStorage.getItem(id+'_'+2));
+                            	let option_4 = JSON.parse(localStorage.getItem(id+'_'+3));
+                            	    
+                            	options = [option_1, option_2, option_3, option_4];
+                            	return options;
+                        	}                    	
                     	}
                     	function afficherPratique() {
                             
@@ -874,6 +862,7 @@ $('document').ready(function() {
                         	        let index = $(this).index();
                             
                         	        if(all_options[index] != null) $(this).addClass('apprises');
+                        	        if(all_options[0]     == null) $(this).addClass('active');
                         	        if(all_options[index] == null &&  $(this).prev().hasClass('apprises')) $(this).addClass('active');
                         	        if(all_options[index] == null && !$(this).prev().hasClass('apprises')) $(this).addClass('a_apprendre');
                         	    });
@@ -1012,7 +1001,7 @@ $('document').ready(function() {
                                     
                                     for (var i = 0; i < option.length; i++) questions_courantes[i] = option[i][0];
                                     
-                        	        dimensionnementParDefautDePratiquesCorps()                   
+                        	        eol()                   
                                     afficherProgressBar();
                                     initialiserProgressBarr();
                         	    
@@ -1286,6 +1275,7 @@ $('document').ready(function() {
                                                 mono_syllabe = [mono_syllabe,note];
                                                 
                                              // Stockage de l'option dans localstore
+                                                if(note <  4) alert( "ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ߬ ߛߌߦߊߡߊ߲߫ ߡߊ߫ ߟߊߡߌ߬ߘߊ߬ ߌ ߓߟߏ߫. ߛߍ߬ߦߌ߬ ߦߙߐ ߣߌ߲߬ ߡߊ߬." );
                                                 if(note >= 4) localStorage.setItem(id+'_'+option_index, JSON.stringify(mono_syllabe));
                                             }
                                         }
@@ -1310,6 +1300,7 @@ $('document').ready(function() {
                                                 bi_syllabe = [bi_syllabe,note];
                                                 
                                              // Stockage de l'option dans localstore
+                                                if(note <  4) alert( "ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ߬ ߛߌߦߊߡߊ߲߫ ߡߊ߫ ߟߊߡߌ߬ߘߊ߬ ߌ ߓߟߏ߫. ߛߍ߬ߦߌ߬ ߦߙߐ ߣߌ߲߬ ߡߊ߬." );
                                                 if(note >= 4) localStorage.setItem(id+'_'+option_index, JSON.stringify(bi_syllabe));
                                             }
                                         }
@@ -1334,6 +1325,7 @@ $('document').ready(function() {
                                                 tri_syllabe = [tri_syllabe,note];
                                                 
                                              // Stockage de l'option dans localstore
+                                                if(note <  4) alert( "ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ߬ ߛߌߦߊߡߊ߲߫ ߡߊ߫ ߟߊߡߌ߬ߘߊ߬ ߌ ߓߟߏ߫. ߛߍ߬ߦߌ߬ ߦߙߐ ߣߌ߲߬ ߡߊ߬." );
                                                 if(note >= 4) localStorage.setItem(id+'_'+option_index, JSON.stringify(tri_syllabe));                                             
                                             }                                           
                                         }
@@ -1358,6 +1350,7 @@ $('document').ready(function() {
                                                 quadri_syllabe = [quadri_syllabe,note];
                                                 
                                              // Stockage de l'option dans localstore
+                                                if(note <  4) alert( "ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ߬ ߛߌߦߊߡߊ߲߫ ߡߊ߫ ߟߊߡߌ߬ߘߊ߬ ߌ ߓߟߏ߫. ߛߍ߬ߦߌ߬ ߦߙߐ ߣߌ߲߬ ߡߊ߬." );
                                                 if(note >= 4) localStorage.setItem(id+'_'+option_index, JSON.stringify(quadri_syllabe));   
                                             }                                            
                                         }
@@ -1460,21 +1453,13 @@ $('document').ready(function() {
                                 }); 
                             }
                     	}
-                    	
-                        function deleteLocalOptions() {
-                            
-                            localStorage.removeItem(id+'_'+0);
-                        	localStorage.removeItem(id+'_'+1);
-                        	localStorage.removeItem(id+'_'+2);
-                        	localStorage.removeItem(id+'_'+3);        
-                        }
                     	function stockerPratique() {
                     	    
                     	    $('#course_fermeture').on('click',function(){
                     	        
                     	     /* Récupération des options passées. */                 	        
                     	        all_options = getLocalOptions();
-                    	   alert( all_options );      
+                    	         
                     	     /* Vérification de la validité de pratique:
                     	     
                     	      Pourqu'une pratique soit valable, il faut que chaque option soit passée.
@@ -1489,9 +1474,10 @@ $('document').ready(function() {
                                 function noterPratique() {
                                     
                     	            let note_total = 0;
-                                alert( all_options );     
-                                    for (var i = 0; i < nbr_option_valide; i++) {
+                                    
+                                    for (var i = 0; i < all_options.length; i++) {
                                     if(all_options[i]) {  
+                                         
                                         note_total += all_options[i][1];
                                     }}
                                    
@@ -1522,9 +1508,16 @@ $('document').ready(function() {
                                     .then(response => response.json())
                                     .catch(error => console.log(error));
                                 }
+                                function deleteLocalOptions() {
+                                    
+                                    localStorage.removeItem(id+'_'+0);
+                                	localStorage.removeItem(id+'_'+1);
+                                	localStorage.removeItem(id+'_'+2);
+                                	localStorage.removeItem(id+'_'+3);        
+                                }
                     	    });
                     	}
-                    	
+                        
                         function dimensionnementParDefautDePratiquesCorps() {
                             
                             $('#pratique_body').css('height','44vh');

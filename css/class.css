@@ -580,7 +580,6 @@
     width: calc(100% - 2px);
     border: 1px solid #ddd;
     border-radius: 4px;
-    opacity: 0;
     transition: 1s;
 }
 .progress_bonne_reponse_bar, .progress_question_bar{

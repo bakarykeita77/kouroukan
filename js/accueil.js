@@ -4,6 +4,7 @@
    
   
     var resume_brut_des_etudes = '';
+    var moyenne = 1;
 
     function getUserIdentity() {
                 
@@ -49,12 +50,12 @@
         	    var note      = matieres[i][j].note;
         	    
         	    var phase     = [niveau, date, phase_nom, note];
-             
-
-            	if(phase[0] == 1 && note >= 15) phases_1[phases_1.length] = phase;
-            	if(phase[0] == 2 && note >= 15) phases_2[phases_2.length] = phase;
-            	if(phase[0] == 3 && note >= 15) phases_3[phases_3.length] = phase;
-            	if(phase[0] == 4 && note >= 15) phases_4[phases_4.length] = phase;
+              
+               
+            	if(phase[0] == 1 && note >= moyenne) phases_1[phases_1.length] = phase;
+            	if(phase[0] == 2 && note >= moyenne) phases_2[phases_2.length] = phase;
+            	if(phase[0] == 3 && note >= moyenne) phases_3[phases_3.length] = phase;
+            	if(phase[0] == 4 && note >= moyenne) phases_4[phases_4.length] = phase;
         	}}
         	
         	
@@ -78,19 +79,20 @@
         	
         	for (var i = 0; i < liste_de_phases.length; i++) noms_des_phases.push(liste_de_phases[i][0]);
         	
-        	if(liste_des_phases_1.indexOf(noms_des_phases[0]) != -1 && liste_des_phases_1.indexOf(noms_des_phases[1]) != -1 && liste_des_phases_1.indexOf(noms_des_phases[2]) != -1 && liste_des_phases_1.indexOf(noms_des_phases[3]) != -1) niveaux.push(1);
+        	if(liste_des_phases_1.indexOf(noms_des_phases[0]) != -1 && liste_des_phases_1.indexOf(noms_des_phases[1]) != -1 && liste_des_phases_1.indexOf(noms_des_phases[3]) != -1) niveaux.push(1);
         	if(liste_des_phases_2.indexOf(noms_des_phases[0]) != -1 && liste_des_phases_2.indexOf(noms_des_phases[1]) != -1 && liste_des_phases_2.indexOf(noms_des_phases[2]) != -1 && liste_des_phases_2.indexOf(noms_des_phases[3]) != -1) niveaux.push(2);
         	if(liste_des_phases_3.indexOf(noms_des_phases[0]) != -1 && liste_des_phases_3.indexOf(noms_des_phases[1]) != -1 && liste_des_phases_3.indexOf(noms_des_phases[2]) != -1 && liste_des_phases_3.indexOf(noms_des_phases[3]) != -1) niveaux.push(3);
         	if(liste_des_phases_4.indexOf(noms_des_phases[0]) != -1 && liste_des_phases_4.indexOf(noms_des_phases[1]) != -1 && liste_des_phases_4.indexOf(noms_des_phases[2]) != -1 && liste_des_phases_4.indexOf(noms_des_phases[3]) != -1) niveaux.push(4); 
-             
+        
             sessionStorage.setItem('niveaux', JSON.stringify(niveaux)); 
      
         	phases_etudiees[0] = phases_1;
         	phases_etudiees[1] = phases_2;
         	phases_etudiees[2] = phases_3;
         	phases_etudiees[3] = phases_4;        	
-
+        
         	sessionStorage.setItem('phases_etudiees',JSON.stringify(phases_etudiees));
+     	    
      	    
         /*-------------------------------------------------------------------------   
           Niveaux distincts

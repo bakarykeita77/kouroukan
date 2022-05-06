@@ -66,7 +66,7 @@ $(document).ready(function() {
         dernieres_phases  = sessionStorage.getItem('dernieres_phases');
         dernieres_phases_distinctes  = JSON.parse(sessionStorage.getItem('dernieres_phases_distinctes'));
         derniere_phase    = sessionStorage.getItem('derniere_phase');
-
+    
    /*2*/programme();
    
 

@@ -16,7 +16,8 @@ $('document').ready(function() {
     var phases_etudiees   = JSON.parse(sessionStorage.getItem('phases_etudiees')); 
     var dernieres_phases  = JSON.parse(sessionStorage.getItem('dernieres_phases'));     
     var dernieres_phases_distinctes  = JSON.parse(sessionStorage.getItem('dernieres_phases_distinctes'));     
-    var phase_nbr         = JSON.parse(sessionStorage.getItem('dernieres_phases_distinctes')).length; 
+    var phase_nbr_attente = '';
+    var phase_nbr         = (phase_nbr_attente != '') ? phase_nbr_attente : JSON.parse(sessionStorage.getItem('dernieres_phases_distinctes')).length; 
     var derniere_phase    = sessionStorage.getItem('derniere_phase');     
     
   
@@ -116,8 +117,12 @@ $('document').ready(function() {
         	    document.querySelector('.phases ul li:nth-child(3)').style.display = 'none';
         	}
         }
+    	function affichageDesPhases() {
+    	    affichageListeEnCascade();
+    	}
+	}
 	    function stylesDesPhases() {
-   	  
+   alert( phase_nbr ); 	  
     	    $.each($('#phases_list li'), function() {
     	       
         	    var phase_index = $(this).index();
@@ -152,10 +157,6 @@ $('document').ready(function() {
     	        }
             });
 	    }
-    	function affichageDesPhases() {
-    	    affichageListeEnCascade();
-    	}
-	}
 	function matiere() {
     	actualiserCochage();
     	
@@ -377,6 +378,8 @@ $('document').ready(function() {
                     	    lectureSemiAutomatique(); // Voir fonctions.js
                     	    lecturePersonnalisee();   // Voir fonctions.js
                     	    arreterLecture(lessonCourante); // Voir fonctions.js
+                    	    apprentissageProgressBarr();
+                    	    
                     	    
                             function changementDesBoutonsMedia(){
                         	    $('.play_btn_container').on('click', function(){
@@ -388,6 +391,29 @@ $('document').ready(function() {
                         	        $(this).css({'display':'none'});
                         	        $('.play_btn_container').css({'display':'block'});
                         	    });
+                            }
+                            function apprentissageProgressBarr() {
+                                            
+                                var course_width = $('.course').width();
+                                var nbr_click = questions().length;
+                                
+                                $('.lesson_progress_bar').width( course_width - 2 );
+                                var progress_unity = $('.lesson_progress_bar').width()/nbr_click;
+                                
+                             /*
+                              A chaque click sur un élément, progress barr avance d'une unité égale à progress_unity px.
+                              Mais si un élément est clické une deuxième fois, progress barr ne doit pas avancer.
+                              Pour cela, tous les éléments clichés sont enregistrés dans un tableau pour les distinguer.
+                              */            
+                                let elements_clickes = [];
+                                
+                                $('.table_parlante td').on('click', function() {
+                                 
+                                    if(elements_clickes.indexOf($(this).html()) == -1) {
+                                        $('.lesson_progress_bonne_reponse_bar').css('width','+='+progress_unity+'px');
+                                    }
+                                    elements_clickes.push($(this).html());
+                                });
                             }
                         }
                         function enregistrerApprentissage() {
@@ -487,7 +513,10 @@ $('document').ready(function() {
             
                                 note = noterApprentissage();
                                 if(note <  moyenne) alert("ߌ ߡߊ߫ ߛߓߍߘߋ߲ ߥߟߊ ߜߋ߭ ߠߎ߬ ߓߍ߯ ߟߊߡߍ߲߫");
-                                if(note >= moyenne) sendApprentissageToDB();
+                                if(note >= moyenne) {
+                                    //sendApprentissageToDB();
+                                    changerPhaseActive();
+                                }
 
                                 function noterApprentissage() {
                                     var table_elements_click_nbr = [];
@@ -543,6 +572,13 @@ $('document').ready(function() {
                                     .then(response => response.json())
                                     .catch(error => console.log(error));
                                     
+                                }
+                                function changerPhaseActive() {
+                                    
+                                    phase_nbr++;
+                                    sessionStorage.setItem('dernieres_phases_distinctes',phase_nbr);
+                                    phase_nbr_attente = JSON.parse(sessionStorage.getItem('dernieres_phases_distinctes'));
+                                    stylesDesPhases();
                                 }
                             });
                 	    }
@@ -1960,11 +1996,9 @@ $('document').ready(function() {
                             return tonifies;
                         }
                     }        	    
-        	        
         	    }
         	    if(phase_class == 'a_apprendre') $('.course_container').css('display','none');
     	    }
-          
       	});
     	
     	$('#go_to_lesson').on('click', function() {
@@ -1980,5 +2014,4 @@ $('document').ready(function() {
             caracteres_coches = [voyelles_cochees, consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees];
         }	    
 	}
-	
 });

@@ -65,7 +65,8 @@
         	sessionStorage.setItem('phases_4', JSON.stringify(phases_4));  
         	
         	
-          /* A chaque niveau, toutes les phases doivent être passées au moins une fois 
+          /* 
+           A chaque niveau, toutes les phases doivent être passées au moins une fois 
            pour qu'il soit considéré comme effectué et est enregistré dans la liste des niveaux.
           */
         	var liste_des_phases_1 = [], liste_des_phases_2 = [], liste_des_phases_3 = [], liste_des_phases_4 = [];

@@ -124,7 +124,7 @@
     
             $('#audio').attr({ src: 'http://localhost:8080/kouroukan/son/mp3/'+td_actif_value+'.mp3', autoplay: 'on' });
     
-            /*Animation de td lors de lecture*/
+          /*Animation de td lors de la lecture*/
             $(td_actif).addClass('ombrage');
             setTimeout(function() { $(td_actif).removeClass('ombrage'); }, 600);
         });

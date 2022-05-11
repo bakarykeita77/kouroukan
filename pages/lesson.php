@@ -258,4 +258,3 @@ if(isset($_SESSION['connected'])){
 <?php
    }else { header("location:programmes.php"); }
 ?>
-?>

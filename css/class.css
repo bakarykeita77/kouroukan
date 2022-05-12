@@ -1,9 +1,7 @@
-
 .actif, .active {
     background-color: yellow;
 }
 .actif, .active, .apprises, .a_apprendre {
-    border: 1px solid transparent;
     padding: 0 16px;
     margin: 1px 0;
     height: 32px;
@@ -13,7 +11,7 @@
     transition: 0.15s;
 }
 .active {
-    border-radius:  6px;
+    border-radius: 6px;
     background-color: yellow;
     box-shadow: 0 0 16px yellow;
 }
@@ -22,19 +20,18 @@
     box-shadow: 0 0 1px yellow;
 }
 .apprises {
-    border: 1px  solid #ccc;
-    border-radius: 6px ;
+    border: 1px solid #ddd;
+    border-radius: 6px;
     color: yellow;
-    box-shadow: 0 0 16px #fff;
-    text-shadow: 0 0 16px #000;
-} 
+    text-shadow: 0 0 4px #777;
+}
 .apprises:active {
-    border: 1px  solid #ddd;
+    border: 1px solid #ddd;
     box-shadow: 0 0 1px #fff;
     text-shadow: 0 0 1px #000;
 }
 .apprises a {
-    color: yellow; 
+    color: yellow;
 }
 .a_apprendre {
     border-radius: 6px;
@@ -58,24 +55,26 @@
     transition: 0.4s;
 }
 
-.centerflex{
+.centerflex {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.centergrid{ margin: auto; }
-.centertransform{
+.centergrid {
+    margin: auto;
+}
+.centertransform {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
-.centerH{
+.centerH {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
 }
-.centerV{
+.centerV {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -88,7 +87,7 @@
     height: 216px;
     min-width: 72px;
 }
-.checkbox_titre{
+.checkbox_titre {
     background-color: #bbb;
     width: 100%;
     height: 24px;
@@ -104,7 +103,7 @@
 }
 .check_consonnes {
     position: relative;
-    border: 1px solid transparent; 
+    border: 1px solid transparent;
     border-right-color: #ddd;
     display: inline-block;
     margin: 0;
@@ -112,20 +111,22 @@
     background-color: #eee;
     height: 170px;
 }
-.check_btn{
+.check_btn {
     display: block;
     min-width: 36px;
     margin: 0
 }
 
-.centercell{ margin: auto; }
-.centrer_parfait{
+.centercell {
+    margin: auto;
+}
+.centrer_parfait {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.clavier_container{
+.clavier_container {
     position: absolute;
     height: 25vh;
     width: 100%;
@@ -137,7 +138,7 @@
     border-radius: 6px;
     box-sizing: border-box;
 }
-.clicker{
+.clicker {
     transform-origin: 50% 0;
     animation: animate_hand 1.5s 1;
 }
@@ -190,7 +191,7 @@
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    
+
     background-color: #666;
     padding: 0 16px;
     width: 100%;
@@ -300,20 +301,20 @@
 .fixe {
     position: fixed;
 }
-.fond_blanc_casse{;
+.fond_blanc_casse {;
     background-color: #ccc;
 }
-.flowerblue{;
+.flowerblue {;
     background-color: cornflowerblue;
 }
-.fond_noir_clair{
+.fond_noir_clair {
     background-color: #999;
 }
 .fond_orange {
     background-color: orange;
 }
 
-.hand{
+.hand {
     position: absolute;
     display: none;
     padding: 0;
@@ -357,25 +358,29 @@
 .lessons_a_apprendre a {
     color: #aaa;
 }
-.lesson_progress_bar{
-    position:absolute; 
-    bottom:0; 
-    box-shadow:0 0 4px #999; 
-    border:1px solid #ddd; 
-    border-radius:6px; 
-    height:8px; 
-    width:calc(100% - 2px);
+.lesson_progress_bar {
+    position: absolute;
+    bottom: 0;
+    box-shadow: 0 0 4px #999;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    height: 8px;
+    width: calc(100% - 2px);
 }
 .lesson_progress_bar span {
-    position:absolute; 
-    border-radius:6px; 
-    right:0; 
-    height:8px; 
-    width:0; 
-    transition:0.6s
+    position: absolute;
+    border-radius: 6px;
+    right: 0;
+    height: 8px;
+    width: 0;
+    transition: 0.6s
 }
-.lesson_progress_question_bar { background-color: #ddd; }
-.lesson_progress_bonne_reponse_bar { background-color: yellow; }
+.lesson_progress_question_bar {
+    background-color: #ddd;
+}
+.lesson_progress_bonne_reponse_bar {
+    background-color: yellow;
+}
 
 .lesson_pied {}
 .lesson_title {
@@ -387,7 +392,7 @@
     box-sizing: border-box;
     border-bottom-color: #666;
 }
-.liste_affichage_cascade{
+.liste_affichage_cascade {
     display: none;
 }
 .liste_affichage_cascade li {
@@ -403,11 +408,11 @@
     position: relative;
 }
 
-.nasalisations_btn_container input, .nasalisations_btn_container label{
+.nasalisations_btn_container input, .nasalisations_btn_container label {
     display: inline-block;
     vertical-align: middle;
 }
-.nasalisations_btn_container label{
+.nasalisations_btn_container label {
     border: 1px dashed #aaa;
     height: 16px;
     width: 16px;
@@ -437,7 +442,9 @@
     text-align: center;
     transition: 0.15s;
 }
-.nav_fleches_container span:active { box-shadow: 0 0 1px #ccc; }
+.nav_fleches_container span:active {
+    box-shadow: 0 0 1px #ccc;
+}
 .nav_fleches_container span:nth-child(1) {
     float: right;
 }
@@ -452,7 +459,7 @@
     box-shadow: 0 4px 43px #000;
 }
 
-.page_body{
+.page_body {
     position: absolute;
     margin: 0;
     width: 100%;
@@ -483,12 +490,14 @@
     box-sizing: border-box;
     z-index: 5;
 }
-.parentgrid{ display: grid; }
-.parentcell{
+.parentgrid {
+    display: grid;
+}
+.parentcell {
     display: table-cell;
     vertical-align: middle;
 }
-.phases_container{
+.phases_container {
     position: absolute;
     top: 64px;
     width: 80%;
@@ -505,18 +514,18 @@
     width: 100%;
     line-height: 48px;
     border: 1px solid transparent;
-    border-bottom: 4px  solid #ccc;
+    border-bottom: 4px solid #ccc;
     border-radius: 6px;
     box-shadow: 0 0 32px #ccc;
 }
-.phases ul{
+.phases ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     width: 80%;
     left: 10%;
 }
-.phases ul li{
+.phases ul li {
     line-height: 32px;
     width: 100%;
     padding: 0 16px;
@@ -527,13 +536,12 @@
     overflow: hidden;
     cursor: pointer;
 }
-.ponctuations input, .ponctuations label{
+.ponctuations input, .ponctuations label {
     display: inline-block;
     vertical-align: middle;
 }
-.ponctuations input{
-}
-.ponctuations label{
+.ponctuations input {}
+.ponctuations label {
     border: 1px dashed #aaa;
     height: 16px;
     width: 16px;
@@ -556,7 +564,7 @@
     position: relative;
     margin: 0;
 }
-.profile_menu_head{
+.profile_menu_head {
     height: 32px;
     width: 95%;
     line-height: 32px;
@@ -571,9 +579,8 @@
 .profile_menu_head a {
     text-decoration: none;
 }
-.profile_menu_body{
-}
-.progress_bar{
+.profile_menu_body {}
+.progress_bar {
     position: relative;
     margin: 0;
     height: 6px;
@@ -582,21 +589,27 @@
     border-radius: 4px;
     transition: 1s;
 }
-.progress_bonne_reponse_bar, .progress_question_bar{
+.progress_bonne_reponse_bar, .progress_question_bar {
     display: block;
     position: absolute;
     height: 100%;
     border-radius: 4px;
     transition: 1s;
 }
-.progress_bonne_reponse_bar{ background-color: orange; }
-.progress_question_bar{ background-color: #bbb; }
+.progress_bonne_reponse_bar {
+    background-color: orange;
+}
+.progress_question_bar {
+    background-color: #bbb;
+}
 
 .right {
     float: right;
 }
 
-.shadow{ box-shadow: 0 8px 8px #666; }
+.shadow {
+    box-shadow: 0 8px 8px #666;
+}
 
 .table_parlante, .table_muette {
     position: relative;
@@ -637,12 +650,30 @@
 }
 
 @keyframes animate_hand {
-    0%{ text-shadow: 16px 16px 16px #666; transform: scale(1); }
-    20%{ text-shadow: 0 0 0 #666; transform: scale(0.75); }
-    40%{ text-shadow: 0 0 0 #666; transform: scale(0.75); }
-    60%{ text-shadow: 8px 8px 8px #666; transform: scale(0.85); }
-    80%{ text-shadow: 16px 16px 16px #666; transform: scale(1); }
-    100%{ text-shadow: 16px 16px 16px #666; transform: scale(1); }
+    0% {
+        text-shadow: 16px 16px 16px #666;
+        transform: scale(1);
+    }
+    20% {
+        text-shadow: 0 0 0 #666;
+        transform: scale(0.75);
+    }
+    40% {
+        text-shadow: 0 0 0 #666;
+        transform: scale(0.75);
+    }
+    60% {
+        text-shadow: 8px 8px 8px #666;
+        transform: scale(0.85);
+    }
+    80% {
+        text-shadow: 16px 16px 16px #666;
+        transform: scale(1);
+    }
+    100% {
+        text-shadow: 16px 16px 16px #666;
+        transform: scale(1);
+    }
 }
 @keyframes descendre_doucement {
     from {

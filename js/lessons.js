@@ -189,8 +189,7 @@ $('document').ready(function() {
             
             var dialogue_btn_html = $('#dialogue_btn').html();
             var parametres_html = parametres.html();
-            
-           
+
           /*--------------------------------------------------------------------*/    
     	    
     	    phaseActiveName();
@@ -838,16 +837,15 @@ $('document').ready(function() {
                         var questions_pratiques=[], questions=[], question='', reponse=[], point='';
                         var table = $('#pratiques_reponse_container table tbody').html();
                         
-
                       /*--------------------------------------------------------------------*/
                 	    
                 	    pratiquesEffectuees();
                 	    afficherPratique();
                         initialiserPratiques();
+                        optionStyles();
                 	    pratiquer();
                 	    stockerPratique();
-
-                    	
+                	    
                       /*--------------------------------------------------------------------*/
 
                     	function getDBOptions() {
@@ -905,40 +903,34 @@ $('document').ready(function() {
                 	    function initialiserPratiques() {
                 	        
                 	        initialiserOptions();
-                	        $('#pratique_head span').removeClass('actif');
                 	        dimensionnementParDefautDePratiquesCorps()                   
                 	        affichageParDefautDesBoutonsDEntete();
-                            
-                            afficherProgressBar();
                             initialiserProgressBarr();
                             
                         	function initialiserOptions() {
                             	$.each($('#pratique_head span'), function() {
-                            
+                               	
+                                	let option_de_syllabe = '';
                             	    let option = $(this);
+                            	    
                             	    option_index = $(this).index();
-                        
                             	    compteur = 0;
                             	    table = '';
-                             
+                                                               
+                                    option.removeClass('active'); 
+                                    option.addClass('a_apprendre');
+                                        
                                     questions = questionsPratiques();
-    
-                            	       
                             	    dimensionnementParDefautDePratiquesCorps()                   
-                                    afficherProgressBar();
                                     initialiserProgressBarr();
                                         
-                                        
-                            	    
-                                	var option_de_syllabe = '';
-                                	        
                                 	switch(option_index) {
                                 	    case 0: mono_syllabe   = monoSyllabe();   break;
                                 	    case 1: bi_syllabe     = biSyllabe();     break;
                                 	    case 2: tri_syllabe    = triSyllabe();    break;
                                 	    case 3: quadri_syllabe = quadriSyllabe(); break;
                                 	}
-                                	    
+                                    
                                 	function monoSyllabe() {
                                 	    let mono_syllabe = [];
                                 	        
@@ -1002,8 +994,37 @@ $('document').ready(function() {
                             	});
                         	}
                         }
+                        function optionStyles() {
+                            
+                            let nbr_option_vide = nombreOptionsVides();
+                            let nbr_option_non_vide = all_options.length - nbr_option_vide;
+                         
+                            if(nbr_option_vide == 4) {
+                                $('#pratique_head span:nth-child(1)').removeClass('a_apprendre');
+                                $('#pratique_head span:nth-child(1)').addClass('active');
+                            }
+                            if(nbr_option_vide < 4) {
+                                $.each($('#pratique_head span'), function() {
+                                    let option_index = $(this).index();
+                                    
+                                    if(option_index <  nbr_option_non_vide) $(this).removeClass('a_apprendre');
+                                    if(option_index <  nbr_option_non_vide) $(this).addClass('apprises');
+                                    if(option_index == nbr_option_non_vide) $(this).removeClass('a_apprendre');
+                                    if(option_index == nbr_option_non_vide) $(this).addClass('active');
+                                    if(option_index >  nbr_option_non_vide) $(this).addClass('a_apprendre');
+                                });
+                            }
+                            function nombreOptionsVides() {
+                                let nov = 0;
+                                for (var i = 0; i < all_options.length; i++) {
+                                    if(all_options[i] == null) nov += 1;
+                                }
+                                return nov;
+                            }
+                        }                        
                         function pratiquer() {
                             let questions_courantes = [];
+                            
                             $('.question_btn, #clavier_pratique').on('click', function() {
                                 if( questions_courantes == '' ) guiderClient(); 
                             }); 
@@ -1013,7 +1034,6 @@ $('document').ready(function() {
                             $('#pratique_head span').one('click', function() {
                                 
                                 if($(this).hasClass('a_apprendre')) return; 
-                                
                                 
                                 option_active = $(this);
                             	option_index = $(this).index();
@@ -1437,7 +1457,7 @@ $('document').ready(function() {
                                         	        }
                                                 }
                                                 function changerDOption() {
-                                                    $('#pratique_head .actif').next().click();
+                                                    $('#pratique_head .active').next().click();
                                     	            afficherClavierEtConsoles();
                                     	            initialiserLesBoutonsDEntete();
                                     	            table = '';
@@ -1490,6 +1510,7 @@ $('document').ready(function() {
                         	      - Si oui, la pratique est valable et le processus de stockage est engagé. */
                                     	        
                                     note = noterPratique(); 
+                             alert( note );       
                                     if(note >= 15) { sendPratiqueToDB(); deleteLocalOptions(); }
                                 }
                                 
@@ -1708,10 +1729,6 @@ $('document').ready(function() {
                     	        
                     	    return qs;
                     	}   
-                    	        
-                        function afficherProgressBar(){
-            	            $('.progress_bar').css({'opacity':1});
-            	        }
                     } 
                     function evaluations() {
                                 

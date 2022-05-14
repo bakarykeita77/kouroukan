@@ -164,6 +164,7 @@ $('document').ready(function() {
             var questionnaires = questions();
             var questions_quantity = quantiteDeQuestion();
             var quantite_de_question = quantiteDeQuestion();
+            var compteur_de_question = 0;
             var exercice_questions = [];
             
             var total_point = 0;
@@ -797,11 +798,14 @@ $('document').ready(function() {
                 	    }
                     }
                     function pratique() {
-                        
+                  
+               // localStorage.removeItem(2+'_'+0); localStorage.removeItem(2+'_'+1); localStorage.removeItem(2+'_'+2); localStorage.removeItem(2+'_'+3);       
                         var option = '';
                         var option_index = null;
                         var option_active = '';
                 	    var option_de_syllabe = '';
+                	    var nbr_option_vide = '';
+                	    var nbr_option_non_vide = '';
                 	    
                 	    var compteur_de_question = 1;
                 	    var compteur = 0;
@@ -996,8 +1000,8 @@ $('document').ready(function() {
                         }
                         function optionStyles() {
                             
-                            let nbr_option_vide = nombreOptionsVides();
-                            let nbr_option_non_vide = all_options.length - nbr_option_vide;
+                            nbr_option_vide = nombreOptionsVides();
+                            nbr_option_non_vide = all_options.length - nbr_option_vide;
                          
                             if(nbr_option_vide == 4) {
                                 $('#pratique_head span:nth-child(1)').removeClass('a_apprendre');
@@ -1029,7 +1033,7 @@ $('document').ready(function() {
                                 if( questions_courantes == '' ) guiderClient(); 
                             }); 
                             $('.question_btn, #clavier_pratique').on('click', function() {
-                                if(question == '') { alert( 'Posez une question' ); return; }
+                               // if(question == '') { alert( 'Posez une question' ); return; }
                             });
                             $('#pratique_head span').one('click', function() {
                                 
@@ -1282,113 +1286,32 @@ $('document').ready(function() {
                                             
                                             
                                             switch(option_index) {
-                                                case 0 : actualiserMonoSyllabe();   break;
-                                                case 1 : actualiserBiSyllabe();     break;
-                                                case 2 : actualiserTriSyllabe();    break;
-                                                case 3 : actualiserQuadriSyllabe(); break;
+                                                case 0 : actualiserOption(mono_syllabe);   break;
+                                                case 1 : actualiserOption(bi_syllabe);     break;
+                                                case 2 : actualiserOption(tri_syllabe);    break;
+                                                case 3 : actualiserOption(quadri_syllabe); break;
                                             }
                                             
-                                            
-                                            function actualiserMonoSyllabe() {
+                                            function actualiserOption(syllabe) {
                                                 let index = '', note = 0;
                                                 
-                                                $.each(mono_syllabe, function() {
-                                                    if(question == this[0]) {
-                                                        index = mono_syllabe.indexOf(this);
-                                                    } 
+                                                $.each(syllabe, function() {
+                                                    if(question == this[0]) index = syllabe.indexOf(this);
                                                 });
                                                     
-                                                mono_syllabe.splice(index,1,question_reponse); 
-                                                
-                                                if( question_limit === compteur+1 ) {
-                                                    
-                                                 // Calcul de note de l'option 
-                                                    for (var i = 0; i < mono_syllabe.length; i++) {
-                                                        note += mono_syllabe[i][2]; 
-                                                    }
-                                                    
-                                                    mono_syllabe = [mono_syllabe,note];
-                                                    
-                                                 // Stockage de l'option dans localstore
-                                                    if(note <  4) alert( "ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ߬ ߛߌߦߊߡߊ߲߫ ߡߊ߫ ߟߊߡߌ߬ߘߊ߬ ߌ ߓߟߏ߫. ߛߍ߬ߦߌ߬ ߦߙߐ ߣߌ߲߬ ߡߊ߬." );
-                                                    if(note >= 4) localStorage.setItem(id+'_'+option_index, JSON.stringify(mono_syllabe));
-                                                }
+                                                syllabe.splice(index,1,question_reponse); 
                                             }
-                                            function actualiserBiSyllabe() {
-                                                let index = '', note = 0;
-                                                
-                                                $.each(bi_syllabe, function() {
-                                                    if(question == this[0]) {
-                                                        index = bi_syllabe.indexOf(this);
-                                                    } 
-                                                });
-                                                    
-                                                bi_syllabe.splice(index,1,question_reponse); 
-                                                
-                                                if( question_limit === compteur+1 ) {
-                                                    
-                                                 // Calcul de note de l'option 
-                                                    for (var i = 0; i < bi_syllabe.length; i++) {
-                                                        note += bi_syllabe[i][2]; 
-                                                    }
-                                                    
-                                                    bi_syllabe = [bi_syllabe,note];
-                                                    
-                                                 // Stockage de l'option dans localstore
-                                                    if(note <  4) alert( "ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ߬ ߛߌߦߊߡߊ߲߫ ߡߊ߫ ߟߊߡߌ߬ߘߊ߬ ߌ ߓߟߏ߫. ߛߍ߬ߦߌ߬ ߦߙߐ ߣߌ߲߬ ߡߊ߬." );
-                                                    if(note >= 4) localStorage.setItem(id+'_'+option_index, JSON.stringify(bi_syllabe));
-                                                }
+                                    	}
+                                    	function noterOption(syllabe) {
+                                    	                                                        
+                                            for (var i = 0; i < syllabe.length; i++) {
+                                                note += syllabe[i][2]; 
                                             }
-                                            function actualiserTriSyllabe() {
-                                                let index = '', note = 0;
-                                                
-                                                $.each(tri_syllabe, function() {
-                                                    if(question == this[0]) {
-                                                        index = tri_syllabe.indexOf(this);
-                                                    } 
-                                                });
-                                                    
-                                                tri_syllabe.splice(index,1,question_reponse); 
-                                                
-                                                if( question_limit === compteur+1 ) {
-                                                    
-                                                 // Calcul de note de l'option 
-                                                    for (var i = 0; i < tri_syllabe.length; i++) {
-                                                        note += tri_syllabe[i][2]; 
-                                                    }
-                                                    
-                                                    tri_syllabe = [tri_syllabe,note];
-                                                    
-                                                 // Stockage de l'option dans localstore
-                                                    if(note <  4) alert( "ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ߬ ߛߌߦߊߡߊ߲߫ ߡߊ߫ ߟߊߡߌ߬ߘߊ߬ ߌ ߓߟߏ߫. ߛߍ߬ߦߌ߬ ߦߙߐ ߣߌ߲߬ ߡߊ߬." );
-                                                    if(note >= 4) localStorage.setItem(id+'_'+option_index, JSON.stringify(tri_syllabe));                                             
-                                                }                                           
-                                            }
-                                            function actualiserQuadriSyllabe() {
-                                                let index = '', note = 0;
-                                                
-                                                $.each(quadri_syllabe, function() {
-                                                    if(question == this[0]) {
-                                                        index = quadri_syllabe.indexOf(this);
-                                                    } 
-                                                });
-                                                    
-                                                quadri_syllabe.splice(index,1,question_reponse); 
-                                                
-                                                if( question_limit === compteur+1 ) {
-                                                    
-                                                 // Calcul de note de l'option 
-                                                    for (var i = 0; i < quadri_syllabe.length; i++) {
-                                                        note += quadri_syllabe[i][2]; 
-                                                    }
-                                                    
-                                                    quadri_syllabe = [quadri_syllabe,note];
-                                                    
-                                                 // Stockage de l'option dans localstore
-                                                    if(note <  4) alert( "ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ߬ ߛߌߦߊߡߊ߲߫ ߡߊ߫ ߟߊߡߌ߬ߘߊ߬ ߌ ߓߟߏ߫. ߛߍ߬ߦߌ߬ ߦߙߐ ߣߌ߲߬ ߡߊ߬." );
-                                                    if(note >= 4) localStorage.setItem(id+'_'+option_index, JSON.stringify(quadri_syllabe));   
-                                                }                                            
-                                            }
+                                            syllabe = [syllabe,note];
+                                    	}
+                                    	function stockerOptionDansLocalStorage(syllabe) {
+                                    	    if(note <  moyenne) alert( "ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ߬ ߛߌߦߊߡߊ߲߫ ߡߊ߫ ߟߊߡߌ߬ߘߊ߬ ߌ ߓߟߏ߫. ߛߍ߬ߦߌ߬ ߦߙߐ ߣߌ߲߬ ߡߊ߬." );
+                                            if(note >= moyenne) localStorage.setItem(id+'_'+option_index, JSON.stringify(syllabe));
                                     	}
                                     	function finDOption() {
                                     	    if( question_limit === compteur+1 ) {
@@ -1397,11 +1320,19 @@ $('document').ready(function() {
                                     	        var message_1 = 'ߌ ߞߎߟߎ߲ߖߋ߫.<br/>'+option_de_syllabe+'  ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߎ߬ ߟߊߡߌ߬ߘߊ ߢߊ߬ߣߍ߲߬ ߁߀߀% ߟߊ߫. ߌ ߘߌ߫ ߛߋ߫ ߥߊ߫ ߟߊ߫ ߢߍ ߝߍ߬.';
                                     	        var message_2 = 'ߌ ߘߐߖߊ߬. <br/>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߎ߬ ߟߊߡߌ߬ߘߊ ߢߊ߬ߣߍ߲߬ '+effort+' ߟߊ߫.<br/> ߘߌ߬ߢߍ߬ ߞߵߌ ߞߐߛߍ߬ߦߌ߬ ߦߙߐ ߣߌ߲߬ ߡߊ߬.';
                                    	    
-    
+                                                                                            
+                                                switch(option_index) {
+                                                    case 0 : noterOption(mono_syllabe);   stockerOptionDansLocalStorage(mono_syllabe);   changerDOption(); break;
+                                                    case 1 : noterOption(bi_syllabe);     stockerOptionDansLocalStorage(bi_syllabe);     changerDOption(); break;
+                                                    case 2 : noterOption(tri_syllabe);    stockerOptionDansLocalStorage(tri_syllabe);    changerDOption(); break;
+                                                    case 3 : noterOption(quadri_syllabe); stockerOptionDansLocalStorage(quadri_syllabe); changerDOption(); break;
+                                                }
+                                            
                                     	        masquerClavierEtConsoles();
                                     	        dimensionnementDeFinDePratiquesBody();
                                     	        initialiserProgressBarr();
                                     	        messageDeFinOption();
+                                    	        
                                     	            
                                     	            $('#message_btn_2').on('click', function() {
                                     	                
@@ -1456,13 +1387,13 @@ $('document').ready(function() {
                                         	            $('#message_btn_2').html('ߛߍ߬ߦߵߊ߬ ߡߊ߬');
                                         	        }
                                                 }
-                                                function changerDOption() {
-                                                    $('#pratique_head .active').next().click();
-                                    	            afficherClavierEtConsoles();
-                                    	            initialiserLesBoutonsDEntete();
-                                    	            table = '';
-                                                }  
                                             }
+                                        }  
+                                        function changerDOption() {
+                                            $('#pratique_head .active').next().click();
+                                    	    afficherClavierEtConsoles();
+                                    	    initialiserLesBoutonsDEntete();
+                                    	    table = '';
                                         }  
                                     	function revisionDOption() {
                                     	        
@@ -1492,10 +1423,10 @@ $('document').ready(function() {
                     	    
                     	    $('#course_fermeture').on('click',function(){
                     	        
-                        alert(phase_index+ '&' +phase_nbr);                                
-                                if(phase_index <  phase_nbr) { return; }
-                                if(phase_index == phase_nbr) {
-                                    
+                        alert(phase_index+ ' & ' +phase_nbr+'\n\n'+nbr_option_non_vide +' & '+ all_options.length);
+                        
+                                if(phase_index == phase_nbr && nbr_option_non_vide == all_options.length) {
+                                  
                                     phase_nbr++;
                                     sessionStorage.setItem('phase_nbr',phase_nbr);
                                     phase_nbr_attente = JSON.parse(sessionStorage.getItem('phase_nbr'));
@@ -1505,13 +1436,13 @@ $('document').ready(function() {
                                     	         
                                  /* Vérification de la validité de pratique:
                                     	     
-                        	      Pourqu'une pratique soit valable, il faut que chaque option soit passée.
-                        	      - Si non, la pratique est invalide et est retournée;
-                        	      - Si oui, la pratique est valable et le processus de stockage est engagé. */
+                                    Pourqu'une pratique soit valable, il faut que chaque option soit passée.
+                                    - Si non, la pratique est invalide et est retournée;
+                                    - Si oui, la pratique est valable et le processus de stockage est engagé. */
                                     	        
                                     note = noterPratique(); 
-                             alert( note );       
-                                    if(note >= 15) { sendPratiqueToDB(); deleteLocalOptions(); }
+                                   
+                                    if(note >= moyenne) { sendPratiqueToDB(); deleteLocalOptions(); }
                                 }
                                 
                                 function noterPratique() {
@@ -1519,13 +1450,11 @@ $('document').ready(function() {
                                     let note_total = 0;
                                     
                                     for (var i = 0; i < all_options.length; i++) {
-                                    if(all_options[i]) {  
-                                         
-                                        note_total += all_options[i][1];
+                                    for (var j = 0; j < all_options[i].length; j++) {
+                                        note_total += all_options[i][j][2];
                                     }}
-                                   
                                     let note = Math.floor((note_total*20)/40);
-                                   
+                                alert( note );  
                                     return note;
                                 }
                                 function sendPratiqueToDB() {

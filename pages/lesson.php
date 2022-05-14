@@ -119,10 +119,10 @@ if(isset($_SESSION['connected'])){
             
           <!--pratique_head---------------------------------------------------->
             <div id="pratique_head">
-                <span>ߜߋ߲߬ ߁ ߡߊ</span>
-                <span>ߜߋ߲߬ ߂ ߡߊ</span>
-                <span>ߜߋ߲߬ ߃ ߡߊ</span>
-                <span>ߜߋ߲߬ ߄ ߡߊ</span>
+                <span>ߜߋ߲߬߁ߡߊ</span>
+                <span>ߜߋ߲߬߂ߡߊ</span>
+                <span>ߜߋ߲߬߃ߡߊ</span>
+                <span>ߜߋ߲߬߄ߡߊ</span>
             </div> 
             
           <!--pratique_body---------------------------------------------------->

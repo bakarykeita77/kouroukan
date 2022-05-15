@@ -597,7 +597,7 @@
     transition: 1s;
 }
 .progress_bonne_reponse_bar {
-    background-color: orange;
+    background-color: yellow;
 }
 .progress_question_bar {
     background-color: #bbb;

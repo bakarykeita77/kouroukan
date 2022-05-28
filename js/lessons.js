@@ -199,9 +199,7 @@ $('document').ready(function() {
         
           /*--------------------------------------------------------------------*/    
             
-            function phaseActiveName() {
-                sessionStorage.setItem('phase', course_id); 
-            }
+            function phaseActiveName() { sessionStorage.setItem('phase', course_id); }
             function dimensionnementDeCourseBody() {
                 
                 var course_height = $('.course').height();

@@ -1,1 +1,1 @@
-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 
+var token = "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";

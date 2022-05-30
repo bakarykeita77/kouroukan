@@ -185,7 +185,7 @@ $('document').ready(function() {
     	actualiserCochage();
     	
     	$('.phases ul li').on('click', function(e){
-        
+alert("Bravo");        
             var syllabes_tonifies = tonification();  
 
             var questionnaires = questions();

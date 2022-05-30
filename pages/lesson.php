@@ -97,7 +97,7 @@ if(isset($_SESSION['connected'])){
             
         </div>
       <!-------------------------------------------------------------------->
-        <div class="course" id="exercice" align="center">
+        <div class="course" id="exercice"      align="center">
             
             <div class="course_head" id="exercice_entete"></div>
             <div class="course_body" id="exercice_corps"></div>
@@ -108,7 +108,7 @@ if(isset($_SESSION['connected'])){
             
         </div>
       <!-------------------------------------------------------------------->
-        <div class="course" id="pratique" align="center">
+        <div class="course" id="pratique"      align="center">
          <!--------------------------------------------------------------------
             La partie pratique de lesson est composée de 3 divisions dont:
             
@@ -179,7 +179,7 @@ if(isset($_SESSION['connected'])){
             </div>
         </div>
       <!-------------------------------------------------------------------->
-        <div class="course" id="evaluation" align="center">
+        <div class="course" id="evaluation"    align="center">
             <div class="course_head" id="evaluation_entete">
 
                 <div class="question_btn">

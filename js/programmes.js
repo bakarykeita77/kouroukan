@@ -2,6 +2,7 @@ $(document).ready(function() {
 
     var programmes_container = $('#programmes_container');
     var reception = $('#reception');
+    var programme_div = $('#programme_div');
     var programme_ul = $('#programme_ul');
 
     var client_lessons_bruts_container = document.querySelector('.page_head #client_lessons_bruts_container');
@@ -14,7 +15,7 @@ $(document).ready(function() {
   /*-----------------------------------------------------------------------------------------------------------------------*/
 
 
-        var matieres_etudiees, niveaux, niveau_max, phases_etudiees, phase_max_index;
+        var matieres_etudiees, niveaux, niveau_max, DB_niveau_max, session_niveau_max, phases_etudiees, phase_max_index;
         var lessons_suivies = '';
         var exercices_effectues = '';
         var evaluations_effectuees = '';
@@ -56,10 +57,18 @@ $(document).ready(function() {
         2)- On determine le programme en fonction du niveau d'étude.
 
     -------------------------------------------------------------------------------------------------------------------------*/
-
-
-        niveaux           = sessionStorage.getItem('niveaux');
-        niveau_max        = parseInt(sessionStorage.getItem('niveau_max'));
+        
+        let session_phase_nbr = sessionStorage.getItem('session_phase_nbr');
+     // sessionStorage.removeItem('sessison_phase_nbr'); sessionStorage.removeItem('DB_phase_nbr'); sessionStorage.removeItem('session_niveau_max'); sessionStorage.removeItem('DB_niveau_max'); sessionStorage.removeItem('niveau_max'); 	    
+      
+        niveaux            = JSON.parse(sessionStorage.getItem('niveaux'));
+        session_niveau_max = JSON.parse(sessionStorage.getItem('session_niveau_max'));
+        DB_niveau_max      = JSON.parse(sessionStorage.getItem('niveau_max'));
+        niveau_max = (session_niveau_max > DB_niveau_max) ?  session_niveau_max : DB_niveau_max;
+    
+    alert( session_niveau_max +' & '+ DB_niveau_max );    
+        
+        
         matieres_etudiees = sessionStorage.getItem('matieres_etudiees');
         derniere_matiere  = sessionStorage.getItem('derniere_matiere');
         phases_etudiees   = sessionStorage.getItem('phases_etudiees');
@@ -68,7 +77,7 @@ $(document).ready(function() {
         derniere_phase    = sessionStorage.getItem('derniere_phase');
     
    /*2*/programme();
-   
+        if(session_niveau_max > DB_niveau_max) changerProgramme();
 
        // situationDesEtudes();
        // resume_brut_des_etudes = situations[situations.length-1];
@@ -93,8 +102,7 @@ $(document).ready(function() {
             var user_syllabes = JSON.parse(localStorage.getItem('syllabes'));
             var user_tons     = JSON.parse(localStorage.getItem('tons'));
             var user_chiffres = JSON.parse(localStorage.getItem('chiffres'));
-             
-
+            
             
             recuperationDesDonneesAjax();
             triDesCoursParPhase();
@@ -299,7 +307,6 @@ $(document).ready(function() {
                 situation_des_etudes = [phases_1, phases_2, phases_3].join('/');
                 situations[situations.length] = situation_des_etudes;
             }
-            
         }
         function verificationDesLessonsEtudiees() {
         
@@ -403,12 +410,11 @@ $(document).ready(function() {
         }
         function programme() {
             
-            programme_ul.html(programmeHTML());
+            programme_div.html(programmeHTML());
             programmeStyle();
             nomDeLaMatiereActive();
             programmeNavigation();
             
-
             function programmeHTML() {
                 var programme_html = '<ul id="programme_ul">';
             
@@ -488,5 +494,27 @@ $(document).ready(function() {
               //Le click sur le bouton next redirige sur la page de lessons.
             }
         }
-       
+        function changerProgramme() {
+            
+            let total_phase = sessionStorage.getItem('total_phase');
+            
+            if( session_phase_nbr === total_phase) {
+                //sessionStorage.removeItem('session_phase_nbr');
+            
+                $.each($('#programme_ul li'), function() {
+                    
+                    let index = $(this).index();
+                    
+                    if(index  < niveau_max) $(this).removeClass('active');
+                    if(index  < niveau_max) $(this).addClass('apprises');
+                    if(index == niveau_max) $(this).removeClass('a_apprendre');
+                    if(index == niveau_max) $(this).addClass('active');
+                    if(index  > niveau_max) $(this).addClass('a_apprendre');
+                });
+            }
+            
+            
+            
+            
+        }
 });

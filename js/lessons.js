@@ -1,23 +1,27 @@
 $('document').ready(function() {
 
-    var id                = parseInt(sessionStorage.getItem('id'));     var matieres_etudiees = sessionStorage.getItem('matieres_etudiees');     
+    var id                = JSON.parse(sessionStorage.getItem('id'));     var matieres_etudiees = sessionStorage.getItem('matieres_etudiees');     
     var derniere_matiere  = sessionStorage.getItem('derniere_matiere');     
     var matiere_active    = sessionStorage.getItem('matiere_active');     
     var matiere_index     = sessionStorage.getItem('matiere_index'); 
     var matiere_nom       = sessionStorage.getItem('matiere_nom'); 
 
     var niveaux           = JSON.parse(sessionStorage.getItem('niveaux'));     
+    var niveau            = JSON.parse(sessionStorage.getItem('niveau_actif'));
     var niveaux_distincts = JSON.parse(sessionStorage.getItem('niveaux_distincts'));     
-    var niveau_max        = parseInt(sessionStorage.getItem('niveau_max'));
-    var niveau            = parseInt(sessionStorage.getItem('niveau_actif'));
+    var session_niveau_max = JSON.parse(sessionStorage.getItem('session_niveau_max'));
+    var DB_niveau_max     = JSON.parse(sessionStorage.getItem('niveau_max'));
+    var niveau_max = (session_niveau_max > DB_niveau_max) ?  session_niveau_max : DB_niveau_max;
     
+    
+    var total_phase       = JSON.parse(sessionStorage.getItem('total_phase'));
     var phases_etudiees   = JSON.parse(sessionStorage.getItem('phases_etudiees')); 
     var dernieres_phases  = JSON.parse(sessionStorage.getItem('dernieres_phases'));     
-    var dernieres_phases_distinctes  = JSON.parse(sessionStorage.getItem('dernieres_phases_distinctes'));     
-    //if(dernieres_phases_distinctes.length == JSON.parse(sessionStorage.getItem('phase_nbr'))) sessionStorage.removeItem('phase_nbr'); 
-    var phase_nbr_attente = JSON.parse(sessionStorage.getItem('phase_nbr'));
-    var phase_nbr         = (phase_nbr_attente == null) ? dernieres_phases_distinctes.length : phase_nbr_attente; 
     var derniere_phase    = sessionStorage.getItem('derniere_phase');     
+    var dernieres_phases_distinctes  = JSON.parse(sessionStorage.getItem('dernieres_phases_distinctes'));     
+    var DB_phase_nbr      = dernieres_phases_distinctes.length;
+    var session_phase_nbr = JSON.parse(sessionStorage.getItem('session_phase_nbr'));
+    var phase_nbr         = (session_phase_nbr > DB_phase_nbr) ? session_phase_nbr : DB_phase_nbr; 
     
     var resume_brut_des_etudes = $('#resume_brut_des_etudes_container').html();
     var voyelles_cochees, consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees;
@@ -50,7 +54,10 @@ $('document').ready(function() {
 	5)- On peut surfer
     
     --------------------------------------------------------------------*/
-	    
+
+   // sessionStorage.removeItem('session_phase_nbr'); sessionStorage.removeItem('DB_phase_nbr');	sessionStorage.removeItem('session_niveau_max'); sessionStorage.removeItem('DB_niveau_max'); 	    
+ 
+    
    /*2*/phases();
    /*5*/matiere();
 
@@ -60,7 +67,8 @@ $('document').ready(function() {
         var phases_collection = phasesCollection();
     	
     	$('.phases').html(phasesHTML());
-        actualiserTitre();	   
+        actualiserTitre();
+        
 	    stylesDesPhases();
 	    affichageDesPhases();
    
@@ -133,6 +141,7 @@ $('document').ready(function() {
                     }
                     if(phase_nbr == 0) {
                 	    if(phase_index !== 0) $(this).addClass('active');
+                	    if(phase_index >  0) $(this).removeClass('active');
                 	    if(phase_index >  0) $(this).addClass('a_apprendre');
                     }
     	        }    	        
@@ -153,7 +162,26 @@ $('document').ready(function() {
     	        }
             });
 	}
+    function changerPhaseActive(nbr) {
+                           
+        $.each($('#phases_list li'), function() {
+    	       
+            var phase_index = $(this).index();
+                                        
+            if(phase_index == nbr-1) $(this).removeClass('active');
+            if(phase_index == nbr-1) $(this).addClass('apprises');
+            if(phase_index == nbr  ) $(this).removeClass('a_apprendre');
+            if(phase_index == nbr  ) $(this).addClass('active');
+            if(phase_index >= nbr+1) $(this).addClass('a_apprendre');
+                    	    
+            if(total_phase == nbr  ) $(this).removeClass('active');
+            if(total_phase == nbr  ) $(this).removeClass('a_apprendre');
+            if(total_phase == nbr  ) $(this).addClass('apprises');
+        });
+    }
 	function matiere() {
+    	
+    	sessionStorage.setItem('total_phase', $('#phases_list li').length);
     	actualiserCochage();
     	
     	$('.phases ul li').on('click', function(e){
@@ -168,7 +196,7 @@ $('document').ready(function() {
             
             var total_point = 0;
             var note = 0;
-            var moyenne = 2;
+            var moyenne = 1;
             
             var chiffre = '';
           
@@ -191,7 +219,7 @@ $('document').ready(function() {
             var parametres_html = parametres.html();
 
           /*--------------------------------------------------------------------*/    
-    	    
+     
     	    phaseActiveName();
     	    dimensionnementDeCourseBody();
     	    affichageDeCours();
@@ -308,11 +336,14 @@ $('document').ready(function() {
                     $('.course_container').css('display','block');
                     $('.course').css('display','none');
                     
+                    sessionStorage.setItem('session_niveau_max', niveau_max);
+                    var session_niveau_max = JSON.parse(sessionStorage.getItem('session_niveau_max'));
+                    
                     switch (course_id) {
-                        case 'apprentissage':apprentissages(); break;
-                        case 'exercice'     :exercices();     break;
-                        case 'pratique'     :pratique();     break;
-                        case 'evaluation'   :evaluations();   break;
+                        case 'apprentissage':apprentissages(); $('.fermeture').attr('id', 'fermer_apprentissage'); break;
+                        case 'exercice'     :exercices();      $('.fermeture').attr('id', 'fermer_exercice');      break;
+                        case 'pratique'     :pratique();       $('.fermeture').attr('id', 'fermer_pratique');      break;
+                        case 'evaluation'   :evaluations();    $('.fermeture').attr('id', 'fermer_evaluation');    break;
             	    }
             	  
                 	function apprentissages() {
@@ -326,10 +357,9 @@ $('document').ready(function() {
                 	    afficherApprentissage();
                         parametrageDeApprentissage();
                         apprendre();
-                        enregistrerApprentissage();
-                        
+                    	enregistrerApprentissage();
                 	    stockerApprentissage();
-       
+                    	                        	
                     	function chargerApprentissage() {   
                             
                             $('#apprentissage_entete').html( apprentissageEnteteHTML() );
@@ -378,6 +408,7 @@ $('document').ready(function() {
                         function apprendre() {
                             
                             changementDesBoutonsMedia();
+                    	    
                     	    lectureSemiAutomatique(); // Voir fonctions.js
                     	    lecturePersonnalisee();   // Voir fonctions.js
                     	    arreterLecture(lessonCourante); // Voir fonctions.js
@@ -512,23 +543,35 @@ $('document').ready(function() {
                             }
                         }
                 	    function stockerApprentissage() {
+                            
                             $('#course_fermeture').on('click',function() {
-
+                    	        
+                    	        var course = $(this).sibblings('.course').html();
+                    	        
+                    	        alert( course );
+                    	                    	        
+            	        alert( phase_index +'&'+  phase_nbr );              
                                 if(phase_index <  phase_nbr) { return; }
                                 if(phase_index == phase_nbr) {
                                     
-                                    phase_nbr++;
-                                    if(phase_nbr_attente == null) sessionStorage.setItem('phase_nbr',phase_nbr);
-                                    phase_nbr_attente = JSON.parse(sessionStorage.getItem('phase_nbr'));
-                                    
                                     note = noterApprentissage();
+                                    
                                     if(note <  moyenne) alert("ߌ ߡߊ߫ ߛߓߍߘߋ߲ ߥߟߊ ߜߋ߭ ߠߎ߬ ߓߍ߯ ߟߊߡߍ߲߫");
                                     if(note >= moyenne) {
+                                    
+                                        phase_nbr++;
+                                        
+                                        if(session_phase_nbr == null) sessionStorage.setItem('session_phase_nbr',phase_nbr);
+                                        session_phase_nbr = JSON.parse(sessionStorage.getItem('session_phase_nbr'));
+                                        if(session_phase_nbr === total_phase) sessionStorage.setItem('session_niveau_max', niveau_max+1);
+                                        
+                                        phase_nbr = (session_phase_nbr > DB_phase_nbr) ? session_phase_nbr : DB_phase_nbr; 
+                                        
                                         sendApprentissageToDB();
-                                        changerPhaseActive();
-                                        clearStorage(); 
+                                        changerPhaseActive(phase_nbr);
                                     }
                                 }
+
                                 function noterApprentissage() {
                                     var table_elements_click_nbr = [];
                                     
@@ -747,28 +790,32 @@ $('document').ready(function() {
                 	    function stockerExercice() {
                 	                        	             
                             $('#course_fermeture').on('click',function(){ 
-                                                                if(phase_index <  phase_nbr) { return; }
+            	        alert( phase_index +'&'+  phase_nbr );              
+                                         
+                                if(phase_index <  phase_nbr) { return; }
                                 if(phase_index == phase_nbr) {
                                     
-                                    phase_nbr++;
-                                    sessionStorage.setItem('phase_nbr',phase_nbr);
-                                    phase_nbr_attente = JSON.parse(sessionStorage.getItem('phase_nbr'));
-                                        
+                                    note = noterExercice(); 
+                                    
                                  /*--------------------------------------------------------------------
                                   Pourqu'un exercice soit valable, il faut que chaque question ait une réponse.
                                  --------------------------------------------------------------------*/  
                             
-                                    note = noterExercice(); 
                                     if(note <  moyenne) alert( "reprendre" ); 
                                     if(note >= moyenne) { 
+                                        
+                                        phase_nbr++;
+                                        if(session_phase_nbr == null) sessionStorage.setItem('session_phase_nbr',phase_nbr);
+                                        session_phase_nbr = JSON.parse(sessionStorage.getItem('session_phase_nbr'));
+                                        
                                         sendExerciceToDB(); 
-                                        changerPhaseActive(); 
-                                        clearStorage(); 
+                                        changerPhaseActive(session_phase_nbr); 
+                                        sessionStorage.removeItem('session_phase_nbr');
                                     }
                                 }
-
+                                
                                 function noterExercice() {
-                    	            var note_total = 0;
+                                    var note_total = 0;
                                     
                                     for (var i = 0; i < questions_quantity; i++) {
                                         if(exercice_a_stocker[i][2] == 1) {
@@ -1448,21 +1495,24 @@ $('document').ready(function() {
                     	    
                     	    $('#course_fermeture').on('click',function(){
 
+            	        alert( phase_index +'&'+  phase_nbr );              
                                 nbr_option_non_vide = nombreDOptionNonVide();
                                 if(phase_index <  phase_nbr || nbr_option_non_vide < all_options.length) { return; }
                                 if(phase_index == phase_nbr && nbr_option_non_vide == all_options.length) {
                                     
-                                    phase_nbr++;
-                                    sessionStorage.setItem('phase_nbr',phase_nbr);
-                                    phase_nbr_attente = JSON.parse(sessionStorage.getItem('phase_nbr'));
-
+                                    note = noterPratique(); 
+                                    
                                  /* Vérification de la validité de pratique:
                                     Pourqu'une pratique soit valable, il faut que chaque option soit passée.
                                     - Si non, la pratique est invalide et est retournée;
                                     - Si oui, la pratique est valable et le processus de stockage est engagé. */
                                     	        
-                                    note = noterPratique(); 
-                                    if(note >= moyenne) { 
+                                    if(note >= moyenne) {
+                                            
+                                        phase_nbr++;
+                                        if(session_phase_nbr == null) sessionStorage.setItem('session_phase_nbr',phase_nbr);
+                                        session_phase_nbr = JSON.parse(sessionStorage.getItem('session_phase_nbr'));
+                                        
                                         sendPratiqueToDB(); 
                                         clearStorage(); 
                                     }
@@ -1890,15 +1940,17 @@ $('document').ready(function() {
                                         
                                         if(phase_index <  phase_nbr) { return; }
                                         if(phase_index == phase_nbr) {
-                                             
+                               // alert( session_phase_nbr+'/'+total_phase );              
                                             phase_nbr++;
-                                            sessionStorage.setItem('phase_nbr',phase_nbr);
-                                            phase_nbr_attente = JSON.parse(sessionStorage.getItem('phase_nbr'));
-                                                                                         
+                                            if(session_phase_nbr == null) sessionStorage.setItem('session_phase_nbr',phase_nbr);
+                                            session_phase_nbr = JSON.parse(sessionStorage.getItem('session_phase_nbr'));
+                                       
+                                            if(session_phase_nbr === total_phase) sessionStorage.setItem('session_niveau_max', niveau_max+1);
+                               // alert( sessionStorage.getItem('session_niveau_max') );                                                         
+                                            
                                             sendEvaluationToDB();
-                                            changerPhaseActive();
+                                            changerPhaseActive(session_phase_nbr);
                                         }
-                                        clearStorage(); 
                                     }
                                     
                                     function sendEvaluationToDB() {
@@ -1927,20 +1979,6 @@ $('document').ready(function() {
                                 }
                             });
                         }
-                    }
-                    
-                    function changerPhaseActive() {
-                           
-                        $.each($('#phases_list li'), function() {
-    	       
-            	            var phase_index = $(this).index();
-                                        
-                            if(phase_index == phase_nbr_attente-1) $(this).removeClass('active');
-                            if(phase_index == phase_nbr_attente-1) $(this).addClass('apprises');
-                    	    if(phase_index == phase_nbr_attente  ) $(this).removeClass('a_apprendre');
-                    	    if(phase_index == phase_nbr_attente  ) $(this).addClass('active');
-                    	    if(phase_index >= phase_nbr_attente+1) $(this).addClass('a_apprendre');
-                        });
                     }
         	    }
         	    if(phase_class == 'a_apprendre') $('.course_container').css('display','none');

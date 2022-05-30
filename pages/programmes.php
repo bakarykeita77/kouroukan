@@ -17,7 +17,7 @@ if(isset($_SESSION['connected'])){
         <div class="page_body">
             <div id="programmes_container" class="centerH" align="right">
                 <h2>ߘߋ߰ߟߌ ߢߍߥߟߊ </h>
-                <div id="programme_ul"></div>
+                <div id="programme_div"></div>
             </div>
         </div>
         <div class="page_foot"><?php include("pied-de-lesson.php"); ?></div>

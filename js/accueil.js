@@ -1,12 +1,12 @@
     
-    getUserIdentity();
+    userIdentityStorage();
     dataStorage();
    
   
     var resume_brut_des_etudes = '';
     var moyenne = 1;
 
-    function getUserIdentity() {
+    function userIdentityStorage() {
                 
         sessionStorage.setItem('id',        document.getElementById('id').innerHTML);
         sessionStorage.setItem('prenom',    document.getElementById('prenom').innerHTML);

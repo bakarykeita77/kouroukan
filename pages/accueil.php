@@ -1,5 +1,4 @@
 <?php
-echo($_POST["prenom"]);
     if($_POST['submit']){
     /* Reception des donnees envoyes de form de connexion */
         $client_email = isset($_POST['client_email'])? $_POST['client_email']:'';

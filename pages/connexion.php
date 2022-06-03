@@ -15,7 +15,7 @@
         <div id = "connexion_form">
     		<h2>ߜߊ߲߬ߞߎ߲߬ߥߟߊ</h2>
     		
-    		<form action="http://localhost:8080/kouroukan/pages/accueil.php" method="POST" id="formulaire_de_connexion">
+    		<form action="accueil.php" method="POST" id="formulaire_de_connexion">
     			<div class="input_box">
     				<input type="email" autocomplete="off" name="client_email" id="client_email">
     				<label>Email</label>

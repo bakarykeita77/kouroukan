@@ -1,5 +1,7 @@
 $(document).ready(function(){  
 
+alert("index.js");
+
     var container = $('#container');
     var clavier = $('#clavier_nko');
     var lien = [];
@@ -14,7 +16,7 @@ $(document).ready(function(){
     var reponse = "", reponse_content = [], question_content = [];
     var ch = "", syllab = [], tonn = [];
 
- /* Dimensionnement de container*/
+ /* Dimensionnement de container */
     var window_w = window.innerWidth;
     var window_h = window.innerHeight;
     

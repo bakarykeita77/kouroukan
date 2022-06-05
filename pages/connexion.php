@@ -9,13 +9,12 @@
 </head>
 <body>
     
-    <div class="container">
-        <?php include "http://localhost:8080/kouroukan/pages/tete-de-page.php"; ?>
+    <div class="cover">
       <!----------------------------------------------------------------------------------------------------->  
         <div id = "connexion_form">
     		<h2>ߜߊ߲߬ߞߎ߲߬ߥߟߊ</h2>
     		
-    		<form action="accueil.php" method="POST" id="formulaire_de_connexion">
+    		<form action="http://localhost:8080/kouroukan/pages/accueil.php" method="POST" id="formulaire_de_connexion">
     			<div class="input_box">
     				<input type="email" autocomplete="off" name="client_email" id="client_email">
     				<label>Email</label>
@@ -29,21 +28,6 @@
     			</div>
     		</form>
     	</div>
-      <!----------------------------------------------------------------------------------------------------->  
-        <p class="error_message" align="center">	
-            <?php 
-                if($warning){ echo($warning); }
-                $error = $_GET['error'];
-                switch($error){
-                    case 3:
-                        echo "Utilisateur non trouve. Vueillez vous inscrire";
-                    break;
-                    case "no_connected_to_change_avatar":
-                        echo "Connectez vous pour charger ou changer l'avatar";
-                    break;
-                }
-            ?>
-        </p>
 	</div>
 	
 	<script src="http://localhost:8080/kouroukan/js/connexion.js"></script>

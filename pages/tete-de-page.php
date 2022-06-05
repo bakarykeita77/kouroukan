@@ -6,8 +6,8 @@ session_start();
 <head id='head'>
 	<title>topbar</title>
 	<meta charset="utf-8">
-    <link rel="stylesheet" href="/css/tete-de-page.css"/>
-    <link rel="stylesheet" href="/css/class.css"/>
+    <link rel="stylesheet" href="http://localhost:8080/kouroukan/css/tete-de-page.css"/>
+    <link rel="stylesheet" href="http://localhost:8080/kouroukan/css/class.css"/>
 	<script src="/js/jquery-3.3.1.js"></script>
 <!--	<script src="http://kit.fontawesome.com/45b3b93014.js" crossorigin="anonymous"></script>    -->
 </head>
@@ -25,21 +25,18 @@ session_start();
  	    <p id="profile_testes"></p>
  	    <p id="nbr_teste"></p>
  	    <span id="niveau_max_containner"></span>
- 	    
     </div>
-    
-    <div id="header"><h3 id="nom_ecole">ߞߙߎ߬ߞߊ߲߬</h3></div>
     
 	<div id="topbar" class="nav_bar"> 
 	    <?php if($_SESSION['id']): ?>
-     		<div id="logo"> <img src="/pages/get-avatar.php?client_id=<?= $_SESSION['id'] ?>" alt="logo"/></div>
+     		<div id="logo"> <img src="http://localhost:8080/kouroukan/pages/get-avatar.php?client_id=<?= $_SESSION['id'] ?>" alt="logo"/></div>
         <?php endif ?>
         
      	<div id='profile_menu_container'>
-		 	<?php if($_SESSION['id']): ?>	
+	
          	    <div id="client_name" style="display: none"><h2><?=$_SESSION['prenom'].' '.$_SESSION['nom'] ?> ߹</h2></div>
          	    <div id="profile_client_id" style="display: none"><?=$_SESSION['id']; ?></div>
-			<?php endif ?>
+			
          	    <div class="profile_menu">
              	    
              	    <div class="profile_menu_head" id="profile_utilisateur_btn">Profile</div>
@@ -65,7 +62,7 @@ session_start();
              	        </div>
              	    </div>
  	                
-             	    <div class="profile_menu_head"><a href="pages/deconnexion.php">ߌ ߜߊ߲߬ߞߎ߲߬ߣߍ߲߬ ߓߐ߫</a></div>
+             	    <div class="profile_menu_head"><a href="deconnexion.php">ߌ ߜߊ߲߬ߞߎ߲߬ߣߍ߲߬ ߓߐ߫</a></div>
          	    </div>
      	</div>
  	    <div id="profile_teste"></div>
@@ -73,8 +70,8 @@ session_start();
 
 		<div id = "nav">
 			<ul id="menu_deroulant">
-			    <li class="hover_anim" id="home"     ><i class="fas fa-home"></i></i><a href = "pages/index.php">    ߝߊ߲ߓߊ </a></li>
-			    <li class="hover_anim" id="alphabet" ><a href = "pages/programmes.php"> ߥߟߊ߬ߘߊ ߟߎ߬ </a></li>
+			    <li class="hover_anim" id="home"     ><i class="fas fa-home"></i></i><a href = "index.php">    ߝߊ߲ߓߊ </a></li>
+			    <li class="hover_anim" id="alphabet" ><a href = "programmes.php"> ߥߟߊ߬ߘߊ ߟߎ߬ </a></li>
 			    <li class="hover_anim" id="syllabe"  ><a href = "">ߛߊ߲߬ߓߊ߬ߕߐ߮ </a></li>
  	     	</ul>
 

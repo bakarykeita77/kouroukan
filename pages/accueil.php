@@ -2,9 +2,9 @@
     if($_POST['submit']){
     /* Reception des donnees envoyes de form de connexion */
         $client_email = isset($_POST['client_email'])? $_POST['client_email']:'';
-        $client_password = isset($_POST['client_password'])? $_POST['client_password']:'';
+        $client_pass = isset($_POST['client_pass'])? $_POST['client_pass']:'';
         
-        if($client_email !== '' OR $client_password !== ''){
+        if($client_email !== '' OR $client_pass !== ''){
         
             require("connexionToDB.php");
             global $db;
@@ -21,9 +21,9 @@
                 $data_naissance = $client[0]['naissance'];
                 $data_sexe      = $client[0]['sexe'];
                 $data_adresse   = $client[0]['adresse'];
-                $data_password  = $client[0]['password'];
+                $data_pass  = $client[0]['pass'];
                 
-                if($client_password == $data_password) {
+                if($client_pass == $data_pass) {
                     session_start();
                     
                     $_SESSION['id'       ] = $data_id;
@@ -33,7 +33,7 @@
                     $_SESSION['sexe'     ] = $data_sexe;
                     $_SESSION['adresse'  ] = $data_adresse;
                     $_SESSION['email'    ] = $data_email;
-                    $_SESSION['password' ] = $data_password;
+                    $_SESSION['pass' ] = $data_pass;
                     $_SESSION['connected'] = true;
                     
                  //   header("location:accueil.php"); 

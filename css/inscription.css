@@ -1,16 +1,17 @@
 #inscription_form {
-    position: relative;
-    width: 80%;
+    position: absolute;
+    width: 400px;
+    height: 400px;
     top: 56px;
     background-color: #fff;
+    font-size: 2em;
     border: 1px solid #ddd;
     box-shadow: 0 4px 16px #666;
     margin: 0 auto;
     padding: 0 16px;
+    left: 50%;
+    transform: translateX(-50%);
     direction: rtl;
-}
-#inscription_form form {
-    margin: 0;
 }
 #inscription_form input:not(#submit_btn) {
     background-color: rgba(0,0,0,0.05);

@@ -1,15 +1,24 @@
 <?php
     if(isset($_POST['submit'])){
-        if(!empty($_POST['prenom']) AND !empty($_POST['nom']) AND !empty($_POST['naissance']) AND !empty($_POST['sexe']) AND !empty($_POST['adresse']) AND !empty($_POST['email']) AND !empty($_POST['password'])){
-          /*Voyons si le mail envoye par l'utilisateur n'est pas deja utilise*/
+        if(!empty($_POST['prenom']) AND !empty($_POST['nom']) AND !empty($_POST['naissance']) AND !empty($_POST['sexe']) AND !empty($_POST['adresse']) AND !empty($_POST['email']) AND !empty($_POST['pass'])){
+          
+		 /*Voyons si le mail envoye par l'utilisateur n'est pas deja utilise.
+		  *Pour cela, on extrait et place tous les emails déja enregistrés de la base de données dans une variable.
+		 */
             require("connexionToDB.php");
             global $db;
             $requette = $db->prepare("SELECT email FROM users");
             $requette->execute();
             $emails = $requette->fetchAll();
             
+			$emails_table = [];
             for($i=0;$i<count($emails);$i++){ $emails_table[$i] = $emails[$i]['email']; }
-            if(in_array($_POST['email'],$emails_table)!=-1){
+
+		 /*On teste la présence de l'email saisi dans la variable $emails.
+		  *Si oui un message s'affiche pour signaler l'utilisateur que cet emailest déja utilisé.
+		  *Si non le processus d'inscription est engagé.
+		 */
+            if(in_array($_POST['email'],$emails_table) == false) {
               /*Fonction pour securiser les donnees*/
                 require('phpFonctions.php');
                 
@@ -20,11 +29,11 @@
                 $sexe = securiser($_POST['sexe']);
                 $adresse = securiser($_POST['adresse']);
                 $email = securiser($_POST['email']);
-                $password = sha1(securiser($_POST['password']));
+                $pass = sha1(securiser($_POST['pass']));
                 
               /*Insertion des donnees dans la base de donnees*/
-                $requette = $db->prepare("INSERT INTO users(prenom,nom,naissance,sexe,adresse,email,password) VALUES(?,?,?,?,?,?,?)");
-                $requette->execute(array($prenom,$nom,$naissance,$sexe,$adresse,$email,$password));
+                $requette = $db->prepare("INSERT INTO users(prenom,nom,naissance,sexe,adresse,email,pass) VALUES(?,?,?,?,?,?,?)");
+                $requette->execute(array($prenom,$nom,$naissance,$sexe,$adresse,$email,$pass));
                 
             }else{ $error = "L'email envoye est deja utilise. Essayer un autre"; }
         }else { $error = "Veuiler remplir tous les champs"; }
@@ -39,11 +48,11 @@
 </head>
 <body>
     
-    <div class="container">
-        <?php include "http://localhost:8080/kouroukan/pages/tete-de-page.php"; ?>
+    <div class="cover">
     	<div id="inscription_form" align="center">
     		
-    		<h3>ߕߐ߯ߛߓߍߥߟߊ<h3>
+    		<h3>ߕߐ߯ߛߓߍߥߟߊ</h3>
+
     		<form method="POST" action="" align='center'>
     		    <table>
         			<tr>
@@ -72,7 +81,7 @@
         			</tr>
         			<tr>
         				<td><label>ߜߎ߲߬ߘߎ߬ߕߐ߮</label></td>
-        				<td><input type="password"  name="password" id="password"/></td>
+        				<td><input type="password"  name="pass" id="pass"/></td>
         			</tr>
         			<tr>
         			    <td></td>

@@ -2,7 +2,9 @@ $(document).ready(function(){
 
 alert("index.js");
 
-    var container = $('#container');
+   var token = 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;
+
+   var container = $('#container');
     var clavier = $('#clavier_nko');
     var lien = [];
     var alphabet = [];

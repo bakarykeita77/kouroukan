@@ -14,7 +14,7 @@
         
         <div id="header"><h3 id="nom_ecole">ߞߙߎ߬ߞߊ߲߬</h3></div>
        
-        <div id='fond_de_container' class='centerH'></div>        
+        <div id='fond_de_container' class='centerH'></div>
         <div class="">
            
             <div id="asides_container0" align="center">

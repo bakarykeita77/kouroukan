@@ -30,7 +30,6 @@
     	</div>
 	</div>
 	
-	<script src="http://localhost:8080/kouroukan/js/connexion.js"></script>
 	<script>
 	
 	    var input = $('#formulaire_de_connexion div input:not("#button_box input")');

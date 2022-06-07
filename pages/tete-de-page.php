@@ -28,7 +28,8 @@ session_start();
     </div>
     
 	<div id="topbar" class="nav_bar"> 
-	    <?php if($_SESSION['id']): ?>
+	    <?php if(^^^^^^^^^^^^^^^
+		): ?>
      		<div id="logo"> <img src="http://localhost:8080/kouroukan/pages/get-avatar.php?client_id=<?= $_SESSION['id'] ?>" alt="logo"/></div>
         <?php endif ?>
         

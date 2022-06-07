@@ -12,7 +12,7 @@
             $requette = $db->prepare("SELECT * FROM users WHERE email = ?");
             $requette->execute(array($client_email));
             $client = $requette->fetchAll();
-            
+           echo ($client);  
             if(!empty($client)) {
                 
                 $data_id        = $client[0]['id'];
@@ -22,7 +22,7 @@
                 $data_sexe      = $client[0]['sexe'];
                 $data_adresse   = $client[0]['adresse'];
                 $data_pass  = $client[0]['pass'];
-                
+               
                 if($client_pass == $data_pass) {
                     session_start();
                     

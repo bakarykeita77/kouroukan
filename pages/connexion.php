@@ -20,7 +20,7 @@
     				<label>Email</label>
     			</div>
     			<div class="input_box">
-    				<input type="password" autocomplete="off" name="client_password" id="client_password">
+    				<input type="password" autocomplete="off" name="client_pass" id="client_pass">
     				<label>ߜߎ߲߬ߘߎ߬ߕߐ߮</label>
     			</div>
     			<div id="button_box">

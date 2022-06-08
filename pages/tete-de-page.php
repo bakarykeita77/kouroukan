@@ -1,6 +1,4 @@
-<?php
-session_start();
-?>
+
 <!DOCTYPE html>
 <html>
 <head id='head'>
@@ -14,25 +12,10 @@ session_start();
 
 <body>
     
-    <div id="donnees_ajax" style="display:none">
-
-        <div id="client_identification_brute_container"></div>
-        <div id="client_lessons_bruts_container"></div>
-        <div id="client_exercices_bruts_container"></div>
- 	    <div id="client_evaluations_brutes_container"></div>
- 	    
- 	    <p id="situation_des_etudes_container"></p>
- 	    <p id="profile_testes"></p>
- 	    <p id="nbr_teste"></p>
- 	    <span id="niveau_max_containner"></span>
-    </div>
-    
 	<div id="topbar" class="nav_bar"> 
-	    <?php if(^^^^^^^^^^^^^^^
-		): ?>
-     		<div id="logo"> <img src="http://localhost:8080/kouroukan/pages/get-avatar.php?client_id=<?= $_SESSION['id'] ?>" alt="logo"/></div>
-        <?php endif ?>
-        
+     		
+		<div id="logo"> <img src="" alt="logo"/></div>
+		
      	<div id='profile_menu_container'>
 	
          	    <div id="client_name" style="display: none"><h2><?=$_SESSION['prenom'].' '.$_SESSION['nom'] ?> ߹</h2></div>

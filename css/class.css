@@ -162,6 +162,7 @@
     padding: 0;
     margin: 0;
     left: 50%;
+    font-size: 1rem;
     transform: translateX(-50%);
     height: calc(100vh - 16px);
 }

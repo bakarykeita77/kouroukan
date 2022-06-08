@@ -1,8 +1,7 @@
     
     userIdentityStorage();
     dataStorage();
-   
-  
+
     var resume_brut_des_etudes = '';
     var moyenne = 1;
 
@@ -15,7 +14,6 @@
         sessionStorage.setItem('sexe',      document.getElementById('sexe').innerHTML);
         sessionStorage.setItem('adresse',   document.getElementById('adresse').innerHTML);
         sessionStorage.setItem('email',     document.getElementById('email').innerHTML);
-                
     }
     function dataStorage() {
         let user_id = parseInt(sessionStorage.getItem('id')); 
@@ -164,7 +162,7 @@
         	        
         	        let niveau = matieres[i][j]['niveau'];
         	        let lesson = matieres[i][j]['lesson'];
-        	        let note   = matieres[i][j]['note'];
+        	        let note   = matieres[i][j]['note']
         	        
         	        pratiques.push([niveau,lesson,note]);
         	    }
@@ -174,3 +172,4 @@
     	})
     	.catch(error => alert( error ));
     }
+//	alert(document.getElementById('prenom').innerHTML+" "+document.getElementById('nom').innerHTML);

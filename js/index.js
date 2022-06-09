@@ -1,6 +1,6 @@
 $(document).ready(function(){  
 
-   var token = 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;
+   var token = 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;
 
    var container = $('#container');
     var clavier = $('#clavier_nko');

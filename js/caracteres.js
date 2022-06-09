@@ -1,3 +1,4 @@
+alert('connecter à caracteres.js');
     
     var niveau = $('#niveau_container').html(); 
     var caracteres = [

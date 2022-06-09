@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(isset($_SESSION['connected'])){
+if(isset($_SESSION['id'])){
 ?>
 <!DOCTYPE html>
 <html>
@@ -23,9 +23,9 @@ if(isset($_SESSION['connected'])){
         <div class="page_foot"><?php include("pied-de-lesson.php"); ?></div>
     </div>
     
-    <script src="http://localhost:8080/kouroukan/js/class.js"></script>
-    <script src="http://localhost:8080/kouroukan/js/caracteres.js"></script>
-    <script src="http://localhost:8080/kouroukan/js/programmes.js"></script>
+    <script src = "http://localhost:8080/kouroukan/js/class.js"     ></script>
+    <script src = "http://localhost:8080/kouroukan/js/caracteres.js"></script>
+    <script src = "http://localhost:8080/kouroukan/js/programmes.js"></script>
     
 </body>
 </html>

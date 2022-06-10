@@ -2,7 +2,7 @@
  alert("authentification");
     userIdentityStorage();
     dataStorage();
-
+var x="hdhdhdhhd";
     var resume_brut_des_etudes = '';
     var moyenne = 1;
 

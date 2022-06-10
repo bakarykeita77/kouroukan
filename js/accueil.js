@@ -1,4 +1,4 @@
- // token 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  
+ // token ghp_sND6k6ifDeko80dbCaVic0gZ3BJebz34vBPu
  alert("authentification");
     userIdentityStorage();
     dataStorage();

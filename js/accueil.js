@@ -1,8 +1,8 @@
  // token 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
- alert("authentification");
+
     userIdentityStorage();
     dataStorage();
-var x="hdhdhdhhd";
+
     var resume_brut_des_etudes = '';
     var moyenne = 1;
 

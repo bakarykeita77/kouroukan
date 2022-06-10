@@ -43,7 +43,7 @@
     var resume_des_etudes = [];
     var p = [];
     var point_max = '';
-    
+    alert('authentification automatique reussi');
 
 
 /*-------------------------------------------------------------------------------------------------------------------------

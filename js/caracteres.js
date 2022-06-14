@@ -1,6 +1,4 @@
-alert('connecter à caracteres.js');
     
-    var niveau = $('#niveau_container').html(); 
     var caracteres = [
         ["ߊ", "ߋ", "ߌ", "ߍ", "ߎ", "ߏ", "ߐ"],
         ["ߓ", "ߔ", "ߕ", "ߖ", "ߗ", "ߘ", "ߙ", "ߛ", "ߜ", "ߝ", "ߞ", "ߟ", "ߡ", "ߢ", "ߣ", "ߤ", "ߥ", "ߦ"],

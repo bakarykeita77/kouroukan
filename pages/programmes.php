@@ -24,6 +24,7 @@ if(isset($_SESSION['id'])){
     </div>
     
     <script src = "http://localhost:8080/kouroukan/js/class.js"     ></script>
+    <script src = "http://localhost:8080/kouroukan/js/jquery-3.3.1.js"     ></script>
     <script src = "http://localhost:8080/kouroukan/js/caracteres.js"></script>
     <script src = "http://localhost:8080/kouroukan/js/programmes.js"></script>
     

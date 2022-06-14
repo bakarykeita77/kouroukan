@@ -43,7 +43,6 @@
     var resume_des_etudes = [];
     var p = [];
     var point_max = '';
-    alert('authentification automatique reussi');
 
 
 /*-------------------------------------------------------------------------------------------------------------------------
@@ -56,50 +55,64 @@ Au click sur l'afficheur du programme
     
     let session_phase_nbr = sessionStorage.getItem('session_phase_nbr');
 // sessionStorage.removeItem('sessison_phase_nbr'); sessionStorage.removeItem('DB_phase_nbr'); sessionStorage.removeItem('session_niveau_max'); sessionStorage.removeItem('DB_niveau_max'); sessionStorage.removeItem('niveau_max'); 	    
-
+    
     niveaux            = JSON.parse(sessionStorage.getItem('niveaux'));
     session_niveau_max = JSON.parse(sessionStorage.getItem('session_niveau_max'));
     DB_niveau_max      = JSON.parse(sessionStorage.getItem('niveau_max'));
-    niveau_max = (session_niveau_max > DB_niveau_max) ?  session_niveau_max : DB_niveau_max;
-    
-    
-    matieres_etudiees = sessionStorage.getItem('matieres_etudiees');
-    derniere_matiere  = sessionStorage.getItem('derniere_matiere');
-    phases_etudiees   = sessionStorage.getItem('phases_etudiees');
-    dernieres_phases  = sessionStorage.getItem('dernieres_phases');
-    dernieres_phases_distinctes  = JSON.parse(sessionStorage.getItem('dernieres_phases_distinctes'));
-    derniere_phase    = sessionStorage.getItem('derniere_phase');
-
+    if(session_niveau_max != null && DB_niveau_max != null) {
+        niveau_max = (session_niveau_max > DB_niveau_max) ?  session_niveau_max : DB_niveau_max;
+        
+        matieres_etudiees = sessionStorage.getItem('matieres_etudiees');
+        derniere_matiere  = sessionStorage.getItem('derniere_matiere');
+        phases_etudiees   = sessionStorage.getItem('phases_etudiees');
+        dernieres_phases  = sessionStorage.getItem('dernieres_phases');
+        dernieres_phases_distinctes  = JSON.parse(sessionStorage.getItem('dernieres_phases_distinctes'));
+        derniere_phase    = sessionStorage.getItem('derniere_phase');
+    }else{
+        niveau_max = 0;
+    }
+  
 /*2*/programme();
     if(session_niveau_max > DB_niveau_max) changerProgramme();
-
-
+      
+    
 /*-----------------------------------------------------------------------------------------------------------------------*/
     
     function programme() {
-        
-        programme_div.html(programmeHTML());
+       
+        programme_div.innerHTML = programmeHTML();
         programmeStyle();
         nomDeLaMatiereActive();
         programmeNavigation();
-        
+       
         function programmeHTML() {
             var programme_html = '<ul id="programme_ul">';
-    alert(liste_de_matieres.length);    
+        
             for (var i = 0; i < liste_de_matieres.length; i++) {
-                            
+
                 var matiere_id    = liste_de_matieres[i][0];
                 var matiere_nom   = liste_de_matieres[i][1];
                 var matiere_index = liste_de_matieres.indexOf(liste_de_matieres[i]);
-                var niveau        = matiere_index+1;
-            
-            if (niveau_max >= matiere_index || $('#'+matiere_id).hasClass('active')) 
-            {
+                var niveau        = matiere_index+1;                   
+             
+              
+                if(niveau_max === 0) {
+                    var phases_lien = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max;
+                    if(matiere_index === 0) {
+                        programme_html += '<li id="'+liste_de_matieres[i][0]+'"><a href="'+phases_lien+'">'+liste_de_matieres[i][1]+'</a></li>\n\n';
+                    }
+                    if(matiere_index > 0) programme_html += '<li><a href="#">'+liste_de_matieres[i][1]+'</a></li>';
+                }
+                   
+                if(niveau_max > 0) {
                     var phases_lien = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees+'&derniere_phase='+derniere_phase;
-                    programme_html += '<li id="'+liste_de_matieres[i][0]+'"><a href="'+phases_lien+'">'+liste_de_matieres[i][1]+'</a></li>\n\n';
-                } else {
-                    programme_html += '<li><a href="#">'+liste_de_matieres[i][1]+'</a></li>';
-                } 
+                    if (niveau_max < matiere_index || $('#'+matiere_id).hasClass('a_apprendre')) {
+                        if(matiere_index > 0) programme_html += '<li><a href="#">'+liste_de_matieres[i][1]+'</a></li>';
+                    }
+                    if (niveau_max >= matiere_index || $('#'+matiere_id).hasClass('active')) {
+                        programme_html += '<li id="'+liste_de_matieres[i][0]+'"><a href="'+phases_lien+'">'+liste_de_matieres[i][1]+'</a></li>\n\n';
+                    }
+                }
             }
             programme_html += '</ul>';
             
@@ -114,30 +127,39 @@ Au click sur l'afficheur du programme
             c)- Si l'index est supérieur au niveau max, l'élément prend la classe a_apprendre définie dans class.css.
         --------------------------------------------------------------------------------------------------------------------*/
 
-            $.each($('#programmes_container ul li'), function() {
-                
+            let programme_li = $("#programme_ul li");
+            
+            $.each(programme_li, function() {
+                         
                 var matiere_index = $(this).index();
+
+                if(niveau_max === 0) {
+                    if(matiere_index === 0) $(this).addClass('active');
+                    if(matiere_index > 0) $(this).addClass('a_apprendre');
+                }
         
-                if(matiere_index  < niveau_max) $(this).addClass('apprises');
-                if(matiere_index  > niveau_max+1) $(this).addClass('a_apprendre');
-                if(matiere_index == niveau_max) {
+                if(niveau_max > 0) {
+                    if(matiere_index  < niveau_max) $(this).addClass('apprises');
+                    if(matiere_index  > niveau_max+1) $(this).addClass('a_apprendre');
+                    if(matiere_index == niveau_max) {
+                        
+                        let total_phases = (niveau_max == 0) ? 3:4;
+                        let nbr_phases_etudiees = dernieres_phases_distinctes.length;
                     
-                    let total_phases = (niveau_max == 0) ? 3:4;
-                    let nbr_phases_etudiees = dernieres_phases_distinctes.length;
-                
-                    if(total_phases == nbr_phases_etudiees) { 
-                        
-                        $(this).removeClass('active'); 
-                        $(this).addClass('apprises'); 
-                        $(this).next().removeClass('a_apprendre'); 
-                        $(this).next().addClass('active');
-                    }
-                    if(total_phases > nbr_phases_etudiees) { 
-                        
-                        $(this).removeClass('a_apprendre'); 
-                        $(this).addClass('active'); 
-                        $(this).next().removeClass('a_apprendre'); 
-                        $(this).next().addClass('a_apprendre');
+                        if(total_phases == nbr_phases_etudiees) { 
+                            
+                            $(this).removeClass('active'); 
+                            $(this).addClass('apprises'); 
+                            $(this).next().removeClass('a_apprendre'); 
+                            $(this).next().addClass('active');
+                        }
+                        if(total_phases > nbr_phases_etudiees) { 
+                            
+                            $(this).removeClass('a_apprendre'); 
+                            $(this).addClass('active'); 
+                            $(this).next().removeClass('a_apprendre'); 
+                            $(this).next().addClass('a_apprendre');
+                        }
                     }
                 }
             });

@@ -1,4 +1,10 @@
  // token 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
+	
+	let niveau = 0, niveaux = [], niveaux_distincts = [], niveau_max = '';
+	let matieres = [], matieres_etudiees = [], derniere_matiere = '';
+	let phases_etudiees = [], dernieres_phases = [], dernieres_phases_distinctes = [], derniere_phase = '';
+	let phases_1 = [], phases_2 = [], phases_3 = [], phases_4 = [];
+	
 
     userIdentityStorage();
     dataStorage();
@@ -24,13 +30,8 @@
     	.then(matiere => {
     	        
     	    let matieres = matiere;
-    	    
-        	let niveaux = [], niveaux_distincts = [], niveau_max = '';
-        	let matieres_etudiees = [], derniere_matiere = '';
-        	let phases_etudiees = [], dernieres_phases = [], dernieres_phases_distinctes = [], derniere_phase = '';
-        	let phases_1 = [], phases_2 = [], phases_3 = [], phases_4 = [];
         	
-        	
+	alert(matieres);
     
         /*-------------------------------------------------------------------------   
           Niveaux et phases
@@ -173,4 +174,3 @@
     	})
     	.catch(error => alert( error ));
     }
-//	alert(document.getElementById('prenom').innerHTML+" "+document.getElementById('nom').innerHTML);

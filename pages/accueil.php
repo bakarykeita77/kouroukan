@@ -82,7 +82,7 @@ session_start();
 
 <script src="http://localhost:8080/kouroukan/js/class.js"></script>
 <script src="http://localhost:8080/kouroukan/js/caracteres.js"></script>
-<script src = "http://localhost:8080/kouroukan/js/accueil.js"></script>
+<script src="http://localhost:8080/kouroukan/js/accueil.js"></script>
 
 </body>
 </html>

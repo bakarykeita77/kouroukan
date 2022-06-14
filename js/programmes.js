@@ -82,7 +82,7 @@ Au click sur l'afficheur du programme
        
         programme_div.innerHTML = programmeHTML();
         programmeStyle();
-        nomDeLaMatiereActive();
+        storageDeLaMatiereActive();
         programmeNavigation();
        
         function programmeHTML() {
@@ -164,14 +164,13 @@ Au click sur l'afficheur du programme
                 }
             });
         }
-        function nomDeLaMatiereActive() {
+        function storageDeLaMatiereActive() {
             $('#programme_ul li').on('click', function(){
                 
                 sessionStorage.setItem('matiere_active', $(this).attr('id')); 
                 sessionStorage.setItem('matiere_nom'   , $(this).text()    ); 
                 sessionStorage.setItem('matiere_index' , $(this).index()   ); 
                 sessionStorage.setItem('niveau_actif'  , $(this).index()+1 ); 
-                
             });
         }
         function programmeNavigation() {

@@ -1,14 +1,14 @@
 <?php
 session_start();
-if(isset($_SESSION['connected'])){
+if(isset($_SESSION["id"])){
     
     $matiere_id             = $_GET['matiere_id'];
     $matiere_index          = $_GET['matiere_index'];
     $matiere_nom            = $_GET['matiere_nom'];
     $niveau                 = $_GET['niveau'];
     $niveau_max             = $_GET['niveau_max'];
-    $phases_etudiees        = $_GET['phases_etudiees'];
-    $resume_brut_des_etudes = $_GET['resume_brut_des_etudes'];
+    $phases_etudiees = ($matiere_index > 0) ? $_GET['phases_etudiees'] : "";
+   // $resume_brut_des_etudes = $_GET['resume_brut_des_etudes'];
 
     $chiffres = ['߀','߁','߂','߃','߄','߅','߆','߇','߈','߉'];
 
@@ -27,6 +27,7 @@ if(isset($_SESSION['connected'])){
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/class.css"/>
 
     <script src="http://localhost:8080/kouroukan/js/jquery-3.3.1.js"></script>
+    <script src="http://localhost:8080/kouroukan/fonctions.js"></script>
     <script src="http://localhost:8080/kouroukan/js/html2canvas.js"></script>
     <script src="http://localhost:8080/kouroukan/js/icones.js"></script>
     <script src="http://localhost:8080/kouroukan/js/caracteres.js"></script>
@@ -46,8 +47,6 @@ if(isset($_SESSION['connected'])){
                     <p id='matiere_nom_container'   ><?= $matiere_id; ?></p>
                     <p id='niveau_container'        ><?= $niveau; ?></p>
                     <p id='niveau_max_container'    ><?= $niveau_max; ?></p>
-                    <p id='resume_brut_des_etudes_container' ><?= $resume_brut_des_etudes; ?></p>
-                    
                 </div>
               <!----------------------------------------------------------------------------------------------------->  
                 <h4>ߘߋ߰ߟߌ ߞߛߊߞߊ : <span class="niveau_courant"><?= $chiffres[$niveau+1]; ?><span class='rang'></span></h4>
@@ -241,7 +240,6 @@ if(isset($_SESSION['connected'])){
 
     <audio id="audio"></audio>
     
-    <script src="http://localhost:8080/kouroukan/fonctions.js"></script>
     <script src="http://localhost:8080/kouroukan/js/lessons.js"></script>
     <script src="http://localhost:8080/kouroukan/js/parametres.js"></script>
     <script src="http://localhost:8080/kouroukan/js/alphabet.js"></script>

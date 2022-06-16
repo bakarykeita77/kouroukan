@@ -30,26 +30,20 @@ $('document').ready(function() {
 	var etape_actuelle = [];
 	var etapes_a_faire = [];
 	var etape_max = [];
-        
     
     var resume_des_etudes = [];
         
 	var phases_actuelles, phases_actuelles_etudiees, phase_precedante;
 	var index_phase_actuelle, index_phase_precedante, index_phase_active;
 	var avancer_btn = '';
-	
 
   /*--------------------------------------------------------------------
-    
     1)- La situation des études est faite par récupération et traitement des données reçues sur l'apprenant.
 	2)- La liste des phases est établie en fonction du niveau d'étude de l'apprenant (selon les phases étudiées ou pas)
 	3)- Le paramétrage conséquent est défini pour la leçon future.
 	4)- Les phases s'affichent et
 	5)- On peut surfer
-    
-    --------------------------------------------------------------------*/
-
-   // sessionStorage.removeItem('session_phase_nbr'); sessionStorage.removeItem('DB_phase_nbr');	sessionStorage.removeItem('session_niveau_max'); sessionStorage.removeItem('DB_niveau_max'); 	    
+  --------------------------------------------------------------------*/
        
         getPhases(); 
    /*2*/phases();
@@ -258,7 +252,6 @@ $('document').ready(function() {
     	        if(course_id=='pratique'){ ceh = pratiqueEnteteHTML(); }
     	         
     	        return ceh;
-    	        
     	        
     	        function apprentissageEnteteHTML() {
     	            
@@ -1977,9 +1970,7 @@ $('document').ready(function() {
     	    }
       	});
     	
-    	$('#go_to_lesson').on('click', function() {
-	        $('.phases ul li').click();
-	    });
+    	$('#go_to_lesson').on('click', function() { $('.phases ul li').click(); });
 	    
         function actualiserCochage() {
             voyelles_cochees = $('#voyelles_cochees').html().split('');

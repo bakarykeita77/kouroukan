@@ -11,11 +11,11 @@
 
  <body>
     <div class="container" align="center">
-        
+        <div class="page_head"><?php require('pages/tete-de-page.php'); ?></div>
         <div id="header"><h3 id="nom_ecole">ߞߙߎ߬ߞߊ߲߬</h3></div>
        
         <div id='fond_de_container' class='centerH'></div>
-        <div class="">
+        <div class="page_body">
            
             <div id="asides_container0" align="center">
                 <div class="aside" id="aside01" style="font-size:24px">ߒߞߏ ߘߋ߰ߟߌ ߦߙߐ ߓߟߐߟߐ ߞߊ߲߬</div>
@@ -24,12 +24,6 @@
                     <p id="connexion_btn"><a href="pages/connexion.php">ߌ ߜߊ߲߬ߞߎ߲߬</a></p>
                     <p id="inscription_btn"><a href="pages/inscription.php">ߌ ߕߐ߮ ߛߓߍ߫ </a></p>
                 </div>
-            </div>
-            <div id="asides_container2">
-                <div id="aside21"></div>
-                <div id="aside22"></div>
-                <div id="aside23"></div>
-                <div id="aside24"></div>
             </div>
         </div>
         <div class="page_foot"></div>

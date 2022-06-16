@@ -134,11 +134,12 @@ body{
 }
 
 #profile_menu_container{
-    position: absolute;
+    position: relative;
     border: 1px solid transparent; 
     border-radius: 6px;
     box-shadow: 0 0 16px #ccc;
     width: 90vw;
+    max-width: 400px;
     left: 5vw;
     box-sizing: border-box;
     top: 48px;

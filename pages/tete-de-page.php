@@ -14,7 +14,7 @@
     
 	<div id="topbar" class="nav_bar"> 
      		
-		<div id="logo"> <img src="" alt="logo"/></div>
+		<div id="logo"> <img src="http://localhost:8080/kouroukan/pages/get-avatar.php?client_id=<?= $_SESSION['id'] ?>" alt=<?=$_SESSION["prenom"]?>/></div>
 		
      	<div id='profile_menu_container'>
 	
@@ -54,7 +54,7 @@
 
 		<div id = "nav">
 			<ul id="menu_deroulant">
-			    <li class="hover_anim" id="home"     ><i class="fas fa-home"></i></i><a href = "index.php">    ߝߊ߲ߓߊ </a></li>
+			    <li class="hover_anim" id="home"     ><i class="fas fa-home"></i></i><a href = "index.php">ߝߊ߲ߓߊ </a></li>
 			    <li class="hover_anim" id="alphabet" ><a href = "programmes.php"> ߥߟߊ߬ߘߊ ߟߎ߬ </a></li>
 			    <li class="hover_anim" id="syllabe"  ><a href = "">ߛߊ߲߬ߓߊ߬ߕߐ߮ </a></li>
  	     	</ul>

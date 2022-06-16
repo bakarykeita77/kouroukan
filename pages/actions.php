@@ -76,7 +76,7 @@
 			$utilisateurs =  $requette->execute();
 			return $utilisateurs;
 		 }
-		function archiverPratique($id_user,$pratique){
+		function archiverPratique($id_user,$pratique) {
 		    global $db;
 
 			$sql = "INSERT INTO pratiques(id_user, pratique) 
@@ -89,7 +89,7 @@
 			$pratiques = $requette->execute();
 
 			return $pratiques;
-		}
+		 }
 		function archiverLesson($id_client,$matiere,$niveau,$phase,$lesson,$note) {
 		    global $db;
 		    
@@ -108,8 +108,8 @@
 		    $data = $requete -> fetchAll(PDO::FETCH_ASSOC);
 		    
 		    return $data;
-		}
-		function archiverNotes($numero, $question, $reponse, $points){
+		 }
+		function archiverNotes($numero, $question, $reponse, $points) {
 			global $db;
 
 			$sql = "INSERT INTO notes(numero, question, reponse, points) 
@@ -124,8 +124,8 @@
 			$notes = $requette->execute();
 
 			return $notes;
-		}
-		function getAllClients(){
+		 }
+		function getAllClients() {
 			global $db;
 
 			$sql = "SELECT * FROM users ORDER BY id DESC LIMIT 12";
@@ -134,7 +134,7 @@
 			$requette->execute();
 			return $utilisateurs = $requette->fetchAll(PDO::FETCH_ASSOC);
 		 }
-		function getClient($id){
+		function getClient($id) {
 			global $db;
 
 			$sql = "SELECT * FROM users WHERE id=:id_client";
@@ -155,8 +155,8 @@
 		    $data = $requete-> fetch(PDO::FETCH_ASSOC);
 		    
 		    return $data;
-		}
-		function getEmailsAndPasswords(){
+		 }
+		function getEmailsAndPasswords() {
 			global $db;
 
 			$sql = "SELECT email, password FROM users";
@@ -167,7 +167,7 @@
 
 			return $emailsAndPass;
 		 }
-		function modifierClient($id, $prenom, $nom, $naissance, $sexe, $adresse, $email, $password){
+		function modifierClient($id, $prenom, $nom, $naissance, $sexe, $adresse, $email, $password) {
 			global $db;
 
 			$sql = "UPDATE users SET prenom=:prenom, nom=:nom, naissance=:naissance, sexe=:sexe, adresse=:adresse, email=:email, password=:password WHERE id=:id";
@@ -186,7 +186,7 @@
 			$utilisateurs =  $requette->execute();
 			return $utilisateurs;
 		 }
-		function nbrEmails(){
+		function nbrEmails() {
 			global $db;
 
 			$sql = "SELECT COUNT(email) FROM users";
@@ -197,7 +197,7 @@
 
 			return $nbr_emails;
 		 }
-		function passCorrespondant($client_email){
+		function passCorrespondant($client_email) {
 			global $db;
 
 			$sql = "SELECT password FROM users WHERE email=:email";
@@ -209,14 +209,14 @@
 
 			return $pass_correspondant;
 		 }
-        function securiser($donnee){
+        function securiser($donnee) {
             $donnee = trim($donnee);
             $donnee = stripslashes($donnee);
             $donnee = strip_tags($donnee);
             
             return $donnee;
-        }
-		function supprimerClient($id){
+         }
+		function supprimerClient($id) {
 			global $db;
 
 			$sql = "DELETE FROM users WHERE id=:id";

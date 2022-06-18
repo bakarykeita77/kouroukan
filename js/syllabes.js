@@ -22,7 +22,7 @@
     function syllab() {
         var slb = [];
         
-        for(var k=0;k<caracteres_coches[3].length;k++){
+        for(var k = 0; k < caracteres_coches[3].length; k++) {
             for(var i=0;i<caracteres_coches[1].length;i++) {
                 for(var j=0;j<caracteres_coches[0].length;j++) {
                     slb[slb.length] = caracteres_coches[1][i]+caracteres_coches[0][j]+caracteres_coches[3][k];

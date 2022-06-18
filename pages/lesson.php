@@ -2,11 +2,11 @@
 session_start();
 if(isset($_SESSION["id"])){
     
-    $matiere_id             = $_GET['matiere_id'];
-    $matiere_index          = $_GET['matiere_index'];
-    $matiere_nom            = $_GET['matiere_nom'];
-    $niveau                 = $_GET['niveau'];
-    $niveau_max             = $_GET['niveau_max'];
+    $matiere_id      = $_GET['matiere_id'];
+    $matiere_index   = $_GET['matiere_index'];
+    $matiere_nom     = $_GET['matiere_nom'];
+    $niveau          = $_GET['niveau'];
+    $niveau_max      = $_GET['niveau_max'];
     $phases_etudiees = ($matiere_index > 0) ? $_GET['phases_etudiees'] : "";
    // $resume_brut_des_etudes = $_GET['resume_brut_des_etudes'];
 
@@ -28,7 +28,7 @@ if(isset($_SESSION["id"])){
 
     <script src="http://localhost:8080/kouroukan/js/jquery-3.3.1.js"></script>
     <script src="http://localhost:8080/kouroukan/fonctions.js"></script>
-    <script src="http://localhost:8080/kouroukan/js/html2canvas.js"></script>
+ <!--   <script src="http://localhost:8080/kouroukan/js/html2canvas.js"></script>   -->
     <script src="http://localhost:8080/kouroukan/js/icones.js"></script>
     <script src="http://localhost:8080/kouroukan/js/caracteres.js"></script>
     <script src="http://localhost:8080/kouroukan/js/class.js"></script>
@@ -55,7 +55,7 @@ if(isset($_SESSION["id"])){
             </div>
         </div>
         <div class="page_foot"><?php include("pied-de-lesson.php"); ?></div>
-    </div>
+     </div>
 
     <div class="course_container">
         
@@ -83,7 +83,7 @@ if(isset($_SESSION["id"])){
                 <div id='tons_coches'></div>
                 <div id='nasalisations_cochees'></div>
             </div>
-        </div>
+         </div>
       <!-------------------------------------------------------------------->
         <div class="course" id="apprentissage" align="center">
             
@@ -94,7 +94,7 @@ if(isset($_SESSION["id"])){
                 <span class='lesson_progress_bonne_reponse_bar'></span>
             </div>
             
-        </div>
+         </div>
       <!-------------------------------------------------------------------->
         <div class="course" id="exercice"      align="center">
             
@@ -105,7 +105,7 @@ if(isset($_SESSION["id"])){
                 <span class='lesson_progress_bonne_reponse_bar'></span>
             </div>
             
-        </div>
+         </div>
       <!-------------------------------------------------------------------->
         <div class="course" id="pratique"      align="center">
          <!--------------------------------------------------------------------
@@ -176,7 +176,7 @@ if(isset($_SESSION["id"])){
             
                 <div class="clavier_container" id="clavier_pratique"><?php include "clavier.php"; ?></div>
             </div>
-        </div>
+         </div>
       <!-------------------------------------------------------------------->
         <div class="course" id="evaluation"    align="center">
             <div class="course_head" id="evaluation_entete">
@@ -221,7 +221,7 @@ if(isset($_SESSION["id"])){
             <div class='progress_bar'><span class='progress_question_bar'></span><span class='progress_bonne_reponse_bar'></span></div>
 
             <div class="clavier_container"><?php include "clavier.php"; ?></div>
-        </div>
+         </div>
       <!-------------------------------------------------------------------->
         <form method="POST" action="actions.php" id="lesson_form" style="display:none">
                     
@@ -232,11 +232,11 @@ if(isset($_SESSION["id"])){
             <input type="text"   name="lesson"   id="lesson_input">
             <input type="number" name="note"     id="note_input">
             <input type="submit" id="submit_btn" value="Envoyer">
-        </form>
+         </form>
       <!-------------------------------------------------------------------->
         <p class='hand'> &#128070;&#127999; </p>
       <!-------------------------------------------------------------------->
-    </div>
+     </div>
 
     <audio id="audio"></audio>
     
@@ -247,7 +247,6 @@ if(isset($_SESSION["id"])){
     <script src="http://localhost:8080/kouroukan/js/tons.js"></script>
     <script src="http://localhost:8080/kouroukan/js/chiffres.js"></script>
     <script src="http://localhost:8080/kouroukan/js/apprentissage.js"></script>
-    <script src="http://localhost:8080/kouroukan/js/exercises.js"></script>
     <script src="http://localhost:8080/kouroukan/js/pratiques.js"></script>
     <script src="http://localhost:8080/kouroukan/js/evaluations.js"></script>
     

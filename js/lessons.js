@@ -66,7 +66,7 @@ $('document').ready(function() {
 	    stylesDesPhases();
 	    affichageDesPhases();
    
-        function phasesHTML(){
+        function phasesHTML() {
             
             var lesson_id = $('.lesson_title').attr('id');
             
@@ -364,12 +364,12 @@ $('document').ready(function() {
                                 
                                 return entete_html;
                         	}
-                    	}
+                    	 }
                     	function afficherApprentissage() {
                             apprentissage.css({'display':'block', 'transform':'scale(0.75)', 'opacity':0});
                             setTimeout(function() { apprentissage.css({'transform':'scale(1)'});}, 5);
                             setTimeout(function() { apprentissage.css({'opacity':'1'});}, 5);
-                    	}
+                    	 }
                         function parametrageDeApprentissage() {
                             affichageDeParametres();
                             
@@ -496,7 +496,6 @@ $('document').ready(function() {
                                     clicks_memo[element_index] = [element,element_click_counter];
                  
                                     $(this).on('click', function(){
-                
                                         
                                       /*--------------------------------------------------------------------
                                        3)- Enregistrement des clicks 
@@ -537,11 +536,11 @@ $('document').ready(function() {
                             
                             $('#course_fermeture').on('click',function() {
                     	        
-                    	        var course = $(this).sibblings('.course').html();
-                    	        
+                    	        var course = $(this).siblings('#apprentissage').html();
+                    	      
                                 if(phase_index <  phase_nbr) { return; }
-                                if(phase_index == phase_nbr) {
-                                    
+                                if(phase_index === phase_nbr) {
+                                   
                                     note = noterApprentissage();
                                     
                                     if(note <  moyenne) alert("ߌ ߡߊ߫ ߛߓߍߘߋ߲ ߥߟߊ ߜߋ߭ ߠߎ߬ ߓߍ߯ ߟߊߡߍ߲߫");
@@ -597,7 +596,6 @@ $('document').ready(function() {
                                     var phase   = sessionStorage.getItem('phase');
                                     var lesson  = JSON.stringify(clicks_memo);
             
-                             
                                     const apprentissage_data = new URLSearchParams({
                                         id     : id,
                                         matiere: matiere,
@@ -611,9 +609,8 @@ $('document').ready(function() {
                                         method: "POST",
                                         body: apprentissage_data
                                     })
-                                    .then(response => response.json())
+                                    .then(response => console.log(response))
                                     .catch(error => console.log(error));
-                                    
                                 }
                             });
                 	    }

@@ -6,8 +6,8 @@
 	<meta charset="utf-8">
     <link rel="stylesheet" href="http://localhost:8080/kouroukan/css/tete-de-page.css"/>
     <link rel="stylesheet" href="http://localhost:8080/kouroukan/css/class.css"/>
-	<script src="/js/jquery-3.3.1.js"></script>
 <!--	<script src="http://kit.fontawesome.com/45b3b93014.js" crossorigin="anonymous"></script>    -->
+    <script src="http://localhost:8080/kouroukan/js/jquery-3.3.1.js"></script>
 </head>
 
 <body>
@@ -54,8 +54,8 @@
 
 		<div id = "nav">
 			<ul id="menu_deroulant">
-			    <li class="hover_anim" id="home"     ><i class="fas fa-home"></i></i><a href = "index.php">ߝߊ߲ߓߊ </a></li>
-			    <li class="hover_anim" id="alphabet" ><a href = "programmes.php"> ߥߟߊ߬ߘߊ ߟߎ߬ </a></li>
+			    <li class="hover_anim" id="home"     ><i class="fas fa-home"></i></i><a href = "http://localhost:8080/kouroukan/index.php">ߝߊ߲ߓߊ </a></li>
+			    <li class="hover_anim" id="alphabet" ><a href = "http://localhost:8080/kouroukan/pages/programmes.php"> ߥߟߊ߬ߘߊ ߟߎ߬ </a></li>
 			    <li class="hover_anim" id="syllabe"  ><a href = "">ߛߊ߲߬ߓߊ߬ߕߐ߮ </a></li>
  	     	</ul>
 
@@ -68,12 +68,12 @@
 
 
     <script src="http://localhost:8080/kouroukan/fonctions.js"></script>
-	<script src="http://localhost:8080/kouroukan/js/ajax.js"></script>
+<!--	<script src="http://localhost:8080/kouroukan/js/ajax.js"></script>	-->
     <script src="http://localhost:8080/kouroukan/js/tete-de-page.js"></script>
     <script src="http://localhost:8080/kouroukan/js/caracteres.js"></script>
     <script src="http://localhost:8080/kouroukan/js/class.js"></script>
     <script src="http://localhost:8080/kouroukan/js/profile.js"></script>
-    <script src="http://localhost:8080/kouroukan/js/lesson.js"></script>
+
 	
 </body>
 </html>

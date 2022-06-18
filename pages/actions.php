@@ -24,8 +24,6 @@
     $lesson    = isset($_POST['lesson'])    ? $_POST['lesson']:null;
     $note      = isset($_POST['note'])      ? $_POST['note']:null;
     $referer   = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/pages/index.php';
-
- 
     
     $id_client = securiser($id_client);
     $id_client = (int) $id_client;
@@ -45,14 +43,11 @@
     $lesson    = securiser($lesson);
     $note      = securiser($note);
     $note      = (int) $note;
-    
  
   /*----------------------------------------------------------------------------------------------*/
 
     if($id_client != '' && $matiere != '' && $niveau == '' && $phase == '' && $lesson == '' && $note == '') getAllInfo($lesson,$id_client);
-    if($id_client != '' && $matiere != '' && $niveau != '' && $phase != '' && $lesson != '' && $note != '') archiverLesson($id_client,$matiere,$niveau,$phase,$lesson,$note);
-    
-                
+    if($id_client != '' && $matiere != '' && $niveau != '' && $phase != '' && $lesson != '' && $note != '') archiverLesson($id_client,$matiere,$niveau,$phase,$lesson,$note);              
  
   /*----------------------------------------------------------------------------------------------*/
   

@@ -17,7 +17,6 @@ $(document).ready(function(){
             let ajax_client = [clients[i].id, clients[i].prenom, clients[i].nom, clients[i].naissance, clients[i].sexe, clients[i].adresse, clients[i].email];
             ajax_clients.push(ajax_client);
         }
-        document.getElementById('client_identification_brute_container').innerHTML = ajax_clients.join(';');
     }, function(){});
     ajaxGet("/kouroukan/pages/lesson-data.php",    function(response){
         var lessons_data = JSON.parse(response);

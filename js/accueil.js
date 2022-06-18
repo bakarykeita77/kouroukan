@@ -1,13 +1,16 @@
- // token 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
-	
+
 	let niveau = 0, niveaux = [], niveaux_distincts = [], niveau_max = '';
 	let matieres = [], matieres_etudiees = [], derniere_matiere = '';
 	let phases_etudiees = [], dernieres_phases = [], dernieres_phases_distinctes = [], derniere_phase = '';
 	let phases_1 = [], phases_2 = [], phases_3 = [], phases_4 = [];
-	
 
     userIdentityStorage();
     dataStorage();
+
+	let avatar_name = sessionStorage.getItem('id');
+	if(avatar_name == null) {
+	 $('#logo').css('display', 'none');
+	}
 
     var resume_brut_des_etudes = '';
     var moyenne = 1;
@@ -21,7 +24,7 @@
         sessionStorage.setItem('sexe',      document.getElementById('sexe').innerHTML);
         sessionStorage.setItem('adresse',   document.getElementById('adresse').innerHTML);
         sessionStorage.setItem('email',     document.getElementById('email').innerHTML);
-    }
+     }
     function dataStorage() {
         let user_id = parseInt(sessionStorage.getItem('id')); 
 
@@ -31,7 +34,6 @@
     	        
     	    let matieres = matiere;
         	
-	alert(matieres);
     
         /*-------------------------------------------------------------------------   
           Niveaux et phases
@@ -173,4 +175,4 @@
             sessionStorage.setItem('pratiques', JSON.stringify(pratiques));
     	})
     	.catch(error => alert( error ));
-    }
+     }

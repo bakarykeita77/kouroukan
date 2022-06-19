@@ -23,7 +23,7 @@
         table += "</table>";
                 
         return table;
-    }  // Cette fonction est appelée dans lesson.js    	
+    } 	
     function alphabetExercicesHTML() {
 
         var exercices_corps_html = '<table class="table_muette">\n\n';
@@ -41,5 +41,4 @@
         exercices_corps_html += '</table>';
             	    
         return exercices_corps_html;
-    }       // Cette fonction est appelée dans lesson.js 
-
+    } 

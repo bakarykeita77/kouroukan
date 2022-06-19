@@ -23,7 +23,6 @@ $('document').ready(function() {
     var phase_nbr = phaseNombre();
 
     var resume_brut_des_etudes = $('#resume_brut_des_etudes_container').html();
-    var voyelles_cochees, consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees;
       
     var rang = '';
 	var etapes_passees = '';
@@ -535,7 +534,7 @@ $('document').ready(function() {
                 	    function stockerApprentissage() {
                             
                             $('#course_fermeture').on('click',function() {
-                    	        
+                   	        
                     	        var course = $(this).siblings('#apprentissage').html();
                     	      
                                 if(phase_index <  phase_nbr) { return; }

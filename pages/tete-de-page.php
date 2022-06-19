@@ -48,7 +48,7 @@
  	                
              	    <div class="profile_menu_head"><a href="deconnexion.php">ߌ ߜߊ߲߬ߞߎ߲߬ߣߍ߲߬ ߓߐ߫</a></div>
          	    </div>
-     	</div>
+     	 </div>
  	    <div id="profile_teste"></div>
  	    <div id="profile_teste_point"></div>
 
@@ -57,12 +57,12 @@
 			    <li class="hover_anim" id="home"     ><i class="fas fa-home"></i></i><a href = "http://localhost:8080/kouroukan/index.php">ߝߊ߲ߓߊ </a></li>
 			    <li class="hover_anim" id="alphabet" ><a href = "http://localhost:8080/kouroukan/pages/programmes.php"> ߥߟߊ߬ߘߊ ߟߎ߬ </a></li>
 			    <li class="hover_anim" id="syllabe"  ><a href = "">ߛߊ߲߬ߓߊ߬ߕߐ߮ </a></li>
- 	     	</ul>
+ 	     	 </ul>
 
 			<ul class = "nav_menu">
 				<li id="menu"  > &#9776;   </li>
 				<li id="livres"> &#xf02d; </li>
-			</ul>
+			 </ul>
 		</div>
 	</div>
 

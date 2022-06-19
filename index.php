@@ -4,7 +4,7 @@
 
  <head>
  	<title>ߞߙߎ߬ߞߊ߲߬</title>
- 	<meta charset="utf-8" name="viewport" content="width=device-width, initial- scale=1"/>
+ 	<meta charset="utf-8" name="viewport"/>
   	<link rel="stylesheet" href="css/index.css">
   	<link rel="stylesheet" href="css/class.css">
  </head>

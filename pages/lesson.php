@@ -62,7 +62,9 @@ if(isset($_SESSION["id"])){
       <!-------------------------------------------------------------------->
         <span class="fermeture" id="course_fermeture">&times;</span>
       <!-------------------------------------------------------------------->
-	    <div id="parametres">   <!--Les éléments de paramètres sont chargés depuis js/parametres.js-->
+	    
+        <!--Les éléments de paramètres sont chargés depuis js/parametres.js-->
+        <div id="parametres">   
             <div id='lesson_parametres_glissiere'>
                 <table id='table1'>
                     <tr id='tr11'>
@@ -72,7 +74,7 @@ if(isset($_SESSION["id"])){
                         <td id='tons_checker'></td>
                         <td id='nasalisation_checker'></td>
                     </tr>
-                </table>
+                 </table>
                 <table id='table2'><tr><td><input type='submit' name='submit_btn' value='ߏ߬ ߛߓߍߦߊ߫. ' id='submit_btn'></td></tr></table>
             </div>
 

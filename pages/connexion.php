@@ -3,7 +3,7 @@
 <html>
 <head>
 	<title>connexion</title>
- 	<meta charset="utf-8" name="viewport" content="width=device-width, initial- scale=1"/>
+ 	<meta charset="utf-8" name="viewport"/>
 	<link rel = "stylesheet" href = "http://localhost:8080/kouroukan/css/connexion.css"/>
 	<link rel = "stylesheet" href = "http://localhost:8080/kouroukan/css/class.css"/>
 </head>
@@ -32,17 +32,17 @@
 	
 	<script>
 	
-	    var input = $('#formulaire_de_connexion div input:not("#button_box input")');
-	    input.val('');
+	    var input = document.querySelectorAll('#formulaire_de_connexion div input:not(#button_box input)');
+	    input.innerHRML = '';
 	    
-	    $.each(input, function(){
+	    input.forEach(function(){
 	        
-	        $(this).on('focus', function(){
-	            $(this).parent().addClass('box_anime');
+	        this.addEventListener('focus', function(){
+	            this.parent().addClass('box_anime');
 	        });
-	        $(this).on('blur', function(){
-	            if($(this).val()=='')
-	            { $(this).parent().removeClass('box_anime'); }
+	        this.addEventListener('blur', function(){
+	            if(this.innerHTML=='')
+	            { this.parent().removeClass('box_anime'); }
 	        });
 
 	    });

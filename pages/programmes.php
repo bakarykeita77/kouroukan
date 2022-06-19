@@ -6,7 +6,7 @@ if(isset($_SESSION['id'])){
 <html>
 <head>
     <title>programmes</title>
- 	<meta charset="utf-8" name="viewport" content="width=device-width, initial- scale=1"/>
+ 	<meta charset="utf-8" name="viewport"/>
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/programmes.css"/>
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/class.css"/>
 </head>

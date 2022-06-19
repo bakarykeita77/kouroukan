@@ -240,7 +240,6 @@ if(isset($_SESSION["id"])){
 
     <audio id="audio"></audio>
     
-    <script src="http://localhost:8080/kouroukan/js/lessons.js"></script>
     <script src="http://localhost:8080/kouroukan/js/parametres.js"></script>
     <script src="http://localhost:8080/kouroukan/js/alphabet.js"></script>
     <script src="http://localhost:8080/kouroukan/js/syllabes.js"></script>
@@ -249,6 +248,7 @@ if(isset($_SESSION["id"])){
     <script src="http://localhost:8080/kouroukan/js/apprentissage.js"></script>
     <script src="http://localhost:8080/kouroukan/js/pratiques.js"></script>
     <script src="http://localhost:8080/kouroukan/js/evaluations.js"></script>
+    <script src="http://localhost:8080/kouroukan/js/lessons.js"></script>
     
 </body>
 </html>

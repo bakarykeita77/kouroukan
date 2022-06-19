@@ -23,7 +23,7 @@ $('document').ready(function() {
     var phase_nbr = phaseNombre();
 
     var resume_brut_des_etudes = $('#resume_brut_des_etudes_container').html();
-    var voyelles_cochees, consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees;
+    var caracteres_coches = [], voyelles_cochees = [], consonnes_cochees = [], tedos_coches = [], tons_coches = [], nasalisations_cochees = [];
       
     var rang = '';
 	var etapes_passees = '';
@@ -155,7 +155,7 @@ $('document').ready(function() {
     	            $(this).addClass('apprises');
     	        }
             });
-	}
+	 }
     function changerPhaseActive(nbr) {
                            
         $.each($('#phases_list li'), function() {
@@ -172,7 +172,7 @@ $('document').ready(function() {
             if(total_phase == nbr  ) $(this).removeClass('a_apprendre');
             if(total_phase == nbr  ) $(this).addClass('apprises');
         });
-    }
+     }
 	function matiere() {
     	
     	sessionStorage.setItem('total_phase', $('#phases_list li').length);
@@ -440,7 +440,7 @@ $('document').ready(function() {
                                     elements_clickes.push($(this).html());
                                 });
                             }
-                        }
+                         }
                         function enregistrerApprentissage() {
                             
                             var table, tr, td, nbr_table, nbr_tr, nbr_td, nbr_table_td;
@@ -542,7 +542,7 @@ $('document').ready(function() {
                                 if(phase_index === phase_nbr) {
                                    
                                     note = noterApprentissage();
-                                    
+                           alert(note+' / '+moyenne);         
                                     if(note <  moyenne) alert("ߌ ߡߊ߫ ߛߓߍߘߋ߲ ߥߟߊ ߜߋ߭ ߠߎ߬ ߓߍ߯ ߟߊߡߍ߲߫");
                                     if(note >= moyenne) {
                                     
@@ -584,8 +584,8 @@ $('document').ready(function() {
                                             sum_click ++;
                                         }}
                                         return sum_click;
-                                    }
-                                }
+                                     }
+                                 }
                                 function sendApprentissageToDB() {       
                                  /*
                                  A la fermeture, on s'assure que chaque élément est clické au moins un nombre de fois défini.
@@ -613,7 +613,7 @@ $('document').ready(function() {
                                     .catch(error => console.log(error));
                                 }
                             });
-                	    }
+                	     }
                 	}
                 	function exercices() {
                	    

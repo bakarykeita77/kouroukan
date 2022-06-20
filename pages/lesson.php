@@ -75,7 +75,11 @@ if(isset($_SESSION["id"])){
                         <td id='nasalisation_checker'></td>
                     </tr>
                  </table>
-                <table id='table2'><tr><td><input type='submit' name='submit_btn' value='ߏ߬ ߛߓߍߦߊ߫. ' id='submit_btn'></td></tr></table>
+                <table id='table2'>
+                    <tr>
+                        <td><input type='submit' name='submit_btn' value='ߏ߬ ߛߓߍߦߊ߫. ' id='submit_btn'></td>
+                    </tr>
+                </table>
             </div>
 
             <div style='display:none'>

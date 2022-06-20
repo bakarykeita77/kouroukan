@@ -1,6 +1,7 @@
 #inscription_form {
-    position: absolute;
-    width: 400px;
+    position: fixed;
+	width: 80%;
+	max-width: 400px;
     height: 400px;
     top: 56px;
     background-color: #fff;

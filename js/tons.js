@@ -9,7 +9,7 @@
         for(var consonne=0;consonne<caracteres_coches[1].length;consonne++) {
         for(var voyelle=0;voyelle<caracteres_coches[0].length;voyelle++) {
         for(var nasalisation=0;nasalisation<caracteres_coches[4].length;nasalisation++) {
-        for(var ton=0;ton<caracteres_coches[5].length;ton++) {
+        for(var ton=0;ton<caracteres_coches[4].length;ton++) {
                 tonifies[tonifies.length] = caracteres_coches[1][consonne]+caracteres_coches[0][voyelle]+caracteres_coches[3][ton]+caracteres_coches[4][nasalisation];
         }}}}
         

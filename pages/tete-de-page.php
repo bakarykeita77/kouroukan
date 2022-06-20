@@ -14,7 +14,7 @@
 		
 		<div id="topbar" class="nav_bar"> 
 				
-			<div id="logo"> <img src="" alt="avatar"/></div>
+			<div id="logo"> <img src="http://localhost:8080/kouroukan/pages/get-avatar.php?client_id=<?= $avatar_id ?>" alt="avatar"/></div>
 			
 			<div id='profile_menu_container'>
 		

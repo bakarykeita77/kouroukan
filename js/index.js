@@ -31,7 +31,6 @@
    }
    var bnh = $('#barre_navigation').height();
    
-
    $('.id_parlant td').on( 'click', function(){
       audio.attr({
          src:'son/mp3/'+ $(this).attr( 'id' ) +'.mp3',

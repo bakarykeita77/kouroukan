@@ -16,11 +16,11 @@
     		
     		<form action="http://localhost:8080/kouroukan/pages/accueil.php" method="POST" id="formulaire_de_connexion">
     			<div class="input_box">
-    				<input type="email" autocomplete="off" name="client_email" id="client_email">
+    				<input type="email" autocomplete="off" name="client_email" class="connexion_input" id="client_email">
     				<label>Email</label>
     			</div>
     			<div class="input_box">
-    				<input type="password" autocomplete="off" name="client_pass" id="client_pass">
+    				<input type="password" autocomplete="off" name="client_pass" class="connexion_input" id="client_pass">
     				<label>ߜߎ߲߬ߘߎ߬ߕߐ߮</label>
     			</div>
     			<div id="button_box">
@@ -32,17 +32,18 @@
 	
 	<script>
 	
-	    var input = document.querySelectorAll('#formulaire_de_connexion div input:not(#button_box input)');
-	    input.innerHRML = '';
+	    var input = document.querySelectorAll(".connexion_input");
+	    input.innerHRML = "";
 	    
-	    input.forEach(function(){
+	    input.forEach(function(item){
+			const list = item.parentElement.classList;
 	        
-	        this.addEventListener('focus', function(){
-	            this.parent().addClass('box_anime');
+	        item.addEventListener("focus", function(){
+	            list.add("box_anime");
 	        });
-	        this.addEventListener('blur', function(){
-	            if(this.innerHTML=='')
-	            { this.parent().removeClass('box_anime'); }
+	        item.addEventListener("blur", function(){
+	            if(item.innerHTML=='')
+	            { list.remove("box_anime"); }
 	        });
 
 	    });

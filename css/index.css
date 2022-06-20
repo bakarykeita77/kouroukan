@@ -14,12 +14,14 @@ body {
     
 }
 #fond_de_container {
-    background: url("image/keita.jpg");
+    position: absolute;
+    background: url("http://localhost:8080/kouroukan/image/keita.jpg");
+    background-size: cover;
     background-repeat: no-repeat;
     top: 76px;
     width: 100%;
-    height: 100%;
-    opacity: 0.25;
+    height: calc(100% - 76px);
+    opacity: 0.2;
 }
 #asides_container0 {
     position: relative;

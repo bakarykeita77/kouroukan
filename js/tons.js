@@ -2,7 +2,7 @@
     var syllabes_tonifies = tonification();  
     var tons_questions = mix1D(syllabes_tonifies);
 
-alert( "ok" ); 
+
     
     function tonification(){
         var tonifies = [];

@@ -51,12 +51,12 @@
 	position: absolute;
 	margin: 0;
 	width: 100%;
-	font-size: 24px;
+	font-size: 1.5rem;
 } 
 .input_box input:focus ~ label,
 .input_box input:valid ~ label{
 	color: cornflowerblue;
 	top: -16px;
-	font-size: 12px;
+	font-size: 0.75rem;
 	transition: 0.5s;
 }

@@ -36,8 +36,8 @@ session_start();
 <head>
 	<title>accueil</title>
 	<meta charset="utf-8">
-	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/accueil.css"/>
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/class.css"/>
+	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/accueil.css"/>
 </head>
 <body>
 

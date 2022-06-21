@@ -43,8 +43,8 @@
 <head>
 	<title>inscriptions</title>
  	<meta charset="utf-8" name="viewport"/>
-	<link rel = "stylesheet" href = "http://localhost:8080/kouroukan/css/inscription.css"/>
 	<link rel = "stylesheet" href = "http://localhost:8080/kouroukan/css/class.css"/>
+	<link rel = "stylesheet" href = "http://localhost:8080/kouroukan/css/inscription.css"/>
 </head>
 <body>
     

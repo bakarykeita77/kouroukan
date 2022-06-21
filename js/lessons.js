@@ -320,7 +320,7 @@ $('document').ready(function() {
                 localStorage.clear();
             }
     	    function cours() {
-    	        
+    	 alert(course_id);         
         	    if(phase_class != 'a_apprendre') {    
 
                     $('.course_container').css('display','block');
@@ -328,7 +328,7 @@ $('document').ready(function() {
                     
                     sessionStorage.setItem('session_niveau_max', niveau_max);
                     var session_niveau_max = JSON.parse(sessionStorage.getItem('session_niveau_max'));
-                    
+                 
                     switch (course_id) {
                         case 'apprentissage':apprentissages(); $('.fermeture').attr('id', 'fermer_apprentissage'); break;
                         case 'exercice'     :exercices();      $('.fermeture').attr('id', 'fermer_exercice');      break;

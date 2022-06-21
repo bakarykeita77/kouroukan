@@ -71,7 +71,7 @@
     border-radius: 50%;
     top: 0;
     left: 0;
-    font-size: 96px;
+    font-size: 6rem;
     font-weight: bold;
     text-align: center;
     background-color: #fff;
@@ -84,7 +84,7 @@
 #check_mark{
     color: blue;
     transform: rotateY(180deg);
-    font-size: 96px;
+    font-size: 6rem;
 }
 #cross_container{
     position: absolute;
@@ -106,7 +106,7 @@
     top: 50%;
     opacity: 0.5;
     transform: translate(-50%,-50%);
-    font-size: 80px;
+    font-size: 5rem;
 }
 #teste_annexes_container{
     height: 100%;

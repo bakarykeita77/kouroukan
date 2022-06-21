@@ -88,7 +88,7 @@ body{
 		text-decoration: none;
 		padding: 0.3em;
 		color: rgba(0,0,0,0.75);
-		font-size: 16px;
+		font-size: 1rem;
 	}
 }
 @media (max-width: 800px) {
@@ -216,7 +216,7 @@ body{
     right: 50%;
     top: 50%;
     font-weight: bold;
-    font-size: 32px;
+    font-size: 2rem;
     opacity: 0.12;
     transform: translate(50%, -50%);
 }
@@ -342,7 +342,7 @@ body{
     font-size: 12px;
 }
 #profile_utilisateur_renseignements div span:last-child{
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: bold;
 }
 #profile_utilisateur_image_container{

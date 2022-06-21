@@ -4,8 +4,8 @@
 <head>
 	<title>connexion</title>
  	<meta charset="utf-8" name="viewport"/>
-	<link rel = "stylesheet" href = "http://localhost:8080/kouroukan/css/connexion.css"/>
 	<link rel = "stylesheet" href = "http://localhost:8080/kouroukan/css/class.css"/>
+	<link rel = "stylesheet" href = "http://localhost:8080/kouroukan/css/connexion.css"/>
 </head>
 <body>
     

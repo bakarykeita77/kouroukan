@@ -18,13 +18,13 @@ if(isset($_SESSION["id"])){
 <html>
 <head>
     <title>lesson</title>
- 	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1"/>
+ 	<meta charset="utf-8" name="viewport"/>
+	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/class.css"/>
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/lesson.css"/>
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/syllabes.css"/>
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/parametres.css"/>
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/pratiques.css"/>
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/evaluation.css"/>
-	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/class.css"/>
 
     <script src="http://localhost:8080/kouroukan/js/jquery-3.3.1.js"></script>
     <script src="http://localhost:8080/kouroukan/fonctions.js"></script>

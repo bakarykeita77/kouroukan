@@ -25,7 +25,7 @@ body{
     width: 100%;
 }
 #table_de_matieres_container ul li a{
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: bold;
     color: rgba(0,0,0,0.5);
     text-decoration: none;
@@ -214,7 +214,7 @@ body{
     border-style:none; 
     margin: auto; 
     font-weight:bold; 
-    font-size:16px; 
+    font-size:1rem; 
 }
 #croix {
     position: absolute;
@@ -239,7 +239,7 @@ body{
     margin: 0;
     padding: 0;
     text-align: center;
-    font-size: 24px;
+    font-size: 1.5rem;
     right: 0;
     top: 0;
 }
@@ -301,7 +301,7 @@ body{
 }
 .check_btn{
     display: block;
-    font-size: 18px;
+    font-size: 1.2rem;
     font-weight: bold;
 }
 .check_btn input, .checkbox_titre input{ margin: 0 6px; }
@@ -362,7 +362,7 @@ body{
 #niveau_d_etude { display: none; }
 #teste_btn{
     width: 100%;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: bold;
     background-color: #ccc;
 }

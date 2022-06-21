@@ -50,7 +50,7 @@ body {
     width: 120px;
     height: 24px;
     line-height: 24px;
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: bolder;
     background-color: #666;
 }

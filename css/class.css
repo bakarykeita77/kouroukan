@@ -1,4 +1,6 @@
-
+html {
+    font-size: 16px;
+}
 @media screen and (min-width: 601px) {
     .container {
         width: 80vw;
@@ -189,7 +191,7 @@
     margin: 16px 0;
     overflow: auto;
     left: 8px;
-    font-size: 2em;
+    font-size: 1rem;
     font-weight: bold;
     box-sizing: border-box;
 }
@@ -232,12 +234,12 @@
 .course_head div label {
     padding: 0 8px;
     border-radius: 5px;
-    font-size: 14px;
+    font-size: 0.75rem;
 }
 .course_head div span:last-child {
     padding: 0 4px;
     margin: 0 4px;
-    font-size: 18px;
+    font-size: 1rem;
 }
 .cover {
     position: absolute;
@@ -336,7 +338,7 @@
     margin: 0;
     top: 112px;
     left: 50%;
-    font-size: 80px;
+    font-size: 4rem;
     text-shadow: 16px 16px 8px #666;
 }
 .hover_anim:hover {

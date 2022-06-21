@@ -4,8 +4,8 @@
 	<head>
 		<title>topbar</title>
 		<meta charset="utf-8">
-		<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/tete-de-page.css"/>
 		<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/class.css"/>
+		<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/tete-de-page.css"/>
 	 <!--	<script src="http://kit.fontawesome.com/45b3b93014.js" crossorigin="anonymous"></script>    -->
 		<script src="http://localhost:8080/kouroukan/js/jquery-3.3.1.js"></script>
 	</head>

@@ -320,7 +320,7 @@ $('document').ready(function() {
                 localStorage.clear();
             }
     	    function cours() {
-    	 alert(course_id);         
+    	    
         	    if(phase_class != 'a_apprendre') {    
 
                     $('.course_container').css('display','block');

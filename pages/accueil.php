@@ -35,7 +35,8 @@ session_start();
 <html>
 <head>
 	<title>accueil</title>
-	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/class.css"/>
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/accueil.css"/>
 </head>
@@ -67,8 +68,8 @@ session_start();
                 </div>
               <!----------------------------------------------------------------------------------------------------->  
                 
-                <p>ߖߐ ߦߴߌ ߡߊ߬ ߞߟߊߓߎߡߊ</p>
-                <h2><?= $_SESSION["prenom"].' '.$_SESSION["nom"]  ?></h2>
+                <p><span id="nom_d_utilisateur"><?= $_SESSION["prenom"].' '.$_SESSION["nom"]  ?><span/> ߖߐ ߦߴߌ ߡߊ߬ ߞߟߊߓߎߡߊ</p>
+                <h2></h2>
                 <div id="message_de_bienvenu">
                     <p>ߌ ߣߌ߫ ߛߣߍ߫ ߞߙߎ߬ߞߊ߲߫ ߘߋ߰ߘߊ ߟߊ߫߸ ߒߞߏ ߟߐ߲ߠߌ ߛߌߟߊ߫ ߛߎߘߎ߲߸ ߓߟߐߟߐ ߛߌߟߊ ߝߍ߬.</p>
                     <p>ߞߏ߫ ߛߎ ߦߋ߫ ߞߏ߬ ߟߊ߫ ߛߐ߭ ߟߋ߬ ߡߊ߬߸ ߒ߬ߓߊ߬߹ ߌ ߖߌߖߊ߬ ߸ ߌ ߦߋ߫ ߥߟߊ߬ߘߊ ߕߊ߬ ߌߞߘߐ߫߹ ߦߊ߲߬.</p>

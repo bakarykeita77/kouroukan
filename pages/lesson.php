@@ -18,7 +18,8 @@ if(isset($_SESSION["id"])){
 <html>
 <head>
     <title>lesson</title>
- 	<meta charset="utf-8" name="viewport"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/class.css"/>
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/lesson.css"/>
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/syllabes.css"/>

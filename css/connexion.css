@@ -1,8 +1,7 @@
 #connexion_form {
     position: fixed;
 	width: 80%;
-	max-width: 400px;
-    height: 400px;
+	max-width: 25rem;
 	border: 1px solid #ddd;
 	background-color: #fff;
 	box-shadow: 0 4px 16px #666;

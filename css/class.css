@@ -1,5 +1,5 @@
 html {
-    font-size: 16px;
+    font-size: 100%;
 }
 @media screen and (min-width: 601px) {
     .container {
@@ -14,7 +14,7 @@ html {
 }
 .actif, .active {
     background-color: yellow;
-}
+ }
 .actif, .active, .apprises, .a_apprendre {
     padding: 0 16px;
     margin: 1px 0;
@@ -318,10 +318,10 @@ html {
 .fixe {
     position: fixed;
 }
-.fond_blanc_casse {;
+.fond_blanc_casse {
     background-color: #ccc;
 }
-.flowerblue {;
+.flowerblue {
     background-color: cornflowerblue;
 }
 .fond_noir_clair {
@@ -640,7 +640,9 @@ html {
 .table_parlante td, .table_muette td {
     position: relative;
     padding: 8px 0;
-    font-weight: bold;
+    font-weight: 900;
+    font-size: 1.5rem;
+    font-stretch: expanded;
     text-align: center;
     border-radius: 10%;
     cursor: pointer;

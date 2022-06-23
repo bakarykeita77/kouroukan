@@ -1,5 +1,4 @@
-body{
-}
+
 #tete_de_page_container{
     position: absolute;
     height: 72px;
@@ -180,8 +179,9 @@ body{
     z-index: 1010;
     transition: 0.3s;
 }
-#profile_menu_body_content{
-    
+#profile_email {
+    display:inline-block; 
+    width:180px;
 }
 .matiere_menu {
     display: inline-block;

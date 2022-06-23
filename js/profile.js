@@ -1,14 +1,19 @@
 $(document).ready(function(){
+
+    var prenom = sessionStorage.getItem("prenom");
+    var nom = sessionStorage.getItem("nom");
+    var naissance = sessionStorage.getItem("naissance");
+    var sexe = sessionStorage.getItem("sexe");
+    var adresse = sessionStorage.getItem("adresse");
+    var email = sessionStorage.getItem("email");
     
-    var profile_menu_container, profile_entete, profile_teste_btn, profile_teste_menu, profile_teste;
-    var profile_utilisateur_btn, profile_utilisateur_container, profile_utilisateur, modifier_avatar;
+    var profile_utilisateur_renseignements, profile_menu_container, profile_teste_btn, profile_teste_menu, profile_teste;
+    var profile_utilisateur_btn, profile_utilisateur_container, modifier_avatar;
     var client_identification_brute_container;
-    var lessons_studied_titles, profile_teste_content;
+    var profile_teste_content;
     var titre_des_matieres_apprises, titre_des_matieres_a_apprendre;
     var liste_des_matieres_apprises, liste_des_matieres_a_apprendre;
    
-    var global_testes = [];
-
     var nom_de_matiere_a_renseigne = '';
     var matiere_a_renseigne = '';
     var matiere_index = '';
@@ -352,27 +357,22 @@ $(document).ready(function(){
       /*-----------------------------------------------------------------------------*/   
         profile_utilisateur_btn.addEventListener('click', function(){
             
-            elementsHTMLDuProfileUtilisateur();
-            insertionDesElementsHTMLDeProfileUtilisateur();
-            afficherProfileUtilisateur();
-            chargementDuProfileUtilisateur();
-            modifierProfileUtilisateur();
+            profileUtilisateurHTML();
+            profileUtilisateurAffichage();
+            profileUtilisateurModificationAvatar();
             
-            function elementsHTMLDuProfileUtilisateur(){
+            function profileUtilisateurHTML(){
                 
-            var profile_utilisateur_html  = '<div> <span>ߕߐ߮ </span><span id="profile_prenom"></span></div>\n';
-                profile_utilisateur_html += '<div> <span>ߖߊ߬ߡߎ߲ </span><span id="profile_nom"></span></div>\n';
-                profile_utilisateur_html += '<div> <span>ߡߐߦߌߛߊ߲ </span><span id="profile_naissance"></span></div>\n';
-                profile_utilisateur_html += '<div> <span>ߖߊ߲߭ </span><span id="profile_sexe"></span></div>\n';
-                profile_utilisateur_html += '<div> <span>ߛߊ߲߬ߓߊ߬ߕߐ߮ </span><span id="profile_adresse"></span></div>\n';
-                profile_utilisateur_html += '<div> <table><tr><td><span style="font-weight:normal">Mail</span></td><td style="display:inline-block; width:180px"><span id="profile_mail"></span></td> </tr></table></div>\n';
+            var profile_utilisateur_html  = '<div> <span>ߕߐ߮ </span>    <span id="profile_prenom">'+prenom+'</span></div>\n';
+                profile_utilisateur_html += '<div> <span>ߖߊ߬ߡߎ߲ </span>   <span id="profile_nom">'+nom+'</span></div>\n';
+                profile_utilisateur_html += '<div> <span>ߡߐߦߌߛߊ߲ </span> <span id="profile_naissance">'+naissance+'</span></div>\n';
+                profile_utilisateur_html += '<div> <span>ߖߊ߲߭ </span>     <span id="profile_sexe"></span>'+sexe+'</div>\n';
+                profile_utilisateur_html += '<div> <span>ߛߊ߲߬ߓߊ߬ߕߐ߮ </span> <span id="profile_adresse">'+adresse+'</span></div>\n';
+                profile_utilisateur_html += '<div> <table><tr><td><span>Mail</span></td><td><span id="profile_mail">'+email+'</span></td> </tr></table></div>\n';
 
-                return profile_utilisateur_html;
+                profile_utilisateur_renseignements.innerHTML = profile_utilisateur_html;
             }
-            function insertionDesElementsHTMLDeProfileUtilisateur(){
-                profile_utilisateur_renseignements.innerHTML = elementsHTMLDuProfileUtilisateur();
-            }
-            function afficherProfileUtilisateur(){
+            function profileUtilisateurAffichage(){
                     this.onclick = toggleProfileUtilisateur();
                     function toggleProfileUtilisateur(){
                         if(profile_utilisateur_container.style.height == '180px'){
@@ -384,44 +384,7 @@ $(document).ready(function(){
                         } 
                     }
             }
-            function chargementDuProfileUtilisateur(){
-                
-                var profile_utilisateur_renseignements = document.getElementById('profile_utilisateur_renseignements');
-                var profile_prenom    = document.getElementById('profile_prenom');
-                var profile_nom       = document.getElementById('profile_nom');
-                var profile_naissance = document.getElementById('profile_naissance');
-                var profile_sexe      = document.getElementById('profile_sexe');
-                var profile_adresse   = document.getElementById('profile_adresse');
-                var profile_mail      = document.getElementById('profile_mail');
-                
-                var profile_client_id = document.getElementById('profile_client_id').innerHTML;
-                var id, prenom, nom, naissance, sexe, adresse, email = '';
-                
-                var clients_bruts = client_identification_brute_container.innerHTML;
-                clients_bruts = clients_bruts.split(';');
-                
-                var clients_collection = [];
-                for(var i=0;i<clients_bruts.length;i++){
-                    var client = clients_bruts[i].split(',');
-                    id = client[0];
-                    if(profile_client_id==id){
-                        prenom    = client[1];
-                        nom       = client[2];
-                        naissance = client[3];
-                        sexe      = client[4];
-                        adresse   = client[5];
-                        email     = client[6];
-                    }
-                }
-
-                profile_prenom.innerHTML    = ': '+prenom;
-                profile_nom.innerHTML       = ': '+nom;
-                profile_naissance.innerHTML = ': '+naissance;
-                profile_sexe.innerHTML      = ': '+sexe;
-                profile_adresse.innerHTML   = ': '+adresse;
-                profile_mail.innerHTML      = email;
-            }
-            function modifierProfileUtilisateur(){
+            function profileUtilisateurModificationAvatar(){
                 
                  var avatar_image = document.getElementById('avatar_image');
                  var avatar_submit = document.getElementById('avatar_submit');
@@ -444,8 +407,8 @@ $(document).ready(function(){
     }
     function selectionDesElementsDeProfile(){
         
+        profile_utilisateur_renseignements = document.getElementById('profile_utilisateur_renseignements');
         profile_menu_container = $('#profile_menu_container');
-        profile_entete = document.getElementById('profile_entete');
         client_evaluations_brutes_container = document.getElementById('client_evaluations_brutes_container');
         nbr_teste = document.getElementById('nbr_teste');
         profile_teste_point = document.getElementById('profile_teste_point');
@@ -458,12 +421,10 @@ $(document).ready(function(){
         client_identification_brute_container = document.getElementById('client_identification_brute_container');
         profile_utilisateur_btn = document.getElementById('profile_utilisateur_btn');
         profile_utilisateur_container = document.getElementById('profile_utilisateur_container');
-        profile_utilisateur = document.getElementById('profile_utilisateur');
         
         titre_des_matieres_apprises = document.getElementById('titre_des_matieres_apprises');
         titre_des_matieres_a_apprendre = document.getElementById('titre_des_matieres_a_apprendre');
         liste_des_matieres_apprises = document.getElementById('liste_des_matieres_apprises');
         liste_des_matieres_a_apprendre = document.getElementById('liste_des_matieres_a_apprendre');
     }  
-    
 });

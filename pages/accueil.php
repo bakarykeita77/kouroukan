@@ -25,6 +25,7 @@ session_start();
             $_SESSION["naissance"] = $client[0]["naissance"];
             $_SESSION["sexe"]      = $client[0]["sexe"];
             $_SESSION["adresse"]   = $client[0]["adresse"];
+            $_SESSION["email"]     = $client_email;
                         
             //   header("location:accueil.php");   
            

@@ -3,7 +3,7 @@
     
     $client_id = isset($_SESSION['id'])? $_SESSION['id']:'';
     if($client_id){
-        if($_POST['submit']){
+        if($_SESSION['id']){
             
             include('connexionToDB.php');
             global $db;
@@ -45,19 +45,5 @@
             <input type="submit" name="submit" id="avatar_submit" value="Envoi l'image">
         </form>
         </div>
-        
-        <script>
-            var avatar_image = document.getElementById('avatar_image');
-            var avatar_submit = document.getElementById('avatar_submit');
-            
-            window.onload = function(){
-                avatar_image.click();
-            }
-
-          //  submit.addEventListener('click', function(){
-           // });
-           // submit.click();
-            
-        </script>
     </body>
 </html>

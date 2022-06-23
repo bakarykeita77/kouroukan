@@ -18,6 +18,15 @@
 			<div id="logo"> <img src="http://localhost:8080/kouroukan/pages/get-avatar.php?client_id=<?= $avatar_id ?>" alt="avatar"/></div>
 			
 			<div id='profile_menu_container'>
+
+				<?php
+					echo($_SESSION['prenom']);
+					echo($_SESSION['nom']);
+					echo($_SESSION['naissance']);
+					echo($_SESSION['sexe']);
+					echo($_SESSION['adresse']);
+
+				?>
 		
 					<div id="client_name" style="display: none"><h2><?=$_SESSION['prenom'].' '.$_SESSION['nom'] ?> ߹</h2></div>
 					<div id="profile_client_id" style="display: none"><?=$_SESSION['id']; ?></div>
@@ -26,7 +35,16 @@
 						
 						<div class="profile_menu_head" id="profile_utilisateur_btn">Profile</div>
 						<div class="profile_menu_body" id='profile_utilisateur_container'>
-							<div id="profile_utilisateur_renseignements"></div>
+							<div id="profile_utilisateur_renseignements">
+							<!-- 						
+								<div> <span>ߕߐ߮ </span>    <span id="profile_prenom"   ><?=$_SESSION['prenom'];?></span></div>
+								<div> <span>ߖߊ߬ߡߎ߲ </span>   <span id="profile_nom"      ><?=$_SESSION['nom'];?></span></div>
+								<div> <span>ߡߐߦߌߛߊ߲ </span> <span id="profile_naissance"><?=$_SESSION['naissance'];?></span></div>
+								<div> <span>ߖߊ߲߭ </span>     <span id="profile_sexe"     ><?=$_SESSION['sexe'];?></span></div>
+								<div> <span>ߛߊ߲߬ߓߊ߬ߕߐ߮ </span> <span id="profile_adresse"  ><?=$_SESSION['adresse'];?></span></div>
+								<div> <table><tr><td><span>Mail</span></td><td><span id="profile_mail"><?=$_SESSION['email'];?></span></td></tr></table></div>
+							 -->
+							</div>
 							<div id="profile_utilisateur_image_container" align='center'>
 								<img height="100%" src="http://localhost:8080/kouroukan/pages/get-avatar.php?client_id=<?= $_SESSION['id'] ?>" alt="logo"/>
 								<div id='modifier_avatar' style="background-color:#fff; border:1px solid #ccc; overflow:hidden; position:absolute; right:50%; transform:translateX(50%); bottom:0; border-radius:6px; font-size:10px; padding:4px">ߖߌ߬ߦߊ߬ߓߍ ߡߊߝߊ߬ߟߋ߲߬</div>

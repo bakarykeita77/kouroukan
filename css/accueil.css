@@ -4,6 +4,10 @@
 #reception {
     font-size: 1rem;
  }
+#nom_d_utilisateur {
+    font-size: 1.2rem;
+    font-weight: 900;
+}
  #affiche_programme {
     width: 200px;
     margin: auto;

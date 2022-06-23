@@ -134,7 +134,7 @@ body{
 }
 
 #profile_menu_container{
-    position: relative;
+    position: absolute;
     border: 1px solid transparent; 
     border-radius: 6px;
     box-shadow: 0 0 16px #ccc;

@@ -75,8 +75,7 @@
                 PRIMARY KEY (`id`)
              ) ENGINE = MyISAM CHARSET=utf8 COLLATE utf8_general_ci";
         
-         /*------------------------------------------------------------------------------------------------------ */   
-        
+
             $db->exec($sql_table_users);
             $db->exec($sql_table_avatar);
             $db->exec($sql_table_alphabet);

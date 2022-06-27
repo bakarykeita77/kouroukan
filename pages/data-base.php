@@ -3,7 +3,8 @@
     require("connexionToDB.php");
     global $db;
 
-
+ /*------------------------------------------------------------------------------------------------------ */   
+    
     //$sql_database = "CREATE DATABASE IF NOT EXISTS `education`";
     
     $sql_table_users    = "CREATE TABLE IF NOT EXISTS `kouroukan`.`users`(

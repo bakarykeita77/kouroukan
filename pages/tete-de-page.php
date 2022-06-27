@@ -19,15 +19,6 @@
 			
 			<div id='profile_menu_container'>
 
-				<?php
-					echo($_SESSION['prenom']);
-					echo($_SESSION['nom']);
-					echo($_SESSION['naissance']);
-					echo($_SESSION['sexe']);
-					echo($_SESSION['adresse']);
-
-				?>
-		
 					<div id="client_name" style="display: none"><h2><?=$_SESSION['prenom'].' '.$_SESSION['nom'] ?> ߹</h2></div>
 					<div id="profile_client_id" style="display: none"><?=$_SESSION['id']; ?></div>
 				

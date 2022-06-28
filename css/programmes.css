@@ -2,7 +2,6 @@
 #programmes_container {
     position: absolute;
     border: 1px solid transparent;
-    top: 64px;
     height: 60vh;
     width: 80%;
     border-radius: 6px;

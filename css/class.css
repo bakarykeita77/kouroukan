@@ -84,12 +84,10 @@ html {
     transform: translate(-50%, -50%);
 }
 .centerH {
-    position: absolute;
     left: 50%;
     transform: translateX(-50%);
 }
 .centerV {
-    position: absolute;
     top: 50%;
     transform: translateY(-50%);
 }
@@ -515,10 +513,10 @@ html {
     vertical-align: middle;
 }
 .phases_container {
-    position: absolute;
-    top: 64px;
+    position: relative;
+    height: calc(100% - 32px);
     width: 80%;
-    height: 60vh;
+    margin: auto;
     border-radius: 6px;
     padding: 8px;
     box-sizing: border-box;

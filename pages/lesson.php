@@ -39,7 +39,7 @@ if(isset($_SESSION["id"])){
     <div class="container">
         <div class="page_head"><?php require('tete-de-page.php'); ?></div>
         <div class="page_body">
-            <div class="phases_container centerH" align="right">
+            <div class="phases_container">
               <!----------------------------------------------------------------------------------------------------->  
                 <div id="donnees_recues_de_prorammes" style="display:none">
                     
@@ -50,7 +50,7 @@ if(isset($_SESSION["id"])){
                     <p id='niveau_max_container'    ><?= $niveau_max; ?></p>
                 </div>
               <!----------------------------------------------------------------------------------------------------->  
-                <h4>ߘߋ߰ߟߌ ߞߛߊߞߊ : <span class="niveau_courant"><?= $chiffres[$niveau+1]; ?><span class='rang'></span></h4>
+                <h4>ߘߋ߰ߟߌ ߞߛߊߞߊ : <span class="niveau_courant"><?= $chiffres[$niveau]; ?><span class='rang'></span></h4>
                 <h2 class="lesson_title" id="<?= $matiere_id ?>"> <?= $matiere_nom; ?> ߥߟߊ߬ߘߊ  </h2>
                 <div class="phases liste_affichage_cascade" align="center"></div>
             </div>

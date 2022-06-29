@@ -43,7 +43,7 @@ session_start();
 </head>
 <body>
 
-    <div class="container" id="accueil" align="center">
+    <div class="container" id="accueil">
         <div class="page_head"><?php require('tete-de-page.php'); ?></div>
         <div class="page_body">
             <div id="reception">

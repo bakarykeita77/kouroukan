@@ -4,6 +4,9 @@ body {
     direction: rtl;
     font-family:Courier new, monospace;
  }
+#index_page {
+    box-shadow: 0 0 2rem #999;
+}
 .corps_de_page{
     width: 80%;
     position: relative;
@@ -11,23 +14,26 @@ body {
     margin: 0 8px;
     padding: 0 8px;
     box-sizing: border-box;
-    
 }
+
 #fond_de_container {
     position: absolute;
     background: url("http://localhost:8080/kouroukan/image/keita.jpg");
     background-size: cover;
     background-repeat: no-repeat;
-    top: 76px;
-    width: 100%;
-    height: calc(100% - 76px);
-    opacity: 0.2;
+    height: calc(100% - 10rem);
+    width: calc(100% - 1rem);
+    margin: auto;
+    top: 5rem;
+    opacity: 0.25;
 }
 #asides_container0 {
     position: relative;
     top: 10%;
+    right: 2rem;
     width: 90%;
-    height: 60%;
+    max-width: 400px;
+    padding: 0.5rem;
 }
 .aside {
     height: 32%;
@@ -36,20 +42,25 @@ body {
     position: relative;
     top: 30%;
 }
+#aside01 {
+    font-weight: bolder;
+    font-size: 2rem;
+}
 #aside03{
     position: relative;
-    width: 250px;
+    padding: 0;
+    width: 100%;
 }
 #aside03 p{
     display: inline-block;
     margin: 0;
-    padding: 0 8px;
+    padding: 0;
     border: 1px solid #bbb;
     border-radius: 4px;
     box-sizing: border-box;
-    width: 120px;
-    height: 24px;
-    line-height: 24px;
+    width: 45%;
+    height: 1.5rem;
+    line-height: 1.5rem;
     font-size: 0.75rem;
     font-weight: bolder;
     background-color: #666;
@@ -60,6 +71,9 @@ body {
 #aside03 p a {
     color: #fff;
 }
+#aside03 p:first-child { float: right; }
+#aside03 p:last-child { float: left; }
+
 #asides_container2{
     display: flex;
     flex-direction: row;

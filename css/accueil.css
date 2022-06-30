@@ -8,7 +8,7 @@
  }
 #nom_d_utilisateur {
     font-size: 1.2rem;
-    font-weight: 900;
+    font-weight: bolder;
 }
 #affiche_programme {
     position: relative;

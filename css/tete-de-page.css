@@ -84,7 +84,6 @@
 		font-weight: bold;
 		overflow: hidden;
 		cursor: pointer;
-		border: 1px solid #aaa;
 		border-radius: 4px;
 		margin: 0 0.5rem;
 	}
@@ -123,9 +122,8 @@
 
 	#menu_deroulant li {
 		margin: 2px;
-		padding: 0 40px 0 0;
 		height: 2em;
-		line-height: 2;
+		line-height: 2rem;
 		background-color:#fff;
 		border: 1px solid transparent;
 	}

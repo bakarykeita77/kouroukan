@@ -25,9 +25,9 @@ html {
     transition: 0.15s;
 }
 .active {
-    border-radius: 6px;
+    border-radius: 0.5rem;
     background-color: yellow;
-    box-shadow: 0 0 16px yellow;
+    box-shadow: 0 0 1rem yellow;
 }
 .active:active {
     background-color: #FFF000;

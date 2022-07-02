@@ -13,7 +13,7 @@
     <div class="cover">
       <!----------------------------------------------------------------------------------------------------->  
         <div id = "connexion_form">
-    		<h2>ߜߊ߲߬ߞߎ߲߬ߥߟߊ</h2>
+    		<h2>ߜߊ߲߬ߞߎ߲߬ ߥߟߊ</h2>
     		
     		<form action="http://localhost:8080/kouroukan/pages/accueil.php" method="POST" id="formulaire_de_connexion">
     			<div class="input_box">

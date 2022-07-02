@@ -50,50 +50,66 @@
 <body>
     
     <div class="cover">
-    	<div id="inscription_form" align="center">
+    	<div id="inscription_form">
     		
-    		<h3>ߕߐ߯ߛߓߍߥߟߊ</h3>
+    		<h3>ߕߐ߯ߛߓߍ߫ ߥߟߊ</h3>
+    		
+    		<form action="http://localhost:8080/kouroukan/pages/accueil.php" method="POST" id="formulaire_de_connexion">
+    			
+    			<div class="input_box">
+    				<input type="text" autocomplete="off" name="prenom" class="inscription_input" id="prenom" required/>
+    				<label>ߕߐ߮</label>
+    			</div>
+    			<div class="input_box">
+    				<input type="text" autocomplete="off" name="nom" class="inscription_input" id="nom" required/>
+    				<label>ߖߊ߬ߡߎ߲</label>
+    			</div>
+    			<div class="input_box">
+    				<input type="text" autocomplete="off" name="naissance" class="inscription_input" id="naissance">
+    				<label>ߡߐߦߌߕߎߡߊ</label>
+    			</div>
+    			<div class="input_box">
+    				<input type="text" autocomplete="off" name="sexe" class="inscription_input" id="sexe">
+    				<label>ߖߊ߲߭</label>
+    			</div>
+    			<div class="input_box">
+    				<input type="text" autocomplete="off" name="adresse" class="inscription_input" id="adresse">
+    				<label>ߜߎ߲߬ߘߎ߬ߕߐ߮</label>
+    			</div>
+    			<div class="input_box">
+    				<input type="email" autocomplete="off" name="email" class="inscription_input" id="email">
+    				<label>E-mail</label>
+    			</div>
+    			<div class="input_box">
+    				<input type="password" autocomplete="off" name="client_pass" class="inscription_input" id="client_pass">
+    				<label>ߜߎ߲߬ߘߎ߬ߕߐ߮</label>
+    			</div>
+    			<div id="button_box">
+    				<input type="submit" name="submit" id="inscription_btn" value="ߊ߬ߟߎ߬ ߟߥߊ߫"/>
+    			</div>
+    		</form>
 
-    		<form method="POST" action="" align='center'>
-    		    <table>
-        			<tr>
-        				<td><label>ߕߐ߮</label></td>
-        				<td><input type="text" name="prenom" id="prenom"></td>
-        			</tr>
-        			<tr>
-        				<td><label>ߖߊ߬ߡߎ߲</label></td>
-        				<td><input type="text" name="nom" id="nom" value=''/></td>
-        			</tr>
-        			<tr>
-        				<td><label>ߡߐߦߌߕߎߡߊ</label></td>
-        				<td><input type="text" name="naissance" id="naissance"/></td>
-        			</tr>
-        			<tr>
-        				<td><label>ߖߊ߲߭</label></td>
-        				<td><input type="text" name="sexe" id="sexe"/></td>
-        			</tr>
-        			<tr>
-        				<td><label>ߛߊ߲߬ߓߊ߬ߕߐ߮</label></td>
-        				<td><input type="text" name="adresse" id="adresse"/></td>
-        			</tr>
-        			<tr>
-        				<td><label>E-mail</label></td>
-        				<td><input type="email" name="email" id="email"/></td>
-        			</tr>
-        			<tr>
-        				<td><label>ߜߎ߲߬ߘߎ߬ߕߐ߮</label></td>
-        				<td><input type="password"  name="pass" id="pass"/></td>
-        			</tr>
-        			<tr>
-        			    <td></td>
-        		        <td><input type='submit' name='submit' value='ߏ߬ ߛߓߍ߫' id='submit_btn'/></td>
-        			</tr>
-    			</table>
-    		 </form>
-    		 <br>
     		 <p class="error_message" align="center"><?php if(isset($error)){ echo $error; } ?></p>
     	</div>
 	</div>
 
+	<script>
+	
+	    var input = document.querySelectorAll(".inscription_input");
+	    input.innerHRML = "";
+	    
+	    input.forEach(function(item){
+			const list = item.parentElement.classList;
+	        
+	        item.addEventListener("focus", function(){
+	            list.add("box_anime");
+	        });
+	        item.addEventListener("blur", function(){
+	            if(item.innerHTML=='') { list.remove("box_anime"); }
+	        });
+
+	    });
+	
+	</script>
 </body>
 </html>

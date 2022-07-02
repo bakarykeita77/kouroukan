@@ -4,9 +4,35 @@ body {
     direction: rtl;
     font-family:Courier new, monospace;
  }
-#index_page {
-    box-shadow: 0 0 2rem #999;
-}
+ 
+ @media (min-width: 801px) {
+     
+    #index_page {
+        box-shadow: 0 0 2rem #999;
+    }
+    #asides_container0 {
+        position: relative;
+        top: 10%;
+        width: 90%;
+        max-width: 400px;
+        margin: 2rem;
+        padding: 0.5rem;
+    }
+ }
+ @media (max-width: 800px) {
+     
+    #index_page {
+        box-shadow: none;
+    }
+    #asides_container0 {
+        position: relative;
+        top: 10%;
+        width: calc(100% - 4rem);
+        margin: auto;
+        padding: 0.5rem;
+    }
+ }
+
 .corps_de_page{
     width: 80%;
     position: relative;
@@ -26,14 +52,6 @@ body {
     margin: auto;
     top: 5rem;
     opacity: 0.25;
-}
-#asides_container0 {
-    position: relative;
-    top: 10%;
-    right: 2rem;
-    width: 90%;
-    max-width: 400px;
-    padding: 0.5rem;
 }
 .aside {
     height: 32%;

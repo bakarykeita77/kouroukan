@@ -1,10 +1,25 @@
 
 #accueil {
+    position: absolute;
+    width: 100%;
+}
+@media(max-width: 800px) {
+    #reception {
+        width: calc(100% - 2rem);
+        margin: auto;
+    }
+}
+@media(mim-width: 801px) {
+    #reception {
+        width: 48rem;
+        margin-right: 2rem;
+    }
 }
 #reception {
+    position: relative;
+    top: 2rem;
     font-size: 1rem;
     text-align: right;
-    padding-right: 3rem;
  }
 #nom_d_utilisateur {
     font-size: 1.2rem;
@@ -12,13 +27,12 @@
 }
 #affiche_programme {
     position: relative;
-    width: 16rem;
-    padding: 1rem;
+    height: 2rem;
+    line-height: 2rem;
     background-color: #ccc;
     font-weight: bolder;
+    text-align: center;
     border-radius: 0.5rem;
-    float: right;
-    right: -1rem;
 }
 #affiche_programme a {
     display: block;

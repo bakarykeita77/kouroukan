@@ -1,22 +1,20 @@
 
 #programmes_container {
     position: relative; 
+    top: 1.5rem;
     width: 80%;
     margin: auto; 
-    border-radius: 6px;
-    padding: 8px;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
     direction: rtl;
     box-sizing: border-box;
 }
 #programmes_container h2 {
     position: relative;
     border: 1px solid transparent;
-    padding: 0 32px;
-    height: 48px;
-    line-height: 48px;
-    border-bottom: 4px solid #ccc;
-    border-radius: 6px;
-    box-shadow: 0 0 32px #ccc;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+    border-bottom: 0.25rem solid #ddd;
 }
 #programme_ul {
     position: relative;

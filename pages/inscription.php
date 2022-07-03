@@ -52,7 +52,7 @@
     <div class="cover">
     	<div id="inscription_form">
     		
-    		<h3>ߕߐ߯ߛߓߍ߫ ߥߟߊ</h3>
+    		<h2>ߕߐ߯ߛߓߍ߫ ߥߟߊ</h2>
     		
     		<form action="http://localhost:8080/kouroukan/pages/accueil.php" method="POST" id="formulaire_de_connexion">
     			

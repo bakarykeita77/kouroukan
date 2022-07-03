@@ -56,7 +56,7 @@ if(isset($_SESSION["id"])){
             </div>
         </div>
         <div class="page_foot"><?php include("pied-de-lesson.php"); ?></div>
-     </div>
+    </div>
 
     <div class="course_container">
         

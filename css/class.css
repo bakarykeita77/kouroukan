@@ -168,9 +168,9 @@ html {
 .course {
     position: relative;
     border: 0.25rem solid #fff;
-    top: 6rem;
-    height: calc(96vh - 6rem);
-    width: calc(80vw - 0.5rem);
+    top: 7rem;
+    height: calc(95vh - 6rem);
+    width: calc(90vw - 0.5rem);
     max-width: 40rem;
     margin: 0 auto;
     padding: 0;

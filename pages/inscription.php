@@ -57,59 +57,40 @@
     		<form action="http://localhost:8080/kouroukan/pages/accueil.php" method="POST" id="formulaire_de_connexion">
     			
     			<div class="input_box">
-    				<input type="text" autocomplete="off" name="prenom" class="inscription_input" id="prenom" required/>
+    				<input type="text" autocomplete="off" name="prenom" class="inscription_input" id="prenom" required />
     				<label>ߕߐ߮</label>
     			</div>
     			<div class="input_box">
-    				<input type="text" autocomplete="off" name="nom" class="inscription_input" id="nom" required/>
+    				<input type="text" autocomplete="off" name="nom" class="inscription_input" id="nom" required />
     				<label>ߖߊ߬ߡߎ߲</label>
     			</div>
     			<div class="input_box">
-    				<input type="text" autocomplete="off" name="naissance" class="inscription_input" id="naissance">
+    				<input type="text" autocomplete="off" name="naissance" class="inscription_input" id="naissance" required />
     				<label>ߡߐߦߌߕߎߡߊ</label>
     			</div>
     			<div class="input_box">
-    				<input type="text" autocomplete="off" name="sexe" class="inscription_input" id="sexe">
+    				<input type="text" autocomplete="off" name="sexe" class="inscription_input" id="sexe" required />
     				<label>ߖߊ߲߭</label>
     			</div>
     			<div class="input_box">
-    				<input type="text" autocomplete="off" name="adresse" class="inscription_input" id="adresse">
+    				<input type="text" autocomplete="off" name="adresse" class="inscription_input" id="adresse" required />
     				<label>ߜߎ߲߬ߘߎ߬ߕߐ߮</label>
     			</div>
     			<div class="input_box">
-    				<input type="email" autocomplete="off" name="email" class="inscription_input" id="email">
+    				<input type="email" autocomplete="off" name="email" class="inscription_input" id="email" required />
     				<label>E-mail</label>
     			</div>
     			<div class="input_box">
-    				<input type="password" autocomplete="off" name="client_pass" class="inscription_input" id="client_pass">
+    				<input type="password" autocomplete="off" name="client_pass" class="inscription_input" id="client_pass" required />
     				<label>ߜߎ߲߬ߘߎ߬ߕߐ߮</label>
     			</div>
     			<div id="button_box">
-    				<input type="submit" name="submit" id="inscription_btn" value="ߊ߬ߟߎ߬ ߟߥߊ߫"/>
+    				<input type="submit" name="submit" id="inscription_btn" value="ߕߐ߯ߛߓߍߟߌ ߞߍ߫"/>
     			</div>
     		</form>
 
     		 <p class="error_message" align="center"><?php if(isset($error)){ echo $error; } ?></p>
     	</div>
 	</div>
-
-	<script>
-	
-	    var input = document.querySelectorAll(".inscription_input");
-	    input.innerHRML = "";
-	    
-	    input.forEach(function(item){
-			const list = item.parentElement.classList;
-	        
-	        item.addEventListener("focus", function(){
-	            list.add("box_anime");
-	        });
-	        item.addEventListener("blur", function(){
-	            if(item.innerHTML=='') { list.remove("box_anime"); }
-	        });
-
-	    });
-	
-	</script>
 </body>
 </html>

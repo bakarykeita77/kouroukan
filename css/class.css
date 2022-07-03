@@ -156,8 +156,8 @@ html {
 }
 .container {
     position: fixed;
-    border: 1px solid #ccc;
     top: 0.125rem;
+    width: 100%;
     margin: 0;
     padding: 0 0.5rem;
     box-sizing: border-box;

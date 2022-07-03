@@ -1,19 +1,6 @@
-
 #accueil {
     position: absolute;
     width: 100%;
-}
-@media(max-width: 800px) {
-    #reception {
-        width: calc(100% - 2rem);
-        margin: auto;
-    }
-}
-@media(mim-width: 801px) {
-    #reception {
-        width: 48rem;
-        margin-right: 2rem;
-    }
 }
 #reception {
     position: relative;
@@ -21,6 +8,22 @@
     font-size: 1rem;
     text-align: right;
  }
+@media(max-width: 800px) {
+    #reception {
+        width: calc(100% - 4rem);
+        margin: auto;
+    }
+}
+@media(min-width: 801px) {
+    #reception {
+        width: 30rem;
+        margin: auto;
+        border: 1px solid transparent;
+        border-right: 1px solid #bbb;
+        border-left: 1px solid #bbb;
+        padding: 0 2rem;
+    }
+}
 #nom_d_utilisateur {
     font-size: 1.2rem;
     font-weight: bolder;

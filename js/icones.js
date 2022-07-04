@@ -19,6 +19,7 @@ var medium_dark = "&#127998;";
 var medium_light = "&#127996;";
 var menu_icon = "&#9776;";
 var minus_sign = "&#10134;";
+var montre = "&#128338;";
 
 var oblique_line = "&#8726;";
 var oreille_icon = "&#128066;&#127997;";
@@ -34,6 +35,8 @@ var UnderBrace = "&#9183;";
 var stop_icon = "&#x25A0;";
 
 var telephone = "&#9990;";
+var telephone2 = "&#128222;";
+
 
 var vertical_line = "&#124;";
 

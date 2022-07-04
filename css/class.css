@@ -164,6 +164,7 @@ html {
     left: 50%;
     transform: translateX(-50%);
     height: calc(100vh - 1rem);
+    direction: rtl;
 }
 .course {
     position: relative;

@@ -13,7 +13,7 @@
         <div class="page_head"><?php require('pages/tete-de-page.php'); ?></div>
        
         <div id='fond_de_container'></div>
-        <div class="page_body">
+        <div class="page_body" id="index_body">
            
             <div id="asides_container0" align="center">
                 <div class="aside" id="aside01" ">ߒߞߏ ߘߋ߰ߟߌ ߦߙߐ ߓߟߐߟߐ ߞߊ߲߬</div><br/>

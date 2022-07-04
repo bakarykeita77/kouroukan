@@ -6,9 +6,21 @@ body {
  }
  
  @media (min-width: 801px) {
-     
-    #index_page {
+     #index_page {
+        position: fixed;
         box-shadow: 0 0 2rem #999;
+        top: 0.125rem;
+        width: 100%;
+        max-width: 50rem;
+        margin: 0 auto;
+        padding: 0 0.5rem;
+        box-sizing: border-box;
+        left: 50%;
+        transform: translateX(-50%);
+        height: calc(100vh - 1rem);
+    }
+
+    #index_page {
     }
     #asides_container0 {
         position: relative;

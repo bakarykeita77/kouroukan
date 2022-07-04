@@ -65,9 +65,10 @@
     
     			<div id = "nav">
     				<ul id="menu_deroulant">
-    					<li class="hover_anim" id="home"     ><i class="fas fa-home"></i></i><a href = "http://localhost:8080/kouroukan/index.php">ߝߊ߲ߓߊ </a></li>
-    					<li class="hover_anim" id="alphabet" ><a href = "http://localhost:8080/kouroukan/pages/programmes.php"> ߥߟߊ߬ߘߊ ߟߎ߬ </a></li>
-    					<li class="hover_anim" id="syllabe"  ><a href = "">ߛߊ߲߬ߓߊ߬ߕߐ߮ </a></li>
+    					<li class="hover_anim" id="home"     ><a href = "http://localhost:8080/kouroukan/index.php">ߝߊ߲ߓߊ </a></li>
+    					<li class="hover_anim" id="alphabet" ><a href = "http://localhost:8080/kouroukan/pages/programmes.php"> ߢߍߥߟߊ </a></li>
+    					<li class="hover_anim" id="alphabet" ><a href = "http://localhost:8080/kouroukan/pages/blog.php"> ߞߊ߬ߙߊ߲߬ߜߍ </a></li>
+    					<li class="hover_anim" id="syllabe"  ><a href = "http://localhost:8080/kouroukan/pages/contact.php">ߛߊ߲߬ߓߊ߬ߕߐ߮ </a></li>
     				</ul>
     
     				<ul class = "nav_menu">

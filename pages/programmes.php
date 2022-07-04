@@ -17,7 +17,7 @@ if(isset($_SESSION['id'])){
         <div class="page_head"><?php require('tete-de-page.php'); ?></div>
         <div class="page_body">
             <div id="programmes_container">
-                <h2>ߘߋ߰ߟߌ ߢߍߥߟߊ </h2>
+                <h1>ߒߞߏ ߘߋ߰ߟߌ ߢߍߥߟߊ </h1>
                 <div id="programme_div"></div>
             </div>
         </div>

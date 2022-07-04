@@ -18,7 +18,7 @@
     direction: rtl;
     box-sizing: border-box;
 }
-#programmes_container h2 {
+#programmes_container h1 {
     position: relative;
     border: 1px solid transparent;
     margin-bottom: 2rem;

@@ -6,7 +6,7 @@
     position: relative;
     text-align: center;
 }
-.contact_item {
+.contact_card {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -33,17 +33,6 @@
     font-size: 0.75rem;
     overflow: auto;
 }
-.contact_btn {
-    background-color: #eee;
-    bottom: 0;
-    height: 1.5rem;
-    width: 100%;
-    text-align: center;
-    font-size: 0.8rem;
-    font-weight: bold;
-    margin: 0;
-    border-radius: 0.5rem;
-}
 
 @media(min-width: 801px) {
     #menu_contact {
@@ -68,6 +57,7 @@
 
 #contact_cover {
     position: absolute;
+    display: none;
     height: 100vh;
     width: 100vw;
     background-color: rgba(0,0,0,0.5);
@@ -77,12 +67,65 @@
 }
 .contact_formulaire {
     position: absolute;
+    display: none;
     top: 1rem;
-    height: 75vh;
+    height: 90vh;
     width: 90vw;
     max-width: 42rem;
     background-color: white;
+    border-radius: 0.5rem;
+    overflow: auto;
     left: 50%;
     transform: translateX(-50%);
+}
+
+
+#contact_form {
+    width: 80%;
+    max-width: 16rem;
+    margin: auto;
+}
+#contact_form input, #contact_form textarea {
+    position: relative;
+    width: 100%;
+    padding: 0.5rem;
+    box-sizing: border-box;
+}
+#contact_form input {
+    height: 1.5rem;
+    font-size: 0.8rem;
+    margin: 0.125rem 0;
+}
+#contact_submit {
+    background-color: #eee;
+    bottom: 0;
+    line-height: 0.5rem;
+    font-weight: bold;
+    border-radius: 0.5rem;
+}
+#contact_form textarea {
+    margin: 1.5rem 0;
+}
+
+
+#contact_position {
     border: 1px solid red;
+    height: 14rem;
+    width: 90%;
+    margin: auto;
+    padding: 1rem;
+}
+#contact_plan, #contact_horaire {
+    border: 1px solid blue;
+    display: inline-block;
+    height: 14rem;
+}
+#contact_plan {
+    background-image: url("http://localhost:8080/kouroukan/image/zialy.jpg");
+    width: 60%;
+    float: right;
+}
+#contact_horaire {
+    width: 35%;
+    float: left;
 }

@@ -10,6 +10,10 @@ $(document).ready(function() {
     fermeture.on('click', function(){
         $(this).parent().css({'display':'none'});
     });
+    var fermeture_de_parent = $('.fermeture_de_parent');
+    fermeture_de_parent.on('click', function(){
+        $(this).parent().parent().css({'display':'none'});
+    });
     var menu_icone = "&#9776;";
     $('.menu_icone').html(menu_icone);
     

@@ -294,7 +294,7 @@ html {
     width: 80vw;
 }
 
-.fermeture {
+.fermeture, .fermeture_de_parent {
     position: absolute;
     top: 4px;
     left: 4px;
@@ -311,9 +311,18 @@ html {
     background-color: #aaa;
     font-weight: bold;
 }
+.fermeture_de_parent:hover {
+    background-color: #aaa;
+    font-weight: bold;
+}
+
 .fermeture:active {
     background-color: #aaa;
 }
+.fermeture_de_parent:active {
+    background-color: #aaa;
+}
+
 .fixe {
     position: fixed;
 }

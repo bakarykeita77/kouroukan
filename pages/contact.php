@@ -34,12 +34,18 @@ session_start();
                 <div class="contact_item" id="contact_email">
                     <div class="contact_icone" id="">&#9993;</div>
                     <div class="contact_description" id="">
-                        
+                        ߣߌ߫ ߡߍ߲ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߡߊ߬ߞߕߌ߬ߟߌ ߞߍ߫ ߥߟߊ ߞߊ߬ ߡߙߌߦߊ ߛߎ−ߎ−ߛߎ߫ ߦߌ߬ߘߊ߬߸ ߏ߬ ߘߴߏ߬ ߞߍ߫. ߊ߲ ߖߟߌ߫ ߦߴߊߟߎ߫ ߟߊ߫ ߞߎߡߊ߫ ߛߊߣߌߡߊ߲ ߠߎ߬ ߟ߫. ߊ߲ ߘߌ߫ ߞߐߝߟߌ ߘߴߊߟߎ߫ ߡߊ߬ ߕߎ߬ߡߊ߬ ߜߘߍ߫.
                     </div>
                     <p class="contact_btn" id="">ߛߓߍ ߗߋ߫ ߊ߲ ߡߊ߬</p>
                 </div>
                 
             </div>
+            
+        </div>
+        <div id="contact_cover">
+            <div class="contact_formulaire" id="agence_formulaire"></div>
+            <div class="contact_formulaire" id="phone_formulaire"></div>
+            <div class="contact_formulaire" id="email_formulaire"></div>
         </div>
     </div>
 </body>

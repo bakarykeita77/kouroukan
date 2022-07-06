@@ -43,7 +43,6 @@
 	top: 0;
 	margin: 0;
 	padding: 0 1rem; 
-	width: calc(100% - 2rem);
 	height: 2rem;
 	line-height: 2.5rem;
 	overflow: auto;
@@ -51,12 +50,15 @@
 }
 .input_box label { 
     color: #bbb;
+    width: 0;
+    overflow: visible;
     font-weight: bold;
 	z-index: 0; 
 }
 .input_box input { 
 	border-style: none;
 	background-color: transparent;
+	width: calc(100% - 2rem);
 	z-index: 1; 
 }
 .input_box input:focus ~ label,

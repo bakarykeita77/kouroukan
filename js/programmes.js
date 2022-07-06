@@ -44,6 +44,13 @@
     var resume_des_etudes = [];
     var p = [];
     var point_max = '';
+    
+
+$('#nav ul li:nth(1)').addClass('surbrillance');
+$('#nav ul li:nth(1)').siblings().removeClass('surbrillance');
+
+    
+    
 
 
 /*-------------------------------------------------------------------------------------------------------------------------

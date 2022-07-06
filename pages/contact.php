@@ -49,7 +49,41 @@ session_start();
                 <h1 class="formulaire_titre"> ߛߓߍߘߊ ߦߙߐ</h1>
                 <div id="contact_position">
                     <div id="contact_plan"></div>
-                    <div id="contact_horaire"></div>
+                    <div id="contact_horaire">
+                        <h3>ߥߊߟߌ߫ ߕߎߡߊ</h3>
+                        <table>
+                            <tr>
+                                <td>ߞߐ߬ߓߊ߬ߟߏ߲</td>
+                                <td>߈:߀߀</td>
+                                <td>-</td>
+                                <td>߁߆:߀߀</td>
+                            </tr>
+                            <tr>
+                                <td>ߞߐ߬ߟߏ߲</td>
+                                <td>߈:߀߀</td>
+                                <td>-</td>
+                                <td>߁߆:߀߀</td>
+                            </tr>
+                            <tr>
+                                <td>ߞߎ߬ߣߎ߲߬ߟߏ߲</td>
+                                <td>߈:߀߀</td>
+                                <td>-</td>
+                                <td>߁߆:߀߀</td>
+                            </tr>
+                            <tr>
+                                <td>ߓߌߟߏ߲</td>
+                                <td>߈:߀߀</td>
+                                <td>-</td>
+                                <td>߁߆:߀߀</td>
+                            </tr>
+                            <tr>
+                                <td>ߛߌ߬ߣߌ߲߬ߟߏ߲</td>
+                                <td>߈:߀߀</td>
+                                <td>-</td>
+                                <td>߁߂:߀߀</td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
             <div class="contact_formulaire" id="phone_formulaire">

@@ -93,7 +93,7 @@
     }
     function couleurDeFond(element,couleur)	{ element.css('backgroundColor', couleur); }
     function couleurDeFont(element,couleur)	{ element.css('color', couleur); }
-	
+alert("ok");	
 	function incrementer(){
 	    var i=0;
 	    return function(){ return i += 1; };
@@ -163,6 +163,10 @@
 	   }
     }
     
+    mettreEnSurbrillance(element) {
+        element.addClass('surbrillance');
+        element.siblings().removeClass('surbrillance');
+    }
     function mix1D(tableau){
         var mixted_table = [];
         for(var i=0; mixted_table.length<tableau.length;i++){

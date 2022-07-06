@@ -11,6 +11,13 @@
    var audio = $('#audio');
    var tdw = $('.table_parlante td').css('width');
    var reponse = "", reponse_content = [], question_content = [];
+   
+
+$('#nav ul li:nth(0)').addClass('surbrillance');
+$('#nav ul li:nth(0)').siblings().removeClass('surbrillance');
+
+   
+   
    var ch = "", syllab = [], tonn = [];
 
  /* Dimensionnement de container */

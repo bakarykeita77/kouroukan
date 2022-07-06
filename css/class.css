@@ -633,6 +633,10 @@ html {
 .shadow {
     box-shadow: 0 8px 8px #666;
 }
+.surbrillance {
+    border: 1px solid yellow;
+    color: yellow;
+}
 
 .table_parlante, .table_muette {
     position: relative;

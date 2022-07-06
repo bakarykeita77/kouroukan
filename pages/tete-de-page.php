@@ -9,6 +9,7 @@
 		<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/tete-de-page.css"/>
 	 <!--	<script src="http://kit.fontawesome.com/45b3b93014.js" crossorigin="anonymous"></script>    -->
 		<script src="http://localhost:8080/kouroukan/js/jquery-3.3.1.js"></script>
+		<script src="http://localhost:8080/kouroukan/fonctions.js"></script>
 	</head>
 
 	<body>
@@ -66,9 +67,9 @@
     			<div id = "nav">
     				<ul id="menu_deroulant">
     					<li class="hover_anim" id="home"     ><a href = "http://localhost:8080/kouroukan/index.php">ߝߊ߲ߓߊ </a></li>
-    					<li class="hover_anim" id="alphabet" ><a href = "http://localhost:8080/kouroukan/pages/programmes.php"> ߢߍߥߟߊ </a></li>
-    					<li class="hover_anim" id="alphabet" ><a href = "http://localhost:8080/kouroukan/pages/blog.php"> ߞߊ߬ߙߊ߲߬ߜߍ </a></li>
-    					<li class="hover_anim" id="syllabe"  ><a href = "http://localhost:8080/kouroukan/pages/contact.php">ߛߊ߲߬ߓߊ߬ߕߐ߮ </a></li>
+    					<li class="hover_anim" id="programme"><a href = "http://localhost:8080/kouroukan/pages/programmes.php"> ߢߍߥߟߊ </a></li>
+    					<li class="hover_anim" id="blog"     ><a href = "http://localhost:8080/kouroukan/pages/blog.php"> ߞߊ߬ߙߊ߲߬ߜߍ </a></li>
+    					<li class="hover_anim" id="contact"  ><a href = "http://localhost:8080/kouroukan/pages/contact.php">ߛߊ߲߬ߓߊ߬ߕߐ߮ </a></li>
     				</ul>
     
     				<ul class = "nav_menu">

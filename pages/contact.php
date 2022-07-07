@@ -42,8 +42,8 @@ session_start();
                 </div>
                 
             </div>
-            
         </div>
+        
         <div id="contact_cover">
             
             <div class="contact_formulaire" id="agence_formulaire">

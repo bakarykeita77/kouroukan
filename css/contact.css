@@ -35,47 +35,6 @@
     text-align: center;
 }
 
-@media(max-width: 800px) {
-    #menu_contact {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        
-        border-radius: 0.5rem;
-        width: 80%;
-        max-width: 20rem;
-        margin: auto;
-        padding: 0 1rem;
-        box-shadow: 0 0 2rem #aaa;
-    }
-    #menu_contact hr {
-        border-color: #ddd;
-        width: 100%;
-        margin: 0;
-    }
-}
-@media(min-width: 801px) {
-    #menu_contact {
-        display: flex;
-        flex-direction: rows;
-        justify-content: space-around;
-        align-items: center;
-        
-        position: relative;
-        width: 60%;
-        min-width: 40rem;
-        margin: auto;
-        padding: 1rem;
-        border-radius: 0.5rem;
-        box-shadow: 0 0 3rem #aaa;
-    }
-    #contact_phone {
-        border-right: 1px solid #aaa;
-        border-left: 1px solid #aaa;
-    }
-}
-
 #contact_cover {
     position: absolute;
     display: none;
@@ -90,16 +49,34 @@
     position: absolute;
     display: none;
     top: 1rem;
-    height: 90vh;
     width: 90vw;
     max-width: 42rem;
+    padding: 2rem 0;
     background-color: white;
     border-radius: 0.5rem;
     overflow: auto;
     left: 50%;
     transform: translateX(-50%);
+    box-sizing: border-box;
 }
 
+#menu_contact {
+    position: relative;
+    border-radius: 0.5rem;
+    padding: 0 1rem;
+    box-shadow: 0 0 3rem #aaa;
+}
+#contact_position {
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+#contact_plan {
+    height: 10rem;
+    background-image: url("http://localhost:8080/kouroukan/image/zialy.jpg");
+    border-radius: 0.5rem;
+    box-shadow: 0 0 3rem #ddd;
+}
 
 #contact_form {
     width: 80%;
@@ -128,25 +105,60 @@
     margin: 1.5rem 0;
 }
 
-
-#contact_position {
-    height: 14rem;
-    width: 90%;
-    margin: auto;
-    padding: 1rem;
+@media(max-width: 800px) {
+    #menu_contact {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+        width: 80%;
+        max-width: 20rem;
+        margin: auto;
+    }
+    #menu_contact hr {
+        border-color: #ddd;
+        width: 100%;
+        margin: 0;
+    }
+    
+    #contact_position {
+        width: 100%;
+    }
+    #contact_plan, #contact_horaire {
+        display: block;
+        width: 100%;
+    }
 }
-#contact_plan, #contact_horaire {
-    border: 1px solid blue;
-    border-radius: 0.5rem;
-    display: inline-block;
-    height: 14rem;
-}
-#contact_plan {
-    background-image: url("http://localhost:8080/kouroukan/image/zialy.jpg");
-    width: 60%;
-    float: right;
-}
-#contact_horaire {
-    width: 35%;
-    float: left;
+@media(min-width: 801px) {
+    #menu_contact {
+        display: flex;
+        flex-direction: rows;
+        justify-content: space-around;
+        align-items: center;
+        
+        width: 60%;
+        min-width: 40rem;
+        margin: auto;
+    }
+    #contact_phone {
+        border-right: 1px solid #aaa;
+        border-left: 1px solid #aaa;
+    }
+    
+    #contact_position {
+        width: 90%;
+        margin: auto;
+    }    
+    #contact_plan, #contact_horaire {
+        display: inline-block;
+    }
+    #contact_plan {
+        width: 60%;
+        float: right;
+    }   
+    #contact_horaire {
+        width: 35%;
+        float: left;
+    }
 }

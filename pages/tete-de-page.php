@@ -65,17 +65,21 @@
     			<div id="profile_teste_point"></div>
     
     			<div id = "nav">
-    				<ul id="menu_deroulant">
-    					<li class="hover_anim" id="home"     ><a href = "http://localhost:8080/kouroukan/index.php">ߝߊ߲ߓߊ </a></li>
-    					<li class="hover_anim" id="programme"><a href = "http://localhost:8080/kouroukan/pages/programmes.php"> ߢߍߥߟߊ </a></li>
-    					<li class="hover_anim" id="blog"     ><a href = "http://localhost:8080/kouroukan/pages/blog.php"> ߞߊ߬ߙߊ߲߬ߜߍ </a></li>
-    					<li class="hover_anim" id="contact"  ><a href = "http://localhost:8080/kouroukan/pages/contact.php">ߛߊ߲߬ߓߊ߬ߕߐ߮ </a></li>
-    				</ul>
-    
-    				<ul class = "nav_menu">
-    					<li id="menu"  > &#9776;   </li>
-    					<li id="livres"> &#xf02d; </li>
-    				</ul>
+    				<div id="menu_deroulant">
+        				<ul>
+        					<li class="hover_anim" id="home"     ><a href = "http://localhost:8080/kouroukan/index.php">ߝߊ߲ߓߊ </a></li>
+        					<li class="hover_anim" id="programme"><a href = "http://localhost:8080/kouroukan/pages/programmes.php"> ߢߍߥߟߊ </a></li>
+        					<li class="hover_anim" id="blog"     ><a href = "http://localhost:8080/kouroukan/pages/blog.php"> ߞߊ߬ߙߊ߲߬ߜߍ </a></li>
+        					<li class="hover_anim" id="contact"  ><a href = "http://localhost:8080/kouroukan/pages/contact.php">ߛߊ߲߬ߓߊ߬ߕߐ߮ </a></li>
+        				</ul>
+    				</div>
+    				
+    				<div id="menu_non_deroulant">
+    				    <ul>
+    				        <li id="menu_menu">Menu</li>
+    				        <li id="menu_board">ߥߟߊ߬ߓߊ</li>
+    				    </ul>
+    				</div>
     			</div>
     		</div>
         </div>

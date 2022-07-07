@@ -490,10 +490,10 @@ html {
     margin: 0;
     width: 100%;
     left: 50%;
-    top: 72px;
+    top: 5.25rem;
     transform: translateX(-50%);
     box-sizing: border-box;
-    height: calc(100% - 80px);
+    height: calc(100% - 5rem);
     z-index: 0;
     overflow: auto;
 }

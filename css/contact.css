@@ -35,6 +35,26 @@
     text-align: center;
 }
 
+@media(max-width: 800px) {
+    #menu_contact {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+        border-radius: 0.5rem;
+        width: 80%;
+        max-width: 20rem;
+        margin: auto;
+        padding: 0 1rem;
+        box-shadow: 0 0 2rem #aaa;
+    }
+    #menu_contact hr {
+        border-color: #ddd;
+        width: 100%;
+        margin: 0;
+    }
+}
 @media(min-width: 801px) {
     #menu_contact {
         display: flex;
@@ -43,10 +63,10 @@
         align-items: center;
         
         position: relative;
-        height: 14rem;
         width: 60%;
         min-width: 40rem;
         margin: auto;
+        padding: 1rem;
         border-radius: 0.5rem;
         box-shadow: 0 0 3rem #aaa;
     }

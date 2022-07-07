@@ -8,10 +8,8 @@ body {
  @media (min-width: 801px) {
      #index_page {
         position: fixed;
-        box-shadow: 0 0 2rem #999;
-        top: 0.125rem;
+        top: 0;
         width: 100%;
-        max-width: 50rem;
         margin: 0 auto;
         padding: 0 0.5rem;
         box-sizing: border-box;
@@ -20,7 +18,11 @@ body {
         height: calc(100vh - 1rem);
     }
 
-    #index_page {
+    #index_body {
+        max-width: 50rem;
+        margin: 0;
+        padding: 0;
+        box-shadow: 0 0 2rem #999;
     }
     #asides_container0 {
         position: relative;
@@ -59,10 +61,9 @@ body {
     background: url("http://localhost:8080/kouroukan/image/keita.jpg");
     background-size: cover;
     background-repeat: no-repeat;
-    height: calc(100% - 10rem);
-    width: calc(100% - 1rem);
+    height: 100%;
+    width: 100%;
     margin: auto;
-    top: 5rem;
     opacity: 0.25;
 }
 .aside {

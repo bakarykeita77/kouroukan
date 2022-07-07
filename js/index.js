@@ -13,8 +13,8 @@
    var reponse = "", reponse_content = [], question_content = [];
    
 
-$('#nav ul li:nth(0)').addClass('surbrillance');
-$('#nav ul li:nth(0)').siblings().removeClass('surbrillance');
+    $('#nav ul li:nth(0)').addClass('surbrillance');
+    $('#nav ul li:nth(0)').siblings().removeClass('surbrillance');
 
    
    

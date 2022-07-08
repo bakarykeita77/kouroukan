@@ -5,12 +5,12 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/class.css"/>
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/tableau.css"/>
-<style>
-    <?php
-        include "css/tableau.css";
-        include "css/assistant.css";
-    ?>
-</style>
+    <style>
+        <?php
+            include "css/tableau.css";
+            include "css/assistant.css";
+        ?>
+    </style>
 
 </head>
 <body>

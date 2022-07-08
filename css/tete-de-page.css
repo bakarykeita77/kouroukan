@@ -119,8 +119,7 @@
 	#menu_deroulant {
 	    position: absolute;
 	    display: none;
-	    width: 80%;
-		max-width: 16em;
+	    width: 100%;
 	    margin: 0;
 	    padding: 0.25rem;
 	    top: 3.5em;

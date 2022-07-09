@@ -77,7 +77,7 @@
     				<div id="menu_non_deroulant">
     				    <ul>
     				        <li id="menu_menu">Menu</li>
-    				        <li id="menu_board">ߥߟߊ߬ߓߊ</li>
+    				        <li id="menu_board"><a href="http://localhost:8080/kouroukan/board.php">ߥߟߊ߬ߓߊ</a></li>
     				    </ul>
     				</div>
     			</div>

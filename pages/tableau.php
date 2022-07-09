@@ -4,13 +4,8 @@
 	<title>tableau</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/class.css"/>
+	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/assistant.css"/>
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/tableau.css"/>
-<style>
-    <?php
-        include "css/tableau.css";
-        include "css/assistant.css";
-    ?>
-</style>
 
 </head>
 <body>
@@ -60,18 +55,18 @@
 	
 	
 	<form method="POST" id="tableau_form">	
-		<textarea readonly="true" id="tableau_noir"></textarea>
+		<textarea readonly="false" id="tableau_noir"></textarea>
 	</form>
 
-	<div class = "outils" id = "cadre_assistant"> <?php include "body/assistant.php"; ?> </div>
-	<div class = "outils" id = "cadre_memoire"  > <?php include "body/memoire.php";   ?> </div>
+	<div class = "outils" id = "cadre_assistant"> <?php include "http://localhost:8080/kouroukan/pages/assistant.php"; ?> </div>
+	<div class = "outils" id = "cadre_memoire"  > <?php include "http://localhost:8080/kouroukan/pages/memoire.php";   ?> </div>
 	<div class = "outils" id = "clavier_tableau"> 
 		<span id="fermer_clavier">&times;</span>		     
-		<?php include "body/clavier.php";   ?>
+		<?php include "http://localhost:8080/kouroukan/pages/clavier.php";   ?>
 	</div>
-	<div class = "outils" id = "cadre_smartboard"> <?php include "body/smartboard.php";?> </div>
+	<div class = "outils" id = "cadre_smartboard"> <?php include "http://localhost:8080/kouroukan/pages/smartboard.php";?> </div>
 
-	<?php include "fonctions/fonctions_tableau.php"; ?>
+	<?php include "http://localhost:8080/kouroukan/fonctions/fonctions_tableau.php"; ?>
 	<script src="jquery-3.3.1.js" type="text/javascript"></script>
 	<script src="js/tableau.js" type="text/javascript"></script>
 	<script src="js/assistant.js" type="text/javascript"></script>

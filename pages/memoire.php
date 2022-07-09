@@ -39,7 +39,7 @@
 
 		
 		<script src = "js/memoire.js"></script>
-		<?php include "fonctions/fonctions_memoire.php" ?>
+		<?php include "http://localhost:8080/kouroukan/fonctions/fonctions_memoire.php" ?>
 		
 	</body>
 </html>

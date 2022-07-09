@@ -1,14 +1,17 @@
 
 #assistant {
-	position: fixed;
-	top: 120px;
+	position: absolute;
+	border-radius: 0.5rem;
+    direction: rtl;
+	top: 0;
     display: block;
     width: 60%;
     max-width: 300px;
+    min-height: 3rem;
     left: 20%;
-	transform: scale(0);
+	transform: scale(1);
     overflow: auto;
-    background-color: #555;
+    background-color: #444;
     transition: transform 200ms;
 }
 
@@ -22,12 +25,6 @@
 	padding: 4px;
 	margin: 0;
 	font-weight: bold;
-}
-
-#fermer_assistant{
-	margin: 8px;
-	border: 2px solid #555;
-	cursor: pointer;
 }
 
 #fermer_assistant:hover{

@@ -10,7 +10,7 @@
     
     <body>
 	
-		<div id="assistant">
+		<div class="outil" id="assistant">
 			<span class="fermeture">&times;</span>
 			<p id="titre_assistant"></p>
 			<div id="corps_assistant">

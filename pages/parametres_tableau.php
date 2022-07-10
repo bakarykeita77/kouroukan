@@ -1,13 +1,26 @@
 	
-	<div id = "parametres_tableau">  
+	<div class="outil" id = "parametres_tableau">  
+	    <span class="fermeture">&times;</span>
 		<div id="options_tableau">
 			<table>
-				<tr><td id="couleur"> ߞߐ߬ߟߐ </td></tr>
-				<tr><td id="zoum"> ߦߊߟߊ߲ </td></tr>
+				<tr> <td id="zoum">ߦߊߟߊ߲</td> <td id="couleur">ߞߐ߬ߟߐ</td> <td id="weight">ߜߎ</td></td></tr>
 			</table>
 		</div>
 		<div id="details_parametres">
-		    <div id="couleurs">
+		<div id="glissiere_parametres_taleau">
+		    <div class="detail" id="zoomer">
+			    <table>
+				    <tr>
+					    <td><p> ߟߊ߬ߓߏ߲߬ߧߊ߬ߟߌ </p></td>
+					    <td><p> ߟߊ߬ߘߐ߰ߦߊ߬ߟߌ </p></td>
+				    </tr>
+				    <tr>
+					    <td><p id="plus">&plus;</p></td>
+					    <td><p id="moin">&minus;</p></td>
+				    </tr>
+			    </table>
+		    </div>
+		    <div class="detail" id="couleurs">
 			    <table>
 				    <tr>
 					    <td> ߥߟߊ߬ߓߊ </td>
@@ -27,17 +40,18 @@
 				    </tr>
 			    </table>
 		    </div>
-		    <div id="zoomer">
+		    <div class="detail" id="weight">
 			    <table>
 				    <tr>
-					    <td><p> ߟߊ߬ߓߏ߲߬ߧߊ߬ߟߌ </p></td>
-					    <td><p> ߟߊ߬ߘߐ߰ߦߊ߬ߟߌ </p></td>
+					    <td><p> ߟߊ߬ߕߟߐ߬ߟߌ </p></td>
+					    <td><p> ߟߊߓߙߊߟߌ </p></td>
 				    </tr>
 				    <tr>
-					    <td><p id="plus">&plus;</p></td>
-					    <td><p id="moin">&minus;</p></td>
+					    <td><p id="bold">ߓ</p></td>
+					    <td><p id="normal">ߓ</p></td>
 				    </tr>
 			    </table>
 		    </div>
+		</div>
 		</div>
 	</div>

@@ -1,64 +1,90 @@
 
 #parametres_tableau  {
     position: absolute;
-    display: block;
+    direction: rtl;
     margin: 0;
-    padding: 0;
-    height: 25%;
+    padding: 1rem;
+    width: 12rem;
+    height: 13rem;
 	background-color: #444;
-	overflow: hidden;
-	z-index: 15000;
+	border-radius: 0.5rem;
+	
+	left: 50%;
+	transform: translate(-50%,35%);
 }
 
 #options_tableau {
-    position:absolute;
+    position:relative;
+    top: 1.5rem;
     color: #fff;
     font-weight: bold;
-    width: 25%;
-    height: 80%;
-    top: 10%;
-    right: 5%;
+    width: 12rem;
     overflow: auto;
     z-index: 1;
 }
 
 		#options_tableau table {
+		    width: 100%;
 			margin: 0;
 			padding: 0;
-			height: 100%;
 		    list-style: none;
 		}
-		
 		#options_tableau table tr {
 		    background-color: #333;
 		    width: 60%;
 		    height: 10%;
-		    padding: 20%;
 		}
-		
-		#options_tableau table tr td { text-align: center; }
+		#options_tableau table tr td { text-align:center; width:5rem;}
 		#options_tableau table tr:active { background-color: #444; }
 		
 #details_parametres {
-    position: absolute;
-    width: 100%;
-    height: 200%;
-
-    overflow: auto;
+    position: relative;
+    left: 0;
+    overflow: hidden;
+    width: 12rem;
     z-index: 0;
-    transition: top 100ms;
+    transition: 1s;
+}
+#glissiere_parametres_taleau {
+    position: relative;
+    top: 1.5rem;
+    margin: 0;
+    padding: 0;
+    right: 0;
+    width: 36.6rem;
+    height: 12rem;
 }
 
-#couleurs, #zoomer {
-    position:relative;
-    display:block;
-    width: 60%;
-    margin-right: 40%;
+#details_parametres .detail {
+    position: relative;
+    display: inline-block;
+    width: 12rem;
+    margin: 0;
+    vertical-align: top;
+    box-sizing: border-box;
 }
 
-#couleurs {
-    height: 45%;
-	margin-top:5%; 
+#couleurs tr {
+    border: 1px solid red;
+    position: relative;
+    width: 100%;
+    
+}
+
+#couleurs td {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	width: 6rem;
+}
+
+#couleurs td p {
+    height: 2em;
+    width: 2em;
+	margin: 0.25em auto;
+	padding: 0;
+    border-radius: 50%;
+	text-align: center;
 }
 
 #couleurs #noir   { background-color: #222;    }
@@ -68,27 +94,21 @@
 #couleurs #bleue  { background-color: #006699; }
 #couleurs #orange { background-color: orange;  }
 
-#couleurs td {
-	margin: 0;
-	padding: 0;
-	text-align: center;
+#zoomer table, #weight table { 
+    margin: 0;
+    width: 100%;
+}
+#zoomer tr, #weight tr { 
+    margin: 0;
+    width: 100%;
 }
 
-#couleurs td p {
-	margin: 0;
-	padding: 0;
-	margin: 0 2em;
-    width: 1.5em;
-    height: 1.5em;
-    border-radius: 50%;
-}
-
-#zoomer { height: 50%; }
-#zoomer p { 
+#zoomer p, #weight p { 
+    margin: auto;
 	text-align: center; 
 }
 
-#plus, #moin {
+#plus, #moin, #bold, #normal {
     width: 2em;
     height: 2em;
     line-height: 2em;
@@ -97,3 +117,6 @@
     background-color: #222;
     color: #fff;
 }
+
+#bold { font-weight: bold; }
+#normal { font-weight: normal; }

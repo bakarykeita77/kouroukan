@@ -8,7 +8,7 @@
     
     <body>
 			
-		<div id="memoire_tableau">
+		<div class="outil" id="memoire_tableau">
 		
 			<div id="char">
 				<input id="syllabe_input"></input>
@@ -25,17 +25,16 @@
 					<textarea id="textarea2"></textarea>
 				</div>
 			</div>
-		</div>
 		
 
 			<table id="table_mots_visibles">
 				<tr id="mots_visibles"> <td class="mot_visible">ߓߊߞߊ߬ߙߌ߬</td> </tr>
 			</table>
 			
-			
 			<table id="table_mots_audibles">
 				<tr id="mots_audibles"> <td class="mot_audible">ߓߊ߫ߞߊ߬ߙߌ߬</td> </tr>
 			</table>
+		</div>
 
 		
 		<script src = "js/memoire.js"></script>

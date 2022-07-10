@@ -1,6 +1,5 @@
 
 #tableau_noir {
-    display: block;
     position: absolute;
     width: calc(100vw - 2rem);
     margin: 1rem;
@@ -11,7 +10,6 @@
     background-color: #000;
     border-style: none;
     border-radius: 0.5rem;
-    box-shadow: 0 0 1rem #000;
     color: #fff;
     font-size: 1rem;
     box-sizing: border-box;
@@ -22,5 +20,8 @@
 }
 .outils {
     position: absolute;
-    z-index: 2000;
+    width: 100vw;
+    z-index: 1000;
 }
+
+.outils .outil:not(#parametres_tableau) {display:none; }

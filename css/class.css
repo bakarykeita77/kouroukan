@@ -296,11 +296,11 @@ html {
 
 .fermeture, .fermeture_de_parent {
     position: absolute;
-    top: 4px;
-    left: 4px;
-    width: 24px;
-    height: 24px;
-    line-height: 24px;
+    top: 0.25rem;
+    left: 0.25rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    line-height: 1.5rem;
     text-align: center;
     background-color: #ccc;
     border: 1px solid #ccc;

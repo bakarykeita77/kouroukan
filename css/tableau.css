@@ -4,17 +4,11 @@
 	direction: rtl;
 }
 
-
-
-
-
 #tableau_form {
+    position: relative;
 	margin: 0;
 	padding: 0;
 	overflow:auto;
-}
-
-#tableau_noir, #cadre_memoire, #cadre_smartboard, #cadre_assistant, #clavier_tableau {
 }
 
 #tableau_noir {

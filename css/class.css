@@ -296,11 +296,12 @@ html {
 
 .fermeture, .fermeture_de_parent {
     position: absolute;
-    top: 0.25rem;
-    left: 0.25rem;
-    width: 1.5rem;
-    height: 1.5rem;
-    line-height: 1.5rem;
+    top: 0;
+    left: 0;
+    width: 1rem;
+    height: 1rem;
+    line-height: 1rem;
+    margin: 0.25rem;
     text-align: center;
     background-color: #ccc;
     border: 1px solid #ccc;
@@ -675,6 +676,7 @@ html {
 }
 .yellow {
     background-color: yellow;
+    color: black;
 }
 
 @keyframes animate_hand {

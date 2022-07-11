@@ -29,12 +29,15 @@
 			padding: 0;
 		    list-style: none;
 		}
-		#options_tableau table tr {
+		#options_tableau table {
 		    background-color: #333;
+		    border-radius: 0.5rem;
+		}
+		#options_tableau table tr {
 		    width: 60%;
 		    height: 10%;
 		}
-		#options_tableau table tr td { text-align:center; width:5rem;}
+		#options_tableau table tr td { text-align:center; width:5rem; border-radius:0.5rem; }
 		#options_tableau table tr:active { background-color: #444; }
 		
 #details_parametres {

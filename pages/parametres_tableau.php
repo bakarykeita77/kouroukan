@@ -1,6 +1,6 @@
 	
 	<div class="outil" id = "parametres_tableau">  
-	    <span class="fermeture">&times;</span>
+	    <span class="fermeture" id="parametres_tableau_fermeture">&times;</span>
 		<div id="options_tableau">
 			<table>
 				<tr> <td id="zoum">ߦߊߟߊ߲</td> <td id="couleur">ߞߐ߬ߟߐ</td> <td id="weight">ߜߎ</td></td></tr>

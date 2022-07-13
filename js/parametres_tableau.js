@@ -29,6 +29,8 @@ function rappelerSessionParametres() {
 }
 function afficherLesOptionsDeParametre() {
     
+    $('#tableau_noir').on('dblclick', function() { $('#parametres_tableau').css('display','block'); });
+    
     $('#zoum').addClass('yellow'); 
     $('#details_parametres').scrollLeft(0);
 
@@ -53,8 +55,8 @@ function parametrerCouleurDeTexte() {
     $('#orange').on('click', function(){ $('#tableau_noir').css('color','orange');});
 }
 function parametrerTailleDeTexte() {
-    $('#plus').on('click', function(){ $('#tableau_noir').css('font-size','+=1rem'); });
-    $('#moin').on('click', function(){ $('#tableau_noir').css('font-size','-=1rem'); });
+    $('#plus').on('click', function(){ $('#tableau_noir').animate({'font-size':'+=1rem'},50); });
+    $('#moin').on('click', function(){ $('#tableau_noir').animate({'font-size':'-=1rem'},50); });
 }
 function parametrerGrosseurDeTexte() {
     $('#bold').on('click', function(){ $('#tableau_noir').css('font-weight','bold'); });

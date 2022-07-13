@@ -24,4 +24,4 @@
     z-index: 1000;
 }
 
-.outils .outil:not(#parametres_tableau) {display:none; }
+.outils .outil:not(#memoire_tableau) {display:none; }

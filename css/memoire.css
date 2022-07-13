@@ -1,6 +1,21 @@
 
 #memoire_tableau {
     position: absolute;
+    background-color: #555;
     direction: rtl;
     margin: 0;
+    padding: 1rem;
+    top: 2rem;
+    left: 2rem;
+    box-sizing: border-box;
+}
+input, textarea {
+    display: block;
+    width: 90%;
+    margin: 8px auto;-
+    padding: 4px;
+    font-weight: bold;
+}
+textarea {
+    min-height: 4rem;
 }

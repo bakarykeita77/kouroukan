@@ -46,6 +46,8 @@ $(document).ready(function(){
 		var mot_visible = [];
 		var mot_audible = [];
 		var mot_courant = "";
+		var texte1 = [];
+		var texte2 = [];
 		var texte_tableau = [];
 		var texte_memoire = [];
 
@@ -630,38 +632,54 @@ Les fonctions */
 	
 /*___________________________________________________________________________________________________________________________________
    Les parametrages du tableau */
-	tablaeau.on('dblclick', function() {
-		$('#parametres_tableau').slideToggle(100);
-	});
-	
-	$('#noir').on('click', fond_noir);
-	$('#teal').on('click', fond_teal);
-	$('#bleue').on('click', fond_bleue);
-	
-	$('#blanc').on('click', couleur_blanc);
-	$('#jaune').on('click', couleur_jaune);
-	$('#orange').on('click', couleur_orange);
-	
-	function fond_noir()  { tableau.css('background-color','#222'); }
-	function fond_teal()  { tableau.css('background-color','teal'); }
-	function fond_bleue() { tableau.css('background-color','#006699'); }
-	
-	function couleur_blanc()  { tableau.css('color','#fff');   }
-	function couleur_jaune()  { tableau.css('color','yellow'); }
-	function couleur_orange() { tableau.css('color','orange'); }
-	
+   
+    document.getElementById('tableau_noir').onkeyup = function(){
+        
+       // let x = event.keyCode;
+        let tableau = $('#tableau_noir');
+        
+        let dernier_caractere = tableau.val()[tableau.val().length-1];  
+        
+        if($.inArray(dernier_caractere,espace) != -1) {
+            
+            mot1[mot1.length] = $('#syllabe_input').val();
+            $('#mot1_input').val(mot1.join(''));
+            
+            texte1[texte1.length] = $('#mot1_input').val();
+            texte1[texte1.length] = $('syllabe_input').val();
+            $('#texte1_input').val(texte1);
+            
+            syllabe.splice(0,syllabe.length);
+            $('#syllabe_input').val(syllabe);
+            
+            mot1.splice(0,mot1.length);
+            $('#mot1_input').val(mot1);
+            
+        }
+        
+        if($.inArray(dernier_caractere,consonnes) != -1 ) {
+            mot1[mot1.length] = $('#syllabe_input').val();
+            $('#mot1_input').val(mot1.join(''));
+            
+            syllabe.splice(0,syllabe.length);
+            $('#syllabe_input').val(syllabe);
+        }
+        
+        if($.inArray(dernier_caractere,espace) == -1) {
+            syllabe.push(dernier_caractere);
+            $('#syllabe_input').val(syllabe.join(''));
+        }
+    }
+   
+   
+   
+
 	$('#couleur').on('click', reglage_couleurs);
 	$('#zoum').on('click', reglage_zoom);
 	
 	function reglage_couleurs() { $('#details_parametres').animate({ 'top':0 }, 250); }
 	function reglage_zoom() { $('#details_parametres').animate({ 'top':'-100%' }, 250); }
-	
-	$('#plus').on('click', agrandir_ecriture);
-	$('#moin').on('click', apetir_ecriture);
-	
-	function agrandir_ecriture() { tableau.animate({'font-size':'+=16px'},300); }
-	function apetir_ecriture() { tableau.animate({'font-size':'-=16px'},300); }
-	
+
 /*___________________________________________________________________________________________________________________________________
 Lorsqu'on appuie une touche du clavier, il se passe ce qui suit: */
 	$('#clavier_nko td:not(.boutons)').on('click', function(){
@@ -752,15 +770,13 @@ Lorsqu'on appuie une touche du clavier, il se passe ce qui suit: */
 
 	}});
 
-    
     tableau.on('click', function(){
 	    lire_texte();
 	    afficherClavier();
 
     });
     
-    
-    
+
     function lire_textes() {
         setTimeout(lecture1,   0);
         setTimeout(lecture2, 400);
@@ -771,8 +787,7 @@ Lorsqu'on appuie une touche du clavier, il se passe ce qui suit: */
 	function lecture2() { var m = texte_memoire; audio.attr({ src:"son/mp3/"+m[m.length-2][1]+".mp3", autoplay:"on" }); }
     function lecture3() { var m = texte_memoire; audio.attr({ src:"son/mp3/"+m[m.length-2][2]+".mp3", autoplay:"on" }); }
 
-    
-    
+
     $('#fermer_clavier').on('click', function() {
         $('#clavier_tableau').css({ 'transform':'scaleY(0)' });
     });
@@ -781,5 +796,4 @@ Lorsqu'on appuie une touche du clavier, il se passe ce qui suit: */
         $('#clavier_tableau').css({ 'transform':'scaleY(1)' });
     }
     
-
 });

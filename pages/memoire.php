@@ -10,30 +10,12 @@
 			
 		<div class="outil" id="memoire_tableau">
 		
-			<div id="char">
-				<input id="syllabe_input"></input>
-			</div>
+			<input type="text" id="syllabe_input" placeholder="syllabe">
+			<input type="text" id="mot1_input" placeholder="mot1 visible">
+			<input type="text" id="mot2_input" placeholder="mot2 audible">
+			<textarea id="texte1_input" placeholder="texte1 visible"></textarea>
+			<textarea id="texte2_input" placeholder="texte2 audible"></textarea>
 		
-			<div id="textes">
-				<div id="texte_visible">
-					<input id="mot1_input"></input>
-					<textarea id="textarea1"></textarea>
-				</div>
-				
-				<div id="texte_audible">
-					<input id="mot2_input"></input>
-					<textarea id="textarea2"></textarea>
-				</div>
-			</div>
-		
-
-			<table id="table_mots_visibles">
-				<tr id="mots_visibles"> <td class="mot_visible">ߓߊߞߊ߬ߙߌ߬</td> </tr>
-			</table>
-			
-			<table id="table_mots_audibles">
-				<tr id="mots_audibles"> <td class="mot_audible">ߓߊ߫ߞߊ߬ߙߌ߬</td> </tr>
-			</table>
 		</div>
 
 		

@@ -1,6 +1,7 @@
 
 #parametres_tableau  {
     position: absolute;
+    display: none;
     direction: rtl;
     margin: 0;
     padding: 1rem;

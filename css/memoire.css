@@ -1,5 +1,6 @@
 
 #memoire_tableau {
+    display: none;
     position: absolute;
     background-color: #555;
     direction: rtl;

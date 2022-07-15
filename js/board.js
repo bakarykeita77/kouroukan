@@ -633,9 +633,35 @@ Les fonctions */
 /*___________________________________________________________________________________________________________________________________
    Les parametrages du tableau */
    
-    document.getElementById('tableau_noir').onkeyup = function(){
+    $('#effacer_tableau').on('click', function() {
         
-       // let x = event.keyCode;
+        syllabe.splice(0,syllabe.length);
+        mot1.splice(0,mot1.length);
+        mot2.splice(0,mot2.length);
+        texte1.splice(0,texte1.length);
+        texte2.splice(0,texte2.length);
+        
+        $('#syllabe_input').val(syllabe);
+        $('#mot1_input').val(mot1);
+        $('#mot2_input').val(mot2);
+        $('#texte1_input').val(texte1);
+        $('#texte2_input').val(texte2);
+        $('#tableau_noir').val(texte1); 
+    });
+    $('#parametre_icone').on('click', function() { $('#parametres_tableau').toggle(100); });
+    $('#play').on('click', function() {
+        $(this).css('display','none');
+        $('#pause').css('display','inline-block');
+    });
+    $('#pause').on('click', function() {
+        $(this).css('display','none');
+        $('#play').css('display','inline-block');
+    });
+    
+    document.getElementById('tableau_noir').onkeyup = function(event){
+        
+        //let x = event.key; 
+    
         let tableau = $('#tableau_noir');
         
         let dernier_caractere = tableau.val()[tableau.val().length-1];  

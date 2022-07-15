@@ -1,21 +1,58 @@
-
-#tableau_noir {
+body { direction: rtl }
+#board_div {
     position: absolute;
     width: calc(100vw - 2rem);
-    margin: 1rem;
-    padding: 1rem;
-    height: calc(100vh - 2rem);
+    margin: 0 1rem;
+    height: calc(100vh - 1rem);
     top: 0;
     left: 0;
+}
+#board_entete {
+    border: 1px solid transparent;
+    border-top-color: #aaa;
+    border-bottom-color: #aaa;
+    height: 2rem;
+    margin: 0.25rem 0;
+    z-index: 1000;
+}
+#entete_menu {
+    display: flex;
+    flex-direction: rows;
+    justify-content: space-around;
+    align-items: center;
+    
+    height: 2rem;
+    margin: 0;
+    
+}
+#board_menu_deroulant div:not(:last-child) { 
+    font-weight: bold;
+}
+#effacer_tableau {
+    font-size: 0.75rem;
+}
+#pause { 
+    display: none; 
+    transform: rotate(90deg);
+}
+#menu_menu { font-weight: bold; }
+
+#tableau_form {
+    z-index: 0;
+}
+#tableau_noir {
+    position: relative;
+    height: 100%;
+    height: calc(100vh - 3rem);
+    width: calc(100vw - 2rem);
+    padding: 1rem;
+    margin: 0;
     background-color: #000;
     border-style: none;
     border-radius: 0.5rem;
     color: #fff;
     font-size: 1rem;
     box-sizing: border-box;
-    direction: rtl;
-}
-#tableau_form {
     z-index: 0;
 }
 .outils {
@@ -25,3 +62,45 @@
 }
 
 .outils .outil:not(#memoire_tableau) {display:none; }
+
+@media(max-width:800px) {
+    #board_menu_icone { display: block; }
+    #board_menu_deroulant { 
+        position: absolute;
+        top: 3rem;
+        right: 1rem;
+        width: 40%;
+        min-width: 12rem;
+        margin: 0;
+        padding: 0;
+        border-radius: 0.5rem;
+        background-color: #ccc;
+        z-index: 2000;
+    }
+    #board_menu_deroulant div {
+        height: 2rem;
+        padding: 0 1rem;
+        border: 1px solid transparent;
+    }
+    #board_menu_deroulant div:not(:last-child) { border-bottom-color: #999; }
+}
+@media(min-width:801px) {
+    #board_menu_icone { display: none; }
+    #board_menu_deroulant {
+        display: flex;
+        flex-direction: rows;
+        justify-content: space-between;
+        align-items: center;
+        
+        width: 30%;
+        min-width: 12rem;
+    }
+    #board_menu_deroulant div {
+        display: inline-block;
+        border: 1px solid #aaa;
+        border-radius: 0.5rem;
+        min-width: 3rem;
+        text-align: center;
+        padding: 0 0.25rem;
+    }
+}

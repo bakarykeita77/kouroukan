@@ -1,6 +1,11 @@
 
 var black_question_mark = "&#10067;";
+var black_square = "&#9632;";
+var black_circle = "&#9679;";
+var fisheye = "&#9673;";
+var black_question_mark = "&#10067;";
 
+var egal = "&#9868;";
 var envelope = "&#9993;";
 var exclamation_mark = "&#10071;";
 
@@ -11,6 +16,8 @@ var cross_mark = "&#10060;";
 
 var dark = "&#127999;";
 var diagonal_mark = "&#10189;";
+
+var equivalent = "&#8801;"  "&equv;"
 
 var light = "&#127995;";
 
@@ -32,10 +39,12 @@ var refaire_icon = "&#8635;";
 
 var surbrace = "&#9182;";
 var UnderBrace = "&#9183;";
-var stop_icon = "&#x25A0;";
+var stop_icon = "&#x25A0;"    "&#9632;";
 
 var telephone = "&#9990;";
 var telephone2 = "&#128222;";
+var trois points v = 8942;
+var trois points h = 8943;
 
 
 var vertical_line = "&#124;";

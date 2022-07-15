@@ -22,8 +22,23 @@ session_start();
 </head>
 <body>
     
-    <form action="#" id="tableau_form"> <textarea name="" id="tableau_noir" cols="30" rows="10"></textarea> </form>
-    
+    <div id="board_div">
+        <div id="board_entete">
+            <div id="entete_menu">
+                <div id="board_menu_icone"><span id="">&#9776;</span></div>
+                <div id="board_menu_deroulant">
+                    <div><span id="parametre_icone">&#9881;</span></div>
+                    <div>
+                        <span id="play">&#9664;</span>
+                        <span id="pause">&#9868;</span>
+                    </div>
+                    <div><span id="effacer_tableau">ߖߐ߬ߛߌ߬ߙߊ߲</span></div>
+                </div>
+                <div><span id="menu_menu">&#8942;</span></div>
+            </div>
+        </div>
+        <form action="#" id="tableau_form"> <textarea name="" id="tableau_noir" cols="30" rows="10"></textarea> </form>
+    </div>
     <div class="outils">
     	<?php include "http://localhost:8080/kouroukan/pages/parametres_tableau.php"; ?>
     	<?php include "http://localhost:8080/kouroukan/pages/assistant.php"; ?>

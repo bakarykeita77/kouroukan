@@ -29,8 +29,6 @@ function rappelerSessionParametres() {
 }
 function afficherLesOptionsDeParametre() {
     
-    $('#tableau_noir').on('dblclick', function() { $('#parametres_tableau').css('display','block'); });
-    
     $('#zoum').addClass('yellow'); 
     $('#details_parametres').scrollLeft(0);
 
@@ -42,7 +40,6 @@ function afficherLesOptionsDeParametre() {
     $('#zoum').click(function(){ $('#details_parametres').scrollLeft(0); });
     $('#couleur').click(function(){ $('#details_parametres').scrollLeft(-195.2); });
     $('#weight').click(function(){ $('#details_parametres').scrollLeft(-390.4); });
-    
 }
 function parametrerCouleurDeFond() {
     $('#noir').on('click', function(){ $('#tableau_noir').css('background-color','black');});

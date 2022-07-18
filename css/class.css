@@ -12,6 +12,8 @@ html {
         width: 100vw;
     }
 }
+*,::before,::after { box-sizing:border-box; }
+
 .actif, .active {
     background-color: yellow;
  }
@@ -350,6 +352,11 @@ html {
     font-size: 4rem;
     text-shadow: 16px 16px 8px #666;
 }
+.hauteur_adaptee::after {
+    content: "";
+    display: block;
+    clear: both;
+}
 .hover_anim:hover {
     transform: scale(1.25);
     color: #000;
@@ -426,6 +433,11 @@ html {
     display: none;
     transition: display 0.1s;
     transition: height 0.2s;
+}
+.long_text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 

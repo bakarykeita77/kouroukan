@@ -10,12 +10,11 @@
 			
 		<div class="outil" id="memoire_tableau">
 		
-			<input type="text" id="syllabe_input" placeholder="syllabe">
-			<input type="text" id="mot1_input" placeholder="mot1">
-			<input type="text" id="mot2_input" placeholder="mot2">
-			<textarea id="texte1_input" placeholder="texte1"></textarea>
-			<textarea id="texte2_input" placeholder="texte2"></textarea>
-		
+			<input type="text" id="syllabe_visible_input" placeholder="syllabe_visible">
+			<input type="text" id="syllabe_audible_input" placeholder="syllabe_audible">
+			<input type="text" id="mot_audible_input" placeholder="mot_audible">
+			<textarea id="texte_audible_input" placeholder="texte_audible"></textarea>
+
 		</div>
 
 		

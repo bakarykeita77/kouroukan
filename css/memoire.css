@@ -1,12 +1,12 @@
 
 #memoire_tableau {
-    display: none;
+    display: block;
     position: absolute;
     background-color: #555;
     direction: rtl;
     margin: 0;
     padding: 1rem;
-    top: 2rem;
+    top: 3rem;
     left: 2rem;
     box-sizing: border-box;
 }

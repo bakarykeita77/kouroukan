@@ -6,11 +6,22 @@ $(document).ready(function(){
 		var wh = window.screen.height;
 
 		var form = $('#tableau_form');
-		var tableau = $('#tableau_noir');
-		var texte_visible = $('#texte_visible');
-		var texte_audible = $('#texte_audible');
-		var memoire_tableau = $('#memoire_tableau');
+		var tableau_noir = $('#tableau_noir');
 		var clavier = $('#clavier_nko');
+		
+		var memoire_tableau = $('#memoire_tableau');
+		var syllabe_visible_input = $('#syllabe_visible_input');
+		var syllabe_audible_input = $('#syllabe_audible_input');
+		var mot_audible_input = $('#mot_audible_input');
+		var texte_audible_input = $('#texte_audible_input');
+		
+		var syllabe_visible = [];
+		var syllabe_audible = [];
+		var mot_audible = [];
+		var texte_audible = [];
+		
+        var dernier_caractere = "";
+        var c1 = "", c2 = "", c3 = "", c4 = "",c5 = "", c6 = "", c7 = "";
 		
 		var audio0 = $('#audio0');
 		var audio1 = $('#audio1');
@@ -23,28 +34,12 @@ $(document).ready(function(){
 		var audio8 = $('#audio8');
 		var audio9 = $('#audio9');
 
-		var caractere_input = $('#caractere_input');
-		var syllabe_input = $('#syllabe_input');
-		var mot1_input = $('#mot1_input');
-		var mot2_input = $('#mot2_input');
-		var textarea1 = $('#textarea1');
-		var textarea2 = $('#textarea2');
+		
 
 		var s = [], s1 = [], s2 = [], s3 = [], s4 = [], s5 = [];
 		var cs = "";
 		var caracteres = []; 
-		var syllabe = [];
-		var syllabes = [];
-		var syllabe1 = [];
-		var syllabe2 = [];
-		var mots_visible = [];
-		var mots_audible = [];
-		var texte_vu = [];
-		var texte_entendu = [];
-		var mot1 = [];
-		var mot2 = [];
-		var mot_visible = [];
-		var mot_audible = [];
+		
 		var mot_courant = "";
 		var texte1 = [];
 		var texte2 = [];
@@ -66,7 +61,6 @@ $(document).ready(function(){
 		var message_erreur = $('#message_erreur');
 		
 		var tableau_texte = [];
-		var c1 = "", c2 = "", c3 = "", c4 = "",c5 = "", c6 = "", c7 = "";
 		var c = [], ch1 = "", ch2 = "", ch3 = "", ch4 = "",ch5 = "", ch6 = "", ch7 = "";
 		var ds = "", ds1 = [], ds2 = [];
 
@@ -629,35 +623,138 @@ Les fonctions */
 	 }
 
 //initialiser();
+
+
+    effacerMemoire();
 	
 /*___________________________________________________________________________________________________________________________________
-   Les parametrages du tableau */
    
-    $('#effacer_tableau').on('click', function() {
-        
-        syllabe.splice(0,syllabe.length);
-        mot1.splice(0,mot1.length);
-        mot2.splice(0,mot2.length);
-        texte1.splice(0,texte1.length);
-        texte2.splice(0,texte2.length);
-        
-        $('#syllabe_input').val(syllabe);
-        $('#mot1_input').val(mot1);
-        $('#mot2_input').val(mot2);
-        $('#texte1_input').val(texte1);
-        $('#texte2_input').val(texte2);
-        $('#tableau_noir').val(texte1); 
-    });
-    $('#parametre_icone').on('click', function() { $('#parametres_tableau').toggle(100); });
-    $('#play').on('click', function() {
-        $(this).css('display','none');
-        $('#pause').css('display','inline-block');
-    });
+   
+   
+   
+   Les parametrages du tableau */
+    $('#parametre_icone').on('click', function() { $('#parametres_tableau').toggle(100); $('#board_menu_deroulant').css('display','none'); });
+    $('#board_menu_icone').on('click', function() { $('#board_menu_deroulant').toggle(100); });
+    
     $('#pause').on('click', function() {
         $(this).css('display','none');
         $('#play').css('display','inline-block');
     });
+    $('#tableau_noir').on('dblclick', function() { $('#memoire_tableau').toggle(100); });
+    $('#effacer_tableau').on('click', function() { effacerMemoire(); });
+    $('#play').on('click', function() {
+        var texte = tableau_noir.val();
+        
+        $(this).css('display','none');
+        $('#pause').css('display','inline-block');
+        
+        effacerMemoire();
+
+        for(var i=0; i<texte.length; i++) {
+            
+            dernier_caractere = texte[i];  
+
+            if($.inArray(dernier_caractere,espace) != -1) {
+                
+                chargerSyllabeAudible();
+                chargerMotAudible();
+                chargerTexteAudible();
+                
+                effacerSyllabeVisible();
+                effacerSyllabeAudible();
+                effacerMotAudible();
+            }
+            if($.inArray(dernier_caractere,consonnes) != -1 ) { 
+                
+                chargerSyllabeAudible(); 
+                chargerMotAudible();
+                
+                effacerSyllabeVisible();
+                effacerSyllabeAudible();
+            } 
+            if($.inArray(dernier_caractere,espace) == -1) { chargerSyllabeVisible(); }
+        }
+    });
     
+    function chargerSyllabeVisible() {
+        syllabe_visible.push(dernier_caractere);
+        syllabe_visible_input.val(syllabe_visible.join(''));
+    }
+    function chargerSyllabeAudible() {
+               
+        syllabe_audible[0] = syllabeVisibleConvertiEnAudible();
+        syllabe_audible_input.val(syllabe_audible);
+    }
+    function chargerMotAudible() {
+         alert(mot_audible[0]);  
+        mot_audible[mot_audible.length] = syllabe_audible_input.val();
+        mot_audible_input.val(mot_audible);
+    }
+    function chargerTexteAudible() {
+        texte_audible[texte_audible.length] = mot_audible_input.val().split(',');
+        texte_audible[texte_audible.length] = espace;
+        texte_audible_input.val(texte_audible);
+
+   alert(texte_audible[0][0]);
+    }
+    
+    function syllabeVisibleConvertiEnAudible() {
+        let syllabe_a_convertir = syllabe_visible_input.val();
+        let sa = ""; // Comme syllabe audible
+        
+        c1 = syllabe_a_convertir[syllabe_a_convertir.length-1];
+        c2 = syllabe_a_convertir[syllabe_a_convertir.length-2];
+        c3 = syllabe_a_convertir[syllabe_a_convertir.length-3];
+        c4 = syllabe_a_convertir[syllabe_a_convertir.length-4];
+        c5 = syllabe_a_convertir[syllabe_a_convertir.length-5];
+                
+                    
+        if($.inArray(c1,ton) != -1) {
+            if($.inArray(c2,voyelles) != -1) {
+                if($.inArray(c3,consonnes) != -1) {
+                    sa = c3+c2+c1;
+                }
+            }
+        }
+        if($.inArray(c1,voyelles) != -1) {
+            if($.inArray(c2,consonnes) != -1) {
+                sa = c2+c1+'߫';
+            }
+        }
+            
+        return sa;
+    }    
+    function effacerTableau() { tableau_noir.val(''); }
+    function effacerMemoire() {
+        
+        syllabe_visible.splice(0,syllabe_visible.length);
+        syllabe_audible.splice(0,syllabe_audible.length);
+        mot_audible.splice(0,mot_audible.length);
+        texte_audible.splice(0,texte_audible.length);
+            
+        $('#syllabe_visible_input').val(null);
+        $('#syllabe_audible_input').val(null);
+        $('#mot_audible_input').val(null);
+        $('#texte_audible_input').val(null);
+    }
+    function effacerSyllabeVisible() {
+        syllabe_visible.splice(0,syllabe_visible.length);
+        syllabe_visible_input.val(syllabe_visible);
+    }
+    function effacerSyllabeAudible() {
+        syllabe_audible.splice(0,syllabe_audible.length);
+        syllabe_audible_input.val(syllabe_audible);
+    }
+    function effacerMotVisible() {
+        mot_visible.splice(0,mot_visible.length);
+        mot1_input.val(mot_visible);
+    }
+    function effacerMotAudible() {
+        mot_audible.splice(0,mot_audible.length);
+        mot_audible_input.val(mot_audible);
+    }
+    
+    /*
     document.getElementById('tableau_noir').onkeyup = function(event){
         
         //let x = event.key; 
@@ -696,12 +793,12 @@ Les fonctions */
             $('#syllabe_input').val(syllabe.join(''));
         }
     }
-   
+    */
    
    
 
 	$('#couleur').on('click', reglage_couleurs);
-	$('#zoum').on('click', reglage_zoom);
+	//$('#zoum').on('click', reglage_zoom);
 	
 	function reglage_couleurs() { $('#details_parametres').animate({ 'top':0 }, 250); }
 	function reglage_zoom() { $('#details_parametres').animate({ 'top':'-100%' }, 250); }

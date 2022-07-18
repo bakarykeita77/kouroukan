@@ -63,10 +63,13 @@ body { direction: rtl }
 
 .outils .outil:not(#memoire_tableau) {display:none; }
 
+
+
 @media(max-width:800px) {
     #board_menu_icone { display: block; }
     #board_menu_deroulant { 
         position: absolute;
+        display: none;
         top: 3rem;
         right: 1rem;
         width: 40%;

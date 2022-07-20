@@ -711,6 +711,22 @@ Les fonctions */
                     c5 = syllabe_a_convertir[syllabe_a_convertir.length-5];
              
 
+                    if($.inArray(c1,nasalisation) != -1) {
+                        if($.inArray(c2,ton) != -1) {
+                            if($.inArray(c3,voyelles) != -1) {
+                                sa1[sa1.length] = c3+c2+c1;
+                                if($.inArray(c4,consonnes) != -1) {
+                                    sa1[sa1.length-1] = c4+c3+c2+c1;
+                                }
+                            }
+                        }
+                        if($.inArray(c2,voyelles) != -1) {
+                            sa1[sa1.length] =c2+c1;
+                            if($.inArray(c3,consonnes) != -1) {
+                                sa1[sa1.length-1] = c3+c2+c1;
+                            }
+                        }
+                    }
                     if($.inArray(c1,ton) != -1) {
                         if($.inArray(c2,voyelles) != -1) {
                             sa1[sa1.length] = c2+c1;
@@ -722,10 +738,19 @@ Les fonctions */
                                 }
                             }
                         }
+                        if($.inArray(c2,nasalisation) != -1) {
+                            if($.inArray(c3,voyelles) != -1) {
+                                sa1[sa1.length] = c3+c2+c1;
+                                if($.inArray(c4,consonnes) != -1) {
+                                    sa1[sa1.length-1] = c4+c3+c2+c1;
+                                }
+                            }
+                        }
                     }
                     if($.inArray(c1,voyelles) != -1) {
+                        sa1[sa1.length] = c1+'߫';
                         if($.inArray(c2,consonnes) != -1) {
-                            sa1[sa1.length] = c2+c1;
+                            sa1[sa1.length-1] = c2+c1;
                             if($.inArray(c3,consonnes) != -1) {
                                 sa1[sa1.length-1] = c3+c1+'߫';
                                 sa1[sa1.length] = c2+c1;

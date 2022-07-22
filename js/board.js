@@ -670,7 +670,6 @@ Les fonctions */
                     effacerSyllabeAudible();
                     effacerMotAudible();
                 }
-
                 if($.inArray(caractere_suivante,consonnes) != -1 ) { 
                     chargerSyllabeAudible2(); 
                     chargerMotAudible();
@@ -707,7 +706,7 @@ Les fonctions */
         
 
                  /*-------------------------------------------------------------*/  
-                    if($.inArray(c1,nasalisation) != -1) {
+                    if(c1 == nasalisation) {
                         if($.inArray(c2,ton) != -1) {
                             if($.inArray(c3,voyelles) != -1) {
                                 sa1[sa1.length] = c3+c2+c1;
@@ -740,6 +739,16 @@ Les fonctions */
                             sa1[sa1.length] =c2+c1;
                             if($.inArray(c3,consonnes) != -1) {
                                 sa1[sa1.length-1] = c3+c2+c1;
+                            }
+                            if(c3 == apostrophes[0]) {
+                                if($.inArray(c4,consonnes) != -1) {
+                                    sa1[sa1.length-1] = c4+c2+'߯'+c1;
+                                }
+                            }
+                            if(c3 == apostrophes[1]) {
+                                if($.inArray(c4,consonnes) != -1) {
+                                    sa1[sa1.length-1] = c4+c2+'߱'+c1;
+                                }
                             }
                         }
                     }
@@ -791,10 +800,12 @@ Les fonctions */
                                 }
                             }
                         }
-                        if($.inArray(c2,nasalisation) != -1) {
+                        if(c2 == nasalisation) {
                             if($.inArray(c3,voyelles) != -1) {
                                 sa1[sa1.length] = c3+c2+c1;
-                                if($.inArray(c4,'consonnes') != -1) {
+                                if($.inArray(c4,consonnes) != -1) {
+                                    sa1[sa1.length-1] = c4+c3+c2+c1;
+                                }                                if($.inArray(c4,consonnes) != -1) {
                                     sa1[sa1.length-1] = c4+c3+c2+c1;
                                 }
                                 if(c4 == apostrophes[0] && $.inArray(c1,tons_groupes[1]) != -1) {
@@ -853,7 +864,26 @@ Les fonctions */
                     c5 = syllabe_a_convertir[syllabe_a_convertir.length-5];
              
          
-
+                    if(c1 == nasalisation) {
+                        if($.inArray(c2,voyelles) != -1) {
+                            sa2[sa2.length] = c2+c1+'߫';
+                            if($.inArray(c3,consonnes) != -1) {
+                                sa2[sa2.length-1] = c3+c2+c1+'߫';
+                            }
+                            if(c3 == apostrophes[0]) {
+                                sa2[sa2.length-1] = c3+c2+c1+'߫';
+                                if($.inArray(c4,consonnes) != -1) {
+                                    sa2[sa2.length-1] = c4+c2+'߯'+c1;
+                                }
+                            }
+                            if(c3 == apostrophes[1]) {
+                                sa2[sa2.length-1] = c3+c2+c1+'߫';
+                                if($.inArray(c4,consonnes) != -1) {
+                                    sa2[sa2.length-1] = c4+c2+'߱'+c1;
+                                }
+                            }
+                        }
+                    }
                     if($.inArray(c1,ton) != -1) {
                         if($.inArray(c2,voyelles) != -1) {
                             sa2[sa2.length] = c2+c1;
@@ -868,6 +898,16 @@ Les fonctions */
                     }
                     if($.inArray(c1,voyelles) != -1) {
                         sa2[sa2.length] = c1+'߫';
+                        if(c2 == apostrophes[0]) {
+                            if($.inAqrray(c3,consonnes) != -1) {
+                                sa2[sa2.length-1] = c3+c1+'߯';
+                            }
+                        }
+                        if(c2 == apostrophes[1]) {
+                            if($.inArray(c3,consonnes) != -1) {
+                                sa2[sa2.length-1] = c3+c1+'߱';
+                            }
+                        }
                         if($.inArray(c2,consonnes) != -1) {
                             sa2[sa2.length-1] = c2+c1+'߫';
                             if($.inArray(c3,consonnes) != -1) {

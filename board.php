@@ -26,12 +26,12 @@ session_start();
         <div id="board_entete">
             <div id="entete_menu">
                 <div id="board_menu_icone"><span id="">&#9776;</span></div>
+                <div>
+                    <span id="play">&#9664;</span>
+                    <span id="pause">&#9868;</span>
+                </div>
                 <div id="board_menu_deroulant">
                     <div><span id="parametre_icone">&#9881;</span></div>
-                    <div>
-                        <span id="play">&#9664;</span>
-                        <span id="pause">&#9868;</span>
-                    </div>
                     <div><span id="effacer_tableau">ߖߐ߬ߛߌ߬ߙߊ߲</span></div>
                 </div>
                 <div><span id="menu_menu">&#8942;</span></div>

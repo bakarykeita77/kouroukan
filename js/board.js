@@ -47,8 +47,9 @@ $(document).ready(function(){
 		var texte_memoire = [];
 
 		var lettres = ['ߊ', 'ߋ', 'ߌ', 'ߍ', 'ߎ', 'ߏ', 'ߐ', 'ߓ', 'ߔ', 'ߕ', 'ߖ', 'ߗ', 'ߘ', 'ߙ', 'ߚ', 'ߛ', 'ߜ', 'ߝ', 'ߞ', 'ߟ', 'ߡ', 'ߢ', 'ߣ', 'ߤ', 'ߥ', 'ߦ', 'ߒ'];
-		var voyelles =  ['ߊ', 'ߋ', 'ߌ', 'ߍ', 'ߎ', 'ߏ', 'ߐ', 'ߒ'];
+		var voyelles =  ['ߊ', 'ߋ', 'ߌ', 'ߍ', 'ߎ', 'ߏ', 'ߐ'];
 		var consonnes = ['ߓ', 'ߔ', 'ߕ', 'ߖ', 'ߗ', 'ߘ', 'ߙ', 'ߚ', 'ߛ', 'ߜ', 'ߝ', 'ߞ', 'ߟ', 'ߡ', 'ߢ', 'ߣ', 'ߤ', 'ߥ', 'ߦ', 'ߧ', 'ߠ']; 
+		var tedo = ['ߒ'];
 		var espace = ' ';
 		var apostrophes = ['ߴ', 'ߵ'];
 		var ton = ['߫', '߬', '߭', '߮', '߯', '߰', '߱'];
@@ -67,9 +68,7 @@ $(document).ready(function(){
 
 /*___________________________________________________________________________________________________________________________________
 Les fonctions */
-	function initialiser() { 
-		syllabe_input.val(""); mot1_input.val(""); mot2_input.val(""); textarea1.val(""); textarea2.val("");
-	 }
+	function initialiser() { effacerTableau(); effacerMemoire(); }
     function controle_caractere() {
 		c  = syllabe;
 		ch1 = c[c.length-1];
@@ -184,118 +183,7 @@ Les fonctions */
 			}
 		}
 	 }
-	function effacer_caractere() {
 
-	    if( syllabe.length > 0 ) {       
-	        syllabe.splice(syllabe.length-1,1);
-	    }else if( mot1.length > 0 ) {
-		    
-		    s = mot1[mot1.length-1];
-		    c1 = s[s.length-1];
-		    c2 = s[s.length-2];
-		    c3 = s[s.length-3];
-		    c4 = s[s.length-4];
-		    c5 = s[s.length-5];
-	
-			if( $.inArray(c1,voyelles) != -1 && $.inArray(c2,consonnes) != -1 && $.inArray(c3,consonnes) != -1 ) {
-			    mot2.splice(mot2.length-1,2);
-		    }
-		    if( $.inArray(c1,ton) != -1 && $.inArray(c2,voyelles) != -1 &&$.inArray(c3,consonnes) != -1 && $.inArray(c4,consonnes) != -1 ) {
-			    mot2.splice(mot2.length-1,2);
-		    }
-	
-		    mot1.splice(mot1.length-1,1);
-	 	    mot2.splice(mot2.length-1,1);
-	    }else if( syllabe.length == "" && mot1.length == "" && texte_tableau.length > 0 ) {
-		    texte_tableau.splice(texte_tableau.length-1,1);
-		    texte_memoire.splice(texte_memoire.length-1,1);
-	    }else {
-	        die();
-	    }
-	
-	    tableau_texte = texte_tableau.concat(mot1).concat(syllabe);
-	    
-	    syllabe_input.val( syllabe.join("") );
-	    
-	    mot1_input.val( mot1.join("") );
-	    mots_visible = mot1_input.val();
-	    
-	    mot2_input.val( mot2 );
-	    mots_audible = mot2_input.val();
-	    
-	    tableau.val(tableau_texte.join(''));
-	    textarea1.val( texte_tableau.join("") );
-	    textarea2.val( texte_memoire );
-	
-	    die();
-	}
-	function charge_mots() {
-		if( $.inArray( ch1,voyelles ) != -1 ) {
-		    s1 = s2 = ch1;
-			if( $.inArray( ch2,consonnes ) != -1 ) {
-			    s1 = [ ch2,ch1 ].join("");
-			    if( $.inArray( ch3,consonnes ) != -1 ) {
-				    s1 = [ ch3,ch2,ch1 ].join("");		
-				    s2 = [ ch3,ch1,"߫" ].join("");
-				    s3 = [ ch2,ch1 ].join(""); 
-			    }
-				if( $.inArray( ch3,apostrophes ) != -1 ) {
-					if( $.inArray( ch4,consonnes ) != -1 ) {
-						s1 = [ ch4,ch3,ch2,ch1 ].join("");		
-						s2 = [ ch4,ch3 ].join("");
-						s3 = [ ch2,ch1 ].join(""); 
-					}
-				}
-			}
-			if( $.inArray( ch2,apostrophes ) != -1 ) {
-				if( $.inArray( ch3,consonnes ) != -1 ) {
-					s1 = [ ch3,ch2,ch1 ].join("");
-					if( $.inArray( ch4,consonnes ) != -1 ) {
-						s1 = [ ch4,ch3,ch2,ch1 ].join("");
-						
-						s2 = [ ch4,ch1,'߫' ].join("");
-						s3 = [ ch3,ch2,ch1 ].join("");
-					}
-				}
-			}
-		}
-
-		mot1[mot1.length] = s1;
-		mot1_input.val( mot1.join("") );
-		mots_visible = mot1_input.val();
-
-		
-		if( syllabe.length <= 2 ) {
-			mot2[mot2.length] = s1;
-		}
-		if( syllabe.length == 3 && $.inArray(ch2,apostrophes) != -1 ) {
-			mot2[mot2.length] = s1;
-		}
-		if( syllabe.length == 4 || syllabe.length == 3 && $.inArray(ch2,consonnes) != -1 ) {
-			mot2[mot2.length] = s2;
-			mot2[mot2.length] = s3;
-		}
-		mot2_input.val( mot2 );
-		mots_audible = mot2_input.val();    
-
-		vider_syllabe();
-	}
-	function charge_texte() {
-		texte_vu =  texte_vu.concat( mot1.join("") );
-		texte_entendu =  texte_entendu.concat( mot2.join("") );
-
-		texte_tableau = texte_vu;
-		texte_memoire = texte_entendu;
-
-		textarea1.val( texte_tableau.join("") );
-		textarea2.val( texte_memoire );
-		espacer();
-
-		vider_syllabe();
-		//vider_syllabes();
-		vider_mots();
-		vider_assistant();
-	 }
 	 function lire(mot) {
 	     /*
 	     var lm = "";	     
@@ -363,253 +251,6 @@ Les fonctions */
 	*/	 
 	 }
 
-	 function espacer() {
-		texte_tableau[texte_tableau.length] = " ";
-		texte_memoire[texte_memoire.length] = " ";
-	 }
-	/*Si Ton est le dernier caractere tapé*/
-	function tonifier() {
-
-		if( $.inArray( c1,voyelles ) != -1 ) {
-			s1 = [ c1,caractere ].join(""); 
-			if( $.inArray( c2,consonnes ) != -1 ) {
-				s1 = [ c2,c1,caractere ].join(""); 
-				if( $.inArray( c3,consonnes ) != -1 ) {
-					s1 = [ c3,c2,c1,caractere ].join(""); 
-					s2 = [ c2,c1,caractere ].join("");
-					s3 = [ c3,c1,caractere ].join("");
-				}
-				if( $.inArray( c3,apostrophes ) != -1 ) {
-					if( $.inArray( c4,consonnes ) != -1 ) {
-						s1 = [ c4,c3,c2,c1,caractere ].join(""); 
-						s2 = [ c4,c3 ].join("");
-						s3 = [ c2,c1,caractere ].join("");
-					}
-				}
-			}
-			if( $.inArray( c2,apostrophes ) != -1 ) {
-				if( $.inArray( c3,consonnes ) != -1 ) { 
-		        	s1 = [ c3,c2,c1,caractere ].join("");
-					if( $.inArray( c4,consonnes ) != -1 ) { 
-						s1 = [c4,c3,c2,c1,caractere].join("");
-						s2 = [c4,c1,caractere ].join("");
-						s3 = [c3,c2,c1,caractere].join("");
-					}
-				}
-			}
-		}
-		
-		if( c1 == "߲" ) {
-			if( $.inArray( c2,voyelles ) != -1 ) {
-				s1 = [ c2,c1,caractere ].join(""); 
-				if( $.inArray( c3,consonnes ) != -1 ) {
-					s1 = [ c3,c2,c1,caractere ].join("");
-					if( $.inArray( c4,apostrophes ) != -1 ) {
-						if( $.inArray( c5,consonnes ) != -1 ) {
-							s1 = [ c5,c4,c3,c2,c1,caractere ].join(""); 
-							s2 = [ c5,c4 ].join("");
-							s3 = [ c3,c2,c1,caractere ].join("");
-						}
-					}
-				}
-				if( $.inArray( c3,apostrophes ) != -1 ) {
-					if( $.inArray( c4,consonnes ) != -1 ) {
-						s1 = [ c4,c3,c2,c1,caractere ];
-					}
-				}
-			}
-		}
-		
-		mot1[mot1.length-1] = s1;
-		mot1_input.val( mot1.join("") );
-		mots_visible = mot1_input.val();
-	    
-	    if( s.length <= 2 ) {
-		    mot2[mot2.length-1] = s1;
-	    }
-	    if( s.length == 3 ) {
-		    if( $.inArray(c2,consonnes) != -1 ) {
-			    mot2[mot2.length-1] = s2;
-			    mot2[mot2.length-2] = s3;
-		    }
-			if( c1 == "߲" &&  $.inArray(c2,voyelles) != -1 ) {
-			    mot2[mot2.length-1] = s1;
-			}
-		    if( $.inArray(c2,apostrophes) != -1 ) {
-			    mot2[mot2.length-1] = s1;
-		    }
-	    }
-	    if( s.length >= 4 ) {
-			mot2[mot2.length-1] = s2;
-			mot2[mot2.length-1] = s3;
-			if( c1 == "߲"&& $.inArray(c2,voyelles) != -1  && $.inArray(c3,apostrophes) != -1 ) {
-				mot2[mot2.length-1] = s1;
-			}
-		}   
-		  
-
-		mot2_input.val( mot2 );
-		mots_audible = mot2_input.val();    
-
-		vider_syllabe();	
- 	 }
-	function tonification_automatique() {
-
-		if( $.inArray( c1,voyelles ) != -1 ) {
-			s2 = [c1,'߫'].join("");
-			if( $.inArray( c2,consonnes ) != -1 ) {
-				s2 = [c2,c1,'߫'].join("");
-				if( $.inArray( c3,consonnes ) != -1 ) {
-					s2 = [c3,c1,'߫'].join("");
-					s3 = [c2,c1,'߫'].join("");
-				}
-			}
-			if( $.inArray( c2,apostrophes ) != -1 ) {
-				if( $.inArray( c3,consonnes ) != -1 ) {
-					s2 = [c3,c2,c1,'߫'].join("");
-				}
-			}
-		}
-		
-		if( $.inArray( c1,ton ) != -1 ) {
-		    if( $.inArray( c2,voyelles ) != -1 ) {
-			    s2 = [ c2,c1 ].join("");
-			    if( $.inArray( c3,consonnes ) != -1 ) {
-				    s2 = [ c3,c2,c1 ].join("");
-			    }
-			    if( $.inArray( c3,apostrophes ) != -1 ) {
-				    if( $.inArray( c4,consonnes ) != -1 ) {
-				    s2 = [ c4,c3,c2,c1 ].join("");
-				    }
-			    }
-		    }
-			if( c2 == "߲" ) {
-				if( $.inArray( c3,voyelles ) != -1 ) {
-					s2 = [ c3,c2,c1 ].join("");
-					if( $.inArray( c4,consonnes ) != -1 ) {
-						s2 = [ c4,c3,c2,c1 ].join("");
-					}
-					if( $.inArray( c4,apostrophes ) != -1 ) {
-						if( $.inArray( c5,consonnes ) != -1 ) {
-							s2 = [ c5,c4,c3,c2,c1 ].join("");
-						}
-					}
-				}
-			}
-		}
-
-		if( c1 == '߲' ) {
-			if( $.inArray( c2,voyelles ) != -1 ) {
-				s2 = [ c2,c1,'߫' ].join("");
-				if( $.inArray( c3,consonnes ) != -1 ) {
-					s2 = [ c3,c2,c1,'߫' ].join("");
-				}
-				if( $.inArray( c3,apostrophes ) != -1 ) {
-					if( $.inArray( c4,consonnes ) != -1 ) {
-						s2 = [ c4,c3,c2,'߫' ].join("");
-					}
-				}
-			}
-			if( $.inArray( c2,ton ) != -1 ) {
-				if( $.inArray( c3,voyelles ) != -1 ) {
-					s2 = [ c3,c2,c1,'߫' ].join("");
-					if( $.inArray( c4,consonnes ) != -1 ) {
-						s2 = [ c4,c3,c2,c1,'߫' ].join("");
-					}
-				}
-			}
-		}
-		
-	    if(s.length <= 2) {
-			mot2[ mot2.length-1 ] = s2;
-			mot2_input.val( mot2 );
-			mots_audible = mot2_input.val();
-		}
-		if( s.length = 3 && $.inArray(c2,consonnes) != -1 && $.inArray(c3,consonnes) != -1 ) {
-			mot2[ mot2.length-2 ] = s2;
-			mot2[ mot2.length-1 ] = s3;
-			mot2_input.val( mot2 );
-			mots_audible = mot2_input.val();
-		}
-	 }
- 	function nasaliser() {
-
-	 	if( $.inArray( c1,voyelles ) != -1 ) {
-		 	s1 = [ c1,caractere ].join("");
-		 	if( $.inArray( c2,consonnes ) != -1 ) {
-			 	s1 = [ c2,c1,caractere ].join("");
-			 	if( $.inArray( c3,apostrophes ) != -1 ) {
-				 	if( $.inArray( c4,consonnes ) != -1 ) {
-					 	s1 = [ c4,c3,c2,c1,caractere ].join(""); 
-					 	s2 = [ c4,c3 ].join("");
-					 	s3 = [ c2,c1,caractere ].join("");
-				 	}
-			 	}
-		 	}
-		 	if( $.inArray( c2,apostrophes ) != -1 ) {
-		 		if( $.inArray( c3,consonnes ) != -1 ) {
-			 		s1 = [ c3,c2,c1,caractere ].join("");
-		 		}
-		 	}
-	 	}
-	 	if( $.inArray( c1,ton ) != -1 ) {
-			if( $.inArray( c2,voyelles ) != -1 ) {
-			 	s1 = [ c2,c1,caractere ].join("");
-			 	if( $.inArray( c3,consonnes ) != -1 ) {
-				 	s1 = [ c3,c2,c1,caractere ].join("");
-				 	if( $.inArray( c4,apostrophes ) != -1 ) {
-					 	if( $.inArray( c5,consonnes ) != -1 ) {
-						 	s1 = [ c5,c4,c3,c2,c1,caractere ].join(""); 
-						 	s2 = [ c5,c4 ].join("");
-						 	s3 = [ c3,c2,c1,caractere ].join("");
-					 	}
-				 	}
-			 	}
-			}
-	 	}î
-	 	
-	 	mot1[mot1.length-1] = s1;
-	 	mot1_input.val( mot1.join("") );
-	 	mots_visible = mot1_input.val();
-	 	
-	 	if( s.length <= 2 ) {
-		 	mot2[mot2.length-1] = s1;
-		 	mot2_input.val( mot2 );
-		 	mots_audible = mot2_input.val();  
-	 	}
-	 	if( s.length >= 3 ) {
-	 	    if($.inArray( c1,ton ) != -1) {
-			 	mot2[mot2.length-1] = s1;
-			 	mot2_input.val( mot2 );
-	 	    }else{
-			 	mot2[mot2.length-2] = s2;
-			 	mot2[mot2.length-1] = s3;
-			 	mot2_input.val( mot2 );
-			 	mots_audible = mot2_input.val();
-		 	} 
-	 	}	
-	 		
-	 	vider_syllabe();
- 	 }
-	function vider_syllabe() {
- 	 	syllabe.splice( 0,syllabe.length );
-		syllabe_input.val( syllabe );
-	 }	
-	function vider_mots() {
-	  // Suppression du contenu de la variable "syllabes" pour eviter sa repetition.
-		mot1.splice( 0,mot1.length );
-		mot2.splice( 0,mot2.length );
-
-  		mot1_input.val( mot1 );
-  		mot2_input.val( mot2 );
-
-  		mots_visible = mot1_input.val();
-  		mots_audible = mot2_input.val();
-	 }	
-	function vider_mot() {
-		 mot1.splice( 0,mot1.length );
-		 mot2.splice( 0,mot2.length );
-	 }
 	function afficher_erreur() {
 		$('#ecrit_errone').text( caractere );
 		$('#ecrit_correcte').text( mot1.join("") + syllabe.join("") );
@@ -627,13 +268,7 @@ Les fonctions */
 
 
     effacerMemoire();
-	
-/*___________________________________________________________________________________________________________________________________
-   
-   
-   
-   
-   Les parametrages du tableau */
+
     $('#parametre_icone').on('click', function() { $('#parametres_tableau').toggle(100); $('#board_menu_deroulant').css('display','none'); });
     $('#board_menu_icone').on('click', function() { $('#board_menu_deroulant').toggle(100); });
     
@@ -655,7 +290,7 @@ Les fonctions */
             
             let caractere_suivante = texte[i];  
             let caractere_precedante = syllabe_visible[syllabe_visible.length-1]; 
-  //  alert(caractere_suivante);
+
          /*---------------------------------------------------------------------------------------*/   
         
             if($.inArray(caractere_precedante,espace.concat(consonnes,ponctuations)) == -1) { 
@@ -670,7 +305,7 @@ Les fonctions */
                     effacerSyllabeAudible();
                     effacerMotAudible();
                 }
-                if($.inArray(caractere_suivante,consonnes) != -1 ) { 
+                if($.inArray(caractere_suivante,consonnes.concat(chiffres)) != -1) { 
                     chargerSyllabeAudible2(); 
                     chargerMotAudible();
                     
@@ -680,6 +315,17 @@ Les fonctions */
             }
 
             chargerSyllabeVisible();
+            
+            if($.inArray(syllabe_visible_input.val(),espace.concat(ponctuations)) != -1) {
+                
+                chargerSyllabeAudible1();
+                chargerMotAudible();
+                chargerTexteAudible();
+                
+                effacerSyllabeVisible();
+                effacerSyllabeAudible();
+                effacerMotAudible();
+            }
             
          /*---------------------------------------------------------------------------------------*/   
     
@@ -705,6 +351,10 @@ Les fonctions */
                     c5 = syllabe_a_convertir[syllabe_a_convertir.length-5];
         
 
+                 /*-------------------------------------------------------------*/  
+                    if($.inArray(syllabe_visible_input.val(),espace.concat(ponctuations)) != -1) {
+                        sa1[sa1.length] = caractere_suivante;
+                    }
                  /*-------------------------------------------------------------*/  
                     if(c1 == nasalisation) {
                         if($.inArray(c2,ton) != -1) {
@@ -800,6 +450,9 @@ Les fonctions */
                                 }
                             }
                         }
+                        if(c2 == tedo) {
+                            sa1[sa1.length] = c2+c1;
+                        }
                         if(c2 == nasalisation) {
                             if($.inArray(c3,voyelles) != -1) {
                                 sa1[sa1.length] = c3+c2+c1;
@@ -842,6 +495,15 @@ Les fonctions */
                             }
                         }
                     }
+                 /*-------------------------------------------------------------*/  
+                    if(c1 == tedo) {
+                        sa1[sa1.length] = c1+'߫';
+                    }
+                 /*-------------------------------------------------------------*/  
+                    if($.inArray(c1,chiffres) != -1) {
+                        sa1[sa1.length] = c1;
+                    }
+                 /*-------------------------------------------------------------*/  
            
                     return sa1;
                 }    
@@ -863,7 +525,7 @@ Les fonctions */
                     c4 = syllabe_a_convertir[syllabe_a_convertir.length-4];
                     c5 = syllabe_a_convertir[syllabe_a_convertir.length-5];
              
-         
+                 /*-------------------------------------------------------------*/  
                     if(c1 == nasalisation) {
                         if($.inArray(c2,voyelles) != -1) {
                             sa2[sa2.length] = c2+c1+'߫';
@@ -883,7 +545,16 @@ Les fonctions */
                                 }
                             }
                         }
+                        if($.inArray(c2,ton) != -1) {
+                            if($.inArray(c3,voyelles) != -1) {
+                                sa2[sa2.length] = c3+c2+c1;
+                                if($.inArray(c4,consonnes) != -1) {
+                                    sa2[sa2.length-1] = c4+c3+c2+c1;
+                                }
+                            }
+                        }
                     }
+                 /*-------------------------------------------------------------*/  
                     if($.inArray(c1,ton) != -1) {
                         if($.inArray(c2,voyelles) != -1) {
                             sa2[sa2.length] = c2+c1;
@@ -895,11 +566,20 @@ Les fonctions */
                                 }
                             }
                         }
+                        if(c2 == nasalisation) {
+                            if($.inArray(c3,voyelles) != -1) {
+                                sa2[sa2.length] = c3+c1+c2;
+                                if($.inArray(c4,consonnes) != -1) {
+                                    sa2[sa2.length-1] = c4+c3+c1+c2;
+                                }
+                            }
+                        }
                     }
+                 /*-------------------------------------------------------------*/  
                     if($.inArray(c1,voyelles) != -1) {
                         sa2[sa2.length] = c1+'߫';
                         if(c2 == apostrophes[0]) {
-                            if($.inAqrray(c3,consonnes) != -1) {
+                            if($.inArray(c3,consonnes) != -1) {
                                 sa2[sa2.length-1] = c3+c1+'߯';
                             }
                         }
@@ -916,6 +596,24 @@ Les fonctions */
                             }
                         }
                     }
+                 /*-------------------------------------------------------------*/  
+                    if(c1 == tedo) {
+                        sa2[sa2.length] = c1+'߫';
+                        if($.inArray(c2,voyelles) != -1) {
+                            if($.inArray(c3,consonnes) != -1) {
+                                sa2[sa2.length] = c3+c2+'߯'+'߲';
+                                if($.inArray(c4,consonnes) != -1) {
+                                    sa2[sa2.length-1] = c4+c2+'߫';
+                                    sa2[sa2.length] = c3+c2+'߯'+'߲';
+                                }
+                            }
+                        }
+                    }
+                 /*-------------------------------------------------------------*/  
+                    if($.inArray(c1,chiffres) != -1) {
+                        sa2[sa2.length] = c1;
+                    }
+                 /*-------------------------------------------------------------*/  
 
                     return sa2;
                 }    
@@ -932,7 +630,6 @@ Les fonctions */
             }
             function chargerTexteAudible() {
                 texte_audible[texte_audible.length] = mot_audible_input.val().split(',');
-                texte_audible[texte_audible.length] = espace;
                 texte_audible_input.val(texte_audible);
             }
             
@@ -964,55 +661,6 @@ Les fonctions */
                 $('#mot_audible_input').val(mot_audible);
                 $('#texte_audible_input').val(texte_audible);
     }
-    
-    /*
-    document.getElementById('tableau_noir').onkeyup = function(event){
-        
-        //let x = event.key; 
-    
-        let tableau = $('#tableau_noir');
-        
-        let dernier_caractere = tableau.val()[tableau.val().length-1];  
-        
-        if($.inArray(dernier_caractere,espace) != -1) {
-            
-            mot1[mot1.length] = $('#syllabe_input').val();
-            $('#mot1_input').val(mot1.join(''));
-            
-            texte1[texte1.length] = $('#mot1_input').val();
-            texte1[texte1.length] = $('syllabe_input').val();
-            $('#texte1_input').val(texte1);
-            
-            syllabe.splice(0,syllabe.length);
-            $('#syllabe_input').val(syllabe);
-            
-            mot1.splice(0,mot1.length);
-            $('#mot1_input').val(mot1);
-            
-        }
-        
-        if($.inArray(dernier_caractere,consonnes) != -1 ) {
-            mot1[mot1.length] = $('#syllabe_input').val();
-            $('#mot1_input').val(mot1.join(''));
-            
-            syllabe.splice(0,syllabe.length);
-            $('#syllabe_input').val(syllabe);
-        }
-        
-        if($.inArray(dernier_caractere,espace) == -1) {
-            syllabe.push(dernier_caractere);
-            $('#syllabe_input').val(syllabe.join(''));
-        }
-    }
-    */
-   
-   
-
-	$('#couleur').on('click', reglage_couleurs);
-	//$('#zoum').on('click', reglage_zoom);
-	
-	function reglage_couleurs() { $('#details_parametres').animate({ 'top':0 }, 250); }
-	function reglage_zoom() { $('#details_parametres').animate({ 'top':'-100%' }, 250); }
 
 /*___________________________________________________________________________________________________________________________________
 Lorsqu'on appuie une touche du clavier, il se passe ce qui suit: */
@@ -1121,13 +769,4 @@ Lorsqu'on appuie une touche du clavier, il se passe ce qui suit: */
 	function lecture2() { var m = texte_memoire; audio.attr({ src:"son/mp3/"+m[m.length-2][1]+".mp3", autoplay:"on" }); }
     function lecture3() { var m = texte_memoire; audio.attr({ src:"son/mp3/"+m[m.length-2][2]+".mp3", autoplay:"on" }); }
 
-
-    $('#fermer_clavier').on('click', function() {
-        $('#clavier_tableau').css({ 'transform':'scaleY(0)' });
-    });
-    
-    function afficherClavier() {
-        $('#clavier_tableau').css({ 'transform':'scaleY(1)' });
-    }
-    
 });

@@ -277,7 +277,7 @@ Les fonctions */
         $('#play').css('display','inline-block');
     });
     $('#tableau_noir').on('dblclick', function() { $('#memoire_tableau').toggle(100); });
-    $('#effacer_tableau').on('click', function() { effacerMemoire(); });
+    $('#effacer_tableau').on('click', function() { effacerTableau(); });
     $('#play').on('click', function() {
         var texte = tableau_noir.val();
         

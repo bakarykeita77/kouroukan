@@ -181,7 +181,7 @@ Les fonctions */
 				message_erreur.text( 'ߘߜߊߛߌߒߠߊ ߕߍ߫ ߕߎ߲߰ ߠߊ߫ ߞߊ߲ߠߊߘߌߦߊߟߊ߲ ߠߊ߫' );
 				afficher_erreur();
 			}
-		}
+		}_
 	 }
 
 	 function lire(mot) {

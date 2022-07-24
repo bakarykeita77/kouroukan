@@ -1,14 +1,14 @@
 
 #assistant {
 	position: absolute;
+	top: 4rem;
+	left: 20vw;
 	border-radius: 0.5rem;
     direction: rtl;
-	top: 0;
     width: 20%;
     max-width: 300px;
     min-height: 3rem;
-    left: 20%;
-	transform: scale(1);
+	transform: scale(0);
     overflow: auto;
     background-color: #444;
     transition: transform 200ms;
@@ -35,16 +35,16 @@
 	text-align: center;
 }
 
-#ecrit_correcte, #ecrit_errone{
+#partie_correcte, #partie_erronee{
 	padding: 0;
 	margin: 0;
 } 
 
-#ecrit_correcte{
+#partie_correcte{
 	color: white;
 }
 
-#ecrit_errone{
+#partie_erronee{
 	color: red;
 } 
 

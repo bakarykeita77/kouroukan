@@ -61,7 +61,7 @@ body { direction: rtl }
     z-index: 1000;
 }
 
-.outils .outil:not(#memoire_tableau) {display:none; }
+.outils .outil:not(#assistant) {display:none; }
 
 
 

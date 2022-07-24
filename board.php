@@ -47,8 +47,8 @@ session_start();
     </div>
     <?php include "http://localhost:8080/kouroukan/fonctions/fonctions_tableau.php"; ?>
     
+    <script src="http://localhost:8080/kouroukan/js/board.js"></script>
     <script src="http://localhost:8080/kouroukan/js/parametres_tableau.js"></script>
     <script src="http://localhost:8080/kouroukan/js/assistant.js"></script>
-    <script src="http://localhost:8080/kouroukan/js/board.js"></script>
 </body>
 </html>

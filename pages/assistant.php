@@ -14,7 +14,7 @@
 			<span class="fermeture">&times;</span>
 			<p id="titre_assistant"></p>
 			<div id="corps_assistant">
-				<p id="avertissement">ߦߴߊ߬ ߡߊ߬ ߞߵߊ߬ ߛߓߍ߫ ߞߏ߫ <span id="erreur"> <span id="ecrit_correcte"></span><span class="clignote" id="ecrit_errone"></span> </span></p>
+				<p id="avertissement">ߦߴߊ߬ ߡߊ߬ ߞߵߊ߬ ߛߓߍ߫ ߞߏ߫ <span id="erreur"> <span id="partie_correcte"></span><span class="clignote" id="partie_erronee"></span> </span></p>
 				<p id="message_erreur"></p>
 				
 				<p id="correction_erreur"></p>

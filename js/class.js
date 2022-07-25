@@ -14,6 +14,16 @@ $(document).ready(function() {
     fermeture_de_parent.on('click', function(){
         $(this).parent().parent().css({'display':'none'});
     });
+    var masqueur = $('.masqueur');
+    masqueur.on('click', function(){
+        $(this).parent().css({'transform':'scale(0)'});
+    });
+    var masqueur_de_parent = $('.masqueur_de_parent');
+    masqueur_de_parent.on('click', function(){
+        $(this).parent().parent().css({'transform':'scale(0)'});
+    });
+ 
+    
     var menu_icone = "&#9776;";
     $('.menu_icone').html(menu_icone);
     

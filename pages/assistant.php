@@ -11,7 +11,7 @@
     <body>
 	
 		<div class="outil" id="assistant">
-			<span class="fermeture">&times;</span>
+			<span class="masqueur">&times;</span>
 			<p id="titre_assistant"></p>
 			<div id="corps_assistant">
 				<p id="avertissement">ߦߴߊ߬ ߡߊ߬ ߞߵߊ߬ ߛߓߍ߫ ߞߏ߫ <span id="erreur"> <span id="partie_correcte"></span><span class="clignote" id="partie_erronee"></span> </span></p>

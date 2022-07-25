@@ -1,12 +1,13 @@
 
 #assistant {
 	position: absolute;
-	top: 4rem;
+	top: 5rem;
 	left: 20vw;
 	border-radius: 0.5rem;
     direction: rtl;
-    width: 20%;
-    max-width: 300px;
+	color: yellow;
+    width: 60%;
+    max-width: 20rem;
     min-height: 3rem;
 	transform: scale(0);
     overflow: auto;

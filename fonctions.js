@@ -93,7 +93,7 @@
     }
     function couleurDeFond(element,couleur)	{ element.css('backgroundColor', couleur); }
     function couleurDeFont(element,couleur)	{ element.css('color', couleur); }
-alert("ok");	
+	
 	function incrementer(){
 	    var i=0;
 	    return function(){ return i += 1; };
@@ -124,11 +124,10 @@ alert("ok");
     
             $('#audio').attr({ src: 'http://localhost:8080/kouroukan/son/mp3/'+td_actif_value+'.mp3', autoplay: 'on' });
     
-          /*Animation de td lors de la lecture*/
             $(td_actif).addClass('ombrage');
             setTimeout(function() { $(td_actif).removeClass('ombrage'); }, 600);
         });
-     };
+     }
     function lectureSemiAutomatique() {
         $(".play_icon").parent().on('click',function(){
 
@@ -163,7 +162,7 @@ alert("ok");
 	   }
     }
     
-    mettreEnSurbrillance(element) {
+    function mettreEnSurbrillance(element) {
         element.addClass('surbrillance');
         element.siblings().removeClass('surbrillance');
     }

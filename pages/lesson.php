@@ -20,19 +20,13 @@ if(isset($_SESSION["id"])){
     <title>lesson</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/class.css"/>
+	
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/lesson.css"/>
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/syllabes.css"/>
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/parametres.css"/>
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/pratiques.css"/>
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/evaluation.css"/>
 
-    <script src="http://localhost:8080/kouroukan/js/jquery-3.3.1.js"></script>
-    <script src="http://localhost:8080/kouroukan/fonctions.js"></script>
- <!--   <script src="http://localhost:8080/kouroukan/js/html2canvas.js"></script>   -->
-    <script src="http://localhost:8080/kouroukan/js/icones.js"></script>
-    <script src="http://localhost:8080/kouroukan/js/caracteres.js"></script>
-    <script src="http://localhost:8080/kouroukan/js/class.js"></script>
 </head>
 <body style="direction:rtl">
 

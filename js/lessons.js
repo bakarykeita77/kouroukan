@@ -354,13 +354,13 @@ $('document').ready(function() {
                             
                             $('#apprentissage_entete').html( apprentissageEnteteHTML() );
                     	    $('#apprentissage_corps').html( lesson_courante ); 
-                         	
+                     	
                         	function apprentissageEnteteHTML(){
                         	    
-                        	    var entete_html = "<div class='play_btn_container'><span class='play_label'>ߝߐߟߊ߲</span><span class='play_icon'>"+play_icon+"</span></div>";
-                        	    entete_html += "<div class='stop_btn_container'><span class='stop_label'>ߘߊ߬ߘߋ߬ߟߊ߲ </span> <span class='stop_icon'>"+stop_icon+"</span></div>";
-                        	    entete_html += "<div class='parametre_btn_container'><span class='parametre_label'>ߛߏ߯ߙߏߟߊ߲</span>  <span class='parametre_icon'>"+parametre_icon+"</span></div>";
-                                
+                        	    var entete_html = "<div class='play_btn_container'><span class='play_label'>ߝߐߟߊ߲</span><span class='play_icon'>&#9664;</span></div>";
+                        	    entete_html += "<div class='stop_btn_container'><span class='stop_label'>ߘߊ߬ߘߋ߬ߟߊ߲ </span> <span class='stop_icon'>&#9632;</span></div>";
+                        	    entete_html += "<div class='parametre_btn_container'><span class='parametre_label'>ߛߏ߯ߙߏߟߊ߲</span>  <span class='parametre_icon'>&#9881;</span></div>";
+                              
                                 return entete_html;
                         	}
                     	 }

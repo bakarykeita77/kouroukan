@@ -81,9 +81,7 @@ session_start();
         <div class="page_foot"><?php include("pied-de-lesson.php"); ?></div>
     </div>
 
-<script src="http://localhost:8080/kouroukan/js/class.js"></script>
-<script src="http://localhost:8080/kouroukan/js/caracteres.js"></script>
-<script src="http://localhost:8080/kouroukan/js/accueil.js"></script>
+    <script src="http://localhost:8080/kouroukan/js/accueil.js"></script>
 
 </body>
 </html>

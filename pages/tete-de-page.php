@@ -3,15 +3,18 @@
 <html>
 	<head>
 		<title>topbar</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    		
 		<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/class.css"/>
 		<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/tete-de-page.css"/>
+		
 	 <!--	<script src="http://kit.fontawesome.com/45b3b93014.js" crossorigin="anonymous"></script>    -->
 		<script src="http://localhost:8080/kouroukan/js/jquery-3.3.1.js"></script>
 		<script src="http://localhost:8080/kouroukan/fonctions.js"></script>
-	</head>
-
+        <script src="http://localhost:8080/kouroukan/js/icones.js"></script>
+        <script src="http://localhost:8080/kouroukan/js/class.js"></script>	</head>
+        <script src="http://localhost:8080/kouroukan/js/caracteres.js"></script>
 	<body>
 	    <div id="tete_de_page_container">
             <h3 id="header">ߞߙߎ߬ߞߊ߲߬</h3>
@@ -84,11 +87,7 @@
     		</div>
         </div>
 
-		<script src="http://localhost:8080/kouroukan/fonctions.js"></script>
-	 <!--	<script src="http://localhost:8080/kouroukan/js/ajax.js"></script>	-->
 		<script src="http://localhost:8080/kouroukan/js/tete-de-page.js"></script>
-		<script src="http://localhost:8080/kouroukan/js/caracteres.js"></script>
-		<script src="http://localhost:8080/kouroukan/js/class.js"></script>
 		<script src="http://localhost:8080/kouroukan/js/profile.js"></script>
 
 	</body>

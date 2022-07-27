@@ -13,14 +13,15 @@ $('document').ready(function() {
     var session_niveau_max = JSON.parse(sessionStorage.getItem('session_niveau_max'));
     var DB_niveau_max     = JSON.parse(sessionStorage.getItem('DB_niveau_max'));
        
-    var session_phase_nbr = JSON.parse(sessionStorage.getItem('session_phase_nbr'));
+    var local_phase_nbr = JSON.parse(localStorage.getItem('local_phase_nbr'));
     var DB_phase_nbr      = JSON.parse(sessionStorage.getItem('DB_phase_nbr'));
+
+    var phase_nbr = phaseNombre();
+    var niveau_max = niveauMax();
+    
 
     var total_phase, phases_etudiees, dernieres_phases, derniere_phase, dernieres_phases_distinctes;
   	var niveaux_passes = [], niveau_en_coure = '', phase_active = '',phases_a_etudier = [], noms_des_phases = '';
-
-    var niveau_max = niveauMax();
-    var phase_nbr = phaseNombre();
 
     var resume_brut_des_etudes = $('#resume_brut_des_etudes_container').html();
       
@@ -43,11 +44,12 @@ $('document').ready(function() {
 	4)- Les phases s'affichent et
 	5)- On peut surfer
   --------------------------------------------------------------------*/
-       
+      
         getPhases(); 
    /*2*/phases();
+        changerPhaseActive(local_phase_nbr);
    /*5*/matiere();
-	
+
   /*--------------------------------------------------------------------*/
 	function getPhases() { 
 
@@ -547,12 +549,12 @@ $('document').ready(function() {
                                     
                                         phase_nbr++;
                                         
-                                        if(session_phase_nbr == null) sessionStorage.setItem('session_phase_nbr',phase_nbr);
-                                        session_phase_nbr = JSON.parse(sessionStorage.getItem('session_phase_nbr'));
-                                        if(session_phase_nbr === total_phase) sessionStorage.setItem('session_niveau_max', niveau_max+1);
+                                        if(local_phase_nbr == null) localStorage.setItem('local_phase_nbr',phase_nbr);
+                                        local_phase_nbr = JSON.parse(localStorage.getItem('local_phase_nbr'));
+                                        if(local_phase_nbr === total_phase) sessionStorage.setItem('session_niveau_max', niveau_max+1);
                                         
-                                        phase_nbr = (session_phase_nbr > DB_phase_nbr) ? session_phase_nbr : DB_phase_nbr; 
-                                        
+                                        phase_nbr = (local_phase_nbr > DB_phase_nbr) ? local_phase_nbr : DB_phase_nbr; 
+                                alert(phase_nbr);  
                                         sendApprentissageToDB();
                                         changerPhaseActive(phase_nbr);
                                     }
@@ -638,9 +640,9 @@ $('document').ready(function() {
                         	    var exercices_entete_html = "<div class='play_icon_container' id='exercices_player' style='width:auto'>";
                         	        exercices_entete_html += "<span class='play_label'>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ </span>";
                         	        exercices_entete_html += "<span class='qtite_question'>"+parseIntNko(quantite_de_question)+"</span> : <span class='ordre_question'>"+parseIntNko(compteur_de_question)+question_rang+" </span>";
-                        	        exercices_entete_html += "<span class='ecouter_question'> ߟߊߡߍ߲߫</span><span class='play_icon'>"+play_icon+"</span>";
+                        	        exercices_entete_html += "<span class='ecouter_question'> ߟߊߡߍ߲߫</span><span class='play_icon'>&#8635;</span>";
                         	    exercices_entete_html += "</div>";
-                        	    exercices_entete_html += "<div class='oreille_icon_container'><span class='reecoute_label'>ߊ߬ ߟߊߡߍ߲߫ ߕߎ߯ߣߌ߫  </span> <span class='oreille_icon'>"+oreille_icon+"</span></div>";
+                        	    exercices_entete_html += "<div class='oreille_icon_container'><span class='reecoute_label'>ߊ߬ ߟߊߡߍ߲߫ ߕߎ߯ߣߌ߫  </span> <span class='oreille_icon'>&#127997z;</span></div>";
                         
                                 return exercices_entete_html;
                         	}
@@ -774,19 +776,19 @@ $('document').ready(function() {
                 	    function stockerExercice() {
                 	                        	             
                             $('#course_fermeture').on('click',function(){ 
-                                         
+                        alert(phase_index ==  phase_nbr);                   
                                 if(phase_index <  phase_nbr) { return; }
                                 if(phase_index == phase_nbr) {
                                     
                                     note = noterExercice(); 
-                                    
+                                   
                                  /*--------------------------------------------------------------------
                                   Pourqu'un exercice soit valable, il faut que chaque question ait une réponse.
                                  --------------------------------------------------------------------*/  
                             
                                     if(note <  moyenne) alert( "reprendre" ); 
                                     if(note >= moyenne) { 
-                                        
+                                       
                                         phase_nbr++;
                                         if(session_phase_nbr == null) sessionStorage.setItem('session_phase_nbr',phase_nbr);
                                         session_phase_nbr = JSON.parse(sessionStorage.getItem('session_phase_nbr'));
@@ -1988,8 +1990,8 @@ $('document').ready(function() {
     function phaseNombre() {
         let phase_nbr = 0;
 
-        if( session_phase_nbr == null && DB_phase_nbr == null) phase_nbr = 0;
-        if( session_phase_nbr != null && DB_phase_nbr != null) phase_nbr = (session_phase_nbr > DB_phase_nbr) ? session_phase_nbr : DB_phase_nbr;
+        if( local_phase_nbr == null && DB_phase_nbr == null) phase_nbr = 0;
+        if( local_phase_nbr != null && DB_phase_nbr != null) phase_nbr = (local_phase_nbr > DB_phase_nbr) ? local_phase_nbr : DB_phase_nbr;
 
         return phase_nbr;
     }

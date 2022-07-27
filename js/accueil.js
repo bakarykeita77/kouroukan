@@ -4,16 +4,12 @@
 	let phases_etudiees = [], dernieres_phases = [], dernieres_phases_distinctes = [], derniere_phase = '';
 	let phases_1 = [], phases_2 = [], phases_3 = [], phases_4 = [];
 
+    var moyenne = 1;
+    
+    
     userIdentityStorage();
     dataStorage();
 
-	let avatar_name = sessionStorage.getItem('id');
-	if(avatar_name == null) {
-	 $('#logo').css('display', 'none');
-	}
-
-    var resume_brut_des_etudes = '';
-    var moyenne = 1;
 
     function userIdentityStorage() {
                 

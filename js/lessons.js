@@ -15,7 +15,7 @@ $('document').ready(function() {
        
     var local_phase_nbr = JSON.parse(localStorage.getItem('local_phase_nbr'));
     var DB_phase_nbr      = JSON.parse(sessionStorage.getItem('DB_phase_nbr'));
-
+alert(DB_phase_nbr);
     var phase_nbr = phaseNombre();
     var niveau_max = niveauMax();
     
@@ -56,7 +56,7 @@ $('document').ready(function() {
         total_phase       = JSON.parse(sessionStorage.getItem('total_phase'));
         phases_etudiees   = JSON.parse(sessionStorage.getItem('phases_etudiees')); 
         dernieres_phases  = JSON.parse(sessionStorage.getItem('dernieres_phases'));     
-        derniere_phase    = sessionStorage.getItem('derniere_phase');     
+        derniere_phase    = JSON.parse(sessionStorage.getItem('derniere_phase'));     
         dernieres_phases_distinctes  = JSON.parse(sessionStorage.getItem('dernieres_phases_distinctes'));
     }
     function phases() {

@@ -5,11 +5,11 @@
 
  /*------------------------------------------------------------------------------------------------------ */   
     
-    //$sql_database = "CREATE DATABASE IF NOT EXISTS `education`";
+  //  $sql_database = "CREATE DATABASE IF NOT EXISTS `kouroukan`";
     
     $sql_table_users    = "CREATE TABLE IF NOT EXISTS `kouroukan`.`users`(
         `id` INT(255) NOT NULL AUTO_INCREMENT,
-        `date` TIMESTAMP NOT NULL CURRENT_TMESTAMP,
+        `date` TIMESTAMP NOT NULL,
         `prenom` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
         `nom` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
         `naissance` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
@@ -26,9 +26,9 @@
         `nom` varchar(100) character set utf8 collate utf8_general_ci,
         `taille` varchar(100) character set utf8 collate utf8_general_ci,
         `type` varchar(100) character set utf8 collate utf8_general_ci,
-        `image` longblob cahacter set utf8 collate utf8_general_ci,
+        `image` longblob,
         primary key (`id`)
-     ) engine = myisam charset utf8 collate utf8_general_ci";
+     ) engine = myisam charset = utf8 collate utf8_general_ci";
     
     $sql_table_alphabet = "CREATE TABLE IF NOT EXISTS `kouroukan`.`alphabet`( 
         `id` INT(255) NOT NULL AUTO_INCREMENT , 
@@ -39,7 +39,7 @@
         `lesson` LONGTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL , 
         `note` INT(3) NOT NULL , 
         PRIMARY KEY (`id`)
-     ) ENGINE = MyISAM CHARSET=utf8 COLLATE utf8_general_ci";
+     ) ENGINE = MyISAM CHARSET = utf8 COLLATE utf8_general_ci";
 
     $sql_table_syllabes = "CREATE TABLE IF NOT EXISTS `kouroukan`.`syllabes`( 
         `id` INT(255) NOT NULL AUTO_INCREMENT , 
@@ -50,7 +50,7 @@
         `lesson` LONGTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL , 
         `note` INT(3) NOT NULL , 
         PRIMARY KEY (`id`)
-     ) ENGINE = MyISAM CHARSET=utf8 COLLATE utf8_general_ci";
+     ) ENGINE = MyISAM CHARSET = utf8 COLLATE utf8_general_ci";
 
     $sql_table_tons     = "CREATE TABLE IF NOT EXISTS `kouroukan`.`tons`( 
         `id` INT(255) NOT NULL AUTO_INCREMENT , 
@@ -61,7 +61,7 @@
         `lesson` LONGTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL , 
         `note` INT(3) NOT NULL , 
         PRIMARY KEY (`id`)
-     ) ENGINE = MyISAM CHARSET=utf8 COLLATE utf8_general_ci";
+     ) ENGINE = MyISAM CHARSET = utf8 COLLATE utf8_general_ci";
 
     $sql_table_chiffres = "CREATE TABLE IF NOT EXISTS `kouroukan`.`chiffres`( 
         `id` INT(255) NOT NULL AUTO_INCREMENT , 
@@ -72,13 +72,17 @@
         `lesson` LONGTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL , 
         `note` INT(3) NOT NULL , 
         PRIMARY KEY (`id`)
-     ) ENGINE = MyISAM CHARSET=utf8 COLLATE utf8_general_ci";
+     ) ENGINE = MyISAM CHARSET = utf8 COLLATE utf8_general_ci";
 
  /*------------------------------------------------------------------------------------------------------ */   
 
+   // $db->exec($sql_database);
     $db->exec($sql_table_users);
     $db->exec($sql_table_avatar);
     $db->exec($sql_table_alphabet);
     $db->exec($sql_table_syllabes);
     $db->exec($sql_table_tons);
     $db->exec($sql_table_chiffres);
+    
+    header("location:http://localhost:8002/?username=root&db=kouroukan"); 
+    

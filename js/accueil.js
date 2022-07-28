@@ -10,27 +10,25 @@
     userIdentityStorage();
     dataStorage();
 
-
     function userIdentityStorage() {
                 
-        sessionStorage.setItem('id',        document.getElementById('id').innerHTML);
-        sessionStorage.setItem('prenom',    document.getElementById('prenom').innerHTML);
-        sessionStorage.setItem('nom',       document.getElementById('nom').innerHTML);
-        sessionStorage.setItem('naissance', document.getElementById('naissance').innerHTML);
-        sessionStorage.setItem('sexe',      document.getElementById('sexe').innerHTML);
-        sessionStorage.setItem('adresse',   document.getElementById('adresse').innerHTML);
-        sessionStorage.setItem('email',     document.getElementById('email').innerHTML);
+        sessionStorage.setItem('id',        JSON.stringify(document.getElementById('id').innerHTML));
+        sessionStorage.setItem('prenom',    JSON.stringify(document.getElementById('prenom').innerHTML));
+        sessionStorage.setItem('nom',       JSON.stringify(document.getElementById('nom').innerHTML));
+        sessionStorage.setItem('naissance', JSON.stringify(document.getElementById('naissance').innerHTML));
+        sessionStorage.setItem('sexe',      JSON.stringify(document.getElementById('sexe').innerHTML));
+        sessionStorage.setItem('adresse',   JSON.stringify(document.getElementById('adresse').innerHTML));
+        sessionStorage.setItem('email',     JSON.stringify(document.getElementById('email').innerHTML));
      }
     function dataStorage() {
         let user_id = parseInt(sessionStorage.getItem('id')); 
 
     	fetch("http://localhost:8080//kouroukan/api/index.php?id_user="+user_id)
-    	.then(response => response.json())
+    	.then(response => response)
     	.then(matiere => {
     	        
     	    let matieres = matiere;
-        	
-    
+      alert(JSON.stringify(matieres));  	
         /*-------------------------------------------------------------------------   
           Niveaux et phases
         -------------------------------------------------------------------------*/   
@@ -108,7 +106,7 @@
         -------------------------------------------------------------------------*/          	
         	if(niveaux != '') niveau_max = Math.max(...niveaux);
         	if(niveaux == '') niveau_max = 0;
-        	sessionStorage.setItem('niveau_max',niveau_max);
+        	sessionStorage.setItem('niveau_max',JSON.stringify(niveau_max));
         	
         /*-------------------------------------------------------------------------   
           Matières étudiées 
@@ -123,7 +121,7 @@
           Derniere matiere 
         -------------------------------------------------------------------------*/         	    
             derniere_matiere = liste_de_matieres[matieres_etudiees.length][0];
-        	sessionStorage.setItem('derniere_matiere',derniere_matiere);
+        	sessionStorage.setItem('derniere_matiere',JSON.stringify(derniere_matiere));
 
         /*-------------------------------------------------------------------------   
           Dernieres phases 
@@ -148,9 +146,8 @@
           Derniere phase
         -------------------------------------------------------------------------*/              
             derniere_phase = liste_de_phases[dernieres_phases.length];
-        	sessionStorage.setItem('derniere_phase',derniere_phase);
-        	
-          
+        	sessionStorage.setItem('derniere_phase',JSON.stringify(derniere_phase));
+
         /*-------------------------------------------------------------------------   
           Les pratiques 
         -------------------------------------------------------------------------*/              

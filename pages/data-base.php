@@ -85,4 +85,3 @@
     $db->exec($sql_table_chiffres);
     
     header("location:http://localhost:8002/?username=root&db=kouroukan"); 
-    

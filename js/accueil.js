@@ -21,14 +21,14 @@
         sessionStorage.setItem('email',     JSON.stringify(document.getElementById('email').innerHTML));
      }
     function dataStorage() {
-        let user_id = parseInt(sessionStorage.getItem('id')); 
+        let user_id = parseInt(JSON.parse(sessionStorage.getItem('id'))); 
 
     	fetch("http://localhost:8080//kouroukan/api/index.php?id_user="+user_id)
-    	.then(response => response)
+    	.then(response => response.json())
     	.then(matiere => {
     	        
     	    let matieres = matiere;
-      alert(JSON.stringify(matieres));  	
+      	
         /*-------------------------------------------------------------------------   
           Niveaux et phases
         -------------------------------------------------------------------------*/   
@@ -46,7 +46,7 @@
         	    var note      = matieres[i][j].note;
         	    
         	    var phase     = [niveau, date, phase_nom, note];
-              
+             
                
             	if(phase[0] == 1 && note >= moyenne) phases_1[phases_1.length] = phase;
             	if(phase[0] == 2 && note >= moyenne) phases_2[phases_2.length] = phase;

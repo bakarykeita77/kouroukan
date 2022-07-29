@@ -16,7 +16,7 @@
     $sexe      = isset($_POST['sexe'])      ? $_POST['sexe']:null;
     $adresse   = isset($_POST['adresse'])   ? $_POST['adresse']:null;
     $email     = isset($_POST['email'])     ? $_POST['email']:null;
-    $password  = isset($_POST['password'])  ? $_POST['password']:null;
+    $pass      = isset($_POST['pass'])      ? $_POST['pass']:null;
     
     $matiere   = isset($_POST['matiere'])   ? $_POST['matiere']:null;
     $niveau    = isset($_POST['niveau'])    ? $_POST['niveau']:null;
@@ -28,13 +28,13 @@
     $id_client = securiser($id_client);
     $id_client = (int) $id_client;
     
-    $prenom    = securiser($_POST['prenom']);
-    $nom       = securiser($_POST['nom']);
-    $naissance = securiser($_POST['naissance']);
-    $sexe      = securiser($_POST['sexe']);
-    $adresse   = securiser($_POST['adresse']);
-    $email     = securiser($_POST['email']);
-    $password  = securiser($_POST['password']);
+    $prenom    = securiser($prenom);
+    $nom       = securiser($nom);
+    $naissance = securiser($naissance);
+    $sexe      = securiser($sexe);
+    $adresse   = securiser($adresse);
+    $email     = securiser($email);
+    $pass      = securiser($pass);
            
     $matiere   = securiser($matiere);
     $niveau    = securiser($niveau);
@@ -43,33 +43,59 @@
     $lesson    = securiser($lesson);
     $note      = securiser($note);
     $note      = (int) $note;
- 
+
   /*----------------------------------------------------------------------------------------------*/
 
-    if($id_client != '' && $matiere != '' && $niveau == '' && $phase == '' && $lesson == '' && $note == '') getAllInfo($lesson,$id_client);
-    if($id_client != '' && $matiere != '' && $niveau != '' && $phase != '' && $lesson != '' && $note != '') archiverLesson($id_client,$matiere,$niveau,$phase,$lesson,$note);              
+    if($id_client != '' && $matiere != '' && $niveau == '' && $phase == '' && $lesson == '' && $note == '')                 getAllInfo($lesson,$id_client);
+    if($id_client != '' && $matiere != '' && $niveau != '' && $phase != '' && $lesson != '' && $note != '')                 archiverLesson($id_client,$matiere,$niveau,$phase,$lesson,$note);              
+    if($prenom != '' && $nom != '' && $naissance != '' && $sexe != '' && $adresse != '' && $email != '' && $pass != '')     { addClient($prenom,$nom,$naissance,$sexe,$adresse,$email,$pass); }         
+    if($id != '' && $prenom != '' && $nom != '' && $naissance != '' && $sexe != '' && $adresse != '' && $email != '' && $pass != '') modifierClient($id,$prenom,$nom,$naissance,$sexe,$adresse,$email,$pass);           
+    if($id_user != '' && $pratique != '')                                                                                   archiverPratique($id_user,$pratique);         
+    if($id_client != '' && $matiere != '' && $niveau != '' && $phase != '' && $lesson != '' && $note != '')                 archiverLesson($id_client,$matiere,$niveau,$phase,$lesson,$note);        
+    if($numero != '' && $question != '' && $reponse != '' && $points != '')                                                 archiverNotes($numero,$question,$reponse,$points);       
+    if($id != '')                                                                                                           getClient($id);       
+    if($matiere != '' && $id_client != '')                                                                                  getAllInfo($matiere,$id_client);       
  
   /*----------------------------------------------------------------------------------------------*/
   
-        function addClient($prenom, $nom, $naissance, $sexe, $adresse, $email, $password) {
+        function addClient($prenom,$nom,$naissance,$sexe,$adresse,$email,$pass) {
 			global $db;
+			
+		 /*
+		  Voyons si le mail envoye par l'utilisateur n'est pas deja utilisé.
+		  Pour cela, on extrait et place tous les emails déja enregistrés de la base de données dans une variable $emails_table.
+		 */
+            $requette = $db->prepare("SELECT email FROM users");
+            $requette->execute();
+            $emails = $requette->fetchAll();
+            
+			$emails_table = [];
+            for($i=0;$i<count($emails);$i++) $emails_table[$i] = $emails[$i]['email'];
 
-			$sql = "INSERT INTO users(prenom, nom, naissance, sexe, adresse, email, password)
-					VALUES(:prenom, :nom, :naissance, :sexe, :adresse, :email, :password)
-			";
+		 /*On teste la présence de l'email saisi dans la variable $emails_table.
+		  *Si oui un message s'affiche pour signaler l'utilisateur que cet email est déja utilisé.
+		  *Si non le processus d'inscription est engagé.
+		 */
+            if(in_array($_POST['email'],$emails_table) == false) {
+            
+    			$sql = "INSERT INTO users(prenom, nom, naissance, sexe, adresse, email, pass)
+    					VALUES(:prenom, :nom, :naissance, :sexe, :adresse, :email, :pass)
+    			";
+    
+    			$requette = $db->prepare($sql);
+    
+    			$requette->bindValue(':prenom',   $prenom,   PDO::PARAM_STR);
+    			$requette->bindValue(':nom',      $nom,      PDO::PARAM_STR);
+    			$requette->bindValue(':naissance',$naissance,PDO::PARAM_STR);
+    			$requette->bindValue(':sexe',     $sexe,     PDO::PARAM_STR);
+    			$requette->bindValue(':adresse',  $adresse,  PDO::PARAM_STR);
+    			$requette->bindValue(':email',    $email,    PDO::PARAM_STR);
+    			$requette->bindValue(':pass',     $pass,     PDO::PARAM_STR);
+    
+    			$utilisateurs =  $requette->execute();
+    			echo("ߌ ߕߐ߮ ߓߘߊ߫ ߛߓߍ߫.");
 
-			$requette = $db->prepare($sql);
-
-			$requette->bindValue(':prenom',   $prenom,   PDO::PARAM_STR);
-			$requette->bindValue(':nom',      $nom,      PDO::PARAM_STR);
-			$requette->bindValue(':naissance',$naissance,PDO::PARAM_STR);
-			$requette->bindValue(':sexe',     $sexe,     PDO::PARAM_STR);
-			$requette->bindValue(':adresse',  $adresse,  PDO::PARAM_STR);
-			$requette->bindValue(':email',    $email,    PDO::PARAM_STR);
-			$requette->bindValue(':password', $password, PDO::PARAM_STR);
-
-			$utilisateurs =  $requette->execute();
-			return $utilisateurs;
+            }else{ echo("L'email envoye est deja utilise. Essayer un autre"); }
 		 }
 		function archiverPratique($id_user,$pratique) {
 		    global $db;
@@ -162,10 +188,10 @@
 
 			return $emailsAndPass;
 		 }
-		function modifierClient($id, $prenom, $nom, $naissance, $sexe, $adresse, $email, $password) {
+		function modifierClient($id, $prenom, $nom, $naissance, $sexe, $adresse, $email, $pass) {
 			global $db;
 
-			$sql = "UPDATE users SET prenom=:prenom, nom=:nom, naissance=:naissance, sexe=:sexe, adresse=:adresse, email=:email, password=:password WHERE id=:id";
+			$sql = "UPDATE users SET prenom=:prenom, nom=:nom, naissance=:naissance, sexe=:sexe, adresse=:adresse, email=:email, pass=:pass WHERE id=:id";
 
 			$requette = $db->prepare($sql);
 
@@ -176,7 +202,7 @@
 			$requette->bindValue(':sexe',     $sexe,     PDO::PARAM_STR);
 			$requette->bindValue(':adresse',  $adresse,  PDO::PARAM_STR);
 			$requette->bindValue(':email',    $email,    PDO::PARAM_STR);
-			$requette->bindValue(':password', $password, PDO::PARAM_STR);
+			$requette->bindValue(':pass',     $pass,     PDO::PARAM_STR);
 
 			$utilisateurs =  $requette->execute();
 			return $utilisateurs;

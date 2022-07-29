@@ -1,44 +1,4 @@
-<?php
-    if(isset($_POST['submit'])){
-        if(!empty($_POST['prenom']) AND !empty($_POST['nom']) AND !empty($_POST['naissance']) AND !empty($_POST['sexe']) AND !empty($_POST['adresse']) AND !empty($_POST['email']) AND !empty($_POST['pass'])){
-          
-		 /*Voyons si le mail envoye par l'utilisateur n'est pas deja utilise.
-		  *Pour cela, on extrait et place tous les emails déja enregistrés de la base de données dans une variable.
-		 */
-            require("connexionToDB.php");
-            global $db;
-            $requette = $db->prepare("SELECT email FROM users");
-            $requette->execute();
-            $emails = $requette->fetchAll();
-            
-			$emails_table = [];
-            for($i=0;$i<count($emails);$i++){ $emails_table[$i] = $emails[$i]['email']; }
 
-		 /*On teste la présence de l'email saisi dans la variable $emails.
-		  *Si oui un message s'affiche pour signaler l'utilisateur que cet emailest déja utilisé.
-		  *Si non le processus d'inscription est engagé.
-		 */
-            if(in_array($_POST['email'],$emails_table) == false) {
-              /*Fonction pour securiser les donnees*/
-                require('phpFonctions.php');
-                
-              /*Securisation des donnees*/
-                $prenom = securiser($_POST['prenom']);
-                $nom = securiser($_POST['nom']);
-                $naissance = securiser($_POST['naissance']);
-                $sexe = securiser($_POST['sexe']);
-                $adresse = securiser($_POST['adresse']);
-                $email = securiser($_POST['email']);
-                $pass = sha1(securiser($_POST['pass']));
-                
-              /*Insertion des donnees dans la base de donnees*/
-                $requette = $db->prepare("INSERT INTO users(prenom,nom,naissance,sexe,adresse,email,pass) VALUES(?,?,?,?,?,?,?)");
-                $requette->execute(array($prenom,$nom,$naissance,$sexe,$adresse,$email,$pass));
-                
-            }else{ $error = "L'email envoye est deja utilise. Essayer un autre"; }
-        }else { $error = "Veuiler remplir tous les champs"; }
-    }
-?>
 <html>
 <head>
 	<title>inscriptions</title>
@@ -54,7 +14,7 @@
     		
     		<h2>ߕߐ߯ߛߓߍ߫ ߥߟߊ</h2>
     		
-    		<form action="http://localhost:8080/kouroukan/pages/accueil.php" method="POST" id="formulaire_de_connexion">
+    		<form action="http://localhost:8080/kouroukan/pages/actions.php" method="POST" id="formulaire_de_connexion">
     			
     			<div class="input_box">
     				<input type="text" autocomplete="off" name="prenom" class="inscription_input" id="prenom" required />
@@ -81,7 +41,7 @@
     				<label>E-mail</label>
     			</div>
     			<div class="input_box">
-    				<input type="password" autocomplete="off" name="client_pass" class="inscription_input" id="client_pass" required />
+    				<input type="password" autocomplete="off" name="pass" class="inscription_input" id="client_pass" required />
     				<label>ߜߎ߲߬ߘߎ߬ߕߐ߮</label>
     			</div>
     			<div id="button_box">

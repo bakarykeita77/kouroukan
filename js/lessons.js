@@ -15,7 +15,7 @@ $('document').ready(function() {
        
     var local_phase_nbr = JSON.parse(localStorage.getItem('local_phase_nbr'));
     var DB_phase_nbr      = JSON.parse(sessionStorage.getItem('DB_phase_nbr'));
-alert(DB_phase_nbr);
+
     var phase_nbr = phaseNombre();
     var niveau_max = niveauMax();
     

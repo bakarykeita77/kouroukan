@@ -46,13 +46,10 @@
     var point_max = '';
     
 
-$('#nav ul li:nth(1)').addClass('surbrillance');
-$('#nav ul li:nth(1)').siblings().removeClass('surbrillance');
+    $('#nav ul li:nth(1)').addClass('surbrillance');
+    $('#nav ul li:nth(1)').siblings().removeClass('surbrillance');
 
     
-    
-
-
 /*-------------------------------------------------------------------------------------------------------------------------
 
 Au click sur l'afficheur du programme 
@@ -61,7 +58,8 @@ Au click sur l'afficheur du programme
 
 -------------------------------------------------------------------------------------------------------------------------*/
     
-    let session_phase_nbr = sessionStorage.getItem('session_phase_nbr');
+    let session_phase_nbr = JSON.parse(sessionStorage.getItem('session_phase_nbr'));
+    //alert(sessionStorage.getItem('niveaux')); 
 // sessionStorage.removeItem('sessison_phase_nbr'); sessionStorage.removeItem('DB_phase_nbr'); sessionStorage.removeItem('session_niveau_max'); sessionStorage.removeItem('DB_niveau_max'); sessionStorage.removeItem('niveau_max'); 	    
     
     niveaux            = JSON.parse(sessionStorage.getItem('niveaux'));

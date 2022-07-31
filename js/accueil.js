@@ -28,7 +28,6 @@
     	.then(response => response.json())
     	.then(matiere_collection => {
     	        
-
         /*-------------------------------------------------------------------------   
           matieres
         -------------------------------------------------------------------------*/   
@@ -59,14 +58,12 @@
         	    
         	    matiere = [niveau, date, phase_nom, lesson, note];
              
-               
             	if(matiere[0] == 1 && note >= moyenne) matiere_1[matiere_1.length] = matiere;
             	if(matiere[0] == 2 && note >= moyenne) matiere_2[matiere_2.length] = matiere;
             	if(matiere[0] == 3 && note >= moyenne) matiere_3[matiere_3.length] = matiere;
             	if(matiere[0] == 4 && note >= moyenne) matiere_4[matiere_4.length] = matiere;
         	}}
-        	
-        	
+
         	sessionStorage.setItem('phases_1', JSON.stringify(phases_1));  
         	sessionStorage.setItem('phases_2', JSON.stringify(phases_2));  
         	sessionStorage.setItem('phases_3', JSON.stringify(phases_3));  
@@ -86,8 +83,7 @@
         	
         	liste_des_phases = [liste_des_phases_1, liste_des_phases_2, liste_des_phases_3, liste_des_phases_4];
         	sessionStorage.setItem('liste_des_phases', JSON.stringify(liste_des_phases));
-     	
-        	
+
         	var noms_des_phases = [];
         	
         	for (var i = 0; i < liste_de_phases.length; i++) noms_des_phases.push(liste_de_phases[i][0]);
@@ -112,7 +108,6 @@
         
         	sessionStorage.setItem('phases_etudiees',JSON.stringify(matieres_etudiees));
      	    
-     	    
         /*-------------------------------------------------------------------------   
           Niveaux distincts
         -------------------------------------------------------------------------*/         
@@ -132,7 +127,6 @@
         	
         	sessionStorage.setItem('niveau_max',JSON.stringify(niveau_max));
         	sessionStorage.setItem('niveau_en_cours',JSON.stringify(niveau_en_cours));
-        	
 
         /*-------------------------------------------------------------------------   
           Derniere matiere 
@@ -143,22 +137,23 @@
         /*-------------------------------------------------------------------------   
           Dernieres phases 
         -------------------------------------------------------------------------*/              
-            for (var i = 0; i < derniere_matiere.length; i++) {
-                dernieres_phases[dernieres_phases.length] = derniere_matiere[i].phase;
+            if(matieres.length != 0) {
+                for (var i = 0; i < derniere_matiere.length; i++) {
+                    dernieres_phases[dernieres_phases.length] = derniere_matiere[i].phase;
+                }
+            	sessionStorage.setItem('dernieres_phases',JSON.stringify(dernieres_phases));
+            	sessionStorage.setItem('phases_etudiees',JSON.stringify(dernieres_phases));
             }
-        	sessionStorage.setItem('dernieres_phases',JSON.stringify(dernieres_phases));
-        	
-        	
         /*-------------------------------------------------------------------------   
           Dernieres phases distinctes
         -------------------------------------------------------------------------*/              
             for (var i = 0; i < dernieres_phases.length; i++) {
-                
                 if(dernieres_phases_distinctes.indexOf(dernieres_phases[i]) === -1) {
                     dernieres_phases_distinctes.push(dernieres_phases[i]);
                 }
             }
         	sessionStorage.setItem('dernieres_phases_distinctes',JSON.stringify(dernieres_phases_distinctes));
+        	sessionStorage.setItem('dernieres_phases_etudiees',JSON.stringify(dernieres_phases_distinctes));
           
         /*-------------------------------------------------------------------------   
           Derniere phase
@@ -166,7 +161,6 @@
             derniere_phase = liste_de_phases[dernieres_phases_distinctes.length][0];
         	sessionStorage.setItem('derniere_phase',JSON.stringify(derniere_phase));
         	
-
         /*-------------------------------------------------------------------------   
           Les pratiques 
         -------------------------------------------------------------------------*/              

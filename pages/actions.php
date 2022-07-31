@@ -57,7 +57,7 @@
     if($matiere != '' && $id_client != '')                                                                                  getAllInfo($matiere,$id_client);       
  
   /*----------------------------------------------------------------------------------------------*/
-  
+ echo($lesson);  
         function addClient($prenom,$nom,$naissance,$sexe,$adresse,$email,$pass) {
 			global $db;
 			

@@ -1,9 +1,11 @@
 
 try {
-    /* code */
-    let t = {"prenom":"Bakary","nom":"Keita","age":"52 ans"};
-    sessionStorage.setItem('t', JSON.stringify(t));
-    let s = JSON.parse(sessionStorage.getItem('t'));
+    /*
+    sessionStorage.setItem('x',10);
+    sessionStorage.setItem('x',5);
+    sessionStorage.setItem('x',500);
+    alert(sessionStorage.getItem('x'));
+    */
 } catch (e) {
     alert(e.message);
 }

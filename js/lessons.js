@@ -1,30 +1,26 @@
 $('document').ready(function() {
  
-    var id                = JSON.parse(sessionStorage.getItem('id'));     
-    var matieres_etudiees = sessionStorage.getItem('matieres_etudiees');     
-    var derniere_matiere  = sessionStorage.getItem('derniere_matiere');     
-    var matiere_active    = sessionStorage.getItem('matiere_active');     
-    var matiere_index     = sessionStorage.getItem('matiere_index'); 
-    var matiere_nom       = sessionStorage.getItem('matiere_nom'); 
-
-    var niveaux           = JSON.parse(sessionStorage.getItem('niveaux'));     
-    var niveau            = JSON.parse(sessionStorage.getItem('niveau_actif'));
-    var niveaux_distincts = JSON.parse(sessionStorage.getItem('niveaux_distincts'));     
+    var id                 = JSON.parse(sessionStorage.getItem('id'));     
+    var matiere_active     = JSON.parse(sessionStorage.getItem('matiere_active'));     
+    var matiere_index      = JSON.parse(sessionStorage.getItem('matiere_index')); 
+    var matiere_nom        = JSON.parse(sessionStorage.getItem('matiere_nom')); 
+ 
+    var niveaux            = JSON.parse(sessionStorage.getItem('niveaux'));     
+    var niveau             = JSON.parse(sessionStorage.getItem('niveau_actif'));
+    var niveaux_distincts  = JSON.parse(sessionStorage.getItem('niveaux_distincts'));     
     var session_niveau_max = JSON.parse(sessionStorage.getItem('session_niveau_max'));
-    var DB_niveau_max     = JSON.parse(sessionStorage.getItem('DB_niveau_max'));
-       
-    var local_phase_nbr = JSON.parse(localStorage.getItem('local_phase_nbr'));
-    var DB_phase_nbr      = JSON.parse(sessionStorage.getItem('DB_phase_nbr'));
-
-    var phase_nbr = phaseNombre();
-    var niveau_max = niveauMax();
+    var niveau_max         = JSON.parse(sessionStorage.getItem('niveau_max'));
     
-
-    var total_phase, phases_etudiees, dernieres_phases, derniere_phase, dernieres_phases_distinctes;
+    var phases_etudiees    = JSON.parse(sessionStorage.getItem('phases_etudiees'));
+    var dernieres_phases_distinctes = JSON.parse(sessionStorage.getItem('dernieres_phases_distinctes'));
+    var dernieres_phases_etudiees   = JSON.parse(sessionStorage.getItem('dernieres_phases_distinctes'));
+    var dernieres_phases  = JSON.parse(sessionStorage.getItem('dernieres_phases_etudiees'));     
+    var total_phase       = JSON.parse(sessionStorage.getItem('total_phase'));
+    var derniere_phase    = JSON.parse(sessionStorage.getItem('derniere_phase'));     
+    var phase_nbr = dernieres_phases_distinctes.length;
+       
   	var niveaux_passes = [], niveau_en_coure = '', phase_active = '',phases_a_etudier = [], noms_des_phases = '';
 
-    var resume_brut_des_etudes = $('#resume_brut_des_etudes_container').html();
-      
     var rang = '';
 	var etapes_passees = '';
 	var etape_actuelle = [];
@@ -44,21 +40,12 @@ $('document').ready(function() {
 	4)- Les phases s'affichent et
 	5)- On peut surfer
   --------------------------------------------------------------------*/
-      
-        getPhases(); 
-   /*2*/phases();
-        changerPhaseActive(local_phase_nbr);
-   /*5*/matiere();
+    
+        phases();
+        changerPhaseActive(phase_nbr);
+        matiere();
 
   /*--------------------------------------------------------------------*/
-	function getPhases() { 
-
-        total_phase       = JSON.parse(sessionStorage.getItem('total_phase'));
-        phases_etudiees   = JSON.parse(sessionStorage.getItem('phases_etudiees')); 
-        dernieres_phases  = JSON.parse(sessionStorage.getItem('dernieres_phases'));     
-        derniere_phase    = JSON.parse(sessionStorage.getItem('derniere_phase'));     
-        dernieres_phases_distinctes  = JSON.parse(sessionStorage.getItem('dernieres_phases_distinctes'));
-    }
     function phases() {
         var phases_collection = phasesCollection();
     	$('.phases').html(phasesHTML());
@@ -126,7 +113,6 @@ $('document').ready(function() {
     	    $.each($('#phases_list li'), function() {
     	      
         	    var phase_index = $(this).index();
-        
     	        if(niveau_max === 0) {
         
                     if(phase_nbr > 0) {
@@ -135,7 +121,7 @@ $('document').ready(function() {
                 	    if(phase_index >  phase_nbr) $(this).addClass('a_apprendre');
                     }
                     if(phase_nbr == 0) {
-                	    if(phase_index !== 0) $(this).addClass('active');
+                	    if(phase_index == 0) $(this).addClass('active');                	    
                 	    if(phase_index >  0) $(this).removeClass('active');
                 	    if(phase_index >  0) $(this).addClass('a_apprendre');
                     }
@@ -162,16 +148,22 @@ $('document').ready(function() {
         $.each($('#phases_list li'), function() {
     	       
             var phase_index = $(this).index();
-                                        
-            if(phase_index == nbr-1) $(this).removeClass('active');
-            if(phase_index == nbr-1) $(this).addClass('apprises');
-            if(phase_index == nbr  ) $(this).removeClass('a_apprendre');
-            if(phase_index == nbr  ) $(this).addClass('active');
-            if(phase_index >= nbr+1) $(this).addClass('a_apprendre');
-                    	    
-            if(total_phase == nbr  ) $(this).removeClass('active');
-            if(total_phase == nbr  ) $(this).removeClass('a_apprendre');
-            if(total_phase == nbr  ) $(this).addClass('apprises');
+            
+            if(nbr === 0) {
+                if(phase_index == nbr) $(this).addClass('active');
+                if(phase_index > nbr) $(this).addClass('a_apprendre');
+              }
+            if(nbr > 0) {
+                if(phase_index == nbr-1) $(this).removeClass('active');
+                if(phase_index == nbr-1) $(this).addClass('apprises');
+                if(phase_index == nbr  ) $(this).removeClass('a_apprendre');
+                if(phase_index == nbr  ) $(this).addClass('active');
+                if(phase_index >= nbr+1) $(this).addClass('a_apprendre');
+                        	    
+                if(total_phase == nbr  ) $(this).removeClass('active');
+                if(total_phase == nbr  ) $(this).removeClass('a_apprendre');
+                if(total_phase == nbr  ) $(this).addClass('apprises');
+            }
         });
     }
 	function matiere() {
@@ -214,7 +206,7 @@ $('document').ready(function() {
             var parametres_html = parametres.html();
 
           /*--------------------------------------------------------------------*/    
-     
+    
     	    phaseActiveName();
     	    dimensionnementDeCourseBody();
     	    affichageDeCours();
@@ -536,7 +528,7 @@ $('document').ready(function() {
                 	    function stockerApprentissage() {
                             
                             $('#course_fermeture').on('click',function() {
-                   	        
+                 
                     	        var course = $(this).siblings('#apprentissage').html();
                     	      
                                 if(phase_index <  phase_nbr) { return; }
@@ -546,17 +538,9 @@ $('document').ready(function() {
                                     
                                     if(note <  moyenne) alert("ߌ ߡߊ߫ ߛߓߍߘߋ߲ ߥߟߊ ߜߋ߭ ߠߎ߬ ߓߍ߯ ߟߊߡߍ߲߫");
                                     if(note >= moyenne) {
-                                    
-                                        phase_nbr++;
-                                        
-                                        if(local_phase_nbr == null) localStorage.setItem('local_phase_nbr',phase_nbr);
-                                        local_phase_nbr = JSON.parse(localStorage.getItem('local_phase_nbr'));
-                                        if(local_phase_nbr === total_phase) sessionStorage.setItem('session_niveau_max', niveau_max+1);
-                                        
-                                        phase_nbr = (local_phase_nbr > DB_phase_nbr) ? local_phase_nbr : DB_phase_nbr; 
-                                alert(phase_nbr);  
+                                        changerPhaseActive(phase_nbr+1);
+                                        sessionStorage.setItem('phase_nbr',JSON.stringify(phase_nbr+1));
                                         sendApprentissageToDB();
-                                        changerPhaseActive(phase_nbr);
                                     }
                                 }
 
@@ -776,7 +760,7 @@ $('document').ready(function() {
                 	    function stockerExercice() {
                 	                        	             
                             $('#course_fermeture').on('click',function(){ 
-                        alert(phase_index ==  phase_nbr);                   
+                                      
                                 if(phase_index <  phase_nbr) { return; }
                                 if(phase_index == phase_nbr) {
                                     
@@ -788,14 +772,9 @@ $('document').ready(function() {
                             
                                     if(note <  moyenne) alert( "reprendre" ); 
                                     if(note >= moyenne) { 
-                                       
-                                        phase_nbr++;
-                                        if(session_phase_nbr == null) sessionStorage.setItem('session_phase_nbr',phase_nbr);
-                                        session_phase_nbr = JSON.parse(sessionStorage.getItem('session_phase_nbr'));
-                                        
-                                        sendExerciceToDB(); 
-                                        changerPhaseActive(session_phase_nbr); 
-                                        sessionStorage.removeItem('session_phase_nbr');
+                                        changerPhaseActive(phase_nbr+1); 
+                                        sessionStorage.setItem('phase_nbr',JSON.stringify(phase_nbr+1));
+                                        sendExerciceToDB();
                                     }
                                 }
                                 
@@ -1979,20 +1958,4 @@ $('document').ready(function() {
             caracteres_coches = [voyelles_cochees, consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees];
         }	    
 	}
-    function niveauMax() {
-        let niveau_max = 0;
-
-        if( session_niveau_max == null && DB_niveau_max == null) niveau_max = 0;
-        if( session_niveau_max != null && DB_niveau_max != null) niveau_max = (session_niveau_max > DB_niveau_max) ?  session_niveau_max : DB_niveau_max;
-
-        return niveau_max;
-    }
-    function phaseNombre() {
-        let phase_nbr = 0;
-
-        if( local_phase_nbr == null && DB_phase_nbr == null) phase_nbr = 0;
-        if( local_phase_nbr != null && DB_phase_nbr != null) phase_nbr = (local_phase_nbr > DB_phase_nbr) ? local_phase_nbr : DB_phase_nbr;
-
-        return phase_nbr;
-    }
 });

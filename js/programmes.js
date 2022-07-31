@@ -3,12 +3,14 @@
     var programme_div        = document.getElementById('programme_div');
     var reception            = document.getElementById('reception');
     var programme_ul         = document.getElementById('programme_ul');
+    
+    var matieres = JSON.parse(sessionStorage.getItem('matieres'));
+    
+	var niveau = 0, niveau_1 = 0, niveau_2 = 0, niveau_3 = 0, niveau_4 = 0,  niveau_en_cours = 1, niveaux = [], niveaux_distincts = [], niveau_max = 0;
+	var matiere = [], matiere_1 = [], matiere_2 = [], matiere_3 = [], matiere_4 = [], matieres = [], matieres_etudiees = [], derniere_matiere = '';
+	var phases_etudiees = [], dernieres_phases = [], dernieres_phases_distinctes = [], derniere_phase = '';
+	var phase = [], phases_1 = [], phases_2 = [], phases_3 = [], phases_4 = [];
 
-
-    var client_lessons_bruts_container      = document.querySelector('.page_head #client_lessons_bruts_container');
-    var client_exercices_bruts_container    = document.querySelector('.page_head #client_exercices_bruts_container');
-    var client_evaluations_brutes_container = document.querySelector('.page_head #client_evaluations_brutes_container');
-    var situation_des_etudes_container      = document.getElementById('situation_des_etudes_container');
 
     var click_min_nbr = 0;
 
@@ -59,26 +61,18 @@ Au click sur l'afficheur du programme
 -------------------------------------------------------------------------------------------------------------------------*/
     
     let session_phase_nbr = JSON.parse(sessionStorage.getItem('session_phase_nbr'));
-    //alert(sessionStorage.getItem('niveaux')); 
 // sessionStorage.removeItem('sessison_phase_nbr'); sessionStorage.removeItem('DB_phase_nbr'); sessionStorage.removeItem('session_niveau_max'); sessionStorage.removeItem('DB_niveau_max'); sessionStorage.removeItem('niveau_max'); 	    
     
     niveaux            = JSON.parse(sessionStorage.getItem('niveaux'));
-    session_niveau_max = JSON.parse(sessionStorage.getItem('session_niveau_max'));
-    DB_niveau_max      = JSON.parse(sessionStorage.getItem('niveau_max'));
-    if(session_niveau_max != null && DB_niveau_max != null) {
-        niveau_max = (session_niveau_max > DB_niveau_max) ?  session_niveau_max : DB_niveau_max;
-        
-        matieres_etudiees = sessionStorage.getItem('matieres_etudiees');
-        derniere_matiere  = sessionStorage.getItem('derniere_matiere');
-        phases_etudiees   = sessionStorage.getItem('phases_etudiees');
-        dernieres_phases  = sessionStorage.getItem('dernieres_phases');
-        dernieres_phases_distinctes  = JSON.parse(sessionStorage.getItem('dernieres_phases_distinctes'));
-        derniere_phase    = sessionStorage.getItem('derniere_phase');
-    }else{
-        niveau_max = 0;
+    niveau_max         = JSON.parse(sessionStorage.getItem('niveau_max'));
+    niveau_en_cours    = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
+    
+    if(matieres.length != 0) {
+        matieres_etudiees = JSON.parse(sessionStorage.getItem('matieres_etudiees'));
+        derniere_matiere  = JSON.parse(sessionStorage.getItem('derniere_matiere'));
     }
-  
-/*2*/programme();
+
+    programme();
     if(session_niveau_max > DB_niveau_max) changerProgramme();
       
     
@@ -127,10 +121,10 @@ Au click sur l'afficheur du programme
         function programmeStyle() {
         /*--------------------------------------------------------------------------------------------------------------------
          A chaque élément de la liste du programme correspondant un index.
-         Cet index est comparé au niveau max de l'étudiant : 
-            a)- Si l'index est inférieur au niveau max, l'élément prend la classe apprises définie dans class.css;
-            b)- Si l'index est égal au niveau max, l'élément prend la classe active définie dans class.css;
-            c)- Si l'index est supérieur au niveau max, l'élément prend la classe a_apprendre définie dans class.css.
+         Cet index est comparé au niveau en cours de l'étudiant : 
+            a)- Si l'index est inférieur au niveau en cours, l'élément prend la classe apprises définie dans class.css;
+            b)- Si l'index est égal au niveau en cours, l'élément prend la classe active définie dans class.css;
+            c)- Si l'index est supérieur au niveau en cours, l'élément prend la classe a_apprendre définie dans class.css.
         --------------------------------------------------------------------------------------------------------------------*/
 
             let programme_li = $("#programme_ul li");
@@ -139,16 +133,16 @@ Au click sur l'afficheur du programme
                          
                 var matiere_index = $(this).index();
 
-                if(niveau_max === 0) {
+                if(niveau_en_cours === 1) {
                     if(matiere_index === 0) $(this).addClass('active');
                     if(matiere_index > 0) $(this).addClass('a_apprendre');
                 }
         
-                if(niveau_max > 0) {
-                    if(matiere_index  < niveau_max) $(this).addClass('apprises');
-                    if(matiere_index  > niveau_max+1) $(this).addClass('a_apprendre');
-                    if(matiere_index == niveau_max) {
-                        
+                if(niveau_en_cours > 1) {
+                    if(matiere_index  < niveau_en_cours) $(this).addClass('apprises');
+                    if(matiere_index  > niveau_en_cours) $(this).addClass('a_apprendre');
+                    if(matiere_index == niveau_en_cours) { $(this).addClass('active');
+                      /*  
                         let total_phases = (niveau_max == 0) ? 3:4;
                         let nbr_phases_etudiees = dernieres_phases_distinctes.length;
                     
@@ -165,7 +159,7 @@ Au click sur l'afficheur du programme
                             $(this).addClass('active'); 
                             $(this).next().removeClass('a_apprendre'); 
                             $(this).next().addClass('a_apprendre');
-                        }
+                        }    */
                     }
                 }
             });
@@ -173,10 +167,10 @@ Au click sur l'afficheur du programme
         function storageDeLaMatiereActive() {
             $('#programme_ul li').on('click', function(){
                 
-                sessionStorage.setItem('matiere_active', $(this).attr('id')); 
-                sessionStorage.setItem('matiere_nom'   , $(this).text()    ); 
-                sessionStorage.setItem('matiere_index' , $(this).index()   ); 
-                sessionStorage.setItem('niveau_actif'  , $(this).index()+1 ); 
+                sessionStorage.setItem('matiere_active', JSON.stringify($(this).attr('id'))); 
+                sessionStorage.setItem('matiere_nom'   , JSON.stringify($(this).text()    )); 
+                sessionStorage.setItem('matiere_index' , JSON.stringify($(this).index()   )); 
+                sessionStorage.setItem('niveau_actif'  , JSON.stringify($(this).index()+1 )); 
             });
         }
         function programmeNavigation() {

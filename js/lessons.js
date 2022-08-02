@@ -1,38 +1,42 @@
 $('document').ready(function() {
- 
-    var id                = JSON.parse(sessionStorage.getItem('id'));     
-    var matieres_etudiees = sessionStorage.getItem('matieres_etudiees');     
-    var derniere_matiere  = sessionStorage.getItem('derniere_matiere');     
-    var matiere_active    = sessionStorage.getItem('matiere_active');     
-    var matiere_index     = sessionStorage.getItem('matiere_index'); 
-    var matiere_nom       = sessionStorage.getItem('matiere_nom'); 
-
-    var niveaux           = JSON.parse(sessionStorage.getItem('niveaux'));     
-    var niveau            = JSON.parse(sessionStorage.getItem('niveau_actif'));
-    var niveaux_distincts = JSON.parse(sessionStorage.getItem('niveaux_distincts'));     
-    var session_niveau_max = JSON.parse(sessionStorage.getItem('session_niveau_max'));
-    var DB_niveau_max     = JSON.parse(sessionStorage.getItem('DB_niveau_max'));
-       
-    var local_phase_nbr = JSON.parse(localStorage.getItem('local_phase_nbr'));
-    var DB_phase_nbr      = JSON.parse(sessionStorage.getItem('DB_phase_nbr'));
-
-    var phase_nbr = phaseNombre();
-    var niveau_max = niveauMax();
     
-
-    var total_phase, phases_etudiees, dernieres_phases, derniere_phase, dernieres_phases_distinctes;
+    var matieres_etudiees, derniere_matiere, matiere_active, matiere_index, matiere_nom;
+    var total_phase, phase_nbr, phases_etudiees, dernieres_phases, derniere_phase, dernieres_phases_distinctes;
+  	var niveau, niveaux, niveau_max, niveau_en_cours, niveaux_distincts;
   	var niveaux_passes = [], niveau_en_coure = '', phase_active = '',phases_a_etudier = [], noms_des_phases = '';
+    
+    var id                = JSON.parse(sessionStorage.getItem('id'));     
+    var matieres          = JSON.parse(sessionStorage.getItem('matieres'));     
+    
+ 
+    if(matieres.length > 0) {
+        
+        niveaux           = JSON.parse(sessionStorage.getItem('niveaux'));     
+        niveau_en_cours   = sessionStorage.getItem('niveau_en_cours');
+        niveaux_distincts = JSON.parse(sessionStorage.getItem('niveaux_distincts'));     
+        niveau_max        = JSON.parse(sessionStorage.getItem('niveau_max'));
+        
+        matieres_etudiees = JSON.parse(sessionStorage.getItem('matieres_etudiees'));     
+        derniere_matiere  = JSON.parse(sessionStorage.getItem('derniere_matiere'));     
+        matiere_active    = JSON.parse(sessionStorage.getItem('matiere_active'));     
+        matiere_index     = JSON.parse(sessionStorage.getItem('matiere_index')); 
+        matiere_nom       = JSON.parse(sessionStorage.getItem('matiere_nom')); 
 
-    var resume_brut_des_etudes = $('#resume_brut_des_etudes_container').html();
-      
+        dernieres_phases_distinctes = JSON.parse(sessionStorage.getItem('dernieres_phases_distinctes'));
+        phase_nbr = dernieres_phases_distinctes.length;
+    }
+    if(matieres.length === 0) {
+        phase_nbr = 0;
+        niveau_max = 0;
+        niveau_en_cours = '1';
+    }
+
     var rang = '';
 	var etapes_passees = '';
 	var etape_actuelle = [];
 	var etapes_a_faire = [];
 	var etape_max = [];
     
-    var resume_des_etudes = [];
-        
 	var phases_actuelles, phases_actuelles_etudiees, phase_precedante;
 	var index_phase_actuelle, index_phase_precedante, index_phase_active;
 	var avancer_btn = '';
@@ -47,7 +51,7 @@ $('document').ready(function() {
       
         getPhases(); 
    /*2*/phases();
-        changerPhaseActive(local_phase_nbr);
+        changerPhaseActive(phase_nbr);
    /*5*/matiere();
 
   /*--------------------------------------------------------------------*/
@@ -66,20 +70,19 @@ $('document').ready(function() {
         
 	    stylesDesPhases();
 	    affichageDesPhases();
-   
         function phasesHTML() {
-            
+          
             var lesson_id = $('.lesson_title').attr('id');
             
           // Liste des phases
-            var content = '<ul class="liste_affichage_cascade" id="phases_list">';
-            if(niveau != 1) {
+            var content = '<ul class="phases liste_affichage_cascade" id="phases_list">';
+            if(niveau_en_cours > 1) {
                 for(var i=0;i<liste_de_phases.length;i++){
                     var phase_id = liste_de_phases[i][0];
                     content += '<li id="'+lesson_id+'_'+phase_id+'">'+liste_de_phases[i][1]+'</li>';
                 }
             }
-            if(niveau == 1) {
+            if(niveau_en_cours == 1) {
                 for(var i=0;i<2;i++){
                     content += '<li id="'+lesson_id+'_'+liste_de_phases[i][0]+'">'+liste_de_phases[i][1]+'</li>';
                 }
@@ -98,15 +101,43 @@ $('document').ready(function() {
 
             return content;
         }
-        function phasesCollection() {
-            let collection = [];
-                    
-            for (var i = 0; i < liste_de_phases.length; i++) {
-                collection[i] = liste_de_phases[i][1];
-            }
-                   
-            return collection;
-        }
+    	function stylesDesPhases() {
+       	  
+        	    $.each($('#phases_list li'), function() {
+        	      
+            	    var phase_index = $(this).index();
+         
+        	        if(niveau_max === 0) {
+            
+                        if(phase_nbr > 0) {
+                    	    if(phase_index <  phase_nbr) $(this).addClass('apprises');
+                    	    if(phase_index == phase_nbr) $(this).addClass('active');
+                    	    if(phase_index >  phase_nbr) $(this).addClass('a_apprendre');
+                        }
+                        if(phase_nbr == 0) {
+ 
+                    	    if(phase_index !== 0) $(this).addClass('active');
+                    	    if(phase_index >  0) $(this).removeClass('active');
+                    	    if(phase_index >  0) $(this).addClass('a_apprendre');
+                        }
+        	        }    	        
+        	        if(niveau_max+1 === niveau) {
+            	        if(phase_nbr > 0) {
+                    	    
+                    	    if(phase_index <  phase_nbr) $(this).addClass('apprises');
+                    	    if(phase_index == phase_nbr) $(this).addClass('active');
+                    	    if(phase_index >  phase_nbr) $(this).addClass('a_apprendre');
+            	        }    	        
+            	        if(phase_nbr == 0) {
+                    	    if(phase_index == 0) $(this).addClass('active');
+                    	    if(phase_index >  0) $(this).addClass('a_apprendre');
+            	        }
+        	        }
+        	        if(niveau_max+1 > niveau) {
+        	            $(this).addClass('apprises');
+        	        }
+                });
+    	}
         function actualiserTitre() {
             var niveau = $('.niveau_courant').text();
       
@@ -120,42 +151,15 @@ $('document').ready(function() {
     	function affichageDesPhases() {
     	    affichageListeEnCascade();
     	}
-	}
-	function stylesDesPhases() {
-   	  
-    	    $.each($('#phases_list li'), function() {
-    	      
-        	    var phase_index = $(this).index();
-        
-    	        if(niveau_max === 0) {
-        
-                    if(phase_nbr > 0) {
-                	    if(phase_index <  phase_nbr) $(this).addClass('apprises');
-                	    if(phase_index == phase_nbr) $(this).addClass('active');
-                	    if(phase_index >  phase_nbr) $(this).addClass('a_apprendre');
-                    }
-                    if(phase_nbr == 0) {
-                	    if(phase_index !== 0) $(this).addClass('active');
-                	    if(phase_index >  0) $(this).removeClass('active');
-                	    if(phase_index >  0) $(this).addClass('a_apprendre');
-                    }
-    	        }    	        
-    	        if(niveau_max+1 === niveau) {
-        	        if(phase_nbr > 0) {
-                	    
-                	    if(phase_index <  phase_nbr) $(this).addClass('apprises');
-                	    if(phase_index == phase_nbr) $(this).addClass('active');
-                	    if(phase_index >  phase_nbr) $(this).addClass('a_apprendre');
-        	        }    	        
-        	        if(phase_nbr == 0) {
-                	    if(phase_index == 0) $(this).addClass('active');
-                	    if(phase_index >  0) $(this).addClass('a_apprendre');
-        	        }
-    	        }
-    	        if(niveau_max+1 > niveau) {
-    	            $(this).addClass('apprises');
-    	        }
-            });
+        function phasesCollection() {
+            let collection = [];
+                    
+            for (var i = 0; i < liste_de_phases.length; i++) {
+                collection[i] = liste_de_phases[i][1];
+            }
+                   
+            return collection;
+        }
 	}
     function changerPhaseActive(nbr) {
                            
@@ -301,10 +305,10 @@ $('document').ready(function() {
             function questions() {
                 var lq = '';
                
-                if(niveau==1) lq = mix1D(lettres);
-                if(niveau==2) lq = mix1D(syllabes);
-                if(niveau==3) lq = mix1D(syllabes_tonifies);
-                if(niveau==4) lq = mix1D(chiffre);
+                if(niveau_en_cours==1) lq = mix1D(lettres);
+                if(niveau_en_cours==2) lq = mix1D(syllabes);
+                if(niveau_en_cours==3) lq = mix1D(syllabes_tonifies);
+                if(niveau_en_cours==4) lq = mix1D(chiffre);
                 
                 return lq;
             }
@@ -534,32 +538,52 @@ $('document').ready(function() {
                             }
                         }
                 	    function stockerApprentissage() {
-                            
+                      
                             $('#course_fermeture').on('click',function() {
                    	        
                     	        var course = $(this).siblings('#apprentissage').html();
-                    	      
+                       
                                 if(phase_index <  phase_nbr) { return; }
                                 if(phase_index === phase_nbr) {
                                    
                                     note = noterApprentissage();
-                                    
+                     	                 
                                     if(note <  moyenne) alert("ߌ ߡߊ߫ ߛߓߍߘߋ߲ ߥߟߊ ߜߋ߭ ߠߎ߬ ߓߍ߯ ߟߊߡߍ߲߫");
                                     if(note >= moyenne) {
-                                    
-                                        phase_nbr++;
-                                        
-                                        if(local_phase_nbr == null) localStorage.setItem('local_phase_nbr',phase_nbr);
-                                        local_phase_nbr = JSON.parse(localStorage.getItem('local_phase_nbr'));
-                                        if(local_phase_nbr === total_phase) sessionStorage.setItem('session_niveau_max', niveau_max+1);
-                                        
-                                        phase_nbr = (local_phase_nbr > DB_phase_nbr) ? local_phase_nbr : DB_phase_nbr; 
-                                alert(phase_nbr);  
                                         sendApprentissageToDB();
+                  
+                                        phase_nbr++;
                                         changerPhaseActive(phase_nbr);
+                                        sessionStorage.setItem('phase_nbr',JSON.stringify(phase_nbr));
                                     }
                                 }
 
+                                function sendApprentissageToDB() {       
+                                 /*
+                                 A la fermeture, on s'assure que chaque élément est clické au moins un nombre de fois défini.
+                                 - Si oui le mémoire de click est envoyé au serveur;
+                                 - Sinon, un message s'affiche et le mémoire n'est pas envoyé.
+                                 */
+                                    var matiere = sessionStorage.getItem('matiere_active');
+                                    var phase   = sessionStorage.getItem('phase');
+                                    var lesson  = JSON.stringify(clicks_memo);
+
+                                    const apprentissage_data = new URLSearchParams({
+                                        id     : id,
+                                        matiere: matiere,
+                                        niveau : niveau_en_cours,
+                                        phase  : phase,
+                                        lesson : lesson,
+                                        note   : JSON.stringify(note)
+                                    });
+                     
+                                    fetch("http://localhost:8080/kouroukan/pages/actions.php", {
+                                        method: "POST",
+                                        body: apprentissage_data
+                                    })
+                                    .then(response => console.log(response))
+                                    .catch(error => alert(error));
+                                }
                                 function noterApprentissage() {
                                     var table_elements_click_nbr = [];
                                     
@@ -587,34 +611,8 @@ $('document').ready(function() {
                                         return sum_click;
                                     }
                                 }
-                                function sendApprentissageToDB() {       
-                                 /*
-                                 A la fermeture, on s'assure que chaque élément est clické au moins un nombre de fois défini.
-                                 - Si oui le mémoire de click est envoyé au serveur;
-                                 - Sinon, un message s'affiche et le mémoire n'est pas envoyé.
-                                 */
-                                    var matiere = sessionStorage.getItem('matiere_active');
-                                    var phase   = sessionStorage.getItem('phase');
-                                    var lesson  = JSON.stringify(clicks_memo);
-            
-                                    const apprentissage_data = new URLSearchParams({
-                                        id     : id,
-                                        matiere: matiere,
-                                        niveau : niveau,
-                                        phase  : phase,
-                                        lesson : lesson,
-                                        note   : note
-                                    });
-                                             
-                                    fetch("http://localhost:8080/kouroukan/pages/actions.php", {
-                                        method: "POST",
-                                        body: apprentissage_data
-                                    })
-                                    .then(response => console.log(response))
-                                    .catch(error => console.log(error));
-                                }
                             });
-                	    }
+                	    } 
                 	}
                 	function exercices() {
                	    
@@ -776,7 +774,7 @@ $('document').ready(function() {
                 	    function stockerExercice() {
                 	                        	             
                             $('#course_fermeture').on('click',function(){ 
-                        alert(phase_index ==  phase_nbr);                   
+                                         
                                 if(phase_index <  phase_nbr) { return; }
                                 if(phase_index == phase_nbr) {
                                     
@@ -789,13 +787,10 @@ $('document').ready(function() {
                                     if(note <  moyenne) alert( "reprendre" ); 
                                     if(note >= moyenne) { 
                                        
-                                        phase_nbr++;
-                                        if(session_phase_nbr == null) sessionStorage.setItem('session_phase_nbr',phase_nbr);
-                                        session_phase_nbr = JSON.parse(sessionStorage.getItem('session_phase_nbr'));
-                                        
                                         sendExerciceToDB(); 
-                                        changerPhaseActive(session_phase_nbr); 
-                                        sessionStorage.removeItem('session_phase_nbr');
+                                        phase_nbr++;
+                                        changerPhaseActive(phase_nbr); 
+                                        sessionStorage.setItem('phase_nbr');
                                     }
                                 }
                                 
@@ -1480,7 +1475,6 @@ $('document').ready(function() {
                     	    
                     	    $('#course_fermeture').on('click',function(){
 
-            	        alert( phase_index +'&'+  phase_nbr );              
                                 nbr_option_non_vide = nombreDOptionNonVide();
                                 if(phase_index <  phase_nbr || nbr_option_non_vide < all_options.length) { return; }
                                 if(phase_index == phase_nbr && nbr_option_non_vide == all_options.length) {
@@ -1494,12 +1488,10 @@ $('document').ready(function() {
                                     	        
                                     if(note >= moyenne) {
                                             
-                                        phase_nbr++;
-                                        if(session_phase_nbr == null) sessionStorage.setItem('session_phase_nbr',phase_nbr);
-                                        session_phase_nbr = JSON.parse(sessionStorage.getItem('session_phase_nbr'));
-                                        
                                         sendPratiqueToDB(); 
-                                        clearStorage(); 
+                                        phase_nbr++;
+                                        changerPhaseActive(phase_nbr);
+                                        sessionStorage.setItem('phase_nbr',JSON.stringify(phase_nbr)); 
                                     }
                                 }
                                 
@@ -1979,20 +1971,4 @@ $('document').ready(function() {
             caracteres_coches = [voyelles_cochees, consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees];
         }	    
 	}
-    function niveauMax() {
-        let niveau_max = 0;
-
-        if( session_niveau_max == null && DB_niveau_max == null) niveau_max = 0;
-        if( session_niveau_max != null && DB_niveau_max != null) niveau_max = (session_niveau_max > DB_niveau_max) ?  session_niveau_max : DB_niveau_max;
-
-        return niveau_max;
-    }
-    function phaseNombre() {
-        let phase_nbr = 0;
-
-        if( local_phase_nbr == null && DB_phase_nbr == null) phase_nbr = 0;
-        if( local_phase_nbr != null && DB_phase_nbr != null) phase_nbr = (local_phase_nbr > DB_phase_nbr) ? local_phase_nbr : DB_phase_nbr;
-
-        return phase_nbr;
-    }
 });

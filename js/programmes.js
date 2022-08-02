@@ -63,13 +63,17 @@ Au click sur l'afficheur du programme
     let session_phase_nbr = JSON.parse(sessionStorage.getItem('session_phase_nbr'));
 // sessionStorage.removeItem('sessison_phase_nbr'); sessionStorage.removeItem('DB_phase_nbr'); sessionStorage.removeItem('session_niveau_max'); sessionStorage.removeItem('DB_niveau_max'); sessionStorage.removeItem('niveau_max'); 	    
     
-    niveaux            = JSON.parse(sessionStorage.getItem('niveaux'));
-    niveau_max         = JSON.parse(sessionStorage.getItem('niveau_max'));
-    niveau_en_cours    = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
-    
-    if(matieres.length != 0) {
+    if(matieres.length > 0) {
+        niveaux            = JSON.parse(sessionStorage.getItem('niveaux'));
+        niveau_max         = JSON.parse(sessionStorage.getItem('niveau_max'));
+        niveau_en_cours    = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
+        
         matieres_etudiees = JSON.parse(sessionStorage.getItem('matieres_etudiees'));
         derniere_matiere  = JSON.parse(sessionStorage.getItem('derniere_matiere'));
+    }
+    if(matieres.length === 0) {
+        niveau_max = 0;
+        niveau_en_cours = 1;
     }
 
     programme();
@@ -166,7 +170,6 @@ Au click sur l'afficheur du programme
         }
         function storageDeLaMatiereActive() {
             $('#programme_ul li').on('click', function(){
-                
                 sessionStorage.setItem('matiere_active', JSON.stringify($(this).attr('id'))); 
                 sessionStorage.setItem('matiere_nom'   , JSON.stringify($(this).text()    )); 
                 sessionStorage.setItem('matiere_index' , JSON.stringify($(this).index()   )); 
@@ -188,8 +191,7 @@ Au click sur l'afficheur du programme
         let total_phase = sessionStorage.getItem('total_phase');
         
         if( session_phase_nbr === total_phase) {
-            //sessionStorage.removeItem('session_phase_nbr');
-        
+
             $.each($('#programme_ul li'), function() {
                 
                 let index = $(this).index();
@@ -201,8 +203,4 @@ Au click sur l'afficheur du programme
                 if(index  > niveau_max) $(this).addClass('a_apprendre');
             });
         }
-        
-        
-        
-        
     }

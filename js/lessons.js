@@ -7,7 +7,7 @@ $('document').ready(function() {
     
     var id                = JSON.parse(sessionStorage.getItem('id'));     
     var matieres          = JSON.parse(sessionStorage.getItem('matieres'));     
-    
+    var matiere_index         = JSON.parse(sessionStorage.getItem('matiere_index'));     
  
     if(matieres.length > 0) {
         
@@ -48,7 +48,7 @@ $('document').ready(function() {
 	4)- Les phases s'affichent et
 	5)- On peut surfer
   --------------------------------------------------------------------*/
-      
+    
         getPhases(); 
    /*2*/phases();
         changerPhaseActive(phase_nbr);
@@ -65,24 +65,25 @@ $('document').ready(function() {
     }
     function phases() {
         var phases_collection = phasesCollection();
+    	
     	$('.phases').html(phasesHTML());
         actualiserTitre();
-        
 	    stylesDesPhases();
 	    affichageDesPhases();
+	    
         function phasesHTML() {
           
             var lesson_id = $('.lesson_title').attr('id');
             
           // Liste des phases
             var content = '<ul class="phases liste_affichage_cascade" id="phases_list">';
-            if(niveau_en_cours > 1) {
+            if(matiere_index > 0) {
                 for(var i=0;i<liste_de_phases.length;i++){
                     var phase_id = liste_de_phases[i][0];
                     content += '<li id="'+lesson_id+'_'+phase_id+'">'+liste_de_phases[i][1]+'</li>';
                 }
             }
-            if(niveau_en_cours == 1) {
+            if(matiere_index == 0) {
                 for(var i=0;i<2;i++){
                     content += '<li id="'+lesson_id+'_'+liste_de_phases[i][0]+'">'+liste_de_phases[i][1]+'</li>';
                 }
@@ -121,7 +122,7 @@ $('document').ready(function() {
                     	    if(phase_index >  0) $(this).addClass('a_apprendre');
                         }
         	        }    	        
-        	        if(niveau_max+1 === niveau) {
+        	        if(niveau_max+1 === niveau_en_cours) {
             	        if(phase_nbr > 0) {
                     	    
                     	    if(phase_index <  phase_nbr) $(this).addClass('apprises');
@@ -133,7 +134,7 @@ $('document').ready(function() {
                     	    if(phase_index >  0) $(this).addClass('a_apprendre');
             	        }
         	        }
-        	        if(niveau_max+1 > niveau) {
+        	        if(niveau_max+1 > niveau_en_cours) {
         	            $(this).addClass('apprises');
         	        }
                 });

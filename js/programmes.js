@@ -136,6 +136,7 @@ Au click sur l'afficheur du programme
             $.each(programme_li, function() {
                          
                 var matiere_index = $(this).index();
+                sessionStorage.setItem('matiere_index', JSON.stringify($(this).index()));
 
                 if(niveau_en_cours === 1) {
                     if(matiere_index === 0) $(this).addClass('active');

@@ -8,7 +8,6 @@ if(isset($_SESSION["id"])){
     $niveau          = $_GET['niveau'];
     $niveau_max      = $_GET['niveau_max'];
     $phases_etudiees = ($matiere_index > 0) ? $_GET['phases_etudiees'] : "";
-   // $resume_brut_des_etudes = $_GET['resume_brut_des_etudes'];
 
     $chiffres = ['߀','߁','߂','߃','߄','߅','߆','߇','߈','߉'];
 
@@ -37,13 +36,21 @@ if(isset($_SESSION["id"])){
             <div class="phases_container">
               <!----------------------------------------------------------------------------------------------------->  
                 <div id="donnees_recues_de_prorammes" style="display:none">
-                    
                     <p id='matiere_id_container'    ><?= $matiere_id; ?></p>
                     <p id='matiere_index_container' ><?= $matiere_index; ?></p>
                     <p id='matiere_nom_container'   ><?= $matiere_id; ?></p>
                     <p id='niveau_container'        ><?= $niveau; ?></p>
                     <p id='niveau_max_container'    ><?= $niveau_max; ?></p>
                 </div>
+                <form action="http://localhost:8080/kouroukan/pages/actions.php" id="form_for_send_lesson" style="display:block">
+                    <input type="text" id="lesson_id_input">   
+                    <input type="text" id="lesson_matiere_input">   
+                    <input type="text" id="lesson_niveau_input">   
+                    <input type="text" id="lesson_phase_input">   
+                    <input type="text" id="lesson_lesson_input">   
+                    <input type="text" id="lesson_note_input">   
+                    <input type="submit" id="lesson_submit" value="">   
+                </form>
               <!----------------------------------------------------------------------------------------------------->  
                 <h4>ߘߋ߰ߟߌ ߞߛߊߞߊ : <span class="niveau_courant"><?= $chiffres[$niveau]; ?><span class='rang'></span></h4>
                 <h2 class="lesson_title" id="<?= $matiere_id ?>"> <?= $matiere_nom; ?> ߥߟߊ߬ߘߊ  </h2>
@@ -56,7 +63,7 @@ if(isset($_SESSION["id"])){
     <div class="course_container">
         
       <!-------------------------------------------------------------------->
-        <span class="fermeture" id="course_fermeture">&times;</span>
+        <span class="fermeture" id="">&times;</span>
       <!-------------------------------------------------------------------->
 	    
         <!--Les éléments de paramètres sont chargés depuis js/parametres.js-->

@@ -7,7 +7,7 @@ $('document').ready(function() {
     
     var id                = JSON.parse(sessionStorage.getItem('id'));     
     var matieres          = JSON.parse(sessionStorage.getItem('matieres'));     
-    var matiere_index         = JSON.parse(sessionStorage.getItem('matiere_index'));     
+    var matiere_index     = JSON.parse(sessionStorage.getItem('matiere_index'));     
  
     if(matieres.length > 0) {
         
@@ -337,8 +337,8 @@ $('document').ready(function() {
                     var session_niveau_max = JSON.parse(sessionStorage.getItem('session_niveau_max'));
                  
                     switch (course_id) {
-                        case 'apprentissage':apprentissages(); $('.fermeture').attr('id', 'fermer_apprentissage'); break;
-                        case 'exercice'     :exercices();      $('.fermeture').attr('id', 'fermer_exercice');      break;
+                        case 'apprentissage':apprentissages(); break;
+                        case 'exercice'     :exercices();      break;
                         case 'pratique'     :pratique();       $('.fermeture').attr('id', 'fermer_pratique');      break;
                         case 'evaluation'   :evaluations();    $('.fermeture').attr('id', 'fermer_evaluation');    break;
             	    }
@@ -349,6 +349,8 @@ $('document').ready(function() {
                         var apprentissage_a_stocker = [];
                         var memo = [];
                         var clicks_memo = [];
+                        
+                        $('.fermeture').attr('id', 'fermer_apprentissage');
                    
                 	    chargerApprentissage();
                 	    afficherApprentissage();
@@ -540,17 +542,29 @@ $('document').ready(function() {
                         }
                 	    function stockerApprentissage() {
                       
-                            $('#course_fermeture').on('click',function() {
-                   	        
+                            $('#fermer_apprentissage').one('click',function() {
                     	        var course = $(this).siblings('#apprentissage').html();
                        
+                   	        alert(phase_id);
+                   	        //alert(phase_nbr);
+                   	        
                                 if(phase_index <  phase_nbr) { return; }
                                 if(phase_index === phase_nbr) {
                                    
+                             alert("note >= moyenne");         
                                     note = noterApprentissage();
                      	                 
                                     if(note <  moyenne) alert("ߌ ߡߊ߫ ߛߓߍߘߋ߲ ߥߟߊ ߜߋ߭ ߠߎ߬ ߓߍ߯ ߟߊߡߍ߲߫");
                                     if(note >= moyenne) {
+                                        
+                                   /* $('#lesson_id_input').val('id');
+                                    $('#lesson_matiere_input').val('matiere');
+                                    $('#lesson_niveau_input').val('niveau_en_cours');
+                                    $('#lesson_phase_input').val('phase');
+                                    $('#lesson_lesson_input').val('lesson');
+                                    $('#lesson_note_input').val('note');*/
+                                   // $('#lesson_submit').click();
+                                        
                                         sendApprentissageToDB();
                   
                                         phase_nbr++;
@@ -569,6 +583,8 @@ $('document').ready(function() {
                                     var phase   = sessionStorage.getItem('phase');
                                     var lesson  = JSON.stringify(clicks_memo);
 
+                              alert($('#lesson_lesson_input').val());      
+                                    /*
                                     const apprentissage_data = new URLSearchParams({
                                         id     : id,
                                         matiere: matiere,
@@ -576,14 +592,14 @@ $('document').ready(function() {
                                         phase  : phase,
                                         lesson : lesson,
                                         note   : JSON.stringify(note)
-                                    });
+                                    }); 
                      
                                     fetch("http://localhost:8080/kouroukan/pages/actions.php", {
                                         method: "POST",
                                         body: apprentissage_data
                                     })
                                     .then(response => console.log(response))
-                                    .catch(error => alert(error));
+                                    .catch(error => alert(error));  */
                                 }
                                 function noterApprentissage() {
                                     var table_elements_click_nbr = [];
@@ -621,6 +637,7 @@ $('document').ready(function() {
                 	    var question_rang = '߭';
                         var exercice_a_stocker = [];
                         
+                        $('.fermeture').attr('id', 'fermer_exercice');
                   	    
                 	    chargerExercice();
                 	    afficherExercice();
@@ -774,8 +791,10 @@ $('document').ready(function() {
                         }
                 	    function stockerExercice() {
                 	                        	             
-                            $('#course_fermeture').on('click',function(){ 
-                                         
+                            $('#fermer_exercice').one('click',function(){ 
+                                
+                                alert(phase_id);
+                                
                                 if(phase_index <  phase_nbr) { return; }
                                 if(phase_index == phase_nbr) {
                                     

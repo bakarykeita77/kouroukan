@@ -5,9 +5,9 @@
     var programme_ul         = document.getElementById('programme_ul');
     
     var matieres = JSON.parse(sessionStorage.getItem('matieres'));
+	var matiere = [], matiere_1 = [], matiere_2 = [], matiere_3 = [], matiere_4 = [], matieres_etudiees = [], derniere_matiere = '';
     
 	var niveau = 0, niveau_1 = 0, niveau_2 = 0, niveau_3 = 0, niveau_4 = 0,  niveau_en_cours = 1, niveaux = [], niveaux_distincts = [], niveau_max = 0;
-	var matiere = [], matiere_1 = [], matiere_2 = [], matiere_3 = [], matiere_4 = [], matieres = [], matieres_etudiees = [], derniere_matiere = '';
 	var phases_etudiees = [], dernieres_phases = [], dernieres_phases_distinctes = [], derniere_phase = '';
 	var phase = [], phases_1 = [], phases_2 = [], phases_3 = [], phases_4 = [];
 
@@ -60,7 +60,7 @@ Au click sur l'afficheur du programme
 
 -------------------------------------------------------------------------------------------------------------------------*/
     
-    let session_phase_nbr = JSON.parse(sessionStorage.getItem('session_phase_nbr'));
+    let phase_nbr = JSON.parse(sessionStorage.getItem('phase_nbr'));
 // sessionStorage.removeItem('sessison_phase_nbr'); sessionStorage.removeItem('DB_phase_nbr'); sessionStorage.removeItem('session_niveau_max'); sessionStorage.removeItem('DB_niveau_max'); sessionStorage.removeItem('niveau_max'); 	    
     
     if(matieres.length > 0) {
@@ -76,9 +76,8 @@ Au click sur l'afficheur du programme
         niveau_en_cours = 1;
     }
 
+
     programme();
-    if(session_niveau_max > DB_niveau_max) changerProgramme();
-      
     
 /*-----------------------------------------------------------------------------------------------------------------------*/
     
@@ -138,17 +137,17 @@ Au click sur l'afficheur du programme
                 var matiere_index = $(this).index();
                 sessionStorage.setItem('matiere_index', JSON.stringify($(this).index()));
 
-                if(niveau_en_cours === 1) {
-                    if(matiere_index === 0) $(this).addClass('active');
-                    if(matiere_index > 0) $(this).addClass('a_apprendre');
+                if(niveau_max === 0) {
+                    if(matiere_index+1 == niveau_en_cours) $(this).addClass('active');
+                    if(matiere_index+1  > niveau_en_cours) $(this).addClass('a_apprendre');
                 }
         
-                if(niveau_en_cours > 1) {
-                    if(matiere_index  < niveau_en_cours) $(this).addClass('apprises');
-                    if(matiere_index  > niveau_en_cours) $(this).addClass('a_apprendre');
-                    if(matiere_index == niveau_en_cours) { $(this).addClass('active');
-                      /*  
-                        let total_phases = (niveau_max == 0) ? 3:4;
+                if(niveau_max > 0) {
+                    if(matiere_index+1  < niveau_en_cours) $(this).addClass('apprises');
+                    if(matiere_index+1  > niveau_en_cours) $(this).addClass('a_apprendre');
+                    if(matiere_index+1 == niveau_en_cours) { $(this).addClass('active');
+                        
+                      /*  let total_phases = (niveau_max == 0) ? 3:4;
                         let nbr_phases_etudiees = dernieres_phases_distinctes.length;
                     
                         if(total_phases == nbr_phases_etudiees) { 
@@ -164,7 +163,7 @@ Au click sur l'afficheur du programme
                             $(this).addClass('active'); 
                             $(this).next().removeClass('a_apprendre'); 
                             $(this).next().addClass('a_apprendre');
-                        }    */
+                        }*/
                     }
                 }
             });
@@ -191,7 +190,7 @@ Au click sur l'afficheur du programme
         
         let total_phase = sessionStorage.getItem('total_phase');
         
-        if( session_phase_nbr === total_phase) {
+        if( phase_nbr === total_phase) {
 
             $.each($('#programme_ul li'), function() {
                 

@@ -38,6 +38,10 @@
 
     	    sessionStorage.setItem('matieres',JSON.stringify(matieres));
         
+            if(matieres.length === 0) {
+                sessionStorage.setItem('niveau_en_cours',JSON.stringify(1));
+                sessionStorage.setItem('niveau_max',JSON.stringify(0));
+            }
             if(matieres.length > 0) {
             /*-------------------------------------------------------------------------   
               Niveaux et matieres
@@ -101,7 +105,7 @@
                 if(niveau_2 != 0) niveaux.push(niveau_2);
                 if(niveau_3 != 0) niveaux.push(niveau_3);
                 if(niveau_4 != 0) niveaux.push(niveau_4);
-                
+    alert(niveaux);         
                 sessionStorage.setItem('niveaux', JSON.stringify(niveaux)); 
                 
             /*-------------------------------------------------------------------------   
@@ -127,7 +131,7 @@
             /*-------------------------------------------------------------------------   
               Niveau max et niveaux_distincts
             -------------------------------------------------------------------------*/          	
-            	if(niveaux.length != 0) niveau_max = Math.max(...niveaux);
+            	if(niveaux.length > 0) niveau_max = Math.max(...niveaux);
             	niveau_en_cours = niveau_max+1;
             	
             	sessionStorage.setItem('niveau_max',JSON.stringify(niveau_max));

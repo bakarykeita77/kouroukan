@@ -142,11 +142,8 @@
                         dernieres_phases_distinctes.push(dernieres_phases[i]);
                     }
                 }
-                if(dernieres_phases_distinctes.length == 4) {
-                    dernieres_phases_distinctes.splice(0,4);
-                    dernieres_phases_distinctes[0] = liste_de_phases[0][1];
-                    
-                }
+                if(dernieres_phases_distinctes.length == 4) dernieres_phases_distinctes.splice(0,4);
+            	
             	sessionStorage.setItem('dernieres_phases_distinctes',JSON.stringify(dernieres_phases_distinctes));
             	sessionStorage.setItem('dernieres_phases_etudiees',JSON.stringify(dernieres_phases_distinctes));
             
@@ -168,7 +165,7 @@
             	    }
             	} 
             	sessionStorage.setItem('niveaux_distincts',JSON.stringify(niveaux_distincts)); 
-            	    
+        alert(derniere_phase);    	    
             /*-------------------------------------------------------------------------   
               Niveau max et niveaux_distincts
             -------------------------------------------------------------------------*/          	

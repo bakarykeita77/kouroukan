@@ -105,7 +105,7 @@
                 if(niveau_2 != 0) niveaux.push(niveau_2);
                 if(niveau_3 != 0) niveaux.push(niveau_3);
                 if(niveau_4 != 0) niveaux.push(niveau_4);
-    alert(niveaux);         
+           
                 sessionStorage.setItem('niveaux', JSON.stringify(niveaux)); 
                 
             /*-------------------------------------------------------------------------   
@@ -119,34 +119,15 @@
             	sessionStorage.setItem('phases_etudiees',JSON.stringify(matieres_etudiees));
          	    
             /*-------------------------------------------------------------------------   
-              Niveaux distincts
-            -------------------------------------------------------------------------*/         
-            	for(var i = 0; i < niveaux.length; i++)  {  
-            	    if(niveaux_distincts.indexOf(niveaux[i]) == -1) {
-            	        niveaux_distincts.push(niveaux[i]);
-            	    }
-            	} 
-            	sessionStorage.setItem('niveaux_distincts',JSON.stringify(niveaux_distincts)); 
-            	    
-            /*-------------------------------------------------------------------------   
-              Niveau max et niveaux_distincts
-            -------------------------------------------------------------------------*/          	
-            	if(niveaux.length > 0) niveau_max = Math.max(...niveaux);
-            	niveau_en_cours = niveau_max+1;
-            	
-            	sessionStorage.setItem('niveau_max',JSON.stringify(niveau_max));
-            	sessionStorage.setItem('niveau_en_cours',JSON.stringify(niveau_en_cours));
-    
-            /*-------------------------------------------------------------------------   
               Derniere matiere 
             -------------------------------------------------------------------------*/         	    
-                derniere_matiere = matieres[niveau_max];
+                derniere_matiere = matieres[matieres.length-1];
             	sessionStorage.setItem('derniere_matiere',JSON.stringify(derniere_matiere));
     
             /*-------------------------------------------------------------------------   
               Dernieres phases 
             -------------------------------------------------------------------------*/              
-                if(matieres.length != 0) {
+                if(derniere_matiere.length > 0) {
                     for (var i = 0; i < derniere_matiere.length; i++) {
                         dernieres_phases[dernieres_phases.length] = derniere_matiere[i].phase;
                     }
@@ -161,15 +142,44 @@
                         dernieres_phases_distinctes.push(dernieres_phases[i]);
                     }
                 }
+                if(dernieres_phases_distinctes.length == 4) {
+                    dernieres_phases_distinctes.splice(0,4);
+                    dernieres_phases_distinctes[0] = liste_de_phases[0][1];
+                    
+                }
             	sessionStorage.setItem('dernieres_phases_distinctes',JSON.stringify(dernieres_phases_distinctes));
             	sessionStorage.setItem('dernieres_phases_etudiees',JSON.stringify(dernieres_phases_distinctes));
-              
+            
             /*-------------------------------------------------------------------------   
               Derniere phase
             -------------------------------------------------------------------------*/              
-                derniere_phase = liste_de_phases[dernieres_phases_distinctes.length][0];
+            	let n = (liste_de_phases[dernieres_phases_distinctes.length] == undefined) ? 0 : dernieres_phases_distinctes.length;
+
+                derniere_phase = liste_de_phases[n][0];
             	sessionStorage.setItem('derniere_phase',JSON.stringify(derniere_phase));
             	
+            
+            /*-------------------------------------------------------------------------   
+              Niveaux distincts
+            -------------------------------------------------------------------------*/         
+            	for(var i = 0; i < niveaux.length; i++)  {  
+            	    if(niveaux_distincts.indexOf(niveaux[i]) == -1) {
+            	        niveaux_distincts.push(niveaux[i]);
+            	    }
+            	} 
+            	sessionStorage.setItem('niveaux_distincts',JSON.stringify(niveaux_distincts)); 
+            	    
+            /*-------------------------------------------------------------------------   
+              Niveau max et niveaux_distincts
+            -------------------------------------------------------------------------*/          	
+            	if(niveaux.length > 0) {
+            	    niveau_max = Math.max(...niveaux);
+            	    niveau_en_cours = niveau_max+1;
+            	
+                	sessionStorage.setItem('niveau_max',JSON.stringify(niveau_max));
+                	sessionStorage.setItem('niveau_en_cours',JSON.stringify(niveau_en_cours));
+            	}
+                
             /*-------------------------------------------------------------------------   
               Les pratiques 
             -------------------------------------------------------------------------*/              

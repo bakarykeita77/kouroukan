@@ -28,7 +28,7 @@
     $note      = isset($_POST['note'])      ? $_POST['note']:null;
     $referer   = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/pages/index.php';
     
-    
+   
   /*----------------------------------------------------------------------------------------------
     Sécurisation des données réçues.
   ----------------------------------------------------------------------------------------------*/
@@ -137,7 +137,7 @@
 	    $requete -> bindValue(':note',      $note,      PDO::PARAM_INT);
 	    
 	    $requete -> execute();
-	    $data = $requete -> fetchAll(PDO::FETCH_ASSOC);
+	    $data = $requete -> fetchAll();
 	    
 	    return $data;
 	 }

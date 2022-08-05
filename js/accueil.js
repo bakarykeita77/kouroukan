@@ -37,7 +37,7 @@
     	    }
 
     	    sessionStorage.setItem('matieres',JSON.stringify(matieres));
-        
+      
             if(matieres.length === 0) {
                 sessionStorage.setItem('niveau_en_cours',JSON.stringify(1));
                 sessionStorage.setItem('niveau_max',JSON.stringify(0));
@@ -154,7 +154,7 @@
 
                 derniere_phase = liste_de_phases[n][0];
             	sessionStorage.setItem('derniere_phase',JSON.stringify(derniere_phase));
-            	
+              	
             
             /*-------------------------------------------------------------------------   
               Niveaux distincts
@@ -165,18 +165,18 @@
             	    }
             	} 
             	sessionStorage.setItem('niveaux_distincts',JSON.stringify(niveaux_distincts)); 
-        alert(derniere_phase);    	    
+            	    
             /*-------------------------------------------------------------------------   
               Niveau max et niveaux_distincts
             -------------------------------------------------------------------------*/          	
-            	if(niveaux.length > 0) {
-            	    niveau_max = Math.max(...niveaux);
-            	    niveau_en_cours = niveau_max+1;
+            	if(niveaux.length == 0) niveau_max = 0;
+            	if(niveaux.length > 0) niveau_max = Math.max(...niveaux);
             	
-                	sessionStorage.setItem('niveau_max',JSON.stringify(niveau_max));
-                	sessionStorage.setItem('niveau_en_cours',JSON.stringify(niveau_en_cours));
-            	}
-                
+        	    niveau_en_cours = niveau_max+1;
+        	
+            	sessionStorage.setItem('niveau_max',JSON.stringify(niveau_max));
+            	sessionStorage.setItem('niveau_en_cours',JSON.stringify(niveau_en_cours));
+             
             /*-------------------------------------------------------------------------   
               Les pratiques 
             -------------------------------------------------------------------------*/              

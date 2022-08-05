@@ -109,20 +109,20 @@ $('document').ready(function() {
             	    var phase_index = $(this).index();
          
         	        if(niveau_max === 0) {
+                        if(phase_nbr == 0) {
+                    	    if(phase_index == 0) $(this).attr('class','active');
+                    	    if(phase_index >  0) $(this).attr('class','active');
+                    	    if(phase_index >  0) $(this).attr('class','a_apprendre');
+                        }
                         if(phase_nbr > 0) {
-                    	    if(phase_index <  phase_nbr) $(this).atrr('class','apprises');
+                    	    if(phase_index <  phase_nbr) $(this).attr('class','apprises');
                     	    if(phase_index == phase_nbr) $(this).attr('class','active');
                     	    if(phase_index >  phase_nbr) $(this).attr('class','a_apprendre');
                         }
-                        if(phase_nbr == 0) {
-                    	    if(phase_index == 0) $(this).addClass('active');
-                    	    if(phase_index >  0) $(this).removeClass('active');
-                    	    if(phase_index >  0) $(this).addClass('a_apprendre');
-                        }
         	        }        
         	        if(niveau_max > 0) {
-        	            if(niveau_max > matiere_index) {
-                        	$(this).attr('class','apprises');
+        	            if(niveau_max < matiere_index) {
+                        	$(this).attr('class','a_apprendre');
         	            }
         	            if(niveau_max == matiere_index) {
                         	if(phase_nbr == 0) {
@@ -135,8 +135,8 @@ $('document').ready(function() {
                             	if(phase_index  > phase_nbr) $(this).attr('class','a_apprendre');
                         	}
         	            }
-        	            if(niveau_max < matiere_index) {
-                        	$(this).attr('class','a_apprendre');
+        	            if(niveau_max > matiere_index) {
+                        	$(this).attr('class','apprises');
         	            }
         	        }
                 });
@@ -229,7 +229,7 @@ $('document').ready(function() {
         
           /*--------------------------------------------------------------------*/    
             
-            function phaseActiveName() { sessionStorage.setItem('phase', course_id); }
+            function phaseActiveName() { sessionStorage.setItem('phase', JSON.stringify(course_id)); }
             function dimensionnementDeCourseBody() {
                 
                 var course_height = $('.course').height();
@@ -570,19 +570,10 @@ $('document').ready(function() {
                                  - Si oui le mémoire de click est envoyé au serveur;
                                  - Sinon, un message s'affiche et le mémoire n'est pas envoyé.
                                  */
-                                    var matiere = sessionStorage.getItem('matiere_active');
-                                    var phase   = sessionStorage.getItem('phase');
+                                    var matiere = JSON.parse(sessionStorage.getItem('matiere_active'));
+                                    var phase   = JSON.parse(sessionStorage.getItem('phase'));
                                     var lesson  = JSON.stringify(clicks_memo);
-                                        
-                                    $('#lesson_id_input').val(id);
-                                    $('#lesson_matiere_input').val(matiere);
-                                    $('#lesson_niveau_input').val(niveau_en_cours);
-                                    $('#lesson_phase_input').val(phase);
-                                    $('#lesson_lesson_input').val(lesson);
-                                    $('#lesson_note_input').val(note);
-                                   // $('#lesson_submit').click();
                                     
-                                    /*
                                     const apprentissage_data = new URLSearchParams({
                                         id     : id,
                                         matiere: matiere,
@@ -597,7 +588,7 @@ $('document').ready(function() {
                                         body: apprentissage_data
                                     })
                                     .then(response => console.log(response))
-                                    .catch(error => alert(error));  */
+                                    .catch(error => alert(error));  
                                 }
                                 function noterApprentissage() {
                                     var table_elements_click_nbr = [];

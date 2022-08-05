@@ -35,6 +35,7 @@ if(isset($_SESSION["id"])){
         <div class="page_body">
             <div class="phases_container">
               <!----------------------------------------------------------------------------------------------------->  
+                
                 <div id="donnees_recues_de_prorammes" style="display:none">
                     <p id='matiere_id_container'    ><?= $matiere_id; ?></p>
                     <p id='matiere_index_container' ><?= $matiere_index; ?></p>
@@ -42,16 +43,9 @@ if(isset($_SESSION["id"])){
                     <p id='niveau_container'        ><?= $niveau; ?></p>
                     <p id='niveau_max_container'    ><?= $niveau_max; ?></p>
                 </div>
-                <form action="http://localhost:8080/kouroukan/pages/actions.php" id="form_for_send_lesson" style="display:block">
-                    <input type="text" id="lesson_id_input">   
-                    <input type="text" id="lesson_matiere_input">   
-                    <input type="text" id="lesson_niveau_input">   
-                    <input type="text" id="lesson_phase_input">   
-                    <input type="text" id="lesson_lesson_input">   
-                    <input type="text" id="lesson_note_input">   
-                    <input type="submit" id="lesson_submit" value="">   
-                </form>
+                
               <!----------------------------------------------------------------------------------------------------->  
+                
                 <h4>ߘߋ߰ߟߌ ߞߛߊߞߊ : <span class="niveau_courant"><?= $chiffres[$niveau]; ?><span class='rang'></span></h4>
                 <h2 class="lesson_title" id="<?= $matiere_id ?>"> <?= $matiere_nom; ?> ߥߟߊ߬ߘߊ  </h2>
                 <div class="phases liste_affichage_cascade" align="center"></div>

@@ -11,7 +11,12 @@ $('document').ready(function() {
     
     dernieres_phases_distinctes = JSON.parse(sessionStorage.getItem('dernieres_phases_distinctes'));
     phase_nbr = JSON.parse(sessionStorage.getItem('phase_nbr'));
-alert(dernieres_phases_distinctes);
+
+    
+    if(matieres.length === 0) {
+        niveau_max = 0;
+        niveau_en_cours = 1;
+    }
     if(matieres.length > 0) {
         
         niveaux           = JSON.parse(sessionStorage.getItem('niveaux'));     
@@ -24,10 +29,6 @@ alert(dernieres_phases_distinctes);
         matiere_active    = JSON.parse(sessionStorage.getItem('matiere_active'));     
         matiere_index     = JSON.parse(sessionStorage.getItem('matiere_index')); 
         matiere_nom       = JSON.parse(sessionStorage.getItem('matiere_nom')); 
-    }
-    if(matieres.length === 0) {
-        niveau_max = 0;
-        niveau_en_cours = 1;
     }
 
     var rang = '';
@@ -49,11 +50,11 @@ alert(dernieres_phases_distinctes);
   --------------------------------------------------------------------*/
   
         getPhases(); 
-   /*2*/phases();
-       // changerPhaseActive(phase_nbr);
-   /*5*/matiere();
+        phases();
+        matiere();
 
   /*--------------------------------------------------------------------*/
+	
 	function getPhases() { 
 
         total_phase       = JSON.parse(sessionStorage.getItem('total_phase'));
@@ -644,9 +645,9 @@ alert(dernieres_phases_distinctes);
                         	    var exercices_entete_html = "<div class='play_icon_container' id='exercices_player' style='width:auto'>";
                         	        exercices_entete_html += "<span class='play_label'>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ </span>";
                         	        exercices_entete_html += "<span class='qtite_question'>"+parseIntNko(quantite_de_question)+"</span> : <span class='ordre_question'>"+parseIntNko(compteur_de_question)+question_rang+" </span>";
-                        	        exercices_entete_html += "<span class='ecouter_question'> ߟߊߡߍ߲߫</span><span class='play_icon'>&#8635;</span>";
+                        	        exercices_entete_html += "<span class='ecouter_question'> ߟߊߡߍ߲߫</span><span class='play_icon'>&#9664;</span>";
                         	    exercices_entete_html += "</div>";
-                        	    exercices_entete_html += "<div class='oreille_icon_container'><span class='reecoute_label'>ߊ߬ ߟߊߡߍ߲߫ ߕߎ߯ߣߌ߫  </span> <span class='oreille_icon'>&#127997z;</span></div>";
+                        	    exercices_entete_html += "<div class='oreille_icon_container'><span class='reecoute_label'>ߊ߬ ߟߊߡߍ߲߫ ߕߎ߯ߣߌ߫  </span> <span class='oreille_icon'>&#128066;</span></div>";
                         
                                 return exercices_entete_html;
                         	}
@@ -837,10 +838,7 @@ alert(dernieres_phases_distinctes);
                 	    }
                     }
                     function pratique() {
-            
-            // sessionStorage.removeItem('phase_nbr');  sessionStorage.removeItem('dernieres_phases_distinctes');   
-            // localStorage.removeItem(2+'_'+0); localStorage.removeItem(2+'_'+1); localStorage.removeItem(2+'_'+2); localStorage.removeItem(2+'_'+3);       
-                       
+
                         var option = '';
                         var option_index = null;
                         var option_active = '';

@@ -257,5 +257,4 @@
 		$utilisateurs =  $requette->execute();
 		return $utilisateurs;
 	 }
-    
 ?>

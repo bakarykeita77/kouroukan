@@ -37,13 +37,14 @@
     	    }
 
     	    sessionStorage.setItem('matieres',JSON.stringify(matieres));
+    	    sessionStorage.removeItem('phase_nbr');
       
             if(matieres.length === 0) {
-                sessionStorage.setItem('niveau_en_cours',JSON.stringify(1));
                 sessionStorage.setItem('niveau_max',JSON.stringify(0));
+                sessionStorage.setItem('niveau_en_cours',JSON.stringify(1));
+                sessionStorage.setItem('phase_nbr',JSON.stringify(0));
             }
             
-   alert('dernieres_phases_distinctes');         
             if(matieres.length > 0) {
             /*-------------------------------------------------------------------------   
               Niveaux et matieres
@@ -202,5 +203,5 @@
                 sessionStorage.setItem('pratiques', JSON.stringify(pratiques));
             }
     	})
-    	.catch(error => alert( error ));
+    	.catch(error => console.log( error ));
      }

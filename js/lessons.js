@@ -9,6 +9,9 @@ $('document').ready(function() {
     var matieres          = JSON.parse(sessionStorage.getItem('matieres'));     
     var matiere_index     = JSON.parse(sessionStorage.getItem('matiere_index'));     
     
+    dernieres_phases_distinctes = JSON.parse(sessionStorage.getItem('dernieres_phases_distinctes'));
+    phase_nbr = JSON.parse(sessionStorage.getItem('phase_nbr'));
+alert(dernieres_phases_distinctes);
     if(matieres.length > 0) {
         
         niveaux           = JSON.parse(sessionStorage.getItem('niveaux'));     
@@ -21,14 +24,10 @@ $('document').ready(function() {
         matiere_active    = JSON.parse(sessionStorage.getItem('matiere_active'));     
         matiere_index     = JSON.parse(sessionStorage.getItem('matiere_index')); 
         matiere_nom       = JSON.parse(sessionStorage.getItem('matiere_nom')); 
-
-        dernieres_phases_distinctes = JSON.parse(sessionStorage.getItem('dernieres_phases_distinctes'));
-        phase_nbr = dernieres_phases_distinctes.length;
     }
     if(matieres.length === 0) {
-        phase_nbr = 0;
         niveau_max = 0;
-        niveau_en_cours = '1';
+        niveau_en_cours = 1;
     }
 
     var rang = '';
@@ -796,31 +795,20 @@ $('document').ready(function() {
                                         sendExerciceToDB(); 
                                         phase_nbr++;
                                         changerPhaseActive(phase_nbr); 
-                                        sessionStorage.setItem('phase_nbr');
+                                        sessionStorage.setItem('phase_nbr',JSON.stringify(phase_nbr));
                                     }
                                 }
                                 
                                 function sendExerciceToDB() {
 
-                                    let matiere = sessionStorage.getItem('matiere_active');
-                                    let phase   = sessionStorage.getItem('phase');
+                                    let matiere = JSON.parse(sessionStorage.getItem('matiere_active'));
+                                    let phase   = JSON.parse(sessionStorage.getItem('phase'));
                                     let lesson  = JSON.stringify(exercice_a_stocker);
                                                                                 
-                                    $('#lesson_id_input').val(id);
-                                    $('#lesson_matiere_input').val(matiere);
-                                    $('#lesson_niveau_input').val(niveau_en_cours);
-                                    $('#lesson_phase_input').val(phase);
-                                    $('#lesson_lesson_input').val(lesson);
-                                    $('#lesson_note_input').val(note);
-                                   // $('#lesson_submit').click();
-                                    
-                                    let form = document.getElementById('#form_for_send_lesson');
-                                alert(form.iinnerHTML);        
-                                    /*
                                     const exercice_data = new URLSearchParams({
                                         id     : id,
                                         matiere: matiere,
-                                        niveau : niveau,
+                                        niveau : niveau_en_cours,
                                         phase  : phase,
                                         lesson : lesson,
                                         note   : note
@@ -831,7 +819,7 @@ $('document').ready(function() {
                                         body: exercice_data 
                                     })
                                     .then(response => response.json())
-                                    .catch(error => console.log(error));    */
+                                    .catch(error => console.log(error));
                                 }
                                 function noterExercice() {
                                     var note_total = 0;

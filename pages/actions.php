@@ -51,7 +51,7 @@
     $note      = securiser($note);
     $note      = (int) $note;
     
-
+ 
   /*----------------------------------------------------------------------------------------------
     Gestion des dnnées dans la base de données.
   ----------------------------------------------------------------------------------------------*/
@@ -63,8 +63,8 @@
     if($id_client != '' && $matiere != '' && $niveau != '' && $phase != '' && $lesson != '' && $note != '')                 archiverLesson($id_client,$matiere,$niveau,$phase,$lesson,$note);        
     if($numero != '' && $question != '' && $reponse != '' && $points != '')                                                 archiverNotes($numero,$question,$reponse,$points);       
     if($id != '')                                                                                                           getClient($id);       
-    if($matiere != '' && $id_client != '')                                                                                  getAllInfo($matiere,$id_client);       
- 
+    if($matiere != '' && $id_client != '')                                                                                  getAllInfo($matiere,$id_client);     
+    
  
   /*----------------------------------------------------------------------------------------------
     Les fonctions.
@@ -104,7 +104,6 @@
 			$requette->bindValue(':pass',     $pass,     PDO::PARAM_STR);
 
 			$utilisateurs =  $requette->execute();
-			echo("ߌ ߕߐ߮ ߓߘߊ߫ ߛߓߍ߫.");
 
         }else{ echo("L'email envoye est deja utilise. Essayer un autre"); }
 	 }

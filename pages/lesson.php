@@ -43,15 +43,7 @@ if(isset($_SESSION["id"])){
                     <p id='niveau_container'        ><?= $niveau; ?></p>
                     <p id='niveau_max_container'    ><?= $niveau_max; ?></p>
                 </div>
-                 <form action="http://localhost:8080/kouroukan/pages/actions.php" id="form_for_send_lesson" style="display:block">
-                    <input type="text" id="lesson_id_input">   
-                    <input type="text" id="lesson_matiere_input">   
-                    <input type="text" id="lesson_niveau_input">   
-                    <input type="text" id="lesson_phase_input">   
-                    <input type="text" id="lesson_lesson_input">   
-                    <input type="text" id="lesson_note_input">   
-                    <input type="submit" id="lesson_submit" value="">   
-                </form>
+                
               <!----------------------------------------------------------------------------------------------------->  
                 
                 <h4>ߘߋ߰ߟߌ ߞߛߊߞߊ : <span class="niveau_courant"><?= $chiffres[$niveau]; ?><span class='rang'></span></h4>

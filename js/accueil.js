@@ -42,6 +42,8 @@
                 sessionStorage.setItem('niveau_en_cours',JSON.stringify(1));
                 sessionStorage.setItem('niveau_max',JSON.stringify(0));
             }
+            
+   alert('dernieres_phases_distinctes');         
             if(matieres.length > 0) {
             /*-------------------------------------------------------------------------   
               Niveaux et matieres
@@ -134,6 +136,8 @@
                 	sessionStorage.setItem('dernieres_phases',JSON.stringify(dernieres_phases));
                 	sessionStorage.setItem('phases_etudiees',JSON.stringify(dernieres_phases));
                 }
+                
+                
             /*-------------------------------------------------------------------------   
               Dernieres phases distinctes
             -------------------------------------------------------------------------*/              
@@ -145,6 +149,7 @@
                 if(dernieres_phases_distinctes.length == 4) dernieres_phases_distinctes.splice(0,4);
             	
             	sessionStorage.setItem('dernieres_phases_distinctes',JSON.stringify(dernieres_phases_distinctes));
+            	sessionStorage.setItem('phase_nbr',JSON.stringify(dernieres_phases_distinctes.length));
             	sessionStorage.setItem('dernieres_phases_etudiees',JSON.stringify(dernieres_phases_distinctes));
             
             /*-------------------------------------------------------------------------   

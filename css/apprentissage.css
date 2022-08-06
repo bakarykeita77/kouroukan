@@ -1,0 +1,12 @@
+#apprentissage {
+    max-height: 32rem;
+}
+#apprentissage_entete {
+    bottom: 0.25rem;
+}
+#apprentissage_corps {
+    top: 0;
+}
+#apprentissage_progress_bar {
+    top: 0.25rem;
+}

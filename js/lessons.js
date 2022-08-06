@@ -1811,7 +1811,6 @@ $('document').ready(function() {
                                         $('#audio').attr({'src':'http://localhost:8080/kouroukan/son/mp3/'+question_evaluation+'.mp3', 'autoplay':'on'});
                         	            $('#progress_bar').css('top',0);
                         	        }
-                        	        
                         	        function memoriserQuestionRang(){
                         	            memoire_rang[memoire_rang.length] = q_ordre+q_rang;
                         	            return memoire_rang;

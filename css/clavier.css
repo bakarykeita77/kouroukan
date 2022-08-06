@@ -1,6 +1,7 @@
 
 #clavier_nko {
-	height: 100%;
+    position: relative;
+    height: 90%;
 	width: 90%;
 	margin: auto;
 	color: #fff;
@@ -12,8 +13,6 @@
 	height: 100%;
 	box-sizing:border-box;
 }
-#clavier_nko table tr{
-}
 #clavier_nko table tr td {
 	box-shadow: 0 0 1em #000;
 	background-color: #555;
@@ -21,7 +20,7 @@
     font-weight: bold;
     cursor: pointer;
     text-shadow: 0 0 8px #000;
-    height: 32px;
+    min-height: 2rem;
 }
 #clavier_nko table tr td:not(.espace) { border-radius: 15%; }
 #clavier_nko table tr td .espace { border-radius: 5%; }

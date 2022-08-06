@@ -24,6 +24,8 @@ if(isset($_SESSION["id"])){
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/lesson.css"/>
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/syllabes.css"/>
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/parametres.css"/>
+	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/apprentissage.css"/>
+	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/exercice.css"/>
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/pratiques.css"/>
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/evaluation.css"/>
 
@@ -88,29 +90,29 @@ if(isset($_SESSION["id"])){
             </div>
          </div>
       <!-------------------------------------------------------------------->
-        <div class="course" id="apprentissage" align="center">
+        <div class="course" id="apprentissage">
             
             <div class="course_head" id="apprentissage_entete"></div>
             <div class="course_body" id="apprentissage_corps"></div>
-            <div class='lesson_progress_bar'>
+            <div class='lesson_progress_bar' id="apprentissage_progress_bar">
                 <span class='lesson_progress_question_bar'></span>
                 <span class='lesson_progress_bonne_reponse_bar'></span>
             </div>
             
          </div>
       <!-------------------------------------------------------------------->
-        <div class="course" id="exercice"      align="center">
+        <div class="course" id="exercice"     >
             
             <div class="course_head" id="exercice_entete"></div>
             <div class="course_body" id="exercice_corps"></div>
-            <div class='lesson_progress_bar'>
+            <div class='lesson_progress_bar' id="exercice_progress_bar">
                 <span class='lesson_progress_question_bar'></span>
                 <span class='lesson_progress_bonne_reponse_bar'></span>
             </div>
             
          </div>
       <!-------------------------------------------------------------------->
-        <div class="course" id="pratique"      align="center">
+        <div class="course" id="pratique"     >
          <!--------------------------------------------------------------------
             La partie pratique de lesson est composée de 3 divisions dont:
             
@@ -181,7 +183,7 @@ if(isset($_SESSION["id"])){
             </div>
          </div>
       <!-------------------------------------------------------------------->
-        <div class="course" id="evaluation"    align="center">
+        <div class="course" id="evaluation"   >
             <div class="course_head" id="evaluation_entete">
 
                 <div class="question_btn">

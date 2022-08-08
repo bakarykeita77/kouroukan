@@ -1,6 +1,10 @@
 
-#content{
-    width: 100%;
-    min-width:800px;
-    height: 200px;
+#exercice_progress_bar{
+    top: 0.25rem;
+}
+#exercice_corps{
+    top: 0;
+}
+#exercice_entete{
+    bottom: 0.25rem;
 }

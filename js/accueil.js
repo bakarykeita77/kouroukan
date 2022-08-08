@@ -1,6 +1,6 @@
 
 	let niveau = 0, niveau_1 = 0, niveau_2 = 0, niveau_3 = 0, niveau_4 = 0,  niveau_en_cours = 1, niveaux = [], niveaux_distincts = [], niveau_max = '';
-	let matiere = [], matiere_1 = [], matiere_2 = [], matiere_3 = [], matiere_4 = [], matieres = [], matieres_etudiees = [], derniere_matiere = '';
+	let matiere = [], matiere_1 = [], matiere_2 = [], matiere_3 = [], matiere_4 = [], matieres = [], matieres_etudiees = [], derniere_matiere = '', matiere_nouvelle=[];
 	let phases_etudiees = [], dernieres_phases = [], dernieres_phases_distinctes = [], derniere_phase = '';
 	let phase = [], phases_1 = [], phases_2 = [], phases_3 = [], phases_4 = [];
 
@@ -96,6 +96,7 @@
             	for (var i = 0; i < liste_de_phases.length; i++) noms_des_phases.push(liste_de_phases[i][0]);
             	sessionStorage.setItem('noms_des_phases', JSON.stringify(noms_des_phases));
             	
+            	
             /*-------------------------------------------------------------------------   
               Niveaux
             -------------------------------------------------------------------------*/                	
@@ -110,7 +111,31 @@
                 if(niveau_4 != 0) niveaux.push(niveau_4);
            
                 sessionStorage.setItem('niveaux', JSON.stringify(niveaux)); 
-                
+              	
+            
+            /*-------------------------------------------------------------------------   
+              Niveaux distincts
+            -------------------------------------------------------------------------*/         
+            	for(var i = 0; i < niveaux.length; i++)  {  
+            	    if(niveaux_distincts.indexOf(niveaux[i]) == -1) {
+            	        niveaux_distincts.push(niveaux[i]);
+            	    }
+            	} 
+            	sessionStorage.setItem('niveaux_distincts',JSON.stringify(niveaux_distincts)); 
+            	
+            	    
+            /*-------------------------------------------------------------------------   
+              Niveau max et niveau_en_cours
+            -------------------------------------------------------------------------*/          	
+            	if(niveaux.length == 0) niveau_max = 0;
+            	if(niveaux.length > 0) niveau_max = Math.max(...niveaux);
+            	
+        	    niveau_en_cours = niveau_max+1;
+        	
+            	sessionStorage.setItem('niveau_max',JSON.stringify(niveau_max));
+            	sessionStorage.setItem('niveau_en_cours',JSON.stringify(niveau_en_cours));
+            
+            
             /*-------------------------------------------------------------------------   
               matieres etudiees
             -------------------------------------------------------------------------*/             
@@ -120,12 +145,21 @@
             	matieres_etudiees[niveau_4 - 1] = matiere_4;        	
             
             	sessionStorage.setItem('phases_etudiees',JSON.stringify(matieres_etudiees));
+            	
          	    
             /*-------------------------------------------------------------------------   
               Derniere matiere 
             -------------------------------------------------------------------------*/         	    
                 derniere_matiere = matieres[matieres.length-1];
             	sessionStorage.setItem('derniere_matiere',JSON.stringify(derniere_matiere));
+            	
+             	    
+            /*-------------------------------------------------------------------------   
+              Matiere nouvelle
+            -------------------------------------------------------------------------*/         	    
+                matiere_nouvelle = matieres[niveau_en_cours];
+            	sessionStorage.setItem('matiere_nouvelle',JSON.stringify(matiere_nouvelle));
+            	
     
             /*-------------------------------------------------------------------------   
               Dernieres phases 
@@ -140,19 +174,25 @@
                 
                 
             /*-------------------------------------------------------------------------   
-              Dernieres phases distinctes
+              Dernieres phases distinctes et phase_nbr
             -------------------------------------------------------------------------*/              
                 for (var i = 0; i < dernieres_phases.length; i++) {
                     if(dernieres_phases_distinctes.indexOf(dernieres_phases[i]) === -1) {
                         dernieres_phases_distinctes.push(dernieres_phases[i]);
                     }
                 }
-                if(dernieres_phases_distinctes.length == 4) dernieres_phases_distinctes.splice(0,4);
-            	
+                
+                if(niveau_max === 0 && dernieres_phases_distinctes.length == 3) dernieres_phases_distinctes.splice(0,3);
+                if(niveau_max > 0 && dernieres_phases_distinctes.length == 4) dernieres_phases_distinctes.splice(0,4);
+                
             	sessionStorage.setItem('dernieres_phases_distinctes',JSON.stringify(dernieres_phases_distinctes));
-            	sessionStorage.setItem('phase_nbr',JSON.stringify(dernieres_phases_distinctes.length));
             	sessionStorage.setItem('dernieres_phases_etudiees',JSON.stringify(dernieres_phases_distinctes));
-            
+            	sessionStorage.setItem('phase_nbr',JSON.stringify(dernieres_phases_distinctes.length));
+            	if(matiere_nouvelle == undefined) {
+            	    sessionStorage.setItem('phase_nbr',JSON.stringify(0));
+            	}
+            	
+
             /*-------------------------------------------------------------------------   
               Derniere phase
             -------------------------------------------------------------------------*/              
@@ -160,29 +200,8 @@
 
                 derniere_phase = liste_de_phases[n][0];
             	sessionStorage.setItem('derniere_phase',JSON.stringify(derniere_phase));
-              	
-            
-            /*-------------------------------------------------------------------------   
-              Niveaux distincts
-            -------------------------------------------------------------------------*/         
-            	for(var i = 0; i < niveaux.length; i++)  {  
-            	    if(niveaux_distincts.indexOf(niveaux[i]) == -1) {
-            	        niveaux_distincts.push(niveaux[i]);
-            	    }
-            	} 
-            	sessionStorage.setItem('niveaux_distincts',JSON.stringify(niveaux_distincts)); 
-            	    
-            /*-------------------------------------------------------------------------   
-              Niveau max et niveaux_distincts
-            -------------------------------------------------------------------------*/          	
-            	if(niveaux.length == 0) niveau_max = 0;
-            	if(niveaux.length > 0) niveau_max = Math.max(...niveaux);
             	
-        	    niveau_en_cours = niveau_max+1;
-        	
-            	sessionStorage.setItem('niveau_max',JSON.stringify(niveau_max));
-            	sessionStorage.setItem('niveau_en_cours',JSON.stringify(niveau_en_cours));
-             
+
             /*-------------------------------------------------------------------------   
               Les pratiques 
             -------------------------------------------------------------------------*/              

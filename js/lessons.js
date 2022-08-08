@@ -1927,6 +1927,7 @@ $('document').ready(function() {
                                             if(phase_nbr === total_phase) {
                                                 sessionStorage.setItem('niveau_max',JSON.stringify(niveau_max+1));
                                                 sessionStorage.setItem('niveau_en_cours',JSON.stringify(niveau_max+2));
+                                                sessionStorage.setItem('phase_nbr',JSON.stringify(0));
                                             }
                                         }
                                     }

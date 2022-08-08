@@ -5,12 +5,24 @@
     var programme_ul         = document.getElementById('programme_ul');
     
     var matieres = JSON.parse(sessionStorage.getItem('matieres'));
+    
+    var niveaux           = JSON.parse(sessionStorage.getItem('niveaux'));
+    var niveau_max        = JSON.parse(sessionStorage.getItem('niveau_max'));
+    var niveau_en_cours   = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
+    if(matieres.length === 0) {
+        niveau_max = 0;
+        niveau_en_cours = 1;
+    }
+    
+    var matieres_etudiees = JSON.parse(sessionStorage.getItem('matieres_etudiees'));
+    var derniere_matiere  = JSON.parse(sessionStorage.getItem('derniere_matiere'));
+    
+    var phase_nbr = JSON.parse(sessionStorage.getItem('phase_nbr'));
+    
 	var matiere = [], matiere_1 = [], matiere_2 = [], matiere_3 = [], matiere_4 = [], matieres_etudiees = [], derniere_matiere = '';
     
-	var niveau = 0, niveau_1 = 0, niveau_2 = 0, niveau_3 = 0, niveau_4 = 0,  niveau_en_cours = 1, niveaux = [], niveaux_distincts = [], niveau_max = 0;
 	var phases_etudiees = [], dernieres_phases = [], dernieres_phases_distinctes = [], derniere_phase = '';
 	var phase = [], phases_1 = [], phases_2 = [], phases_3 = [], phases_4 = [];
-
 
     var click_min_nbr = 0;
 
@@ -60,23 +72,8 @@ Au click sur l'afficheur du programme
 
 -------------------------------------------------------------------------------------------------------------------------*/
     
-    let phase_nbr = JSON.parse(sessionStorage.getItem('phase_nbr'));
-// sessionStorage.removeItem('sessison_phase_nbr'); sessionStorage.removeItem('DB_phase_nbr'); sessionStorage.removeItem('session_niveau_max'); sessionStorage.removeItem('DB_niveau_max'); sessionStorage.removeItem('niveau_max'); 	    
+
     
-    if(matieres.length > 0) {
-        niveaux            = JSON.parse(sessionStorage.getItem('niveaux'));
-        niveau_max         = JSON.parse(sessionStorage.getItem('niveau_max'));
-        niveau_en_cours    = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
-        
-        matieres_etudiees = JSON.parse(sessionStorage.getItem('matieres_etudiees'));
-        derniere_matiere  = JSON.parse(sessionStorage.getItem('derniere_matiere'));
-    }
-    if(matieres.length === 0) {
-        niveau_max = 0;
-        niveau_en_cours = 1;
-    }
-
-
     programme();
     
 /*-----------------------------------------------------------------------------------------------------------------------*/
@@ -145,26 +142,7 @@ Au click sur l'afficheur du programme
                 if(niveau_max > 0) {
                     if(matiere_index+1  < niveau_en_cours) $(this).addClass('apprises');
                     if(matiere_index+1  > niveau_en_cours) $(this).addClass('a_apprendre');
-                    if(matiere_index+1 == niveau_en_cours) { $(this).addClass('active');
-                        
-                      /*  let total_phases = (niveau_max == 0) ? 3:4;
-                        let nbr_phases_etudiees = dernieres_phases_distinctes.length;
-                    
-                        if(total_phases == nbr_phases_etudiees) { 
-                            
-                            $(this).removeClass('active'); 
-                            $(this).addClass('apprises'); 
-                            $(this).next().removeClass('a_apprendre'); 
-                            $(this).next().addClass('active');
-                        }
-                        if(total_phases > nbr_phases_etudiees) { 
-                            
-                            $(this).removeClass('a_apprendre'); 
-                            $(this).addClass('active'); 
-                            $(this).next().removeClass('a_apprendre'); 
-                            $(this).next().addClass('a_apprendre');
-                        }*/
-                    }
+                    if(matiere_index+1 == niveau_en_cours) $(this).addClass('active');
                 }
             });
         }

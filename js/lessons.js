@@ -67,6 +67,7 @@ $('document').ready(function() {
         var phases_collection = phasesCollection();
     	
     	$('.phases').html(phasesHTML());
+    	sessionStorage.setItem('total_phase', JSON.stringify($('#phases_list li').length));
         actualiserTitre();
 	    stylesDesPhases();
 	    affichageDesPhases();
@@ -183,7 +184,6 @@ $('document').ready(function() {
     }
 	function matiere() {
     	
-    	sessionStorage.setItem('total_phase', $('#phases_list li').length);
     	actualiserCochage();
     	
     	$('.phases ul li').on('click', function(e){
@@ -1727,6 +1727,8 @@ $('document').ready(function() {
                         var q_index = 0, q_rang = '߭';
                         var q_ordre = parseIntNko(q_index+1);
                         var evaluation_a_stocker = [];
+                        
+                        $('.fermeture').attr('id', 'fermer_evaluation');
 
                         afficherEvaluation();
                         initialiserEvaluation();
@@ -1784,7 +1786,7 @@ $('document').ready(function() {
                             function poserQuestionEvaluation(){
                         	    $('.question_btn').on('click', function(){
                         	        question_evaluation = questions_evaluation[q_index];
-            alert(question_evaluation);            
+          //  alert(question_evaluation);            
                         	        dicterLaQuestion();
                         	       // memoriserQuestionRang();
                         
@@ -1858,16 +1860,16 @@ $('document').ready(function() {
                             	    let r = reponse_evaluation.join('');
                             	    let p = (q == r) ? 1:0;
                             	    let question_reponse = [];
-                            	    
+                           	    
                                     note += p; 
                             	    evaluation_a_stocker.splice(evaluation_counter,1,question_reponse);
                             	    marquerReponseEvaluation();            
                             	    
                                     function marquerReponseEvaluation() {    
                                         if(reponse_evaluation.join('') == question_evaluation) {
-                                            
+                                          
                                             $('#check_mark_container').css('display','inline-block');
-                                            $('#check_mark').html( check_true_icon );
+                                            $('#check_mark').html("&#10003;"); 
                                             setTimeout(function(){ $('#check_mark_cover').css({'left':'-100%'}); },100);
                                             setTimeout(function(){ $('#check_mark_cover').css({'left':0}); },1500);
                                             setTimeout(function(){ $('#check_mark_container').css({'display':'none'}); },1500);
@@ -1908,8 +1910,8 @@ $('document').ready(function() {
                             });
                         }
                         function stockerEvaluation() {
-                            
                             $('.correction_btn').on('click', function(){
+                              
                                 if(evaluation_counter == nbr_max_de_questions_a_poser) {
                                     
                                     if(note <  moyenne) alert( "reprendre" ); 
@@ -1918,41 +1920,44 @@ $('document').ready(function() {
                                         if(phase_index <  phase_nbr) { return; }
                                         if(phase_index == phase_nbr) {
                                      
-                                            phase_nbr++;
-                                            if(session_phase_nbr == null) sessionStorage.setItem('session_phase_nbr',phase_nbr);
-                                            session_phase_nbr = JSON.parse(sessionStorage.getItem('session_phase_nbr'));
-                                       
-                                            if(session_phase_nbr === total_phase) sessionStorage.setItem('session_niveau_max', niveau_max+1);
-                                            
                                             sendEvaluationToDB();
-                                            changerPhaseActive(session_phase_nbr);
+                                            phase_nbr++;
+                                            changerPhaseActive(phase_nbr);
+                                            sessionStorage.setItem('phase_nbr',JSON.stringify(phase_nbr));
+                                            if(phase_nbr === total_phase) {
+                                                sessionStorage.setItem('niveau_max',JSON.stringify(niveau_max+1));
+                                                sessionStorage.setItem('niveau_en_cours',JSON.stringify(niveau_max+2));
+                                            }
                                         }
                                     }
                                     
                                     function sendEvaluationToDB() {
                                         
-                                        let matiere = sessionStorage.getItem('matiere_active');
-                                        let phase   = sessionStorage.getItem('phase');
+                                        let matiere = JSON.parse(sessionStorage.getItem('matiere_active'));
+                                        let phase   = JSON.parse(sessionStorage.getItem('phase'));
                                         let lesson  = JSON.stringify(evaluation_a_stocker);
                                                 
                                             
                                         const evaluation_data = new URLSearchParams({
                                             id     : id,
                                             matiere: matiere,
-                                            niveau : niveau,
+                                            niveau : niveau_en_cours,
                                             phase  : phase,
                                             lesson : lesson,
-                                            note   : note
+                                            note   : JSON.stringify(note)
                                         });
                                     
                                         fetch("http://localhost:8080/kouroukan/pages/actions.php", {
                                             method: "POST",
                                             body: evaluation_data 
                                         })
-                                        .then(response => response.json())
+                                        .then(response => console.log(response))
                                         .catch(error => console.log(error));
                                     }
                                 }
+                            });
+                            $('#fermer_evaluation').on('click', function() {
+                                (location.replace("http://localhost:8080/kouroukan/pages/programmes.php"))();
                             });
                         }
                     }

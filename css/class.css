@@ -695,7 +695,8 @@ html {
 }
 
 .table_parlante, .table_muette {
-    position: relative;
+    position: absolute;
+    top: 0;
     padding: 8px;
     width: 100%;
 }

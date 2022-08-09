@@ -78,12 +78,6 @@ $('document').ready(function() {
             
           // Liste des phases
             var content = '<ul class="phases liste_affichage_cascade" id="phases_list">';
-            if(matiere_index > 0) {
-                for(var i=0;i<liste_de_phases.length;i++){
-                    var phase_id = liste_de_phases[i][0];
-                    content += '<li id="'+lesson_id+'_'+phase_id+'">'+liste_de_phases[i][1]+'</li>';
-                }
-            }
             if(matiere_index == 0) {
                 for(var i=0;i<2;i++){
                     content += '<li id="'+lesson_id+'_'+liste_de_phases[i][0]+'">'+liste_de_phases[i][1]+'</li>';
@@ -91,6 +85,12 @@ $('document').ready(function() {
                 for(var j=3;j<liste_de_phases.length;j++){
                     var phase_id = liste_de_phases[j][0];
                     content += '<li id="'+lesson_id+'_'+phase_id+'">'+liste_de_phases[j][1]+'</li>';
+                }
+            }
+            if(matiere_index > 0) {
+                for(var i=0;i<liste_de_phases.length;i++){
+                    var phase_id = liste_de_phases[i][0];
+                    content += '<li id="'+lesson_id+'_'+phase_id+'">'+liste_de_phases[i][1]+'</li>';
                 }
             }
             content += '</ul>';
@@ -186,7 +186,7 @@ $('document').ready(function() {
     	
     	actualiserCochage();
     	
-    	$('.phases ul li').on('click', function(e){
+    	$('#phases_list li').on('click', function(e){
        
             var syllabes_tonifies = tonification();  
 
@@ -201,7 +201,6 @@ $('document').ready(function() {
             var moyenne = 1;
             
             var chiffre = '';
-          
             var phase_active_index = $('.active').index();
             var phase_index = $(this).index();
             var phase_class = $(this).attr('class');
@@ -228,7 +227,7 @@ $('document').ready(function() {
     	    cours();
         
           /*--------------------------------------------------------------------*/    
-            
+              
             function phaseActiveName() { sessionStorage.setItem('phase', JSON.stringify(course_id)); }
             function dimensionnementDeCourseBody() {
                 
@@ -282,8 +281,8 @@ $('document').ready(function() {
     	        }
 
     	    }
+       
             function lessonCourante() {
-        
                 if(phase_id=='alphabet_apprentissage') { lesson_courante = alphabetApprentissageHTML(); } //Cette fonction provient de alphabet.js 
                 if(phase_id=='syllabes_apprentissage') { lesson_courante = syllabesApprentissageHTML(); } //Cette fonction provient de syllabes.js
                 if(phase_id=='tons_apprentissage'    ) { lesson_courante = tonsApprentissageHTML();     } //Cette fonction provient de tons.js
@@ -311,7 +310,7 @@ $('document').ready(function() {
                 if(niveau_en_cours==1) lq = mix1D(lettres);
                 if(niveau_en_cours==2) lq = mix1D(syllabes);
                 if(niveau_en_cours==3) lq = mix1D(syllabes_tonifies);
-                if(niveau_en_cours==4) lq = mix1D(chiffre);
+                if(niveau_en_cours==4) lq = mix1D(chiffres);
                 
                 return lq;
             }
@@ -338,12 +337,12 @@ $('document').ready(function() {
                     
                     sessionStorage.setItem('session_niveau_max', niveau_max);
                     var session_niveau_max = JSON.parse(sessionStorage.getItem('session_niveau_max'));
-                 
+
                     switch (course_id) {
                         case 'apprentissage':apprentissages(); break;
                         case 'exercice'     :exercices();      break;
-                        case 'pratique'     :pratique();       $('.fermeture').attr('id', 'fermer_pratique');      break;
-                        case 'evaluation'   :evaluations();    $('.fermeture').attr('id', 'fermer_evaluation');    break;
+                        case 'pratique'     :pratique();       break;
+                        case 'evaluation'   :evaluations();    break;
             	    }
             	  
                 	function apprentissages() {

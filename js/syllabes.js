@@ -3,17 +3,49 @@
     var syllabes_questions = mix1D(syllabes);
   
     function syllab() {
-        var slb = [];
+        let slb = [];
+        let voyelles = caracteres_coches[0];
+        let consonnes = caracteres_coches[1];
+        let nasalisation = caracteres_coches[3];
         
-        for(var k = 0; k < caracteres_coches[2].length; k++) {
-            for(var i=0;i<caracteres_coches[1].length;i++) {
-                for(var j=0;j<caracteres_coches[0].length;j++) {
-                    slb[slb.length] = caracteres_coches[1][i]+caracteres_coches[0][j]+caracteres_coches[2][k];
-                }
-            }                                                                                                                            
-        }
+        for(let i=0; i<nasalisation.length; i++) {
+        for(let j=0; j<consonnes.length;    j++) {
+        for(let k=0; k<voyelles.length;     k++) {
+            slb[slb.length] = consonnes[j]+voyelles[k]+nasalisation[i];
+        }}}
         
         return slb;
+    }
+    function syllabesApprentissageHTML() {
+        let syllabes = makeSyllabs();
+     
+        let sah = "<table class='table_parlante'>\n";
+        for(let i=0; i<syllabes.length; i+=voyelles.length) {
+            sah += "<tr>\n";
+            for(let j=0; j<7; j++) {
+                sah += "<td>"+syllabes[i+j]+"</td>\n";
+            }
+            sah += "</tr>\n\n";
+        }
+        sah += "</table>";
+        
+        return sah;
+        
+        function makeSyllabs() {
+            let slb = [];
+            let voyelles = caracteres_coches[0];
+            let consonnes = caracteres_coches[1];
+            let tedo = caracteres_coches[2];
+            let nasalisation = caracteres_coches[4];
+    
+            
+            for(var i=0; i<nasalisation.length; i++) {
+            for(var j=0; j<consonnes.length;    j++) {
+            for(var k=0; k<voyelles.length;     k++) {
+                slb[slb.length] = consonnes[j]+voyelles[k]+nasalisation[i];
+            }}}
+            return slb;
+        }
     }
     function syllabesExercicesHTML(){
             	    

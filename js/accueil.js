@@ -1,7 +1,7 @@
 
 	let niveau = 0, niveau_1 = 0, niveau_2 = 0, niveau_3 = 0, niveau_4 = 0,  niveau_en_cours = 1, niveaux = [], niveaux_distincts = [], niveau_max = '';
 	let matiere = [], matiere_1 = [], matiere_2 = [], matiere_3 = [], matiere_4 = [], matieres = [], matieres_etudiees = [], derniere_matiere = '', matiere_nouvelle=[];
-	let phases_etudiees = [], dernieres_phases = [], dernieres_phases_distinctes = [], derniere_phase = '';
+	let phases_etudiees = [], dernieres_phases = [], dernieres_phases_distinctes = [], phase_nbr = '', derniere_phase = '';
 	let phase = [], phases_1 = [], phases_2 = [], phases_3 = [], phases_4 = [];
 
     var moyenne = 1;
@@ -184,14 +184,15 @@
                 
                 if(niveau_max === 0 && dernieres_phases_distinctes.length == 3) dernieres_phases_distinctes.splice(0,3);
                 if(niveau_max > 0 && dernieres_phases_distinctes.length == 4) dernieres_phases_distinctes.splice(0,4);
+                phase_nbr = dernieres_phases_distinctes.length;
                 
             	sessionStorage.setItem('dernieres_phases_distinctes',JSON.stringify(dernieres_phases_distinctes));
             	sessionStorage.setItem('dernieres_phases_etudiees',JSON.stringify(dernieres_phases_distinctes));
-            	sessionStorage.setItem('phase_nbr',JSON.stringify(dernieres_phases_distinctes.length));
-            	if(matiere_nouvelle == undefined) {
+            	sessionStorage.setItem('phase_nbr',JSON.stringify(phase_nbr));
+            	/*if(matiere_nouvelle == undefined) {
             	    sessionStorage.setItem('phase_nbr',JSON.stringify(0));
-            	}
-            	
+            	} */
+
 
             /*-------------------------------------------------------------------------   
               Derniere phase
@@ -200,7 +201,7 @@
 
                 derniere_phase = liste_de_phases[n][0];
             	sessionStorage.setItem('derniere_phase',JSON.stringify(derniere_phase));
-            	
+      	
 
             /*-------------------------------------------------------------------------   
               Les pratiques 

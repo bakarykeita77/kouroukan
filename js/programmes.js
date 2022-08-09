@@ -63,7 +63,7 @@
     $('#nav ul li:nth(1)').addClass('surbrillance');
     $('#nav ul li:nth(1)').siblings().removeClass('surbrillance');
 
-    
+      
 /*-------------------------------------------------------------------------------------------------------------------------
 
 Au click sur l'afficheur du programme 

@@ -128,7 +128,8 @@ if(isset($_SESSION["id"])){
                 <span>ߜߋ߲߬߃ߡߊ</span>
                 <span>ߜߋ߲߬߄ߡߊ</span>
             </div> 
-            
+            <div class='progress_bar'><span class='progress_question_bar'></span><span class='progress_bonne_reponse_bar'></span></div>
+          
           <!--pratique_body---------------------------------------------------->
             <div class="course_body" id="pratique_body">
             
@@ -157,7 +158,6 @@ if(isset($_SESSION["id"])){
             
           <!--pratique_foot---------------------------------------------------->
             <div id="pratique_foot">
-                <div class='progress_bar'><span class='progress_question_bar'></span><span class='progress_bonne_reponse_bar'></span></div>
                 <div id="dialogue_btn">
     
                     <div class="btn question_btn">
@@ -230,7 +230,7 @@ if(isset($_SESSION["id"])){
       <!-------------------------------------------------------------------->
         <form method="POST" action="actions.php" id="lesson_form" style="display:none">
                     
-            <input type="number" name="id"       id="id_input"           value="<?= $_SESSION['id']; ?>">
+            <input type="number" name="id"       id="id_input" value="<?= $_SESSION['id']; ?>">
             <input type="text"   name="matiere"  id="matiere_nom_input">
             <input type="number" name="niveau"   id="niveau_input">
             <input type="text"   name="phase"    id="phase_input">

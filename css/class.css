@@ -148,7 +148,7 @@ html {
     min-height: 4rem;
     width: 100%;
     margin: auto;
-    bottom: 0.15rem;
+    bottom: 0;
     padding-top: 1rem;
     background-color: #666;
     border: 1px solid transparent;

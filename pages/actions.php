@@ -28,6 +28,11 @@
     $note      = isset($_POST['note'])      ? $_POST['note']:null;
     $referer   = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/pages/index.php';
     
+    $image_name = isset($_FILES['image']['name'])    ? $_FILES['image']['name'] : null;
+    $taille    = isset($_FILES['image']['size'])     ? $_FILES['image']['size'] : null;
+    $type      = isset($_FILES['image']['type'])     ? $_FILES['image']['type'] : null;
+    $image     = isset($_FILES['image']['tmp_name']) ? file_get_contents($_FILES['image']['tmp_name']) : null;
+                
    
   /*----------------------------------------------------------------------------------------------
     Sécurisation des données réçues.
@@ -51,6 +56,10 @@
     $note      = securiser($note);
     $note      = (int) $note;
     
+    $image_name = securiser($image_name);
+    $taille    = securiser($taille);
+    $type      = securiser($type);
+    $image     = securiser($image);
  
   /*----------------------------------------------------------------------------------------------
     Gestion des dnnées dans la base de données.
@@ -64,6 +73,7 @@
     if($numero != '' && $question != '' && $reponse != '' && $points != '')                                                 archiverNotes($numero,$question,$reponse,$points);       
     if($id != '')                                                                                                           getClient($id);       
     if($matiere != '' && $id_client != '')                                                                                  getAllInfo($matiere,$id_client);     
+    if($image_name != null && $taille != null && $type != null && $image != null)                                           uploadImage($table_image,$id_client,$image_name,$taille,$type,$image);       
     
  
   /*----------------------------------------------------------------------------------------------
@@ -257,4 +267,20 @@
 		$utilisateurs =  $requette->execute();
 		return $utilisateurs;
 	 }
+	function uploadImage($table_image,$id_client,$image_name,$taille,$type,$image) {
+	    global $db;
+	    
+	    $sql = "INSERT INTO ".$table_image."(id_client,nom,taille,type,image)
+	            VALUES(:id_client,:nom,:taille,:type,:image)";
+	    $requete = $db -> prepare($sql);
+	    
+	    $requete -> bindValue(':id_client', $id_client, PDO::PARAM_INT);
+	    $requete -> bindValue(':$image_name', $image_name, PDO::PARAM_STR);
+	    $requete -> bindValue(':taille', $taille, PDO::PARAM_INT);
+	    $requete -> bindValue(':type', $type, PDO::PARAM_STR);
+	    $requete -> bindValue(':image', $image, PDO::PARAM_STR);
+	    
+	    $requete -> execute();
+	    $image_data = $requete -> fetchAll();
+	}
 ?>

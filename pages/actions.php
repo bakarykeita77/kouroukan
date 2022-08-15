@@ -11,21 +11,21 @@
   /*----------------------------------------------------------------------------------------------
     Reception des données réçues.
   ----------------------------------------------------------------------------------------------*/
-    $id_client = isset($_POST['id'])        ? $_POST['id']:null;
+    $id_client = isset($_POST['id'])        ? $_POST['id']        : null;
     
-    $prenom    = isset($_POST['prenom'])    ? $_POST['prenom']:null;
-    $nom       = isset($_POST['nom'])       ? $_POST['nom']:null;
-    $naissance = isset($_POST['naissance']) ? $_POST['naissance']:null;
-    $sexe      = isset($_POST['sexe'])      ? $_POST['sexe']:null;
-    $adresse   = isset($_POST['adresse'])   ? $_POST['adresse']:null;
-    $email     = isset($_POST['email'])     ? $_POST['email']:null;
-    $pass      = isset($_POST['pass'])      ? $_POST['pass']:null;
+    $prenom    = isset($_POST['prenom'])    ? $_POST['prenom']    : null;
+    $nom       = isset($_POST['nom'])       ? $_POST['nom']       : null;
+    $naissance = isset($_POST['naissance']) ? $_POST['naissance'] : null;
+    $sexe      = isset($_POST['sexe'])      ? $_POST['sexe']      : null;
+    $adresse   = isset($_POST['adresse'])   ? $_POST['adresse']   : null;
+    $email     = isset($_POST['email'])     ? $_POST['email']     : null;
+    $pass      = isset($_POST['pass'])      ? $_POST['pass']      : null;
     
-    $matiere   = isset($_POST['matiere'])   ? $_POST['matiere']:null;
-    $niveau    = isset($_POST['niveau'])    ? $_POST['niveau']:null;
-    $phase     = isset($_POST['phase'])     ? $_POST['phase']:null;
-    $lesson    = isset($_POST['lesson'])    ? $_POST['lesson']:null;
-    $note      = isset($_POST['note'])      ? $_POST['note']:null;
+    $matiere   = isset($_POST['matiere'])   ? $_POST['matiere']   : null;
+    $niveau    = isset($_POST['niveau'])    ? $_POST['niveau']    : null;
+    $phase     = isset($_POST['phase'])     ? $_POST['phase']     : null;
+    $lesson    = isset($_POST['lesson'])    ? $_POST['lesson']    : null;
+    $note      = isset($_POST['note'])      ? $_POST['note']      : null;
     $referer   = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/pages/index.php';
     
     $image_name = isset($_FILES['image']['name'])    ? $_FILES['image']['name'] : null;
@@ -58,8 +58,12 @@
     
     $image_name = securiser($image_name);
     $taille    = securiser($taille);
+    $taille    = (int) $taille;
     $type      = securiser($type);
     $image     = securiser($image);
+    
+    $table_name = tableName($image_name);
+    
  
   /*----------------------------------------------------------------------------------------------
     Gestion des dnnées dans la base de données.
@@ -73,9 +77,8 @@
     if($numero != '' && $question != '' && $reponse != '' && $points != '')                                                 archiverNotes($numero,$question,$reponse,$points);       
     if($id != '')                                                                                                           getClient($id);       
     if($matiere != '' && $id_client != '')                                                                                  getAllInfo($matiere,$id_client);     
-    if($image_name != null && $taille != null && $type != null && $image != null)                                           uploadImage($table_image,$id_client,$image_name,$taille,$type,$image);       
+    if($image_name != null && $taille != null && $type != null && $image != null)                                           uploadImage($table_name,$id_client,$image_name,$taille,$type,$image);       
     
- 
   /*----------------------------------------------------------------------------------------------
     Les fonctions.
   ----------------------------------------------------------------------------------------------*/
@@ -267,20 +270,35 @@
 		$utilisateurs =  $requette->execute();
 		return $utilisateurs;
 	 }
-	function uploadImage($table_image,$id_client,$image_name,$taille,$type,$image) {
+	function tableName($image_name) {
+	    
+	    $consonnes = ["ߓ", "ߔ", "ߕ", "ߖ", "ߗ", "ߘ", "ߙ", "ߛ", "ߜ", "ߝ", "ߞ", "ߟ", "ߡ", "ߢ", "ߣ", "ߤ", "ߥ", "ߦ"];
+	    $in = explode('.',$image_name);
+	    $in = $in[0];
+	  
+	    $syllabe_nbr = floor(strlen($in)/4);
+	    
+	    if($syllabe_nbr == 1) $nom_de_table = "image1syllabe";
+	    if($syllabe_nbr == 2) $nom_de_table = "image2syllabe";
+	    if($syllabe_nbr == 3) $nom_de_table = "image3syllabe";
+	    if($syllabe_nbr == 4) $nom_de_table = "image4syllabe";
+
+	    return $nom_de_table;
+	}
+	function uploadImage($table_name,$id_client,$image_name,$taille,$type,$image) {
 	    global $db;
 	    
-	    $sql = "INSERT INTO ".$table_image."(id_client,nom,taille,type,image)
+	    $sql = "INSERT INTO `$table_name`(id_client,nom,taille,type,image) 
 	            VALUES(:id_client,:nom,:taille,:type,:image)";
 	    $requete = $db -> prepare($sql);
 	    
-	    $requete -> bindValue(':id_client', $id_client, PDO::PARAM_INT);
-	    $requete -> bindValue(':$image_name', $image_name, PDO::PARAM_STR);
-	    $requete -> bindValue(':taille', $taille, PDO::PARAM_INT);
-	    $requete -> bindValue(':type', $type, PDO::PARAM_STR);
-	    $requete -> bindValue(':image', $image, PDO::PARAM_STR);
+	    $requete -> bindValue(':id_client', $id_client,  PDO::PARAM_INT);
+	    $requete -> bindValue(':nom',       $image_name, PDO::PARAM_STR);
+	    $requete -> bindValue(':taille',    $taille,     PDO::PARAM_INT);
+	    $requete -> bindValue(':type',      $type,       PDO::PARAM_STR);
+	    $requete -> bindValue(':image',     $image,      PDO::PARAM_STR);
 	    
-	    $requete -> execute();
-	    $image_data = $requete -> fetchAll();
+	    $image_data = $requete -> execute();
+	    return $image_data;
 	}
 ?>

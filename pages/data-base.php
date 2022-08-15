@@ -68,7 +68,7 @@
         `note` INT(3) NOT NULL , 
         PRIMARY KEY (`id`)
      ) ENGINE = MyISAM CHARSET = utf8 COLLATE utf8_general_ci";
-    $sql_table_image_1_syllabe = "CREATE TABLE IF NOT EXISTS `kouroukan`.`image-1-syllabe`(
+    $sql_table_image1syllabe = "CREATE TABLE IF NOT EXISTS `kouroukan`.`image1syllabe`(
         `id` int(255) not null auto_increment,
         `id_client` int(255) not null,
         `nom` varchar(100) character set utf8 collate utf8_general_ci,
@@ -77,7 +77,7 @@
         `image` longblob,
         primary key (`id`)
      ) engine = myisam charset = utf8 collate utf8_general_ci";
-    $sql_table_image_2_syllabe = "CREATE TABLE IF NOT EXISTS `kouroukan`.`image-2-syllabe`(
+    $sql_table_image2syllabe = "CREATE TABLE IF NOT EXISTS `kouroukan`.`image2syllabe`(
         `id` int(255) not null auto_increment,
         `id_client` int(255) not null,
         `nom` varchar(100) character set utf8 collate utf8_general_ci,
@@ -86,7 +86,7 @@
         `image` longblob,
         primary key (`id`)
      ) engine = myisam charset = utf8 collate utf8_general_ci";
-    $sql_table_image_3_syllabe = "CREATE TABLE IF NOT EXISTS `kouroukan`.`image-3-syllabe`(
+    $sql_table_image3syllabe = "CREATE TABLE IF NOT EXISTS `kouroukan`.`image3syllabe`(
         `id` int(255) not null auto_increment,
         `id_client` int(255) not null,
         `nom` varchar(100) character set utf8 collate utf8_general_ci,
@@ -95,7 +95,7 @@
         `image` longblob,
         primary key (`id`)
      ) engine = myisam charset = utf8 collate utf8_general_ci";
-    $sql_table_image_4_syllabe = "CREATE TABLE IF NOT EXISTS `kouroukan`.`image-4-syllabe`(
+    $sql_table_image4syllabe = "CREATE TABLE IF NOT EXISTS `kouroukan`.`image4syllabe`(
         `id` int(255) not null auto_increment,
         `id_client` int(255) not null,
         `nom` varchar(100) character set utf8 collate utf8_general_ci,
@@ -114,9 +114,9 @@
     $db->exec($sql_table_syllabes);
     $db->exec($sql_table_tons);
     $db->exec($sql_table_chiffres);
-    $db->exec($sql_table_image_1_syllabe);
-    $db->exec($sql_table_image_2_syllabe);
-    $db->exec($sql_table_image_3_syllabe);
-    $db->exec($sql_table_image_4_syllabe);
+    $db->exec($sql_table_image1syllabe);
+    $db->exec($sql_table_image2syllabe);
+    $db->exec($sql_table_image3syllabe);
+    $db->exec($sql_table_image4syllabe);
     
     header("location:http://localhost:8002/?username=root&db=kouroukan"); 

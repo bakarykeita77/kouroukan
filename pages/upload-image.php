@@ -2,11 +2,7 @@
     session_start();
     
     $id_client = isset($_SESSION['id'])? $_SESSION['id']:'';
-    if($id_client != ''){
-        if(empty($_FILES['image']['tmp_name'])) echo('Selectionner une image');
-    }else{
-        header("location:connexion.php?error=no_conncted_to_change_avatar");
-    }
+    if($id_client == '') header("location:connexion.php?error=no_conncted_to_change_avatar");
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,11 +13,17 @@
     </head>
     <body>
         <div style="position:absolute; left:50%; transform:translateX(-50%)">
-        <form method="POST" action="http://localhost:8080/kouroukan/pages/actions.php" enctype="multipart/form-data">
-            <input type="number" name="id" value="<?=  $id_client; ?>" style="display:none"><br>
-            <input type="file" name="image" id="image"><br><br>
-            <input type="submit" name="image_submit" id="image_submit" value="ߖߌ߬ߦߊ߬ߓߍ ߟߊߦߟߍ߬">
-        </form>
+            
+            <h2 id="upload_image_guide">ߖߌ߬ߦߊ߬  ߟߊ߬ߦߟߍ ߦߙߐ</h2>
+            
+            <form method="POST" action="http://localhost:8080/kouroukan/pages/actions.php" enctype="multipart/form-data" id="upload_image_form">
+                <input type="number" name="id" value="<?=  $id_client; ?>" style="display:none">
+                <input type="text" name="syllabe_categorie" id="syllabe_categorie" value="" style="display:none">
+                
+                <input type="file" name="image" id="image"><br><br>
+                <img src="" alt="" width="200"><br>
+                <input type="submit" name="image_submit" id="image_submit" value="ߖߌ߬ߦߊ߬ߓߍ ߣߌ߲߬ ߠߊߦߟߍ߬">
+            </form>
         </div>
         
         <script src="http://localhost:8080/kouroukan/js/upload-image.js"></script>

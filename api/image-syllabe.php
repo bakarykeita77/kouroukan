@@ -2,50 +2,68 @@
     include('DBConnexion.php');
     global $db;
     
+    $id = $_GET['id'];
     $image_categorie = $_GET['image_categorie'];
+    
+    if($image_categorie == 'image1syllabe' && $id == '') extraireLesImagesMonoSyllabe();
+    if($image_categorie == 'image2syllabe' && $id == '') extraireLesImagesBiSyllabe();
+    if($image_categorie == 'image3syllabe' && $id == '') extraireLesImagesTriSyllabe();
+    if($image_categorie == 'image4syllabe' && $id == '') extraireLesImagesQuadriSyllabe();
 
-    switch ($image_categorie) {
-        case 'image_1_syllabe': getImageMonoSyllabe();   break;
-        case 'image_2_syllabe': getImageBiSyllabe();     break;
-        case 'image_3_syllabe': getImageTriSyllabe();    break;
-        case 'image_4_syllabe': getImageQuadriSyllabe(); break;
-        default: break;
-    }
+    if($image_categorie !== '' && $id != '') extraireUneImage($image_categorie,$id);
     
 
-    function getImageMonoSyllabe() {
+    function extraireLesImagesMonoSyllabe() {
         global $db;
         
         $requette = $db->prepare("select * from image1syllabe");
         $requette->execute();
-        $image = $requette->fetchAll();
+        $images1 = $requette->fetchAll();
         
-        for($i=0; $i<count($image); $i++) echo $image[$i]['image']."<br>";
+        echo "<pre>";
+        print_r($images1); 
+        echo "</pre>";
     }
-    function getImageBiSyllabe() {
+    function extraireLesImagesBiSyllabe() {
         global $db;
         
         $requette = $db->prepare("select * from image2syllabe");
         $requette->execute();
-        $image = $requette->fetchAll();
+        $images2 = $requette->fetchAll();
         
-        for($i=0; $i<count($image); $i++) echo $image[$i]['image']."<br>";
+        echo "<pre>";
+        print_r($images2); 
+        echo "</pre>";
     }
-    function getImageTriSyllabe() {
+    function extraireLesImagesTriSyllabe() {
         global $db;
         
         $requette = $db->prepare("select * from image3syllabe");
         $requette->execute();
-        $image = $requette->fetchAll();
+        $images3 = $requette->fetchAll();
         
-        for($i=0; $i<count($image); $i++) echo $image[$i]['image']."<br>";
+        echo "<pre>";
+        print_r($images3); 
+        echo "</pre>";
     }
-    function getImageQuadriSyllabe() {
+    function extraireLesImagesQuadriSyllabe() {
         global $db;
         
         $requette = $db->prepare("select * from image4syllabe");
         $requette->execute();
+        $images4 = $requette->fetchAll();
+        
+        echo "<pre>";
+        print_r($images4); 
+        echo "</pre>";
+    }
+    function extraireUneImage($image_categorie,$id) {
+        global $db;
+        
+        $requette = $db->prepare("select * from ".$image_categorie." where id = :id");
+        $requette->bindValue(':id', $id, PDO::PARAM_INT);
+        $requette->execute();
         $image = $requette->fetchAll();
         
-        for($i=0; $i<count($image); $i++) echo $image[$i]['image']."<br>";
+        echo $image[0]['image']; 
     }

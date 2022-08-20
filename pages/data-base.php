@@ -23,7 +23,7 @@
         `id` int(255) not null auto_increment,
         `client_id` int(255) not null,
         `nom` varchar(100) character set utf8 collate utf8_general_ci,
-        `taille` varchar(100) character set utf8 collate utf8_general_ci,
+        `taille` int(100) not null,
         `type` varchar(100) character set utf8 collate utf8_general_ci,
         `image` longblob,
         primary key (`id`)
@@ -68,11 +68,13 @@
         `note` INT(3) NOT NULL , 
         PRIMARY KEY (`id`)
      ) ENGINE = MyISAM CHARSET = utf8 COLLATE utf8_general_ci";
+    
     $sql_table_image1syllabe = "CREATE TABLE IF NOT EXISTS `kouroukan`.`image1syllabe`(
         `id` int(255) not null auto_increment,
         `id_client` int(255) not null,
         `nom` varchar(100) character set utf8 collate utf8_general_ci,
-        `taille` varchar(100) character set utf8 collate utf8_general_ci,
+        `extension` varchar(100) character set utf8 collate utf8_general_ci,
+        `taille` int(100) not null,
         `type` varchar(100) character set utf8 collate utf8_general_ci,
         `image` longblob,
         primary key (`id`)
@@ -81,7 +83,8 @@
         `id` int(255) not null auto_increment,
         `id_client` int(255) not null,
         `nom` varchar(100) character set utf8 collate utf8_general_ci,
-        `taille` varchar(100) character set utf8 collate utf8_general_ci,
+        `extension` varchar(100) character set utf8 collate utf8_general_ci,
+        `taille` int(100) not null,
         `type` varchar(100) character set utf8 collate utf8_general_ci,
         `image` longblob,
         primary key (`id`)
@@ -90,7 +93,8 @@
         `id` int(255) not null auto_increment,
         `id_client` int(255) not null,
         `nom` varchar(100) character set utf8 collate utf8_general_ci,
-        `taille` varchar(100) character set utf8 collate utf8_general_ci,
+        `extension` varchar(100) character set utf8 collate utf8_general_ci,
+        `taille` int(100) not null,
         `type` varchar(100) character set utf8 collate utf8_general_ci,
         `image` longblob,
         primary key (`id`)
@@ -99,7 +103,8 @@
         `id` int(255) not null auto_increment,
         `id_client` int(255) not null,
         `nom` varchar(100) character set utf8 collate utf8_general_ci,
-        `taille` varchar(100) character set utf8 collate utf8_general_ci,
+        `extension` varchar(100) character set utf8 collate utf8_general_ci,
+        `taille` int(100) not null,
         `type` varchar(100) character set utf8 collate utf8_general_ci,
         `image` longblob,
         primary key (`id`)
@@ -114,6 +119,7 @@
     $db->exec($sql_table_syllabes);
     $db->exec($sql_table_tons);
     $db->exec($sql_table_chiffres);
+    
     $db->exec($sql_table_image1syllabe);
     $db->exec($sql_table_image2syllabe);
     $db->exec($sql_table_image3syllabe);

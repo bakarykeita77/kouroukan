@@ -28,6 +28,7 @@
     $note      = isset($_POST['note'])      ? $_POST['note']      : null;
     $referer   = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/pages/index.php';
     
+    $syllabe_categorie = isset($_POST['syllabe_categorie']) ? $_POST['syllabe_categorie'] : null;
     $image_name = isset($_FILES['image']['name'])    ? $_FILES['image']['name'] : null;
     $taille    = isset($_FILES['image']['size'])     ? $_FILES['image']['size'] : null;
     $type      = isset($_FILES['image']['type'])     ? $_FILES['image']['type'] : null;
@@ -56,13 +57,15 @@
     $note      = securiser($note);
     $note      = (int) $note;
     
+    $syllabe_categorie = securiser($syllabe_categorie);
     $image_name = securiser($image_name);
+    $name       = explode('.',$image_name)[0];
+    $extension = explode('.',$image_name)[1];
     $taille    = securiser($taille);
     $taille    = (int) $taille;
     $type      = securiser($type);
-    $image     = securiser($image);
-    
-    $table_name = tableName($image_name);
+
+    $table_name = $syllabe_categorie;
     
  
   /*----------------------------------------------------------------------------------------------
@@ -77,7 +80,7 @@
     if($numero != '' && $question != '' && $reponse != '' && $points != '')                                                 archiverNotes($numero,$question,$reponse,$points);       
     if($id != '')                                                                                                           getClient($id);       
     if($matiere != '' && $id_client != '')                                                                                  getAllInfo($matiere,$id_client);     
-    if($image_name != null && $taille != null && $type != null && $image != null)                                           uploadImage($table_name,$id_client,$image_name,$taille,$type,$image);       
+    if($name != null && $extension != null && $taille != null && $type != null && $image != null && $table_name != null)    uploadImage($table_name,$id_client,$name,$extension,$taille,$type,$image);       
     
   /*----------------------------------------------------------------------------------------------
     Les fonctions.
@@ -270,33 +273,19 @@
 		$utilisateurs =  $requette->execute();
 		return $utilisateurs;
 	 }
-	function tableName($image_name) {
-	    
-	    $consonnes = ["ߓ", "ߔ", "ߕ", "ߖ", "ߗ", "ߘ", "ߙ", "ߛ", "ߜ", "ߝ", "ߞ", "ߟ", "ߡ", "ߢ", "ߣ", "ߤ", "ߥ", "ߦ"];
-	    $in = explode('.',$image_name);
-	    $in = $in[0];
-	  
-	    $syllabe_nbr = floor(strlen($in)/4);
-	    
-	    if($syllabe_nbr == 1) $nom_de_table = "image1syllabe";
-	    if($syllabe_nbr == 2) $nom_de_table = "image2syllabe";
-	    if($syllabe_nbr == 3) $nom_de_table = "image3syllabe";
-	    if($syllabe_nbr == 4) $nom_de_table = "image4syllabe";
-
-	    return $nom_de_table;
-	}
-	function uploadImage($table_name,$id_client,$image_name,$taille,$type,$image) {
+	function uploadImage($table_name,$id_client,$name,$extension,$taille,$type,$image) {
 	    global $db;
 	    
-	    $sql = "INSERT INTO `$table_name`(id_client,nom,taille,type,image) 
-	            VALUES(:id_client,:nom,:taille,:type,:image)";
+	    $sql = "INSERT INTO `{$table_name}`(id_client,nom,extension,taille,type,image) 
+	            VALUES(:id_client,:nom,:extension,:taille,:type,:image)";
 	    $requete = $db -> prepare($sql);
 	    
-	    $requete -> bindValue(':id_client', $id_client,  PDO::PARAM_INT);
-	    $requete -> bindValue(':nom',       $image_name, PDO::PARAM_STR);
-	    $requete -> bindValue(':taille',    $taille,     PDO::PARAM_INT);
-	    $requete -> bindValue(':type',      $type,       PDO::PARAM_STR);
-	    $requete -> bindValue(':image',     $image,      PDO::PARAM_STR);
+	    $requete -> bindValue(':id_client', $id_client, PDO::PARAM_INT);
+	    $requete -> bindValue(':nom',       $name,      PDO::PARAM_STR);
+	    $requete -> bindValue(':extension', $extension, PDO::PARAM_STR);
+	    $requete -> bindValue(':taille',    $taille,    PDO::PARAM_INT);
+	    $requete -> bindValue(':type',      $type,      PDO::PARAM_STR);
+	    $requete -> bindValue(':image',     $image,     PDO::PARAM_STR);
 	    
 	    $image_data = $requete -> execute();
 	    return $image_data;

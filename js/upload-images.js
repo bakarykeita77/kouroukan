@@ -8,7 +8,7 @@
 
  /*---------------------------------------------------------------------------------------------------------*/
     //Extraction de noms des images déja téléchargées
-    fetch("http://localhost:8080/kouroukan/api/image-syllabe.php?image_categorie=image1syllabe&id=4")
+   /* fetch("http://localhost:8080/kouroukan/api/image-syllabe.php?image_categorie=image2syllabe&id=4")
     .then(response => response.text())
     .then(data => alert(JSON.parse(data)))
     .catch(error => alert(error));
@@ -27,14 +27,14 @@
         let image_nom = image.val().split("\\").pop().split(".")[0];
         let image_extension = image.val().split("\\").pop().split(".")[1];
         
-        let syllabe_categorie_html = syllabeCategorieHtml();
-        $('#syllabe_categorie').val(syllabe_categorie_html);
-        
+        let nom_table_html = imageCategorieHtml();
+        $('#nom_table_image').val(nom_table_html);
+
         image_to_upload.attr('src','http://localhost:8080/kouroukan/image/'+image_nom+'.'+image_extension);
         image_to_upload.css('display','block');
         image_submit.css('display','block');
         
-        function syllabeCategorieHtml() {
+        function imageCategorieHtml() {
 	        let consonnes = ["ߓ", "ߔ", "ߕ", "ߖ", "ߗ", "ߘ", "ߙ", "ߛ", "ߜ", "ߝ", "ߞ", "ߟ", "ߡ", "ߢ", "ߣ", "ߤ", "ߥ", "ߦ"];
             let voyelles = ["ߊ", "ߋ", "ߌ", "ߍ", "ߎ", "ߏ", "ߐ"];
             
@@ -47,15 +47,15 @@
             }
             
             let syllabe_nbr = Math.max(...[consonnes_nbr.length, voyelles_nbr.length]);
-            let syllabe_categorie = "";
+            let image_categorie = "";
             
             switch (syllabe_nbr) {
-                case 1: syllabe_categorie = "image1syllabe"; break;
-                case 2: syllabe_categorie = "image2syllabe"; break;
-                case 3: syllabe_categorie = "image3syllabe"; break;
-                case 4: syllabe_categorie = "image4syllabe"; break;
+                case 1: image_categorie = "image1syllabe"; break;
+                case 2: image_categorie = "image2syllabe"; break;
+                case 3: image_categorie = "image3syllabe"; break;
+                case 4: image_categorie = "image4syllabe"; break;
             }
             
-            return syllabe_categorie;
+            return image_categorie;
         }
     });

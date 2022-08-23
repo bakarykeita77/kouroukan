@@ -12,7 +12,7 @@
 
     if($image_categorie !== '' && $id != '') extraireUneImage($image_categorie,$id);
     
-
+extraireUneImage("image1syllabe",4);
     function extraireLesImagesMonoSyllabe() {
         global $db;
         
@@ -63,7 +63,19 @@
         $requette = $db->prepare("select * from ".$image_categorie." where id = :id");
         $requette->bindValue(':id', $id, PDO::PARAM_INT);
         $requette->execute();
-        $image = $requette->fetchAll();
+        $image = $requette->fetchAll(PDO::FETCH_ASSOC);
+        /*
+        $images = [
+            'id' => $image[0]['id'],
+            'id_client' => $image[0]['id_client'],
+            'nom' => $image[0]['nom'],
+            'extension' => $image[0]['extension'],
+            'taille' => $image[0]['taille'],
+            'type' => $image[0]['type'],
+            'image' => base64_encode($image[0]['image'])
+        ];
         
-        echo $image[0]['image']; 
+        echo(json_encode($images));
+        */
+        echo $image[0]['image'];
     }

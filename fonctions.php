@@ -242,6 +242,13 @@
 			$utilisateurs =  $requette->execute();
 			return $utilisateurs;
 		 }
+		
+		function dataURI_encode($file) {
+		  //argument devant etre un chemin vers le fichier à encoder
+		    $mime_type = mime_content_type($file);
+		    $file_binary = file_get_contents($file);
+		    return 'data:'.$mime_type.';base64,'.base64_encode($file_binary);
+		}
 	 }
 	catch(PDOException $e){
 		echo "Echec :".$e -> getMessage();

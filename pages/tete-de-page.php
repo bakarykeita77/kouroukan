@@ -87,6 +87,7 @@
     		</div>
         </div>
 
+	    <?php include "http://localhost:8080/kouroukan/fonctions.php" ?>
 		<script src="http://localhost:8080/kouroukan/js/tete-de-page.js"></script>
 		<script src="http://localhost:8080/kouroukan/js/profile.js"></script>
 

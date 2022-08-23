@@ -1,4 +1,4 @@
-<?php
+ <?php
 
     require("connexionToDB.php");
     global $db;
@@ -73,7 +73,6 @@
         `id` int(255) not null auto_increment,
         `id_client` int(255) not null,
         `nom` varchar(100) character set utf8 collate utf8_general_ci,
-        `extension` varchar(100) character set utf8 collate utf8_general_ci,
         `taille` int(100) not null,
         `type` varchar(100) character set utf8 collate utf8_general_ci,
         `image` longblob,
@@ -83,7 +82,6 @@
         `id` int(255) not null auto_increment,
         `id_client` int(255) not null,
         `nom` varchar(100) character set utf8 collate utf8_general_ci,
-        `extension` varchar(100) character set utf8 collate utf8_general_ci,
         `taille` int(100) not null,
         `type` varchar(100) character set utf8 collate utf8_general_ci,
         `image` longblob,
@@ -93,7 +91,6 @@
         `id` int(255) not null auto_increment,
         `id_client` int(255) not null,
         `nom` varchar(100) character set utf8 collate utf8_general_ci,
-        `extension` varchar(100) character set utf8 collate utf8_general_ci,
         `taille` int(100) not null,
         `type` varchar(100) character set utf8 collate utf8_general_ci,
         `image` longblob,
@@ -103,7 +100,6 @@
         `id` int(255) not null auto_increment,
         `id_client` int(255) not null,
         `nom` varchar(100) character set utf8 collate utf8_general_ci,
-        `extension` varchar(100) character set utf8 collate utf8_general_ci,
         `taille` int(100) not null,
         `type` varchar(100) character set utf8 collate utf8_general_ci,
         `image` longblob,

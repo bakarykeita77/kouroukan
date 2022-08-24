@@ -51,9 +51,6 @@ if(isset($_SESSION["id"])){
                 <div id="images_pratique" style="display:none">
                     
                     <?php include "http://localhost:8080/kouroukan/pages/image-1-syllabe.php"; ?>
-                    <?php include "http://localhost:8080/kouroukan/pages/image-2-syllabe.php"; ?>
-                    <?php include "http://localhost:8080/kouroukan/pages/image-3-syllabe.php"; ?>
-                    <?php include "http://localhost:8080/kouroukan/pages/image-4-syllabe.php"; ?>
                 </div>
               
               <!----------------------------------------------------------------------------------------------------->  
@@ -132,13 +129,13 @@ if(isset($_SESSION["id"])){
          ---------------------------------------------------------------------->
             
           <!--pratique_head---------------------------------------------------->
+            <div class='progress_bar'><span class='progress_question_bar'></span><span class='progress_bonne_reponse_bar'></span></div>
             <div id="pratique_head">
                 <span>ߜߋ߲߬߁ߡߊ</span>
                 <span>ߜߋ߲߬߂ߡߊ</span>
                 <span>ߜߋ߲߬߃ߡߊ</span>
                 <span>ߜߋ߲߬߄ߡߊ</span>
             </div> 
-            <div class='progress_bar'><span class='progress_question_bar'></span><span class='progress_bonne_reponse_bar'></span></div>
           
           <!--pratique_body---------------------------------------------------->
             <div class="course_body" id="pratique_body">

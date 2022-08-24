@@ -1547,23 +1547,29 @@ $('document').ready(function() {
                     	}
                         
                         function dimensionnementParDefautDePratiquesCorps() {
+                	        var course_height = $('.course').height();
+                	        var pratique_head_height = $('#pratique_head').height();
+                	        var pratique_foot_height = $('#pratique_foot').height();
+                	        var pratiques_reponse_container_height = $('#pratiques_reponse_container').height();
+                	        var pratique_body_height = course_height - (pratique_head_height + pratique_foot_height+16);
+                	        var pratiques_demo_container_height = pratique_body_height - pratiques_reponse_container_height;  
+
+                            $('#pratique_body').css('height', pratique_body_height+'px');
+                            $('#pratiques_demo_container').css('height', pratiques_demo_container_height+'px');
                             
-                            $('#pratique_body').css('height','44vh');
-                            $('#pratiques_demo_container').css('height','168px');
-                            $('#pratiques_reponse_container').css('height','84px');
                             $('#pratiques_reponse_container #table_1').empty();
                             $('#message_de_fin_container').css('display','none');
-        	                                       
         	                $('#pratiques_images_container img').attr('src','#');
+        	                
         	                afficherClavierEtConsoles();
                         }
                 	    function dimensionnementDePratiquesReponseContainer() {
                 	        
                 	        var pratique_body_height = $('#pratique_body').height();
-                	        var pratiques_demo_container_height = $('#pratiques_demo_container').height();
-                	        var pratiques_reponse_container_height = pratique_body_height - pratiques_demo_container_height;
+                	        var pratiques_reponse_container_height = $('#pratiques_reponse_container').height();
+                	        var pratiques_demo_container_height = pratique_body_height - pratiques_reponse_container_height;  
                 	        
-                	        $('#pratiques_reponse_container').css('height', pratiques_reponse_container_height-10+'px');
+                	       // $('#pratiques_reponse_container').css('height', pratiques_reponse_container_height-10+'px');
                 	    }
                 	    function redimensionnementDePratiquesReponseContainer() {
                 	        

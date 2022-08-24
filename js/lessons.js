@@ -1219,7 +1219,7 @@ $('document').ready(function() {
                         	        total_point = 0;
                         	       
                         	        $('.correction_btn').on('click',  function() {
-                        	          
+
                         	            reponse = reponse.join('');
                         	            point = (question == reponse)?1:0;
                                 	    total_point = total_point + point;
@@ -1261,8 +1261,12 @@ $('document').ready(function() {
                                         }
                                         function afficherImage() {
             
-                                    	    var image_name = $('.pratique_tr_actif').children('td:nth(1)').html(); 
-                                            var image_src = imageSource();
+                                    	    $('#pratiques_images_container').html($('#'+reponse).html());
+                                    	    
+                                    	    
+                                    	    /*var image_name = $('.pratique_tr_actif').children('td:nth(1)').html(); 
+                                            //var image_src = imageSource();
+                                            var image_src = $('#'+reponse).html();
                                             
                         	                $('#pratiques_image').attr('src', image_src);
                                 	       
@@ -1274,12 +1278,12 @@ $('document').ready(function() {
                                 	            $('#pratiques_image').css('opacity','0.15');
                                 	            $('#croix').css('display','flex');
                                 	        }
-                                	        
+                                	    */    
                                 	        setTimeout(function(){ $('#pratique_guide').animate({'top':'-100%'},400); }, 200);
                                           	
                                             function imageSource() {
                                                 var image_src = '';
-                                   alert(image_name);           	    
+                                  // alert(image_name);           	    
                                             	if(option_index == 0) image_src = 'http://localhost:8080/kouroukan/image/mono_syllabes/'+image_name+'.jpg';
                                             	if(option_index == 1) image_src = 'http://localhost:8080/kouroukan/image/bi_syllabes/'+image_name+'.jpg';
                                             	if(option_index == 2) image_src = 'http://localhost:8080/kouroukan/image/tri_syllabes/'+image_name+'.jpg';

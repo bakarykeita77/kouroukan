@@ -13,8 +13,9 @@
 		<script src="http://localhost:8080/kouroukan/js/jquery-3.3.1.js"></script>
 		<script src="http://localhost:8080/kouroukan/fonctions.js"></script>
         <script src="http://localhost:8080/kouroukan/js/icones.js"></script>
-        <script src="http://localhost:8080/kouroukan/js/class.js"></script>	</head>
+        <script src="http://localhost:8080/kouroukan/js/class.js"></script>	
         <script src="http://localhost:8080/kouroukan/js/caracteres.js"></script>
+    </head>
 	<body>
 	    <div id="tete_de_page_container">
             <h3 id="header">ߞߙߎ߬ߞߊ߲߬</h3>

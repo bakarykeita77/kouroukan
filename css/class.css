@@ -374,6 +374,28 @@ html {
     transition: 0.1s;
 }
 
+.images_container {
+    position: relative;
+    top: 48px;
+    margin: 0;
+    z-index: 0;
+}
+.image_card { 
+    display: inline-block; 
+    margin: 0;
+}
+.images_titre {
+    position: fixed; 
+    top: 0; 
+    left: 2%;
+    height:48px; 
+    width: 96%;
+    margin:0; 
+    background-color:white;
+    box-shadow: 0 0 16px #aaa;
+    z-index: 1;
+}
+
 .left {
     float: left;
 }

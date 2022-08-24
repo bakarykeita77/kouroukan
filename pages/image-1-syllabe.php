@@ -5,7 +5,6 @@
     $requete = $db -> prepare("select * from image1syllabe");
     $requete -> execute();
     $images_1 = $requete -> fetchAll();
-
 ?>
 
 <!DOCTYPE html>
@@ -15,19 +14,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>image_1</title>
+	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/class.css"/>
 </head>
 <body>
-<center>
-    <h1>ߞߎߡߊߘߋ߲߫ ߜߋ߲߬ ߞߋ߬ߟߋ߲߬ߡߊ ߟߎ߬ ߖߌ߬ߦߊ</h1>
-    <div id="image_container">
-        <?php for($i=0; $i<count($images_1); $i++) { 
-        $id = $images_1[$i]['id']; ?>
-        
-        <img src="http://localhost:8080/kouroukan/pages/api-image.php?image_categorie=image1syllabe&id=<?= $id; ?>" width="200" height="200"  alt="">
-       
-        <?php } ?>
-    </div>
-</center>
-<!--      <script src="http://localhost:8080/kouroukan/js/image-1-syllabe.js"></script>
- --></body>
+    <center>
+        <h1 class="images_titre">ߞߎߡߊߘߋ߲߫ ߜߋ߲߬ ߞߋ߬ߟߋ߲߬ߡߊ ߟߎ߬ ߖߌ߬ߦߊ</h1>
+        <div class="images_container">
+            <?php for($i=0; $i<count($images_1); $i++) {
+                $id = $images_1[$i]['id']; 
+                $image_nom = explode('.', $images_1[$i]['nom'])[0];
+                $image_src = "http://localhost:8080/kouroukan/pages/api-image.php?image_categorie=image1syllabe&id=$id";
+                ?>
+                
+                <div class="image_card" id=<?= $image_nom; ?>>
+                    <img src=<?= $image_src; ?> width="200" height="200"  alt="">
+                </div>
+            <?php } ?>
+        </div>
+    </center>
+</body>
 </html>

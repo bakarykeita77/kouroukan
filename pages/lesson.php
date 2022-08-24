@@ -47,6 +47,16 @@ if(isset($_SESSION["id"])){
                 </div>
                 
               <!----------------------------------------------------------------------------------------------------->  
+              
+                <div id="images_pratique" style="display:none">
+                    
+                    <?php include "http://localhost:8080/kouroukan/pages/image-1-syllabe.php"; ?>
+                    <?php include "http://localhost:8080/kouroukan/pages/image-2-syllabe.php"; ?>
+                    <?php include "http://localhost:8080/kouroukan/pages/image-3-syllabe.php"; ?>
+                    <?php include "http://localhost:8080/kouroukan/pages/image-4-syllabe.php"; ?>
+                </div>
+              
+              <!----------------------------------------------------------------------------------------------------->  
                 
                 <h4>ߘߋ߰ߟߌ ߞߛߊߞߊ : <span class="niveau_courant"><?= $chiffres[$niveau]; ?><span class='rang'></span></h4>
                 <h2 class="lesson_title" id="<?= $matiere_id ?>"> <?= $matiere_nom; ?> ߥߟߊ߬ߘߊ  </h2>

@@ -1547,14 +1547,10 @@ $('document').ready(function() {
                     	}
                         
                         function dimensionnementParDefautDePratiquesCorps() {
-                	        var course_height = $('.course').height();
-                	        var pratique_head_height = $('#pratique_head').height();
-                	        var pratique_foot_height = $('#pratique_foot').height();
+                	        var pratiques_body_height = $('#pratique_body').height();
                 	        var pratiques_reponse_container_height = $('#pratiques_reponse_container').height();
-                	        var pratique_body_height = course_height - (pratique_head_height + pratique_foot_height+16);
-                	        var pratiques_demo_container_height = pratique_body_height - pratiques_reponse_container_height;  
+                	        var pratiques_demo_container_height = pratiques_body_height - pratiques_reponse_container_height;  
 
-                            $('#pratique_body').css('height', pratique_body_height+'px');
                             $('#pratiques_demo_container').css('height', pratiques_demo_container_height+'px');
                             
                             $('#pratiques_reponse_container #table_1').empty();

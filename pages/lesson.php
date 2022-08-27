@@ -37,7 +37,6 @@ if(isset($_SESSION["id"])){
         <div class="page_body">
             <div class="phases_container">
               <!----------------------------------------------------------------------------------------------------->  
-                
                 <div id="donnees_recues_de_prorammes" style="display:none">
                     <p id='matiere_id_container'    ><?= $matiere_id; ?></p>
                     <p id='matiere_index_container' ><?= $matiere_index; ?></p>
@@ -45,9 +44,7 @@ if(isset($_SESSION["id"])){
                     <p id='niveau_container'        ><?= $niveau; ?></p>
                     <p id='niveau_max_container'    ><?= $niveau_max; ?></p>
                 </div>
-                
               <!----------------------------------------------------------------------------------------------------->  
-              
                 <div id="images_pratique" style="display:none">
                     <?php 
                         include "http://localhost:8080/kouroukan/pages/image-4-syllabe.php";
@@ -56,10 +53,8 @@ if(isset($_SESSION["id"])){
                         include "http://localhost:8080/kouroukan/pages/image-1-syllabe.php"; 
                     ?>
                 </div>
-              
               <!----------------------------------------------------------------------------------------------------->  
-                
-                <h4>ߘߋ߰ߟߌ ߞߛߊߞߊ : <span class="niveau_courant"><?= $chiffres[$niveau]; ?><span class='rang'></span></h4>
+                <h4>ߘߋ߰ߟߌ ߞߛߊߞߊ : <span class="niveau_courant"><?= $chiffres[$niveau]; ?></span><span class='rang'></span></h4>
                 <h2 class="lesson_title" id="<?= $matiere_id ?>"> <?= $matiere_nom; ?> ߥߟߊ߬ߘߊ  </h2>
                 <div class="phases liste_affichage_cascade" align="center"></div>
             </div>
@@ -142,31 +137,28 @@ if(isset($_SESSION["id"])){
             </div> 
           
           <!--pratique_body---------------------------------------------------->
-            <div class="" id="pratique_body">
             
-                <div id="pratiques_demo_container" align="center">
-                    <div id="pratique_guide">
-                        <div id="bulles_container"></div>
-                        <p id="signe_egal">&#9183;</p>
-                        <p id="cumule_des_caracteres"></p>
-                    </div>
-                    <div id="pratiques_images_container" align="center">
-                        <img src="" id="pratiques_image" alt="?">
-                        <div id="croix">&#10060;</div>
-                    </div>
+            <div id="pratiques_demo_container">
+                <div id="pratique_guide">
+                    <div id="bulles_container"></div>
+                    <p id="signe_egal">&#9183;</p>
+                    <p id="cumule_des_caracteres"></p>
                 </div>
-                <div id="pratiques_reponse_container">
-                    <div id="table_1_cadre">
-                        <table id="table_1" border=1></table>
-                    </div>
+                <div id="pratiques_images_container" align="center">
+                    <img src="" id="pratiques_image" alt="?">
+                    <div id="croix">&#10060;</div>
                 </div>
-                <div id="message_de_fin_container">
-                    <p id="message_de_fin"></p>
-                    <div id="message_btn_container"> <button id="message_btn_1"></button><button id="message_btn_2"></button> </div>
-                </div>
-                
             </div>
-            
+            <div id="pratiques_reponse_container">
+                <div id="table_1_cadre">
+                    <table id="table_1" border=1></table>
+                </div>
+            </div>
+            <div id="message_de_fin_container">
+                <p id="message_de_fin"></p>
+                <div id="message_btn_container"> <button id="message_btn_1"></button><button id="message_btn_2"></button> </div>
+            </div>
+        
           <!--pratique_foot---------------------------------------------------->
             <div id="pratique_foot">
                 <div id="dialogue_btn">

@@ -19,19 +19,11 @@
     height: 1.25rem;
     line-height: 1.25rem;
 }
-#pratique_body {
-    position: absolute;
-    margin: 0;
-    padding: 0;
-    border: 1px solid transparent;
-    overflow: auto;
-}
 #pratiques_demo_container {
     position: absolute;
     border: 1px solid transparent;
-    margin: 0;
     top: 0;
-    width: 100%;
+    margin: 0;
     overflow: auto;
     z-index: 1;
 }
@@ -134,10 +126,8 @@
     position: absolute;
     border: 1px solid transparent;
     bottom: 0;
-    width: 100%;
     margin: 0;
     padding: 0;
-    height: 6rem;
     text-align: right;
     box-sizing: border-box;
     overflow: auto;
@@ -171,7 +161,7 @@
     padding: 0 16px;
 }
 #message_de_fin_container {
-    position: relative;
+    position: absolute;
     display: none;
     height: 108px;
     width: 90%;
@@ -212,25 +202,47 @@
 #message_btn_container button:last-child {
     left: 0;
 }
+.pages_foot {
+    border: 1px solid red;
+}
 @media screen and (orientation: portrait) {
-    #pratique_foot, #pratique_head , #pratique_progress_bar {
+    #pratique_foot, #pratique_head , #pratique_progress_bar, #pratiques_reponse_container, #message_de_fin_container {
         width: 100%;
     }
-    #pratique_body {
-        top: 2.5rem;
+    #pratiques_demo_container, #pratiques_reponse_container, #message_de_fin_container {
         width: calc(100% - 1rem);
-        height: calc(100% - 13rem);
+        
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    #pratiques_demo_container {
+        top: 2.5rem;
+        height: calc(80% - 13rem);
+    }
+    #pratiques_reponse_container {
+        top: calc(80% - 10.5rem);
+        height: 20%;
+    }
+    #message_de_fin_container {
+        top: calc(100% - 7rem);
     }
 }
 @media screen and (orientation: landscape) {
-    #pratique_foot, #pratique_head , #pratique_progress_bar {
+    #pratique_foot, #pratique_head , #pratique_progress_bar, #pratiques_reponse_container, #message_de_fin_container {
         width: 40%;
     }
-    #pratique_body {
+    #pratiques_demo_container {
         top: 0;
         width: 56%;
         height: 100%;
         left: 0;
         border-right-color: #aaa;
+    }
+    #pratiques_reponse_container {
+        top: 2.5rem;
+        height: 7rem;
+    }
+    #message_de_fin_container {
+        top: calc(100% - 7rem);
     }
 }

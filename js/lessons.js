@@ -1551,7 +1551,7 @@ $('document').ready(function() {
                 	        var pratiques_reponse_container_height = $('#pratiques_reponse_container').height();
                 	        var pratiques_demo_container_height = pratiques_body_height - pratiques_reponse_container_height;  
 
-                            $('#pratiques_demo_container').css('height', pratiques_demo_container_height+'px');
+                          //  $('#pratiques_demo_container').css('height', pratiques_demo_container_height+'px');
                             
                             $('#pratiques_reponse_container #table_1').empty();
                             $('#message_de_fin_container').css('display','none');

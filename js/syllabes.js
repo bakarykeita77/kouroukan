@@ -1,4 +1,4 @@
-
+/*
     var syllabes = syllab();
     var syllabes_questions = mix1D(syllabes);
   
@@ -73,14 +73,14 @@
         syllabes_pratiques_html = '<div id="pratiques_container">';
         
             syllabes_pratiques_html += '<div id="pratiques_programme">';
-                syllabes_pratiques_html += '<span>ߜߋ߲߬ ߁ ߡߊ</span>';
-                syllabes_pratiques_html += '<span>ߜߋ߲߬ ߂ ߡߊ</span>';
-                syllabes_pratiques_html += '<span>ߜߋ߲߬ ߃ ߡߊ</span>';
-                syllabes_pratiques_html += '<span>ߜߋ߲߬ ߄ ߡߊ</span>';
+                syllabes_pratiques_html += '<span>ߜߋ߲߬ ߁ߡߊ</span>';
+                syllabes_pratiques_html += '<span>ߜߋ߲߬߂ߡߊ</span>';
+                syllabes_pratiques_html += '<span>ߜߋ߲߬߃ߡߊ</span>';
+                syllabes_pratiques_html += '<span>ߜߋ߲߬߄ߡߊ</span>';
             syllabes_pratiques_html += '</div>';
         
             syllabes_pratiques_html += '<div id="pratiques">';
-                syllabes_pratiques_html += '<div id="pratiques_image_container" align="center"><img src="" id="pratiques_image" alt="?"></div>';
+                syllabes_pratiques_html += '<div id="pratiques_image_container"><img src="" id="pratiques_image" alt="pratiques_image"></div>';
                 syllabes_pratiques_html += '<div id="pratiques_input_container"><input name="pratiques_input" id="pratiques_input" placeholder="ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ ߞߍ߫ ߦߊ߲߬"></div>';
             syllabes_pratiques_html += '</div>';
         
@@ -88,7 +88,7 @@
         
         return syllabes_pratiques_html;
     }
-    
+*/    
     function monoSyllabes() {
        
         var mono_syllabes = [

@@ -144,10 +144,10 @@ if(isset($_SESSION["id"])){
                     <p id="signe_egal">&#9183;</p>
                     <p id="cumule_des_caracteres"></p>
                 </div>
-                <div id="pratiques_images_container" align="center">
+                <div id="pratiques_images_container">
                     <img src="" id="pratiques_image" alt="?">
-                    <div id="croix">&#10060;</div>
                 </div>
+                <div id="croix">&#10060;</div>
             </div>
             <div id="pratiques_reponse_container">
                 <div id="table_1_cadre">

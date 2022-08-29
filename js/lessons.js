@@ -256,7 +256,7 @@ $('document').ready(function() {
     	       
     	        if(course_id=='apprentissage'){ ceh = apprentissageEnteteHTML(); }
     	        if(course_id=='exercice'){ ceh = exerciceEnteteHTML(); }
-    	        if(course_id=='pratique'){ ceh = pratiqueEnteteHTML(); }
+    	       // if(course_id=='pratique'){ ceh = pratiqueEnteteHTML(); }
     	         
     	        return ceh;
     	        
@@ -279,7 +279,6 @@ $('document').ready(function() {
                     
                     return exercice_entete_html;
     	        }
-
     	    }
        
             function lessonCourante() {
@@ -293,9 +292,9 @@ $('document').ready(function() {
                 if(phase_id=='tons_exercice'         ) { lesson_courante = tonsExercicesHTML();         } //Cette fonction provient de tons.js
                 if(phase_id=='chiffres_exercice'     ) { lesson_courante = chiffresExercicesHTML();     } //Cette fonction provient de chiffres.js
               
-                if(phase_id=='syllabes_pratique'     ) { lesson_courante = syllabesPratiquesHTML();     } //Cette fonction provient de syllabes.js
-                if(phase_id=='tons_pratique'         ) { lesson_courante = tonsPratiquesHTML();         } //Cette fonction provient de tons.js
-                if(phase_id=='chiffres_pratique'     ) { lesson_courante = chiffresPratiquesHTML();     } //Cette fonction provient de chiffres.js
+               // if(phase_id=='syllabes_pratique'     ) { lesson_courante = syllabesPratiquesHTML();     } //Cette fonction provient de syllabes.js
+               // if(phase_id=='tons_pratique'         ) { lesson_courante = tonsPratiquesHTML();         } //Cette fonction provient de tons.js
+               // if(phase_id=='chiffres_pratique'     ) { lesson_courante = chiffresPratiquesHTML();     } //Cette fonction provient de chiffres.js
              
                 return lesson_courante;
                 
@@ -1124,7 +1123,7 @@ $('document').ready(function() {
                             	    $('.question_btn').on('click', function() {
                                         pratiqueGuide();
                                 	    question = questions_courantes[compteur];
-                     alert(question);      	        
+                      	        
                                 	    actualiserLesBoutonsDEntete();
                                 	    repeteQuestion();
                                  	        
@@ -1260,37 +1259,21 @@ $('document').ready(function() {
                                             }	   
                                         }
                                         function afficherImage() {
-            
-                                    	    $('#pratiques_images_container').html($('#'+reponse).html());
-                                    	    
-                                    	    
-                                    	    /*var image_name = $('.pratique_tr_actif').children('td:nth(1)').html(); 
-                                            //var image_src = imageSource();
-                                            var image_src = $('#'+reponse).html();
                                             
-                        	                $('#pratiques_image').attr('src', image_src);
-                                	       
+                                            let image_source = $('#'+reponse+' img').attr('src');
+                                            let image = (image_source !== undefined) ? $('#'+reponse).html() : $('#ߖߌ߬ߦߊ').html();
+            
+                                    	    $('#pratiques_images_container').html(image);
                                 	        if(question == reponse) {
-                                	            $('#pratiques_image').css('opacity',1);
+                                	            $('#pratiques_images_container').css('opacity',1);
                                 	            $('#croix').css('display','none');
                                 	        }
                                 	        if(question !== reponse) {
-                                	            $('#pratiques_image').css('opacity','0.15');
+                                	            $('#pratiques_images_container').css('opacity','0.15');
                                 	            $('#croix').css('display','flex');
                                 	        }
-                                	    */    
+                                	        
                                 	        setTimeout(function(){ $('#pratique_guide').animate({'top':'-100%'},400); }, 200);
-                                          	
-                                            function imageSource() {
-                                                var image_src = '';
-                                  // alert(image_name);           	    
-                                            	if(option_index == 0) image_src = 'http://localhost:8080/kouroukan/image/mono_syllabes/'+image_name+'.jpg';
-                                            	if(option_index == 1) image_src = 'http://localhost:8080/kouroukan/image/bi_syllabes/'+image_name+'.jpg';
-                                            	if(option_index == 2) image_src = 'http://localhost:8080/kouroukan/image/tri_syllabes/'+image_name+'.jpg';
-                                            	if(option_index == 3) image_src = 'http://localhost:8080/kouroukan/image/quadri_syllabes/'+image_name+'.jpg';
-    
-                                            	return image_src;
-                                            }
                                         } 
                                       
                                         function afficherQuestionBouton() {
@@ -1458,16 +1441,21 @@ $('document').ready(function() {
                                     	    $('#table_1 tr').on('click', function() {
                                     	        $(this).siblings().removeClass('pratique_tr_actif');
                                     	        $(this).addClass('pratique_tr_actif'); 
-                                    	        afficherImage();
                                     	        
-                                    	        var q = $('.pratique_tr_actif td:nth(0)').html(); 
-                                    	        var r = $('.pratique_tr_actif td:nth(1)').html(); 
-                                    	        if(q == r) {
-                                	                $('#pratiques_image').css('opacity',1);
+                                    	        let question = $('.pratique_tr_actif td:nth(0)').html(); 
+                                    	        let reponse = $('.pratique_tr_actif td:nth(1)').html(); 
+                                    	        
+                                                let image_source = $('#'+reponse+' img').attr('src');
+                                                let image = (image_source !== undefined) ? $('#'+reponse).html() : $('#ߖߌ߬ߦߊ').html();
+            
+                                    	        $('#pratiques_images_container').html(image);
+                                    	  
+                                    	        if(question == reponse) {
+                                	                $('#pratiques_images_container').css('opacity',1);
                                 	                $('#croix').css('display','none');
                                 	            }
-                                    	        if(q !== r) {
-                                    	            $('#pratiques_image').css('opacity','0.15');
+                                    	        if(question !== reponse) {
+                                    	            $('#pratiques_images_container').css('opacity','0.15');
                                 	                $('#croix').css('display','flex');
                                     	        }
                                 	        

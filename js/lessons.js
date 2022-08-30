@@ -879,7 +879,6 @@ $('document').ready(function() {
                         var table = $('#pratiques_reponse_container table tbody').html();
                         
                       /*--------------------------------------------------------------------*/
-                	    
                 	    recuperationDesOptionsEffectuees();
                 	    afficherPratique();
                         initialiserPratiques();
@@ -1091,7 +1090,7 @@ $('document').ready(function() {
                             	compteur_de_question = 1;
                             	compteur = 0;
                             	option_de_syllabe = optionDeSyllabe();
-                            	table = '';
+                            	table = ""; // Table de reponse
                           
                                 switch(option_index) {
                                     case 0 : option = mono_syllabe;   break;
@@ -1101,6 +1100,8 @@ $('document').ready(function() {
                                 }
                                         
                                 for (var i = 0; i < option.length; i++) { questions_courantes[i] = option[i][0]; }
+                                
+                                $(this).parent().parent().css('top','-110%');
                                 
                                 initialiserProgressBarr();
                         	    poserQuestionPratique();
@@ -1177,7 +1178,6 @@ $('document').ready(function() {
                                         bullesStyles();
                                         $('#cumule_des_caracteres').html(reponse);
                                         afficherCorrectionButton();
-                                        $('#table_2 td:last-child').html(reponse);
                                         compteur_de_caractere++;
                                             
                                         function afficherCorrectionButton() {
@@ -1243,19 +1243,20 @@ $('document').ready(function() {
                                         
                                         function chargerTableDeReponses() {
                                             table += "<tr>\n <td>"+question+"</td>\n<td>"+reponse+"</td>\n<td>"+parseIntNko(point)+"</td>\n </tr>\n\n";
-                                            $('#pratiques_reponse_container #table_1').html(table);
+                                            $('#table_1 tbody').html(table);
                                         }
                                         function rechargerTableDeReponses() {
                                             table += "<tr>\n <td></td>\n<td></td>\n<td></td>\n </tr>\n\n";
-                                            $('#pratiques_reponse_container #table_1').html(table);
+                                            $('#table_1 tbody').html(table);
                                         }
                                         function stylesDeTableDeReponses() {
-                                            defilementDeTableReponseVersLeBas();
-                                            $('#table_1 tr:last-child').addClass('pratique_tr_actif'); 
-                                            $('#table_1 tr:last-child').siblings().removeClass('pratique_tr_actif'); 
+                                            //defilementDeTableReponseVersLeBas();
+                                            $('#table_1 tbody tr:last-child').addClass('pratique_tr_actif'); 
+                                            $('#table_1 tbody tr:last-child').siblings().removeClass('pratique_tr_actif'); 
+                                            $('#table_1 tbody tr:last-child').siblings().addClass('noir_clair'); 
                                         
                                             function defilementDeTableReponseVersLeBas() {
-                                                $('#table_1_cadre').animate({ scrollTop:$('#table_1_cadre')[0].scrollHeight }, 1000);
+                                                $('#table_2_cadre').animate({ scrollTop:$('#table_2_cadre')[0].scrollHeight }, 1000);
                                             }	   
                                         }
                                         function afficherImage() {
@@ -1438,7 +1439,8 @@ $('document').ready(function() {
                                         }  
                                     	function revisionDOption() {
                                     	        
-                                    	    $('#table_1 tr').on('click', function() {
+                                    	    $('#table_1 tbody tr').on('click', function() {
+                                    	        $('#table_1 tbody tr').addClass('noir_clair');
                                     	        $(this).siblings().removeClass('pratique_tr_actif');
                                     	        $(this).addClass('pratique_tr_actif'); 
                                     	        
@@ -1539,9 +1541,6 @@ $('document').ready(function() {
                 	        var pratiques_reponse_container_height = $('#pratiques_reponse_container').height();
                 	        var pratiques_demo_container_height = pratiques_body_height - pratiques_reponse_container_height;  
 
-                          //  $('#pratiques_demo_container').css('height', pratiques_demo_container_height+'px');
-                            
-                            $('#pratiques_reponse_container #table_1').empty();
                             $('#message_de_fin_container').css('display','none');
         	                $('#pratiques_images_container img').attr('src','#');
         	                

@@ -129,12 +129,14 @@ if(isset($_SESSION["id"])){
             
           <!--pratique_head---------------------------------------------------->
             <div class='progress_bar' id="pratique_progress_bar"><span class='progress_question_bar'></span><span class='progress_bonne_reponse_bar'></span></div>
-            <div id="pratique_head">
-                <span>ߜߋ߲߬߁ߡߊ</span>
-                <span>ߜߋ߲߬߂ߡߊ</span>
-                <span>ߜߋ߲߬߃ߡߊ</span>
-                <span>ߜߋ߲߬߄ߡߊ</span>
-            </div> 
+            <div id="options_popup">
+                <div id="pratique_head">
+                    <span>ߜߋ߲߬߁ߡߊ</span>
+                    <span>ߜߋ߲߬߂ߡߊ</span>
+                    <span>ߜߋ߲߬߃ߡߊ</span>
+                    <span>ߜߋ߲߬߄ߡߊ</span>
+                </div> 
+            </div>
           
           <!--pratique_body---------------------------------------------------->
             
@@ -150,9 +152,16 @@ if(isset($_SESSION["id"])){
                 <div id="croix">&#10060;</div>
             </div>
             <div id="pratiques_reponse_container">
-                <div id="table_1_cadre">
-                    <table id="table_1" border=1></table>
-                </div>
+                <table id="table_1">
+                    <thead>
+                        <tr>
+                            <th>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</th>
+                            <th>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ</th>
+                            <th>ߓߙߍ߬ߦߊ</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
             </div>
             <div id="message_de_fin_container">
                 <p id="message_de_fin"></p>
@@ -185,7 +194,7 @@ if(isset($_SESSION["id"])){
                 <div class="clavier_container" id="clavier_pratique"><?php include "clavier.php"; ?></div>
             </div>
          </div>
-      <!-------------------------------------------------------------------->
+      <!----------------------------------------------------------------------->
         <div class="course" id="evaluation"   >
             <div class="course_head" id="evaluation_entete">
 
@@ -230,7 +239,7 @@ if(isset($_SESSION["id"])){
 
             <div class="clavier_container"><?php include "clavier.php"; ?></div>
          </div>
-      <!-------------------------------------------------------------------->
+      <!----------------------------------------------------------------------->
         <form method="POST" action="actions.php" id="lesson_form" style="display:none">
                     
             <input type="number" name="id"       id="id_input" value="<?= $_SESSION['id']; ?>">
@@ -241,9 +250,9 @@ if(isset($_SESSION["id"])){
             <input type="number" name="note"     id="note_input">
             <input type="submit" id="submit_btn" value="Envoyer">
          </form>
-      <!-------------------------------------------------------------------->
+      <!----------------------------------------------------------------------->
         <p class='hand'> &#128070;&#127999; </p>
-      <!-------------------------------------------------------------------->
+      <!----------------------------------------------------------------------->
      </div>
 
     <audio id="audio"></audio>

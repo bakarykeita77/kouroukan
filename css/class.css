@@ -553,6 +553,10 @@ html {
 .nav_fleches_container span:nth-child(2) {
     float: left;
 }
+.noir_clair {
+    color: #000;
+    background-color: #ddd;
+}
 
 .opaque {
     animation: opacir0.6s 1;
@@ -652,6 +656,7 @@ html {
 .pratique_tr_actif {
     color: orange;
     font-weight: bold;
+    background-color: yellow;
 }
 .profile_menu {
     display: flex;

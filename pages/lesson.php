@@ -128,18 +128,17 @@ if(isset($_SESSION["id"])){
          ---------------------------------------------------------------------->
             
           <!--pratique_head---------------------------------------------------->
-            <div class='progress_bar' id="pratique_progress_bar"><span class='progress_question_bar'></span><span class='progress_bonne_reponse_bar'></span></div>
             <div id="options_popup">
+                <center><h2 id="options_titre">ߓߟߏߦߊߟߌ ߓߏߟߏ߲ ߠߎ߬</h2></center>
                 <div id="pratique_head">
-                    <span>ߜߋ߲߬߁ߡߊ</span>
-                    <span>ߜߋ߲߬߂ߡߊ</span>
-                    <span>ߜߋ߲߬߃ߡߊ</span>
-                    <span>ߜߋ߲߬߄ߡߊ</span>
+                    <span>ߞߎߡߊߘߋ߲߫ ߜߋ߲߬ ߁ ߡߊ</span>
+                    <span>ߞߎߡߊߘߋ߲߫ ߜߋ߲߬ ߂ ߡߊ</span>
+                    <span>ߞߎߡߊߘߋ߲߫ ߜߋ߲߬ ߃ ߡߊ</span>
+                    <span>ߞߎߡߊߘߋ߲߫ ߜߋ߲߬ ߄ ߡߊ</span>
                 </div> 
             </div>
           
           <!--pratique_body---------------------------------------------------->
-            
             <div id="pratiques_demo_container">
                 <div id="pratique_guide">
                     <div id="bulles_container"></div>
@@ -147,29 +146,37 @@ if(isset($_SESSION["id"])){
                     <p id="cumule_des_caracteres"></p>
                 </div>
                 <div id="pratiques_images_container">
-                    <img src="" id="pratiques_image" alt="?">
+                    <img src="http://localhost:8080/htdocs/kouroukan/image/ߖߌ߬ߦߊ.jpg" id="pratiques_image" alt="?">
                 </div>
                 <div id="croix">&#10060;</div>
             </div>
-            <div id="pratiques_reponse_container">
-                <table id="table_1">
-                    <thead>
-                        <tr>
-                            <th>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</th>
-                            <th>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ</th>
-                            <th>ߓߙߍ߬ߦߊ</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-            <div id="message_de_fin_container">
-                <p id="message_de_fin"></p>
-                <div id="message_btn_container"> <button id="message_btn_1"></button><button id="message_btn_2"></button> </div>
-            </div>
-        
+          
           <!--pratique_foot---------------------------------------------------->
             <div id="pratique_foot">
+                
+                <div class='progress_bar' id="pratique_progress_bar"><span class='progress_question_bar'></span><span class='progress_bonne_reponse_bar'></span></div>
+                <div id="pratiques_reponse_container">
+                    <table id="table_1">
+                        <thead>
+                            <tr>
+                                <th>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</th>
+                                <th>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ</th>
+                                <th>ߓߙߍ߬ߦߊ</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot>
+                            <tr>
+                                <td id="label_total_point" colspan="2">ߓߍ߬ߙߍ ߡߎ߬ߡߍ</td>
+                                <td id="total_point">gg</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div id="message_de_fin_container">
+                    <p id="message_de_fin"></p>
+                    <div id="message_btn_container"> <button id="message_btn_1"></button><button id="message_btn_2"></button> </div>
+                </div>
                 <div id="dialogue_btn">
     
                     <div class="btn question_btn">

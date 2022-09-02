@@ -1091,7 +1091,7 @@ $('document').ready(function() {
                             	compteur = 0;
                             	option_de_syllabe = optionDeSyllabe();
                             	table = ""; // Table de reponse
-                          
+                            	
                                 switch(option_index) {
                                     case 0 : option = mono_syllabe;   break;
                                     case 1 : option = bi_syllabe;     break;
@@ -1105,6 +1105,7 @@ $('document').ready(function() {
                                 
                                 initialiserProgressBarr();
                         	    poserQuestionPratique();
+                                if(!question) $('.clavier_container').css('opacity',0.5);
                             	repondreQuestionPratique();
                             	correctionPratique();
                                 
@@ -1124,6 +1125,8 @@ $('document').ready(function() {
                             	    $('.question_btn').on('click', function() {
                                         pratiqueGuide();
                                 	    question = questions_courantes[compteur];
+                                	    
+                                	    if(question) $('.clavier_container').css('opacity',1);
                       	        
                                 	    actualiserLesBoutonsDEntete();
                                 	    repeteQuestion();
@@ -1172,7 +1175,9 @@ $('document').ready(function() {
                             	    $('.clavier_container td').on('click', function() {
                                         
                                         var caractere = $(this).html();
-                                            
+                                        
+                                        if(!question) return false;
+                                        
                                         reponse[reponse.length] = caractere;
                                         chargementDesBulles();
                                         bullesStyles();
@@ -1218,6 +1223,8 @@ $('document').ready(function() {
                         	        total_point = 0;
                         	       
                         	        $('.correction_btn').on('click',  function() {
+                        	            
+                        	            $('.clavier_container').css('opacity',0.5);
 
                         	            reponse = reponse.join('');
                         	            point = (question == reponse)?1:0;
@@ -1250,13 +1257,13 @@ $('document').ready(function() {
                                             $('#table_1 tbody').html(table);
                                         }
                                         function stylesDeTableDeReponses() {
-                                            //defilementDeTableReponseVersLeBas();
+                                            defilementDeTableReponseVersLeBas();
                                             $('#table_1 tbody tr:last-child').addClass('pratique_tr_actif'); 
                                             $('#table_1 tbody tr:last-child').siblings().removeClass('pratique_tr_actif'); 
                                             $('#table_1 tbody tr:last-child').siblings().addClass('noir_clair'); 
                                         
                                             function defilementDeTableReponseVersLeBas() {
-                                                $('#table_2_cadre').animate({ scrollTop:$('#table_2_cadre')[0].scrollHeight }, 1000);
+                                                $('#table_1').animate({ scrollTop:$('#table_1')[0].scrollHeight }, 1000);
                                             }	   
                                         }
                                         function afficherImage() {
@@ -1377,15 +1384,8 @@ $('document').ready(function() {
                                                     $('#pratique_foot').ss('display','block');
                                                 }
                                     	        function dimensionnementDeFinDePratiquesBody() {
-                                    	            
-                                    	            var course_height = $('.course').height();
-                	                                var course_head_height = $('.course_head').height();
-                	                                var pratique_head_height = $('#pratique_head').height();
-                                    	            var course_body_height = course_height - pratique_head_height + 6;
-                	                                
-                	                                $('.course_body').css('height', course_body_height-26+'px');
-                                    	            $('#message_de_fin_container').css('display','block');
-                                    	            redimensionnementDePratiquesReponseContainer();
+                	                                $('#pratiques_reponse_container').css('height', 'calc(100% - 1rem)');
+                                    	          //  $('#message_de_fin_container').css('display','block');
                                     	        }
                                                 function messageDeFinOption() {
                                         	        if(effort == '߁߀߀%') {
@@ -1653,7 +1653,7 @@ $('document').ready(function() {
                             $('.progress_bar, .course_head, .clavier_container, #dialogue_btn').css('display','block');
                         }
                         function masquerClavierEtConsoles() {
-                            $('.progress_bar, .course_head, .clavier_container, #dialogue_btn').css('display','none');
+                            $('.progress_bar, .clavier_container, #dialogue_btn').css('display','none');
                         }
                         function initialiserProgressBarr() {
                             $('.progress_question_bar, .progress_bonne_reponse_bar').css('width',0);

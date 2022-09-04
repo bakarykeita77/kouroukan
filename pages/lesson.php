@@ -156,22 +156,26 @@ if(isset($_SESSION["id"])){
                 
                 <div class='progress_bar' id="pratique_progress_bar"><span class='progress_question_bar'></span><span class='progress_bonne_reponse_bar'></span></div>
                 <div id="pratiques_reponse_container">
-                    <table id="table_1">
-                        <thead>
-                            <tr>
-                                <th>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</th>
-                                <th>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ</th>
-                                <th>ߓߙߍ߬ߦߊ</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                        <tfoot>
-                            <tr>
-                                <td id="label_total_point" colspan="2">ߓߍ߬ߙߍ ߡߎ߬ߡߍ</td>
-                                <td id="total_point">gg</td>
-                            </tr>
-                        </tfoot>
-                    </table>
+                    <div id="table_1">
+                        <div id="thead">
+                            <div>
+                                <span class="th">ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</span>
+                                <span class="th">ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ</span>
+                                <span class="th">ߓߙߍ߬ߦߊ</span>
+                            </div>
+                        </div>
+                        <div id="tbody"></div>
+                        <div id="tfoot">
+                            <div>
+                                <span id="label_total_point">ߓߍ߬ߙߍ ߡߎ߬ߡߍ</span>
+                                <span id="total_point"></span>
+                            </div>
+                            <div>
+                                <span id="label_pourcentage_point" colspan="2">ߓߍ߬ߙߍ ߗߡߍ߬ߘߐ߬ߦߊ</span>
+                                <span id="pourcentage_point"></span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div id="message_de_fin_container">
                     <p id="message_de_fin"></p>

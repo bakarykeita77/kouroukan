@@ -850,7 +850,7 @@ $('document').ready(function() {
                         var compteur_de_caractere = 0;
                         var bulle_index = -1;
                         var s_0 = [], s_1 = [], s_2 = [], s_3 = [];
-                	    var question_limit = 4;
+                	    var question_limit = 10;
                 	    var quantite_de_question = parseIntNko(question_limit);
                 	    var question_rang = '߭';
                 	    
@@ -1249,21 +1249,21 @@ $('document').ready(function() {
                                         compteur++;
                                         
                                         function chargerTableDeReponses() {
-                                            table += "<tr>\n <td>"+question+"</td>\n<td>"+reponse+"</td>\n<td>"+parseIntNko(point)+"</td>\n </tr>\n\n";
-                                            $('#table_1 tbody').html(table);
+                                            table += "<div>\n <span class='td'>"+question+"</span>\n<span class='td'>"+reponse+"</span>\n<span class='td'>"+parseIntNko(point)+"</span>\n </div>\n\n";
+                                            $('#table_1 #tbody').html(table);
                                         }
                                         function rechargerTableDeReponses() {
-                                            table += "<tr>\n <td></td>\n<td></td>\n<td></td>\n </tr>\n\n";
-                                            $('#table_1 tbody').html(table);
+                                            table += "<div>\n <span class='td'></span>\n<span class='td'></span>\n<span class='td'></span>\n </div>\n\n";
+                                            $('#table_1 #tbody').html(table);
                                         }
                                         function stylesDeTableDeReponses() {
                                             defilementDeTableReponseVersLeBas();
-                                            $('#table_1 tbody tr:last-child').addClass('pratique_tr_actif'); 
-                                            $('#table_1 tbody tr:last-child').siblings().removeClass('pratique_tr_actif'); 
-                                            $('#table_1 tbody tr:last-child').siblings().addClass('noir_clair'); 
+                                            $('#table_1 #tbody div:last-child').addClass('pratique_tr_actif'); 
+                                            $('#table_1 #tbody div:last-child').siblings().removeClass('pratique_tr_actif'); 
+                                            $('#table_1 #tbody div:last-child').siblings().addClass('noir_clair'); 
                                         
                                             function defilementDeTableReponseVersLeBas() {
-                                                $('#table_1').animate({ scrollTop:$('#table_1')[0].scrollHeight }, 1000);
+                                                $('#tbody').animate({ scrollTop:$('#tbody')[0].scrollHeight }, 1000);
                                             }	   
                                         }
                                         function afficherImage() {
@@ -1373,19 +1373,22 @@ $('document').ready(function() {
                                                 
                                     	        masquerClavierEtConsoles();
                                     	        dimensionnementDeFinDePratiquesBody();
+                                    	        chargerTotalPoints();
                                     	        initialiserProgressBarr();
                                     	        messageDeFinOption();
                                     	        continueLaPratique();
                                                 
-                                                function masquerLesBoutonsDEntete() {
-                                                    $('#pratique_foot').ss('display','none');
-                                                }
-                                                function afficherLesBoutonsDEntete() {
-                                                    $('#pratique_foot').ss('display','block');
-                                                }
                                     	        function dimensionnementDeFinDePratiquesBody() {
-                	                                $('#pratiques_reponse_container').css('height', 'calc(100% - 1rem)');
+                                    	            
+                                    	            let pfh = $('#pratique_foot').height();
+                                    	            
+                	                                $('#tbody').css('height', (pfh-120)+'px');
+                                    	            $('#table_1 #tfoot').css('display','block');
                                     	          //  $('#message_de_fin_container').css('display','block');
+                                    	        }
+                                    	        function chargerTotalPoints() {
+                                    	            $('#total_point').html(parseIntNko(total_point));
+                                    	            $('#pourcentage_point').html('%'+parseIntNko(total_point*100/question_limit));
                                     	        }
                                                 function messageDeFinOption() {
                                         	        if(effort == '߁߀߀%') {
@@ -1439,13 +1442,13 @@ $('document').ready(function() {
                                         }  
                                     	function revisionDOption() {
                                     	        
-                                    	    $('#table_1 tbody tr').on('click', function() {
-                                    	        $('#table_1 tbody tr').addClass('noir_clair');
+                                    	    $('#table_1 #tbody div').on('click', function() {
+                                    	        $('#table_1 #tbody div').addClass('noir_clair');
                                     	        $(this).siblings().removeClass('pratique_tr_actif');
                                     	        $(this).addClass('pratique_tr_actif'); 
                                     	        
-                                    	        let question = $('.pratique_tr_actif td:nth(0)').html(); 
-                                    	        let reponse = $('.pratique_tr_actif td:nth(1)').html(); 
+                                    	        let question = $('.pratique_tr_actif .td:nth(0)').html(); 
+                                    	        let reponse = $('.pratique_tr_actif .td:nth(1)').html(); 
                                     	        
                                                 let image_source = $('#'+reponse+' img').attr('src');
                                                 let image = (image_source !== undefined) ? $('#'+reponse).html() : $('#ߖߌ߬ߦߊ').html();

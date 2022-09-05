@@ -879,6 +879,8 @@ $('document').ready(function() {
                         var table = $('#pratiques_reponse_container table tbody').html();
                         
                       /*--------------------------------------------------------------------*/
+                        $('.fermeture').attr('id', 'fermer_pratique');
+                      
                 	    recuperationDesOptionsEffectuees();
                 	    afficherPratique();
                         initialiserPratiques();
@@ -1035,10 +1037,9 @@ $('document').ready(function() {
                         	}
                         }
                         function optionStyles() {
-                            
                             nbr_option_vide = nombreOptionsVides();
                             nbr_option_non_vide = all_options.length - nbr_option_vide;
-                        
+                      
                             if(nbr_option_vide == 4) {
                                 $('#pratique_head span:nth-child(1)').removeClass('a_apprendre');
                                 $('#pratique_head span:nth-child(1)').addClass('active');
@@ -1233,6 +1234,7 @@ $('document').ready(function() {
                             
                                         afficherQuestionBouton();
                                         chargerTableDeReponses();
+                                        defilementDeTableReponseVersLeHaut();
                                         stylesDeTableDeReponses();
                                         afficherImage();
                                         actualiserPratiquesProgressBar();
@@ -1249,7 +1251,7 @@ $('document').ready(function() {
                                         compteur++;
                                         
                                         function chargerTableDeReponses() {
-                                            table += "<div>\n <span class='td'>"+question+"</span>\n<span class='td'>"+reponse+"</span>\n<span class='td'>"+parseIntNko(point)+"</span>\n </div>\n\n";
+                                            table += "<div class='tr'>\n <span class='td'>"+question+"</span>\n<span class='td'>"+reponse+"</span>\n<span class='td'>"+parseIntNko(point)+"</span>\n </div>\n\n";
                                             $('#table_1 #tbody').html(table);
                                         }
                                         function rechargerTableDeReponses() {
@@ -1257,15 +1259,14 @@ $('document').ready(function() {
                                             $('#table_1 #tbody').html(table);
                                         }
                                         function stylesDeTableDeReponses() {
-                                            defilementDeTableReponseVersLeBas();
                                             $('#table_1 #tbody div:last-child').addClass('pratique_tr_actif'); 
                                             $('#table_1 #tbody div:last-child').siblings().removeClass('pratique_tr_actif'); 
                                             $('#table_1 #tbody div:last-child').siblings().addClass('noir_clair'); 
                                         
-                                            function defilementDeTableReponseVersLeBas() {
-                                                $('#tbody').animate({ scrollTop:$('#tbody')[0].scrollHeight }, 1000);
-                                            }	   
                                         }
+                                        function defilementDeTableReponseVersLeHaut() {
+                                            $('#tbody').animate({ scrollTop:$('#tbody')[0].scrollHeight }, 1000);
+                                        }	   
                                         function afficherImage() {
                                             
                                             let image_source = $('#'+reponse+' img').attr('src');
@@ -1471,10 +1472,8 @@ $('document').ready(function() {
                             });
                         }
                     	function stockerPratique() {
-                    	    
-                    	    $('#course_fermeture').on('click',function(){
+                    	    $('#fermer_pratique').on('click',function(){
 
-                                nbr_option_non_vide = nombreDOptionNonVide();
                                 if(phase_index <  phase_nbr || nbr_option_non_vide < all_options.length) { return; }
                                 if(phase_index == phase_nbr && nbr_option_non_vide == all_options.length) {
                                     

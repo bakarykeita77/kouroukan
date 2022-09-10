@@ -1,16 +1,15 @@
 $('document').ready(function() {
     
-    var matieres_etudiees, derniere_matiere, matiere_active, matiere_index, matiere_nom;
-    var total_phase, phase_nbr, phases_etudiees, dernieres_phases, derniere_phase, dernieres_phases_distinctes;
-  	var niveau, niveaux, niveau_max, niveau_en_cours, niveaux_distincts;
-  	var niveaux_passes = [], niveau_en_coure = '', phase_active = '',phases_a_etudier = [], noms_des_phases = '';
+    var id              = JSON.parse(sessionStorage.getItem('id'));     
+    var matieres        = JSON.parse(sessionStorage.getItem('matieres'));     
+    var matiere_index   = JSON.parse(sessionStorage.getItem('matiere_index'));  
     
-    var id                = JSON.parse(sessionStorage.getItem('id'));     
-    var matieres          = JSON.parse(sessionStorage.getItem('matieres'));     
-    var matiere_index     = JSON.parse(sessionStorage.getItem('matiere_index'));     
+    niveaux_etudies = JSON.parse(sessionStorage.getItem('niveaux_etudies'));
+    niveau_max      = JSON.parse(sessionStorage.getItem('niveau_max'));
+    niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
     
-    dernieres_phases_distinctes = JSON.parse(sessionStorage.getItem('dernieres_phases_distinctes'));
-    phase_nbr = JSON.parse(sessionStorage.getItem('phase_nbr'));
+    phases_etudiees = JSON.parse(sessionStorage.getItem('phases_etudiees'));
+    derniere_phase  = JSON.parse(sessionStorage.getItem('derniere_phase'));
 
     
     if(matieres.length === 0) {
@@ -53,6 +52,7 @@ $('document').ready(function() {
         phases();
         matiere();
 
+
   /*--------------------------------------------------------------------*/
 	
 	function getPhases() { 
@@ -65,7 +65,7 @@ $('document').ready(function() {
     }
     function phases() {
         var phases_collection = phasesCollection();
-    	
+        
     	$('.phases').html(phasesHTML());
     	sessionStorage.setItem('total_phase', JSON.stringify($('#phases_list li').length));
         actualiserTitre();
@@ -80,17 +80,24 @@ $('document').ready(function() {
             var content = '<ul class="phases liste_affichage_cascade" id="phases_list">';
             if(matiere_index == 0) {
                 for(var i=0;i<2;i++){
-                    content += '<li id="'+lesson_id+'_'+liste_de_phases[i][0]+'">'+liste_de_phases[i][1]+'</li>';
+                    let phase_id = liste_de_phases[i][0];
+                    let phase_nom = liste_de_phases[i][1];
+                  
+                    content += '<li id="'+lesson_id+'_'+phase_id+'">'+phase_nom+'</li>';
                 }
                 for(var j=3;j<liste_de_phases.length;j++){
-                    var phase_id = liste_de_phases[j][0];
-                    content += '<li id="'+lesson_id+'_'+phase_id+'">'+liste_de_phases[j][1]+'</li>';
+                    let phase_id = liste_de_phases[j][0];
+                    let phase_nom = liste_de_phases[j][1];
+                    
+                    content += '<li id="'+lesson_id+'_'+phase_id+'">'+phase_nom+'</li>';
                 }
             }
             if(matiere_index > 0) {
                 for(var i=0;i<liste_de_phases.length;i++){
-                    var phase_id = liste_de_phases[i][0];
-                    content += '<li id="'+lesson_id+'_'+phase_id+'">'+liste_de_phases[i][1]+'</li>';
+                    let phase_id = liste_de_phases[i][0];
+                    let phase_nom = liste_de_phases[i][1];
+                    
+                    content += '<li id="'+lesson_id+'_'+phase_id+'">'+phase_nom+'</li>';
                 }
             }
             content += '</ul>';
@@ -104,44 +111,36 @@ $('document').ready(function() {
             return content;
         }
     	function stylesDesPhases() {
-   
-        	    $.each($('#phases_list li'), function() {
-        	      
-            	    var phase_index = $(this).index();
-         
-        	        if(niveau_max === 0) {
-                        if(phase_nbr == 0) {
-                    	    if(phase_index == 0) $(this).attr('class','active');
-                    	    if(phase_index >  0) $(this).attr('class','active');
-                    	    if(phase_index >  0) $(this).attr('class','a_apprendre');
-                        }
-                        if(phase_nbr > 0) {
-                    	    if(phase_index <  phase_nbr) $(this).attr('class','apprises');
-                    	    if(phase_index == phase_nbr) $(this).attr('class','active');
-                    	    if(phase_index >  phase_nbr) $(this).attr('class','a_apprendre');
-                        }
-        	        }        
-        	        if(niveau_max > 0) {
-        	            if(niveau_max < matiere_index) {
-                        	$(this).attr('class','a_apprendre');
-        	            }
-        	            if(niveau_max == matiere_index) {
-                        	if(phase_nbr == 0) {
-                            	if(phase_index == 0) $(this).attr('class','active');
-                            	if(phase_index  > 0) $(this).attr('class','a_apprendre');
-                        	}
-                        	if(phase_nbr > 0) {
-                            	if(phase_index  < phase_nbr) $(this).attr('class','apprises');
-                            	if(phase_index == phase_nbr) $(this).attr('class','active');
-                            	if(phase_index  > phase_nbr) $(this).attr('class','a_apprendre');
-                        	}
-        	            }
-        	            if(niveau_max > matiere_index) {
-                        	$(this).attr('class','apprises');
-        	            }
-        	        }
-                });
+    	    var lesson_statut = lessonStatut();
+
+    	    $.each($('#phases_list li'), function() {
+    	      
+        	    var phase_index = $(this).index();
+        	    var phase_attr_id = $(this).attr('id');
+                
+                if(lesson_statut == "vierge") {
+                    if(phase_index === 0) $(this).addClass('actif');
+                    if(phase_index  >  0) $(this).addClass('a_apprendre');
+                }
+    	        if(lesson_statut == "non_vierge") {
+        	        if($.inArray(phase_attr_id,phases_etudiees) !== -1) $(this).addClass('apprises');
+        	        if(phase_attr_id == derniere_phase) $(this).next().addClass('actif');
+        	        $(this).not($('.apprises, .actif')).addClass('a_apprendre');
+    	        }
+            });
     	}
+        function lessonStatut() {
+            let li = $('#phases_list li');
+            let indice = 0;
+            
+            $.each(li, function() { 
+                let li_id = $(this).attr('id');
+                indice = ($.inArray(li_id, phases_etudiees) === -1) ? indice : indice+=1; 
+            });
+          
+            let ls = (indice === 0) ? "vierge" : "non_vierge";
+            return ls;
+        }
         function actualiserTitre() {
             var niveau = $('.niveau_courant').text();
       
@@ -187,7 +186,7 @@ $('document').ready(function() {
     	actualiserCochage();
     	
     	$('#phases_list li').on('click', function(e){
-       
+      
             var syllabes_tonifies = tonification();  
 
             var questionnaires = questions();
@@ -228,7 +227,7 @@ $('document').ready(function() {
         
           /*--------------------------------------------------------------------*/    
               
-            function phaseActiveName() { sessionStorage.setItem('phase', JSON.stringify(course_id)); }
+            function phaseActiveName() { sessionStorage.setItem('phase', JSON.stringify(phase_id)); }
             function dimensionnementDeCourseBody() {
                 
                 var course_height = $('.course').height();
@@ -545,21 +544,17 @@ $('document').ready(function() {
                       
                             $('#fermer_apprentissage').one('click',function() {
                     	        var course = $(this).siblings('#apprentissage').html();
-                       
-                                if(phase_index <  phase_nbr) { return; }
-                                if(phase_index === phase_nbr) {
-                                   
-                                    note = noterApprentissage();
-                     	                 
-                                    if(note <  moyenne) alert("ߌ ߡߊ߫ ߛߓߍߘߋ߲ ߥߟߊ ߜߋ߭ ߠߎ߬ ߓߍ߯ ߟߊߡߍ߲߫");
-                                    if(note >= moyenne) {
+                    
+                                note = noterApprentissage();
+                 	                 
+                                if(note <  moyenne) alert("ߌ ߡߊ߫ ߛߓߍߘߋ߲ ߥߟߊ ߜߋ߭ ߠߎ߬ ߓߍ߯ ߟߊߡߍ߲߫");
+                                if(note >= moyenne) {
 
-                                        sendApprentissageToDB();
-                  
-                                        phase_nbr++;
-                                        changerPhaseActive(phase_nbr);
-                                        sessionStorage.setItem('phase_nbr',JSON.stringify(phase_nbr));
-                                    }
+                                    sendApprentissageToDB();
+              
+                                   /* phase_nbr++;
+                                    changerPhaseActive(phase_nbr);
+                                    sessionStorage.setItem('phase_nbr',JSON.stringify(phase_nbr));*/
                                 }
 
                                 function sendApprentissageToDB() {       
@@ -779,25 +774,17 @@ $('document').ready(function() {
                 	    function stockerExercice() {
                 	                        	             
                             $('#fermer_exercice').one('click',function(){ 
-                                
-                                if(phase_index <  phase_nbr) { return; }
-                                if(phase_index == phase_nbr) {
-                                    
-                                    note = noterExercice(); 
-                                   
-                                 /*--------------------------------------------------------------------
-                                  Pourqu'un exercice soit valable, il faut que chaque question ait une réponse.
-                                 --------------------------------------------------------------------*/  
                             
-                                    if(note <  moyenne) alert( "reprendre" ); 
-                                    if(note >= moyenne) { 
-                                        sendExerciceToDB(); 
-                                        phase_nbr++;
-                                        changerPhaseActive(phase_nbr); 
-                                        sessionStorage.setItem('phase_nbr',JSON.stringify(phase_nbr));
-                                    }
+                                note = noterExercice(); 
+
+                                if(note <  moyenne) alert( "reprendre" ); 
+                                if(note >= moyenne) { 
+                                    sendExerciceToDB(); 
+                                    phase_nbr++;
+                                    changerPhaseActive(phase_nbr); 
+                                    sessionStorage.setItem('phase_nbr',JSON.stringify(phase_nbr));
                                 }
-                                
+                            
                                 function sendExerciceToDB() {
 
                                     let matiere = JSON.parse(sessionStorage.getItem('matiere_active'));
@@ -850,7 +837,7 @@ $('document').ready(function() {
                         var compteur_de_caractere = 0;
                         var bulle_index = -1;
                         var s_0 = [], s_1 = [], s_2 = [], s_3 = [];
-                	    var question_limit = 10;
+                	    var question_limit = 2;
                 	    var quantite_de_question = parseIntNko(question_limit);
                 	    var question_rang = '߭';
                 	    
@@ -861,8 +848,7 @@ $('document').ready(function() {
                         var bi_syllabes     = biSyllabesTotal();
                         var tri_syllabes    = triSyllabesTotal();
                         var quadri_syllabes = quadriSyllabesTotal();  
-                        
-                    	    
+
                     	let questions_mono_syllabe   = mix1D(mono_syllabes);
                     	let questions_bi_syllabe     = mix1D(bi_syllabes);
                     	let questions_tri_syllabe    = mix1D(tri_syllabes);
@@ -887,18 +873,20 @@ $('document').ready(function() {
                         optionStyles();
                 	    pratiquer();
                 	    stockerPratique();
-                	    
+             	    
                       /*--------------------------------------------------------------------*/
 
                     	function recuperationDesOptionsEffectuees() {
                     	    DB_options = getDBOptions();
+                    	    if(DB_options.length === 4) localStorage.clear();
                     	    local_options = getLocalOptions();
                             
                             all_options = (DB_options != '') ? DB_options:local_options;
+            alert(all_options);
                     	}
                     	function getDBOptions() {
                         	    
-                            let DB_pratiques = JSON.parse(sessionStorage.getItem('pratiques'));
+                            let DB_pratiques = JSON.parse(localStorage.getItem('pratiques'));
                         
                         	let pratiques_niveaux = [], niveau_max = '';
                         	let niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));
@@ -930,7 +918,7 @@ $('document').ready(function() {
                             pratiqueStyle();
                     	}
                         function pratiqueStyle() {
-                      	    
+                    	    
                         	let index_actif = 0;
                         	$.each($('#pratique_head span'), function() {
                         	        
@@ -972,11 +960,11 @@ $('document').ready(function() {
                                 	    case 2: tri_syllabe    = triSyllabe();    break;
                                 	    case 3: quadri_syllabe = quadriSyllabe(); break;
                                 	}
-                                    
+                                 
                                 	function monoSyllabe() {
                                 	    let mono_syllabe = [];
                                 	        
-                                        for(let i = 0; i < 10; i++) {
+                                        for(let i = 0; i < question_limit; i++) {
                                                 	                
                                             let q = questions_mono_syllabe[i];
                                             let r = '';
@@ -991,7 +979,7 @@ $('document').ready(function() {
                                 	function biSyllabe() {
                                 	    let bi_syllabe = [];
                                 	        
-                                        for(let i = 0; i < 10; i++) {
+                                        for(let i = 0; i < question_limit; i++) {
                                                 	                
                                             let q = questions_bi_syllabe[i];
                                             let r = '';
@@ -1006,7 +994,7 @@ $('document').ready(function() {
                                 	function triSyllabe() {
                                 	    let tri_syllabe = [];
                                 	        
-                                        for(let i = 0; i < 10; i++) {
+                                        for(let i = 0; i < question_limit; i++) {
                                                 	                
                                             let q = questions_tri_syllabe[i];
                                             let r = '';
@@ -1021,7 +1009,7 @@ $('document').ready(function() {
                                 	function quadriSyllabe() {
                                 	    let quadri_syllabe = [];
                                 	        
-                                        for(let i = 0; i < 10; i++) {
+                                        for(let i = 0; i < question_limit; i++) {
                                                 	                
                                             let q = questions_quadri_syllabe[i];
                                             let r = '';
@@ -1084,8 +1072,14 @@ $('document').ready(function() {
                             }); 
                             $('#pratique_head span').one('click', function() {
                                 
-                                if($(this).hasClass('a_apprendre')) return; 
-                                
+                                if($(this).hasClass('a_apprendre')) {
+                                    alert("ߘߊߞߎ߲ ߡߊ߫ ߛߋ߫ ߦߊ߲߬ ߡߊ߫ ߝߟߐ߫");
+                                    return; 
+                                }
+                              /*  if($(this).hasClass('apprises')) {
+                                    alert("ߕߊ߲߬ߓߌ߬ ߓߘߊ߫ ߞߍ߫ ߦߊ߲߬ ߘߐ߫ ߞߘߐ߬ߡߊ߲߬");
+                                    return; 
+                                }   */
                                 option_active = $(this);
                             	option_index = $(this).index();
                             	compteur_de_question = 1;
@@ -1099,7 +1093,7 @@ $('document').ready(function() {
                                     case 2 : option = tri_syllabe;    break;
                                     case 3 : option = quadri_syllabe; break;
                                 }
-                                        
+                                         
                                 for (var i = 0; i < option.length; i++) { questions_courantes[i] = option[i][0]; }
                                 
                                 $(this).parent().parent().css('top','-110%');
@@ -1193,10 +1187,8 @@ $('document').ready(function() {
                                         }
                                         function chargementDesBulles() {
                                                 
-                                            if($.inArray(caractere,caracteres[1]) != -1) {
-                                                bulle_index++;
-                                            }
-                                                
+                                            if($.inArray(caractere,caracteres[1]) != -1) bulle_index++;
+
                                             if(bulle_index < 1) {
                                                 s_0[s_0.length] = reponse[reponse.length-1];
                                                 $('#span_0').html(s_0);
@@ -1224,7 +1216,7 @@ $('document').ready(function() {
                         	        total_point = 0;
                         	       
                         	        $('.correction_btn').on('click',  function() {
-                        	            
+                        	          
                         	            $('.clavier_container').css('opacity',0.5);
 
                         	            reponse = reponse.join('');
@@ -1347,10 +1339,7 @@ $('document').ready(function() {
                                             }
                                     	}
                                     	function noterOption(syllabe) {
-                                    	                                                        
-                                            for (var i = 0; i < syllabe.length; i++) {
-                                                note += syllabe[i][2]; 
-                                            }
+                                            for (var i = 0; i < syllabe.length; i++) { note += syllabe[i][2]; }
                                             syllabe = [syllabe,note];
                                     	}
                                     	function stockerOptionDansLocalStorage(syllabe) {
@@ -1360,11 +1349,10 @@ $('document').ready(function() {
                                     	function finDOption() {
                                     	    if( question_limit === compteur+1 ) {
                                     	        
-                                    	        var effort = parseIntNko((total_point/question_limit)*100)+'%';
+                                    	        var effort = '%'+parseIntNko((total_point/question_limit)*100);
                                     	        var message_1 = 'ߌ ߞߎߟߎ߲ߖߋ߫.<br/>'+option_de_syllabe+'  ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߎ߬ ߟߊߡߌ߬ߘߊ ߢߊ߬ߣߍ߲߬ ߁߀߀% ߟߊ߫. ߌ ߘߌ߫ ߛߋ߫ ߥߊ߫ ߟߊ߫ ߢߍ ߝߍ߬.';
-                                    	        var message_2 = 'ߌ ߘߐߖߊ߬. <br/>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߎ߬ ߟߊߡߌ߬ߘߊ ߢߊ߬ߣߍ߲߬ '+effort+' ߟߊ߫.<br/> ߘߌ߬ߢߍ߬ ߞߵߌ ߞߐߛߍ߬ߦߌ߬ ߦߙߐ ߣߌ߲߬ ߡߊ߬.';
+                                    	        var message_2 = 'ߌ ߘߐߖߊ߬. <br/>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߎ߬ ߟߊߡߌ߬ߘߊ ߢߊ߬ߣߍ߲߬ '+effort+' ߟߋ߬ ߟߊ߫.<br/> ߘߌ߬ߢߍ߬ ߞߵߌ ߞߐߛߍ߬ߦߌ߬ ߦߙߐ ߣߌ߲߬ ߡߊ߬.';
                                    	    
-                                                                                            
                                                 switch(option_index) {
                                                     case 0 : noterOption(mono_syllabe);   stockerOptionDansLocalStorage(mono_syllabe);   break;
                                                     case 1 : noterOption(bi_syllabe);     stockerOptionDansLocalStorage(bi_syllabe);     break;
@@ -1385,13 +1373,14 @@ $('document').ready(function() {
                                     	            
                 	                                $('#tbody').css('height', (pfh-120)+'px');
                                     	            $('#table_1 #tfoot').css('display','block');
-                                    	          //  $('#message_de_fin_container').css('display','block');
+                                    	           // $('#message_de_fin_container').css('display','block');
                                     	        }
                                     	        function chargerTotalPoints() {
                                     	            $('#total_point').html(parseIntNko(total_point));
                                     	            $('#pourcentage_point').html('%'+parseIntNko(total_point*100/question_limit));
                                     	        }
                                                 function messageDeFinOption() {
+                                            
                                         	        if(effort == '߁߀߀%') {
         
                                         	            if(option_index <= 2) {
@@ -1437,9 +1426,9 @@ $('document').ready(function() {
                                             option_active.next().removeClass('a_apprendre');
                                             option_active.next().addClass('active');
                                     	    
-                                    	    /*afficherClavierEtConsoles();
+                                    	    afficherClavierEtConsoles();
                                     	    initialiserLesBoutonsDEntete();
-                                    	    table = '';*/
+                                    	    table = '';
                                         }  
                                     	function revisionDOption() {
                                     	        
@@ -1478,7 +1467,7 @@ $('document').ready(function() {
                                 if(phase_index == phase_nbr && nbr_option_non_vide == all_options.length) {
                                     
                                     note = noterPratique(); 
-                                    
+                                   
                                  /* Vérification de la validité de pratique:
                                     Pourqu'une pratique soit valable, il faut que chaque option soit passée.
                                     - Si non, la pratique est invalide et est retournée;
@@ -1501,22 +1490,16 @@ $('document').ready(function() {
                                     for (var j = 0; j < all_options[i].length; j++) {
                                         note_total += all_options[i][j][2];
                                     }}
-                                    let note = Math.floor((note_total*20)/40);
+                                    
+                                    let note = Math.floor(note_total/4);
                                  
                                     return note;
                                 }
                                 function sendPratiqueToDB() {
                                     
-                                    let matiere = sessionStorage.getItem('matiere_active');
-                                    let phase   = sessionStorage.getItem('phase');
                                     let lesson  = JSON.stringify(all_options);
-                                           
-
                                     const pratique_data = new URLSearchParams({
-                                        id     : id,
-                                        matiere: matiere,
                                         niveau : niveau,
-                                        phase  : phase,
                                         lesson : lesson,
                                         note   : note
                                     });
@@ -1548,33 +1531,6 @@ $('document').ready(function() {
         	                
         	                afficherClavierEtConsoles();
                         }
-                	    function dimensionnementDePratiquesReponseContainer() {
-                	        
-                	        var pratique_body_height = $('#pratique_body').height();
-                	        var pratiques_reponse_container_height = $('#pratiques_reponse_container').height();
-                	        var pratiques_demo_container_height = pratique_body_height - pratiques_reponse_container_height;  
-                	        
-                	       // $('#pratiques_reponse_container').css('height', pratiques_reponse_container_height-10+'px');
-                	    }
-                	    function redimensionnementDePratiquesReponseContainer() {
-                	        
-                	        var pratique_body_height = $('#pratique_body').height();
-                	        var pratiques_demo_container_height = $('#pratiques_demo_container').height();
-            	            var message_de_fin_container_height = $('#message_de_fin_container').height();
-                	        var pratiques_reponse_container_height = pratique_body_height - pratiques_demo_container_height - message_de_fin_container_height;
-                	        
-                	        $('#pratiques_reponse_container').css('height', pratiques_reponse_container_height-10+'px');
-                	    }
-                	    function reredimensionnementDePratiquesReponseContainer() {
-                	        
-                	        var pratique_body_height = $('#pratique_body').height();
-                	        var pratiques_images_container_height = $('#pratiques_images_container').height();
-            	            var message_de_fin_container_height = $('#message_de_fin').height();
-                	        var pratiques_reponse_container_height = pratique_body_height - pratiques_images_container_height;
-                	        
-                	        $('#pratiques_reponse_container').css('height', pratiques_reponse_container_height-10+'px');
-                	       // $('#table_1_cadre').css('height', pratiques_reponse_container_height-24+'px');
-                	    }
                     	function affichageParDefautDesBoutonsDEntete() {
                     	        
                     	    $('.repetition_btn').css('display','none');
@@ -1609,7 +1565,7 @@ $('document').ready(function() {
                                 case 2: q = mix1D(tri_syllabes);    break;
                                 case 3: q = mix1D(quadri_syllabes); break;
                             }
-                            for (var i = 0; i < 10; i++) questions[i] = q[i];
+                            for (var i = 0; i < question_limit; i++) questions[i] = q[i];
                             
                             return questions;
                         }
@@ -1911,19 +1867,15 @@ $('document').ready(function() {
                                     
                                     if(note <  moyenne) alert( "reprendre" ); 
                                     if(note >= moyenne) {
-                                        
-                                        if(phase_index <  phase_nbr) { return; }
-                                        if(phase_index == phase_nbr) {
-                                     
-                                            sendEvaluationToDB();
-                                            phase_nbr++;
-                                            changerPhaseActive(phase_nbr);
-                                            sessionStorage.setItem('phase_nbr',JSON.stringify(phase_nbr));
-                                            if(phase_nbr === total_phase) {
-                                                sessionStorage.setItem('niveau_max',JSON.stringify(niveau_max+1));
-                                                sessionStorage.setItem('niveau_en_cours',JSON.stringify(niveau_max+2));
-                                                sessionStorage.setItem('phase_nbr',JSON.stringify(0));
-                                            }
+                           
+                                        sendEvaluationToDB();
+                                        phase_nbr++;
+                                        changerPhaseActive(phase_nbr);
+                                        sessionStorage.setItem('phase_nbr',JSON.stringify(phase_nbr));
+                                        if(phase_nbr === total_phase) {
+                                            sessionStorage.setItem('niveau_max',JSON.stringify(niveau_max+1));
+                                            sessionStorage.setItem('niveau_en_cours',JSON.stringify(niveau_max+2));
+                                            sessionStorage.setItem('phase_nbr',JSON.stringify(0));
                                         }
                                     }
                                     
@@ -1942,7 +1894,7 @@ $('document').ready(function() {
                                             lesson : lesson,
                                             note   : JSON.stringify(note)
                                         });
-                                    
+                                  
                                         fetch("http://localhost:8080/kouroukan/pages/actions.php", {
                                             method: "POST",
                                             body: evaluation_data 
@@ -1958,7 +1910,7 @@ $('document').ready(function() {
                         }
                     }
         	    }
-        	    if(phase_class == 'a_apprendre') $('.course_container').css('display','none');
+        	   // if(phase_class == 'a_apprendre') $('.course_container').css('display','none');
     	    }
       	});
     	

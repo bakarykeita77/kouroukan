@@ -1,4 +1,4 @@
-/*
+
     var syllabes = syllab();
     var syllabes_questions = mix1D(syllabes);
   
@@ -88,7 +88,7 @@
         
         return syllabes_pratiques_html;
     }
-*/    
+    
     function monoSyllabes() {
        
         var mono_syllabes = [

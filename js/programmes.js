@@ -4,29 +4,18 @@
     var reception            = document.getElementById('reception');
     var programme_ul         = document.getElementById('programme_ul');
     
-    var matieres = JSON.parse(sessionStorage.getItem('matieres'));
+    var matieres             = JSON.parse(sessionStorage.getItem('matieres'));
     
-    var niveaux           = JSON.parse(sessionStorage.getItem('niveaux'));
-    var niveau_max        = JSON.parse(sessionStorage.getItem('niveau_max'));
-    var niveau_en_cours   = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
-    if(matieres.length === 0) {
-        niveau_max = 0;
-        niveau_en_cours = 1;
-    }
-    
-    var matieres_etudiees = JSON.parse(sessionStorage.getItem('matieres_etudiees'));
-    var derniere_matiere  = JSON.parse(sessionStorage.getItem('derniere_matiere'));
-    
-    var phase_nbr = JSON.parse(sessionStorage.getItem('phase_nbr'));
-    
-	var matiere = [], matiere_1 = [], matiere_2 = [], matiere_3 = [], matiere_4 = [], matieres_etudiees = [], derniere_matiere = '';
-    
-	var phases_etudiees = [], dernieres_phases = [], dernieres_phases_distinctes = [], derniere_phase = '';
-	var phase = [], phases_1 = [], phases_2 = [], phases_3 = [], phases_4 = [];
+    var niveaux_etudies      = JSON.parse(sessionStorage.getItem('niveaux_etudies'));
+    var niveau_max           = JSON.parse(sessionStorage.getItem('niveau_max'));
+    var niveau_en_cours      = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
+
+    var phases_etudiees = JSON.parse(sessionStorage.getItem('phases_etudiees'));
+    var derniere_phase  = JSON.parse(sessionStorage.getItem('derniere_phase'));
 
     var click_min_nbr = 0;
 
-    var matieres_etudiees, niveaux, niveau_max, DB_niveau_max, session_niveau_max, phases_etudiees, phase_max_index;
+    var DB_niveau_max, session_niveau_max, phase_max_index;
     var lessons_suivies = '';
     var exercices_effectues = '';
     var evaluations_effectuees = '';
@@ -72,9 +61,8 @@ Au click sur l'afficheur du programme
 
 -------------------------------------------------------------------------------------------------------------------------*/
     
-
-    
     programme();
+   // changerProgramme();
     
 /*-----------------------------------------------------------------------------------------------------------------------*/
     
@@ -98,10 +86,9 @@ Au click sur l'afficheur du programme
               
                 if(niveau_max === 0) {
                     var phases_lien = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max;
-                    if(matiere_index === 0) {
-                        programme_html += '<li id="'+liste_de_matieres[i][0]+'"><a href="'+phases_lien+'">'+liste_de_matieres[i][1]+'</a></li>\n\n';
-                    }
-                    if(matiere_index > 0) programme_html += '<li><a href="#">'+liste_de_matieres[i][1]+'</a></li>';
+                    
+                    if(matiere_index === 0) programme_html += '<li id="'+liste_de_matieres[i][0]+'"><a href="'+phases_lien+'">'+liste_de_matieres[i][1]+'</a></li>\n\n';
+                    if(matiere_index  >  0) programme_html += '<li><a href="#">'+liste_de_matieres[i][1]+'</a></li>';
                 }
                    
                 if(niveau_max > 0) {
@@ -119,30 +106,21 @@ Au click sur l'afficheur du programme
             return programme_html;
         }           
         function programmeStyle() {
-        /*--------------------------------------------------------------------------------------------------------------------
-         A chaque élément de la liste du programme correspondant un index.
-         Cet index est comparé au niveau en cours de l'étudiant : 
-            a)- Si l'index est inférieur au niveau en cours, l'élément prend la classe apprises définie dans class.css;
-            b)- Si l'index est égal au niveau en cours, l'élément prend la classe active définie dans class.css;
-            c)- Si l'index est supérieur au niveau en cours, l'élément prend la classe a_apprendre définie dans class.css.
-        --------------------------------------------------------------------------------------------------------------------*/
-
+     
             let programme_li = $("#programme_ul li");
             
             $.each(programme_li, function() {
-                         
+                
                 var matiere_index = $(this).index();
-                sessionStorage.setItem('matiere_index', JSON.stringify($(this).index()));
-
+                
                 if(niveau_max === 0) {
-                    if(matiere_index+1 == niveau_en_cours) $(this).addClass('active');
-                    if(matiere_index+1  > niveau_en_cours) $(this).addClass('a_apprendre');
+                    if(matiere_index === 0) $(this).addClass("actif");
+                    if(matiere_index  >  0) $(this).addClass("a_apprendre");
                 }
-        
                 if(niveau_max > 0) {
-                    if(matiere_index+1  < niveau_en_cours) $(this).addClass('apprises');
-                    if(matiere_index+1  > niveau_en_cours) $(this).addClass('a_apprendre');
-                    if(matiere_index+1 == niveau_en_cours) $(this).addClass('active');
+                    if($.inArray(matiere_index+1,niveaux_etudies) !== -1) $(this).addClass("apprises");
+                    if($.inArray(matiere_index+1,niveaux_etudies) === -1) $(this).addClass("a_apprendre");
+                    if(matiere_index+1 === niveau_en_cours) $(this).removeClass("a_apprendre").addClass("actif");
                 }
             });
         }
@@ -165,20 +143,13 @@ Au click sur l'afficheur du programme
         }
     }
     function changerProgramme() {
-        
-        let total_phase = sessionStorage.getItem('total_phase');
-        
-        if( phase_nbr === total_phase) {
 
-            $.each($('#programme_ul li'), function() {
-                
-                let index = $(this).index();
-                
-                if(index  < niveau_max) $(this).removeClass('active');
-                if(index  < niveau_max) $(this).addClass('apprises');
-                if(index == niveau_max) $(this).removeClass('a_apprendre');
-                if(index == niveau_max) $(this).addClass('active');
-                if(index  > niveau_max) $(this).addClass('a_apprendre');
-            });
-        }
+        $.each($('#programme_ul li'), function() {
+            
+            let index = $(this).index();
+           
+            if(index  < niveau_max) $(this).removeClass('active').addClass('apprises');
+            if(index == niveau_max) $(this).removeClass('a_apprendre').addClass('active');
+            if(index  > niveau_max) $(this).addClass('a_apprendre');
+        });
     }

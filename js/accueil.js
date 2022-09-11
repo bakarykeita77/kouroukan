@@ -67,8 +67,12 @@
             	}}
             	
                 derniere_phase = phases_etudiees[phases_etudiees.length-1];
-                moyenne_1 = note_1/3; moyenne_2 = note_2/4; moyenne_3 = note_3/4; moyenne_4 = note_4/4;
-            	
+                
+                if(matieres[0] !== undefined && matieres[0].length === 3) moyenne_1 = note_1/3; 
+                if(matieres[1] !== undefined && matieres[1].length === 4) moyenne_2 = note_2/4;
+                if(matieres[2] !== undefined && matieres[2].length === 4) moyenne_3 = note_3/4;
+                if(matieres[3] !== undefined && matieres[3].length === 4) moyenne_4 = note_4/4;
+           	
                 if(moyenne_1 >= moyenne) niveaux_etudies.push(1);   	    
                 if(moyenne_2 >= moyenne) niveaux_etudies.push(2);   	    
                 if(moyenne_3 >= moyenne) niveaux_etudies.push(3);   	    
@@ -76,7 +80,7 @@
 
                 niveau_max = Math.max(...niveaux_etudies);
                 niveau_en_cours = niveau_max + 1;
-                
+               
             	sessionStorage.setItem('phases_etudiees', JSON.stringify(phases_etudiees));
             	sessionStorage.setItem('derniere_phase' , JSON.stringify(derniere_phase ));
                 

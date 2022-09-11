@@ -837,7 +837,7 @@ $('document').ready(function() {
                         var compteur_de_caractere = 0;
                         var bulle_index = -1;
                         var s_0 = [], s_1 = [], s_2 = [], s_3 = [];
-                	    var question_limit = 2;
+                	    var question_limit = 10;
                 	    var quantite_de_question = parseIntNko(question_limit);
                 	    var question_rang = '߭';
                 	    
@@ -882,7 +882,6 @@ $('document').ready(function() {
                     	    local_options = getLocalOptions();
                             
                             all_options = (DB_options != '') ? DB_options:local_options;
-            alert(all_options);
                     	}
                     	function getDBOptions() {
                         	    

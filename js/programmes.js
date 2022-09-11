@@ -113,11 +113,11 @@ Au click sur l'afficheur du programme
                 
                 var matiere_index = $(this).index();
                 
-                if(niveau_max === 0) {
+                if(niveau_max == null) {
                     if(matiere_index === 0) $(this).addClass("actif");
                     if(matiere_index  >  0) $(this).addClass("a_apprendre");
                 }
-                if(niveau_max > 0) {
+                if(niveau_max != null) {
                     if($.inArray(matiere_index+1,niveaux_etudies) !== -1) $(this).addClass("apprises");
                     if($.inArray(matiere_index+1,niveaux_etudies) === -1) $(this).addClass("a_apprendre");
                     if(matiere_index+1 === niveau_en_cours) $(this).removeClass("a_apprendre").addClass("actif");

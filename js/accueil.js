@@ -1,5 +1,5 @@
 
-	let niveau_actif = '', niveau_en_cours = 1, niveaux_etudies = [], niveau_max = '';
+	let niveau_actif = 1, niveau_en_cours = 1, niveaux_etudies = [], niveau_max = 0;
 	let phase_active = '', phase_en_cours = '', phases_etudiees = [], derniere_phase = '';
     var moyenne = 1;
     
@@ -76,23 +76,37 @@
                 if(moyenne_1 >= moyenne) niveaux_etudies.push(1);   	    
                 if(moyenne_2 >= moyenne) niveaux_etudies.push(2);   	    
                 if(moyenne_3 >= moyenne) niveaux_etudies.push(3);   	    
-                if(moyenne_4 >= moyenne) niveaux_etudies.push(4);   	    
+                if(moyenne_4 >= moyenne) niveaux_etudies.push(4);  
 
-                niveau_max = Math.max(...niveaux_etudies);
-                niveau_en_cours = niveau_max + 1;
-               
-            	sessionStorage.setItem('phases_etudiees', JSON.stringify(phases_etudiees));
-            	sessionStorage.setItem('derniere_phase' , JSON.stringify(derniere_phase ));
-                
-                sessionStorage.setItem('moyenne_1', JSON.stringify(moyenne_1));
-                sessionStorage.setItem('moyenne_2', JSON.stringify(moyenne_2));
-                sessionStorage.setItem('moyenne_3', JSON.stringify(moyenne_3));
-                sessionStorage.setItem('moyenne_4', JSON.stringify(moyenne_4));
-              
-            	sessionStorage.setItem('niveaux_etudies', JSON.stringify(niveaux_etudies));
-            	sessionStorage.setItem('niveau_max', JSON.stringify(niveau_max));
-            	sessionStorage.setItem('niveau_en_cours', JSON.stringify(niveau_en_cours));
-            	
+                if(niveaux_etudies == '') {
+                    
+                    sessionStorage.setItem('phases_etudiees', JSON.stringify(phases_etudiees));
+                	sessionStorage.setItem('derniere_phase' , JSON.stringify(derniere_phase ));
+                    
+                    sessionStorage.setItem('moyenne_1', JSON.stringify(moyenne_1));
+                    sessionStorage.setItem('moyenne_2', JSON.stringify(moyenne_2));
+                    sessionStorage.setItem('moyenne_3', JSON.stringify(moyenne_3));
+                    sessionStorage.setItem('moyenne_4', JSON.stringify(moyenne_4));
+                  
+                	sessionStorage.setItem('niveau_max', JSON.stringify(0));
+                	sessionStorage.setItem('niveau_en_cours', JSON.stringify(1));
+                }
+                if(niveaux_etudies != '') {
+                    niveau_max = Math.max(...niveaux_etudies);
+                    niveau_en_cours = niveau_max + 1;
+                   
+                	sessionStorage.setItem('phases_etudiees', JSON.stringify(phases_etudiees));
+                	sessionStorage.setItem('derniere_phase' , JSON.stringify(derniere_phase ));
+                    
+                    sessionStorage.setItem('moyenne_1', JSON.stringify(moyenne_1));
+                    sessionStorage.setItem('moyenne_2', JSON.stringify(moyenne_2));
+                    sessionStorage.setItem('moyenne_3', JSON.stringify(moyenne_3));
+                    sessionStorage.setItem('moyenne_4', JSON.stringify(moyenne_4));
+                  
+                	sessionStorage.setItem('niveaux_etudies', JSON.stringify(niveaux_etudies));
+                	sessionStorage.setItem('niveau_max', JSON.stringify(niveau_max));
+                	sessionStorage.setItem('niveau_en_cours', JSON.stringify(niveau_en_cours));
+                }
 
             /*-------------------------------------------------------------------------   
               Les pratiques 

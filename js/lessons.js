@@ -4,12 +4,14 @@ $('document').ready(function() {
     var matieres        = JSON.parse(sessionStorage.getItem('matieres'));     
     var matiere_index   = JSON.parse(sessionStorage.getItem('matiere_index'));  
     
-    niveaux_etudies = JSON.parse(sessionStorage.getItem('niveaux_etudies'));
-    niveau_max      = JSON.parse(sessionStorage.getItem('niveau_max'));
-    niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
+    var niveaux_etudies = JSON.parse(sessionStorage.getItem('niveaux_etudies'));
+    var niveau_max      = JSON.parse(sessionStorage.getItem('niveau_max'));
+    var niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
     
-    phases_etudiees = JSON.parse(sessionStorage.getItem('phases_etudiees'));
-    derniere_phase  = JSON.parse(sessionStorage.getItem('derniere_phase'));
+    var id_phases = [], data_phase_nbr;
+    var phases_etudiees = JSON.parse(sessionStorage.getItem('phases_etudiees'));
+    var derniere_phase  = JSON.parse(sessionStorage.getItem('derniere_phase'));
+    var nbr  = JSON.parse(sessionStorage.getItem('nbr'));
 
     
     if(matieres.length === 0) {
@@ -36,8 +38,7 @@ $('document').ready(function() {
 	var etapes_a_faire = [];
 	var etape_max = [];
     
-	var phases_actuelles, phases_actuelles_etudiees, phase_precedante;
-	var index_phase_actuelle, index_phase_precedante, index_phase_active;
+	var derniere_phase = '', phase_en_cours = '', phase_nbr = 0;
 	var avancer_btn = '';
 
   /*--------------------------------------------------------------------
@@ -47,11 +48,11 @@ $('document').ready(function() {
 	4)- Les phases s'affichent et
 	5)- On peut surfer
   --------------------------------------------------------------------*/
-  
+
         getPhases(); 
         phases();
         matiere();
-
+   
 
   /*--------------------------------------------------------------------*/
 	
@@ -66,7 +67,11 @@ $('document').ready(function() {
     function phases() {
         var phases_collection = phasesCollection();
         
+     
     	$('.phases').html(phasesHTML());
+    	
+    	data_phase_nbr = phasesNombre(derniere_phase);
+    	id_phases = idDesPhases();
     	sessionStorage.setItem('total_phase', JSON.stringify($('#phases_list li').length));
         actualiserTitre();
 	    stylesDesPhases();
@@ -111,21 +116,32 @@ $('document').ready(function() {
             return content;
         }
     	function stylesDesPhases() {
+            if($.inArray(derniere_phase,id_phases) !== -1) sessionStorage.removeItem('nbr');
+            
+            var nbr = JSON.parse(sessionStorage.getItem('nbr'));
     	    var lesson_statut = lessonStatut();
-
+    	    var phase_nbr = nombre();
+    	    
     	    $.each($('#phases_list li'), function() {
     	      
         	    var phase_index = $(this).index();
         	    var phase_attr_id = $(this).attr('id');
                 
                 if(lesson_statut == "vierge") {
-                    if(phase_index === 0) $(this).addClass('actif');
-                    if(phase_index  >  0) $(this).addClass('a_apprendre');
+                    if(phase_nbr ===0) {
+                        if(phase_index === 0) $(this).addClass('active');
+                        if(phase_index  >  0) $(this).addClass('a_apprendre');
+                    }
+                    if(phase_nbr > 0) {
+                        if(phase_index == phase_nbr-1) $(this).removeClass('active').addClass('apprises');
+                        if(phase_index == phase_nbr  ) $(this).removeClass('a_apprendre').addClass('active');
+                        if(phase_index >= phase_nbr+1) $(this).addClass('a_apprendre');
+                    }
                 }
     	        if(lesson_statut == "non_vierge") {
-        	        if($.inArray(phase_attr_id,phases_etudiees) !== -1) $(this).addClass('apprises');
-        	        if(phase_attr_id == derniere_phase) $(this).next().addClass('actif');
-        	        $(this).not($('.apprises, .actif')).addClass('a_apprendre');
+                    if(phase_index == phase_nbr-1) $(this).removeClass('active').addClass('apprises');
+                    if(phase_index == phase_nbr  ) $(this).removeClass('a_apprendre').addClass('active');
+                    if(phase_index >= phase_nbr+1) $(this).addClass('a_apprendre');
     	        }
             });
     	}
@@ -164,22 +180,56 @@ $('document').ready(function() {
             return collection;
         }
 	}
-    function changerPhaseActive(nbr) {
-                           
+    function phasesNombre(derniere_phase) {
+        let phase_nbr, derniere_phase_index;
+ 
+        $.each($('#phases_list li'), function() {
+            let phase_id = $(this).attr('id');
+            id_phases.push(phase_id);
+        });
+        
+        if($.inArray(derniere_phase,id_phases) === -1) { derniere_phase_index = 0; phase_nbr = 0; }
+        if($.inArray(derniere_phase,id_phases) !== -1) {
+            derniere_phase_index = $('#phases_list #'+derniere_phase).index();
+            phase_nbr = derniere_phase_index+1;
+        }
+        
+        sessionStorage.setItem('derniere_phase_index',JSON.stringify(derniere_phase_index));
+        sessionStorage.setItem('phase_nbr',JSON.stringify(phase_nbr));
+        
+        return phase_nbr; 
+    }
+    function changerPhaseActive(phase_nbr) {
+        
+        phase_nbr++;
         $.each($('#phases_list li'), function() {
     	       
             var phase_index = $(this).index();
-                                        
-            if(phase_index == nbr-1) $(this).removeClass('active');
-            if(phase_index == nbr-1) $(this).addClass('apprises');
-            if(phase_index == nbr  ) $(this).removeClass('a_apprendre');
-            if(phase_index == nbr  ) $(this).addClass('active');
-            if(phase_index >= nbr+1) $(this).addClass('a_apprendre');
-                    	    
-            if(total_phase == nbr  ) $(this).removeClass('active');
-            if(total_phase == nbr  ) $(this).removeClass('a_apprendre');
-            if(total_phase == nbr  ) $(this).addClass('apprises');
+            if(total_phase > phase_nbr) {  
+                if(phase_index == phase_nbr-1) $(this).removeClass('active').addClass('apprises');
+                if(phase_index == phase_nbr  ) $(this).removeClass('a_apprendre').addClass('active');
+                if(phase_index >= phase_nbr+1) $(this).addClass('a_apprendre');
+            }       	    
+            if(total_phase == phase_nbr) $(this).removeClass('active a_apprendre').addClass('apprises');
         });
+        sessionStorage.setItem('nbr',JSON.stringify(phase_nbr));
+        initialiserProgressBarr();
+    }
+    function nombre() {
+        let phase_nbr = 0;
+        
+        if(nbr === null || nbr === 0) phase_nbr = (data_phase_nbr === 0) ? 0 : data_phase_nbr;
+        if(nbr > 0) phase_nbr = (nbr >= data_phase_nbr) ? nbr : data_phase_nbr;
+
+        return phase_nbr;
+    }
+    function idDesPhases() {
+        let id_phases = [];
+        $.each($('#phases_list li'), function() {
+            let phase_id = $(this).attr('id');
+            id_phases.push(phase_id);
+        });
+        return id_phases;
     }
 	function matiere() {
     	
@@ -349,7 +399,7 @@ $('document').ready(function() {
                         var apprentissage_a_stocker = [];
                         var memo = [];
                         var clicks_memo = [];
-                        
+                      
                         $('.fermeture').attr('id', 'fermer_apprentissage');
                    
                 	    chargerApprentissage();
@@ -549,12 +599,13 @@ $('document').ready(function() {
                  	                 
                                 if(note <  moyenne) alert("ߌ ߡߊ߫ ߛߓߍߘߋ߲ ߥߟߊ ߜߋ߭ ߠߎ߬ ߓߍ߯ ߟߊߡߍ߲߫");
                                 if(note >= moyenne) {
-
+                    
+                                    let nbr = JSON.parse(sessionStorage.getItem('nbr'));
+                                    let phase_nbr = nombre();
+                      
+  
                                     sendApprentissageToDB();
-              
-                                   /* phase_nbr++;
                                     changerPhaseActive(phase_nbr);
-                                    sessionStorage.setItem('phase_nbr',JSON.stringify(phase_nbr));*/
                                 }
 
                                 function sendApprentissageToDB() {       
@@ -779,8 +830,9 @@ $('document').ready(function() {
 
                                 if(note <  moyenne) alert( "reprendre" ); 
                                 if(note >= moyenne) { 
+                                    let phase_nbr = phasesNombre(derniere_phase);
+                                    
                                     sendExerciceToDB(); 
-                                    phase_nbr++;
                                     changerPhaseActive(phase_nbr); 
                                     sessionStorage.setItem('phase_nbr',JSON.stringify(phase_nbr));
                                 }
@@ -1473,9 +1525,9 @@ $('document').ready(function() {
                                     - Si oui, la pratique est valable et le processus de stockage est engagé. */
                                     	        
                                     if(note >= moyenne) {
-                                            
+                                        let phase_nbr = phasesNombre(derniere_phase);
+                                        
                                         sendPratiqueToDB(); 
-                                        phase_nbr++;
                                         changerPhaseActive(phase_nbr);
                                         sessionStorage.setItem('phase_nbr',JSON.stringify(phase_nbr)); 
                                     }
@@ -1611,9 +1663,6 @@ $('document').ready(function() {
                         }
                         function masquerClavierEtConsoles() {
                             $('.progress_bar, .clavier_container, #dialogue_btn').css('display','none');
-                        }
-                        function initialiserProgressBarr() {
-                            $('.progress_question_bar, .progress_bonne_reponse_bar').css('width',0);
                         }
                     	
                       	function monoSyllabesTotal() {
@@ -1866,11 +1915,12 @@ $('document').ready(function() {
                                     
                                     if(note <  moyenne) alert( "reprendre" ); 
                                     if(note >= moyenne) {
-                           
+                                        let phase_nbr = phasesNombre(derniere_phase);
+                                        
                                         sendEvaluationToDB();
-                                        phase_nbr++;
                                         changerPhaseActive(phase_nbr);
                                         sessionStorage.setItem('phase_nbr',JSON.stringify(phase_nbr));
+                                        
                                         if(phase_nbr === total_phase) {
                                             sessionStorage.setItem('niveau_max',JSON.stringify(niveau_max+1));
                                             sessionStorage.setItem('niveau_en_cours',JSON.stringify(niveau_max+2));
@@ -1924,4 +1974,7 @@ $('document').ready(function() {
             caracteres_coches = [voyelles_cochees, consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees];
         }	    
 	}
+    function initialiserProgressBarr() {
+        $('.progress_question_bar, .progress_bonne_reponse_bar').css('width',0);
+    }
 });

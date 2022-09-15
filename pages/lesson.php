@@ -101,8 +101,8 @@ if(isset($_SESSION["id"])){
             <div class="course_head" id="apprentissage_entete"></div>
             <div class="course_body" id="apprentissage_corps"></div>
             <div class='lesson_progress_bar' id="apprentissage_progress_bar">
-                <span class='lesson_progress_question_bar'></span>
-                <span class='lesson_progress_bonne_reponse_bar'></span>
+                <span class='progress_question_bar lesson_progress_question_bar'></span>
+                <span class='progress_bonne_reponse_bar lesson_progress_bonne_reponse_bar'></span>
             </div>
             
          </div>
@@ -112,8 +112,8 @@ if(isset($_SESSION["id"])){
             <div class="course_head" id="exercice_entete"></div>
             <div class="course_body" id="exercice_corps"></div>
             <div class='lesson_progress_bar' id="exercice_progress_bar">
-                <span class='lesson_progress_question_bar'></span>
-                <span class='lesson_progress_bonne_reponse_bar'></span>
+                <span class='progress_question_bar lesson_progress_question_bar'></span>
+                <span class='progress_bonne_reponse_bar lesson_progress_bonne_reponse_bar'></span>
             </div>
             
          </div>

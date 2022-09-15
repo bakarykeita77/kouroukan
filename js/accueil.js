@@ -6,6 +6,7 @@
     
     userIdentityStorage();
     dataStorage();
+    sessionStorage.removeItem('nbr');
     
 
     function userIdentityStorage() {
@@ -53,21 +54,20 @@
                 var moyenne = 1, moyenne_1 = 0, moyenne_2 = 0, moyenne_3 = 0, moyenne_4 = 0;
                
             	for (var i = 0; i < matieres.length ; i++) {
-            	for (var j = matieres[i].length; j > 0; j--) {
+            	for (var j = 0; j < matieres[i].length; j++) {
+                 
+                    phases_etudiees.push(matieres[i][j].phase);  
                     
-                    phases_etudiees.push(matieres[i][j-1].phase);  
-                    
-                    let  nivo = parseInt(matieres[i][j-1].niveau);
-                    let  phase_note = parseInt(matieres[i][j-1].note);
+                    let  nivo = parseInt(matieres[i][j].niveau);
+                    let  phase_note = parseInt(matieres[i][j].note);
                     
                     if(nivo === 1) note_1 += phase_note;
                     if(nivo === 2) note_2 += phase_note;
                     if(nivo === 3) note_3 += phase_note;
                     if(nivo === 4) note_4 += phase_note;
             	}}
-            	
                 derniere_phase = phases_etudiees[phases_etudiees.length-1];
-                
+
                 if(matieres[0] !== undefined && matieres[0].length === 3) moyenne_1 = note_1/3; 
                 if(matieres[1] !== undefined && matieres[1].length === 4) moyenne_2 = note_2/4;
                 if(matieres[2] !== undefined && matieres[2].length === 4) moyenne_3 = note_3/4;

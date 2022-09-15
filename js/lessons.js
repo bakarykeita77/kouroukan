@@ -116,9 +116,8 @@ $('document').ready(function() {
             return content;
         }
     	function stylesDesPhases() {
-            if($.inArray(derniere_phase,id_phases) !== -1) sessionStorage.removeItem('nbr');
-            
             var nbr = JSON.parse(sessionStorage.getItem('nbr'));
+           // if(total_phase === nbr) sessionStorage.removeItem('nbr');
     	    var lesson_statut = lessonStatut();
     	    var phase_nbr = nombre();
     	    
@@ -133,13 +132,13 @@ $('document').ready(function() {
                         if(phase_index  >  0) $(this).addClass('a_apprendre');
                     }
                     if(phase_nbr > 0) {
-                        if(phase_index == phase_nbr-1) $(this).removeClass('active').addClass('apprises');
+                        if(phase_index <= phase_nbr-1) $(this).removeClass('active').addClass('apprises');
                         if(phase_index == phase_nbr  ) $(this).removeClass('a_apprendre').addClass('active');
                         if(phase_index >= phase_nbr+1) $(this).addClass('a_apprendre');
                     }
                 }
     	        if(lesson_statut == "non_vierge") {
-                    if(phase_index == phase_nbr-1) $(this).removeClass('active').addClass('apprises');
+                    if(phase_index <= phase_nbr-1) $(this).removeClass('active').addClass('apprises');
                     if(phase_index == phase_nbr  ) $(this).removeClass('a_apprendre').addClass('active');
                     if(phase_index >= phase_nbr+1) $(this).addClass('a_apprendre');
     	        }
@@ -181,8 +180,10 @@ $('document').ready(function() {
         }
 	}
     function phasesNombre(derniere_phase) {
+        
         let phase_nbr, derniere_phase_index;
- 
+        let nbr = JSON.parse(sessionStorage.getItem('nbr'));
+
         $.each($('#phases_list li'), function() {
             let phase_id = $(this).attr('id');
             id_phases.push(phase_id);
@@ -206,7 +207,7 @@ $('document').ready(function() {
     	       
             var phase_index = $(this).index();
             if(total_phase > phase_nbr) {  
-                if(phase_index == phase_nbr-1) $(this).removeClass('active').addClass('apprises');
+                if(phase_index <= phase_nbr-1) $(this).removeClass('active').addClass('apprises');
                 if(phase_index == phase_nbr  ) $(this).removeClass('a_apprendre').addClass('active');
                 if(phase_index >= phase_nbr+1) $(this).addClass('a_apprendre');
             }       	    
@@ -596,14 +597,12 @@ $('document').ready(function() {
                     	        var course = $(this).siblings('#apprentissage').html();
                     
                                 note = noterApprentissage();
-                 	                 
                                 if(note <  moyenne) alert("ߌ ߡߊ߫ ߛߓߍߘߋ߲ ߥߟߊ ߜߋ߭ ߠߎ߬ ߓߍ߯ ߟߊߡߍ߲߫");
                                 if(note >= moyenne) {
                     
                                     let nbr = JSON.parse(sessionStorage.getItem('nbr'));
                                     let phase_nbr = nombre();
-                      
-  
+
                                     sendApprentissageToDB();
                                     changerPhaseActive(phase_nbr);
                                 }
@@ -827,16 +826,29 @@ $('document').ready(function() {
                             $('#fermer_exercice').one('click',function(){ 
                             
                                 note = noterExercice(); 
-
                                 if(note <  moyenne) alert( "reprendre" ); 
                                 if(note >= moyenne) { 
-                                    let phase_nbr = phasesNombre(derniere_phase);
+                                    
+                                    let nbr = JSON.parse(sessionStorage.getItem('nbr'));
+                                    let phase_nbr = nombre();
+                      
                                     
                                     sendExerciceToDB(); 
                                     changerPhaseActive(phase_nbr); 
-                                    sessionStorage.setItem('phase_nbr',JSON.stringify(phase_nbr));
                                 }
                             
+                                function noterExercice() {
+                                    var note_total = 0;
+                                    
+                                    for (var i = 0; i < questions_quantity; i++) {
+                                        if(exercice_a_stocker[i][2] == 1) {
+                                            note_total += exercice_a_stocker[i][2];
+                                        }
+                                    }
+                                    
+                                    var note = Math.floor((note_total*20)/quantite_de_question);
+                                    return note;
+                                }                                
                                 function sendExerciceToDB() {
 
                                     let matiere = JSON.parse(sessionStorage.getItem('matiere_active'));
@@ -859,18 +871,6 @@ $('document').ready(function() {
                                     .then(response => response.json())
                                     .catch(error => console.log(error));
                                 }
-                                function noterExercice() {
-                                    var note_total = 0;
-                                    
-                                    for (var i = 0; i < questions_quantity; i++) {
-                                        if(exercice_a_stocker[i][2] == 1) {
-                                            note_total += exercice_a_stocker[i][2];
-                                        }
-                                    }
-                                    
-                                    var note = Math.floor((note_total*20)/quantite_de_question);
-                                    return note;
-                                }                                
                             });
                 	    }
                     }

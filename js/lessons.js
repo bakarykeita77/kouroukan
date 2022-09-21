@@ -1173,6 +1173,7 @@ $('document').ready(function() {
                                 	    question = questions_courantes[compteur];
                                 	    
                                 	    if(question) $('.clavier_container').css('opacity',1);
+                                	    $('#pratiques_images_container').css('transform','scale(0.25)');
                       	        
                                 	    actualiserLesBoutonsDEntete();
                                 	    repeteQuestion();
@@ -1316,6 +1317,8 @@ $('document').ready(function() {
                                             let image = (image_source !== undefined) ? $('#'+reponse).html() : $('#ߖߌ߬ߦߊ').html();
             
                                     	    $('#pratiques_images_container').html(image);
+                                	        $('#pratiques_images_container').css('transform','scale(1)');
+                                	        
                                 	        if(question == reponse) {
                                 	            $('#pratiques_images_container').css('opacity',1);
                                 	            $('#croix').css('display','none');

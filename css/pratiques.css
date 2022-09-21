@@ -124,7 +124,7 @@
     height: 100%;
     width: 100%;
     background-color: #fff;
-    z-index: 0;
+    transition: 2s;
 }
 #pratiques_images_container img {
     position: absolute;

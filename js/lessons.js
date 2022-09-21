@@ -914,7 +914,7 @@ $('document').ready(function() {
                     	let pratique_a_stocker = [];
             
                         var questions_pratiques=[], questions=[], question='', reponse=[], point='';
-                        var table = $('#pratiques_reponse_container table tbody').html();
+                        var table = $('#pratique_fiche table tbody').html();
                         
                       /*--------------------------------------------------------------------*/
                         $('.fermeture').attr('id', 'fermer_pratique');
@@ -1296,20 +1296,20 @@ $('document').ready(function() {
                                         
                                         function chargerTableDeReponses() {
                                             table += "<div class='tr'>\n <span class='td'>"+question+"</span>\n<span class='td'>"+reponse+"</span>\n<span class='td'>"+parseIntNko(point)+"</span>\n </div>\n\n";
-                                            $('#table_1 #tbody').html(table);
+                                            $('#pratique_fiche_body').html(table);
                                         }
                                         function rechargerTableDeReponses() {
                                             table += "<div>\n <span class='td'></span>\n<span class='td'></span>\n<span class='td'></span>\n </div>\n\n";
-                                            $('#table_1 #tbody').html(table);
+                                            $('#pratique_fiche_body').html(table);
                                         }
                                         function stylesDeTableDeReponses() {
-                                            $('#table_1 #tbody div:last-child').addClass('pratique_tr_actif'); 
-                                            $('#table_1 #tbody div:last-child').siblings().removeClass('pratique_tr_actif'); 
-                                            $('#table_1 #tbody div:last-child').siblings().addClass('noir_clair'); 
+                                            $('#pratique_fiche_body div:last-child').addClass('pratique_tr_actif'); 
+                                            $('#pratique_fiche_body div:last-child').siblings().removeClass('pratique_tr_actif'); 
+                                            $('#pratique_fiche_body div:last-child').siblings().addClass('noir_clair'); 
                                         
                                         }
                                         function defilementDeTableReponseVersLeHaut() {
-                                            $('#tbody').animate({ scrollTop:$('#tbody')[0].scrollHeight }, 1000);
+                                            $('#pratique_fiche_body').animate({ scrollTop:$('#pratique_fiche_body')[0].scrollHeight }, 1000);
                                         }	   
                                         function afficherImage() {
                                             
@@ -1426,7 +1426,7 @@ $('document').ready(function() {
                                     	            let pfh = $('#pratique_foot').height();
                                     	            
                 	                                $('#tbody').css('height', (pfh-120)+'px');
-                                    	            $('#table_1 #tfoot').css('display','block');
+                                    	            $('#pratique_fiche_foot').css('display','block');
                                     	           // $('#message_de_fin_container').css('display','block');
                                     	        }
                                     	        function chargerTotalPoints() {
@@ -1486,8 +1486,8 @@ $('document').ready(function() {
                                         }  
                                     	function revisionDOption() {
                                     	        
-                                    	    $('#table_1 #tbody div').on('click', function() {
-                                    	        $('#table_1 #tbody div').addClass('noir_clair');
+                                    	    $('#pratique_fiche_body div').on('click', function() {
+                                    	        $('#pratique_fiche_body div').addClass('noir_clair');
                                     	        $(this).siblings().removeClass('pratique_tr_actif');
                                     	        $(this).addClass('pratique_tr_actif'); 
                                     	        
@@ -1577,8 +1577,8 @@ $('document').ready(function() {
                         
                         function dimensionnementParDefautDePratiquesCorps() {
                 	        var pratiques_body_height = $('#pratique_body').height();
-                	        var pratiques_reponse_container_height = $('#pratiques_reponse_container').height();
-                	        var pratiques_demo_container_height = pratiques_body_height - pratiques_reponse_container_height;  
+                	        var pratique_fiche_height = $('#pratique_fiche').height();
+                	        var pratique_body_height = pratiques_body_height - pratique_fiche_height;  
 
                             $('#message_de_fin_container').css('display','none');
         	                $('#pratiques_images_container img').attr('src','#');

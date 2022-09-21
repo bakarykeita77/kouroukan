@@ -139,7 +139,7 @@ if(isset($_SESSION["id"])){
             </div>
           
           <!--pratique_body---------------------------------------------------->
-            <div id="pratiques_demo_container">
+            <div id="pratique_body">
                 <div id="pratique_guide">
                     <div id="bulles_container"></div>
                     <p id="signe_egal">&#9183;</p>
@@ -153,27 +153,21 @@ if(isset($_SESSION["id"])){
           
           <!--pratique_foot---------------------------------------------------->
             <div id="pratique_foot">
-                
-                <div class='progress_bar' id="pratique_progress_bar"><span class='progress_question_bar'></span><span class='progress_bonne_reponse_bar'></span></div>
-                <div id="pratiques_reponse_container">
-                    <div id="table_1">
-                        <div id="thead">
-                            <div>
-                                <span class="th">ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</span>
-                                <span class="th">ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ</span>
-                                <span class="th">ߓߙߍ߬ߦߊ</span>
-                            </div>
+                <div id="pratique_fiche">
+                    <div id="pratique_fiche_head">
+                        <span class="th">ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</span>
+                        <span class="th">ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ</span>
+                        <span class="th">ߓߙߍ߬ߦߊ</span>
+                    </div>
+                    <div id="pratique_fiche_body"></div>
+                    <div id="pratique_fiche_foot">
+                        <div>
+                            <span id="label_total_point">ߓߍ߬ߙߍ ߡߎ߬ߡߍ</span>
+                            <span id="total_point"></span>
                         </div>
-                        <div id="tbody"></div>
-                        <div id="tfoot">
-                            <div>
-                                <span id="label_total_point">ߓߍ߬ߙߍ ߡߎ߬ߡߍ</span>
-                                <span id="total_point"></span>
-                            </div>
-                            <div>
-                                <span id="label_pourcentage_point" colspan="2">ߓߍ߬ߙߍ ߗߡߍ߬ߘߐ߬ߦߊ</span>
-                                <span id="pourcentage_point"></span>
-                            </div>
+                        <div>
+                            <span id="label_pourcentage_point" colspan="2">ߓߍ߬ߙߍ ߗߡߍ߬ߘߐ߬ߦߊ</span>
+                            <span id="pourcentage_point"></span>
                         </div>
                     </div>
                 </div>
@@ -181,6 +175,7 @@ if(isset($_SESSION["id"])){
                     <p id="message_de_fin"></p>
                     <div id="message_btn_container"> <button id="message_btn_1"></button><button id="message_btn_2"></button> </div>
                 </div>
+                <div class='progress_bar' id="pratique_progress_bar"><span class='progress_question_bar'></span><span class='progress_bonne_reponse_bar'></span></div>
                 <div id="dialogue_btn">
     
                     <div class="btn question_btn">

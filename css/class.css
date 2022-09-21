@@ -143,12 +143,11 @@ html {
     align-items: center;
 }
 .clavier_container {
-    position: absolute;
+    position: relative;
     height: 8rem;
     min-height: 4rem;
     width: 100%;
-    margin: auto;
-    bottom: 0;
+    margin: 0;
     padding-top: 1rem;
     background-color: #666;
     border: 1px solid transparent;
@@ -258,7 +257,21 @@ html {
     width: 100vw;
     background-color: rgba(0,0,0,0.5);
 }
-
+.dialogue_btn {
+    position: absolute;
+    background-color: #666;
+    bottom: 8.25rem;
+    padding: 0 1rem;
+    margin: 0;
+    width: 100%;
+    height: 2rem;
+    line-height: 2rem;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 6px;
+    box-sizing: border-box;
+    box-shadow: 0 1px 2px #444;
+}
 
 .error_message {
     color: rgba(255,0,0,0.5);
@@ -685,9 +698,8 @@ html {
 }
 .profile_menu_body {}
 .progress_bar {
-    position: absolute;
-    top: 0.25rem;
-    margin: 0;
+    position: relative;
+    margin-top: 0.25rem;
     height: 0.5rem;
     width: calc(100% - 2px);
     border: 1px solid #ddd;

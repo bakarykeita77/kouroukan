@@ -15,10 +15,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>image_3</title>
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/class.css"/>
+	<style>
+	    .image_card img {object-fit:contain;}
+	</style>
 </head>
 <body>
     <center>
-        <h1 class="images_titre">ߞߎߡߊߘߋ߲߫ ߜߋ߲߬ ߞߋ߬ߟߋ߲߬ߡߊ ߟߎ߬ ߖߌ߬ߦߊ</h1>
+        <h1 class="images_titre">ߞߎߡߊߘߋ߲߫ ߜߋ߲߬ ߛߓߊ߬ߡߊ ߟߎ߬ ߖߌ߬ߦߊ</h1>
         <div class="images_container">
             <?php for($i=0; $i<count($images_3); $i++) { 
                 $id = $images_3[$i]['id']; 

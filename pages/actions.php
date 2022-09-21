@@ -56,8 +56,7 @@
     $lesson    = securiser($lesson);
     $note      = securiser($note);
     $note      = (int) $note;
-    $pratique  = [$niveau, $lesson, $note];
-    
+
     $syllabe_categorie = securiser($syllabe_categorie);
     $image_name = securiser($image_name);
     $name       = explode('.',$image_name)[0];
@@ -67,21 +66,18 @@
     $type      = securiser($type);
 
     $table_name = $syllabe_categorie;
-  echo $pratique;  
- 
+
   /*----------------------------------------------------------------------------------------------
     Gestion des dnnées dans la base de données.
   ----------------------------------------------------------------------------------------------*/
-    if($id_client != '' && $matiere != '' && $niveau == '' && $phase == '' && $lesson == '' && $note == '')                 getAllInfo($lesson,$id_client);
-    if($id_client != '' && $matiere != '' && $niveau != '' && $phase != '' && $lesson != '' && $note != '')                 archiverLesson($id_client,$matiere,$niveau,$phase,$lesson,$note);              
-    if($prenom != '' && $nom != '' && $naissance != '' && $sexe != '' && $adresse != '' && $email != '' && $pass != '')     addClient($prenom,$nom,$naissance,$sexe,$adresse,$email,$pass);       
+    if($id_client != '' && $matiere != '' && $niveau == '' && $phase == '' && $lesson == '' && $note == '')                          getAllInfo($lesson,$id_client);
+    if($id_client != '' && $matiere != '' && $niveau != '' && $phase != '' && $lesson != '' && $note != '')                          archiverLesson($id_client,$matiere,$niveau,$phase,$lesson,$note);              
+    if($prenom != '' && $nom != '' && $naissance != '' && $sexe != '' && $adresse != '' && $email != '' && $pass != '')              addClient($prenom,$nom,$naissance,$sexe,$adresse,$email,$pass);       
     if($id != '' && $prenom != '' && $nom != '' && $naissance != '' && $sexe != '' && $adresse != '' && $email != '' && $pass != '') modifierClient($id,$prenom,$nom,$naissance,$sexe,$adresse,$email,$pass);           
-    if($id_client != '' && $pratique != [''])                                                                                   archiverPratique($id_client,$pratique);         
-    if($id_client != '' && $matiere != '' && $niveau != '' && $phase != '' && $lesson != '' && $note != '')                 archiverLesson($id_client,$matiere,$niveau,$phase,$lesson,$note);        
-    if($numero != '' && $question != '' && $reponse != '' && $points != '')                                                 archiverNotes($numero,$question,$reponse,$points);       
-    if($id != '')                                                                                                           getClient($id);       
-    if($matiere != '' && $id_client != '')                                                                                  getAllInfo($matiere,$id_client);     
-    if($name != null && $extension != null && $taille != null && $type != null && $image != null && $table_name != null)    uploadImage($table_name,$id_client,$name,$extension,$taille,$type,$image);       
+    if($id_client != '' && $matiere != '' && $niveau != '' && $phase != '' && $lesson != '' && $note != '')                          archiverLesson($id_client,$matiere,$niveau,$phase,$lesson,$note);        
+    if($id != '')                                                                                                                    getClient($id);       
+    if($matiere != '' && $id_client != '')                                                                                           getAllInfo($matiere,$id_client);     
+    if($name != null && $extension != null && $taille != null && $type != null && $image != null && $table_name != null)             uploadImage($table_name,$id_client,$name,$extension,$taille,$type,$image);       
     
   /*----------------------------------------------------------------------------------------------
     Les fonctions.
@@ -124,20 +120,6 @@
 
         }else{ echo("L'email envoye est deja utilise. Essayer un autre"); }
 	 }
-	function archiverPratique($id_client,$pratique) {
-	    global $db;
-
-		$sql = "INSERT INTO pratiques(id_client, pratique) 
-				VALUES(:id_client, :pratique)";
-		$requette = $db -> prepare($sql);
-
-		$requette->bindValue(':id_client',  $id_client,   PDO::PARAM_INT);
-		$requette->bindValue(':pratique', $pratique,  PDO::PARAM_STR);
-
-		$pratiques = $requette->execute();
- 
-		return $pratiques;
-	 }
 	function archiverLesson($id_client,$matiere,$niveau,$phase,$lesson,$note) {
 	    global $db;
 	    
@@ -156,22 +138,6 @@
 	    $data = $requete -> fetchAll();
 	    
 	    return $data;
-	 }
-	function archiverNotes($numero, $question, $reponse, $points) {
-		global $db;
-
-		$sql = "INSERT INTO notes(numero, question, reponse, points) 
-				VALUES(:numero, :question, :reponse, :points)";
-		$requette = $db -> prepare($sql);
-
-		$requette->bindValue(':numero',  $numero,   PDO::PARAM_STR);
-		$requette->bindValue(':question',$question, PDO::PARAM_STR);
-		$requette->bindValue(':reponse', $reponse,  PDO::PARAM_STR);
-		$requette->bindValue(':points',  $points,   PDO::PARAM_STR);
-
-		$notes = $requette->execute();
-
-		return $notes;
 	 }
 	function getAllClients() {
 		global $db;

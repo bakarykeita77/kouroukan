@@ -15,6 +15,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>image_1</title>
 	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/class.css"/>
+	<style>
+	    .image_card img {object-fit:contain;}
+	</style>
 </head>
 <body>
     <center>

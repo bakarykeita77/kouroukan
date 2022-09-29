@@ -8,12 +8,14 @@ $('document').ready(function() {
     var niveau_max      = JSON.parse(sessionStorage.getItem('niveau_max'));
     var niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
     
+    var groupe_d_images = $('#images_pratique .images_container');
+    
     var id_phases = [], data_phase_nbr;
     var phases_etudiees = JSON.parse(sessionStorage.getItem('phases_etudiees'));
     var derniere_phase  = JSON.parse(sessionStorage.getItem('derniere_phase'));
     var nbr  = JSON.parse(sessionStorage.getItem('nbr'));
 
-    
+   
     if(matieres.length === 0) {
         niveau_max = 0;
         niveau_en_cours = 1;
@@ -52,8 +54,8 @@ $('document').ready(function() {
         getPhases(); 
         phases();
         matiere();
-   
-
+        
+        
   /*--------------------------------------------------------------------*/
 	
 	function getPhases() { 
@@ -66,8 +68,7 @@ $('document').ready(function() {
     }
     function phases() {
         var phases_collection = phasesCollection();
-        
-     
+
     	$('.phases').html(phasesHTML());
     	
     	data_phase_nbr = phasesNombre(derniere_phase);
@@ -117,16 +118,20 @@ $('document').ready(function() {
         }
     	function stylesDesPhases() {
             var nbr = JSON.parse(sessionStorage.getItem('nbr'));
+    
            // if(total_phase === nbr) sessionStorage.removeItem('nbr');
     	    var lesson_statut = lessonStatut();
     	    var phase_nbr = nombre();
-    	    
+      
     	    $.each($('#phases_list li'), function() {
     	      
         	    var phase_index = $(this).index();
         	    var phase_attr_id = $(this).attr('id');
                 
-                if(lesson_statut == "vierge") {
+    	        if(lesson_statut == "ended") {
+                    $(this).removeClass('active a_apprendre').addClass('apprises');
+    	        }
+                if(lesson_statut == "beginning") {
                     if(phase_nbr ===0) {
                         if(phase_index === 0) $(this).addClass('active');
                         if(phase_index  >  0) $(this).addClass('a_apprendre');
@@ -137,7 +142,7 @@ $('document').ready(function() {
                         if(phase_index >= phase_nbr+1) $(this).addClass('a_apprendre');
                     }
                 }
-    	        if(lesson_statut == "non_vierge") {
+    	        if(lesson_statut == "in_progress") {
                     if(phase_index <= phase_nbr-1) $(this).removeClass('active').addClass('apprises');
                     if(phase_index == phase_nbr  ) $(this).removeClass('a_apprendre').addClass('active');
                     if(phase_index >= phase_nbr+1) $(this).addClass('a_apprendre');
@@ -146,14 +151,16 @@ $('document').ready(function() {
     	}
         function lessonStatut() {
             let li = $('#phases_list li');
-            let indice = 0;
+            let indice = 0, ls = "";
             
             $.each(li, function() { 
                 let li_id = $(this).attr('id');
                 indice = ($.inArray(li_id, phases_etudiees) === -1) ? indice : indice+=1; 
             });
-          
-            let ls = (indice === 0) ? "vierge" : "non_vierge";
+            
+            if(li.length === indice) ls = "ended";
+            if(li.length > indice) ls = (indice === 0) ? "beginning" : "in_progress";
+            
             return ls;
         }
         function actualiserTitre() {
@@ -218,7 +225,7 @@ $('document').ready(function() {
     }
     function nombre() {
         let phase_nbr = 0;
-        
+       
         if(nbr === null || nbr === 0) phase_nbr = (data_phase_nbr === 0) ? 0 : data_phase_nbr;
         if(nbr > 0) phase_nbr = (nbr >= data_phase_nbr) ? nbr : data_phase_nbr;
 
@@ -238,6 +245,7 @@ $('document').ready(function() {
     	
     	$('#phases_list li').on('click', function(e){
       
+            var syllabes = syllab();
             var syllabes_tonifies = tonification();  
 
             var questionnaires = questions();
@@ -269,8 +277,8 @@ $('document').ready(function() {
             var dialogue_btn_html = $('#dialogue_btn').html();
             var parametres_html = parametres.html();
 
-          /*--------------------------------------------------------------------*/    
-     
+          /*--------------------------------------------------------------------*/   
+            
     	    phaseActiveName();
     	    dimensionnementDeCourseBody();
     	    affichageDeCours();
@@ -355,7 +363,6 @@ $('document').ready(function() {
             }
             function questions() {
                 var lq = '';
-               
                 if(niveau_en_cours==1) lq = mix1D(lettres);
                 if(niveau_en_cours==2) lq = mix1D(syllabes);
                 if(niveau_en_cours==3) lq = mix1D(syllabes_tonifies);
@@ -395,7 +402,7 @@ $('document').ready(function() {
             	    }
             	  
                 	function apprentissages() {
-                	                    	    
+             	                    	    
                 	    var compteur_de_question = 1;
                         var apprentissage_a_stocker = [];
                         var memo = [];
@@ -875,6 +882,8 @@ $('document').ready(function() {
                 	    }
                     }
                     function pratique() {
+                        
+                        let phase_nbr = nombre();
 
                         var option = '';
                         var option_index = null;
@@ -929,25 +938,14 @@ $('document').ready(function() {
                       /*--------------------------------------------------------------------*/
 
                     	function recuperationDesOptionsEffectuees() {
-                    	    DB_options = getDBOptions();
-                    	    if(DB_options.length === 4) localStorage.clear();
+                    	    
+                    	    DB_pratiques = JSON.parse(localStorage.getItem('pratiques'));
                     	    local_options = getLocalOptions();
+                    	    
+                    	    if(DB_options != "") localStorage.clear();
                             
                             all_options = (DB_options != '') ? DB_options:local_options;
                     	}
-                    	function getDBOptions() {
-                        	    
-                            let DB_pratiques = JSON.parse(localStorage.getItem('pratiques'));
-                        
-                        	let pratiques_niveaux = [], niveau_max = '';
-                        	let niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));
-                            
-                        	for (var i = 0; i < DB_pratiques.length; i++) {
-                        	    if(DB_pratiques[i][0] == niveau_actif) DB_options = JSON.parse(DB_pratiques[i][1]);
-                        	}
-                        	
-                        	return DB_options;    
-                        }
                         function getLocalOptions() {
                         	    
                             let options = [];
@@ -1127,10 +1125,10 @@ $('document').ready(function() {
                                     alert("ߘߊߞߎ߲ ߡߊ߫ ߛߋ߫ ߦߊ߲߬ ߡߊ߫ ߝߟߐ߫");
                                     return; 
                                 }
-                              /*  if($(this).hasClass('apprises')) {
+                                if($(this).hasClass('apprises')) {
                                     alert("ߕߊ߲߬ߓߌ߬ ߓߘߊ߫ ߞߍ߫ ߦߊ߲߬ ߘߐ߫ ߞߘߐ߬ߡߊ߲߬");
                                     return; 
-                                }   */
+                                }
                                 option_active = $(this);
                             	option_index = $(this).index();
                             	compteur_de_question = 1;
@@ -1147,7 +1145,7 @@ $('document').ready(function() {
                                          
                                 for (var i = 0; i < option.length; i++) { questions_courantes[i] = option[i][0]; }
                                 
-                                $(this).parent().parent().css('top','-110%');
+                                $(this).parent().parent().css('top','-110%'); //masquer les options de pratique
                                 
                                 initialiserProgressBarr();
                         	    poserQuestionPratique();
@@ -1169,37 +1167,16 @@ $('document').ready(function() {
                                 }
                         	    function poserQuestionPratique() {
                             	    $('.question_btn').on('click', function() {
-                                        pratiqueGuide();
                                 	    question = questions_courantes[compteur];
                                 	    
                                 	    if(question) $('.clavier_container').css('opacity',1);
                                 	    $('#pratiques_images_container').css('transform','scale(0.25)');
+                                	    $('#pratique_guide').css('top',0);
                       	        
                                 	    actualiserLesBoutonsDEntete();
+                                	    pratiqueGuide();
                                 	    repeteQuestion();
                                  	        
-                                	    function pratiqueGuide() {
-                                	            
-                                	        var pratique_guide_html = pratiqueGuideHTML();
-                               	          
-                                	        $('#cumule_des_caracteres').html(questions_courantes[compteur]);
-                                	        setTimeout(function() {$('#pratiques_image').attr('src','#');}, 600);
-                                	            
-                                	        $('#bulles_container').html(pratique_guide_html);
-                                	        $('#bulles_container span:last').remove();
-                                	        $('#pratique_guide').animate({'top':0}, 400);
-                                	            
-                                	        function pratiqueGuideHTML() {
-                                	            var pratique_guide_html = '';
-                                	            var nbr_de_bulle = option_index+1; 
-                                	                
-                                	            for (var i = 0; i < nbr_de_bulle; i++) {
-                                	                pratique_guide_html += '<span class="bulle" id="span_'+i+'"></span><span class="plus">+</span>';
-                                	            }
-                                	                
-                                	            return pratique_guide_html;
-                                	        }
-                                	    }
                                 	    function actualiserLesBoutonsDEntete() {
                                 	        compteur_de_question++;
                                 
@@ -1217,6 +1194,28 @@ $('document').ready(function() {
                                 	        $('.repetition_btn').on('click', function(){ $('#audio').attr({'src':'http://localhost:8080/kouroukan/son/mp3/'+question+'.mp3', 'autoplay':'on'}); });
                                 	    }
                             	    });
+                        	    }
+                        	    function pratiqueGuide() {
+                        	            
+                        	        var pratique_guide_html = pratiqueGuideHTML();
+                       	          
+                        	        $('#cumule_des_caracteres').html(questions_courantes[compteur]);
+                        	        setTimeout(function() {$('#pratiques_image').attr('src','#');}, 600);
+                        	            
+                        	        $('#bulles_container').html(pratique_guide_html);
+                        	        $('#bulles_container span:last').remove();
+                        	        $('#pratique_guide').animate({'top':0}, 400);
+                        	            
+                        	        function pratiqueGuideHTML() {
+                        	            var pratique_guide_html = '';
+                        	            var nbr_de_bulle = option_index+1; 
+                        	                
+                        	            for (var i = 0; i < nbr_de_bulle; i++) {
+                        	                pratique_guide_html += '<span class="bulle" id="span_'+i+'"></span><span class="plus">+</span>';
+                        	            }
+                        	                
+                        	            return pratique_guide_html;
+                        	        }
                         	    }
                         	    function repondreQuestionPratique(){
                             	    $('.clavier_container td').on('click', function() {
@@ -1518,9 +1517,11 @@ $('document').ready(function() {
                     	    $('#fermer_pratique').on('click',function(){
 
                                 if(phase_index <  phase_nbr || nbr_option_non_vide < all_options.length) { return; }
-                                if(phase_index == phase_nbr && nbr_option_non_vide == all_options.length) {
+                                if(phase_index === phase_nbr && nbr_option_non_vide == all_options.length) {
                                     
+                                 
                                     note = noterPratique(); 
+                                    
                                    
                                  /* Vérification de la validité de pratique:
                                     Pourqu'une pratique soit valable, il faut que chaque option soit passée.
@@ -1529,7 +1530,7 @@ $('document').ready(function() {
                                     	        
                                     if(note >= moyenne) {
                                         let phase_nbr = phasesNombre(derniere_phase);
-                                        
+                                
                                         sendPratiqueToDB(); 
                                         changerPhaseActive(phase_nbr);
                                         sessionStorage.setItem('phase_nbr',JSON.stringify(phase_nbr)); 
@@ -1551,9 +1552,15 @@ $('document').ready(function() {
                                 }
                                 function sendPratiqueToDB() {
                                     
+                                    let matiere = JSON.parse(sessionStorage.getItem('matiere_active'));
+                                    let phase   = JSON.parse(sessionStorage.getItem('phase'));
                                     let lesson  = JSON.stringify(all_options);
+                                                    
                                     const pratique_data = new URLSearchParams({
-                                        niveau : niveau,
+                                        id     : id,
+                                        matiere: matiere,
+                                        niveau : niveau_en_cours,
+                                        phase  : phase,
                                         lesson : lesson,
                                         note   : note
                                     });
@@ -1563,7 +1570,7 @@ $('document').ready(function() {
                                         body: pratique_data 
                                     })
                                     .then(response => response.json())
-                                    .catch(error => console.log(error));
+                                    .catch(error => alert(error));
                                 }
                                 function deleteLocalOptions() {
                                     
@@ -1787,10 +1794,13 @@ $('document').ready(function() {
                             
                             function poserQuestionEvaluation(){
                         	    $('.question_btn').on('click', function(){
+                        	        effacerPrecedenteReponse();
                         	        question_evaluation = questions_evaluation[q_index];
-          //  alert(question_evaluation);            
+                       
                         	        dicterLaQuestion();
-                        	       // memoriserQuestionRang();
+                        	        $('#evaluation_cross').css('display','none');
+                        	        $('#evaluation_cross').css('transform','scale(0.4)');
+                                    $('#evaluation_reponse_container').css({'top':0});                        	       // memoriserQuestionRang();
                         
                         	        q_index = compteur();
                         	        q_ordre = parseIntNko(q_index+1);
@@ -1800,9 +1810,12 @@ $('document').ready(function() {
                                         $('.question_btn').off('click');
                                         $('.question_btn').html('ߞߘߐߓߐߟߌ ߓߘߊ߫ ߓߊ߲߫. ߌ ߞߎߟߎ߲ߖߋ߫߹ ');
                                     }
-                        	        actualiserEvaluationEntete();
-                        	        
-                        	        function actualiserEvaluationEntete(){
+                        	        actualiserLesLibellesDeDialogueBtn();
+                    alert(question_evaluation);     	        
+                        	        function effacerPrecedenteReponse() {
+                        	            $('#evaluation_reponse').html('');
+                        	        }
+                        	        function actualiserLesLibellesDeDialogueBtn(){
                         	            
                             	        $('.question_ordre').html(q_ordre+q_rang);
                             	        $('.question_action').html('ߠߊߡߍ߲߫');
@@ -1835,7 +1848,7 @@ $('document').ready(function() {
                                         var caractere = $(this).html();
                                         
                                         reponse_evaluation[reponse_evaluation.length] = caractere;
-                                        $('#reponse').html(reponse_evaluation.join(''));
+                                        $('#evaluation_reponse').html(reponse_evaluation.join(''));
                                         afficherCorrectionButton();
                                         
                                         function afficherCorrectionButton(){
@@ -1851,7 +1864,7 @@ $('document').ready(function() {
                             $('.correction_btn').on('click', function(){
                                 
                                 corrigerEvaluation();
-                                actualiserProgressBar();
+                                actualiserEvaluationProgressBar();
                                 effacer();
                                 setTimeout(function() { afficherQuestionButton(); }, 1500);
                             	evaluation_counter++;
@@ -1869,26 +1882,20 @@ $('document').ready(function() {
                             	    
                                     function marquerReponseEvaluation() {    
                                         if(reponse_evaluation.join('') == question_evaluation) {
-                                          
-                                            $('#check_mark_container').css('display','inline-block');
-                                            $('#check_mark').html("&#10003;"); 
-                                            setTimeout(function(){ $('#check_mark_cover').css({'left':'-100%'}); },100);
-                                            setTimeout(function(){ $('#check_mark_cover').css({'left':0}); },1500);
-                                            setTimeout(function(){ $('#check_mark_container').css({'display':'none'}); },1500);
+                                            $('#evaluation_reponse_container').css({'top':'-100%'});
                                         }else{
                                             
-                                            $('#cross').html( '&#10060;' );
-                                            $('#cross_container').css({'display':'block', 'transform':'scale(0.5)', 'opacity':0});
-                                            setTimeout(function(){ $('#cross_container').css({'transform':'scale(1)', 'opacity':0.75}); }, 100);
-                                            setTimeout(function(){ $('#cross_container').css({'display':'none'}); },1500);
+                                            $('#evaluation_cross').html( '&#10060;' );
+                                            $('#evaluation_cross').css({'display':'block', 'transform':'scale(0.5)', 'opacity':0});
+                                            setTimeout(function(){ $('#evaluation_cross').css({'transform':'scale(1)', 'opacity':0.75}); }, 100);
                                         }
                                     }    
                                 }
-                                function actualiserProgressBar(){
+                                function actualiserEvaluationProgressBar(){
                                             
-                                    var course_width = $('.course').width();
-                                    $('.progress_bar').width( course_width - 2 );
-                                    var progress_unity = $('.progress_bar').width()/nbr_max_de_questions_a_poser;
+                                    var course_width = $('#evaluation_foot').width();
+                                    $('#evaluation_progress_bar').width( course_width - 2 );
+                                    var progress_unity = $('#evaluation_progress_bar').width()/nbr_max_de_questions_a_poser;
                                            
                                     if(question_evaluation != reponse_evaluation.join('')){ 
                                         $('.progress_question_bar').css('width','+='+progress_unity+'px');
@@ -1913,26 +1920,26 @@ $('document').ready(function() {
                         }
                         function stockerEvaluation() {
                             $('.correction_btn').on('click', function(){
-                              
+                         
                                 if(evaluation_counter == nbr_max_de_questions_a_poser) {
-                                    
-                                    if(note <  moyenne) alert( "reprendre" ); 
+                                     
+                                    if(note <  moyenne) alert( "ߛߍ߬ߦߵߊ߬ ߡߊ߬" ); 
                                     if(note >= moyenne) {
+                                        if(phase_class == "apprises") {alert("ߦߙߐ ߢߌ߲߬ ߞߍߣߍ߲߫ ߞߘߐ ߟߋ߬"); return false;}
+                                       
                                         let phase_nbr = phasesNombre(derniere_phase);
-                                        
                                         sendEvaluationToDB();
                                         changerPhaseActive(phase_nbr);
                                         sessionStorage.setItem('phase_nbr',JSON.stringify(phase_nbr));
                                         
                                         if(phase_nbr === total_phase) {
-                                            sessionStorage.setItem('niveau_max',JSON.stringify(niveau_max+1));
-                                            sessionStorage.setItem('niveau_en_cours',JSON.stringify(niveau_max+2));
+                                            sessionStorage.setItem('niveau_max',JSON.stringify(niveau_max+1));                                            sessionStorage.setItem('niveau_en_cours',JSON.stringify(niveau_max+2));
                                             sessionStorage.setItem('phase_nbr',JSON.stringify(0));
                                         }
                                     }
                                     
                                     function sendEvaluationToDB() {
-                                        
+                                       
                                         let matiere = JSON.parse(sessionStorage.getItem('matiere_active'));
                                         let phase   = JSON.parse(sessionStorage.getItem('phase'));
                                         let lesson  = JSON.stringify(evaluation_a_stocker);
@@ -1946,7 +1953,7 @@ $('document').ready(function() {
                                             lesson : lesson,
                                             note   : JSON.stringify(note)
                                         });
-                                  
+                                
                                         fetch("http://localhost:8080/kouroukan/pages/actions.php", {
                                             method: "POST",
                                             body: evaluation_data 

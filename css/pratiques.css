@@ -67,6 +67,10 @@
     margin: 0;
     text-align: center;
 }
+#bulles_container {
+    height: 3rem;
+    line-height: 3.5rem;
+}
 #bulles_container .plus {
     color: #aaa;
 }
@@ -76,10 +80,6 @@
     height: 24px;
     font-size: 3rem;
     color: #aaa;
-}
-#bulles_container {
-    height: 3rem;
-    line-height: 3.5rem;
 }
 #pratique_guide span {
     vertical-align: middle;
@@ -100,6 +100,7 @@
     top: 0;
     transition: 0.6s;
 }
+#pratique_fiche span { border: 1px solid transparent; }
 #pratique_fiche_head, #pratique_fiche_body div, #pratique_fiche_foot div {
     display: flex;
     flex-direction: row;
@@ -119,33 +120,34 @@
     transition: 0.6s;
 }
 #pratique_fiche_body div {
+    display: flex;
+    flex-direction: row;
     height: 1.5rem;
     border: 1px solid transparent;
     border-bottom-color: #fff;
 }
-#pratique_fiche_body span:nth-child(2) {
-    border: 1px solid transparent;
-    border-left-color: #fff;
-    border-right-color: #fff;
-}
-#pratique_fiche span:nth-child(1), #pratique_fiche span:nth-child(2) {
+#pratique_fiche_body span:nth-child(1), #pratique_fiche_body span:nth-child(2) {
     text-align: right;
     width: 40%;
     padding-right: 0.5rem;
 }
-#pratique_fiche span:nth-child(3) { flex-grow: 1; text-align: center; }
+#pratique_fiche_body span:nth-child(2) {
+    border-left-color: #fff;
+    border-right-color: #fff;
+}
+#pratique_fiche_body span:nth-child(3) { flex-grow: 1; text-align: center; }
 #pratique_fiche_foot {
     display: none;
     transition: 0.6s;
 }
 #pratique_fiche_foot div { margin: 0.125rem; }
 #pratique_fiche_foot span:nth-child(1) { 
-    flex-grow: 1; 
+    width: 80%;
     text-align:right; 
     font-size: 0.8rem;
 }
 #pratique_fiche_foot span:nth-child(2) { 
-    width: 20%;
+    flex-grow: 1; 
     text-align:center; 
     border: 0.125rem solid #ddd;
 }

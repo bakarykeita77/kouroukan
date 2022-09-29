@@ -54,12 +54,12 @@
                 var moyenne = 1, moyenne_1 = 0, moyenne_2 = 0, moyenne_3 = 0, moyenne_4 = 0;
                
             	for (var i = 0; i < matieres.length ; i++) {
-            	for (var j = 0; j < matieres[i].length; j++) {
+            	for (var j = matieres[i].length; j > 0; j--) {
                  
-                    phases_etudiees.push(matieres[i][j].phase);  
+                    phases_etudiees.push(matieres[i][j-1].phase);  
                     
-                    let  nivo = parseInt(matieres[i][j].niveau);
-                    let  phase_note = parseInt(matieres[i][j].note);
+                    let  nivo = parseInt(matieres[i][j-1].niveau);
+                    let  phase_note = parseInt(matieres[i][j-1].note);
                     
                     if(nivo === 1) note_1 += phase_note;
                     if(nivo === 2) note_2 += phase_note;

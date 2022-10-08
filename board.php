@@ -40,12 +40,12 @@ session_start();
         <form action="#" id="tableau_form"> <textarea name="" id="tableau_noir" cols="30" rows="10"></textarea> </form>
     </div>
     <div class="outils">
-    	<?php include "http://localhost:8080/kouroukan/pages/parametres_tableau.php"; ?>
-    	<?php include "http://localhost:8080/kouroukan/pages/assistant.php"; ?>
-    	<?php include "http://localhost:8080/kouroukan/pages/memoire.php"; ?>
-    	<?php include "http://localhost:8080/kouroukan/pages/smartboard.php";?>
+    	<?php include "pages/parametres_tableau.php"; ?>
+    	<?php include "pages/assistant.php"; ?>
+    	<?php include "pages/memoire.php"; ?>
+    	<?php include "pages/smartboard.php";?>
     </div>
-    <?php include "http://localhost:8080/kouroukan/fonctions/fonctions_tableau.php"; ?>
+    <?php include "fonctions/fonctions_tableau.php"; ?>
     
     <script src="http://localhost:8080/kouroukan/js/parametres_tableau.js"></script>
     <script src="http://localhost:8080/kouroukan/js/assistant.js"></script>

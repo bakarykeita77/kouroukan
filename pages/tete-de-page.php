@@ -17,10 +17,12 @@
         <script src="http://localhost:8080/kouroukan/js/caracteres.js"></script>
     </head>
 	<body>
+		
+	    <?php include("fonctions.php"); ?>  
 	    <div id="tete_de_page_container">
             <h3 id="header">ߞߙߎ߬ߞߊ߲߬</h3>
     		<div id="topbar"> 
-    				
+  				
     			<div id="logo"> <img src="http://localhost:8080/kouroukan/pages/get-avatar.php?client_id=<?= $avatar_id ?>" alt="avatar"/></div>
     			
     			<div id='profile_menu_container'>
@@ -88,7 +90,6 @@
     		</div>
         </div>
 
-	    <?php include "http://localhost:8080/kouroukan/fonctions.php" ?>
 		<script src="http://localhost:8080/kouroukan/js/tete-de-page.js"></script>
 		<script src="http://localhost:8080/kouroukan/js/profile.js"></script>
 

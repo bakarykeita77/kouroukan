@@ -91,7 +91,6 @@
         margin: 0;
         height: 100%;
         width: 75%;
-        overflow: auto;
         float: right;
     }
 	#menu_deroulant li a {

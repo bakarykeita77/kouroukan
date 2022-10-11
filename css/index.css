@@ -3,9 +3,10 @@ body {
     padding: 0;
     direction: rtl;
     font-family:Courier new, monospace;
+    color: blue;
  }
  
- @media (min-width: 801px) {
+@media (min-width: 801px) {
      #index_page {
         position: fixed;
         top: 0;
@@ -28,12 +29,11 @@ body {
         position: relative;
         top: 10%;
         width: 90%;
-        max-width: 400px;
         margin: 2rem;
         padding: 0.5rem;
     }
  }
- @media (max-width: 800px) {
+@media (max-width: 800px) {
      
     #index_page {
         box-shadow: none;

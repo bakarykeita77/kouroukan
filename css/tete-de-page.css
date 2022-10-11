@@ -51,6 +51,7 @@
 	border-radius: 0.25rem;
 	background-color: #005580;
 	z-index: 0;
+    color: red;
 }
 #modifier_avatar {
     background-color:#fff; 

@@ -5,10 +5,12 @@ session_start();
         $client_email = isset($_POST['client_email'])? $_POST['client_email']:'';
         $client_pass = isset($_POST['client_pass'])? $_POST['client_pass']:'';
          
-        if($client_email !== '' OR $client_pass !== ''){
+        if($client_email !== '' && $client_pass !== ''){
         
             require("connexionToDB.php");
             global $db;
+
+          /*---------------------------------------------------------------------------------------------------*/
             
             $requette = $db->prepare("SELECT * FROM users WHERE email = ?");
             $requette->execute(array($client_email));
@@ -26,13 +28,16 @@ session_start();
             $_SESSION["sexe"]      = $client[0]["sexe"];
             $_SESSION["adresse"]   = $client[0]["adresse"];
             $_SESSION["email"]     = $client_email;
-                        
+
+          /*---------------------------------------------------------------------------------------------------*/
+            
+
             //   header("location:accueil.php");   
            
         }else{ $warning = "Veuillez remplir tous les champs !"; }  
         
     /* Creation de la base de donnees*/
-    
+
     }
 ?>
 <!DOCTYPE html>
@@ -69,7 +74,7 @@ session_start();
                         <div id="matiere_active"></div>
                         <div id="matieres_a_etudiees"></div>
                     </div>
-                </div>
+                 </div>
               <!----------------------------------------------------------------------------------------------------->  
                 
                 <p>ߖߐ ߦߴߌ ߡߊ߬ ߞߟߊߓߎߡߊ <span id="nom_d_utilisateur"><?= $_SESSION["prenom"].' '.$_SESSION["nom"]  ?><span/> </p>

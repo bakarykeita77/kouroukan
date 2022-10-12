@@ -60,7 +60,7 @@
     $syllabe_categorie = securiser($syllabe_categorie);
     $image_name = securiser($image_name);
     $name       = explode('.',$image_name)[0];
-    $extension = explode('.',$image_name)[1];
+   // $extension = explode('.',$image_name)[1];
     $taille    = securiser($taille);
     $taille    = (int) $taille;
     $type      = securiser($type);
@@ -73,12 +73,12 @@
     if($id_client != '' && $matiere != '' && $niveau == '' && $phase == '' && $lesson == '' && $note == '')                          getAllInfo($lesson,$id_client);
     if($id_client != '' && $matiere != '' && $niveau != '' && $phase != '' && $lesson != '' && $note != '')                          archiverLesson($id_client,$matiere,$niveau,$phase,$lesson,$note);              
     if($prenom != '' && $nom != '' && $naissance != '' && $sexe != '' && $adresse != '' && $email != '' && $pass != '')              addClient($prenom,$nom,$naissance,$sexe,$adresse,$email,$pass);       
-    if($id != '' && $prenom != '' && $nom != '' && $naissance != '' && $sexe != '' && $adresse != '' && $email != '' && $pass != '') modifierClient($id,$prenom,$nom,$naissance,$sexe,$adresse,$email,$pass);           
+    if($id_client != '' && $prenom != '' && $nom != '' && $naissance != '' && $sexe != '' && $adresse != '' && $email != '' && $pass != '') modifierClient($id_client,$prenom,$nom,$naissance,$sexe,$adresse,$email,$pass);           
     if($id_client != '' && $matiere != '' && $niveau != '' && $phase != '' && $lesson != '' && $note != '')                          archiverLesson($id_client,$matiere,$niveau,$phase,$lesson,$note);        
-    if($id != '')                                                                                                                    getClient($id);       
+    if($id_client != '')                                                                                                             getClient($id_client);       
     if($matiere != '' && $id_client != '')                                                                                           getAllInfo($matiere,$id_client);     
     if($name != null && $extension != null && $taille != null && $type != null && $image != null && $table_name != null)             uploadImage($table_name,$id_client,$name,$extension,$taille,$type,$image);       
-    
+
   /*----------------------------------------------------------------------------------------------
     Les fonctions.
   ----------------------------------------------------------------------------------------------*/
@@ -139,6 +139,7 @@
 	    
 	    return $data;
 	 }
+	
 	function getAllClients() {
 		global $db;
 
@@ -148,6 +149,7 @@
 		$requette->execute();
 		return $utilisateurs = $requette->fetchAll(PDO::FETCH_ASSOC);
 	 }
+	
 	function getClient($id) {
 		global $db;
 
@@ -181,7 +183,7 @@
 
 		return $emailsAndPass;
 	 }
-	function modifierClient($id, $prenom, $nom, $naissance, $sexe, $adresse, $email, $pass) {
+	function modifierClient($iid_clientd, $prenom, $nom, $naissance, $sexe, $adresse, $email, $pass) {
 		global $db;
 
 		$sql = "UPDATE users SET prenom=:prenom, nom=:nom, naissance=:naissance, sexe=:sexe, adresse=:adresse, email=:email, pass=:pass WHERE id=:id";
@@ -256,5 +258,5 @@
 	    
 	    $image_data = $requete -> execute();
 	    return $image_data;
-	}
+	 }
 ?>

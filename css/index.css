@@ -3,7 +3,6 @@ body {
     padding: 0;
     direction: rtl;
     font-family:Courier new, monospace;
-    color: blue;
  }
  
 @media (min-width: 801px) {
@@ -28,7 +27,6 @@ body {
     #asides_container0 {
         position: relative;
         top: 10%;
-        width: 90%;
         margin: 2rem;
         padding: 0.5rem;
     }
@@ -54,6 +52,7 @@ body {
     margin: 0 8px;
     padding: 0 8px;
     box-sizing: border-box;
+    display: none;
 }
 
 #fond_de_container {
@@ -76,11 +75,12 @@ body {
 #aside01 {
     font-weight: bolder;
     font-size: 2rem;
+    width: 90%;
 }
-#aside03{
+#aside02, #aside03{
     position: relative;
     padding: 0;
-    width: 100%;
+    width: 60%;
 }
 #aside03 p{
     display: inline-block;

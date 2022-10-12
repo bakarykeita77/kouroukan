@@ -1,3 +1,9 @@
+<?php
+    if(!file_exists("image")) {
+        mkdir("image");
+    }
+?>
+
 <!DOCTYPE html>
 <html>
 

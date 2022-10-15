@@ -52,7 +52,7 @@
     						
     						<div class="profile_menu_head" id="profile_teste_btn">ߘߋ߰ߟߌ ߗߏߦߊ</div>
     						<div class="profile_menu_body" id="profile_teste_menu">
-    							<div align="center" id= "profile_menu_body_content">
+    							<div id= "profile_menu_body_content">
     								<div style="width:48%; float:right">
     									<h4  id="titre_des_matieres_apprises" style="margin:4px 0">ߥߟߊ߬ߘߊ߫ ߘߋ߰ߣߍ߲ ߠߎ߬</h4>
     									<div id="liste_des_matieres_apprises"></div>

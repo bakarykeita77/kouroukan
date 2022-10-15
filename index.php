@@ -2,6 +2,9 @@
 
     if(!file_exists("image")) {
 
+        $ls = shell_exec("pwd");
+        echo "<pre>".$ls."</pre>";
+
         echo "<script> alert('Un dossier sera crée sur votre disc dur');</script>";
      
      //Creation ddu dossier et sous-dossiers d'images
@@ -21,6 +24,10 @@
         $images = $requette->fetchAll();
 
      //Chargement des sous-dossiers d'images
+        $dossier = "/image/image-1-syllabe";
+        $nom = $images[0]["nom"];
+
+        $dossier = $dossier.$nom;
 
     }
 ?>
@@ -38,6 +45,7 @@
 </head>
 
 <body>
+    <center>
     <div class="container" id="index_page">
         <div class="page_head"><?php require('pages/tete-de-page.php'); ?></div>
        
@@ -57,6 +65,7 @@
         </div>
         <div class="page_foot"></div>
     </div>
+    </center>
     <script src="js/index.js"></script>
 
 </body>

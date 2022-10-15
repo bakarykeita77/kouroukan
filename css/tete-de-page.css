@@ -51,7 +51,6 @@
 	border-radius: 0.25rem;
 	background-color: #005580;
 	z-index: 0;
-    color: red;
 }
 #modifier_avatar {
     background-color:#fff; 
@@ -68,49 +67,59 @@
 .afficher { display:block; }
 
 @media (min-width: 801px) {
+    #nav {
+        display: flex;
+        flex-direction: row;
+    }
     #menu_deroulant, #menu_non_deroulant {
         display: inline-block;
     }
     
-	#menu_deroulant li,  #menu_non_deroulant li {
+	#nav li {
 	    position: relative;
 	    display: inline;
-		font-weight: bold;
-		overflow: hidden;
+		overflow: auto;
 		cursor: pointer;
-		border-radius: 0.25rem;
+		border-radius: 0c.25rem;
 		padding: 0.25rem;
-		margin: 0 1rem;
+		margin: 0 0.5rem;
 	}
 	
     #menu_deroulant {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-
         margin: 0;
         height: 100%;
         width: 75%;
         float: right;
     }
-	#menu_deroulant li a {
+    #nav ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+	    height: 100%;
+        max-width: 20rem;
+    }
+	#nav a {
 		text-decoration: none;
 		color: rgba(0,0,0,0.75);
-		font-size: 1rem;
+		font-size: 0.8rem;
 	}
 	
 	#menu_non_deroulant {
+        flex-grow: 1;
 	    padding: 0;
 	    height: 100%;
 	    line-height: 3rem;
 	    margin-left: 10rem;
 	}
-	#menu_non_deroulant ul {
-	    height: 100%;
-	    margin: 0;
-	    padding: 0;
-	}
+    #menu_deroulant ul {
+        width: 100%;
+        margin: 0 5%;
+    }
+    #menu_non_deroulant ul {
+        margin: 0;
+    }
 
 	#menu_non_deroulant ul #menu_menu { display: none; }
 }
@@ -126,7 +135,7 @@
 	    right: 0;
 	    background-color:#eee;
 		list-style-type:none;
-		font-weight: bold;
+		font-size: 0.8rem;
 		box-shadow: 0 0 2rem #aaa;
 		overflow: hidden;
 	}
@@ -166,23 +175,26 @@
 	}
 	#menu_non_deroulant ul li {
 	    display: inline-block;
-	    border: 1px solid yellow;
 	    border-radius: 0.5rem;
 	    height: 2rem;
 	    line-height: 2rem;
 	    width: 30%;
 	    margin: 0.5rem;
 	    padding: 0 1rem;
+        font-size: 0.8rem;
 	    text-align: center;
 	    box-sizing: border-box;
 	}
-	
+	#menu_non_deroulant a {
+        text-decoration: none;
+        color: #000;
+    }
 	#nav_outils, .nav_menu { display:inline-block; }
 	#nav_outils { float:left; width:30%; }
     #nav_outils li { display:inline-block; }
 }
 
-#profile_menu_container{
+#profile_menu_container {
     position: absolute;
     border: 1px solid transparent; 
     border-radius: 0.5rem;
@@ -200,21 +212,21 @@
     overflow: hidden;
     z-index: 1000;
 }
-#profile_entete ul{
+#profile_entete ul {
     direction: rtl;
     list-style: none;
 }
-#profile_entete a{
+#profile_entete a {
     text-decoration: none;
 }
-#profile_teste_menu{
+#profile_teste_menu {
     display: none;
     height: 0;
     width: 100%;
     overflow: auto;
     transition: height 0.25s;
 }
-#profile_teste{
+#profile_teste {
     position: absolute;
     display: none;
     direction: rtl;

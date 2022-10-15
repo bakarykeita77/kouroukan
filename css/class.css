@@ -4,14 +4,19 @@ html {
 }
 @media screen and (min-width: 601px) {
     .container {
-        width: 80vw;
-        max-width: 800px;
+        width: 70vw;
         margin: auto;
+    }
+    .page_body {       
+        box-shadow: 0 0 2rem #999;
     }
 }
 @media screen and (max-width: 600px) {
     .container {
         width: 100vw;
+    }
+    .page_body {       
+        box-shadow: none;
     }
 }
 *,::before,::after { box-sizing:border-box; }
@@ -162,7 +167,6 @@ html {
 .container {
     position: fixed;
     top: 0.125rem;
-    width: 100%;
     margin: 0;
     padding: 0 0.5rem;
     box-sizing: border-box;
@@ -581,6 +585,7 @@ html {
 
 .page_body {
     position: absolute;
+    padding: 0;
     margin: 0;
     height: calc(100% - 5rem);
     width: 100%;

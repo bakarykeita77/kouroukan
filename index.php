@@ -1,6 +1,27 @@
 <?php
+
     if(!file_exists("image")) {
+
+        echo "<script> alert('Un dossier sera crée sur votre disc dur');</script>";
+     
+     //Creation ddu dossier et sous-dossiers d'images
         mkdir("image");
+        chdir("image");
+        mkdir("image-1-syllabe");
+        mkdir("image-2-syllabe");
+        mkdir("image-3-syllabe");
+        mkdir("image-4-syllabe"); 
+
+     //Extraction des images du serveur
+        include("pages/connexionToDB.php");
+        global $db;
+
+        $requette = $db->prepare("SELECT * FROM image1syllabe");
+        $requette->execute();
+        $images = $requette->fetchAll();
+
+     //Chargement des sous-dossiers d'images
+
     }
 ?>
 
@@ -22,7 +43,7 @@
        
         <div class="page_body" id="index_body">
             <div id='fond_de_container'></div>
-            
+
             <center>
             <div id="asides_container0">
                 <div class="aside" id="aside01" ">ߒߞߏ ߘߋ߰ߟߌ ߦߙߐ ߓߟߐߟߐ ߞߊ߲߬</div><br/>

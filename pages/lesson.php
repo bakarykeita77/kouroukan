@@ -21,13 +21,13 @@ if(isset($_SESSION["id"])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	
-	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/lesson.css"/>
-	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/syllabes.css"/>
-	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/parametres.css"/>
-	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/apprentissage.css"/>
-	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/exercice.css"/>
-	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/pratiques.css"/>
-	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/evaluation.css"/>
+	<link rel="stylesheet" href="/kouroukan/css/lesson.css"/>
+	<link rel="stylesheet" href="/kouroukan/css/syllabes.css"/>
+	<link rel="stylesheet" href="/kouroukan/css/parametres.css"/>
+	<link rel="stylesheet" href="/kouroukan/css/apprentissage.css"/>
+	<link rel="stylesheet" href="/kouroukan/css/exercice.css"/>
+	<link rel="stylesheet" href="/kouroukan/css/pratiques.css"/>
+	<link rel="stylesheet" href="/kouroukan/css/evaluation.css"/>
 
 </head>
 <body style="direction:rtl">
@@ -64,9 +64,9 @@ if(isset($_SESSION["id"])){
 
     <div class="course_container">
         
-      <!-------------------------------------------------------------------->
+      <!--------------------------------------------------------------------------------------------------------------->
         <span class="fermeture" id="">&times;</span>
-      <!-------------------------------------------------------------------->
+      <!--------------------------------------------------------------------------------------------------------------->
 	    
         <!--Les éléments de paramètres sont chargés depuis js/parametres.js-->
         <div id="parametres">   
@@ -95,29 +95,32 @@ if(isset($_SESSION["id"])){
                 <div id='nasalisations_cochees'></div>
             </div>
          </div>
-      <!-------------------------------------------------------------------->
+      <!--------------------------------------------------------------------------------------------------------------->
         <div class="course" id="apprentissage">
-            
-            <div class="course_head" id="apprentissage_entete"></div>
-            <div class="course_body" id="apprentissage_corps"></div>
-            <div class='lesson_progress_bar' id="apprentissage_progress_bar">
-                <span class='progress_question_bar lesson_progress_question_bar'></span>
-                <span class='progress_bonne_reponse_bar lesson_progress_bonne_reponse_bar'></span>
+            <div class="course_head" id="apprentisssage_entete">
+                <div class = 'lesson_progress_bar' id = "apprentissage_progress_bar">
+                    <span class='progress_question_bar lesson_progress_question_bar'></span>
+                    <span class='progress_bonne_reponse_bar lesson_progress_bonne_reponse_bar'></span>
+                </div>
             </div>
+            <div class="course_body" id="apprentissage_corps"></div>
+            <div class="course_foot" id="apprentissage_pied"></div>
             
          </div>
-      <!-------------------------------------------------------------------->
+      <!--------------------------------------------------------------------------------------------------------------->
         <div class="course" id="exercice"     >
             
-            <div class="course_head" id="exercice_entete"></div>
-            <div class="course_body" id="exercice_corps"></div>
-            <div class='lesson_progress_bar' id="exercice_progress_bar">
-                <span class='progress_question_bar lesson_progress_question_bar'></span>
-                <span class='progress_bonne_reponse_bar lesson_progress_bonne_reponse_bar'></span>
+            <div class="course_head" id="exercice_entete">
+                <div class='lesson_progress_bar' id="exercice_progress_bar">
+                    <span class='progress_question_bar lesson_progress_question_bar'></span>
+                    <span class='progress_bonne_reponse_bar lesson_progress_bonne_reponse_bar'></span>
+                </div>
             </div>
+            <div class="course_body" id="exercice_corps"></div>
+            <div class="course_foot" id="exercice_pied"></div>
             
          </div>
-      <!-------------------------------------------------------------------->
+      <!--------------------------------------------------------------------------------------------------------------->
         <div class="course" id="pratique"     >
          <!--------------------------------------------------------------------
             La partie pratique de lesson est composée de 3 divisions dont:
@@ -200,7 +203,7 @@ if(isset($_SESSION["id"])){
                 <div class="clavier_container" id="clavier_pratique"><?php include "clavier.php"; ?></div>
             </div>
          </div>
-      <!----------------------------------------------------------------------->
+      <!--------------------------------------------------------------------------------------------------------------->
         <div class="course" id="evaluation"   >
             <div class="course_head" id="evaluation_entete">
 
@@ -245,7 +248,7 @@ if(isset($_SESSION["id"])){
 
             <div class="clavier_container"><?php include "clavier.php"; ?></div>
          </div>
-      <!----------------------------------------------------------------------->
+      <!--------------------------------------------------------------------------------------------------------------->
         <form method="POST" action="actions.php" id="lesson_form" style="display:none">
                     
             <input type="number" name="id"       id="id_input" value="<?= $_SESSION['id']; ?>">
@@ -256,9 +259,9 @@ if(isset($_SESSION["id"])){
             <input type="number" name="note"     id="note_input">
             <input type="submit" id="submit_btn" value="Envoyer">
          </form>
-      <!----------------------------------------------------------------------->
+      <!--------------------------------------------------------------------------------------------------------------->
         <p class='hand'> &#128070;&#127999; </p>
-      <!----------------------------------------------------------------------->
+      <!--------------------------------------------------------------------------------------------------------------->
      </div>
 
     <audio id="audio"></audio>

@@ -37,11 +37,12 @@
     	    sessionStorage.setItem('matieres',JSON.stringify(matieres));
 
             if(matieres.length === 0) {
-                sessionStorage.setItem('niveaux_etudies',JSON.stringify(''));
+                sessionStorage.setItem('niveaux_etudies',JSON.stringify([]));
                 sessionStorage.setItem('niveau_max',JSON.stringify(0));
                 sessionStorage.setItem('niveau_en_cours',JSON.stringify(1));
                 
-                sessionStorage.setItem('phases_etudiees',JSON.stringify(''));
+                sessionStorage.setItem('phases_etudiees',JSON.stringify([]));
+                sessionStorage.setItem('derniere_phase',JSON.stringify(''));
                 sessionStorage.setItem('phase_active',JSON.stringify('alphabet_apprentissage'));
             }
             

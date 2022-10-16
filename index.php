@@ -45,10 +45,10 @@
 </head>
 
 <body>
-    <center>
     <div class="container" id="index_page">
         <div class="page_head"><?php require('pages/tete-de-page.php'); ?></div>
        
+        <center>
         <div class="page_body" id="index_body">
             <div id='fond_de_container'></div>
 
@@ -63,9 +63,9 @@
             </div>
             </center>
         </div>
+        </center>
         <div class="page_foot"></div>
     </div>
-    </center>
     <script src="js/index.js"></script>
 
 </body>

@@ -180,7 +180,6 @@ html {
     border: 0.25rem solid #fff;
     top: 7rem;
     height: calc(95vh - 6.5rem);
-    
     width: calc(90vw - 0.5rem);
     max-width: 40rem;
     margin: 0 auto;
@@ -195,7 +194,7 @@ html {
 }
 .course_body {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     
@@ -219,24 +218,34 @@ html {
     height: 100vh;
     width: 100vw;
 }
-.course_head {
+.course_foot {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
 
     position: absolute;
-    background-color: #666;
-    bottom: 8.25rem;
+    bottom: 0;
     padding: 0 1rem;
     width: 100%;
     height: 2rem;
     margin: 0;
     border-radius: 0.5rem;
+    background-color: #666;
     box-sizing: border-box;
     box-shadow: 0 1px 2px #444;
     font-size: 1rem;
     font-weight: bold;
+}
+.course_head {
+    position: absolute;
+    top: 0;
+    height: 1rem;
+    width: 100%;
+    margin: 0;
+    padding: 0 2px;
+    overflow: visible;
+    box-sizing: border-box;
 }
 .course_head div {
     padding: 0 0.25rem;
@@ -443,10 +452,11 @@ html {
 }
 .lesson_progress_bar {
     position: absolute;
-    bottom: 0;
+    top: 0;
+    left: 0;
     box-shadow: 0 0 4px #999;
     border-radius: 6px;
-    height: 8px;
+    height: 0.5rem;
     width: 100%;
 }
 .lesson_progress_bar span {

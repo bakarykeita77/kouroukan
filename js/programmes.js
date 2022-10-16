@@ -1,17 +1,13 @@
 
+ //Selection des éléments HTML du programme
     var programmes_container = document.getElementById('programmes_container');
     var programme_div        = document.getElementById('programme_div');
     var reception            = document.getElementById('reception');
-    var programme_ul         = document.getElementById('programme_ul');
+    var programme_ul         = document.getElementById('programme_ul'); 
     
-    var matieres             = JSON.parse(sessionStorage.getItem('matieres'));
-    
-    var niveaux_etudies      = JSON.parse(sessionStorage.getItem('niveaux_etudies'));
-    var niveau_max           = JSON.parse(sessionStorage.getItem('niveau_max'));
-    var niveau_en_cours      = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
-
-    var phases_etudiees = JSON.parse(sessionStorage.getItem('phases_etudiees'));
-    var derniere_phase  = JSON.parse(sessionStorage.getItem('derniere_phase'));
+ //Récupération des données reçues sur l'apprenant 
+    var matieres = JSON.parse(sessionStorage.getItem('matieres')); 
+    matieres_length = (matieres !== null) ? matieres.length : 0;
 
     var click_min_nbr = 0;
 
@@ -51,7 +47,6 @@
 
     $('#nav ul li:nth(1)').addClass('surbrillance');
     $('#nav ul li:nth(1)').siblings().removeClass('surbrillance');
-
       
 /*-------------------------------------------------------------------------------------------------------------------------
 
@@ -59,7 +54,22 @@ Au click sur l'afficheur du programme
     1)- On obtient le niveau d'étude de l'apprenant par analyse de sa situation.
     2)- On determine le programme en fonction de ce niveau d'étude.
 
--------------------------------------------------------------------------------------------------------------------------*/
+-------------------------------------------------------------------------------------------------------------------------*/   
+
+ //Récupération du niveau d'avancement des études 
+    var niveaux_etudies = JSON.parse(sessionStorage.getItem('niveaux_etudies'));
+    var niveau_max      = JSON.parse(sessionStorage.getItem('niveau_max'));
+    var niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
+    var phases_etudiees = JSON.parse(sessionStorage.getItem('phases_etudiees'));
+    var derniere_phase  = JSON.parse(sessionStorage.getItem('derniere_phase'));
+    
+    niveaux_etudies = (niveaux_etudies !== null) ? niveaux_etudies : [];
+    niveau_max      = (niveau_max      !== null) ? niveau_max      : 0;
+    niveau_en_cours = (niveau_en_cours !== null) ? niveau_en_cours : 1;
+    phases_etudiees = (phases_etudiees !== null) ? phases_etudiees : [];
+    derniere_phase  = (derniere_phase  !== null) ? derniere_phase  : '';
+
+/*-----------------------------------------------------------------------------------------------------------------------*/
     
     programme();
    // changerProgramme();

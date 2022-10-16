@@ -1,21 +1,19 @@
 
 #reception {
     position: relative;
-    top: 2rem;
+    top: 5rem;
+    padding: 0 2rem;
+    margin: auto;
     font-size: 1rem;
     text-align: right;
  }
 @media(max-width: 800px) {
     #reception {
         width: calc(100% - 4rem);
-        margin: auto;
     }
 }
 @media(min-width: 801px) {
     #reception {
-        top: 3rem;
-        padding: 0 2rem;
-        margin: auto;
         width: 60%;
         max-width: 32rem;
         border: 1px solid transparent;

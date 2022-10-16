@@ -12,26 +12,11 @@ body {
     box-sizing: border-box;
     height: calc(100vh - 1rem);
 }
-
-@media (min-width: 801px) {
-
-    #asides_container0 {
-        position: relative;
-        top: 10%;
-        margin: 2rem;
-        padding: 0.5rem;
-    }
- }
-@media (max-width: 800px) {
-    
-    #asides_container0 {
-        position: relative;
-        top: 10%;
-        width: calc(100% - 4rem);
-        margin: auto;
-        padding: 0.5rem;
-    }
- }
+#asides_container0 {
+    width: calc(100% - 4rem);
+    margin-top: 5rem;
+    padding: 0.5rem;
+}
 
 #fond_de_container {
     position: absolute;
@@ -55,9 +40,14 @@ body {
     font-size: 2rem;
     width: 90%;
 }
+#aside02 {
+    position: relative;
+    margin: 1rem;
+    padding: 1rem;
+    border: 1px solid #ccc;
+}
 #aside02, #aside03{
     position: relative;
-    padding: 0;
     width: 60%;
 }
 #aside03 p{

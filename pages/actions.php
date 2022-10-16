@@ -71,10 +71,9 @@
     Gestion des dnnées dans la base de données.
   ----------------------------------------------------------------------------------------------*/
     if($id_client != '' && $matiere != '' && $niveau == '' && $phase == '' && $lesson == '' && $note == '')                          getAllInfo($lesson,$id_client);
-    if($id_client != '' && $matiere != '' && $niveau != '' && $phase != '' && $lesson != '' && $note != '')                          archiverLesson($id_client,$matiere,$niveau,$phase,$lesson,$note);              
+    if($id_client != '' && $matiere != '' && $niveau != '' && $phase != '' && $lesson != '' && $note != '')                          archiverLesson($id_client,$matiere,$niveau,$phase,$lesson,$note);     
     if($prenom != '' && $nom != '' && $naissance != '' && $sexe != '' && $adresse != '' && $email != '' && $pass != '')              addClient($prenom,$nom,$naissance,$sexe,$adresse,$email,$pass);       
     if($id_client != '' && $prenom != '' && $nom != '' && $naissance != '' && $sexe != '' && $adresse != '' && $email != '' && $pass != '') modifierClient($id_client,$prenom,$nom,$naissance,$sexe,$adresse,$email,$pass);           
-    if($id_client != '' && $matiere != '' && $niveau != '' && $phase != '' && $lesson != '' && $note != '')                          archiverLesson($id_client,$matiere,$niveau,$phase,$lesson,$note);        
     if($id_client != '')                                                                                                             getClient($id_client);       
     if($matiere != '' && $id_client != '')                                                                                           getAllInfo($matiere,$id_client);     
     if($name != null && $extension != null && $taille != null && $type != null && $image != null && $table_name != null)             uploadImage($table_name,$id_client,$name,$extension,$taille,$type,$image);       

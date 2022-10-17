@@ -2,9 +2,6 @@
 
     if(!file_exists("image")) {
 
-        $ls = shell_exec("pwd");
-        echo "<pre>".$ls."</pre>";
-
         echo "<script> alert('Un dossier sera crée sur votre disc dur');</script>";
      
      //Creation ddu dossier et sous-dossiers d'images

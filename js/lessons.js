@@ -632,13 +632,13 @@ $('document').ready(function() {
                                         lesson : lesson,
                                         note   : JSON.stringify(note)
                                     }); 
-                     
+                    
                                     fetch("http://localhost:8080/kouroukan/pages/actions.php", {
                                         method: "POST",
                                         body: apprentissage_data
                                     })
-                                    .then(response => console.log(response))
-                                    .catch(error => alert(error));  
+                                    .then(response => response.json())
+                                    .catch(error => console.log(error));  
                                 }
                                 function noterApprentissage() {
                                     var table_elements_click_nbr = [];

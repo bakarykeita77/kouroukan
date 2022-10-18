@@ -637,7 +637,7 @@ $('document').ready(function() {
                                         method: "POST",
                                         body: apprentissage_data
                                     })
-                                    .then(response => response.json())
+                                    .then(response => response.text())
                                     .catch(error => console.log(error));  
                                 }
                                 function noterApprentissage() {

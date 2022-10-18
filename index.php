@@ -4,7 +4,7 @@
 
         echo "<script> alert('Un dossier sera crée sur votre disc dur');</script>";
      
-     //Creation ddu dossier et sous-dossiers d'images
+     //Creation du dossier et sous-dossiers d'images
         mkdir("image");
         chdir("image");
         mkdir("image-1-syllabe");

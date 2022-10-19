@@ -57,20 +57,15 @@ Au click sur l'afficheur du programme
 -------------------------------------------------------------------------------------------------------------------------*/   
 
  //Récupération du niveau d'avancement des études 
-    var niveaux_etudies = JSON.parse(sessionStorage.getItem('niveaux_etudies'));
-    var niveau_max      = JSON.parse(sessionStorage.getItem('niveau_max'));
-    var niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
-    var phases_etudiees = JSON.parse(sessionStorage.getItem('phases_etudiees'));
-    var derniere_phase  = JSON.parse(sessionStorage.getItem('derniere_phase'));
-    
-    niveaux_etudies = (niveaux_etudies !== null) ? niveaux_etudies : [];
-    niveau_max      = (niveau_max      !== null) ? niveau_max      : 0;
-    niveau_en_cours = (niveau_en_cours !== null) ? niveau_en_cours : 1;
-    phases_etudiees = (phases_etudiees !== null) ? phases_etudiees : [];
-    derniere_phase  = (derniere_phase  !== null) ? derniere_phase  : '';
+    var niveaux_etudies   = JSON.parse(sessionStorage.getItem('niveaux_etudies'));
+    var niveau_max        = JSON.parse(sessionStorage.getItem('niveau_max'));
+    var niveau_en_cours   = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
+    var phases_etudiees   = JSON.parse(sessionStorage.getItem('phases_etudiees'));
+    var phases_distinctes = JSON.parse(sessionStorage.getItem('phases_distinctes'));
+    var derniere_phase    = JSON.parse(sessionStorage.getItem('derniere_phase'));
 
 /*-----------------------------------------------------------------------------------------------------------------------*/
-    
+     
     programme();
    // changerProgramme();
     
@@ -118,7 +113,7 @@ Au click sur l'afficheur du programme
         function programmeStyle() {
      
             let programme_li = $("#programme_ul li");
-            
+               
             $.each(programme_li, function() {
                 
                 var matiere_index = $(this).index();
@@ -127,7 +122,7 @@ Au click sur l'afficheur du programme
                     if(matiere_index === 0) $(this).addClass("actif");
                     if(matiere_index  >  0) $(this).addClass("a_apprendre");
                 }
-                if(niveau_max !== 0) {
+                if(niveau_max > 0) {
                     if($.inArray(matiere_index+1,niveaux_etudies) !== -1) $(this).addClass("apprises");
                     if($.inArray(matiere_index+1,niveaux_etudies) === -1) $(this).addClass("a_apprendre");
                     if(matiere_index+1 === niveau_en_cours) $(this).removeClass("a_apprendre").addClass("actif");

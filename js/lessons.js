@@ -121,18 +121,16 @@ $('document').ready(function() {
             return content;
         }
     	function stylesDesPhases() {
-            var nbr = JSON.parse(sessionStorage.getItem('nbr'));
-           // if(total_phase === nbr) sessionStorage.removeItem('nbr');
+        
     	    var lesson_statut = lessonStatut();
     	    var phase_nbr = nombre();
     	    
     	    $.each($('#phases_list li'), function() {
     	      
         	    var phase_index = $(this).index();
-        	    var phase_attr_id = $(this).attr('id');
                 
                 if(lesson_statut == "vierge") {
-                    if(phase_nbr ===0) {
+                    if(phase_nbr === 0) {
                         if(phase_index === 0) $(this).addClass('active');
                         if(phase_index  >  0) $(this).addClass('a_apprendre');
                     }

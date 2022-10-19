@@ -198,10 +198,11 @@ html {
     justify-content: center;
     align-items: center;
     
-    position: absolute;
+    border: 1px solid #ccc;
     left: 0.5rem;
+    /*la hauteur est calculée par la fonction dimensionnementDeCourseBody() dans lessons.js*/
     width: calc(100% - 1rem);
-    margin: 1rem 0;
+    margin: 1rem auto;
     overflow: auto;
     font-size: 1rem;
     font-weight: bold;

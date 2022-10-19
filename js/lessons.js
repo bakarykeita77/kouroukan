@@ -277,8 +277,8 @@ $('document').ready(function() {
           /*--------------------------------------------------------------------*/    
      
     	    phaseActiveName();
-    	    dimensionnementDeCourseBody();
     	    affichageDeCours();
+    	    dimensionnementDeCourseBody();
     	    cours();
         
           /*--------------------------------------------------------------------*/    
@@ -384,11 +384,15 @@ $('document').ready(function() {
             }
     	    function cours() {
                 
+                if(phase_class == 'apprises') {
+                    $('.course_container').css('display','none'); 
+                    alert("Tu as dépassé ce niveau !");
+                }
                 if(phase_class == 'a_apprendre') {
                     $('.course_container').css('display','none'); 
                     alert("Tu n'est pas encore arrivé à ce niveau !");
                 }
-        	    if(phase_class != 'a_apprendre') {    
+        	    if(phase_class == 'active') {    
 
                     $('.course_container').css('display','block');
                     $('.course').css('display','none');

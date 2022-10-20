@@ -286,23 +286,22 @@ $('document').ready(function() {
                 
                 var course_height = $('.course').height();
     	        var course_head_height = $('.course_head').height();
+    	        var course_foot_height = $('.course_foot').height();
+
     	        var pratique_head_height = $('#pratique_head').height();
-    	        var progress_bar_height = $('.progress_bar').height();
-    	        var clavier_container_height = $('.clavier_container').height();
     	        var course_body_height = '';
-    	    
 
     	        if(course_id == 'apprentissage' || course_id == 'exercice') {
-    	            course_body_height = course_height - (course_head_height+progress_bar_height+6);
+    	            course_body_height = course_height - (course_head_height+course_foot_height);
     	        }
     	        if(course_id == 'pratique'){
-    	            course_body_height = course_height - (course_head_height+pratique_head_height+progress_bar_height+clavier_container_height+6);
+    	            course_body_height = course_height - (course_head_height+pratique_head_height+course_foot_height);
     	        }
     	        if(course_id == 'evaluation'){
-    	            course_body_height = course_height - (course_head_height+progress_bar_height+clavier_container_height+6);
+    	            course_body_height = course_height - (course_head_height+course_foot_height);
     	        }
     	        
-    	        $('.course_body').css('height', course_body_height-26+'px');
+    	        $('.course_body').css('height', course_body_height-8+'px');
             }
     	    function coursEnteteHTML() {
     	        var ceh = '';
@@ -422,16 +421,7 @@ $('document').ready(function() {
                 	    stockerApprentissage();
                     	                        	
                     	function chargerApprentissage() {   
-                                  	
                             $('#apprentissage_corps').html( lesson_courante ); 
-                            $('#apprentissage_pied').html( apprentissageEnteteHTML() );
-                        	
-                            function apprentissageEnteteHTML() {            	    
-                        	    var entete_html = "<div class='play_btn_container'><span class='play_label'>ߝߐߟߊ߲</span><span class='play_icon'>&#9664;</span></div>";
-                        	    entete_html += "<div class='stop_btn_container'><span class='stop_label'>ߘߊ߬ߘߋ߬ߟߊ߲ </span> <span class='stop_icon'>&#9632;</span></div>";
-                        	    entete_html += "<div class='parametre_btn_container'><span class='parametre_label'>ߛߏ߯ߙߏߟߊ߲</span>  <span class='parametre_icon'>&#9881;</span></div>";                              
-                                return entete_html;
-                        	}
                     	}
                     	function afficherApprentissage() {
                             apprentissage.css({'display':'block', 'transform':'scale(0.75)', 'opacity':0});

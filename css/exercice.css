@@ -1,4 +1,10 @@
 
+#exercice_entete {
+    height: 1rem;
+}
+#exercice_pied {
+    height: 2rem;
+}
 #exercice_progress_bar{
     top: 0.25rem;
 }

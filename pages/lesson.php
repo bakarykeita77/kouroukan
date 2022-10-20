@@ -97,6 +97,7 @@ if(isset($_SESSION["id"])){
          </div>
       <!--------------------------------------------------------------------------------------------------------------->
         <div class="course" id="apprentissage">
+            
             <div class="course_head" id="apprentisssage_entete">
                 <div class = 'lesson_progress_bar' id = "apprentissage_progress_bar">
                     <span class='progress_question_bar lesson_progress_question_bar'></span>
@@ -104,7 +105,26 @@ if(isset($_SESSION["id"])){
                 </div>
             </div>
             <div class="course_body" id="apprentissage_corps"></div>
-            <div class="course_foot" id="apprentissage_pied"></div>
+            <div class="course_foot" id="apprentissage_pied">
+                <div class="dialogue_btn" id="evaluation_dialogue_btn">
+
+                    <div class='play_btn_container'>
+                        <span class='play_label'>ߝߐߟߊ߲</span>
+                        <span class='play_icon'>&#9664;</span>
+                    </div>
+
+                    <div class='stop_btn_container'>
+                        <span class='stop_label'>ߘߊ߬ߘߋ߬ߟߊ߲ </span> 
+                        <span class='stop_icon'>&#9632;</span>
+                    </div>
+
+                    <div class='parametre_btn_container'>
+                        <span class='parametre_label'>ߛߏ߯ߙߏߟߊ߲</span>  
+                        <span class='parametre_icon'>&#9881;</span>
+                    </div>
+
+                </div>
+            </div>
             
          </div>
       <!--------------------------------------------------------------------------------------------------------------->
@@ -205,25 +225,9 @@ if(isset($_SESSION["id"])){
          </div>
       <!--------------------------------------------------------------------------------------------------------------->
         <div class="course" id="evaluation"   >
+
             <div class="course_head" id="evaluation_entete">
-
-                <div class="question_btn">
-                    <span class="question_label"></span>
-                    <span class="question_total"></span> :
-                    <span class="question_ordre"></span>
-                    <span class="question_action"></span>
-                    <span class="question_icon"></span>
-                </div>
-
-                <div class="repetition_btn">
-                    <span class="repetition_label">ߊ߬ ߟߊߡߍ߲߫ ߕߎ߯ߣߌ߫</span>
-                    <span class="repetition_icon"></span>
-                </div>
-
-                <div class="correction_btn">
-                    <span class="correction_label">ߏ߬ ߛߊߞߍ߫</span>
-                    <span class="correction_icon"></span>
-                </div>
+                <div class='progress_bar'><span class='progress_question_bar'></span><span class='progress_bonne_reponse_bar'></span></div>
             </div>
             <div class="course_body" id="evaluation_corps">
 
@@ -244,9 +248,30 @@ if(isset($_SESSION["id"])){
 
                 </div>
             </div>
-            <div class='progress_bar'><span class='progress_question_bar'></span><span class='progress_bonne_reponse_bar'></span></div>
+            <div class="course_foot" id="evaluation_pied">
 
-            <div class="clavier_container"><?php include "clavier.php"; ?></div>
+                <div class="dialogue_btn" id="evaluation_dialogue_btn">
+                    <div class="question_btn">
+                        <span class="question_label"></span>
+                        <span class="question_total"></span> :
+                        <span class="question_ordre"></span>
+                        <span class="question_action"></span>
+                        <span class="question_icon"></span>
+                    </div>
+
+                    <div class="repetition_btn">
+                        <span class="repetition_label">ߊ߬ ߟߊߡߍ߲߫ ߕߎ߯ߣߌ߫</span>
+                        <span class="repetition_icon"></span>
+                    </div>
+
+                    <div class="correction_btn">
+                        <span class="correction_label">ߏ߬ ߛߊߞߍ߫</span>
+                        <span class="correction_icon"></span>
+                    </div>
+                </div>
+                <div class="clavier_container"><?php include "clavier.php"; ?></div>
+            </div>
+
          </div>
       <!--------------------------------------------------------------------------------------------------------------->
         <form method="POST" action="actions.php" id="lesson_form" style="display:none">

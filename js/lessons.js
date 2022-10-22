@@ -287,6 +287,7 @@ $('document').ready(function() {
                 var course_height = $('.course').height();
     	        var course_head_height = $('.course_head').height();
     	        var course_foot_height = $('.course_foot').height();
+    	        var evaluation_pied_height = $('#evaluation_pied').height();
 
     	        var pratique_head_height = $('#pratique_head').height();
     	        var course_body_height = '';
@@ -298,10 +299,10 @@ $('document').ready(function() {
     	            course_body_height = course_height - (course_head_height+pratique_head_height+course_foot_height);
     	        }
     	        if(course_id == 'evaluation'){
-    	            course_body_height = course_height - (course_head_height+course_foot_height);
+    	            course_body_height = course_height - (course_head_height+evaluation_pied_height);
     	        }
     	        
-    	        $('.course_body').css('height', course_body_height-8+'px');
+    	        $('.course_body').css('height', course_body_height-12+'px');
             }
     	    function coursEnteteHTML() {
     	        var ceh = '';
@@ -480,8 +481,8 @@ $('document').ready(function() {
                                 var course_width = $('.course').width();
                                 var nbr_click = questions().length;
                                 
-                                $('.lesson_progress_bar').width( course_width - 2 );
-                                var progress_unity = $('.lesson_progress_bar').width()/nbr_click;
+                                $('#apprentissage_progress_bar').width( course_width - 2 );
+                                var progress_unity = $('#apprentissage_progress_bar').width()/nbr_click;
                                 
                              /*
                               A chaque click sur un élément, progress barr avance d'une unité égale à progress_unity px.
@@ -771,8 +772,8 @@ $('document').ready(function() {
                                         function actualiserLessonProgressBar(){
                                             
                                             var course_width = $('.course').width();
-                                            $('.lesson_progress_bar').width( course_width - 2 );
-                                            var progress_unity = $('.lesson_progress_bar').width()/nbr_de_questionnaires;
+                                            $('#exercice_progress_bar').width( course_width - 2 );
+                                            var progress_unity = $('#exercice_progress_bar').width()/nbr_de_questionnaires;
                                             
                                           
                                             if(question_posee!=reponse_montree){ 
@@ -1360,7 +1361,7 @@ $('document').ready(function() {
                                             $('#span_3').html(s_3);
                                         }
                                         function actualiserPratiquesProgressBar(){
-                                            var progress_unity = $('.progress_bar').width()/reverseIntNko(quantite_de_question);
+                                            var progress_unity = $('#pratique_progress_bar').width()/reverseIntNko(quantite_de_question);
                                                       
                                             if(question != reponse){ 
                                                 $('.progress_question_bar').css('width','+='+progress_unity+'px');
@@ -1728,7 +1729,7 @@ $('document').ready(function() {
                         var q_index = 0, q_rang = '߭';
                         var q_ordre = parseIntNko(q_index+1);
                         var evaluation_a_stocker = [];
-                        
+                         
                         $('.fermeture').attr('id', 'fermer_evaluation');
 
                         afficherEvaluation();
@@ -1848,7 +1849,7 @@ $('document').ready(function() {
                         }
                         function correctionEvaluation(){
                             $('.correction_btn').on('click', function(){
-                                
+                                 
                                 corrigerEvaluation();
                                 actualiserProgressBar();
                                 effacer();
@@ -1869,26 +1870,23 @@ $('document').ready(function() {
                                     function marquerReponseEvaluation() {    
                                         if(reponse_evaluation.join('') == question_evaluation) {
                                           
-                                            $('#check_mark_container').css('display','inline-block');
+                                            $('#check_mark_container, #reponse').css('display','inline-block');
                                             $('#check_mark').html("&#10003;"); 
                                             setTimeout(function(){ $('#check_mark_cover').css({'left':'-100%'}); },100);
                                             setTimeout(function(){ $('#check_mark_cover').css({'left':0}); },1500);
                                             setTimeout(function(){ $('#check_mark_container').css({'display':'none'}); },1500);
                                         }else{
-                                            
-                                            $('#cross').html( '&#10060;' );
-                                            $('#cross_container').css({'display':'block', 'transform':'scale(0.5)', 'opacity':0});
-                                            setTimeout(function(){ $('#cross_container').css({'transform':'scale(1)', 'opacity':0.75}); }, 100);
-                                            setTimeout(function(){ $('#cross_container').css({'display':'none'}); },1500);
+                                            $("#reponse").html(reponse_evaluation.join('')+"<span id='cross'>&#10060;</span>");
+                                            $('#cross').css({'display':'block', 'transform':'scale(0.5)', 'opacity':0});
+                                            setTimeout(function(){ $('#cross').css({'transform':'scale(1)', 'opacity':0.75}); }, 100);
+                                            setTimeout(function(){ $('#cross').css({'display':'none'}); },1500);
                                         }
                                     }    
                                 }
                                 function actualiserProgressBar(){
                                             
-                                    var course_width = $('.course').width();
-                                    $('.progress_bar').width( course_width - 2 );
-                                    var progress_unity = $('.progress_bar').width()/nbr_max_de_questions_a_poser;
-                                           
+                                    var progress_unity = $('#evaluation_progress_bar').width()/nbr_max_de_questions_a_poser;
+                                        
                                     if(question_evaluation != reponse_evaluation.join('')){ 
                                         $('.progress_question_bar').css('width','+='+progress_unity+'px');
                                     }else{ 

@@ -99,9 +99,9 @@ if(isset($_SESSION["id"])){
         <div class="course" id="apprentissage">
             
             <div class="course_head" id="apprentisssage_entete">
-                <div class = 'lesson_progress_bar' id = "apprentissage_progress_bar">
-                    <span class='progress_question_bar lesson_progress_question_bar'></span>
-                    <span class='progress_bonne_reponse_bar lesson_progress_bonne_reponse_bar'></span>
+                <div class = 'progress_bar' id = "apprentissage_progress_bar">
+                    <div class='progress_question_bar lesson_progress_question_bar'></div>
+                    <div class='progress_bonne_reponse_bar lesson_progress_bonne_reponse_bar'></div>
                 </div>
             </div>
             <div class="course_body" id="apprentissage_corps"></div>
@@ -131,9 +131,9 @@ if(isset($_SESSION["id"])){
         <div class="course" id="exercice"     >
             
             <div class="course_head" id="exercice_entete">
-                <div class='lesson_progress_bar' id="exercice_progress_bar">
-                    <span class='progress_question_bar lesson_progress_question_bar'></span>
-                    <span class='progress_bonne_reponse_bar lesson_progress_bonne_reponse_bar'></span>
+                <div class='progress_bar' id="exercice_progress_bar">
+                    <p class='progress_question_bar'></p>
+                    <p class='progress_bonne_reponse_bar'></p>
                 </div>
             </div>
             <div class="course_body" id="exercice_corps"></div>
@@ -198,7 +198,10 @@ if(isset($_SESSION["id"])){
                     <p id="message_de_fin"></p>
                     <div id="message_btn_container"> <button id="message_btn_1"></button><button id="message_btn_2"></button> </div>
                 </div>
-                <div class='progress_bar' id="pratique_progress_bar"><span class='progress_question_bar'></span><span class='progress_bonne_reponse_bar'></span></div>
+                <div class='progress_bar' id="pratique_progress_bar">
+                    <span class='progress_question_bar'></span>
+                    <span class='progress_bonne_reponse_bar'></span>
+                </div>
                 <div id="dialogue_btn">
     
                     <div class="btn question_btn">
@@ -227,20 +230,22 @@ if(isset($_SESSION["id"])){
         <div class="course" id="evaluation"   >
 
             <div class="course_head" id="evaluation_entete">
-                <div class='progress_bar'><span class='progress_question_bar'></span><span class='progress_bonne_reponse_bar'></span></div>
+                <div class='progress_bar' id="evaluation_progress_bar">
+                    <p class='progress_question_bar'></p>
+                    <p class='progress_bonne_reponse_bar'></p>
+            </div>
             </div>
             <div class="course_body" id="evaluation_corps">
 
-                <div id='teste_container' align='center'>
-                    <div id='teste_content'>
-                        <div id='reponse_container'><p id='reponse'></p></div>
-                        <div id='check_mark_container'>
-                            <p id='check_mark'></p>
-                            <p id='check_mark_cover'></p>
-                        </div>
-                        <div id='cross_container'><p id=cross></p></div>
+                <div id='teste_container'>
+                
+                    <p id='reponse'></p>
+                    
+                    <div id='check_mark_container'>
+                        <p id='check_mark'></p>
+                        <p id='check_mark_cover'></p>
                     </div>
-
+                    
                     <div id='teste_annexes_container'>
                         <div id='alerte'></div>
                         <div id='autre'></div>

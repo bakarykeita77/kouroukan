@@ -158,7 +158,6 @@ html {
     padding-top: 1rem;
     background-color: #666;
     border: 1px solid transparent;
-    border-radius: 0.5rem;
     box-sizing: border-box;
 }
 .clicker {
@@ -187,6 +186,7 @@ html {
     padding: 0;
     border-radius: 0.5rem;
     box-shadow: 0 0.25rem 2rem #333;
+    box-sizing: border-box;
     background-color: #fff;
     overflow: auto;
     opacity: 1;
@@ -194,17 +194,12 @@ html {
     transition: 0.6s;
 }
 .course_body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    
     position: absolute;
     border: 1px solid #ccc;
-    top: 0.5rem;
-    left: 0.5rem;
+    top: 1rem;
+    left: 1rem;
     /*la hauteur est calculée par la fonction dimensionnementDeCourseBody() dans lessons.js*/
-    width: calc(100% - 1rem);
+    width: calc(100% - 2rem);
     margin: 0.25rem auto;
     overflow: auto;
     font-size: 1rem;
@@ -242,10 +237,10 @@ html {
 .course_head {
     position: absolute;
     top: 0;
-    height: 0.5rem;
+    height: 1rem;
     width: 100%;
     margin: 0;
-    padding: 0 2px;
+    padding: 0;
     box-sizing: border-box;
 }
 .course_head div {
@@ -281,15 +276,14 @@ html {
     position: absolute;
     background-color: #666;
     padding: 0 1rem;
-    margin: 0;
+    margin: 0.125rem 0;
     width: 100%;
     height: 2rem;
     line-height: 2rem;
     text-align: center;
     font-weight: bold;
-    border-radius: 6px;
     box-sizing: border-box;
-    box-shadow: 0 1px 2px #444;
+    cursor: pointer;
 }
 
 .error_message {
@@ -715,18 +709,24 @@ html {
 }
 .progress_bar {
     position: relative;
-    margin-top: 0.25rem;
+    margin-top: 0.125rem;
+    padding: 0;
     height: 0.5rem;
     width: calc(100% - 2px);
-    border: 1px solid #ddd;
+    border: 1px solid #ccc;
     border-radius: 4px;
+    box-shadow: 0 0 0.25rem #444;
+    box-sizing: border-box;
     transition: 1s;
 }
 .progress_bonne_reponse_bar, .progress_question_bar {
-    display: block;
     position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0;
+    margin: 0;
     height: 100%;
-    border-radius: 4px;
+    border-radius: 0.25rem;
     transition: 1s;
 }
 .progress_bonne_reponse_bar {

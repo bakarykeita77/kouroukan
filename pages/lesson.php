@@ -100,13 +100,12 @@ if(isset($_SESSION["id"])){
             
             <div class="course_head" id="apprentisssage_entete">
                 <div class = 'progress_bar' id = "apprentissage_progress_bar">
-                    <div class='progress_question_bar lesson_progress_question_bar'></div>
-                    <div class='progress_bonne_reponse_bar lesson_progress_bonne_reponse_bar'></div>
+                    <div class='progress_bonne_reponse_bar'></div>
                 </div>
             </div>
             <div class="course_body" id="apprentissage_corps"></div>
             <div class="course_foot" id="apprentissage_pied">
-                <div class="dialogue_btn" id="evaluation_dialogue_btn">
+                <div class="dialogue_btn" id="apprentissage_dialogue_btn">
 
                     <div class='play_btn_container'>
                         <span class='play_label'>ߝߐߟߊ߲</span>
@@ -136,8 +135,10 @@ if(isset($_SESSION["id"])){
                     <p class='progress_bonne_reponse_bar'></p>
                 </div>
             </div>
-            <div class="course_body" id="exercice_corps"></div>
-            <div class="course_foot" id="exercice_pied"></div>
+            <div class="course_body" id="exercice_corps"></div>   <!--Cette division est chargé par la fonction chargerExercice() dans lesson.js-->
+            <div class="course_foot" id="exercice_pied">
+
+            </div>
             
          </div>
       <!--------------------------------------------------------------------------------------------------------------->

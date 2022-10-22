@@ -481,7 +481,6 @@ $('document').ready(function() {
                                 var course_width = $('.course').width();
                                 var nbr_click = questions().length;
                                 
-                                $('#apprentissage_progress_bar').width( course_width - 2 );
                                 var progress_unity = $('#apprentissage_progress_bar').width()/nbr_click;
                                 
                              /*
@@ -494,7 +493,7 @@ $('document').ready(function() {
                                 $('.table_parlante td').on('click', function() {
                                  
                                     if(elements_clickes.indexOf($(this).html()) == -1) {
-                                        $('.lesson_progress_bonne_reponse_bar').css('width','+='+progress_unity+'px');
+                                        $('.progress_bonne_reponse_bar').css('width','+='+progress_unity+'px');
                                     }
                                     elements_clickes.push($(this).html());
                                 });
@@ -685,13 +684,14 @@ $('document').ready(function() {
                 	        reductionDesElementsDeLessonCouranteA49();
                         	
                         	function exerciceEnteteHTML(){
-                        	    var exercices_entete_html = "<div class='play_icon_container' id='exercices_player' style='width:auto'>";
-                        	        exercices_entete_html += "<span class='play_label'>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ </span>";
-                        	        exercices_entete_html += "<span class='qtite_question'>"+parseIntNko(quantite_de_question)+"</span> : <span class='ordre_question'>"+parseIntNko(compteur_de_question)+question_rang+" </span>";
-                        	        exercices_entete_html += "<span class='ecouter_question'> ߟߊߡߍ߲߫</span><span class='play_icon'>&#9664;</span>";
-                        	    exercices_entete_html += "</div>";
-                        	    exercices_entete_html += "<div class='oreille_icon_container'><span class='reecoute_label'>ߊ߬ ߟߊߡߍ߲߫ ߕߎ߯ߣߌ߫  </span> <span class='oreille_icon'>&#128066;</span></div>";
-                        
+                        	    var exercices_entete_html = "<div class='dialogue_btn' id='exercice_dialogue_btn'>";   
+                                exercices_entete_html += "<div class='play_icon_container' id='exercices_player' style='width:auto'>";
+                                exercices_entete_html += "<span class='play_label'>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ </span>";
+                                exercices_entete_html += "<span class='qtite_question'>"+parseIntNko(quantite_de_question)+"</span> : <span class='ordre_question'>"+parseIntNko(compteur_de_question)+question_rang+" </span>";
+                                exercices_entete_html += "<span class='ecouter_question'> ߟߊߡߍ߲߫</span><span class='play_icon'>&#9664;</span>";
+                                exercices_entete_html += "</div>";
+                                exercices_entete_html += "<div class='oreille_icon_container'><span class='reecoute_label'>ߊ߬ ߟߊߡߍ߲߫ ߕߎ߯ߣߌ߫  </span> <span class='oreille_icon'>&#128066;</span></div>";
+                                exercices_entete_html += "</div>";
                                 return exercices_entete_html;
                         	}
                     	    function reductionDesElementsDeLessonCouranteA49() {
@@ -757,12 +757,12 @@ $('document').ready(function() {
                         	        {   
                         	            var td = $(e.target);
                             	        reponse_montree = td.html();
-                	                    point = (question_posee==reponse_montree)?1:0;
-                        
-                            	        if(question_posee!=reponse_montree){ barrerLaFausseReponse(td); clignotage(question_posee); }
-                            	        if(question_posee==reponse_montree){ td.addClass('ombrage'); }
-                            	        actualiserLessonProgressBar();
+                                        point = (question_posee==reponse_montree)?1:0;
+                                                            
+                            	        if(question_posee != reponse_montree){ barrerLaFausseReponse(td); clignotage(question_posee); }
+                            	        if(question_posee == reponse_montree){ td.addClass('ombrage'); }
                             	        setTimeout(function(){ td.removeClass('ombrage'); },1000);
+                            	        actualiserLessonProgressBar();
                             	        
                             	        question_posee = '';    /* Vider la variable question_posee. */
                             	        
@@ -771,15 +771,12 @@ $('document').ready(function() {
                             	        
                                         function actualiserLessonProgressBar(){
                                             
-                                            var course_width = $('.course').width();
-                                            $('#exercice_progress_bar').width( course_width - 2 );
                                             var progress_unity = $('#exercice_progress_bar').width()/nbr_de_questionnaires;
-                                            
                                           
                                             if(question_posee!=reponse_montree){ 
-                                                $('.lesson_progress_question_bar').css('width','+='+progress_unity+'px');
+                                                $('.progress_question_bar').css('width','+='+progress_unity+'px');
                                             }else{ 
-                                                $('.lesson_progress_question_bar, .lesson_progress_bonne_reponse_bar').css('width','+='+progress_unity+'px');
+                                                $('.progress_question_bar, .progress_bonne_reponse_bar').css('width','+='+progress_unity+'px');
                                             }
                                         }
                         	        }
@@ -790,7 +787,7 @@ $('document').ready(function() {
                 	        
                 	        var td = $('.table_muette td');
                 	        var exercice_counter = 0;
-
+alert("ok");
                 	        initialiserExerciceAStocker();
                 	        actualiserExerciceAStocker();
                 	        
@@ -811,9 +808,8 @@ $('document').ready(function() {
                     	                var q = exercice_a_stocker[exercice_counter][0];
                     	                var r = $(this).html();
                     	                var p = (q==r) ? 1:0;
-                    	                var question_reponse = [];
+                    	                var question_reponse = [q,r,p];
                     	                
-                    	                question_reponse = [q,r,p];
                     	                exercice_a_stocker.splice(exercice_counter,1,question_reponse);
                     	                
                     	                exercice_counter++;

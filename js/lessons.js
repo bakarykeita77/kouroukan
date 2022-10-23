@@ -4,7 +4,8 @@ $('document').ready(function() {
     var matieres = [], matieres_length = 0, matiere_index = 0, nbr = 0;
     var niveaux_etudies = [], niveau_max = 0, niveau_en_cours = 1;
 	var etapes_passees = [], etape_actuelle = [], etapes_a_faire = [], etape_max = [], rang = '';
-	var phases_etudiees = '', derniere_phase = '', phase_en_cours = '', phase_nbr = 0;
+	var phases_etudiees = [], derniere_phase = '', phase_en_cours = '', phase_nbr = 0;
+    var phases_distinctes = [], phases_1_distinctes = [], phases_2_distinctes = [], phases_3_distinctes = [], phases_4_distinctes = [];
 	var avancer_btn = '';
     var id_phases = [], data_phase_nbr;
 
@@ -38,21 +39,27 @@ $('document').ready(function() {
     }
     if(matieres_length > 0) {
         
-        matiere_index     = JSON.parse(sessionStorage.getItem('matiere_index')); 
-        niveaux_etudies = JSON.parse(sessionStorage.getItem('niveaux_etudies'));
-        niveau_max        = JSON.parse(sessionStorage.getItem('niveau_max'));
-        niveau_en_cours   = sessionStorage.getItem('niveau_en_cours');
-        phases_etudiees = JSON.parse(sessionStorage.getItem('phases_etudiees'));
-        derniere_phase  = JSON.parse(sessionStorage.getItem('derniere_phase'));
-        niveaux           = JSON.parse(sessionStorage.getItem('niveaux'));     
-        niveaux_distincts = JSON.parse(sessionStorage.getItem('niveaux_distincts'));     
+        matieres_etudiees   = JSON.parse(sessionStorage.getItem('matieres_etudiees'));     
+        derniere_matiere    = JSON.parse(sessionStorage.getItem('derniere_matiere'));     
+        matiere_active      = JSON.parse(sessionStorage.getItem('matiere_active'));     
+        matiere_nom         = JSON.parse(sessionStorage.getItem('matiere_nom'));
+        matiere_index       = JSON.parse(sessionStorage.getItem('matiere_index')); 
         
-        matieres_etudiees = JSON.parse(sessionStorage.getItem('matieres_etudiees'));     
-        derniere_matiere  = JSON.parse(sessionStorage.getItem('derniere_matiere'));     
-        matiere_active    = JSON.parse(sessionStorage.getItem('matiere_active'));     
-        matiere_nom       = JSON.parse(sessionStorage.getItem('matiere_nom'));
+        niveaux             = JSON.parse(sessionStorage.getItem('niveaux'));     
+        niveaux_etudies     = JSON.parse(sessionStorage.getItem('niveaux_etudies'));
+        niveaux_distincts   = JSON.parse(sessionStorage.getItem('niveaux_distincts'));     
+        niveau_max          = JSON.parse(sessionStorage.getItem('niveau_max'));
+        niveau_en_cours     = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
         
-        nbr  = JSON.parse(sessionStorage.getItem('nbr')); 
+        phases_etudiees     = JSON.parse(sessionStorage.getItem('phases_etudiees'));
+        phases_distinctes   = JSON.parse(sessionStorage.getItem('phases_distinctes'));
+        phases_1_distinctes = JSON.parse(sessionStorage.getItem('phases_1_distinctes'));
+        phases_2_distinctes = JSON.parse(sessionStorage.getItem('phases_2_distinctes'));
+        phases_3_distinctes = JSON.parse(sessionStorage.getItem('phases_3_distinctes'));
+        phases_4_distinctes = JSON.parse(sessionStorage.getItem('phases_4_distinctes'));
+        derniere_phase      = JSON.parse(sessionStorage.getItem('derniere_phase'));
+
+        nbr                 = JSON.parse(sessionStorage.getItem('nbr')); 
     }
 
   /*-----------------------------------------------------------------------------------------------------------------*/
@@ -124,7 +131,7 @@ $('document').ready(function() {
         
     	    var lesson_statut = lessonStatut();
     	    var phase_nbr = nombre();
-    	    
+   alert(derniere_phase); 	    
     	    $.each($('#phases_list li'), function() {
     	      
         	    var phase_index = $(this).index();
@@ -153,7 +160,7 @@ $('document').ready(function() {
             
             $.each(li, function() { 
                 let li_id = $(this).attr('id');
-                indice = ($.inArray(li_id, phases_etudiees) === -1) ? indice : indice+=1; 
+                indice = ($.inArray(li_id, phases_distinctes) === -1) ? indice : indice+=1; 
             });
           
             let ls = (indice === 0) ? "vierge" : "non_vierge";
@@ -787,7 +794,7 @@ $('document').ready(function() {
                 	        
                 	        var td = $('.table_muette td');
                 	        var exercice_counter = 0;
-alert("ok");
+
                 	        initialiserExerciceAStocker();
                 	        actualiserExerciceAStocker();
                 	        
@@ -963,20 +970,20 @@ alert("ok");
                             setTimeout(function() { pratiques.css({'transform':'scale(1)'});}, 5);
                             setTimeout(function() { pratiques.css({'opacity':'1'});}, 5);
                             pratiqueStyle();
+
+                            function pratiqueStyle() {
+                                
+                                $.each($('#pratique_head span'), function() {
+                                        
+                                    let index = $(this).index();
+                                
+                                    if(all_options[index] != null) $(this).addClass('apprises');
+                                    if(all_options[0]     == null) $(this).addClass('active');
+                                    if(all_options[index] == null &&  $(this).prev().hasClass('apprises')) $(this).addClass('active');
+                                    if(all_options[index] == null && !$(this).prev().hasClass('apprises')) $(this).addClass('a_apprendre');
+                                });
+                            }
                     	}
-                        function pratiqueStyle() {
-                    	    
-                        	let index_actif = 0;
-                        	$.each($('#pratique_head span'), function() {
-                        	        
-                        	    let index = $(this).index();
-                            
-                        	    if(all_options[index] != null) $(this).addClass('apprises');
-                        	    if(all_options[0]     == null) $(this).addClass('active');
-                        	    if(all_options[index] == null &&  $(this).prev().hasClass('apprises')) $(this).addClass('active');
-                        	    if(all_options[index] == null && !$(this).prev().hasClass('apprises')) $(this).addClass('a_apprendre');
-                        	});
-                        }
                 	    function initialiserPratiques() {
                 	        
                 	        initialiserOptions();

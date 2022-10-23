@@ -4,7 +4,7 @@
     let phases_distinctes = [], phases_1_distinctes = [], phases_2_distinctes = [], phases_3_distinctes = [], phases_4_distinctes = [];
 
     let niveau_1_phases = ["alphabet_apprentissage", "alphabet_exercice", "alphabet_evaluation"];
-    let niveau_2_phases = ["syllabe_apprentissage", "syllabe_exercice", "syllabe_pratique", "syllabe_evaluation"];
+    let niveau_2_phases = ["syllabes_apprentissage", "syllabes_exercice", "syllabes_pratique", "syllabes_evaluation"];
     let niveau_3_phases = ["tons_apprentissage", "tons_exercice", "tons_pratique", "tons_evaluation"];
     let niveau_4_phases = ["chiffres_apprentissage", "chiffres_exercice", "chiffres_pratique", "chiffres_evaluation"];
 
@@ -77,26 +77,18 @@
                     if(nivo === 4) note_4 += phase_note;
             	}}
 
-                //Calcul de phases distinctes globale
-                for(var i=0; i<phases_etudiees.length; i++) {
-                    if($.inArray(phases_etudiees[i],phases_distinctes) === -1) phases_distinctes.push(phases_etudiees[i]);
-                }
-                derniere_phase = phases_distinctes[phases_distinctes.length-1];
-
              //Calcul de phases distinctes
-                for(let i=0; i<niveau_1_phases.length; i++) {
-                    if($.inArray(niveau_1_phases[i],phases_distinctes) != -1 && $.inArray(niveau_1_phases[i],phases_1_distinctes) == -1) phases_1_distinctes.push(niveau_1_phases[i]);
+                for(let i=0; i<phases_etudiees.length; i++) {
+                    if($.inArray(niveau_1_phases[i],phases_etudiees) != -1 && $.inArray(niveau_1_phases[i],phases_1_distinctes) == -1) phases_1_distinctes.push(niveau_1_phases[i]);
+                    if($.inArray(niveau_2_phases[i],phases_etudiees) != -1 && $.inArray(niveau_2_phases[i],phases_2_distinctes) == -1) phases_2_distinctes.push(niveau_2_phases[i]);
+                    if($.inArray(niveau_3_phases[i],phases_etudiees) != -1 && $.inArray(niveau_3_phases[i],phases_3_distinctes) == -1) phases_3_distinctes.push(niveau_3_phases[i]);
+                    if($.inArray(niveau_4_phases[i],phases_etudiees) != -1 && $.inArray(niveau_4_phases[i],phases_4_distinctes) == -1) phases_4_distinctes.push(niveau_4_phases[i]);               
                 }
-                for(let j=0; j<niveau_2_phases.length; j++) {
-                    if($.inArray(niveau_2_phases[j],phases_distinctes) != -1 && $.inArray(niveau_2_phases[j],phases_2_distinctes) == -1) phases_2_distinctes.push(niveau_2_phases[j]);
-                }
-                for(let k=0; k<niveau_3_phases.length; k++) {
-                    if($.inArray(niveau_3_phases[k],phases_distinctes) != -1 && $.inArray(niveau_3_phases[k],phases_3_distinctes) == -1) phases_3_distinctes.push(niveau_3_phases[k]);
-                }
-                for(let l=0; l<niveau_4_phases.length; l++) {
-                    if($.inArray(niveau_4_phases[l],phases_distinctes) != -1 && $.inArray(niveau_4_phases[l],phases_4_distinctes) == -1) phases_4_distinctes.push(niveau_4_phases[l]);
-                }
-                
+
+             //Calcul de phases distinctes globale            
+                phases_distinctes = phases_1_distinctes.concat(phases_2_distinctes, phases_3_distinctes, phases_4_distinctes);
+                derniere_phase = phases_distinctes[phases_distinctes.length-1];
+               
                 sessionStorage.setItem('phases_distinctes'  , JSON.stringify(phases_distinctes));
                 sessionStorage.setItem('phases_1_distinctes', JSON.stringify(phases_1_distinctes));
                 sessionStorage.setItem('phases_2_distinctes', JSON.stringify(phases_2_distinctes));

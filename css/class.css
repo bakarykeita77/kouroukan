@@ -180,8 +180,8 @@ html {
     border: 0.25rem solid #fff;
     top: 7rem;
     height: calc(95vh - 8rem);
-    width: calc(95vw - 0.5rem);
-    max-width: 40rem;
+    width: 95vw;
+    max-width: 45rem;
     margin: 0 auto;
     padding: 0;
     border-radius: 0.5rem;

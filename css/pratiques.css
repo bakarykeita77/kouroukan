@@ -95,10 +95,11 @@
 #pratique_fiche {
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
     margin: 0;
-    top: 0;
-    transition: 0.6s;
+
+    position: absolute;
+    top: 1rem;
+    width: 100%;
 }
 #pratique_fiche_head, #pratique_fiche_body div, #pratique_fiche_foot div {
     display: flex;
@@ -107,8 +108,7 @@
 #pratique_fiche_head span { font-size: 0.8rem; }
 #pratique_fiche_body { 
     position: relative;
-    flex-grow: 1; 
-    top: 0;
+    top: 1rem;
     background-color: #ddd;
     border-top: 0.25rem solid #aaa;
     border-bottom: 0.25rem solid #aaa;
@@ -151,7 +151,8 @@
 }
 
 #dialogue_btn {
-    position: relative;
+    position: absolute;
+    bottom: 8rem;
     background-color: #666;
     padding: 0 1rem;
     margin: 0.25rem 0;

@@ -131,7 +131,7 @@ $('document').ready(function() {
         
     	    var lesson_statut = lessonStatut();
     	    var phase_nbr = nombre();
-   alert(derniere_phase); 	    
+   	    
     	    $.each($('#phases_list li'), function() {
     	      
         	    var phase_index = $(this).index();

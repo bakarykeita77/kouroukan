@@ -151,7 +151,6 @@ if(isset($_SESSION["id"])){
             2)- pratique_foot
          ---------------------------------------------------------------------->
             
-          <!--pratique_head---------------------------------------------------->
             <div id="options_popup">
                 <center><h2 id="options_titre">ߓߟߏߦߊߟߌ ߓߏߟߏ߲ ߠߎ߬</h2></center>
                 <div id="pratique_head">
@@ -160,6 +159,15 @@ if(isset($_SESSION["id"])){
                     <span>ߞߎߡߊߘߋ߲߫ ߜߋ߲߬ ߃ ߡߊ</span>
                     <span>ߞߎߡߊߘߋ߲߫ ߜߋ߲߬ ߄ ߡߊ</span>
                 </div> 
+            </div>
+
+            
+          <!--pratique_head---------------------------------------------------->
+            <div class="course_head" id="pratique_head">
+                <div class='progress_bar' id="pratique_progress_bar">
+                    <span class='progress_question_bar'></span>
+                    <span class='progress_bonne_reponse_bar'></span>
+                </div>
             </div>
           
           <!--pratique_body---------------------------------------------------->
@@ -176,7 +184,7 @@ if(isset($_SESSION["id"])){
             </div>
           
           <!--pratique_foot---------------------------------------------------->
-            <div id="pratique_foot">
+            <div class="course_foot" id="pratique_foot">
                 <div id="pratique_fiche">
                     <div id="pratique_fiche_head">
                         <span class="th">ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</span>
@@ -198,10 +206,6 @@ if(isset($_SESSION["id"])){
                 <div id="message_de_fin_container">
                     <p id="message_de_fin"></p>
                     <div id="message_btn_container"> <button id="message_btn_1"></button><button id="message_btn_2"></button> </div>
-                </div>
-                <div class='progress_bar' id="pratique_progress_bar">
-                    <span class='progress_question_bar'></span>
-                    <span class='progress_bonne_reponse_bar'></span>
                 </div>
                 <div id="dialogue_btn">
     

@@ -68,7 +68,7 @@ if(isset($_SESSION["id"])){
         <span class="fermeture" id="">&times;</span>
       <!--------------------------------------------------------------------------------------------------------------->
 	    
-        <!--Les éléments de paramètres sont chargés depuis js/parametres.js-->
+      <!--Les éléments de paramètres sont chargés depuis js/parametres.js-->
         <div id="parametres">   
             <div id='lesson_parametres_glissiere'>
                 <table id='table1'>
@@ -98,13 +98,13 @@ if(isset($_SESSION["id"])){
       <!--------------------------------------------------------------------------------------------------------------->
         <div class="course" id="apprentissage">
             
-            <div class="course_head" id="apprentisssage_entete">
+            <div class="course_head" id="apprentisssage_head">
                 <div class = 'progress_bar' id = "apprentissage_progress_bar">
                     <div class='progress_bonne_reponse_bar'></div>
                 </div>
             </div>
-            <div class="course_body" id="apprentissage_corps"></div>
-            <div class="course_foot" id="apprentissage_pied">
+            <div class="course_body" id="apprentissage_body"></div>
+            <div class="course_foot" id="apprentissage_foot">
                 <div class="dialogue_btn" id="apprentissage_dialogue_btn">
 
                     <div class='play_btn_container'>
@@ -160,9 +160,8 @@ if(isset($_SESSION["id"])){
                     <span>ߞߎߡߊߘߋ߲߫ ߜߋ߲߬ ߄ ߡߊ</span>
                 </div> 
             </div>
-
-            
-          <!--pratique_head---------------------------------------------------->
+           
+         <!--pratique_head---------------------------------------------------->
             <div class="course_head" id="pratique_head">
                 <div class='progress_bar' id="pratique_progress_bar">
                     <span class='progress_question_bar'></span>
@@ -170,8 +169,8 @@ if(isset($_SESSION["id"])){
                 </div>
             </div>
           
-          <!--pratique_body---------------------------------------------------->
-            <div id="pratique_body">
+         <!--pratique_body---------------------------------------------------->
+            <div class="course_body" id="pratique_body">
                 <div id="pratique_guide">
                     <div id="bulles_container"></div>
                     <p id="signe_egal">&#9183;</p>
@@ -183,7 +182,7 @@ if(isset($_SESSION["id"])){
                 <div id="croix">&#10060;</div>
             </div>
           
-          <!--pratique_foot---------------------------------------------------->
+         <!--pratique_foot---------------------------------------------------->
             <div class="course_foot" id="pratique_foot">
                 <div id="pratique_fiche">
                     <div id="pratique_fiche_head">

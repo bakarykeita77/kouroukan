@@ -151,16 +151,17 @@ if(isset($_SESSION["id"])){
             2)- pratique_foot
          ---------------------------------------------------------------------->
             
-            <div id="options_popup">
+            <div id="pratique_options">
                 <center><h2 id="options_titre">ߓߟߏߦߊߟߌ ߓߏߟߏ߲ ߠߎ߬</h2></center>
-                <div id="pratique_head">
+                <center>
+                <div>
                     <span>ߞߎߡߊߘߋ߲߫ ߜߋ߲߬ ߁ ߡߊ</span>
                     <span>ߞߎߡߊߘߋ߲߫ ߜߋ߲߬ ߂ ߡߊ</span>
                     <span>ߞߎߡߊߘߋ߲߫ ߜߋ߲߬ ߃ ߡߊ</span>
                     <span>ߞߎߡߊߘߋ߲߫ ߜߋ߲߬ ߄ ߡߊ</span>
                 </div> 
+                </center>
             </div>
-           
          <!--pratique_head---------------------------------------------------->
             <div class="course_head" id="pratique_head">
                 <div class='progress_bar' id="pratique_progress_bar">
@@ -177,7 +178,7 @@ if(isset($_SESSION["id"])){
                     <p id="cumule_des_caracteres"></p>
                 </div>
                 <div id="pratiques_images_container">
-                    <img src="http://localhost:8080/htdocs/kouroukan/image/ߖߌ߬ߦߊ.jpg" id="pratiques_image" alt="?">
+                    <img src="/kouroukan/image/image-2-syllabe/ߓߊߘߊ.jpg" id="pratiques_image" alt="?">
                 </div>
                 <div id="croix">&#10060;</div>
             </div>
@@ -206,7 +207,7 @@ if(isset($_SESSION["id"])){
                     <p id="message_de_fin"></p>
                     <div id="message_btn_container"> <button id="message_btn_1"></button><button id="message_btn_2"></button> </div>
                 </div>
-                <div id="dialogue_btn">
+                <div class="dialogue_btn" id="pratique_dialogue_btn">
     
                     <div class="btn question_btn">
                         <span class="question_label">ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</span>

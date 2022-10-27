@@ -26,6 +26,7 @@
 #clavier_nko table tr td .espace { border-radius: 5%; }
 #clavier_nko table tr td:active {
     background-color: #666;
+    text-shadow: none;
     color: #000;
 }
 .espace, .boutons, .points, .apostrophes, .glisser, .tons {

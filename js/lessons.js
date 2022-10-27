@@ -276,7 +276,7 @@ $('document').ready(function() {
             var pratiques = $('#pratique');
             var evaluation = $('#evaluation');
             
-            var dialogue_btn_html = $('#dialogue_btn').html();
+            var dialogue_btn_html = $('.dialogue_btn').html();
             var parametres_html = parametres.html();
 
           /*--------------------------------------------------------------------*/    
@@ -929,7 +929,7 @@ $('document').ready(function() {
                     	let pratique_a_stocker = [];
             
                         var questions_pratiques=[], questions=[], question='', reponse=[], point='';
-                        var table = $('#pratique_fiche table tbody').html();
+                        var table = $('#pratique_fiche_body').html();
                         
                       /*--------------------------------------------------------------------*/
                         $('.fermeture').attr('id', 'fermer_pratique');
@@ -976,32 +976,21 @@ $('document').ready(function() {
                             return options;
                         }   
                     	function afficherPratique() {
-                            
                             pratiques.css({'display':'block', 'transform':'scale(0.75)', 'opacity':0});
                 	        affichageParDefautDesBoutonsDEntete();
                             setTimeout(function() { pratiques.css({'transform':'scale(1)'});}, 5);
                             setTimeout(function() { pratiques.css({'opacity':'1'});}, 5);
-                            pratiqueStyle();
 
-                            function pratiqueStyle() {
-                                
-                                $.each($('#pratique_head span'), function() {
-                                        
-                                    let index = $(this).index();
-                                
-                                    if(all_options[index] != null) $(this).addClass('apprises');
-                                    if(all_options[0]     == null) $(this).addClass('active');
-                                    if(all_options[index] == null &&  $(this).prev().hasClass('apprises')) $(this).addClass('active');
-                                    if(all_options[index] == null && !$(this).prev().hasClass('apprises')) $(this).addClass('a_apprendre');
-                                });
-                            }
+                            optionStyles();
                     	}
                 	    function initialiserPratiques() {
-                	        
+               	        
                 	        initialiserOptions();
                 	        dimensionnementParDefautDePratiquesCorps()                   
                 	        affichageParDefautDesBoutonsDEntete();
                             initialiserProgressBarr();
+                            table = '';
+                            $('#pratique_fiche_body').html();
                             
                         	function initialiserOptions() {
                             	$.each($('#pratique_head span'), function() {
@@ -1095,11 +1084,12 @@ $('document').ready(function() {
                             nbr_option_non_vide = all_options.length - nbr_option_vide;
                       
                             if(nbr_option_vide == 4) {
-                                $('#pratique_head span:nth-child(1)').removeClass('a_apprendre');
-                                $('#pratique_head span:nth-child(1)').addClass('active');
+                                $('#pratique_options span').addClass('a_apprendre');
+                                $('#pratique_options span:nth-child(1)').removeClass('a_apprendre');
+                                $('#pratique_options span:nth-child(1)').addClass('active');
                             }
                             if(nbr_option_vide < 4) {
-                                $.each($('#pratique_head span'), function() {
+                                $.each($('#pratique_options span'), function() {
                                     let option_index = $(this).index();
                                     
                                     if(option_index <  nbr_option_non_vide) $(this).removeClass('a_apprendre');
@@ -1131,28 +1121,32 @@ $('document').ready(function() {
                             return nonv;
                         }
                         function pratiquer() {
-                            let questions_courantes = [];
                             
+                            let questions_courantes = [];
+                           
                             $('.question_btn, #clavier_pratique').on('click', function() {
                                 if( questions_courantes == '' ) guiderClient(); 
                             }); 
-                            $('#pratique_head span').one('click', function() {
+                            $('#pratique_options span').one('click', function() {
                                 
                                 if($(this).hasClass('a_apprendre')) {
                                     alert("ߘߊߞߎ߲ ߡߊ߫ ߛߋ߫ ߦߊ߲߬ ߡߊ߫ ߝߟߐ߫");
                                     return; 
                                 }
-                              /*  if($(this).hasClass('apprises')) {
+                                if($(this).hasClass('apprises')) {
                                     alert("ߕߊ߲߬ߓߌ߬ ߓߘߊ߫ ߞߍ߫ ߦߊ߲߬ ߘߐ߫ ߞߘߐ߬ߡߊ߲߬");
                                     return; 
-                                }   */
+                                }
+                                
+
                                 option_active = $(this);
                             	option_index = $(this).index();
+                                masquerLesOptions();
                             	compteur_de_question = 1;
                             	compteur = 0;
                             	option_de_syllabe = optionDeSyllabe();
                             	table = ""; // Table de reponse
-                            	
+                                    
                                 switch(option_index) {
                                     case 0 : option = mono_syllabe;   break;
                                     case 1 : option = bi_syllabe;     break;
@@ -1181,6 +1175,19 @@ $('document').ready(function() {
                                 	}
                                 	        
                                 	return option_de_syllabe;
+                                }
+                                function dossierImage() {
+                                    let dossier = '';
+
+                                    if(option_index === 0) dossier = "/kouroukan/image/image-1-syllabe/";
+                                    if(option_index === 1) dossier = "/kouroukan/image/image-2-syllabe/";
+                                    if(option_index === 2) dossier = "/kouroukan/image/image-3-syllabe/";
+                                    if(option_index === 3) dossier = "/kouroukan/image/image-4-syllabe/";
+
+                                    return dossier;
+                                }
+                                function masquerLesOptions() {
+                                    $('#pratique_options').css('top','-120%');
                                 }
                         	    function poserQuestionPratique() {
                             	    $('.question_btn').on('click', function() {
@@ -1327,11 +1334,15 @@ $('document').ready(function() {
                                             $('#pratique_fiche_body').animate({ scrollTop:$('#pratique_fiche_body')[0].scrollHeight }, 1000);
                                         }	   
                                         function afficherImage() {
-                                            
+                                            /*
                                             let image_source = $('#'+reponse+' img').attr('src');
                                             let image = (image_source !== undefined) ? $('#'+reponse).html() : $('#ߖߌ߬ߦߊ').html();
+                                            */
+                                            
+                                            let dossier_image = dossierImage();
+                                            let image_html = '<img src="'+dossier_image+reponse+'.jpg" id="pratiques_image" alt="?">';
             
-                                    	    $('#pratiques_images_container').html(image);
+                                    	    $('#pratiques_images_container').html(image_html);
                                 	        $('#pratiques_images_container').css('transform','scale(1)');
                                 	        
                                 	        if(question == reponse) {
@@ -1344,6 +1355,7 @@ $('document').ready(function() {
                                 	        }
                                 	        
                                 	        setTimeout(function(){ $('#pratique_guide').animate({'top':'-100%'},400); }, 200);
+
                                         } 
                                       
                                         function afficherQuestionBouton() {
@@ -1550,6 +1562,8 @@ $('document').ready(function() {
                                         sessionStorage.setItem('phase_nbr',JSON.stringify(phase_nbr)); 
                                     }
                                 }
+                                initialiserPratiques();
+
                                 
                                 function noterPratique() {
                                     
@@ -1677,10 +1691,10 @@ $('document').ready(function() {
                 	        }
                 	    }
                         function afficherClavierEtConsoles() {
-                            $('.progress_bar, .course_head, .clavier_container, #dialogue_btn').css('display','block');
+                            $('.progress_bar, .course_head, .clavier_container, #pratique_dialogue_btn').css('display','block');
                         }
                         function masquerClavierEtConsoles() {
-                            $('.progress_bar, .clavier_container, #dialogue_btn').css('display','none');
+                            $('.progress_bar, .clavier_container, #pratique_dialogue_btn').css('display','none');
                         }
                     	
                       	function monoSyllabesTotal() {

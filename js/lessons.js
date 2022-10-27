@@ -990,7 +990,7 @@ $('document').ready(function() {
                 	        affichageParDefautDesBoutonsDEntete();
                             initialiserProgressBarr();
                             table = '';
-                            $('#pratique_fiche_body').html();
+                            $('#pratique_fiche_body').html('');
                             
                         	function initialiserOptions() {
                             	$.each($('#pratique_head span'), function() {
@@ -1121,7 +1121,7 @@ $('document').ready(function() {
                             return nonv;
                         }
                         function pratiquer() {
-                            
+                          
                             let questions_courantes = [];
                            
                             $('.question_btn, #clavier_pratique').on('click', function() {
@@ -1153,7 +1153,7 @@ $('document').ready(function() {
                                     case 2 : option = tri_syllabe;    break;
                                     case 3 : option = quadri_syllabe; break;
                                 }
-                                         
+                                alert(option);                    
                                 for (var i = 0; i < option.length; i++) { questions_courantes[i] = option[i][0]; }
                                 
                                 $(this).parent().parent().css('top','-110%');

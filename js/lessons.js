@@ -67,7 +67,6 @@ $('document').ready(function() {
     phases();
     matiere();
    
-
   /*-----------------------------------------------------------------------------------------------------------------*/
 	
 	function getPhases() { 
@@ -993,7 +992,7 @@ $('document').ready(function() {
                             $('#pratique_fiche_body').html('');
                             
                         	function initialiserOptions() {
-                            	$.each($('#pratique_head span'), function() {
+                            	$.each($('#pratique_options span'), function() {
                                	
                                 	let option_de_syllabe = '';
                             	    let option = $(this);
@@ -1008,14 +1007,14 @@ $('document').ready(function() {
                                     questions = questionsPratiques();
                             	    dimensionnementParDefautDePratiquesCorps()                   
                                     initialiserProgressBarr();
-                                        
+                                     
                                 	switch(option_index) {
                                 	    case 0: mono_syllabe   = monoSyllabe();   break;
                                 	    case 1: bi_syllabe     = biSyllabe();     break;
                                 	    case 2: tri_syllabe    = triSyllabe();    break;
                                 	    case 3: quadri_syllabe = quadriSyllabe(); break;
                                 	}
-                                 
+                                
                                 	function monoSyllabe() {
                                 	    let mono_syllabe = [];
                                 	        
@@ -1122,22 +1121,17 @@ $('document').ready(function() {
                         }
                         function pratiquer() {
                           
-                            let questions_courantes = [];
-                           
-                            $('.question_btn, #clavier_pratique').on('click', function() {
-                                if( questions_courantes == '' ) guiderClient(); 
-                            }); 
+                            let questions_posees = [];
+                          
+                         /* Une question doit etre posee avant de commencer à taper reponse.*/ 
+                            $('#clavier_pratique').on('click', function() {
+                                if( questions_posees == '' ) guiderClient(); 
+                            });
+
                             $('#pratique_options span').one('click', function() {
                                 
-                                if($(this).hasClass('a_apprendre')) {
-                                    alert("ߘߊߞߎ߲ ߡߊ߫ ߛߋ߫ ߦߊ߲߬ ߡߊ߫ ߝߟߐ߫");
-                                    return; 
-                                }
-                                if($(this).hasClass('apprises')) {
-                                    alert("ߕߊ߲߬ߓߌ߬ ߓߘߊ߫ ߞߍ߫ ߦߊ߲߬ ߘߐ߫ ߞߘߐ߬ߡߊ߲߬");
-                                    return; 
-                                }
-                                
+                                if($(this).hasClass('a_apprendre')) { alert("ߘߊߞߎ߲ ߡߊ߫ ߛߋ߫ ߦߊ߲߬ ߡߊ߫ ߝߟߐ߫");   return; }
+                                if($(this).hasClass('apprises'))    { alert("ߕߊ߲߬ߓߌ߬ ߓߘߊ߫ ߞߍ߫ ߦߊ߲߬ ߘߐ߫ ߞߘߐ߬ߡߊ߲߬"); return; }                               
 
                                 option_active = $(this);
                             	option_index = $(this).index();
@@ -1153,8 +1147,8 @@ $('document').ready(function() {
                                     case 2 : option = tri_syllabe;    break;
                                     case 3 : option = quadri_syllabe; break;
                                 }
-                                alert(option);                    
-                                for (var i = 0; i < option.length; i++) { questions_courantes[i] = option[i][0]; }
+            alert("tri_syllabe : "+tri_syllabe);                    
+                                for (var i = 0; i < option.length; i++) { questions_posees[i] = option[i][0]; }
                                 
                                 $(this).parent().parent().css('top','-110%');
                                 
@@ -1192,7 +1186,7 @@ $('document').ready(function() {
                         	    function poserQuestionPratique() {
                             	    $('.question_btn').on('click', function() {
                                         pratiqueGuide();
-                                	    question = questions_courantes[compteur];
+                                	    question = questions_posees[compteur];
                                 	    
                                 	    if(question) $('.clavier_container').css('opacity',1);
                                 	    $('#pratiques_images_container').css('transform','scale(0.25)');
@@ -1204,7 +1198,7 @@ $('document').ready(function() {
                                 	            
                                 	        var pratique_guide_html = pratiqueGuideHTML();
                                	          
-                                	        $('#cumule_des_caracteres').html(questions_courantes[compteur]);
+                                	        $('#cumule_des_caracteres').html(questions_posees[compteur]);
                                 	        setTimeout(function() {$('#pratiques_image').attr('src','#');}, 600);
                                 	            
                                 	        $('#bulles_container').html(pratique_guide_html);
@@ -1493,7 +1487,7 @@ $('document').ready(function() {
                                     	                dimensionnementParDefautDePratiquesCorps();
                                                         total_point = 0;
                                     	                
-                                    	                if(option_active.hasClass('apprises')) { alert( "Cette option est déjà passée"); questions_courantes.splice(0,questions_courantes.length); return; }
+                                    	                if(option_active.hasClass('apprises')) { alert( "Cette option est déjà passée"); questions_posees.splice(0,questions_posees.length); return; }
                                     	                if($('#message_btn_2').text() == 'ߥߊ߫ ߢߍ߫') changerDOption();
                                     	                if($('#message_btn_2').text() == 'ߛߍ߬ߦߵߊ߬ ߡߊ߬') questions = questionsPratiques();
                                     	            });

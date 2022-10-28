@@ -106,7 +106,6 @@
     margin: 0.25rem;
 
     position: absolute;
-    top: 0;
     border: 1px solid #ccc;
     padding: 0.125rem;
 }
@@ -248,9 +247,9 @@
         height: calc(100% - 18rem);
     }
     #pratique_fiche {
-        height: 6.5rem;
+        height: 5rem;
         width: 100%;
-        bottom: 10.5rem;
+        bottom: 10.25rem;
     }
     #message_de_fin_container {
         top: calc(100% - 7rem);
@@ -272,7 +271,8 @@
         height: calc(100% - 1rem);       
     }
     #pratique_fiche {
-        bottom: 10.5rem;
+        top: 0;
+        bottom: 10.25rem;
         width: calc(100% - 1rem);
     }
 }

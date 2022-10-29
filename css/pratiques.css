@@ -241,7 +241,7 @@
         transform: translateX(-50%);
     }
     #pratique_foot {
-        height: 18rem;
+        height: 15rem;
     }
     #pratique_body {
         height: calc(100% - 18rem);

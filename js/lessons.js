@@ -408,7 +408,7 @@ $('document').ready(function() {
                     $('.course_container').css('display','none'); 
                     alert("Tu n'est pas encore arrivé à ce niveau !");
                 }
-        	    if(phase_class == 'active') {    
+        	    if(phase_class == 'apprises') {    
 
                     $('.course_container').css('display','block');
                     $('.course').css('display','none');
@@ -1147,7 +1147,7 @@ $('document').ready(function() {
                                     case 2 : option = tri_syllabe;    break;
                                     case 3 : option = quadri_syllabe; break;
                                 }
-            alert("tri_syllabe : "+tri_syllabe);                    
+                              
                                 for (var i = 0; i < option.length; i++) { questions_posees[i] = option[i][0]; }
                                 
                                 $(this).parent().parent().css('top','-110%');
@@ -1448,7 +1448,7 @@ $('document').ready(function() {
                                     	            
                 	                                $('#tbody').css('height', (pfh-120)+'px');
                                     	            $('#pratique_fiche_foot').css('display','block');
-                                    	           // $('#message_de_fin_container').css('display','block');
+                                    	            $('#message_de_fin_container').css('display','block');
                                     	        }
                                     	        function chargerTotalPoints() {
                                     	            $('#total_point').html(parseIntNko(total_point));
@@ -1515,10 +1515,10 @@ $('document').ready(function() {
                                     	        let question = $('.pratique_tr_actif .td:nth(0)').html(); 
                                     	        let reponse = $('.pratique_tr_actif .td:nth(1)').html(); 
                                     	        
-                                                let image_source = $('#'+reponse+' img').attr('src');
-                                                let image = (image_source !== undefined) ? $('#'+reponse).html() : $('#ߖߌ߬ߦߊ').html();
+                                            let dossier_image = dossierImage();
+                                            let image_html = '<img src="'+dossier_image+reponse+'.jpg" id="pratiques_image" alt="?">';
             
-                                    	        $('#pratiques_images_container').html(image);
+                                    	    $('#pratiques_images_container').html(image_html);
                                     	  
                                     	        if(question == reponse) {
                                 	                $('#pratiques_images_container').css('opacity',1);
@@ -1538,8 +1538,8 @@ $('document').ready(function() {
                     	function stockerPratique() {
                     	    $('#fermer_pratique').on('click',function(){
 
-                                if(phase_index <  phase_nbr || nbr_option_non_vide < all_options.length) { return; }
-                                if(phase_index == phase_nbr && nbr_option_non_vide == all_options.length) {
+                                if(phase_index <  data_phase_nbr || nbr_option_non_vide < all_options.length) { return; }
+                                if(phase_index == data_phase_nbr && nbr_option_non_vide == all_options.length) {
                                     
                                     note = noterPratique(); 
                                    
@@ -1573,10 +1573,16 @@ $('document').ready(function() {
                                     return note;
                                 }
                                 function sendPratiqueToDB() {
-                                    
+
+                                    let matiere = JSON.parse(sessionStorage.getItem('matiere_active'));
+                                    let phase   = JSON.parse(sessionStorage.getItem('phase'));
                                     let lesson  = JSON.stringify(all_options);
+
                                     const pratique_data = new URLSearchParams({
+                                        id     : id,
+                                        matiere: matiere,
                                         niveau : niveau,
+                                        phase  : phase,
                                         lesson : lesson,
                                         note   : note
                                     });
@@ -1585,7 +1591,7 @@ $('document').ready(function() {
                                         method: "POST",
                                         body: pratique_data 
                                     })
-                                    .then(response => response.json())
+                                    .then(response => response.text())
                                     .catch(error => console.log(error));
                                 }
                                 function deleteLocalOptions() {

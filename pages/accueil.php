@@ -45,8 +45,8 @@ session_start();
 	<title>accueil</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/class.css"/>
-	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/accueil.css"/>
+	<link rel="stylesheet" href="/kouroukan/css/class.css"/>
+	<link rel="stylesheet" href="/kouroukan/css/accueil.css"/>
 </head>
 <body>
 
@@ -81,14 +81,14 @@ session_start();
                     <p>ߌ ߣߌ߫ ߛߣߍ߫ ߞߙߎ߬ߞߊ߲߫ ߘߋ߰ߘߊ ߟߊ߫߸ ߒߞߏ ߟߐ߲ߠߌ ߛߌߟߊ߫ ߛߎߘߎ߲߸ ߓߟߐߟߐ ߛߌߟߊ ߝߍ߬.</p>
                     <p>ߞߏ߫ ߛߎ ߦߋ߫ ߞߏ߬ ߟߊ߫ ߛߐ߭ ߟߋ߬ ߡߊ߬߸ ߒ߬ߓߊ߬߹ ߌ ߖߌߖߊ߬ ߸ ߌ ߦߋ߫ ߥߟߊ߬ߘߊ ߕߊ߬ ߌߞߘߐ߫߹ ߦߊ߲߬.</p>
                 </div>
-                <p id="affiche_programme"><a href="http://localhost:8080/kouroukan/pages/programmes.php">ߥߟߊ߬ߘߊ ߟߎ߬</a></p>
+                <p id="affiche_programme"><a href="/kouroukan/pages/programmes.php">ߥߟߊ߬ߘߊ ߟߎ߬</a></p>
                
             </div>   
         </div>
         <div class="page_foot"><?php include("pied-de-lesson.php"); ?></div>
     </div>
 
-    <script src="http://localhost:8080/kouroukan/js/accueil.js"></script>
+    <script src="/kouroukan/js/accueil.js"></script>
 
 </body>
 </html>

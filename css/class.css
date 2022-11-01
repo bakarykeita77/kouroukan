@@ -214,7 +214,7 @@ html {
     top: 1rem;
     /*la hauteur est calculée par la fonction dimensionnementDeCourseBody() dans lessons.js*/
     width: calc(100% - 2rem);
-    margin: 0.25rem auto;
+    margin: 0.25rem 1rem;
     overflow: auto;
     box-sizing: border-box;
 }
@@ -747,10 +747,9 @@ html {
 }
 
 .table_parlante, .table_muette {
-    position: absolute;
-    top: 0;
-    padding: 8px;
-    width: 100%;
+    position: relative;
+    padding: 0.5rem;
+    width: calc(100% - 1rem);
 }
 .table_parlante tr, .table_muette tr {
     position: relative;

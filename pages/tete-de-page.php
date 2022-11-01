@@ -1,4 +1,5 @@
-<?php $avatar_id = isset($_SESSION['id']) ? $_SESSION['id']:''; ?>
+
+<?php $avatar_id = isset($_SESSION['id']) ? $_SESSION['id']:1; ?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -10,11 +11,11 @@
 		<link rel="stylesheet" href="/kouroukan/css/tete-de-page.css"/>
 		
 	 <!--	<script src="http://kit.fontawesome.com/45b3b93014.js" crossorigin="anonymous"></script>    -->
-		<script src="http://localhost:8080/kouroukan/js/jquery-3.3.1.js"></script>
-		<script src="http://localhost:8080/kouroukan/fonctions.js"></script>
-        <script src="http://localhost:8080/kouroukan/js/icones.js"></script>
-        <script src="http://localhost:8080/kouroukan/js/class.js"></script>	
-        <script src="http://localhost:8080/kouroukan/js/caracteres.js"></script>
+		<script src="/kouroukan/js/jquery-3.3.1.js"></script>
+		<script src="/kouroukan/fonctions.js"></script>
+        <script src="/kouroukan/js/icones.js"></script>
+        <script src="/kouroukan/js/class.js"></script>	
+        <script src="/kouroukan/js/caracteres.js"></script>
     </head>
 	<body>
 		
@@ -23,7 +24,7 @@
             <h3 id="header">ߞߙߎ߬ߞߊ߲߬</h3>
     		<div id="topbar"> 
   				
-    			<div id="logo"> <img src="http://localhost:8080/kouroukan/pages/get-avatar.php?client_id=<?= $avatar_id ?>" alt="avatar"/></div>
+    			<div id="logo"> <img src="/kouroukan/pages/get-avatar.php?client_id=<?= $avatar_id ?>" alt="avatar"/></div>
     			
     			<div id='profile_menu_container'>
     
@@ -73,25 +74,25 @@
     			<div id = "nav">
     				<div id="menu_deroulant">
         				<ul>
-        					<li class="hover_anim" id="home"     ><a href = "http://localhost:8080/kouroukan/index.php">ߝߊ߲ߓߊ </a></li>
-        					<li class="hover_anim" id="programme"><a href = "http://localhost:8080/kouroukan/pages/programmes.php"> ߢߍߥߟߊ </a></li>
-        					<li class="hover_anim" id="blog"     ><a href = "http://localhost:8080/kouroukan/pages/blog.php"> ߞߊ߬ߙߊ߲߬ߜߍ </a></li>
-        					<li class="hover_anim" id="contact"  ><a href = "http://localhost:8080/kouroukan/pages/contact.php">ߛߊ߲߬ߓߊ߬ߕߐ߮ </a></li>
+        					<li class="hover_anim" id="home"     ><a href = "/kouroukan/index.php">ߝߊ߲ߓߊ </a></li>
+        					<li class="hover_anim" id="programme"><a href = "/kouroukan/pages/programmes.php"> ߢߍߥߟߊ </a></li>
+        					<li class="hover_anim" id="blog"     ><a href = "/kouroukan/pages/blog.php"> ߞߊ߬ߙߊ߲߬ߜߍ </a></li>
+        					<li class="hover_anim" id="contact"  ><a href = "/kouroukan/pages/contact.php">ߛߊ߲߬ߓߊ߬ߕߐ߮ </a></li>
         				</ul>
     				</div>
     				
     				<div id="menu_non_deroulant">
     				    <ul>
     				        <li id="menu_menu">Menu</li>
-    				        <li id="menu_board"><a href="http://localhost:8080/kouroukan/board.php">ߥߟߊ߬ߓߊ</a></li>
+    				        <li id="menu_board"><a href="/kouroukan/board.php">ߥߟߊ߬ߓߊ</a></li>
     				    </ul>
     				</div>
     			</div>
     		</div>
         </div>
 
-		<script src="http://localhost:8080/kouroukan/js/tete-de-page.js"></script>
-		<script src="http://localhost:8080/kouroukan/js/profile.js"></script>
+		<script src="/kouroukan/js/tete-de-page.js"></script>
+		<script src="/kouroukan/js/profile.js"></script>
 
 	</body>
 </html>

@@ -98,7 +98,7 @@ if(isset($_SESSION["id"])){
       <!--------------------------------------------------------------------------------------------------------------->
         <div class="course" id="apprentissage">
             
-            <div class="course_head" id="apprentisssage_head">
+            <div class="course_head" id="apprentissage_head">
                 <div class = 'progress_bar' id = "apprentissage_progress_bar">
                     <div class='progress_bonne_reponse_bar'></div>
                 </div>
@@ -129,14 +129,14 @@ if(isset($_SESSION["id"])){
       <!--------------------------------------------------------------------------------------------------------------->
         <div class="course" id="exercice"     >
             
-            <div class="course_head" id="exercice_entete">
+            <div class="course_head" id="exercice_head">
                 <div class='progress_bar' id="exercice_progress_bar">
                     <p class='progress_question_bar'></p>
                     <p class='progress_bonne_reponse_bar'></p>
                 </div>
             </div>
-            <div class="course_body" id="exercice_corps"></div>   <!--Cette division est chargé par la fonction chargerExercice() dans lesson.js-->
-            <div class="course_foot" id="exercice_pied">
+            <div class="course_body" id="exercice_body"></div>   <!--Cette division est chargé par la fonction chargerExercice() dans lesson.js-->
+            <div class="course_foot" id="exercice_foot">
 
             </div>
             
@@ -234,13 +234,13 @@ if(isset($_SESSION["id"])){
       <!--------------------------------------------------------------------------------------------------------------->
         <div class="course" id="evaluation"   >
 
-            <div class="course_head" id="evaluation_entete">
+            <div class="course_head" id="evaluation_head">
                 <div class='progress_bar' id="evaluation_progress_bar">
                     <p class='progress_question_bar'></p>
                     <p class='progress_bonne_reponse_bar'></p>
             </div>
             </div>
-            <div class="course_body" id="evaluation_corps">
+            <div class="course_body" id="evaluation_body">
 
                 <div id='teste_container'>
                 
@@ -258,7 +258,7 @@ if(isset($_SESSION["id"])){
 
                 </div>
             </div>
-            <div class="course_foot" id="evaluation_pied">
+            <div class="course_foot" id="evaluation_foot">
 
                 <div class="dialogue_btn" id="evaluation_dialogue_btn">
                     <div class="question_btn">
@@ -301,18 +301,17 @@ if(isset($_SESSION["id"])){
 
     <audio id="audio"></audio>
     
-    <script src="http://localhost:8080/kouroukan/js/parametres.js"></script>
+    <script src="/kouroukan/js/parametres.js"></script>
     
-    <script src="http://localhost:8080/kouroukan/js/alphabet.js"></script>
-    <script src="http://localhost:8080/kouroukan/js/syllabes.js"></script>
-    <script src="http://localhost:8080/kouroukan/js/tons.js"></script>
-    <script src="http://localhost:8080/kouroukan/js/chiffres.js"></script>
+    <script src="/kouroukan/js/alphabet.js"></script>
+    <script src="/kouroukan/js/syllabes.js"></script>
+    <script src="/kouroukan/js/tons.js"></script>
+    <script src="/kouroukan/js/chiffres.js"></script>
     
-    <script src="http://localhost:8080/kouroukan/js/apprentissage.js"></script>
-    <script src="http://localhost:8080/kouroukan/js/pratiques.js"></script>
-    <script src="http://localhost:8080/kouroukan/js/evaluations.js"></script>
+    <script src="/kouroukan/js/apprentissage.js"></script>
+    <script src="/kouroukan/js/evaluations.js"></script>
     
-    <script src="http://localhost:8080/kouroukan/js/lessons.js"></script>
+    <script src="/kouroukan/js/lessons.js"></script>
     
 </body>
 </html>

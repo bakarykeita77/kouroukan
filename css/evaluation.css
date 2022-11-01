@@ -8,18 +8,16 @@
 .stop_btn_container, .oreille_icon_container {
     display: none;
 }
-#evaluation_entete {
+#evaluation_head {
 }
-#evaluation_corps {
-    margin: 0;
+#evaluation_body {
     padding: 0;
-    overflow: hidden;
 }
-#evaluation_pied {
+#evaluation_foot {
     height: 10.25rem;
 }
 #evaluation_dialogue_btn {
-    top: 0;
+    bottom: 8rem;
     border-radius: 0.5rem 0.5rem 0 0;
 }
 #evaluation_clavier_container {

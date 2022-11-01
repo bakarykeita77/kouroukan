@@ -244,10 +244,12 @@ $('document').ready(function() {
 	function matiere() {
     	
     	actualiserCochage();
+        lettres = voyelles_cochees.concat(consonnes_cochees,tedos_coches);
+        syllabes = syllab();
     	
     	$('#phases_list li').on('click', function(e){
       
-            var syllabes_tonifies = tonification();  
+            var syllabes_tonifies = tonification(); // Voir cette fonction dans js/tons.js 
 
             var questionnaires = questions();
             var questions_quantity = quantiteDeQuestion();
@@ -285,8 +287,11 @@ $('document').ready(function() {
     	    dimensionnementDeCourseBody();
     	    cours();
         
-          /*--------------------------------------------------------------------*/    
-              
+          /*--------------------------------------------------------------------*/  
+
+
+          /*--------------------------------------------------------------------*/  
+
             function phaseActiveName() { sessionStorage.setItem('phase', JSON.stringify(phase_id)); }
             function dimensionnementDeCourseBody() {
                 
@@ -341,18 +346,19 @@ $('document').ready(function() {
     	        }
     	        function exerciceEnteteHTML() {
     	            
-                    var exercice_entete_html = "<div class='play_icon_container' id='exercices_player' style='width:auto'>";
-                        exercice_entete_html += "<span class='play_label'>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ </span>";
-                    	exercice_entete_html += "<span class='qtite_question'>"+quantite_de_question+"</span> : <span class='ordre_question'>"+parseIntNko(compteur_de_question)+question_rang+" </span>";
-                    	exercice_entete_html += "<span class='ecouter_question'> ߟߊߡߍ߲߫</span><span class='play_icon'>"+play_icon+"</span>";
-                    exercice_entete_html += "</div>";
-                    exercice_entete_html += "<div class='oreille_icon_container'><span class='reecoute_label'>ߊ߬ ߟߊߡߍ߲߫ ߕߎ߯ߣߌ߫  </span> <span class='oreille_icon'>"+oreille_icon+"</span></div>";
+                    var exercice_head_html = "<div class='play_icon_container' id='exercices_player' style='width:auto'>";
+                        exercice_head_html += "<span class='play_label'>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ </span>";
+                    	exercice_head_html += "<span class='qtite_question'>"+quantite_de_question+"</span> : <span class='ordre_question'>"+parseIntNko(compteur_de_question)+question_rang+" </span>";
+                    	exercice_head_html += "<span class='ecouter_question'> ߟߊߡߍ߲߫</span><span class='play_icon'>"+play_icon+"</span>";
+                    exercice_head_html += "</div>";
+                    exercice_head_html += "<div class='oreille_icon_container'><span class='reecoute_label'>ߊ߬ ߟߊߡߍ߲߫ ߕߎ߯ߣߌ߫  </span> <span class='oreille_icon'>"+oreille_icon+"</span></div>";
                     
-                    return exercice_entete_html;
+                    return exercice_head_html;
     	        }
     	    }
        
             function lessonCourante() {
+
                 if(phase_id=='alphabet_apprentissage') { lesson_courante = alphabetApprentissageHTML(); } //Cette fonction provient de alphabet.js 
                 if(phase_id=='syllabes_apprentissage') { lesson_courante = syllabesApprentissageHTML(); } //Cette fonction provient de syllabes.js
                 if(phase_id=='tons_apprentissage'    ) { lesson_courante = tonsApprentissageHTML();     } //Cette fonction provient de tons.js
@@ -366,7 +372,7 @@ $('document').ready(function() {
                // if(phase_id=='syllabes_pratique'     ) { lesson_courante = syllabesPratiquesHTML();     } //Cette fonction provient de syllabes.js
                // if(phase_id=='tons_pratique'         ) { lesson_courante = tonsPratiquesHTML();         } //Cette fonction provient de tons.js
                // if(phase_id=='chiffres_pratique'     ) { lesson_courante = chiffresPratiquesHTML();     } //Cette fonction provient de chiffres.js
-             
+            
                 return lesson_courante;
                 
             }
@@ -408,7 +414,7 @@ $('document').ready(function() {
                     $('.course_container').css('display','none'); 
                     alert("Tu n'est pas encore arrivé à ce niveau !");
                 }
-        	    if(phase_class == 'apprises') {    
+        	    if(phase_class == 'active') {    
 
                     $('.course_container').css('display','block');
                     $('.course').css('display','none');
@@ -425,9 +431,6 @@ $('document').ready(function() {
             	  
                 	function apprentissages() {
                 	                    	    
-                	    var compteur_de_question = 1;
-                        var apprentissage_a_stocker = [];
-                        var memo = [];
                         var clicks_memo = [];
                       
                         $('.fermeture').attr('id', 'fermer_apprentissage');
@@ -439,8 +442,9 @@ $('document').ready(function() {
                     	enregistrerApprentissage();
                 	    stockerApprentissage();
                     	                        	
-                    	function chargerApprentissage() {   
-                            $('#apprentissage_body').html( lesson_courante ); 
+                    	function chargerApprentissage() { 
+                           // $('#fermer_apprentissage').click(function(){lesson_courante = '';});  
+                            $('#apprentissage_body').html( "<div id='table_parlante_container'>"+lesson_courante+"</div>" ); 
                     	}
                     	function afficherApprentissage() {
                             apprentissage.css({'display':'block', 'transform':'scale(0.75)', 'opacity':0});
@@ -456,7 +460,7 @@ $('document').ready(function() {
                     	        
                     	        lettres = voyelles_cochees.concat(consonnes_cochees,tedos_coches);
                     	        syllabes = syllab();
-                    	        syllabes_tonifies = tonification();
+                    	        syllabes_tonifies = tonification(); // Voir cette fonction dans js/tons.js 
                     	        
                     	        $('#apprentissage_body').html( lessonCourante() ); 
                     	        $('.stop_btn_container').css({'display':'none'});
@@ -496,23 +500,19 @@ $('document').ready(function() {
                             }
                             function apprentissageProgressBarr() {
                                             
-                                var course_width = $('.course').width();
                                 var nbr_click = questions().length;
-                                
                                 var progress_unity = $('#apprentissage_progress_bar').width()/nbr_click;
                                 
                              /*
                               A chaque click sur un élément, progress barr avance d'une unité égale à progress_unity px.
                               Mais si un élément est clické une deuxième fois, progress barr ne doit pas avancer.
                               Pour cela, tous les éléments clichés sont enregistrés dans un tableau pour les distinguer.
-                              */            
+                             */            
                                 let elements_clickes = [];
                                 
                                 $('.table_parlante td').on('click', function() {
                                  
-                                    if(elements_clickes.indexOf($(this).html()) == -1) {
-                                        $('.progress_bonne_reponse_bar').css('width','+='+progress_unity+'px');
-                                    }
+                                    if(elements_clickes.indexOf($(this).html()) == -1) $('.progress_bonne_reponse_bar').css('width','+='+progress_unity+'px');
                                     elements_clickes.push($(this).html());
                                 });
                             }
@@ -643,7 +643,7 @@ $('document').ready(function() {
                                         note   : JSON.stringify(note)
                                     }); 
                     
-                                    fetch("http://localhost:8080/kouroukan/pages/actions.php", {
+                                    fetch("/kouroukan/pages/actions.php", {
                                         method: "POST",
                                         body: apprentissage_data
                                     })
@@ -697,8 +697,8 @@ $('document').ready(function() {
                     	
                     	function chargerExercice(){ 
 
-                            $('#exercice_pied').html( exerciceEnteteHTML() );
-                    	    $('#exercice_corps').html( lesson_courante ); 
+                            $('#exercice_foot').html( exerciceEnteteHTML() );
+                    	    $('#exercice_body').html( lesson_courante ); 
                 	        reductionDesElementsDeLessonCouranteA49();
                         	
                         	function exerciceEnteteHTML(){
@@ -770,7 +770,7 @@ $('document').ready(function() {
                             	        
                         	    $('.table_muette').on('click', function(e){
                         	        if(question_posee=='')
-                        	        {   guiderClient(); }
+                        	        {  /* guiderClient(); */}
                         	        else
                         	        {   
                         	            var td = $(e.target);
@@ -943,6 +943,7 @@ $('document').ready(function() {
                       /*--------------------------------------------------------------------*/
 
                     	function recuperationDesOptionsEffectuees() {
+                    
                     	    DB_options = getDBOptions();
                     	    if(DB_options.length === 4) localStorage.clear();
                     	    local_options = getLocalOptions();
@@ -952,7 +953,7 @@ $('document').ready(function() {
                     	function getDBOptions() {
                         	    
                             let DB_pratiques = JSON.parse(localStorage.getItem('pratiques'));
-                        
+                       
                         	let pratiques_niveaux = [], niveau_max = '';
                         	let niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));
                             
@@ -964,14 +965,13 @@ $('document').ready(function() {
                         }
                         function getLocalOptions() {
                         	    
-                            let options = [];
+                            let options = [], option_1 = [], option_2 = [], option_3 = [], option_4 = [];
                         	                                
-                            let option_1 = JSON.parse(localStorage.getItem(id+'_'+0));
-                            let option_2 = JSON.parse(localStorage.getItem(id+'_'+1));
-                            let option_3 = JSON.parse(localStorage.getItem(id+'_'+2));
-                            let option_4 = JSON.parse(localStorage.getItem(id+'_'+3));
-                            	    
-                            options = [option_1, option_2, option_3, option_4];
+                            if(JSON.parse(localStorage.getItem(id+'_'+0)) != null) { option_1 = JSON.parse(localStorage.getItem(id+'_'+0)); options.push(option_1); }
+                            if(JSON.parse(localStorage.getItem(id+'_'+1)) != null) { option_2 = JSON.parse(localStorage.getItem(id+'_'+1)); options.push(option_2); }
+                            if(JSON.parse(localStorage.getItem(id+'_'+2)) != null) { option_3 = JSON.parse(localStorage.getItem(id+'_'+2)); options.push(option_3); }
+                            if(JSON.parse(localStorage.getItem(id+'_'+3)) != null) { option_4 = JSON.parse(localStorage.getItem(id+'_'+3)); options.push(option_4); }
+                                                     	    
                             return options;
                         }   
                     	function afficherPratique() {
@@ -1131,7 +1131,7 @@ $('document').ready(function() {
                             $('#pratique_options span').one('click', function() {
                                 
                                 if($(this).hasClass('a_apprendre')) { alert("ߘߊߞߎ߲ ߡߊ߫ ߛߋ߫ ߦߊ߲߬ ߡߊ߫ ߝߟߐ߫");   return; }
-                                if($(this).hasClass('apprises'))    { alert("ߕߊ߲߬ߓߌ߬ ߓߘߊ߫ ߞߍ߫ ߦߊ߲߬ ߘߐ߫ ߞߘߐ߬ߡߊ߲߬"); return; }                               
+                              //  if($(this).hasClass('apprises'))    { alert("ߕߊ߲߬ߓߌ߬ ߓߘߊ߫ ߞߍ߫ ߦߊ߲߬ ߘߐ߫ ߞߘߐ߬ߡߊ߲߬"); return; }                               
 
                                 option_active = $(this);
                             	option_index = $(this).index();
@@ -1154,7 +1154,6 @@ $('document').ready(function() {
                                 
                                 initialiserProgressBarr();
                         	    poserQuestionPratique();
-                                if(!question) $('.clavier_container').css('opacity',0.5);
                             	repondreQuestionPratique();
                             	correctionPratique();
                                 
@@ -1184,6 +1183,8 @@ $('document').ready(function() {
                                     $('#pratique_options').css('top','-120%');
                                 }
                         	    function poserQuestionPratique() {
+                                    if(!question) $('.clavier_container').css('opacity',0.5);
+
                             	    $('.question_btn').on('click', function() {
                                         pratiqueGuide();
                                 	    question = questions_posees[compteur];
@@ -1538,6 +1539,9 @@ $('document').ready(function() {
                     	function stockerPratique() {
                     	    $('#fermer_pratique').on('click',function(){
 
+                                let DB_options = getDBOptions();
+                                let local_options = getLocalOptions();
+
                                 if(phase_index <  data_phase_nbr || nbr_option_non_vide < all_options.length) { return; }
                                 if(phase_index == data_phase_nbr && nbr_option_non_vide == all_options.length) {
                                     
@@ -1553,6 +1557,7 @@ $('document').ready(function() {
                                         
                                         sendPratiqueToDB(); 
                                         changerPhaseActive(phase_nbr);
+                                        //deleteLocalOptions();
                                         sessionStorage.setItem('phase_nbr',JSON.stringify(phase_nbr)); 
                                     }
                                 }

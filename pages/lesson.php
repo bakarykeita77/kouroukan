@@ -20,6 +20,9 @@ if(isset($_SESSION["id"])){
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <link rel="stylesheet" href="/kouroukan/css/class.css"/>
+    <link rel="stylesheet" href="/kouroukan/css/tete-de-page.css"/>
 	
 	<link rel="stylesheet" href="/kouroukan/css/lesson.css"/>
 	<link rel="stylesheet" href="/kouroukan/css/syllabes.css"/>

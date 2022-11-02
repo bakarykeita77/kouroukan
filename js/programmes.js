@@ -1,4 +1,4 @@
-
+alert("ok");
  //Selection des éléments HTML du programme
     var programmes_container = document.getElementById('programmes_container');
     var programme_div        = document.getElementById('programme_div');

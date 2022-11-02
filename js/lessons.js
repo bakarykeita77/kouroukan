@@ -405,7 +405,7 @@ $('document').ready(function() {
                 localStorage.clear();
             }
     	    function cours() {
-                
+                /*
                 if(phase_class == 'apprises') {
                     $('.course_container').css('display','none'); 
                     alert("Tu as dépassé ce niveau !");
@@ -413,8 +413,8 @@ $('document').ready(function() {
                 if(phase_class == 'a_apprendre') {
                     $('.course_container').css('display','none'); 
                     alert("Tu n'est pas encore arrivé à ce niveau !");
-                }
-        	    if(phase_class == 'active') {    
+                } */
+        	    if(phase_class == 'apprises') {    
 
                     $('.course_container').css('display','block');
                     $('.course').css('display','none');
@@ -1130,7 +1130,7 @@ $('document').ready(function() {
 
                             $('#pratique_options span').one('click', function() {
                                 
-                                if($(this).hasClass('a_apprendre')) { alert("ߘߊߞߎ߲ ߡߊ߫ ߛߋ߫ ߦߊ߲߬ ߡߊ߫ ߝߟߐ߫");   return; }
+                               // if($(this).hasClass('a_apprendre')) { alert("ߘߊߞߎ߲ ߡߊ߫ ߛߋ߫ ߦߊ߲߬ ߡߊ߫ ߝߟߐ߫");   return; }
                               //  if($(this).hasClass('apprises'))    { alert("ߕߊ߲߬ߓߌ߬ ߓߘߊ߫ ߞߍ߫ ߦߊ߲߬ ߘߐ߫ ߞߘߐ߬ߡߊ߲߬"); return; }                               
 
                                 option_active = $(this);
@@ -1541,7 +1541,7 @@ $('document').ready(function() {
 
                                 let DB_options = getDBOptions();
                                 let local_options = getLocalOptions();
-
+console.log(DB_options);
                                 if(phase_index <  data_phase_nbr || nbr_option_non_vide < all_options.length) { return; }
                                 if(phase_index == data_phase_nbr && nbr_option_non_vide == all_options.length) {
                                     

@@ -1,4 +1,4 @@
-alert("ok"); 
+
 	let niveau_actif = 1, niveau_en_cours = 1, niveaux_etudies = [], niveau_max = 0;
 	let phase_active = '', phase_en_cours = '', phases_etudiees = [], derniere_phase = '';
     let phases_distinctes = [], phases_1_distinctes = [], phases_2_distinctes = [], phases_3_distinctes = [], phases_4_distinctes = [];
@@ -136,7 +136,7 @@ alert("ok");
            	
             	for (var i = 0; i < matieres.length; i++) {
             	for (var j = 0; j < matieres[i].length; j++) {
-            	    if(matieres[i][j]['phase'] == "pratique") {
+            	    if(matieres[i][j]['phase'].split('_')[1] == "pratique") {
             	        
             	        let niveau = matieres[i][j]['niveau'];
             	        let lesson = matieres[i][j]['lesson'];
@@ -145,9 +145,8 @@ alert("ok");
             	        pratiques.push([niveau,lesson,note]);
             	    }
             	}}
-            	
+             	
                 localStorage.setItem('pratiques', JSON.stringify(pratiques));
-   // console.log(localStorage.getItem('pratiques'));
                 sessionStorage.setItem('pratiques', JSON.stringify(pratiques));
             }
     	})

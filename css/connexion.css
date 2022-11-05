@@ -82,6 +82,7 @@
 	width: 100%;
 	background-color: #ccc;
 	border-radius: 0.5rem;
+	border-style: none;
 }
 #connexion_form button {
 	position: absolute;

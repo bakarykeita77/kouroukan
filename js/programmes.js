@@ -1,4 +1,4 @@
-alert("ok");
+
  //Selection des éléments HTML du programme
     var programmes_container = document.getElementById('programmes_container');
     var programme_div        = document.getElementById('programme_div');
@@ -72,12 +72,13 @@ Au click sur l'afficheur du programme
 /*-----------------------------------------------------------------------------------------------------------------------*/
     
     function programme() {
-       
+        
         programme_div.innerHTML = programmeHTML();
         programmeStyle();
         storageDeLaMatiereActive();
         programmeNavigation();
-       
+        changerProgramme();
+
         function programmeHTML() {
             var programme_html = '<ul id="programme_ul">';
         
@@ -115,7 +116,7 @@ Au click sur l'afficheur du programme
             let programme_li = $("#programme_ul li");
                
             $.each(programme_li, function() {
-                
+               
                 var matiere_index = $(this).index();
                 
                 if(niveau_max === 0) {
@@ -146,15 +147,15 @@ Au click sur l'afficheur du programme
             
         //Le click sur le bouton next redirige sur la page de lessons.
         }
-    }
-    function changerProgramme() {
-
-        $.each($('#programme_ul li'), function() {
-            
-            let index = $(this).index();
-           
-            if(index  < niveau_max) $(this).removeClass('active').addClass('apprises');
-            if(index == niveau_max) $(this).removeClass('a_apprendre').addClass('active');
-            if(index  > niveau_max) $(this).addClass('a_apprendre');
-        });
+        function changerProgramme() {
+    
+            $.each($('#programme_ul li'), function() {
+    
+                let index = $(this).index();
+               
+                if(index  < niveau_max) $(this).removeClass('active').addClass('apprises');
+                if(index == niveau_max) $(this).removeClass('a_apprendre').addClass('active');
+                if(index  > niveau_max) $(this).addClass('a_apprendre');
+            });
+        }
     }

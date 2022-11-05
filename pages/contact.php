@@ -8,8 +8,10 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>contact</title>
-    <link rel="stylesheet" href="http://localhost:8080/kouroukan/css/contact.css"/>
-	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/class.css"/>
+    
+    <link rel="stylesheet" href="/kouroukan/css/class.css"/>
+    <link rel="stylesheet" href="/kouroukan/css/tete-de-page.css"/>
+    <link rel="stylesheet" href="/kouroukan/css/contact.css"/>
 </head>
 <body>
     <div class="container" id="body_contact">
@@ -108,6 +110,6 @@ session_start();
         </div>
     </div>
     
-    <script src="http://localhost:8080/kouroukan/js/contact.js"></script>
+    <script src="/kouroukan/js/contact.js"></script>
 </body>
 </html>

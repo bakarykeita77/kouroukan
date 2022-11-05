@@ -140,7 +140,7 @@
             	        
             	        let niveau = matieres[i][j]['niveau'];
             	        let lesson = matieres[i][j]['lesson'];
-            	        let note   = matieres[i][j]['note']
+            	        let note   = matieres[i][j]['note'];
             	        
             	        pratiques.push([niveau,lesson,note]);
             	    }

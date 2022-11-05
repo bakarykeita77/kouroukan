@@ -103,24 +103,28 @@
 #pratique_fiche {
     display: flex;
     flex-direction: column;
-    margin: 0.25rem;
-
+    
     position: absolute;
-    border: 1px solid #ccc;
-    padding: 0.125rem;
+}
+#pratique_fiche_head, #pratique_fiche_body, #pratique_fiche_foot {
+    position: relative;
+}
+#pratique_fiche_head {
+    padding: 0.25rem 0;
+    margin: 0.125rem 0;
+    border-bottom: 0.25rem solid #aaa;
 }
 #pratique_fiche_head, #pratique_fiche_body div, #pratique_fiche_foot div {
     display: flex;
     flex-direction: row;
 }
-#pratique_fiche_head span { font-size: 0.8rem; }
+#pratique_fiche_head span { font-size: 0.8rem; height: 1rem; }
 #pratique_fiche_body { 
-    position: relative;
-    top: 0.25rem;
-    background-color: #ddd;
-    border-top: 0.25rem solid #aaa;
-    margin: 0;
-    padding: 0;
+    min-height: 3.5rem;
+    margin: 0.125rem;
+    padding: 0.25rem;
+    background-color: #fff;
+    border: 1px solid #ccc;
     font-weight: bold;
     overflow: auto;
     transition: 0.6s;
@@ -142,7 +146,10 @@
 }
 #pratique_fiche span:nth-child(3) { flex-grow: 1; text-align: center; }
 #pratique_fiche_foot {
-    display: none;
+    padding: 0.25rem 0;
+    margin: 0.125rem 0;
+    background-color: #fff;
+    border-top: 0.25rem solid #aaa;
     transition: 0.6s;
 }
 #pratique_fiche_foot div { margin: 0.125rem; }
@@ -153,6 +160,7 @@
 }
 #pratique_fiche_foot span:nth-child(2) { 
     width: 20%;
+    padding: 0;
     text-align:center; 
     border: 0.125rem solid #ddd;
 }
@@ -192,19 +200,21 @@
 }
 
 #message_de_fin_container {
+    position: absolute;
     display: none;
-    height: 7rem;
+    height: 6rem;
     width: 100%;
     padding: 0;
     margin: 0;
+    bottom: 0;
 }
 #message_de_fin {
     background-color: #000;
     color: #fff;
-    border-radius: 8px;
-    margin: 12px auto;
-    padding: 4px;
-    height: 60px;
+    border-radius: 0.5rem;
+    margin: 0.5rem auto;
+    padding: 0.25rem;
+    height: 3.75rem;
     width: 100%;
     text-align: right;
     font-size: 0.75rem;
@@ -213,17 +223,18 @@
 #message_btn_container {
     position: absolute;
     bottom: 0;
-    height: 24px;
+    height: 1.5rem;
     margin: 0 auto;
     width: 100%;
 }
 #message_btn_container button {
     position: absolute;
+    border: none;
     width: 45%;
-    height: 24px;
+    height: 1.5rem;
     margin: 0;
     background-color: #ccc;
-    border-radius: 8px;
+    border-radius: 0.5rem;
 }
 #message_btn_container button:first-child {
     right: 0;
@@ -272,7 +283,6 @@
     }
     #pratique_fiche {
         top: 0;
-        bottom: 10.25rem;
         width: calc(100% - 1rem);
     }
 }

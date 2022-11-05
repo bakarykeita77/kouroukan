@@ -79,6 +79,10 @@ $('document').ready(function() {
     }
     function phases() {
 
+        let pratiques = JSON.parse(localStorage.getItem('pratiques'));
+        let all_options = JSON.parse(localStorage.getItem('all_options')); 
+        let localOptionsLength = (all_options == null) ? 0 : all_options.length;
+
     	$('.phases').html(phasesHTML());
     	
     	data_phase_nbr = phasesNombre(derniere_phase);
@@ -128,14 +132,14 @@ $('document').ready(function() {
         }
     	function stylesDesPhases() {
         
-    	    var lesson_statut = lessonStatut();
+    	    var phase_status = phaseStatus();
     	    var phase_nbr = nombre();
    	    
     	    $.each($('#phases_list li'), function() {
     	      
         	    var phase_index = $(this).index();
-                
-                if(lesson_statut == "vierge") {
+               
+                if(phase_status == "vierge") {
                     if(phase_nbr === 0) {
                         if(phase_index === 0) $(this).addClass('active');
                         if(phase_index  >  0) $(this).addClass('a_apprendre');
@@ -146,24 +150,34 @@ $('document').ready(function() {
                         if(phase_index >= phase_nbr+1) $(this).addClass('a_apprendre');
                     }
                 }
-    	        if(lesson_statut == "non_vierge") {
+    	        if(phase_status == "non_vierge") {
+
                     if(phase_index <= phase_nbr-1) $(this).removeClass('active').addClass('apprises');
                     if(phase_index == phase_nbr  ) $(this).removeClass('a_apprendre').addClass('active');
                     if(phase_index >= phase_nbr+1) $(this).addClass('a_apprendre');
     	        }
+
+             //Cas specifique de pratiques                    
+                if(localOptionsLength === 4) {
+                    $('#syllabes_pratique, #tons_pratique, #chiffres_pratique').removeClass('active').addClass('apprises');
+                    $('#syllabes_pratique, #tons_pratique, #chiffres_pratique').next().removeClass('a_apprendre').addClass('active');
+                }
             });
     	}
-        function lessonStatut() {
+        function phaseStatus() {
             let li = $('#phases_list li');
             let indice = 0;
+
+            
+            
             
             $.each(li, function() { 
                 let li_id = $(this).attr('id');
                 indice = ($.inArray(li_id, phases_distinctes) === -1) ? indice : indice+=1; 
             });
           
-            let ls = (indice === 0) ? "vierge" : "non_vierge";
-            return ls;
+            let ps = (indice === 0) ? "vierge" : "non_vierge";
+            return ps;
         }
         function actualiserTitre() {
             var niveau = $('.niveau_courant').text();
@@ -281,11 +295,10 @@ $('document').ready(function() {
             var parametres_html = parametres.html();
 
           /*--------------------------------------------------------------------*/    
-     
-    	    phaseActiveName();
-    	    affichageDeCours();
-    	    dimensionnementDeCourseBody();
-    	    cours();
+          phaseActiveName();
+          affichageDeCours();
+          dimensionnementDeCourseBody();
+          cours(); 
         
           /*--------------------------------------------------------------------*/  
 
@@ -405,7 +418,7 @@ $('document').ready(function() {
                 localStorage.clear();
             }
     	    function cours() {
-                /*
+                
                 if(phase_class == 'apprises') {
                     $('.course_container').css('display','none'); 
                     alert("Tu as dépassé ce niveau !");
@@ -413,8 +426,9 @@ $('document').ready(function() {
                 if(phase_class == 'a_apprendre') {
                     $('.course_container').css('display','none'); 
                     alert("Tu n'est pas encore arrivé à ce niveau !");
-                } */
-        	    if(phase_class == 'apprises') {    
+                } 
+  
+        	    if(phase_class == 'active') {       
 
                     $('.course_container').css('display','block');
                     $('.course').css('display','none');
@@ -903,7 +917,7 @@ $('document').ready(function() {
                         var compteur_de_caractere = 0;
                         var bulle_index = -1;
                         var s_0 = [], s_1 = [], s_2 = [], s_3 = [];
-                	    var question_limit = 10;
+                	    var question_limit = 2;
                 	    var quantite_de_question = parseIntNko(question_limit);
                 	    var question_rang = '߭';
                 	    
@@ -929,12 +943,13 @@ $('document').ready(function() {
             
                         var questions_pratiques=[], questions=[], question='', reponse=[], point='';
                         var table = $('#pratique_fiche_body').html();
-                        
+                       
                       /*--------------------------------------------------------------------*/
                         $('.fermeture').attr('id', 'fermer_pratique');
                       
                 	    recuperationDesOptionsEffectuees();
                 	    afficherPratique();
+                        dimensionnementDePratique();
                         initialiserPratiques();
                         optionStyles();
                 	    pratiquer();
@@ -945,19 +960,20 @@ $('document').ready(function() {
                     	function recuperationDesOptionsEffectuees() {
                     
                     	    DB_options = getDBOptions();
-                    	    if(DB_options.length === 4) localStorage.clear();
+                    	   // if(DB_options.length === 4) localStorage.clear();
                     	    local_options = getLocalOptions();
                             
                             all_options = (DB_options != '') ? DB_options:local_options;
+                            localStorage.setItem('all_options', JSON.stringify(all_options));
                     	}
                     	function getDBOptions() {
                         	    
                             let DB_pratiques = JSON.parse(localStorage.getItem('pratiques'));
+                            let DB_pratiques_length = (DB_pratiques == null) ? 0 : DB_pratiques.length;
                        
-                        	let pratiques_niveaux = [], niveau_max = '';
                         	let niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));
                             
-                        	for (var i = 0; i < DB_pratiques.length; i++) {
+                        	for (var i = 0; i < DB_pratiques_length; i++) {
                         	    if(DB_pratiques[i][0] == niveau_actif) DB_options = JSON.parse(DB_pratiques[i][1]);
                         	}
                         	
@@ -982,6 +998,23 @@ $('document').ready(function() {
 
                             optionStyles();
                     	}
+                        function dimensionnementDePratique() {
+
+                            let pratique_head_height = $('#pratique_head').height();
+                            let pratique_foot_height = $('#pratique_foot').height();
+
+                            let pratique_dialogue_btn_height = $('#pratique_dialogue_btn').height();
+                            let clavier_pratique_height = $('#clavier_pratique').height();
+
+                            let pratique_fiche_head_height = $('#pratique_head').height();
+                            let pratique_fiche_foot_height = $('#pratique_fiche_foot').height();
+
+                            let pratique_fiche_height = pratique_foot_height-pratique_dialogue_btn_height-clavier_pratique_height-24;
+                            let pratique_fiche_body_height = pratique_fiche_height-pratique_fiche_head_height-pratique_fiche_foot_height;
+
+                            $('#pratique_fiche').css('height', pratique_fiche_height+'px');
+                            $('#pratique_fiche_body').css('height', pratique_fiche_body_height+'px');
+                        }
                 	    function initialiserPratiques() {
                	        
                 	        initialiserOptions();
@@ -1120,7 +1153,7 @@ $('document').ready(function() {
                             return nonv;
                         }
                         function pratiquer() {
-                          
+              
                             let questions_posees = [];
                           
                          /* Une question doit etre posee avant de commencer à taper reponse.*/ 
@@ -1130,8 +1163,8 @@ $('document').ready(function() {
 
                             $('#pratique_options span').one('click', function() {
                                 
-                               // if($(this).hasClass('a_apprendre')) { alert("ߘߊߞߎ߲ ߡߊ߫ ߛߋ߫ ߦߊ߲߬ ߡߊ߫ ߝߟߐ߫");   return; }
-                              //  if($(this).hasClass('apprises'))    { alert("ߕߊ߲߬ߓߌ߬ ߓߘߊ߫ ߞߍ߫ ߦߊ߲߬ ߘߐ߫ ߞߘߐ߬ߡߊ߲߬"); return; }                               
+                                if($(this).hasClass('a_apprendre')) { alert("ߘߊߞߎ߲ ߡߊ߫ ߛߋ߫ ߦߊ߲߬ ߡߊ߫ ߝߟߐ߫");   return; }
+                                if($(this).hasClass('apprises'))    { alert("ߕߊ߲߬ߓߌ߬ ߓߘߊ߫ ߞߍ߫ ߦߊ߲߬ ߘߐ߫ ߞߘߐ߬ߡߊ߲߬"); return; }                               
 
                                 option_active = $(this);
                             	option_index = $(this).index();
@@ -1333,10 +1366,10 @@ $('document').ready(function() {
                                             let image_source = $('#'+reponse+' img').attr('src');
                                             let image = (image_source !== undefined) ? $('#'+reponse).html() : $('#ߖߌ߬ߦߊ').html();
                                             */
-                                            
+                                           
                                             let dossier_image = dossierImage();
                                             let image_html = '<img src="'+dossier_image+reponse+'.jpg" id="pratiques_image" alt="?">';
-            
+
                                     	    $('#pratiques_images_container').html(image_html);
                                 	        $('#pratiques_images_container').css('transform','scale(1)');
                                 	        
@@ -1405,7 +1438,7 @@ $('document').ready(function() {
                                             }
                                             
                                             function actualiserOption(syllabe) {
-                                                let index = '', note = 0;
+                                                let index = '';
                                                 
                                                 $.each(syllabe, function() {
                                                     if(question == this[0]) index = syllabe.indexOf(this);
@@ -1446,10 +1479,18 @@ $('document').ready(function() {
                                     	        function dimensionnementDeFinDePratiquesBody() {
                                     	            
                                     	            let pfh = $('#pratique_foot').height();
+                                    	            let mfch = $('#message_de_fin_container').height(); 
+                                                    var pratique_fiche_head_height = $('#pratique_fiche_head').height(); 
+                                                    var pratique_fiche_foot_height = $('#pratique_fiche_foot').height(); 
+
+                                                    let pratique_fiche_height = pfh - mfch;
+                                                    var pratique_fiche_body_height = pratique_fiche_height-pratique_fiche_head_height-pratique_fiche_foot_height; 
                                     	            
-                	                                $('#tbody').css('height', (pfh-120)+'px');
-                                    	            $('#pratique_fiche_foot').css('display','block');
-                                    	            $('#message_de_fin_container').css('display','block');
+                                                    
+                                    	            $('#pratique_fiche').css({'height':pratique_fiche_height+'px'});
+                                    	            $('#pratique_fiche_body').css({'display':'block', 'height':pratique_fiche_body_height+'px'});
+                                    	            $('#pratique_fiche_foot').css({'display':'block'});
+                                    	            $('#message_de_fin_container').css({'display':'block'});
                                     	        }
                                     	        function chargerTotalPoints() {
                                     	            $('#total_point').html(parseIntNko(total_point));
@@ -1541,7 +1582,7 @@ $('document').ready(function() {
 
                                 let DB_options = getDBOptions();
                                 let local_options = getLocalOptions();
-console.log(DB_options);
+
                                 if(phase_index <  data_phase_nbr || nbr_option_non_vide < all_options.length) { return; }
                                 if(phase_index == data_phase_nbr && nbr_option_non_vide == all_options.length) {
                                     
@@ -1557,7 +1598,6 @@ console.log(DB_options);
                                         
                                         sendPratiqueToDB(); 
                                         changerPhaseActive(phase_nbr);
-                                        //deleteLocalOptions();
                                         sessionStorage.setItem('phase_nbr',JSON.stringify(phase_nbr)); 
                                     }
                                 }
@@ -1611,8 +1651,6 @@ console.log(DB_options);
                         
                         function dimensionnementParDefautDePratiquesCorps() {
                 	        var pratiques_body_height = $('#pratique_body').height();
-                	        var pratique_fiche_height = $('#pratique_fiche').height();
-                	        var pratique_body_height = pratiques_body_height - pratique_fiche_height;  
 
                             $('#message_de_fin_container').css('display','none');
         	                $('#pratiques_images_container img').attr('src','#');

@@ -183,7 +183,7 @@ if(isset($_SESSION["id"])){
                 <div id="pratiques_images_container">
                     <img src="/kouroukan/image/image-2-syllabe/ߓߊߘߊ.jpg" id="pratiques_image" alt="?">
                 </div>
-                <div id="croix">&#10060;</div>
+                <div id="image_croix">&#10060;</div>
             </div>
           
          <!--pratique_foot---------------------------------------------------->

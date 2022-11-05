@@ -917,7 +917,7 @@ $('document').ready(function() {
                         var compteur_de_caractere = 0;
                         var bulle_index = -1;
                         var s_0 = [], s_1 = [], s_2 = [], s_3 = [];
-                	    var question_limit = 2;
+                	    var question_limit = 5;
                 	    var quantite_de_question = parseIntNko(question_limit);
                 	    var question_rang = '߭';
                 	    
@@ -1352,7 +1352,10 @@ $('document').ready(function() {
                                             chargerPratiqueFicheFoot();
 
                                             function chargerPratiqueFicheBody() {
-                                                table += "<div class='tr'>\n <span class='td'>"+question+"</span>\n<span class='td'>"+reponse+"</span>\n<span class='td'>"+parseIntNko(point)+"</span>\n </div>\n\n";
+
+                                                if(question == reponse) table += "<div class='tr'>\n <span class='affiche_question'>"+question+"</span>\n<span class='affiche_reponse'><span id='fiche_vraie_reponse'>"+reponse+"</span></span>\n<span class='affiche_point'>"+parseIntNko(point)+"</span>\n </div>\n\n";
+                                                if(question != reponse) table += "<div class='tr'>\n <span class='affiche_question'>"+question+"</span>\n<span class='affiche_reponse'><span id='fiche_mauvaise_reponse'>"+reponse+"</span><span id='fiche_croix'>&#10060;</span></span>\n<span class='affiche_point'>"+parseIntNko(point)+"</span>\n </div>\n\n";
+                                              
                                                 $('#pratique_fiche_body').html(table);
                                             }
                                             function chargerPratiqueFicheFoot() {
@@ -1397,11 +1400,11 @@ $('document').ready(function() {
                                 	        
                                 	        if(question == reponse) {
                                 	            $('#pratiques_images_container').css('opacity',1);
-                                	            $('#croix').css('display','none');
+                                	            $('#image_croix').css('display','none');
                                 	        }
                                 	        if(question !== reponse) {
                                 	            $('#pratiques_images_container').css('opacity','0.15');
-                                	            $('#croix').css('display','flex');
+                                	            $('#image_croix').css('display','flex');
                                 	        }
                                 	        
                                 	        setTimeout(function(){ $('#pratique_guide').animate({'top':'-100%'},400); }, 200);
@@ -1565,28 +1568,27 @@ $('document').ready(function() {
                                         }  
                                     	function revisionDOption() {
                                     	        
-                                    	    $('#pratique_fiche_body div').on('click', function() {
+                                    	    $('#pratique_fiche_body .tr').on('click', function() {
                                     	        $('#pratique_fiche_body div').addClass('noir_clair');
                                     	        $(this).siblings().removeClass('pratique_tr_actif');
                                     	        $(this).addClass('pratique_tr_actif'); 
                                     	        
-                                    	        let question = $('.pratique_tr_actif .td:nth(0)').html(); 
-                                    	        let reponse = $('.pratique_tr_actif .td:nth(1)').html(); 
-                                    	        
-                                            let dossier_image = dossierImage();
-                                            let image_html = '<img src="'+dossier_image+reponse+'.jpg" id="pratiques_image" alt="?">';
-            
-                                    	    $('#pratiques_images_container').html(image_html);
-                                    	  
+                                    	        let question = $('.pratique_tr_actif .affiche_question').html(); 
+                                    	        let reponse = $('.pratique_tr_actif .affiche_reponse span:nth-child(1)').html();
+                                                  	        
+                                                let dossier_image = dossierImage();
+                                                let image_html = '<img src="'+dossier_image+reponse+'.jpg" alt="?">';
+                                                
                                     	        if(question == reponse) {
                                 	                $('#pratiques_images_container').css('opacity',1);
-                                	                $('#croix').css('display','none');
+                                	                $('#image_croix').css('display','none');
                                 	            }
-                                    	        if(question !== reponse) {
+                                    	        if(question != reponse) {
                                     	            $('#pratiques_images_container').css('opacity','0.15');
-                                	                $('#croix').css('display','flex');
+                                	                $('#image_croix').css('display','flex');
                                     	        }
-                                	        
+                         
+                                                $('#pratiques_images_container').html(image_html);                                	        
                                     	    });
                                     	}
                                     }); 

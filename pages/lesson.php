@@ -181,7 +181,8 @@ if(isset($_SESSION["id"])){
                     <p id="cumule_des_caracteres"></p>
                 </div>
                 <div id="pratiques_images_container">
-                    <img src="/kouroukan/image/image-2-syllabe/ߓߊߘߊ.jpg" id="pratiques_image" alt="?">
+                    <h1 id="image_name"></h1>
+                    <img src="#" alt="?">
                 </div>
                 <div id="image_croix">&#10060;</div>
             </div>

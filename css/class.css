@@ -10,6 +10,9 @@ html {
     .page_body {       
         box-shadow: 0 0 2rem #999;
     }
+    .course_body {
+        top: 0;
+    }
 }
 @media screen and (max-width: 600px) {
     .container {
@@ -17,6 +20,9 @@ html {
     }
     .page_body {       
         box-shadow: none;
+    }
+    .course_body {
+        top: 1rem;
     }
 }
 *,::before,::after { box-sizing:border-box; }
@@ -211,7 +217,6 @@ html {
 }
 .course_body {
     border: 1px solid #ccc;
-    top: 1rem;
     /*la hauteur est calculée par la fonction dimensionnementDeCourseBody() dans lessons.js*/
     width: calc(100% - 2rem);
     margin: 0.25rem 1rem;

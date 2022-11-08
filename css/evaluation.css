@@ -32,7 +32,7 @@
 }
 #reponse {
     position: relative;
-    min-height: 8rem;
+    height: 8rem;
     min-width: 8rem;
     line-height: 8rem;
     text-align: center;
@@ -40,7 +40,6 @@
     padding: 0;
     font-size: 6rem;
     font-weight: bold;
-    box-sizing: border-box;
 }
 #cross {
     display: none;
@@ -55,7 +54,6 @@
     color: red;
     font-weight: bold;
     text-align: center;
-    box-sizing: border-box;
     transform: scale(0.5);
     transition: 0.8s;
 }
@@ -72,7 +70,6 @@
     border-radius: 50%;
     overflow: hidden;
     box-shadow: 0 0 16px #666;
-    box-sizing: border-box;
 }
 #teste_annexes_container {
     position: absolute;
@@ -94,7 +91,6 @@
     font-size: 4rem;
     font-weight: bold;
     text-align: center;
-    box-sizing: border-box;
 }
 #check_mark{
     color: blue;

@@ -182,7 +182,7 @@ if(isset($_SESSION["id"])){
                 </div>
                 <div id="pratiques_images_container">
                     <h1 id="image_name"></h1>
-                    <img src="#" alt="?">
+                    <img src="" alt="?">
                 </div>
                 <div id="image_croix">&#10060;</div>
             </div>

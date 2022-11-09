@@ -88,6 +88,24 @@
     box-shadow: 0 0 0.5rem #ccc;
     padding: 0 0.5rem;
 }
+#reponse_container {
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+}
+#correcteur {
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    padding: 0.25rem;
+    margin-right: 4rem;
+    cursor: pointer;
+    transition: 0.25s;
+}
+#correcteur:hover {
+    box-shadow: 0 0 1rem #aaa;
+}
+#correcteur:active {
+    box-shadow: none;
+}
 #pratique_guide span {
     vertical-align: middle;
     margin: 2px;

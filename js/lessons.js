@@ -1230,6 +1230,7 @@ $('document').ready(function() {
                                 afficherPratiqueLesson();
                         	    poserQuestionPratique();
                             	repondreQuestionPratique();
+                                rectificationDeReponse();
                             	correctionPratique();
                                 
                                 function optionDeSyllabe() {
@@ -1354,6 +1355,12 @@ $('document').ready(function() {
                                         }
                             	    }); 
                         	    }
+                                function rectificationDeReponse() {
+                                    $('#correcteur').on('click',function() {
+                                        reponse.pop();
+                                        $('#cumule_des_caracteres').html(reponse);
+                                    });
+                                }
                             	function correctionPratique() {
                         	        total_point = 0;
                         	       

@@ -97,13 +97,15 @@
     border-radius: 0.5rem;
     padding: 0.25rem;
     margin-right: 4rem;
+    font-size: 0.6rem;
     cursor: pointer;
     transition: 0.25s;
 }
 #correcteur:hover {
-    box-shadow: 0 0 1rem #aaa;
+    box-shadow: 0 0 1rem #666;
 }
 #correcteur:active {
+    background-color: #fff;
     box-shadow: none;
 }
 #pratique_guide span {

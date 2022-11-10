@@ -178,7 +178,7 @@ if(isset($_SESSION["id"])){
                 <div id="pratique_guide">
                     <div id="bulles_container"></div>
                     <p id="signe_egal">&#9183;</p>
-                    <p id="reponse_container"><span id="cumule_des_caracteres"></span><span id='correcteur'>ߖ</span></p>
+                    <p id="reponse_container"><span id="cumule_des_caracteres"></span><span id='correcteur'>ߖߐ߬ߛߌ߬ߙߊ߲</span></p>
                 </div>
                 <div id="pratiques_images_container">
                     <h1 id="image_name"></h1>

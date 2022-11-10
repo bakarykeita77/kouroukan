@@ -916,7 +916,7 @@ $('document').ready(function() {
                 	    var compteur = 0;
                         var compteur_de_caractere = 0;
                         var bulle_index = -1;
-                        var s_0 = [], s_1 = [], s_2 = [], s_3 = [];
+                        var s_0 = [], s_1 = [], s_2 = [], s_3 = [], sc = [];
                 	    var question_limit = 3;
                 	    var quantite_de_question = parseIntNko(question_limit);
                 	    var question_rang = '߭';
@@ -1284,9 +1284,7 @@ $('document').ready(function() {
                                                 var option_index = JSON.parse(sessionStorage.getItem('option_index'));
                                 	            var nbr_de_bulle = option_index+1; 
                                 	                
-                                	            for (var i = 0; i < nbr_de_bulle; i++) {
-                                	                pratique_guide_html += '<span class="bulle" id="span_'+i+'"></span><span class="plus">+</span>';
-                                	            }
+                                	            for (var i = 0; i < nbr_de_bulle; i++) { pratique_guide_html += '<span class="bulle" id="span_'+i+'"></span><span class="plus">+</span>'; }
                                 	                
                                 	            return pratique_guide_html;
                                 	        }
@@ -1311,14 +1309,14 @@ $('document').ready(function() {
                         	    }
                         	    function repondreQuestionPratique(){
                             	    $('.clavier_container td').on('click', function() {
-                                        
+                                       
                                         var caractere = $(this).html();
                                         
                                         if(!question) return false;
                                         
                                         reponse[reponse.length] = caractere;
-                                        chargementDesBulles();
-                                        bullesStyles();
+                                        chargerBulles();
+                                        styliserBulles();
                                         $('#cumule_des_caracteres').html(reponse);
                                         afficherCorrectionButton();
                                         compteur_de_caractere++;
@@ -1328,37 +1326,50 @@ $('document').ready(function() {
                         	                $('.correction_btn').css('display','block');
                         	                $('.question_btn').css('display','none');
                                         }
-                                        function chargementDesBulles() {
+                                        function chargerBulles() {
                                                 
-                                            if($.inArray(caractere,caracteres[1]) != -1) bulle_index++;
+                                            if($.inArray(caractere,caracteres[1]) != -1) bulle_index++; //Chaque fois que le caractere tapé est consonne, bulle_index augmente d'une unité.
 
-                                            if(bulle_index < 1) {
-                                                s_0[s_0.length] = reponse[reponse.length-1];
-                                                $('#span_0').html(s_0);
-                                            }
-                                            if(bulle_index == 1) {
-                                                s_1[s_1.length] = reponse[reponse.length-1];
-                                                $('#span_1').html(s_1);
-                                            }
-                                            if(bulle_index == 2) {
-                                                s_2[s_2.length] = reponse[reponse.length-1];
-                                                $('#span_2').html(s_2);
-                                            }
-                                            if(bulle_index == 3) {
-                                                s_3[s_3.length] = reponse[reponse.length-1];
-                                                $('#span_3').html(s_3);
-                                            }
-                                        }
-                                        function bullesStyles() {
-                                            $('.bulle:nth('+bulle_index+')').prevAll('.bulle').css({'background-color':'white', 'box-shadow':'0 0 8px #ccc', 'transform':'scale(1)'});
-                                            $('.bulle:nth('+bulle_index+')').css({'background-color':'yellow', 'box-shadow':'0 0 8px yellow', 'transform':'scale(1.125)'});
+                                            if(bulle_index == 0) { s_0[s_0.length] = reponse[reponse.length-1];  $('#span_0').html(s_0); }
+                                            if(bulle_index == 1) { s_1[s_1.length] = reponse[reponse.length-1];  $('#span_1').html(s_1); }
+                                            if(bulle_index == 2) { s_2[s_2.length] = reponse[reponse.length-1];  $('#span_2').html(s_2); }
+                                            if(bulle_index == 3) { s_3[s_3.length] = reponse[reponse.length-1];  $('#span_3').html(s_3); }
                                         }
                             	    }); 
                         	    }
+                                function styliserBulles() {
+                                    $('.bulle:nth('+bulle_index+')').prevAll('.bulle').css({'background-color':'white', 'box-shadow':'0 0 8px #ccc', 'transform':'scale(1)'});
+                                    $('.bulle:nth('+bulle_index+')').css({'background-color':'yellow', 'box-shadow':'0 0 8px yellow', 'transform':'scale(1.125)'});
+                                    $('.bulle:nth('+bulle_index+')').nextAll('.bulle').css({'background-color':'#ccc', 'box-shadow':'0 0 8px #ccc', 'transform':'scale(1)'});
+                                    if(bulle_index === -1) { $('.bulle').css({'background-color':'#ccc', 'box-shadow':'none'}); }
+                                }
                                 function rectificationDeReponse() {
+                                            
                                     $('#correcteur').on('click',function() {
+                                        rectifierBulles();
                                         reponse.pop();
                                         $('#cumule_des_caracteres').html(reponse);
+                                        
+                                        function rectifierBulles() {
+                                               
+                                            var derniere_bulle_non_vide_html = $('#span_'+bulle_index).html().split('');
+                                            derniere_bulle_non_vide_html.pop();
+                                            sc = derniere_bulle_non_vide_html;
+                                            $('#span_'+bulle_index).html(sc);
+
+                                            switch(bulle_index) {
+                                                case 0 : s_0 = sc; break;
+                                                case 1 : s_1 = sc; break;
+                                                case 2 : s_2 = sc; break;
+                                                case 3 : s_3 = sc; break;
+                                            }
+                                            
+                                            i=reponse.length-1;
+                                            if($.inArray(reponse[i],caracteres[1]) != -1) bulle_index--; //Chaque fois qu'un caractere de reponse est consonne, bulle_index diminue d'une unité.
+                                            i--;
+                                            
+                                            styliserBulles();
+                                        }
                                     });
                                 }
                             	function correctionPratique() {

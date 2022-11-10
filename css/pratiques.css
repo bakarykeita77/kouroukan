@@ -332,5 +332,7 @@
     #pratique_fiche {
         top: 0;
         width: calc(100% - 1rem);
+        left: 50%;
+        transform: translateX(-50%);
     }
 }

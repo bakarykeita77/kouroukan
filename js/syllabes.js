@@ -1,6 +1,6 @@
  
     var syllabes = syllab();
-    var syllabes_questions = mix1D(syllabes);
+    var syllabes_questions = malaxer(syllabes);
  
     function syllabesApprentissageHTML() {
         

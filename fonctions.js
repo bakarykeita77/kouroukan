@@ -166,7 +166,7 @@
         element.addClass('surbrillance');
         element.siblings().removeClass('surbrillance');
     }
-    function mix1D(tableau){
+    function malaxer(tableau){
         var mixted_table = [];
         for(var i=0; mixted_table.length<tableau.length;i++){
             var nbr_aleatoire = Math.floor(Math.random()*tableau.length);

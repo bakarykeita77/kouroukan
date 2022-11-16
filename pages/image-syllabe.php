@@ -1,18 +1,12 @@
 <?php
-    include('DBConnexion.php');
+    include('connexionToDB.php');
     global $db;
     
-    $id = $_GET['id'];
-    $image_categorie = $_GET['image_categorie'];
-    
-    if($image_categorie == 'image1syllabe' && $id == '') extraireLesImagesMonoSyllabe();
-    if($image_categorie == 'image2syllabe' && $id == '') extraireLesImagesBiSyllabe();
-    if($image_categorie == 'image3syllabe' && $id == '') extraireLesImagesTriSyllabe();
-    if($image_categorie == 'image4syllabe' && $id == '') extraireLesImagesQuadriSyllabe();
-
-    if($image_categorie !== '' && $id != '') extraireUneImage($image_categorie,$id);
-    
-extraireUneImage("image1syllabe",4);
+    extraireLesImagesMonoSyllabe();
+ /*   if($image_categorie == 'image2syllabe') extraireLesImagesBiSyllabe();
+    if($image_categorie == 'image3syllabe') extraireLesImagesTriSyllabe();
+    if($image_categorie == 'image4syllabe') extraireLesImagesQuadriSyllabe();
+*/
     function extraireLesImagesMonoSyllabe() {
         global $db;
         
@@ -24,6 +18,7 @@ extraireUneImage("image1syllabe",4);
         print_r($images1); 
         echo "</pre>";
     }
+    
     function extraireLesImagesBiSyllabe() {
         global $db;
         

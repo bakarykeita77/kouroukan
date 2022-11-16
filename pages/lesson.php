@@ -1,5 +1,25 @@
-<?php
+<?php header('Content-Type: text/html; charset=utf-8');
 session_start();
+
+
+$image = [];
+$sous_dossier_dir = [];
+$image_dir = "../image/";
+$image_sous_dossiers = scandir($image_dir);
+
+for($i=4; $i<8; $i++) { array_push($sous_dossier_dir,'../image/'.$image_sous_dossiers[$i]); }
+foreach($sous_dossier_dir as $sd) { array_push($image,scandir($sd)); }
+
+if(empty($image[0]) && empty($image[1]) && empty($image[2]) && empty($image[3])) echo "Ce tableau n'est pas vide";
+chargerLesImages();
+
+echo"<pre>";
+//print_r($images1[0]);
+echo"</pre>";
+
+
+
+
 if(isset($_SESSION["id"])){
     
     $matiere_id      = $_GET['matiere_id'];
@@ -10,7 +30,6 @@ if(isset($_SESSION["id"])){
     $phases_etudiees = ($matiere_index > 0) ? $_GET['phases_etudiees'] : "";
 
     $chiffres = ['߀','߁','߂','߃','߄','߅','߆','߇','߈','߉'];
-
 ?>
 
 <!DOCTYPE html>

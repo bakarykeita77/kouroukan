@@ -1662,6 +1662,7 @@ $('document').ready(function() {
                                     	function revisionDOption() {
                                     	        
                                     	    $('#pratique_fiche_body .tr').on('click', function() {
+                                                
                                     	        $('#pratique_fiche_body div').addClass('noir_clair');
                                     	        $(this).siblings().removeClass('pratique_tr_actif');
                                     	        $(this).addClass('pratique_tr_actif'); 

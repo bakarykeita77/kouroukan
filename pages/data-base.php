@@ -4,7 +4,6 @@
     global $db;
 
  /*------------------------------------------------------------------------------------------------------ */   
-    -----------------------------------------------------------------------------------------------------------------------ߥ
   //  $sql_database = "CREATE DATABASE IF NOT EXISTS `kouroukan`";
     
     $sql_table_users    = "CREATE TABLE IF NOT EXISTS `kouroukan`.`users`(
@@ -105,6 +104,15 @@
         `image` longblob,
         primary key (`id`)
      ) engine = myisam charset = utf8 collate utf8_general_ci";
+   $sql_table_images = "CREATE TABLE IF NOT EXISTS `kouroukan`.`images`(
+      `id` int(255) not null auto_increment,
+      `id_client` int(255) not null,
+      `nom` varchar(100) character set utf8 collate utf8_general_ci,
+      `taille` int(100) not null,
+      `type` varchar(100) character set utf8 collate utf8_general_ci,
+      `image` longblob,
+      primary key (`id`)
+   ) engine = myisam charset = utf8 collate utf8_general_ci";
 
  /*------------------------------------------------------------------------------------------------------ */   
 
@@ -120,5 +128,6 @@
     $db->exec($sql_table_image2syllabe);
     $db->exec($sql_table_image3syllabe);
     $db->exec($sql_table_image4syllabe);
+    $db->exec($sql_table_images);
     
     header("location:http://localhost:8002/?username=root&db=kouroukan"); 

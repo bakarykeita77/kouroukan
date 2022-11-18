@@ -15,10 +15,9 @@
         $images1 = $requette->fetchAll();
         
         echo "<pre>";
-        print_r($images1); 
+        print_r($images1[0]); 
         echo "</pre>";
     }
-    
     function extraireLesImagesBiSyllabe() {
         global $db;
         

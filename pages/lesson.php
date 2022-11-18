@@ -10,14 +10,13 @@ $image_sous_dossiers = scandir($image_dir);
 for($i=4; $i<8; $i++) { array_push($sous_dossier_dir,'../image/'.$image_sous_dossiers[$i]); }
 foreach($sous_dossier_dir as $sd) { array_push($image,scandir($sd)); }
 
-if(empty($image[0]) && empty($image[1]) && empty($image[2]) && empty($image[3])) echo "Ce tableau n'est pas vide";
-chargerLesImages();
+//if(!empty($image[0]) && !empty($image[1]) && !empty($image[2]) && !empty($image[3])) include_once('image-syllabe.php');
+
+echo json_encode($image);
 
 echo"<pre>";
-//print_r($images1[0]);
+//print_r($image);
 echo"</pre>";
-
-
 
 
 if(isset($_SESSION["id"])){

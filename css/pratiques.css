@@ -1,4 +1,4 @@
-#options_popup {
+#pratique_options {
     position: absolute;
     border: 1px solid transparent;
     top: 0;
@@ -9,8 +9,15 @@
     width: 100%;
     background-color: #fff;
     box-shadow: 0 0 1rem #999;
-    transition: 0.5s;
     z-index: 2;
+}
+#pratique_options div {
+    margin-top: 2rem;
+}
+#pratique_options span {
+    display: block;
+    width: 10rem;
+    cursor: pointer;
 }
 #options_titre {
     background-color: #eee;
@@ -34,18 +41,14 @@
 }
 #pratique_head span {
     padding: 0;
-    margin: 0.25rem;
+    margin: 0;
     font-size: 0.75rem;
     font-weight: bold;
     text-align: center;
-    width: 20%;
-    height: 1.5rem;
-    line-height: 1.5rem;
+    height: 100%;
 }
 #pratique_body {
-    position: relative;
     border: 1px solid transparent;
-    margin: 0;
     overflow: auto;
 }
 #pratique_guide {
@@ -63,9 +66,13 @@
     box-sizing: border-box;
     z-index: 1;
 }
-#bulles_container, #cumule_des_caracteres {
-    margin: 0;
+#bulles_container, #signe_egal, #cumule_des_caracteres {
+    margin: 0.125rem 0;
     text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+}
+#bulles_container {
 }
 #bulles_container {
     height: 3rem;
@@ -75,46 +82,75 @@
     color: #aaa;
 }
 #signe_egal {
-    margin: 0;
     padding: 0;
-    height: 24px;
+    height: 2rem;
     font-size: 3rem;
     color: #aaa;
 }
+<<<<<<< HEAD
+=======
+#cumule_des_caracteres {
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0.5rem #ccc;
+    padding: 0 0.5rem;
+}
+#reponse_container {
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+}
+#correcteur {
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    padding: 0.25rem;
+    margin-right: 4rem;
+    font-size: 0.6rem;
+    cursor: pointer;
+    transition: 0.25s;
+}
+#correcteur:hover {
+    box-shadow: 0 0 1rem #666;
+}
+#correcteur:active {
+    background-color: #fff;
+    box-shadow: none;
+}
+>>>>>>> a7134bcdf180a037e5b3f4da5cf471008131216a
 #pratique_guide span {
     vertical-align: middle;
     margin: 2px;
 }
 #pratique_foot {
-    position: relative;
     display: flex;
     flex-direction: column;
-    margin: 0;
-    padding: 0;
 }
 #pratique_fiche {
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
-    margin: 0;
-    top: 0;
-    transition: 0.6s;
+    
+    position: absolute;
+}
+#pratique_fiche_head, #pratique_fiche_body, #pratique_fiche_foot {
+    position: relative;
+}
+#pratique_fiche_head {
+    padding: 0.25rem 0;
+    margin: 0.125rem 0;
+    border-bottom: 0.25rem solid #aaa;
 }
 #pratique_fiche span { border: 1px solid transparent; }
 #pratique_fiche_head, #pratique_fiche_body div, #pratique_fiche_foot div {
     display: flex;
     flex-direction: row;
 }
-#pratique_fiche_head span { font-size: 0.8rem; }
+#pratique_fiche_head span { font-size: 0.8rem; height: 1rem; }
+#pratique_fiche span:nth-child(1), #pratique_fiche span:nth-child(2) { width: 40%; }
+#pratique_fiche span:nth-child(3) { flex-grow: 1; text-align: center; }
 #pratique_fiche_body { 
-    position: relative;
-    flex-grow: 1; 
-    top: 0;
-    background-color: #ddd;
-    border-top: 0.25rem solid #aaa;
-    border-bottom: 0.25rem solid #aaa;
-    margin: 0;
-    padding: 0;
+    min-height: 3.5rem;
+    margin: 0.125rem;
+    padding: 0.25rem;
+    background-color: #fff;
+    border: 1px solid #ccc;
     font-weight: bold;
     overflow: auto;
     transition: 0.6s;
@@ -126,6 +162,7 @@
     border: 1px solid transparent;
     border-bottom-color: #fff;
 }
+<<<<<<< HEAD
 #pratique_fiche_body span:nth-child(1), #pratique_fiche_body span:nth-child(2) {
     text-align: right;
     width: 40%;
@@ -136,8 +173,34 @@
     border-right-color: #fff;
 }
 #pratique_fiche_body span:nth-child(3) { flex-grow: 1; text-align: center; }
+=======
+.affiche_reponse {
+    position: relative;
+    border: 1px solid transparent;
+    border-left-color: #fff;
+    border-right-color: #fff;
+}
+#fiche_croix, #fiche_mauvaise_reponse {
+    display: block;
+}
+#fiche_croix {
+    position: absolute;
+    top: 0;
+    font-size: 1.3rem;
+    line-height: 1.3rem;
+    color: red;
+    opacity: 0.6;
+}
+.affiche_question, .affiche_reponse {
+    width: 40%;
+    padding-right: 0.5rem;
+}
+>>>>>>> a7134bcdf180a037e5b3f4da5cf471008131216a
 #pratique_fiche_foot {
-    display: none;
+    padding: 0.25rem 0;
+    margin: 0.125rem 0;
+    background-color: #fff;
+    border-top: 0.25rem solid #aaa;
     transition: 0.6s;
 }
 #pratique_fiche_foot div { margin: 0.125rem; }
@@ -147,41 +210,29 @@
     font-size: 0.8rem;
 }
 #pratique_fiche_foot span:nth-child(2) { 
+<<<<<<< HEAD
     flex-grow: 1; 
+=======
+    width: 25%;
+    padding: 0;
+>>>>>>> a7134bcdf180a037e5b3f4da5cf471008131216a
     text-align:center; 
     border: 0.125rem solid #ddd;
 }
 
-#dialogue_btn {
-    position: relative;
-    background-color: #666;
-    padding: 0 1rem;
-    margin: 0.25rem 0;
-    width: 100%;
-    height: 2rem;
-    line-height: 2rem;
-    text-align: center;
-    font-weight: bold;
-    border-radius: 6px;
-    box-sizing: border-box;
-    box-shadow: 0 1px 2px #444;
+#pratique_dialogue_btn {
+    bottom: 8rem;
+    border-radius: 0.5rem 0.5rem 0 0;
 }
-#cumule_des_caracteres {
-    border-radius: 0.5rem;
-    box-shadow: 0 0 0.5rem #ccc;
-    height: 3rem;
-    padding: 0 0.5rem;
-    margin: 0.5rem;
-    line-height: 3rem;
-    font-size: 2rem;
-    font-weight: bold;
+#clavier_pratique {
+    border-radius: 0 0 0.5rem 0.5rem;
 }
 #pratiques_images_container {
     position: absolute;
     height: 100%;
     width: 100%;
     background-color: #fff;
-    transition: 1.5s;
+    z-index: 0;
 }
 #pratiques_images_container img {
     position: absolute;
@@ -189,8 +240,23 @@
     height: 100%;
     width: 100%;
     object-fit: contain;
+    z-index: 0;
+    transition: 1.5s;
 }
-#croix {
+#image_name {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    padding: 0 2rem;
+    margin: 0;
+    transform: translateX(-50%);
+    background-color: #fff;
+    border: 0.125rem solid transparent;
+    border-bottom-color: #ccc;
+    box-shadow: 0 0 4rem #eee;
+    z-index: 1;
+}
+#image_croix {
     display: none;
     flex-direction: column;
     justify-content: center;
@@ -199,24 +265,27 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    font-size: 8rem;
+    font-size: 10rem;
+    color: red;
     opacity: 0.5;
 }
 
 #message_de_fin_container {
+    position: absolute;
     display: none;
-    height: 7rem;
+    height: 6rem;
     width: 100%;
     padding: 0;
     margin: 0;
+    bottom: 0;
 }
 #message_de_fin {
     background-color: #000;
     color: #fff;
-    border-radius: 8px;
-    margin: 12px auto;
-    padding: 4px;
-    height: 60px;
+    border-radius: 0.5rem;
+    margin: 0.5rem auto;
+    padding: 0.25rem;
+    height: 3.75rem;
     width: 100%;
     text-align: right;
     font-size: 0.75rem;
@@ -225,17 +294,18 @@
 #message_btn_container {
     position: absolute;
     bottom: 0;
-    height: 24px;
+    height: 1.5rem;
     margin: 0 auto;
     width: 100%;
 }
 #message_btn_container button {
     position: absolute;
+    border: none;
     width: 45%;
-    height: 24px;
+    height: 1.5rem;
     margin: 0;
     background-color: #ccc;
-    border-radius: 8px;
+    border-radius: 0.5rem;
 }
 #message_btn_container button:first-child {
     right: 0;
@@ -245,36 +315,51 @@
 }
 
 @media screen and (orientation: portrait) {
-    #pratique_foot {
-        height: 18rem;
+
+    #pratique_body, #pratique_head, #pratique_foot {
+        margin: 0;
         width: calc(100% - 1rem);
-        margin: auto;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    #pratique_foot {
+        height: 16rem;
     }
     #pratique_body {
         height: calc(100% - 18rem);
-        width: calc(100% - 1rem);
-        margin: auto;
     }
+    #image_name { display: none; }
     #pratique_fiche {
-        height: 6rem;
+        width: 100%;
+        top: 0;
+    }
+    #pratique_fiche_foot {
+        display: none;
     }
     #message_de_fin_container {
         top: calc(100% - 7rem);
+        left: 50%;
+        transform: translateX(-50%);
     }
 }
 @media screen and (orientation: landscape) {
-    #pratique_foot {
-        height: 100%;
+    #pratique_head, #pratique_foot {
         width: 40%;
         margin-right: 0.5rem;
     }
     #pratique_body {
         height: 100%;
         width: 56%;
-        float: left;
-        border-right-color: #aaa;
+        left: 0;
+    }
+    #image_name { display: block; }
+    #pratique_foot {
+        height: calc(100% - 1rem);       
     }
     #pratique_fiche {
-        height: 4.5rem;
+        top: 0;
+        width: calc(100% - 1rem);
+        left: 50%;
+        transform: translateX(-50%);
     }
 }

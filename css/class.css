@@ -4,13 +4,19 @@ html {
 }
 @media screen and (min-width: 601px) {
     .container {
-        width: 80vw;
+        width: 70vw;
         margin: auto;
+    }
+    .page_body {       
+        box-shadow: 0 0 2rem #999;
     }
 }
 @media screen and (max-width: 600px) {
     .container {
         width: 100vw;
+    }
+    .page_body {       
+        box-shadow: none;
     }
 }
 *,::before,::after { box-sizing:border-box; }
@@ -21,13 +27,13 @@ html {
     margin: 1px 0;
     height: 2rem;
     line-height: 2rem;
-    font-weight: bold;
     cursor: pointer;
-    transition: 0.15s;
+    transition: 0.4s;
 }
 .actif, .active {
     border: 1px solid yellow; 
     background-color: yellow;
+    font-weight: bold;
     box-shadow: 0 0 1rem yellow;
 }
 .actif:active {
@@ -39,6 +45,7 @@ html {
     box-shadow: 0 0 1px yellow;
 }
 .apprises, .a_apprendre {
+    font-weight: normal;
     border: 1px solid #ddd; 
 }
 .apprises {
@@ -108,7 +115,6 @@ html {
     width: 100%;
     height: 1.5remè
     padding-right: 0.5rem;
-    box-sizing: border-box;
 }
 .check_btn_container {
     position: relative;
@@ -132,7 +138,19 @@ html {
     min-width: 2.25rem;
     margin: 0
 }
-
+.centrerX {
+    left: 50%;
+    transform: translateX(-50%);
+}
+.centrerY {
+    top: 50%;
+    transform: translateY(-50%);
+}
+.centrerXY {
+    top: 50%;
+    left: 50%;
+    transform: translateXY(-50%,-50%);
+}
 .centercell {
     margin: auto;
 }
@@ -143,7 +161,8 @@ html {
     align-items: center;
 }
 .clavier_container {
-    position: relative;
+    position: absolute;
+    bottom: 0;
     height: 8rem;
     min-height: 4rem;
     width: 100%;
@@ -151,8 +170,6 @@ html {
     padding-top: 1rem;
     background-color: #666;
     border: 1px solid transparent;
-    border-radius: 0.5rem;
-    box-sizing: border-box;
 }
 .clicker {
     transform-origin: 50% 0;
@@ -161,10 +178,8 @@ html {
 .container {
     position: fixed;
     top: 0.125rem;
-    width: 100%;
     margin: 0;
     padding: 0 0.5rem;
-    box-sizing: border-box;
     left: 50%;
     transform: translateX(-50%);
     height: calc(100vh - 1rem);
@@ -174,10 +189,9 @@ html {
     position: relative;
     border: 0.25rem solid #fff;
     top: 7rem;
-    height: calc(95vh - 6.5rem);
-    
-    width: calc(90vw - 0.5rem);
-    max-width: 40rem;
+    height: calc(95vh - 8rem);
+    width: 95vw;
+    max-width: 45rem;
     margin: 0 auto;
     padding: 0;
     border-radius: 0.5rem;
@@ -188,20 +202,16 @@ html {
     z-index: 0;
     transition: 0.6s;
 }
-.course_body {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    
+.course_head, .course_body, .course_foot {
     position: absolute;
-    left: 0.5rem;
-    width: calc(100% - 1rem);
-    margin: 1rem 0;
+}
+.course_body {
+    top: 1rem;
+    border: 1px solid #ccc;
+    /*la hauteur est calculée par la fonction dimensionnementDeCourseBody() dans lessons.js*/
+    width: calc(100% - 2rem);
+    margin: 0.25rem 1rem;
     overflow: auto;
-    font-size: 1rem;
-    font-weight: bold;
-    box-sizing: border-box;
 }
 .course_container {
     display: none;
@@ -214,24 +224,20 @@ html {
     height: 100vh;
     width: 100vw;
 }
-.course_head {
-    display: flex;
-    flex-direction: row;
+.course_foot {
     justify-content: space-around;
     align-items: center;
 
-    position: absolute;
-    background-color: #666;
-    bottom: 8.25rem;
-    padding: 0 1rem;
     width: 100%;
-    height: 2rem;
-    margin: 0;
-    border-radius: 0.5rem;
-    box-sizing: border-box;
-    box-shadow: 0 1px 2px #444;
-    font-size: 1rem;
+    bottom: 0;
     font-weight: bold;
+}
+.course_head {
+    top: 0;
+    height: 1rem;
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
 .course_head div {
     padding: 0 0.25rem;
@@ -258,19 +264,21 @@ html {
     background-color: rgba(0,0,0,0.5);
 }
 .dialogue_btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
     position: absolute;
     background-color: #666;
-    bottom: 8.25rem;
     padding: 0 1rem;
-    margin: 0;
+    margin: 0.125rem 0;
     width: 100%;
     height: 2rem;
     line-height: 2rem;
     text-align: center;
     font-weight: bold;
-    border-radius: 6px;
-    box-sizing: border-box;
-    box-shadow: 0 1px 2px #444;
+    cursor: pointer;
 }
 
 .error_message {
@@ -301,7 +309,6 @@ html {
     width: 100%;
     height: 2rem;
     margin: 0;
-    box-sizing: border-box;
     box-shadow: 0 1px 2px #666;
 }
 .exercices_container {
@@ -436,22 +443,6 @@ html {
 .lessons_a_apprendre a {
     color: #aaa;
 }
-.lesson_progress_bar {
-    position: absolute;
-    bottom: 0;
-    box-shadow: 0 0 4px #999;
-    border-radius: 6px;
-    height: 8px;
-    width: 100%;
-}
-.lesson_progress_bar span {
-    position: absolute;
-    border-radius: 6px;
-    right: 0;
-    height: 8px;
-    width: 0;
-    transition: 0.6s
-}
 .lesson_progress_question_bar {
     background-color: #ddd;
 }
@@ -459,14 +450,12 @@ html {
     background-color: yellow;
 }
 
-.lesson_pied {}
 .lesson_title {
     position: relative;
     padding: 0 16px;
     margin-bottom: 0 0 16px 0;
     height: 40px;
     line-height: 40px;
-    box-sizing: border-box;
     border-bottom-color: #666;
 }
 .liste_affichage_cascade {
@@ -484,8 +473,6 @@ html {
     overflow: hidden;
     text-overflow: ellipsis;
 }
-
-
 
 .masqueur, .masqueur_de_parent {
     position: absolute;
@@ -534,7 +521,6 @@ html {
     border-radius: 50%;
     font-weight: bold;
     text-align: center;
-    box-sizing: border-box;
 }
 
 .nav_fleches_container {
@@ -580,13 +566,13 @@ html {
 
 .page_body {
     position: absolute;
+    padding: 0;
     margin: 0;
     height: calc(100% - 5rem);
     width: 100%;
     left: 50%;
     top: 5.25rem;
     transform: translateX(-50%);
-    box-sizing: border-box;
     z-index: 0;
     overflow: auto;
 }
@@ -596,14 +582,12 @@ html {
     width: 80%;
     left: 50%;
     transform: translateX(-50%);
-    box-sizing: border-box;
 }
 .page_head {
     margin: 0;
     height: 3rem;
     width: 100%;
     top: 0;
-    box-sizing: border-box;
     z-index: 5;
 }
 .parentgrid {
@@ -620,7 +604,6 @@ html {
     margin: auto;
     border-radius: 6px;
     padding: 8px;
-    box-sizing: border-box;
 }
 .phases_container h2, .phases_container h4 {
     padding: 0 16px;
@@ -646,7 +629,6 @@ html {
     width: 100%;
     padding: 0 16px;
     margin: 1px 0;
-    box-sizing: border-box;
     text-align: right;
     font-weight: bold;
     overflow: hidden;
@@ -656,7 +638,6 @@ html {
     display: inline-block;
     vertical-align: middle;
 }
-.ponctuations input {}
 .ponctuations label {
     border: 1px dashed #aaa;
     height: 16px;
@@ -664,7 +645,6 @@ html {
     border-radius: 50%;
     font-weight: bold;
     text-align: center;
-    box-sizing: border-box;
 }
 .pratique_tr_actif {
     color: orange;
@@ -696,27 +676,39 @@ html {
 .profile_menu_head a {
     text-decoration: none;
 }
-.profile_menu_body {}
 .progress_bar {
     position: relative;
-    margin-top: 0.25rem;
+    margin-top: 0.125rem;
+    padding: 0;
     height: 0.5rem;
     width: calc(100% - 2px);
-    border: 1px solid #ddd;
+    border: 1px solid #ccc;
     border-radius: 4px;
+    box-shadow: 0 0 0.25rem #444;
     transition: 1s;
 }
-.progress_bonne_reponse_bar, .progress_question_bar {
-    display: block;
+.progress_bar span {
     position: absolute;
+    top: 0;
+    border-radius: 6px;
+    right: 0;
+    width: 0;
+    transition: 0.6s
+}
+.progress_bonne_reponse_bar, .progress_question_bar {
+    position: absolute;
+    top: 0;
+    right: 0;
     height: 100%;
-    border-radius: 4px;
+    padding: 0;
+    margin: 0;
+    border-radius: 0.25rem;
     transition: 1s;
 }
 .progress_bonne_reponse_bar {
     background-color: yellow;
 }
-.progress_question_bar {
+.progress_question_bar {   
     background-color: #bbb;
 }
 
@@ -733,10 +725,9 @@ html {
 }
 
 .table_parlante, .table_muette {
-    position: absolute;
-    top: 0;
-    padding: 8px;
-    width: 100%;
+    position: relative;
+    padding: 0.5rem;
+    width: calc(100% - 1rem);
 }
 .table_parlante tr, .table_muette tr {
     position: relative;

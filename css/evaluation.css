@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #evaluation {
     overflow: hidden;
 }
@@ -207,6 +208,109 @@
     right: 0;
 }
 #evaluation_message_btn_container button:last-child {
+=======
+:root {
+    --blue: #1e90ff;
+}
+#lesson_entete div {
+    width: 160px;
+    overflow: hidden;
+}
+.stop_btn_container, .oreille_icon_container {
+    display: none;
+}
+#evaluation_head {
+}
+#evaluation_body {
+    padding: 0;
+}
+#evaluation_foot {
+    height: 10.25rem;
+}
+#evaluation_dialogue_btn {
+    bottom: 8rem;
+    border-radius: 0.5rem 0.5rem 0 0;
+}
+#evaluation_clavier_container {
+    border-radius: 0 0 0.5rem 0.5rem;
+}
+#teste_container {
+    position: relative;
+    padding: 0;
+    margin: 0;
+    min-height: 8rem;
+    width: 100%;
+}
+#reponse {
+    position: relative;
+    height: 8rem;
+    min-width: 8rem;
+    line-height: 8rem;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    font-size: 6rem;
+    font-weight: bold;
+}
+#cross {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 8rem;
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    transform: scale(0.5);
+    transition: 0.8s;
+}
+#check_mark_container {
+    display: none;
+    position: relative;
+    padding: 0;
+    margin: 0;
+    height: 4rem;
+    width: 4rem;
+    line-height: 4rem;
+    top: 0;
+    border: 2px solid blue;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 0 16px #666;
+}
+#teste_annexes_container {
+    position: absolute;
+    top: 0.25rem;
+    padding: 0;
+    margin: 0;
+    vertical-align: top;
+}
+#reponse, #check_mark_container {
+    vertical-align: top;
+}
+#check_mark, #check_mark_cover {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    font-size: 4rem;
+    font-weight: bold;
+    text-align: center;
+}
+#check_mark{
+    color: blue;
+    transform: rotateY(180deg);
+}
+#teste_annexes_container {
+    height: 100%;
+    width: 30%;
+>>>>>>> a7134bcdf180a037e5b3f4da5cf471008131216a
     left: 0;
 }
 

@@ -8,7 +8,10 @@ if(isset($_SESSION['id'])){
     <title>programmes</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/programmes.css"/>
+
+    <link rel="stylesheet" href="/kouroukan/css/class.css"/>
+    <link rel="stylesheet" href="/kouroukan/css/tete-de-page.css"/>
+	<link rel="stylesheet" href="/kouroukan/css/programmes.css"/>
 </head>
 <body>
   
@@ -23,7 +26,7 @@ if(isset($_SESSION['id'])){
         <div class="page_foot"><?php include("pied-de-lesson.php"); ?></div>
     </div>
     
-    <script src = "http://localhost:8080/kouroukan/js/programmes.js"></script>
+    <script src = "/kouroukan/js/programmes.js"></script>
     
 </body>
 </html>

@@ -1,5 +1,5 @@
 <?php
 session_start();
 session_destroy();
-header("location:http://localhost:8080/kouroukan/index.php");
+header("location:/kouroukan/index.php");
 ?>

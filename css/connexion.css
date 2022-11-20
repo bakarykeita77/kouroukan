@@ -59,6 +59,7 @@
 	border-style: none;
 	background-color: transparent;
 	width: calc(100% - 2rem);
+	cursor: pointer;
 	z-index: 1; 
 }
 .input_box input:focus ~ label,
@@ -82,6 +83,8 @@
 	width: 100%;
 	background-color: #ccc;
 	border-radius: 0.5rem;
+	border-style: none;
+	cursor: pointer;
 }
 #connexion_form button {
 	position: absolute;

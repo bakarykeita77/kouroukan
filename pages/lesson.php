@@ -1,5 +1,24 @@
-<?php
+<?php header('Content-Type: text/html; charset=utf-8');
 session_start();
+
+
+$image = [];
+$sous_dossier_dir = [];
+$image_dir = "../image/";
+$image_sous_dossiers = scandir($image_dir);
+
+for($i=4; $i<8; $i++) { array_push($sous_dossier_dir,'../image/'.$image_sous_dossiers[$i]); }
+foreach($sous_dossier_dir as $sd) { array_push($image,scandir($sd)); }
+
+//if(!empty($image[0]) && !empty($image[1]) && !empty($image[2]) && !empty($image[3])) include_once('image-syllabe.php');
+
+echo json_encode($image);
+
+echo"<pre>";
+//print_r($image);
+echo"</pre>";
+
+
 if(isset($_SESSION["id"])){
     
     $matiere_id      = $_GET['matiere_id'];
@@ -10,7 +29,6 @@ if(isset($_SESSION["id"])){
     $phases_etudiees = ($matiere_index > 0) ? $_GET['phases_etudiees'] : "";
 
     $chiffres = ['߀','߁','߂','߃','߄','߅','߆','߇','߈','߉'];
-
 ?>
 
 <!DOCTYPE html>
@@ -20,14 +38,17 @@ if(isset($_SESSION["id"])){
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <link rel="stylesheet" href="/kouroukan/css/class.css"/>
+    <link rel="stylesheet" href="/kouroukan/css/tete-de-page.css"/>
 	
-	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/lesson.css"/>
-	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/syllabes.css"/>
-	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/parametres.css"/>
-	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/apprentissage.css"/>
-	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/exercice.css"/>
-	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/pratiques.css"/>
-	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/evaluation.css"/>
+	<link rel="stylesheet" href="/kouroukan/css/lesson.css"/>
+	<link rel="stylesheet" href="/kouroukan/css/syllabes.css"/>
+	<link rel="stylesheet" href="/kouroukan/css/parametres.css"/>
+	<link rel="stylesheet" href="/kouroukan/css/apprentissage.css"/>
+	<link rel="stylesheet" href="/kouroukan/css/exercice.css"/>
+	<link rel="stylesheet" href="/kouroukan/css/pratiques.css"/>
+	<link rel="stylesheet" href="/kouroukan/css/evaluation.css"/>
 
 </head>
 <body style="direction:rtl">
@@ -56,7 +77,7 @@ if(isset($_SESSION["id"])){
               <!----------------------------------------------------------------------------------------------------->  
                 <h4>ߘߋ߰ߟߌ ߞߛߊߞߊ : <span class="niveau_courant"><?= $chiffres[$niveau]; ?></span><span class='rang'></span></h4>
                 <h2 class="lesson_title" id="<?= $matiere_id ?>"> <?= $matiere_nom; ?> ߥߟߊ߬ߘߊ  </h2>
-                <div class="phases liste_affichage_cascade" align="center"></div>
+                <center><div class="phases liste_affichage_cascade" id="pratique_phases"></div></center>
             </div>
         </div>
         <div class="page_foot"><?php include("pied-de-lesson.php"); ?></div>
@@ -64,11 +85,11 @@ if(isset($_SESSION["id"])){
 
     <div class="course_container">
         
-      <!-------------------------------------------------------------------->
+      <!--------------------------------------------------------------------------------------------------------------->
         <span class="fermeture" id="">&times;</span>
-      <!-------------------------------------------------------------------->
+      <!--------------------------------------------------------------------------------------------------------------->
 	    
-        <!--Les éléments de paramètres sont chargés depuis js/parametres.js-->
+      <!--Les éléments de paramètres sont chargés depuis js/parametres.js-->
         <div id="parametres">   
             <div id='lesson_parametres_glissiere'>
                 <table id='table1'>
@@ -95,29 +116,53 @@ if(isset($_SESSION["id"])){
                 <div id='nasalisations_cochees'></div>
             </div>
          </div>
-      <!-------------------------------------------------------------------->
+      <!--------------------------------------------------------------------------------------------------------------->
         <div class="course" id="apprentissage">
             
-            <div class="course_head" id="apprentissage_entete"></div>
-            <div class="course_body" id="apprentissage_corps"></div>
-            <div class='lesson_progress_bar' id="apprentissage_progress_bar">
-                <span class='progress_question_bar lesson_progress_question_bar'></span>
-                <span class='progress_bonne_reponse_bar lesson_progress_bonne_reponse_bar'></span>
+            <div class="course_head" id="apprentissage_head">
+                <div class = 'progress_bar' id = "apprentissage_progress_bar">
+                    <div class='progress_bonne_reponse_bar'></div>
+                </div>
+            </div>
+            <div class="course_body" id="apprentissage_body"></div>
+            <div class="course_foot" id="apprentissage_foot">
+                <div class="dialogue_btn" id="apprentissage_dialogue_btn">
+
+                    <div class='play_btn_container'>
+                        <span class='play_label'>ߝߐߟߊ߲</span>
+                        <span class='play_icon'>&#9664;</span>
+                    </div>
+
+                    <div class='stop_btn_container'>
+                        <span class='stop_label'>ߘߊ߬ߘߋ߬ߟߊ߲ </span> 
+                        <span class='stop_icon'>&#9632;</span>
+                    </div>
+
+                    <div class='parametre_btn_container'>
+                        <span class='parametre_label'>ߛߏ߯ߙߏߟߊ߲</span>  
+                        <span class='parametre_icon'>&#9881;</span>
+                    </div>
+
+                </div>
             </div>
             
          </div>
-      <!-------------------------------------------------------------------->
+      <!--------------------------------------------------------------------------------------------------------------->
         <div class="course" id="exercice"     >
             
-            <div class="course_head" id="exercice_entete"></div>
-            <div class="course_body" id="exercice_corps"></div>
-            <div class='lesson_progress_bar' id="exercice_progress_bar">
-                <span class='progress_question_bar lesson_progress_question_bar'></span>
-                <span class='progress_bonne_reponse_bar lesson_progress_bonne_reponse_bar'></span>
+            <div class="course_head" id="exercice_head">
+                <div class='progress_bar' id="exercice_progress_bar">
+                    <p class='progress_question_bar'></p>
+                    <p class='progress_bonne_reponse_bar'></p>
+                </div>
+            </div>
+            <div class="course_body" id="exercice_body"></div>   <!--Cette division est chargé par la fonction chargerExercice() dans lesson.js-->
+            <div class="course_foot" id="exercice_foot">
+
             </div>
             
          </div>
-      <!-------------------------------------------------------------------->
+      <!--------------------------------------------------------------------------------------------------------------->
         <div class="course" id="pratique"     >
          <!--------------------------------------------------------------------
             La partie pratique de lesson est composée de 3 divisions dont:
@@ -127,32 +172,41 @@ if(isset($_SESSION["id"])){
             2)- pratique_foot
          ---------------------------------------------------------------------->
             
-          <!--pratique_head---------------------------------------------------->
-            <div id="options_popup">
+            <div id="pratique_options">
                 <center><h2 id="options_titre">ߓߟߏߦߊߟߌ ߓߏߟߏ߲ ߠߎ߬</h2></center>
-                <div id="pratique_head">
+                <center>
+                <div>
                     <span>ߞߎߡߊߘߋ߲߫ ߜߋ߲߬ ߁ ߡߊ</span>
                     <span>ߞߎߡߊߘߋ߲߫ ߜߋ߲߬ ߂ ߡߊ</span>
                     <span>ߞߎߡߊߘߋ߲߫ ߜߋ߲߬ ߃ ߡߊ</span>
                     <span>ߞߎߡߊߘߋ߲߫ ߜߋ߲߬ ߄ ߡߊ</span>
                 </div> 
+                </center>
+            </div>
+         <!--pratique_head---------------------------------------------------->
+            <div class="course_head" id="pratique_head">
+                <div class='progress_bar' id="pratique_progress_bar">
+                    <span class='progress_question_bar'></span>
+                    <span class='progress_bonne_reponse_bar'></span>
+                </div>
             </div>
           
-          <!--pratique_body---------------------------------------------------->
-            <div id="pratique_body">
+         <!--pratique_body---------------------------------------------------->
+            <div class="course_body" id="pratique_body">
                 <div id="pratique_guide">
                     <div id="bulles_container"></div>
                     <p id="signe_egal">&#9183;</p>
-                    <p id="cumule_des_caracteres"></p>
+                    <p id="reponse_container"><span id="cumule_des_caracteres"></span><span id='correcteur'>ߖߐ߬ߛߌ߬ߙߊ߲</span></p>
                 </div>
                 <div id="pratiques_images_container">
-                    <img src="http://localhost:8080/htdocs/kouroukan/image/ߖߌ߬ߦߊ.jpg" id="pratiques_image" alt="?">
+                    <h1 id="image_name"></h1>
+                    <img src="" alt="?">
                 </div>
-                <div id="croix">&#10060;</div>
+                <div id="image_croix">&#10060;</div>
             </div>
           
-          <!--pratique_foot---------------------------------------------------->
-            <div id="pratique_foot">
+         <!--pratique_foot---------------------------------------------------->
+            <div class="course_foot" id="pratique_foot">
                 <div id="pratique_fiche">
                     <div id="pratique_fiche_head">
                         <span class="th">ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</span>
@@ -175,8 +229,7 @@ if(isset($_SESSION["id"])){
                     <p id="message_de_fin"></p>
                     <div id="message_btn_container"> <button id="message_btn_1"></button><button id="message_btn_2"></button> </div>
                 </div>
-                <div class='progress_bar' id="pratique_progress_bar"><span class='progress_question_bar'></span><span class='progress_bonne_reponse_bar'></span></div>
-                <div id="dialogue_btn">
+                <div class="dialogue_btn" id="pratique_dialogue_btn">
     
                     <div class="btn question_btn">
                         <span class="question_label">ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</span>
@@ -200,8 +253,9 @@ if(isset($_SESSION["id"])){
                 <div class="clavier_container" id="clavier_pratique"><?php include "clavier.php"; ?></div>
             </div>
          </div>
-      <!----------------------------------------------------------------------->
+      <!--------------------------------------------------------------------------------------------------------------->
         <div class="course" id="evaluation"   >
+<<<<<<< HEAD
                       
           <!--evaluation_body---------------------------------------------------->
             <div id="evaluation_body">
@@ -233,6 +287,31 @@ if(isset($_SESSION["id"])){
                             <span class="pourcentage_point"></span>
                         </div>
                     </div>
+=======
+
+            <div class="course_head" id="evaluation_head">
+                <div class='progress_bar' id="evaluation_progress_bar">
+                    <p class='progress_question_bar'></p>
+                    <p class='progress_bonne_reponse_bar'></p>
+            </div>
+            </div>
+            <div class="course_body" id="evaluation_body">
+
+                <div id='teste_container'>
+                
+                    <p id='reponse'></p>
+                    
+                    <div id='check_mark_container'>
+                        <p id='check_mark'></p>
+                        <p id='check_mark_cover'></p>
+                    </div>
+                    
+                    <div id='teste_annexes_container'>
+                        <div id='alerte'></div>
+                        <div id='autre'></div>
+                    </div>
+
+>>>>>>> a7134bcdf180a037e5b3f4da5cf471008131216a
                 </div>
                 <div id="evaluation_message_de_fin_container">
                     <p id="evaluation_message_de_fin"></p>
@@ -262,8 +341,35 @@ if(isset($_SESSION["id"])){
             
                 <div class="clavier_container" id="clavier_pratique"><?php include "clavier.php"; ?></div>
             </div>
+<<<<<<< HEAD
+=======
+            <div class="course_foot" id="evaluation_foot">
+
+                <div class="dialogue_btn" id="evaluation_dialogue_btn">
+                    <div class="question_btn">
+                        <span class="question_label"></span>
+                        <span class="question_total"></span> :
+                        <span class="question_ordre"></span>
+                        <span class="question_action"></span>
+                        <span class="question_icon"></span>
+                    </div>
+
+                    <div class="repetition_btn">
+                        <span class="repetition_label">ߊ߬ ߟߊߡߍ߲߫ ߕߎ߯ߣߌ߫</span>
+                        <span class="repetition_icon"></span>
+                    </div>
+
+                    <div class="correction_btn">
+                        <span class="correction_label">ߏ߬ ߛߊߞߍ߫</span>
+                        <span class="correction_icon"></span>
+                    </div>
+                </div>
+                <div class="clavier_container"><?php include "clavier.php"; ?></div>
+            </div>
+
+>>>>>>> a7134bcdf180a037e5b3f4da5cf471008131216a
          </div>
-      <!----------------------------------------------------------------------->
+      <!--------------------------------------------------------------------------------------------------------------->
         <form method="POST" action="actions.php" id="lesson_form" style="display:none">
                     
             <input type="number" name="id"       id="id_input" value="<?= $_SESSION['id']; ?>">
@@ -274,25 +380,24 @@ if(isset($_SESSION["id"])){
             <input type="number" name="note"     id="note_input">
             <input type="submit" id="submit_btn" value="Envoyer">
          </form>
-      <!----------------------------------------------------------------------->
+      <!--------------------------------------------------------------------------------------------------------------->
         <p class='hand'> &#128070;&#127999; </p>
-      <!----------------------------------------------------------------------->
+      <!--------------------------------------------------------------------------------------------------------------->
      </div>
 
     <audio id="audio"></audio>
     
-    <script src="http://localhost:8080/kouroukan/js/parametres.js"></script>
+    <script src="/kouroukan/js/parametres.js"></script>
     
-    <script src="http://localhost:8080/kouroukan/js/alphabet.js"></script>
-    <script src="http://localhost:8080/kouroukan/js/syllabes.js"></script>
-    <script src="http://localhost:8080/kouroukan/js/tons.js"></script>
-    <script src="http://localhost:8080/kouroukan/js/chiffres.js"></script>
+    <script src="/kouroukan/js/alphabet.js"></script>
+    <script src="/kouroukan/js/syllabes.js"></script>
+    <script src="/kouroukan/js/tons.js"></script>
+    <script src="/kouroukan/js/chiffres.js"></script>
     
-    <script src="http://localhost:8080/kouroukan/js/apprentissage.js"></script>
-    <script src="http://localhost:8080/kouroukan/js/pratiques.js"></script>
-    <script src="http://localhost:8080/kouroukan/js/evaluations.js"></script>
+    <script src="/kouroukan/js/apprentissage.js"></script>
+    <script src="/kouroukan/js/evaluations.js"></script>
     
-    <script src="http://localhost:8080/kouroukan/js/lessons.js"></script>
+    <script src="/kouroukan/js/lessons.js"></script>
     
 </body>
 </html>

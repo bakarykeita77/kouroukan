@@ -1,12 +1,15 @@
-#apprentissage {
-    max-height: 32rem;
-}
-#apprentissage_entete {
-    bottom: 0.25rem;
-}
-#apprentissage_corps {
+
+#table_parlante_container {
+    position: absolute;
     top: 0;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow: auto;
 }
-#apprentissage_progress_bar {
-    top: 0.25rem;
+#apprentissage_foot {
+    height: 2rem;
+}
+#apprentissage_dialogue_btn {
+    border-radius: 0.5rem;
 }

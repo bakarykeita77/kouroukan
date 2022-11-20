@@ -1,10 +1,7 @@
 
-#exercice_progress_bar{
-    top: 0.25rem;
+#exercice_foot {
+    height: 2rem;
 }
-#exercice_corps{
-    top: 0;
-}
-#exercice_entete{
-    bottom: 0.25rem;
+#exercice_dialogue_btn {
+    border-radius: 0.5rem;
 }

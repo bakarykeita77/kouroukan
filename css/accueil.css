@@ -1,32 +1,32 @@
-#accueil {
-    position: absolute;
-    width: 100%;
-}
+
 #reception {
     position: relative;
-    top: 2rem;
+    top: 5rem;
+    padding: 0 2rem;
+    margin: auto;
     font-size: 1rem;
     text-align: right;
  }
 @media(max-width: 800px) {
     #reception {
         width: calc(100% - 4rem);
-        margin: auto;
     }
 }
 @media(min-width: 801px) {
     #reception {
-        width: 30rem;
-        margin: auto;
+        width: 60%;
+        max-width: 32rem;
         border: 1px solid transparent;
         border-right: 1px solid #bbb;
         border-left: 1px solid #bbb;
-        padding: 0 2rem;
     }
 }
 #nom_d_utilisateur {
     font-size: 1.2rem;
     font-weight: bolder;
+}
+#message_de_bienvenu {
+    margin-bottom: 2rem;
 }
 #affiche_programme {
     position: relative;

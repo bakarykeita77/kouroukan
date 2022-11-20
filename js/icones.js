@@ -17,7 +17,8 @@ var cross_mark = "&#10060;";
 var dark = "&#127999;";
 var diagonal_mark = "&#10189;";
 
-var equivalent = "&#8801;"  "&equv;"
+var equivalent = "&#8801;";
+var equivalent2 = "&equv;";
 
 var light = "&#127995;";
 
@@ -39,12 +40,13 @@ var refaire_icon = "&#8635;";
 
 var surbrace = "&#9182;";
 var UnderBrace = "&#9183;";
-var stop_icon = "&#x25A0;"    "&#9632;";
+var stop_icon = "&#x25A0;";
+var stop_icon = "&#9632;";
 
 var telephone = "&#9990;";
 var telephone2 = "&#128222;";
-var trois points v = 8942;
-var trois points h = 8943;
+var trois_points_v = 8942;
+var trois_points_h = 8943;
 
 
 var vertical_line = "&#124;";

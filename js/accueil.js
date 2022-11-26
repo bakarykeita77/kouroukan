@@ -13,9 +13,10 @@
     var moyenne = 1;
     
     
-    userIdentityStorage();
     dataStorage();
+    userIdentityStorage();
     sessionStorage.removeItem('nbr');
+    afficherLogo();
     
 
     function userIdentityStorage() {
@@ -152,3 +153,4 @@
     	})
     	.catch(error => console.log( error ));
      }
+    function afficherLogo() { $('#logo').css('display', 'block'); }

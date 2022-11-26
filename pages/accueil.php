@@ -54,31 +54,32 @@ session_start();
 <body>
 
     <div class="container" id="accueil">
+        
+      <!----------------------------------------------------------------------------------------------------->  
+        <div id="user_info" style="display: none">
+            <?php if(isset($_SESSION["id"])): ?>
+            <div id="identification">
+                <p id="id"       ><?= $_SESSION["id"];        ?></p>
+                <p id="prenom"   ><?= $_SESSION["prenom"];    ?></p>
+                <p id="nom"      ><?= $_SESSION["nom"];       ?></p>
+                <p id="naissance"><?= $_SESSION["naissance"]; ?></p>
+                <p id="sexe"     ><?= $_SESSION["sexe"];      ?></p>
+                <p id="adresse"  ><?= $_SESSION["adresse"];   ?></p>
+                <p id="email"    ><?= $_SESSION["email"];     ?></p>
+            </div>
+            <?php endif ?>
+            <div id="matieres">
+                <div id="matieres_etudiees"></div>
+                <div id="matiere_active"></div>
+                <div id="matieres_a_etudiees"></div>
+            </div>
+         </div>
+      <!----------------------------------------------------------------------------------------------------->  
+
         <div class="page_head"><?php require('tete-de-page.php'); ?></div>
         <div class="page_body">
             <div id="reception">
-                
-              <!----------------------------------------------------------------------------------------------------->  
-                <div id="user_info" style="display: none">
-                    <?php if(isset($_SESSION["id"])): ?>
-                    <div id="identification">
-                        <p id="id"       ><?= $_SESSION["id"];        ?></p>
-                        <p id="prenom"   ><?= $_SESSION["prenom"];    ?></p>
-                        <p id="nom"      ><?= $_SESSION["nom"];       ?></p>
-                        <p id="naissance"><?= $_SESSION["naissance"]; ?></p>
-                        <p id="sexe"     ><?= $_SESSION["sexe"];      ?></p>
-                        <p id="adresse"  ><?= $_SESSION["adresse"];   ?></p>
-                        <p id="email"    ><?= $_SESSION["email"];     ?></p>
-                    </div>
-                    <?php endif ?>
-                    <div id="matieres">
-                        <div id="matieres_etudiees"></div>
-                        <div id="matiere_active"></div>
-                        <div id="matieres_a_etudiees"></div>
-                    </div>
-                 </div>
-              <!----------------------------------------------------------------------------------------------------->  
-                
+                                
                 <p>ߖߐ ߦߴߌ ߡߊ߬ ߞߟߊߓߎߡߊ <span id="nom_d_utilisateur"><?= $_SESSION["prenom"].' '.$_SESSION["nom"]  ?></span> </p>
                 <div id="message_de_bienvenu">
                     <p>ߌ ߣߌ߫ ߛߣߍ߫ ߞߙߎ߬ߞߊ߲߫ ߘߋ߰ߘߊ ߟߊ߫߸ ߒߞߏ ߟߐ߲ߠߌ ߛߌߟߊ߫ ߛߎߘߎ߲߸ ߓߟߐߟߐ ߛߌߟߊ ߝߍ߬.</p>

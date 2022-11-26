@@ -37,12 +37,8 @@ body {
 }
 #aside01 {
     font-weight: bolder;
-<<<<<<< HEAD
     font-size: 1.75rem;
-=======
-    font-size: 2rem;
     width: 90%;
->>>>>>> a7134bcdf180a037e5b3f4da5cf471008131216a
 }
 #aside02 {
     position: relative;

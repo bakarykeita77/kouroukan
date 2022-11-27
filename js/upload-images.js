@@ -30,7 +30,7 @@
         let nom_table_html = imageCategorieHtml();
         $('#nom_table_image').val(nom_table_html);
 
-        image_to_upload.attr('src','http://localhost:8080/kouroukan/image/'+image_nom+'.'+image_extension);
+        image_to_upload.attr('src','/kouroukan/images/'+image_nom+'.'+image_extension);
         image_to_upload.css('display','block');
         image_submit.css('display','block');
         

@@ -28,7 +28,7 @@ session_start();
             $_SESSION["sexe"]      = $client[0]["sexe"];
             $_SESSION["adresse"]   = $client[0]["adresse"];
             $_SESSION["email"]     = $client_email;
-
+echo $_SESSION["prenom"];
           /*---------------------------------------------------------------------------------------------------*/
             
             //   header("location:accueil.php");   
@@ -73,7 +73,7 @@ session_start();
                 <div id="matiere_active"></div>
                 <div id="matieres_a_etudiees"></div>
             </div>
-         </div>
+         </div> 
       <!----------------------------------------------------------------------------------------------------->  
 
         <div class="page_head"><?php require('tete-de-page.php'); ?></div>

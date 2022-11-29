@@ -1,4 +1,6 @@
-
+    
+    fermer();
+    
 	function activerSonDuClavier() {
 		$('#clavier_nko td').on('click',function(){
 			lettre = $(this).attr('id');
@@ -99,6 +101,9 @@
 	    return function(){ return i += 1; };
 	}
 	
+	function fermer() {
+	    $(".fermeture").on('click', function() { $(this).parent().css('display','none'); });
+	}
 	function fermer(element) {
 	    element.animate({ 'height':0 }, 200);
 	    setTimeout((function(){ element.css({ 'display':'none' }) }),180);

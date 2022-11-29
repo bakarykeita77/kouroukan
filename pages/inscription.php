@@ -4,8 +4,8 @@
 	<title>inscriptions</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel = "stylesheet" href = "http://localhost:8080/kouroukan/css/class.css"/>
-	<link rel = "stylesheet" href = "http://localhost:8080/kouroukan/css/inscription.css"/>
+	<link rel = "stylesheet" href = "/kouroukan/css/class.css"/>
+	<link rel = "stylesheet" href = "/kouroukan/css/inscription.css"/>
 </head>
 <body>
     
@@ -14,7 +14,7 @@
     		
     		<h2>ߕߐ߯ߛߓߍ߫ ߥߟߊ</h2>
     		
-    		<form action="http://localhost:8080/kouroukan/pages/actions.php" method="POST" id="formulaire_de_connexion">
+    		<form action="/kouroukan/pages/actions.php" method="POST" id="formulaire_de_connexion">
     			
     			<div class="input_box">
     				<input type="text" autocomplete="off" name="prenom" class="inscription_input" id="prenom" required />
@@ -49,8 +49,21 @@
     			</div>
     		</form>
 
-    		 <p class="error_message" align="center"><?php if(isset($error)){ echo $error; } ?></p>
+    		 <p class="error_message" align="center"><?php if(isset($error)) { echo $error; } ?></p>
     	</div>
+    	<div id="inscription_alert_container">
+    	    <span class="fermeture" id="fermer_inscription">&times;</span>
+    	    <p id="inscription_alert"></p>
+    	</div>
+    	
+	    <script src="/kouroukan/js/jquery-3.3.1.js"></script>
+    	<script src="/kouroukan/js/inscription.js"></script>
+    	
+    	<?php
+            if($_SERVER['HTTP_REFERER'] == "http://localhost:8080/kouroukan/pages/inscription.php") {
+                echo('<script> alerteEmailDejaUtiliser(); </script>'); 
+            }
+        ?>
 	</div>
 </body>
 </html>

@@ -17,7 +17,11 @@ session_start();
             $client = $requette->fetchAll();
             
 
-            if(empty($client)) { echo("Cet utilisateur n'est pas inscrit"); return; }
+            if(empty($client)) { 
+                echo("Cet utilisateur n'est pas inscrit"); 
+                
+                return; 
+            }
             $data_pass = $client[0]['pass'];
             if($client_pass != $data_pass) { echo("Les mots de passe ne correspondent pas"); return; }
                 
@@ -28,7 +32,7 @@ session_start();
             $_SESSION["sexe"]      = $client[0]["sexe"];
             $_SESSION["adresse"]   = $client[0]["adresse"];
             $_SESSION["email"]     = $client_email;
-echo $_SESSION["prenom"];
+
           /*---------------------------------------------------------------------------------------------------*/
             
             //   header("location:accueil.php");   

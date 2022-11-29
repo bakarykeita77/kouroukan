@@ -26,8 +26,7 @@
     $phase     = isset($_POST['phase'])     ? $_POST['phase']     : null;
     $lesson    = isset($_POST['lesson'])    ? $_POST['lesson']    : null;
     $note      = isset($_POST['note'])      ? $_POST['note']      : null;
-    $referer   = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/pages/index.php';
-    
+
     $syllabe_categorie = isset($_POST['syllabe_categorie']) ? $_POST['syllabe_categorie'] : null;
     $image_name = isset($_FILES['image']['name'])    ? $_FILES['image']['name'] : null;
     $taille    = isset($_FILES['image']['size'])     ? $_FILES['image']['size'] : null;
@@ -99,9 +98,10 @@
 		$emails_table = [];
         for($i=0;$i<count($emails);$i++) $emails_table[$i] = $emails[$i]['email'];
 
-	 /*On teste la présence de l'email saisi dans la variable $emails_table.
-	  *Si oui un message s'affiche pour signaler l'utilisateur que cet email est déja utilisé.
-	  *Si non le processus d'inscription est engagé.
+	 /*
+	  On teste la présence de l'email saisi dans la variable $emails_table.
+	  Si oui un message s'affiche pour signaler l'utilisateur que cet email est déja utilisé.
+	  Si non le processus d'inscription est engagé.
 	 */
         if(in_array($_POST['email'],$emails_table) == false) {
         
@@ -121,7 +121,9 @@
 
 			$utilisateurs =  $requette->execute();
 
-        }else{ echo("L'email envoye est deja utilise. Essayer un autre"); }
+        }else{ 
+            header("location:".$_SERVER['HTTP_REFERER']);   
+        }
 	 }
 	function archiverLesson($id_client,$matiere,$niveau,$phase,$lesson,$note) {
 	    global $db;

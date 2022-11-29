@@ -12,9 +12,10 @@
 	padding: 1rem;
 	top: 2rem;
 	box-sizing: border-box;
-    left: 50%;
     overflow: auto;
+    left: 50%;
     transform: translateX(-50%);
+    z-index: 0;
 }
 #inscription_form h2 {
     margin: 0;
@@ -87,4 +88,23 @@
 	width: 100%;
 	padding: 0.5rem;
 	margin: 0;
+}
+#inscription_alert_container {
+    position: absolute;
+    top: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    overflow: hidden;
+}
+#inscription_alert {
+    margin: 0.5rem 0;
+    padding: 0.25rem;
+    right: 0.5rem;
+    background-color: black;
+    border-radius: 0.5rem;
+    color: white;
+    width: 14rem;
+    text-align: center;
+    z-index: 1;
 }

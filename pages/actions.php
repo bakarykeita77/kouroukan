@@ -120,7 +120,8 @@
 			$requette->bindValue(':pass',     $pass,     PDO::PARAM_STR);
 
 			$utilisateurs =  $requette->execute();
-
+			
+            header("location:http://localhost:8080/kouroukan/index.php");   
         }else{ 
             header("location:".$_SERVER['HTTP_REFERER']);   
         }

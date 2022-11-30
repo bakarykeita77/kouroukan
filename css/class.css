@@ -326,7 +326,7 @@ html {
     width: 80vw;
 }
 
-.fermeture, .fermeture_de_parent {
+.fermeture, .fermeture_de_parent, .fermeture_note_btn {
     position: absolute;
     top: 0;
     left: 0;
@@ -555,6 +555,29 @@ html {
 .noir_clair {
     color: #000;
     background-color: #ddd;
+}
+.note {
+    height: 5rem;
+    width: 16rem;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    right: 0;
+    background-color: black;
+    color: white;
+    border-radius: 0.5rem;
+    text-align: center;
+}
+.note_container {
+    position: absolute;
+    top: 2rem;
+    width: 0;
+    margin: 0;
+    border-radius: 0.5rem;
+    background-color: #eee;
+    box-shadow: 0 0 5rem #aaa;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
 }
 
 .opaque {

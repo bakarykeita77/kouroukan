@@ -51,17 +51,18 @@
 
     		 <p class="error_message" align="center"><?php if(isset($error)) { echo $error; } ?></p>
     	</div>
-    	<div id="inscription_alert_container">
-    	    <span class="fermeture" id="fermer_inscription">&times;</span>
-    	    <p id="inscription_alert"></p>
+    	<div class="note_container">
+    	    <span class="fermeture_note_btn">&times;</span>
+    	    <p class="note" id="note_inscription"></p>
     	</div>
     	
 	    <script src="/kouroukan/js/jquery-3.3.1.js"></script>
+    	<script src="/kouroukan/note-fonctions.js"></script>
     	<script src="/kouroukan/js/inscription.js"></script>
     	
     	<?php
             if($_SERVER['HTTP_REFERER'] == "http://localhost:8080/kouroukan/pages/inscription.php") {
-                echo('<script> alerteEmailDejaUtiliser(); </script>'); 
+                echo('<script> notifier(); </script>'); 
             }
         ?>
 	</div>

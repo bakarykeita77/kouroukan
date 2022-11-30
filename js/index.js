@@ -1,18 +1,18 @@
 
-   var container = $('#container');
-   var clavier = $('#clavier_nko');
-   var lien = [];
-   var alphabet = [];
-   var mot = "";
-   var questionnaire = [];
-   var niveau = "";
-   var nombre_aleatoire = "", na = "", n = "";
-   var i = 0;
-   var audio = $('#audio');
-   var tdw = $('.table_parlante td').css('width');
-   var reponse = "", reponse_content = [], question_content = [];
-   
-
+    var container = $('#container');
+    var clavier = $('#clavier_nko');
+    var lien = [];
+    var alphabet = [];
+    var mot = "";
+    var questionnaire = [];
+    var niveau = "";
+    var nombre_aleatoire = "", na = "", n = "";
+    var i = 0;
+    var audio = $('#audio');
+    var tdw = $('.table_parlante td').css('width');
+    var reponse = "", reponse_content = [], question_content = [];
+    
+    
     $('#nav ul li:nth(0)').addClass('surbrillance');
     $('#nav ul li:nth(0)').siblings().removeClass('surbrillance');
 
@@ -44,3 +44,27 @@
          autoplay:'on'
       });
    });
+   
+   
+   function masquerAsides() {
+       $("#aside01").css('opacity',0);
+       $("#aside02").css('opacity',0);
+   }
+   function demasquerAsides() {
+        $("#aside01").animate({'opacity':1},1000);
+        $("#aside02").animate({'opacity':1},1000);
+   }
+   function afficherAsides() {
+       $('#index_alert_fermeture').click(function() { demasquerAsides(); });
+   }
+   function autoAfficherAsides() {
+       setTimeout(function() {
+           $("#aside01").animate({'opacity':1},1000);
+           $("#aside02").animate({'opacity':1},1000);
+       }, 10500);
+   }
+   function affichageAsides() {
+       masquerAsides();
+       afficherAsides();
+       autoAfficherAsides();
+   }

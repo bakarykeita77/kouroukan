@@ -18,9 +18,7 @@ session_start();
             
 
             if(empty($client)) { 
-                echo("Cet utilisateur n'est pas inscrit"); 
-                
-                return; 
+                header("location:".$_SERVER['HTTP_REFERER']);  
             }
             $data_pass = $client[0]['pass'];
             if($client_pass != $data_pass) { echo("Les mots de passe ne correspondent pas"); return; }
@@ -35,7 +33,7 @@ session_start();
 
           /*---------------------------------------------------------------------------------------------------*/
             
-            //   header("location:accueil.php");   
+              
            
         }else{ $warning = "Veuillez remplir tous les champs !"; }  
         

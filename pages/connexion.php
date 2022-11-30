@@ -29,7 +29,24 @@
     			</div>
     		</form>
     	</div>
+    	
+		<div class="note_container">
+		    <span class="fermeture_note_btn" id="fermeture_note_connexion">&times;</span>
+		    <p class="note" id="note_connexion"></p>
+		</div>
 	</div>
+	
+	<script src="/kouroukan/js/jquery-3.3.1.js"></script>
+	<script src="/kouroukan/note-fonctions.js"></script>
+	
+	<?php
+	    
+	    if($_SERVER['HTTP_REFERER'] == "http://localhost:8080/kouroukan/pages/connexion.php") {
+	        echo("<script> notifier(); </script>");
+	    }
+	
+	
+	?>
 	
 </body>
 </html> 

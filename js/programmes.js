@@ -1,4 +1,4 @@
-alert("ok");
+
  //Selection des éléments HTML du programme
     var programmes_container = document.getElementById('programmes_container');
     var programme_div        = document.getElementById('programme_div');
@@ -65,7 +65,7 @@ Au click sur l'afficheur du programme
     var derniere_phase    = JSON.parse(sessionStorage.getItem('derniere_phase'));
 
 /*-----------------------------------------------------------------------------------------------------------------------*/
- alert('ok');    
+     
     programme();
    // changerProgramme();
     

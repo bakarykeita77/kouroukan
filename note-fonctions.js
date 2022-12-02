@@ -6,13 +6,18 @@
         
     }
     function afficherNote() {
+        $('.note_container').css({'display':'block'});
         $('.note_container').animate({'width':'20rem'},500);
     }
+    function cacherNote() {
+        $('.note_container').animate({'width':0},500);
+        setTimeout(function() { $('.note_container').css({'display':'none'}); },500);
+    }
     function masquerNote() {
-        $('.fermeture_note_btn').click(function() { $('.note_container').animate({'width':0},500); });
+        $('.fermeture_note_btn').click(function() { cacherNote(); });
     }
     function autoMasquerNote() {
-        setTimeout(function() { $('.fermeture_note_btn').click(); }, 10000);
+        setTimeout(function() { cacherNote(); }, 10000);
     }
     function notifier() {
         chargerNote(); 

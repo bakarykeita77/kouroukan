@@ -568,6 +568,7 @@ html {
 }
 .note_container {
     position: absolute;
+    display: none;
     top: 2rem;()
     width: 0;
     margin: 0;

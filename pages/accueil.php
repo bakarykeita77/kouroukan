@@ -9,7 +9,7 @@ session_start();
         
             require("connexionToDB.php");
             global $db;
-
+ 
           /*---------------------------------------------------------------------------------------------------*/
             
             $requette = $db->prepare("SELECT * FROM users WHERE email = ?");

@@ -6,33 +6,45 @@ if(isset($_SESSION['id'])){
     if(!file_exists($_SERVER['DOCUMENT_ROOT']."/local-images-for-kouroukan")) {
 
         echo "<script> alert('Un dossier sera crée sur votre disc dur');</script>";
-     
-     //Creation du dossier et sous-dossiers d'images
+        
+    //Nous sommes au fichier programmes.
+        $programmes = getcwd();
+
+     //Selection du repertoir racine.   
         chdir($_SERVER['DOCUMENT_ROOT']);
+        
+     //Creation du dossier et sous-dossiers d'images à la racine.
         mkdir("local-images-for-kouroukan");
         chdir("local-images-for-kouroukan");
         mkdir("local-images-1-syllabe");
         mkdir("local-images-2-syllabe");
         mkdir("local-images-3-syllabe");
-        mkdir("local-images-4-syllabe"); 
+        mkdir("local-images-4-syllabe");
+     
+     //Retour au programmes.  
+        chdir($programmes);
+       
+     //Copie des images du serveur au dossier local.
+        $racine = $_SERVER['DOCUMENT_ROOT'];
+        $server_images_folders = scandir("../server-images");
+        $local_images_folders = scandir($racine."/local-images-for-kouroukan");
+         
+        for($i=2; $i<count($server_images_folders); $i++) {
+            $source = "../server-images/".$server_images_folders[$i];
+            $destination = $racine."/local-images-for-kouroukan/".$local_images_folders[$i];
+             
+            $server_images = scandir($source);
+            $local_images = scandir($destination);
+             
 
-     //Extraction des images du serveur
-        include("connexionToDB.php");
-        global $db;
-
-        $requette = $db->prepare("SELECT * FROM image1syllabe");
-        $requette->execute();
-        $images = $requette->fetchAll();
-
-        $requette = $db->prepare("SELECT * FROM image1syllabe");
-        $requette->execute();
-        $images = $requette->fetchAll();
-
-     //Chargement des sous-dossiers d'images
-        $dossier = "/image/image-1-syllabe";
-        $nom = $images[0]["nom"];
-
-        $dossier = $dossier.$nom;
+            for($j=2; $j<count($server_images); $j++) {
+                 
+                $srcfile = $source."/".$server_images[$j];
+                $destfile = $destination."/".$local_images[$j].$server_images[$j];
+                 
+                copy($srcfile,$destfile); 
+            }
+        }
     }
 
 ?>

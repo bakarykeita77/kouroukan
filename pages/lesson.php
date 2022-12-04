@@ -1,24 +1,6 @@
 <?php header('Content-Type: text/html; charset=utf-8');
 session_start();
 
-
-$image = [];
-$sous_dossier_dir = [];
-$image_dir = "../image/";
-$image_sous_dossiers = scandir($image_dir);
-
-for($i=4; $i<8; $i++) { array_push($sous_dossier_dir,'../image/'.$image_sous_dossiers[$i]); }
-foreach($sous_dossier_dir as $sd) { array_push($image,scandir($sd)); }
-
-//if(!empty($image[0]) && !empty($image[1]) && !empty($image[2]) && !empty($image[3])) include_once('image-syllabe.php');
-
-echo json_encode($image);
-
-echo"<pre>";
-//print_r($image);
-echo"</pre>";
-
-
 if(isset($_SESSION["id"])){
     
     $matiere_id      = $_GET['matiere_id'];
@@ -255,39 +237,6 @@ if(isset($_SESSION["id"])){
          </div>
       <!--------------------------------------------------------------------------------------------------------------->
         <div class="course" id="evaluation"   >
-<<<<<<< HEAD
-                      
-          <!--evaluation_body---------------------------------------------------->
-            <div id="evaluation_body">
-                <div id="evaluation_reponse_container">
-                    <div id="evaluation_reponse"></div>
-                    <div id="evaluation_cross">&#10060;</div>
-                </div>
-                <div id="evaluation_image_container">
-                    <img src="http://localhost:8080/htdocs/kouroukan/image/bk.jpg" id="evaluation_image" alt="">
-                </div>
-            </div>
-          
-          <!--evaluation_foot---------------------------------------------------->
-            <div id="evaluation_foot">
-                <div id="evaluation_fiche">
-                    <div id="evaluation_fiche_head">
-                        <span class="th">ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</span>
-                        <span class="th">ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ</span>
-                        <span class="th">ߓߙߍ߬ߦߊ</span>
-                    </div>
-                    <div id="evaluation_fiche_body"></div>
-                    <div id="evaluation_fiche_foot">
-                        <div>
-                            <span id="evaluation_label_total_point">ߓߍ߬ߙߍ ߡߎ߬ߡߍ</span>
-                            <span id="evaluation_total_point"></span>
-                        </div>
-                        <div>
-                            <span class="label_pourcentage_point" colspan="2">ߓߍ߬ߙߍ ߗߡߍ߬ߘߐ߬ߦߊ</span>
-                            <span class="pourcentage_point"></span>
-                        </div>
-                    </div>
-=======
 
             <div class="course_head" id="evaluation_head">
                 <div class='progress_bar' id="evaluation_progress_bar">
@@ -310,8 +259,6 @@ if(isset($_SESSION["id"])){
                         <div id='alerte'></div>
                         <div id='autre'></div>
                     </div>
-
->>>>>>> a7134bcdf180a037e5b3f4da5cf471008131216a
                 </div>
                 <div id="evaluation_message_de_fin_container">
                     <p id="evaluation_message_de_fin"></p>
@@ -341,8 +288,6 @@ if(isset($_SESSION["id"])){
             
                 <div class="clavier_container" id="clavier_pratique"><?php include "clavier.php"; ?></div>
             </div>
-<<<<<<< HEAD
-=======
             <div class="course_foot" id="evaluation_foot">
 
                 <div class="dialogue_btn" id="evaluation_dialogue_btn">
@@ -366,8 +311,6 @@ if(isset($_SESSION["id"])){
                 </div>
                 <div class="clavier_container"><?php include "clavier.php"; ?></div>
             </div>
-
->>>>>>> a7134bcdf180a037e5b3f4da5cf471008131216a
          </div>
       <!--------------------------------------------------------------------------------------------------------------->
         <form method="POST" action="actions.php" id="lesson_form" style="display:none">

@@ -1,13 +1,11 @@
 $('document').ready(function() {
-<<<<<<< HEAD
-    
+
+ //Declaration des variables
     var id              = JSON.parse(sessionStorage.getItem('id'));     
     var matieres        = JSON.parse(sessionStorage.getItem('matieres'));     
-    var matiere_index   = JSON.parse(sessionStorage.getItem('matiere_index'));  
-    
-    var niveaux_etudies = JSON.parse(sessionStorage.getItem('niveaux_etudies'));
-    var niveau_max      = JSON.parse(sessionStorage.getItem('niveau_max'));
-    var niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
+    var matiere_index   = JSON.parse(sessionStorage.getItem('matiere_index'));
+    var matieres_etudiees = [], matiere_active = "", matiere_nom = "", matiere_index = 0, derniere_matiere = "";
+    var niveaux = [], niveaux_etudies = [], niveaux_distincts = [], niveau_max = 0, niveau_en_cours = 1;
     
     var groupe_d_images = $('#images_pratique .images_container');
     
@@ -16,41 +14,9 @@ $('document').ready(function() {
     var derniere_phase  = JSON.parse(sessionStorage.getItem('derniere_phase'));
     var nbr  = JSON.parse(sessionStorage.getItem('nbr'));
 
-   
-    if(matieres.length === 0) {
-        niveau_max = 0;
-        niveau_en_cours = 1;
-    }
-    if(matieres.length > 0) {
-        
-        niveaux           = JSON.parse(sessionStorage.getItem('niveaux'));     
-        niveau_en_cours   = sessionStorage.getItem('niveau_en_cours');
-        niveaux_distincts = JSON.parse(sessionStorage.getItem('niveaux_distincts'));     
-        niveau_max        = JSON.parse(sessionStorage.getItem('niveau_max'));
-        
-        matieres_etudiees = JSON.parse(sessionStorage.getItem('matieres_etudiees'));     
-        derniere_matiere  = JSON.parse(sessionStorage.getItem('derniere_matiere'));     
-        matiere_active    = JSON.parse(sessionStorage.getItem('matiere_active'));     
-        matiere_index     = JSON.parse(sessionStorage.getItem('matiere_index')); 
-        matiere_nom       = JSON.parse(sessionStorage.getItem('matiere_nom')); 
-    }
-
-    var rang = '';
-	var etapes_passees = '';
-	var etape_actuelle = [];
-	var etapes_a_faire = [];
-	var etape_max = [];
-    
-	var derniere_phase = '', phase_en_cours = '', phase_nbr = 0;
-=======
-
- //Declaration des variables
-    var matieres = [], matieres_length = 0, matiere_index = 0, nbr = 0;
-    var niveaux_etudies = [], niveau_max = 0, niveau_en_cours = 1;
 	var etapes_passees = [], etape_actuelle = [], etapes_a_faire = [], etape_max = [], rang = '';
 	var phases_etudiees = [], derniere_phase = '', phase_en_cours = '', phase_nbr = 0;
     var phases_distinctes = [], phases_1_distinctes = [], phases_2_distinctes = [], phases_3_distinctes = [], phases_4_distinctes = [];
->>>>>>> a7134bcdf180a037e5b3f4da5cf471008131216a
 	var avancer_btn = '';
     var id_phases = [], data_phase_nbr;
 
@@ -65,14 +31,7 @@ $('document').ready(function() {
  //Récupération de l'id de l'étudiant 
     var id = JSON.parse(sessionStorage.getItem('id')); 
 
-<<<<<<< HEAD
-        getPhases(); 
-        phases();
-        matiere();
-        
-        
   /*--------------------------------------------------------------------*/
-=======
  //Récupération des données reçues sur l'apprenant  
     matieres        = JSON.parse(sessionStorage.getItem('matieres')); 
     matieres_length = (matieres !== null) ? matieres.length : 0;
@@ -82,64 +41,65 @@ $('document').ready(function() {
   //Traitement des données reçues sur l'apprenant
     if(matieres_length === 0) {
         matiere_index = 0;
+        
         niveaux_etudies = [];
         niveau_max = 0;
         niveau_en_cours = 1;
+        
         phases_etudiees = [];
         derniere_phase = '';
         phase_en_cours = 'alphabet_apprentissage';
+        
         nbr = 0;
     }
     if(matieres_length > 0) {
+
+        getMatieres();
+        getNiveaux();
+        getPhases();
         
+        nbr                 = JSON.parse(sessionStorage.getItem('nbr')); 
+    }
+
+  /*-----------------------------------------------------------------------------------------------------------------*/
+    phases();
+    matiere();
+   
+  /*-----------------------------------------------------------------------------------------------------------------*/
+    
+    function getMatieres() {
         matieres_etudiees   = JSON.parse(sessionStorage.getItem('matieres_etudiees'));     
         derniere_matiere    = JSON.parse(sessionStorage.getItem('derniere_matiere'));     
         matiere_active      = JSON.parse(sessionStorage.getItem('matiere_active'));     
         matiere_nom         = JSON.parse(sessionStorage.getItem('matiere_nom'));
         matiere_index       = JSON.parse(sessionStorage.getItem('matiere_index')); 
-        
+    }
+    function getNiveaux() {
         niveaux             = JSON.parse(sessionStorage.getItem('niveaux'));     
         niveaux_etudies     = JSON.parse(sessionStorage.getItem('niveaux_etudies'));
         niveaux_distincts   = JSON.parse(sessionStorage.getItem('niveaux_distincts'));     
         niveau_max          = JSON.parse(sessionStorage.getItem('niveau_max'));
         niveau_en_cours     = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
-        
+    }
+	function getPhases() { 
+        total_phase         = JSON.parse(sessionStorage.getItem('total_phase'));
+        dernieres_phases    = JSON.parse(sessionStorage.getItem('dernieres_phases'));  
+        derniere_phase      = JSON.parse(sessionStorage.getItem('derniere_phase')); 
+        dernieres_phases_distinctes  = JSON.parse(sessionStorage.getItem('dernieres_phases_distinctes'));        
         phases_etudiees     = JSON.parse(sessionStorage.getItem('phases_etudiees'));
         phases_distinctes   = JSON.parse(sessionStorage.getItem('phases_distinctes'));
         phases_1_distinctes = JSON.parse(sessionStorage.getItem('phases_1_distinctes'));
         phases_2_distinctes = JSON.parse(sessionStorage.getItem('phases_2_distinctes'));
         phases_3_distinctes = JSON.parse(sessionStorage.getItem('phases_3_distinctes'));
         phases_4_distinctes = JSON.parse(sessionStorage.getItem('phases_4_distinctes'));
-        derniere_phase      = JSON.parse(sessionStorage.getItem('derniere_phase'));
-
-        nbr                 = JSON.parse(sessionStorage.getItem('nbr')); 
-    }
-
-  /*-----------------------------------------------------------------------------------------------------------------*/
-    getPhases(); 
-    phases();
-    matiere();
-   
-  /*-----------------------------------------------------------------------------------------------------------------*/
->>>>>>> a7134bcdf180a037e5b3f4da5cf471008131216a
-	
-	function getPhases() { 
-
-        total_phase       = JSON.parse(sessionStorage.getItem('total_phase'));
-        phases_etudiees   = JSON.parse(sessionStorage.getItem('phases_etudiees')); 
-        dernieres_phases  = JSON.parse(sessionStorage.getItem('dernieres_phases'));     
-        derniere_phase    = JSON.parse(sessionStorage.getItem('derniere_phase'));     
-        dernieres_phases_distinctes  = JSON.parse(sessionStorage.getItem('dernieres_phases_distinctes'));
     }
     function phases() {
-<<<<<<< HEAD
+        
         var phases_collection = phasesCollection();
-=======
 
         let pratiques = JSON.parse(localStorage.getItem('pratiques'));
         let all_options = JSON.parse(localStorage.getItem('all_options')); 
         let localOptionsLength = (all_options == null) ? 0 : all_options.length;
->>>>>>> a7134bcdf180a037e5b3f4da5cf471008131216a
 
     	$('.phases').html(phasesHTML());
     	
@@ -189,24 +149,6 @@ $('document').ready(function() {
             return content;
         }
     	function stylesDesPhases() {
-<<<<<<< HEAD
-            var nbr = JSON.parse(sessionStorage.getItem('nbr'));
-    
-           // if(total_phase === nbr) sessionStorage.removeItem('nbr');
-    	    var lesson_statut = lessonStatut();
-    	    var phase_nbr = nombre();
-      
-    	    $.each($('#phases_list li'), function() {
-    	      
-        	    var phase_index = $(this).index();
-        	    var phase_attr_id = $(this).attr('id');
-                
-    	        if(lesson_statut == "ended") {
-                    $(this).removeClass('active a_apprendre').addClass('apprises');
-    	        }
-                if(lesson_statut == "beginning") {
-                    if(phase_nbr ===0) {
-=======
         
     	    var phase_status = phaseStatus();
     	    var phase_nbr = nombre();
@@ -217,7 +159,7 @@ $('document').ready(function() {
                
                 if(phase_status == "vierge") {
                     if(phase_nbr === 0) {
->>>>>>> a7134bcdf180a037e5b3f4da5cf471008131216a
+                        
                         if(phase_index === 0) $(this).addClass('active');
                         if(phase_index  >  0) $(this).addClass('a_apprendre');
                     }
@@ -227,12 +169,8 @@ $('document').ready(function() {
                         if(phase_index >= phase_nbr+1) $(this).addClass('a_apprendre');
                     }
                 }
-<<<<<<< HEAD
-    	        if(lesson_statut == "in_progress") {
-=======
     	        if(phase_status == "non_vierge") {
 
->>>>>>> a7134bcdf180a037e5b3f4da5cf471008131216a
                     if(phase_index <= phase_nbr-1) $(this).removeClass('active').addClass('apprises');
                     if(phase_index == phase_nbr  ) $(this).removeClass('a_apprendre').addClass('active');
                     if(phase_index >= phase_nbr+1) $(this).addClass('a_apprendre');
@@ -245,32 +183,33 @@ $('document').ready(function() {
                 }
             });
     	}
-        function phaseStatus() {
+        function lessonStatus() {
+            
             let li = $('#phases_list li');
-<<<<<<< HEAD
             let indice = 0, ls = "";
-=======
-            let indice = 0;
-
-            
-            
->>>>>>> a7134bcdf180a037e5b3f4da5cf471008131216a
             
             $.each(li, function() { 
                 let li_id = $(this).attr('id');
                 indice = ($.inArray(li_id, phases_distinctes) === -1) ? indice : indice+=1; 
             });
-<<<<<<< HEAD
-            
+
             if(li.length === indice) ls = "ended";
             if(li.length > indice) ls = (indice === 0) ? "beginning" : "in_progress";
             
             return ls;
-=======
+        }
+        function phaseStatus() {
+            
+            let li = $('#phases_list li');
+            let indice = 0, ls = "";
+            
+            $.each(li, function() { 
+                let li_id = $(this).attr('id');
+                indice = ($.inArray(li_id, phases_distinctes) === -1) ? indice : indice+=1; 
+            });
           
             let ps = (indice === 0) ? "vierge" : "non_vierge";
             return ps;
->>>>>>> a7134bcdf180a037e5b3f4da5cf471008131216a
         }
         function actualiserTitre() {
             var niveau = $('.niveau_courant').text();
@@ -356,12 +295,8 @@ $('document').ready(function() {
     	
     	$('#phases_list li').on('click', function(e){
       
-<<<<<<< HEAD
             var syllabes = syllab();
-            var syllabes_tonifies = tonification();  
-=======
             var syllabes_tonifies = tonification(); // Voir cette fonction dans js/tons.js 
->>>>>>> a7134bcdf180a037e5b3f4da5cf471008131216a
 
             var questionnaires = questions();
             var questions_quantity = quantiteDeQuestion();
@@ -392,23 +327,12 @@ $('document').ready(function() {
             var dialogue_btn_html = $('.dialogue_btn').html();
             var parametres_html = parametres.html();
 
-<<<<<<< HEAD
           /*--------------------------------------------------------------------*/   
             
     	    phaseActiveName();
     	    dimensionnementDeCourseBody();
     	    affichageDeCours();
     	    cours();
-=======
-          /*--------------------------------------------------------------------*/    
-            phaseActiveName();
-            affichageDeCours();
-            dimensionnementDeCourseBody();
-            cours(); 
->>>>>>> a7134bcdf180a037e5b3f4da5cf471008131216a
-        
-          /*--------------------------------------------------------------------*/  
-
 
           /*--------------------------------------------------------------------*/  
 
@@ -502,18 +426,11 @@ $('document').ready(function() {
             }
             function questions() {
                 var lq = '';
-<<<<<<< HEAD
+                
                 if(niveau_en_cours==1) lq = mix1D(lettres);
                 if(niveau_en_cours==2) lq = mix1D(syllabes);
                 if(niveau_en_cours==3) lq = mix1D(syllabes_tonifies);
                 if(niveau_en_cours==4) lq = mix1D(chiffres);
-=======
-               
-                if(niveau_en_cours==1) lq = malaxer(lettres);
-                if(niveau_en_cours==2) lq = malaxer(syllabes);
-                if(niveau_en_cours==3) lq = malaxer(syllabes_tonifies);
-                if(niveau_en_cours==4) lq = malaxer(chiffres);
->>>>>>> a7134bcdf180a037e5b3f4da5cf471008131216a
                 
                 return lq;
             }
@@ -558,14 +475,8 @@ $('document').ready(function() {
             	    }
             	  
                 	function apprentissages() {
-<<<<<<< HEAD
-             	                    	    
+
                 	    var compteur_de_question = 1;
-                        var apprentissage_a_stocker = [];
-                        var memo = [];
-=======
-                	                    	    
->>>>>>> a7134bcdf180a037e5b3f4da5cf471008131216a
                         var clicks_memo = [];
                       
                         $('.fermeture').attr('id', 'fermer_apprentissage');
@@ -1078,14 +989,10 @@ $('document').ready(function() {
                      /*--------------------------------------------------------------------*/
 
                     	function recuperationDesOptionsEffectuees() {
-<<<<<<< HEAD
-                    	    
-                    	    DB_pratiques = JSON.parse(localStorage.getItem('pratiques'));
-=======
                     
                     	    DB_options = getDBOptions();
                     	   // if(DB_options.length === 4) localStorage.clear();
->>>>>>> a7134bcdf180a037e5b3f4da5cf471008131216a
+                    	    
                     	    local_options = getLocalOptions();
                     	    
                     	    if(DB_options != "") localStorage.clear();
@@ -1093,8 +1000,6 @@ $('document').ready(function() {
                             all_options = (DB_options != '') ? DB_options:local_options;
                             localStorage.setItem('all_options', JSON.stringify(all_options));
                     	}
-<<<<<<< HEAD
-=======
                     	function getDBOptions() {
                         	    
                             let DB_pratiques = JSON.parse(localStorage.getItem('pratiques'));
@@ -1108,7 +1013,7 @@ $('document').ready(function() {
                         	
                         	return DB_options;    
                         }
->>>>>>> a7134bcdf180a037e5b3f4da5cf471008131216a
+                        
                         function getLocalOptions() {
                         	    
                             let options = [], option_1 = [], option_2 = [], option_3 = [], option_4 = [];
@@ -1334,24 +1239,13 @@ $('document').ready(function() {
                             });
 
                             $('#pratique_options span').one('click', function() {
-                                
-<<<<<<< HEAD
-                                if($(this).hasClass('a_apprendre')) {
-                                    alert("ߘߊߞߎ߲ ߡߊ߫ ߛߋ߫ ߦߊ߲߬ ߡߊ߫ ߝߟߐ߫");
-                                    return; 
-                                }
-                                if($(this).hasClass('apprises')) {
-                                    alert("ߕߊ߲߬ߓߌ߬ ߓߘߊ߫ ߞߍ߫ ߦߊ߲߬ ߘߐ߫ ߞߘߐ߬ߡߊ߲߬");
-                                    return; 
-                                }
-=======
+       
                                 if($(this).hasClass('a_apprendre')) { alert("ߘߊߞߎ߲ ߡߊ߫ ߛߋ߫ ߦߊ߲߬ ߡߊ߫ ߝߟߐ߫");   return; }
                                 if($(this).hasClass('apprises'))    { alert("ߕߊ߲߬ߓߌ߬ ߓߘߊ߫ ߞߍ߫ ߦߊ߲߬ ߘߐ߫ ߞߘߐ߬ߡߊ߲߬"); return; }
                                 sessionStorage.removeItem('fin_status')                            
 
                                 initialiserPratiques();
 
->>>>>>> a7134bcdf180a037e5b3f4da5cf471008131216a
                                 option_active = $(this);
                             	option_index = $(this).index();
                                 sessionStorage.setItem('option_index', JSON.stringify(option_index));
@@ -1388,19 +1282,7 @@ $('document').ready(function() {
                                     return dossier;
                                 }
                         	    function poserQuestionPratique() {
-<<<<<<< HEAD
-                            	    $('.question_btn').on('click', function() {
-                                	    question = questions_courantes[compteur];
-                                	    
-                                	    if(question) $('.clavier_container').css('opacity',1);
-                                	    $('#pratiques_images_container').css('transform','scale(0.25)');
-                                	    $('#pratique_guide').css('top',0);
-                      	        
-                                	    actualiserLesBoutonsDEntete();
-                                	    pratiqueGuide();
-                                	    repeteQuestion();
-                                 	        
-=======
+                        	        
                                     if(!question) $('.clavier_container').css('opacity',0.5);
 
                                     let questions = [];
@@ -1443,7 +1325,6 @@ $('document').ready(function() {
                                 	            return pratique_guide_html;
                                 	        }
                                 	    }
->>>>>>> a7134bcdf180a037e5b3f4da5cf471008131216a
                                 	    function actualiserLesBoutonsDEntete() {
                                 	        compteur_de_question++;
                                 
@@ -1872,21 +1753,17 @@ $('document').ready(function() {
                     	function stockerPratique() {
                     	    $('#fermer_pratique').on('click',function(){
 
-<<<<<<< HEAD
                                 if(phase_index <  phase_nbr || nbr_option_non_vide < all_options.length) { return; }
                                 if(phase_index === phase_nbr && nbr_option_non_vide == all_options.length) {
-=======
+                                
                                 let DB_options = getDBOptions();
                                 let local_options = getLocalOptions();
 
-                                if(phase_index <  data_phase_nbr || nbr_option_non_vide < all_options.length) { return; }
-                                if(phase_index == data_phase_nbr && nbr_option_non_vide == all_options.length) {
->>>>>>> a7134bcdf180a037e5b3f4da5cf471008131216a
-                                    
-                                 
+                               // if(phase_index <  data_phase_nbr || nbr_option_non_vide < all_options.length) { return; }
+                                //if(phase_index == data_phase_nbr && nbr_option_non_vide == all_options.length) {
+
                                     note = noterPratique(); 
-                                    
-                                   
+
                                  /* Vérification de la validité de pratique:
                                     Pourqu'une pratique soit valable, il faut que chaque option soit passée.
                                     - Si non, la pratique est invalide et est retournée;
@@ -1918,8 +1795,7 @@ $('document').ready(function() {
                                     return note;
                                 }
                                 function sendPratiqueToDB() {
-<<<<<<< HEAD
-                                    
+
                                     let matiere = JSON.parse(sessionStorage.getItem('matiere_active'));
                                     let phase   = JSON.parse(sessionStorage.getItem('phase'));
                                     let lesson  = JSON.stringify(all_options);
@@ -1928,17 +1804,6 @@ $('document').ready(function() {
                                         id     : id,
                                         matiere: matiere,
                                         niveau : niveau_en_cours,
-=======
-
-                                    let matiere = JSON.parse(sessionStorage.getItem('matiere_active'));
-                                    let phase   = JSON.parse(sessionStorage.getItem('phase'));
-                                    let lesson  = JSON.stringify(all_options);
-
-                                    const pratique_data = new URLSearchParams({
-                                        id     : id,
-                                        matiere: matiere,
-                                        niveau : niveau,
->>>>>>> a7134bcdf180a037e5b3f4da5cf471008131216a
                                         phase  : phase,
                                         lesson : lesson,
                                         note   : note
@@ -1948,13 +1813,9 @@ $('document').ready(function() {
                                         method: "POST",
                                         body: pratique_data 
                                     })
-<<<<<<< HEAD
-                                    .then(response => response.json())
-                                    .catch(error => alert(error));
-=======
+
                                     .then(response => response.text())
                                     .catch(error => console.log(error));
->>>>>>> a7134bcdf180a037e5b3f4da5cf471008131216a
                                 }
                                 function deleteLocalOptions() {
                                     
@@ -2158,11 +2019,9 @@ $('document').ready(function() {
                         	    $('.question_btn').on('click', function(){
                         	        effacerPrecedenteReponse();
                         	        question_evaluation = questions_evaluation[q_index];
-<<<<<<< HEAD
-                       
-=======
+
             alert(question_evaluation);            
->>>>>>> a7134bcdf180a037e5b3f4da5cf471008131216a
+                        	        
                         	        dicterLaQuestion();
                         	        $('#evaluation_cross').css('display','none');
                         	        $('#evaluation_cross').css('transform','scale(0.4)');
@@ -2177,7 +2036,7 @@ $('document').ready(function() {
                                         $('.question_btn').html('ߞߘߐߓߐߟߌ ߓߘߊ߫ ߓߊ߲߫. ߌ ߞߎߟߎ߲ߖߋ߫߹ ');
                                     }
                         	        actualiserLesLibellesDeDialogueBtn();
-                    alert(question_evaluation);     	        
+                        	        
                         	        function effacerPrecedenteReponse() {
                         	            $('#evaluation_reponse').html('');
                         	        }
@@ -2248,14 +2107,6 @@ $('document').ready(function() {
                             	    
                                     function marquerReponseEvaluation() {    
                                         if(reponse_evaluation.join('') == question_evaluation) {
-<<<<<<< HEAD
-                                            $('#evaluation_reponse_container').css({'top':'-100%'});
-                                        }else{
-                                            
-                                            $('#evaluation_cross').html( '&#10060;' );
-                                            $('#evaluation_cross').css({'display':'block', 'transform':'scale(0.5)', 'opacity':0});
-                                            setTimeout(function(){ $('#evaluation_cross').css({'transform':'scale(1)', 'opacity':0.75}); }, 100);
-=======
                                           
                                             $('#check_mark_container, #reponse').css('display','inline-block');
                                             $('#check_mark').html("&#10003;"); 
@@ -2267,21 +2118,16 @@ $('document').ready(function() {
                                             $('#cross').css({'display':'block', 'transform':'scale(0.5)', 'opacity':0});
                                             setTimeout(function(){ $('#cross').css({'transform':'scale(1)', 'opacity':0.75}); }, 100);
                                             setTimeout(function(){ $('#cross').css({'display':'none'}); },1500);
->>>>>>> a7134bcdf180a037e5b3f4da5cf471008131216a
                                         }
                                     }    
                                 }
                                 function actualiserEvaluationProgressBar(){
                                             
-<<<<<<< HEAD
                                     var course_width = $('#evaluation_foot').width();
                                     $('#evaluation_progress_bar').width( course_width - 2 );
+                                    
                                     var progress_unity = $('#evaluation_progress_bar').width()/nbr_max_de_questions_a_poser;
                                            
-=======
-                                    var progress_unity = $('#evaluation_progress_bar').width()/nbr_max_de_questions_a_poser;
-                                        
->>>>>>> a7134bcdf180a037e5b3f4da5cf471008131216a
                                     if(question_evaluation != reponse_evaluation.join('')){ 
                                         $('.progress_question_bar').css('width','+='+progress_unity+'px');
                                     }else{ 

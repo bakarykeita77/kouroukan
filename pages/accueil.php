@@ -33,12 +33,9 @@ session_start();
 
           /*---------------------------------------------------------------------------------------------------*/
             
-              
-           
         }else{ $warning = "Veuillez remplir tous les champs !"; }  
         
     /* Creation de la base de donnees*/
-
     }
 ?>
 <!DOCTYPE html>

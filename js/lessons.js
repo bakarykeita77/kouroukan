@@ -3,22 +3,17 @@ $('document').ready(function() {
  //Declaration des variables
     var id              = JSON.parse(sessionStorage.getItem('id'));     
     var matieres        = JSON.parse(sessionStorage.getItem('matieres'));     
-    var matiere_index   = JSON.parse(sessionStorage.getItem('matiere_index'));
     var matieres_etudiees = [], matiere_active = "", matiere_nom = "", matiere_index = 0, derniere_matiere = "";
     var niveaux = [], niveaux_etudies = [], niveaux_distincts = [], niveau_max = 0, niveau_en_cours = 1;
     
     var groupe_d_images = $('#images_pratique .images_container');
     
-    var id_phases = [], data_phase_nbr;
-    var phases_etudiees = JSON.parse(sessionStorage.getItem('phases_etudiees'));
-    var derniere_phase  = JSON.parse(sessionStorage.getItem('derniere_phase'));
-    var nbr  = JSON.parse(sessionStorage.getItem('nbr'));
-
 	var etapes_passees = [], etape_actuelle = [], etapes_a_faire = [], etape_max = [], rang = '';
+    var id_phases = [], data_phase_nbr = 0;
 	var phases_etudiees = [], derniere_phase = '', phase_en_cours = '', phase_nbr = 0;
     var phases_distinctes = [], phases_1_distinctes = [], phases_2_distinctes = [], phases_3_distinctes = [], phases_4_distinctes = [];
 	var avancer_btn = '';
-    var id_phases = [], data_phase_nbr;
+    var id_phases = [], data_phase_nbr = 0, nbr = 0;
 
   /*-------------------------------------------------------------------------------------------------------------------
     1)- La situation des études est faite par récupération et traitement des données reçues sur l'apprenant.
@@ -26,10 +21,6 @@ $('document').ready(function() {
 	3)- Le paramétrage conséquent est défini pour la leçon future.
 	4)- Les phases s'affichent et
 	5)- On peut surfer
-  -------------------------------------------------------------------------------------------------------------------*/
-    
- //Récupération de l'id de l'étudiant 
-    var id = JSON.parse(sessionStorage.getItem('id')); 
 
   /*--------------------------------------------------------------------*/
  //Récupération des données reçues sur l'apprenant  
@@ -58,7 +49,7 @@ $('document').ready(function() {
         getNiveaux();
         getPhases();
         
-        nbr                 = JSON.parse(sessionStorage.getItem('nbr')); 
+        nbr = JSON.parse(sessionStorage.getItem('nbr')); 
     }
 
   /*-----------------------------------------------------------------------------------------------------------------*/
@@ -110,6 +101,7 @@ $('document').ready(function() {
 	    stylesDesPhases();
 	    affichageDesPhases();
 	    
+	    
         function phasesHTML() {
           
             var lesson_id = $('.lesson_title').attr('id');
@@ -150,32 +142,26 @@ $('document').ready(function() {
         }
     	function stylesDesPhases() {
         
-    	    var phase_status = phaseStatus();
-    	    var phase_nbr = nombre();
-   	    
+    	    let lesson_status = lessonStatus();
+    	    let n = nombreDePhasesEtudiees();
+
     	    $.each($('#phases_list li'), function() {
     	      
         	    var phase_index = $(this).index();
-               
-                if(phase_status == "vierge") {
-                    if(phase_nbr === 0) {
-                        
-                        if(phase_index === 0) $(this).addClass('active');
-                        if(phase_index  >  0) $(this).addClass('a_apprendre');
-                    }
-                    if(phase_nbr > 0) {
-                        if(phase_index <= phase_nbr-1) $(this).removeClass('active').addClass('apprises');
-                        if(phase_index == phase_nbr  ) $(this).removeClass('a_apprendre').addClass('active');
-                        if(phase_index >= phase_nbr+1) $(this).addClass('a_apprendre');
-                    }
+            
+                if(lesson_status == "lesson_a_etudier") {
+
+                    if(phase_index === 0) $(this).addClass('active');
+                    if(phase_index  >  0) $(this).addClass('a_apprendre');
+                
                 }
-    	        if(phase_status == "non_vierge") {
-
-                    if(phase_index <= phase_nbr-1) $(this).removeClass('active').addClass('apprises');
-                    if(phase_index == phase_nbr  ) $(this).removeClass('a_apprendre').addClass('active');
-                    if(phase_index >= phase_nbr+1) $(this).addClass('a_apprendre');
+    	        if(lesson_status == "lesson_en_cours") {
+                    if(phase_index <= n-1) $(this).removeClass('active').addClass('apprises');
+                    if(phase_index == n  ) $(this).removeClass('a_apprendre').addClass('active');
+                    if(phase_index >= n+1) $(this).addClass('a_apprendre');
     	        }
-
+                if(lesson_status == "lesson_etudie") $(this).addClass('apprises');
+                
              //Cas specifique de pratiques                    
                 if(localOptionsLength === 4) {
                     $('#syllabes_pratique, #tons_pratique, #chiffres_pratique').removeClass('active').addClass('apprises');
@@ -192,24 +178,13 @@ $('document').ready(function() {
                 let li_id = $(this).attr('id');
                 indice = ($.inArray(li_id, phases_distinctes) === -1) ? indice : indice+=1; 
             });
+            
+            
+            if(indice === 0) ls = "lesson_a_etudier";
+            if(indice === li.length) ls = "lesson_etudie";
+            if(indice > 0 && indice < li.length) ls = "lesson_en_cours";
 
-            if(li.length === indice) ls = "ended";
-            if(li.length > indice) ls = (indice === 0) ? "beginning" : "in_progress";
-            
             return ls;
-        }
-        function phaseStatus() {
-            
-            let li = $('#phases_list li');
-            let indice = 0, ls = "";
-            
-            $.each(li, function() { 
-                let li_id = $(this).attr('id');
-                indice = ($.inArray(li_id, phases_distinctes) === -1) ? indice : indice+=1; 
-            });
-          
-            let ps = (indice === 0) ? "vierge" : "non_vierge";
-            return ps;
         }
         function actualiserTitre() {
             var niveau = $('.niveau_courant').text();
@@ -225,6 +200,17 @@ $('document').ready(function() {
     	    affichageListeEnCascade();
     	}
 	}
+	function nombreDePhasesEtudiees() {
+	    let n = 0; // nombre de phases étudiées.
+        let phases = JSON.parse(sessionStorage.getItem('phases_distinctes'));
+	    
+        $.each($('#phases_list li'), function() {
+            let phase_id = $(this).attr('id');
+            if($.inArray(phase_id, phases) !== -1) n++;
+        });
+
+	    return n;
+	}
     function phasesNombre(derniere_phase) {
         
         let phase_nbr, derniere_phase_index;
@@ -234,7 +220,7 @@ $('document').ready(function() {
             let phase_id = $(this).attr('id');
             id_phases.push(phase_id);
         });
-        
+
         if($.inArray(derniere_phase,id_phases) === -1) { derniere_phase_index = 0; phase_nbr = 0; }
         if($.inArray(derniere_phase,id_phases) !== -1) {
             derniere_phase_index = $('#phases_list #'+derniere_phase).index();
@@ -243,7 +229,7 @@ $('document').ready(function() {
         
         sessionStorage.setItem('derniere_phase_index',JSON.stringify(derniere_phase_index));
         sessionStorage.setItem('phase_nbr',JSON.stringify(phase_nbr));
-        
+    
         return phase_nbr; 
     }
     function changerPhaseActive(phase_nbr) {
@@ -264,7 +250,7 @@ $('document').ready(function() {
     }
     function nombre() {
         let phase_nbr = 0;
-       
+    
         if(nbr === null || nbr === 0) phase_nbr = (data_phase_nbr === 0) ? 0 : data_phase_nbr;
         if(nbr > 0) phase_nbr = (nbr >= data_phase_nbr) ? nbr : data_phase_nbr;
 
@@ -328,7 +314,7 @@ $('document').ready(function() {
             var parametres_html = parametres.html();
 
           /*--------------------------------------------------------------------*/   
-            
+          
     	    phaseActiveName();
     	    dimensionnementDeCourseBody();
     	    affichageDeCours();
@@ -427,10 +413,10 @@ $('document').ready(function() {
             function questions() {
                 var lq = '';
                 
-                if(niveau_en_cours==1) lq = mix1D(lettres);
-                if(niveau_en_cours==2) lq = mix1D(syllabes);
-                if(niveau_en_cours==3) lq = mix1D(syllabes_tonifies);
-                if(niveau_en_cours==4) lq = mix1D(chiffres);
+                if(niveau_en_cours==1) lq = malaxer(lettres);
+                if(niveau_en_cours==2) lq = malaxer(syllabes);
+                if(niveau_en_cours==3) lq = malaxer(syllabes_tonifies);
+                if(niveau_en_cours==4) lq = malaxer(chiffres);
                 
                 return lq;
             }
@@ -1274,10 +1260,10 @@ $('document').ready(function() {
                                     let option = (option_status == "avancer") ? option_index+1 : option_index;
                                     let dossier = '';
 
-                                    if(option === 0) dossier = "/kouroukan/image/image-1-syllabe/";
-                                    if(option === 1) dossier = "/kouroukan/image/image-2-syllabe/";
-                                    if(option === 2) dossier = "/kouroukan/image/image-3-syllabe/";
-                                    if(option === 3) dossier = "/kouroukan/image/image-4-syllabe/";
+                                    if(option === 0) dossier = "/local-images-for-kouroukan/local-images-1-syllabe/";
+                                    if(option === 1) dossier = "/local-images-for-kouroukan/local-images-2-syllabe/";
+                                    if(option === 2) dossier = "/local-images-for-kouroukan/local-images-3-syllabe/";
+                                    if(option === 3) dossier = "/local-images-for-kouroukan/local-images-4-syllabe/";
 
                                     return dossier;
                                 }
@@ -1480,7 +1466,7 @@ $('document').ready(function() {
                                             
                                                 let dossier_image = dossierImage();
 
-                                                $('#pratiques_images_container img').attr('src', dossier_image+reponse);
+                                                $('#pratiques_images_container img').attr('src', dossier_image+reponse+".jpg");
                                                 $('#pratiques_images_container img').css('transform','scale(1)'); //Scale est à 0.25 dans la fonction poserQuestionPratique()
                                                 
                                                 if(question == reponse) {

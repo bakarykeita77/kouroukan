@@ -274,7 +274,7 @@ $('document').ready(function() {
         return id_phases;
     }
 	function matiere() {
-    	
+ clearStorage();   	
     	actualiserCochage();
         lettres = voyelles_cochees.concat(consonnes_cochees,tedos_coches);
         syllabes = syllab();
@@ -1458,11 +1458,6 @@ $('document').ready(function() {
 
                                             function chargerImageName() { $('#image_name').html(reponse); }
                                             function chargerPratiquesImagesContainer() {
-
-                                                /*
-                                                let image_source = $('#'+reponse+' img').attr('src');
-                                                let image = (image_source !== undefined) ? $('#'+reponse).html() : $('#ߖߌ߬ߦߊ').html();
-                                                */
                                             
                                                 let dossier_image = dossierImage();
 

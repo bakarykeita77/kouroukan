@@ -10,7 +10,7 @@
 	<?php include("fonctions.php"); ?>  
 	<div id="tete_de_page_container">
 		<h3 id="header">ߞߙߎ߬ߞߊ߲߬</h3>
-		<div id="topbar"> 
+		<div id="topbar">
 			
 			<div id="logo"> <img src="/kouroukan/pages/get-avatar.php?client_id=<?= $avatar_id ?>" alt="avatar"/></div>
 			

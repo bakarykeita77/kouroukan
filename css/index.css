@@ -20,7 +20,7 @@ body {
 
 #fond_de_container {
     position: absolute;
-    background: url("http://localhost:8080/kouroukan/image/keita.jpg");
+    background: url("/kouroukan/images/images-de-fond/keita.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     height: 100%;

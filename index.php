@@ -37,7 +37,7 @@
             </center>
         </div>
         </center>
-        <div class="page_foot"></div>
+        <div class="page_foot"></div> 
     </div>
     
     <script src="note-fonctions.js"></script>
@@ -48,7 +48,6 @@
         if($_SERVER['HTTP_REFERER'] == "http://localhost:8080/kouroukan/pages/inscription.php") {
             echo "<script> affichageAsides(); notifier(); </script>";
         }
-    
     ?>
 
 </body>

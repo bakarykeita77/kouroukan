@@ -13,9 +13,9 @@
     var moyenne = 1;
     
     
-    dataStorage();
     userIdentityStorage();
-    sessionStorage.removeItem('nbr');
+    dataStorage();
+    //sessionStorage.removeItem('nbr');
     afficherLogo();
     
 

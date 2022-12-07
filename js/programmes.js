@@ -3,7 +3,6 @@
     var programmes_container = document.getElementById('programmes_container');
     var programme_div        = document.getElementById('programme_div');
     var reception            = document.getElementById('reception');
-    var programme_ul         = document.getElementById('programme_ul'); 
     
  //Récupération des données reçues sur l'apprenant 
     var matieres = JSON.parse(sessionStorage.getItem('matieres')); 
@@ -45,8 +44,8 @@
     var point_max = '';
     
 
-    $('#nav ul li:nth(1)').addClass('surbrillance');
-    $('#nav ul li:nth(1)').siblings().removeClass('surbrillance');
+  //  $('#nav ul li:nth(1)').addClass('surbrillance');
+  //  $('#nav ul li:nth(1)').siblings().removeClass('surbrillance');
       
 /*-------------------------------------------------------------------------------------------------------------------------
 
@@ -78,6 +77,7 @@ Au click sur l'afficheur du programme
         storageDeLaMatiereActive();
         programmeNavigation();
         changerProgramme();
+        alerter();
 
         function programmeHTML() {
             var programme_html = '<ul id="programme_ul">';
@@ -88,7 +88,7 @@ Au click sur l'afficheur du programme
                 var matiere_nom   = liste_de_matieres[i][1];
                 var matiere_index = liste_de_matieres.indexOf(liste_de_matieres[i]);
                 var niveau        = matiere_index+1;                   
-             
+          
               
                 if(niveau_max === 0) {
                     var phases_lien = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max;
@@ -112,7 +112,7 @@ Au click sur l'afficheur du programme
             return programme_html;
         }           
         function programmeStyle() {
-            
+               
             if(niveau_max > niveau_en_cours) niveau_max = niveau_en_cours;
    
             let programme_li = $("#programme_ul li");
@@ -148,6 +148,12 @@ Au click sur l'afficheur du programme
             });
             
         //Le click sur le bouton next redirige sur la page de lessons.
+        }
+        function alerter() {
+            $('#programme_ul li').on('click', function() {
+                if($(this).hasClass('a_apprendre')) { alert("ߘߊߞߎ߲ ߡߊ߫ ߛߋ߫ ߦߊ߲߬ ߡߊ߫ ߝߟߐ߫");   return false; }
+                if($(this).hasClass('apprises'))    { alert("ߕߊ߲߬ߓߌ߬ ߓߘߊ߫ ߞߍ߫ ߦߊ߲߬ ߘߐ߫ ߞߘߐ߬ߡߊ߲߬"); return false; }
+            });
         }
     }
     function changerProgramme() {

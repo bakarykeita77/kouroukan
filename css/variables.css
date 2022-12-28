@@ -1,1 +1,16 @@
-variable css
+:root{
+    
+    --couleurPrimaire: cornflowerblue;
+    --couleurSecondaire: yellow;
+    --couleurTertiaire: #ddd;
+    
+    --shadowPrimaire: 0 0 3rem #aaa;
+    --shadowSecondaire: 0 0 1rem #aaa;
+    
+    --borderPrimaire: 1px solid #ddd;
+    --borderSecondaire: 1px solid blue;
+    
+    --borderRadius: 0.5rem;
+    --padding: 0.5rem;
+    --margin: 0.5rem;
+}

@@ -1,5 +1,5 @@
 <!-- Début de l'entete de la page ------------------------------------------------------------------------------------>
-	<?php $avatar_id = isset($_SESSION['id']) ? $_SESSION['id']:1; ?>
+	<!-- <?php $avatar_id = isset($_SESSION['id']) ? $_SESSION['id']:1; ?> -->
 	
 	<script src="/kouroukan/js/jquery-3.3.1.js"></script>
 	<script src="/kouroukan/fonctions.js"></script>
@@ -9,7 +9,6 @@
 	
 	<?php include("fonctions.php"); ?>  
 	<div id="tete_de_page_container">
-		<h3 id="header">ߞߙߎ߬ߞߊ߲߬</h3>
 		<div id="topbar">
 			
 			<div id="logo"> <img src="/kouroukan/pages/get-avatar.php?client_id=<?= $avatar_id ?>" alt="avatar"/></div>

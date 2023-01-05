@@ -1,7 +1,7 @@
 html { font-size: 16px; direction: rtl; }
 @media screen and (min-width: 601px) {
     .container { width: 70vw; margin: auto; }
-    .page_body { box-shadow: 0 0 2rem #999; }
+    .page_body { width: 60%; border: var(--borderSecondaire); }
 }
 @media screen and (max-width: 600px) {
     .container { width: 100vw; }
@@ -124,12 +124,14 @@ html { font-size: 16px; direction: rtl; }
 .clicker { transform-origin: 50% 0; animation: animate_hand 1.5s 1; }
 .container {
     position: fixed;
+    border: var(--borderSecondaire);
     top: 0.125rem;
     margin: 0;
     padding: 0 0.5rem;
     left: 50%;
     transform: translateX(-50%);
-    height: calc(100vh - 1rem);
+    height: 100vh;
+    width: 100vw;
     direction: rtl;
 }
 .course {
@@ -281,10 +283,8 @@ html { font-size: 16px; direction: rtl; }
 }
 .fermeture:hover { background-color: #aaa; font-weight: bold; }
 .fermeture_de_parent:hover { background-color: #aaa; font-weight: bold; }
-
 .fermeture:active { background-color: #aaa; }
 .fermeture_de_parent:active { background-color: #aaa; }
-
 .fixe { position: fixed; }
 .fond_blanc_casse { background-color: #666; }
 .flowerblue { background-color: cornflowerblue; }
@@ -440,7 +440,7 @@ html { font-size: 16px; direction: rtl; }
 .note_container {
     position: absolute;
     display: none;
-    top: 2rem;()
+    top: 2rem;
     width: 0;
     margin: 0;
     border-radius: 0.5rem;
@@ -458,10 +458,9 @@ html { font-size: 16px; direction: rtl; }
     position: absolute;
     padding: 0;
     margin: 0;
-    height: calc(100% - 4.5rem);
-    width: 100%;
+    height: calc(100% - 3rem);
     left: 50%;
-    top: 4.5rem;
+    top: 3rem;
     transform: translateX(-50%);
     z-index: 0;
     overflow: auto;

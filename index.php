@@ -8,13 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
+    <link rel="stylesheet" href="/kouroukan/css/variables.css"/>
     <link rel="stylesheet" href="/kouroukan/css/class.css"/>
     <link rel="stylesheet" href="/kouroukan/css/tete-de-page.css"/>
   	<link rel="stylesheet" href="css/index.css"/>
 </head>
 
 <body>
-    <div class="container" id="index_page">
+    <div class="container">
         <div class="page_head"><?php require('pages/tete-de-page.php'); ?></div>
        
         <center>

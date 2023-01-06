@@ -1,12 +1,17 @@
 <!-- Début de l'entete de la page ------------------------------------------------------------------------------------>
-	<!-- <?php $avatar_id = isset($_SESSION['id']) ? $_SESSION['id']:1; ?> -->
+	<?php $avatar_id = isset($_SESSION['id']) ? $_SESSION['id']:1; ?>
+	
+  <!------------------------------------------------------------------------------------------------------------------>	
+    <link rel="stylesheet" href="/kouroukan/css/class.css"/>
+    <link rel="stylesheet" href="/kouroukan/css/tete-de-page.css"/>
 	
 	<script src="/kouroukan/js/jquery-3.3.1.js"></script>
 	<script src="/kouroukan/fonctions.js"></script>
 	<script src="/kouroukan/js/icones.js"></script>
 	<script src="/kouroukan/js/class.js"></script>	
 	<script src="/kouroukan/js/caracteres.js"></script>
-	
+
+  <!------------------------------------------------------------------------------------------------------------------>	
 	<?php include("fonctions.php"); ?>  
 	<div id="tete_de_page_container">
 		<div id="topbar">
@@ -32,7 +37,7 @@
 								<div> <table><tr><td><span>Mail</span></td><td><span id="profile_mail"><?=$_SESSION['email'];?></span></td></tr></table></div>
 								-->
 							</div>
-							<div id="profile_utilisateur_image_container" align='center'>
+							<div id="profile_utilisateur_image_container">
 								<img height="100%" src="/kouroukan/pages/get-avatar.php?client_id=<?= $_SESSION['id'] ?>" alt="logo"/>
 								<div id='modifier_avatar'>ߖߌ߬ߦߊ߬ߓߍ ߡߊߝߊ߬ߟߋ߲߬</div>
 							</div>
@@ -77,7 +82,9 @@
 			</div>
 		</div>
 	</div>
-
+	
+  <!------------------------------------------------------------------------------------------------------------------>	
 	<script src="/kouroukan/js/tete-de-page.js"></script>
 	<script src="/kouroukan/js/profile.js"></script>
+
 <!-- Fin de l'entete de la page ------------------------------------------------------------------------------------->

@@ -1,20 +1,20 @@
+#logo { display: none; }
 #inscription_form {
     position: fixed;
+    left: 35%;
+	top: 50%;
+	transform: translate(-50%,-50%);
     height: 90%;
     max-height: 32rem;
 	width: 80%;
 	max-width: 25rem;
-	border: 1px solid #ddd;
-	background-color: #fff;
-	box-shadow: 0 0.25rem 1rem #666;
-	border-radius: 0.5rem;
+	border: var(--borderPrimaire);
+	background-color: var(--couleurNeutre);
+	border-radius: var(--radiusSmall);
 	margin: auto;
-	padding: 1rem;
-	top: 2rem;
+	padding: var(--paddingLarge);
 	box-sizing: border-box;
     overflow: auto;
-    left: 50%;
-    transform: translateX(-50%);
     z-index: 0;
 }
 #inscription_form h2 {

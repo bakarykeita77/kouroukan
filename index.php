@@ -8,22 +8,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
-    <link rel="stylesheet" href="/kouroukan/css/variables.css"/>
-    <link rel="stylesheet" href="/kouroukan/css/class.css"/>
-    <link rel="stylesheet" href="/kouroukan/css/tete-de-page.css"/>
   	<link rel="stylesheet" href="css/index.css"/>
 </head>
 
 <body>
-    <div class="container">
+    <div class="container" id="index_container">
         <div class="page_head"><?php require('pages/tete-de-page.php'); ?></div>
        
         <center>
         <div class="page_body" id="index_body">
-            <div id='fond_de_container'></div>
+            <div id='image_d_accueil'></div>
 
             <center>
-            <div id="asides_container0">
+            <div id="asides_container">
                 <div class="aside" id="aside01">ߒߞߏ ߘߋ߰ߟߌ ߦߙߐ ߓߟߐߟߐ ߞߊ߲߬</div><br/>
                 <div class="aside" id="aside02">ߞߙߎ߬ߞߊ߲߬ ߞߣߍ ߦߴߊߟߎ߫ ߟߊߓߌ߬ߟߊ ߘߐ߫߸ ߞߊ߬ ߒߞߏ ߘߋ߰߸ ߞߊߟߌߦߊ ߘߐ߫ ߊ߬ ߣߌ߫ ߣߐ߰ߦߊ ߘߐ߫. ߦߙߐ ߓߍ߯ ߘߐ߫ ߊ߬ ߣߌ߫ ߕߎߡߊ ߓߍ߯ ߟߊ߫.</div><br/>
                 <div class="aside" id="aside03">

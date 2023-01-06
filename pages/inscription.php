@@ -8,7 +8,7 @@
 	<link rel = "stylesheet" href = "/kouroukan/css/inscription.css"/>
 </head>
 <body>
-    
+	<div><?php include("tete-de-page.php"); ?></div>    
     <div class="cover">
     	<div id="inscription_form">
     		

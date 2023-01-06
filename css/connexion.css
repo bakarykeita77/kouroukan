@@ -1,29 +1,25 @@
-
+#logo { display: none; }
 #connexion_form {
     position: fixed;
+    left: 35%;
+	top: 50%;
+	transform: translate(-50%,-50%);
 	width: 80%;
 	max-width: 25rem;
-	border: 1px solid #ddd;
-	background-color: #fff;
-	box-shadow: 0 0.25rem 1rem #666;
-	border-radius: 0.5rem;
-	margin: 2rem auto;
-	padding: 1rem;
-	top: 2rem;
+	border: 1px solid var(--borderPrimaire);
+	background-color: var(--couleurNeutre);
+	border-radius: var(--radiusMedium);
+	margin: 2*var(--marginLarge) auto;
+	padding: var(--paddingLarge);
 	box-sizing: border-box;
 	direction: rtl;
-    left: 50%;
-    transform: translateX(-50%);
 }
 #connexion_form h2 {
     margin: 1rem;
     padding: 0;
     text-align: center;
 }
-#connexion_form form {
-	margin: 2rem auto;
-	width: 100%;
-}
+#connexion_form form { margin: 2rem auto; width: 100%; }
 .input_box, #button_box {
 	position: relative;
 	margin: 1rem 0;
@@ -35,9 +31,7 @@
 	border-bottom-color: #aaa;
 	margin: 1rem 0;
 }
-.input_box:hover label {
-	color: cornflowerblue;
- } 
+.input_box:hover label { color: cornflowerblue; } 
 .input_box input, 
 .input_box label {
 	position: absolute;
@@ -71,12 +65,8 @@
 	color: cornflowerblue;
 	transition: 0.6s;
 }
-#button_box {
-    margin-top: 3rem;
-}
-#button_box input {
-    font-weight: bolder;
-}
+#button_box { margin-top: 3rem; }
+#button_box input { font-weight: bolder; }
 #connexion_btn {
 	padding: 1rem 0;
 	height: 2rem;

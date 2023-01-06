@@ -10,13 +10,13 @@
 	<link rel = "stylesheet" href = "/kouroukan/css/connexion.css"/>
 </head>
 <body>
-	<div><?php include("/kouroukan/pages/tete-de-page.php"); ?></div>    
+	<div><?php include("tete-de-page.php"); ?></div>    
     <div class="cover">
       <!----------------------------------------------------------------------------------------------------->  
         <div id = "connexion_form">
     		<h2>ߜߊ߲߬ߞߎ߲߬ ߥߟߊ</h2>
     		
-    		<form action="http://localhost:8080/kouroukan/pages/accueil.php" method="POST" id="formulaire_de_connexion">
+    		<form action="accueil.php" method="POST" id="formulaire_de_connexion">
     			<div class="input_box">
     				<input type="email" autocomplete="off" name="client_email" class="connexion_input" id="client_email" required />
     				<label>Email</label>
@@ -33,7 +33,7 @@
     	
 		<div class="note_container">
 		    <span class="fermeture_note_btn" id="fermeture_note_connexion">&times;</span>
-		    <p class="note" id="note_connexion"></p>
+		    <p class="note" id="note_connexion">Note</p>
 		</div>
 	</div>
 	

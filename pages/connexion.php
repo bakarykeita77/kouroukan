@@ -32,8 +32,11 @@
     	</div>
     	
 		<div class="note_container">
-		    <span class="fermeture_note_btn" id="fermeture_note_connexion">&times;</span>
-		    <p class="note" id="note_connexion">Note</p>
+			<h1 class="note_titre">ߞߙߎ߬ߞߊ߲߬ ߞߣߍ</h1>
+			<div class="note">
+				<p> ߌ ߜߊ߲߬ߞߎ߲߬ ߞߙߎ߬ߞߊ߲߬ ߠߊ߫߸ ߟߐ߲ߠߌ ߛߌߟߊ߫ ߛߎߘߎ߲߸ ߕߎ߬ߡߊ ߓߍ߯ ߟߊ߫߸ ߊ߬ ߣߌ߫ ߦߙߐ ߓߍ߯ ߘߐ߫ </p>
+				<p> ߣߌ߫ ߜߊ߲߬ߞߎ߲߬ߠߌ ߡߊ߫ ߢߊ߬߸ ߝߴߊ߬ ߦߋ߫ ߛߐ߬ߘߐ߲߬ ߘߏ߯ ߛߓߍߟߌ ߟߎ߬ ߡߊ߫ ߓߍ߲߬߸ ߏ߬ߘߐ߬ ߦߋ߫ ߛߴߊ߬ ߡߊ߬߸ ߝߴߊ߬ ߦߋ߫ ߛߐ߬ߘߐ߲߬ ߌ ߕߐ߯ ߕߍ߫ ߘߋ߰ߘߋ߲ ߠߎ߬ ߛߙߍߘߍ ߘߐ߫߸ ߏ߬ߘߐ߬ ߦߋ߫ <a href="inscription.php"> ߕߐ߯ߛߓߍߟߌ ߞߍ߫ </a></p>
+			</div>
 		</div>
 	</div>
 	

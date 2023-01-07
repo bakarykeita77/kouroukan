@@ -14,11 +14,6 @@
 	box-sizing: border-box;
 	direction: rtl;
 }
-#connexion_form h2 {
-    margin: 1rem;
-    padding: 0;
-    text-align: center;
-}
 #connexion_form form { margin: 2rem auto; width: 100%; }
 .input_box, #button_box {
 	position: relative;

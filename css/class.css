@@ -236,7 +236,7 @@ html { font-size: 16px; direction: rtl; }
     left: 0;
     height: calc(100vh - 3rem);
     width: 100vw;
-    background-color: rgba(0,0,0,0.75);
+    background-color: #000;
 }
 .dialogue_btn {
     display: flex;
@@ -455,29 +455,20 @@ html { font-size: 16px; direction: rtl; }
 .nav_fleches_container span:nth-child(1) { float: right; }
 .nav_fleches_container span:nth-child(2) { float: left; }
 .noir_clair { color: #000; background-color: #ddd; }
-.note {
-    width: 17rem;
-    margin: 0.5rem;
-    padding: 0.5rem;
-    right: 0;
-    background-color: black;
-    color: white;
-    border-radius: 0.5rem;
-    text-align: center;
-}
 .note_container {
     position: absolute;
-    display: none;
-    top: 2rem;
-    width: 0;
     margin: 0;
-    border-radius: 0.5rem;
-    background-color: #eee;
-    box-shadow: 0 0 5rem #aaa;
-    left: 50%;
-    transform: translateX(-50%);
-    overflow: hidden;
+    padding: 0;
+    top: 50%;
+    left: 70%;
+    transform: translate(-50%,-70%);
 }
+.note_titre { color: var(--couleurPrimaire) }
+.note {
+    width: 20rem;
+    margin: 0;
+}
+.note p { color: var(--couleurNeutre); }
 
 .opaque { animation: opacir0.6s 1; }
 .ombrage { box-shadow: 0 4px 43px #000; }

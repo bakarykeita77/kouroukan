@@ -4,55 +4,45 @@ body {
     direction: rtl;
     font-family:Courier new, monospace;
  }
- #index_container {
-    
+#site_name {
+    color: var(--couleurPrimaire);
+    border-bottom: 2px solid var(--couleurTertiaire);
+}
+ #asides_container, #image_d_accueil {
+    position: absolute;
+    top: 50%;
+    box-sizing: border-box;
  }
 #asides_container {
-    position: absolute;
-    top: 60%;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-#image_d_accueil {
-    position: absolute;
-    top: 0;
-    background: url("/kouroukan/images/images-de-fond/keita.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 60%;
-    width: 100%;
-    margin: var(--marginSmall) 0;
-    box-sizing: border-box;
-}
-.aside { text-align: right; margin: var(--marginSmall); padding: var(--paddingLarge); border: var(--borderPrimaire); }
-.aside p{ position: relative; top: 30%; }
-#aside01 { font-weight: bolder; font-size: 1.75rem; }
-#aside02 { position: relative; border: 1px solid #ccc; }
-#aside02, #aside03{ position: relative; }
-#aside03 p{
-    display: inline-block;
+    width: 60%;
+    left: 40%;
+    transform: translate(0,-50%);
     margin: 0;
-    padding: 0;
-    border: 1px solid #bbb;
-    border-radius: 4px;
-    box-sizing: border-box;
-    height: 1.5rem;
-    line-height: 1.5rem;
-    font-size: 0.75rem;
-    font-weight: bolder;
-    background-color: #666;
+    padding: var(--paddingLarge);
 }
-#aside03 p:active { background-color: #bbb; }
-#aside03 p a { color: #fff; }
-#aside03 p:first-child { float: right; }
-#aside03 p:last-child { float: left; }
-
+#site_name, #asides_container p, #btn_container {
+    padding: 0.25rem 1rem;
+}
+#image_d_accueil { 
+    width: 40%;
+    left: 40%;
+    transform: translate(-100%,-50%);
+}
 .pied_de_page { display: none; }
 #affiche_de_tableau { display: none; }
 .afficher { transform:scaleX(1); }
 .cacher { transform:scaleX(0); }
-
+#btn_container { border-top: 2px solid var(--couleurTertiaire); }
+.asides_btn {
+    position: absolute;
+    width: 40%;
+    background-color: var(--couleurPrimaire);
+    border-radius: var(--radiusSmall);
+    text-align: center;
+}
+#inscription_btn {
+    right: 50%;
+}
 #pied_de_page { position:relative; width: 100vw; }
 
 .page p, .page h1, .page h2, .page h3 { padding: 8px; }

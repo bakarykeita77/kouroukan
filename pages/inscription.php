@@ -52,8 +52,11 @@
     		 <p class="error_message" align="center"><?php if(isset($error)) { echo $error; } ?></p>
     	</div>
     	<div class="note_container">
-    	    <span class="fermeture_note_btn">&times;</span>
-    	    <p class="note" id="note_inscription"></p>
+    	    <h1 class="note_titre">ߞߙߎ߬ߞߊ߲߬ ߞߣߍ ߕߐ߯ߛߓߍߟߌ</h1>
+			<div class="note">
+				<p>ߞߙߎ߬ߞߊ߲߬ ߞߣߍ ߞߊ߬ߙߊ߲ ߦߋ߫ ߘߊߡߌ߬ߘߊ߬ ߟߊ߫ ߕߐ߯ߛߓߍߟߌ ߟߋ߬ ߝߟߐ߫ ߡߊ߬</p>
+				<p>ߏ߬ߘߐ߬߸ ߕߐ߯ߛߓߍߟߌ߫ ߥߟߊ ߢߌ߲߬ ߠߝߊ߫߸ ߦߋ߫ ߘߎ߰ߡߊ߬ ߞߘߎ ߘߌ߲߯߸ ߕߐ߯ߛߓߍߟߌ ߓߊ߲ߣߍ߲ ߠߴߏ߬ ߘߌ߫. ߏ߬ߟߋ ߞߐ߫߸ ߌ ߘߌ߫ ߛߋ߫ ߞߵߌ ߜߊ߲߬ߞߎ߲߬. ߞߙߎ߬ߞߊ߲߬ ߞߣߍ ߓߌ߬ߟߌ߬ߣߍ߲ ߠߴߌ ߛߊ߬ߥߏ ߘߴߏ߬ ߘߌ߫ ߕߎ߬ߡߊ߫-ߊ߫-ߕߎ߬ߡߊ߫ ߞߵߌ ߘߌߦߊ߫߸ ߦߙߐ߫-ߊ߫-ߦߙߐ߫ ߞߵߌ ߘߌߦߊ߫.</p>
+			</div>
     	</div>
     	
 	    <script src="/kouroukan/js/jquery-3.3.1.js"></script>

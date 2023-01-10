@@ -121,7 +121,7 @@
 
 			$utilisateurs =  $requette->execute();
 			
-            header("location:http://localhost:8080/kouroukan/index.php");   
+            header("location:http://localhost/kouroukan/");   
         }else{ 
             header("location:".$_SERVER['HTTP_REFERER']);   
         }

@@ -162,15 +162,16 @@
 }
 #modifier_avatar {
     position:absolute; 
+    bottom:0; 
     background-color:var(--couleureNeutre); 
-    border:1px solid var(--borderPrimaire); 
+    border:var(--borderPrimaire); 
     border-radius: var(--radiusSmall); 
     padding:var(--paddingSmall);
     font-size:10px; 
     overflow:hidden; 
     right:50%; 
+    cursor: pointer;
     transform:translateX(50%); 
-    bottom:0; 
 }
 .afficher { display:block; }
 
@@ -265,7 +266,7 @@
     transform: translate(50%, -50%);
 }
 
-#profile_teste_menu p{
+#profile_teste_menu p {
     margin: 0;
     padding: 0 var(--paddingLarge);
     height: 24px;

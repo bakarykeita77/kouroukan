@@ -363,7 +363,7 @@ $(document).ready(function(){
             
             function profileUtilisateurHTML(){
                 
-            var profile_utilisateur_html  = '<div> <span>ߕߐ߮ </span>    <span id="profile_prenom">'+prenom+'</span></div>\n';
+                var profile_utilisateur_html  = '<div> <span>ߕߐ߮ </span>    <span id="profile_prenom">'+prenom+'</span></div>\n';
                 profile_utilisateur_html += '<div> <span>ߖߊ߬ߡߎ߲ </span>   <span id="profile_nom">'+nom+'</span></div>\n';
                 profile_utilisateur_html += '<div> <span>ߡߐߦߌߛߊ߲ </span> <span id="profile_naissance">'+naissance+'</span></div>\n';
                 profile_utilisateur_html += '<div> <span>ߖߊ߲߭ </span>     <span id="profile_sexe"></span>'+sexe+'</div>\n';
@@ -387,10 +387,8 @@ $(document).ready(function(){
             function profileUtilisateurModificationAvatar(){
                 
                  var avatar_image = document.getElementById('avatar_image');
-                 var avatar_submit = document.getElementById('avatar_submit');
-                 
                  modifier_avatar.onclick = function(){
-                     document.location.href = 'http://localhost:8080/kouroukan/pages/upload-avatar.php';
+                     document.location.href = "http://localhost/kouroukan/pages/upload-avatar.php";
                  }
             }
         });

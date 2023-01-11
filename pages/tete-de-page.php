@@ -28,7 +28,7 @@
 					<div class="profile_menu_head" id="profile_utilisateur_btn">Profile</div>
 					<div class="profile_menu_body" id='profile_utilisateur_container'>
 						<div id="profile_utilisateur_renseignements">
-						<!-- 						
+							<!-- 						
 							<div> <span>ߕߐ߮ </span>    <span id="profile_prenom"   ><?=$_SESSION['prenom'];?></span></div>
 							<div> <span>ߖߊ߬ߡߎ߲ </span>   <span id="profile_nom"      ><?=$_SESSION['nom'];?></span></div>
 							<div> <span>ߡߐߦߌߛߊ߲ </span> <span id="profile_naissance"><?=$_SESSION['naissance'];?></span></div>
@@ -39,7 +39,7 @@
 						</div>
 						<div id="profile_utilisateur_image_container">
 							<img height="100%" src="/kouroukan/pages/get-avatar.php?client_id=<?= $_SESSION['id'] ?>" alt="logo"/>
-							<div id='modifier_avatar'>ߖߌ߬ߦߊ߬ߓߍ ߡߊߝߊ߬ߟߋ߲߬</div>
+							<div id='modifier_avatar'>ߖߌ߬ߦߊ߬ߓߍ ߡߊߝߊ߬ߟߋ߲߬</div>  <!--Voir la fonction profileUtilisateurModificationAvatar() dans js/profile.js-->
 						</div>
 					</div>
 					

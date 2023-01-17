@@ -3,17 +3,16 @@ session_start();
 
 $racine = $_SERVER['DOCUMENT_ROOT'];
 
-if(isset($_SESSION['id'])){
+if(isset($_SESSION['id'])) {
     if(!file_exists($_SERVER['DOCUMENT_ROOT']."/local-images-for-kouroukan")) {
 
         echo "<script> alert('Un dossier sera crée sur votre disc dur');</script>";
         
-    //Nous sommes au fichier programmes.
+     //Nous sommes au fichier programmes.
         $programmes = getcwd();
 
      //Selection du repertoir racine.   
         chdir($_SERVER['DOCUMENT_ROOT']);
-        print_r(scandir($_SERVER['DOCUMENT_ROOT']));
         
      //Creation du dossier et sous-dossiers d'images à la racine.
         mkdir("local-images-for-kouroukan");
@@ -27,7 +26,7 @@ if(isset($_SESSION['id'])){
         chdir($programmes);
        
      //Copie des images du serveur au dossier local.
-      /*  $racine = $_SERVER['DOCUMENT_ROOT'];
+        $racine = $_SERVER['DOCUMENT_ROOT'];
         $server_images_folders = scandir("../server-images");
         $local_images_folders = scandir($racine."/local-images-for-kouroukan");
          
@@ -38,7 +37,6 @@ if(isset($_SESSION['id'])){
             $server_images = scandir($source);
             $local_images = scandir($destination);
              
-
             for($j=2; $j<count($server_images); $j++) {
                  
                 $srcfile = $source."/".$server_images[$j];
@@ -46,7 +44,7 @@ if(isset($_SESSION['id'])){
                  
                 copy($srcfile,$destfile); 
             }
-        } */
+        } 
     }
 
 ?>

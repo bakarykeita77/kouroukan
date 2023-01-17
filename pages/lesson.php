@@ -329,10 +329,8 @@ if(isset($_SESSION["id"])){
     <script src="/kouroukan/js/syllabes.js"></script>
     <script src="/kouroukan/js/tons.js"></script>
     <script src="/kouroukan/js/chiffres.js"></script>
-    
     <script src="/kouroukan/js/apprentissage.js"></script>
     <script src="/kouroukan/js/evaluations.js"></script>
-    
     <script src="/kouroukan/js/lessons.js"></script>
     
 </body>

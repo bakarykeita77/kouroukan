@@ -11,18 +11,19 @@ session_start();
             global $db;
  
           /*---------------------------------------------------------------------------------------------------*/
-            
-            $requette = $db->prepare("SELECT * FROM users WHERE email = ?");
+          //Control de la presence des données reçues dans la table users
+            $requette = $db->prepare( "SELECT * FROM users WHERE email = ?" );
             $requette->execute(array($client_email));
             $client = $requette->fetchAll();
             
+          //Si lesdonnées  sont absentes, le client est redirigé sur la page de provenance (connexion.php).
+            if(empty($client)) header("location:".$_SERVER['HTTP_REFERER']);
 
-            if(empty($client)) { 
-                header("location:".$_SERVER['HTTP_REFERER']);  
-            }
+          //Si les données sont presentes, mais les mots de passesne correspondent pas, le client est redirigé sur la page de provenance.
             $data_pass = $client[0]['pass'];
             if($client_pass != $data_pass) { echo("Les mots de passe ne correspondent pas"); return; }
-                
+            
+          //Si lesdonnées sont présentent et que les e-mails et les mots de passes correspondent, la connexion est établie.
             $_SESSION["id"]        = $client[0]["id"];
             $_SESSION["prenom"]    = $client[0]["prenom"];
             $_SESSION["nom"]       = $client[0]["nom"];

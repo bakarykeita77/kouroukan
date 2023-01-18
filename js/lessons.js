@@ -297,6 +297,15 @@ $('document').ready(function() {
     	    affichageDeCours();
     	    cours();
 
+            $(".media").on('mouseover', function() { 
+                $(".media").css({"height":"7rem"}); 
+                $(".media_btns").css({"height":"5rem"}); 
+            });
+            $(".media").on('mouseleave', function(){ 
+                $(".media").css({"height":"2rem"}); 
+                $(".media_btns").css({"height":"0"}); 
+            });
+
           /*--------------------------------------------------------------------*/  
 
             function phaseActiveName() { sessionStorage.setItem('phase', JSON.stringify(phase_id)); }

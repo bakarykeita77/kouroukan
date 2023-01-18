@@ -238,14 +238,9 @@ html { font-size: 16px; direction: rtl; }
     background-color: #000;
 }
 .dialogue_btn {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-
-    position: absolute;
+    position: relative;
     border-top: var(--borderPrimaire);
-    padding-top: 1rem;
+    padding: 0 5rem;
     margin: 0.125rem 0;
     width: 100%;
     height: 2rem;
@@ -253,10 +248,6 @@ html { font-size: 16px; direction: rtl; }
     text-align: center;
     font-weight: bold;
     cursor: pointer;
-}
-.dialogue_btn div {
-    border: var(--borderPrimaire);
-    padding: 0  3rem;
 }
 
 .error_message { color: rgba(255,0,0,0.5); }
@@ -363,6 +354,8 @@ html { font-size: 16px; direction: rtl; }
     z-index: 1;
 }
 
+
+
 .left { float: left; }
 .lesson_active { background-color: yellow; box-shadow: 0 0 16px yellow; }
 .lesson_active:active { background-color: #FFF000; }
@@ -377,7 +370,6 @@ html { font-size: 16px; direction: rtl; }
 .lessons_a_apprendre a { color: #aaa; }
 .lesson_progress_question_bar { background-color: #ddd; }
 .lesson_progress_bonne_reponse_bar { background-color: yellow; }
-
 .lesson_title {
     position: relative;
     padding: 0 16px;
@@ -400,6 +392,8 @@ html { font-size: 16px; direction: rtl; }
     text-overflow: ellipsis;
 }
 
+
+
 .masqueur, .masqueur_de_parent {
     position: absolute;
     top: 0;
@@ -417,11 +411,37 @@ html { font-size: 16px; direction: rtl; }
 }
 .masqueur:hover { background-color: #aaa; font-weight: bold; }
 .masqueur_de_parent:hover { background-color: #aaa; font-weight: bold; }
-
 .masqueur:active { background-color: #aaa; }
 .masqueur_de_parent:active { background-color: #aaa; }
-
 .matiere { position: relative; }
+.media {
+    position: absolute;
+    width: 10rem;
+    height: 2rem;
+    bottom: 0;
+    right: 10%;
+}
+.media_btns {
+    position: absolute;
+    border: var(--borderPrimaire);
+    border-radius: var(--radiusSmall);
+    background-color: rgba(0,0,0,0.75);
+    color: white;
+    width: 10rem;
+    height: 0;
+    bottom: 2.5rem;
+    overflow: hidden;
+    transition: 0.25s;
+}
+.media_label {
+    position: absolute;
+    width: 10rem;
+    bottom: 0;
+    border: var(--borderPrimaire);
+    border-radius: var(--radiusSmall);
+}
+
+
 
 .nasalisations_btn_container input, .nasalisations_btn_container label { display: inline-block; vertical-align: middle; }
 .nasalisations_btn_container label {
@@ -433,7 +453,6 @@ html { font-size: 16px; direction: rtl; }
     font-weight: bold;
     text-align: center;
 }
-
 .nav_fleches_container {
     position: absolute;
     border: 2px solid transparent;
@@ -476,8 +495,12 @@ html { font-size: 16px; direction: rtl; }
     border-bottom: var(--borderTertiaire);
 }
 
+
+
 .opaque { animation: opacir0.6s 1; }
 .ombrage { box-shadow: 0 4px 43px #000; }
+
+
 
 .page_body {
     position: absolute;
@@ -505,6 +528,28 @@ html { font-size: 16px; direction: rtl; }
     width: 100%;
     top: 0;
     z-index: 5;
+}
+.parametres {
+    border: var(--borderPrimaire);
+    position: absolute;
+    width: 10rem;
+    height: 2rem;
+    bottom: 0;
+    left: 10%;
+}
+.parametres_popup {
+    border: 2px solid red;
+    position: absolute;
+    left: 10%;
+    /* border: var(--borderPrimaire); */
+    border-radius: var(--radiusSmall);
+    background-color: rgba(0,0,0,0.75);
+    color: white;
+    min-width: 20rem;
+    height: 10rem;
+    bottom: 2.5rem;
+    transition: 0.25s;
+
 }
 .parentgrid { display: grid; }
 .parentcell { display: table-cell; vertical-align: middle; }
@@ -612,10 +657,16 @@ html { font-size: 16px; direction: rtl; }
 .progress_bonne_reponse_bar { background-color: yellow; }
 .progress_question_bar { background-color: #bbb; }
 
+
+
 .right { float: right; }
+
+
 
 .shadow { box-shadow: 0 8px 8px #666; }
 .surbrillance { border: 1px solid yellow; color: yellow; }
+
+
 
 .table_parlante, .table_muette {
     position: relative;
@@ -636,6 +687,9 @@ html { font-size: 16px; direction: rtl; }
     transition: 1s;
 }
 .transparent { animation: transperer; }
+
+
+
 .wraped {
     border: 1px solid transparent;
     border-radius: 6px;
@@ -643,7 +697,12 @@ html { font-size: 16px; direction: rtl; }
 }
 .wraped li:last-child { border-bottom-color: transparent; }
 .wraped li { border-bottom-color: #ccc; }
+
+
+
 .yellow { background-color: yellow; color: black; }
+
+
 
 @keyframes animate_hand {
     0% { text-shadow: 16px 16px 16px #666; transform: scale(1); }

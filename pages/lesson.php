@@ -1,7 +1,7 @@
 <?php header('Content-Type: text/html; charset=utf-8');
 session_start();
 
-if(isset($_SESSION["id"])){
+if(isset($_SESSION["id"])) {
     
     $matiere_id      = $_GET['matiere_id'];
     $matiere_index   = $_GET['matiere_index'];
@@ -103,19 +103,27 @@ if(isset($_SESSION["id"])){
             <div class="course_foot" id="apprentissage_foot">
                 <div class="dialogue_btn" id="apprentissage_dialogue_btn">
 
-                    <div class='play_btn_container'>
-                        <span class='play_label'>ߝߐߟߊ߲</span>
-                        <span class='play_icon'>&#9664;</span>
+                    <div class="media" id="media_appentissage">
+                        <div class="btns_container media_btns">
+                            <div class='btn'>
+                                <span class='play_icon'>&#9664;</span>
+                                <span class='play_label'>ߝߐߟߊ߲</span>
+                            </div>
+
+                            <div class='btn'>
+                                <span class='stop_icon'>&#9632;</span>
+                                <span class='stop_label'>ߘߊ߬ߘߋ߬ߟߊ߲ </span> 
+                            </div>
+                        </div>
+                        <div class="media_label">ߝߊߟߊ߲ߞߏ</div>
                     </div>
 
-                    <div class='stop_btn_container'>
-                        <span class='stop_label'>ߘߊ߬ߘߋ߬ߟߊ߲ </span> 
-                        <span class='stop_icon'>&#9632;</span>
-                    </div>
-
-                    <div class='parametre_btn_container'>
-                        <span class='parametre_label'>ߛߏ߯ߙߏߟߊ߲</span>  
-                        <span class='parametre_icon'>&#9881;</span>
+                    <div class="parametres" id="parametre_lesson">
+                        <div class="parametres_popup"> <?php include("parametre.php"); ?> </div>
+                        <div class='btns_container parametres_btns'>
+                            <span class='parametre_icon'>&#9881;</span>
+                            <span class='parametre_label'>ߛߏ߯ߙߏߟߊ߲</span>  
+                        </div>
                     </div>
 
                 </div>

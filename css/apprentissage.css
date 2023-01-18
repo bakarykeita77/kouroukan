@@ -7,9 +7,5 @@
     width: 100%;
     overflow: auto;
 }
-#apprentissage_foot {
-    height: 2rem;
-}
-#apprentissage_dialogue_btn {
-    border-radius: 0.5rem;
-}
+#apprentissage_foot { height: 2rem; }
+#apprentissage_dialogue_btn { border-radius: 0.5rem; }

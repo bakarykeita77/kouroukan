@@ -304,34 +304,11 @@ $('document').ready(function() {
                 
                 var course_height = $('.course').height();
     	        var course_head_height = $('.course_head').height();
+    	        var course_foot_height = $('.course_foot').height();
+    	        var course_body_height = 0;
 
-    	        var apprentissage_head_height = $('#apprentissage_head').height();
-    	        var apprentissage_foot_height = $('#apprentissage_foot').height();
+    	        course_body_height = course_height - (course_head_height + course_foot_height);
 
-    	        var exercice_head_height = $('#exercice_head').height();
-    	        var exercice_foot_height = $('#exercice_foot').height();
-
-    	        var pratique_head_height = $('#pratique_head').height();
-    	        var pratique_foot_height = $('#pratique_foot').height();
-
-    	        var evaluation_head_height = $('#evaluation_head').height();
-    	        var evaluation_foot_height = $('#evaluation_foot').height();
-
-    	        var course_body_height = '';
-
-    	        if(course_id == 'apprentissage') {
-    	            course_body_height = course_height - (apprentissage_head_height+apprentissage_foot_height);
-    	        }
-    	        if(course_id == 'exercice') {
-    	            course_body_height = course_height - (exercice_head_height+exercice_foot_height);
-    	        }
-    	        if(course_id == 'pratique'){
-    	            course_body_height = course_height - (pratique_head_height+pratique_foot_height);
-    	        }
-    	        if(course_id == 'evaluation'){
-    	            course_body_height = course_height - (evaluation_head_height+evaluation_foot_height);
-    	        }
-    	        
     	        $('.course_body').css('height', course_body_height-12+'px');
             }
     	    function coursEnteteHTML() {

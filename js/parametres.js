@@ -329,7 +329,7 @@
          }
         function submit_btnClick(){ 
             $('#submit_btn').on('click', function(){
-                
+       alert('ok');         
                 masquerLessonParametres();
                 function masquerLessonParametres(){
                     parametres.css({'display':'none'}, 300);

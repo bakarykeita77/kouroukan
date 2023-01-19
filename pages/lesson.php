@@ -26,7 +26,6 @@ if(isset($_SESSION["id"])) {
 	
 	<link rel="stylesheet" href="/kouroukan/css/lesson.css"/>
 	<link rel="stylesheet" href="/kouroukan/css/syllabes.css"/>
-	<link rel="stylesheet" href="/kouroukan/css/parametres.css"/>
 	<link rel="stylesheet" href="/kouroukan/css/apprentissage.css"/>
 	<link rel="stylesheet" href="/kouroukan/css/exercice.css"/>
 	<link rel="stylesheet" href="/kouroukan/css/pratiques.css"/>
@@ -65,7 +64,7 @@ if(isset($_SESSION["id"])) {
       <!--------------------------------------------------------------------------------------------------------------->
 	    
       <!--Les éléments de paramètres sont chargés depuis js/parametres.js-->
-        <div id="parametres">   
+        <!-- <div id="parametres">   
             <div id='lesson_parametres_glissiere'>
                 <table id='table1'>
                     <tr id='tr11'>
@@ -90,7 +89,7 @@ if(isset($_SESSION["id"])) {
                 <div id='tons_coches'></div>
                 <div id='nasalisations_cochees'></div>
             </div>
-         </div>
+         </div> -->
       <!--------------------------------------------------------------------------------------------------------------->
         <div class="course" id="apprentissage">
             
@@ -103,7 +102,7 @@ if(isset($_SESSION["id"])) {
             <div class="course_foot" id="apprentissage_foot">
                 <div class="dialogue_btn" id="apprentissage_dialogue_btn">
 
-                    <div class="media" id="media_appentissage">
+                    <div class="btns media" id="media_appentissage">
                         <div class="btns_container media_btns">
                             <div class='btn'>
                                 <span class='play_icon'>&#9664;</span>
@@ -115,12 +114,12 @@ if(isset($_SESSION["id"])) {
                                 <span class='stop_label'>ߘߊ߬ߘߋ߬ߟߊ߲ </span> 
                             </div>
                         </div>
-                        <div class="media_label">ߝߊߟߊ߲ߞߏ</div>
+                        <div class="btns_label media_label">ߝߊߟߊ߲ߞߏ</div>
                     </div>
 
-                    <div class="parametres" id="parametre_lesson">
-                        <div class="parametres_popup"> <?php include("parametre.php"); ?> </div>
-                        <div class='btns_container parametres_btns'>
+                    <div class="btns parametre" id="parametre_lesson">
+                        <div class="btns_container parametres_popup"> <?php include("parametre.php"); ?> </div>
+                        <div class='parametres_btns'>
                             <span class='parametre_icon'>&#9881;</span>
                             <span class='parametre_label'>ߛߏ߯ߙߏߟߊ߲</span>  
                         </div>

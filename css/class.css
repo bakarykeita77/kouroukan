@@ -24,6 +24,7 @@
     
     --shadowPrimaire: 0 0 3rem #aaa;
     --shadowSecondaire: 0 0 1rem #aaa;
+    --shadowTertiaire: 0 0 1rem #666;
 }
 
 
@@ -37,6 +38,8 @@ html { font-size: 16px; direction: rtl; }
     .note_container { display: none; }
 }
 *,::before,::after { box-sizing:border-box; }
+
+
 
 .actif, .active, .apprises, .a_apprendre {
     border-radius: 0.5rem;
@@ -61,6 +64,32 @@ html { font-size: 16px; direction: rtl; }
 .apprises a { color: yellow; }
 .a_apprendre { background-color: #bbb; }
 .a_apprendre a { color: #999; text-shadow: none; }
+
+
+
+.btns {    
+    position: absolute;
+    height: 2rem;
+    bottom: 0;
+    background-color: var(--couleurNeutre);
+    border: var(--borderPrimaire);
+}
+.btns_container .btn {
+    margin: var(--marginSmall);
+    border-radius: var(--radiusSmall);
+}
+.btns_container .btn:hover {
+    box-shadow: var(--shadowTertiaire);
+}
+.btns_container {
+    position: absolute;
+    border: var(--borderPrimaire);
+    background-color: var(--couleurNeutre);
+    box-shadow: 0 0 2rem black;
+    left: 0;
+    bottom: 0;
+    overflow: hidden;
+}
 .bulle {
     position: relative;
     display: inline-block;
@@ -74,6 +103,8 @@ html { font-size: 16px; direction: rtl; }
     border-radius: 3rem;
     transition: 0.4s;
 }
+
+
 
 .centerflex {
     display: flex;
@@ -94,7 +125,7 @@ html { font-size: 16px; direction: rtl; }
     display: inline-block;
     background-color: #eee;
     top: 0;
-    height: 14rem;
+    height: 20rem;
     min-width: 5rem;
 }
 .checkbox_titre {
@@ -180,10 +211,13 @@ html { font-size: 16px; direction: rtl; }
 .course_head, .course_body, .course_foot { position: absolute; }
 .course_body {
     top: 1rem;
-    /*la hauteur est calculée par la fonction dimensionnementDeCourseBody() dans lessons.js*/
+  /*la hauteur est calculée par la fonction dimensionnementDeCourseBody() dans lessons.js*/
     width: calc(100% - 2rem);
     margin: 0.25rem 1rem;
     border: var(--borderPrimaire);
+    border-radius: var(--radiusSmall);
+    background-color: rgba(0,0,0,0.7);
+    color: var(--couleurNeutre);
     overflow: auto;
 }
 .course_container {
@@ -237,10 +271,14 @@ html { font-size: 16px; direction: rtl; }
     width: 100vw;
     background-color: #000;
 }
+
+
+
+.dark_backgound { background-color: #aaa; }
 .dialogue_btn {
     position: relative;
     border-top: var(--borderPrimaire);
-    padding: 0 5rem;
+    padding: 0.5rem 5rem;
     margin: 0.125rem 0;
     width: 100%;
     height: 2rem;
@@ -249,6 +287,8 @@ html { font-size: 16px; direction: rtl; }
     font-weight: bold;
     cursor: pointer;
 }
+
+
 
 .error_message { color: rgba(255,0,0,0.5); }
 .evaluation_container {
@@ -425,11 +465,9 @@ html { font-size: 16px; direction: rtl; }
     position: absolute;
     border: var(--borderPrimaire);
     border-radius: var(--radiusSmall);
-    background-color: rgba(0,0,0,0.75);
-    color: white;
     width: 10rem;
     height: 0;
-    bottom: 2.5rem;
+    bottom: 2rem;
     overflow: hidden;
     transition: 0.25s;
 }
@@ -498,7 +536,7 @@ html { font-size: 16px; direction: rtl; }
 
 
 .opaque { animation: opacir0.6s 1; }
-.ombrage { box-shadow: 0 4px 43px #000; }
+.ombrage { box-shadow: 0 4px 43px #000; background-color: white; color: black; }
 
 
 
@@ -529,27 +567,24 @@ html { font-size: 16px; direction: rtl; }
     top: 0;
     z-index: 5;
 }
-.parametres {
-    border: var(--borderPrimaire);
+.parametre {
     position: absolute;
-    width: 10rem;
+    background-color: var(--couleurNeutre);
+    border: var(--borderPrimaire);
+    width: 20rem;
     height: 2rem;
     bottom: 0;
     left: 10%;
 }
 .parametres_popup {
-    border: 2px solid red;
     position: absolute;
-    left: 10%;
-    /* border: var(--borderPrimaire); */
+    height: 0;
+    left: 0;
+    bottom: 2rem;
+    border: var(--borderPrimaire);
     border-radius: var(--radiusSmall);
-    background-color: rgba(0,0,0,0.75);
-    color: white;
-    min-width: 20rem;
-    height: 10rem;
-    bottom: 2.5rem;
+    background-color: var(--couleurNeutre);
     transition: 0.25s;
-
 }
 .parentgrid { display: grid; }
 .parentcell { display: table-cell; vertical-align: middle; }
@@ -681,6 +716,7 @@ html { font-size: 16px; direction: rtl; }
     font-size: 1.5rem;
     font-stretch: expanded;
     text-align: center;
+    text-shadow: 0 0 2rem black;
     border-radius: 10%;
     cursor: pointer;
     overflow: hidden;
@@ -697,6 +733,7 @@ html { font-size: 16px; direction: rtl; }
 }
 .wraped li:last-child { border-bottom-color: transparent; }
 .wraped li { border-bottom-color: #ccc; }
+.yellow_backgound { background-color: yellow; }
 
 
 

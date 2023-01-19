@@ -297,14 +297,6 @@ $('document').ready(function() {
     	    affichageDeCours();
     	    cours();
 
-            $(".media").on('mouseover', function() { 
-                $(".media").css({"height":"7rem"}); 
-                $(".media_btns").css({"height":"5rem"}); 
-            });
-            $(".media").on('mouseleave', function(){ 
-                $(".media").css({"height":"2rem"}); 
-                $(".media_btns").css({"height":"0"}); 
-            });
 
           /*--------------------------------------------------------------------*/  
 
@@ -372,6 +364,18 @@ $('document').ready(function() {
             function affichageDeCours(){
             	$('.course_container').css({'display':'block'});
                 $('.course').css('display','none');
+            }
+            function afficherMediaBoutons() { $(".media_btns").css({"display":"block", "height":"5rem"}); }
+            function masquerMediaBoutons(){
+                $(".media_btns").css({"height":"0"});
+                setTimeout(() => {
+                    $(".media_btns").css({"display":"none"});
+                }, 300);
+            }
+            function afficherParametres() { $(".parametres_popup").css({"display":"block", "height":"24rem"}); }
+            function masquerParametres() {
+                $(".parametres_popup").css({"height":"0"});
+                setTimeout(() => { $(".parametres_popup").css({"display":"none"}); }, 300);
             }
             function questions() {
                 var lq = '';
@@ -454,8 +458,6 @@ $('document').ready(function() {
                     	        syllabes_tonifies = tonification(); // Voir cette fonction dans js/tons.js 
                     	        
                     	        $('#apprentissage_body').html( lessonCourante() ); 
-                    	        $('.stop_btn_container').css({'display':'none'});
-                    	        $('.play_btn_container').css({'display':'block'});
                         	        
                         	    lectureSemiAutomatique(); // Voir fonctions.js
                         	    lecturePersonnalisee();   // Voir fonctions.js
@@ -463,14 +465,13 @@ $('document').ready(function() {
                     	    });
                     	    
                             function affichageDeParametres(){
-                                $('.parametre_btn_container').on('click', function(){
-                                    parametres.css({'display':'block'});
-                                });
+                                $(".parametre").on('mouseover', function() { afficherParametres(); });
+                                $(".parametre").on('mouseleave', function(){ masquerParametres(); });
                             }
                         }
                         function apprendre() {
                             
-                            changementDesBoutonsMedia();
+                            affichageDesBoutonsMedia();
                     	    
                     	    lectureSemiAutomatique(); // Voir fonctions.js
                     	    lecturePersonnalisee();   // Voir fonctions.js
@@ -478,16 +479,18 @@ $('document').ready(function() {
                     	    apprentissageProgressBarr();
                     	    
                     	    
-                            function changementDesBoutonsMedia(){
-                        	    $('.play_btn_container').on('click', function(){
-                        	        $(this).css({'display':'none'});
-                        	        $('.stop_btn_container').css({'display':'block'});
-                        	    });
-                       	        
-                        	    $('.stop_btn_container').on('click', function(){
-                        	        $(this).css({'display':'none'});
-                        	        $('.play_btn_container').css({'display':'block'});
-                        	    });
+                            function affichageDesBoutonsMedia(){
+                                $(".media").on('mouseover', function() { 
+                                    afficherMediaBoutons(); 
+                                });
+                                $(".media").on('mouseleave', function(){ 
+                                    masquerMediaBoutons(); 
+                                });
+                    
+                                $(".media_btns .btn").click(function() {
+                                    $(".media_btns .btn").css('background-color','white');
+                                    $(this).css('background-color','yellow');
+                                });
                             }
                             function apprentissageProgressBarr() {
                                             

@@ -1,50 +1,22 @@
 
-#parametres {
-    position: relative;
-    display: none;;
-    margin: 0;
-    padding: 0;
-    top: 152px;
-    box-sizing: border-box;
-    z-index: 1;
-}
 #lesson_parametres_glissiere{
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 94vw;
-    max-width: 600px;
-    background-color: #ddd; 
-    border-radius: 6px;
-    box-shadow: 0 0 16px #666;
+    border-radius: var(--radiusSmall);
     margin: 0;
     box-sizing: border-box ;
     overflow: auto;
 }
 #table1{
     position: relative;
+    height: 18rem;
     left: 0;
     margin: auto;
     padding: 0;
 }
-#table2 {
-    position: relative;
-    left: 0;
-    width: 94vw;
-}
-#checkbox_nasalisation {
-    min-width: 100px;
-}
-#checkbox_tons {
-    min-width: 86px;
-}
+#table2 { position: relative; left: 0; }
 #table2{
     margin: 0;
     padding: 0;
     width: 100%;
     text-align: center;
 }
-#submit_btn{
-    width: 200px;
-    border-radius: 6px;
-}
+#submit_btn{ width: 200px; border-radius: var(--radiusSmall); }

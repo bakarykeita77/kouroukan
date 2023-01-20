@@ -4,7 +4,7 @@
 
   <!------------------------------------------------------------------------------------------------------------------>	
   <!--Les éléments de paramètres sont chargés depuis js/parametres.js-->
-    <div id='lesson_parametres_glissiere'>
+    <div class='parametres_popup'>
         <table id='table1'>
             <tr id='tr11'>
                 <td id='consonnes_checker'></td>

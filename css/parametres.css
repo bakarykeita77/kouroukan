@@ -1,13 +1,6 @@
 
-#lesson_parametres_glissiere{
-    border-radius: var(--radiusSmall);
-    margin: 0;
-    box-sizing: border-box ;
-    overflow: auto;
-}
 #table1{
     position: relative;
-    height: 18rem;
     left: 0;
     margin: auto;
     padding: 0;
@@ -19,4 +12,4 @@
     width: 100%;
     text-align: center;
 }
-#submit_btn{ width: 200px; border-radius: var(--radiusSmall); }
+#submit_btn{ width: 200px; border: var(--borderPrimaire); border-radius: var(--radiusSmall); }

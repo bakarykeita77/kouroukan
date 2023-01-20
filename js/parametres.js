@@ -15,7 +15,11 @@
     nasalisations = laNasalisation();
     tons = lesTons();
 
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/    
     parametrageDeLesson();
+    affichageDeParametres();
+    parametrageDeApprentissage();
+    
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/    
 
     function lesVoyelles(){
@@ -57,6 +61,17 @@
         for(var i=0;i<caracteres[5].length;i++){ t[i] = caracteres[5][i]; }
         return t;
     }
+    function affichageDeParametres(){
+        $(".parametres_popup").parent().parent().on('mouseover', function() { afficherParametres(); });
+        $(".parametres_popup").on('mouseleave', function(){ masquerParametres(); });
+        $('#submit_btn').on('click', function(){ $(".parametres_popup").css({"display":"none"}); });
+        
+        function afficherParametres() { $(".parametres_popup").css({"display":"block", "height":"24rem"}); }
+        function masquerParametres() {
+            $(".parametres_popup").css({"height":"0"});
+            setTimeout(() => { $(".parametres_popup").css({"display":"none"}); }, 300);
+        }
+    }
     function parametrageDeLesson(){
        
         parametres = $('#parametres');
@@ -65,7 +80,6 @@
         chargementDesElementsDeLessonParametres();
         affichageDeLessonParametres();
         cocherLesCaracteres();
-        submit_btnClick();
        
         function selectionDesElementsDeLessonParametres(){
             submit_btn = $('#submit_btn');
@@ -188,6 +202,7 @@
             
             checkbox_parentClick();
             checkbox_childrenClick();
+            
             $.each($('.checkbox_parent'), function(){ $(this).click(); }); /* Cochage par defaut */
             $('.checkbox_titre').on('click', function(){ $(this).find('.checkbox_parent').click(); });
             $('.check_btn').on('click', function(){ $(this).children().first().click(); });
@@ -203,9 +218,7 @@
                     collecteDesCaracteresCoches();
                 });
              }
-            function checkbox_childrenClick(){
-                $('.checkbox_children').on('click', function(){ collecteDesCaracteresCoches(); }); 
-             }
+            function checkbox_childrenClick(){ $('.checkbox_children').on('click', function(){ collecteDesCaracteresCoches(); }); }
             function collecteDesCaracteresCoches(){
                 viderLesSousTableauxDesCaracteresCoches();
                 rechargerLesSousTableauxDesCaracteresCoches();
@@ -317,23 +330,26 @@
             choixDesOptionsNecessaires();
             function choixDesOptionsNecessaires(){
                 
-                if(niveau==1){
-                    tons_checker.hide();
-                    nasalisation_checker.hide();
-                }
-                if(niveau==2){
-                    tons_checker.hide();
-                    tedo_checker.hide();
-                }
+                if(niveau==1){ tons_checker.hide(); nasalisation_checker.hide(); }
+                if(niveau==2){ tons_checker.hide(); tedo_checker.hide(); }
              }
          }
-        function submit_btnClick(){ 
-            $('#submit_btn').on('click', function(){
-       alert('ok');         
-                masquerLessonParametres();
-                function masquerLessonParametres(){
-                    parametres.css({'display':'none'}, 300);
-                 }
-             });
-         }
+    }
+    function parametrageDeApprentissage() {
+        
+        $('#parametres td').on('click', function(){ 
+            
+            actualiserCochage(); 
+            
+            lettres = voyelles_cochees.concat(consonnes_cochees,tedos_coches);
+            syllabes = syllab();
+            syllabes_tonifies = tonification(); // Voir cette fonction dans js/tons.js 
+            
+            $('#apprentissage_body').html( lessonCourante() ); 
+                
+            lectureSemiAutomatique(); // Voir fonctions.js
+            lecturePersonnalisee();   // Voir fonctions.js
+            arreterLecture(lessonCourante); // Voir fonctions.js
+        });
+        
     }

@@ -21,7 +21,6 @@ if(isset($_SESSION["id"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
-    <link rel="stylesheet" href="/kouroukan/css/class.css"/>
     <link rel="stylesheet" href="/kouroukan/css/tete-de-page.css"/>
 	
 	<link rel="stylesheet" href="/kouroukan/css/lesson.css"/>
@@ -118,7 +117,7 @@ if(isset($_SESSION["id"])) {
                     </div>
 
                     <div class="btns parametre" id="parametre_lesson">
-                        <div class="btns_container parametres_popup"> <?php include("parametre.php"); ?> </div>
+                        <div class="btns_container"> <?php include("parametre.php"); ?> </div>
                         <div class='parametres_btns'>
                             <span class='parametre_icon'>&#9881;</span>
                             <span class='parametre_label'>ߛߏ߯ߙߏߟߊ߲</span>  

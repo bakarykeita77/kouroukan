@@ -372,11 +372,6 @@ $('document').ready(function() {
                     $(".media_btns").css({"display":"none"});
                 }, 300);
             }
-            function afficherParametres() { $(".parametres_popup").css({"display":"block", "height":"24rem"}); }
-            function masquerParametres() {
-                $(".parametres_popup").css({"height":"0"});
-                setTimeout(() => { $(".parametres_popup").css({"display":"none"}); }, 300);
-            }
             function questions() {
                 var lq = '';
                 
@@ -432,7 +427,6 @@ $('document').ready(function() {
                    
                 	    chargerApprentissage();
                 	    afficherApprentissage();
-                        parametrageDeApprentissage();
                         apprendre();
                     	enregistrerApprentissage();
                 	    stockerApprentissage();
@@ -446,29 +440,6 @@ $('document').ready(function() {
                             setTimeout(function() { apprentissage.css({'transform':'scale(1)'});}, 5);
                             setTimeout(function() { apprentissage.css({'opacity':'1'});}, 5);
                     	}
-                        function parametrageDeApprentissage() {
-                            affichageDeParametres();
-                            
-                    	    $('#parametres td').on('click', function(){ 
-                                
-                    	        actualiserCochage(); 
-                    	        
-                    	        lettres = voyelles_cochees.concat(consonnes_cochees,tedos_coches);
-                    	        syllabes = syllab();
-                    	        syllabes_tonifies = tonification(); // Voir cette fonction dans js/tons.js 
-                    	        
-                    	        $('#apprentissage_body').html( lessonCourante() ); 
-                        	        
-                        	    lectureSemiAutomatique(); // Voir fonctions.js
-                        	    lecturePersonnalisee();   // Voir fonctions.js
-                        	    arreterLecture(lessonCourante); // Voir fonctions.js
-                    	    });
-                    	    
-                            function affichageDeParametres(){
-                                $(".parametre").on('mouseover', function() { afficherParametres(); });
-                                $(".parametre").on('mouseleave', function(){ masquerParametres(); });
-                            }
-                        }
                         function apprendre() {
                             
                             affichageDesBoutonsMedia();

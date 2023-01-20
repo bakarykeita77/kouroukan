@@ -1,6 +1,6 @@
 :root{
     
-    --borderPrimaire: 1px solid #ddd;
+    --borderPrimaire: 1px solid #aaa;
     --borderSecondaire: 1px solid cornflowerblue;
     --borderTertiaire: 1px solid yellow;
     
@@ -25,6 +25,7 @@
     --shadowPrimaire: 0 0 3rem #aaa;
     --shadowSecondaire: 0 0 1rem #aaa;
     --shadowTertiaire: 0 0 1rem #666;
+    --shadowQuarternaire: 0 0 3rem #666;
 }
 
 
@@ -71,8 +72,6 @@ html { font-size: 16px; direction: rtl; }
     position: absolute;
     height: 2rem;
     bottom: 0;
-    background-color: var(--couleurNeutre);
-    border: var(--borderPrimaire);
 }
 .btns_container .btn {
     margin: var(--marginSmall);
@@ -83,12 +82,12 @@ html { font-size: 16px; direction: rtl; }
 }
 .btns_container {
     position: absolute;
-    border: var(--borderPrimaire);
     background-color: var(--couleurNeutre);
+    border-radius: var(--radiusSmall);
     box-shadow: 0 0 2rem black;
     left: 0;
     bottom: 0;
-    overflow: hidden;
+    overflow: visible;
 }
 .bulle {
     position: relative;
@@ -140,6 +139,9 @@ html { font-size: 16px; direction: rtl; }
     height: 12rem;
     padding-right: 0.5rem;
     overflow: auto
+}
+.check_btn:hover {
+    box-shadow: var(--shadowQuarternaire);
 }
 .check_consonnes {
     position: relative;
@@ -203,7 +205,7 @@ html { font-size: 16px; direction: rtl; }
     padding: 0;
     border-radius: 0.5rem;
     background-color: var(--couleurNeutre);
-    box-shadow: var(--shadowPrimaire);
+    box-shadow: var(--shadowQuarternaire);
     opacity: 1;
     z-index: 0;
     transition: 0.6s;
@@ -277,7 +279,6 @@ html { font-size: 16px; direction: rtl; }
 .dark_backgound { background-color: #aaa; }
 .dialogue_btn {
     position: relative;
-    border-top: var(--borderPrimaire);
     padding: 0.5rem 5rem;
     margin: 0.125rem 0;
     width: 100%;
@@ -463,8 +464,6 @@ html { font-size: 16px; direction: rtl; }
 }
 .media_btns {
     position: absolute;
-    border: var(--borderPrimaire);
-    border-radius: var(--radiusSmall);
     width: 10rem;
     height: 0;
     bottom: 2rem;
@@ -475,8 +474,6 @@ html { font-size: 16px; direction: rtl; }
     position: absolute;
     width: 10rem;
     bottom: 0;
-    border: var(--borderPrimaire);
-    border-radius: var(--radiusSmall);
 }
 
 
@@ -569,22 +566,31 @@ html { font-size: 16px; direction: rtl; }
 }
 .parametre {
     position: absolute;
-    background-color: var(--couleurNeutre);
-    border: var(--borderPrimaire);
-    width: 20rem;
+    background-color: transparent;
     height: 2rem;
+    width: 10rem;
     bottom: 0;
     left: 10%;
+}
+.parametres_btns {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: var(--couleurNeutre);
+    border: var(--borderPrimaire);
+    height: 2rem;
+    width: 10rem;
 }
 .parametres_popup {
     position: absolute;
     height: 0;
+    min-width: 20rem;
     left: 0;
-    bottom: 2rem;
-    border: var(--borderPrimaire);
+    bottom: 3rem;
     border-radius: var(--radiusSmall);
     background-color: var(--couleurNeutre);
     transition: 0.25s;
+    overflow: auto;
 }
 .parentgrid { display: grid; }
 .parentcell { display: table-cell; vertical-align: middle; }

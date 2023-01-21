@@ -124,7 +124,7 @@ html { font-size: 16px; direction: rtl; }
     display: inline-block;
     background-color: #eee;
     top: 0;
-    height: 20rem;
+    height: 18rem;
     min-width: 5rem;
 }
 .checkbox_titre {
@@ -132,6 +132,12 @@ html { font-size: 16px; direction: rtl; }
     width: 100%;
     height: 1.5rem;
     padding-right: 0.5rem;
+}
+.check_btn {
+    display: block;
+    min-width: 3rem;
+    margin: 0;
+    border-radius: var(--radiusSmall);
 }
 .check_btn_container {
     position: relative;
@@ -141,6 +147,7 @@ html { font-size: 16px; direction: rtl; }
     overflow: auto
 }
 .check_btn:hover {
+    background-color: var(--couleurNeutre);
     box-shadow: var(--shadowQuarternaire);
 }
 .check_consonnes {
@@ -152,11 +159,6 @@ html { font-size: 16px; direction: rtl; }
     padding: 0;
     background-color: #eee;
     height: 11rem;
-}
-.check_btn {
-    display: block;
-    min-width: 2.25rem;
-    margin: 0
 }
 .centrerX { left: 50%; transform: translateX(-50%); }
 .centrerY { top: 50%; transform: translateY(-50%); }
@@ -584,9 +586,9 @@ html { font-size: 16px; direction: rtl; }
 .parametres_popup {
     position: absolute;
     height: 0;
-    min-width: 20rem;
+    min-width: 25rem;
     left: 0;
-    bottom: 3rem;
+    bottom: 3.5rem;
     border-radius: var(--radiusSmall);
     background-color: var(--couleurNeutre);
     transition: 0.25s;

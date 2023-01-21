@@ -123,11 +123,9 @@ if(isset($_SESSION["id"])) {
                             <span class='parametre_label'>ߛߏ߯ߙߏߟߊ߲</span>  
                         </div>
                     </div>
-
                 </div>
             </div>
-            
-         </div>
+        </div>
       <!--------------------------------------------------------------------------------------------------------------->
         <div class="course" id="exercice"     >
             
@@ -330,14 +328,6 @@ if(isset($_SESSION["id"])) {
     <audio id="audio"></audio>
     
     <script src="/kouroukan/js/parametres.js"></script>
-    
-    <script src="/kouroukan/js/alphabet.js"></script>
-    <script src="/kouroukan/js/syllabes.js"></script>
-    <script src="/kouroukan/js/tons.js"></script>
-    <script src="/kouroukan/js/chiffres.js"></script>
-    <script src="/kouroukan/js/apprentissage.js"></script>
-    <script src="/kouroukan/js/evaluations.js"></script>
-    <script src="/kouroukan/js/lessons.js"></script>
     
 </body>
 </html>

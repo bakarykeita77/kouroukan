@@ -5,12 +5,22 @@
     <link rel="stylesheet" href="/kouroukan/css/class.css"/>
     <link rel="stylesheet" href="/kouroukan/css/tete-de-page.css"/>
 	
+    
 	<script src="/kouroukan/js/jquery-3.3.1.js"></script>
 	<script src="/kouroukan/fonctions.js"></script>
 	<script src="/kouroukan/js/icones.js"></script>
 	<script src="/kouroukan/js/class.js"></script>	
-	<script src="/kouroukan/js/caracteres.js"></script>
 
+	<script src="/kouroukan/js/caracteres.js"></script>
+    <script src="/kouroukan/js/alphabet.js"></script>
+	<script src="/kouroukan/js/syllabes.js"></script>
+	<script src="/kouroukan/js/tons.js"></script>
+	<script src="/kouroukan/js/chiffres.js"></script>
+
+    <script src="/kouroukan/js/apprentissage.js"></script>
+    <script src="/kouroukan/js/evaluations.js"></script>
+    <script src="/kouroukan/js/lessons.js"></script>
+    
   <!------------------------------------------------------------------------------------------------------------------>	
 	<?php include("fonctions.php"); ?>  
 	<div id="tete_de_page_container">

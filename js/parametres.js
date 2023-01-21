@@ -6,7 +6,9 @@
     var voyelle, consonne, tedo, ton, nasalisation;
     var voyelles, consonnes, tedos, tons, nasalisations;
     var voyelles_cochees = [], consonnes_cochees = [], tedos_coches = [], tons_coches = [], nasalisations_cochees = [], caracteres_coches = [],syllabes_coches = [];
-
+    var lettres = [], syllabes = [], syllabes_tonifies = [];
+    var phase_id = JSON.parse(sessionStorage.getItem('phase_id'));
+    var lesson_courante = [];
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
  /* Les variables tableaux regroupant les caracteres par types */  
     voyelles = lesVoyelles();
@@ -17,6 +19,7 @@
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/    
     parametrageDeLesson();
+    actualiserCochage();
     affichageDeParametres();
     parametrageDeApprentissage();
     
@@ -61,12 +64,24 @@
         for(var i=0;i<caracteres[5].length;i++){ t[i] = caracteres[5][i]; }
         return t;
     }
+    function actualiserCochage() {
+        voyelles_cochees = $('#voyelles_cochees').html().split('');
+        consonnes_cochees = $('#consonnes_cochees').html().split('');
+        tedos_coches = $('#tedos_coches').html().split('');
+        tons_coches = [''].concat($('#tons_coches').html().split(''));
+        nasalisations_cochees = [''].concat($('#nasalisations_cochees').html().split(''));
+        caracteres_coches = [voyelles_cochees, consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees];
+
+        lettres = voyelles_cochees.concat(consonnes_cochees,tedos_coches);
+        syllabes = syllab();                // Voir js/syllabes.js 
+        syllabes_tonifies = tonification(); // Voir js/tons.js
+    }	
     function affichageDeParametres(){
         $(".parametres_popup").parent().parent().on('mouseover', function() { afficherParametres(); });
         $(".parametres_popup").on('mouseleave', function(){ masquerParametres(); });
         $('#submit_btn').on('click', function(){ $(".parametres_popup").css({"display":"none"}); });
         
-        function afficherParametres() { $(".parametres_popup").css({"display":"block", "height":"24rem"}); }
+        function afficherParametres() { $(".parametres_popup").css({"display":"block", "height":"22rem"}); }
         function masquerParametres() {
             $(".parametres_popup").css({"height":"0"});
             setTimeout(() => { $(".parametres_popup").css({"display":"none"}); }, 300);
@@ -76,6 +91,7 @@
        
         parametres = $('#parametres');
         lesson_parametres = $('#lesson_parametres');
+
         selectionDesElementsDeLessonParametres();
         chargementDesElementsDeLessonParametres();
         affichageDeLessonParametres();
@@ -337,19 +353,36 @@
     }
     function parametrageDeApprentissage() {
         
-        $('#parametres td').on('click', function(){ 
-            
+        $('.checkbox_titre, .check_btn').on('click', function() { 
+
+         // Chaque fois qu'un checkbox est clické, le cochage doit etre actualisé et le tableau noir rechargé. 
             actualiserCochage(); 
-            
-            lettres = voyelles_cochees.concat(consonnes_cochees,tedos_coches);
-            syllabes = syllab();
-            syllabes_tonifies = tonification(); // Voir cette fonction dans js/tons.js 
-            
-            $('#apprentissage_body').html( lessonCourante() ); 
+            lesson_courante = lessonCourante();
+            $('#apprentissage_body').html( lesson_courante ); 
                 
             lectureSemiAutomatique(); // Voir fonctions.js
             lecturePersonnalisee();   // Voir fonctions.js
             arreterLecture(lessonCourante); // Voir fonctions.js
+
+
+            function lessonCourante() {
+
+                if(phase_id=='alphabet_apprentissage') { lesson_courante = alphabetApprentissageHTML(); } //Voir alphabet.js 
+                if(phase_id=='syllabes_apprentissage') { lesson_courante = syllabesApprentissageHTML(); } //Voir syllabes.js
+                if(phase_id=='tons_apprentissage'    ) { lesson_courante = tonsApprentissageHTML();     } //Voir tons.js
+                if(phase_id=='chiffres_apprentissage') { lesson_courante = chiffresApprentissageHTML(); } //Voir chiffres.js
+                
+                if(phase_id=='alphabet_exercice'     ) { lesson_courante = alphabetExercicesHTML();     } //Voir alphabet.js
+                if(phase_id=='syllabes_exercice'     ) { lesson_courante = syllabesExercicesHTML();     } //Voir syllabes.js
+                if(phase_id=='tons_exercice'         ) { lesson_courante = tonsExercicesHTML();         } //Voir tons.js
+                if(phase_id=='chiffres_exercice'     ) { lesson_courante = chiffresExercicesHTML();     } //Voir chiffres.js
+              
+               if(phase_id=='syllabes_pratique'      ) { lesson_courante = syllabesPratiquesHTML();     } //Voir syllabes.js
+               if(phase_id=='tons_pratique'          ) { lesson_courante = tonsPratiquesHTML();         } //Voir tons.js
+               if(phase_id=='chiffres_pratique'      ) { lesson_courante = chiffresPratiquesHTML();     } //Voir chiffres.js
+            
+                return lesson_courante;
+            }
         });
         
     }

@@ -252,14 +252,13 @@ $('document').ready(function() {
     }
 	function matiere() {
   	
-    	actualiserCochage();
         lettres = voyelles_cochees.concat(consonnes_cochees,tedos_coches);
         syllabes = syllab();
     	
     	$('#phases_list li').on('click', function(e){
       
             var syllabes = syllab();
-            var syllabes_tonifies = tonification(); // Voir cette fonction dans js/tons.js 
+            var syllabes_tonifies = tonification(); // Voir js/tons.js 
 
             var questionnaires = questions();
             var questions_quantity = quantiteDeQuestion();
@@ -290,13 +289,15 @@ $('document').ready(function() {
             var dialogue_btn_html = $('.dialogue_btn').html();
             var parametres_html = parametres.html();
 
+            sessionStorage.setItem("lesson_courante", JSON.stringify(lesson_courante));
+            sessionStorage.setItem("phase_id", JSON.stringify(phase_id));
+
           /*--------------------------------------------------------------------*/   
           
     	    phaseActiveName();
     	    dimensionnementDeCourseBody();
     	    affichageDeCours();
     	    cours();
-
 
           /*--------------------------------------------------------------------*/  
 
@@ -344,22 +345,21 @@ $('document').ready(function() {
        
             function lessonCourante() {
 
-                if(phase_id=='alphabet_apprentissage') { lesson_courante = alphabetApprentissageHTML(); } //Cette fonction provient de alphabet.js 
-                if(phase_id=='syllabes_apprentissage') { lesson_courante = syllabesApprentissageHTML(); } //Cette fonction provient de syllabes.js
-                if(phase_id=='tons_apprentissage'    ) { lesson_courante = tonsApprentissageHTML();     } //Cette fonction provient de tons.js
-                if(phase_id=='chiffres_apprentissage') { lesson_courante = chiffresApprentissageHTML(); } //Cette fonction provient de chiffres.js
+                if(phase_id=='alphabet_apprentissage') { lesson_courante = alphabetApprentissageHTML(); } //Voir alphabet.js 
+                if(phase_id=='syllabes_apprentissage') { lesson_courante = syllabesApprentissageHTML(); } //Voir syllabes.js
+                if(phase_id=='tons_apprentissage'    ) { lesson_courante = tonsApprentissageHTML();     } //Voir tons.js
+                if(phase_id=='chiffres_apprentissage') { lesson_courante = chiffresApprentissageHTML(); } //Voir chiffres.js
                 
-                if(phase_id=='alphabet_exercice'     ) { lesson_courante = alphabetExercicesHTML();     } //Cette fonction provient de alphabet.js
-                if(phase_id=='syllabes_exercice'     ) { lesson_courante = syllabesExercicesHTML();     } //Cette fonction provient de syllabes.js
-                if(phase_id=='tons_exercice'         ) { lesson_courante = tonsExercicesHTML();         } //Cette fonction provient de tons.js
-                if(phase_id=='chiffres_exercice'     ) { lesson_courante = chiffresExercicesHTML();     } //Cette fonction provient de chiffres.js
+                if(phase_id=='alphabet_exercice'     ) { lesson_courante = alphabetExercicesHTML();     } //Voir alphabet.js
+                if(phase_id=='syllabes_exercice'     ) { lesson_courante = syllabesExercicesHTML();     } //Voir syllabes.js
+                if(phase_id=='tons_exercice'         ) { lesson_courante = tonsExercicesHTML();         } //Voir tons.js
+                if(phase_id=='chiffres_exercice'     ) { lesson_courante = chiffresExercicesHTML();     } //Voir chiffres.js
               
-               // if(phase_id=='syllabes_pratique'     ) { lesson_courante = syllabesPratiquesHTML();     } //Cette fonction provient de syllabes.js
-               // if(phase_id=='tons_pratique'         ) { lesson_courante = tonsPratiquesHTML();         } //Cette fonction provient de tons.js
-               // if(phase_id=='chiffres_pratique'     ) { lesson_courante = chiffresPratiquesHTML();     } //Cette fonction provient de chiffres.js
+               if(phase_id=='syllabes_pratique'      ) { lesson_courante = syllabesPratiquesHTML();     } //Voir syllabes.js
+               if(phase_id=='tons_pratique'          ) { lesson_courante = tonsPratiquesHTML();         } //Voir tons.js
+               if(phase_id=='chiffres_pratique'      ) { lesson_courante = chiffresPratiquesHTML();     } //Voir chiffres.js
             
                 return lesson_courante;
-                
             }
             function affichageDeCours(){
             	$('.course_container').css({'display':'block'});
@@ -2123,15 +2123,7 @@ $('document').ready(function() {
         }
     	
     	$('#go_to_lesson').on('click', function() { $('.phases ul li').click(); });
-	    
-        function actualiserCochage() {
-            voyelles_cochees = $('#voyelles_cochees').html().split('');
-            consonnes_cochees = $('#consonnes_cochees').html().split('');
-            tedos_coches = $('#tedos_coches').html().split('');
-            tons_coches = [''].concat($('#tons_coches').html().split(''));
-            nasalisations_cochees = [''].concat($('#nasalisations_cochees').html().split(''));
-            caracteres_coches = [voyelles_cochees, consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees];
-        }	    
+	        
 	}
     function initialiserProgressBarr() {
         $('.progress_question_bar, .progress_bonne_reponse_bar').css('width',0);

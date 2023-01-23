@@ -1,5 +1,4 @@
 
-  <!------------------------------------------------------------------------------------------------------------------>	
 	<link rel="stylesheet" href="/kouroukan/css/parametres.css"/>
 
   <!------------------------------------------------------------------------------------------------------------------>	
@@ -29,5 +28,9 @@
         <div id='nasalisations_cochees'></div>
     </div>
 
-  <!------------------------------------------------------------------------------------------------------------------>	       
-    <script src="/kouroukan/js/parametres.js"></script>
+  <!------------------------------------------------------------------------------------------------------------------>	  
+     
+  <script src = "/kouroukan/js/caracteres.js"></script>
+  <script src = "/kouroukan/js/syllabes.js"></script>
+  <script src = "/kouroukan/js/tons.js"></script>
+  <script src = "/kouroukan/js/parametres.js"></script>

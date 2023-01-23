@@ -1,4 +1,14 @@
- 
+
+    var voyelles_cochees = [], consonnes_cochees = [], tedos_coches = [], tons_coches = [], nasalisations_cochees = [], caracteres_coches = [],syllabes_coches = [];
+
+    voyelles_cochees = $('#voyelles_cochees').html().split('');
+    consonnes_cochees = $('#consonnes_cochees').html().split('');
+    tedos_coches = $('#tedos_coches').html().split('');
+    tons_coches = [''].concat($('#tons_coches').html().split(''));
+    nasalisations_cochees = [''].concat($('#nasalisations_cochees').html().split(''));
+    caracteres_coches = [voyelles_cochees, consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees];
+
+    lettres = voyelles_cochees.concat(consonnes_cochees,tedos_coches);
     var syllabes = syllab();
     var syllabes_questions = malaxer(syllabes);
  

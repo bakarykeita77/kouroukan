@@ -3,12 +3,13 @@
     var parametres_btn, parametres;
     var voyelles_checker, consonnes_checker, tedo_checker, tons_checker, nasalisation_checker;
     var checkbox_titre, check_btn_container, checkbox_parent, check_btn, checkbox_children;
-    var voyelle, consonne, tedo, ton, nasalisation;
-    var voyelles, consonnes, tedos, tons, nasalisations;
     var voyelles_cochees = [], consonnes_cochees = [], tedos_coches = [], tons_coches = [], nasalisations_cochees = [], caracteres_coches = [],syllabes_coches = [];
-    var lettres = [], syllabes = [], syllabes_tonifies = [];
+    var niveau = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
     var phase_id = JSON.parse(sessionStorage.getItem('phase_id'));
     var lesson_courante = [];
+    
+
+    
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
  /* Les variables tableaux regroupant les caracteres par types */  
     voyelles = lesVoyelles();
@@ -25,45 +26,6 @@
     
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/    
 
-    function lesVoyelles(){
-        var v = [];
-        for(var i=0;i<caracteres[0].length;i++){ v[i] = caracteres[0][i]; }
-        return v;
-    }
-    function lesConsonnes(){
-        var c = [];
-        for(var i=0;i<7;i++){
-            c[c.length] = caracteres[1][i];
-        }
-        for(var j=0;j<caracteres[2].length;j++){
-            c[c.length] = caracteres[2][j];
-        }
-        for(var k=7;k<14;k++){
-            c[c.length] = caracteres[1][k];
-        }
-        for(var l=14;l<18;l++){
-            c[c.length] = caracteres[1][l];
-        }
-        
-        return c;
-    }
-    function leTedo(){
-        var t = [];
-        for(var i=0;i<caracteres[3].length;i++){
-            t[i] = caracteres[3][i];
-        }
-        return t;
-    }
-    function laNasalisation(){
-        var n = [];
-        for(var i=0;i<caracteres[4].length;i++){ n[i] = caracteres[4][i]; }
-        return n;
-    }
-    function lesTons() {
-        var t = [];
-        for(var i=0;i<caracteres[5].length;i++){ t[i] = caracteres[5][i]; }
-        return t;
-    }
     function actualiserCochage() {
         voyelles_cochees = $('#voyelles_cochees').html().split('');
         consonnes_cochees = $('#consonnes_cochees').html().split('');
@@ -77,14 +39,17 @@
         syllabes_tonifies = tonification(); // Voir js/tons.js
     }	
     function affichageDeParametres(){
-        $(".parametres_popup").parent().parent().on('mouseover', function() { afficherParametres(); });
-        $(".parametres_popup").on('mouseleave', function(){ masquerParametres(); });
-        $('#submit_btn').on('click', function(){ $(".parametres_popup").css({"display":"none"}); });
+        $(".parametres_btns").on('mouseover', function() { afficherParametres(); });
+        $(".parametres_container").on('mouseleave', function(){ masquerParametres(); });
+        $('#submit_btn').on('click', function(){ masquerParametres(); });
         
-        function afficherParametres() { $(".parametres_popup").css({"display":"block", "height":"22rem"}); }
+        function afficherParametres() { 
+            $(".parametres_container").css({"display":"block", "opacity":0}); 
+            setTimeout(() => { $(".parametres_container").css({"transform":"scale(1)", "opacity":1}); }, 10);
+    }
         function masquerParametres() {
-            $(".parametres_popup").css({"height":"0"});
-            setTimeout(() => { $(".parametres_popup").css({"display":"none"}); }, 300);
+            $(".parametres_container").css({"transform":"scale(0.75)", "opacity":0});
+            setTimeout(() => { $(".parametres_container").css({"display":"none"}); }, 300);
         }
     }
     function parametrageDeLesson(){
@@ -363,7 +328,6 @@
             lectureSemiAutomatique(); // Voir fonctions.js
             lecturePersonnalisee();   // Voir fonctions.js
             arreterLecture(lessonCourante); // Voir fonctions.js
-
 
             function lessonCourante() {
 

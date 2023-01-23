@@ -289,11 +289,10 @@ $('document').ready(function() {
             var dialogue_btn_html = $('.dialogue_btn').html();
             var parametres_html = parametres.html();
 
-            sessionStorage.setItem("lesson_courante", JSON.stringify(lesson_courante));
             sessionStorage.setItem("phase_id", JSON.stringify(phase_id));
 
           /*--------------------------------------------------------------------*/   
-          
+   
     	    phaseActiveName();
     	    dimensionnementDeCourseBody();
     	    affichageDeCours();
@@ -346,19 +345,20 @@ $('document').ready(function() {
             function lessonCourante() {
 
                 if(phase_id=='alphabet_apprentissage') { lesson_courante = alphabetApprentissageHTML(); } //Voir alphabet.js 
-                if(phase_id=='syllabes_apprentissage') { lesson_courante = syllabesApprentissageHTML(); } //Voir syllabes.js
-                if(phase_id=='tons_apprentissage'    ) { lesson_courante = tonsApprentissageHTML();     } //Voir tons.js
-                if(phase_id=='chiffres_apprentissage') { lesson_courante = chiffresApprentissageHTML(); } //Voir chiffres.js
-                
                 if(phase_id=='alphabet_exercice'     ) { lesson_courante = alphabetExercicesHTML();     } //Voir alphabet.js
+                
+                if(phase_id=='syllabes_apprentissage') { lesson_courante = syllabesApprentissageHTML(); } //Voir syllabes.js
                 if(phase_id=='syllabes_exercice'     ) { lesson_courante = syllabesExercicesHTML();     } //Voir syllabes.js
-                if(phase_id=='tons_exercice'         ) { lesson_courante = tonsExercicesHTML();         } //Voir tons.js
-                if(phase_id=='chiffres_exercice'     ) { lesson_courante = chiffresExercicesHTML();     } //Voir chiffres.js
+                if(phase_id=='syllabes_pratique'     ) { lesson_courante = syllabesPratiquesHTML();     } //Voir syllabes.js
               
-               if(phase_id=='syllabes_pratique'      ) { lesson_courante = syllabesPratiquesHTML();     } //Voir syllabes.js
-               if(phase_id=='tons_pratique'          ) { lesson_courante = tonsPratiquesHTML();         } //Voir tons.js
-               if(phase_id=='chiffres_pratique'      ) { lesson_courante = chiffresPratiquesHTML();     } //Voir chiffres.js
+                if(phase_id=='tons_apprentissage'    ) { lesson_courante = tonsApprentissageHTML();     } //Voir tons.js
+                if(phase_id=='tons_exercice'         ) { lesson_courante = tonsExercicesHTML();         } //Voir tons.js
+                if(phase_id=='tons_pratique'         ) { lesson_courante = tonsPratiquesHTML();         } //Voir tons.js
             
+                if(phase_id=='chiffres_apprentissage') { lesson_courante = chiffresApprentissageHTML(); } //Voir chiffres.js
+                if(phase_id=='chiffres_exercice'     ) { lesson_courante = chiffresExercicesHTML();     } //Voir chiffres.js
+                if(phase_id=='chiffres_pratique'     ) { lesson_courante = chiffresPratiquesHTML();     } //Voir chiffres.js
+
                 return lesson_courante;
             }
             function affichageDeCours(){
@@ -437,6 +437,21 @@ $('document').ready(function() {
                     	}
                     	function afficherApprentissage() {
                             apprentissage.css({'display':'block', 'transform':'scale(0.75)', 'opacity':0});
+
+                            // let parametre_lesson_btn = $('#parametre_lesson_btn');
+                            // let pos = parametre_lesson_btn.offset();
+                            // let top = pos.top;
+                            // let left = pos.left;
+
+
+                            let parametre_lesson_btn = document.getElementById('parametre_lesson_btn');
+                            let param = parametre_lesson_btn.getBoundingClientRect();
+                            let top = param.top;
+                            let left = param.left;
+
+                            $('.parametres_container').css({"top":top + "px", "left":left + "px"});
+    
+
                             setTimeout(function() { apprentissage.css({'transform':'scale(1)'});}, 5);
                             setTimeout(function() { apprentissage.css({'opacity':'1'});}, 5);
                     	}

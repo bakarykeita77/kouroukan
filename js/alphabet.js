@@ -1,4 +1,4 @@
-    
+   
     var lettres = voyelles_cochees.concat(consonnes_cochees,tedos_coches);  
     var alphabet_questions = malaxer(lettres);
 

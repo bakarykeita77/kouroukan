@@ -62,33 +62,7 @@ if(isset($_SESSION["id"])) {
         <span class="fermeture" id="">&times;</span>
       <!--------------------------------------------------------------------------------------------------------------->
 	    
-      <!--Les éléments de paramètres sont chargés depuis js/parametres.js-->
-        <!-- <div id="parametres">   
-            <div id='lesson_parametres_glissiere'>
-                <table id='table1'>
-                    <tr id='tr11'>
-                        <td id='consonnes_checker'></td>
-                        <td id='tedo_checker'></td>
-                        <td id='voyelles_checker'></td>
-                        <td id='tons_checker'></td>
-                        <td id='nasalisation_checker'></td>
-                    </tr>
-                 </table>
-                <table id='table2'>
-                    <tr>
-                        <td><input type='submit' name='submit_btn' value='ߏ߬ ߛߓߍߦߊ߫. ' id='submit_btn'></td>
-                    </tr>
-                </table>
-            </div>
-
-            <div style='display:none'>
-                <div id='voyelles_cochees'></div>
-                <div id='consonnes_cochees'></div>
-                <div id='tedos_coches'></div>
-                <div id='tons_coches'></div>
-                <div id='nasalisations_cochees'></div>
-            </div>
-         </div> -->
+      <div class="parametres_container" id="parametre_lesson_container"> <?php include("parametre.php"); ?> </div>
       <!--------------------------------------------------------------------------------------------------------------->
         <div class="course" id="apprentissage">
             
@@ -102,7 +76,7 @@ if(isset($_SESSION["id"])) {
                 <div class="dialogue_btn" id="apprentissage_dialogue_btn">
 
                     <div class="btns media" id="media_appentissage">
-                        <div class="btns_container media_btns">
+                        <div class="media_btns">
                             <div class='btn'>
                                 <span class='play_icon'>&#9664;</span>
                                 <span class='play_label'>ߝߐߟߊ߲</span>
@@ -117,15 +91,14 @@ if(isset($_SESSION["id"])) {
                     </div>
 
                     <div class="btns parametre" id="parametre_lesson">
-                        <div class="btns_container"> <?php include("parametre.php"); ?> </div>
-                        <div class='parametres_btns'>
+                        <div class='parametres_btns' id='parametre_lesson_btn'>
                             <span class='parametre_icon'>&#9881;</span>
                             <span class='parametre_label'>ߛߏ߯ߙߏߟߊ߲</span>  
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+         </div>
       <!--------------------------------------------------------------------------------------------------------------->
         <div class="course" id="exercice"     >
             
@@ -326,8 +299,21 @@ if(isset($_SESSION["id"])) {
      </div>
 
     <audio id="audio"></audio>
+
+
+
+	<script src="/kouroukan/js/caracteres.js"></script>
     
+    <script src="/kouroukan/js/alphabet.js"></script>
+	<script src="/kouroukan/js/syllabes.js"></script>
+	<script src="/kouroukan/js/tons.js"></script>
+	<script src="/kouroukan/js/chiffres.js"></script>
+	
     <script src="/kouroukan/js/parametres.js"></script>
+
+    <script src="/kouroukan/js/apprentissage.js"></script>
+    <script src="/kouroukan/js/evaluations.js"></script>
+    <script src="/kouroukan/js/lessons.js"></script>
     
 </body>
 </html>

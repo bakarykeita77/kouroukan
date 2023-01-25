@@ -40,13 +40,13 @@
     }	
     function affichageDeParametres(){
         $(".parametres_btns").on('mouseover', function() { afficherParametres(); });
-        $(".parametres_container").on('mouseleave', function(){ masquerParametres(); });
-        $('#submit_btn').on('click', function(){ masquerParametres(); });
+        $(".parametres_popup").on('mouseleave', function(){ masquerParametres(); });
+        $('.course_container, #submit_btn').on('click', function(){ masquerParametres(); });
         
         function afficherParametres() { 
             $(".parametres_container").css({"display":"block", "opacity":0}); 
             setTimeout(() => { $(".parametres_container").css({"transform":"scale(1)", "opacity":1}); }, 10);
-    }
+        }
         function masquerParametres() {
             $(".parametres_container").css({"transform":"scale(0.75)", "opacity":0});
             setTimeout(() => { $(".parametres_container").css({"display":"none"}); }, 300);

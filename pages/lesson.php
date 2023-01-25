@@ -56,13 +56,13 @@ if(isset($_SESSION["id"])) {
         <div class="page_foot"><?php include("pied-de-lesson.php"); ?></div>
     </div>
 
+      <div class="parametres_container" id="parametre_lesson_container"> <?php include("parametre.php"); ?> </div>
     <div class="course_container">
         
       <!--------------------------------------------------------------------------------------------------------------->
         <span class="fermeture" id="">&times;</span>
       <!--------------------------------------------------------------------------------------------------------------->
 	    
-      <div class="parametres_container" id="parametre_lesson_container"> <?php include("parametre.php"); ?> </div>
       <!--------------------------------------------------------------------------------------------------------------->
         <div class="course" id="apprentissage">
             

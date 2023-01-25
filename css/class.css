@@ -38,7 +38,6 @@ html { font-size: 16px; direction: rtl; }
     .page_body { width: 100%; }
     .note_container { display: none; }
 }
-*,::before,::after { box-sizing:border-box; }
 
 
 
@@ -191,7 +190,6 @@ html { font-size: 16px; direction: rtl; }
     border-radius: 0.5rem;
     background-color: var(--couleurNeutre);
     box-shadow: var(--shadowQuarternaire);
-    opacity: 1;
     z-index: 0;
     transition: 0.6s;
 }
@@ -560,18 +558,16 @@ html { font-size: 16px; direction: rtl; }
     margin: var(--marginSmall);
     border-radius: var(--radiusSmall);
 }
-.parametres_container .btn:hover {
-    box-shadow: var(--shadowTertiaire);
-}
+.parametres_container .btn:hover { box-shadow: var(--shadowTertiaire); }
 .parametres_container {
     position: absolute;
+    height: 17rem;
+    width: 25rem;
     margin: 0;
-    transform: scale(0.75);
-    background-color: var(--couleurNeutre);
+    padding: 0;
     border-radius: var(--radiusSmall);
     box-shadow: 0 0 2rem black;
     transition: 0.25s;
-    overflow: auto;
     opacity: 0;
     z-index: 10;
 }
@@ -585,7 +581,12 @@ html { font-size: 16px; direction: rtl; }
     width: 10rem;
 }
 .parametres_popup {
+    position: absolute;
+    bottom: 0;
+    margin: 0;
     min-width: 25rem;
+    background-color: var(--couleurNeutre);
+    left: 0;
 }
 .parentgrid { display: grid; }
 .parentcell { display: table-cell; vertical-align: middle; }

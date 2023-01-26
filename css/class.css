@@ -71,14 +71,29 @@ html { font-size: 16px; direction: rtl; }
 
 
 .btn { 
-    height: 2rem; 
-    padding-right: 1rem; 
+    height: 1.5rem; 
+    padding: 0.5rem 1rem; 
     margin: 0.5rem; 
     border-radius: var(--radiusSmall);
 }
 .btn:hover {
     background-color: var(--couleurNeutre);
     box-shadow: var(--shadowTertiaire);
+}
+.btn span {
+    position: absolute;
+    height: 1.5rem;
+    line-height: 1.5rem;
+}
+.btn span:first-child {
+    width: 1.5rem;
+    line-height: 1.5rem;
+    text-align: center;
+    border: var(--borderPrimaire);
+    border-radius: var(--radiusCircle);
+}
+.btn span:last-child {
+    margin-right: 2rem;
 }
 .btns {    
     position: absolute;
@@ -477,11 +492,13 @@ html { font-size: 16px; direction: rtl; }
     display: none;
     height: 6rem;
     width: 10rem;
+    padding: 1rem;
     transform: scale(0.75);
     bottom: 3rem;
     overflow: hidden;
     background-color: var(--couleurNeutre);
     border-radius: var(--radiusSmall);
+    box-shadow: var(--shadowQuarternaire);
     opacity: 0;
     transition: 1s;
 }
@@ -602,7 +619,7 @@ html { font-size: 16px; direction: rtl; }
     margin: 0;
     padding: 0;
     border-radius: var(--radiusSmall);
-    box-shadow: 0 0 2rem black;
+    box-shadow: var(--shadowQuarternaire);
     transition: 0.25s;
     opacity: 0;
     z-index: 10;

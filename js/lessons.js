@@ -343,21 +343,21 @@ $('document').ready(function() {
     	    }
        
             function lessonCourante() {
-                alert(phase_id); 
-                if(phase_id=='alphabet_apprentissage') { lesson_courante = alphabetApprentissageHTML(); } //Voir alphabet.js 
-                if(phase_id=='alphabet_exercice'     ) { lesson_courante = alphabetExercicesHTML();     } //Voir alphabet.js
                 
-                if(phase_id=='syllabes_apprentissage') { lesson_courante = syllabesApprentissageHTML(); } //Voir syllabes.js
-                if(phase_id=='syllabes_exercice'     ) { lesson_courante = syllabesExercicesHTML();     } //Voir syllabes.js
-                if(phase_id=='syllabes_pratique'     ) { lesson_courante = syllabesPratiquesHTML();     } //Voir syllabes.js
+                if(phase_id=='alphabet_apprentissage') { lesson_courante = alphabetApprentissageHTML(); } // Voir alphabet.js 
+                if(phase_id=='alphabet_exercice'     ) { lesson_courante = alphabetExercicesHTML();     } // Voir alphabet.js
+                
+                if(phase_id=='syllabes_apprentissage') { lesson_courante = syllabesApprentissageHTML(); } // Voir syllabes.js
+                if(phase_id=='syllabes_exercice'     ) { lesson_courante = syllabesExercicesHTML();     } // Voir syllabes.js
+                if(phase_id=='syllabes_pratique'     ) { lesson_courante = syllabesPratiquesHTML();     } // Voir syllabes.js
               
-                if(phase_id=='tons_apprentissage'    ) { lesson_courante = tonsApprentissageHTML();     } //Voir tons.js
-                if(phase_id=='tons_exercice'         ) { lesson_courante = tonsExercicesHTML();         } //Voir tons.js
-                if(phase_id=='tons_pratique'         ) { lesson_courante = tonsPratiquesHTML();         } //Voir tons.js
+                if(phase_id=='tons_apprentissage'    ) { lesson_courante = tonsApprentissageHTML();     } // Voir tons.js
+                if(phase_id=='tons_exercice'         ) { lesson_courante = tonsExercicesHTML();         } // Voir tons.js
+                if(phase_id=='tons_pratique'         ) { lesson_courante = tonsPratiquesHTML();         } // Voir tons.js
             
-                if(phase_id=='chiffres_apprentissage') { lesson_courante = chiffresApprentissageHTML(); } //Voir chiffres.js
-                if(phase_id=='chiffres_exercice'     ) { lesson_courante = chiffresExercicesHTML();     } //Voir chiffres.js
-                if(phase_id=='chiffres_pratique'     ) { lesson_courante = chiffresPratiquesHTML();     } //Voir chiffres.js
+                if(phase_id=='chiffres_apprentissage') { lesson_courante = chiffresApprentissageHTML(); } // Voir chiffres.js
+                if(phase_id=='chiffres_exercice'     ) { lesson_courante = chiffresExercicesHTML();     } // Voir chiffres.js
+                if(phase_id=='chiffres_pratique'     ) { lesson_courante = chiffresPratiquesHTML();     } // Voir chiffres.js
 
                 return lesson_courante;
             }
@@ -365,7 +365,12 @@ $('document').ready(function() {
             	$('.course_container').css({'display':'block'});
                 $('.course').css('display','none');
             }
-            function afficherMediaBoutons() { $(".media_btns").css({"display":"block", "transform":"scale(1)", "opacity":1}); }
+            function afficherMediaBoutons() { 
+                $(".parametres_container").css({"transform":"scale(0.75)", "opacity":0});
+                setTimeout(() => { $(".parametres_container").css({"display":"none"}); }, 250);
+
+                $(".media_btns").css({"display":"block", "transform":"scale(1)", "opacity":1}); 
+            }
             function masquerMediaBoutons(){
                 $(".media_btns").css({"tansform":"scale(0.75)", "opacity":0});
                 setTimeout(() => { $(".media_btns").css({"display":"none"}); }, 300);
@@ -456,6 +461,7 @@ $('document').ready(function() {
                             function affichageDesBoutonsMedia(){
                                 $(".media_label").on('mouseover', function() { afficherMediaBoutons(); });
                                 $(".media_btns").on('mouseleave', function(){ masquerMediaBoutons(); });
+                                $('.course_container').on('click', function(){ masquerMediaBoutons(); });
                     
                                 $(".media_btns .btn").click(function() {
                                     $(".media_btns .btn").css('background-color','white');

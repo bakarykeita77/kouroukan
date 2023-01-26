@@ -38,18 +38,21 @@
         syllabes = syllab();                // Voir js/syllabes.js 
         syllabes_tonifies = tonification(); // Voir js/tons.js
     }	
-    function affichageDeParametres(){
+    function affichageDeParametres(){ 
         $(".parametres_btns").on('mouseover', function() { afficherParametres(); });
         $(".parametres_popup").on('mouseleave', function(){ masquerParametres(); });
         $('.course_container, #submit_btn').on('click', function(){ masquerParametres(); });
         
         function afficherParametres() { 
+            $(".media_btns").css({"tansform":"scale(0.75)", "opacity":0});
+            $(".media_btns").css({"display":"none"});
+
             $(".parametres_container").css({"display":"block", "opacity":0}); 
             setTimeout(() => { $(".parametres_container").css({"transform":"scale(1)", "opacity":1}); }, 10);
         }
         function masquerParametres() {
             $(".parametres_container").css({"transform":"scale(0.75)", "opacity":0});
-            setTimeout(() => { $(".parametres_container").css({"display":"none"}); }, 300);
+            setTimeout(() => { $(".parametres_container").css({}); }, 300);
         }
     }
     function parametrageDeLesson(){

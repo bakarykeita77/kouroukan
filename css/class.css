@@ -28,6 +28,7 @@
     --shadowQuarternaire: 0 0 3rem #666;
 }
 
+/* --------------------------------------------------------------------------------------------------------- */
 
 html { font-size: 16px; direction: rtl; }
 @media screen and (min-width: 601px) {
@@ -39,6 +40,7 @@ html { font-size: 16px; direction: rtl; }
     .note_container { display: none; }
 }
 
+/* --------------------------------------------------------------------------------------------------------- */
 
 
 .actif, .active, .apprises, .a_apprendre {
@@ -65,13 +67,26 @@ html { font-size: 16px; direction: rtl; }
 .a_apprendre { background-color: #bbb; }
 .a_apprendre a { color: #999; text-shadow: none; }
 
+/* --------------------------------------------------------------------------------------------------------- */
 
 
+.btn { 
+    height: 2rem; 
+    padding-right: 1rem; 
+    margin: 0.5rem; 
+    border-radius: var(--radiusSmall);
+}
+.btn:hover {
+    background-color: var(--couleurNeutre);
+    box-shadow: var(--shadowTertiaire);
+}
 .btns {    
     position: absolute;
     height: 2rem;
     bottom: 0;
+    border: var(--borderPrimaire);
 }
+.btns_label { padding-right: 1rem; }
 .bulle {
     position: relative;
     display: inline-block;
@@ -86,6 +101,7 @@ html { font-size: 16px; direction: rtl; }
     transition: 0.4s;
 }
 
+/* --------------------------------------------------------------------------------------------------------- */
 
 
 .centerflex {
@@ -257,6 +273,7 @@ html { font-size: 16px; direction: rtl; }
     background-color: #000;
 }
 
+/* --------------------------------------------------------------------------------------------------------- */
 
 
 .dark_backgound { background-color: #aaa; }
@@ -266,11 +283,11 @@ html { font-size: 16px; direction: rtl; }
     width: 100%;
     height: 2rem;
     line-height: 2rem;
-    text-align: center;
     font-weight: bold;
     cursor: pointer;
 }
 
+/* --------------------------------------------------------------------------------------------------------- */
 
 
 .error_message { color: rgba(255,0,0,0.5); }
@@ -312,6 +329,9 @@ html { font-size: 16px; direction: rtl; }
 }
 .evaluation { width: 80vw; }
 
+/* --------------------------------------------------------------------------------------------------------- */
+
+
 .fermeture, .fermeture_de_parent, .fermeture_note_btn {
     position: absolute;
     top: 0;
@@ -336,6 +356,9 @@ html { font-size: 16px; direction: rtl; }
 .fond_noir_clair { background-color: #999; }
 .fond_orange { background-color: orange; }
 
+/* --------------------------------------------------------------------------------------------------------- */
+
+
 .hand {
     position: absolute;
     display: none;
@@ -358,6 +381,9 @@ html { font-size: 16px; direction: rtl; }
     transition: 0.1s;
 }
 
+/* --------------------------------------------------------------------------------------------------------- */
+
+
 .images_container {
     position: relative;
     top: 48px;
@@ -377,6 +403,7 @@ html { font-size: 16px; direction: rtl; }
     z-index: 1;
 }
 
+/* --------------------------------------------------------------------------------------------------------- */
 
 
 .left { float: left; }
@@ -415,6 +442,7 @@ html { font-size: 16px; direction: rtl; }
     text-overflow: ellipsis;
 }
 
+/* --------------------------------------------------------------------------------------------------------- */
 
 
 .masqueur, .masqueur_de_parent {
@@ -446,11 +474,16 @@ html { font-size: 16px; direction: rtl; }
 }
 .media_btns {
     position: absolute;
+    display: none;
+    height: 6rem;
     width: 10rem;
-    height: 0;
-    bottom: 2rem;
+    transform: scale(0.75);
+    bottom: 3rem;
     overflow: hidden;
-    transition: 0.25s;
+    background-color: var(--couleurNeutre);
+    border-radius: var(--radiusSmall);
+    opacity: 0;
+    transition: 1s;
 }
 .media_label {
     position: absolute;
@@ -458,6 +491,7 @@ html { font-size: 16px; direction: rtl; }
     bottom: 0;
 }
 
+/* --------------------------------------------------------------------------------------------------------- */
 
 
 .nasalisations_btn_container input, .nasalisations_btn_container label { display: inline-block; vertical-align: middle; }
@@ -512,11 +546,13 @@ html { font-size: 16px; direction: rtl; }
     border-bottom: var(--borderTertiaire);
 }
 
+/* --------------------------------------------------------------------------------------------------------- */
 
 
 .opaque { animation: opacir0.6s 1; }
 .ombrage { box-shadow: 0 4px 43px #000; background-color: white; color: black; }
 
+/* --------------------------------------------------------------------------------------------------------- */
 
 
 .page_body {
@@ -572,13 +608,10 @@ html { font-size: 16px; direction: rtl; }
     z-index: 10;
 }
 .parametres_btns {
-    position: relative;
-    left: 16px;
     bottom: 0;
     background-color: var(--couleurNeutre);
-    border: var(--borderPrimaire);
     height: 2rem;
-    width: 10rem;
+    padding-right: 1rem;
 }
 .parametres_popup {
     position: absolute;
@@ -633,6 +666,15 @@ html { font-size: 16px; direction: rtl; }
     border-radius: 50%;
     font-weight: bold;
     text-align: center;
+}
+.popup {
+    position: absolute;
+    min-width: 10rem;
+    min-height: 10rem;
+    background-color: var(--couleurNeutre);
+    transform: scale(0.75);
+    opacity: 0;
+    transition: 0.3s;
 }
 .pratique_tr_actif {
     color: orange;
@@ -694,16 +736,18 @@ html { font-size: 16px; direction: rtl; }
 .progress_bonne_reponse_bar { background-color: yellow; }
 .progress_question_bar { background-color: #bbb; }
 
-
+/* --------------------------------------------------------------------------------------------------------- */
 
 .right { float: right; }
 
 
+/* --------------------------------------------------------------------------------------------------------- */
 
 .shadow { box-shadow: 0 8px 8px #666; }
 .surbrillance { border: 1px solid yellow; color: yellow; }
 
 
+/* --------------------------------------------------------------------------------------------------------- */
 
 .table_parlante, .table_muette {
     position: relative;
@@ -727,6 +771,8 @@ html { font-size: 16px; direction: rtl; }
 .transparent { animation: transperer; }
 
 
+/* --------------------------------------------------------------------------------------------------------- */
+
 
 .wraped {
     border: 1px solid transparent;
@@ -737,10 +783,12 @@ html { font-size: 16px; direction: rtl; }
 .wraped li { border-bottom-color: #ccc; }
 .yellow_backgound { background-color: yellow; }
 
+/* --------------------------------------------------------------------------------------------------------- */
 
 
 .yellow { background-color: yellow; color: black; }
 
+/* --------------------------------------------------------------------------------------------------------- */
 
 
 @keyframes animate_hand {

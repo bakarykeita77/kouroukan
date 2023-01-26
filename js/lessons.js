@@ -343,7 +343,7 @@ $('document').ready(function() {
     	    }
        
             function lessonCourante() {
-
+                alert(phase_id); 
                 if(phase_id=='alphabet_apprentissage') { lesson_courante = alphabetApprentissageHTML(); } //Voir alphabet.js 
                 if(phase_id=='alphabet_exercice'     ) { lesson_courante = alphabetExercicesHTML();     } //Voir alphabet.js
                 
@@ -365,12 +365,10 @@ $('document').ready(function() {
             	$('.course_container').css({'display':'block'});
                 $('.course').css('display','none');
             }
-            function afficherMediaBoutons() { $(".media_btns").css({"display":"block", "height":"5rem"}); }
+            function afficherMediaBoutons() { $(".media_btns").css({"display":"block", "transform":"scale(1)", "opacity":1}); }
             function masquerMediaBoutons(){
-                $(".media_btns").css({"height":"0"});
-                setTimeout(() => {
-                    $(".media_btns").css({"display":"none"});
-                }, 300);
+                $(".media_btns").css({"tansform":"scale(0.75)", "opacity":0});
+                setTimeout(() => { $(".media_btns").css({"display":"none"}); }, 300);
             }
             function questions() {
                 var lq = '';
@@ -419,18 +417,17 @@ $('document').ready(function() {
                         $('.fermeture').attr('id', 'fermer_apprentissage');
                    
                 	    afficherApprentissage();
-                        parametresDeApprentissage();
+                        parametresPosition();
                 	    chargerApprentissage();
                         apprendre();
                     	enregistrerApprentissage();
                 	    stockerApprentissage();
                     	                        	
                     	function chargerApprentissage() { $('#apprentissage_body').html( "<div id='table_parlante_container'>"+lesson_courante+"</div>" ); }
-                    	function parametresDeApprentissage()  {
+                    	function parametresPosition() {
 
                             let param_btn = document.querySelector('#parametre_lesson_btn');
                             let param_btn_object = param_btn.getBoundingClientRect();
-                            let param_btn_height = param_btn_object.height;
                             let param_btn_top = param_btn_object.top;
                             let param_btn_left = $('#parametre_lesson_btn').offset().left;
 
@@ -457,12 +454,8 @@ $('document').ready(function() {
                     	    
                     	    
                             function affichageDesBoutonsMedia(){
-                                $(".media").on('mouseover', function() { 
-                                    afficherMediaBoutons(); 
-                                });
-                                $(".media").on('mouseleave', function(){ 
-                                    masquerMediaBoutons(); 
-                                });
+                                $(".media_label").on('mouseover', function() { afficherMediaBoutons(); });
+                                $(".media_btns").on('mouseleave', function(){ masquerMediaBoutons(); });
                     
                                 $(".media_btns .btn").click(function() {
                                     $(".media_btns .btn").css('background-color','white');
@@ -652,7 +645,7 @@ $('document').ready(function() {
                 	    } 
                 	}
                 	function exercices() {
-               	    
+              	    
                 	    var compteur_de_question = 1;
                 	    var question_rang = '߭';
                         var exercice_a_stocker = [];

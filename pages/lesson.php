@@ -75,7 +75,7 @@ if(isset($_SESSION["id"])) {
             <div class="course_foot" id="apprentissage_foot">
                 <div class="dialogue_btn" id="apprentissage_dialogue_btn">
 
-                    <div class="btns media" id="media_appentissage">
+                    <div class="btns media" id="media_apprentissage">
                         <div class="media_btns">
                             <div class='btn'>
                                 <span class='play_icon'>&#9664;</span>
@@ -310,6 +310,7 @@ if(isset($_SESSION["id"])) {
 	<script src="/kouroukan/js/chiffres.js"></script>
 	
     <script src="/kouroukan/js/parametres.js"></script>
+    <script src="/kouroukan/class-fonctions.js"></script>
 
     <script src="/kouroukan/js/apprentissage.js"></script>
     <script src="/kouroukan/js/evaluations.js"></script>

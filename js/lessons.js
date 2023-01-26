@@ -252,14 +252,13 @@ $('document').ready(function() {
     }
 	function matiere() {
   	
-    	actualiserCochage();
         lettres = voyelles_cochees.concat(consonnes_cochees,tedos_coches);
         syllabes = syllab();
     	
     	$('#phases_list li').on('click', function(e){
       
             var syllabes = syllab();
-            var syllabes_tonifies = tonification(); // Voir cette fonction dans js/tons.js 
+            var syllabes_tonifies = tonification(); // Voir js/tons.js 
 
             var questionnaires = questions();
             var questions_quantity = quantiteDeQuestion();
@@ -290,8 +289,10 @@ $('document').ready(function() {
             var dialogue_btn_html = $('.dialogue_btn').html();
             var parametres_html = parametres.html();
 
+            sessionStorage.setItem("phase_id", JSON.stringify(phase_id));
+
           /*--------------------------------------------------------------------*/   
-          
+   
     	    phaseActiveName();
     	    dimensionnementDeCourseBody();
     	    affichageDeCours();
@@ -342,27 +343,32 @@ $('document').ready(function() {
     	    }
        
             function lessonCourante() {
-
-                if(phase_id=='alphabet_apprentissage') { lesson_courante = alphabetApprentissageHTML(); } //Cette fonction provient de alphabet.js 
-                if(phase_id=='syllabes_apprentissage') { lesson_courante = syllabesApprentissageHTML(); } //Cette fonction provient de syllabes.js
-                if(phase_id=='tons_apprentissage'    ) { lesson_courante = tonsApprentissageHTML();     } //Cette fonction provient de tons.js
-                if(phase_id=='chiffres_apprentissage') { lesson_courante = chiffresApprentissageHTML(); } //Cette fonction provient de chiffres.js
+                alert(phase_id); 
+                if(phase_id=='alphabet_apprentissage') { lesson_courante = alphabetApprentissageHTML(); } //Voir alphabet.js 
+                if(phase_id=='alphabet_exercice'     ) { lesson_courante = alphabetExercicesHTML();     } //Voir alphabet.js
                 
-                if(phase_id=='alphabet_exercice'     ) { lesson_courante = alphabetExercicesHTML();     } //Cette fonction provient de alphabet.js
-                if(phase_id=='syllabes_exercice'     ) { lesson_courante = syllabesExercicesHTML();     } //Cette fonction provient de syllabes.js
-                if(phase_id=='tons_exercice'         ) { lesson_courante = tonsExercicesHTML();         } //Cette fonction provient de tons.js
-                if(phase_id=='chiffres_exercice'     ) { lesson_courante = chiffresExercicesHTML();     } //Cette fonction provient de chiffres.js
+                if(phase_id=='syllabes_apprentissage') { lesson_courante = syllabesApprentissageHTML(); } //Voir syllabes.js
+                if(phase_id=='syllabes_exercice'     ) { lesson_courante = syllabesExercicesHTML();     } //Voir syllabes.js
+                if(phase_id=='syllabes_pratique'     ) { lesson_courante = syllabesPratiquesHTML();     } //Voir syllabes.js
               
-               // if(phase_id=='syllabes_pratique'     ) { lesson_courante = syllabesPratiquesHTML();     } //Cette fonction provient de syllabes.js
-               // if(phase_id=='tons_pratique'         ) { lesson_courante = tonsPratiquesHTML();         } //Cette fonction provient de tons.js
-               // if(phase_id=='chiffres_pratique'     ) { lesson_courante = chiffresPratiquesHTML();     } //Cette fonction provient de chiffres.js
+                if(phase_id=='tons_apprentissage'    ) { lesson_courante = tonsApprentissageHTML();     } //Voir tons.js
+                if(phase_id=='tons_exercice'         ) { lesson_courante = tonsExercicesHTML();         } //Voir tons.js
+                if(phase_id=='tons_pratique'         ) { lesson_courante = tonsPratiquesHTML();         } //Voir tons.js
             
+                if(phase_id=='chiffres_apprentissage') { lesson_courante = chiffresApprentissageHTML(); } //Voir chiffres.js
+                if(phase_id=='chiffres_exercice'     ) { lesson_courante = chiffresExercicesHTML();     } //Voir chiffres.js
+                if(phase_id=='chiffres_pratique'     ) { lesson_courante = chiffresPratiquesHTML();     } //Voir chiffres.js
+
                 return lesson_courante;
-                
             }
             function affichageDeCours(){
             	$('.course_container').css({'display':'block'});
                 $('.course').css('display','none');
+            }
+            function afficherMediaBoutons() { $(".media_btns").css({"display":"block", "transform":"scale(1)", "opacity":1}); }
+            function masquerMediaBoutons(){
+                $(".media_btns").css({"tansform":"scale(0.75)", "opacity":0});
+                setTimeout(() => { $(".media_btns").css({"display":"none"}); }, 300);
             }
             function questions() {
                 var lq = '';
@@ -386,16 +392,9 @@ $('document').ready(function() {
             }
     	    function cours() {
                 
-                if(phase_class == 'apprises') {
-                    $('.course_container').css('display','none');
-                    alert("ߕߊ߲߬ߓߌ߬ ߓߘߊ߫ ߞߍ߫ ߦߊ߲߬ ߘߐ߫ ߞߘߐ߬ߡߊ߲߬");
-                }
-                if(phase_class == 'a_apprendre') {
-                    $('.course_container').css('display','none'); 
-                    alert("ߘߊߞߎ߲ ߡߊ߫ ߛߋ߫ ߦߊ߲߬ ߡߊ߫ ߝߟߐ߫");  
-                } 
-  
-        	    if(phase_class == 'active') {       
+                if(phase_class == 'apprises')    { $('.course_container').css('display','none'); alert("ߕߊ߲߬ߓߌ߬ ߓߘߊ߫ ߞߍ߫ ߦߊ߲߬ ߘߐ߫ ߞߘߐ߬ߡߊ߲߬"); }
+                if(phase_class == 'a_apprendre') { $('.course_container').css('display','none'); alert("ߘߊߞߎ߲ ߡߊ߫ ߛߋ߫ ߦߊ߲߬ ߡߊ߫ ߝߟߐ߫");   }  
+        	    if(phase_class == 'active') {
 
                     $('.course_container').css('display','block');
                     $('.course').css('display','none');
@@ -417,51 +416,36 @@ $('document').ready(function() {
                       
                         $('.fermeture').attr('id', 'fermer_apprentissage');
                    
-                	    chargerApprentissage();
                 	    afficherApprentissage();
-                        parametrageDeApprentissage();
+                        parametresPosition();
+                	    chargerApprentissage();
                         apprendre();
                     	enregistrerApprentissage();
                 	    stockerApprentissage();
                     	                        	
-                    	function chargerApprentissage() { 
-                           // $('#fermer_apprentissage').click(function(){lesson_courante = '';});  
-                            $('#apprentissage_body').html( "<div id='table_parlante_container'>"+lesson_courante+"</div>" ); 
-                    	}
-                    	function afficherApprentissage() {
-                            apprentissage.css({'display':'block', 'transform':'scale(0.75)', 'opacity':0});
+                    	function chargerApprentissage() { $('#apprentissage_body').html( "<div id='table_parlante_container'>"+lesson_courante+"</div>" ); }
+                    	function parametresPosition() {
+
+                            let param_btn = document.querySelector('#parametre_lesson_btn');
+                            let param_btn_object = param_btn.getBoundingClientRect();
+                            let param_btn_top = param_btn_object.top;
+                            let param_btn_left = $('#parametre_lesson_btn').offset().left;
+
+                            let parametres_container = document.querySelector('.parametres_container');
+                            let parametres_object = parametres_container.getBoundingClientRect();
+                            let parametres_height = parametres_object.height;
+
+                            $('.parametres_container').offset({'top':param_btn_top - parametres_height - 16, 'left':param_btn_left});
+                        }
+                        function afficherApprentissage() {
+                            apprentissage.css({'display':'block'});                          
+
                             setTimeout(function() { apprentissage.css({'transform':'scale(1)'});}, 5);
                             setTimeout(function() { apprentissage.css({'opacity':'1'});}, 5);
                     	}
-                        function parametrageDeApprentissage() {
-                            affichageDeParametres();
-                            
-                    	    $('#parametres td').on('click', function(){ 
-                                
-                    	        actualiserCochage(); 
-                    	        
-                    	        lettres = voyelles_cochees.concat(consonnes_cochees,tedos_coches);
-                    	        syllabes = syllab();
-                    	        syllabes_tonifies = tonification(); // Voir cette fonction dans js/tons.js 
-                    	        
-                    	        $('#apprentissage_body').html( lessonCourante() ); 
-                    	        $('.stop_btn_container').css({'display':'none'});
-                    	        $('.play_btn_container').css({'display':'block'});
-                        	        
-                        	    lectureSemiAutomatique(); // Voir fonctions.js
-                        	    lecturePersonnalisee();   // Voir fonctions.js
-                        	    arreterLecture(lessonCourante); // Voir fonctions.js
-                    	    });
-                    	    
-                            function affichageDeParametres(){
-                                $('.parametre_btn_container').on('click', function(){
-                                    parametres.css({'display':'block'});
-                                });
-                            }
-                        }
                         function apprendre() {
                             
-                            changementDesBoutonsMedia();
+                            affichageDesBoutonsMedia();
                     	    
                     	    lectureSemiAutomatique(); // Voir fonctions.js
                     	    lecturePersonnalisee();   // Voir fonctions.js
@@ -469,16 +453,14 @@ $('document').ready(function() {
                     	    apprentissageProgressBarr();
                     	    
                     	    
-                            function changementDesBoutonsMedia(){
-                        	    $('.play_btn_container').on('click', function(){
-                        	        $(this).css({'display':'none'});
-                        	        $('.stop_btn_container').css({'display':'block'});
-                        	    });
-                       	        
-                        	    $('.stop_btn_container').on('click', function(){
-                        	        $(this).css({'display':'none'});
-                        	        $('.play_btn_container').css({'display':'block'});
-                        	    });
+                            function affichageDesBoutonsMedia(){
+                                $(".media_label").on('mouseover', function() { afficherMediaBoutons(); });
+                                $(".media_btns").on('mouseleave', function(){ masquerMediaBoutons(); });
+                    
+                                $(".media_btns .btn").click(function() {
+                                    $(".media_btns .btn").css('background-color','white');
+                                    $(this).css('background-color','yellow');
+                                });
                             }
                             function apprentissageProgressBarr() {
                                             
@@ -663,7 +645,7 @@ $('document').ready(function() {
                 	    } 
                 	}
                 	function exercices() {
-               	    
+              	    
                 	    var compteur_de_question = 1;
                 	    var question_rang = '߭';
                         var exercice_a_stocker = [];
@@ -2140,17 +2122,6 @@ $('document').ready(function() {
         }
     	
     	$('#go_to_lesson').on('click', function() { $('.phases ul li').click(); });
-	    
-        function actualiserCochage() {
-            voyelles_cochees = $('#voyelles_cochees').html().split('');
-            consonnes_cochees = $('#consonnes_cochees').html().split('');
-            tedos_coches = $('#tedos_coches').html().split('');
-            tons_coches = [''].concat($('#tons_coches').html().split(''));
-            nasalisations_cochees = [''].concat($('#nasalisations_cochees').html().split(''));
-            caracteres_coches = [voyelles_cochees, consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees];
-        }	    
 	}
-    function initialiserProgressBarr() {
-        $('.progress_question_bar, .progress_bonne_reponse_bar').css('width',0);
-    }
+    function initialiserProgressBarr() { $('.progress_question_bar, .progress_bonne_reponse_bar').css('width',0); }
 });

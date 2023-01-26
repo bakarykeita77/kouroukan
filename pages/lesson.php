@@ -1,7 +1,7 @@
 <?php header('Content-Type: text/html; charset=utf-8');
 session_start();
 
-if(isset($_SESSION["id"])){
+if(isset($_SESSION["id"])) {
     
     $matiere_id      = $_GET['matiere_id'];
     $matiere_index   = $_GET['matiere_index'];
@@ -21,12 +21,10 @@ if(isset($_SESSION["id"])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
-    <link rel="stylesheet" href="/kouroukan/css/class.css"/>
     <link rel="stylesheet" href="/kouroukan/css/tete-de-page.css"/>
 	
 	<link rel="stylesheet" href="/kouroukan/css/lesson.css"/>
 	<link rel="stylesheet" href="/kouroukan/css/syllabes.css"/>
-	<link rel="stylesheet" href="/kouroukan/css/parametres.css"/>
 	<link rel="stylesheet" href="/kouroukan/css/apprentissage.css"/>
 	<link rel="stylesheet" href="/kouroukan/css/exercice.css"/>
 	<link rel="stylesheet" href="/kouroukan/css/pratiques.css"/>
@@ -58,39 +56,13 @@ if(isset($_SESSION["id"])){
         <div class="page_foot"><?php include("pied-de-lesson.php"); ?></div>
     </div>
 
+      <div class="parametres_container" id="parametre_lesson_container"> <?php include("parametre.php"); ?> </div>
     <div class="course_container">
         
       <!--------------------------------------------------------------------------------------------------------------->
         <span class="fermeture" id="">&times;</span>
       <!--------------------------------------------------------------------------------------------------------------->
 	    
-      <!--Les éléments de paramètres sont chargés depuis js/parametres.js-->
-        <div id="parametres">   
-            <div id='lesson_parametres_glissiere'>
-                <table id='table1'>
-                    <tr id='tr11'>
-                        <td id='consonnes_checker'></td>
-                        <td id='tedo_checker'></td>
-                        <td id='voyelles_checker'></td>
-                        <td id='tons_checker'></td>
-                        <td id='nasalisation_checker'></td>
-                    </tr>
-                 </table>
-                <table id='table2'>
-                    <tr>
-                        <td><input type='submit' name='submit_btn' value='ߏ߬ ߛߓߍߦߊ߫. ' id='submit_btn'></td>
-                    </tr>
-                </table>
-            </div>
-
-            <div style='display:none'>
-                <div id='voyelles_cochees'></div>
-                <div id='consonnes_cochees'></div>
-                <div id='tedos_coches'></div>
-                <div id='tons_coches'></div>
-                <div id='nasalisations_cochees'></div>
-            </div>
-         </div>
       <!--------------------------------------------------------------------------------------------------------------->
         <div class="course" id="apprentissage">
             
@@ -103,24 +75,29 @@ if(isset($_SESSION["id"])){
             <div class="course_foot" id="apprentissage_foot">
                 <div class="dialogue_btn" id="apprentissage_dialogue_btn">
 
-                    <div class='play_btn_container'>
-                        <span class='play_label'>ߝߐߟߊ߲</span>
-                        <span class='play_icon'>&#9664;</span>
+                    <div class="btns media" id="media_apprentissage">
+                        <div class="media_btns">
+                            <div class='btn'>
+                                <span class='play_icon'>&#9664;</span>
+                                <span class='play_label'>ߝߐߟߊ߲</span>
+                            </div>
+
+                            <div class='btn'>
+                                <span class='stop_icon'>&#9632;</span>
+                                <span class='stop_label'>ߘߊ߬ߘߋ߬ߟߊ߲ </span> 
+                            </div>
+                        </div>
+                        <div class="btns_label media_label">ߝߊߟߊ߲ߞߏ</div>
                     </div>
 
-                    <div class='stop_btn_container'>
-                        <span class='stop_label'>ߘߊ߬ߘߋ߬ߟߊ߲ </span> 
-                        <span class='stop_icon'>&#9632;</span>
+                    <div class="btns parametre" id="parametre_lesson">
+                        <div class='parametres_btns' id='parametre_lesson_btn'>
+                            <span class='parametre_icon'>&#9881;</span>
+                            <span class='parametre_label'>ߛߏ߯ߙߏߟߊ߲</span>  
+                        </div>
                     </div>
-
-                    <div class='parametre_btn_container'>
-                        <span class='parametre_label'>ߛߏ߯ߙߏߟߊ߲</span>  
-                        <span class='parametre_icon'>&#9881;</span>
-                    </div>
-
                 </div>
             </div>
-            
          </div>
       <!--------------------------------------------------------------------------------------------------------------->
         <div class="course" id="exercice"     >
@@ -322,13 +299,19 @@ if(isset($_SESSION["id"])){
      </div>
 
     <audio id="audio"></audio>
-    
-    <script src="/kouroukan/js/parametres.js"></script>
+
+
+
+	<script src="/kouroukan/js/caracteres.js"></script>
     
     <script src="/kouroukan/js/alphabet.js"></script>
-    <script src="/kouroukan/js/syllabes.js"></script>
-    <script src="/kouroukan/js/tons.js"></script>
-    <script src="/kouroukan/js/chiffres.js"></script>
+	<script src="/kouroukan/js/syllabes.js"></script>
+	<script src="/kouroukan/js/tons.js"></script>
+	<script src="/kouroukan/js/chiffres.js"></script>
+	
+    <script src="/kouroukan/js/parametres.js"></script>
+    <script src="/kouroukan/class-fonctions.js"></script>
+
     <script src="/kouroukan/js/apprentissage.js"></script>
     <script src="/kouroukan/js/evaluations.js"></script>
     <script src="/kouroukan/js/lessons.js"></script>

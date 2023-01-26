@@ -58,6 +58,8 @@ if(isset($_SESSION['id'])) {
         <link rel="stylesheet" href="/kouroukan/css/class.css"/>
         <link rel="stylesheet" href="/kouroukan/css/tete-de-page.css"/>
     	<link rel="stylesheet" href="/kouroukan/css/programmes.css"/>
+        
+        <script src = "/kouroukan/js/caracteres.js"></script>
     </head>
     <body>
       

@@ -4,13 +4,13 @@
   <!------------------------------------------------------------------------------------------------------------------>	
     <link rel="stylesheet" href="/kouroukan/css/class.css"/>
     <link rel="stylesheet" href="/kouroukan/css/tete-de-page.css"/>
-	
+    
 	<script src="/kouroukan/js/jquery-3.3.1.js"></script>
 	<script src="/kouroukan/fonctions.js"></script>
+	<script src="/kouroukan/class-fonctions.js"></script>
 	<script src="/kouroukan/js/icones.js"></script>
 	<script src="/kouroukan/js/class.js"></script>	
-	<script src="/kouroukan/js/caracteres.js"></script>
-
+	
   <!------------------------------------------------------------------------------------------------------------------>	
 	<?php include("fonctions.php"); ?>  
 	<div id="tete_de_page_container">

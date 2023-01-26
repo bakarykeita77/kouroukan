@@ -3,10 +3,13 @@
     var parametres_btn, parametres;
     var voyelles_checker, consonnes_checker, tedo_checker, tons_checker, nasalisation_checker;
     var checkbox_titre, check_btn_container, checkbox_parent, check_btn, checkbox_children;
-    var voyelle, consonne, tedo, ton, nasalisation;
-    var voyelles, consonnes, tedos, tons, nasalisations;
     var voyelles_cochees = [], consonnes_cochees = [], tedos_coches = [], tons_coches = [], nasalisations_cochees = [], caracteres_coches = [],syllabes_coches = [];
+    var niveau = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
+    var phase_id = JSON.parse(sessionStorage.getItem('phase_id'));
+    var lesson_courante = [];
+    
 
+    
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
  /* Les variables tableaux regroupant les caracteres par types */  
     voyelles = lesVoyelles();
@@ -15,57 +18,49 @@
     nasalisations = laNasalisation();
     tons = lesTons();
 
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/    
     parametrageDeLesson();
+    actualiserCochage();
+    affichageDeParametres();
+    parametrageDeApprentissage();
+    
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/    
 
-    function lesVoyelles(){
-        var v = [];
-        for(var i=0;i<caracteres[0].length;i++){ v[i] = caracteres[0][i]; }
-        return v;
-    }
-    function lesConsonnes(){
-        var c = [];
-        for(var i=0;i<7;i++){
-            c[c.length] = caracteres[1][i];
-        }
-        for(var j=0;j<caracteres[2].length;j++){
-            c[c.length] = caracteres[2][j];
-        }
-        for(var k=7;k<14;k++){
-            c[c.length] = caracteres[1][k];
-        }
-        for(var l=14;l<18;l++){
-            c[c.length] = caracteres[1][l];
-        }
+    function actualiserCochage() {
+        voyelles_cochees = $('#voyelles_cochees').html().split('');
+        consonnes_cochees = $('#consonnes_cochees').html().split('');
+        tedos_coches = $('#tedos_coches').html().split('');
+        tons_coches = [''].concat($('#tons_coches').html().split(''));
+        nasalisations_cochees = [''].concat($('#nasalisations_cochees').html().split(''));
+        caracteres_coches = [voyelles_cochees, consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees];
+
+        lettres = voyelles_cochees.concat(consonnes_cochees,tedos_coches);
+        syllabes = syllab();                // Voir js/syllabes.js 
+        syllabes_tonifies = tonification(); // Voir js/tons.js
+    }	
+    function affichageDeParametres(){
+        $(".parametres_btns").on('mouseover', function() { afficherParametres(); });
+        $(".parametres_popup").on('mouseleave', function(){ masquerParametres(); });
+        $('.course_container, #submit_btn').on('click', function(){ masquerParametres(); });
         
-        return c;
-    }
-    function leTedo(){
-        var t = [];
-        for(var i=0;i<caracteres[3].length;i++){
-            t[i] = caracteres[3][i];
+        function afficherParametres() { 
+            $(".parametres_container").css({"display":"block", "opacity":0}); 
+            setTimeout(() => { $(".parametres_container").css({"transform":"scale(1)", "opacity":1}); }, 10);
         }
-        return t;
-    }
-    function laNasalisation(){
-        var n = [];
-        for(var i=0;i<caracteres[4].length;i++){ n[i] = caracteres[4][i]; }
-        return n;
-    }
-    function lesTons() {
-        var t = [];
-        for(var i=0;i<caracteres[5].length;i++){ t[i] = caracteres[5][i]; }
-        return t;
+        function masquerParametres() {
+            $(".parametres_container").css({"transform":"scale(0.75)", "opacity":0});
+            setTimeout(() => { $(".parametres_container").css({"display":"none"}); }, 300);
+        }
     }
     function parametrageDeLesson(){
        
         parametres = $('#parametres');
         lesson_parametres = $('#lesson_parametres');
+
         selectionDesElementsDeLessonParametres();
         chargementDesElementsDeLessonParametres();
         affichageDeLessonParametres();
         cocherLesCaracteres();
-        submit_btnClick();
        
         function selectionDesElementsDeLessonParametres(){
             submit_btn = $('#submit_btn');
@@ -188,6 +183,7 @@
             
             checkbox_parentClick();
             checkbox_childrenClick();
+            
             $.each($('.checkbox_parent'), function(){ $(this).click(); }); /* Cochage par defaut */
             $('.checkbox_titre').on('click', function(){ $(this).find('.checkbox_parent').click(); });
             $('.check_btn').on('click', function(){ $(this).children().first().click(); });
@@ -203,9 +199,7 @@
                     collecteDesCaracteresCoches();
                 });
              }
-            function checkbox_childrenClick(){
-                $('.checkbox_children').on('click', function(){ collecteDesCaracteresCoches(); }); 
-             }
+            function checkbox_childrenClick(){ $('.checkbox_children').on('click', function(){ collecteDesCaracteresCoches(); }); }
             function collecteDesCaracteresCoches(){
                 viderLesSousTableauxDesCaracteresCoches();
                 rechargerLesSousTableauxDesCaracteresCoches();
@@ -317,23 +311,42 @@
             choixDesOptionsNecessaires();
             function choixDesOptionsNecessaires(){
                 
-                if(niveau==1){
-                    tons_checker.hide();
-                    nasalisation_checker.hide();
-                }
-                if(niveau==2){
-                    tons_checker.hide();
-                    tedo_checker.hide();
-                }
+                if(niveau==1){ tons_checker.hide(); nasalisation_checker.hide(); }
+                if(niveau==2){ tons_checker.hide(); tedo_checker.hide(); }
              }
          }
-        function submit_btnClick(){ 
-            $('#submit_btn').on('click', function(){
+    }
+    function parametrageDeApprentissage() {
+        
+        $('.checkbox_titre, .check_btn').on('click', function() { 
+
+         // Chaque fois qu'un checkbox est clické, le cochage doit etre actualisé et le tableau noir rechargé. 
+            actualiserCochage(); 
+            lesson_courante = lessonCourante();
+            $('#apprentissage_body').html( lesson_courante ); 
                 
-                masquerLessonParametres();
-                function masquerLessonParametres(){
-                    parametres.css({'display':'none'}, 300);
-                 }
-             });
-         }
+            lectureSemiAutomatique(); // Voir fonctions.js
+            lecturePersonnalisee();   // Voir fonctions.js
+            arreterLecture(lessonCourante); // Voir fonctions.js
+
+            function lessonCourante() {
+
+                if(phase_id=='alphabet_apprentissage') { lesson_courante = alphabetApprentissageHTML(); } //Voir alphabet.js 
+                if(phase_id=='syllabes_apprentissage') { lesson_courante = syllabesApprentissageHTML(); } //Voir syllabes.js
+                if(phase_id=='tons_apprentissage'    ) { lesson_courante = tonsApprentissageHTML();     } //Voir tons.js
+                if(phase_id=='chiffres_apprentissage') { lesson_courante = chiffresApprentissageHTML(); } //Voir chiffres.js
+                
+                if(phase_id=='alphabet_exercice'     ) { lesson_courante = alphabetExercicesHTML();     } //Voir alphabet.js
+                if(phase_id=='syllabes_exercice'     ) { lesson_courante = syllabesExercicesHTML();     } //Voir syllabes.js
+                if(phase_id=='tons_exercice'         ) { lesson_courante = tonsExercicesHTML();         } //Voir tons.js
+                if(phase_id=='chiffres_exercice'     ) { lesson_courante = chiffresExercicesHTML();     } //Voir chiffres.js
+              
+               if(phase_id=='syllabes_pratique'      ) { lesson_courante = syllabesPratiquesHTML();     } //Voir syllabes.js
+               if(phase_id=='tons_pratique'          ) { lesson_courante = tonsPratiquesHTML();         } //Voir tons.js
+               if(phase_id=='chiffres_pratique'      ) { lesson_courante = chiffresPratiquesHTML();     } //Voir chiffres.js
+            
+                return lesson_courante;
+            }
+        });
+        
     }

@@ -1,6 +1,6 @@
 :root{
     
-    --borderPrimaire: 1px solid #ddd;
+    --borderPrimaire: 1px solid #aaa;
     --borderSecondaire: 1px solid cornflowerblue;
     --borderTertiaire: 1px solid yellow;
     
@@ -24,8 +24,11 @@
     
     --shadowPrimaire: 0 0 3rem #aaa;
     --shadowSecondaire: 0 0 1rem #aaa;
+    --shadowTertiaire: 0 0 1rem #666;
+    --shadowQuarternaire: 0 0 3rem #666;
 }
 
+/* --------------------------------------------------------------------------------------------------------- */
 
 html { font-size: 16px; direction: rtl; }
 @media screen and (min-width: 601px) {
@@ -36,7 +39,9 @@ html { font-size: 16px; direction: rtl; }
     .page_body { width: 100%; }
     .note_container { display: none; }
 }
-*,::before,::after { box-sizing:border-box; }
+
+/* --------------------------------------------------------------------------------------------------------- */
+
 
 .actif, .active, .apprises, .a_apprendre {
     border-radius: 0.5rem;
@@ -61,6 +66,27 @@ html { font-size: 16px; direction: rtl; }
 .apprises a { color: yellow; }
 .a_apprendre { background-color: #bbb; }
 .a_apprendre a { color: #999; text-shadow: none; }
+
+/* --------------------------------------------------------------------------------------------------------- */
+
+
+.btn { 
+    height: 2rem; 
+    padding-right: 1rem; 
+    margin: 0.5rem; 
+    border-radius: var(--radiusSmall);
+}
+.btn:hover {
+    background-color: var(--couleurNeutre);
+    box-shadow: var(--shadowTertiaire);
+}
+.btns {    
+    position: absolute;
+    height: 2rem;
+    bottom: 0;
+    border: var(--borderPrimaire);
+}
+.btns_label { padding-right: 1rem; }
 .bulle {
     position: relative;
     display: inline-block;
@@ -74,6 +100,9 @@ html { font-size: 16px; direction: rtl; }
     border-radius: 3rem;
     transition: 0.4s;
 }
+
+/* --------------------------------------------------------------------------------------------------------- */
+
 
 .centerflex {
     display: flex;
@@ -94,7 +123,6 @@ html { font-size: 16px; direction: rtl; }
     display: inline-block;
     background-color: #eee;
     top: 0;
-    height: 14rem;
     min-width: 5rem;
 }
 .checkbox_titre {
@@ -103,12 +131,22 @@ html { font-size: 16px; direction: rtl; }
     height: 1.5rem;
     padding-right: 0.5rem;
 }
+.check_btn {
+    display: block;
+    min-width: 3rem;
+    margin: 0;
+    border-radius: var(--radiusSmall);
+}
 .check_btn_container {
     position: relative;
     background-color: #eee;
     height: 12rem;
     padding-right: 0.5rem;
     overflow: auto
+}
+.check_btn:hover {
+    background-color: var(--couleurNeutre);
+    box-shadow: var(--shadowQuarternaire);
 }
 .check_consonnes {
     position: relative;
@@ -119,11 +157,6 @@ html { font-size: 16px; direction: rtl; }
     padding: 0;
     background-color: #eee;
     height: 11rem;
-}
-.check_btn {
-    display: block;
-    min-width: 2.25rem;
-    margin: 0
 }
 .centrerX { left: 50%; transform: translateX(-50%); }
 .centrerY { top: 50%; transform: translateY(-50%); }
@@ -172,18 +205,20 @@ html { font-size: 16px; direction: rtl; }
     padding: 0;
     border-radius: 0.5rem;
     background-color: var(--couleurNeutre);
-    box-shadow: var(--shadowPrimaire);
-    opacity: 1;
+    box-shadow: var(--shadowQuarternaire);
     z-index: 0;
     transition: 0.6s;
 }
 .course_head, .course_body, .course_foot { position: absolute; }
 .course_body {
     top: 1rem;
-    /*la hauteur est calculée par la fonction dimensionnementDeCourseBody() dans lessons.js*/
+  /*la hauteur est calculée par la fonction dimensionnementDeCourseBody() dans lessons.js*/
     width: calc(100% - 2rem);
     margin: 0.25rem 1rem;
     border: var(--borderPrimaire);
+    border-radius: var(--radiusSmall);
+    background-color: rgba(0,0,0,0.7);
+    color: var(--couleurNeutre);
     overflow: auto;
 }
 .course_container {
@@ -237,27 +272,23 @@ html { font-size: 16px; direction: rtl; }
     width: 100vw;
     background-color: #000;
 }
-.dialogue_btn {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
 
-    position: absolute;
-    border-top: var(--borderPrimaire);
-    padding-top: 1rem;
+/* --------------------------------------------------------------------------------------------------------- */
+
+
+.dark_backgound { background-color: #aaa; }
+.dialogue_btn {
+    padding: 0.5rem 5rem;
     margin: 0.125rem 0;
     width: 100%;
     height: 2rem;
     line-height: 2rem;
-    text-align: center;
     font-weight: bold;
     cursor: pointer;
 }
-.dialogue_btn div {
-    border: var(--borderPrimaire);
-    padding: 0  3rem;
-}
+
+/* --------------------------------------------------------------------------------------------------------- */
+
 
 .error_message { color: rgba(255,0,0,0.5); }
 .evaluation_container {
@@ -298,6 +329,9 @@ html { font-size: 16px; direction: rtl; }
 }
 .evaluation { width: 80vw; }
 
+/* --------------------------------------------------------------------------------------------------------- */
+
+
 .fermeture, .fermeture_de_parent, .fermeture_note_btn {
     position: absolute;
     top: 0;
@@ -322,6 +356,9 @@ html { font-size: 16px; direction: rtl; }
 .fond_noir_clair { background-color: #999; }
 .fond_orange { background-color: orange; }
 
+/* --------------------------------------------------------------------------------------------------------- */
+
+
 .hand {
     position: absolute;
     display: none;
@@ -344,6 +381,9 @@ html { font-size: 16px; direction: rtl; }
     transition: 0.1s;
 }
 
+/* --------------------------------------------------------------------------------------------------------- */
+
+
 .images_container {
     position: relative;
     top: 48px;
@@ -363,6 +403,9 @@ html { font-size: 16px; direction: rtl; }
     z-index: 1;
 }
 
+/* --------------------------------------------------------------------------------------------------------- */
+
+
 .left { float: left; }
 .lesson_active { background-color: yellow; box-shadow: 0 0 16px yellow; }
 .lesson_active:active { background-color: #FFF000; }
@@ -377,7 +420,6 @@ html { font-size: 16px; direction: rtl; }
 .lessons_a_apprendre a { color: #aaa; }
 .lesson_progress_question_bar { background-color: #ddd; }
 .lesson_progress_bonne_reponse_bar { background-color: yellow; }
-
 .lesson_title {
     position: relative;
     padding: 0 16px;
@@ -400,6 +442,9 @@ html { font-size: 16px; direction: rtl; }
     text-overflow: ellipsis;
 }
 
+/* --------------------------------------------------------------------------------------------------------- */
+
+
 .masqueur, .masqueur_de_parent {
     position: absolute;
     top: 0;
@@ -417,11 +462,37 @@ html { font-size: 16px; direction: rtl; }
 }
 .masqueur:hover { background-color: #aaa; font-weight: bold; }
 .masqueur_de_parent:hover { background-color: #aaa; font-weight: bold; }
-
 .masqueur:active { background-color: #aaa; }
 .masqueur_de_parent:active { background-color: #aaa; }
-
 .matiere { position: relative; }
+.media {
+    position: absolute;
+    width: 10rem;
+    height: 2rem;
+    bottom: 0;
+    right: 10%;
+}
+.media_btns {
+    position: absolute;
+    display: none;
+    height: 6rem;
+    width: 10rem;
+    transform: scale(0.75);
+    bottom: 3rem;
+    overflow: hidden;
+    background-color: var(--couleurNeutre);
+    border-radius: var(--radiusSmall);
+    opacity: 0;
+    transition: 1s;
+}
+.media_label {
+    position: absolute;
+    width: 10rem;
+    bottom: 0;
+}
+
+/* --------------------------------------------------------------------------------------------------------- */
+
 
 .nasalisations_btn_container input, .nasalisations_btn_container label { display: inline-block; vertical-align: middle; }
 .nasalisations_btn_container label {
@@ -433,7 +504,6 @@ html { font-size: 16px; direction: rtl; }
     font-weight: bold;
     text-align: center;
 }
-
 .nav_fleches_container {
     position: absolute;
     border: 2px solid transparent;
@@ -476,8 +546,14 @@ html { font-size: 16px; direction: rtl; }
     border-bottom: var(--borderTertiaire);
 }
 
+/* --------------------------------------------------------------------------------------------------------- */
+
+
 .opaque { animation: opacir0.6s 1; }
-.ombrage { box-shadow: 0 4px 43px #000; }
+.ombrage { box-shadow: 0 4px 43px #000; background-color: white; color: black; }
+
+/* --------------------------------------------------------------------------------------------------------- */
+
 
 .page_body {
     position: absolute;
@@ -505,6 +581,45 @@ html { font-size: 16px; direction: rtl; }
     width: 100%;
     top: 0;
     z-index: 5;
+}
+.parametre {
+    position: absolute;
+    background-color: transparent;
+    height: 2rem;
+    width: 10rem;
+    bottom: 0;
+    left: 10%;
+}
+.parametres_container .btn {
+    margin: var(--marginSmall);
+    border-radius: var(--radiusSmall);
+}
+.parametres_container .btn:hover { box-shadow: var(--shadowTertiaire); }
+.parametres_container {
+    position: absolute;
+    height: 17rem;
+    width: 25rem;
+    margin: 0;
+    padding: 0;
+    border-radius: var(--radiusSmall);
+    box-shadow: 0 0 2rem black;
+    transition: 0.25s;
+    opacity: 0;
+    z-index: 10;
+}
+.parametres_btns {
+    bottom: 0;
+    background-color: var(--couleurNeutre);
+    height: 2rem;
+    padding-right: 1rem;
+}
+.parametres_popup {
+    position: absolute;
+    bottom: 0;
+    margin: 0;
+    min-width: 25rem;
+    background-color: var(--couleurNeutre);
+    left: 0;
 }
 .parentgrid { display: grid; }
 .parentcell { display: table-cell; vertical-align: middle; }
@@ -551,6 +666,15 @@ html { font-size: 16px; direction: rtl; }
     border-radius: 50%;
     font-weight: bold;
     text-align: center;
+}
+.popup {
+    position: absolute;
+    min-width: 10rem;
+    min-height: 10rem;
+    background-color: var(--couleurNeutre);
+    transform: scale(0.75);
+    opacity: 0;
+    transition: 0.3s;
 }
 .pratique_tr_actif {
     color: orange;
@@ -612,10 +736,18 @@ html { font-size: 16px; direction: rtl; }
 .progress_bonne_reponse_bar { background-color: yellow; }
 .progress_question_bar { background-color: #bbb; }
 
+/* --------------------------------------------------------------------------------------------------------- */
+
 .right { float: right; }
+
+
+/* --------------------------------------------------------------------------------------------------------- */
 
 .shadow { box-shadow: 0 8px 8px #666; }
 .surbrillance { border: 1px solid yellow; color: yellow; }
+
+
+/* --------------------------------------------------------------------------------------------------------- */
 
 .table_parlante, .table_muette {
     position: relative;
@@ -630,12 +762,18 @@ html { font-size: 16px; direction: rtl; }
     font-size: 1.5rem;
     font-stretch: expanded;
     text-align: center;
+    text-shadow: 0 0 2rem black;
     border-radius: 10%;
     cursor: pointer;
     overflow: hidden;
     transition: 1s;
 }
 .transparent { animation: transperer; }
+
+
+/* --------------------------------------------------------------------------------------------------------- */
+
+
 .wraped {
     border: 1px solid transparent;
     border-radius: 6px;
@@ -643,7 +781,15 @@ html { font-size: 16px; direction: rtl; }
 }
 .wraped li:last-child { border-bottom-color: transparent; }
 .wraped li { border-bottom-color: #ccc; }
+.yellow_backgound { background-color: yellow; }
+
+/* --------------------------------------------------------------------------------------------------------- */
+
+
 .yellow { background-color: yellow; color: black; }
+
+/* --------------------------------------------------------------------------------------------------------- */
+
 
 @keyframes animate_hand {
     0% { text-shadow: 16px 16px 16px #666; transform: scale(1); }

@@ -1,30 +1,63 @@
 
 @media(min-width: 801px) {
+    #programmes_fond {
+        box-shadow: var(--shadowQuaternaire);
+    }
     #programmes_container {
-        width: 30rem;
-        border-right: 1px solid #bbb;
-        border-left: 1px solid #bbb;
+        width: 45rem;
         font-size: 1rem;
+        box-shadow: var(--shadowPrimaire);
+    }
+    #programme_matieres {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+    #programme_ul li {
+        display: inline-block;
+        width: 8rem;
     }
 }
 @media(max-width: 800px) {
-    #programmes_container {
-        width: 96%;
+    #programmes_fond {
+        box-shadow: none;
     }
+    #programmes_container { width: 96%; }
+    #programme_matieres {
+        display: block;
+    }
+    #programme_ul li {
+        display: block;
+        width: 100%;
+    }
+}
+#programmes_fond {
 }
 #programmes_container {
     position: relative; 
+    height: calc(90vh - 4rem);
     top: 2rem;
     margin: auto;
-    padding: 0 2rem;
+    padding: 1rem;
+    background-color: var(--couleurNeutre);
     direction: rtl;
-    box-sizing: border-box;
+}
+#programme_body span {
+    display: inline-block;
+    padding: var(--paddingSmall);
+    border-radius: var(--radiusSmall);
+    width: 4rem;
+    text-align: center;
 }
 #programmes_container h1 {
     position: relative;
     border: 1px solid transparent;
-    margin-bottom: 2rem;
+    border-bottom-color: var(--couleurQuaternaire);
+    margin: 2rem 0;
     padding: 0 1rem;
+    width: calc(100% - 2rem);
+    font-size: 3rem;
 }
 #programme_ul {
     position: relative;
@@ -35,4 +68,24 @@
     text-decoration: none;
     font-size: 1rem;
     font-weight: bold;
+}
+
+#programme_matieres {
+    position: absolute;
+    margin: 0;
+    padding: var(--paddingSmall);
+    height: 3rem;
+    width: calc(100% - 2rem);
+    border: 1px solid transparent;
+    border-top-color: var(--couleurQuaternaire);
+    border-bottom-color: var(--couleurQuaternaire);
+}
+#programme_commentaire {
+    position: relative;
+    width: calc(100% - 2rem);
+    padding: 0 2rem;
+}
+#programme_commentaire p {
+    position: relative;
+    margin: 2rem 0;
 }

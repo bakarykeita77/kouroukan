@@ -2,6 +2,7 @@
  //Selection des éléments HTML du programme
     var programmes_container = document.getElementById('programmes_container');
     var programme_div        = document.getElementById('programme_div');
+    var programme_matieres        = document.getElementById('programme_matieres');
     var reception            = document.getElementById('reception');
     
  //Récupération des données reçues sur l'apprenant 
@@ -72,7 +73,8 @@ Au click sur l'afficheur du programme
     
     function programme() {
         
-        programme_div.innerHTML = programmeHTML();
+        // programme_div.innerHTML = programmeHTML();
+        programme_matieres.innerHTML = programmeHTML();
         programmeStyle();
         storageDeLaMatiereActive();
         programmeNavigation();

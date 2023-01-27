@@ -7,6 +7,7 @@
     --couleurPrimaire: cornflowerblue;
     --couleurSecondaire: yellow;
     --couleurTertiaire: #ddd;
+    --couleurQuaternaire: #aaa;
     --couleurNeutre: #fff;
 
     --marginSmall: 0.25rem;
@@ -44,7 +45,7 @@ html { font-size: 16px; direction: rtl; }
 
 
 .actif, .active, .apprises, .a_apprendre {
-    border-radius: 0.5rem;
+    border-radius: var(--radiusSmall);
     padding: 0 1rem;
     margin: 1px 0;
     height: 2rem;
@@ -92,9 +93,7 @@ html { font-size: 16px; direction: rtl; }
     border: var(--borderPrimaire);
     border-radius: var(--radiusCircle);
 }
-.btn span:last-child {
-    margin-right: 2rem;
-}
+.btn span:last-child { margin-right: 2rem; }
 .btns {    
     position: absolute;
     height: 2rem;
@@ -368,7 +367,9 @@ html { font-size: 16px; direction: rtl; }
 .fixe { position: fixed; }
 .fond_blanc_casse { background-color: #666; }
 .flowerblue { background-color: cornflowerblue; }
-.fond_noir_clair { background-color: #999; }
+.fond_blanc { box-shadow: var(--shadowTertiaire); }
+.fond_jaune { background-color: yellow; }
+.fond_noir_clair { background-color: #bbb; }
 .fond_orange { background-color: orange; }
 
 /* --------------------------------------------------------------------------------------------------------- */
@@ -648,15 +649,13 @@ html { font-size: 16px; direction: rtl; }
     border-radius: 6px;
     padding: 8px;
 }
-.phases_container h2, .phases_container h4 {  padding: 0 16px; }
+.phases_container h2, .phases_container h4 {  padding: var(--paddingSmall); }
 .phases_container h2 {
     height: 48px;
     width: 100%;
     line-height: 48px;
     border: 1px solid transparent;
-    border-bottom: 4px solid #ccc;
-    border-radius: 6px;
-    box-shadow: 0 0 32px #ccc;
+    border-bottom: 1px solid #aaa;
 }
 .phases ul {
     list-style-type: none;
@@ -666,7 +665,7 @@ html { font-size: 16px; direction: rtl; }
     left: 10%;
 }
 .phases ul li {
-    line-height: 32px;
+    line-height: 2rem;
     width: 100%;
     padding: 0 16px;
     margin: 1px 0;

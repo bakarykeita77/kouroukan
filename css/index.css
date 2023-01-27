@@ -34,11 +34,13 @@ body {
 .cacher { transform:scaleX(0); }
 #btn_container { border-top: 2px solid var(--couleurTertiaire); }
 .asides_btn {
-    width: 45%;
+    width: 40%;
     background-color: var(--couleurPrimaire);
     border-radius: var(--radiusSmall);
     text-align: center;
 }
+.asidess_btn:first-child { right: 0; }
+.asidess_btn:last-child { left: 0; }
 .asides_btn a {
     color: black;
     font-weight: bold;

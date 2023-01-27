@@ -6,8 +6,7 @@
     position: relative;
     text-align: center;
 }
-.contact_card {
-    
+.contact_card {   
     position: relative;
     width: 12rem;
     height: 10rem;
@@ -33,6 +32,7 @@
     background-color: #aaa;
     border-radius: 0.5rem;
     text-align: center;
+    cursor: pointer;
 }
 
 #contact_cover {

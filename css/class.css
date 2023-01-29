@@ -23,9 +23,9 @@
     --radiusLarge: 1rem;
     --radiusCircle: 50%;
     
-    --shadowPrimaire: 0 0 3rem #aaa;
-    --shadowSecondaire: 0 0 1rem #aaa;
-    --shadowTertiaire: 0 0 1rem #666;
+    --shadowPrimaire: 0 0 1rem #aaa;
+    --shadowSecondaire: 0 0 2rem #aaa;
+    --shadowTertiaire: 0 0 3rem #aaa;
     --shadowQuarternaire: 0 0 3rem #666;
 }
 
@@ -365,6 +365,31 @@ html { font-size: 16px; direction: rtl; }
 .fermeture_de_parent:hover { background-color: #aaa; font-weight: bold; }
 .fermeture:active { background-color: #aaa; }
 .fermeture_de_parent:active { background-color: #aaa; }
+.fiche {
+}
+.fiche_entete, .fiche_corps, .fiche_foot { display: inline-block; vertical-align: top; }
+.fiche_entete {
+    position: relative;
+    float: right;
+    width: 5rem;
+    min-height: 3rem;
+}
+.fiche_corps {
+    position: relative;
+    border-right: 1px solid var(--couleurPrimaire);
+    min-width: 5rem;
+    min-height: 3rem;
+}
+.fiche_foot {
+    position: relative;
+    float: left;
+    border-right: 1px solid var(--couleurPrimaire);
+    width: 3rem;
+    min-height: 3rem;
+    text-align: center;
+}
+.fiche_titre {
+}
 .fixe { position: fixed; }
 .fond_blanc_casse { background-color: #666; }
 .flowerblue { background-color: cornflowerblue; }
@@ -443,7 +468,7 @@ html { font-size: 16px; direction: rtl; }
     margin-bottom: 0 0 16px 0;
     height: 40px;
     line-height: 40px;
-    border-bottom-color: #666;
+    border-bottom: 1px solid #bbb;
 }
 .liste_affichage_cascade { display: none; }
 .liste_affichage_cascade li {
@@ -617,6 +642,7 @@ html { font-size: 16px; direction: rtl; }
 .parametres_container .btn:hover { box-shadow: var(--shadowTertiaire); }
 .parametres_container {
     position: absolute;
+    display: none;
     height: 17rem;
     width: 25rem;
     margin: 0;
@@ -643,13 +669,21 @@ html { font-size: 16px; direction: rtl; }
 }
 .parentgrid { display: grid; }
 .parentcell { display: table-cell; vertical-align: middle; }
+.phases {
+    margin: 1rem 0;
+}
+.phases_container, .travaux {
+    display: inline-block;
+    vertical-align: top;
+}
 .phases_container {
-    position: relative;
-    height: calc(100% - 32px);
-    width: 80%;
-    margin: auto;
-    border-radius: 6px;
-    padding: 8px;
+    height: calc(100vh - 15rem);
+    max-height: 30rem;
+    width: 12rem;
+    margin-left: 2rem;
+    padding: var(--paddingLarge);
+    border-radius: var(--radiusSmall);
+    box-shadow: var(--shadowPrimaire);
 }
 .phases_container h2, .phases_container h4 {  padding: var(--paddingSmall); }
 .phases_container h2 {
@@ -663,14 +697,15 @@ html { font-size: 16px; direction: rtl; }
     list-style-type: none;
     margin: 0;
     padding: 0;
-    width: 80%;
-    left: 10%;
+    width: 100%;
+    top: 1rem;
 }
 .phases ul li {
+    position: relative;
     line-height: 2rem;
-    width: 100%;
-    padding: 0 16px;
+    left: 0;
     margin: 1px 0;
+    padding: 0 1rem;
     text-align: right;
     font-weight: bold;
     overflow: hidden;
@@ -787,6 +822,20 @@ html { font-size: 16px; direction: rtl; }
     transition: 1s;
 }
 .transparent { animation: transperer; }
+.travaux {
+    position: absolute;
+    left: 0;
+    height: calc(100vh - 15rem);
+    width: calc(100% - 20rem);
+    margin: 0;
+    padding: var(--paddingLarge);
+    overflow-y: auto;
+}
+.travail {
+    position: relative;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--couleurTertiaire);
+}
 
 
 /* --------------------------------------------------------------------------------------------------------- */

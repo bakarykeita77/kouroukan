@@ -139,10 +139,10 @@ $('document').ready(function() {
             content += '</ul>';
             
           //Barre de navigation               
-            content += '<div class="nav_fleches_container">';
-                content += '<span id="back_to_programmes"><a href="programmes.php">ߛߋ߬ߦߌ߬ ߞߐ߫</a></span>';
-                content += '<span id="go_to_lesson">ߥߊ߫ ߢߍ߫</</span>';
-            content += '</div>';
+            // content += '<div class="nav_fleches_container">';
+            //     content += '<span id="back_to_programmes"><a href="programmes.php">ߛߋ߬ߦߌ߬ ߞߐ߫</a></span>';
+            //     content += '<span id="go_to_lesson">ߥߊ߫ ߢߍ߫</</span>';
+            // content += '</div>';
 
             return content;
         }
@@ -1456,16 +1456,12 @@ $('document').ready(function() {
                             	            $('.correction_btn').css('display','none');
                             	            $('.question_btn').css('display','block');
                                         }
-                                        function effacerQuestion() {
-                                        	question = '';
-                                        }
+                                        function effacerQuestion() { question = ''; }
                                         function effacerReponse() {
                                         	reponse = reponse.split(',');
                                         	reponse.splice(0,reponse.length);
                                         }
-                                        function initialiserCompteurDeCaractere() {
-                            	            compteur_de_caractere = 0;
-                                        }
+                                        function initialiserCompteurDeCaractere() { compteur_de_caractere = 0; }
                                         function effacerLesBulles() {
                                             
                                             bulle_index = -1;

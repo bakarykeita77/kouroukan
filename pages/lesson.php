@@ -36,27 +36,66 @@ if(isset($_SESSION["id"])) {
     <div class="container">
         <div class="page_head"><?php require('tete-de-page.php'); ?></div>
         <div class="page_body">
+          <!----------------------------------------------------------------------------------------------------->  
+            <div id="donnees_recues_de_prorammes" style="display:none">
+                <p id='matiere_id_container'    ><?= $matiere_id; ?></p>
+                <p id='matiere_index_container' ><?= $matiere_index; ?></p>
+                <p id='matiere_nom_container'   ><?= $matiere_id; ?></p>
+                <p id='niveau_container'        ><?= $niveau; ?></p>
+                <p id='niveau_max_container'    ><?= $niveau_max; ?></p>
+            </div>
+          <!----------------------------------------------------------------------------------------------------->  
+            <h4>ߘߋ߰ߟߌ ߞߛߊߞߊ : <span class="niveau_courant"><?= $chiffres[$niveau]; ?></span><span class='rang'></span></h4>
+          <!----------------------------------------------------------------------------------------------------->  
+            <h1 class="lesson_title" id="<?= $matiere_id ?>"> <?= $matiere_nom; ?> ߥߟߊ߬ߘߊ  </h1>
+          <!----------------------------------------------------------------------------------------------------->  
+            
             <div class="phases_container">
-              <!----------------------------------------------------------------------------------------------------->  
-                <div id="donnees_recues_de_prorammes" style="display:none">
-                    <p id='matiere_id_container'    ><?= $matiere_id; ?></p>
-                    <p id='matiere_index_container' ><?= $matiere_index; ?></p>
-                    <p id='matiere_nom_container'   ><?= $matiere_id; ?></p>
-                    <p id='niveau_container'        ><?= $niveau; ?></p>
-                    <p id='niveau_max_container'    ><?= $niveau_max; ?></p>
+                <div class="phases liste_affichage_cascade" id="pratique_phases"></div>
+            </div>
+            <div class="travaux">
+                
+                <div class="travail" id="fiche_d_apprentissage">
+                    <h3 class="fiche_titre" ><?= $matiere_nom; ?> ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ</h3>
+                    <div class="fiche" id="fiche_1">
+                        <div class="fiche_entete"></div>
+                        <div class="fiche_corps"></div>
+                        <div class="fiche_foot"></div>
+                    </div>
                 </div>
-              <!----------------------------------------------------------------------------------------------------->  
-                <h4>ߘߋ߰ߟߌ ߞߛߊߞߊ : <span class="niveau_courant"><?= $chiffres[$niveau]; ?></span><span class='rang'></span></h4>
-              <!----------------------------------------------------------------------------------------------------->  
-                <h2 class="lesson_title" id="<?= $matiere_id ?>"> <?= $matiere_nom; ?> ߥߟߊ߬ߘߊ  </h2>
-              <!----------------------------------------------------------------------------------------------------->  
-                <center><div class="phases liste_affichage_cascade" id="pratique_phases"></div></center>
+
+                <div class="travail" id="fiche_d_exercice">
+                    <h3 class="fiche_titre"><?= $matiere_nom; ?> ߡߊ߬ߞߟߏ߬ߟߌ</h3>
+                    <div class="fiche" id="fiche_2">
+                        <div class="fiche_entete"></div>
+                        <div class="fiche_corps"></div>
+                        <div class="fiche_foot"></div>
+                    </div>
+                </div>
+
+                <div class="travail" id="fiche_de_pratique">
+                    <h3 class="fiche_titre"><?= $matiere_nom; ?> ߓߟߏߦߊߟߌ</h3>
+                    <div class="fiche" id="fiche_3">
+                        <div class="fiche_entete"></div>
+                        <div class="fiche_corps"></div>
+                        <div class="fiche_foot"></div>
+                    </div>
+                </div>
+
+                <div class="travail" id="fiche_d_evaluation">
+                    <h3 class="fiche_titre"><?= $matiere_nom; ?> ߞߘߐߓߐߟߌ</h3>
+                    <div class="fiche" id="fiche_4">
+                        <div class="fiche_entete"></div>
+                        <div class="fiche_corps"></div>
+                        <div class="fiche_foot"></div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="page_foot"><?php include("pied-de-lesson.php"); ?></div>
     </div>
 
-      <div class="parametres_container" id="parametre_lesson_container"> <?php include("parametre.php"); ?> </div>
+    <div class="parametres_container" id="parametre_lesson_container"> <?php include("parametre.php"); ?> </div>
     <div class="course_container">
         
       <!--------------------------------------------------------------------------------------------------------------->
@@ -315,6 +354,7 @@ if(isset($_SESSION["id"])) {
     <script src="/kouroukan/js/apprentissage.js"></script>
     <script src="/kouroukan/js/evaluations.js"></script>
     <script src="/kouroukan/js/lessons.js"></script>
+    <script src="/kouroukan/js/travaux.js"></script>
     
 </body>
 </html>

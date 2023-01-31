@@ -5,7 +5,7 @@ $('document').ready(function() {
     var matieres = JSON.parse(sessionStorage.getItem('matieres'));     
     var matieres_etudiees = [], matiere_active = "", matiere_nom = "", matiere_index = 0, derniere_matiere = "";
     var niveaux = [], niveaux_etudies = [], niveaux_distincts = [], niveau_max = 0, niveau_en_cours = 1;
-    
+     
     var groupe_d_images = $('#images_pratique .images_container');
     
 	var etapes_passees = [], etape_actuelle = [], etapes_a_faire = [], etape_max = [], rang = '';
@@ -14,7 +14,7 @@ $('document').ready(function() {
     var phases_distinctes = [], phases_1_distinctes = [], phases_2_distinctes = [], phases_3_distinctes = [], phases_4_distinctes = [];
 	var avancer_btn = '';
     var id_phases = [], data_phase_nbr = 0, nbr = 0;
-
+   
   /*-------------------------------------------------------------------------------------------------------------------
     1)- La situation des études est faite par récupération et traitement des données reçues sur l'apprenant.
 	2)- La liste des phases est établie en fonction du niveau d'étude de l'apprenant (selon les phases étudiées ou pas)
@@ -251,7 +251,7 @@ $('document').ready(function() {
         return id_phases;
     }
 	function matiere() {
-  	
+ 	
         lettres = voyelles_cochees.concat(consonnes_cochees,tedos_coches);
         syllabes = syllab();
     	
@@ -268,7 +268,7 @@ $('document').ready(function() {
             
             var total_point = 0, point = 0, effort = '';
             var note = 0;
-            var moyenne = 1;
+            var moyenne = 5;
             
             var chiffre = '';
             var phase_active_index = $('.active').index();
@@ -358,7 +358,7 @@ $('document').ready(function() {
                 if(phase_id=='chiffres_apprentissage') { lesson_courante = chiffresApprentissageHTML(); } // Voir chiffres.js
                 if(phase_id=='chiffres_exercice'     ) { lesson_courante = chiffresExercicesHTML();     } // Voir chiffres.js
                 if(phase_id=='chiffres_pratique'     ) { lesson_courante = chiffresPratiquesHTML();     } // Voir chiffres.js
-
+ 
                 return lesson_courante;
             }
             function affichageDeCours(){
@@ -440,7 +440,7 @@ $('document').ready(function() {
                             let parametres_object = parametres_container.getBoundingClientRect();
                             let parametres_height = parametres_object.height;
 
-                            $('.parametres_container').offset({'top':param_btn_top - parametres_height - 16, 'left':param_btn_left});
+                            $('.parametres_container').offset({'top':param_btn_top, 'left':param_btn_left});
                         }
                         function afficherApprentissage() {
                             apprentissage.css({'display':'block'});                          
@@ -848,11 +848,11 @@ $('document').ready(function() {
                                         note   : note
                                     });
     
-                                    fetch("http://localhost:8080/kouroukan/pages/actions.php", {
+                                    fetch("/kouroukan/pages/actions.php", {
                                         method: "POST",
                                         body: exercice_data 
                                     })
-                                    .then(response => response.json())
+                                    .then(response => response.text())
                                     .catch(error => console.log(error));
                                 }
                             });
@@ -1094,24 +1094,12 @@ $('document').ready(function() {
                             $('#pratique_head, #pratique_body, #pratique_foot').css('display','none');
                             $('#pratique_options').css('display','block');
                         }
-                        function masquerPratiqueOptions() {
-                            $('#pratique_options').css('display','none');
-                        }
-                        function afficherPratiqueLesson() {
-                            $('#pratique_head, #pratique_body, #pratique_foot').css('display','block');
-                        }
-                        function masquerPratiqueLesson() {
-                            $('#pratique_head, #pratique_body, #pratique_foot').css('display','none');
-                        }
-                        function afficherMessageDeFin() {
-                            $('#message_de_fin_container').css('display','block');
-                        }
-                        function mettreCroixSurImage() {
-                            $('#image_croix').css('display','flex');
-                        }
-                        function nePasMettreCroixSurImage() {
-                            $('#image_croix').css('display','none');
-                        }
+                        function masquerPratiqueOptions() { $('#pratique_options').css('display','none'); }
+                        function afficherPratiqueLesson() { $('#pratique_head, #pratique_body, #pratique_foot').css('display','block'); }
+                        function masquerPratiqueLesson() { $('#pratique_head, #pratique_body, #pratique_foot').css('display','none'); }
+                        function afficherMessageDeFin() { $('#message_de_fin_container').css('display','block'); }
+                        function mettreCroixSurImage() { $('#image_croix').css('display','flex'); }
+                        function nePasMettreCroixSurImage() { $('#image_croix').css('display','none'); }
                         function optionStyles() {
                             nbr_option_vide = nombreOptionsVides();
                             nbr_option_non_vide = all_options.length - nbr_option_vide;
@@ -1810,9 +1798,7 @@ $('document').ready(function() {
                     	        }
                 	        }
                 	    }
-                        function masquerClavierEtConsoles() {
-                            $('.progress_bar, .clavier_container, #pratique_dialogue_btn').css('display','none');
-                        }
+                        function masquerClavierEtConsoles() { $('.progress_bar, .clavier_container, #pratique_dialogue_btn').css('display','none'); }
                     	
                       	function monoSyllabesTotal() {
                     	    var syllabes_1_total = monoSyllabes(); // Cette fonction provient de syllabes.js 
@@ -1862,7 +1848,7 @@ $('document').ready(function() {
                     function evaluations() {
                                 
                         var syllabes = syllab();
-                        var nbr_max_de_questions_a_poser = 4;
+                        var nbr_max_de_questions_a_poser = 20;
                         var questions_evaluation = questions();
                         var question_evaluation = '', questions_a_evaluer = [], reponse_evaluation = [];
                         var compteur = incrementer();
@@ -1952,9 +1938,7 @@ $('document').ready(function() {
                                     }
                         	        actualiserLesLibellesDeDialogueBtn();
                         	        
-                        	        function effacerPrecedenteReponse() {
-                        	            $('#evaluation_reponse').html('');
-                        	        }
+                        	        function effacerPrecedenteReponse() { $('#evaluation_reponse').html(''); }
                         	        function actualiserLesLibellesDeDialogueBtn(){
                         	            
                             	        $('.question_ordre').html(q_ordre+q_rang);
@@ -1965,7 +1949,7 @@ $('document').ready(function() {
                             	        $('.correction_btn').css('display','none');
                         	        }
                         	        function dicterLaQuestion(){
-                                        $('#audio').attr({'src':'http://localhost:8080/kouroukan/son/mp3/'+question_evaluation+'.mp3', 'autoplay':'on'});
+                                        $('#audio').attr({'src':'/kouroukan/son/mp3/'+question_evaluation+'.mp3', 'autoplay':'on'});
                         	            $('#progress_bar').css('top',0);
                         	        }
                         	        function memoriserQuestionRang(){
@@ -1976,7 +1960,7 @@ $('document').ready(function() {
                             }
                             function repeterQuestionEvaluation(){
                         	    $('.repetition_btn').on('click', function(){
-                                    $('#audio').attr({'src':'http://localhost:8080/kouroukan/son/mp3/'+question_evaluation+'.mp3', 'autoplay':'on'});
+                                    $('#audio').attr({'src':'/kouroukan/son/mp3/'+question_evaluation+'.mp3', 'autoplay':'on'});
                         	    });
                             }
                             function repondreEvaluation(){
@@ -2014,11 +1998,12 @@ $('document').ready(function() {
                                     let q = question_evaluation;
                             	    let r = reponse_evaluation.join('');
                             	    let p = (q == r) ? 1:0;
-                            	    let question_reponse = [];
+                            	    let question_reponse = [q,r,p];
                            	    
                                     note += p; 
                             	    evaluation_a_stocker.splice(evaluation_counter,1,question_reponse);
-                            	    marquerReponseEvaluation();            
+         	    
+                                    marquerReponseEvaluation();            
                             	    
                                     function marquerReponseEvaluation() {    
                                         if(reponse_evaluation.join('') == question_evaluation) {
@@ -2099,18 +2084,18 @@ $('document').ready(function() {
                                             lesson : lesson,
                                             note   : JSON.stringify(note)
                                         });
-                                
-                                        fetch("http://localhost:8080/kouroukan/pages/actions.php", {
+                     console.log(evaluation_data);           
+                                        fetch("/kouroukan/pages/actions.php", {
                                             method: "POST",
                                             body: evaluation_data 
                                         })
-                                        .then(response => console.log(response))
+                                        .then(response =>  response.text())
                                         .catch(error => console.log(error));
                                     }
                                 }
                             });
                             $('#fermer_evaluation').on('click', function() {
-                                (location.replace("http://localhost:8080/kouroukan/pages/programmes.php"))();
+                                (location.replace("/kouroukan/pages/programmes.php"))();
                             });
                         }
                     }

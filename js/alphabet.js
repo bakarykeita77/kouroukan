@@ -24,7 +24,7 @@
                 
         return table;
     } 	
-    function alphabetExercicesHTML() {
+    function alphabetExercicesHTML() { 
 
         var exercices_corps_html = '<table class="table_muette">\n\n';
         
@@ -39,6 +39,6 @@
             exercices_corps_html += '</tr>\n\n'; 
         }
         exercices_corps_html += '</table>';
-            	    
+       	    
         return exercices_corps_html;
     } 

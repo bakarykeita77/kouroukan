@@ -806,8 +806,8 @@ html { font-size: 16px; direction: rtl; }
 
 .table_parlante, .table_muette {
     position: relative;
-    padding: 0.5rem;
-    width: calc(100% - 1rem);
+    padding: 1.5rem;
+    width: 100%;
 }
 .table_parlante tr, .table_muette tr { position: relative; width: 100%; }
 .table_parlante td, .table_muette td {
@@ -821,7 +821,7 @@ html { font-size: 16px; direction: rtl; }
     border-radius: 10%;
     cursor: pointer;
     overflow: hidden;
-    transition: 1s;
+    transition: 0.5s;
 }
 .transparent { animation: transperer; }
 .travaux {
@@ -832,9 +832,7 @@ html { font-size: 16px; direction: rtl; }
     margin: 0;
     overflow-y: auto;
 }
-.travaux table {
-    border-collapse: collapse;
-}
+.travaux table { border-collapse: collapse; }
 .travaux table tr { height: 1.5rem; }
 .travail {
     position: relative;
@@ -842,6 +840,7 @@ html { font-size: 16px; direction: rtl; }
     margin: 0;
     border-bottom: 2px solid var(--couleurQuaternaire);
 }
+.travail:not(:first-child) { height: 6rem; }
 .travail:first-child { border-top: 2px solid var(--couleurQuaternaire); }
 
 

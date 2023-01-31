@@ -40,7 +40,7 @@ if(isset($_SESSION["id"])) {
             <div id="donnees_recues_de_prorammes" style="display:none">
                 <p id='matiere_id_container'    ><?= $matiere_id; ?></p>
                 <p id='matiere_index_container' ><?= $matiere_index; ?></p>
-                <p id='matiere_nom_container'   ><?= $matiere_id; ?></p>
+                <p id='matiere_nom_container'   ><?= $matiere_nom; ?></p>
                 <p id='niveau_container'        ><?= $niveau; ?></p>
                 <p id='niveau_max_container'    ><?= $niveau_max; ?></p>
             </div>
@@ -341,9 +341,9 @@ if(isset($_SESSION["id"])) {
 
 
 
+	<script src="/kouroukan/fonctions.js"></script>
 	<script src="/kouroukan/js/caracteres.js"></script>
     
-    <script src="/kouroukan/js/alphabet.js"></script>
 	<script src="/kouroukan/js/syllabes.js"></script>
 	<script src="/kouroukan/js/tons.js"></script>
 	<script src="/kouroukan/js/chiffres.js"></script>
@@ -354,6 +354,7 @@ if(isset($_SESSION["id"])) {
     <script src="/kouroukan/js/apprentissage.js"></script>
     <script src="/kouroukan/js/evaluations.js"></script>
     <script src="/kouroukan/js/lessons.js"></script>
+    <script src="/kouroukan/js/alphabet.js"></script>
     <script src="/kouroukan/js/travaux.js"></script>
     
 </body>

@@ -166,13 +166,14 @@
         element.addClass('surbrillance');
         element.siblings().removeClass('surbrillance');
     }
-    function malaxer(tableau){
+    function malaxer(tableau){  
         var mixted_table = [];
         for(var i=0; mixted_table.length<tableau.length;i++){
             var nbr_aleatoire = Math.floor(Math.random()*tableau.length);
             var element_aleatoire = tableau[nbr_aleatoire];
             if($.inArray(element_aleatoire, mixted_table)==-1){ mixted_table[mixted_table.length] = element_aleatoire; }
         }
+    
         return mixted_table;
     }
     function mix2D(tableau){

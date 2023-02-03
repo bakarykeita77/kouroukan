@@ -11,23 +11,15 @@
     box-shadow: 0 0 1rem #999;
     z-index: 2;
 }
-#pratique_options div {
-    margin-top: 2rem;
-}
-#pratique_options span {
-    display: block;
-    width: 10rem;
-    cursor: pointer;
-}
+#pratique_options div { margin-top: 2rem; }
+#pratique_options span { display: block; width: 10rem; cursor: pointer; }
 #options_titre {
     background-color: #eee;
     border: 2px solid transparent;
     margin: 0 0 1rem 0;
     border-bottom: 0.25rem solid #ddd;
 }
-#pratique {
-    overflow: hidden;
-}
+#pratique { overflow: hidden; }
 #pratique_head {
     display: flex;
     flex-direction: column;
@@ -50,6 +42,7 @@
 #pratique_body {
     border: 1px solid transparent;
     overflow: auto;
+    color: black;
 }
 #pratique_guide {
     display: flex;
@@ -74,64 +67,35 @@
 }
 #bulles_container {
 }
-#bulles_container {
-    height: 3rem;
-    line-height: 3.5rem;
-}
-#bulles_container .plus {
-    color: #aaa;
-}
+#bulles_container { height: 3rem; line-height: 3.5rem; }
+#bulles_container .plus { color: #aaa; }
 #signe_egal {
     padding: 0;
-    height: 2rem;
-    font-size: 3rem;
+    margin: 0;
+    font-size: 5rem;
     color: #aaa;
+    transform: rotate(90deg);
 }
-<<<<<<< HEAD
-=======
-#cumule_des_caracteres {
-    border-radius: 0.5rem;
-    box-shadow: 0 0 0.5rem #ccc;
-    padding: 0 0.5rem;
-}
-#reponse_container {
-    border: 1px solid #ccc;
-    border-radius: 0.5rem;
-}
-#correcteur {
-    border: 1px solid #ccc;
-    border-radius: 0.5rem;
-    padding: 0.25rem;
-    margin-right: 4rem;
-    font-size: 0.6rem;
+#pratique_guide span { vertical-align: middle; margin: 2px; }
+#reponse_container span:first-child { padding-left: 1rem; }
+#correcteur { 
+    border: 1px solid var(--couleurTertiaire);
+    border-radius: var(--couleurTertiaire);
+    box-shadow: 0 0 1rem #666; 
+    margin: 0;
+    padding: 0.125rem; 
+    bottom: 0.125rem;
     cursor: pointer;
-    transition: 0.25s;
+    transition: 0.2s; 
 }
-#correcteur:hover {
-    box-shadow: 0 0 1rem #666;
-}
-#correcteur:active {
-    background-color: #fff;
-    box-shadow: none;
-}
->>>>>>> a7134bcdf180a037e5b3f4da5cf471008131216a
-#pratique_guide span {
-    vertical-align: middle;
-    margin: 2px;
-}
-#pratique_foot {
-    display: flex;
-    flex-direction: column;
-}
+#correcteur:active { box-shadow: none; }
+#pratique_foot { display: flex; flex-direction: column; }
 #pratique_fiche {
     display: flex;
     flex-direction: column;
-    
     position: absolute;
 }
-#pratique_fiche_head, #pratique_fiche_body, #pratique_fiche_foot {
-    position: relative;
-}
+#pratique_fiche_head, #pratique_fiche_body, #pratique_fiche_foot { position: relative; }
 #pratique_fiche_head {
     padding: 0.25rem 0;
     margin: 0.125rem 0;
@@ -162,7 +126,6 @@
     border: 1px solid transparent;
     border-bottom-color: #fff;
 }
-<<<<<<< HEAD
 #pratique_fiche_body span:nth-child(1), #pratique_fiche_body span:nth-child(2) {
     text-align: right;
     width: 40%;
@@ -173,29 +136,6 @@
     border-right-color: #fff;
 }
 #pratique_fiche_body span:nth-child(3) { flex-grow: 1; text-align: center; }
-=======
-.affiche_reponse {
-    position: relative;
-    border: 1px solid transparent;
-    border-left-color: #fff;
-    border-right-color: #fff;
-}
-#fiche_croix, #fiche_mauvaise_reponse {
-    display: block;
-}
-#fiche_croix {
-    position: absolute;
-    top: 0;
-    font-size: 1.3rem;
-    line-height: 1.3rem;
-    color: red;
-    opacity: 0.6;
-}
-.affiche_question, .affiche_reponse {
-    width: 40%;
-    padding-right: 0.5rem;
-}
->>>>>>> a7134bcdf180a037e5b3f4da5cf471008131216a
 #pratique_fiche_foot {
     padding: 0.25rem 0;
     margin: 0.125rem 0;
@@ -210,23 +150,20 @@
     font-size: 0.8rem;
 }
 #pratique_fiche_foot span:nth-child(2) { 
-<<<<<<< HEAD
     flex-grow: 1; 
-=======
-    width: 25%;
-    padding: 0;
->>>>>>> a7134bcdf180a037e5b3f4da5cf471008131216a
     text-align:center; 
     border: 0.125rem solid #ddd;
 }
 
 #pratique_dialogue_btn {
-    bottom: 8rem;
+    position: absolute;
+    width: calc(100% + 2px - 7rem);
+    left: 0.5rem;
+    bottom: 9.625rem;
     border-radius: 0.5rem 0.5rem 0 0;
+    border: var(--couleurSecondaire);
 }
-#clavier_pratique {
-    border-radius: 0 0 0.5rem 0.5rem;
-}
+#clavier_pratique { border-radius: 0 0 0.5rem 0.5rem; }
 #pratiques_images_container {
     position: absolute;
     height: 100%;
@@ -307,35 +244,25 @@
     background-color: #ccc;
     border-radius: 0.5rem;
 }
-#message_btn_container button:first-child {
-    right: 0;
-}
-#message_btn_container button:last-child {
-    left: 0;
-}
+#message_btn_container button:first-child { right: 0; }
+#message_btn_container button:last-child { left: 0; }
 
 @media screen and (orientation: portrait) {
 
     #pratique_body, #pratique_head, #pratique_foot {
-        margin: 0;
-        width: calc(100% - 1rem);
-        left: 50%;
-        transform: translateX(-50%);
+        position: relative;
+        width: 96%;
+        margin: auto ;
     }
-    #pratique_foot {
-        height: 16rem;
+    #pratique_foot { 
+        position: absolute;
+        height: 18rem; 
+        right: 1rem;
     }
-    #pratique_body {
-        height: calc(100% - 18rem);
-    }
+    #pratique_body { height: calc(100% - 20rem); }
     #image_name { display: none; }
-    #pratique_fiche {
-        width: 100%;
-        top: 0;
-    }
-    #pratique_fiche_foot {
-        display: none;
-    }
+    #pratique_fiche { width: 100%; top: 0; }
+    #pratique_fiche_foot { display: none; }
     #message_de_fin_container {
         top: calc(100% - 7rem);
         left: 50%;
@@ -343,19 +270,19 @@
     }
 }
 @media screen and (orientation: landscape) {
-    #pratique_head, #pratique_foot {
-        width: 40%;
-        margin-right: 0.5rem;
+    #pratique_body, #pratique_head, #pratique_foot { position: absolute; }
+    #pratique_head, #pratique_foot { 
+        width: 40%; 
+        bottom: 1rem;
+        right: 1rem;
     }
     #pratique_body {
-        height: 100%;
-        width: 56%;
+        height: calc(100% - 4px);
+        width: 52%;
         left: 0;
     }
     #image_name { display: block; }
-    #pratique_foot {
-        height: calc(100% - 1rem);       
-    }
+    #pratique_foot { height: calc(100% - 3rem); }
     #pratique_fiche {
         top: 0;
         width: calc(100% - 1rem);

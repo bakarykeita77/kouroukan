@@ -74,16 +74,10 @@ html { font-size: 16px; direction: rtl; }
 
 .btn { 
     height: 1.5rem; 
-    padding: 0.5rem 1rem; 
-    margin: 0.5rem; 
+    margin: 0.125rem; 
     border-radius: var(--radiusSmall);
 }
-.btn:hover {
-    background-color: var(--couleurNeutre);
-    box-shadow: var(--shadowTertiaire);
-}
 .btn span {
-    position: absolute;
     height: 1.5rem;
     line-height: 1.5rem;
 }
@@ -91,8 +85,6 @@ html { font-size: 16px; direction: rtl; }
     width: 1.5rem;
     line-height: 1.5rem;
     text-align: center;
-    border: var(--borderPrimaire);
-    border-radius: var(--radiusCircle);
 }
 .btn span:last-child { margin-right: 2rem; }
 .btns {    
@@ -189,11 +181,12 @@ html { font-size: 16px; direction: rtl; }
 }
 .clavier_container {
     position: absolute;
-    bottom: 0;
+    bottom: 0.5rem;
+    left: 0.5rem;
     height: 8rem;
     min-height: 4rem;
-    width: 100%;
-    margin: 0;
+    width: calc(100% - 1rem);
+    margin: auto;
     padding-top: 1rem;
     background-color: #666;
     border: 1px solid transparent;
@@ -211,7 +204,6 @@ html { font-size: 16px; direction: rtl; }
 }
 .course {
     position: relative;
-    border: 1rem solid white;
     top: 6rem;
     height: calc(95vh - 6rem);
     width: 95vw;
@@ -226,14 +218,10 @@ html { font-size: 16px; direction: rtl; }
 }
 .course_head, .course_body, .course_foot { position: absolute; }
 .course_body {
-    top: 1rem;
-  /*la hauteur est calculée par la fonction dimensionnementDeCourseBody() dans lessons.js*/
+    top: 0;
     width: calc(100% - 2rem);
-    margin: 0.25rem 1rem;
-    border: var(--borderPrimaire);
+    margin: 0 1rem;
     border-radius: var(--radiusSmall);
-    background-color: rgba(0,0,0,0.7);
-    color: var(--couleurNeutre);
     overflow: auto;
 }
 .course_container {
@@ -245,14 +233,14 @@ html { font-size: 16px; direction: rtl; }
     padding: 0;
     height: 100vh;
     width: 100vw;
+    background-color: rgba(0,0,0,0.7);
 }
 .course_foot {
     justify-content: space-around;
     align-items: center;
 
-    width: 100%;
-    bottom: 0;
     font-weight: bold;
+    box-shadow: 0 0 2rem #666;
 }
 .course_head {
     top: 0;
@@ -293,12 +281,13 @@ html { font-size: 16px; direction: rtl; }
 
 .dark_backgound { background-color: #aaa; }
 .dialogue_btn {
-    padding: 0.5rem 5rem;
+    padding: 0.125rem 3rem;
     margin: 0.125rem 0;
-    width: 100%;
     height: 2rem;
     line-height: 2rem;
     font-weight: bold;
+    background-color: #666;
+    border: 1px soldi white;
     cursor: pointer;
 }
 
@@ -365,10 +354,7 @@ html { font-size: 16px; direction: rtl; }
 .fermeture_de_parent:hover { background-color: #aaa; font-weight: bold; }
 .fermeture:active { background-color: #aaa; }
 .fermeture_de_parent:active { background-color: #aaa; }
-.fiche {
-    position: relative;
-    height: 3rem;
-}
+.fiche { position: relative; height: 3rem; }
 .fiche_entete, .fiche_corps, .fiche_foot { display: inline-block; vertical-align: top; }
 .fiche_entete {
     position: relative;
@@ -390,9 +376,7 @@ html { font-size: 16px; direction: rtl; }
     text-align: center;
 }
 .fiche_foot table { width: 100%; }
-.fiche_titre {
-    margin: 0;
-}
+.fiche_titre { margin: 0; }
 .fixe { position: fixed; }
 .fond_blanc_casse { background-color: #666; }
 .flowerblue { background-color: cornflowerblue; }

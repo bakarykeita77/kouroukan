@@ -294,24 +294,12 @@ $('document').ready(function() {
           /*--------------------------------------------------------------------*/   
    
     	    phaseActiveName();
-    	    dimensionnementDeCourseBody();
     	    affichageDeCours();
     	    cours();
 
           /*--------------------------------------------------------------------*/  
 
             function phaseActiveName() { sessionStorage.setItem('phase', JSON.stringify(phase_id)); }
-            function dimensionnementDeCourseBody() {
-                
-                var course_height = $('.course').height();
-    	        var course_head_height = $('.course_head').height();
-    	        var course_foot_height = $('.course_foot').height();
-    	        var course_body_height = 0;
-
-    	        course_body_height = course_height - (course_head_height + course_foot_height);
-
-    	        $('.course_body').css('height', course_body_height-12+'px');
-            }
     	    function coursEnteteHTML() {
     	        var ceh = '';
     	       
@@ -874,7 +862,7 @@ $('document').ready(function() {
                         var compteur_de_caractere = 0;
                         var bulle_index = -1;
                         var s_0 = [], s_1 = [], s_2 = [], s_3 = [], sc = [];
-                	    var question_limit = 3;
+                	    var question_limit = 10;
                 	    var quantite_de_question = parseIntNko(question_limit);
                 	    var question_rang = '߭';
                 	    

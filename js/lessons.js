@@ -385,9 +385,9 @@ $('document').ready(function() {
             }
     	    function cours() {
                 
-                if(phase_class == 'apprises')    { $('.course_container').css('display','none'); alert("ߕߊ߲߬ߓߌ߬ ߓߘߊ߫ ߞߍ߫ ߦߊ߲߬ ߘߐ߫ ߞߘߐ߬ߡߊ߲߬"); }
+               // if(phase_class == 'apprises')    { $('.course_container').css('display','none'); alert("ߕߊ߲߬ߓߌ߬ ߓߘߊ߫ ߞߍ߫ ߦߊ߲߬ ߘߐ߫ ߞߘߐ߬ߡߊ߲߬"); }
                 if(phase_class == 'a_apprendre') { $('.course_container').css('display','none'); alert("ߘߊߞߎ߲ ߡߊ߫ ߛߋ߫ ߦߊ߲߬ ߡߊ߫ ߝߟߐ߫");   }  
-        	    if(phase_class == 'active') {
+        	    if(phase_class == 'apprises') {
 
                     $('.course_container').css('display','block');
                     $('.course').css('display','none');
@@ -697,7 +697,7 @@ $('document').ready(function() {
                     	    repondreExerciceQuestion();
                     	    
                     	    function poserExerciceQuestion(){
-                        	    $('#exercices_player').on('click',function(){
+                        	    $('#exercices_player').on('click',function() {
                       	        
                         	        compteur_de_question++;
                         	        question_rang = '߲';
@@ -715,8 +715,8 @@ $('document').ready(function() {
     
                         	        i++;
                         	        
-                        	        function lireQuestion(){
-                        	            $('#audio').attr({'src':'http://localhost:8080/kouroukan/son/mp3/'+question_posee+'.mp3', 'autoplay':'on'});
+                        	        function lireQuestion() {
+                        	            $('#audio').attr({'src':'/kouroukan/son/mp3/'+question_posee+'.mp3', 'autoplay':'on'});
                         	        }
                         	        function repeteQuestion(){
                         	            $('.oreille_icon_container').on('click', function() { lireQuestion();});
@@ -956,7 +956,7 @@ $('document').ready(function() {
                             let pratique_fiche_foot_height = $('#pratique_fiche_foot').height();
 
                             let pratique_fiche_height = pratique_foot_height-pratique_dialogue_btn_height-clavier_pratique_height-24;
-                            let pratique_fiche_body_height = pratique_fiche_height-pratique_fiche_head_height-pratique_fiche_foot_height;
+                            let pratique_fiche_body_height = pratique_fiche_height-pratique_fiche_head_height-pratique_fiche_foot_height-54;
 
                             $('#pratique_fiche').css('height', pratique_fiche_height+'px');
                             $('#pratique_fiche_body').css('height', pratique_fiche_body_height+'px');
@@ -1646,26 +1646,27 @@ $('document').ready(function() {
 
                                 if(phase_index <  phase_nbr || nbr_option_non_vide < all_options.length) { return; }
                                 if(phase_index === phase_nbr && nbr_option_non_vide == all_options.length) {
-                                
-                                let DB_options = getDBOptions();
-                                let local_options = getLocalOptions();
+                                    
+                                    let DB_options = getDBOptions();
+                                    let local_options = getLocalOptions();
 
-                               // if(phase_index <  data_phase_nbr || nbr_option_non_vide < all_options.length) { return; }
-                                //if(phase_index == data_phase_nbr && nbr_option_non_vide == all_options.length) {
+                                    if(phase_index <  data_phase_nbr || nbr_option_non_vide < all_options.length) { return; }
+                                    if(phase_index == data_phase_nbr && nbr_option_non_vide == all_options.length) {
 
-                                    note = noterPratique(); 
-
-                                 /* Vérification de la validité de pratique:
-                                    Pourqu'une pratique soit valable, il faut que chaque option soit passée.
-                                    - Si non, la pratique est invalide et est retournée;
-                                    - Si oui, la pratique est valable et le processus de stockage est engagé. */
-                                    	        
-                                    if(note >= moyenne) {
-                                        let phase_nbr = nombreDePhasesEtudiees();
-                                
-                                        sendPratiqueToDB(); 
-                                        changerPhaseActive(phase_nbr);
-                                        sessionStorage.setItem('phase_nbr',JSON.stringify(phase_nbr)); 
+                                        note = noterPratique(); 
+    
+                                    /* Vérification de la validité de pratique:
+                                        Pourqu'une pratique soit valable, il faut que chaque option soit passée.
+                                        - Si non, la pratique est invalide et est retournée;
+                                        - Si oui, la pratique est valable et le processus de stockage est engagé. */
+                                                    
+                                        if(note >= moyenne) {
+                                            let phase_nbr = nombreDePhasesEtudiees();
+                                    
+                                            sendPratiqueToDB(); 
+                                            changerPhaseActive(phase_nbr);
+                                            sessionStorage.setItem('phase_nbr',JSON.stringify(phase_nbr)); 
+                                        }
                                     }
                                 }
 
@@ -1699,12 +1700,11 @@ $('document').ready(function() {
                                         lesson : lesson,
                                         note   : note
                                     });
-    
-                                    fetch("http://localhost:8080/kouroukan/pages/actions.php", {
+
+                                    fetch("/kouroukan/pages/actions.php", {
                                         method: "POST",
                                         body: pratique_data 
                                     })
-
                                     .then(response => response.text())
                                     .catch(error => console.log(error));
                                 }
@@ -2052,7 +2052,8 @@ $('document').ready(function() {
                                         sessionStorage.setItem('phase_nbr',JSON.stringify(phase_nbr));
                                         
                                         if(phase_nbr === total_phase) {
-                                            sessionStorage.setItem('niveau_max',JSON.stringify(niveau_max+1));                                            sessionStorage.setItem('niveau_en_cours',JSON.stringify(niveau_max+2));
+                                            sessionStorage.setItem('niveau_max',JSON.stringify(niveau_max+1));                                            
+                                            sessionStorage.setItem('niveau_en_cours',JSON.stringify(niveau_max+2));
                                             sessionStorage.setItem('phase_nbr',JSON.stringify(0));
                                         }
                                     }
@@ -2072,7 +2073,7 @@ $('document').ready(function() {
                                             lesson : lesson,
                                             note   : JSON.stringify(note)
                                         });
-                     console.log(evaluation_data);           
+                                
                                         fetch("/kouroukan/pages/actions.php", {
                                             method: "POST",
                                             body: evaluation_data 

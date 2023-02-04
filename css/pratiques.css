@@ -107,7 +107,7 @@
     flex-direction: row;
 }
 #pratique_fiche_head span { font-size: 0.8rem; height: 1rem; }
-#pratique_fiche span:nth-child(1), #pratique_fiche span:nth-child(2) { width: 40%; }
+#pratique_fiche span:nth-child(1), #pratique_fiche span:nth-child(2) { width: 40%; padding-right: 0.5rem; }
 #pratique_fiche span:nth-child(3) { flex-grow: 1; text-align: center; }
 #pratique_fiche_body { 
     min-height: 3.5rem;
@@ -282,7 +282,7 @@
         left: 0;
     }
     #image_name { display: block; }
-    #pratique_foot { height: calc(100% - 3rem); }
+    #pratique_foot { height: calc(100% - 3rem); border-radius: var(--radiusSmall); }
     #pratique_fiche {
         top: 0;
         width: calc(100% - 1rem);

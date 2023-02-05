@@ -1,20 +1,36 @@
 #logo { display: none; }
-#connexion_form {
-    position: fixed;
-    left: 35%;
-	top: 50%;
-	transform: translate(-50%,-50%);
+#connexion_container {
+	position: absolute;
+    margin: 0;
+    padding: 0;
 	width: 80%;
-	max-width: 25rem;
+	min-height: 25rem;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	box-sizing: border-box;
+}
+#connexion_form {
+	left: 0;
 	border: 1px solid var(--borderPrimaire);
 	background-color: var(--couleurNeutre);
 	border-radius: var(--radiusMedium);
-	margin: 2*var(--marginLarge) auto;
-	padding: var(--paddingLarge);
 	box-sizing: border-box;
 	direction: rtl;
 }
 #connexion_form form { margin: 2rem auto; width: 100%; }
+#connexion_form button {
+	position: absolute;
+	height: 2rem;
+	width: 100%;
+	padding: 0.5rem;
+	margin: 0;
+	line-height: 0.5rem;
+	background-color: #ccc;
+	border-radius: 0.5rem;
+	border-style: none;
+	cursor: pointer;
+}
 .input_box, #button_box {
 	position: relative;
 	margin: 1rem 0;
@@ -52,6 +68,12 @@
 	cursor: pointer;
 	z-index: 1; 
 }
+.input_box input:hover { 
+	background-color: #eee;
+	color: #ddd;
+	border-radius: var(--radiusMedium);
+	border-color: transparent;
+}
 .input_box input:focus ~ label,
 .input_box input:valid ~ label {
 	top: -1.5rem;
@@ -62,19 +84,46 @@
 }
 #button_box { margin-top: 3rem; }
 #button_box input { font-weight: bolder; }
-#connexion_btn {
-	padding: 1rem 0;
-	height: 2rem;
-	line-height: 0.5rem;
-	width: 100%;
-	background-color: #ccc;
-	border-radius: 0.5rem;
-	border-style: none;
-	cursor: pointer;
+
+
+#connexion_note {
+    margin: 0;
+    padding: 0;
+	right: 0;
 }
-#connexion_form button {
-	position: absolute;
-	width: 100%;
-	padding: 0.5rem;
-	margin: 0;
+#connexion_form, #connexion_note  {
+	padding: 2rem;
+	max-width: 30rem;
+	box-sizing: border-box;
+}
+.note_titre { color: var(--couleurPrimaire) }
+.note { margin: 0; }
+.note p { color: var(--couleurNeutre); }
+.note p a { 
+    color: var(--couleurSecondaire); 
+    text-decoration: none; 
+    font-weight: bold; 
+    border-bottom: var(--borderTertiaire);
+}
+ 
+
+@media screen and (min-width: 800px) {
+	#connexion_container { margin: auto; }
+	#connexion_form, #connexion_note {
+		position: absolute;
+		margin: 0;
+		display: inline-block; 
+		width: 50%;
+	}
+}
+@media screen and (max-width: 800px) {
+	#connexion_container { margin: auto; }
+	#connexion_form, #connexion_note { 
+		position: relative;
+		display: block; 
+		width: 100%;
+		margin: auto; 
+	}
+	#connexion_note { display: none; }
+	
 }

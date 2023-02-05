@@ -32,12 +32,6 @@
 /* --------------------------------------------------------------------------------------------------------- */
 
 html { font-size: 16px; direction: rtl; }
-@media (orientation: landscape) {
-    .page_body { width: 70%; }
-}
-@media (orientation: portrait) {
-    .page_body { width: 100%; }
-}
 
 /* --------------------------------------------------------------------------------------------------------- */
 
@@ -271,7 +265,7 @@ html { font-size: 16px; direction: rtl; }
     left: 0;
     height: calc(100vh - 3rem);
     width: 100%;
-    background-color: #000;
+    background-color: rgba(0,0,0,0.7);
 }
 
 /* --------------------------------------------------------------------------------------------------------- */
@@ -570,7 +564,7 @@ html { font-size: 16px; direction: rtl; }
     position: absolute;
     padding: 0 1rem;
     margin: 0;
-    height: calc(100% - 3rem);
+    height: calc(100% - 4rem);
     top: 3rem;
     left: 50%;
     transform: translateX(-50%);
@@ -589,7 +583,8 @@ html { font-size: 16px; direction: rtl; }
 }
 .page_head {
     margin: 0;
-    height: 4.5rem;
+    padding: 0;
+    height: 3rem;
     width: 100%;
     top: 0;
     z-index: 5;

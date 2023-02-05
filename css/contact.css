@@ -2,8 +2,9 @@
 .page_body {
     
 }
-#body_contact h1 {
+.cover h1 {
     position: relative;
+    color: white;
     text-align: center;
 }
 .contact_card {   
@@ -35,12 +36,11 @@
     cursor: pointer;
 }
 
-#contact_cover {
+#contacts_cover {
     position: absolute;
     display: none;
     height: 100vh;
     width: 100vw;
-    background-color: rgba(0,0,0,0.5);
     top: 0;
     left: 0;
     z-index: 2000;
@@ -75,7 +75,7 @@
 
 #contact_plan {
     height: 12rem;
-    background-image: url("http://localhost:8080/kouroukan/image/zialy.jpg");
+    background-image: url("/kouroukan/image/zialy.jpg");
     border-radius: 0.5rem;
     box-shadow: 0 0 3rem #ddd;
 }
@@ -143,6 +143,8 @@
         width: 60%;
         min-width: 40rem;
         margin: auto;
+        background-color: white;
+        box-shadow: 0 0 3rem #666;
     }
     #contact_phone {
         border-right: 1px solid #aaa;

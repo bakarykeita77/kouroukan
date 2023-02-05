@@ -130,8 +130,6 @@
     position: absolute;
     height: 3rem;
     width: 100vw;
-    top: 0;
-    left: 0;
     direction: rtl;
     z-index: 1000;
 }

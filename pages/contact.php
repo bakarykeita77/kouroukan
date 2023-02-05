@@ -14,7 +14,7 @@ session_start();
     <link rel="stylesheet" href="/kouroukan/css/contact.css"/>
 </head>
 <body>
-    <div class="container" id="body_contact">
+    <div class="cover">
         <div class="page_head" id="entete_contact"><?php include("tete-de-page.php"); ?></div>
         <div class="page_body" id="body_contact">
             

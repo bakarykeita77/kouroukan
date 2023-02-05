@@ -13,9 +13,11 @@
 
 <body>
     <div class="container" id="index_container">
+        
         <div class="page_head"><?php require('pages/tete-de-page.php'); ?></div>
      
         <div class="page_body" id="accueil_body">
+
             <div id='image_d_accueil'><img src="/kouroukan/images/images-de-fond/class.jpg" width="100%"/></div>
 
             <div id="asides_container">
@@ -30,7 +32,9 @@
                     <p class="note" id="note_inscription_success"></p>
                 </div>
             </div>
+            
         </div>
+        
         <div class="page_foot"></div> 
     </div>
     

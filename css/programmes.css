@@ -1,33 +1,9 @@
 
-@media(orientation: landscape) {
-    #programmes_fond { box-shadow: var(--shadowQuaternaire); }
-    #programme_matieres {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: center;
-        
-        height: 4rem;
-    }
-    #programme_ul li { display: inline-block; width: 8rem; }
-}
-@media(orientation: portrait) {
-    #programmes_fond { box-shadow: none; }
-    #programme_matieres { display: block; height: 10rem; }
-    #programme_ul li {
-        display: block;
-        width: calc(90% - 2rem);
-        margin: auto;
-    }
-}
-
 #programmes_container {
     position: relative;
     max-width: 50rem;
-    height: calc(90vh - 4rem);
-    top: 2rem;
     margin: auto;
-    padding: 1rem;
+    padding: 0 1.5rem;
     background-color: var(--couleurNeutre);
     direction: rtl;
 }
@@ -44,14 +20,18 @@
     border: 1px solid transparent;
     border-bottom-color: var(--couleurQuaternaire);
     margin: 2rem 0;
-    padding: 0 1rem;
-    width: calc(100% - 2rem);
-    font-size: 3rem;
+    padding: 0;
+    width: 100%;
+    font-size: 2rem;
 }
 #programme_ul {
     position: relative;
     padding: 0;
     list-style-type: none;
+}
+#programme_ul li {
+    height: 3rem; 
+    line-height: 3rem;
 }
 #programme_ul a {
     text-decoration: none;
@@ -60,19 +40,38 @@
 }
 
 #programme_matieres {
-    position: absolute;
-    width: calc(100% - 2rem);
-    margin: auto;
+    margin: 1rem auto;
     padding: var(--paddingSmall);
     border: 1px solid transparent;
     box-shadow: var(--shadowPrimaire);
 }
-#programme_commentaire {
-    position: relative;
-    width: calc(100% - 2rem);
-    padding: 0 2rem;
-}
 #programme_commentaire p {
     position: relative;
     margin: 2rem 0;
+}
+
+
+@media(orientation: landscape) {
+    #programmes_fond { box-shadow: var(--shadowQuaternaire); }
+    #programme_matieres {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        
+        height: 4rem;
+    }
+    #programme_ul li { 
+        display: inline-block; 
+        width: 4rem; 
+    }
+}
+@media(orientation: portrait) {
+    #programmes_fond { box-shadow: none; }
+    #programme_matieres { display: block; }
+    #programme_ul li {
+        display: block;
+        width: calc(90% - 2rem);
+        margin: auto;
+    }
 }

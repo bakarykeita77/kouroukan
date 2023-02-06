@@ -16,7 +16,7 @@
 	        var liste = $(this);
 	        var index = $(this).index();
 	        setTimeout(function(){
-	            liste.css({'display':'block', 'height':'32px'});
+	            liste.css({'display':'block', 'height':'48px'});
 	        }, index*50);
 	    });
 

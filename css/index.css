@@ -167,7 +167,8 @@ button:active { background-color: #ccc; }
     #image_d_accueil, #asides_container {
         position: relative;
         display: block;
-        width: 90%;
+        left: 0;
+        width: 100%;
         max-width: 800px;
         margin: auto;
     }

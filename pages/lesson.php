@@ -29,6 +29,7 @@ if(isset($_SESSION["id"])) {
 	<link rel="stylesheet" href="/kouroukan/css/exercice.css"/>
 	<link rel="stylesheet" href="/kouroukan/css/pratiques.css"/>
 	<link rel="stylesheet" href="/kouroukan/css/evaluation.css"/>
+	<link rel="stylesheet" href="/kouroukan/css/travaux.css"/>
 
 </head>
 <body style="direction:rtl">
@@ -75,11 +76,7 @@ if(isset($_SESSION["id"])) {
 
                 <div class="travail" id="fiche_de_pratique">
                     <h3 class="fiche_titre"><?= $matiere_nom; ?> ߓߟߏߦߊߟߌ</h3>
-                    <div class="fiche" id="fiche_3">
-                        <div class="fiche_entete"></div>
-                        <div class="fiche_corps"></div>
-                        <div class="fiche_foot"></div>
-                    </div>
+                    <div class="fiche" id="fiche_3"></div>
                 </div>
 
                 <div class="travail" id="fiche_d_evaluation">
@@ -90,6 +87,7 @@ if(isset($_SESSION["id"])) {
                         <div class="fiche_foot"></div>
                     </div>
                 </div>
+                
             </div>
         </div>
         <div class="page_foot"><?php include("pied-de-lesson.php"); ?></div>

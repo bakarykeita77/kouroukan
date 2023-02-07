@@ -346,7 +346,7 @@ body { margin: 0; padding: 0; }
 .fermeture_de_parent:hover { background-color: #aaa; font-weight: bold; }
 .fermeture:active { background-color: #aaa; }
 .fermeture_de_parent:active { background-color: #aaa; }
-.fiche { position: relative; height: 3rem; }
+.fiche { position: relative; }
 .fiche_entete, .fiche_corps, .fiche_foot { display: inline-block; vertical-align: top; }
 .fiche_entete {
     position: relative;
@@ -786,18 +786,17 @@ body { margin: 0; padding: 0; }
     height: calc(100vh - 12rem);
     width: calc(100% - 20rem);
     margin: 0;
+    border: 2px solid transparent;
+    border-top-color: var(--couleurQuaternaire);
+    border-bottom-color: var(--couleurQuaternaire);
     overflow-y: auto;
 }
 .travaux table { border-collapse: collapse; }
-.travaux table tr { height: 1.5rem; }
 .travail {
     position: relative;
     padding: 1rem 1.5rem;
-    margin: 0;
-    border-bottom: 2px solid var(--couleurQuaternaire);
+    margin: 1.5rem 0;
 }
-.travail:not(:first-child) { height: 6rem; }
-.travail:first-child { border-top: 2px solid var(--couleurQuaternaire); }
 
 
 /* --------------------------------------------------------------------------------------------------------- */

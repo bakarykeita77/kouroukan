@@ -344,47 +344,68 @@
             lesson_3 = JSON.parse(lesson_3);
             note_3 = parseIntNko(matieres[1][2].note);
 
-            let entete_html_3 = ficheDePratiqueEnteteHTML();
-            let corps_html_3  = ficheDePratiqueCorpsHTML();
-            let foot_html_3   = ficheDePratiqueFootHTML();
         
-            fiche_entete_3.html(entete_html_3);
-            fiche_corps_3.html(corps_html_3);
-            fiche_foot_3.html(foot_html_3);
+            // fiche_entete_3.html(entete_html_3);
+            // fiche_corps_3.html(corps_html_3);
+            // fiche_foot_3.html(foot_html_3);
+
+            let pratique = $('#fiche_3');
+            let pratique_html = pratiqueHTML();
 
 
-            function ficheDePratiqueEnteteHTML() {
-                let entete_html = "<table border=1>";
-                entete_html += "<tr><td>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</td></tr>";
-                entete_html += "<tr><td>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ</td></tr>";
-                entete_html += "<tr><td>ߓߙߍ߬ߦߊ</td></tr>";
-                entete_html += "</table>";
+            pratique.html(pratique_html);
 
-                return entete_html;
-            }
-            function ficheDePratiqueCorpsHTML() {
-                let corps_html = "<table border=1>";
-                    corps_html += "<tr>";
-                        for(let i=0; i<lesson_3.length; i++) {
-                            corps_html += "<td>"+lesson_3[i][0]+"</td>";
+
+            function pratiqueHTML() {
+                var pratique_html = "";
+
+                for(var h=0; h<lesson_3.length; h++) {
+
+                    let entete_html_3 = ficheDePratiqueEnteteHTML();
+                    var corps_html_3  = ficheDePratiqueCorpsHTML();
+                    let foot_html_3   = ficheDePratiqueFootHTML();
+
+                    pratique_html += "<div class='t_container'>\n"; 
+                        pratique_html += "<div class='t1'>"+entete_html_3+"</div>\n\n";
+                        pratique_html += "<div class='t2'>"+corps_html_3+"</div>\n\n";       
+                        pratique_html += "<div class='t3'>"+foot_html_3+"</div>\n\n";
+                    pratique_html += "</div>\n\n\n\n";
+                            
+                    function ficheDePratiqueEnteteHTML() {
+                        let entete_html = "<table border=1>\n";
+                        entete_html += "<tr><td>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</td></tr>\n";
+                        entete_html += "<tr><td>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ</td></tr>\n";
+                        entete_html += "<tr><td>ߓߙߍ߬ߦߊ</td></tr>\n";
+                        entete_html += "</table>\n";
+
+                        return entete_html;
+                    }
+                    function ficheDePratiqueCorpsHTML() {
+                        let corps_html = "<div>\n";
+
+                        for(var i=0;i<3; i++) {
+                            corps_html += "<div>\n";
+                            for(var j=0; j<lesson_3[h].length; j++) {              
+                                corps_html += "<span>"+lesson_3[h][j][i]+"</span>\n";
+                            }
+                            corps_html += "</div>\n";
                         }
-                    corps_html += "</tr>";
-                    corps_html += "<tr>";
-                        for(let j=0; j<lesson_3.length; j++) {
-                            corps_html += "<td>"+parseIntNko(lesson_3[j][1])+"</td>";
-                        }
-                corps_html += "</tr>";
-                corps_html += "<table>";
-        
-                return  corps_html;
-            }
-            function ficheDePratiqueFootHTML() {
-                let foot_html = "<table border=1 width=100>";
-                foot_html += "<tr><td> ߡߎ߬ߡߍ</td></tr>";
-                foot_html += "<tr><td>"+note_3+"</td></tr>";
-                foot_html += "<table>";
-        
-                return foot_html;
+                        corps_html += "</div>\n";
+
+                        return  corps_html;
+                    }
+                    function ficheDePratiqueFootHTML() {
+                        let foot_html = "<table border=1 width=100>\n";
+                        foot_html += "<tr><td> ߓߍ߬ߙߍ</td></tr>\n";
+                        foot_html += "<tr><td> ߡߎ߬ߡߍ</td></tr>\n";
+                        foot_html += "<tr><td>"+note_3+"</td></tr>\n";
+                        foot_html += "<table>\n";
+                
+                        return foot_html;
+                    }
+                }
+                        
+                return pratique_html
             }
         }
         if(matieres[1][3]) {

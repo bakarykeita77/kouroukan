@@ -1,0 +1,19 @@
+.t{
+    position: relative;
+    padding: 0.125rem 0;
+    box-sizing: border-box;
+}
+.t td { text-align: center; padding: var(--paddingSmall); }
+.t1, .t2, .t3 {
+    margin: 0;
+    display: inline-block;
+    vertical-align: top;
+    box-sizing: border-box;
+    overflow: auto;
+}
+.t1 { width: 15%; }
+.t1 table, .t2 table { width: 100%; }
+.t2 { width: 60%; border: var(--borderPrimaire); font-weight: bold; }
+.t2 div { overflow: auto; }
+.t3 { width: 10%; }
+.t3 table { width: 100%; }

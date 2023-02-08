@@ -387,7 +387,7 @@ $('document').ready(function() {
                 
                // if(phase_class == 'apprises')    { $('.course_container').css('display','none'); alert("ߕߊ߲߬ߓߌ߬ ߓߘߊ߫ ߞߍ߫ ߦߊ߲߬ ߘߐ߫ ߞߘߐ߬ߡߊ߲߬"); }
                 if(phase_class == 'a_apprendre') { $('.course_container').css('display','none'); alert("ߘߊߞߎ߲ ߡߊ߫ ߛߋ߫ ߦߊ߲߬ ߡߊ߫ ߝߟߐ߫");   }  
-        	    if(phase_class == 'apprises') {
+        	    if(phase_class == 'active') {
 
                     $('.course_container').css('display','block');
                     $('.course').css('display','none');
@@ -411,7 +411,7 @@ $('document').ready(function() {
                    
                 	    afficherApprentissage();
                         parametresPosition();
-                	    chargerApprentissage();
+                        chargerApprentissage();
                         apprendre();
                     	enregistrerApprentissage();
                 	    stockerApprentissage();
@@ -1909,7 +1909,7 @@ $('document').ready(function() {
                         	        effacerPrecedenteReponse();
                         	        question_evaluation = questions_evaluation[q_index];
 
-            alert(question_evaluation);            
+                            alert(question_evaluation);            
                         	        
                         	        dicterLaQuestion();
                         	        $('#evaluation_cross').css('display','none');

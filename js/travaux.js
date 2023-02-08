@@ -242,46 +242,61 @@
             lesson_1 = JSON.parse(lesson_1);
             note_1 = parseIntNko(matieres[1][0].note);
 
+            var fiche_apprentissage = $('#fiche_1');
+            var fiche_apprentissage_html = ficheApprentissageHTML();
 
-            let entete_html_1 = ficheDApprentissageEnteteHTML();
-            let corps_html_1  = ficheDApprentissageCorpsHTML();
-            let foot_html_1   = ficheDApprentissageFootHTML();
-        
-            fiche_entete_1.html(entete_html_1);
-            fiche_corps_1.html(corps_html_1);
-            fiche_foot_1.html(foot_html_1);
+            fiche_apprentissage.html(fiche_apprentissage_html);
 
-            function ficheDApprentissageEnteteHTML() {
-                let entete_html = "<table border=1>";
-                entete_html += "<tr><td>ߜߋ߲߭ ߠߎ߬</td></tr>";
-                entete_html += "<tr><td>ߘߌ߯ߟߌ ߦߙߌߞߊ</td></tr>";
-                entete_html += "</table>";
-        
-                return entete_html;
-            }
-            function ficheDApprentissageCorpsHTML() {
-                let fac = "<table border=1>";
-                    fac += "<tr>";
-                        for(let i=0; i<lesson_1.length; i++) {
-                            fac += "<td>"+lesson_1[i][0]+"</td>";
-                        }
-                    fac += "</tr>";
-                    fac += "<tr>";
-                        for(let j=0; j<lesson_1.length; j++) {
-                            fac += "<td>"+parseIntNko(lesson_1[j][1])+"</td>";
-                        }
-                    fac += "</tr>";
-                fac += "<table>";
-        
-                return  fac;
-            }
-            function ficheDApprentissageFootHTML() {
-                let ffh = "<table border=1 width=100>";
-                ffh += "<tr><td> ߡߎ߬ߡߍ</td></tr>";
-                ffh += "<tr><td>"+note_1+"</td></tr>";
-                ffh += "<table>";
-        
-                return ffh;
+            function ficheApprentissageHTML() {
+
+                var entete_html_1 = ficheDApprentissageEnteteHTML();
+                var corps_html_1  = ficheDApprentissageCorpsHTML();
+                var foot_html_1   = ficheDApprentissageFootHTML();
+            
+                var fiche_apprentissage_html = "";
+
+                fiche_apprentissage_html += "<div class='t'>\n";
+                    fiche_apprentissage_html += "<div class='t1'>"+entete_html_1+"</div>\n";
+                    fiche_apprentissage_html += "<div class='t2'>"+corps_html_1+"</div>\n";
+                    fiche_apprentissage_html += "<div class='t3'>"+foot_html_1+"</div>\n";
+                fiche_apprentissage_html += "</div>\n";
+
+                return fiche_apprentissage_html;
+
+
+                function ficheDApprentissageEnteteHTML() {
+                    var entete_html = "<table border=1>";
+                    entete_html += "<tr><td>ߜߋ߲߭ ߠߎ߬</td></tr>";
+                    entete_html += "<tr><td>ߘߌ߯ߟߌ ߦߙߌߞߊ</td></tr>";
+                    entete_html += "</table>";
+            
+                    return entete_html;
+                }
+                function ficheDApprentissageCorpsHTML() {
+                    var fac = "<table border=1>";
+                        fac += "<tr>";
+                            for(let i=0; i<lesson_1.length; i++) {
+                                fac += "<td>"+lesson_1[i][0]+"</td>";
+                            }
+                        fac += "</tr>";
+                        fac += "<tr>";
+                            for(let j=0; j<lesson_1.length; j++) {
+                                fac += "<td>"+parseIntNko(lesson_1[j][1])+"</td>";
+                            }
+                        fac += "</tr>";
+                    fac += "</table>";
+            
+                    return  fac;
+                }
+                function ficheDApprentissageFootHTML() {
+                    var ffh = "<table border=1>";
+                    ffh += "<tr><td> ߡߎ߬ߡߍ</td></tr>";
+                    ffh += "<tr><td>"+note_1+"</td></tr>";
+                    ffh += "</table>";
+            
+                    return ffh;
+                }
+
             }
         }
         if(matieres[1][1]) {
@@ -290,73 +305,83 @@
             lesson_2 = JSON.parse(lesson_2);
             note_2 = parseIntNko(matieres[1][1].note);
 
-            let entete_html_2 = ficheDExerciceEnteteHTML();
-            let corps_html_2  = ficheDExerciceCorpsHTML();
-            let foot_html_2   = ficheDExerciceFootHTML();
-        
-            fiche_entete_2.html(entete_html_2);
-            fiche_corps_2.html(corps_html_2);
-            fiche_foot_2.html(foot_html_2);
+            var fiche_exercice = $('#fiche_2');
+            var fiche_exercice_html = exerciceFicheHTML();
+
+            fiche_exercice.html(fiche_exercice_html);
+
+            function exerciceFicheHTML() {
+
+                var fiche_entete_html_2 = ficheDExerciceEnteteHTML();
+                var fiche_corps_html_2  = ficheDExerciceCorpsHTML();
+                var fiche_foot_html_2   = ficheDExerciceFootHTML();
+                
+                let exercice_fiche_html = "";
+
+                exercice_fiche_html += "<div class='t'>\n";
+                    exercice_fiche_html += "<div class='t1'>"+fiche_entete_html_2+"</div>\n";
+                    exercice_fiche_html += "<div class='t2'>"+fiche_corps_html_2+"</div>\n";
+                    exercice_fiche_html += "<div class='t3'>"+fiche_foot_html_2+"</div>\n";
+                exercice_fiche_html += "</div>\n";
 
 
-            function ficheDExerciceEnteteHTML() {
-                let entete_html = "<table border=1>";
-                entete_html += "<tr><td>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</td></tr>";
-                entete_html += "<tr><td>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ</td></tr>";
-                entete_html += "<tr><td>ߓߙߍ߬ߦߊ</td></tr>";
-                entete_html += "</table>";
 
-                return entete_html;
-            }
-            function ficheDExerciceCorpsHTML() {
-                let corps_html = "<table border=1>";
-                corps_html += "<tr>";
-                    for(let i=0; i<lesson_2.length; i++) {
-                        corps_html += "<td>"+lesson_2[i][0]+"</td>";
-                    }
-                corps_html += "</tr>";
-                corps_html += "<tr>";
-                    for(let j=0; j<lesson_2.length; j++) {
-                        corps_html += "<td>"+lesson_2[j][1]+"</td>";
-                    }
-                corps_html += "</tr>";
-                    corps_html += "<tr>";
-                        for(let k=0; k<lesson_2.length; k++) {
-                            corps_html += "<td>"+parseIntNko(lesson_2[k][2])+"</td>";
+                return exercice_fiche_html;
+
+                function ficheDExerciceEnteteHTML() {
+                    var entete_html = "<table border=1>\n";
+                    entete_html += "<tr><td>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</td></tr>\n";
+                    entete_html += "<tr><td>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ</td></tr>\n";
+                    entete_html += "<tr><td>ߓߙߍ߬ߦߊ</td></tr>\n";
+                    entete_html += "</table>\n";
+
+                    return entete_html;
+                }
+                function ficheDExerciceCorpsHTML() {
+                    var corps_html = "<table border=1>\n";
+                    corps_html += "<tr>\n";
+                        for(let i=0; i<lesson_2.length; i++) {
+                            corps_html += "<td>"+lesson_2[i][0]+"</td>\n";
                         }
-                corps_html += "</tr>";
-                corps_html += "</table>";
-        
-                return  corps_html;
+                    corps_html += "</tr>\n";
+                    corps_html += "<tr>\n";
+                        for(let j=0; j<lesson_2.length; j++) {
+                            corps_html += "<td>"+lesson_2[j][1]+"</td>\n";
+                        }
+                    corps_html += "</tr>\n";
+                        corps_html += "<tr>\n";
+                            for(let k=0; k<lesson_2.length; k++) {
+                                corps_html += "<td>"+parseIntNko(lesson_2[k][2])+"</td>\n";
+                            }
+                    corps_html += "</tr>\n";
+                    corps_html += "</table>\n";
+            
+                    return  corps_html;
+                }
+                function ficheDExerciceFootHTML() {
+                    var foot_html = "<table border=1 width=100>\n";
+                    foot_html += "<tr><td> ߓߍ߬ߙߍ</td></tr>\n";
+                    foot_html += "<tr><td> ߡߎ߬ߡߍ</td></tr>\n";
+                    foot_html += "<tr><td>"+note_2+"</td></tr>\n";
+                    foot_html += "</table>\n";
+            
+                    return foot_html;
+                }
             }
-            function ficheDExerciceFootHTML() {
-                let foot_html = "<table border=1 width=100>";
-                foot_html += "<tr><td> ߓߍ߬ߙߍ</td></tr>";
-                foot_html += "<tr><td> ߡߎ߬ߡߍ</td></tr>";
-                foot_html += "<tr><td>"+note_2+"</td></tr>";
-                foot_html += "</table>";
-        
-                return foot_html;
-            }
+
         }
         if(matieres[1][2]) {
             lesson_3 = matieres[1][2].lesson;
             lesson_3 = JSON.parse(lesson_3);
-            note_3 = parseIntNko(matieres[1][2].note);
-
-        
-            // fiche_entete_3.html(entete_html_3);
-            // fiche_corps_3.html(corps_html_3);
-            // fiche_foot_3.html(foot_html_3);
 
             let pratique = $('#fiche_3');
-            let pratique_html = pratiqueHTML();
+            let pratique_html = pratiqueFicheHTML();
 
 
             pratique.html(pratique_html);
 
 
-            function pratiqueHTML() {
+            function pratiqueFicheHTML() {
                 var pratique_html = "";
 
                 for(var h=0; h<lesson_3.length; h++) {
@@ -365,7 +390,7 @@
                     var corps_html_3  = ficheDePratiqueCorpsHTML();
                     let foot_html_3   = ficheDePratiqueFootHTML();
 
-                    pratique_html += "<div class='t_container'>\n"; 
+                    pratique_html += "<div class='t'>\n"; 
                         pratique_html += "<div class='t1'>"+entete_html_3+"</div>\n\n";
                         pratique_html += "<div class='t2'>"+corps_html_3+"</div>\n\n";       
                         pratique_html += "<div class='t3'>"+foot_html_3+"</div>\n\n";
@@ -381,27 +406,37 @@
                         return entete_html;
                     }
                     function ficheDePratiqueCorpsHTML() {
-                        let corps_html = "<div>\n";
+                        let corps_html = "<table border=1>\n";
 
                         for(var i=0;i<3; i++) {
-                            corps_html += "<div>\n";
-                            for(var j=0; j<lesson_3[h].length; j++) {              
-                                corps_html += "<span>"+lesson_3[h][j][i]+"</span>\n";
-                            }
-                            corps_html += "</div>\n";
+                            corps_html += "<tr>\n";
+                            for(var j=0; j<lesson_3[h].length; j++) { corps_html += "<td>"+lesson_3[h][j][i]+"</td>\n"; }
+                            corps_html += "</tr>\n";
                         }
-                        corps_html += "</div>\n";
+                        corps_html += "</table>\n";
 
                         return  corps_html;
                     }
                     function ficheDePratiqueFootHTML() {
-                        let foot_html = "<table border=1 width=100>\n";
+                        
+                        let note_3 = parseIntNko(note3()); 
+                      
+                        let foot_html = "<table border=1>\n";
                         foot_html += "<tr><td> ߓߍ߬ߙߍ</td></tr>\n";
                         foot_html += "<tr><td> ߡߎ߬ߡߍ</td></tr>\n";
                         foot_html += "<tr><td>"+note_3+"</td></tr>\n";
-                        foot_html += "<table>\n";
+                        foot_html += "</table>\n";
                 
                         return foot_html;
+
+                        function note3() {
+                            let note_3 = 0;
+                            for(var i=0; i<lesson_3[h].length; i++) {
+                                note_3 += lesson_3[h][i][2];
+                            }
+
+                            return note_3;
+                        }
                     }
                 }
                         

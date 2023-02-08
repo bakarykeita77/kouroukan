@@ -67,11 +67,7 @@ if(isset($_SESSION["id"])) {
 
                 <div class="travail" id="fiche_d_exercice">
                     <h3 class="fiche_titre"><?= $matiere_nom; ?> ߡߊ߬ߞߟߏ߬ߟߌ</h3>
-                    <div class="fiche" id="fiche_2">
-                        <div class="fiche_entete"></div>
-                        <div class="fiche_corps"></div>
-                        <div class="fiche_foot"></div>
-                    </div>
+                    <div class="fiche" id="fiche_2"></div>
                 </div>
 
                 <div class="travail" id="fiche_de_pratique">
@@ -316,7 +312,6 @@ if(isset($_SESSION["id"])) {
                         <span class="correction_icon"></span>
                     </div>
                 </div>
-                <div class="clavier_container"><?php include "clavier.php"; ?></div>
             </div>
          </div>
       <!--------------------------------------------------------------------------------------------------------------->

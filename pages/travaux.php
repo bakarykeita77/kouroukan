@@ -2,7 +2,6 @@
 session_start();
 
     if(isset($_SESSION["id"])) {
-        $matiere_nom     = $_GET['matiere_nom'];
     }
 ?>
 
@@ -12,11 +11,7 @@ session_start();
                 
         <div class="travail" id="fiche_d_apprentissage">
             <h3 class="fiche_titre" ><?= $matiere_nom; ?> ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ</h3>
-            <div class="fiche" id="fiche_1">
-                <div class="fiche_entete"></div>
-                <div class="fiche_corps"></div>
-                <div class="fiche_foot"></div>
-            </div>
+            <div class="fiche" id="fiche_1"></div>
         </div>
 
         <div class="travail" id="fiche_d_exercice">
@@ -31,11 +26,7 @@ session_start();
 
         <div class="travail" id="fiche_d_evaluation">
             <h3 class="fiche_titre"><?= $matiere_nom; ?> ߞߘߐߓߐߟߌ</h3>
-            <div class="fiche" id="fiche_4">
-                <div class="fiche_entete"></div>
-                <div class="fiche_corps"></div>
-                <div class="fiche_foot"></div>
-            </div>
+            <div class="fiche" id="fiche_4"></div>
         </div>
         
     </div>

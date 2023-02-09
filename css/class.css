@@ -279,7 +279,7 @@ body { margin: 0; padding: 0; }
     line-height: 2rem;
     font-weight: bold;
     background-color: #666;
-    border: 1px soldi white;
+    border: 1px solid white;
     cursor: pointer;
 }
 
@@ -346,8 +346,11 @@ body { margin: 0; padding: 0; }
 .fermeture_de_parent:hover { background-color: #aaa; font-weight: bold; }
 .fermeture:active { background-color: #aaa; }
 .fermeture_de_parent:active { background-color: #aaa; }
-.fiche { position: relative; }
-.fiche_entete, .fiche_corps, .fiche_foot { display: inline-block; vertical-align: top; }
+.fiche { 
+    position: relative; 
+    width: 100%;
+}
+.fiche_entete, .fiche_corps, .fiche_foot { display: inline-block; vertical-align: top; border: 2px solid blue; min-height:1rem; position:relative; }
 .fiche_entete {
     position: relative;
     float: right;
@@ -792,12 +795,16 @@ body { margin: 0; padding: 0; }
     border-bottom-color: var(--couleurQuaternaire);
     overflow-y: auto;
 }
+.travaux_cadre { height: calc(100vh - 13rem); margin: 0.5rem 0; overflow: auto; }
 .travaux table { border-collapse: collapse; }
 .travail {
     position: relative;
     padding: 1rem 1.5rem;
-    margin: 1.5rem 0;
+    margin: 0.25rem;
+    background-color: var(--couleurTertiaire);
+    border-radius: var(--radiusSmall);
 }
+.travail:not(last-child) { border-bottom-color: var(--couleurTertiaire); }
 
 
 /* --------------------------------------------------------------------------------------------------------- */

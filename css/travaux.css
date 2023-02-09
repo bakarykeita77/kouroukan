@@ -13,7 +13,7 @@
 }
 .t1 { width: 15%; }
 .t1 table, .t2 table { width: 100%; }
-.t2 { width: 60%; border: var(--borderPrimaire); font-weight: bold; }
+.t2 { width: calc(75% - 8px); border: var(--borderPrimaire); font-weight: bold; }
 .t2 div { overflow: auto; }
 .t3 { width: 10%; }
 .t3 table { width: 100%; }

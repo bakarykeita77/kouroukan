@@ -55,14 +55,11 @@ if(isset($_SESSION["id"])) {
                 <div class="phases liste_affichage_cascade" id="pratique_phases"></div>
             </div>
             <div class="travaux">
+            <div class="travaux_cadre">
                 
                 <div class="travail" id="fiche_d_apprentissage">
                     <h3 class="fiche_titre" ><?= $matiere_nom; ?> ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ</h3>
-                    <div class="fiche" id="fiche_1">
-                        <div class="fiche_entete"></div>
-                        <div class="fiche_corps"></div>
-                        <div class="fiche_foot"></div>
-                    </div>
+                    <div class="fiche" id="fiche_1"></div>
                 </div>
 
                 <div class="travail" id="fiche_d_exercice">
@@ -77,14 +74,12 @@ if(isset($_SESSION["id"])) {
 
                 <div class="travail" id="fiche_d_evaluation">
                     <h3 class="fiche_titre"><?= $matiere_nom; ?> ߞߘߐߓߐߟߌ</h3>
-                    <div class="fiche" id="fiche_4">
-                        <div class="fiche_entete"></div>
-                        <div class="fiche_corps"></div>
-                        <div class="fiche_foot"></div>
-                    </div>
+                    <div class="fiche" id="fiche_4"></div>
                 </div>
                 
             </div>
+            </div>
+
         </div>
         <div class="page_foot"><?php include("pied-de-lesson.php"); ?></div>
     </div>
@@ -268,27 +263,8 @@ if(isset($_SESSION["id"])) {
                     <div id="evaluation_message_btn_container"> <button id="message_btn_1"></button><button id="message_btn_2"></button> </div>
                 </div>
                 <div class='progress_bar' id="evaluation_progress_bar"><span class='progress_question_bar'></span><span class='progress_bonne_reponse_bar'></span></div>
-                <div id="evaluation_dialogue_btn">
-    
-                    <div class="btn question_btn">
-                        <span class="question_label">ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</span>
-                        <span class="question_total"></span> :
-                        <span class="question_ordre"></span>
-                        <span class="question_action"></span>
-                        <span class="question_icon"></span>
-                    </div>
-    
-                    <div class="btn repetition_btn">
-                        <span class="repetition_label">ߊ߬ ߟߊߡߍ߲߫ ߕߎ߯ߣߌ߫</span>
-                        <span class="repetition_icon"></span>
-                    </div>
-    
-                    <div class="btn correction_btn">
-                        <span class="correction_label">ߏ߬ ߛߊߞߍ߫</span>
-                        <span class="correction_icon"></span>
-                    </div>
-                </div>
             
+                <div class="clavier_container" id="clavier_pratique"><?php include "clavier.php"; ?></div>
                 <div class="clavier_container" id="clavier_pratique"><?php include "clavier.php"; ?></div>
             </div>
             <div class="course_foot" id="evaluation_foot">

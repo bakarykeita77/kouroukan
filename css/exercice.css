@@ -1,7 +1,23 @@
 
+#exercice_head, #exercice_body, #exercice_foot {
+    position: relative;
+    width: 100%;
+    left: 0;
+}
+#exercice_body {
+    border: 0.5rem solid white;
+    border-top-width: 1px;
+    height: calc(100% - 3rem);
+    width: calc(100% - 1rem);
+    margin: auto;
+    background-color: rgba(0,0,0,0.8);
+    color: white;
+    box-sizing: border-box;
+}
 #exercice_foot {
     height: 2rem;
 }
 #exercice_dialogue_btn {
     border-radius: 0.5rem;
+    border: 2px solid blue;
 }

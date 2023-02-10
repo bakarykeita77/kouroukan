@@ -14,36 +14,38 @@
     if( matiere_nom == "ߞߊ߲ߡߊߛߙߋ") afficheDesTravaux(2);
     if( matiere_nom == "ߖߊ߰ߕߋ߬ߘߋ߲") afficheDesTravaux(3);
 
-    
+  
     function afficheDesTravaux(n) {
+        if(matiere_nom == "ߛߓߍߛߎ߲") $('#fiche_de_pratique').css('display','none');  // Masquer la partie pratique de Apprentissage.
+        
+        chargementParDefautDesFiches();
 
+        if(matieres[n][0]) {
+
+            fiche_lesson = matieres[n][0].lesson;
+            fiche_lesson = JSON.parse(fiche_lesson);    
+            fiche_note = parseIntNko(matieres[n][0].note);
+
+            var fiche = $('#fiche_1');
+            var fiche_html = ficheApprentissageHTML();
+
+            fiche.html(fiche_html);
+        }
+        if(matieres[n][1]) {
+
+            fiche_lesson = matieres[n][1].lesson;
+            fiche_lesson = JSON.parse(fiche_lesson);
+            fiche_note = parseIntNko(matieres[n][1].note);
+
+            var fiche = $('#fiche_2');
+            var fiche_html = ficheExerciceEtEvaluationCorpsHTML();
+
+            fiche.html(fiche_html);
+        }
         if( matiere_nom == "ߛߓߍߛߎ߲" ) {
-            $('#fiche_de_pratique').css('display','none');  // Masquer la partie pratique de Apprentissage.
-
-            if(matieres[n][0]) {
-
-                fiche_lesson = matieres[n][0].lesson;
-                fiche_lesson = JSON.parse(fiche_lesson);
-                fiche_note = parseIntNko(matieres[n][0].note);
-
-                var fiche = $('#fiche_1');
-                var fiche_html = ficheApprentissageHTML();
-
-                fiche.html(fiche_html);
-            }else{ $('#fiche_1').html("ߝߏߦߊ߲߫"); }
-            if(matieres[n][1]) {
-
-                fiche_lesson = matieres[n][1].lesson;
-                fiche_lesson = JSON.parse(fiche_lesson);
-                fiche_note = parseIntNko(matieres[n][1].note);
-
-                var fiche = $('#fiche_2');
-                var fiche_html = ficheExerciceEtEvaluationCorpsHTML();
-
-                fiche.html(fiche_html);
-            }
+            
             if(matieres[n][2]) {
-
+                
                 fiche_lesson = matieres[n][2].lesson;
                 fiche_lesson = JSON.parse(fiche_lesson);
                 fiche_note = parseIntNko(matieres[n][2].note);
@@ -54,28 +56,6 @@
                 fiche.html(fiche_html);
             }
         }else{
-            if(matieres[n][0]) {
-
-                fiche_lesson = matieres[n][0].lesson;
-                fiche_lesson = JSON.parse(fiche_lesson);
-                fiche_note = parseIntNko(matieres[n][0].note);
-
-                var fiche = $('#fiche_1');
-                var fiche_html = ficheApprentissageHTML();
-
-                fiche.html(fiche_html);
-            }
-            if(matieres[n][1]) {
-
-                fiche_lesson = matieres[n][1].lesson;
-                fiche_lesson = JSON.parse(fiche_lesson);
-                fiche_note = parseIntNko(matieres[n][1].note);
-
-                var fiche = $('#fiche_2');
-                var fiche_html = ficheExerciceEtEvaluationCorpsHTML();
-
-                fiche.html(fiche_html);
-            }
             if(matieres[n][2]) {
                 fiche_lesson = matieres[1][2].lesson;
                 fiche_lesson = JSON.parse(fiche_lesson);
@@ -85,19 +65,30 @@
     
                 pratique.html(pratique_html);
             }
-            if(matieres[n][3]) {
-                fiche_lesson = matieres[1][3].lesson;
-                fiche_lesson = JSON.parse(fiche_lesson);
-                fiche_note = parseIntNko(matieres[1][3].note);
+        }
+        if(matieres[n][3]) {
+            fiche_lesson = matieres[1][3].lesson;
+            fiche_lesson = JSON.parse(fiche_lesson);
+            fiche_note = parseIntNko(matieres[1][3].note);
 
-                var fiche = $('#fiche_4');
-                var fiche_html = ficheExerciceEtEvaluationCorpsHTML();
+            var fiche = $('#fiche_4');
+            var fiche_html = ficheExerciceEtEvaluationCorpsHTML();
 
-                fiche.html(fiche_html);
-            }
+            fiche.html(fiche_html);
         }
 
 
+        
+        function chargementParDefautDesFiches() {
+            var fiche_html = "<h1 class='neant'>ߝߏߦߊ߲߫ ߹</h1>";
+            
+            if(matieres[n] == undefined) $('.fiche').html(fiche_html);
+            
+            if(matieres[n][0] == undefined) $('#fiche_1').html(fiche_html);
+            if(matieres[n][1] == undefined) $('#fiche_2').html(fiche_html);
+            if(matieres[n][2] == undefined) $('#fiche_3').html(fiche_html);
+            if(matieres[n][3] == undefined) $('#fiche_4').html(fiche_html);
+        }
         function ficheEnteteHTMLPourApprentissage() {
             var entete_html = "<table border=1>";
             entete_html += "<tr><td>"+matiere_nom+"</td></tr>";
@@ -118,7 +109,7 @@
                     corps_html+= "<td>"+parseIntNko(fiche_lesson[j][1])+"</td>";
                     }
             corps_html+= "</tr>";
-        corps_html+= "</table>";
+            corps_html+= "</table>";
     
             return  corps_html;
         }

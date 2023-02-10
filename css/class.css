@@ -195,7 +195,7 @@ body { margin: 0; padding: 0; }
 }
 .course {
     position: relative;
-    top: 6rem;
+    top: 5rem;
     height: calc(95vh - 6rem);
     width: 95vw;
     max-width: 60rem;
@@ -211,7 +211,7 @@ body { margin: 0; padding: 0; }
 .course_body {
     top: 0;
     width: calc(100% - 2rem);
-    margin: 0 1rem;
+    margin: 0;
     border-radius: var(--radiusSmall);
     overflow: auto;
 }
@@ -224,14 +224,13 @@ body { margin: 0; padding: 0; }
     padding: 0;
     height: 100vh;
     width: 100vw;
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0,0,0,0.5);
 }
 .course_foot {
     justify-content: space-around;
     align-items: center;
 
     font-weight: bold;
-    box-shadow: 0 0 2rem #666;
 }
 .course_head {
     top: 0;
@@ -274,12 +273,11 @@ body { margin: 0; padding: 0; }
 .dark_backgound { background-color: #aaa; }
 .dialogue_btn {
     padding: 0.125rem 3rem;
-    margin: 0.125rem 0;
+    margin: 0;
     height: 2rem;
     line-height: 2rem;
     font-weight: bold;
-    background-color: #666;
-    border: 1px solid white;
+    box-sizing:  border-box;
     cursor: pointer;
 }
 
@@ -489,11 +487,13 @@ body { margin: 0; padding: 0; }
 .masqueur_de_parent:active { background-color: #aaa; }
 .matiere { position: relative; }
 .media {
-    position: absolute;
+    position: relative;
+    background-color: var(--couleurNeutre);
+    height: 1.5rem;
     width: 10rem;
-    height: 2rem;
-    bottom: 0;
-    right: 10%;
+    top: 0;
+    border: var(--borderSecondaire);
+    border-radius: var(--radiusSmall);
 }
 .media_btns {
     position: absolute;
@@ -511,10 +511,8 @@ body { margin: 0; padding: 0; }
     transition: 1s;
 }
 .media_label {
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-    background-color: var(--couleurNeutre);
+    height: 1.5rem;
+    line-height: 1.5rem;
 }
 
 /* --------------------------------------------------------------------------------------------------------- */
@@ -595,11 +593,13 @@ body { margin: 0; padding: 0; }
 }
 .parametre {
     position: absolute;
-    background-color: transparent;
-    height: 2rem;
+    background-color: var(--couleurNeutre);
+    height: 1.5rem;
     width: 10rem;
-    bottom: 0;
+    top: 0;
     left: 10%;
+    border: var(--borderSecondaire);
+    border-radius: var(--radiusSmall);
 }
 .parametres_container .btn {
     margin: var(--marginSmall);
@@ -618,9 +618,8 @@ body { margin: 0; padding: 0; }
     z-index: 10;
 }
 .parametres_btns {
-    bottom: 0;
-    background-color: var(--couleurNeutre);
-    height: 2rem;
+    height: 1.5rem;
+    line-height: 1.5rem;
     padding-right: 1rem;
 }
 .parametres_popup {
@@ -721,7 +720,7 @@ body { margin: 0; padding: 0; }
 .profile_menu_head a { text-decoration: none; }
 .progress_bar {
     position: relative;
-    margin-top: 0.125rem;
+    margin: 0;
     padding: 0;
     height: 0.5rem;
     width: calc(100% - 2px);

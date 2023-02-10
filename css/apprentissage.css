@@ -7,11 +7,35 @@
     width: 100%;
     overflow: auto;
 }
+#apprentissage_head, #apprentissage_body, #apprentissage_foot {
+    position: relative;
+    width: 100%;
+    left: 0;
+    margin: 0;
+}
+#apprentissage_head {
+    height: 1rem;
+}
+#apprentissage_body {
+    border: 0.5rem solid white;
+    border-top-width: 1px;
+    height: calc(100% - 3rem);
+    width: calc(100% - 1rem);
+    margin: auto;
+    background-color: rgba(0,0,0,0.8);
+    color: white;
+    box-sizing: border-box;
+}
 #apprentissage_foot { 
-    position: absolute;
+    position: relative;
+    margin: 0;
+    padding: 0;
     bottom: 0;
     left: 0;
     height: 2rem; 
     width: 100%;
+    background-color: var(--couleurNeutre);
 }
-#apprentissage_dialogue_btn { border-radius: 0.5rem; }
+#apprentissage_dialogue_btn { 
+    border-radius: 0.5rem; 
+}

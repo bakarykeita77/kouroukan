@@ -17,3 +17,8 @@
 .t2 div { overflow: auto; }
 .t3 { width: 10%; }
 .t3 table { width: 100%; }
+.neant {
+    color: #aaa;
+    padding: 0 2rem;
+    margin-bottom: 0;
+}

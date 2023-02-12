@@ -23,10 +23,17 @@
     --radiusLarge: 1rem;
     --radiusCircle: 50%;
     
-    --shadowPrimaire: 0 0 1rem #aaa;
-    --shadowSecondaire: 0 0 2rem #aaa;
-    --shadowTertiaire: 0 0 3rem #aaa;
-    --shadowQuarternaire: 0 0 3rem #666;
+    --shadow_1a: 0 0 1rem #aaa;
+    --shadow_2a: 0 0 2rem #aaa;
+    --shadow_3a: 0 0 3rem #aaa;
+
+    --shadow_16: 0 0 1rem #666;
+    --shadow_26: 0 0 2rem #666;
+    --shadow_36: 0 0 3rem #666;
+
+    --shadow_10: 0 0 1rem #000;
+    --shadow_20: 0 0 2rem #000;
+    --shadow_30: 0 0 3rem #000;
 }
 
 /* --------------------------------------------------------------------------------------------------------- */
@@ -68,10 +75,7 @@ body { margin: 0; padding: 0; }
     margin: 0.125rem; 
     border-radius: var(--radiusSmall);
 }
-.btn span {
-    height: 1.5rem;
-    line-height: 1.5rem;
-}
+.btn span { height: 1.5rem; line-height: 1.5rem; }
 .btn span:first-child {
     width: 1.5rem;
     line-height: 1.5rem;
@@ -144,7 +148,7 @@ body { margin: 0; padding: 0; }
 }
 .check_btn:hover {
     background-color: var(--couleurNeutre);
-    box-shadow: var(--shadowQuarternaire);
+    box-shadow: var(--shadow_36);
 }
 .check_consonnes {
     position: relative;
@@ -177,7 +181,7 @@ body { margin: 0; padding: 0; }
     height: 8rem;
     min-height: 4rem;
     width: calc(100% - 1rem);
-    margin: auto;
+    margin: 0 auto;
     padding-top: 1rem;
     background-color: #666;
     border: 1px solid transparent;
@@ -195,7 +199,7 @@ body { margin: 0; padding: 0; }
 }
 .course {
     position: relative;
-    top: 5rem;
+    top: 4rem;
     height: calc(95vh - 6rem);
     width: 95vw;
     max-width: 60rem;
@@ -203,16 +207,15 @@ body { margin: 0; padding: 0; }
     padding: 0;
     border-radius: 0.5rem;
     background-color: var(--couleurNeutre);
-    box-shadow: var(--shadowQuarternaire);
+    box-shadow: var(--shadow_36);
     z-index: 0;
     transition: 0.6s;
 }
 .course_body, .course_foot, .course_head { position: relative; }
 .course_body {
-    top: 0;
-    width: calc(100% - 2rem);
+    width: calc(100% - 1rem);
+    margin: auto;
     margin: 0;
-    border-radius: var(--radiusSmall);
     overflow: auto;
 }
 .course_container {
@@ -224,12 +227,13 @@ body { margin: 0; padding: 0; }
     padding: 0;
     height: 100vh;
     width: 100vw;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0,0,0,0.6);
 }
 .course_foot {
     justify-content: space-around;
     align-items: center;
-
+    background-color: var(--couleurNeutre);
+    border-radius: var(--radiusMedium);
     font-weight: bold;
 }
 .course_head {
@@ -344,16 +348,9 @@ body { margin: 0; padding: 0; }
 .fermeture_de_parent:hover { background-color: #aaa; font-weight: bold; }
 .fermeture:active { background-color: #aaa; }
 .fermeture_de_parent:active { background-color: #aaa; }
-.fiche { 
-    position: relative; 
-    width: 100%;
-}
+.fiche { position: relative; width: 100%; }
 .fiche_entete, .fiche_corps, .fiche_foot { display: inline-block; vertical-align: top; border: 2px solid blue; min-height:1rem; position:relative; }
-.fiche_entete {
-    position: relative;
-    float: right;
-    width: 15%;
-}
+.fiche_entete {  position: relative; float: right; width: 15%; }
 .fiche_entete table { width: 100%; }
 .fiche_corps {
     position: relative;
@@ -444,10 +441,11 @@ body { margin: 0; padding: 0; }
 .lesson_progress_bonne_reponse_bar { background-color: yellow; }
 .lesson_title {
     position: relative;
-    padding: 0 16px;
-    margin-bottom: 0 0 16px 0;
-    height: 40px;
-    line-height: 40px;
+    padding: 0 1rem 1rem 0;
+    margin: 0 0 1rem 0;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    border-bottom: 2px solid #aaa;
 }
 .liste_affichage_cascade { display: none; }
 .liste_affichage_cascade li {
@@ -506,7 +504,7 @@ body { margin: 0; padding: 0; }
     overflow: hidden;
     background-color: var(--couleurNeutre);
     border-radius: var(--radiusSmall);
-    box-shadow: var(--shadowQuarternaire);
+    box-shadow: var(--shadow_36);
     opacity: 0;
     transition: 1s;
 }
@@ -556,8 +554,13 @@ body { margin: 0; padding: 0; }
 /* --------------------------------------------------------------------------------------------------------- */
 
 
-.opaque { animation: opacir0.6s 1; }
 .ombrage { box-shadow: 0 4px 43px #000; background-color: white; color: black; }
+.opaque { animation: opacir0.6s 1; }
+.oreille_icon_container {
+    height: 1.5rem;
+    line-height: 1.5rem;
+    display: none;
+}
 
 /* --------------------------------------------------------------------------------------------------------- */
 
@@ -574,7 +577,8 @@ body { margin: 0; padding: 0; }
     box-sizing: border-box;
     overflow: auto;
     box-sizing: border-box;
-}.page_body h4 { margin-right: 1rem; }
+}
+.page_body h4 { margin: 0.5rem 1rem; }
 .page_foot {
     position: absolute;
     height: 0;
@@ -605,7 +609,7 @@ body { margin: 0; padding: 0; }
     margin: var(--marginSmall);
     border-radius: var(--radiusSmall);
 }
-.parametres_container .btn:hover { box-shadow: var(--shadowTertiaire); }
+.parametres_container .btn:hover { box-shadow: var(--shadow_3a); }
 .parametres_container {
     position: absolute;
     display: none;
@@ -628,14 +632,12 @@ body { margin: 0; padding: 0; }
     margin: 0;
     min-width: 25rem;
     background-color: var(--couleurNeutre);
-    box-shadow: var(--shadowQuarternaire);
+    box-shadow: var(--shadow_36);
     left: 0;
 }
 .parentgrid { display: grid; }
 .parentcell { display: table-cell; vertical-align: middle; }
-.phases {
-    margin: 1rem 0;
-}
+.phases { margin: 1rem 0; }
 .phases_container {
     height: 50vh;
     max-height: 25rem;
@@ -672,6 +674,7 @@ body { margin: 0; padding: 0; }
     overflow: hidden;
     cursor: pointer;
 }
+.play_icon_container { height: 1.5rem; line-height: 1.5rem; }
 .ponctuations input, .ponctuations label { display: inline-block; vertical-align: middle; }
 .ponctuations label {
     border: 1px dashed #aaa;
@@ -790,11 +793,9 @@ body { margin: 0; padding: 0; }
     width: calc(100% - 20rem);
     margin: 0;
     border: 2px solid transparent;
-    border-top-color: var(--couleurQuaternaire);
-    border-bottom-color: var(--couleurQuaternaire);
     overflow-y: auto;
 }
-.travaux_cadre { height: calc(100vh - 13rem); margin: 0.5rem 0; overflow: auto; }
+.travaux_cadre { height: calc(100vh - 13rem); margin: 0 0 0.5rem 0; overflow: auto; }
 .travaux table { border-collapse: collapse; }
 .travail {
     position: relative;
@@ -803,6 +804,7 @@ body { margin: 0; padding: 0; }
     background-color: var(--couleurTertiaire);
     border-radius: var(--radiusSmall);
 }
+.travail:not(first-child) { margin-top: 0; }
 .travail:not(last-child) { border-bottom-color: var(--couleurTertiaire); }
 
 

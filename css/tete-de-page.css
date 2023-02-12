@@ -144,7 +144,7 @@
 	height: 5rem;
 	border-radius: var(--radiusCircle);
 	box-sizing: border-box;
-	box-shadow: var(--shadowPrimaire);
+	box-shadow: var(--shadow_1a);
 	overflow: hidden;
 	background-color: var(--couleureNeutre);
 	z-index: 1;

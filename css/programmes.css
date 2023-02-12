@@ -43,7 +43,7 @@
     margin: 1rem auto;
     padding: var(--paddingSmall);
     border: 1px solid transparent;
-    box-shadow: var(--shadowPrimaire);
+    box-shadow: var(--shadow_1a);
 }
 #programme_commentaire p {
     position: relative;

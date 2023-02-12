@@ -8,16 +8,21 @@
     border: 0.5rem solid white;
     border-top-width: 1px;
     height: calc(100% - 3rem);
-    width: calc(100% - 1rem);
-    margin: auto;
     background-color: rgba(0,0,0,0.8);
     color: white;
     box-sizing: border-box;
 }
-#exercice_foot {
-    height: 2rem;
+#exercice_foot { height: 3rem; }
+#exercice_dialogue_btn { border-radius: 0.5rem; }
+#exercice_dialogue_btn div  { 
+    text-align: center; 
+    width: 12rem; 
+    padding: var(--paddingSmall);
+    border: var(--borderPrimaire); 
+    border-radius: var(--radiusMedium);
+    box-shadow: var(--shadow_16);
+    margin: 0 auto; 
 }
-#exercice_dialogue_btn {
-    border-radius: 0.5rem;
-    border: 2px solid blue;
+#exercice_dialogue_btn div:active {
+    box-shadow: none;
 }

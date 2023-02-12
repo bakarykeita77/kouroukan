@@ -127,7 +127,7 @@
 		width: 100%;
 		margin: auto; 
 	}
-	#connexion_form { box-shadow: var(--shadowTertiaire); }
+	#connexion_form { box-shadow: var(--shadow_3a); }
 	#connexion_note { display: none; }
 	
 }

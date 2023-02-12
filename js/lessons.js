@@ -661,7 +661,7 @@ $('document').ready(function() {
                         	
                         	function exerciceEnteteHTML(){
                         	    var exercices_entete_html = "<div class='dialogue_btn' id='exercice_dialogue_btn'>";   
-                                exercices_entete_html += "<div class='play_icon_container' id='exercices_player' style='width:auto'>";
+                                exercices_entete_html += "<div class='play_icon_container' id='exercices_player'>";
                                 exercices_entete_html += "<span class='play_label'>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ </span>";
                                 exercices_entete_html += "<span class='qtite_question'>"+parseIntNko(quantite_de_question)+"</span> : <span class='ordre_question'>"+parseIntNko(compteur_de_question)+question_rang+" </span>";
                                 exercices_entete_html += "<span class='ecouter_question'> ߟߊߡߍ߲߫</span><span class='play_icon'>&#9664;</span>";
@@ -705,7 +705,7 @@ $('document').ready(function() {
                         	        $('.ordre_question').html(parseIntNko(compteur_de_question)+question_rang);
                         	        question_posee = exercice_questions[i];
                         	        
-                        alert( question_posee ); 
+                                    alert( question_posee ); 
                       
                         	        $(this).css('display','none');
                         	        $('.oreille_icon_container').css('display','block');
@@ -728,7 +728,7 @@ $('document').ready(function() {
                             	        
                         	    $('.table_muette').on('click', function(e){
                         	        if(question_posee=='')
-                        	        {  /* guiderClient(); */}
+                        	        { guiderAuQuestionBouton(); }
                         	        else
                         	        {   
                         	            var td = $(e.target);
@@ -757,6 +757,19 @@ $('document').ready(function() {
                                         }
                         	        }
                         	    });
+
+                                function guiderAuQuestionBouton() {
+                                    setTimeout(() => { $('.play_icon_container').css('box-shadow','none'); }, 100);
+                                    setTimeout(() => { $('.play_icon_container').css('box-shadow','var(--shadow_30)'); }, 200);
+                                    setTimeout(() => { $('.play_icon_container').css('box-shadow','none'); }, 300);
+                                    setTimeout(() => { $('.play_icon_container').css('box-shadow','var(--shadow_30)'); }, 400);
+                                    setTimeout(() => { $('.play_icon_container').css('box-shadow','none'); }, 500);
+                                    setTimeout(() => { $('.play_icon_container').css('box-shadow','var(--shadow_30)'); }, 600);
+                                    setTimeout(() => { $('.play_icon_container').css('box-shadow','none'); }, 700);
+                                    setTimeout(() => { $('.play_icon_container').css('box-shadow','var(--shadow_30)'); }, 800);
+                                    setTimeout(() => { $('.play_icon_container').css('box-shadow','none'); }, 900);
+                                    setTimeout(() => { $('.play_icon_container').css('box-shadow','var(--shadow_16)'); }, 1000);
+                                }
                     	    }
                 	    }
                 	    function enregistrerExercice(){
@@ -835,7 +848,7 @@ $('document').ready(function() {
                                         lesson : lesson,
                                         note   : note
                                     });
-    
+   
                                     fetch("/kouroukan/pages/actions.php", {
                                         method: "POST",
                                         body: exercice_data 
@@ -1394,6 +1407,7 @@ $('document').ready(function() {
                                             
                                             chargerPratiqueFicheBody();
                                             chargerPratiqueFicheFoot();
+                                            pratique_fiche_body = $('#pratique_fiche_body');
 
                                             function chargerPratiqueFicheBody() {
 
@@ -1848,6 +1862,11 @@ $('document').ready(function() {
                         var q_index = 0, q_rang = '߭';
                         var q_ordre = parseIntNko(q_index+1);
                         var evaluation_a_stocker = [];
+
+                        var evaluation_fiche_body = $('#evaluation_fiche_body');
+                        var fiche_body_html = evaluation_fiche_body.html();
+
+                        $('#pratique_options').css('display','none');
                          
                         $('.fermeture').attr('id', 'fermer_evaluation');
 
@@ -1909,7 +1928,7 @@ $('document').ready(function() {
                         	        effacerPrecedenteReponse();
                         	        question_evaluation = questions_evaluation[q_index];
 
-                            alert(question_evaluation);            
+                                    alert(question_evaluation);            
                         	        
                         	        dicterLaQuestion();
                         	        $('#evaluation_cross').css('display','none');
@@ -1990,6 +2009,16 @@ $('document').ready(function() {
                            	    
                                     note += p; 
                             	    evaluation_a_stocker.splice(evaluation_counter,1,question_reponse);
+                                    //chargerFicheBody(pratique_fiche_body,fiche_body_html,q,r,p);
+                                    chargerPratiqueFicheBody();
+
+                                    function chargerPratiqueFicheBody() {
+
+                                        if(q == r) fiche_body_html += "<div class='tr'>\n <span class='affiche_question'>"+q+"</span>\n<span class='affiche_reponse'><span id='fiche_vraie_reponse'>"+r+"</span></span>\n<span class='affiche_point'>"+parseIntNko(p)+"</span>\n </div>\n\n";
+                                        if(q != r) fiche_body_html += "<div class='tr'>\n <span class='affiche_question'>"+q+"</span>\n<span class='affiche_reponse'><span id='fiche_mauvaise_reponse'>"+r+"</span><span id='fiche_croix'>&#10060;</span></span>\n<span class='affiche_point'>"+parseIntNko(p)+"</span>\n </div>\n\n";
+                                        
+                                        evaluation_fiche_body.html(fiche_body_html);
+                                    }
          	    
                                     marquerReponseEvaluation();            
                             	    
@@ -2007,7 +2036,7 @@ $('document').ready(function() {
                                             setTimeout(function(){ $('#cross').css({'transform':'scale(1)', 'opacity':0.75}); }, 100);
                                             setTimeout(function(){ $('#cross').css({'display':'none'}); },1500);
                                         }
-                                    }    
+                                    } 
                                 }
                                 function actualiserEvaluationProgressBar(){
                                             
@@ -2036,6 +2065,13 @@ $('document').ready(function() {
                                     $('.repetition_btn').css('display','none');
                                 }
                             });
+                    
+                            function chargerFicheBody(tbody,tbody_html,question,reponse,point) {
+                                if(question == reponse) tbody_html += "<div class='tr'>\n <span class='affiche_question'>"+question+"</span>\n<span class='affiche_reponse'><span id='fiche_vraie_reponse'>"+reponse+"</span></span>\n<span class='affiche_point'>"+parseIntNko(point)+"</span>\n </div>\n\n";
+                                if(question != reponse) tbody_html += "<div class='tr'>\n <span class='affiche_question'>"+question+"</span>\n<span class='affiche_reponse'><span id='fiche_mauvaise_reponse'>"+reponse+"</span><span id='fiche_croix'>&#10060;</span></span>\n<span class='affiche_point'>"+parseIntNko(point)+"</span>\n </div>\n\n";
+                           
+                                tbody.html(tbody_html);
+                            }
                         }
                         function stockerEvaluation() {
                             $('.correction_btn').on('click', function(){

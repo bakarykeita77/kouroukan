@@ -55,29 +55,29 @@ if(isset($_SESSION["id"])) {
                 <div class="phases liste_affichage_cascade" id="pratique_phases"></div>
             </div>
             <div class="travaux">
-            <div class="travaux_cadre">
-                
-                <div class="travail" id="fiche_d_apprentissage">
-                    <h3 class="fiche_titre" ><?= $matiere_nom; ?> ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ</h3>
-                    <div class="fiche" id="fiche_1"></div>
-                </div>
+                <div class="travaux_cadre">
+                    
+                    <div class="travail" id="fiche_d_apprentissage">
+                        <h3 class="fiche_titre" ><?= $matiere_nom; ?> ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ</h3>
+                        <div class="fiche" id="fiche_1"></div>
+                    </div>
 
-                <div class="travail" id="fiche_d_exercice">
-                    <h3 class="fiche_titre"><?= $matiere_nom; ?> ߡߊ߬ߞߟߏ߬ߟߌ</h3>
-                    <div class="fiche" id="fiche_2"></div>
-                </div>
+                    <div class="travail" id="fiche_d_exercice">
+                        <h3 class="fiche_titre"><?= $matiere_nom; ?> ߡߊ߬ߞߟߏ߬ߟߌ</h3>
+                        <div class="fiche" id="fiche_2"></div>
+                    </div>
 
-                <div class="travail" id="fiche_de_pratique">
-                    <h3 class="fiche_titre"><?= $matiere_nom; ?> ߓߟߏߦߊߟߌ</h3>
-                    <div class="fiche" id="fiche_3"></div>
-                </div>
+                    <div class="travail" id="fiche_de_pratique">
+                        <h3 class="fiche_titre"><?= $matiere_nom; ?> ߓߟߏߦߊߟߌ</h3>
+                        <div class="fiche" id="fiche_3"></div>
+                    </div>
 
-                <div class="travail" id="fiche_d_evaluation">
-                    <h3 class="fiche_titre"><?= $matiere_nom; ?> ߞߘߐߓߐߟߌ</h3>
-                    <div class="fiche" id="fiche_4"></div>
+                    <div class="travail" id="fiche_d_evaluation">
+                        <h3 class="fiche_titre"><?= $matiere_nom; ?> ߞߘߐߓߐߟߌ</h3>
+                        <div class="fiche" id="fiche_4"></div>
+                    </div>
+                    
                 </div>
-                
-            </div>
             </div>
 
         </div>
@@ -137,9 +137,7 @@ if(isset($_SESSION["id"])) {
                 </div>
             </div>
             <div class="course_body" id="exercice_body"></div>   <!--Cette division est chargé par la fonction chargerExercice() dans lesson.js-->
-            <div class="course_foot" id="exercice_foot">
-
-            </div>
+            <div class="course_foot" id="exercice_foot"></div>
             
          </div>
       <!--------------------------------------------------------------------------------------------------------------->
@@ -187,6 +185,7 @@ if(isset($_SESSION["id"])) {
           
          <!--pratique_foot---------------------------------------------------->
             <div class="course_foot" id="pratique_foot">
+
                 <div id="pratique_fiche">
                     <div id="pratique_fiche_head">
                         <span class="th">ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</span>
@@ -205,10 +204,12 @@ if(isset($_SESSION["id"])) {
                         </div>
                     </div>
                 </div>
+
                 <div id="message_de_fin_container">
                     <p id="message_de_fin"></p>
                     <div id="message_btn_container"> <button id="message_btn_1"></button><button id="message_btn_2"></button> </div>
                 </div>
+
                 <div class="dialogue_btn" id="pratique_dialogue_btn">
     
                     <div class="btn question_btn">
@@ -240,8 +241,9 @@ if(isset($_SESSION["id"])) {
                 <div class='progress_bar' id="evaluation_progress_bar">
                     <p class='progress_question_bar'></p>
                     <p class='progress_bonne_reponse_bar'></p>
+                </div>
             </div>
-            </div>
+
             <div class="course_body" id="evaluation_body">
 
                 <div id='teste_container'>
@@ -262,12 +264,33 @@ if(isset($_SESSION["id"])) {
                     <p id="evaluation_message_de_fin"></p>
                     <div id="evaluation_message_btn_container"> <button id="message_btn_1"></button><button id="message_btn_2"></button> </div>
                 </div>
-                <div class='progress_bar' id="evaluation_progress_bar"><span class='progress_question_bar'></span><span class='progress_bonne_reponse_bar'></span></div>
-            
-                <div class="clavier_container" id="clavier_pratique"><?php include "clavier.php"; ?></div>
-                <div class="clavier_container" id="clavier_pratique"><?php include "clavier.php"; ?></div>
             </div>
+
             <div class="course_foot" id="evaluation_foot">
+
+                <div id="evaluation_fiche">
+                    <div id="evaluation_fiche_head">
+                        <span class="th">ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</span>
+                        <span class="th">ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ</span>
+                        <span class="th">ߓߙߍ߬ߦߊ</span>
+                    </div>
+                    <div id="evaluation_fiche_body"></div>
+                    <div id="evaluation_fiche_foot">
+                        <div>
+                            <span id="label_total_point">ߓߍ߬ߙߍ ߡߎ߬ߡߍ</span>
+                            <span id="total_point"></span>
+                        </div>
+                        <div>
+                            <span id="label_pourcentage_point" colspan="2">ߓߍ߬ߙߍ ߗߡߍ߬ߘߐ߬ߦߊ</span>
+                            <span id="pourcentage_point"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="message_de_fin_container">
+                    <p id="message_de_fin"></p>
+                    <div id="message_btn_container"> <button id="message_btn_1"></button><button id="message_btn_2"></button> </div>
+                </div>
 
                 <div class="dialogue_btn" id="evaluation_dialogue_btn">
                     <div class="question_btn">
@@ -288,6 +311,8 @@ if(isset($_SESSION["id"])) {
                         <span class="correction_icon"></span>
                     </div>
                 </div>
+
+                <div class="clavier_container" id="clavier_pratique"><?php include "clavier.php"; ?></div>
             </div>
          </div>
       <!--------------------------------------------------------------------------------------------------------------->

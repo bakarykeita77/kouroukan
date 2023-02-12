@@ -90,6 +90,7 @@
 }
 #correcteur:active { box-shadow: none; }
 #pratique_foot { display: flex; flex-direction: column; }
+
 #pratique_fiche {
     display: flex;
     flex-direction: column;
@@ -255,7 +256,6 @@
         margin: auto ;
     }
     #pratique_foot { 
-        position: absolute;
         height: 18rem; 
         right: 1rem;
     }
@@ -270,20 +270,20 @@
     }
 }
 @media screen and (orientation: landscape) {
-    #pratique_body, #pratique_head, #pratique_foot { position: absolute; }
+    #pratique_body, #pratique_head, #pratique_foot { position: relative; }
     #pratique_head, #pratique_foot { 
         width: 40%; 
         bottom: 1rem;
         right: 1rem;
     }
-    #pratique_body {
+    #pratique_body, #evaluation_body {
         height: calc(100% - 4px);
         width: 52%;
         left: 0;
     }
     #image_name { display: block; }
-    #pratique_foot { height: calc(100% - 3rem); border-radius: var(--radiusSmall); }
-    #pratique_fiche {
+    #pratique_foot, #evaluation_foot { height: calc(100% - 3rem); border-radius: var(--radiusSmall); }
+    #pratique_fiche, #evaluation_fiche {
         top: 0;
         width: calc(100% - 1rem);
         left: 50%;

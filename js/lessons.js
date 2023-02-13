@@ -1923,7 +1923,7 @@ $('document').ready(function() {
                             repeterQuestionEvaluation();
                             repondreEvaluation();
                             
-                            function poserQuestionEvaluation(){
+                            function poserQuestionEvaluation() {
                         	    $('.question_btn').on('click', function(){
                         	        effacerPrecedenteReponse();
                         	        question_evaluation = questions_evaluation[q_index];
@@ -1933,7 +1933,8 @@ $('document').ready(function() {
                         	        dicterLaQuestion();
                         	        $('#evaluation_cross').css('display','none');
                         	        $('#evaluation_cross').css('transform','scale(0.4)');
-                                    $('#evaluation_reponse_container').css({'top':0});                        	       // memoriserQuestionRang();
+                                    $('#evaluation_reponse_container').css({'top':0});  
+                                    // memoriserQuestionRang();
                         
                         	        q_index = compteur();
                         	        q_ordre = parseIntNko(q_index+1);
@@ -1997,8 +1998,9 @@ $('document').ready(function() {
                                 corrigerEvaluation();
                                 actualiserEvaluationProgressBar();
                                 effacer();
-                                setTimeout(function() { afficherQuestionButton(); }, 1500);
+                                afficherQuestionButton();
                             	evaluation_counter++;
+                                
                                 
                                 function corrigerEvaluation(){
                                     
@@ -2009,19 +2011,22 @@ $('document').ready(function() {
                            	    
                                     note += p; 
                             	    evaluation_a_stocker.splice(evaluation_counter,1,question_reponse);
-                                    //chargerFicheBody(pratique_fiche_body,fiche_body_html,q,r,p);
-                                    chargerPratiqueFicheBody();
+                                    chargerEvaluationFicheBody();
+                                    chargerEvaluationTotalPoint();
+                                    marquerReponseEvaluation();            
 
-                                    function chargerPratiqueFicheBody() {
-
+                                    function chargerEvaluationFicheBody() {
                                         if(q == r) fiche_body_html += "<div class='tr'>\n <span class='affiche_question'>"+q+"</span>\n<span class='affiche_reponse'><span id='fiche_vraie_reponse'>"+r+"</span></span>\n<span class='affiche_point'>"+parseIntNko(p)+"</span>\n </div>\n\n";
                                         if(q != r) fiche_body_html += "<div class='tr'>\n <span class='affiche_question'>"+q+"</span>\n<span class='affiche_reponse'><span id='fiche_mauvaise_reponse'>"+r+"</span><span id='fiche_croix'>&#10060;</span></span>\n<span class='affiche_point'>"+parseIntNko(p)+"</span>\n </div>\n\n";
                                         
                                         evaluation_fiche_body.html(fiche_body_html);
                                     }
          	    
-                                    marquerReponseEvaluation();            
                             	    
+                                    function chargerEvaluationTotalPoint() {
+                                        alert(note);
+                                        $('#total_point').html(note);
+                                    }                                    
                                     function marquerReponseEvaluation() {    
                                         if(reponse_evaluation.join('') == question_evaluation) {
                                           

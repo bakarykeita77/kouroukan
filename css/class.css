@@ -4,6 +4,12 @@
     --borderSecondaire: 1px solid cornflowerblue;
     --borderTertiaire: 1px solid yellow;
     
+    --border_a: 1px solid #aaa;
+    --border_b: 1px solid #bbb;
+    --border_c: 1px solid #ccc;
+    --border_flowerBlue: 1px solid cornflowerblue;
+    --border_yellow: 1px solid yellow;
+    
     --couleurPrimaire: cornflowerblue;
     --couleurSecondaire: yellow;
     --couleurTertiaire: #ddd;
@@ -175,9 +181,8 @@ body { margin: 0; padding: 0; }
     align-items: center;
 }
 .clavier_container {
-    position: absolute;
-    bottom: 0.5rem;
-    left: 0.5rem;
+    position: relative;
+    top: calc(100% - 11.5rem);
     height: 8rem;
     min-height: 4rem;
     width: calc(100% - 1rem);
@@ -230,8 +235,6 @@ body { margin: 0; padding: 0; }
     background-color: rgba(0,0,0,0.6);
 }
 .course_foot {
-    justify-content: space-around;
-    align-items: center;
     background-color: var(--couleurNeutre);
     border-radius: var(--radiusMedium);
     font-weight: bold;
@@ -277,12 +280,12 @@ body { margin: 0; padding: 0; }
 .dark_backgound { background-color: #aaa; }
 .dialogue_btn {
     padding: 0.125rem 3rem;
-    margin: 0;
+    margin: 0 auto;
     height: 2rem;
     line-height: 2rem;
     font-weight: bold;
-    box-sizing:  border-box;
     cursor: pointer;
+    transition: 0.25s;
 }
 
 /* --------------------------------------------------------------------------------------------------------- */
@@ -754,7 +757,7 @@ body { margin: 0; padding: 0; }
 .progress_question_bar { background-color: #bbb; }
 
 /* --------------------------------------------------------------------------------------------------------- */
-
+.repetition_btn { display: none; }
 .right { float: right; }
 
 

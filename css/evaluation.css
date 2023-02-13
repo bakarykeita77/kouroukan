@@ -20,9 +20,7 @@
 
 #evaluation_body {
     border: 0.5rem solid white;
-    border-top-width: 1px;
     height: calc(100% - 3rem);
-    background-color: rgba(0,0,0,0.8);
     color: white;
     box-sizing: border-box;
 }
@@ -62,8 +60,16 @@
     font-weight: bold;
 }
 #evaluation_reponse {
+    border: 1px solid red;
+    position: absolute;
+    left: 0;
+    color: black;
+    width: 100%;
+    height: 100%;
     margin: 0;
+    text-align: center;
     text-shadow: 0.5rem 0.5rem 0.5rem #ccc;
+    font-size: 20rem;
 }
 #evaluation_cross {
     display: none;
@@ -72,8 +78,6 @@
 }
 #evaluation_foot {
     position: relative;
-    display: flex;
-    flex-direction: column;
     margin: 0;
     padding: 0;
 }
@@ -146,11 +150,13 @@
 #evaluation_dialogue_btn {
     position: relative;
     width: calc(100% + 2px - 7rem);
-    left: 0.5rem;
-    bottom: 0;
-    border-radius: 0.5rem 0.5rem 0 0;
-    border: var(--couleurSecondaire);
+    top: calc(100% - 12.5rem);
+    text-align: center;
+    border-radius: var(--radiusLarge);
+    border: var(--border_c);
+    box-shadow: var(--shadow_1a);
 }
+#evaluation_dialogue_btn:active { box-shadow: none; }
 #evaluation_image_container {
     height: 100%;
     width: 100%;
@@ -207,7 +213,7 @@
 #evaluation_head {
 }
 #evaluation_body { padding: 0; }
-#evaluation_clavier_container { border-radius: 0 0 0.5rem 0.5rem; }
+#evaluation_clavier_container { border-radius: var(--radiusSmall); }
 #teste_container {
     position: relative;
     padding: 0;

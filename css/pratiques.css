@@ -164,7 +164,7 @@
     border-radius: 0.5rem 0.5rem 0 0;
     border: var(--couleurSecondaire);
 }
-#clavier_pratique { border-radius: 0 0 0.5rem 0.5rem; }
+#clavier_pratique { border-radius: var(--radiusSmall); }
 #pratiques_images_container {
     position: absolute;
     height: 100%;

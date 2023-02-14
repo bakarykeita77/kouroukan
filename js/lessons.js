@@ -2012,8 +2012,10 @@ $('document').ready(function() {
                                     note += p; 
                             	    evaluation_a_stocker.splice(evaluation_counter,1,question_reponse);
                                     chargerEvaluationFicheBody();
-                                    chargerEvaluationTotalPoint();
-                                    marquerReponseEvaluation();            
+                                    chargerEvaluationFicheFoot();
+                                    marquerReponseEvaluation(); 
+                                    defilementDeEvaluationFicheVersLeHaut();
+
 
                                     function chargerEvaluationFicheBody() {
                                         if(q == r) fiche_body_html += "<div class='tr'>\n <span class='affiche_question'>"+q+"</span>\n<span class='affiche_reponse'><span id='fiche_vraie_reponse'>"+r+"</span></span>\n<span class='affiche_point'>"+parseIntNko(p)+"</span>\n </div>\n\n";
@@ -2023,25 +2025,27 @@ $('document').ready(function() {
                                     }
          	    
                             	    
-                                    function chargerEvaluationTotalPoint() {
-                                        alert(note);
-                                        $('#total_point').html(note);
+                                    function chargerEvaluationFicheFoot() {
+                                        $(' #evaluation_fiche_foot #total_point').html(parseIntNko(nbr_max_de_questions_a_poser)+'/'+parseIntNko(note));
+                                        $(' #evaluation_fiche_foot #pourcentage_point').html('%'+parseIntNko((note/nbr_max_de_questions_a_poser)*100));
                                     }                                    
                                     function marquerReponseEvaluation() {    
                                         if(reponse_evaluation.join('') == question_evaluation) {
                                           
-                                            $('#check_mark_container, #reponse').css('display','inline-block');
+                                            $('#check_mark_container').css('display','block');
+                                            $('#check_mark_cover').css({'left':0});
                                             $('#check_mark').html("&#10003;"); 
                                             setTimeout(function(){ $('#check_mark_cover').css({'left':'-100%'}); },100);
-                                            setTimeout(function(){ $('#check_mark_cover').css({'left':0}); },1500);
-                                            setTimeout(function(){ $('#check_mark_container').css({'display':'none'}); },1500);
+                                            setTimeout(function(){ $('#check_mark_container').css({'display':'none'}); },2500);
                                         }else{
-                                            $("#reponse").html(reponse_evaluation.join('')+"<span id='cross'>&#10060;</span>");
-                                            $('#cross').css({'display':'block', 'transform':'scale(0.5)', 'opacity':0});
-                                            setTimeout(function(){ $('#cross').css({'transform':'scale(1)', 'opacity':0.75}); }, 100);
-                                            setTimeout(function(){ $('#cross').css({'display':'none'}); },1500);
+                                            $("#evaluation_reponse").html(reponse_evaluation.join('')+"<span id='evaluation_cross'>&#10060;</span>");
+                                            $('#evaluation_cross').css({'display':'block', 'transform':'scale(0.5)', 'opacity':0});
+                                            setTimeout(function(){ $('#evaluation_cross').css({'transform':'scale(1)', 'opacity':0.75}); }, 100);
                                         }
                                     } 
+                                    function defilementDeEvaluationFicheVersLeHaut() {
+                                        $('#evaluation_fiche_body').animate({ scrollTop:$('#evaluation_fiche_body')[0].scrollHeight }, 1000);
+                                    }
                                 }
                                 function actualiserEvaluationProgressBar(){
                                             
@@ -2062,7 +2066,7 @@ $('document').ready(function() {
                                         reponse_evaluation.splice(0,reponse_evaluation.length);
                                         $('#reponse').html(reponse_evaluation);
                                         $('#check_mark').empty();
-                                    },1500);
+                                    },2500);
                                 }
                                 function afficherQuestionButton(){
                                     $('.correction_btn').css('display','none');

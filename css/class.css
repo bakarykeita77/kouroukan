@@ -190,8 +190,6 @@ body { margin: 0; padding: 0; }
     align-items: center;
 }
 .clavier_container {
-    position: relative;
-    top: calc(100% - 11.5rem);
     height: 8rem;
     min-height: 4rem;
     width: calc(100% - 1rem);
@@ -215,8 +213,8 @@ body { margin: 0; padding: 0; }
     position: relative;
     top: 4rem;
     height: calc(95vh - 6rem);
+    min-height: 25rem;
     width: 95vw;
-    max-width: 60rem;
     margin: 0 auto;
     padding: 0;
     border-radius: 0.5rem;
@@ -239,9 +237,11 @@ body { margin: 0; padding: 0; }
     left: 0;
     margin: 0;
     padding: 0;
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     background-color: rgba(0,0,0,0.6);
+    overflow: scroll;
+    box-sizing: border-box;
 }
 .course_foot {
     background-color: var(--couleurNeutre);
@@ -867,6 +867,7 @@ body { margin: 0; padding: 0; }
         width: 80%;
         margin: auto;
     }
+    .course { max-width: 60rem; }
     .phases_container, .travaux {
         display: inline-block;
         vertical-align: top;
@@ -888,6 +889,47 @@ body { margin: 0; padding: 0; }
         margin: 0;
         padding: 0;
     }
+    .course { max-width: 40rem; }
+    .phases_container, .travaux {
+        display: block;
+    }
+    .phases_container {
+        width: 60%;
+        max-width: 32rem;
+        margin: auto;
+    }
+    .travaux { display: none; }
+	
+}
+
+@media screen and (orientation: landscape) {
+	.page_body {
+        width: 80%;
+        margin: auto;
+    }
+    .course { max-width: 60rem; }
+    .phases_container, .travaux {
+        display: inline-block;
+        vertical-align: top;
+    }
+    .phases_container {
+        width: 30%;
+        max-width: 30rem;
+        margin-right: 1rem;
+    }
+    .travaux {
+        width: 60%;
+        max-width: 50rem;
+        margin: auto;
+    }
+}
+@media screen and (orientation: portrait) {
+	.page_body {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    .course { max-width: 40rem; }
     .phases_container, .travaux {
         display: block;
     }

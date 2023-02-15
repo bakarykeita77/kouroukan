@@ -2023,8 +2023,6 @@ $('document').ready(function() {
                                         
                                         evaluation_fiche_body.html(fiche_body_html);
                                     }
-         	    
-                            	    
                                     function chargerEvaluationFicheFoot() {
                                         $(' #evaluation_fiche_foot #total_point').html(parseIntNko(nbr_max_de_questions_a_poser)+'/'+parseIntNko(note));
                                         $(' #evaluation_fiche_foot #pourcentage_point').html('%'+parseIntNko((note/nbr_max_de_questions_a_poser)*100));

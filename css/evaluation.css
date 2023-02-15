@@ -21,7 +21,6 @@
 #evaluation_body {
     border: 0.5rem solid white;
     height: calc(100% - 3rem);
-    color: white;
     box-sizing: border-box;
 }
 #evaluation_guide {
@@ -50,15 +49,17 @@
     z-index: 1;
 }
 #evaluation_reponse, #evaluation_cross {
+    border: 1px solid red;
     position: absolute;
     font-weight: bold;
-    font-size: 20rem;
+    font-size: 300%;
 }
 #evaluation_reponse {
     left: 0;
     color: black;
-    width: 100%;
-    height: 100%;
+    width: calc(100% - 2px);
+    height: calc(100% - 2px);
+    line-height: 100%;
     margin: 0;
     padding: 0;
     text-align: center;
@@ -73,10 +74,10 @@
     display: flex;
     flex-direction: column;
     position: absolute;
-    height: calc(100% - 14rem);
+    height: 100%;
 }
 #evaluation_fiche_head, #evaluation_fiche_body, #evaluation_fiche_foot { position: relative; }
-#pratique_fiche_head {
+#evaluation_fiche_head {
     padding: 0.25rem 0;
     margin: 0.125rem 0;
     border-bottom: 0.25rem solid #aaa;
@@ -147,13 +148,12 @@
 }
 
 #evaluation_dialogue_btn {
-    position: relative;
     width: calc(100% + 2px - 7rem);
-    top: calc(100% - 12.5rem);
     text-align: center;
     border-radius: var(--radiusLarge);
     border: var(--border_c);
     box-shadow: var(--shadow_1a);
+    margin: 0.5rem auto;
 }
 #evaluation_dialogue_btn:active { box-shadow: none; }
 #evaluation_image_container {
@@ -222,11 +222,8 @@
 #evaluation_clavier_container { border-radius: var(--radiusSmall); }
 #teste_container {
     position: relative;
-    padding: 0;
-    margin: 0;
-    min-height: 8rem;
-    width: 95%;
-    height: calc(100% - 1rem);
+    width: calc(100% - 2px);
+    margin: 0.5rem auto;
 }
 #reponse {
     position: relative;
@@ -289,18 +286,61 @@
     left: 0;
 }
 
+@media screen and (max-width: 800px) {
+
+    #evaluation_body, #evaluation_head, #evaluation_foot {
+        position: relative;
+        width: 96%;
+        margin: 1rem auto ;
+    }
+    #evaluation_foot { height: 50%; }
+    #evaluation_body { height: calc(100% - 25rem); }
+    #evaluation_fiche_foot div:nth-child(2) { display: none; }
+    #teste_container {  height: 10rem; }
+    #evaluation_fiche { 
+        width: 100%; top: 0; 
+    }
+    #evaluation_message_de_fin_container {
+        top: calc(100% - 7rem);
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+@media screen and (min-width: 800px) {
+    #evaluation_body, #evaluation_head, #evaluation_foot { position: absolute; }
+    #evaluation_body {
+        height: calc(100% - 4px);
+        width: 52%;
+        left: 0;
+    }
+    #evaluation_head, #evaluation_foot {
+        width: 40%; 
+        bottom: 1rem;
+        right: 1rem;
+    }
+    #evaluation_foot { border-radius: var(--radiusSmall); }
+    #teste_container {  height: calc(100% - 12.5rem); }
+    #evaluation_fiche {
+        left: 50%;
+        width: calc(100% - 1rem);
+        transform: translateX(-50%);
+    }
+}
+
 @media screen and (orientation: portrait) {
 
     #evaluation_body, #evaluation_head, #evaluation_foot {
         position: relative;
         width: 96%;
-        margin: auto ;
+        margin: 1rem auto ;
     }
-    #evaluation_foot {
-        height: 18rem; 
+    #evaluation_foot { height: 50%; }
+    #evaluation_body { height: calc(100% - 25rem); }
+    #evaluation_fiche_foot div:nth-child(2) { display: none; }
+    #teste_container {  height: 10rem; }
+    #evaluation_fiche { 
+        width: 100%; top: 0; 
     }
-    #evaluation_body { height: calc(100% - 20rem); }
-    #evaluation_fiche { width: 100%; top: 0; }
     #evaluation_message_de_fin_container {
         top: calc(100% - 7rem);
         left: 50%;
@@ -319,11 +359,11 @@
         bottom: 1rem;
         right: 1rem;
     }
-    #evaluation_foot { height: calc(100% - 3rem); border-radius: var(--radiusSmall); }
+    #evaluation_foot { border-radius: var(--radiusSmall); }
+    #teste_container {  height: calc(100% - 12.5rem); }
     #evaluation_fiche {
-        top: 0;
-        width: calc(100% - 1rem);
         left: 50%;
+        width: calc(100% - 1rem);
         transform: translateX(-50%);
     }
 }

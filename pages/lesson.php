@@ -294,7 +294,7 @@ if(isset($_SESSION["id"])) {
                     </div>
                 </div>
 
-                <div class="clavier_container" id="clavier_pratique"><?php include "clavier.php"; ?></div>
+                <div class="clavier_container" id="clavier_evaluation"><?php include "clavier.php"; ?></div>
 
                 <div class="dialogue_btn" id="evaluation_dialogue_btn">
                     <div class="question_btn">

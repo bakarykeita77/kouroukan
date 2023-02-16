@@ -1918,10 +1918,14 @@ $('document').ready(function() {
                             }
                         }
                         function evaluer() {
+
+                            var reponse_font_size = $('#evaluation_reponse').height();
+                            $('#evaluation_reponse').css('font-size',reponse_font_size+'px');
                             	            
                             poserQuestionEvaluation();
                             repeterQuestionEvaluation();
                             repondreEvaluation();
+                            
                             
                             function poserQuestionEvaluation() {
                         	    $('.question_btn').on('click', function(){
@@ -2020,8 +2024,19 @@ $('document').ready(function() {
                                     function chargerEvaluationFicheBody() {
                                         if(q == r) fiche_body_html += "<div class='tr'>\n <span class='affiche_question'>"+q+"</span>\n<span class='affiche_reponse'><span id='fiche_vraie_reponse'>"+r+"</span></span>\n<span class='affiche_point'>"+parseIntNko(p)+"</span>\n </div>\n\n";
                                         if(q != r) fiche_body_html += "<div class='tr'>\n <span class='affiche_question'>"+q+"</span>\n<span class='affiche_reponse'><span id='fiche_mauvaise_reponse'>"+r+"</span><span id='fiche_croix'>&#10060;</span></span>\n<span class='affiche_point'>"+parseIntNko(p)+"</span>\n </div>\n\n";
-                                        
+                                     
                                         evaluation_fiche_body.html(fiche_body_html);
+                                        afficherLaDerniereLigne();
+                                        
+                                        function afficherLaDerniereLigne() {
+                                            $('#evaluation_fiche_body .tr:last-child').css({
+                                                'height':0,
+                                                'overflow':'hidden',
+                                                'transition':'height 0.6s ease-out'
+                                            });
+    
+                                            $('.tr:last-child').css({'height':'2rem'});
+                                        }
                                     }
                                     function chargerEvaluationFicheFoot() {
                                         $(' #evaluation_fiche_foot #total_point').html(parseIntNko(nbr_max_de_questions_a_poser)+'/'+parseIntNko(note));

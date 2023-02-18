@@ -171,20 +171,6 @@ if(isset($_SESSION["id"])) {
           
          <!--pratique_body---------------------------------------------------->
             <div class="course_body" id="pratique_body">
-                <div id="pratique_guide">
-                    <div id="bulles_container"></div>
-                    <p id="signe_egal">&#123;</p>
-                    <p id="reponse_container"><span id="cumule_des_caracteres"></span><span id='correcteur'>ߖߐ߬ߛߌ߬ߙߊ߲</span></p>
-                </div>
-                <div id="pratiques_images_container">
-                    <h1 id="image_name"></h1>
-                    <img src="" alt="?">
-                </div>
-                <div id="image_croix">&#10060;</div>
-            </div>
-          
-         <!--pratique_foot---------------------------------------------------->
-            <div class="course_foot" id="pratique_foot">
 
                 <div id="pratique_fiche">
                     <div id="pratique_fiche_head">
@@ -209,6 +195,27 @@ if(isset($_SESSION["id"])) {
                     <p id="message_de_fin"></p>
                     <div id="message_btn_container"> <button id="message_btn_1"></button><button id="message_btn_2"></button> </div>
                 </div>
+                
+            </div>
+          
+         <!--pratique_foot---------------------------------------------------->
+            <div class="course_foot" id="pratique_foot">
+
+
+                <div id="pratique_guide">
+                    <div id="bulles_container"></div>
+                    <p id="signe_egal">&#123;</p>
+                    <p id="reponse_container"><span id="cumule_des_caracteres"></span><span id='correcteur'>ߖߐ߬ߛߌ߬ߙߊ߲</span></p>
+                </div>
+
+                <div id="pratiques_images_container">
+                    <h1 id="image_name"></h1>
+                    <img src="" alt="?">
+                </div>
+
+                <div id="image_croix">&#10060;</div>
+
+                <div class="clavier_container" id="pratique_clavier_container"><?php include "clavier.php"; ?></div>
 
                 <div class="dialogue_btn" id="pratique_dialogue_btn">
     
@@ -231,7 +238,6 @@ if(isset($_SESSION["id"])) {
                     </div>
                 </div>
             
-                <div class="clavier_container" id="clavier_pratique"><?php include "clavier.php"; ?></div>
             </div>
          </div>
       <!--------------------------------------------------------------------------------------------------------------->
@@ -348,11 +354,12 @@ if(isset($_SESSION["id"])) {
     <script src="/kouroukan/js/parametres.js"></script>
     <script src="/kouroukan/class-fonctions.js"></script>
 
+    <script src="/kouroukan/js/travaux.js"></script>
     <script src="/kouroukan/js/apprentissage.js"></script>
+    <script src="/kouroukan/js/exercices.js"></script>
     <script src="/kouroukan/js/evaluations.js"></script>
     <script src="/kouroukan/js/lessons.js"></script>
     <script src="/kouroukan/js/alphabet.js"></script>
-    <script src="/kouroukan/js/travaux.js"></script>
     
 </body>
 </html>

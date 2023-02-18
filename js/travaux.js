@@ -9,16 +9,28 @@
 // Recupération des lessons étudiées
     let matieres = JSON.parse(sessionStorage.getItem("matieres"));
 
-    if( matiere_nom == "ߛߓߍߛߎ߲" ) afficheDesTravaux(0);
-    if( matiere_nom == "ߜߋ߲߭"    ) afficheDesTravaux(1);
-    if( matiere_nom == "ߞߊ߲ߡߊߛߙߋ") afficheDesTravaux(2);
-    if( matiere_nom == "ߖߊ߰ߕߋ߬ߘߋ߲") afficheDesTravaux(3);
-
+    if(matieres.length == 0) initialiserTravaux();
+    
+    if(matieres.length !== 0) {
+        if( matiere_nom == "ߛߓߍߛߎ߲" ) chargerTravaux(0);
+        if( matiere_nom == "ߜߋ߲߭"    ) chargerTravaux(1);
+        if( matiere_nom == "ߞߊ߲ߡߊߛߙߋ") chargerTravaux(2);
+        if( matiere_nom == "ߖߊ߰ߕߋ߬ߘߋ߲") chargerTravaux(3);
+    }
   
-    function afficheDesTravaux(n) {
+
+
+    function initialiserTravaux() {
+        $('#fiche_de_pratique').css('display','none');  // Masquer la partie pratique de Apprentissage.
+        
+        var fiche_html = "<h1 class='neant'>ߝߏߦߊ߲߫ ߹</h1>";
+        $('.fiche').html(fiche_html);
+    }
+    function chargerTravaux(n) {
+        chargementParDefautDesFiches();
+
         if(matiere_nom == "ߛߓߍߛߎ߲") $('#fiche_de_pratique').css('display','none');  // Masquer la partie pratique de Apprentissage.
         
-        chargementParDefautDesFiches();
 
         if(matieres[n][0]) {
 
@@ -77,7 +89,6 @@
             fiche.html(fiche_html);
         }
 
-
         
         function chargementParDefautDesFiches() {
             var fiche_html = "<h1 class='neant'>ߝߏߦߊ߲߫ ߹</h1>";
@@ -89,171 +100,172 @@
             if(matieres[n][2] == undefined) $('#fiche_3').html(fiche_html);
             if(matieres[n][3] == undefined) $('#fiche_4').html(fiche_html);
         }
-        function ficheEnteteHTMLPourApprentissage() {
-            var entete_html = "<table border=1>";
-            entete_html += "<tr><td>"+matiere_nom+"</td></tr>";
-            entete_html += "<tr><td>ߘߌ߯ߟߌ ߦߙߌߞߊ</td></tr>";
-            entete_html += "</table>";
+    }
     
-            return entete_html;
-        }
-        function ficheCorpsHTMLPourApprentissage() {
-            var corps_html = "<table border=1>";
-            corps_html+= "<tr>";
-                    for(let i=0; i<fiche_lesson.length; i++) {
-                    corps_html+= "<td>"+fiche_lesson[i][0]+"</td>";
-                    }
-            corps_html+= "</tr>";
-            corps_html+= "<tr>";
-                    for(let j=0; j<fiche_lesson.length; j++) {
-                    corps_html+= "<td>"+parseIntNko(fiche_lesson[j][1])+"</td>";
-                    }
-            corps_html+= "</tr>";
-            corps_html+= "</table>";
-    
-            return  corps_html;
-        }
-        function ficheFootHTMLPourApprentissage() {
-            var foot_html= "<table border=1>";
-            foot_html+= "<tr><td> ߡߎ߬ߡߍ</td></tr>";
-            foot_html+= "<tr><td>"+fiche_note+"</td></tr>";
-            foot_html+= "</table>";
-    
-            return foot_html;
-        }
-        function ficheEnteteHTML() {
-            var entete_html = "<table border=1>\n";
-            entete_html += "<tr><td>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</td></tr>\n";
-            entete_html += "<tr><td>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ</td></tr>\n";
-            entete_html += "<tr><td>ߓߙߍ߬ߦߊ</td></tr>\n";
-            entete_html += "</table>\n";
+    function ficheEnteteHTMLPourApprentissage() {
+        var entete_html = "<table border=1>";
+        entete_html += "<tr><td>"+matiere_nom+"</td></tr>";
+        entete_html += "<tr><td>ߘߌ߯ߟߌ ߦߙߌߞߊ</td></tr>";
+        entete_html += "</table>";
 
-            return entete_html;
-        }
-        function ficheCorpsHTML() {
-            var corps_html = "<table border=1>\n";
-            corps_html += "<tr>\n";
+        return entete_html;
+    }
+    function ficheCorpsHTMLPourApprentissage() {
+        var corps_html = "<table border=1>";
+        corps_html+= "<tr>";
                 for(let i=0; i<fiche_lesson.length; i++) {
-                    corps_html += "<td>"+fiche_lesson[i][0]+"</td>\n";
+                corps_html+= "<td>"+fiche_lesson[i][0]+"</td>";
                 }
-            corps_html += "</tr>\n";
-            corps_html += "<tr>\n";
+        corps_html+= "</tr>";
+        corps_html+= "<tr>";
                 for(let j=0; j<fiche_lesson.length; j++) {
-                    corps_html += "<td>"+fiche_lesson[j][1]+"</td>\n";
+                corps_html+= "<td>"+parseIntNko(fiche_lesson[j][1])+"</td>";
                 }
-            corps_html += "</tr>\n";
-                corps_html += "<tr>\n";
-                    for(let k=0; k<fiche_lesson.length; k++) {
-                        corps_html += "<td>"+parseIntNko(fiche_lesson[k][2])+"</td>\n";
-                    }
-            corps_html += "</tr>\n";
-            corps_html += "</table>\n";
+        corps_html+= "</tr>";
+        corps_html+= "</table>";
+
+        return  corps_html;
+    }
+    function ficheFootHTMLPourApprentissage() {
+        var foot_html= "<table border=1>";
+        foot_html+= "<tr><td> ߡߎ߬ߡߍ</td></tr>";
+        foot_html+= "<tr><td>"+fiche_note+"</td></tr>";
+        foot_html+= "</table>";
+
+        return foot_html;
+    }
+    function ficheEnteteHTML() {
+        var entete_html = "<table border=1>\n";
+        entete_html += "<tr><td>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</td></tr>\n";
+        entete_html += "<tr><td>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ</td></tr>\n";
+        entete_html += "<tr><td>ߓߙߍ߬ߦߊ</td></tr>\n";
+        entete_html += "</table>\n";
+
+        return entete_html;
+    }
+    function ficheCorpsHTML() {
+        var corps_html = "<table border=1>\n";
+        corps_html += "<tr>\n";
+            for(let i=0; i<fiche_lesson.length; i++) {
+                corps_html += "<td>"+fiche_lesson[i][0]+"</td>\n";
+            }
+        corps_html += "</tr>\n";
+        corps_html += "<tr>\n";
+            for(let j=0; j<fiche_lesson.length; j++) {
+                corps_html += "<td>"+fiche_lesson[j][1]+"</td>\n";
+            }
+        corps_html += "</tr>\n";
+            corps_html += "<tr>\n";
+                for(let k=0; k<fiche_lesson.length; k++) {
+                    corps_html += "<td>"+parseIntNko(fiche_lesson[k][2])+"</td>\n";
+                }
+        corps_html += "</tr>\n";
+        corps_html += "</table>\n";
+
+        return  corps_html;
+    }
+    function ficheFootHTML() {
+        var foot_html = "<table border=1 width=100>\n";
+        foot_html += "<tr><td> ߓߍ߬ߙߍ</td></tr>\n";
+        foot_html += "<tr><td> ߡߎ߬ߡߍ</td></tr>\n";
+        foot_html += "<tr><td>"+fiche_note+"</td></tr>\n";
+        foot_html += "</table>\n";
+
+        return foot_html;
+    }
+
+    function ficheApprentissageHTML() {
+
+        var entete_html = ficheEnteteHTMLPourApprentissage();
+        var corps_html  = ficheCorpsHTMLPourApprentissage();
+        var foot_html   = ficheFootHTMLPourApprentissage();
     
-            return  corps_html;
-        }
-        function ficheFootHTML() {
-            var foot_html = "<table border=1 width=100>\n";
-            foot_html += "<tr><td> ߓߍ߬ߙߍ</td></tr>\n";
-            foot_html += "<tr><td> ߡߎ߬ߡߍ</td></tr>\n";
-            foot_html += "<tr><td>"+fiche_note+"</td></tr>\n";
-            foot_html += "</table>\n";
+        var fiche_html = "";
 
-            return foot_html;
-        }
+        fiche_html += "<div class='t'>\n";
+            fiche_html += "<div class='t1'>"+entete_html+"</div>\n";
+            fiche_html += "<div class='t2'>"+corps_html+"</div>\n";
+            fiche_html += "<div class='t3'>"+foot_html+"</div>\n";
+        fiche_html += "</div>\n";
 
-        function ficheApprentissageHTML() {
+        return fiche_html;
+    }
+    function fichePratiqueHTML() {
+        var pratique_html = "";
 
-            var entete_html = ficheEnteteHTMLPourApprentissage();
-            var corps_html  = ficheCorpsHTMLPourApprentissage();
-            var foot_html   = ficheFootHTMLPourApprentissage();
-        
-            var fiche_html = "";
+        for(var h=0; h<fiche_lesson.length; h++) {
 
-            fiche_html += "<div class='t'>\n";
-                fiche_html += "<div class='t1'>"+entete_html+"</div>\n";
-                fiche_html += "<div class='t2'>"+corps_html+"</div>\n";
-                fiche_html += "<div class='t3'>"+foot_html+"</div>\n";
-            fiche_html += "</div>\n";
+            let entete_html = ficheDePratiqueEnteteHTML();
+            var corps_html  = ficheDePratiqueCorpsHTML();
+            let foot_html   = ficheDePratiqueFootHTML();
 
-            return fiche_html;
-        }
-        function fichePratiqueHTML() {
-            var pratique_html = "";
-
-            for(var h=0; h<fiche_lesson.length; h++) {
-
-                let entete_html = ficheDePratiqueEnteteHTML();
-                var corps_html  = ficheDePratiqueCorpsHTML();
-                let foot_html   = ficheDePratiqueFootHTML();
-
-                pratique_html += "<div class='t'>\n"; 
-                    pratique_html += "<div class='t1'>"+entete_html+"</div>\n\n";
-                    pratique_html += "<div class='t2'>"+corps_html+"</div>\n\n";       
-                    pratique_html += "<div class='t3'>"+foot_html+"</div>\n\n";
-                pratique_html += "</div>\n\n\n\n";
-                        
-                function ficheDePratiqueEnteteHTML() {
-                    let entete_html = "<table border=1>\n";
-                    entete_html += "<tr><td>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</td></tr>\n";
-                    entete_html += "<tr><td>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ</td></tr>\n";
-                    entete_html += "<tr><td>ߓߙߍ߬ߦߊ</td></tr>\n";
-                    entete_html += "</table>\n";
-
-                    return entete_html;
-                }
-                function ficheDePratiqueCorpsHTML() {
-                    let corps_html = "<table border=1>\n";
-
-                    for(var i=0;i<3; i++) {
-                        corps_html += "<tr>\n";
-                        for(var j=0; j<fiche_lesson[h].length; j++) { corps_html += "<td>"+fiche_lesson[h][j][i]+"</td>\n"; }
-                        corps_html += "</tr>\n";
-                    }
-                    corps_html += "</table>\n";
-
-                    return  corps_html;
-                }
-                function ficheDePratiqueFootHTML() {
+            pratique_html += "<div class='t'>\n"; 
+                pratique_html += "<div class='t1'>"+entete_html+"</div>\n\n";
+                pratique_html += "<div class='t2'>"+corps_html+"</div>\n\n";       
+                pratique_html += "<div class='t3'>"+foot_html+"</div>\n\n";
+            pratique_html += "</div>\n\n\n\n";
                     
-                    let fiche_note = parseIntNko(note3()); 
-                  
-                    let foot_html = "<table border=1>\n";
-                    foot_html += "<tr><td> ߓߍ߬ߙߍ</td></tr>\n";
-                    foot_html += "<tr><td> ߡߎ߬ߡߍ</td></tr>\n";
-                    foot_html += "<tr><td>"+fiche_note+"</td></tr>\n";
-                    foot_html += "</table>\n";
-            
-                    return foot_html;
+            function ficheDePratiqueEnteteHTML() {
+                let entete_html = "<table border=1>\n";
+                entete_html += "<tr><td>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</td></tr>\n";
+                entete_html += "<tr><td>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ</td></tr>\n";
+                entete_html += "<tr><td>ߓߙߍ߬ߦߊ</td></tr>\n";
+                entete_html += "</table>\n";
 
-                    function note3() {
-                        let fiche_note = 0;
-                        for(var i=0; i<fiche_lesson[h].length; i++) {
-                            fiche_note += fiche_lesson[h][i][2];
-                        }
+                return entete_html;
+            }
+            function ficheDePratiqueCorpsHTML() {
+                let corps_html = "<table border=1>\n";
 
-                        return fiche_note;
+                for(var i=0;i<3; i++) {
+                    corps_html += "<tr>\n";
+                    for(var j=0; j<fiche_lesson[h].length; j++) { corps_html += "<td>"+fiche_lesson[h][j][i]+"</td>\n"; }
+                    corps_html += "</tr>\n";
+                }
+                corps_html += "</table>\n";
+
+                return  corps_html;
+            }
+            function ficheDePratiqueFootHTML() {
+                
+                let fiche_note = parseIntNko(note3()); 
+                
+                let foot_html = "<table border=1>\n";
+                foot_html += "<tr><td> ߓߍ߬ߙߍ</td></tr>\n";
+                foot_html += "<tr><td> ߡߎ߬ߡߍ</td></tr>\n";
+                foot_html += "<tr><td>"+fiche_note+"</td></tr>\n";
+                foot_html += "</table>\n";
+        
+                return foot_html;
+
+                function note3() {
+                    let fiche_note = 0;
+                    for(var i=0; i<fiche_lesson[h].length; i++) {
+                        fiche_note += fiche_lesson[h][i][2];
                     }
+
+                    return fiche_note;
                 }
             }
-                    
-            return pratique_html
         }
-        function ficheExerciceEtEvaluationCorpsHTML() {
+                
+        return pratique_html
+    }
+    function ficheExerciceEtEvaluationCorpsHTML() {
 
-            var fiche_entete_html = ficheEnteteHTML();
-            var fiche_corps_html  = ficheCorpsHTML();
-            var fiche_foot_html   = ficheFootHTML();
-            
-            let fiche_html = "";
+        var fiche_entete_html = ficheEnteteHTML();
+        var fiche_corps_html  = ficheCorpsHTML();
+        var fiche_foot_html   = ficheFootHTML();
+        
+        let fiche_html = "";
 
-            fiche_html += "<div class='t'>\n";
-                fiche_html += "<div class='t1'>"+fiche_entete_html+"</div>\n";
-                fiche_html += "<div class='t2'>"+fiche_corps_html+"</div>\n";
-                fiche_html += "<div class='t3'>"+fiche_foot_html+"</div>\n";
-            fiche_html += "</div>\n";
+        fiche_html += "<div class='t'>\n";
+            fiche_html += "<div class='t1'>"+fiche_entete_html+"</div>\n";
+            fiche_html += "<div class='t2'>"+fiche_corps_html+"</div>\n";
+            fiche_html += "<div class='t3'>"+fiche_foot_html+"</div>\n";
+        fiche_html += "</div>\n";
 
-            return fiche_html;
-        }
+        return fiche_html;
     }
 
 

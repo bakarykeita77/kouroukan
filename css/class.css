@@ -865,7 +865,7 @@ body { margin: 0; padding: 0; }
 }
 
 
-@media screen and (orientation: portrait) {
+@media screen and (orientation: landscape) {
 	.page_body { width: 80%;  margin: auto; }
     .course { max-width: 60rem; }
     .phases_container, .travaux { display: inline-block; vertical-align: top; }
@@ -880,7 +880,7 @@ body { margin: 0; padding: 0; }
         margin: auto;
     }
 }
-@media screen and (orientation: landscape) {
+@media screen and (orientation: portrait) {
 	.page_body {
         width: 100%;
         margin: 0;

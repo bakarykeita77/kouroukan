@@ -101,6 +101,7 @@ $('document').ready(function() {
     	$('.phases').html(phasesHTML());
     	
     	data_phase_nbr = nombreDePhasesEtudiees();
+    	sessionStorage.setItem('data_phase_nbr', JSON.stringify(data_phase_nbr));
     	id_phases = idDesPhases();
     	sessionStorage.setItem('total_phase', JSON.stringify($('#phases_list li').length));
         actualiserTitre();
@@ -263,33 +264,32 @@ $('document').ready(function() {
             var questionnaires = questions();
             var questions_quantity = quantiteDeQuestion();
             var quantite_de_question = quantiteDeQuestion();
+            sessionStorage.setItem('quantite_de_question',JSON.stringify(quantite_de_question));
             var compteur_de_question = 0;
-            var exercice_questions = [];
             
             var total_point = 0, point = 0, effort = '';
             var note = 0;
             var moyenne = 5;
+            sessionStorage.setItem("phase_id", JSON.stringify(phase_id));
             
             var chiffre = '';
             var phase_active_index = $('.active').index();
             var phase_index = $(this).index();
             var phase_class = $(this).attr('class');
     	    var phase_id = $(this).attr('id');
+            sessionStorage.setItem("phase_id", JSON.stringify(phase_id));
     	    var course_id = phase_id.split('_')[1];
     	    var lesson_courante = lessonCourante();
         
             var parametres_btn = $('.parametre_btn_container');
             var parametres = $('#parametres');
             
-            var apprentissage = $('#apprentissage');
-            var exercice = $('#exercice');
             var pratiques = $('#pratique');
             var evaluation = $('#evaluation');
             
             var dialogue_btn_html = $('.dialogue_btn').html();
             var parametres_html = parametres.html();
 
-            sessionStorage.setItem("phase_id", JSON.stringify(phase_id));
 
           /*--------------------------------------------------------------------*/   
    
@@ -353,16 +353,6 @@ $('document').ready(function() {
             	$('.course_container').css({'display':'block'});
                 $('.course').css('display','none');
             }
-            function afficherMediaBoutons() { 
-                $(".parametres_container").css({"transform":"scale(0.75)", "opacity":0});
-                setTimeout(() => { $(".parametres_container").css({"display":"none"}); }, 250);
-
-                $(".media_btns").css({"display":"block", "transform":"scale(1)", "opacity":1}); 
-            }
-            function masquerMediaBoutons(){
-                $(".media_btns").css({"tansform":"scale(0.75)", "opacity":0});
-                setTimeout(() => { $(".media_btns").css({"display":"none"}); }, 300);
-            }
             function questions() {
                 var lq = '';
                 
@@ -396,469 +386,13 @@ $('document').ready(function() {
                     var session_niveau_max = JSON.parse(sessionStorage.getItem('session_niveau_max'));
 
                     switch (course_id) {
-                        case 'apprentissage':apprentissages(); break;
-                        case 'exercice'     :exercices();      break;
-                        case 'pratique'     :pratique();       break;
-                        case 'evaluation'   :evaluations();    break;
+                        case 'apprentissage':apprentissages(); break;   // Voir apprentissage.js
+                        case 'exercice'     :exercices();      break;   // Voir exercices.js
+                        case 'pratique'     :pratique();       break;   // Voir apprentissage.js
+                        case 'evaluation'   :evaluations();    break;   // Voir evaluations.js
             	    }
             	  
-                	function apprentissages() {
-
-                	    var compteur_de_question = 1;
-                        var clicks_memo = [];
-                      
-                        $('.fermeture').attr('id', 'fermer_apprentissage');
-                   
-                	    afficherApprentissage();
-                        parametresPosition();
-                        chargerApprentissage();
-                        apprendre();
-                    	enregistrerApprentissage();
-                	    stockerApprentissage();
-                    	                        	
-                    	function chargerApprentissage() { $('#apprentissage_body').html( "<div id='table_parlante_container'>"+lesson_courante+"</div>" ); }
-                    	function parametresPosition() {
-
-                            let param_btn = document.querySelector('#parametre_lesson_btn');
-                            let param_btn_object = param_btn.getBoundingClientRect();
-                            let param_btn_top = param_btn_object.top;
-                            let param_btn_left = $('#parametre_lesson_btn').offset().left;
-
-                            let parametres_container = document.querySelector('.parametres_container');
-                            let parametres_object = parametres_container.getBoundingClientRect();
-                            let parametres_height = parametres_object.height;
-
-                            $('.parametres_container').offset({'top':param_btn_top, 'left':param_btn_left});
-                        }
-                        function afficherApprentissage() {
-                            apprentissage.css({'display':'block'});                          
-
-                            setTimeout(function() { apprentissage.css({'transform':'scale(1)'});}, 5);
-                            setTimeout(function() { apprentissage.css({'opacity':'1'});}, 5);
-                    	}
-                        function apprendre() {
-                            
-                            affichageDesBoutonsMedia();
-                    	    
-                    	    lectureSemiAutomatique(); // Voir fonctions.js
-                    	    lecturePersonnalisee();   // Voir fonctions.js
-                    	    arreterLecture(lessonCourante); // Voir fonctions.js
-                    	    apprentissageProgressBarr();
-                    	    
-                    	    
-                            function affichageDesBoutonsMedia(){
-                                $(".media_label").on('mouseover', function() { afficherMediaBoutons(); });
-                                $(".media_btns").on('mouseleave', function(){ masquerMediaBoutons(); });
-                                $('.course_container').on('click', function(){ masquerMediaBoutons(); });
-                    
-                                $(".media_btns .btn").click(function() {
-                                    $(".media_btns .btn").css('background-color','white');
-                                    $(this).css('background-color','yellow');
-                                });
-                            }
-                            function apprentissageProgressBarr() {
-                                            
-                                var nbr_click = questions().length;
-                                var progress_unity = $('#apprentissage_progress_bar').width()/nbr_click;
-                                
-                             /*
-                              A chaque click sur un élément, progress barr avance d'une unité égale à progress_unity px.
-                              Mais si un élément est clické une deuxième fois, progress barr ne doit pas avancer.
-                              Pour cela, tous les éléments clichés sont enregistrés dans un tableau pour les distinguer.
-                             */            
-                                let elements_clickes = [];
-                                
-                                $('.table_parlante td').on('click', function() {
-                                 
-                                    if(elements_clickes.indexOf($(this).html()) == -1) $('.progress_bonne_reponse_bar').css('width','+='+progress_unity+'px');
-                                    elements_clickes.push($(this).html());
-                                });
-                            }
-                        }
-                        function enregistrerApprentissage() {
-                            
-                            var table, tr, td, nbr_table, nbr_tr, nbr_td, nbr_table_td;
-                            
-                            table = $('.table_parlante'); 
-                            tr = $('.table_parlante tr'); 
-                            td = $('.table_parlante td');
-                            
-                            nbr_table = table.length;
-                            nbr_tr = Math.ceil(td.length/tr.length);
-                            nbr_table_td = Math.ceil(td.length/nbr_table);
-                            nbr_td = td.length;
-                                       
-                            
-                            initialiserApprentissageAStocker();
-                            memoriserApprentissage();
-                            
-                            
-                            function initialiserApprentissageAStocker() {
-                                //
-                            }
-                            function memoriserApprentissage() {
-    
-                                $.each(td, function(){
-                                    
-                                  /* 
-                                  --------------------------------------------------------------------
-                                   Pour chaque click sur un bouton:
-                                      1)- Un compteur de click individuel est activé qui calcule combien de fois chaque bouton est clické.
-                                      2)- Une identification est faite pour savoir, quel bouton est clické.
-                                      3)- Un enregistrement capte le nombre de click pour chaque bouton.
-                                      4)- Et le memo de l'enregistrement est envoyé au serveur quand on ferme la leçon.
-                                  --------------------------------------------------------------------
-                                  */
-                                    
-                                    var element        = $(this).html();
-                                    var table_courante = $(this).parent().parent().parent();
-                                    var tr_index       = $(this).parent().index();
-                                    var table_index    = table.index(table_courante);
-                                    var element_index  = table_index*nbr_table_td + tr_index*nbr_tr + $(this).index();
-                                    var element_click_counter = 0;
-                
-                                    
-                                  /*--------------------------------------------------------------------
-                                   Initialisation de mémoire d'enregistrement qui est un tableau bidimentionnel.
-                                   Il contient des petits tableaux de deux éléments chacun:
-                                   - Le premier est le nom de l'élément clické;
-                                   - Le deuxième est le nombre de fois que cet élément est clické.
-                                     
-                                   L'initialisation consiste à donner la valeur 0 click à tous les éléments.
-                                   On considère qu'aucun élément n'est clické pour le moment. */
-                                    
-                                    clicks_memo[element_index] = [element,element_click_counter];
-                 
-                                    $(this).on('click', function(){
-                                        
-                                      /*--------------------------------------------------------------------
-                                       3)- Enregistrement des clicks 
-                                       
-                                       L'enregistrement par bouton ou élémentaire est un tableau de deux éléments dont
-                                       - L'élément clické;
-                                       - Le nombre de fois que cet élément est  clické. */
-                                                                      
-                                        var clicked_element = $(this).html(); // Élément clické.
-                                        element_click_counter++; // Compteur de click pour chaque élément.
-                             
-                                        var new_click_value = [clicked_element,element_click_counter];  // Enregistrement elementaire.
-                                        var non_clicked_elements = '';
-                                        var nbr_clicked_elements = 0;
-                               
-                                      /*Actualisation de mémoire d'enregistrement
-                                        C'est à dire qu'après chaque click,les anciennes valeurs de chaque enregistrement elementaire sont remplacés par les nouvelles valeurs.                 */
-                                        
-                                        clicks_memo.splice(element_index,1,new_click_value);
-                                        non_clicked_elements = nonClickedElementsTable();
-                                        nbr_clicked_elements = td.length - non_clicked_elements.length;
-                                        
-    
-                                        function nonClickedElementsTable(){
-                                            var table_elements_non_cliques = [];
-                
-                                            $.each(clicks_memo, function(){
-                                                if($(this)[1]==0){ table_elements_non_cliques[table_elements_non_cliques.length] = $(this); }
-                                            });
-                                            
-                                            return table_elements_non_cliques;
-                                        }
-                                    });   
-                                });
-                            }
-                        }
-                	    function stockerApprentissage() {
-                      
-                            $('#fermer_apprentissage').one('click',function() {
-                    	        var course = $(this).siblings('#apprentissage').html();
-                    
-                                note = noterApprentissage();
-                                if(note <  moyenne) alert("ߌ ߡߊ߫ ߛߓߍߘߋ߲ ߥߟߊ ߜߋ߭ ߠߎ߬ ߓߍ߯ ߟߊߡߍ߲߫");
-                                if(note >= moyenne) {
-                    
-                                    let nbr = JSON.parse(sessionStorage.getItem('nbr'));
-                                    let phase_nbr = nombreDePhasesEtudiees();
-
-                                    sendApprentissageToDB();
-                                    changerPhaseActive(phase_nbr);
-                                }
-
-                                function sendApprentissageToDB() {       
-                                 /*
-                                 A la fermeture, on s'assure que chaque élément est clické au moins un nombre de fois défini.
-                                 - Si oui le mémoire de click est envoyé au serveur;
-                                 - Sinon, un message s'affiche et le mémoire n'est pas envoyé.
-                                 */
-                                    var matiere = JSON.parse(sessionStorage.getItem('matiere_active'));
-                                    var phase   = JSON.parse(sessionStorage.getItem('phase'));
-                                    var lesson  = JSON.stringify(clicks_memo);
-                                    
-                                    const apprentissage_data = new URLSearchParams({
-                                        id     : id,
-                                        matiere: matiere,
-                                        niveau : niveau_en_cours,
-                                        phase  : phase,
-                                        lesson : lesson,
-                                        note   : JSON.stringify(note)
-                                    }); 
-                    
-                                    fetch("/kouroukan/pages/actions.php", {
-                                        method: "POST",
-                                        body: apprentissage_data
-                                    })
-                                    .then(response => response.text())
-                                    .catch(error => console.log(error));  
-                                }
-                                function noterApprentissage() {
-                                    var table_elements_click_nbr = [];
-                                    
-                                    for(var i=0;i<clicks_memo.length;i++) {
-                                        table_elements_click_nbr[table_elements_click_nbr.length] = clicks_memo[i][1];
-                                    }
-                                    
-                                    var nbr_click_min = Math.min.apply(null, table_elements_click_nbr);
-                                    var nbr_click_max = Math.max.apply(null, table_elements_click_nbr);
-                                    var click_min_admis = 1;
-                                    
-                                    
-                                    var nbr_btn_clicke = nombreDeBoutonClicke();
-                                    var note = Math.floor((nbr_btn_clicke*20)/clicks_memo.length);
-                                    
-                                    return note;
-                                    
-                                    function nombreDeBoutonClicke() {
-                                        var sum_click = 0;
-                                        
-                                        for (var i = 0; i < table_elements_click_nbr.length; i++) {
-                                        if(table_elements_click_nbr[i] >= click_min_admis) {    
-                                            sum_click ++;
-                                        }}
-                                        return sum_click;
-                                    }
-                                }
-                            });
-                	    } 
-                	}
-                	function exercices() {
-              	    
-                	    var compteur_de_question = 1;
-                	    var question_rang = '߭';
-                        var exercice_a_stocker = [];
-                        
-                        $('.fermeture').attr('id', 'fermer_exercice');
-                  	    
-                	    chargerExercice();
-                	    afficherExercice();
-                	    exercer();
-                	    enregistrerExercice();
-                	    stockerExercice();
-                    
-                    	
-                    	function chargerExercice(){ 
-
-                            $('#exercice_foot').html( exerciceEnteteHTML() );
-                    	    $('#exercice_body').html( lesson_courante ); 
-                	        reductionDesElementsDeLessonCouranteA49();
-                        	
-                        	function exerciceEnteteHTML(){
-                        	    var exercices_entete_html = "<div class='dialogue_btn' id='exercice_dialogue_btn'>";   
-                                exercices_entete_html += "<div class='play_icon_container' id='exercices_player'>";
-                                exercices_entete_html += "<span class='play_label'>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ </span>";
-                                exercices_entete_html += "<span class='qtite_question'>"+parseIntNko(quantite_de_question)+"</span> : <span class='ordre_question'>"+parseIntNko(compteur_de_question)+question_rang+" </span>";
-                                exercices_entete_html += "<span class='ecouter_question'> ߟߊߡߍ߲߫</span><span class='play_icon'>&#9664;</span>";
-                                exercices_entete_html += "</div>";
-                                exercices_entete_html += "<div class='oreille_icon_container'><span class='reecoute_label'>ߊ߬ ߟߊߡߍ߲߫ ߕߎ߯ߣߌ߫  </span> <span class='oreille_icon'>&#128066;</span></div>";
-                                exercices_entete_html += "</div>";
-                                return exercices_entete_html;
-                        	}
-                    	    function reductionDesElementsDeLessonCouranteA49() {
-                        	    for( var i = $('.table_muette tr').length-1; i > 6; i--) {
-                        	        document.querySelector('.table_muette').deleteRow(i);
-                        	    }
-                                $.each($('.table_muette tr td'), function() {
-                                    exercice_questions.push($(this).html());
-                                });
-                                
-                                exercice_questions = malaxer(exercice_questions);
-                    	    }
-                    	}
-                    	function afficherExercice(){
-                            
-                            exercice.css({'display':'block', 'transform':'scale(0.75)', 'opacity':0});
-                            setTimeout(function() { exercice.css({'transform':'scale(1)'});}, 5);
-                            setTimeout(function() { exercice.css({'opacity':'1'});}, 5);
-                    	}
-                	    function exercer(){
-                	        
-                    	    var i=0;
-                    	    var question_posee, reponse_montree; 
-        
-                    	    question_posee = '';
-                    	    poserExerciceQuestion();
-                    	    repondreExerciceQuestion();
-                    	    
-                    	    function poserExerciceQuestion(){
-                        	    $('#exercices_player').on('click',function() {
-                      	        
-                        	        compteur_de_question++;
-                        	        question_rang = '߲';
-                        	        $('.ecouter_question').html(' ߠߊߡߍ߲߫');
-                        	        $('.ordre_question').html(parseIntNko(compteur_de_question)+question_rang);
-                        	        question_posee = exercice_questions[i];
-                        	        
-                                    alert( question_posee ); 
-                      
-                        	        $(this).css('display','none');
-                        	        $('.oreille_icon_container').css('display','block');
-                        	        
-                        	        lireQuestion();
-                        	        repeteQuestion();
-    
-                        	        i++;
-                        	        
-                        	        function lireQuestion() {
-                        	            $('#audio').attr({'src':'/kouroukan/son/mp3/'+question_posee+'.mp3', 'autoplay':'on'});
-                        	        }
-                        	        function repeteQuestion(){
-                        	            $('.oreille_icon_container').on('click', function() { lireQuestion();});
-                        	        }
-                        	    });
-                    	    }
-                    	    function repondreExerciceQuestion(){
-                	            var nbr_de_questionnaires = 40;
-                            	        
-                        	    $('.table_muette').on('click', function(e){
-                        	        if(question_posee=='')
-                        	        { guiderAuQuestionBouton(); }
-                        	        else
-                        	        {   
-                        	            var td = $(e.target);
-                            	        reponse_montree = td.html();
-                                        point = (question_posee==reponse_montree)?1:0;
-                                                            
-                            	        if(question_posee != reponse_montree){ barrerLaFausseReponse(td); clignotage(question_posee); }
-                            	        if(question_posee == reponse_montree){ td.addClass('ombrage'); }
-                            	        setTimeout(function(){ td.removeClass('ombrage'); },1000);
-                            	        actualiserLessonProgressBar();
-                            	        
-                            	        question_posee = '';    /* Vider la variable question_posee. */
-                            	        
-                            	        $('.oreille_icon_container').css('display','none');
-                            	        $('.play_icon_container').css('display','block');
-                            	        
-                                        function actualiserLessonProgressBar(){
-                                            
-                                            var progress_unity = $('#exercice_progress_bar').width()/nbr_de_questionnaires;
-                                          
-                                            if(question_posee!=reponse_montree){ 
-                                                $('.progress_question_bar').css('width','+='+progress_unity+'px');
-                                            }else{ 
-                                                $('.progress_question_bar, .progress_bonne_reponse_bar').css('width','+='+progress_unity+'px');
-                                            }
-                                        }
-                        	        }
-                        	    });
-
-                                function guiderAuQuestionBouton() {
-                                    setTimeout(() => { $('.play_icon_container').css('box-shadow','none'); }, 100);
-                                    setTimeout(() => { $('.play_icon_container').css('box-shadow','var(--shadow_30)'); }, 200);
-                                    setTimeout(() => { $('.play_icon_container').css('box-shadow','none'); }, 300);
-                                    setTimeout(() => { $('.play_icon_container').css('box-shadow','var(--shadow_30)'); }, 400);
-                                    setTimeout(() => { $('.play_icon_container').css('box-shadow','none'); }, 500);
-                                    setTimeout(() => { $('.play_icon_container').css('box-shadow','var(--shadow_30)'); }, 600);
-                                    setTimeout(() => { $('.play_icon_container').css('box-shadow','none'); }, 700);
-                                    setTimeout(() => { $('.play_icon_container').css('box-shadow','var(--shadow_30)'); }, 800);
-                                    setTimeout(() => { $('.play_icon_container').css('box-shadow','none'); }, 900);
-                                    setTimeout(() => { $('.play_icon_container').css('box-shadow','var(--shadow_16)'); }, 1000);
-                                }
-                    	    }
-                	    }
-                	    function enregistrerExercice(){
-                	        
-                	        var td = $('.table_muette td');
-                	        var exercice_counter = 0;
-
-                	        initialiserExerciceAStocker();
-                	        actualiserExerciceAStocker();
-                	        
-                            function initialiserExerciceAStocker() {
-                                for(var i=0;i<questions_quantity;i++){
-                                	            
-                                    var q = exercice_questions[i];
-                                    var r = '';
-                                    var p = 0;
-                                	            
-                                    exercice_a_stocker[i] = [q,r,p];
-                                }
-                            }
-                	        function actualiserExerciceAStocker() {
-                    	        $.each(td, function(){
-                    	            $(this).on('click', function(){
-                         	               
-                    	                var q = exercice_a_stocker[exercice_counter][0];
-                    	                var r = $(this).html();
-                    	                var p = (q==r) ? 1:0;
-                    	                var question_reponse = [q,r,p];
-                    	                
-                    	                exercice_a_stocker.splice(exercice_counter,1,question_reponse);
-                    	                
-                    	                exercice_counter++;
-                    	            });
-                    	        });
-                	        }
-                        }
-                	    function stockerExercice() {
-                	                        	             
-                            $('#fermer_exercice').one('click',function(){ 
-                            
-                                note = noterExercice(); 
-                                if(note <  moyenne) alert( "reprendre" ); 
-                                if(note >= moyenne) { 
-                                    
-                                    let nbr = JSON.parse(sessionStorage.getItem('nbr'));
-                                    let phase_nbr = nombreDePhasesEtudiees();
-                      
-                                    
-                                    sendExerciceToDB(); 
-                                    changerPhaseActive(phase_nbr); 
-                                }
-                            
-                                function noterExercice() {
-                                    var note_total = 0;
-                                    
-                                    for (var i = 0; i < questions_quantity; i++) {
-                                        if(exercice_a_stocker[i][2] == 1) {
-                                            note_total += exercice_a_stocker[i][2];
-                                        }
-                                    }
-                                    
-                                    var note = Math.floor((note_total*20)/quantite_de_question);
-                                    return note;
-                                }                                
-                                function sendExerciceToDB() {
-
-                                    let matiere = JSON.parse(sessionStorage.getItem('matiere_active'));
-                                    let phase   = JSON.parse(sessionStorage.getItem('phase'));
-                                    let lesson  = JSON.stringify(exercice_a_stocker);
-                                                                                
-                                    const exercice_data = new URLSearchParams({
-                                        id     : id,
-                                        matiere: matiere,
-                                        niveau : niveau_en_cours,
-                                        phase  : phase,
-                                        lesson : lesson,
-                                        note   : note
-                                    });
-   
-                                    fetch("/kouroukan/pages/actions.php", {
-                                        method: "POST",
-                                        body: exercice_data 
-                                    })
-                                    .then(response => response.text())
-                                    .catch(error => console.log(error));
-                                }
-                            });
-                	    }
-                    }
+                	
                     function pratique() {
                         
                         let phase_nbr = nombreDePhasesEtudiees();
@@ -1526,7 +1060,7 @@ $('document').ready(function() {
                                                     case 3 : noterOption(syllabes_4); stockerOptionDansLocalStorage(syllabes_4); break;
                                                 }
                                                 
-                                    	        masquerClavierEtConsoles();
+                                    	       // masquerClavierEtConsoles();
                                     	        dimensionnementDeFinDePratiquesBody();
                                     	        messageDeFinOption();
                                     	        optionCallBack();

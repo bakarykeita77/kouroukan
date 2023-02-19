@@ -194,11 +194,12 @@ function exercices() {
             if(note >= moyenne) { 
                 
                 let nbr = JSON.parse(sessionStorage.getItem('nbr'));
-                let phase_nbr = nombreDePhasesEtudiees();
+                let phase_nbr = JSON.parse(sessionStorage.getItem('data_phase_nbr'));
   
                 
                 sendExerciceToDB(); 
                 changerPhaseActive(phase_nbr); 
+                initialiserProgressBarr();
             }
         
             function noterExercice() {

@@ -251,16 +251,17 @@
 #check_mark_container {
     display: none;
     position: absolute;
+    background-color: var(--couleur_f);
     padding: 0;
     margin: 0;
-    height: 8rem;
-    width: 8rem;
-    line-height: 8rem;
+    height: 5rem;
+    width: 5rem;
+    line-height: 5rem;
     top: 0;
     left: 0;
     border-radius: 50%;
     overflow: hidden;
-    box-shadow: var(--shadow_3a);
+    box-shadow: var(--shadow_36);
 }
 #reponse, #check_mark_container { vertical-align: top; }
 #check_mark, #check_mark_cover {
@@ -269,12 +270,12 @@
     padding: 0;
     width: 100%;
     height: 100%;
-    font-size: 7rem;
+    font-size: 4rem;
     font-weight: bold;
     text-align: center;
 }
 #check_mark{  color: blue; transform: rotateY(180deg); }
-#check_mark_cover { left: 0; transition: 0.8s; background-color: var(--couleur_f); }
+#check_mark_cover { left: 0; transition: 1s; background-color: var(--couleur_f); }
 #teste_annexes_container {
     position: absolute;
     top: 0.25rem;
@@ -317,52 +318,9 @@
     }
     #evaluation_head, #evaluation_foot {
         width: 40%; 
-        bottom: 1rem;
         right: 1rem;
     }
-    #evaluation_foot { border-radius: var(--radiusSmall); }
-    #teste_container {  height: calc(100% - 12.5rem); }
-    #evaluation_fiche {
-        left: 50%;
-        width: calc(100% - 1rem);
-        transform: translateX(-50%);
-    }
-}
-
-/**
-@media screen and (orientation: portrait) {
-
-    #evaluation_body, #evaluation_head, #evaluation_foot {
-        position: relative;
-        width: 96%;
-        margin: 1rem auto ;
-    }
-    #evaluation_foot { height: 50%; }
-    #evaluation_body { height: calc(100% - 25rem); }
-    #evaluation_fiche_foot div:nth-child(2) { display: none; }
-    #teste_container {  height: 10rem; }
-    #evaluation_fiche { 
-        width: 100%; top: 0; 
-    }
-    #evaluation_message_de_fin_container {
-        top: calc(100% - 7rem);
-        left: 50%;
-        transform: translateX(-50%);
-    }
-}
-@media screen and (orientation: landscape) {
-    #evaluation_body, #evaluation_head, #evaluation_foot { position: absolute; }
-    #evaluation_body {
-        height: calc(100% - 4px);
-        width: 52%;
-        left: 0;
-    }
-    #evaluation_head, #evaluation_foot {
-        width: 40%; 
-        bottom: 1rem;
-        right: 1rem;
-    }
-    #evaluation_foot { border-radius: var(--radiusSmall); }
+    #evaluation_foot { bottom: 0; border-radius: var(--radiusSmall); }
     #teste_container {  height: calc(100% - 12.5rem); }
     #evaluation_fiche {
         left: 50%;

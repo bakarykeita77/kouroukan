@@ -217,7 +217,8 @@ function apprentissages() {
                 let data_phase_nbr = JSON.parse(sessionStorage.getItem('data_phase_nbr'));
 
                 sendApprentissageToDB();
-                //changerPhaseActive(data_phase_nbr);
+                changerPhaseActive(data_phase_nbr);
+                initialiserProgressBarr();
             }
 
             function sendApprentissageToDB() {       

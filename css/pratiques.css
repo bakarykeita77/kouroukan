@@ -290,7 +290,7 @@
         height: calc(100% - 4px);
     }
     #image_name { display: block; }
-    #pratique_foot, #evaluation_foot { height: 100%; border-radius: var(--radiusSmall); }
+    #pratique_foot, #evaluation_foot { height: 98%; border-radius: var(--radiusSmall); }
     #pratique_fiche, #evaluation_fiche {
         top: 0;
         width: calc(100% - 1rem);

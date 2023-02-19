@@ -56,6 +56,22 @@
         setTimeout(function() { td.html(fausse_reponse); }, 2000);
     }
 	
+    
+    function changerPhaseActive(phase_nbr) {
+        
+        phase_nbr++;
+        $.each($('#phases_list li'), function() {
+    	       
+            var phase_index = $(this).index();
+            if(total_phase > phase_nbr) {  
+                if(phase_index <= phase_nbr-1) $(this).removeClass('active').addClass('apprises');
+                if(phase_index == phase_nbr  ) $(this).removeClass('a_apprendre').addClass('active');
+                if(phase_index >= phase_nbr+1) $(this).addClass('a_apprendre');
+            }       	    
+            if(total_phase == phase_nbr) $(this).removeClass('active a_apprendre').addClass('apprises');
+        });
+        sessionStorage.setItem('nbr',JSON.stringify(phase_nbr));
+    }
     function clignotage(reponse_ratee) {
         $.each($('.table_muette td'), function() {
             if ($(this).html() == reponse_ratee) {
@@ -98,6 +114,7 @@
 	    var i=0;
 	    return function(){ return i += 1; };
 	}
+    function initialiserProgressBarr() { $('.progress_question_bar, .progress_bonne_reponse_bar').css('width',0); }
 	
 	function fermer(element) {
 	    element.animate({ 'height':0 }, 200);

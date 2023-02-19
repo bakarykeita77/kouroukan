@@ -1,23 +1,24 @@
 
-    let matiere_nom = $('#matiere_nom_container').html();
+    var matiere_nom = $('#matiere_nom_container').html();
 
 // Selection des differents éléments de fiche
     let travail = $('.travail');
     let fiche_lesson = [];
     let fiche_note = [];
 
-// Recupération des lessons étudiées
-    let matieres = JSON.parse(sessionStorage.getItem("matieres"));
-
-    if(matieres.length == 0) initialiserTravaux();
     
+// Recupération des lessons étudiées
+    var matieres = JSON.parse(sessionStorage.getItem('matieres')); 
+
+console.log(matieres);
+    if(matieres.length == 0) initialiserTravaux();
+ 
     if(matieres.length !== 0) {
         if( matiere_nom == "ߛߓߍߛߎ߲" ) chargerTravaux(0);
         if( matiere_nom == "ߜߋ߲߭"    ) chargerTravaux(1);
         if( matiere_nom == "ߞߊ߲ߡߊߛߙߋ") chargerTravaux(2);
         if( matiere_nom == "ߖߊ߰ߕߋ߬ߘߋ߲") chargerTravaux(3);
-    }
-  
+    } 
 
 
     function initialiserTravaux() {
@@ -29,8 +30,7 @@
     function chargerTravaux(n) {
         chargementParDefautDesFiches();
 
-        if(matiere_nom == "ߛߓߍߛߎ߲") $('#fiche_de_pratique').css('display','none');  // Masquer la partie pratique de Apprentissage.
-        
+        if(matiere_nom == "ߛߓߍߛߎ߲") $('#fiche_de_pratique').css('display','none');  // Masquer la partie pratique de Apprentissage.     
 
         if(matieres[n][0]) {
 
@@ -69,7 +69,7 @@
             }
         }else{
             if(matieres[n][2]) {
-                fiche_lesson = matieres[1][2].lesson;
+                fiche_lesson = matieres[n][2].lesson;
                 fiche_lesson = JSON.parse(fiche_lesson);
     
                 let pratique = $('#fiche_3');
@@ -79,9 +79,9 @@
             }
         }
         if(matieres[n][3]) {
-            fiche_lesson = matieres[1][3].lesson;
+            fiche_lesson = matieres[n][3].lesson;
             fiche_lesson = JSON.parse(fiche_lesson);
-            fiche_note = parseIntNko(matieres[1][3].note);
+            fiche_note = parseIntNko(matieres[n][3].note);
 
             var fiche = $('#fiche_4');
             var fiche_html = ficheExerciceEtEvaluationCorpsHTML();
@@ -105,7 +105,7 @@
     function ficheEnteteHTMLPourApprentissage() {
         var entete_html = "<table border=1>";
         entete_html += "<tr><td>"+matiere_nom+"</td></tr>";
-        entete_html += "<tr><td>ߘߌ߯ߟߌ ߦߙߌߞߊ</td></tr>";
+        entete_html += "<tr><td>ߘߌ߯ߟߌ</td></tr>";
         entete_html += "</table>";
 
         return entete_html;
@@ -267,6 +267,3 @@
 
         return fiche_html;
     }
-
-
-    

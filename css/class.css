@@ -8,6 +8,7 @@
     --border_b: 1px solid #bbb;
     --border_c: 1px solid #ccc;
     --border_d: 1px solid #ddd;
+    --border_6: 1px solid #666;
     --border_flowerBlue: 1px solid cornflowerblue;
     --border_yellow: 1px solid yellow;
     
@@ -821,7 +822,7 @@ body { margin: 0; padding: 0; }
     border: 2px solid transparent;
     overflow-y: auto;
 }
-.travaux_cadre { height: calc(100vh - 13rem); margin: 0 0 0.5rem 0; overflow: auto; }
+.travaux_cadre { margin: 0 0 0.5rem 0; overflow: auto; }
 .travaux table { border-collapse: collapse; }
 .travail {
     position: relative;

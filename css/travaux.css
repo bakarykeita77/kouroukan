@@ -1,24 +1,21 @@
-.t{
-    position: relative;
-    padding: 0.125rem 0;
-    box-sizing: border-box;
-}
-.t td { text-align: center; padding: var(--paddingSmall); }
-.t1, .t2, .t3 {
+
+.travail_entete { right: 0; width: 4.5rem; overflow: auto; }
+.travail_corps { 
+    position: relative; 
+    padding: 0; 
     margin: 0;
-    display: inline-block;
-    vertical-align: top;
-    box-sizing: border-box;
-    overflow: auto;
+    width: calc(100% - 2px - 9rem); 
+    border: var(--border_6);
+    overflow: auto; 
 }
-.t1 { width: 15%; }
-.t1 table, .t2 table { width: 100%; }
-.t2 { width: calc(75% - 8px); border: var(--borderPrimaire); font-weight: bold; }
-.t2 div { overflow: auto; }
-.t3 { width: 10%; }
-.t3 table { width: 100%; }
-.neant {
-    color: #aaa;
-    padding: 0 2rem;
-    margin-bottom: 0;
+.travail_corps_table {
+    position: relative;
+    top: 0;
+}
+.travail_foot { left: 0; width: 3rem; overflow: auto; }
+.travail_entete, .travail_corps, .travail_foot { 
+    margin: 0;
+    padding: 0;
+    display: inline-block; 
+    vertical-align: top; 
 }

@@ -59,7 +59,7 @@ if(isset($_SESSION["id"])) {
                     
                     <div class="travail" id="travail_d_apprentissage">
                         <h3 class="travail_titre" ><?= $matiere_nom; ?> ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ</h3>
-                        <div id="travail_1">
+                        <div class="travail_content" id="travail_1">
                             
                                 <div class="travail_entete" id="travail_1_entete">
                                     <table border=1 width=70>
@@ -84,7 +84,7 @@ if(isset($_SESSION["id"])) {
 
                     <div class="travail" id="travail_d_exercice">
                         <h3 class="travail_titre"><?= $matiere_nom; ?> ߡߊ߬ߞߟߏ߬ߟߌ</h3>
-                        <div id="travail_2">
+                        <div class="travail_content" id="travail_2">
                             
                                 <div class="travail_entete" id="travail_2_entete">
                                     <table border=1 width=70>
@@ -109,8 +109,8 @@ if(isset($_SESSION["id"])) {
 
                     <div class="travail" id="travail_de_pratique">
                         <h3 class="travail_titre"><?= $matiere_nom; ?> ߓߟߏߦߊߟߌ</h3>
-                        <div id="travail_3">
-
+                        <div class="travail_content" id="travail_3">
+                            
                             <div class="travail_31">
                                 <div class="travail_entete" id="travail_31_entete">
                                     <table border=1 width=70>
@@ -190,12 +190,13 @@ if(isset($_SESSION["id"])) {
                                     </table> 
                                 </div>
                             </div>
+
                         </div>
                     </div>
 
                     <div class="travail" id="travail_d_evaluation">
                         <h3 class="travail_titre"><?= $matiere_nom; ?> ߞߘߐߓߐߟߌ</h3>
-                        <div id="travail_4">
+                        <div class="travail_content" id="travail_4">
                            
                                 <div class="travail_entete" id="travail_4_entete">
                                     <table border=1 width=70>

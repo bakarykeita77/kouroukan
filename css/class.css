@@ -576,6 +576,7 @@ body { margin: 0; padding: 0; }
 .nav_fleches_container span:active { box-shadow: 0 0 1px #ccc; }
 .nav_fleches_container span:nth-child(1) { float: right; }
 .nav_fleches_container span:nth-child(2) { float: left; }
+.neant { color: var(--couleur_a); }
 .noir_clair { color: #000; background-color: #ddd; }
 
 /* --------------------------------------------------------------------------------------------------------- */
@@ -833,6 +834,7 @@ body { margin: 0; padding: 0; }
 }
 .travail:not(first-child) { margin-top: 0; }
 .travail:not(last-child) { border-bottom-color: var(--couleurTertiaire); }
+.travail_corps td, .travail_foot td:last-child { text-align: center; }
 
 
 /* --------------------------------------------------------------------------------------------------------- */

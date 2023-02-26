@@ -58,7 +58,7 @@ if(isset($_SESSION["id"])) {
                 <div class="travaux_cadre">
                     
                     <div class="travail" id="travail_d_apprentissage">
-                        <h3 class="travail_titre" ><?= $matiere_nom; ?> ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ</h3>
+                        <div class="travail_titre" ><h3><?= $matiere_nom; ?> ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ</h3> <div class="ordres_de_travail" id="ordre_d_apprentissage"><div class="ordres_glissiere"></div></div></div>
                         <div class="travail_content" id="travail_1">
                             
                                 <div class="travail_entete" id="travail_1_entete">
@@ -83,7 +83,7 @@ if(isset($_SESSION["id"])) {
                     </div>
 
                     <div class="travail" id="travail_d_exercice">
-                        <h3 class="travail_titre"><?= $matiere_nom; ?> ߡߊ߬ߞߟߏ߬ߟߌ</h3>
+                        <div class="travail_titre" ><h3><?= $matiere_nom; ?> ߡߊ߬ߞߟߏ߬ߟߌ</h3> <div class="ordres_de_travail" id="ordre_d_exercice"><div class="ordres_glissiere"></div></div></div>
                         <div class="travail_content" id="travail_2">
                             
                                 <div class="travail_entete" id="travail_2_entete">
@@ -108,7 +108,7 @@ if(isset($_SESSION["id"])) {
                     </div>
 
                     <div class="travail" id="travail_de_pratique">
-                        <h3 class="travail_titre"><?= $matiere_nom; ?> ߓߟߏߦߊߟߌ</h3>
+                        <div class="travail_titre" ><h3><?= $matiere_nom; ?> ߓߟߏߦߊߟߌ</h3> <div class="ordres_de_travail" id="ordre_de_pratique"><div class="ordres_glissiere"></div></div></div>
                         <div class="travail_content" id="travail_3">
                             
                             <div class="travail_31">
@@ -195,7 +195,7 @@ if(isset($_SESSION["id"])) {
                     </div>
 
                     <div class="travail" id="travail_d_evaluation">
-                        <h3 class="travail_titre"><?= $matiere_nom; ?> ߞߘߐߓߐߟߌ</h3>
+                        <div class="travail_titre" ><h3><?= $matiere_nom; ?> ߞߘߐߓߐߟߌ</h3> <div class="ordres_de_travail" id="ordre_d_evaluation"><div class="ordres_glissiere"></div></div></div>
                         <div class="travail_content" id="travail_4">
                            
                                 <div class="travail_entete" id="travail_4_entete">

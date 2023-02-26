@@ -1,4 +1,7 @@
-
+.travail_titre h3 { 
+    width: 10rem;
+ }
+.trava
 .travail_entete { right: 0; width: 4.5rem; overflow: auto; }
 .travail_corps { 
     position: relative; 
@@ -18,4 +21,25 @@
     padding: 0;
     display: inline-block; 
     vertical-align: top; 
+}
+.travail_titre h3, .ordres_de_travail { display: inline-block; vertical-align: middle; }
+.ordres_de_travail { 
+    width: calc(100% - 12rem);
+    overflow: auto;
+}
+.ordres_de_travail .ordres_glissiere { width: 16rem; }
+.ordres_de_travail p { 
+    position: relative;
+    display: inline-block; 
+    margin: var(--marginSmall);
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+    text-align: center;
+    font-weight: bold;
+    background-color: white;
+    color: var(--couleur_a);
+    border: var(--border_b);
+    border-radius: 50%;
+    cursor: pointer;
 }

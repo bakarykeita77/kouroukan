@@ -23,6 +23,7 @@
     vertical-align: top; 
 }
 .travail_titre h3, .ordres_de_travail { display: inline-block; vertical-align: middle; }
+.travail td { min-width: 4rem; }
 .ordres_de_travail { 
     width: calc(100% - 12rem);
     overflow: auto;
@@ -43,3 +44,4 @@
     border-radius: 50%;
     cursor: pointer;
 }
+.ordres_de_travail p:hover { box-shadow: 0 0 0.5rem #666; color: black; }

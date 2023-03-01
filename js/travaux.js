@@ -86,6 +86,7 @@
             rechargerExercice();
             rechargerPratique();
             rechargerEvaluation();
+            styleDuCercleActif();
 
             
             function chargerTravail(content) {
@@ -251,7 +252,15 @@
                     $('#travail_4_note').html(travail_note);
                 });
             }
+            function styleDuCercleActif() {
 
+                $('.ordres_de_travail p:last-child').css({'box-shadow':'0 0 0.5rem #666', 'background-color':'white', 'color':'black'});
+
+                $('.ordres_de_travail p').click(function() {
+                    $(this).css({'box-shadow':'0 0 0.5rem #666', 'background-color':'white', 'color':'black'});
+                    $(this).siblings().css({'box-shadow':'none', 'background-color':'var(--couleur_e)', 'color':'#bbb'});
+                });
+            }
             function designerCercles() {
 
                 let nombre_de_cercle_1 = travail_d_apprentissage_corps_html.length;

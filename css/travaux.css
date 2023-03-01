@@ -38,10 +38,11 @@
     line-height: 2rem;
     text-align: center;
     font-weight: bold;
-    background-color: white;
+    background-color: #eee;
     color: var(--couleur_a);
     border: var(--border_b);
     border-radius: 50%;
     cursor: pointer;
 }
 .ordres_de_travail p:hover { box-shadow: 0 0 0.5rem #666; color: black; }
+.cercle_actif  { box-shadow: 0 0 0.5rem #666; color: black; }

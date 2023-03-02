@@ -1,5 +1,6 @@
-
+    var travail_1 = $('#travail_1'), travail_2 = $('#travail_2'), travail_3 = $('#travail_3'), travail_4 = $('#travail_4');
     var matiere_nom = $('#matiere_nom_container').html();
+    var fiche_html_vide = "<h1 class='neant'>ߝߏߦߊ߲߫ ߹</h1>";
 
 // Selection des differents éléments de fiche
     let travail = $('.travail');
@@ -24,8 +25,7 @@
     function chargerAVideLesFiches() {
         if(matiere_nom == "ߛߓߍߛߎ߲") $('#fiche_de_pratique').css('display','none');  // Masquer la partie pratique de Apprentissage.     
         
-        var fiche_html = "<h1 class='neant'>ߝߏߦߊ߲߫ ߹</h1>";
-        $('.travail_content').html(fiche_html);
+        $('.travail_content').html(fiche_html_vide);
 
         return false;
     }
@@ -34,22 +34,6 @@
         if(matieres[n] == undefined) chargerAVideLesFiches();
         if(matieres[n] != undefined) chargerLesFiches();
 
-        
-        function chargementInitialDesFiches() {
-            var fiche_html = "<h1 class='neant'>ߝߏߦߊ߲߫ ߹</h1>";
-             
-            if( matiere_nom == "ߛߓߍߛߎ߲" ) {
-                if(matieres[n][0] == undefined) $('#travail_1').html(fiche_html);
-                if(matieres[n][1] == undefined) $('#travail_2').html(fiche_html);
-                if(matieres[n][2] == undefined) $('#travail_4').html(fiche_html);
-            }
-            if( matiere_nom != "ߛߓߍߛߎ߲" ) {
-                if(matieres[n][0] == undefined) $('#travail_1').html(fiche_html);
-                if(matieres[n][1] == undefined) $('#travail_2').html(fiche_html);
-                if(matieres[n][2] == undefined) $('#travail_3').html(fiche_html);
-                if(matieres[n][3] == undefined) $('#travail_4').html(fiche_html);
-            }
-        }
         function chargerLesFiches() {
 
             var fiche_phase  = "";
@@ -59,22 +43,26 @@
             var travail_de_pratique_corps_html = [];
             var travail_d_evaluation_corps_html = [];
 
-            chargementInitialDesFiches();
-            
             if(matiere_nom == "ߛߓߍߛߎ߲") $('#travail_de_pratique').css('display','none');  // Masquer la partie pratique de Apprentissage.     
 
             if(matieres[n]) {
-            for (let i = 0; i < matieres[n].length; i++) {
+                for (let i = 0; i < matieres[n].length; i++) {
 
-                fiche_phase  = matieres[n][i].phase.split('_')[1];
-                let travail_lesson = matieres[n][i].lesson;   
-                let travail_note   = parseIntNko(matieres[n][i].note);
+                    fiche_phase  = matieres[n][i].phase.split('_')[1];
+                    let travail_lesson = matieres[n][i].lesson;   
+                    let travail_note   = parseIntNko(matieres[n][i].note);
 
-                if(fiche_phase == "apprentissage") travail_d_apprentissage_corps_html.push([fiche_phase,travail_lesson,travail_note]);
-                if(fiche_phase == "exercice")      travail_d_exercice_corps_html.push([fiche_phase,travail_lesson,travail_note]);
-                if(fiche_phase == "pratique")      travail_de_pratique_corps_html.push([fiche_phase,travail_lesson,travail_note]);
-                if(fiche_phase == "evaluation")    travail_d_evaluation_corps_html.push([fiche_phase,travail_lesson,travail_note]);
-            }}
+                    if(fiche_phase == "apprentissage") travail_d_apprentissage_corps_html.push([fiche_phase,travail_lesson,travail_note]);
+                    if(fiche_phase == "exercice")      travail_d_exercice_corps_html.push([fiche_phase,travail_lesson,travail_note]);
+                    if(fiche_phase == "pratique")      travail_de_pratique_corps_html.push([fiche_phase,travail_lesson,travail_note]);
+                    if(fiche_phase == "evaluation")    travail_d_evaluation_corps_html.push([fiche_phase,travail_lesson,travail_note]);
+                }
+                
+                if(travail_d_apprentissage_corps_html.length == 0) travail_1.html(fiche_html_vide);
+                if(travail_d_exercice_corps_html.length == 0) travail_2.html(fiche_html_vide);
+                if(travail_de_pratique_corps_html.length == 0) travail_3.html(fiche_html_vide);
+                if(travail_d_evaluation_corps_html.length == 0) travail_4.html(fiche_html_vide);
+            }
 
             chargerTravail(travail_d_apprentissage_corps_html);
             chargerTravail(travail_d_exercice_corps_html);

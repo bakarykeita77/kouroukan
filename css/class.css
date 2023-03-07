@@ -882,7 +882,7 @@ body { margin: 0; padding: 0; }
 @media screen and (orientation: landscape) {
 	.page_body { width: 80%;  margin: auto; }
     .course { max-width: 60rem; }
-    .phases_container, .travaux { display: inline-block; vertical-align: top; }
+    .phases_container, .travaux { position: absolute; display: inline-block; vertical-align: top; }
     .phases_container {
         width: 30%;
         max-width: 30rem;

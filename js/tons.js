@@ -37,7 +37,7 @@
     return tons_apprentissage_html;
     }
 
-    function tonsExercicesHTML() {
+    function tonsExerciceHTML() {
         
         tonsApprentissageHTML();
         var exercices_corps_html = '<table class="table_muette">';

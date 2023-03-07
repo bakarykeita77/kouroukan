@@ -43,7 +43,7 @@
 
         return slb;
     }
-    function syllabesExercicesHTML(){
+    function syllabesExerciceHTML(){
             	    
         var exercices_corps_html = '<table class="table_muette">';
         for(var i=0;i<syllabes_questions.length-syllabes_questions.length%7;i+=7){

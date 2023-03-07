@@ -1,5 +1,7 @@
 
-<div class="course_head" id="evaluation_head">
+	<link rel="stylesheet" href="/kouroukan/css/evaluation.css"/>
+
+    <div class="course_head" id="evaluation_head">
         <div class='progress_bar' id="evaluation_progress_bar">
             <p class='progress_question_bar'></p>
             <p class='progress_bonne_reponse_bar'></p>
@@ -79,3 +81,5 @@
         </div>
 
     </div>
+    
+    <script src="/kouroukan/js/evaluations.js"></script>

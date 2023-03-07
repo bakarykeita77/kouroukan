@@ -1,3 +1,4 @@
+    var matieres = [];    
     var travail_1 = $('#travail_1'), travail_2 = $('#travail_2'), travail_3 = $('#travail_3'), travail_4 = $('#travail_4');
     var matiere_nom = $('#matiere_nom_container').html();
     var fiche_html_vide = "<h1 class='neant'>ߝߏߦߊ߲߫ ߹</h1>";
@@ -10,11 +11,10 @@
 
     
 // Recupération des lessons étudiées
-    var matieres = JSON.parse(sessionStorage.getItem('matieres')); 
+    matieres = JSON.parse(sessionStorage.getItem('matieres')); 
  
     if(matieres.length == 0) chargerAVideLesFiches();
- 
-    if(matieres.length !== 0) {
+    if(matieres.length != 0) {
         if( matiere_nom == "ߛߓߍߛߎ߲" ) chargerTravaux(0);
         if( matiere_nom == "ߜߋ߲߭"    ) chargerTravaux(1);
         if( matiere_nom == "ߞߊ߲ߡߊߛߙߋ") chargerTravaux(2);
@@ -125,7 +125,6 @@
             function travailCorpsHTML(phase,lesson) {
 
                 var corps_html = "";
-                var pratique_travail_html = [];
                 var corps_html = "";
 
                 

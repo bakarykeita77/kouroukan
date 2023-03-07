@@ -1,3 +1,5 @@
+    <link rel="stylesheet" href="/kouroukan/css/pratiques.css"/>
+
 <!--------------------------------------------------------------------
     La partie pratique de lesson est composée de 3 divisions dont:
     
@@ -93,5 +95,6 @@
                 <span class="correction_icon"></span>
             </div>
         </div>
-    
     </div>
+    
+    <script src="/kouroukan/js/pratiques.js"></script>

@@ -13,7 +13,7 @@
                 
         return table;
     };
-    function chiffresExercicesHTML() {
+    function chiffresExerciceHTML() {
                     
         table = "<table class='table_parlante'>\n";
             table += "<tr>\n";

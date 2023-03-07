@@ -84,7 +84,11 @@
 	</div>
 	
   <!------------------------------------------------------------------------------------------------------------------>	
-	<script src="/kouroukan/js/tete-de-page.js"></script>
+  <script src="/kouroukan/js/caracteres.js"></script>
+  <script src="/kouroukan/js/chiffres.js"></script>
+  <script src="/kouroukan/fonctions.js"></script>
+  <script src="/kouroukan/js/tete-de-page.js"></script>
+    
 	<script src="/kouroukan/js/profile.js"></script>
 
 <!-- Fin de l'entete de la page ------------------------------------------------------------------------------------->

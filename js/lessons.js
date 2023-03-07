@@ -256,7 +256,6 @@ $('document').ready(function() {
             var moyenne = 5;
             sessionStorage.setItem("phase_id", JSON.stringify(phase_id));
             
-            var chiffre = '';
             var phase_active_index = $('.active').index();
             var phase_index = $(this).index();
             var phase_class = $(this).attr('class');
@@ -268,8 +267,6 @@ $('document').ready(function() {
         
             var parametres_btn = $('.parametre_btn_container');
             var parametres = $('#parametres');
-            
-            var pratiques = $('#pratique');
             
             var dialogue_btn_html = $('.dialogue_btn').html();
             var parametres_html = parametres.html();
@@ -303,7 +300,7 @@ $('document').ready(function() {
     	        }
     	        function exerciceEnteteHTML() {
     	            
-                    var exercice_head_html = "<div class='play_icon_container' id='exercices_player' style='width:auto'>";
+                    var exercice_head_html = "<div class='play_icon_container' id='exercice_player' style='width:auto'>";
                         exercice_head_html += "<span class='play_label'>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ </span>";
                     	exercice_head_html += "<span class='qtite_question'>"+quantite_de_question+"</span> : <span class='ordre_question'>"+parseIntNko(compteur_de_question)+question_rang+" </span>";
                     	exercice_head_html += "<span class='ecouter_question'> ߟߊߡߍ߲߫</span><span class='play_icon'>"+play_icon+"</span>";
@@ -316,20 +313,20 @@ $('document').ready(function() {
        
             function lessonCourante() {
                 
-                if(phase_id=='alphabet_apprentissage') { lesson_courante = alphabetApprentissageHTML(); } // Voir alphabet.js 
-                if(phase_id=='alphabet_exercice'     ) { lesson_courante = alphabetExercicesHTML();     } // Voir alphabet.js
+                if(phase_id=='alphabet_apprentissage') lesson_courante = alphabetApprentissageHTML(); // Voir alphabet.js 
+                if(phase_id=='alphabet_exercice'     ) lesson_courante = alphabetexerciceHTML();      // Voir alphabet.js
                 
-                if(phase_id=='syllabes_apprentissage') { lesson_courante = syllabesApprentissageHTML(); } // Voir syllabes.js
-                if(phase_id=='syllabes_exercice'     ) { lesson_courante = syllabesExercicesHTML();     } // Voir syllabes.js
-                if(phase_id=='syllabes_pratique'     ) { lesson_courante = syllabesPratiquesHTML();     } // Voir syllabes.js
+                if(phase_id=='syllabes_apprentissage') lesson_courante = syllabesApprentissageHTML(); // Voir syllabes.js
+                if(phase_id=='syllabes_exercice'     ) lesson_courante = syllabesExerciceHTML();      // Voir syllabes.js
+                if(phase_id=='syllabes_pratique'     ) lesson_courante = syllabesPratiquesHTML();     // Voir syllabes.js
               
-                if(phase_id=='tons_apprentissage'    ) { lesson_courante = tonsApprentissageHTML();     } // Voir tons.js
-                if(phase_id=='tons_exercice'         ) { lesson_courante = tonsExercicesHTML();         } // Voir tons.js
-                if(phase_id=='tons_pratique'         ) { lesson_courante = tonsPratiquesHTML();         } // Voir tons.js
+                if(phase_id=='tons_apprentissage'    ) lesson_courante = tonsApprentissageHTML();     // Voir tons.js
+                if(phase_id=='tons_exercice'         ) lesson_courante = tonsExerciceHTML();          // Voir tons.js
+                if(phase_id=='tons_pratique'         ) lesson_courante = tonsPratiquesHTML();         // Voir tons.js
             
-                if(phase_id=='chiffres_apprentissage') { lesson_courante = chiffresApprentissageHTML(); } // Voir chiffres.js
-                if(phase_id=='chiffres_exercice'     ) { lesson_courante = chiffresExercicesHTML();     } // Voir chiffres.js
-                if(phase_id=='chiffres_pratique'     ) { lesson_courante = chiffresPratiquesHTML();     } // Voir chiffres.js
+                if(phase_id=='chiffres_apprentissage') lesson_courante = chiffresApprentissageHTML(); // Voir chiffres.js
+                if(phase_id=='chiffres_exercice'     ) lesson_courante = chiffresExerciceHTML();      // Voir chiffres.js
+                if(phase_id=='chiffres_pratique'     ) lesson_courante = chiffresPratiquesHTML();     // Voir chiffres.js
  
                 return lesson_courante;
             }
@@ -371,12 +368,12 @@ $('document').ready(function() {
 
                     switch (course_id) {
                         case 'apprentissage':apprentissages(); break;   // Voir apprentissage.js
-                        case 'exercice'     :exercices();      break;   // Voir exercices.js
+                        case 'exercice'     :exercice();       break;   // Voir exercice.js
                         case 'pratique'     :pratique();       break;   // Voir pratiques.js
                         case 'evaluation'   :evaluations();    break;   // Voir evaluations.js
             	    }
         	    }
-        	   // if(phase_class == 'a_apprendre') $('.course_container').css('display','none');
+        	    if(phase_class == 'a_apprendre') $('.course_container').css('display','none');
     	    }
       	});
         function clearStorage() {

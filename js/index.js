@@ -16,7 +16,7 @@
     $('#nav ul li:nth(0)').addClass('surbrillance');
     $('#nav ul li:nth(0)').siblings().removeClass('surbrillance');
 
-   alert('Lenovo');
+   
    
    var ch = "", syllab = [], tonn = [];
 

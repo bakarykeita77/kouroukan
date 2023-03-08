@@ -12,7 +12,12 @@
     z-index: 2;
 }
 #pratique_options div { margin-top: 2rem; }
-#pratique_options span { display: block; width: 10rem; cursor: pointer; }
+#pratique_options span {
+    display: block;
+    margin: 0.25rem; 
+    width: 10rem; 
+    cursor: pointer; 
+}
 #options_titre {
     background-color: #eee;
     border: 2px solid transparent;

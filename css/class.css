@@ -667,8 +667,6 @@ body { margin: 0; padding: 0; }
 .parentcell { display: table-cell; vertical-align: middle; }
 .phases { margin: 1rem 0; }
 .phases_container {
-    height: 50vh;
-    max-height: 25rem;
     padding: var(--paddingLarge);
     margin: 0 1rem;
     border-radius: var(--radiusSmall);
@@ -795,7 +793,9 @@ body { margin: 0; padding: 0; }
 /* --------------------------------------------------------------------------------------------------------- */
 
 .table_parlante, .table_muette {
-    position: relative;
+    position: absolute;
+    top: 50%;
+    transform: translate(0,-50%);
     padding: 1.5rem;
     width: 100%;
 }
@@ -882,14 +882,20 @@ body { margin: 0; padding: 0; }
 @media screen and (orientation: landscape) {
 	.page_body { width: 80%;  margin: auto; }
     .course { max-width: 60rem; }
-    .phases_container, .travaux { position: absolute; display: inline-block; vertical-align: top; }
+    .phases_container, .travaux { 
+        position: absolute; 
+        height: 70vh;
+        display: inline-block; 
+        vertical-align: top; 
+        box-sizing: border-box;
+    }
     .phases_container {
         width: 30%;
         max-width: 30rem;
         margin-right: 1rem;
     }
     .travaux {
-        width: 60%;
+        width: 65%;
         max-width: 50rem;
         margin: auto;
     }
@@ -906,50 +912,9 @@ body { margin: 0; padding: 0; }
     }
     .phases_container {
         width: 60%;
+        min-height: 20rem;
         max-width: 32rem;
         margin: auto;
     }
     .travaux { display: none; }
-	
-}
-
-/**
-@media screen and (orientation: landscape) {
-	.page_body {
-        width: 80%;
-        margin: auto;
-    }
-    .course { max-width: 60rem; }
-    .phases_container, .travaux {
-        display: inline-block;
-        vertical-align: top;
-    }
-    .phases_container {
-        width: 30%;
-        max-width: 30rem;
-        margin-right: 1rem;
-    }
-    .travaux {
-        width: 60%;
-        max-width: 50rem;
-        margin: auto;
-    }
-}
-@media screen and (orientation: portrait) {
-	.page_body {
-        width: 100%;
-        margin: 0;
-        padding: 0;
-    }
-    .course { max-width: 40rem; }
-    .phases_container, .travaux {
-        display: block;
-    }
-    .phases_container {
-        width: 60%;
-        max-width: 32rem;
-        margin: auto;
-    }
-    .travaux { display: none; }
-	
 }

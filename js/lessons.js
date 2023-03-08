@@ -368,7 +368,7 @@ $('document').ready(function() {
 
                     switch (course_id) {
                         case 'apprentissage':apprentissages(); break;   // Voir apprentissage.js
-                        case 'exercice'     :exercice();       break;   // Voir exercice.js
+                        case 'exercice'     :exercices();       break;   // Voir exercice.js
                         case 'pratique'     :pratique();       break;   // Voir pratiques.js
                         case 'evaluation'   :evaluations();    break;   // Voir evaluations.js
             	    }

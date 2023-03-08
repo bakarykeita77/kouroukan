@@ -1,7 +1,7 @@
 
 function pratique() {
                         
-    let phase_nbr = nombreDePhasesEtudiees();
+    let phase_nbr = $('.apprises').length;
 
     var option = '';
     var option_index = null;
@@ -36,6 +36,9 @@ function pratique() {
     let syllabes_2 = biSyllabe();
     let syllabes_3 = triSyllabe();
     let syllabes_4 = quadriSyllabe();
+
+    let pratique = $('#pratique');
+    let pratiques = JSON.parse(localStorage.getItem('pratiques'));
 
     var questions=[], question='', reponse=[];
     var table = $('#pratique_fiche_body').html();
@@ -91,9 +94,9 @@ function pratique() {
         return options;
     }   
     function afficherPratique() {
-        pratiques.css({'display':'block', 'transform':'scale(0.75)', 'opacity':0});
-        setTimeout(function() { pratiques.css({'transform':'scale(1)'});}, 5);
-        setTimeout(function() { pratiques.css({'opacity':'1'});}, 5);
+        pratique.css({'display':'block', 'transform':'scale(0.75)', 'opacity':0});
+        setTimeout(function() { pratique.css({'transform':'scale(1)'});}, 5);
+        setTimeout(function() { pratique.css({'opacity':'1'});}, 5);
 
         optionStyles();
     }
@@ -327,10 +330,10 @@ function pratique() {
                 let option = (option_status == "avancer") ? option_index+1 : option_index;
                 let dossier = '';
 
-                if(option === 0) dossier = "/local-images-for-kouroukan/local-images-1-syllabe/";
-                if(option === 1) dossier = "/local-images-for-kouroukan/local-images-2-syllabe/";
-                if(option === 2) dossier = "/local-images-for-kouroukan/local-images-3-syllabe/";
-                if(option === 3) dossier = "/local-images-for-kouroukan/local-images-4-syllabe/";
+                if(option === 0) dossier = "/kouroukan/server-images/server-images-1-syllabe/";
+                if(option === 1) dossier = "/kouroukan/server-images/server-images-2-syllabe/";
+                if(option === 2) dossier = "/kouroukan/server-images/server-images-3-syllabe/";
+                if(option === 3) dossier = "/kouroukan/server-images/server-images-4-syllabe/";
 
                 return dossier;
             }

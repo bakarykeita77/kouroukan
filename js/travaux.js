@@ -11,7 +11,7 @@
 
     
 // Recupération des lessons étudiées
-    matieres = JSON.parse(sessionStorage.getItem('matieres')); 
+    matieres = JSON.parse(sessionStorage.getItem('matieres'));
  
     if(matieres.length == 0) chargerAVideLesFiches();
     if(matieres.length != 0) {

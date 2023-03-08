@@ -26,7 +26,7 @@ function exercices() {
         var lesson_courante = [];
   console.log(phase_id);               
         if(phase_id=='alphabet_exercice'     ) { lesson_courante = alphabetExercicesHTML();     } // Voir alphabet.js
-        if(phase_id=='syllabes_exercice'     ) { lesson_courante = syllabesexerciceHTML();     } // Voir syllabes.js
+        if(phase_id=='syllabes_exercice'     ) { lesson_courante = syllabesExerciceHTML();     } // Voir syllabes.js
         if(phase_id=='tons_exercice'         ) { lesson_courante = tonsExercicesHTML();         } // Voir tons.js
         if(phase_id=='chiffres_exercice'     ) { lesson_courante = chiffresExercicesHTML();     } // Voir chiffres.js
 

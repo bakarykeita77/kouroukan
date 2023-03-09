@@ -16,6 +16,8 @@
     display: block;
     margin: 0.25rem; 
     width: 10rem; 
+    height: 2rem;
+    line-height: 2rem;
     cursor: pointer; 
 }
 #options_titre {
@@ -268,7 +270,6 @@
     }
     #pratique_foot { 
         height: 18rem; 
-        right: 1rem;
     }
     #pratique_body { height: calc(100% - 20rem); }
     #image_name { display: none; }

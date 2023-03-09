@@ -88,7 +88,7 @@ body { margin: 0; padding: 0; }
 .active:hover a { color: blue; }
 .a_apprendre { font-weight: bold; border: 1px solid #ddd; }
 .a_apprendre:hover { background-color: var(--couleur_c); }
-.apprises { border: var(--border_c); }
+.apprises { border: var(--border_c); color: var(--couleur_flowerBlue); }
 .apprises a { color: var(--couleur_flowerBlue); }
 .apprises:active { box-shadow: none; }
 .apprises:hover { background-color: var(--couleur_e); }

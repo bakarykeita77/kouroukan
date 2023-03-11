@@ -59,11 +59,12 @@
     <!--pratique_foot---------------------------------------------------->
     <div class="course_foot" id="pratique_foot">
 
-
+        <div id="guide_container">
         <div id="pratique_guide">
-            <div id="bulles_container"></div>
-            <p id="signe_egal">&#123;</p>
+            <div class="flex_row_center" id="bulles_container"></div>
+            <!-- <p id="signe_egal">&#123;</p> -->
             <p id="reponse_container"><span id="cumule_des_caracteres"></span><span id='correcteur'>ߖߐ߬ߛߌ߬ߙߊ߲</span></p>
+        </div>
         </div>
 
         <div id="pratiques_images_container">
@@ -74,7 +75,6 @@
         <div id="image_croix">&#10060;</div>
 
         <div class="clavier_container" id="pratique_clavier_container"><?php include "clavier.php"; ?></div>
-
         <div class="dialogue_btn" id="pratique_dialogue_btn">
 
             <div class="btn question_btn">

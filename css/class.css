@@ -8,6 +8,8 @@
     --border_b: 1px solid #bbb;
     --border_c: 1px solid #ccc;
     --border_d: 1px solid #ddd;
+    --border_e: 1px solid #eee;
+    --border_f: 1px solid #fff;
     --border_6: 1px solid #666;
     --border_flowerBlue: 1px solid cornflowerblue;
     --border_yellow: 1px solid yellow;
@@ -123,9 +125,9 @@ body { margin: 0; padding: 0; }
     position: relative;
     display: inline-block;
     background-color: #ccc;
-    height: 3rem;
-    width: 3rem;
-    line-height: 3rem;
+    height: 2rem;
+    width: 2rem;
+    line-height: 2rem;
     margin: 0;
     border: 1px solid transparent;
     box-shadow: 0 0 0.5rem #ccc;
@@ -395,6 +397,12 @@ body { margin: 0; padding: 0; }
 .fiche_foot table { width: 100%; }
 .fiche_titre { margin: 0; }
 .fixe { position: fixed; }
+.flex_row_center {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
 .fond_blanc_casse { background-color: #666; }
 .flowerblue { background-color: cornflowerblue; }
 .fond_blanc { box-shadow: var(--couleurNeutre); }

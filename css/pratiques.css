@@ -51,20 +51,22 @@
     overflow: auto;
     color: black;
 }
-#pratique_guide {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    
+#guide_container {
     position: absolute;
-    top: -100%;
     width: 100%;
-    height: calc(100% - 13rem);
+    background-color: #eee;
+    border: var(--border_e);
+    overflow-y: hidden;
+    z-index: 1;
+}
+#pratique_guide {
+    position: absolute;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
     padding: 4px;
     background-color: #eee;
     box-sizing: border-box;
-    z-index: 1;
 }
 #bulles_container, #signe_egal, #cumule_des_caracteres {
     margin: 0.125rem 0;
@@ -72,9 +74,11 @@
     font-size: 2rem;
     font-weight: bold;
 }
-#bulles_container {
+#bulles_container { 
+    height: calc(100% - 2rem); 
+    line-height: calc(100% - 2rem); 
+    margin: 0; 
 }
-#bulles_container { height: 3rem; line-height: 3.5rem; }
 #bulles_container .plus { color: #aaa; }
 #signe_egal {
     padding: 0;
@@ -84,15 +88,32 @@
     transform: rotate(90deg);
 }
 #pratique_guide span { vertical-align: middle; margin: 2px; }
-#reponse_container span:first-child { padding-left: 1rem; }
+#reponse_container {
+    position: relative;
+    background-color: var(--couleur_f);
+    margin: 0;
+    height: 2rem;
+    line-height: 2rem;
+}
+#cumule_des_caracteres {
+    height: 2rem;
+    line-height: 2rem;
+    padding-left: 1rem;
+    margin: 0 0.25rem;
+}
 #correcteur { 
+    height: 1.5rem;
+    line-height: 1.5rem;
     border: 1px solid var(--couleurTertiaire);
     border-radius: var(--couleurTertiaire);
     box-shadow: 0 0 1rem #666; 
     margin: 0;
     padding: 0.125rem; 
     bottom: 0.125rem;
+    font-size: 0.8rem;
+    font-weight: normal;
     cursor: pointer;
+    float: left;
     transition: 0.2s; 
 }
 #correcteur:active { box-shadow: none; }
@@ -107,9 +128,9 @@
 #pratique_fiche_head {
     padding: 0.25rem 0;
     margin: 0.125rem 0;
+    background-color: #eee;
     border-bottom: 0.25rem solid #aaa;
 }
-#pratique_fiche span { border: 1px solid transparent; }
 #pratique_fiche_head, #pratique_fiche_body div, #pratique_fiche_foot div {
     display: flex;
     flex-direction: row;
@@ -117,7 +138,7 @@
 #pratique_fiche_head span { font-size: 0.8rem; height: 1rem; }
 #pratique_fiche span:nth-child(1), #pratique_fiche span:nth-child(2) { width: 40%; padding-right: 0.5rem; }
 #pratique_fiche span:nth-child(3) { flex-grow: 1; text-align: center; }
-#pratique_fiche_body { 
+#pratique_fiche_body {
     min-height: 3.5rem;
     margin: 0.125rem;
     padding: 0.25rem;
@@ -127,21 +148,33 @@
     overflow: auto;
     transition: 0.6s;
 }
-#pratique_fiche_body div {
-    display: flex;
-    flex-direction: row;
+#pratique_fiche_body .tr {
     height: 1.5rem;
-    border: 1px solid transparent;
-    border-bottom-color: #fff;
+    border: 1px solid #fff;
 }
+#pratique_fiche_body .tr > span { border: 1px solid #eee; margin: 0 1px; }
 #pratique_fiche_body span:nth-child(1), #pratique_fiche_body span:nth-child(2) {
     text-align: right;
     width: 40%;
     padding-right: 0.5rem;
 }
-#pratique_fiche_body span:nth-child(2) {
+.affiche_reponse {
+    position: relative;
+    border: 1px solid transparent;
     border-left-color: #fff;
     border-right-color: #fff;
+}
+.affiche_reponse span {
+    border-style: none;
+}
+.fiche_croix { color: red; opacity: 0.5; }
+.fiche_mauvaise_reponse, .fiche_croix {
+    position: absolute;
+    right: 0;
+    border: none;
+}
+#pratique_progress_bar {
+    top: 1.5rem;
 }
 #pratique_fiche_body span:nth-child(3) { flex-grow: 1; text-align: center; }
 #pratique_fiche_foot {
@@ -165,7 +198,7 @@
 
 #pratique_dialogue_btn {
     position: absolute;
-    bottom: 0.5rem;
+    bottom: 0;
     width: calc(100% - 6rem);
     text-align: center;
     border: var(--border_c);
@@ -175,14 +208,13 @@
 }
 #pratique_clavier_container { 
     position: absolute;
-    bottom: 4rem;
     border-radius: var(--radiusSmall); 
 }
 #pratiques_images_container {
     position: absolute;
-    height: calc(100% - 13rem);
     width: 100%;
     background-color: #fff;
+    border: var(--border_e);
     z-index: 0;
 }
 #pratiques_images_container img {
@@ -215,10 +247,27 @@
 
     position: absolute;
     width: 100%;
-    height: 100%;
     font-size: 10rem;
     color: red;
-    opacity: 0.5;
+    opacity: 0.4;
+    z-index: 1;
+}
+#pratique_travail_foot {
+    background-color: #eee;
+    border: 1px solid #ddd;
+    border-top: 0.25rem solid #aaa;
+}
+#pratique_travail_foot div {
+    position: relative;
+    height: 1.5rem;
+    margin: 0.125rem 0;
+}
+#pratique_travail_foot span:first-child { float: right; }
+#pratique_travail_foot span:last-child {
+    border: var(--border_c);
+     width: 15%;
+     text-align: center; 
+    float: left; 
 }
 
 #message_de_fin_container {
@@ -268,13 +317,28 @@
         width: 96%;
         margin: auto ;
     }
-    #pratique_foot { 
-        height: 18rem; 
+    #guide_container {
+        bottom: 12rem;
+        height: calc(100% - 12rem);
     }
+    #pratique_foot { 
+        height: 18rem;
+        overflow: hidden;
+    }
+    #pratique_clavier_container { bottom: 3rem; }
     #pratique_body { height: calc(100% - 20rem); }
+    #pratiques_images_container { height: calc(100% - 3rem); }
     #image_name { display: none; }
-    #pratique_fiche { width: 100%; top: 0; }
+    #pratique_fiche { 
+        top: 0; 
+        width: 100%; 
+        height: 100%; 
+    }
     #pratique_fiche_foot { display: none; }
+    #pratique_fiche_body {
+        height: calc(100% - 8rem);
+    }
+    #image_croix { height: calc(100% - 4rem); }
     #message_de_fin_container {
         top: calc(100% - 7rem);
         left: 50%;
@@ -285,7 +349,7 @@
     #pratique_body, #pratique_head, #pratique_foot { position: relative; }
     #pratique_head, #pratique_foot { 
         width: 40%; 
-        bottom: 1rem;
+        bottom: 0;
         right: 1rem;
     }
     #pratique_body {
@@ -295,12 +359,30 @@
         width: 52%;
         height: calc(100% - 4px);
     }
+    #guide_container {
+        bottom: 14rem;
+        height: calc(100% - 15rem);
+    }
+    #pratiques_images_container { 
+        bottom: 14rem;
+        height: calc(100% - 15rem);
+    }
     #image_name { display: block; }
-    #pratique_foot, #evaluation_foot { height: 98%; border-radius: var(--radiusSmall); }
+    #pratique_foot, #evaluation_foot { 
+        top: 1.5rem;
+        height: 94%; 
+        border-radius: var(--radiusSmall); 
+    }
+    #pratique_clavier_container { bottom: 4.5rem; }
     #pratique_fiche, #evaluation_fiche {
-        top: 0;
+        bottom: 10rem;
         width: calc(100% - 1rem);
+        height: calc(100% - 11rem);
         left: 50%;
         transform: translateX(-50%);
     }
+    #pratique_fiche_body {
+        height: calc(100% - 6rem);
+    }
+    #image_croix { height: calc(100% - 15rem); }
 }

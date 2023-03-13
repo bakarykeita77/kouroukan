@@ -1,7 +1,11 @@
 .travail_titre h3 { 
     width: 10rem;
  }
-.trava
+ #travaux_container {
+    border: 2px solid red;
+    position: relative;
+    top: 4rem;
+ }
 .travail_entete { right: 0; width: 4.5rem; overflow: auto; }
 .travail_corps { 
     position: relative; 

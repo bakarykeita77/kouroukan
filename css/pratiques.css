@@ -26,7 +26,7 @@
     margin: 0 0 1rem 0;
     border-bottom: 0.25rem solid #ddd;
 }
-#pratique { overflow: hidden; }
+#pratique { overflow: hidden; max-width: 600px; }
 #pratique_head {
     display: flex;
     flex-direction: column;
@@ -46,7 +46,14 @@
     text-align: center;
     height: 100%;
 }
+#pratique_body, #pratique_head, #pratique_foot {
+    position: relative;
+    width: 96%;
+    max-width: 400px;
+    margin: auto ;
+}
 #pratique_body {
+    height: calc(100% - 20rem);
     border: 1px solid transparent;
     overflow: auto;
     color: black;
@@ -68,7 +75,7 @@
     background-color: #eee;
     box-sizing: border-box;
 }
-#bulles_container, #signe_egal, #cumule_des_caracteres {
+#bulles_container, #cumule_des_caracteres {
     margin: 0.125rem 0;
     text-align: center;
     font-size: 2rem;
@@ -80,13 +87,6 @@
     margin: 0; 
 }
 #bulles_container .plus { color: #aaa; }
-#signe_egal {
-    padding: 0;
-    margin: 0;
-    font-size: 5rem;
-    color: #aaa;
-    transform: rotate(90deg);
-}
 #pratique_guide span { vertical-align: middle; margin: 2px; }
 #reponse_container {
     position: relative;
@@ -117,7 +117,6 @@
     transition: 0.2s; 
 }
 #correcteur:active { box-shadow: none; }
-#pratique_foot { display: flex; flex-direction: column; }
 
 #pratique_fiche {
     display: flex;
@@ -141,7 +140,6 @@
 #pratique_fiche_body {
     min-height: 3.5rem;
     margin: 0.125rem;
-    padding: 0.25rem;
     background-color: #fff;
     border: 1px solid #ccc;
     font-weight: bold;
@@ -174,7 +172,8 @@
     border: none;
 }
 #pratique_progress_bar {
-    top: 1.5rem;
+    top: 0.25rem;
+    width: 96%;
 }
 #pratique_fiche_body span:nth-child(3) { flex-grow: 1; text-align: center; }
 #pratique_fiche_foot {
@@ -212,9 +211,9 @@
 }
 #pratiques_images_container {
     position: absolute;
+    bottom: 3rem;
     width: 100%;
     background-color: #fff;
-    border: var(--border_e);
     z-index: 0;
 }
 #pratiques_images_container img {
@@ -310,13 +309,8 @@
 #message_btn_container button:first-child { right: 0; }
 #message_btn_container button:last-child { left: 0; }
 
-@media screen and (orientation: portrait) {
 
-    #pratique_body, #pratique_head, #pratique_foot {
-        position: relative;
-        width: 96%;
-        margin: auto ;
-    }
+
     #guide_container {
         bottom: 12rem;
         height: calc(100% - 12rem);
@@ -326,7 +320,6 @@
         overflow: hidden;
     }
     #pratique_clavier_container { bottom: 3rem; }
-    #pratique_body { height: calc(100% - 20rem); }
     #pratiques_images_container { height: calc(100% - 3rem); }
     #image_name { display: none; }
     #pratique_fiche { 
@@ -336,7 +329,7 @@
     }
     #pratique_fiche_foot { display: none; }
     #pratique_fiche_body {
-        height: calc(100% - 8rem);
+        height: calc(100% - 6rem);
     }
     #image_croix { height: calc(100% - 4rem); }
     #message_de_fin_container {
@@ -344,45 +337,3 @@
         left: 50%;
         transform: translateX(-50%);
     }
-}
-@media screen and (orientation: landscape) {
-    #pratique_body, #pratique_head, #pratique_foot { position: relative; }
-    #pratique_head, #pratique_foot { 
-        width: 40%; 
-        bottom: 0;
-        right: 1rem;
-    }
-    #pratique_body {
-        position:  absolute;
-        top: 0;
-        left: 0;
-        width: 52%;
-        height: calc(100% - 4px);
-    }
-    #guide_container {
-        bottom: 14rem;
-        height: calc(100% - 15rem);
-    }
-    #pratiques_images_container { 
-        bottom: 14rem;
-        height: calc(100% - 15rem);
-    }
-    #image_name { display: block; }
-    #pratique_foot, #evaluation_foot { 
-        top: 1.5rem;
-        height: 94%; 
-        border-radius: var(--radiusSmall); 
-    }
-    #pratique_clavier_container { bottom: 4.5rem; }
-    #pratique_fiche, #evaluation_fiche {
-        bottom: 10rem;
-        width: calc(100% - 1rem);
-        height: calc(100% - 11rem);
-        left: 50%;
-        transform: translateX(-50%);
-    }
-    #pratique_fiche_body {
-        height: calc(100% - 6rem);
-    }
-    #image_croix { height: calc(100% - 15rem); }
-}

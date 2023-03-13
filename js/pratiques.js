@@ -41,7 +41,7 @@ function pratique() {
     let pratiques = JSON.parse(localStorage.getItem('pratiques'));
 
     var questions=[], question='', reponse=[];
-    var table = $('#pratique_fiche_body').html();
+    var table = "";
    
  /*--------------------------------------------------------------------*/
     $('.fermeture').attr('id', 'fermer_pratique');

@@ -60,17 +60,14 @@
 
 /* --------------------------------------------------------------------------------------------------------- */
 
-html { font-size: 16px; direction: rtl; padding: 0;}
-body { margin: 0; padding: 0; }
+html { font-size: 16px; padding: 0; margin: 0;}
 
 /* --------------------------------------------------------------------------------------------------------- */
 
 
 .actif, .active, .apprises, .a_apprendre {
     padding: 0 1rem;
-    margin: 1px 0;
     border-radius: var(--radiusSmall);
-    cursor: pointer;
 }
 .actif, .active {
     border: var(--border_yellow); 
@@ -224,7 +221,6 @@ body { margin: 0; padding: 0; }
     left: 0;
     height: 100vh;
     width: 100vw;
-    direction: rtl;
 }
 .course {
     position: relative;
@@ -232,6 +228,7 @@ body { margin: 0; padding: 0; }
     height: calc(95vh - 6rem);
     min-height: 25rem;
     width: 95vw;
+    max-width: 60rem;
     margin: 0 auto;
     padding: 0;
     border-radius: 0.5rem;
@@ -277,7 +274,6 @@ body { margin: 0; padding: 0; }
     color: #fff;
     font-weight: bold;
     text-shadow: 0 0.25rem 0.5rem #000;
-    border: 1px solid transparent;
     border-radius: 0.25rem;
 }
 .course_head div label {
@@ -602,17 +598,10 @@ body { margin: 0; padding: 0; }
 
 
 .page_body {
-    position: absolute;
-    padding: 0;
-    margin: 0;
+    position: relative;
     height: calc(100% - 4rem);
-    top: 3rem;
-    left: 50%;
-    transform: translateX(-50%);
     z-index: 0;
-    box-sizing: border-box;
     overflow: auto;
-    box-sizing: border-box;
 }
 .page_body h4 { padding: 0 2rem; margin: 1rem; }
 .page_foot {
@@ -673,10 +662,12 @@ body { margin: 0; padding: 0; }
 }
 .parentgrid { display: grid; }
 .parentcell { display: table-cell; vertical-align: middle; }
-.phases { margin: 1rem 0; }
+.phases { margin: 1rem 0; width: 100%; }
 .phases_container {
+    position: relative;
     padding: var(--paddingLarge);
     margin: 0 1rem;
+    height: 4rem;
     border-radius: var(--radiusSmall);
     box-shadow: 0 0 1.5rem #666;
 }
@@ -689,7 +680,10 @@ body { margin: 0; padding: 0; }
     border-bottom: 1px solid #aaa;
 }
 .phases ul {
-    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -758,12 +752,9 @@ body { margin: 0; padding: 0; }
 .progress_bar {
     position: relative;
     margin: 0;
-    padding: 0;
     height: 0.5rem;
-    width: calc(100% - 2px);
+    width: 100%;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: 0 0 0.25rem #444;
     transition: 1s;
 }
 .progress_bar span {
@@ -888,41 +879,28 @@ body { margin: 0; padding: 0; }
 
 
 @media screen and (orientation: landscape) {
-	.page_body { width: 80%;  margin: auto; }
-    .course { max-width: 60rem; }
-    .phases_container, .travaux { 
+	.page_body { width: 80%; max-width: 600px;  margin: auto; }
+    .phases_container {
+    }
+    .phases_container li {
+        display: inline-block;
+        width: 6rem;
+    }
+    .travaux { 
         position: absolute; 
-        height: 70vh;
+        height: 60vh;
         display: inline-block; 
         vertical-align: top; 
         box-sizing: border-box;
     }
-    .phases_container {
-        width: 30%;
-        max-width: 30rem;
-        margin-right: 1rem;
-    }
     .travaux {
-        width: 65%;
+        width: 100%;
         max-width: 50rem;
         margin: auto;
     }
 }
 @media screen and (orientation: portrait) {
-	.page_body {
-        width: 100%;
-        margin: 0;
-        padding: 0;
-    }
-    .course { max-width: 60rem; }
-    .phases_container, .travaux {
-        display: block;
-    }
-    .phases_container {
-        width: 60%;
-        min-height: 20rem;
-        max-width: 32rem;
-        margin: auto;
-    }
+	.page_body {  width: 100%; margin: 0;  padding: 0; }
+    .travaux { display: block; }
     .travaux { display: none; }
 }

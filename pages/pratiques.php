@@ -60,11 +60,10 @@
     <div class="course_foot" id="pratique_foot">
 
         <div id="guide_container">
-        <div id="pratique_guide">
-            <div class="flex_row_center" id="bulles_container"></div>
-            <!-- <p id="signe_egal">&#123;</p> -->
-            <p id="reponse_container"><span id="cumule_des_caracteres"></span><span id='correcteur'>ߖߐ߬ߛߌ߬ߙߊ߲</span></p>
-        </div>
+            <div id="pratique_guide">
+                <div class="flex_row_center" id="bulles_container"></div>
+                <p id="reponse_container"><span id="cumule_des_caracteres"></span><span id='correcteur'>ߖߐ߬ߛߌ߬ߙߊ߲</span></p>
+            </div>
         </div>
 
         <div id="pratiques_images_container">

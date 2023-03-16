@@ -112,10 +112,7 @@ html { font-size: 16px; padding: 0; margin: 0;}
 }
 .btn span:last-child { margin-right: 2rem; }
 .btns {    
-    position: absolute;
-    height: 2rem;
     bottom: 0;
-    border: var(--borderPrimaire);
 }
 .btns_label { padding-right: 1rem; }
 .bulle {
@@ -224,7 +221,7 @@ html { font-size: 16px; padding: 0; margin: 0;}
 }
 .course {
     position: relative;
-    top: 4rem;
+    top: 5rem;
     height: calc(95vh - 6rem);
     min-height: 25rem;
     width: 95vw;
@@ -237,11 +234,8 @@ html { font-size: 16px; padding: 0; margin: 0;}
     z-index: 0;
     transition: 0.6s;
 }
-.course_body, .course_foot, .course_head { position: relative; }
+.course_body, .course_foot, .course_head { border-radius: var(--radiusLarge); }
 .course_body {
-    width: calc(100% - 1rem);
-    margin: auto;
-    margin: 0;
     overflow: auto;
 }
 .course_container {
@@ -260,17 +254,12 @@ html { font-size: 16px; padding: 0; margin: 0;}
 .course_foot {
     background-color: var(--couleurNeutre);
     border-radius: var(--radiusMedium);
-    font-weight: bold;
 }
 .course_head {
-    top: 0;
-    height: 1rem;
-    width: 100%;
-    margin: 0;
+    top: -0.75rem;
     padding: 0;
 }
 .course_head div {
-    padding: 0 0.25rem;
     color: #fff;
     font-weight: bold;
     text-shadow: 0 0.25rem 0.5rem #000;
@@ -304,7 +293,6 @@ html { font-size: 16px; padding: 0; margin: 0;}
     padding: 0.125rem 3rem;
     margin: 0 auto;
     height: 2rem;
-    line-height: 2rem;
     font-weight: bold;
     cursor: pointer;
     transition: 0.25s;
@@ -474,7 +462,7 @@ html { font-size: 16px; padding: 0; margin: 0;}
     position: relative;
     background-color: var(--couleur_d);
     padding: 0.5rem 2rem;
-    margin: 0 1rem 1rem 0;
+    margin: 1rem 0;
     height: 2.5rem;
     line-height: 2.5rem;
 }
@@ -601,7 +589,6 @@ html { font-size: 16px; padding: 0; margin: 0;}
     position: relative;
     height: calc(100% - 4rem);
     z-index: 0;
-    overflow: auto;
 }
 .page_body h4 { padding: 0 2rem; margin: 1rem; }
 .page_foot {
@@ -662,14 +649,19 @@ html { font-size: 16px; padding: 0; margin: 0;}
 }
 .parentgrid { display: grid; }
 .parentcell { display: table-cell; vertical-align: middle; }
-.phases { margin: 1rem 0; width: 100%; }
-.phases_container {
-    position: relative;
+.phases {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
     padding: var(--paddingLarge);
-    margin: 0 1rem;
-    height: 4rem;
+    margin: 1rem auto;
     border-radius: var(--radiusSmall);
     box-shadow: 0 0 1.5rem #666;
+    list-style: none;
+}
+.phases_container {
+    position: relative;
 }
 .phases_container h2, .phases_container h4 {  padding: var(--paddingSmall); }
 .phases_container h2 {
@@ -678,6 +670,12 @@ html { font-size: 16px; padding: 0; margin: 0;}
     line-height: 48px;
     border: 1px solid transparent;
     border-bottom: 1px solid #aaa;
+}
+.phases_container li {
+    height: 3rem;
+    line-height: 3rem;
+    font-weight: bold;
+    cursor: pointer;
 }
 .phases ul {
     display: flex;
@@ -750,11 +748,14 @@ html { font-size: 16px; padding: 0; margin: 0;}
 }
 .profile_menu_head a { text-decoration: none; }
 .progress_bar {
-    position: relative;
+    position: absolute;
+    left: 0;
     margin: 0;
     height: 0.5rem;
-    width: 100%;
+    width: calc(100% - 2px);
+    background-color: #fff;
     border: 1px solid #ccc;
+    border-radius: var(--radiusSmall);
     transition: 1s;
 }
 .progress_bar span {
@@ -769,10 +770,8 @@ html { font-size: 16px; padding: 0; margin: 0;}
     position: absolute;
     top: 0;
     right: 0;
-    height: 100%;
-    padding: 0;
+    height: 0.5rem;
     margin: 0;
-    border-radius: 0.25rem;
     transition: 1s;
 }
 .progress_bonne_reponse_bar { background-color: yellow; }
@@ -793,8 +792,6 @@ html { font-size: 16px; padding: 0; margin: 0;}
 
 .table_parlante, .table_muette {
     position: absolute;
-    top: 50%;
-    transform: translate(0,-50%);
     padding: 1.5rem;
     width: 100%;
 }
@@ -814,12 +811,8 @@ html { font-size: 16px; padding: 0; margin: 0;}
 }
 .transparent { animation: transperer; }
 .travaux {
-    position: absolute;
     left: 0;
-    height: calc(100vh - 12rem);
-    width: calc(100% - 20rem);
-    margin: 0;
-    border: 2px solid transparent;
+    border: var(--border_c);
     overflow-y: auto;
 }
 .travaux_cadre { margin: 0 0 0.5rem 0; overflow: auto; }
@@ -828,7 +821,6 @@ html { font-size: 16px; padding: 0; margin: 0;}
     position: relative;
     padding: 1rem 1.5rem;
     margin: 0.25rem;
-    background-color: var(--couleurTertiaire);
     border-radius: var(--radiusSmall);
 }
 .travail:not(first-child) { margin-top: 0; }
@@ -879,16 +871,20 @@ html { font-size: 16px; padding: 0; margin: 0;}
 
 
 @media screen and (orientation: landscape) {
-	.page_body { width: 80%; max-width: 600px;  margin: auto; }
-    .phases_container {
+	.page_body { width: 80%; max-width: 700px;  margin: auto; }
+    .phases {
+        height: 5rem;
+        width: 90%;
+        padding: 1rem; 
     }
-    .phases_container li {
+    .phases { flex-direction: row; }
+    .phases li {
         display: inline-block;
-        width: 6rem;
+        width: 5rem;
     }
     .travaux { 
         position: absolute; 
-        height: 60vh;
+        height: 50vh;
         display: inline-block; 
         vertical-align: top; 
         box-sizing: border-box;
@@ -901,6 +897,16 @@ html { font-size: 16px; padding: 0; margin: 0;}
 }
 @media screen and (orientation: portrait) {
 	.page_body {  width: 100%; margin: 0;  padding: 0; }
+    .phases {
+        height: 15rem;
+        width: 80%;
+        padding: 3rem 0; 
+        max-width: 30rem;
+    }
+    .phases { flex-direction: column; }
+    .phases li {
+        width: 80%;
+    }
     .travaux { display: block; }
     .travaux { display: none; }
 }

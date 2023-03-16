@@ -1,6 +1,7 @@
 
 	<link rel="stylesheet" href="/kouroukan/css/apprentissage.css"/>
 
+    
     <div class="course_head" id="apprentissage_head">
         <div class = 'progress_bar' id = "apprentissage_progress_bar">
             <div class='progress_bonne_reponse_bar'></div>

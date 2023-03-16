@@ -1,11 +1,10 @@
-
-var id = JSON.parse(sessionStorage.getItem('id'));  
-var apprentissage = $('#apprentissage');
-var niveau_en_cours     = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
-var phase_id = JSON.parse(sessionStorage.getItem('phase_id'));
-var moyenne = JSON.parse(sessionStorage.getItem("moyenne"));
-
 function apprentissages() {
+        
+    var id = JSON.parse(sessionStorage.getItem('id'));  
+    var apprentissage = $('#apprentissage');
+    var niveau_en_cours     = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
+    var phase_id = JSON.parse(sessionStorage.getItem('phase_id'));
+    var moyenne = JSON.parse(sessionStorage.getItem("moyenne"));
 
     var lesson_courante = lessonCourante();
     var compteur_de_question = 1;
@@ -24,7 +23,6 @@ function apprentissages() {
    
     function lessonCourante() {
         let lesson_courante = [];
-           
         if(phase_id == 'alphabet_apprentissage') lesson_courante = alphabetApprentissageHTML(); // Voir alphabet.js 
         if(phase_id == 'syllabes_apprentissage') lesson_courante = syllabesApprentissageHTML(); // Voir syllabes.js
         if(phase_id == 'tons_apprentissage'    ) lesson_courante = tonsApprentissageHTML();     // Voir tons.js

@@ -6,7 +6,6 @@
 }
 #exercice_body {
     border: 0.5rem solid white;
-    border-top-width: 1px;
     height: calc(100% - 3rem);
     background-color: rgba(0,0,0,0.8);
     color: white;

@@ -11,6 +11,8 @@
     lettres = voyelles_cochees.concat(consonnes_cochees,tedos_coches);
     var syllabes = syllab();
     var syllabes_questions = malaxer(syllabes);
+
+console.log(voyelles_cochees); 
  
     function syllabesApprentissageHTML() {
         

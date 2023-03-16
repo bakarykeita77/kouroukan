@@ -1,24 +1,17 @@
-.travail_titre h3 { 
-    width: 10rem;
- }
+.travail_titre h3 { width: 10rem; }
  #travaux_container {
-    border: 2px solid red;
     position: relative;
-    top: 4rem;
  }
 .travail_entete { right: 0; width: 4.5rem; overflow: auto; }
 .travail_corps { 
-    position: relative; 
-    padding: 0; 
-    margin: 0;
+    position: relative;
     width: calc(100% - 2px - 9rem); 
-    border: var(--border_6);
+    border: 1px solid transparent;
+    border-right-color: #aaa;
+    border-left-color: #aaa;
     overflow: auto; 
 }
-.travail_corps_table {
-    position: relative;
-    top: 0;
-}
+.travail_corps_table { position: relative; top: 0; }
 .travail_foot { left: 0; width: 3rem; overflow: auto; }
 .travail_entete, .travail_corps, .travail_foot { 
     margin: 0;
@@ -27,11 +20,8 @@
     vertical-align: top; 
 }
 .travail_titre h3, .ordres_de_travail { display: inline-block; vertical-align: middle; }
-.travail td { min-width: 4rem; }
-.ordres_de_travail { 
-    width: calc(100% - 12rem);
-    overflow: auto;
-}
+.travail td { min-width: 2rem; }
+.ordres_de_travail { width: calc(100% - 12rem); overflow: auto; }
 .ordres_de_travail .ordres_glissiere { width: 16rem; }
 .ordres_de_travail p { 
     position: relative;

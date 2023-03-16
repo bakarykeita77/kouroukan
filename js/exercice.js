@@ -1,17 +1,16 @@
-
-var id = JSON.parse(sessionStorage.getItem('id')); 
-var exercice = $('#exercice');
-var phase_id = JSON.parse(sessionStorage.getItem('phase_id'));
-var quantite_de_question = JSON.parse(sessionStorage.getItem('quantite_de_question'));
-var exercice_questions = [];
-
 function exercices() {
-              	    
+                
+    var id = JSON.parse(sessionStorage.getItem('id')); 
+    var exercice = $('#exercice');
+    var phase_id = JSON.parse(sessionStorage.getItem('phase_id'));
+    var quantite_de_question = JSON.parse(sessionStorage.getItem('quantite_de_question'));
+    var exercice_questions = [];
+  	    
     var lesson_courante = lessonCourante();
     var compteur_de_question = 1;
     var question_rang = '߭';
     var exercice_a_stocker = [];
-    
+   
     $('.fermeture').attr('id', 'fermer_exercice');
      
     chargerExercice();
@@ -21,10 +20,9 @@ function exercices() {
     stockerExercice();
 
 
-    
     function lessonCourante() {
         var lesson_courante = [];
-  console.log(phase_id);               
+                 
         if(phase_id=='alphabet_exercice'     ) { lesson_courante = alphabetExercicesHTML();     } // Voir alphabet.js
         if(phase_id=='syllabes_exercice'     ) { lesson_courante = syllabesExerciceHTML();     } // Voir syllabes.js
         if(phase_id=='tons_exercice'         ) { lesson_courante = tonsExercicesHTML();         } // Voir tons.js

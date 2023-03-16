@@ -1,4 +1,3 @@
-
 function pratique() {
                         
     let phase_nbr = $('.apprises').length;

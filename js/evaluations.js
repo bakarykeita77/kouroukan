@@ -1,11 +1,10 @@
-
-var id = JSON.parse(sessionStorage.getItem('id')); 
-var evaluation = $('#evaluation');
-var niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
-var phase_class = JSON.parse(sessionStorage.getItem('phase_class'));
-
 function evaluations() {
-    
+        
+    var id = JSON.parse(sessionStorage.getItem('id')); 
+    var evaluation = $('#evaluation');
+    var niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
+    var phase_class = JSON.parse(sessionStorage.getItem('phase_class'));
+
     var syllabes = syllab();
     var nbr_max_de_questions_a_poser = 20;
     var questions_evaluation = questions();

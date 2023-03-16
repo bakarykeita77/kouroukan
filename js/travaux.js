@@ -1,4 +1,4 @@
-    var matieres = [];    
+  
     var travail_1 = $('#travail_1'), travail_2 = $('#travail_2'), travail_3 = $('#travail_3'), travail_4 = $('#travail_4');
     var matiere_nom = $('#matiere_nom_container').html();
     var fiche_html_vide = "<h1 class='neant'>ߝߏߦߊ߲߫ ߹</h1>";
@@ -11,7 +11,7 @@
 
     
 // Recupération des lessons étudiées
-    matieres = JSON.parse(sessionStorage.getItem('matieres'));
+    var matieres = JSON.parse(sessionStorage.getItem('matieres'));
  
     if(matieres.length == 0) chargerAVideLesFiches();
     if(matieres.length != 0) {

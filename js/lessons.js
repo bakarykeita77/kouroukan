@@ -48,7 +48,7 @@ $('document').ready(function() {
         getMatieres();
         getNiveaux();
         getPhases();
-        
+       
         nbr = JSON.parse(sessionStorage.getItem('nbr')); 
     }
 
@@ -98,7 +98,7 @@ $('document').ready(function() {
         let all_options = JSON.parse(localStorage.getItem('all_options')); 
         let localOptionsLength = (all_options == null) ? 0 : all_options.length;
 
-    	$('.phases').html(phasesHTML());
+    	chargerPhases();
     	
     	data_phase_nbr = nombreDePhasesEtudiees();
     	sessionStorage.setItem('data_phase_nbr', JSON.stringify(data_phase_nbr));
@@ -106,46 +106,50 @@ $('document').ready(function() {
     	sessionStorage.setItem('total_phase', JSON.stringify($('#phases_list li').length));
         actualiserTitre();
 	    stylesDesPhases();
-	    affichageDesPhases();
+	    //affichageDesPhases();
 	    
 	    
-        function phasesHTML() {
-          
-            var lesson_id = $('.lesson_title').attr('id');
-            
-          // Liste des phases
-            var content = '<ul class="phases liste_affichage_cascade" id="phases_list">';
-            if(matiere_index == 0) {
-                for(var i=0;i<2;i++){
-                    let phase_id = liste_de_phases[i][0];
-                    let phase_nom = liste_de_phases[i][1];
-                  
-                    content += '<li id="'+lesson_id+'_'+phase_id+'">'+phase_nom+'</li>';
-                }
-                for(var j=3;j<liste_de_phases.length;j++){
-                    let phase_id = liste_de_phases[j][0];
-                    let phase_nom = liste_de_phases[j][1];
-                    
-                    content += '<li id="'+lesson_id+'_'+phase_id+'">'+phase_nom+'</li>';
-                }
-            }
-            if(matiere_index > 0) {
-                for(var i=0;i<liste_de_phases.length;i++){
-                    let phase_id = liste_de_phases[i][0];
-                    let phase_nom = liste_de_phases[i][1];
-                    
-                    content += '<li id="'+lesson_id+'_'+phase_id+'">'+phase_nom+'</li>';
-                }
-            }
-            content += '</ul>';
-            
-          //Barre de navigation               
-            // content += '<div class="nav_fleches_container">';
-            //     content += '<span id="back_to_programmes"><a href="programmes.php">ߛߋ߬ߦߌ߬ ߞߐ߫</a></span>';
-            //     content += '<span id="go_to_lesson">ߥߊ߫ ߢߍ߫</</span>';
-            // content += '</div>';
+        function chargerPhases() { 
+            $('.phases_container').html(phasesHTML()); 
 
-            return content;
+            function phasesHTML() {
+            
+                var lesson_id = $('.lesson_title').attr('id');
+                
+            // Liste des phases
+                var content = '<ul class="phases" id="phases_list">';
+                if(matiere_index == 0) {
+                    for(var i=0;i<2;i++){
+                        let phase_id = liste_de_phases[i][0];
+                        let phase_nom = liste_de_phases[i][1];
+                    
+                        content += '<li id="'+lesson_id+'_'+phase_id+'">'+phase_nom+'</li>';
+                    }
+                    for(var j=3;j<liste_de_phases.length;j++){
+                        let phase_id = liste_de_phases[j][0];
+                        let phase_nom = liste_de_phases[j][1];
+                        
+                        content += '<li id="'+lesson_id+'_'+phase_id+'">'+phase_nom+'</li>';
+                    }
+                }
+                if(matiere_index > 0) {
+                    for(var i=0;i<liste_de_phases.length;i++){
+                        let phase_id = liste_de_phases[i][0];
+                        let phase_nom = liste_de_phases[i][1];
+                        
+                        content += '<li id="'+lesson_id+'_'+phase_id+'">'+phase_nom+'</li>';
+                    }
+                }
+                content += '</ul>';
+                
+            //Barre de navigation               
+                // content += '<div class="nav_fleches_container">';
+                //     content += '<span id="back_to_programmes"><a href="programmes.php">ߛߋ߬ߦߌ߬ ߞߐ߫</a></span>';
+                //     content += '<span id="go_to_lesson">ߥߊ߫ ߢߍ߫</</span>';
+                // content += '</div>';
+
+                return content;
+            }
         }
     	function stylesDesPhases() {
         
@@ -160,7 +164,6 @@ $('document').ready(function() {
 
                     if(phase_index === 0) $(this).addClass('active');
                     if(phase_index  >  0) $(this).addClass('a_apprendre');
-                
                 }
     	        if(lesson_status == "lesson_en_cours") {
                     if(phase_index <= n-1) $(this).removeClass('active').addClass('apprises');
@@ -199,13 +202,10 @@ $('document').ready(function() {
             rang = (niveau=='߁')?'߭':'߲';
     	    $('.rang').html(rang);
     	
-        	if(matiere_index == 1) {
-        	    document.querySelector('.phases ul li:nth-child(3)').style.display = 'none';
+        	if(matiere_index == 0) {
+        	    document.querySelector('.phases_container ul li:nth-child(3)').style.display = 'none';
         	}
         }
-    	function affichageDesPhases() {
-    	    affichageListeEnCascade();
-    	}
 	}
 	function nombreDePhasesEtudiees() {
 	    let n = 0; // nombre de phases étudiées.
@@ -254,7 +254,6 @@ $('document').ready(function() {
             var total_point = 0, point = 0, effort = '';
             var note = 0;
             var moyenne = 5;
-            sessionStorage.setItem("phase_id", JSON.stringify(phase_id));
             
             var phase_active_index = $('.active').index();
             var phase_index = $(this).index();
@@ -265,19 +264,16 @@ $('document').ready(function() {
     	    var course_id = phase_id.split('_')[1];
     	    var lesson_courante = lessonCourante();
         
-            var parametres_btn = $('.parametre_btn_container');
             var parametres = $('#parametres');
             
             var dialogue_btn_html = $('.dialogue_btn').html();
             var parametres_html = parametres.html();
 
-
           /*--------------------------------------------------------------------*/   
-   
+            $('#phase_id').html(phase_id);
     	    phaseActiveName();
     	    affichageDeCours();
     	    cours();
-
           /*--------------------------------------------------------------------*/  
 
             function phaseActiveName() { sessionStorage.setItem('phase', JSON.stringify(phase_id)); }
@@ -356,23 +352,23 @@ $('document').ready(function() {
             }
     	    function cours() {
                 
-                if(phase_class == 'apprises')    { $('.course_container').css('display','none'); alert("ߕߊ߲߬ߓߌ߬ ߓߘߊ߫ ߞߍ߫ ߦߊ߲߬ ߘߐ߫ ߞߘߐ߬ߡߊ߲߬"); }
-                if(phase_class == 'a_apprendre') { $('.course_container').css('display','none'); alert("ߘߊߞߎ߲ ߡߊ߫ ߛߋ߫ ߦߊ߲߬ ߡߊ߫ ߝߟߐ߫");   }  
-        	    if(phase_class == 'active') {
+                //if(phase_class == 'apprises')    { $('.course_container').css('display','none'); alert("ߕߊ߲߬ߓߌ߬ ߓߘߊ߫ ߞߍ߫ ߦߊ߲߬ ߘߐ߫ ߞߘߐ߬ߡߊ߲߬"); }
+                //if(phase_class == 'a_apprendre') { $('.course_container').css('display','none'); alert("ߘߊߞߎ߲ ߡߊ߫ ߛߋ߫ ߦߊ߲߬ ߡߊ߫ ߝߟߐ߫");   }  
+        	    //if(phase_class == 'active') {
 
                     $('.course_container').css('display','block');
                     $('.course').css('display','none');
-                    
+                   
                     sessionStorage.setItem('session_niveau_max', niveau_max);
                     var session_niveau_max = JSON.parse(sessionStorage.getItem('session_niveau_max'));
 
                     switch (course_id) {
                         case 'apprentissage':apprentissages(); break;   // Voir apprentissage.js
-                        case 'exercice'     :exercices();       break;   // Voir exercice.js
+                        case 'exercice'     :exercices();      break;   // Voir exercice.js
                         case 'pratique'     :pratique();       break;   // Voir pratiques.js
                         case 'evaluation'   :evaluations();    break;   // Voir evaluations.js
             	    }
-        	    }
+        	    //}
         	    if(phase_class == 'a_apprendre') $('.course_container').css('display','none');
     	    }
       	});
@@ -381,6 +377,6 @@ $('document').ready(function() {
             localStorage.clear();
         }
     	
-    	$('#go_to_lesson').on('click', function() { $('.phases ul li').click(); });
+    	$('#go_to_lesson').on('click', function() { $('.phases_container ul li').click(); });
 	}
 });

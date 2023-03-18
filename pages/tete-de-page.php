@@ -10,6 +10,7 @@
 	<script src="/kouroukan/class-fonctions.js"></script>
 	<script src="/kouroukan/js/icones.js"></script>
 	<script src="/kouroukan/js/class.js"></script>	
+  	<script src="/kouroukan/js/caracteres.js"></script>
 	
   <!------------------------------------------------------------------------------------------------------------------>	
 	<?php include("fonctions.php"); ?>  
@@ -84,11 +85,8 @@
 	</div>
 	
   <!------------------------------------------------------------------------------------------------------------------>	
-  <script src="/kouroukan/js/caracteres.js"></script>
-  <script src="/kouroukan/js/chiffres.js"></script>
 
-  <script src="/kouroukan/js/tete-de-page.js"></script>
-    
-  <script src="/kouroukan/js/profile.js"></script>
+  	<script src="/kouroukan/js/tete-de-page.js"></script>
+  	<script src="/kouroukan/js/profile.js"></script>
 
 <!-- Fin de l'entete de la page ------------------------------------------------------------------------------------->

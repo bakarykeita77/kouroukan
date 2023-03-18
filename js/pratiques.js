@@ -1,6 +1,7 @@
 function pratique() {
                         
     let phase_nbr = $('.apprises').length;
+    var id = JSON.parse(sessionStorage.getItem('id'));
 
     var option = '';
     var option_index = null;
@@ -37,9 +38,8 @@ function pratique() {
     let syllabes_4 = quadriSyllabe();
 
     let pratique = $('#pratique');
-    let pratiques = JSON.parse(localStorage.getItem('pratiques'));
 
-    var questions=[], question='', reponse=[];
+    var question='', reponse=[];
     var table = "";
    
  /*--------------------------------------------------------------------*/
@@ -101,7 +101,6 @@ function pratique() {
     }
     function dimensionnerPratique() {
 
-        let pratique_head_height = $('#pratique_head').height();
         let pratique_foot_height = $('#pratique_foot').height();
 
         let pratique_dialogue_btn_height = $('#pratique_dialogue_btn').height();

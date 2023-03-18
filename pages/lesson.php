@@ -39,7 +39,6 @@ if(isset($_SESSION["id"])) {
                 <p id='niveau_container'        ><?= $niveau; ?></p>
                 <p id='niveau_max_container'    ><?= $niveau_max; ?></p>
             </div>
-            <div id="phase_id"></div>
           <!----------------------------------------------------------------------------------------------------->  
             <h4>ߘߋ߰ߟߌ ߞߛߊߞߊ : <span class="niveau_courant"><?= $chiffres[$niveau]; ?></span><span class='rang'></span></h4>
           <!----------------------------------------------------------------------------------------------------->  
@@ -53,8 +52,8 @@ if(isset($_SESSION["id"])) {
         <div class="page_foot"><?php include("pied-de-lesson.php"); ?></div>
     </div>
 
-    <div class="parametres_container" id="parametre_lesson_container"> <?php include("parametre.php"); ?> </div>
     <div class="course_container">
+      <div class="parametres_container" id="parametre_lesson_container"> <?php include("parametre.php"); ?> </div>
         
       <!--------------------------------------------------------------------------------------------------------------->
         <span class="fermeture" id="">&times;</span>
@@ -86,18 +85,8 @@ if(isset($_SESSION["id"])) {
 
     <audio id="audio"></audio>
 
-	
-    <script src="/kouroukan/class-fonctions.js"></script>
-
-    <script src="/kouroukan/js/alphabet.js"></script>
-    <script src="/kouroukan/js/syllabes.js"></script>
-    <script src="/kouroukan/js/tons.js"></script>
-    <script src="/kouroukan/js/chiffres.js"></script>
-
     <script src="/kouroukan/js/lessons.js"></script>
-    <script src="/kouroukan/js/parametres.js"></script>
-    
-    
+       
 </body>
 </html>
 <?php

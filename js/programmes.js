@@ -79,7 +79,7 @@ Au click sur l'afficheur du programme
         storageDeLaMatiereActive();
         programmeNavigation();
         changerProgramme();
-        alerter();
+       // alerter();
 
         function programmeHTML() {
             var programme_html = '<ul id="programme_ul">';

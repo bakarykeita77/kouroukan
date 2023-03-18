@@ -2,7 +2,8 @@
     var voyelles_cochees = [], consonnes_cochees = [], tedos_coches = [], tedos_coches = [], nasalisations_cochees = [], caracteres_coches = [];
     actualiserCochage();
 
-    var syllabes_tonifies = tonification();  
+    var syllabes_tonifies = tonification(); 
+    sessionStorage.setItem('syllabes_tonifies', JSON.stringify(syllabes_tonifies)); 
     var tons_questions = malaxer(syllabes_tonifies);
 
     function tonification(){

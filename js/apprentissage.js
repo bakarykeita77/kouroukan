@@ -1,13 +1,12 @@
 function apprentissages() {
         
-    var id = JSON.parse(sessionStorage.getItem('id'));  
-    var apprentissage = $('#apprentissage');
-    var niveau_en_cours     = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
-    var phase_id = JSON.parse(sessionStorage.getItem('phase_id'));
-    var moyenne = JSON.parse(sessionStorage.getItem("moyenne"));
+    var id              = JSON.parse(sessionStorage.getItem('id'));  
+    var apprentissage   = $('#apprentissage');
+    var niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
+    var phase_id        = JSON.parse(sessionStorage.getItem('phase_id'));
+    var moyenne_d_apprentissage = JSON.parse(sessionStorage.getItem("moyenne"));
 
     var lesson_courante = lessonCourante();
-    var compteur_de_question = 1;
     var clicks_memo = [];
 
   
@@ -47,7 +46,7 @@ function apprentissages() {
     function afficherApprentissage() {
         apprentissage.css({'display':'block'});                          
 
-        setTimeout(function() { apprentissage.css({'transform':'scale(1)'});}, 5);
+        setTimeout(function() { apprentissage.css({'transform':'scale(1)'}); }, 5);
         setTimeout(function() { apprentissage.css({'opacity':'1'});}, 5);
     }
     function apprendre() {
@@ -137,49 +136,54 @@ function apprentissages() {
             $.each(td, function(){
                 
               /* 
-              --------------------------------------------------------------------
+              --------------------------------------------------------------------------------------------------------
                Pour chaque click sur un bouton:
                   1)- Un compteur de click individuel est activé qui calcule combien de fois chaque bouton est clické.
                   2)- Une identification est faite pour savoir, quel bouton est clické.
                   3)- Un enregistrement capte le nombre de click pour chaque bouton.
                   4)- Et le memo de l'enregistrement est envoyé au serveur quand on ferme la leçon.
-              --------------------------------------------------------------------
+              --------------------------------------------------------------------------------------------------------
               */
-                
                 var element        = $(this).html();
                 var table_courante = $(this).parent().parent().parent();
                 var tr_index       = $(this).parent().index();
                 var table_index    = table.index(table_courante);
                 var element_index  = table_index*nbr_table_td + tr_index*nbr_tr + $(this).index();
                 var element_click_counter = 0;
+                var point = 0;
 
                 
-              /*--------------------------------------------------------------------
-               Initialisation de mémoire d'enregistrement qui est un tableau bidimentionnel.
-               Il contient des petits tableaux de deux éléments chacun:
-               - Le premier est le nom de l'élément clické;
-               - Le deuxième est le nombre de fois que cet élément est clické.
+              /*
+              --------------------------------------------------------------------------------------------------------
+                Initialisation de mémoire d'enregistrement qui est un tableau bidimentionnel.
+                Il contient des petits tableaux de deux éléments chacun:
+                - Le premier est le nom de l'élément clické;
+                - Le deuxième est le nombre de fois que cet élément est clické.
                  
-               L'initialisation consiste à donner la valeur 0 click à tous les éléments.
-               On considère qu'aucun élément n'est clické pour le moment. */
-                
-                clicks_memo[element_index] = [element,element_click_counter];
+                L'initialisation consiste à donner la valeur 0 click à tous les éléments.
+                On considère qu'aucun élément n'est clické pour le moment. 
+               --------------------------------------------------------------------------------------------------------
+               */
+                clicks_memo[element_index] = [element,parseIntNko(element_click_counter),parseIntNko(point)];
 
                 $(this).on('click', function(){
                     
                   /*--------------------------------------------------------------------
                    3)- Enregistrement des clicks 
                    
-                   L'enregistrement par bouton ou élémentaire est un tableau de deux éléments dont
+                   L'enregistrement par bouton ou élémentaire est un tableau de trois éléments dont
                    - L'élément clické;
-                   - Le nombre de fois que cet élément est  clické. */
+                   - Le nombre de fois que cet élément est  clické. 
+                   - Le point.
+
+                   --------------------------------------------------------------------*/
                                                   
                     var clicked_element = $(this).html(); // Élément clické.
                     element_click_counter++; // Compteur de click pour chaque élément.
+                    var new_mark = (element_click_counter >= 5) ? "߁" : "߀";
          
-                    var new_click_value = [clicked_element,element_click_counter];  // Enregistrement elementaire.
+                    var new_click_value = [clicked_element,parseIntNko(element_click_counter),new_mark];  // Enregistrement elementaire.
                     var non_clicked_elements = '';
-                    var nbr_clicked_elements = 0;
            
                   /*Actualisation de mémoire d'enregistrement
                     C'est à dire qu'après chaque click,les anciennes valeurs de chaque enregistrement elementaire sont remplacés par les nouvelles valeurs.                 */
@@ -187,7 +191,7 @@ function apprentissages() {
                     clicks_memo.splice(element_index,1,new_click_value);
                     non_clicked_elements = nonClickedElementsTable();
                     nbr_clicked_elements = td.length - non_clicked_elements.length;
-                    
+                   
 
                     function nonClickedElementsTable(){
                         var table_elements_non_cliques = [];
@@ -205,13 +209,11 @@ function apprentissages() {
     function stockerApprentissage() {
   
         $('#fermer_apprentissage').one('click',function() {
-            var course = $(this).siblings('#apprentissage').html();
 
             note = noterApprentissage();
-            if(note <  moyenne) alert("ߌ ߡߊ߫ ߛߓߍߘߋ߲ ߥߟߊ ߜߋ߭ ߠߎ߬ ߓߍ߯ ߟߊߡߍ߲߫");
-            if(note >= moyenne) {
+            if(note <  moyenne_d_apprentissage) alert("ߌ ߡߊ߫ ߛߓߍߘߋ߲ ߥߟߊ ߜߋ߭ ߠߎ߬ ߓߍ߯ ߟߊߡߍ߲߫");
+            if(note >= moyenne_d_apprentissage) {
 
-                let nbr = JSON.parse(sessionStorage.getItem('nbr'));
                 let data_phase_nbr = JSON.parse(sessionStorage.getItem('data_phase_nbr'));
 
                 sendApprentissageToDB();
@@ -235,7 +237,7 @@ function apprentissages() {
                     niveau : niveau_en_cours,
                     phase  : phase,
                     lesson : lesson,
-                    note   : JSON.stringify(note)
+                    note   : note
                 }); 
 
                 fetch("/kouroukan/pages/actions.php", {
@@ -246,19 +248,13 @@ function apprentissages() {
                 .catch(error => console.log(error));  
             }
             function noterApprentissage() {
-                var table_elements_click_nbr = [];
+                var note = 0;
                 
                 for(var i=0;i<clicks_memo.length;i++) {
-                    table_elements_click_nbr[table_elements_click_nbr.length] = clicks_memo[i][1];
+                    if(clicks_memo[i][2] == "߁") {
+                        note ++;
+                    }
                 }
-                
-                var nbr_click_min = Math.min.apply(null, table_elements_click_nbr);
-                var nbr_click_max = Math.max.apply(null, table_elements_click_nbr);
-                var click_min_admis = 1;
-                
-                
-                var nbr_btn_clicke = nombreDeBoutonClicke();
-                var note = Math.floor((nbr_btn_clicke*20)/clicks_memo.length);
                 
                 return note;
                 

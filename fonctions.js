@@ -1,4 +1,4 @@
-    
+    var total_phase = JSON.parse(sessionStorage.getItem('total_phase'));
 	function activerSonDuClavier() {
 		$('#clavier_nko td').on('click',function(){
 			lettre = $(this).attr('id');
@@ -71,6 +71,10 @@
             if(total_phase == phase_nbr) $(this).removeClass('active a_apprendre').addClass('apprises');
         });
         sessionStorage.setItem('nbr',JSON.stringify(phase_nbr));
+    }
+    function clearStorage() {
+        sessionStorage.clear();
+        localStorage.clear();
     }
     function clignotage(reponse_ratee) {
         $.each($('.table_muette td'), function() {
@@ -185,10 +189,11 @@
     }
     function malaxer(tableau){  
         var mixted_table = [];
+
         for(var i=0; mixted_table.length<tableau.length;i++){
             var nbr_aleatoire = Math.floor(Math.random()*tableau.length);
             var element_aleatoire = tableau[nbr_aleatoire];
-            if($.inArray(element_aleatoire, mixted_table)==-1){ mixted_table[mixted_table.length] = element_aleatoire; }
+            if($.inArray(element_aleatoire, mixted_table)==-1) mixted_table[mixted_table.length] = element_aleatoire;
         }
     
         return mixted_table;

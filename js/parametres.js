@@ -1,22 +1,20 @@
-
  /* Declaration des variables */   
     var parametres_btn, parametres;
     var voyelles_checker, consonnes_checker, tedo_checker, tons_checker, nasalisation_checker;
     var checkbox_titre, check_btn_container, checkbox_parent, check_btn, checkbox_children;
+    var voyelles = [], consonnes = [], tedoo = [], tons = [], nasalisations = [], syllabes = [];
     var voyelles_cochees = [], consonnes_cochees = [], tedos_coches = [], tons_coches = [], nasalisations_cochees = [], caracteres_coches = [],syllabes_coches = [];
     var niveau = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
     var phase_id = JSON.parse(sessionStorage.getItem('phase_id'));
     var lesson_courante = [];
     
-
-    
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
  /* Les variables tableaux regroupant les caracteres par types */  
-    voyelles = lesVoyelles();
-    consonnes = lesConsonnes();
-    tedoo = leTedo();
-    nasalisations = laNasalisation();
-    tons = lesTons();
+    voyelles = lesVoyelles();         // Voir caracteres.js
+    consonnes = lesConsonnes();       // Voir caracteres.js
+    tedoo = leTedo();                 // Voir caracteres.js
+    nasalisations = laNasalisation(); // Voir caracteres.js
+    tons = lesTons();                 // Voir caracteres.js
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/    
     parametrageDeLesson();
@@ -26,36 +24,6 @@
     
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/    
 
-    function actualiserCochage() {
-        voyelles_cochees = $('#voyelles_cochees').html().split('');
-        consonnes_cochees = $('#consonnes_cochees').html().split('');
-        tedos_coches = $('#tedos_coches').html().split('');
-        tons_coches = [''].concat($('#tons_coches').html().split(''));
-        nasalisations_cochees = [''].concat($('#nasalisations_cochees').html().split(''));
-        caracteres_coches = [voyelles_cochees, consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees];
-
-        lettres = voyelles_cochees.concat(consonnes_cochees,tedos_coches);
-        syllabes = syllab();                // Voir js/syllabes.js 
-        syllabes_tonifies = tonification(); // Voir js/tons.js
-    }	
-    function affichageDeParametres(){ 
-        
-        $(".parametres_btns").on('mouseover', function() { afficherParametres(); });
-        $(".parametres_popup").on('mouseleave', function(){ masquerParametres(); });
-        $('.course_container, #submit_btn').on('click', function(){ masquerParametres(); });
-        
-        function afficherParametres() { 
-            $(".media_btns").css({"tansform":"scale(0.75)", "opacity":0});
-            $(".media_btns").css({"display":"none"});
-
-            $(".parametres_container").css({"display":"block", "opacity":0}); 
-            setTimeout(() => { $(".parametres_container").css({"transform":"scale(1)", "opacity":1}); }, 10);
-        }
-        function masquerParametres() {
-            $(".parametres_container").css({"transform":"scale(0.75)", "opacity":0});
-            setTimeout(() => { $(".parametres_container").css({'display':'none'}); }, 300);
-        }
-    }
     function parametrageDeLesson(){
        
         parametres = $('#parametres');
@@ -308,7 +276,7 @@
                 $('#tedos_coches').html(tedos_coches);
                 $('#tons_coches').html(tons_coches);
                 $('#nasalisations_cochees').html(nasalisations_cochees);
-             }
+            }
          }
         function affichageDeLessonParametres(){
                
@@ -319,6 +287,47 @@
                 if(niveau==2){ tons_checker.hide(); tedo_checker.hide(); }
              }
          }
+    }
+    function actualiserCochage() {
+        voyelles_cochees = $('#voyelles_cochees').html().split('');
+        consonnes_cochees = $('#consonnes_cochees').html().split('');
+        tedos_coches = $('#tedos_coches').html().split('');
+        tons_coches = [''].concat($('#tons_coches').html().split(''));
+        nasalisations_cochees = [''].concat($('#nasalisations_cochees').html().split(''));
+        caracteres_coches = [voyelles_cochees, consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees];
+
+        lettres = voyelles_cochees.concat(consonnes_cochees,tedos_coches);
+        syllabes = JSON.parse(sessionStorage.getItem('syllabes')); // Voir js/syllabes.js 
+        syllabes_tonifies = JSON.parse(sessionStorage.getItem('syllabes_tonifies')); // Voir js/tons.js
+
+        sessionStorage.setItem('voyelles_cochees'     , JSON.stringify(voyelles_cochees));
+        sessionStorage.setItem('consonnes_cochees'    , JSON.stringify(consonnes_cochees));
+        sessionStorage.setItem('tedos_coches'         , JSON.stringify(tedos_coches));
+        sessionStorage.setItem('tons_coches'          , JSON.stringify(tons_coches));
+        sessionStorage.setItem('nasalisations_cochees', JSON.stringify(nasalisations_cochees));
+        sessionStorage.setItem('caracteres_coches'    , JSON.stringify(caracteres_coches));
+
+        sessionStorage.setItem('lettres'              , JSON.stringify(lettres));
+        sessionStorage.setItem('syllabes'             , JSON.stringify(syllabes));
+        sessionStorage.setItem('syllabes_tonifies'    , JSON.stringify(syllabes_tonifies));
+    }	
+    function affichageDeParametres(){ 
+        
+        $(".parametres_btns").on('mouseover', function() { afficherParametres(); });
+        $(".parametres_popup").on('mouseleave', function(){ masquerParametres(); });
+        $('.course_container, #submit_btn').on('click', function(){ masquerParametres(); });
+        
+        function afficherParametres() { 
+            $(".media_btns").css({"tansform":"scale(0.75)", "opacity":0});
+            $(".media_btns").css({"display":"none"});
+
+            $(".parametres_container").css({"display":"block", "opacity":0}); 
+            setTimeout(() => { $(".parametres_container").css({"transform":"scale(1)", "opacity":1}); }, 10);
+        }
+        function masquerParametres() {
+            $(".parametres_container").css({"transform":"scale(0.75)", "opacity":0});
+            setTimeout(() => { $(".parametres_container").css({'display':'none'}); }, 300);
+        }
     }
     function parametrageDeApprentissage() {
         

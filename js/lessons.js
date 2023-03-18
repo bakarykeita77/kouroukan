@@ -4,16 +4,10 @@ $('document').ready(function() {
     var id = JSON.parse(sessionStorage.getItem('id'));     
     var matieres = JSON.parse(sessionStorage.getItem('matieres'));     
     var matieres_etudiees = [], matiere_active = "", matiere_nom = "", matiere_index = 0, derniere_matiere = "";
-    var niveaux = [], niveaux_etudies = [], niveaux_distincts = [], niveau_max = 0, niveau_en_cours = 1;
-     
-    var groupe_d_images = $('#images_pratique .images_container');
+    var niveaux = [], niveau_max = 0, niveau_en_cours = 1;
     
-	var etapes_passees = [], etape_actuelle = [], etapes_a_faire = [], etape_max = [], rang = '';
-    var id_phases = [], data_phase_nbr = 0;
-	var phases_etudiees = [], derniere_phase = '', phase_en_cours = '', phase_nbr = 0;
-    var phases_distinctes = [], phases_1_distinctes = [], phases_2_distinctes = [], phases_3_distinctes = [], phases_4_distinctes = [];
-	var avancer_btn = '';
-    var id_phases = [], data_phase_nbr = 0, nbr = 0;
+	var rang = '';
+    var data_phase_nbr = 0, phases_distinctes = [], nbr = 0;
    
   /*-------------------------------------------------------------------------------------------------------------------
     1)- La situation des études est faite par récupération et traitement des données reçues sur l'apprenant.
@@ -201,10 +195,6 @@ $('document').ready(function() {
       
             rang = (niveau=='߁')?'߭':'߲';
     	    $('.rang').html(rang);
-    	
-        	if(matiere_index == 0) {
-        	    document.querySelector('.phases_container ul li:nth-child(3)').style.display = 'none';
-        	}
         }
 	}
 	function nombreDePhasesEtudiees() {
@@ -251,29 +241,19 @@ $('document').ready(function() {
             sessionStorage.setItem('quantite_de_question',JSON.stringify(quantite_de_question));
             var compteur_de_question = 0;
             
-            var total_point = 0, point = 0, effort = '';
-            var note = 0;
-            var moyenne = 5;
-            
-            var phase_active_index = $('.active').index();
-            var phase_index = $(this).index();
             var phase_class = $(this).attr('class');
             sessionStorage.setItem('phase_class', JSON.stringify(phase_class));
     	    var phase_id = $(this).attr('id');
             sessionStorage.setItem("phase_id", JSON.stringify(phase_id));
     	    var course_id = phase_id.split('_')[1];
     	    var lesson_courante = lessonCourante();
-        
-            var parametres = $('#parametres');
-            
-            var dialogue_btn_html = $('.dialogue_btn').html();
-            var parametres_html = parametres.html();
 
           /*--------------------------------------------------------------------*/   
-            $('#phase_id').html(phase_id);
+
     	    phaseActiveName();
     	    affichageDeCours();
     	    cours();
+            
           /*--------------------------------------------------------------------*/  
 
             function phaseActiveName() { sessionStorage.setItem('phase', JSON.stringify(phase_id)); }
@@ -310,7 +290,7 @@ $('document').ready(function() {
             function lessonCourante() {
                 
                 if(phase_id=='alphabet_apprentissage') lesson_courante = alphabetApprentissageHTML(); // Voir alphabet.js 
-                if(phase_id=='alphabet_exercice'     ) lesson_courante = alphabetexerciceHTML();      // Voir alphabet.js
+                if(phase_id=='alphabet_exercice'     ) lesson_courante = alphabetExerciceHTML();      // Voir alphabet.js
                 
                 if(phase_id=='syllabes_apprentissage') lesson_courante = syllabesApprentissageHTML(); // Voir syllabes.js
                 if(phase_id=='syllabes_exercice'     ) lesson_courante = syllabesExerciceHTML();      // Voir syllabes.js
@@ -356,26 +336,22 @@ $('document').ready(function() {
                 //if(phase_class == 'a_apprendre') { $('.course_container').css('display','none'); alert("ߘߊߞߎ߲ ߡߊ߫ ߛߋ߫ ߦߊ߲߬ ߡߊ߫ ߝߟߐ߫");   }  
         	    //if(phase_class == 'active') {
 
-                    $('.course_container').css('display','block');
-                    $('.course').css('display','none');
-                   
-                    sessionStorage.setItem('session_niveau_max', niveau_max);
-                    var session_niveau_max = JSON.parse(sessionStorage.getItem('session_niveau_max'));
+                $('.course_container').css('display','block');
+                $('.course').css('display','none');
+                
+                sessionStorage.setItem('session_niveau_max', niveau_max);
 
-                    switch (course_id) {
-                        case 'apprentissage':apprentissages(); break;   // Voir apprentissage.js
-                        case 'exercice'     :exercices();      break;   // Voir exercice.js
-                        case 'pratique'     :pratique();       break;   // Voir pratiques.js
-                        case 'evaluation'   :evaluations();    break;   // Voir evaluations.js
-            	    }
+                switch (course_id) {
+                    case 'apprentissage':apprentissages(); break;   // Voir apprentissage.js
+                    case 'exercice'     :exercices();      break;   // Voir exercice.js
+                    case 'pratique'     :pratique();       break;   // Voir pratiques.js
+                    case 'evaluation'   :evaluations();    break;   // Voir evaluations.js
+                }
+
         	    //}
         	    if(phase_class == 'a_apprendre') $('.course_container').css('display','none');
     	    }
       	});
-        function clearStorage() {
-            sessionStorage.clear();
-            localStorage.clear();
-        }
     	
     	$('#go_to_lesson').on('click', function() { $('.phases_container ul li').click(); });
 	}

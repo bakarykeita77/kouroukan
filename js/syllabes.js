@@ -1,18 +1,16 @@
 
-    var voyelles_cochees = [], consonnes_cochees = [], tedos_coches = [], tons_coches = [], nasalisations_cochees = [], caracteres_coches = [],syllabes_coches = [];
+    var voyelles_cochees = $('#voyelles_cochees').html().split('');
+    var consonnes_cochees = $('#consonnes_cochees').html().split('');
+    var tedos_coches = $('#tedos_coches').html().split('');
+    var tons_coches = [''].concat($('#tons_coches').html().split(''));
+    var nasalisations_cochees = [''].concat($('#nasalisations_cochees').html().split(''));
+    var caracteres_coches = [voyelles_cochees, consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees];
 
-    voyelles_cochees = $('#voyelles_cochees').html().split('');
-    consonnes_cochees = $('#consonnes_cochees').html().split('');
-    tedos_coches = $('#tedos_coches').html().split('');
-    tons_coches = [''].concat($('#tons_coches').html().split(''));
-    nasalisations_cochees = [''].concat($('#nasalisations_cochees').html().split(''));
-    caracteres_coches = [voyelles_cochees, consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees];
-
-    lettres = voyelles_cochees.concat(consonnes_cochees,tedos_coches);
+    var lettres = voyelles_cochees.concat(consonnes_cochees,tedos_coches);
     var syllabes = syllab();
+    sessionStorage.setItem('syllabes', JSON.stringify(syllabes));
     var syllabes_questions = malaxer(syllabes);
 
-console.log(voyelles_cochees); 
  
     function syllabesApprentissageHTML() {
         

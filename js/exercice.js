@@ -2,9 +2,11 @@ function exercices() {
                 
     var id = JSON.parse(sessionStorage.getItem('id')); 
     var exercice = $('#exercice');
+    var niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
     var phase_id = JSON.parse(sessionStorage.getItem('phase_id'));
     var quantite_de_question = JSON.parse(sessionStorage.getItem('quantite_de_question'));
     var exercice_questions = [];
+    var moyenne_d_exercice = 1;
   	    
     var lesson_courante = lessonCourante();
     var compteur_de_question = 1;
@@ -23,10 +25,10 @@ function exercices() {
     function lessonCourante() {
         var lesson_courante = [];
                  
-        if(phase_id=='alphabet_exercice'     ) { lesson_courante = alphabetExercicesHTML();     } // Voir alphabet.js
-        if(phase_id=='syllabes_exercice'     ) { lesson_courante = syllabesExerciceHTML();     } // Voir syllabes.js
-        if(phase_id=='tons_exercice'         ) { lesson_courante = tonsExercicesHTML();         } // Voir tons.js
-        if(phase_id=='chiffres_exercice'     ) { lesson_courante = chiffresExercicesHTML();     } // Voir chiffres.js
+        if(phase_id=='alphabet_exercice' ) { lesson_courante = alphabetExerciceHTML(); } // Voir alphabet.js
+        if(phase_id=='syllabes_exercice' ) { lesson_courante = syllabesExerciceHTML(); } // Voir syllabes.js
+        if(phase_id=='tons_exercice'     ) { lesson_courante = tonsExerciceHTML();     } // Voir tons.js
+        if(phase_id=='chiffres_exercice' ) { lesson_courante = chiffresExerciceHTML(); } // Voir chiffres.js
 
         return lesson_courante;
     }
@@ -162,7 +164,7 @@ function exercices() {
                             
                 var q = exercice_questions[i];
                 var r = '';
-                var p = 0;
+                var p = parseIntNko(0);
                             
                 exercice_a_stocker[i] = [q,r,p];
             }
@@ -173,7 +175,7 @@ function exercices() {
                         
                     var q = exercice_a_stocker[exercice_counter][0];
                     var r = $(this).html();
-                    var p = (q==r) ? 1:0;
+                    var p = (q==r) ? "߁":"߀";
                     var question_reponse = [q,r,p];
                     
                     exercice_a_stocker.splice(exercice_counter,1,question_reponse);
@@ -188,8 +190,9 @@ function exercices() {
         $('#fermer_exercice').one('click',function(){ 
         
             note = noterExercice(); 
-            if(note <  moyenne) alert( "reprendre" ); 
-            if(note >= moyenne) { 
+
+            if(note <  moyenne_d_exercice) alert( "reprendre" ); 
+            if(note >= moyenne_d_exercice) { 
                 
                 let nbr = JSON.parse(sessionStorage.getItem('nbr'));
                 let phase_nbr = JSON.parse(sessionStorage.getItem('data_phase_nbr'));
@@ -204,8 +207,8 @@ function exercices() {
                 var note_total = 0;
                 
                 for (var i = 0; i < quantite_de_question; i++) {
-                    if(exercice_a_stocker[i][2] == 1) {
-                        note_total += exercice_a_stocker[i][2];
+                    if(exercice_a_stocker[i][2] == "߁") {
+                        note_total ++;
                     }
                 }
                 

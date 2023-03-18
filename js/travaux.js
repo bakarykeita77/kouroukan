@@ -50,18 +50,18 @@
 
                     fiche_phase  = matieres[n][i].phase.split('_')[1];
                     let travail_lesson = matieres[n][i].lesson;   
-                    let travail_note   = parseIntNko(matieres[n][i].note);
+                    let travail_note   = matieres[n][i].note;
 
                     if(fiche_phase == "apprentissage") travail_d_apprentissage_corps_html.push([fiche_phase,travail_lesson,travail_note]);
-                    if(fiche_phase == "exercice")      travail_d_exercice_corps_html.push([fiche_phase,travail_lesson,travail_note]);
-                    if(fiche_phase == "pratique")      travail_de_pratique_corps_html.push([fiche_phase,travail_lesson,travail_note]);
-                    if(fiche_phase == "evaluation")    travail_d_evaluation_corps_html.push([fiche_phase,travail_lesson,travail_note]);
+                    if(fiche_phase == "exercice"     ) travail_d_exercice_corps_html     .push([fiche_phase,travail_lesson,travail_note]);
+                    if(fiche_phase == "pratique"     ) travail_de_pratique_corps_html    .push([fiche_phase,travail_lesson,travail_note]);
+                    if(fiche_phase == "evaluation"   ) travail_d_evaluation_corps_html   .push([fiche_phase,travail_lesson,travail_note]);
                 }
                 
                 if(travail_d_apprentissage_corps_html.length == 0) travail_1.html(fiche_html_vide);
-                if(travail_d_exercice_corps_html.length == 0) travail_2.html(fiche_html_vide);
-                if(travail_de_pratique_corps_html.length == 0) travail_3.html(fiche_html_vide);
-                if(travail_d_evaluation_corps_html.length == 0) travail_4.html(fiche_html_vide);
+                if(travail_d_exercice_corps_html.length      == 0) travail_2.html(fiche_html_vide);
+                if(travail_de_pratique_corps_html.length     == 0) travail_3.html(fiche_html_vide);
+                if(travail_d_evaluation_corps_html.lengt     == 0) travail_4.html(fiche_html_vide);
             }
 
             chargerTravail(travail_d_apprentissage_corps_html);
@@ -83,7 +83,6 @@
                     var phase_name = content[i][0];
                     var travail_lesson = JSON.parse(content[i][1]);
                     var travail_corps_html = travailCorpsHTML(phase_name,travail_lesson);
-
      
                     var travail_note = content[i][2];
    
@@ -129,24 +128,18 @@
 
                 
                 if(phase == "pratique") {
-                    
                     for(var i=0; i<lesson.length; i++) {
                     corps_html += "<table class='travail_corps_table' border=1>\n";
                         for(var j=0; j<3; j++) { 
-
                             if(j !== 2) {              
                             corps_html += "<tr>\n";
-                            for(var k=0; k<lesson[i].length; k++) {                 
-                                corps_html += "<td>"+lesson[i][k][j]+"</td>\n";
-                            }
+                                for(var k=0; k<lesson[i].length; k++) corps_html += "<td>"+lesson[i][k][j]+"</td>\n";
                             corps_html += "</tr>\n";
                             }
 
                             if(j === 2) {              
                             corps_html += "<tr>\n";
-                            for(var k=0; k<lesson[i].length; k++) { 
-                                corps_html += "<td>"+parseIntNko(lesson[i][k][j])+"</td>\n"; 
-                            }
+                                for(var k=0; k<lesson[i].length; k++) corps_html += "<td>"+lesson[i][k][j]+"</td>\n";
                             corps_html += "</tr>\n";
                             }
                         }
@@ -160,20 +153,13 @@
                     var corps_html = "<table class='travail_corps_table' border=1>\n";
 
                     corps_html += "<tr>\n";
-                        for(let i=0; i<lesson.length; i++) {
-                            corps_html += "<td>"+lesson[i][0]+"</td>\n";
-                        }
+                        for(let i=0; i<lesson.length; i++) corps_html += "<td>"+lesson[i][0]+"</td>\n";
                     corps_html += "</tr>\n";
                     corps_html += "<tr>\n";
-                        for(let j=0; j<lesson.length; j++) {
-                            if(phase == "apprentissage") corps_html += "<td>"+parseIntNko(lesson[j][1])+"</td>\n";                 
-                            if(phase != "apprentissage") corps_html += "<td>"+lesson[j][1]+"</td>\n";
-                        }
+                        for(let j=0; j<lesson.length; j++) corps_html += "<td>"+lesson[j][1]+"</td>\n";
                     corps_html += "</tr>\n";
                     corps_html += "<tr>\n";
-                        for(let k=0; k<lesson.length; k++) {
-                            corps_html += "<td>"+parseIntNko(lesson[k][2])+"</td>\n";
-                        }
+                        for(let k=0; k<lesson.length; k++) corps_html += "<td>"+lesson[k][2]+"</td>\n";
                     corps_html += "</tr>\n";
                     
                     corps_html += "</table>\n\n\n";

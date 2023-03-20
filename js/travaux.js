@@ -84,7 +84,7 @@
                     var travail_lesson = JSON.parse(content[i][1]);
                     var travail_corps_html = travailCorpsHTML(phase_name,travail_lesson);
      
-                    var travail_note = content[i][2];
+                    var travail_note = parseIntNko(content[i][2]);
    
                     
                     switch(phase_name) {

@@ -108,7 +108,6 @@
  
 
 @media screen and (min-width: 800px) {
-	.cover { background-color: rgba(0, 0, 0, 0.7); }
 	#connexion_container { margin: auto; }
 	#connexion_form, #connexion_note {
 		position: absolute;
@@ -119,7 +118,6 @@
 	#connexion_form { box-shadow: var(--shadowQuaternaire); }
 }
 @media screen and (max-width: 800px) {
-	.cover { background-color: var(--couleurNeutre); }
 	#connexion_container { margin: auto; }
 	#connexion_form, #connexion_note { 
 		position: relative;

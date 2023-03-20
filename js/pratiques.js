@@ -93,10 +93,7 @@ function pratique() {
         return options;
     }   
     function afficherPratique() {
-        pratique.css({'display':'block', 'transform':'scale(0.75)', 'opacity':0});
-        setTimeout(function() { pratique.css({'transform':'scale(1)'});}, 5);
-        setTimeout(function() { pratique.css({'opacity':'1'});}, 5);
-
+        afficherCourse(pratique);
         optionStyles();
     }
     function dimensionnerPratique() {

@@ -128,8 +128,10 @@
 }
 #tete_de_page_container{
     position: absolute;
+    top: 0;
+    left: 0;
     height: 3rem;
-    width: 100vw;
+    width: 100%;
     direction: rtl;
     z-index: 1000;
 }

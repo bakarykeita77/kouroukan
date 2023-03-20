@@ -85,6 +85,7 @@ if(isset($_SESSION["id"])) {
 
     <audio id="audio"></audio>
 
+    <script src="/kouroukan/fonctions.js"></script>
     <script src="/kouroukan/js/lessons.js"></script>
        
 </body>

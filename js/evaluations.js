@@ -27,7 +27,7 @@ function evaluations() {
      
     $('.fermeture').attr('id', 'fermer_evaluation');
 
-    afficherEvaluation();
+    afficherCourse(evaluation);
     initialiserEvaluation();
     evaluer();
     correctionEvaluation();
@@ -42,11 +42,6 @@ function evaluations() {
         if(niveau_en_cours==4) lq = malaxer(chiffres);
         
         return lq;
-    }
-    function afficherEvaluation(){
-        evaluation.css({'display':'block', 'transform':'scale(0.75)', 'opacity':0});
-        setTimeout(function() { evaluation.css({'transform':'scale(1)'});}, 5);
-        setTimeout(function() { evaluation.css({'opacity':'1'});}, 5);
     }
     function initialiserEvaluation() {
         

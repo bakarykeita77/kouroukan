@@ -16,7 +16,7 @@ function exercices() {
     $('.fermeture').attr('id', 'fermer_exercice');
      
     chargerExercice();
-    afficherExercice();
+    afficherCourse(exercice);
     exercer();
     enregistrerExercice();
     stockerExercice();
@@ -59,12 +59,6 @@ function exercices() {
             
             exercice_questions = malaxer(exercice_questions);
         }
-    }
-    function afficherExercice(){
-        
-        exercice.css({'display':'block', 'transform':'scale(0.75)', 'opacity':0});
-        setTimeout(function() { exercice.css({'transform':'scale(1)'});}, 5);
-        setTimeout(function() { exercice.css({'opacity':'1'});}, 5);
     }
     function exercer(){
         

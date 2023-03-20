@@ -238,14 +238,16 @@ $('document').ready(function() {
             var questionnaires = questions();
             var questions_quantity = quantiteDeQuestion();
             var quantite_de_question = quantiteDeQuestion();
-            sessionStorage.setItem('quantite_de_question',JSON.stringify(quantite_de_question));
             var compteur_de_question = 0;
             
             var phase_class = $(this).attr('class');
-            sessionStorage.setItem('phase_class', JSON.stringify(phase_class));
     	    var phase_id = $(this).attr('id');
-            sessionStorage.setItem("phase_id", JSON.stringify(phase_id));
     	    var course_id = phase_id.split('_')[1];
+            
+            sessionStorage.setItem('quantite_de_question',JSON.stringify(quantite_de_question));
+            sessionStorage.setItem('phase_class', JSON.stringify(phase_class));
+            sessionStorage.setItem("phase_id", JSON.stringify(phase_id));
+
     	    var lesson_courante = lessonCourante();
 
           /*--------------------------------------------------------------------*/   

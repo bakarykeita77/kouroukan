@@ -9,10 +9,10 @@ function apprentissages() {
     var lesson_courante = lessonCourante();
     var clicks_memo = [];
 
-  
+
     $('.fermeture').attr('id', 'fermer_apprentissage');
 
-    afficherApprentissage();
+    afficherCourse(apprentissage);
     parametresPosition();
     chargerApprentissage();
     apprendre();
@@ -42,12 +42,6 @@ function apprentissages() {
         let parametres_height = parametres_object.height;
 
         $('.parametres_container').offset({'top':param_btn_top, 'left':param_btn_left});
-    }
-    function afficherApprentissage() {
-        apprentissage.css({'display':'block'});                          
-
-        setTimeout(function() { apprentissage.css({'transform':'scale(1)'}); }, 5);
-        setTimeout(function() { apprentissage.css({'opacity':'1'});}, 5);
     }
     function apprendre() {
         

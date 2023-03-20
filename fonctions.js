@@ -21,6 +21,11 @@
 	    });
 
 	}
+    function afficherCourse(course) {
+        course.css({'display':'block', 'transform':'scale(0.75)', 'opacity':0});
+        setTimeout(function() { course.css({'transform':'scale(1)'}); }, 5);
+        setTimeout(function() { course.css({'opacity':'1'});}, 5);
+    }
 	function aggrandir_caractere_de(element) { element.css( 'font-size','+=32px' ); }
 	function appetir_caractere_de(element) { element.css( 'font-size','-=32px' ); }
     function arreterLecture(lessonHTML) {

@@ -177,7 +177,7 @@
                     let travail_note = travail_d_apprentissage_corps_html[constante][2];
 
                     $('#travail_1_corps').html(travail_corps_html);
-                    $('#travail_1_note').html(travail_note);
+                    $('#travail_1_note').html(parseIntNko(travail_note));
                 });
             } 
             function rechargerExercice() {   
@@ -189,7 +189,7 @@
                     let travail_note = travail_d_exercice_corps_html[constante][2];
 
                     $('#travail_2_corps').html(travail_corps_html);
-                    $('#travail_2_note').html(travail_note);
+                    $('#travail_2_note').html(parseIntNko(travail_note));
                 });
             }
             function rechargerPratique() {     
@@ -210,7 +210,7 @@
                     $('#travail_33_corps').html(travail_corps_html_2); $('#travail_33_note').html(travail_note);
                     $('#travail_34_corps').html(travail_corps_html_3); $('#travail_34_note').html(travail_note);
 
-                    $('#travail_3_note').html(travail_note);
+                    $('#travail_3_note').html(parseIntNko(travail_note));
                 });
             }
             function rechargerEvaluation() {     
@@ -222,7 +222,7 @@
                     var travail_note = travail_d_evaluation_corps_html[constante][2];
 
                     $('#travail_4_corps').html(travail_corps_html);
-                    $('#travail_4_note').html(travail_note);
+                    $('#travail_4_note').html(parseIntNko(travail_note));
                 });
             }
             function styleDuCercleActif() {

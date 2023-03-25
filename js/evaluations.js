@@ -10,6 +10,7 @@ function evaluations() {
     var questions_evaluation = questions();
     var question_evaluation = '', questions_a_evaluer = [], reponse_evaluation = [];
     var note = 0;
+    var moyenne_d_evaluation = 18;
     var compteur = incrementer();
     var evaluation_counter = 0;
     
@@ -81,7 +82,7 @@ function evaluations() {
     }
     function evaluer() {
 
-        var reponse_font_size = $('#evaluation_reponse').height();
+        var reponse_font_size = $('#evaluation_reponse').height()/2;
         $('#evaluation_reponse').css('font-size',reponse_font_size+'px');
                         
         poserQuestionEvaluation();
@@ -106,10 +107,6 @@ function evaluations() {
                 q_ordre = parseIntNko(q_index+1);
                 q_rang = '߲';
                 
-                if(q_index==nbr_max_de_questions_a_poser){
-                    $('.question_btn').off('click');
-                    $('.question_btn').html('ߞߘߐߓߐߟߌ ߓߘߊ߫ ߓߊ߲߫. ߌ ߞߎߟߎ߲ߖߋ߫߹ ');
-                }
                 actualiserLesLibellesDeDialogueBtn();
                 
                 function effacerPrecedenteReponse() { $('#evaluation_reponse').html(''); }
@@ -140,7 +137,7 @@ function evaluations() {
         function repondreEvaluation(){
             $('#clavier_nko td').on('click', function(){
              
-                if(question_evaluation == '') guiderClient();
+                if(question_evaluation == '') rappel($('#evaluation_dialogue_btn'));
                 if(question_evaluation != '') {
                     
                     var caractere = $(this).html();
@@ -165,6 +162,8 @@ function evaluations() {
             actualiserEvaluationProgressBar();
             effacer();
             afficherQuestionButton();
+            finDEvaluation();
+            
             evaluation_counter++;
             
             
@@ -201,8 +200,8 @@ function evaluations() {
                     }
                 }
                 function chargerEvaluationFicheFoot() {
-                    $(' #evaluation_fiche_foot #total_point').html(parseIntNko(nbr_max_de_questions_a_poser)+'/'+parseIntNko(note));
-                    $(' #evaluation_fiche_foot #pourcentage_point').html('%'+parseIntNko((note/nbr_max_de_questions_a_poser)*100));
+                    $('#total_point_d_evaluation').html(parseIntNko(nbr_max_de_questions_a_poser)+'/'+parseIntNko(note));
+                    $('#pourcentage_point_d_evaluation').html('%'+parseIntNko(Math.floor((note/nbr_max_de_questions_a_poser)*100)));
                 }                                    
                 function marquerReponseEvaluation() {    
                     if(reponse_evaluation.join('') == question_evaluation) {
@@ -248,21 +247,20 @@ function evaluations() {
                 $('.question_btn').css('display','block');
                 $('.repetition_btn').css('display','none');
             }
+            function finDEvaluation() {
+                if(q_index==nbr_max_de_questions_a_poser){
+                    $('.question_btn').off('click');
+                    $('.question_btn').html('ߞߘߐߓߐߟߌ ߓߘߊ߫ ߓߊ߲߫. ߌ ߞߎߟߎ߲ߖߋ߫߹ ');
+                }
+            }
         });
-
-        function chargerFicheBody(tbody,tbody_html,question,reponse,point) {
-            if(question == reponse) tbody_html += "<div class='tr'>\n <span class='affiche_question'>"+question+"</span>\n<span class='affiche_reponse'><span id='fiche_vraie_reponse'>"+reponse+"</span></span>\n<span class='affiche_point'>"+parseIntNko(point)+"</span>\n </div>\n\n";
-            if(question != reponse) tbody_html += "<div class='tr'>\n <span class='affiche_question'>"+question+"</span>\n<span class='affiche_reponse'><span id='fiche_mauvaise_reponse'>"+reponse+"</span><span id='fiche_croix'>&#10060;</span></span>\n<span class='affiche_point'>"+parseIntNko(point)+"</span>\n </div>\n\n";
-       
-            tbody.html(tbody_html);
-        }
     }
     function stockerEvaluation() {
         $('.correction_btn').on('click', function(){
-                         
+                        
             if(evaluation_counter == nbr_max_de_questions_a_poser) {
-                if(note <  moyenne) alert( "ߛߍ߬ߦߵߊ߬ ߡߊ߬" ); 
-                if(note >= moyenne) {
+                if(note <  moyenne_d_evaluation) alert( "ߛߍ߬ߦߵߊ߬ ߡߊ߬" ); 
+                if(note >= moyenne_d_evaluation) {
                     if(phase_class == "apprises") {alert("ߦߙߐ ߢߌ߲߬ ߞߍߣߍ߲߫ ߞߘߐ ߟߋ߬"); return false;}
                    
                     let phase_nbr = JSON.parse(sessionStorage.getItem('data_phase_nbr'));
@@ -278,6 +276,7 @@ function evaluations() {
                     }
                 }
                 
+                    
                 function sendEvaluationToDB() {
                    
                     let matiere = JSON.parse(sessionStorage.getItem('matiere_active'));

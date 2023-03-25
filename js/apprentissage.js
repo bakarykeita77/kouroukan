@@ -146,7 +146,6 @@ function apprentissages() {
                 var element_click_counter = 0;
                 var point = 0;
 
-                
               /*
               --------------------------------------------------------------------------------------------------------
                 Initialisation de mémoire d'enregistrement qui est un tableau bidimentionnel.

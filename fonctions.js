@@ -283,6 +283,19 @@
 		
 		son.play();
 	}
+    
+    function rappel(button) {
+        setTimeout(() => { button.css('box-shadow','none'); }, 100);
+        setTimeout(() => { button.css('box-shadow','var(--shadow_30)'); }, 200);
+        setTimeout(() => { button.css('box-shadow','none'); }, 300);
+        setTimeout(() => { button.css('box-shadow','var(--shadow_30)'); }, 400);
+        setTimeout(() => { button.css('box-shadow','none'); }, 500);
+        setTimeout(() => { button.css('box-shadow','var(--shadow_30)'); }, 600);
+        setTimeout(() => { button.css('box-shadow','none'); }, 700);
+        setTimeout(() => { button.css('box-shadow','var(--shadow_30)'); }, 800);
+        setTimeout(() => { button.css('box-shadow','none'); }, 900);
+        setTimeout(() => { button.css('box-shadow','var(--shadow_16)'); }, 1000);
+    }
 	
 	function softDisplay() {
 	    var element = $('.soft_display');

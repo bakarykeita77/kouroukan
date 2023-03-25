@@ -20,7 +20,7 @@
 
 #evaluation_body {
     border: 0.5rem solid white;
-    height: calc(100% - 3rem);
+    height: calc(100% - 20rem);
     box-sizing: border-box;
 }
 #evaluation_guide {
@@ -82,13 +82,11 @@
     margin: 0.125rem 0;
     border-bottom: 0.25rem solid #aaa;
 }
-#evaluation_fiche span { border: 1px solid transparent; }
 #evaluation_fiche_head, #evaluation_fiche_body div, #evaluation_fiche_foot div {
     display: flex;
     flex-direction: row;
 }
 #evaluation_fiche_head span { font-size: 0.8rem; height: 1rem; }
-#evaluation_fiche span:nth-child(1), #evaluation_fiche span:nth-child(2) { width: calc(40% - 1rem); padding-right: 0.5rem; }
 #evaluation_fiche span:nth-child(3) { flex-grow: 1; text-align: center; }
 #evaluation_fiche_body { 
     min-height: 1.5rem;
@@ -134,17 +132,21 @@
     transition: 0.6s;
 }
 #evaluation_fiche_foot div { margin: 0.125rem; }
-#evaluation_fiche_foot span:nth-child(1) { 
-    width: 80%;
+#label_total_point_d_evaluation, #label_pourcentage_point_d_evaluation { 
+    display: inline-block;
+    height: 1.5rem;
+    width: calc(80% - 4px);
     text-align:right; 
     font-size: 0.8rem;
 }
-#evaluation_fiche_foot span:nth-child(2) { 
-    flex-grow: 1; 
-    text-align:center; 
+#total_point_d_evaluation, #pourcentage_point_d_evaluation { 
+    display: inline-block;
     border: 0.125rem solid #ddd;
-    width: 25%;
+    text-align:center; 
+    height: 1.25rem;
+    width: calc(20% - 0.25rem);
     padding: 0;
+    float: left;
 }
 
 #evaluation_dialogue_btn {
@@ -287,28 +289,27 @@
     left: 0;
 }
 
-@media screen and (orientation: portrait) {
+
 
     #evaluation_head, #evaluation_body, #evaluation_foot {
-        position: absolute;
+        position: relative;
         width: 96%;
-        left: 50%;
-        transform: translate(-50%,0);
+        max-width: 400px;
+        margin: auto ;
     }
     #evaluation_head { top: 0; display: none; }
-    #evaluation_body { top: 0; height: 25%; }
-    #evaluation_foot { height: 75%; bottom: 0; }
+    #evaluation_body { top: 0; }
+    #evaluation_foot { height: 50%; bottom: 0; }
     #evaluation_fiche_foot div:nth-child(2) { display: none; }
     #teste_container {  height: calc(100% - 12.5rem); }
-    #evaluation_fiche { 
-        width: 100%; top: 0; 
-    }
+    #evaluation_fiche { width: 100%; top: 0; }
     #evaluation_message_de_fin_container {
         top: calc(100% - 7rem);
         left: 50%;
         transform: translateX(-50%);
     }
-}
+
+/* 
 @media screen and (orientation: landscape) {
     #evaluation_body, #evaluation_head, #evaluation_foot { position: absolute; }
     #evaluation_body {
@@ -327,4 +328,4 @@
         width: calc(100% - 1rem);
         transform: translateX(-50%);
     }
-}
+} */

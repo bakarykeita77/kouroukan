@@ -19,12 +19,12 @@
             <div id="evaluation_fiche_body"></div>
             <div id="evaluation_travail_foot">
                 <div>
-                    <span id="label_total_point">ߓߍ߬ߙߍ ߡߎ߬ߡߍ</span>
-                    <span id="total_point"></span>
+                    <span id="label_total_point_d_evaluation">ߓߍ߬ߙߍ ߡߎ߬ߡߍ</span>
+                    <span id="total_point_d_evaluation"></span>
                 </div>
                 <div>
-                    <span id="label_pourcentage_point" colspan="2">ߓߍ߬ߙߍ ߗߡߍ߬ߘߐ߬ߦߊ</span>
-                    <span id="pourcentage_point"></span>
+                    <span id="label_pourcentage_point_d_evaluation" colspan="2">ߓߍ߬ߙߍ ߗߡߍ߬ߘߐ߬ߦߊ</span>
+                    <span id="pourcentage_point_d_evaluation"></span>
                 </div>
             </div>
         </div>

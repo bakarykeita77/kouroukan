@@ -311,26 +311,14 @@
 
 
 
-    #guide_container {
-        bottom: 12rem;
-        height: calc(100% - 12rem);
-    }
-    #pratique_foot { 
-        height: 18rem;
-        overflow: hidden;
-    }
+    #guide_container { bottom: 12rem;  height: calc(100% - 12rem); }
+    #pratique_foot {  height: 18rem;  overflow: hidden; }
     #pratique_clavier_container { bottom: 3rem; }
     #pratiques_images_container { height: calc(100% - 3rem); }
     #image_name { display: none; }
-    #pratique_fiche { 
-        top: 0; 
-        width: 100%; 
-        height: 100%; 
-    }
+    #pratique_fiche { top: 0; width: 100%;  height: 100%; }
     #pratique_fiche_foot { display: none; }
-    #pratique_fiche_body {
-        height: calc(100% - 6rem);
-    }
+    #pratique_fiche_body { height: calc(100% - 6rem); }
     #image_croix { height: calc(100% - 4rem); }
     #message_de_fin_container {
         top: calc(100% - 7rem);

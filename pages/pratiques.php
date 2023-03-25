@@ -16,7 +16,7 @@
             <span>ߞߎߡߊߘߋ߲߫ ߜߋ߲߬ ߂ ߡߊ</span>
             <span>ߞߎߡߊߘߋ߲߫ ߜߋ߲߬ ߃ ߡߊ</span>
             <span>ߞߎߡߊߘߋ߲߫ ߜߋ߲߬ ߄ ߡߊ</span>
-        </div> 
+        </div>
         </center>
     </div>
     <!--pratique_head---------------------------------------------------->
@@ -37,7 +37,7 @@
                 <span class="th">ߓߙߍ߬ߦߊ</span>
             </div>
             <div id="pratique_fiche_body"></div>
-            <div id="pratique_travail_foot">
+            <div id="pratique_fiche_foot">
                 <div>
                     <span id="label_total_point">ߓߍ߬ߙߍ ߡߎ߬ߡߍ</span>
                     <span id="total_point"></span>
@@ -59,21 +59,25 @@
     <!--pratique_foot---------------------------------------------------->
     <div class="course_foot" id="pratique_foot">
 
-        <div id="guide_container">
-            <div id="pratique_guide">
-                <div class="flex_row_center" id="bulles_container"></div>
-                <p id="reponse_container"><span id="cumule_des_caracteres"></span><span id='correcteur'>ߖߐ߬ߛߌ߬ߙߊ߲</span></p>
+        <div id="foot_cadre">
+            <div id="pratiques_images_container">
+                <h1 id="image_name"></h1>
+                <img src="" alt="?">
+                <div id="image_croix">&#10060;</div>
+            </div>
+
+            <div id="guide_et_clavier_container">
+                <div id="guide_container">
+                    <div id="pratique_guide">
+                        <div class="flex_row_center" id="bulles_container"></div>
+                        <p id="reponse_container"><span id="cumule_des_caracteres"></span><span id='correcteur'>ߖߐ߬ߛߌ߬ߙߊ߲</span></p>
+                    </div>
+                </div>
+
+                <div class="clavier_container" id="pratique_clavier_container"><?php include "clavier.php"; ?></div>
             </div>
         </div>
 
-        <div id="pratiques_images_container">
-            <h1 id="image_name"></h1>
-            <img src="" alt="?">
-        </div>
-
-        <div id="image_croix">&#10060;</div>
-
-        <div class="clavier_container" id="pratique_clavier_container"><?php include "clavier.php"; ?></div>
         <div class="dialogue_btn" id="pratique_dialogue_btn">
 
             <div class="btn question_btn">

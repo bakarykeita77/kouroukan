@@ -129,7 +129,6 @@ function pratique() {
 
             viderPratiqueFicheBody();
             viderPratiqueFicheFoot();
-            $('#pratique_fiche_foot').css('display','none');
 
             function viderPratiqueFicheBody() {                                        
                 table = "";
@@ -235,7 +234,8 @@ function pratique() {
     }
     function masquerPratiqueOptions() { $('#pratique_options').css('display','none'); }
     function afficherPratiqueLesson() { $('#pratique_head, #pratique_body, #pratique_foot').css('display','block'); }
-    function masquerPratiqueLesson() { $('#pratique_head, #pratique_body, #pratique_foot').css('display','none'); }
+    function afficherPratiqueClavier() { $('#guide_et_clavier_container').css('top',0); }
+    function masquerPratiqueClavier() { $('#guide_et_clavier_container').css('top','100%'); }
     function afficherMessageDeFin() { $('#message_de_fin_container').css('display','block'); }
     function mettreCroixSurImage() { $('#image_croix').css('display','flex'); $('#pratiques_images_container img').css('opacity',0.4); }
     function nePasMettreCroixSurImage() { $('#image_croix').css('display','none'); $('#pratiques_images_container img').css('opacity',1); }
@@ -348,12 +348,10 @@ function pratique() {
                     let option_status = JSON.parse(sessionStorage.getItem('fin_status'));
                     questions = (option_status == "avancer") ? questions_option_suivante : questions_posees;
         
-                    $('guide_container').css('z-index',1);
-                    $('#pratiques_images_container').css('z-index',0);
                     $('#image_croix').css('display','none');
-                    $('pratique_clavier_container').css('z-index',1);
 
                     actualiserLesBoutonsDEntete();
+                    afficherPratiqueClavier();
                     pratiqueGuide();
                     question = questions[compteur];
                     lireQuestion();
@@ -482,11 +480,8 @@ function pratique() {
                     memoire_pratique[memoire_pratique.length] = [question, reponse, point];
         
                     
-                    $('pratique_clavier_container').css('z-index',0);
-                    $('#pratiques_images_container').css('z-index',1);
-                    $('guide_container').css('z-index',0);
-
                     afficherQuestionBouton();
+                    masquerPratiqueClavier();
                     chargerPratiqueFiche();
                     animerPratiqueFiche();
                     stylesDePratiqueFicheBody();

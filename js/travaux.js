@@ -46,11 +46,11 @@
             if(matiere_nom == "ߛߓߍߛߎ߲") $('#travail_de_pratique').css('display','none');  // Masquer la partie pratique de Apprentissage.     
 
             if(matieres[n]) {
-                for (let i = 0; i < matieres[n].length; i++) {
+                for (let i = matieres[n].length; i > 0; i--) {
 
-                    fiche_phase  = matieres[n][i].phase.split('_')[1];
-                    let travail_lesson = matieres[n][i].lesson;   
-                    let travail_note   = matieres[n][i].note;
+                    fiche_phase  = matieres[n][i-1].phase.split('_')[1];
+                    let travail_lesson = matieres[n][i-1].lesson;   
+                    let travail_note   = matieres[n][i-1].note;
 
                     if(fiche_phase == "apprentissage") travail_d_apprentissage_corps_html.push([fiche_phase,travail_lesson,travail_note]);
                     if(fiche_phase == "exercice"     ) travail_d_exercice_corps_html     .push([fiche_phase,travail_lesson,travail_note]);
@@ -61,14 +61,14 @@
                 if(travail_d_apprentissage_corps_html.length == 0) travail_1.html(fiche_html_vide);
                 if(travail_d_exercice_corps_html.length      == 0) travail_2.html(fiche_html_vide);
                 if(travail_de_pratique_corps_html.length     == 0) travail_3.html(fiche_html_vide);
-                if(travail_d_evaluation_corps_html.lengt     == 0) travail_4.html(fiche_html_vide);
+                if(travail_d_evaluation_corps_html.length     == 0) travail_4.html(fiche_html_vide);
             }
 
             chargerTravail(travail_d_apprentissage_corps_html);
             chargerTravail(travail_d_exercice_corps_html);
             chargerTravail(travail_de_pratique_corps_html);
             chargerTravail(travail_d_evaluation_corps_html);
-            designerCercles();
+            designDesCercles();
     
             rechargerApprentissage();
             rechargerExercice();
@@ -89,28 +89,34 @@
                     
                     switch(phase_name) {
                         
-                        case "apprentissage" : $('#ordre_d_apprentissage .ordres_glissiere').html(ordreDeTravailHTML(travail_d_apprentissage_corps_html));
-                                               $('#travail_1_corps').html(travail_corps_html);
-                                               $('#travail_1_note').html(travail_note); 
-                                               break;
-                                               
-                        case "exercice"      : $('#ordre_d_exercice .ordres_glissiere').html(ordreDeTravailHTML(travail_d_exercice_corps_html));
-                                               $('#travail_2_corps').html(travail_corps_html);     
-                                               $('#travail_2_note').html(travail_note); 
-                                               break;
-
-                        case "pratique"      : $('#ordre_de_pratique .ordres_glissiere').html(ordreDeTravailHTML(travail_de_pratique_corps_html));
-                                               $('#travail_31_corps').html(travail_corps_html[0]); $('#travail_31_note').html(travail_note); 
-                                               $('#travail_32_corps').html(travail_corps_html[1]); $('#travail_32_note').html(travail_note);
-                                               $('#travail_33_corps').html(travail_corps_html[2]); $('#travail_33_note').html(travail_note);
-                                               $('#travail_34_corps').html(travail_corps_html[3]); $('#travail_34_note').html(travail_note);
-                                               break;
-
-                        case "evaluation"    : $('#ordre_d_evaluation .ordres_glissiere').html(ordreDeTravailHTML(travail_d_evaluation_corps_html));
-                                               $('#travail_4_corps').html(travail_corps_html);     
-                                               $('#travail_4_note').html(travail_note);
-                                               break;
-                    }    
+                        case "apprentissage" : chargerApprentissage(); break;
+                        case "exercice"      : chargerExercice(); break;
+                        case "pratique"      : chargerPratique();  break;
+                        case "evaluation"    : chargerEvaluation(); break;
+                    } 
+                    
+                    function chargerApprentissage() {
+                        $('#ordre_d_apprentissage .ordres_glissiere').html(ordreDeTravailHTML(travail_d_apprentissage_corps_html));
+                        $('#travail_1_corps').html(travail_corps_html);
+                        $('#travail_1_note').html(travail_note);
+                    }
+                    function chargerExercice() {
+                        $('#ordre_d_exercice .ordres_glissiere').html(ordreDeTravailHTML(travail_d_exercice_corps_html));
+                        $('#travail_2_corps').html(travail_corps_html);     
+                        $('#travail_2_note').html(travail_note);
+                    }
+                    function chargerPratique() {
+                        $('#ordre_de_pratique .ordres_glissiere').html(ordreDeTravailHTML(travail_de_pratique_corps_html));
+                        $('#travail_31_corps').html(travail_corps_html[0]); $('#travail_31_note').html(travail_note); 
+                        $('#travail_32_corps').html(travail_corps_html[1]); $('#travail_32_note').html(travail_note);
+                        $('#travail_33_corps').html(travail_corps_html[2]); $('#travail_33_note').html(travail_note);
+                        $('#travail_34_corps').html(travail_corps_html[3]); $('#travail_34_note').html(travail_note);
+                    }
+                    function chargerEvaluation() {
+                        $('#ordre_d_evaluation .ordres_glissiere').html(ordreDeTravailHTML(travail_d_evaluation_corps_html));
+                        $('#travail_4_corps').html(travail_corps_html);     
+                        $('#travail_4_note').html(travail_note);
+                    }
                 }
                 function ordreDeTravailHTML(content) {
                     var cercle = "";
@@ -234,7 +240,7 @@
                     $(this).siblings().css({'box-shadow':'none', 'background-color':'var(--couleur_e)', 'color':'#bbb'});
                 });
             }
-            function designerCercles() {
+            function designDesCercles() {
 
                 let nombre_de_cercle_1 = travail_d_apprentissage_corps_html.length;
                 let nombre_de_cercle_2 = travail_d_exercice_corps_html.length;

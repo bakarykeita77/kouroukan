@@ -160,8 +160,9 @@
     padding: 0.25rem 0;
     margin: 0.125rem 0;
     background-color: #fff;
-    border: 1px solid #aaa;
+    border: 1px solid #ccc;
     border-top-width: 0.25rem;
+    border-top-color: #aaa;
     transition: 0.6s;
 }
 #pratique_fiche_foot div { margin: 0.125rem; }
@@ -192,10 +193,9 @@
 }
 #pratiques_images_container {
     position: absolute;
-    bottom: 0;
-    width: 100%;
+    border: 1px solid #ccc;
+    width: calc(100% - 2px);
     background-color: #fff;
-    z-index: 0;
 }
 #pratiques_images_container img {
     position: absolute;
@@ -204,7 +204,7 @@
     width: 100%;
     object-fit: contain;
     z-index: 0;
-    transition: 1.5s;
+    transition: 1s;
 }
 #image_name {
     position: absolute;
@@ -297,7 +297,7 @@
     height: calc(100% - 3rem);
     overflow: hidden;
 }
-#pratiques_images_container { height: 100%; z-index: 0; }
+#pratiques_images_container { height: calc(100% - 0.5rem); }
 #image_name { display: none; }
 #guide_et_clavier_container { position: absolute; height: 100%; width: 100%; z-index: 1; top: 100%; transition: 0.2s; }
 #guide_container { position: relative;  height: calc(100% - 9rem); }

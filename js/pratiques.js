@@ -319,19 +319,7 @@ function pratique() {
             rectificationDeReponse();
             correctionPratique();
             
-            function dossierImage() {
-                let option_status = JSON.parse(sessionStorage.getItem('fin_status'));
-                let option_index = JSON.parse(sessionStorage.getItem('option_index'));
-                let option = (option_status == "avancer") ? option_index+1 : option_index;
-                let dossier = '';
 
-                if(option === 0) dossier = "/kouroukan/server-images/server-images-1-syllabe/";
-                if(option === 1) dossier = "/kouroukan/server-images/server-images-2-syllabe/";
-                if(option === 2) dossier = "/kouroukan/server-images/server-images-3-syllabe/";
-                if(option === 3) dossier = "/kouroukan/server-images/server-images-4-syllabe/";
-
-                return dossier;
-            }
             function poserQuestionPratique() {
                 
                 if(!question) {
@@ -356,6 +344,7 @@ function pratique() {
                     question = questions[compteur];
                     lireQuestion();
                     repeteQuestion();
+                    setTimeout(() => {  $('#pratiques_images_container img').css('display','none'); }, 100);
                          
                     function pratiqueGuide() {
                             
@@ -486,6 +475,7 @@ function pratique() {
                     animerPratiqueFiche();
                     stylesDePratiqueFicheBody();
                     chargerPratiqueBody();
+                    revisionDOption();
                     actualiserPratiquesProgressBar();
                             
                     if(question == reponse) { nePasMettreCroixSurImage(); }
@@ -499,7 +489,6 @@ function pratique() {
                     effacerLesBulles();
                     initialiserCompteurDeCaractere();
                     finDOption();
-                    revisionDOption();
                     
                     compteur++;
                     
@@ -507,15 +496,14 @@ function pratique() {
 
                         chargerImageName();                                            
                         chargerPratiquesImagesContainer();
+                        afficherPratiquesImage();
 
                         function chargerImageName() { $('#image_name').html(reponse); }
                         function chargerPratiquesImagesContainer() {
                         
                             let dossier_image = dossierImage();
-
                             $('#pratiques_images_container img').attr('src', dossier_image+reponse+".jpg");
-                            $('#pratiques_images_container img').css('transform','scale(1)'); //Scale est à 0.25 dans la fonction poserQuestionPratique()
-                            
+
                             if(question == reponse) {  nePasMettreCroixSurImage(); }
                             if(question !== reponse) { mettreCroixSurImage(); }
                         }
@@ -740,29 +728,48 @@ function pratique() {
                             }
                         }
                     }  
-                    function revisionDOption() {
-                            
-                        $('#pratique_fiche_body .tr').on('click', function() {
-                            
-                            $(this).siblings().removeClass('pratique_tr_actif');
-                            $(this).addClass('pratique_tr_actif'); 
-                            
-                            let question = $('.pratique_tr_actif .affiche_question').html(); 
-                            let reponse = $('.pratique_tr_actif .affiche_reponse span:nth-child(1)').html();
-                                          
-                            let dossier_image = dossierImage();
-                            
-                            if(question == reponse) { nePasMettreCroixSurImage(); }
-                            if(question != reponse) { mettreCroixSurImage(); }
-     
-                            $('#image_name').html(reponse);                                	        
-                            $('#pratiques_images_container img').attr('src', dossier_image+reponse+'.jpg');                                	        
-                        });
-                    }
                 }); 
             }
             function afficherClavier() { $('pratique_clavier_container').css('display','block'); }
             function masquerClavier() { $('pratique_clavier_container').css('display','none'); }
+        });
+    }
+    function dossierImage() {
+        let option_status = JSON.parse(sessionStorage.getItem('fin_status'));
+        let option_index = JSON.parse(sessionStorage.getItem('option_index'));
+        let option = (option_status == "avancer") ? option_index+1 : option_index;
+        let dossier = '';
+
+        if(option === 0) dossier = "/kouroukan/server-images/server-images-1-syllabe/";
+        if(option === 1) dossier = "/kouroukan/server-images/server-images-2-syllabe/";
+        if(option === 2) dossier = "/kouroukan/server-images/server-images-3-syllabe/";
+        if(option === 3) dossier = "/kouroukan/server-images/server-images-4-syllabe/";
+
+        return dossier;
+    }
+    function afficherPratiquesImage() {
+        $('#pratiques_images_container img').css({'display':'block', 'transform':'scale(0.25)'});
+        setTimeout(() => { $('#pratiques_images_container img').css('transform','scale(1)'); }, 10);
+    }
+    function revisionDOption() {
+            
+        $('#pratique_fiche_body .tr').on('click', function() {
+          
+            $('#pratiques_images_container img').css('display','none');
+            $(this).siblings().removeClass('pratique_tr_actif');
+            $(this).addClass('pratique_tr_actif'); 
+            
+            let question = $('.pratique_tr_actif .affiche_question').html(); 
+            let reponse = $('.pratique_tr_actif .affiche_reponse span:nth-child(1)').html();
+                          
+            let dossier_image = dossierImage();
+            
+            if(question == reponse) { nePasMettreCroixSurImage(); }
+            if(question != reponse) { mettreCroixSurImage(); }
+
+            $('#image_name').html(reponse);                                	        
+            $('#pratiques_images_container img').attr('src', dossier_image+reponse+'.jpg');  
+            setTimeout(() => { afficherPratiquesImage(); }, 10);                              	        
         });
     }
     function stockerPratique() {

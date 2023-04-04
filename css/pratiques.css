@@ -1,3 +1,84 @@
+
+#pratiques_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    margin: 0;
+    padding: 0 16px;
+    box-sizing: border-box;
+    height: calc(100% - 2px);
+    border: 1px solid transparent;
+}
+#pratiques_programme {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+    width: 100%;
+    margin-top: 16px;
+    padding: 0;
+    font-size: 0.75rem;
+    box-shadow: 0 0 16px #bbb;
+}
+#pratiques_programme span:not(.actif) {
+    background-color: #ccc;
+    margin: 0 1px;
+    padding: 0;
+    height: 16px;
+    width: 25%;
+    text-align: center;
+}
+.actif { width: 25%; margin: 1px; height: 16px; }
+#pratiques {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    height: 90%;
+}
+#pratiques_image_container {
+    position: relative;
+    margin-top: 16px;
+    width: 0;
+    height: 0;
+}
+#pratiques_image {
+    width: 100%;
+    font-size: 6rem;
+    font-weight: bold;
+    color: #ddd;
+}
+#pratiques_input_container {
+    position: absolute;
+    border: 1px solid transparent;
+    background-color: #fff;
+    border-top-color: #ccc;
+    bottom: 16px;
+    padding: 4px 0;
+    height: 32px;
+    width: 100%;
+}
+#pratiques_input {
+    position: relative;
+    bottom: 0;
+    background-color: #eee;
+    border-style: none;
+    width: 90%;
+    right: 5%;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    margin: 0;
+    padding: 0 16px;
+    font-size: 1rem;
+    font-weight: bold;
+    box-sizing: border-box;
+}
+
 #pratique_options {
     position: absolute;
     border: 1px solid transparent;
@@ -8,7 +89,7 @@
     height: 100%;
     width: 100%;
     background-color: #fff;
-    box-shadow: 0 0 1rem #999;
+    border-radius: var(--radiusSmall);
     z-index: 2;
 }
 #pratique_options div { margin-top: 2rem; }
@@ -180,7 +261,7 @@
 #pratique_dialogue_btn {
     position: absolute;
     bottom: 0;
-    width: calc(100% - 6rem);
+    width: 100%;
     text-align: center;
     border: var(--border_c);
     border-radius: var(--radiusLarge);

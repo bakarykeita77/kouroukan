@@ -96,6 +96,7 @@
 	max-width: 30rem;
 	box-sizing: border-box;
 }
+#connexion_btn { cursor: pointer; }
 .note_titre { color: var(--couleurPrimaire) }
 .note { margin: 0; }
 .note p { color: var(--couleurNeutre); }

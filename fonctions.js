@@ -62,20 +62,21 @@
     }
 	
     
-    function changerPhaseActive(phase_nbr) {
-        
-        phase_nbr++;
-        $.each($('#phases_list li'), function() {
-    	       
-            var phase_index = $(this).index();
-            if(total_phase > phase_nbr) {  
-                if(phase_index <= phase_nbr-1) $(this).removeClass('active').addClass('apprises');
-                if(phase_index == phase_nbr  ) $(this).removeClass('a_apprendre').addClass('active');
-                if(phase_index >= phase_nbr+1) $(this).addClass('a_apprendre');
-            }       	    
-            if(total_phase == phase_nbr) $(this).removeClass('active a_apprendre').addClass('apprises');
-        });
-        sessionStorage.setItem('nbr',JSON.stringify(phase_nbr));
+    function changerPhaseActive(phase_index) {
+        if(phase_index != -1) {
+            phase_index++;
+            $.each($('#phases_list li'), function() {
+                
+                var phase_index = $(this).index();
+                if(total_phase > phase_index) {  
+                    if(phase_index <= phase_index-1) $(this).removeClass('active').addClass('apprises');
+                    if(phase_index == phase_index  ) $(this).removeClass('a_apprendre').addClass('active');
+                    if(phase_index >= phase_index+1) $(this).addClass('a_apprendre');
+                }       	    
+                if(total_phase == phase_index) $(this).removeClass('active a_apprendre').addClass('apprises');
+            });
+            sessionStorage.setItem('nbr',JSON.stringify(phase_index));
+        }
     }
     function clearStorage() {
         sessionStorage.clear();

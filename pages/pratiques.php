@@ -10,6 +10,7 @@
     
     <div id="pratique_options">
         <center><h2 id="options_titre">ߓߟߏߦߊߟߌ ߓߏߟߏ߲ ߠߎ߬</h2></center>
+        <br>
         <center>
         <div>
             <span>ߞߎߡߊߘߋ߲߫ ߜߋ߲߬ ߁ ߡߊ</span>
@@ -97,6 +98,8 @@
                 <span class="correction_label">ߏ߬ ߛߊߞߍ߫</span>
                 <span class="correction_icon"></span>
             </div>
+
+            <div class="fin_btn"></div>
         </div>
     </div>
     

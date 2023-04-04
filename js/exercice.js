@@ -124,8 +124,6 @@ function exercices() {
                         }
                     }
                     function finDExercice() {
-                        console.log(compteur_de_question);
-
                         if(compteur_de_question - 1 == nbr_de_questionnaires){
                             $('#exercices_player').off('click');
                             $('#exercices_player').html('ߡߊ߬ߞߟߏ߬ߟߌ ߓߘߊ߫ ߓߊ߲߫. ߌ ߞߎߟߎ߲ߖߋ߫߹ ');
@@ -172,18 +170,14 @@ function exercices() {
     function stockerExercice() {
                                          
         $('#fermer_exercice').one('click',function(){ 
-        
-            note = noterExercice(); 
-
+            let index_phase_active = $('.phases_container ul li .active').index();
+            
+            note = noterExercice();
+ 
             if(note <  moyenne_d_exercice) alert( "reprendre" ); 
             if(note >= moyenne_d_exercice) { 
-                
-                let nbr = JSON.parse(sessionStorage.getItem('nbr'));
-                let phase_nbr = JSON.parse(sessionStorage.getItem('data_phase_nbr'));
-  
-                
                 sendExerciceToDB(); 
-                changerPhaseActive(phase_nbr); 
+                changerPhaseActive(index_phase_active); 
                 initialiserProgressBarr();
             }
         

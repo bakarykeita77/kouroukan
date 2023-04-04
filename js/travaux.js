@@ -61,7 +61,7 @@
                 if(travail_d_apprentissage_corps_html.length == 0) travail_1.html(fiche_html_vide);
                 if(travail_d_exercice_corps_html.length      == 0) travail_2.html(fiche_html_vide);
                 if(travail_de_pratique_corps_html.length     == 0) travail_3.html(fiche_html_vide);
-                if(travail_d_evaluation_corps_html.length     == 0) travail_4.html(fiche_html_vide);
+                if(travail_d_evaluation_corps_html.length    == 0) travail_4.html(fiche_html_vide);
             }
 
             chargerTravail(travail_d_apprentissage_corps_html);
@@ -106,6 +106,7 @@
                         $('#travail_2_note').html(travail_note);
                     }
                     function chargerPratique() {
+    
                         $('#ordre_de_pratique .ordres_glissiere').html(ordreDeTravailHTML(travail_de_pratique_corps_html));
                         $('#travail_31_corps').html(travail_corps_html[0]); $('#travail_31_note').html(travail_note); 
                         $('#travail_32_corps').html(travail_corps_html[1]); $('#travail_32_note').html(travail_note);
@@ -131,22 +132,21 @@
 
                 var corps_html = "";
                 var corps_html = "";
-
-                
+              
                 if(phase == "pratique") {
                     for(var i=0; i<lesson.length; i++) {
                     corps_html += "<table class='travail_corps_table' border=1>\n";
                         for(var j=0; j<3; j++) { 
                             if(j !== 2) {              
-                            corps_html += "<tr>\n";
-                                for(var k=0; k<lesson[i].length; k++) corps_html += "<td>"+lesson[i][k][j]+"</td>\n";
-                            corps_html += "</tr>\n";
+                                corps_html += "<tr>\n";
+                                    for(var k=0; k<lesson[i].length; k++) corps_html += "<td>"+lesson[i][k][j]+"</td>\n";
+                                corps_html += "</tr>\n";
                             }
 
-                            if(j === 2) {              
-                            corps_html += "<tr>\n";
-                                for(var k=0; k<lesson[i].length; k++) corps_html += "<td>"+lesson[i][k][j]+"</td>\n";
-                            corps_html += "</tr>\n";
+                            if(j === 2) { 
+                                corps_html += "<tr>\n";
+                                    for(var k=0; k<lesson[i].length; k++) corps_html += "<td>"+parseIntNko(lesson[i][k][j])+"</td>\n";
+                                corps_html += "</tr>\n";
                             }
                         }
                     corps_html += "</table>\n---\n";

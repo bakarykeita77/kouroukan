@@ -7,7 +7,6 @@ session_start();
     <head>
         <title>syllabes</title>
  	    <meta charset="utf-8" name="viewport"/>
-  	    <link rel="stylesheet" href="http://localhost:8080/kouroukan/css/class.css">
         <link rel="stylesheet" href="http://localhost:8080/kouroukan/css/syllabes.css">
     </head>
     <body>
@@ -39,12 +38,6 @@ session_start();
         </div>
         <div class="lesson_pied"></div> 
         <audio id="audio"></audio>
-
-        <script src="http://localhost:8080/kouroukan/js/icones.js"></script>
-        <script src="http://localhost:8080/kouroukan/js/caracteres.js"></script>
-        <script src="http://localhost:8080/kouroukan/js/alp.js"></script>
-        <script src="http://localhost:8080/kouroukan/js/class.js"></script>
-        <script src="http://localhost:8080/kouroukan/fonctions.js"></script>
 
     </body>
 </html>

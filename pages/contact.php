@@ -9,7 +9,6 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>contact</title>
     
-    <link rel="stylesheet" href="/kouroukan/css/class.css"/>
     <link rel="stylesheet" href="/kouroukan/css/tete-de-page.css"/>
     <link rel="stylesheet" href="/kouroukan/css/contact.css"/>
 </head>

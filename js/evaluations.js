@@ -3,13 +3,14 @@ function evaluations() {
     var id = JSON.parse(sessionStorage.getItem('id')); 
     var evaluation = $('#evaluation');
     var niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
+    var total_phase = $('.phases li').lenth;
     var phase_class = JSON.parse(sessionStorage.getItem('phase_class'));
 
     var syllabes = syllab();
     var nbr_max_de_questions_a_poser = 20;
     var questions_evaluation = questions();
     var question_evaluation = '', questions_a_evaluer = [], reponse_evaluation = [];
-    var note = 0;
+    var note_d_evaluation = 0;
     var moyenne_d_evaluation = 18;
     var compteur = incrementer();
     var evaluation_counter = 0;
@@ -174,7 +175,7 @@ function evaluations() {
                 let p = (q == r) ? 1:0;
                 let question_reponse = [q,r,p];
                
-                note += p; 
+                note_d_evaluation += p; 
                 evaluation_a_stocker.splice(evaluation_counter,1,question_reponse);
                 chargerEvaluationFicheBody();
                 chargerEvaluationFicheFoot();
@@ -200,8 +201,8 @@ function evaluations() {
                     }
                 }
                 function chargerEvaluationFicheFoot() {
-                    $('#total_point_d_evaluation').html(parseIntNko(nbr_max_de_questions_a_poser)+'/'+parseIntNko(note));
-                    $('#pourcentage_point_d_evaluation').html('%'+parseIntNko(Math.floor((note/nbr_max_de_questions_a_poser)*100)));
+                    $('#total_point_d_evaluation').html(parseIntNko(nbr_max_de_questions_a_poser)+'/'+parseIntNko(note_d_evaluation));
+                    $('#pourcentage_point_d_evaluation').html('%'+parseIntNko(Math.floor((note_d_evaluation/nbr_max_de_questions_a_poser)*100)));
                 }                                    
                 function marquerReponseEvaluation() {    
                     if(reponse_evaluation.join('') == question_evaluation) {
@@ -257,19 +258,20 @@ function evaluations() {
     }
     function stockerEvaluation() {
         $('.correction_btn').on('click', function(){
+            let index_phase_active = $('.phases_container ul li .active').index();
                         
             if(evaluation_counter == nbr_max_de_questions_a_poser) {
-                if(note <  moyenne_d_evaluation) alert( "ߛߍ߬ߦߵߊ߬ ߡߊ߬" ); 
-                if(note >= moyenne_d_evaluation) {
+                if(note_d_evaluation <  moyenne_d_evaluation) alert( "ߛߍ߬ߦߵߊ߬ ߡߊ߬" ); 
+                if(note_d_evaluation >= moyenne_d_evaluation) {
                     if(phase_class == "apprises") {alert("ߦߙߐ ߢߌ߲߬ ߞߍߣߍ߲߫ ߞߘߐ ߟߋ߬"); return false;}
                    
                     let phase_nbr = JSON.parse(sessionStorage.getItem('data_phase_nbr'));
                     sendEvaluationToDB();
-                    changerPhaseActive(phase_nbr);
+                    changerPhaseActive(index_phase_active);
                     sessionStorage.setItem('phase_nbr',JSON.stringify(phase_nbr));
                     
                     
-                    if(phase_nbr === total_phase) {
+                    if(index_phase_active === total_phase) {
                         sessionStorage.setItem('niveau_max',JSON.stringify(niveau_max+1));                                            
                         sessionStorage.setItem('niveau_en_cours',JSON.stringify(niveau_max+2));
                         sessionStorage.setItem('phase_nbr',JSON.stringify(0));
@@ -290,7 +292,7 @@ function evaluations() {
                         niveau : niveau_en_cours,
                         phase  : phase,
                         lesson : lesson,
-                        note   : JSON.stringify(note)
+                        note_d_evaluation   : JSON.stringify(note_d_evaluation)
                     });
             
                     fetch("/kouroukan/pages/actions.php", {

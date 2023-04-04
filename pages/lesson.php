@@ -23,7 +23,6 @@ if(isset($_SESSION["id"])) {
     
     <link rel="stylesheet" href="/kouroukan/css/tete-de-page.css"/>
 	  <link rel="stylesheet" href="/kouroukan/css/lesson.css"/>
-	  <link rel="stylesheet" href="/kouroukan/css/syllabes.css"/>
 
 </head>
 <body style="direction:rtl">
@@ -45,7 +44,7 @@ if(isset($_SESSION["id"])) {
             <h1 class="lesson_title" id="<?= $matiere_id ?>"> <?= $matiere_nom; ?> ߥߟߊ߬ߘߊ  </h1>
           <!----------------------------------------------------------------------------------------------------->  
             
-            <div class="phases_container" id="pratique_phases"></div>
+            <div class="phases_container"></div>
             <div id="travaux_container"><?php include("travaux.php"); ?></div>
 
         </div>

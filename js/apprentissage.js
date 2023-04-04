@@ -202,18 +202,37 @@ function apprentissages() {
     function stockerApprentissage() {
   
         $('#fermer_apprentissage').one('click',function() {
+            let index_phase_active = $('.phases_container ul li .active').index();
 
             note = noterApprentissage();
             if(note <  moyenne_d_apprentissage) alert("ߌ ߡߊ߫ ߛߓߍߘߋ߲ ߥߟߊ ߜߋ߭ ߠߎ߬ ߓߍ߯ ߟߊߡߍ߲߫");
             if(note >= moyenne_d_apprentissage) {
-
-                let data_phase_nbr = JSON.parse(sessionStorage.getItem('data_phase_nbr'));
-
                 sendApprentissageToDB();
-                changerPhaseActive(data_phase_nbr);
+                changerPhaseActive(index_phase_active);
                 initialiserProgressBarr();
             }
 
+            function noterApprentissage() {
+                var note = 0;
+                
+                for(var i=0;i<clicks_memo.length;i++) {
+                    if(clicks_memo[i][2] == "߁") {
+                        note ++;
+                    }
+                }
+                
+                return note;
+                
+                function nombreDeBoutonClicke() {
+                    var sum_click = 0;
+                    
+                    for (var i = 0; i < table_elements_click_nbr.length; i++) {
+                    if(table_elements_click_nbr[i] >= click_min_admis) {    
+                        sum_click ++;
+                    }}
+                    return sum_click;
+                }
+            }
             function sendApprentissageToDB() {       
              /*
              A la fermeture, on s'assure que chaque élément est clické au moins un nombre de fois défini.
@@ -239,27 +258,6 @@ function apprentissages() {
                 })
                 .then(response => response.text())
                 .catch(error => console.log(error));  
-            }
-            function noterApprentissage() {
-                var note = 0;
-                
-                for(var i=0;i<clicks_memo.length;i++) {
-                    if(clicks_memo[i][2] == "߁") {
-                        note ++;
-                    }
-                }
-                
-                return note;
-                
-                function nombreDeBoutonClicke() {
-                    var sum_click = 0;
-                    
-                    for (var i = 0; i < table_elements_click_nbr.length; i++) {
-                    if(table_elements_click_nbr[i] >= click_min_admis) {    
-                        sum_click ++;
-                    }}
-                    return sum_click;
-                }
             }
         });
     } 

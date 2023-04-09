@@ -84,11 +84,14 @@ function evaluations() {
     function evaluer() {
 
         var reponse_font_size = $('#evaluation_reponse').height()/2;
+        var correction_line_height = $('#correcteur_d_evaluation').height();
         $('#evaluation_reponse').css('font-size',reponse_font_size+'px');
+        $('#correcteur_d_evaluation').css('line-height',correction_line_height+'px');
                         
         poserQuestionEvaluation();
         repeterQuestionEvaluation();
         repondreEvaluation();
+        rectificationDEvaluation();
         
         
         function poserQuestionEvaluation() {
@@ -130,12 +133,12 @@ function evaluations() {
                 }
             });
         }
-        function repeterQuestionEvaluation(){
+        function repeterQuestionEvaluation() {
             $('.repetition_btn').on('click', function(){
                 $('#audio').attr({'src':'/kouroukan/son/mp3/'+question_evaluation+'.mp3', 'autoplay':'on'});
             });
         }
-        function repondreEvaluation(){
+        function repondreEvaluation() {
             $('#clavier_nko td').on('click', function(){
              
                 if(question_evaluation == '') rappel($('#evaluation_dialogue_btn'));
@@ -155,13 +158,20 @@ function evaluations() {
                 }
             });
         }
+        function rectificationDEvaluation() {
+            $('#correcteur_d_evaluation').on('click',function() {
+                reponse_evaluation.pop();
+                $('#evaluation_reponse').html(reponse_evaluation.join(''));
+            });
+        }
     }
-    function correctionEvaluation(){
+    function correctionEvaluation() {
         $('.correction_btn').on('click', function(){
              
             corrigerEvaluation();
             actualiserEvaluationProgressBar();
-            effacer();
+            effacerQuestion();
+            effacerCheckMark();
             afficherQuestionButton();
             finDEvaluation();
             
@@ -213,7 +223,7 @@ function evaluations() {
                         setTimeout(function(){ $('#check_mark_cover').css({'left':'-100%'}); },100);
                         setTimeout(function(){ $('#check_mark_container').css({'display':'none'}); },2500);
                     }else{
-                        $("#evaluation_reponse").html(reponse_evaluation.join('')+"<span id='evaluation_cross'>&#10060;</span>");
+                        $("#evaluation_reponse").html(reponse_evaluation.join('')+"<div id='evaluation_cross'>&#10060;</div>");
                         $('#evaluation_cross').css({'display':'block', 'transform':'scale(0.5)', 'opacity':0});
                         setTimeout(function(){ $('#evaluation_cross').css({'transform':'scale(1)', 'opacity':0.75}); }, 100);
                     }
@@ -235,13 +245,15 @@ function evaluations() {
                     $('.progress_question_bar, .progress_bonne_reponse_bar').css('width','+='+progress_unity+'px');
                 }
             }
-            function effacer(){
+            function effacerQuestion() {
+                question_evaluation = '';
+                reponse_evaluation.splice(0,reponse_evaluation.length);
+                $('#reponse').html(reponse_evaluation);
+            }
+            function effacerCheckMark() {
                 setTimeout(function(){
-                    question_evaluation = '';
-                    reponse_evaluation.splice(0,reponse_evaluation.length);
-                    $('#reponse').html(reponse_evaluation);
                     $('#check_mark').empty();
-                },2500);
+                }, 2500);
             }
             function afficherQuestionButton(){
                 $('.correction_btn').css('display','none');

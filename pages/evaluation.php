@@ -43,9 +43,12 @@
 
     <div class="course_foot" id="evaluation_foot">
 
-        <div id='teste_container'>
+        <div id='teste_container'>  
         
-            <p id='evaluation_reponse'></p>
+            <p id="evaluation_reponse_container">
+                <span id='evaluation_reponse'></span>
+                <span id='correcteur_d_evaluation'>ߖߐ߬ߛߌ߬ߙߊ߲</span>
+            </p>
             
             <div id='check_mark_container'>
                 <p id='check_mark'></p>

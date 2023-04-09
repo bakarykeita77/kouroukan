@@ -3,12 +3,12 @@ $('document').ready(function() {
  //Declaration des variables
     var id = JSON.parse(sessionStorage.getItem('id'));     
     var matieres = JSON.parse(sessionStorage.getItem('matieres'));     
-    var matieres_etudiees = [], matiere_active = "", matiere_nom = "", matiere_index = 0, derniere_matiere = "";
+    var matieres_etudiees = [],  matiere_index = 0;
     var niveaux = [], niveau_max = 0, niveau_en_cours = 1;
     
 	var rang = '';
     var data_phase_nbr = 0, phases_distinctes = [], nbr = 0;
-   
+ 
   /*-------------------------------------------------------------------------------------------------------------------
     1)- La situation des études est faite par récupération et traitement des données reçues sur l'apprenant.
 	2)- La liste des phases est établie en fonction du niveau d'étude de l'apprenant (selon les phases étudiées ou pas)

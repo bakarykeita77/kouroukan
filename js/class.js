@@ -6,11 +6,11 @@ $(document).ready(function() {
         setTimeout(function() {$(this).css('display','none');}, 100);
     });
     
-    var fermeture = $('.fermeture');
+    var fermeture = $('.fermeture:not(#fermer_pratique)');
     fermeture.on('click', function(){
         $(this).parent().css({'display':'none'});
     });
-    var fermeture_de_parent = $('.fermeture_de_parent');
+    var fermeture_de_parent = $('.fermeture_de_parent:not(#fermer_pratique)');
     fermeture_de_parent.on('click', function(){
         $(this).parent().parent().css({'display':'none'});
     });

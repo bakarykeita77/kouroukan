@@ -20,7 +20,7 @@
 
 #evaluation_body {
     border: 0.5rem solid white;
-    height: calc(100% - 20rem);
+    height: calc(100% - 16rem);
     box-sizing: border-box;
 }
 #evaluation_guide {
@@ -38,18 +38,28 @@
     box-sizing: border-box;
     z-index: 1;
 }
-#clavier_evaluation { border-radius: 0 0 0.5rem 0.5rem; }
-#evaluation_reponse_container, #evaluation_image_container {
+#clavier_evaluation { 
+    position: absolute;
+    bottom: 3.5rem;
+    border-radius: 0 0 0.5rem 0.5rem; 
+}
+#evaluation_image_container {
     position: absolute;
     height: 100%;
     width: 100%;
 }
 #evaluation_reponse_container {
+    position: relative;
+    background-color: var(--couleur_6);
+    border: var(--border_6);
+    width: 100%;
+    height: calc(100% - 2px);
+    margin: auto;
+    line-height: 100%;
     transition: 0.4s;
     z-index: 1;
 }
 #evaluation_reponse, #evaluation_cross {
-    border: 1px solid #666;
     position: absolute;
     font-weight: bold;
 }
@@ -57,16 +67,27 @@
     background-color: var(--couleur_6);
     border-radius: 0.5rem 0.5rem 0 0;
     color: white;
-    width: 100%;
-    height: calc(100% - 2px);
-    line-height: 100%;
+    width: 80%;
+    height: calc(3.75rem - 4px);
+    line-height: 3.75rem;
     margin: 0;
     padding: 0;
     text-align: center;
 }
+#correcteur_d_evaluation {
+    position: absolute;
+    height: calc(100% - 2rem);
+    width: calc(20% - 2rem);
+    min-width: 3rem;
+    font-size: 0.8rem;
+    text-align: center;
+    top: 1rem;
+    left: 1rem;
+    background-color: var(--couleurNeutre);
+    box-shadow: var(--shadow_16);
+    border-radius: var(--radiusSmall);
+}
 #evaluation_foot {
-    position: relative;
-    margin: 0;
     padding: 0;
 }
 
@@ -111,6 +132,8 @@
     height: 2rem;
     line-height: 2rem;
 }
+#evaluation_fiche_head .th:nth-child(1), #evaluation_fiche_head .th:nth-child(2) { width: 40%; padding-right: 0.5rem; }
+#evaluation_fiche_head span:nth-child(3) { flex-grow: 1; text-align: center; }
 #evaluation_fiche_body span:nth-child(1), #evaluation_fiche_body span:nth-child(2) {
     text-align: right;
     width: calc(40% - 1rem);
@@ -134,6 +157,7 @@
 #evaluation_fiche_foot div { margin: 0.125rem; }
 #label_total_point_d_evaluation, #label_pourcentage_point_d_evaluation { 
     display: inline-block;
+    vertical-align: top;
     height: 1.5rem;
     width: calc(80% - 4px);
     text-align:right; 
@@ -146,16 +170,18 @@
     height: 1.25rem;
     width: calc(20% - 0.25rem);
     padding: 0;
-    float: left;
 }
 
-#evaluation_dialogue_btn {
-    width: calc(100% - 6rem);
-    text-align: center;
+#evaluation_dialogue_btn {   
+    width: 100%;
+    margin: 0.5rem auto;
+    bottom: 0;
     border-radius: var(--radiusLarge);
     border: var(--border_c);
+    background-color: var(--couleurNeutre);
     box-shadow: var(--shadow_1a);
-    margin: 0.5rem auto;
+    left: 50%;
+    transform: translate(-50%, 0);
 }
 #evaluation_dialogue_btn:active { box-shadow: none; }
 #evaluation_image_container {
@@ -218,8 +244,6 @@
 #fiche_croix { color: rgba(255,0,0,0.5); }
 #lesson_entete div { width: 160px; overflow: hidden; }
 .stop_btn_container, .oreille_icon_container { display: none; }
-#evaluation_head {
-}
 #evaluation_body { padding: 0; }
 #evaluation_clavier_container { border-radius: var(--radiusSmall); }
 #teste_container {
@@ -241,11 +265,16 @@
 #evaluation_cross {
     display: none;
     position: absolute;
+    background-color: var(--couleur_6);
+    border-radius: 0.5rem 0.5rem 0 0;
+    width: 100%;
+    height: 100%;
+    line-height: 150%;
+    text-align: center;
     top: 0;
     left: 0;
     margin: 0;
     padding: 0;
-    height: 100%;
     color: rgba(255,0,0,0.8);
     transform: scale(0.75);
     transition: 0.6s;
@@ -258,6 +287,7 @@
     margin: 0;
     height: 5rem;
     width: 5rem;
+    text-align: center;
     line-height: 5rem;
     top: 0;
     left: 0;
@@ -292,16 +322,17 @@
 
 
     #evaluation_head, #evaluation_body, #evaluation_foot {
-        position: relative;
+        position: absolute;
         width: 96%;
         max-width: 400px;
-        margin: auto ;
+        left: 50%;
+        transform: translate(-50%,0);
     }
     #evaluation_head { top: 0; display: none; }
     #evaluation_body { top: 0; }
-    #evaluation_foot { height: 50%; bottom: 0; }
+    #evaluation_foot { height: 16.5rem; bottom: 0; }
     #evaluation_fiche_foot div:nth-child(2) { display: none; }
-    #teste_container {  height: calc(100% - 12.5rem); }
+    #teste_container {  height: calc(3.75rem - 2px); }
     #evaluation_fiche { width: 100%; top: 0; }
     #evaluation_message_de_fin_container {
         top: calc(100% - 7rem);

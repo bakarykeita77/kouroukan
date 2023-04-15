@@ -84,6 +84,8 @@ if(isset($_SESSION["id"])) {
 
     <audio id="audio"></audio>
 
+       
+    <script src="/kouroukan/js/parametres.js"></script>
     <script src="/kouroukan/fonctions.js"></script>
     <script src="/kouroukan/js/lessons.js"></script>
 
@@ -91,9 +93,14 @@ if(isset($_SESSION["id"])) {
     <script src="/kouroukan/js/syllabes.js"></script>
     <script src="/kouroukan/js/tons.js"></script>
     <script src="/kouroukan/js/chiffres.js"></script>
-       
 </body>
 </html>
 <?php
    }else { header("location:programmes.php"); }
 ?>
+
+
+
+
+
+

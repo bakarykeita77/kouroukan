@@ -5,6 +5,7 @@ $('document').ready(function() {
     var matieres = JSON.parse(sessionStorage.getItem('matieres'));     
     var matieres_etudiees = [],  matiere_index = 0;
     var niveaux = [], niveau_max = 0, niveau_en_cours = 1;
+    var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));
     
 	var rang = '';
     var data_phase_nbr = 0, phases_distinctes = [], nbr = 0;
@@ -169,7 +170,6 @@ $('document').ready(function() {
              //Cas specifique de pratiques                    
                 if(localOptionsLength === 4) {
                     $('#syllabes_pratique, #tons_pratique, #chiffres_pratique').removeClass('active').addClass('apprises');
-                    $('#syllabes_pratique, #tons_pratique, #chiffres_pratique').next().removeClass('a_apprendre').addClass('active');
                 }
             });
     	}
@@ -230,12 +230,12 @@ $('document').ready(function() {
         lettres = voyelles_cochees.concat(consonnes_cochees,tedos_coches);
         syllabes = syllab();
     	
-    	$('#phases_list li').on('click', function(e){
-      
+    	$('#phases_list li').on('click', function(){
+            
             var syllabes = syllab();
             var syllabes_tonifies = tonification(); // Voir js/tons.js 
 
-            var questionnaires = questions();
+            var questionnaires = questions(niveau_actif);
             var questions_quantity = quantiteDeQuestion();
             var quantite_de_question = quantiteDeQuestion();
             var compteur_de_question = 0;
@@ -311,16 +311,6 @@ $('document').ready(function() {
             function affichageDeCours(){
             	$('.course_container').css({'display':'block'});
                 $('.course').css('display','none');
-            }
-            function questions() {
-                var lq = '';
-                
-                if(niveau_en_cours==1) lq = malaxer(lettres);
-                if(niveau_en_cours==2) lq = malaxer(syllabes);
-                if(niveau_en_cours==3) lq = malaxer(syllabes_tonifies);
-                if(niveau_en_cours==4) lq = malaxer(chiffres);
-                
-                return lq;
             }
             function quantiteDeQuestion(){
                 let nq = 0;

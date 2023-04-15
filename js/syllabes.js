@@ -1,8 +1,10 @@
+    var niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
+    var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));
 
     var voyelles_cochees = $('#voyelles_cochees').html().split('');
     var consonnes_cochees = $('#consonnes_cochees').html().split('');
     var tedos_coches = $('#tedos_coches').html().split('');
-    var tons_coches = [''].concat($('#tons_coches').html().split(''));
+    var tons_chgoches = [''].concat($('#tons_coches').html().split(''));
     var nasalisations_cochees = [''].concat($('#nasalisations_cochees').html().split(''));
     var caracteres_coches = [voyelles_cochees, consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees];
 
@@ -32,8 +34,8 @@
         let slb = [];
         let voyelles = caracteres_coches[0];
         let consonnes = caracteres_coches[1];
-        let tedo = caracteres_coches[2];
-        let nasalisation = (caracteres_coches[3]) ? caracteres_coches[3] : [];
+        let nasalisation = caracteres_coches[4];
+        let tons = (niveau_actif > 2) ? caracteres_coches[3] : [];
        
         for(var i=0; i<nasalisation.length; i++) {
         for(var j=0; j<consonnes.length;    j++) {

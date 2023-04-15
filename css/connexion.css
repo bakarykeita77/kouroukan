@@ -1,9 +1,9 @@
 #logo { display: none; }
 #connexion_container {
 	position: absolute;
-    margin: 0;
     padding: 0;
 	width: 80%;
+	max-width: 50rem;
 	min-height: 25rem;
 	top: 50%;
 	left: 50%;
@@ -42,7 +42,6 @@
 	border-bottom-color: #aaa;
 	margin: 1rem 0;
 }
-.input_box:hover label { color: cornflowerblue; } 
 .input_box input, 
 .input_box label {
 	position: absolute;
@@ -68,8 +67,10 @@
 	cursor: pointer;
 	z-index: 1; 
 }
+.input_box:hover label { color: cornflowerblue; } 
 .input_box input:hover { 
-	background-color: #eee;
+	background-color: #aaa;
+	opacity: 0.25;
 	color: #ddd;
 	border-radius: var(--radiusMedium);
 	border-color: transparent;

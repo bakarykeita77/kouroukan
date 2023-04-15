@@ -60,6 +60,7 @@
 
          }
         function chargementDesElementsDeLessonParametres(){
+
             consonnes_checker.html(consonnesCheckerHTML());
             tedo_checker.html(tedoCheckerHTML());
             voyelles_checker.html(voyellesCheckerHTML());
@@ -313,11 +314,12 @@
     }	
     function affichageDeParametres(){ 
         
-        $(".parametres_btns").on('mouseover', function() { afficherParametres(); });
+        $(".btns").on('mouseover', function() { afficherParametres(); });
         $(".parametres_popup").on('mouseleave', function(){ masquerParametres(); });
         $('.course_container, #submit_btn').on('click', function(){ masquerParametres(); });
         
         function afficherParametres() { 
+            alert('ok');
             $(".media_btns").css({"tansform":"scale(0.75)", "opacity":0});
             $(".media_btns").css({"display":"none"});
 

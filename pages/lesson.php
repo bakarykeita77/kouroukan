@@ -86,6 +86,11 @@ if(isset($_SESSION["id"])) {
 
     <script src="/kouroukan/fonctions.js"></script>
     <script src="/kouroukan/js/lessons.js"></script>
+
+    <script src="/kouroukan/js/alphabet.js"></script>
+    <script src="/kouroukan/js/syllabes.js"></script>
+    <script src="/kouroukan/js/tons.js"></script>
+    <script src="/kouroukan/js/chiffres.js"></script>
        
 </body>
 </html>

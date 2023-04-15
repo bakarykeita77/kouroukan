@@ -111,9 +111,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0;}
     text-align: center;
 }
 .btn span:last-child { margin-right: 2rem; }
-.btns {    
-    bottom: 0;
-}
+.btns { bottom: 0; }
 .btns_label { padding-right: 1rem; }
 .bulle {
     position: relative;
@@ -284,11 +282,13 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0;}
 .dialogue_btn {
     position: absolute;
     padding: 0.125rem 0;
+    width: 80%;
     height: 2rem;
     line-height: 2rem;
     text-align: center;
     font-weight: bold;
-    cursor: pointer;
+    left: 50%;
+    transform: translateX(-50%);
     transition: 0.25s;
 }
 
@@ -505,13 +505,14 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0;}
 .masqueur_de_parent:active { background-color: #aaa; }
 .matiere { position: relative; }
 .media {
-    position: relative;
+    position: absolute;
     background-color: var(--couleurNeutre);
     height: 1.5rem;
     width: 10rem;
     top: 0;
     border: var(--borderSecondaire);
     border-radius: var(--radiusSmall);
+    cursor: pointer;
 }
 .media_btns {
     position: absolute;
@@ -615,18 +616,13 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0;}
     height: 1.5rem;
     width: 10rem;
     top: 0;
-    left: 10%;
     border: var(--borderSecondaire);
     border-radius: var(--radiusSmall);
+    cursor: pointer;
 }
-.parametres_container .btn {
-    margin: var(--marginSmall);
-    border-radius: var(--radiusSmall);
-}
-.parametres_container .btn:hover { box-shadow: var(--shadow_3a); }
 .parametres_container {
     position: absolute;
-    display: none;
+    display: block;
     height: 0;
     width: 25rem;
     margin: 0;
@@ -635,6 +631,11 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0;}
     opacity: 0;
     z-index: 10;
 }
+.parametres_container .btn {
+    margin: var(--marginSmall);
+    border-radius: var(--radiusSmall);
+}
+.parametres_container .btn:hover { box-shadow: var(--shadow_3a); }
 .parametres_btns {
     height: 1.5rem;
     line-height: 1.5rem;
@@ -793,7 +794,6 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0;}
 /* --------------------------------------------------------------------------------------------------------- */
 
 .table_parlante, .table_muette {
-    position: absolute;
     padding: 1.5rem;
     width: 100%;
 }
@@ -873,7 +873,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0;}
 
 
 @media screen and (orientation: landscape) {
-	.page_body { width: 80%; max-width: 700px;  margin: auto; }
+	.page_body { width: 80%; max-width: 800px;  margin: auto; }
 	.cover { background-color: rgba(0, 0, 0, 0.7); }
     .phases {
         height: 5rem;

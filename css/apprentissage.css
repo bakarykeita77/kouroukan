@@ -33,3 +33,5 @@
 #apprentissage_dialogue_btn { 
     border-radius: 0.5rem; 
 }
+#apprentissage_dialogue_btn .btns:nth-child(1) { right: 0; }
+#apprentissage_dialogue_btn .btns:nth-child(2) { left: 0; }

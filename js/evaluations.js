@@ -1,17 +1,18 @@
 function evaluations() {
         
     var id = JSON.parse(sessionStorage.getItem('id')); 
+    var matiere_nom = JSON.parse(sessionStorage.getItem('matiere_nom')); 
     var evaluation = $('#evaluation');
     var niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
     var total_phase = $('.phases li').lenth;
     var phase_class = JSON.parse(sessionStorage.getItem('phase_class'));
 
     var syllabes = syllab();
-    var nbr_max_de_questions_a_poser = 20;
-    var questions_evaluation = questions();
+    var nbr_max_de_questions_a_poser = 2;
+    var questions_evaluation = questions(niveau_en_cours);
     var question_evaluation = '', questions_a_evaluer = [], reponse_evaluation = [];
     var note_d_evaluation = 0;
-    var moyenne_d_evaluation = 18;
+    var moyenne_d_evaluation = 1 ;
     var compteur = incrementer();
     var evaluation_counter = 0;
     
@@ -35,16 +36,7 @@ function evaluations() {
     correctionEvaluation();
     stockerEvaluation();
 
-    function questions() {
-        var lq = '';
-        
-        if(niveau_en_cours==1) lq = malaxer(lettres);
-        if(niveau_en_cours==2) lq = malaxer(syllabes);
-        if(niveau_en_cours==3) lq = malaxer(syllabes_tonifies);
-        if(niveau_en_cours==4) lq = malaxer(chiffres);
-        
-        return lq;
-    }
+    
     function initialiserEvaluation() {
         
         initialisationDEvaluationEntete();
@@ -175,8 +167,6 @@ function evaluations() {
             afficherQuestionButton();
             finDEvaluation();
             
-            evaluation_counter++;
-            
             
             function corrigerEvaluation(){
                 
@@ -184,8 +174,10 @@ function evaluations() {
                 let r = reponse_evaluation.join('');
                 let p = (q == r) ? 1:0;
                 let question_reponse = [q,r,p];
-               
+                
+                evaluation_counter++;
                 note_d_evaluation += p; 
+
                 evaluation_a_stocker.splice(evaluation_counter,1,question_reponse);
                 chargerEvaluationFicheBody();
                 chargerEvaluationFicheFoot();
@@ -263,7 +255,7 @@ function evaluations() {
             function finDEvaluation() {
                 if(q_index==nbr_max_de_questions_a_poser){
                     $('.question_btn').off('click');
-                    $('.question_btn').html('ߞߘߐߓߐߟߌ ߓߘߊ߫ ߓߊ߲߫. ߌ ߞߎߟߎ߲ߖߋ߫߹ ');
+                    $('.question_btn').html(matiere_nom+' ߞߘߐߓߐߟߌ ߓߘߊ߫ ߓߊ߲߫. ߌ ߞߎߟߎ߲ߖߋ߫߹ ');
                 }
             }
         });
@@ -304,9 +296,9 @@ function evaluations() {
                         niveau : niveau_en_cours,
                         phase  : phase,
                         lesson : lesson,
-                        note_d_evaluation   : JSON.stringify(note_d_evaluation)
+                        note   : note_d_evaluation
                     });
-            
+           
                     fetch("/kouroukan/pages/actions.php", {
                         method: "POST",
                         body: evaluation_data 

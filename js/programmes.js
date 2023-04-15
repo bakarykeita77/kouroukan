@@ -75,8 +75,8 @@ Au click sur l'afficheur du programme
         
         // programme_div.innerHTML = programmeHTML();
         programme_matieres.innerHTML = programmeHTML();
-        programmeStyle();
         storageDeLaMatiereActive();
+        programmeStyle();
         programmeNavigation();
         changerProgramme();
        // alerter();
@@ -149,7 +149,7 @@ Au click sur l'afficheur du programme
                 reception.css('display','block');
             });
             
-        //Le click sur le bouton next redirige sur la page de lessons.
+        // Le click sur le bouton next redirige sur la page de lessons.
         }
         function alerter() {
             $('#programme_ul li').on('click', function() {

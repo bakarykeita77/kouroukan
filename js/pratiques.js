@@ -52,7 +52,7 @@ function pratique() {
     afficherPratique();
     dimensionnerPratique();
     afficherPratiqueOptions();
-    optionStyles();
+    optionStyles(); 
     pratiquer();
     stockerPratique();
  

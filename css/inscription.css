@@ -1,9 +1,9 @@
 #logo { display: none; }
 #inscription_container {
 	position: absolute;
-    margin: 0;
     padding: 0;
 	width: 80%;
+	max-width: 50rem;
 	min-height: 32rem;
 	top: 50%;
 	left: 50%;
@@ -16,7 +16,6 @@
 	background-color: var(--couleurNeutre);
 	border-radius: var(--radiusMedium);
 	box-sizing: border-box;
-	direction: rtl;
 }
 #inscription_form h2 {
     margin: 0;
@@ -26,7 +25,6 @@
 #formulaire_de_connexion { margin-top: 1rem; }
 .input_box, #button_box {
 	position: relative;
-	margin: 0.5rem 0;
 	height: 2.5rem;
 }
 .input_box {
@@ -34,7 +32,6 @@
 	border-bottom-color: #aaa;
 	margin: 0.5rem 0;
 }
-.input_box:hover label { color: cornflowerblue; } 
 .input_box input, 
 .input_box label {
 	position: absolute;
@@ -62,11 +59,12 @@
 	z-index: 1; 
 }
 .input_box input:hover { 
-	background-color: #eee;
-	color: #ddd;
+	background-color: #aaa;
+	opacity: 0.25;
 	border-radius: var(--radiusMedium);
 	border-color: transparent;
 }
+.input_box:hover label { color: cornflowerblue; } 
 .input_box input:valid ~ label,
 .input_box input:focus ~ label {
 	top: -1.75rem;

@@ -7,7 +7,7 @@ session_start();
     <head>
         <title>syllabes</title>
  	    <meta charset="utf-8" name="viewport"/>
-        <link rel="stylesheet" href="http://localhost:8080/kouroukan/css/syllabes.css">
+        <link rel="stylesheet" href="/kouroukan/css/syllabes.css">
     </head>
     <body>
         

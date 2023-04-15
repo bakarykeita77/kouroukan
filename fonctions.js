@@ -284,6 +284,17 @@
 		
 		son.play();
 	}
+
+    function questions(niveau) {
+        var lq = '';
+        
+        if(niveau==1) lq = malaxer(lettres);
+        if(niveau==2) lq = malaxer(syllabes);
+        if(niveau==3) lq = malaxer(syllabes_tonifies);
+        if(niveau==4) lq = malaxer(chiffres);
+        
+        return lq;
+    }
     
     function rappel(button) {
         setTimeout(() => { button.css('box-shadow','none'); }, 100);

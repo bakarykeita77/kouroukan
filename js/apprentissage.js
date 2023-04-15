@@ -3,6 +3,7 @@ function apprentissages() {
     var id              = JSON.parse(sessionStorage.getItem('id'));  
     var apprentissage   = $('#apprentissage');
     var niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
+    var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));
     var phase_id        = JSON.parse(sessionStorage.getItem('phase_id'));
     var moyenne_d_apprentissage = JSON.parse(sessionStorage.getItem("moyenne"));
 
@@ -75,7 +76,7 @@ function apprentissages() {
         }
         function apprentissageProgressBarr() {
                         
-            var nbr_click = questions().length;
+            var nbr_click = questions(niveau_actif).length;
             var progress_unity = $('#apprentissage_progress_bar').width()/nbr_click;
             
          /*
@@ -90,18 +91,6 @@ function apprentissages() {
                 if(elements_clickes.indexOf($(this).html()) == -1) $('.progress_bonne_reponse_bar').css('width','+='+progress_unity+'px');
                 elements_clickes.push($(this).html());
             });
-
-            
-            function questions() {
-                var lq = '';
-                
-                if(niveau_en_cours==1) lq = malaxer(lettres);
-                if(niveau_en_cours==2) lq = malaxer(syllabes);
-                if(niveau_en_cours==3) lq = malaxer(syllabes_tonifies);
-                if(niveau_en_cours==4) lq = malaxer(chiffres);
-                
-                return lq;
-            }
         }
     }
     function enregistrerApprentissage() {

@@ -298,8 +298,10 @@
         caracteres_coches = [voyelles_cochees, consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees];
 
         lettres = voyelles_cochees.concat(consonnes_cochees,tedos_coches);
-        syllabes = JSON.parse(sessionStorage.getItem('syllabes')); // Voir js/syllabes.js 
-        syllabes_tonifies = JSON.parse(sessionStorage.getItem('syllabes_tonifies')); // Voir js/tons.js
+        syllabes = syllab();                // Voir js/syllabes.js 
+        syllabes_tonifies = tonification(); // Voir js/tons.js
+
+
 
         sessionStorage.setItem('voyelles_cochees'     , JSON.stringify(voyelles_cochees));
         sessionStorage.setItem('consonnes_cochees'    , JSON.stringify(consonnes_cochees));
@@ -319,7 +321,7 @@
         $('.course_container, #submit_btn').on('click', function(){ masquerParametres(); });
         
         function afficherParametres() { 
-            alert('ok');
+          
             $(".media_btns").css({"tansform":"scale(0.75)", "opacity":0});
             $(".media_btns").css({"display":"none"});
 

@@ -85,24 +85,26 @@ if(isset($_SESSION["id"])) {
     <audio id="audio"></audio>
 
        
+	<script src="/kouroukan/fonctions.js"></script>
+	<script src="/kouroukan/js/caracteres.js"></script>
+    
+	<script src="/kouroukan/js/syllabes.js"></script>
+	<script src="/kouroukan/js/tons.js"></script>
+	<script src="/kouroukan/js/chiffres.js"></script>
+	
     <script src="/kouroukan/js/parametres.js"></script>
-    <script src="/kouroukan/fonctions.js"></script>
-    <script src="/kouroukan/js/lessons.js"></script>
+    <script src="/kouroukan/class-fonctions.js"></script>
 
+    <script src="/kouroukan/js/travaux.js"></script>
+    <script src="/kouroukan/js/apprentissage.js"></script>
+    <script src="/kouroukan/js/exercices.js"></script>
+    <script src="/kouroukan/js/pratiques.js"></script>
+    <script src="/kouroukan/js/evaluations.js"></script>
+    <script src="/kouroukan/js/lessons.js"></script>
     <script src="/kouroukan/js/alphabet.js"></script>
-    <script src="/kouroukan/js/syllabes.js"></script>
-    <script src="/kouroukan/js/tons.js"></script>
-    <script src="/kouroukan/js/chiffres.js"></script>
 </body>
 </html>
 <?php
    }else { header("location:programmes.php"); }
 ?>
-
-
-
-
-
-
-
 

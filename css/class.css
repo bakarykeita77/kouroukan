@@ -101,18 +101,20 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0;}
 
 .btn { 
     height: 1.5rem; 
-    margin: 0.125rem; 
+    margin: 1rem; 
     border-radius: var(--radiusSmall);
 }
-.btn span { height: 1.5rem; line-height: 1.5rem; }
+.btn span { display: inline-block; height: 1.5rem; }
 .btn span:first-child {
     width: 1.5rem;
+    border: var(--border_c);
+    border-radius: var(--radiusSmall);
     line-height: 1.5rem;
     text-align: center;
+    font-size: large;
 }
-.btn span:last-child { margin-right: 2rem; }
+.btn span:last-child { margin-right: 0.5rem; }
 .btns { bottom: 0; }
-.btns_label { padding-right: 1rem; }
 .bulle {
     position: relative;
     display: inline-block;
@@ -146,10 +148,15 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0;}
 .centerV { top: 50%; transform: translateY(-50%); }
 .checkbox {
     position: relative;
+    top: 0;
+    padding: 0;
+    margin: 0;
     display: inline-block;
     background-color: #eee;
-    top: 0;
-    min-width: 5rem;
+    height: 16rem;
+}
+.checkbox tbody {  
+    width: 100%; 
 }
 .checkbox_titre {
     background-color: #bbb;
@@ -157,6 +164,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0;}
     height: 1.5rem;
     padding-right: 0.5rem;
 }
+.checkbox_titre td { position: relative; width: 100%; }
 .check_btn {
     display: block;
     min-width: 3rem;
@@ -170,6 +178,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0;}
     padding-right: 0.5rem;
     overflow: auto
 }
+.check_btn_container table { height: 12rem; }
 .check_btn:hover {
     background-color: var(--couleurNeutre);
     box-shadow: var(--shadow_36);
@@ -285,7 +294,6 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0;}
     width: 80%;
     height: 2rem;
     line-height: 2rem;
-    text-align: center;
     font-weight: bold;
     left: 50%;
     transform: translateX(-50%);
@@ -508,7 +516,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0;}
     position: absolute;
     background-color: var(--couleurNeutre);
     height: 1.5rem;
-    width: 10rem;
+    padding: 0 0.5rem;
     top: 0;
     border: var(--borderSecondaire);
     border-radius: var(--radiusSmall);
@@ -517,6 +525,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0;}
 .media_btns {
     position: absolute;
     display: none;
+    right: 0;
     height: 6rem;
     width: 10rem;
     padding: 1rem;
@@ -614,7 +623,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0;}
     position: absolute;
     background-color: var(--couleurNeutre);
     height: 1.5rem;
-    width: 10rem;
+    padding: 0 0.5rem;
     top: 0;
     border: var(--borderSecondaire);
     border-radius: var(--radiusSmall);
@@ -622,9 +631,8 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0;}
 }
 .parametres_container {
     position: absolute;
-    display: block;
-    height: 0;
-    width: 25rem;
+    left: 0;
+    bottom: calc(100% + 1rem);
     margin: 0;
     padding: 0;
     transition: 0.25s;
@@ -639,16 +647,15 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0;}
 .parametres_btns {
     height: 1.5rem;
     line-height: 1.5rem;
-    padding-right: 1rem;
 }
 .parametres_popup {
-    position: absolute;
-    bottom: calc(100% + 0.5rem);
     margin: 0;
-    min-width: 25rem;
+    height: 60vh;
+    max-height: 21rem;
+    width: 80vw;
+    max-width: 35rem;
     background-color: var(--couleurNeutre);
-    box-shadow: var(--shadow_36);
-    left: 0;
+    overflow: auto;
 }
 .parentgrid { display: grid; }
 .parentcell { display: table-cell; vertical-align: middle; }

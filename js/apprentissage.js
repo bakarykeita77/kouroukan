@@ -14,7 +14,6 @@ function apprentissages() {
     $('.fermeture').attr('id', 'fermer_apprentissage');
 
     afficherCourse(apprentissage);
-    parametresPosition();
     chargerApprentissage();
     apprendre();
     enregistrerApprentissage();
@@ -31,19 +30,6 @@ function apprentissages() {
         return lesson_courante;
     }
     function chargerApprentissage() { $('#apprentissage_body').html( "<div id='table_parlante_container'>"+lesson_courante+"</div>" ); }
-    function parametresPosition() {
-
-        let param_btn = document.querySelector('#parametre_lesson_btn');
-        let param_btn_object = param_btn.getBoundingClientRect();
-        let param_btn_top = param_btn_object.top;
-        let param_btn_left = $('#parametre_lesson_btn').offset().left;
-
-        let parametres_container = document.querySelector('.parametres_container');
-        let parametres_object = parametres_container.getBoundingClientRect();
-        let parametres_height = parametres_object.height;
-
-        $('.parametres_container').offset({'top':param_btn_top, 'left':param_btn_left});
-    }
     function apprendre() {
         
         affichageDesBoutonsMedia();

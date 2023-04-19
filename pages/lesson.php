@@ -52,7 +52,6 @@ if(isset($_SESSION["id"])) {
     </div>
 
     <div class="course_container">
-      <div class="parametres_container" id="parametre_lesson_container"> <?php include("parametre.php"); ?> </div>
         
       <!--------------------------------------------------------------------------------------------------------------->
         <span class="fermeture" id="">&times;</span>
@@ -84,13 +83,13 @@ if(isset($_SESSION["id"])) {
 
     <audio id="audio"></audio>
 
-       
-	<script src="/kouroukan/fonctions.js"></script>
-	<script src="/kouroukan/js/caracteres.js"></script>
-    
-	<script src="/kouroukan/js/syllabes.js"></script>
-	<script src="/kouroukan/js/tons.js"></script>
-	<script src="/kouroukan/js/chiffres.js"></script>
+        
+    <script src="/kouroukan/fonctions.js"></script>
+    <script src="/kouroukan/js/caracteres.js"></script>
+      
+    <script src="/kouroukan/js/syllabes.js"></script>
+    <script src="/kouroukan/js/tons.js"></script>
+    <script src="/kouroukan/js/chiffres.js"></script>
 	
     <script src="/kouroukan/js/parametres.js"></script>
     <script src="/kouroukan/class-fonctions.js"></script>

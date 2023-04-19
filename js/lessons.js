@@ -48,7 +48,7 @@ $('document').ready(function() {
     }
 
   /*-----------------------------------------------------------------------------------------------------------------*/
-    dimensionnementDelesson();
+    
     phases();
     matiere();
    
@@ -79,11 +79,6 @@ $('document').ready(function() {
         phases_2_distinctes = JSON.parse(sessionStorage.getItem('phases_2_distinctes'));
         phases_3_distinctes = JSON.parse(sessionStorage.getItem('phases_3_distinctes'));
         phases_4_distinctes = JSON.parse(sessionStorage.getItem('phases_4_distinctes'));
-    }
-    function dimensionnementDelesson() {
-        let page_head_height = $('.page_head').height()
-        let page_body_height = $('.page_body').height()
-        let page_foot_height = $('.page_foot').height()
     }
     function phases() {
         
@@ -313,14 +308,14 @@ $('document').ready(function() {
                 $('.course').css('display','none');
             }
             function quantiteDeQuestion(){
-                let nq = 0;
+                let qq = 0;
                 
-                if(matiere_index==0) nq = 20;
-                if(matiere_index==1) nq = 40;
-                if(matiere_index==2) nq = 40;
-                if(matiere_index==3) nq = 40;
+                if(matiere_index==0) qq = 20;
+                if(matiere_index==1) qq = 40;
+                if(matiere_index==2) qq = 40;
+                if(matiere_index==3) qq = 40;
                 
-                return nq; 
+                return qq; 
             }
     	    function cours() {
                 

@@ -128,7 +128,7 @@
                 var tch = '';
                 tch += "<table class='checkbox' id='checkbox_tons'>\n";
                     tch += "<tr class='checkbox_titre'><td><input type='checkbox' name='tons_checkbox' class='checkbox_parent'><label for='tons_checkbox'>ߞߊ߲ߡߊߛߙߋ</label></td></tr>\n";
-                    tch += "<tr class='check_btn_container ponctuations'>\n";
+                    tch += "<tr class='check_btn_container'>\n";
                         for(var i=0;i<tons.length;i++){
                             tch += "<td class='check_btn'><input type='checkbox' name='ton_"+i+"' value='"+tons[i]+"' class='checkbox_children ton'><label class='ton_signe' for='ton_"+i+"'>"+tons[i]+"</label></td>\n";
                         }
@@ -142,7 +142,7 @@
                 
                 nch += "<table class='checkbox' id='checkbox_nasalisation'>\n";
                     nch += "<tr class='checkbox_titre'><td><input type='checkbox' name='nasalisation_checkbox' class='checkbox_parent'><label for='nasalisation_checkbox'>ߞߊ߲ߠߊߘߌߦߊߟߊ߲</label></td></tr>\n";
-                    nch += "<tr class='check_btn_container nasalisations_btn_container'>\n";
+                    nch += "<tr class='check_btn_container'>\n";
                         for(var i=0;i<nasalisations.length;i++){
                             nch += "<td class='check_btn'><input type='checkbox' name='nasalisation_"+i+"' value='"+nasalisations[i]+"' class='checkbox_children nasalisation'><label for='nasalisation_"+i+"'>"+nasalisations[i]+"</label></td>\n";
                         }
@@ -316,9 +316,9 @@
     }	
     function affichageDeParametres(){ 
         
-        $(".btns").on('mouseover', function() { afficherParametres(); });
+        $("#parametre_lesson").on('mouseover', function() { afficherParametres(); });
         $(".parametres_popup").on('mouseleave', function(){ masquerParametres(); });
-        $('.course_container, #submit_btn').on('click', function(){ masquerParametres(); });
+        $('#submit_btn').on('click', function(){ masquerParametres(); });
         
         function afficherParametres() { 
           

@@ -27,6 +27,7 @@
             </div>
 
             <div class="btns parametre" id="parametre_lesson">
+                <div class="parametres_container" id="parametre_lesson_container"> <?php include("parametre.php"); ?> </div>
                 <div class='parametres_btns' id='parametre_lesson_btn'>
                     <span class='parametre_icon'>&#9881;</span>
                     <span class='parametre_label'>ߛߏ߯ߙߏߟߊ߲</span>  

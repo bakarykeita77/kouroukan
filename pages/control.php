@@ -19,12 +19,12 @@
 			
 			ajouterClient($prenom, $nom, $naissance, $sexe, $adresse, $email, $password);
 
-			header("location:http://localhost:8080/kouroukan/pages/gestion_clients.php");
+			header("location:/kouroukan/pages/gestion_clients.php");
 		 break;
 		case 'supprimer_client':
 			$id = isset($_GET['id']) ?$_GET['id']:"";
 			supprimerClient($id);
-			header("location:http://localhost:8080/kouroukan/pages/gestion_clients.php");
+			header("location:/kouroukan/pages/gestion_clients.php");
 		 break;
 		case 'modifier_client':
 
@@ -39,7 +39,7 @@
 
 			modifierClient($id, $prenom, $nom, $naissance, $sexe, $adresse, $email, $password);
 
-			header("location:http://localhost:8080/kouroukan/pages/gestion_clients.php");
+			header("location:/kouroukan/pages/gestion_clients.php");
 		 break;
 		case 'connexion':
 
@@ -54,7 +54,7 @@
 			$db_password = passCorrespondant($client_email);
 
 			if(in_array($client_email, $db_emails)  && $client_password===$db_password){
-				header("location:http://localhost/kouroukan/pages/formations.php");
+				header("location:/kouroukan/pages/formations.php");
 			}else{
 				die("Email ou Mot de pass incorrect");
 			};
@@ -68,7 +68,7 @@
 		 	$requette = $db->exec($sql);
 
 		 	// archiverNotes($numero, $question, $reponse, $points);
-			 // header("location:http://localhost/kouroukan/index.php?page=formations");
+			 // header("location:/kouroukan/index.php?page=formations");
 		 break;
 	 }
  ?>

@@ -15,6 +15,6 @@ session_start();
     <center><h2>Users</h2></center>
     <p id="id_user" style="display:none"><?= $_SESSION['id']; ?></p>
     <center><div id="users"></div></center>
-    <script src="http://localhost:8080/kouroukan/js/clients-info.js"></script>
+    <script src="/kouroukan/js/clients-info.js"></script>
 </body>
 </html>

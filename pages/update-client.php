@@ -13,7 +13,7 @@
     <head>
         <title>update-client</title>
         <meta charset='UTF-8'>
-        <link rel="stylesheet" href="http://localhost:8080/kouroukan/css/update-client.css">
+        <link rel="stylesheet" href="/kouroukan/css/update-client.css">
     </head>
     <body>
         <h1>Mise a jour du Client</h1>

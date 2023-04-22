@@ -48,7 +48,7 @@
     
     
     <!-- <?php
-        if($_SERVER['HTTP_REFERER'] == "http://localhost/kouroukan/pages/inscription.php") {
+        if($_SERVER['HTTP_REFERER'] == "/kouroukan/pages/inscription.php") {
             echo "<script> affichageAsides(); notifier(); </script>";
         }
     ?> -->

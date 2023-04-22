@@ -22,6 +22,7 @@ if(isset($_SESSION["id"])) {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
     <link rel="stylesheet" href="/kouroukan/css/tete-de-page.css"/>
+    <link rel = "stylesheet" href = "/kouroukan/css/clavier.css"/>
 	  <link rel="stylesheet" href="/kouroukan/css/lesson.css"/>
 
 </head>
@@ -86,6 +87,7 @@ if(isset($_SESSION["id"])) {
         
     <script src="/kouroukan/fonctions.js"></script>
     <script src="/kouroukan/js/caracteres.js"></script>
+    <script src="/kouroukan/js/clavier.js"></script>
       
     <script src="/kouroukan/js/syllabes.js"></script>
     <script src="/kouroukan/js/tons.js"></script>

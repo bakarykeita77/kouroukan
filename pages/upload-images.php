@@ -65,7 +65,7 @@
                 max-width: 90vw;
             }
         </style>
-		<script src="http://localhost:8080/kouroukan/js/jquery-3.3.1.js"></script>
+		<script src="/kouroukan/js/jquery-3.3.1.js"></script>
     </head>
     <body>
         <center>
@@ -88,6 +88,6 @@
     
         </center>
         
-        <script src="http://localhost:8080/kouroukan/js/upload-images.js"></script>
+        <script src="/kouroukan/js/upload-images.js"></script>
     </body>
 </html>

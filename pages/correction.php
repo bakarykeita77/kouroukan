@@ -17,7 +17,7 @@
     <head>
         <title>notes</title>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="http://localhost:8080/kouroukan/pcss/correction.css">
+        <link rel="stylesheet" href="/kouroukan/pcss/correction.css">
     </head>
     <body>
         <h2>ߞߘߐߓߐߟߌ  ߓߙߍ߬ߦߊ߬ߥߟߊ</h2>

@@ -282,6 +282,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0;}
     left: 0;
     height: calc(100% - 3rem);
     width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 /* --------------------------------------------------------------------------------------------------------- */
@@ -632,11 +633,11 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0;}
 .parametres_container {
     position: absolute;
     left: 0;
-    bottom: calc(100% + 1rem);
+    bottom: calc(100% + 0.5rem);
     margin: 0;
     padding: 0;
+    box-shadow: var(--shadow_36);
     transition: 0.25s;
-    opacity: 0;
     z-index: 10;
 }
 .parametres_container .btn {
@@ -881,7 +882,6 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0;}
 
 @media screen and (orientation: landscape) {
 	.page_body { width: 80%; max-width: 800px;  margin: auto; }
-	.cover { background-color: rgba(0, 0, 0, 0.7); }
     .phases {
         height: 5rem;
         width: 90%;
@@ -909,7 +909,6 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0;}
 }
 @media screen and (orientation: portrait) {
 	.page_body {  width: 100%; margin: 0;  padding: 0; }
-	.cover { background-color: var(--couleurNeutre); }
     .phases {
         height: 15rem;
         width: 80%;

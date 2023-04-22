@@ -9,7 +9,7 @@
     <head>
         <title>clients_list</title>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="http://localhost:8080/kouroukan/css/clients.css">
+        <link rel="stylesheet" href="/kouroukan/css/clients.css">
     </head>
     <body>
         <h1>Gestion des Clients</h1>

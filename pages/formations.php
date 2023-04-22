@@ -8,9 +8,9 @@ if(isset($_SESSION['prenom'])){
 	<head>
 		<title>formations</title>
 		<meta charset="utf-8"/>
-		<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/formations.css"/>
-		<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/class.css"/>
-		<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/teste.css"/>
+		<link rel="stylesheet" href="/kouroukan/css/formations.css"/>
+		<link rel="stylesheet" href="/kouroukan/css/class.css"/>
+		<link rel="stylesheet" href="/kouroukan/css/teste.css"/>
 	</head>
 
 	<body>
@@ -79,7 +79,7 @@ if(isset($_SESSION['prenom'])){
                 			 </tr>
                 			<tr>
                 				<td>
-                					<div id = 'teste_clavier'> <?php include 'http://localhost:8080/kouroukan/body/clavier.php'; ?> </div>
+                					<div id = 'teste_clavier'> <?php include '/kouroukan/body/clavier.php'; ?> </div>
                 				</td>
                 			 </tr>
                 		</table>
@@ -97,16 +97,16 @@ if(isset($_SESSION['prenom'])){
     		</div>		
 		</div>
 		
-		<script src="http://localhost:8080/kouroukan/js/lesson_parametres.js"></script>
-		<script src="http://localhost:8080/kouroukan/js/teste.js"></script>
-		<script src="http://localhost:8080/kouroukan/js/class.js"></script>
-		<script src="http://localhost:8080/kouroukan/js/jquery-3.3.1.js"></script>
+		<script src="/kouroukan/js/lesson_parametres.js"></script>
+		<script src="/kouroukan/js/teste.js"></script>
+		<script src="/kouroukan/js/class.js"></script>
+		<script src="/kouroukan/js/jquery-3.3.1.js"></script>
 
 	</body>
 </html>
 <?php
     }else{
-        header("location:http://localhost:8080/kouroukan/index.php");
+        header("location:/kouroukan/index.php");
     }
 ?>
 

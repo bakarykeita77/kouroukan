@@ -3,7 +3,7 @@
     <head>
         <title>sebesun</title>
         <meta charset = "utf-8">
-        <link rel = "stylesheet" href = "http://localhost:8080/kouroukan/css/class.css">
+        <link rel = "stylesheet" href = "/kouroukan/css/class.css">
         <link rel = "stylesheet" href = "css/alphabet.css">
     </head>
     

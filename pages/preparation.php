@@ -9,7 +9,7 @@ if(isset($_SESSION['connected'])){
     <head>
         <title>preparation</title>
         <meta charset = "UTF-8">
-        <link rel="stylesheet" href="http://localhost:8080/kouroukan/css/preparation.css">
+        <link rel="stylesheet" href="/kouroukan/css/preparation.css">
     </head>
     <body>
         <div id='lesson_container'>
@@ -21,7 +21,7 @@ if(isset($_SESSION['connected'])){
             <audio id="audio"></audio>
         </div>
         
-        <script src="http://localhost:8080/kouroukan/js/preparation.js"></script>
+        <script src="/kouroukan/js/preparation.js"></script>
     </body>
 </html>
 <?php

@@ -67,7 +67,7 @@
     	<script src="/kouroukan/js/inscription.js"></script>
     	
     	<?php
-            if($_SERVER['HTTP_REFERER'] == "http://localhost:8080/kouroukan/pages/inscription.php") {
+            if($_SERVER['HTTP_REFERER'] == "/kouroukan/pages/inscription.php") {
                 echo('<script> notifier(); </script>'); 
             }
         ?>

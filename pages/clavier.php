@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
     <title>clavier_nko</title>
-    <meta charset = "utf-8"/>
-    <link rel = "stylesheet" href = "http://localhost/kouroukan/css/clavier.css"/>	
+    <meta charset = "utf-8"/>	
 <body>
     <p class='niveau' style="display:none"><?= $niveau ?></p>
 	<div id="clavier_nko">
@@ -87,8 +86,5 @@
 		</table>
 	
 	</div>
-
-<script src = "http://localhost/kouroukan/js/clavier.js"></script>
-
 </body>
 </html>

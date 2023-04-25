@@ -11,7 +11,6 @@
 	<script src="/kouroukan/js/icones.js"></script>
 	<script src="/kouroukan/js/class.js"></script>	
   	<script src="/kouroukan/js/caracteres.js"></script>
-  	<script src="/kouroukan/js/parametres.js"></script>
 	
   <!------------------------------------------------------------------------------------------------------------------>	
 	<?php include("fonctions.php"); ?>  

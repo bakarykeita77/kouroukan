@@ -1,15 +1,7 @@
-  
     var travail_1 = $('#travail_1'), travail_2 = $('#travail_2'), travail_3 = $('#travail_3'), travail_4 = $('#travail_4');
     var matiere_nom = $('#matiere_nom_container').html();
     var fiche_html_vide = "<h1 class='neant'>ߝߏߦߊ߲߫ ߹</h1>";
 
-// Selection des differents éléments de fiche
-    let travail = $('.travail');
-    let travail_lesson = [];
-    let fiche_phase = [];
-    let travail_note = [];
-
-    
 // Recupération des lessons étudiées
     var matieres = JSON.parse(sessionStorage.getItem('matieres'));
  

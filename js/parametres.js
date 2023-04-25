@@ -152,6 +152,15 @@
                 return nch;
             }
         }
+        function affichageDeLessonParametres(){
+               
+            choixDesOptionsNecessaires();
+            function choixDesOptionsNecessaires(){
+                
+                if(niveau==1){ tons_checker.hide(); nasalisation_checker.hide(); }
+                if(niveau==2){ tons_checker.hide(); tedo_checker.hide(); }
+             }
+         }
         function cocherLesCaracteres(){
             
             checkbox_parentClick();
@@ -278,15 +287,6 @@
                 $('#tons_coches').html(tons_coches);
                 $('#nasalisations_cochees').html(nasalisations_cochees);
             }
-         }
-        function affichageDeLessonParametres(){
-               
-            choixDesOptionsNecessaires();
-            function choixDesOptionsNecessaires(){
-                
-                if(niveau==1){ tons_checker.hide(); nasalisation_checker.hide(); }
-                if(niveau==2){ tons_checker.hide(); tedo_checker.hide(); }
-             }
          }
     }
     function actualiserCochage() {

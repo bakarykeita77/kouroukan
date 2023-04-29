@@ -95,19 +95,31 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0;}
 .a_apprendre { background-color: var(--couleur_d); color: var(--couleur_a); }
 .a_apprendre a { color:  #888; }
 .a_apprendre:hover a { color: black; }
+.asides_btn {
+    display: inline-block;
+    width: 48%;
+    height: 3rem;
+    background-color: var(--couleurPrimaire);
+    border-radius: var(--radiusSmall);
+    text-align: center;
+}
+.asides_btn:first-child { float: right; }
+.asides_btn:last-child { float: left; }
+.asides_btn a {
+    position: absolute;
+    margin: 0.5rem auto;
+    color: black;
+    font-weight: bold;
+}
 
 /* --------------------------------------------------------------------------------------------------------- */
 
 
 .btn { 
     height: 1.5rem; 
-    margin: 1rem; 
-    border-radius: var(--radiusSmall);
 }
-.btn span { display: inline-block; height: 1.5rem; }
 .btn span:first-child {
     width: 1.5rem;
-    border: var(--border_c);
     border-radius: var(--radiusSmall);
     line-height: 1.5rem;
     text-align: center;
@@ -227,6 +239,20 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0;}
     width: 100vw;
     overflow: auto;
 }
+.correcteur { 
+    height: 1.5rem;
+    line-height: 1.5rem;
+    border: 1px solid var(--couleurTertiaire);
+    border-radius: var(--couleurTertiaire);
+    box-shadow: 0 0 1rem #666; 
+    padding: 0.125rem; 
+    font-size: 0.8rem;
+    font-weight: normal;
+    cursor: pointer;
+    float: left;
+    transition: 0.2s; 
+}
+.correction_btn { cursor: pointer; }
 .course {
     position: relative;
     top: 5rem;
@@ -291,11 +317,11 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0;}
 .dark_backgound { background-color: #aaa; }
 .dialogue_btn {
     position: absolute;
-    padding: 0.125rem 0;
     width: 80%;
     height: 2rem;
     line-height: 2rem;
     font-weight: bold;
+    text-align: center;
     left: 50%;
     transform: translateX(-50%);
     transition: 0.25s;
@@ -789,7 +815,10 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0;}
 .progress_question_bar { background-color: #bbb; }
 
 /* --------------------------------------------------------------------------------------------------------- */
-.repetition_btn { display: none; }
+.question_btn { cursor: pointer; }
+
+/* --------------------------------------------------------------------------------------------------------- */
+.repetition_btn { display: none; cursor: pointer; }
 .right { float: right; }
 
 
@@ -820,9 +849,15 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0;}
     transition: 0.5s;
 }
 .transparent { animation: transperer; }
-.travaux {
+.travaux { 
+    position: absolute; 
+    height: 65vh;
+    width: 100%;
+    max-width: 50rem;
+    margin: auto;
+    vertical-align: top; 
+    box-sizing: border-box;
     left: 0;
-    border: var(--border_c);
     overflow-y: auto;
 }
 .travaux_cadre { margin: 0 0 0.5rem 0; overflow: auto; }
@@ -832,6 +867,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0;}
     padding: 1rem 1.5rem;
     margin: 0.25rem;
     border-radius: var(--radiusSmall);
+    background-color: var(--couleur_e);
 }
 .travail:not(first-child) { margin-top: 0; }
 .travail:not(last-child) { border-bottom-color: var(--couleurTertiaire); }
@@ -894,18 +930,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0;}
         min-width: 5rem;
         text-align: center;
     }
-    .travaux { 
-        position: absolute; 
-        height: 50vh;
-        display: inline-block; 
-        vertical-align: top; 
-        box-sizing: border-box;
-    }
-    .travaux {
-        width: 100%;
-        max-width: 50rem;
-        margin: auto;
-    }
+    .travaux { display: block; }
 }
 @media screen and (orientation: portrait) {
 	.page_body {  width: 100%; margin: 0;  padding: 0; }
@@ -919,6 +944,5 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0;}
     .phases li {
         width: 80%;
     }
-    .travaux { display: block; }
     .travaux { display: none; }
 }

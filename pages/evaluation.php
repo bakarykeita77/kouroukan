@@ -47,7 +47,7 @@
         
             <p id="evaluation_reponse_container">
                 <span id='evaluation_reponse'></span>
-                <span id='correcteur_d_evaluation'>ߖߐ߬ߛߌ߬ߙߊ߲</span>
+                <span class='correcteur' id='correcteur_d_evaluation'>ߖߐ߬ߛߌ߬ߙߊ߲</span>
             </p>
             
             <div id='check_mark_container'>

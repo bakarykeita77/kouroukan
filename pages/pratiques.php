@@ -71,7 +71,7 @@
                 <div id="guide_container">
                     <div id="pratique_guide">
                         <div class="flex_row_center" id="bulles_container"></div>
-                        <p id="reponse_container"><span id="cumule_des_caracteres"></span><span id='correcteur'>ߖߐ߬ߛߌ߬ߙߊ߲</span></p>
+                        <p id="reponse_container"><span id="cumule_des_caracteres"></span><span class='correcteur' id='correcteur_de_pratique'>ߖߐ߬ߛߌ߬ߙߊ߲</span></p>
                     </div>
                 </div>
 

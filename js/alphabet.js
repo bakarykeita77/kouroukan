@@ -1,23 +1,22 @@
-
     var voyelles_cochees = $('#voyelles_cochees').html().split('');
     var consonnes_cochees = $('#consonnes_cochees').html().split('');
     var tedos_coches = $('#tedos_coches').html().split('');
-    var lettres = voyelles_cochees.concat(consonnes_cochees,tedos_coches);  
-
-    var alphabet_questions = malaxer(lettres);
+    var caracteres_coches = [voyelles_cochees,consonnes_cochees,tedos_coches];  
+    var caracteres_coches = JSON.parse(sessionStorage.getItem('caracteres_coches'));    //Voir parametres.js fonction rechargerLesSousTableauxDesCaracteresCoches()
+    var alphabet_questions = malaxer(caracteres_coches);
 
 
     function alphabetApprentissageHTML() {
 
         var table = "<table class = 'table_parlante'>\n";
-        for(var i=0;i<lettres.length-lettres.length%7;i+=7) {
+        for(var i=0;i<caracteres_coches.length-caracteres_coches.length%7;i+=7) {
             table += "<tr>\n";
-            for(var j=0;j<7;j++) table += "<td>"+lettres[i+j]+"</td>\n";
+            for(var j=0;j<7;j++) table += "<td>"+caracteres_coches[i+j]+"</td>\n";
             table += "</tr>\n";
         }
-        for(var k=lettres.length-lettres.length%7;k<lettres.length;k+=lettres.length%7){
+        for(var k=caracteres_coches.length-caracteres_coches.length%7;k<caracteres_coches.length;k+=caracteres_coches.length%7){
             table += "<tr>\n";
-            for(var l=0;l<lettres.length%7;l++) table += "<td>"+lettres[k+l]+"</td>\n";
+            for(var l=0;l<caracteres_coches.length%7;l++) table += "<td>"+caracteres_coches[k+l]+"</td>\n";
             table += "</tr>\n";
         }
         table += "</table>";

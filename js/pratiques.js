@@ -388,10 +388,10 @@ function pratique() {
                         afficherRepetitionBtn();
                     }
                     function lireQuestion(){
-                        $('#audio').attr({'src':'http://localhost:8080/kouroukan/son/mp3/'+question_d_option+'.mp3', 'autoplay':'on'});
+                        $('#audio').attr({'src':'/kouroukan/son/mp3/'+question_d_option+'.mp3', 'autoplay':'on'});
                     }
                     function repeteQuestion(){
-                        $('.repetition_btn').on('click', function(){ $('#audio').attr({'src':'http://localhost:8080/kouroukan/son/mp3/'+question_d_option+'.mp3', 'autoplay':'on'}); });
+                        $('.repetition_btn').on('click', function(){ $('#audio').attr({'src':'/kouroukan/son/mp3/'+question_d_option+'.mp3', 'autoplay':'on'}); });
                     }
                 });
             }
@@ -440,7 +440,7 @@ function pratique() {
             }
             function rectificationDeReponse() {
                         
-                $('#correcteur').on('click',function() {
+                $('#correcteur_de_pratique').on('click',function() {
                     rectifierBulles();
                     reponse_d_option.pop();
                     $('#cumule_des_caracteres').html(reponse_d_option);

@@ -178,109 +178,19 @@
                     if($(this).prop('checked')==true){ checkbox_children_actifs.prop('checked',true); }
                     if($(this).prop('checked')==false){ checkbox_children_actifs.prop('checked',false); }
                     
-                    collecteDesCaracteresCoches();
+                    viderLesSousTableauxDesCaracteresCoches();
+                    collecteDesCaracteresCoches(); 
+                    rechargerLesSousTableauxDesCaracteresCoches();
                 });
              }
-            function checkbox_childrenClick(){ $('.checkbox_children').on('click', function(){ collecteDesCaracteresCoches(); }); }
-            function collecteDesCaracteresCoches(){
-                viderLesSousTableauxDesCaracteresCoches();
-                rechargerLesSousTableauxDesCaracteresCoches();
-              
-                function viderLesSousTableauxDesCaracteresCoches(){
-                    voyelles_cochees.splice(0,voyelles_cochees.length);
-                    consonnes_cochees.splice(0,consonnes_cochees.length);
-                    tedos_coches.splice(0,tedos_coches.length);
-                    tons_coches.splice(0,tons_coches.length);
-                    nasalisations_cochees.splice(0,nasalisations_cochees.length);
-                 }
-                function rechargerLesSousTableauxDesCaracteresCoches(){
-                    if(niveau==1){
-                        $.each($('.voyelle'), function(){
-                            voyelle_coche = $(this).prop('checked');
-                            if(voyelle_coche==true){ voyelles_cochees[voyelles_cochees.length] = $(this).attr('value'); }
-                         });
-                        $.each($('.consonne'), function(){
-                            consonne_coche = $(this).prop('checked');
-                            if(consonne_coche==true){ consonnes_cochees[consonnes_cochees.length] = $(this).attr('value'); }
-                         });
-                        $.each($('.tedo'), function(){
-                            tedo_coche = $(this).prop('checked');
-                            if(tedo_coche==true){ tedos_coches[tedos_coches.length] = $(this).attr('value'); }
-                         });
-                         
-                        caracteres_coches = [voyelles_cochees, consonnes_cochees, tedos_coches];
-                    }
-                    if(niveau==2){
-                        
-                        $.each($('.voyelle'), function(){
-                            voyelle_coche = $(this).prop('checked');
-                            if(voyelle_coche==true){ voyelles_cochees[voyelles_cochees.length] = $(this).attr('value'); }
-                         });
-                        $.each($('.consonne'), function(){
-                            consonne_coche = $(this).prop('checked');
-                            if(consonne_coche==true){ consonnes_cochees[consonnes_cochees.length] = $(this).attr('value'); }
-                         });
-                        $.each($('.tedo'), function(){
-                            tedo_coche = $(this).prop('checked');
-                            if(tedo_coche==true){ tedos_coches[tedos_coches.length] = $(this).attr('value'); }
-                         });
-                        $.each($('.nasalisation'), function(){
-                            nasalisation_coche = $(this).prop('checked');
-                            if(nasalisation_coche==true){ nasalisations_cochees[nasalisations_cochees.length] = $(this).attr('value'); }
-                         });
-                         
-                        caracteres_coches = [voyelles_cochees, consonnes_cochees, tedos_coches, nasalisations_cochees];
-                    }
-                    if(niveau==3){
-                        $.each($('.voyelle'), function(){
-                            voyelle_coche = $(this).prop('checked');
-                            if(voyelle_coche==true){ voyelles_cochees[voyelles_cochees.length] = $(this).attr('value'); }
-                         });
-                        $.each($('.consonne'), function(){
-                            consonne_coche = $(this).prop('checked');
-                            if(consonne_coche==true){ consonnes_cochees[consonnes_cochees.length] = $(this).attr('value'); }
-                         });
-                        $.each($('.tedo'), function(){
-                            tedo_coche = $(this).prop('checked');
-                            if(tedo_coche==true){ tedos_coches[tedos_coches.length] = $(this).attr('value'); }
-                         });
-                        $.each($('.ton'), function(){
-                            ton_coche = $(this).prop('checked');
-                            if(ton_coche==true){ tons_coches[tons_coches.length] = $(this).attr('value'); }
-                         });
-                        $.each($('.nasalisation'), function(){
-                            nasalisation_coche = $(this).prop('checked');
-                            if(nasalisation_coche==true){ nasalisations_cochees[nasalisations_cochees.length] = $(this).attr('value'); }
-                         });
-                         
-                        caracteres_coches = [voyelles_cochees, consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees];
-                    }
-                    if(niveau==4){
-                        $.each($('.voyelle'), function(){
-                            voyelle_coche = $(this).prop('checked');
-                            if(voyelle_coche==true){ voyelles_cochees[voyelles_cochees.length] = $(this).attr('value'); }
-                         });
-                        $.each($('.consonne'), function(){
-                            consonne_coche = $(this).prop('checked');
-                            if(consonne_coche==true){ consonnes_cochees[consonnes_cochees.length] = $(this).attr('value'); }
-                         });
-                        $.each($('.tedo'), function(){
-                            tedo_coche = $(this).prop('checked');
-                            if(tedo_coche==true){ tedos_coches[tedos_coches.length] = $(this).attr('value'); }
-                         });
-                        $.each($('.ton'), function(){
-                            ton_coche = $(this).prop('checked');
-                            if(ton_coche==true){ tons_coches[tons_coches.length] = $(this).attr('value'); }
-                         });
-                        $.each($('.nasalisation'), function(){
-                            nasalisation_coche = $(this).prop('checked');
-                            if(nasalisation_coche==true){ nasalisations_cochees[nasalisations_cochees.length] = $(this).attr('value'); }
-                         });
-                        
-                        caracteres_coches = [voyelles_cochees, consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees];
-                    }
-                }
-             
+            function checkbox_childrenClick(){
+                $('.checkbox_children').on('click', function(){ 
+                    viderLesSousTableauxDesCaracteresCoches();
+                    collecteDesCaracteresCoches(); 
+                    rechargerLesSousTableauxDesCaracteresCoches();
+                }); 
+            }
+            function rechargerLesSousTableauxDesCaracteresCoches(){
                 $('#voyelles_cochees').html(voyelles_cochees);
                 $('#consonnes_cochees').html(consonnes_cochees);
                 $('#tedos_coches').html(tedos_coches);
@@ -288,6 +198,100 @@
                 $('#nasalisations_cochees').html(nasalisations_cochees);
             }
          }
+        function viderLesSousTableauxDesCaracteresCoches(){
+            voyelles_cochees.splice(0,voyelles_cochees.length);
+            consonnes_cochees.splice(0,consonnes_cochees.length);
+            tedos_coches.splice(0,tedos_coches.length);
+            tons_coches.splice(0,tons_coches.length);
+            nasalisations_cochees.splice(0,nasalisations_cochees.length);
+        }
+        function collecteDesCaracteresCoches(){
+            if(niveau==1){
+                $.each($('.voyelle'), function(){
+                    voyelle_coche = $(this).prop('checked');
+                    if(voyelle_coche==true){ voyelles_cochees[voyelles_cochees.length] = $(this).attr('value'); }
+                    });
+                $.each($('.consonne'), function(){
+                    consonne_coche = $(this).prop('checked');
+                    if(consonne_coche==true){ consonnes_cochees[consonnes_cochees.length] = $(this).attr('value'); }
+                    });
+                $.each($('.tedo'), function(){
+                    tedo_coche = $(this).prop('checked');
+                    if(tedo_coche==true){ tedos_coches[tedos_coches.length] = $(this).attr('value'); }
+                    });
+                    
+                caracteres_coches = [voyelles_cochees, consonnes_cochees, tedos_coches];
+            }
+            if(niveau==2){
+                
+                $.each($('.voyelle'), function(){
+                    voyelle_coche = $(this).prop('checked');
+                    if(voyelle_coche==true){ voyelles_cochees[voyelles_cochees.length] = $(this).attr('value'); }
+                    });
+                $.each($('.consonne'), function(){
+                    consonne_coche = $(this).prop('checked');
+                    if(consonne_coche==true){ consonnes_cochees[consonnes_cochees.length] = $(this).attr('value'); }
+                    });
+                $.each($('.tedo'), function(){
+                    tedo_coche = $(this).prop('checked');
+                    if(tedo_coche==true){ tedos_coches[tedos_coches.length] = $(this).attr('value'); }
+                    });
+                $.each($('.nasalisation'), function(){
+                    nasalisation_coche = $(this).prop('checked');
+                    if(nasalisation_coche==true){ nasalisations_cochees[nasalisations_cochees.length] = $(this).attr('value'); }
+                    });
+                    
+                caracteres_coches = [voyelles_cochees, consonnes_cochees, tedos_coches, nasalisations_cochees];
+            }
+            if(niveau==3){
+                $.each($('.voyelle'), function(){
+                    voyelle_coche = $(this).prop('checked');
+                    if(voyelle_coche==true){ voyelles_cochees[voyelles_cochees.length] = $(this).attr('value'); }
+                    });
+                $.each($('.consonne'), function(){
+                    consonne_coche = $(this).prop('checked');
+                    if(consonne_coche==true){ consonnes_cochees[consonnes_cochees.length] = $(this).attr('value'); }
+                    });
+                $.each($('.tedo'), function(){
+                    tedo_coche = $(this).prop('checked');
+                    if(tedo_coche==true){ tedos_coches[tedos_coches.length] = $(this).attr('value'); }
+                    });
+                $.each($('.ton'), function(){
+                    ton_coche = $(this).prop('checked');
+                    if(ton_coche==true){ tons_coches[tons_coches.length] = $(this).attr('value'); }
+                    });
+                $.each($('.nasalisation'), function(){
+                    nasalisation_coche = $(this).prop('checked');
+                    if(nasalisation_coche==true){ nasalisations_cochees[nasalisations_cochees.length] = $(this).attr('value'); }
+                    });
+                    
+                caracteres_coches = [voyelles_cochees, consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees];
+            }
+            if(niveau==4){
+                $.each($('.voyelle'), function(){
+                    voyelle_coche = $(this).prop('checked');
+                    if(voyelle_coche==true){ voyelles_cochees[voyelles_cochees.length] = $(this).attr('value'); }
+                    });
+                $.each($('.consonne'), function(){
+                    consonne_coche = $(this).prop('checked');
+                    if(consonne_coche==true){ consonnes_cochees[consonnes_cochees.length] = $(this).attr('value'); }
+                    });
+                $.each($('.tedo'), function(){
+                    tedo_coche = $(this).prop('checked');
+                    if(tedo_coche==true){ tedos_coches[tedos_coches.length] = $(this).attr('value'); }
+                    });
+                $.each($('.ton'), function(){
+                    ton_coche = $(this).prop('checked');
+                    if(ton_coche==true){ tons_coches[tons_coches.length] = $(this).attr('value'); }
+                    });
+                $.each($('.nasalisation'), function(){
+                    nasalisation_coche = $(this).prop('checked');
+                    if(nasalisation_coche==true){ nasalisations_cochees[nasalisations_cochees.length] = $(this).attr('value'); }
+                    });
+                
+                caracteres_coches = [voyelles_cochees, consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees];
+            }
+        }
     }
     function actualiserCochage() {
         voyelles_cochees = $('#voyelles_cochees').html().split('');

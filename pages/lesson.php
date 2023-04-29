@@ -22,7 +22,7 @@ if(isset($_SESSION["id"])) {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
     <link rel="stylesheet" href="/kouroukan/css/tete-de-page.css"/>
-    <link rel = "stylesheet" href = "/kouroukan/css/clavier.css"/>
+    <link rel="stylesheet" href="/kouroukan/css/clavier.css"/>
 	  <link rel="stylesheet" href="/kouroukan/css/lesson.css"/>
 
 </head>
@@ -31,7 +31,7 @@ if(isset($_SESSION["id"])) {
     <div class="container">
         <div class="page_head"><?php require('tete-de-page.php'); ?></div>
         <div class="page_body">
-          <!----------------------------------------------------------------------------------------------------->  
+          <!----------------------------------------------------------------------------------------------------------->  
             <div id="donnees_recues_de_prorammes" style="display:none">
                 <p id='matiere_id_container'    ><?= $matiere_id; ?></p>
                 <p id='matiere_index_container' ><?= $matiere_index; ?></p>
@@ -39,11 +39,11 @@ if(isset($_SESSION["id"])) {
                 <p id='niveau_container'        ><?= $niveau; ?></p>
                 <p id='niveau_max_container'    ><?= $niveau_max; ?></p>
             </div>
-          <!----------------------------------------------------------------------------------------------------->  
+          <!----------------------------------------------------------------------------------------------------------->  
             <h4>ߘߋ߰ߟߌ ߞߛߊߞߊ : <span class="niveau_courant"><?= $chiffres[$niveau]; ?></span><span class='rang'></span></h4>
-          <!----------------------------------------------------------------------------------------------------->  
+          <!----------------------------------------------------------------------------------------------------------->  
             <h1 class="lesson_title" id="<?= $matiere_id ?>"> <?= $matiere_nom; ?> ߥߟߊ߬ߘߊ  </h1>
-          <!----------------------------------------------------------------------------------------------------->  
+          <!----------------------------------------------------------------------------------------------------------->  
             
             <div class="phases_container"></div>
             <div id="travaux_container"><?php include("travaux.php"); ?></div>

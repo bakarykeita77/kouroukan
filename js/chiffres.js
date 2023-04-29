@@ -1,4 +1,3 @@
-
     var n_chiffres = chiffres.length;
 
     function chiffresApprentissageHTML() {

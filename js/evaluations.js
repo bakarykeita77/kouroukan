@@ -7,7 +7,6 @@ function evaluations() {
     var total_phase = $('.phases li').lenth;
     var phase_class = JSON.parse(sessionStorage.getItem('phase_class'));
 
-    var syllabes = syllab();
     var nbr_max_de_questions_a_poser = 2;
     var questions_evaluation = questions(niveau_en_cours);
     var question_evaluation = '', questions_a_evaluer = [], reponse_evaluation = [];
@@ -217,7 +216,7 @@ function evaluations() {
                     }else{
                         $("#evaluation_reponse").html(reponse_evaluation.join('')+"<div id='evaluation_cross'>&#10060;</div>");
                         $('#evaluation_cross').css({'display':'block', 'transform':'scale(0.5)', 'opacity':0});
-                        setTimeout(function(){ $('#evaluation_cross').css({'transform':'scale(1)', 'opacity':0.75}); }, 100);
+                        setTimeout(function(){ $('#evaluation_cross').css({'transform':'scale(1.5)', 'opacity':0.75}); }, 100);
                     }
                 } 
                 function defilementDeEvaluationFicheVersLeHaut() {

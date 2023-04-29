@@ -37,19 +37,6 @@ body {
     border-top: 2px solid var(--couleurTertiaire); 
     width: 100%;
 }
-.asides_btn {
-    display: inline-block;
-    width: 48%;
-    background-color: var(--couleurPrimaire);
-    border-radius: var(--radiusSmall);
-    text-align: center;
-}
-.asidess_btn:first-child { float: right; }
-.asidess_btn:last-child { float: left; }
-.asides_btn a {
-    color: black;
-    font-weight: bold;
-}
 #pied_de_page { position:relative; width: 100vw; }
 
 .page p, .page h1, .page h2, .page h3 { padding: 8px; }
@@ -111,7 +98,6 @@ body {
 
 a {
     text-decoration: none;
-    color: blue;
     cursor: pointer;
 }
 

@@ -170,22 +170,10 @@
     padding-left: 1rem;
     margin: 0 0.25rem;
 }
-#correcteur { 
-    height: 1.5rem;
-    line-height: 1.5rem;
-    border: 1px solid var(--couleurTertiaire);
-    border-radius: var(--couleurTertiaire);
-    box-shadow: 0 0 1rem #666; 
-    margin: 0;
-    padding: 0.125rem; 
+#correcteur_de_pratique { 
     bottom: 0.125rem;
-    font-size: 0.8rem;
-    font-weight: normal;
-    cursor: pointer;
-    float: left;
-    transition: 0.2s; 
 }
-#correcteur:active { box-shadow: none; }
+#correcteur_de_pratique:active { box-shadow: none; }
 
 #pratique_fiche {
     display: flex;
@@ -259,13 +247,8 @@
 }
 
 #pratique_dialogue_btn {
-    position: absolute;
     bottom: 0;
     width: 100%;
-    text-align: center;
-    border: var(--border_c);
-    border-radius: var(--radiusLarge);
-    box-shadow: var(--shadow_1a);
     margin: 0.5rem auto;
 }
 #pratique_clavier_container { 

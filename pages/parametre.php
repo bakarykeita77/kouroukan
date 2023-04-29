@@ -1,5 +1,4 @@
-
-	<link rel="stylesheet" href="/kouroukan/css/parametres.css"/>
+    <link rel="stylesheet" href="/kouroukan/css/parametres.css"/>
 
   <!------------------------------------------------------------------------------------------------------------------>	
   <!--Les éléments de paramètres sont chargés depuis js/parametres.js-->
@@ -34,4 +33,3 @@
     <script src="/kouroukan/js/syllabes.js"></script>
     <script src="/kouroukan/js/tons.js"></script>
     <script src="/kouroukan/js/chiffres.js"></script>
-    

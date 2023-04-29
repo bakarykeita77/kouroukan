@@ -10,14 +10,14 @@ session_start();
     
     <title>board</title>
     
-    <link rel="stylesheet" href="http://localhost:8080/kouroukan/css/board.css">
-    <link rel="stylesheet" href="http://localhost:8080/kouroukan/css/class.css">
-    <link rel="stylesheet" href="http://localhost:8080/kouroukan/css/parametres_tableau.css">
-	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/assistant.css"/>
-	<link rel="stylesheet" href="http://localhost:8080/kouroukan/css/memoire.css"/>
+    <link rel="stylesheet" href="/kouroukan/css/board.css">
+    <link rel="stylesheet" href="/kouroukan/css/class.css">
+    <link rel="stylesheet" href="/kouroukan/css/parametres_tableau.css">
+	<link rel="stylesheet" href="/kouroukan/css/assistant.css"/>
+	<link rel="stylesheet" href="/kouroukan/css/memoire.css"/>
 
-    <script src="http://localhost:8080/kouroukan/js/jquery-3.3.1.js"></script>
-    <script src="http://localhost:8080/kouroukan/js/class.js"></script>
+    <script src="/kouroukan/js/jquery-3.3.1.js"></script>
+    <script src="/kouroukan/js/class.js"></script>
     
 </head>
 <body>
@@ -47,8 +47,8 @@ session_start();
     </div>
     <?php include "fonctions/fonctions_tableau.php"; ?>
     
-    <script src="http://localhost:8080/kouroukan/js/parametres_tableau.js"></script>
-    <script src="http://localhost:8080/kouroukan/js/assistant.js"></script>
-    <script src="http://localhost:8080/kouroukan/js/board.js"></script>
+    <script src="/kouroukan/js/parametres_tableau.js"></script>
+    <script src="/kouroukan/js/assistant.js"></script>
+    <script src="/kouroukan/js/board.js"></script>
 </body>
 </html>

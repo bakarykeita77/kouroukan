@@ -4,8 +4,7 @@ $('document').ready(function() {
     var id = JSON.parse(sessionStorage.getItem('id'));     
     var matieres = JSON.parse(sessionStorage.getItem('matieres'));     
     var matieres_etudiees = [],  matiere_index = 0;
-    var niveaux = [], niveau_max = 0, niveau_en_cours = 1;
-    var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));
+    var niveaux = [], niveau_max = 0;
     
 	var rang = '';
     var data_phase_nbr = 0, phases_distinctes = [], nbr = 0;
@@ -223,14 +222,9 @@ $('document').ready(function() {
 	function matiere() {
  	
         lettres = voyelles_cochees.concat(consonnes_cochees,tedos_coches);
-        syllabes = syllab();
     	
     	$('#phases_list li').on('click', function(){
             
-            var syllabes = syllab();
-            var syllabes_tonifies = tonification(); // Voir js/tons.js 
-
-            var questionnaires = questions(niveau_actif);
             var questions_quantity = quantiteDeQuestion();
             var quantite_de_question = quantiteDeQuestion();
             var compteur_de_question = 0;

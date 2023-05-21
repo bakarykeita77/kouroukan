@@ -1,10 +1,5 @@
-    var voyelles_cochees = $('#voyelles_cochees').html().split('');
-    var consonnes_cochees = $('#consonnes_cochees').html().split('');
-    var tedos_coches = $('#tedos_coches').html().split('');
-    var caracteres_coches = [voyelles_cochees,consonnes_cochees,tedos_coches];  
-    var caracteres_coches = JSON.parse(sessionStorage.getItem('caracteres_coches'));    //Voir parametres.js fonction rechargerLesSousTableauxDesCaracteresCoches()
-    var alphabet_questions = malaxer(caracteres_coches);
-
+     
+    var caracteres_coches = JSON.parse(sessionStorage.getItem('caracteres_coches'));    //Voir parametres.js fonction collecteDesCaracteresCoches()
 
     function alphabetApprentissageHTML() {
 
@@ -25,6 +20,7 @@
     } 	
     function alphabetExerciceHTML() { 
 
+        var alphabet_questions = malaxer(caracteres_coches);
         var exercices_corps_html = '<table class="table_muette">\n\n';
         
         for(var i=0;i<alphabet_questions.length-alphabet_questions.length%7;i+=7){

@@ -1,35 +1,41 @@
+
 function apprentissages() {
         
     var id              = JSON.parse(sessionStorage.getItem('id'));  
     var apprentissage   = $('#apprentissage');
     var niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
-    var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));
-    var phase_id        = JSON.parse(sessionStorage.getItem('phase_id'));
+    var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));          // Voir programmes.js fonction storageDeLaMatiereActive()
+    var phase_id        = JSON.parse(sessionStorage.getItem('phase_id'));    
     var moyenne_d_apprentissage = JSON.parse(sessionStorage.getItem("moyenne"));
 
-    var lesson_courante = lessonCourante();
+    var syllabes_apprentissage_html = JSON.parse(sessionStorage.getItem('syllabes_apprentissage_html'));
+
+    var lesson_active = lessonCourante();
     var clicks_memo = [];
 
+console.log(phase_id);
+console.log(syllabes_apprentissage_html);
+console.log(lesson_active); 
 
     $('.fermeture').attr('id', 'fermer_apprentissage');
 
-    afficherCourse(apprentissage);
     chargerApprentissage();
+    afficherCourse(apprentissage);
     apprendre();
     enregistrerApprentissage();
     stockerApprentissage();
                     
    
     function lessonCourante() {
-        let lesson_courante = [];
-        if(phase_id == 'alphabet_apprentissage') lesson_courante = alphabetApprentissageHTML(); // Voir alphabet.js 
-        if(phase_id == 'syllabes_apprentissage') lesson_courante = syllabesApprentissageHTML(); // Voir syllabes.js
-        if(phase_id == 'tons_apprentissage'    ) lesson_courante = tonsApprentissageHTML();     // Voir tons.js
-        if(phase_id == 'chiffres_apprentissage') lesson_courante = chiffresApprentissageHTML(); // Voir chiffres.js
+        let lesson_active = [];
+        if(phase_id == 'alphabet_apprentissage') lesson_active = alphabetApprentissageHTML(); // Voir alphabet.js 
+        if(phase_id == 'syllabes_apprentissage') lesson_active = syllabes_apprentissage_html; // Voir syllabes.js
+        if(phase_id == 'tons_apprentissage'    ) lesson_active = tonsApprentissageHTML();     // Voir tons.js
+        if(phase_id == 'chiffres_apprentissage') lesson_active = chiffresApprentissageHTML(); // Voir chiffres.js
 
-        return lesson_courante;
+        return lesson_active;
     }
-    function chargerApprentissage() { $('#apprentissage_body').html( "<div id='table_parlante_container'>"+lesson_courante+"</div>" ); }
+    function chargerApprentissage() { $('#apprentissage_body').html( "<div id='table_parlante_container'>"+lesson_active+"</div>" ); }
     function apprendre() {
         
         affichageDesBoutonsMedia();

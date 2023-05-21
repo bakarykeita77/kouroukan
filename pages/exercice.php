@@ -7,7 +7,7 @@
 			<p class='progress_bonne_reponse_bar'></p>
 		</div>
 	</div>
-	<div class="course_body" id="exercice_body"></div>   <!--Cette division est chargé par la fonction chargerExercice() dans lesson.js-->
+	<div class="course_body" id="exercice_body"></div>   <!--Cette division est chargé par la fonction chargerExercice() dans exeercice.js-->
 	<div class="course_foot" id="exercice_foot"></div>
 	
     <script src="/kouroukan/js/exercice.js"></script>

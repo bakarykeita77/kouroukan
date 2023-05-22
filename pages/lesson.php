@@ -61,11 +61,11 @@ if(isset($_SESSION["id"])) {
       <!--------------------------------------------------------------------------------------------------------------->
         <div class="course" id="apprentissage"><?php include("apprentissage.php"); ?></div>
       <!--------------------------------------------------------------------------------------------------------------->
-        <div class="course" id="exercice">     <?php include("exercice.php"); ?>     </div>
+        <div class="course" id="exercice">     <?php include("exercice.php");      ?></div>
       <!--------------------------------------------------------------------------------------------------------------->
-        <div class="course" id="pratique">     <?php include("pratiques.php"); ?>    </div>
+        <div class="course" id="pratique">     <?php include("pratiques.php");     ?></div>
       <!--------------------------------------------------------------------------------------------------------------->
-        <div class="course" id="evaluation">   <?php include("evaluation.php"); ?>   </div>
+        <div class="course" id="evaluation">   <?php include("evaluation.php");    ?></div>
       <!--------------------------------------------------------------------------------------------------------------->
         <form method="POST" action="actions.php" id="lesson_form" style="display:none">
                     
@@ -88,7 +88,6 @@ if(isset($_SESSION["id"])) {
     <script src="/kouroukan/fonctions.js"></script>
     <script src="/kouroukan/js/caracteres.js"></script>
     <script src="/kouroukan/js/clavier.js"></script>
-    <script src="/kouroukan/js/parametres.js"></script>
 
     <script src="/kouroukan/js/travaux.js"></script>
     <script src="/kouroukan/js/lessons.js"></script>

@@ -1,6 +1,10 @@
      
-    var caracteres_coches = JSON.parse(sessionStorage.getItem('caracteres_coches'));    //Voir parametres.js fonction collecteDesCaracteresCoches()
-
+    var caracteres_coches = JSON.parse(sessionStorage.getItem('syllabes'));    //Voir parametres.js fonction collecteDesCaracteresCoches()
+    
+    sessionStorage.setItem('alphabet_apprentissage_html', JSON.stringify(alphabetApprentissageHTML()));
+    sessionStorage.setItem('alphabet_exercice_html', JSON.stringify(alphabetExerciceHTML()));
+    
+    
     function alphabetApprentissageHTML() {
 
         var table = "<table class = 'table_parlante'>\n";

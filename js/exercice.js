@@ -7,6 +7,12 @@ function exercices() {
     var nbr_de_questionnaires = 20;
     var exercice_questions = [];
     var moyenne_d_exercice = 1;
+
+    var alphabet_exercice_html = JSON.parse(sessionStorage.getItem('alphabet_exercice_html')); // Voir alphabet.js
+    var syllabes_exercice_html = JSON.parse(sessionStorage.getItem('syllabes_exercice_html')); // Voir syllabes.js
+    var tons_exercice_html     = JSON.parse(sessionStorage.getItem('tons_exercice_html'));     // Voir tons.js
+    var chiffres_exercice_html = JSON.parse(sessionStorage.getItem('chiffres_exercice_html')); // Voir chiffres.js
+
   	    
     var lesson_courante = lessonCourante();
     var compteur_de_question = 1;
@@ -25,10 +31,10 @@ function exercices() {
     function lessonCourante() {
         var lesson_courante = [];
                  
-        if(phase_id=='alphabet_exercice' ) { lesson_courante = alphabetExerciceHTML(); } // Voir alphabet.js
-        if(phase_id=='syllabes_exercice' ) { lesson_courante = syllabesExerciceHTML(); } // Voir syllabes.js
-        if(phase_id=='tons_exercice'     ) { lesson_courante = tonsExerciceHTML();     } // Voir tons.js
-        if(phase_id=='chiffres_exercice' ) { lesson_courante = chiffresExerciceHTML(); } // Voir chiffres.js
+        if(phase_id=='alphabet_exercice' ) { lesson_courante = alphabet_exercice_html; } // Voir alphabet.js
+        if(phase_id=='syllabes_exercice' ) { lesson_courante = syllabes_exercice_html; } // Voir syllabes.js
+        if(phase_id=='tons_exercice'     ) { lesson_courante = tons_exercice_html;     } // Voir tons.js
+        if(phase_id=='chiffres_exercice' ) { lesson_courante = chiffres_exercice_html; } // Voir chiffres.js
 
         return lesson_courante;
     }

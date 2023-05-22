@@ -1,25 +1,16 @@
-    
-    var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));                   // Voir programmes.js fonction storageDeLaMatiereActive()
-    var caracteres_coches = JSON.parse(sessionStorage.getItem('caracteres_coches'));         // Voir parametres.js fonction collecteDesCaracteresCoches()
-    var session_syllabes = JSON.parse(sessionStorage.getItem('syllabes'));         // Voir parametres.js fonction collecteDesCaracteresCoches()
-    var syllabes = (niveau_actif > 1) ? session_syllabes : [];
-    var syllabes_questions = malaxer(syllabes);
+  
+    var syllabes       = JSON.parse(sessionStorage.getItem('syllabes'));       // Voir parametres.js fonction collecteDesCaracteresCoches()
+    var mixed_syllabes = JSON.parse(sessionStorage.getItem('mixed_syllabes')); // Voir parametres.js fonction collecteDesCaracteresCoches()    
 
-// Récupération des caractères cochés
     var voyelles_cochees = JSON.parse(sessionStorage.getItem('voyelles_cochees'));           // voir parametres.js fonction collecteDesCaracteresCoches()
     var consonnes_cochees = JSON.parse(sessionStorage.getItem('consonnes_cochees'));         // voir parametres.js fonction collecteDesCaracteresCoches()
     var tedos_coches = JSON.parse(sessionStorage.getItem('tedos_coches'));                   // voir parametres.js fonction collecteDesCaracteresCoches()
     var nasalisations_cochees = JSON.parse(sessionStorage.getItem('nasalisations_cochees')); // voir parametres.js fonction collecteDesCaracteresCoches()
     var tons_coches = JSON.parse(sessionStorage.getItem('tons_coches'));                     // voir parametres.js fonction collecteDesCaracteresCoches()
-        
-    // voyelles_cochees      = $('#voyelles_cochees').html().split('');
-    // consonnes_cochees     = $('#consonnes_cochees').html().split('');
-    // tedos_coches          = $('#tedos_coches').html().split('');
-    // tons_coches           = $('#tons_coches').html().split('');
-    // nasalisations_cochees = $('#nasalisations_cochees').html().split('');
 
-    
     sessionStorage.setItem('syllabes_apprentissage_html', JSON.stringify(syllabesApprentissageHTML()));
+    sessionStorage.setItem('syllabes_exercice_html', JSON.stringify(syllabesExerciceHTML()));
+    sessionStorage.setItem('syllabes_pratique_html', JSON.stringify(syllabesPratiquesHTML()));
 
     
     function monoSyllabes() {
@@ -188,10 +179,10 @@
      
     function syllabesApprentissageHTML() {
          
-        let sah = "<table class='table_parlante'>\n";
-        for(let i=0; i<syllabes.length; i+=voyelles_cochees.length) {
+        var sah = "<table class='table_parlante'>\n";
+        for(var i=0; i<syllabes.length; i+=voyelles_cochees.length) {
             sah += "<tr>\n";
-            for(let j=0; j<voyelles_cochees.length; j++) {
+            for(var j=0; j<voyelles_cochees.length; j++) {
                 sah += "<td>"+syllabes[i+j]+"</td>\n";
             }
             sah += "</tr>\n\n";
@@ -203,17 +194,17 @@
     function syllabesExerciceHTML(){
             	    
         var exercices_corps_html = '<table class="table_muette">';
-        for(var i=0;i<syllabes_questions.length-syllabes_questions.length%7;i+=7){
+        for(var i=0;i<mixed_syllabes.length-mixed_syllabes.length%7;i+=7){
             exercices_corps_html += '<tr>\n';
             for(var j=0;j<7;j++){
-                exercices_corps_html += '<td>'+syllabes_questions[i+j]+'</td>\n';
+                exercices_corps_html += '<td>'+mixed_syllabes[i+j]+'</td>\n';
             }
             exercices_corps_html += '</tr>\n';
         }
-        for(var i=syllabes_questions.length-syllabes_questions.length%7;i<syllabes_questions.length;i+=syllabes_questions.length%7){
+        for(var i=mixed_syllabes.length-mixed_syllabes.length%7;i<mixed_syllabes.length;i+=mixed_syllabes.length%7){
             exercices_corps_html += '<tr>\n';
-            for(var j=0;j<syllabes_questions.length%7;j++){
-                exercices_corps_html += '<td>'+syllabes_questions[i+j]+'</td>\n';
+            for(var j=0;j<mixed_syllabes.length%7;j++){
+                exercices_corps_html += '<td>'+mixed_syllabes[i+j]+'</td>\n';
             }
             exercices_corps_html += '</tr>\n';
         }

@@ -13,7 +13,7 @@
         var syllabes_tonifies = JSON.parse(sessionStorage.getItem('syllabes'));  // Voir parametres.js fonction collecteDesCaracteresCoches()
 
 
-        actualiserCochage();
+        reactualiserCochage();
 
         sessionStorage.setItem('syllabes_tonifies', JSON.stringify(syllabes_tonifies)); 
         var tons_questions = malaxer(syllabes_tonifies);
@@ -80,7 +80,7 @@
         function tonsPratiquesHTML() {
             // Code
         }
-        function actualiserCochage() {
+        function reactualiserCochage() {
             voyelles_cochees = $('#voyelles_cochees').html().split('');
             consonnes_cochees = $('#consonnes_cochees').html().split('');
             tedos_coches = $('#tedos_coches').html().split('');

@@ -1,5 +1,5 @@
   
-    var syllabes       = JSON.parse(sessionStorage.getItem('syllabes'));       // Voir parametres.js fonction collecteDesCaracteresCoches()
+    var lesson_content       = JSON.parse(sessionStorage.getItem('lesson_content'));       // Voir parametres.js fonction collecteDesCaracteresCoches()
     var mixed_syllabes = JSON.parse(sessionStorage.getItem('mixed_syllabes')); // Voir parametres.js fonction collecteDesCaracteresCoches()    
 
     var voyelles_cochees = JSON.parse(sessionStorage.getItem('voyelles_cochees'));           // voir parametres.js fonction collecteDesCaracteresCoches()
@@ -180,10 +180,10 @@
     function syllabesApprentissageHTML() {
          
         var sah = "<table class='table_parlante'>\n";
-        for(var i=0; i<syllabes.length; i+=voyelles_cochees.length) {
+        for(var i=0; i<lesson_content.length; i+=voyelles_cochees.length) {
             sah += "<tr>\n";
             for(var j=0; j<voyelles_cochees.length; j++) {
-                sah += "<td>"+syllabes[i+j]+"</td>\n";
+                sah += "<td>"+lesson_content[i+j]+"</td>\n";
             }
             sah += "</tr>\n\n";
         }

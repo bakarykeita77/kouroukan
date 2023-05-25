@@ -1,24 +1,23 @@
 
 function apprentissages() {
         
-    var id              = JSON.parse(sessionStorage.getItem('id'));  
     var apprentissage   = $('#apprentissage');
-    var niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
-    var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));        // Voir programmes.js fonction storageDeLaMatiereActive()
+
+    var id              = JSON.parse(sessionStorage.getItem('id'));  
+    var niveau_actif    = JSON.parse(sessionStorage.getItem('niveau_actif'));        // Voir programmes.js fonction storageDeLaMatiereActive()
     var phase_id        = JSON.parse(sessionStorage.getItem('phase_id'));    
     var moyenne_d_apprentissage = JSON.parse(sessionStorage.getItem("moyenne"));
+    
+    var lesson_content = JSON.parse(sessionStorage.getItem("lesson_content"));
+    var lesson_courante = JSON.parse(sessionStorage.getItem("lesson_courante"));
 
     var alphabet_apprentissage_html = JSON.parse(sessionStorage.getItem('alphabet_apprentissage_html')); // Voir alphabet.js
     var syllabes_apprentissage_html = JSON.parse(sessionStorage.getItem('syllabes_apprentissage_html')); // Voir syllabes.js
     var tons_apprentissage_html     = JSON.parse(sessionStorage.getItem('tons_apprentissage_html'));     // Voir tons.js
     var chiffres_apprentissage_html = JSON.parse(sessionStorage.getItem('chiffres_apprentissage_html')); // Voir chiffres.js
 
-    var lesson_active = lessonCourante();
     var clicks_memo = [];
-
-console.log(phase_id);
-console.log(alphabet_apprentissage_html);
-console.log(lesson_active); 
+  
 
     $('.fermeture').attr('id', 'fermer_apprentissage');
 
@@ -38,14 +37,14 @@ console.log(lesson_active);
 
         return lesson_active;
     }
-    function chargerApprentissage() { $('#apprentissage_body').html( "<div id='table_parlante_container'>"+lesson_active+"</div>" ); }
+    function chargerApprentissage() { $('#apprentissage_body').html(lesson_courante); }
     function apprendre() {
         
         affichageDesBoutonsMedia();
         
         lectureSemiAutomatique(); // Voir fonctions.js
         lecturePersonnalisee();   // Voir fonctions.js
-        arreterLecture(lessonCourante); // Voir fonctions.js
+        arreterLecture(lesson_courante); // Voir fonctions.js
         apprentissageProgressBarr();
               
        
@@ -71,7 +70,7 @@ console.log(lesson_active);
         }
         function apprentissageProgressBarr() {
                         
-            var nbr_click = questions(niveau_actif).length;
+            var nbr_click = lesson_content.length;
             var progress_unity = $('#apprentissage_progress_bar').width()/nbr_click;
             
          /*
@@ -82,7 +81,7 @@ console.log(lesson_active);
             let elements_clickes = [];
             
             $('.table_parlante td').on('click', function() {
-             
+           
                 if(elements_clickes.indexOf($(this).html()) == -1) $('.progress_bonne_reponse_bar').css('width','+='+progress_unity+'px');
                 elements_clickes.push($(this).html());
             });
@@ -230,7 +229,7 @@ console.log(lesson_active);
                 const apprentissage_data = new URLSearchParams({
                     id     : id,
                     matiere: matiere,
-                    niveau : niveau_en_cours,
+                    niveau : niveau_actif,
                     phase  : phase,
                     lesson : lesson,
                     note   : note

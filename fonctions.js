@@ -1,5 +1,6 @@
     var total_phase = JSON.parse(sessionStorage.getItem('total_phase'));
-	function activerSonDuClavier() {
+	
+    function activerSonDuClavier() {
 		$('#clavier_nko td').on('click',function(){
 			lettre = $(this).attr('id');
 			source_son = 'son/mp3/'+lettre+'.mp3';
@@ -34,6 +35,7 @@
              lecturePersonnalisee();
         });
     }
+/*-------------------------------------------------------------------------------------------------------------------------------------*/ 
     
     function barrerLaFausseReponse(td) {
         var fausse_reponse = td.html();
@@ -60,7 +62,8 @@
         setTimeout(function() { $('#croix').css('opacity', 0.6 ); }, 50);
         setTimeout(function() { td.html(fausse_reponse); }, 2000);
     }
-	
+
+/*-------------------------------------------------------------------------------------------------------------------------------------*/	
     
     function changerPhaseActive(phase_index) {
         if(phase_index != -1) {
@@ -119,6 +122,8 @@
     }
     function couleurDeFond(element,couleur)	{ element.css('backgroundColor', couleur); }
     function couleurDeFont(element,couleur)	{ element.css('color', couleur); }
+
+/*-------------------------------------------------------------------------------------------------------------------------------------*/
 	
 	function incrementer(){
 	    var i=0;
@@ -130,6 +135,8 @@
 	    element.animate({ 'height':0 }, 200);
 	    setTimeout((function(){ element.css({ 'display':'none' }) }),180);
 	}
+
+/*-------------------------------------------------------------------------------------------------------------------------------------*/
 	
     function guiderClient(){
 
@@ -142,6 +149,8 @@
         
         return;
     }
+
+/*-------------------------------------------------------------------------------------------------------------------------------------*/
 	
     function lecturePersonnalisee() {
         $('.table_parlante').on('click', function(e) {
@@ -174,6 +183,22 @@
             },600);
          });
      }
+     function lessonHTML(array) {
+         var table = "<table class = 'table_parlante'>\n";
+         for(var i=0;i<array.length-array.length%7;i+=7) {
+             table += "<tr>\n";
+             for(var j=0;j<7;j++) table += "<td>"+array[i+j]+"</td>\n";
+             table += "</tr>\n";
+         }
+         for(var k=array.length-array.length%7;k<array.length;k+=array.length%7){
+             table += "<tr>\n";
+             for(var l=0;l<array.length%7;l++) table += "<td>"+array[k+l]+"</td>\n";
+             table += "</tr>\n";
+         }
+         table += "</table>";
+                 
+         return table;
+     } 
     function lire_mot() {
 	   for(var i=0; i<texte_memoire.length; i++) {
 	       var mot = texte_memoire[i];
@@ -188,6 +213,8 @@
 	   
 	   }
     }
+
+/*-------------------------------------------------------------------------------------------------------------------------------------*/
     
     function mettreEnSurbrillance(element) {
         element.addClass('surbrillance');
@@ -252,6 +279,8 @@
         }
         return mixted_table;
     }
+
+/*-------------------------------------------------------------------------------------------------------------------------------------*/
     
     function parseIntNko(nombre_a_convertir){
         var numberToString = String(nombre_a_convertir);
@@ -285,7 +314,11 @@
 		son.play();
 	}
 
+/*-------------------------------------------------------------------------------------------------------------------------------------*/
+
     function questions(niveau) {
+        
+        var lesson_content = JSON.parse(sessionStorage.getItem("lesson_content"));
         var lq = '';
         
         if(niveau==1) lq = malaxer(lettres);
@@ -295,6 +328,8 @@
         
         return lq;
     }
+
+/*-------------------------------------------------------------------------------------------------------------------------------------*/
     
     function rappel(button) {
         setTimeout(() => { button.css('box-shadow','none'); }, 100);
@@ -308,6 +343,8 @@
         setTimeout(() => { button.css('box-shadow','none'); }, 900);
         setTimeout(() => { button.css('box-shadow','var(--shadow_16)'); }, 1000);
     }
+
+/*-------------------------------------------------------------------------------------------------------------------------------------*/
 	
 	function softDisplay() {
 	    var element = $('.soft_display');
@@ -315,6 +352,8 @@
 	    
 	   // alert( elements_secondaires ); 
 	}
+
+/*-------------------------------------------------------------------------------------------------------------------------------------*/
 
     function zoomArriere(element) { element.css('fontSize','-=16px'); }
     function zoomAvant(element)	{ element.css('fontSize','+=16px'); }

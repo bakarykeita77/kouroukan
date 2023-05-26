@@ -1,7 +1,8 @@
 $('document').ready(function() {
 
  //Declaration des variables
-    var id = JSON.parse(sessionStorage.getItem('id'));     
+    var id = JSON.parse(sessionStorage.getItem('id'));  
+    var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));   // Voir programmes.js fonction storageDeLaMatiereActive()
     var matieres = JSON.parse(sessionStorage.getItem('matieres'));     
     var matieres_etudiees = [],  matiere_index = 0;
     var niveaux = [], niveau_max = 0;
@@ -219,12 +220,10 @@ $('document').ready(function() {
         });
         return id_phases;
     }
-	function matiere() {
- 		
-    	$('#phases_list li').on('click', function(){
+	function matiere() {		
+        
+        $('#phases_list li').on('click', function(){
             
-            var lesson_content = lessonContent(); // Voir js/parametres.js
-    	    var lesson_courante = lessonHTML(lesson_content);
    
             var questions_quantity = quantiteDeQuestion();
             var quantite_de_question = quantiteDeQuestion();
@@ -233,12 +232,14 @@ $('document').ready(function() {
             var phase_class = $(this).attr('class');
     	    var phase_id = $(this).attr('id');
     	    var course_id = phase_id.split('_')[1];
-            
+            var lesson_content = lessonContent()
+    	    var lesson_courante = lessonHTML(lesson_content);
             
             sessionStorage.setItem('lesson_content',JSON.stringify(lesson_content));
             sessionStorage.setItem('lesson_courante',JSON.stringify(lesson_courante));
             sessionStorage.setItem('quantite_de_question',JSON.stringify(quantite_de_question));
             sessionStorage.setItem('phase_class', JSON.stringify(phase_class));
+            sessionStorage.setItem("course_id", JSON.stringify(course_id));
             sessionStorage.setItem("phase_id", JSON.stringify(phase_id));
 
             /*--------------------------------------------------------------------*/ 
@@ -320,11 +321,11 @@ $('document').ready(function() {
                 //if(phase_class == 'a_apprendre') { $('.course_container').css('display','none'); alert("ߘߊߞߎ߲ ߡߊ߫ ߛߋ߫ ߦߊ߲߬ ߡߊ߫ ߝߟߐ߫");   }  
         	    //if(phase_class == 'active') {
 
+
                 $('.course_container').css('display','block');
                 $('.course').css('display','none');
                 
                 sessionStorage.setItem('session_niveau_max', niveau_max);
-                $('#apprentissage_body').html('²');
 
                 switch (course_id) {
                     case 'apprentissage':apprentissages(); break;   // Voir apprentissage.js
@@ -335,9 +336,96 @@ $('document').ready(function() {
 
         	    //}
         	    if(phase_class == 'a_apprendre') $('.course_container').css('display','none');
+
+
+                
+
+
+                var lesson_content = lessonContent();
+                var lesson_active = lessonHTML(lesson_content);
+                $('.course_body').html(lesson_active);
     	    }
       	});
     	
     	$('#go_to_lesson').on('click', function() { $('.phases_container ul li').click(); });
+                  
+        function lessonContent() {
+
+            var niveau = JSON.parse(sessionStorage.getItem('niveau_actif'));   // Voir programmes.js fonction storageDeLaMatiereActive()
+            var course_id = JSON.parse(sessionStorage.getItem('course_id'));   // Voir programmes.js fonction storageDeLaMatiereActive()
+        
+            
+            // Recuperation des caractères cochés
+            var voyelles_cochees      = JSON.parse(sessionStorage.getItem('voyelles_cochees'));
+            var consonnes_cochees     = JSON.parse(sessionStorage.getItem('consonnes_cochees'));
+            var tedos_coches          = JSON.parse(sessionStorage.getItem('tedos_coches'));
+            var tons_coches           = JSON.parse(sessionStorage.getItem('tons_coches'));
+            var nasalisations_cochees = JSON.parse(sessionStorage.getItem('nasalisations_cochees'));
+
+            function lettresCochees() {
+                var lettres = voyelles_cochees.concat(consonnes_cochees,tedos_coches);
+                return lettres;
+            }
+            function syllabesSimples() {
+                var syllabes = [];
+
+                for(var i=0; i<nasalisations_cochees.length; i++) {
+                for(var j=0; j<consonnes_cochees.length;     j++) {
+                for(var k=0; k<voyelles_cochees.length;      k++) {
+                    syllabes[syllabes.length] = consonnes_cochees[j]+voyelles_cochees[k]+nasalisations_cochees[i];
+                }}}
+
+                return syllabes;
+            }
+            function syllabesTonifiees() {
+                var s_t = [];
+
+                for(var i=0; i<nasalisations_cochees.length; i++) {
+                for(var j=0; j<consonnes_cochees.length;     j++) {
+                for(var k=0; k<voyelles_cochees.length;      k++) {
+                for(var l=0; l<tons_coches.length;           l++) {
+                    s_t[s_t.length] = consonnes_cochees[j]+voyelles_cochees[k]+nasalisations_cochees[i]+tons_coches[l];
+                }}}}
+
+                return s_t;
+            }
+            function chiffresDeBase() {
+                var chiffre = chiffres;    // Voir caracteres.js
+                return chiffre;
+            }
+
+            let lesson_content = [];
+            
+            
+            if(course_id == "apprentissage") {
+                if(niveau == 1) lesson_content = lettresCochees();
+                if(niveau == 2) lesson_content = syllabesSimples();
+                if(niveau == 3) lesson_content = syllabesTonifiees();
+                if(niveau == 4) lesson_content = chiffresDeBase();
+            }
+            
+            if(course_id == "exercice") {
+                if(niveau == 1) lesson_content = malaxer(lettresCochees());
+                if(niveau == 2) lesson_content = malaxer(syllabesSimples());
+                if(niveau == 3) lesson_content = malaxer(syllabesTonifiees());
+                if(niveau == 4) lesson_content = malaxer(chiffresDeBase());
+            }
+            
+            if(course_id == "pratique") {
+                if(niveau == 1) lesson_content = [];
+                if(niveau == 2) lesson_content = [];
+                if(niveau == 3) lesson_content = [];
+                if(niveau == 4) lesson_content = [];
+            }
+            
+            if(course_id == "evaluation") {
+                if(niveau == 1) lesson_content = [];
+                if(niveau == 2) lesson_content = [];
+                if(niveau == 3) lesson_content = [];
+                if(niveau == 4) lesson_content = [];
+            }
+
+            return lesson_content;
+        }
 	}
 });

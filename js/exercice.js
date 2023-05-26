@@ -21,7 +21,7 @@ function exercices() {
    
     $('.fermeture').attr('id', 'fermer_exercice');
      
-    chargerExercice();
+     chargerExercice();
     afficherCourse(exercice);
     exercer();
     enregistrerExercice();
@@ -41,7 +41,6 @@ function exercices() {
     function chargerExercice(){ 
 
         $('#exercice_foot').html( exerciceEnteteHTML() );
-        $('#exercice_body').html( lesson_courante ); 
         reductionDesElementsDeLessonCouranteA49();
         
         function exerciceEnteteHTML(){

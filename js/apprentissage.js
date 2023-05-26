@@ -11,33 +11,18 @@ function apprentissages() {
     var lesson_content = JSON.parse(sessionStorage.getItem("lesson_content"));
     var lesson_courante = JSON.parse(sessionStorage.getItem("lesson_courante"));
 
-    var alphabet_apprentissage_html = JSON.parse(sessionStorage.getItem('alphabet_apprentissage_html')); // Voir alphabet.js
-    var syllabes_apprentissage_html = JSON.parse(sessionStorage.getItem('syllabes_apprentissage_html')); // Voir syllabes.js
-    var tons_apprentissage_html     = JSON.parse(sessionStorage.getItem('tons_apprentissage_html'));     // Voir tons.js
-    var chiffres_apprentissage_html = JSON.parse(sessionStorage.getItem('chiffres_apprentissage_html')); // Voir chiffres.js
-
     var clicks_memo = [];
   
 
     $('.fermeture').attr('id', 'fermer_apprentissage');
 
-    chargerApprentissage();
+    // chargerApprentissage();
     afficherCourse(apprentissage);
     apprendre();
     enregistrerApprentissage();
     stockerApprentissage();
                     
    
-    function lessonCourante() {
-        let lesson_active = [];
-        if(phase_id == 'alphabet_apprentissage') lesson_active = alphabet_apprentissage_html; 
-        if(phase_id == 'syllabes_apprentissage') lesson_active = syllabes_apprentissage_html;
-        if(phase_id == 'tons_apprentissage'    ) lesson_active = tons_apprentissage_html;
-        if(phase_id == 'chiffres_apprentissage') lesson_active = chiffres_apprentissage_html;
-
-        return lesson_active;
-    }
-    function chargerApprentissage() { $('#apprentissage_body').html(lesson_courante); }
     function apprendre() {
         
         affichageDesBoutonsMedia();

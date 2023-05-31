@@ -304,38 +304,35 @@
 
                 var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));
                 var course_id = JSON.parse(sessionStorage.getItem('course_id'));
-
+                var syllabes_tonifies = syllabesTonifieesActualisees();  // Voir parametres.js fonction collecteDesCaracteresCoches()
+               
              // Récupération des caractères cochés
                 voyelles_cochees = $('#voyelles_cochees').html().split('');
                 consonnes_cochees = $('#consonnes_cochees').html().split('');
                 tedos_coches = $('#tedos_coches').html().split('');
                 tons_coches = $('#tons_coches').html().split('');
                 nasalisations_cochees;
+                
                 caracteres_coches = voyelles_cochees.concat(consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees);
+                var syllabes_simples_coches = syllabesSimplesActualisees();
+
+                var voyelles_length = voyelles_cochees.length;
+                var tons_length = tons_coches.length;
+                var syllabes_tonifies_length = syllabes_tonifies.length;
 
                 var lesson_content_actualise = lessonContentActualise();
-
-             // Storage des caractères cochés
-                sessionStorage.setItem('voyelles_cochees'     , JSON.stringify(voyelles_cochees));
-                sessionStorage.setItem('consonnes_cochees'    , JSON.stringify(consonnes_cochees));
-                sessionStorage.setItem('tedos_coches'         , JSON.stringify(tedos_coches));
-                sessionStorage.setItem('tons_coches'          , JSON.stringify(tons_coches));
-                sessionStorage.setItem('nasalisations_cochees', JSON.stringify(nasalisations_cochees));
-                sessionStorage.setItem('caracteres_coches'    , JSON.stringify(caracteres_coches));
-
-                sessionStorage.setItem('lesson_content'             , JSON.stringify(lesson_content));
+ 
 
              // Rechargement du tableau noir avec les caractères cochés
-                lesson_actualisee = lessonHTML(lesson_content_actualise);
-                $('#apprentissage_body').html( lesson_actualisee ); 
+                $('#apprentissage_body').html( lesson_content_actualise ); 
 
                 
                 function lessonContentActualise() {
                     var content_actualise = [];
 
-                    if(niveau_actif == 1) content_actualise = caracteres_coches;
-                    if(niveau_actif == 2) content_actualise = syllabesSimplesActualisees();
-                    if(niveau_actif == 3) content_actualise = syllabesTonifieesActualisees();
+                    if(niveau_actif == 1) content_actualise = lessonHTML(caracteres_coches);
+                    if(niveau_actif == 2) content_actualise = lessonHTML(syllabes_simples_coches);
+                    if(niveau_actif == 3) content_actualise = lessonHTML2(voyelles_length,tons_length,syllabes_tonifies_length,syllabes_tonifies);
                     if(niveau_actif == 4) content_actualise = chiffresDeBaseActualisees();
 
                     return content_actualise;
@@ -351,17 +348,17 @@
 
                     return syllabes;
                 }
-                function syllabesTonifieesActualisees() {
-                    var s_t = [];
-
-                    for(var i=0; i<nasalisations_cochees.length; i++) {
-                    for(var j=0; j<consonnes_cochees.length;     j++) {
-                    for(var k=0; k<voyelles_cochees.length;      k++) {
-                    for(var l=0; l<tons_coches.length;           l++) {
-                        s_t[s_t.length] = consonnes_cochees[j]+voyelles_cochees[k]+nasalisations_cochees[i]+tons_coches[l];
+                function syllabesTonifieesActualisees(){
+                    var tonifies = [];
+                        
+                    for(var nasalisation=0;nasalisation<nasalisations_cochees.length;nasalisation++) {
+                    for(var consonne=0;consonne<consonnes_cochees.length;consonne++) {
+                    for(var voyelle=0;voyelle<voyelles_cochees.length;voyelle++) {
+                    for(var ton=0;ton<tons_coches.length;ton++) {
+                        tonifies[tonifies.length] = consonnes_cochees[consonne]+voyelles_cochees[voyelle]+tons_coches[ton]+nasalisations_cochees[nasalisation];
                     }}}}
-
-                    return s_t;
+                    
+                    return tonifies;
                 }
                 function chiffresDeBaseActualisees() {
                     var chiffre = chiffres;    // Voir caracteres.js

@@ -198,7 +198,26 @@
          table += "</table>";
                  
          return table;
-     } 
+     }
+     function lessonHTML2(voyelles_length,tons_length,syllabes_tonifies_length,syllabes_tonifies) {
+             
+         var tons_apprentissage_html = '';
+         var n1 = voyelles_length*tons_length;
+                     
+         for(var sous_table=0;sous_table<syllabes_tonifies_length;sous_table+=n1){
+             tons_apprentissage_html += '<table class="table_parlante">\n\n';
+             for(var ligne=0;ligne<n1;ligne+=tons_coches.length){
+                 tons_apprentissage_html += '<tr>\n';
+                 for(var colonne=0;colonne<tons_coches.length;colonne++){
+                     tons_apprentissage_html += '<td>'+syllabes_tonifies[sous_table+ligne+colonne]+'</td>\n';
+                 }
+                 tons_apprentissage_html += '</tr>\n\n';
+             }
+             tons_apprentissage_html += "</table><br><br><hr><br>\n";
+         }
+                     
+         return tons_apprentissage_html;
+     }
     function lire_mot() {
 	   for(var i=0; i<texte_memoire.length; i++) {
 	       var mot = texte_memoire[i];

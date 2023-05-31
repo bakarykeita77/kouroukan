@@ -1,49 +1,47 @@
 function exercices() {
                 
-    var id = JSON.parse(sessionStorage.getItem('id')); 
-    var exercice = $('#exercice');
-    var niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
-    var phase_id = JSON.parse(sessionStorage.getItem('phase_id'));
+    var id = JSON.parse(sessionStorage.getItem('id'));
+    var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));
     var nbr_de_questionnaires = 20;
     var exercice_questions = [];
     var moyenne_d_exercice = 1;
 
-    var alphabet_exercice_html = JSON.parse(sessionStorage.getItem('alphabet_exercice_html')); // Voir alphabet.js
-    var syllabes_exercice_html = JSON.parse(sessionStorage.getItem('syllabes_exercice_html')); // Voir syllabes.js
-    var tons_exercice_html     = JSON.parse(sessionStorage.getItem('tons_exercice_html'));     // Voir tons.js
-    var chiffres_exercice_html = JSON.parse(sessionStorage.getItem('chiffres_exercice_html')); // Voir chiffres.js
-
-  	    
-    var lesson_courante = lessonCourante();
     var compteur_de_question = 1;
     var question_rang = '߭';
     var exercice_a_stocker = [];
    
     $('.fermeture').attr('id', 'fermer_exercice');
      
-     chargerExercice();
-    afficherCourse(exercice);
+    reductionDesElementsDeExerciceCouranteA49();    // Réduction du nombre de questions à une quantité raisonable
+    actualiserDialogueBtn();
     exercer();
     enregistrerExercice();
     stockerExercice();
 
 
-    function lessonCourante() {
-        var lesson_courante = [];
-                 
-        if(phase_id=='alphabet_exercice' ) { lesson_courante = alphabet_exercice_html; } // Voir alphabet.js
-        if(phase_id=='syllabes_exercice' ) { lesson_courante = syllabes_exercice_html; } // Voir syllabes.js
-        if(phase_id=='tons_exercice'     ) { lesson_courante = tons_exercice_html;     } // Voir tons.js
-        if(phase_id=='chiffres_exercice' ) { lesson_courante = chiffres_exercice_html; } // Voir chiffres.js
+    function reductionDesElementsDeExerciceCouranteA49() {
 
-        return lesson_courante;
-    }
-    function chargerExercice(){ 
-
-        $('#exercice_foot').html( exerciceEnteteHTML() );
-        reductionDesElementsDeLessonCouranteA49();
+        if($('#exercice .table_parlante tr').length >= 6) {
+            for( var i = $('#exercice .table_parlante tr').length-1; i > 6; i--) {
+                document.querySelector('#exercice .table_parlante').deleteRow(i);
+            }
+            $.each($('#exercice .table_parlante tr td'), function() {
+                exercice_questions.push($(this).html());
+            });
+        }
+        if($('#exercice .table_parlante tr').length < 6) {
+            $.each($('#exercice .table_parlante tr td'), function() {
+                exercice_questions.push($(this).html());
+            });
+        }
         
-        function exerciceEnteteHTML(){
+        exercice_questions = malaxer(exercice_questions);
+    }
+    function actualiserDialogueBtn(){ 
+
+        $('#exercice_foot').html( dialogueBtnHTML() );  // Chaque fois qu'une question est posée, les infos sur les boutons de dialogue doivent etre actualisées.
+        
+        function dialogueBtnHTML(){
             var exercices_entete_html = "<div class='dialogue_btn' id='exercice_dialogue_btn'>";   
             exercices_entete_html += "<div class='play_icon_container' id='exercices_player'>";
             exercices_entete_html += "<span class='play_label'>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ </span>";
@@ -53,16 +51,6 @@ function exercices() {
             exercices_entete_html += "<div class='oreille_icon_container'><span class='reecoute_label'>ߊ߬ ߟߊߡߍ߲߫ ߕߎ߯ߣߌ߫  </span> <span class='oreille_icon'>&#128066;</span></div>";
             exercices_entete_html += "</div>";
             return exercices_entete_html;
-        }
-        function reductionDesElementsDeLessonCouranteA49() {
-            for( var i = $('.table_muette tr').length-1; i > 6; i--) {
-                document.querySelector('.table_muette').deleteRow(i);
-            }
-            $.each($('.table_muette tr td'), function() {
-                exercice_questions.push($(this).html());
-            });
-            
-            exercice_questions = malaxer(exercice_questions);
         }
     }
     function exercer(){
@@ -99,7 +87,7 @@ function exercices() {
         }
         function repondreExerciceQuestion(){
                     
-            $('.table_muette').on('click', function(e){
+            $('.table_parlante').on('click', function(e){
                 if(question_posee=='')
                 { rappel($('.play_icon_container')); }
                 else
@@ -140,7 +128,7 @@ function exercices() {
     }
     function enregistrerExercice(){
         
-        var td = $('.table_muette td');
+        var td = $('.table_parlante td');
         var exercice_counter = 0;
 
         initialiserExerciceAStocker();
@@ -207,7 +195,7 @@ function exercices() {
                 const exercice_data = new URLSearchParams({
                     id     : id,
                     matiere: matiere,
-                    niveau : niveau_en_cours,
+                    niveau : niveau_actif,
                     phase  : phase,
                     lesson : lesson,
                     note   : note

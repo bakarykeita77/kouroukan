@@ -16,8 +16,6 @@ function apprentissages() {
 
     $('.fermeture').attr('id', 'fermer_apprentissage');
 
-    // chargerApprentissage();
-    afficherCourse(apprentissage);
     apprendre();
     enregistrerApprentissage();
     stockerApprentissage();

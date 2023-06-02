@@ -1,11 +1,8 @@
 
 function apprentissages() {
         
-    var apprentissage   = $('#apprentissage');
-
     var id              = JSON.parse(sessionStorage.getItem('id'));  
     var niveau_actif    = JSON.parse(sessionStorage.getItem('niveau_actif'));        // Voir programmes.js fonction storageDeLaMatiereActive()
-    var phase_id        = JSON.parse(sessionStorage.getItem('phase_id'));    
     var moyenne_d_apprentissage = JSON.parse(sessionStorage.getItem("moyenne"));
     
     var lesson_content = JSON.parse(sessionStorage.getItem("lesson_content"));
@@ -177,6 +174,7 @@ function apprentissages() {
                 changerPhaseActive(index_phase_active);
                 initialiserProgressBarr();
             }
+
 
             function noterApprentissage() {
                 var note = 0;

@@ -5,7 +5,7 @@ function apprentissages() {
     var niveau_actif    = JSON.parse(sessionStorage.getItem('niveau_actif'));        // Voir programmes.js fonction storageDeLaMatiereActive()
     var moyenne_d_apprentissage = JSON.parse(sessionStorage.getItem("moyenne"));
     
-    var lettres_cochees = JSON.parse(sessionStorage.getItem("lettres_cochees"));    // Voir parametres.js fonction lettresCochees()
+    var nbr_td = JSON.parse(sessionStorage.getItem("nbr_td"));    // Voir parametres.js fonction chargementDeLesson()
     var lesson_courante = JSON.parse(sessionStorage.getItem("lesson_courante"));
 
     var clicks_memo = [];
@@ -57,7 +57,7 @@ function apprentissages() {
           Pour cela, tous les éléments clichés sont enregistrés dans un tableau pour les distinguer.
          */
                         
-            var nbr_click = lettres_cochees.length;
+            var nbr_click = nbr_td;
             let elements_clickes = [];
                      
             progression(nbr_click);
@@ -66,8 +66,8 @@ function apprentissages() {
             function initialiserApprentissageProgressBarr() {
                 $('.parametres_popup td').on('click', function() {  
                     
-                    var lettres_cochees = JSON.parse(sessionStorage.getItem("lettres_cochees"));    // Voir parametres.js fonction lettresCochees()
-                    var nbr_click = lettres_cochees.length;
+                    var nbr_td = JSON.parse(sessionStorage.getItem("nbr_td"));    // Voir parametres.js fonction lettresCochees()
+                    var nbr_click = nbr_td;
                     elements_clickes = [];
                     progress_unity = 0;
 

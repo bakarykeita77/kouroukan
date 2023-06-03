@@ -350,6 +350,8 @@
             $('#pratique_body').html(pratique_html);
             $('#evaluation_body').html(evaluation_html);
 
+            sessionStorage.setItem('nbr_td', JSON.stringify(nombreDeTdDeLaTableParlante()));
+
               
             function apprentissageHTML() {
 
@@ -435,6 +437,16 @@
                 var chiffre = chiffres;    // Voir caracteres.js
                 sessionStorage.setItem('chiffres', JSON.stringify(chiffre));
                 return chiffre;
+            }
+            function nombreDeTdDeLaTableParlante() {
+                var nbr_td = 0;
+
+                if(niveau_actif == 1) nbr_td = lettresCochees().length;
+                if(niveau_actif == 2) nbr_td = syllabesSimplesActualisees().length; 
+                if(niveau_actif == 3) nbr_td = syllabesTonifieesActualisees().length; 
+                if(niveau_actif == 4) nbr_td = chiffresDeBaseActualisees().length; 
+
+                return nbr_td;
             }
         }
     }

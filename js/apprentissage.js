@@ -5,19 +5,21 @@ function apprentissages() {
     var niveau_actif    = JSON.parse(sessionStorage.getItem('niveau_actif'));        // Voir programmes.js fonction storageDeLaMatiereActive()
     var moyenne_d_apprentissage = JSON.parse(sessionStorage.getItem("moyenne"));
     
-    var lesson_content = JSON.parse(sessionStorage.getItem("lesson_content"));
+    var lettres_cochees = JSON.parse(sessionStorage.getItem("lettres_cochees"));    // Voir parametres.js fonction lettresCochees()
     var lesson_courante = JSON.parse(sessionStorage.getItem("lesson_courante"));
 
     var clicks_memo = [];
   
-
-    $('.fermeture').attr('id', 'fermer_apprentissage');
+ /*-----------------------------------------------------------------------------------------------------------------------------------*/
+    
+ $('.fermeture').attr('id', 'fermer_apprentissage');
 
     apprendre();
     enregistrerApprentissage();
     stockerApprentissage();
                     
-   
+ /*-----------------------------------------------------------------------------------------------------------------------------------*/
+    
     function apprendre() {
         
         affichageDesBoutonsMedia();
@@ -49,22 +51,37 @@ function apprentissages() {
             setTimeout(() => { $(".media_btns").css({"display":"none"}); }, 300);
         }
         function apprentissageProgressBarr() {
-                        
-            var nbr_click = lesson_content.length;
-            var progress_unity = $('#apprentissage_progress_bar').width()/nbr_click;
-            
          /*
           A chaque click sur un élément, progress barr avance d'une unité égale à progress_unity px.
           Mais si un élément est clické une deuxième fois, progress barr ne doit pas avancer.
           Pour cela, tous les éléments clichés sont enregistrés dans un tableau pour les distinguer.
-         */            
+         */
+                        
+            var nbr_click = lettres_cochees.length;
             let elements_clickes = [];
-            
-            $('.table_parlante td').on('click', function() {
-           
-                if(elements_clickes.indexOf($(this).html()) == -1) $('.progress_bonne_reponse_bar').css('width','+='+progress_unity+'px');
-                elements_clickes.push($(this).html());
-            });
+                     
+            progression(nbr_click);
+            initialiserApprentissageProgressBarr();
+
+            function initialiserApprentissageProgressBarr() {
+                $('.parametres_popup td').on('click', function() {  
+                    
+                    var lettres_cochees = JSON.parse(sessionStorage.getItem("lettres_cochees"));    // Voir parametres.js fonction lettresCochees()
+                    var nbr_click = lettres_cochees.length;
+                    elements_clickes = [];
+                    progress_unity = 0;
+
+                    $('.progress_bonne_reponse_bar').css('width', progress_unity+'px');
+                    progression(nbr_click);
+                });
+            }
+            function progression(nbr_click) {
+                var progress_unity = $('#apprentissage_progress_bar').width()/nbr_click;
+                $('.table_parlante td').on('click', function() {
+                    if(elements_clickes.indexOf($(this).html()) == -1) $('.progress_bonne_reponse_bar').css('width','+='+progress_unity+'px');
+                    elements_clickes.push($(this).html());
+                });
+            }
         }
     }
     function enregistrerApprentissage() {

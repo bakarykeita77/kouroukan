@@ -1,5 +1,5 @@
 
-    // var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));  // Voir programmes.js fonction storageDeLaMatiereActive()
+    // var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));  // Voir programmes.js fonction storagesDuProgramme()
 
     // if(niveau_actif > 2) {
 

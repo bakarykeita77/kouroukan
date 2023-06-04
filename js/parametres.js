@@ -5,7 +5,7 @@
     var checkbox_titre, check_btn_container, checkbox_parent, check_btn, checkbox_children;
     var voyelles = [], consonnes = [], tedoo = [], tons = [], nasalisations = [];
     var voyelles_cochees = [], consonnes_cochees = [], tedos_coches = [], tons_coches = [], nasalisations_cochees = [], caracteres_coches = [],syllabes_coches = [];
-    var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));   // Voir programmes.js fonction storageDeLaMatiereActive()
+    var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));   // Voir programmes.js fonction storagesDuProgramme()
     var phase_id = JSON.parse(sessionStorage.getItem('phase_id'));
     var lesson_courante = [], lesson_content = [];
 

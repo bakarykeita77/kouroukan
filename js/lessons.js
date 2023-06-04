@@ -1,7 +1,6 @@
 $('document').ready(function() {
 
 //Declaration des variables  
-    var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));   // Voir programmes.js fonction storageDeLaMatiereActive()
     var matieres = JSON.parse(sessionStorage.getItem('matieres'));     
     var matiere_index = 0;
     var niveau_max = 0;

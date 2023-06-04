@@ -2,7 +2,7 @@
 function apprentissages() {
         
     var id              = JSON.parse(sessionStorage.getItem('id'));  
-    var niveau_actif    = JSON.parse(sessionStorage.getItem('niveau_actif'));        // Voir programmes.js fonction storageDeLaMatiereActive()
+    var niveau_actif    = JSON.parse(sessionStorage.getItem('niveau_actif'));        // Voir programmes.js fonction storagesDuProgramme()
     var moyenne_d_apprentissage = JSON.parse(sessionStorage.getItem("moyenne"));
     
     var nbr_td = JSON.parse(sessionStorage.getItem("nbr_td"));    // Voir parametres.js fonction chargementDeLesson()
@@ -23,7 +23,6 @@ function apprentissages() {
     function apprendre() {
         
         affichageDesBoutonsMedia();
-        
         lectureSemiAutomatique(); // Voir fonctions.js
         lecturePersonnalisee();   // Voir fonctions.js
         arreterLecture(lesson_courante); // Voir fonctions.js
@@ -86,7 +85,7 @@ function apprentissages() {
     }
     function enregistrerApprentissage() {
         
-        var table, tr, td, nbr_table, nbr_tr, nbr_td, nbr_table_td;
+        var table, tr, td, nbr_table, nbr_tr, nbr_td, nbr_td_par_table;
         
         table = $('.table_parlante'); 
         tr = $('.table_parlante tr'); 
@@ -94,7 +93,7 @@ function apprentissages() {
         
         nbr_table = table.length;
         nbr_tr = Math.ceil(td.length/tr.length);
-        nbr_table_td = Math.ceil(td.length/nbr_table);
+        nbr_td_par_table = Math.ceil(td.length/nbr_table);
         nbr_td = td.length;
                    
         
@@ -122,7 +121,7 @@ function apprentissages() {
                 var table_courante = $(this).parent().parent().parent();
                 var tr_index       = $(this).parent().index();
                 var table_index    = table.index(table_courante);
-                var element_index  = table_index*nbr_table_td + tr_index*nbr_tr + $(this).index();
+                var element_index  = table_index*nbr_td_par_table + tr_index*nbr_tr + $(this).index();
                 var element_click_counter = 0;
                 var point = 0;
 
@@ -197,9 +196,7 @@ function apprentissages() {
                 var note = 0;
                 
                 for(var i=0;i<clicks_memo.length;i++) {
-                    if(clicks_memo[i][2] == "߁") {
-                        note ++;
-                    }
+                    if(clicks_memo[i][2] == "߁") note++;
                 }
                 
                 return note;
@@ -208,9 +205,8 @@ function apprentissages() {
                     var sum_click = 0;
                     
                     for (var i = 0; i < table_elements_click_nbr.length; i++) {
-                    if(table_elements_click_nbr[i] >= click_min_admis) {    
-                        sum_click ++;
-                    }}
+                        if(table_elements_click_nbr[i] >= click_min_admis) sum_click ++;
+                    }
                     return sum_click;
                 }
             }

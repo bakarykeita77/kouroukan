@@ -349,7 +349,8 @@
     }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
-    
+
+    function raffraichirLaPage() { alert('raffraichissement'); location = location; }
     function rappel(button) {
         setTimeout(() => { button.css('box-shadow','none'); }, 100);
         setTimeout(() => { button.css('box-shadow','var(--shadow_30)'); }, 200);

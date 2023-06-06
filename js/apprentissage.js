@@ -188,25 +188,18 @@ function apprentissages() {
             if(note >= moyenne_d_apprentissage) {
                 sendApprentissageToDB();
                 changerPhaseActive(index_phase_active);
-                initialiserProgressBarr();
+                initialiserProgressBarr();  // Voir fonction.js
             }
 
 
             function noterApprentissage() {
                 var note = 0;
-                
-                for(var i=0;i<clicks_memo.length;i++) {
-                    if(clicks_memo[i][2] == "߁") note++;
-                }
-                
+                for(var i=0;i<clicks_memo.length;i++) if(clicks_memo[i] !== undefined) if(clicks_memo[i][2] == "߁") note++;
                 return note;
                 
                 function nombreDeBoutonClicke() {
                     var sum_click = 0;
-                    
-                    for (var i = 0; i < table_elements_click_nbr.length; i++) {
-                        if(table_elements_click_nbr[i] >= click_min_admis) sum_click ++;
-                    }
+                    for (var i = 0; i < table_elements_click_nbr.length; i++) if(table_elements_click_nbr[i] >= click_min_admis) sum_click ++;
                     return sum_click;
                 }
             }
@@ -216,8 +209,8 @@ function apprentissages() {
              - Si oui le mémoire de click est envoyé au serveur;
              - Sinon, un message s'affiche et le mémoire n'est pas envoyé.
              */
-                var matiere = JSON.parse(sessionStorage.getItem('matiere_active'));
-                var phase   = JSON.parse(sessionStorage.getItem('phase'));
+                var matiere = JSON.parse(sessionStorage.getItem('matiere_active')); // Voir programmes.js fonction storagesDuProgramme()
+                var phase   = JSON.parse(sessionStorage.getItem('phase'));  // Voir lessons.js fonction phaseActiveName()
                 var lesson  = JSON.stringify(clicks_memo);
                 
                 const apprentissage_data = new URLSearchParams({

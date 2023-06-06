@@ -175,21 +175,22 @@ function exercices() {
             }
         
             function noterExercice() {
-                var note_total = 0;
+                var note_d_exercice = 0;
                 
                 for (var i = 0; i < nbr_de_questionnaires; i++) {
+                if(exercice_a_stocker[i] !== undefined) {
                     if(exercice_a_stocker[i][2] == "߁") {
-                        note_total ++;
+                        note_d_exercice ++;
                     }
-                }
-                
-                var note = Math.floor((note_total*20)/nbr_de_questionnaires);
+                }}
+
+                var note = Math.floor((note_d_exercice*20)/nbr_de_questionnaires);
                 return note;
             }                                
             function sendExerciceToDB() {
 
-                let matiere = JSON.parse(sessionStorage.getItem('matiere_active'));
-                let phase   = JSON.parse(sessionStorage.getItem('phase'));
+                let matiere = JSON.parse(sessionStorage.getItem('matiere_active')); // Voir programmes.js fonction storagesDuProgramme() 
+                let phase   = JSON.parse(sessionStorage.getItem('phase'));  // Voir lessons.js fonction phaseActiveName()  
                 let lesson  = JSON.stringify(exercice_a_stocker);
                                                             
                 const exercice_data = new URLSearchParams({

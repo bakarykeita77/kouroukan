@@ -19,11 +19,11 @@
     display: inline-block; 
     vertical-align: top; 
 }
-.travail_titre h3, .ordres_de_travail { display: inline-block; vertical-align: middle; }
+.travail_titre h3, .bulles_container { display: inline-block; vertical-align: middle; }
 .travail td { min-width: 2rem; }
-.ordres_de_travail { width: calc(100% - 12rem); overflow: auto; }
-.ordres_de_travail .ordres_glissiere { width: 16rem; }
-.ordres_de_travail p { 
+.bulles_container { width: calc(100% - 12rem); height: 3rem; overflow: auto; }
+.bulles_container .bulles_glissiere { width: 16rem; height: 3rem; }
+.bulles_container p { 
     position: relative;
     display: inline-block; 
     margin: var(--marginSmall);
@@ -38,5 +38,5 @@
     border-radius: 50%;
     cursor: pointer;
 }
-.ordres_de_travail p:hover { box-shadow: 0 0 0.5rem #666; color: black; }
+.bulles_container p:hover { box-shadow: 0 0 0.5rem #666; color: black; }
 .cercle_actif  { box-shadow: 0 0 0.5rem #666; color: black; }

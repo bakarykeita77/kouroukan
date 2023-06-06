@@ -284,8 +284,8 @@ function evaluations() {
                     
                 function sendEvaluationToDB() {
                    
-                    let matiere = JSON.parse(sessionStorage.getItem('matiere_active'));
-                    let phase   = JSON.parse(sessionStorage.getItem('phase'));
+                    let matiere = JSON.parse(sessionStorage.getItem('matiere_active')); // Voir programmes.js fonction storagesDuProgramme()
+                    let phase   = JSON.parse(sessionStorage.getItem('phase'));  // Voir lessons.js fonction phaseActiveName()
                     let lesson  = JSON.stringify(evaluation_a_stocker);
                             
                         

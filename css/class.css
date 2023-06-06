@@ -737,7 +737,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0;}
     overflow: hidden;
     cursor: pointer;
 }
-.play_icon_container { height: 1.5rem; line-height: 1.5rem; }
+.play_icon_container { height: 1.5rem; line-height: 1.5rem; cursor: pointer; }
 .ponctuations input, .ponctuations label { display: inline-block; vertical-align: middle; }
 .ponctuations label {
     border: 1px dashed #aaa;

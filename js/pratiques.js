@@ -828,7 +828,7 @@ function pratique() {
                     
                     for (var i = 0; i < all_options.length; i++) {
                     for (var j = 0; j < all_options[i].length; j++) {
-                        note_total += all_options[i][j][2];
+                        if(all_options[i][j] != undefined) note_total += all_options[i][j][2];
                     }}
                     
                     let note = Math.floor(note_total/4);
@@ -837,8 +837,8 @@ function pratique() {
                 }
                 function sendPratiqueToDB() {
 
-                    let matiere = JSON.parse(sessionStorage.getItem('matiere_active'));
-                    let phase   = JSON.parse(sessionStorage.getItem('phase'));
+                    let matiere = JSON.parse(sessionStorage.getItem('matiere_active')); // Voir programmes.js fonction storagesDuProgramme()
+                    let phase   = JSON.parse(sessionStorage.getItem('phase'));  // Voir lessons.js fonction phaseActiveName()
                     let lesson  = JSON.stringify(all_options);
                                     
                     const pratique_data = new URLSearchParams({

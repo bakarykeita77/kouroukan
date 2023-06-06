@@ -220,12 +220,12 @@ $('document').ready(function() {
             sessionStorage.setItem("course_id", JSON.stringify(course_id));
             sessionStorage.setItem("phase_id", JSON.stringify(phase_id));
  
-            /*--------------------------------------------------------------------*/ 
+         /*--------------------------------------------------------------------*/ 
 
             phaseActiveName();
             cours();
             
-            /*--------------------------------------------------------------------*/  
+         /*--------------------------------------------------------------------*/  
 
             function phaseActiveName() { sessionStorage.setItem('phase', JSON.stringify(phase_id)); }
             function cours() {
@@ -234,7 +234,7 @@ $('document').ready(function() {
                 //if(phase_class == 'a_apprendre') { $('.course_container').css('display','none'); alert("ߘߊߞߎ߲ ߡߊ߫ ߛߋ߫ ߦߊ߲߬ ߡߊ߫ ߝߟߐ߫");   }  
                 //if(phase_class == 'active') {
 
-                    parametrageDeLesson();
+                    parametrageDeLesson();  // Voir parametres.js
                     afficherLesson();
                     dispenserLesson(); 
                     
@@ -273,9 +273,8 @@ $('document').ready(function() {
                     }
                 //}
             }
-            });
+        });
         
         $('#go_to_lesson').on('click', function() { $('.phases_container ul li').click(); });
-        $('.fermeture').one('click', function(){ location = location; });  //Rafraichir la page
     }
 });

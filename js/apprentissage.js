@@ -2,17 +2,17 @@
 function apprentissages() {
         
     var id              = JSON.parse(sessionStorage.getItem('id'));  
-    var niveau_actif    = JSON.parse(sessionStorage.getItem('niveau_actif'));        // Voir programmes.js fonction storagesDuProgramme()
+    var niveau_actif    = JSON.parse(sessionStorage.getItem('niveau_actif'));   // Voir programmes.js fonction storagesDuProgramme()
     var moyenne_d_apprentissage = JSON.parse(sessionStorage.getItem("moyenne"));
     
-    var nbr_td = JSON.parse(sessionStorage.getItem("nbr_td"));    // Voir parametres.js fonction chargementDeLesson()
+    var nbr_td = JSON.parse(sessionStorage.getItem("nbr_td"));  // Voir parametres.js fonction chargementDeLesson()
     var lesson_courante = JSON.parse(sessionStorage.getItem("lesson_courante"));
 
     var clicks_memo = [];
   
  /*-----------------------------------------------------------------------------------------------------------------------------------*/
     
- $('.fermeture').attr('id', 'fermer_apprentissage');
+    $('.fermeture').attr('id', 'fermer_apprentissage');
 
     apprendre();
     enregistrerApprentissage();
@@ -23,12 +23,12 @@ function apprentissages() {
     function apprendre() {
         
         affichageDesBoutonsMedia();
-        lectureSemiAutomatique(); // Voir fonctions.js
+        lectureSemiAutomatique();   // Voir fonctions.js
         lecturePersonnalisee();   // Voir fonctions.js
-        arreterLecture(lesson_courante); // Voir fonctions.js
+        arreterLecture(lesson_courante);    // Voir fonctions.js
         apprentissageProgressBarr();
-              
-       
+
+      
         function affichageDesBoutonsMedia(){
             $(".media_label").on('mouseover', function() { afficherMediaBoutons(); });
             $(".media_btns").on('mouseleave', function(){ masquerMediaBoutons(); });
@@ -85,7 +85,7 @@ function apprentissages() {
     }
     function enregistrerApprentissage() {
         
-        var table, tr, td, nbr_table, nbr_tr, nbr_td, nbr_td_par_table;
+        var table, tr, td, nbr_table, nbr_tr, nbr_td_par_table;
         
         table = $('.table_parlante'); 
         tr = $('.table_parlante tr'); 

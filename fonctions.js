@@ -154,7 +154,6 @@
 	
     function lecturePersonnalisee() {
         $('.table_parlante').on('click', function(e) {
-            var td = $('.table_parlante td');
             var td_actif = e.target;
             var td_actif_value = td_actif.textContent;
     

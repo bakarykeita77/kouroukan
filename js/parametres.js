@@ -10,6 +10,7 @@
     var lesson_courante = [], lesson_content = [];
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+ 
  /* Les variables tableaux regroupant les caracteres par types */  
     voyelles = lesVoyelles();         // Voir caracteres.js
     consonnes = lesConsonnes();       // Voir caracteres.js
@@ -17,13 +18,10 @@
     nasalisations = laNasalisation(); // Voir caracteres.js
     tons = lesTons();                 // Voir caracteres.js
 
-
-//$('#exercice').on('click', function(){ alert('ok'); });
-
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/    
     parametrageDeLesson();
     affichageDeParametres();
-    
+
     var lesson_content = JSON.parse(sessionStorage.getItem('lesson_content'));  // Voir fonction collecteDesCaracteresCoches()
  
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/    
@@ -207,6 +205,7 @@
                 collecteDesCaracteresCoches(); 
                 rechargerLesSousTableauxDesCaracteresCoches();
                 chargementDeLesson();
+                
             });
         }
         function checkbox_childrenClick(){

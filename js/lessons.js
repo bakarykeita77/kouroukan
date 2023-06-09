@@ -196,7 +196,10 @@ $('document').ready(function() {
 
                 if(phase_class == 'apprises') { 
                     autorisation_d_acces_aux_cours = (frecance_du_cours < 5) ? 'oui' : 'non';
-                    if(autorisation_d_acces_aux_cours === 'non') { $('.course_container').css('display','none'); alert("ߕߊ߲߬ߓߌ߬ ߓߘߊ߫ ߞߍ߫ ߦߊ߲߬ ߘߐ߫ ߞߘߐ߬ߡߊ߲߬"); }
+                    if(autorisation_d_acces_aux_cours === 'non') { 
+                        $('.course_container').css('display','none'); 
+                        alert("ߥߟߊ߬ߘߊ ߣߌ߲߰ ߡߊ߬ߛߍ߬ߦߌ߬ߟߌ ߓߘߊ߫ ߟߏ߯ߟߎ߫ ߓߐ߫.\n ߕߊ߲߬ߓߌ߫ ߥߟߊ߬ߘߊ߬ ߜߘߍ߫ ߝߍ߬،"); 
+                    }
                     return false;
                 }
                 if(phase_class == 'a_apprendre') { 

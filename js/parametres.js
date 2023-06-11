@@ -358,15 +358,16 @@
                 var lettres_cochees         = lettresCochees();       
                 var syllabes_simples_coches = syllabesSimplesActualisees();
                 var syllabes_tonifies       = syllabesTonifieesActualisees();  // Voir parametres.js fonction collecteDesCaracteresCoches()
+                var chiffres = chiffresDeBaseActualisees();
 
                 var voyelles_length          = voyelles_cochees.length;
                 var tons_length              = tons_coches.length;
                 var syllabes_tonifies_length = syllabes_tonifies.length;
 
-                if(niveau_actif == 1) apprentissage_html = lessonHTML(lettres_cochees);
-                if(niveau_actif == 2) apprentissage_html = lessonHTML(syllabes_simples_coches);
+                if(niveau_actif == 1) apprentissage_html = lessonHTML(lettres_cochees, 'table_alphabet_apprentissage');
+                if(niveau_actif == 2) apprentissage_html = lessonHTML(syllabes_simples_coches, 'table_syllabe_apprentissage');
                 if(niveau_actif == 3) apprentissage_html = lessonHTML2(voyelles_length,tons_length,syllabes_tonifies_length,syllabes_tonifies);
-                if(niveau_actif == 4) apprentissage_html = chiffresDeBaseActualisees();
+                if(niveau_actif == 4) apprentissage_html = lessonHTML(chiffres, 'table_chiffre_apprentissage');
 
                 return apprentissage_html;
             }
@@ -378,10 +379,10 @@
                 var syllabes_tonifies_melanges = malaxer(syllabesTonifieesActualisees());
                 var chiffres_melanges          = malaxer(syllabesTonifieesActualisees())
 
-                if(niveau_actif == 1) exercice_html = lessonHTML(lettres_melangees);
-                if(niveau_actif == 2) exercice_html = lessonHTML(syllabes_simples_melanges);
-                if(niveau_actif == 3) exercice_html = lessonHTML(syllabes_tonifies_melanges);
-                if(niveau_actif == 4) exercice_html = lessonHTML(chiffres_melanges);
+                if(niveau_actif == 1) exercice_html = lessonHTML(lettres_melangees, 'table_alphabet_exercice');
+                if(niveau_actif == 2) exercice_html = lessonHTML(syllabes_simples_melanges, 'table_syllabe_exercice');
+                if(niveau_actif == 3) exercice_html = lessonHTML(syllabes_tonifies_melanges, 'table_tons_exercice');
+                if(niveau_actif == 4) exercice_html = lessonHTML(chiffres_melanges, 'table_chiffre_exercice');
 
                 return exercice_html;
             }

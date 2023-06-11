@@ -157,7 +157,7 @@
             var td_actif = e.target;
             var td_actif_value = td_actif.textContent;
     
-            $('#audio').attr({ src: 'http://localhost:8080/kouroukan/son/mp3/'+td_actif_value+'.mp3', autoplay: 'on' });
+            $('#audio').attr({ src: 'http://localhost/kouroukan/son/mp3/'+td_actif_value+'.mp3', autoplay: 'on' });
     
             $(td_actif).addClass('ombrage');
             setTimeout(function() { $(td_actif).removeClass('ombrage'); }, 600);
@@ -182,21 +182,22 @@
             },600);
          });
      }
-     function lessonHTML(array) {
-         var table = "<table class = 'table_parlante'>\n";
-         for(var i=0;i<array.length-array.length%7;i+=7) {
-             table += "<tr>\n";
-             for(var j=0;j<7;j++) table += "<td>"+array[i+j]+"</td>\n";
-             table += "</tr>\n";
-         }
-         for(var k=array.length-array.length%7;k<array.length;k+=array.length%7){
-             table += "<tr>\n";
-             for(var l=0;l<array.length%7;l++) table += "<td>"+array[k+l]+"</td>\n";
-             table += "</tr>\n";
-         }
-         table += "</table>";
-                 
-         return table;
+     function lessonHTML(array, table_id = '#') {
+
+        var table = "<table class = 'table_parlante' id='"+table_id+"'>\n";
+        for(var i=0;i<array.length-array.length%7;i+=7) {
+            table += "<tr>\n";
+            for(var j=0;j<7;j++) table += "<td>"+array[i+j]+"</td>\n";
+            table += "</tr>\n";
+        }
+        for(var k=array.length-array.length%7;k<array.length;k+=array.length%7){
+            table += "<tr>\n";
+            for(var l=0;l<array.length%7;l++) table += "<td>"+array[k+l]+"</td>\n";
+            table += "</tr>\n";
+        }
+        table += "</table>";
+                
+        return table;
      }
      function lessonHTML2(voyelles_length,tons_length,syllabes_tonifies_length,syllabes_tonifies) {
              

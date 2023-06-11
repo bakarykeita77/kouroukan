@@ -3,9 +3,15 @@ function apprentissages() {
         
     var id              = JSON.parse(sessionStorage.getItem('id'));  
     var niveau_actif    = JSON.parse(sessionStorage.getItem('niveau_actif'));   // Voir programmes.js fonction storagesDuProgramme()
-    var moyenne_d_apprentissage = JSON.parse(sessionStorage.getItem("moyenne"));
     
-    var nbr_td = JSON.parse(sessionStorage.getItem("nbr_td"));  // Voir parametres.js fonction chargementDeLesson()
+    var table_id = $('.table_parlante').attr('id');
+        
+    var table = $('#'+table_id); 
+    var tr = $('#'+table_id+' tr');
+    var td = $('#'+table_id+' td');
+    var nbr_table = table.length;
+    var nbr_tr = tr.length;
+    var nbr_td = td.length;
     var lesson_courante = JSON.parse(sessionStorage.getItem("lesson_courante"));
 
     var clicks_memo = [];
@@ -65,8 +71,6 @@ function apprentissages() {
             function initialiserApprentissageProgressBarr() {
                 $('.parametres_popup td').on('click', function() {  
                     
-                    var nbr_td = JSON.parse(sessionStorage.getItem("nbr_td"));    // Voir parametres.js fonction lettresCochees()
-                    var nbr_click = nbr_td;
                     elements_clickes = [];
                     progress_unity = 0;
 
@@ -76,7 +80,7 @@ function apprentissages() {
             }
             function progression(nbr_click) {
                 var progress_unity = $('#apprentissage_progress_bar').width()/nbr_click;
-                $('.table_parlante td').on('click', function() {
+                td.on('click', function() {
                     if(elements_clickes.indexOf($(this).html()) == -1) $('.progress_bonne_reponse_bar').css('width','+='+progress_unity+'px');
                     elements_clickes.push($(this).html());
                 });
@@ -85,17 +89,9 @@ function apprentissages() {
     }
     function enregistrerApprentissage() {
         
-        var table, tr, td, nbr_table, nbr_tr, nbr_td_par_table;
-        
-        table = $('.table_parlante'); 
-        tr = $('.table_parlante tr'); 
-        td = $('.table_parlante td');
-        
-        nbr_table = table.length;
-        nbr_tr = Math.ceil(td.length/tr.length);
-        nbr_td_par_table = Math.ceil(td.length/nbr_table);
-        nbr_td = td.length;
-                   
+        nbr_td_par_table = Math.ceil(nbr_td/nbr_table);
+        nbr_td_par_tr = Math.ceil(nbr_td/nbr_tr);
+                       
         
         initialiserApprentissageAStocker();
         memoriserApprentissage();
@@ -106,8 +102,7 @@ function apprentissages() {
         }
         function memoriserApprentissage() {
 
-            $.each(td, function(){
-                
+            $.each(td, function(){   
               /* 
               --------------------------------------------------------------------------------------------------------
                Pour chaque click sur un bouton:
@@ -121,7 +116,8 @@ function apprentissages() {
                 var table_courante = $(this).parent().parent().parent();
                 var tr_index       = $(this).parent().index();
                 var table_index    = table.index(table_courante);
-                var element_index  = table_index*nbr_td_par_table + tr_index*nbr_tr + $(this).index();
+                var element_index  = table_index*nbr_td_par_table + tr_index*nbr_td_par_tr + $(this).index();
+                //var element_index  = $(this).index();
                 var element_click_counter = 0;
                 var point = 0;
 
@@ -181,9 +177,11 @@ function apprentissages() {
     function stockerApprentissage() {
   
         $('#fermer_apprentissage').one('click',function() {
+            let moyenne_d_apprentissage = 18; 
             let index_phase_active = $('.phases_container ul li .active').index();
 
             note = noterApprentissage();
+
             if(note <  moyenne_d_apprentissage) alert("ߌ ߡߊ߫ ߛߓߍߘߋ߲ ߥߟߊ ߜߋ߭ ߠߎ߬ ߓߍ߯ ߟߊߡߍ߲߫");
             if(note >= moyenne_d_apprentissage) {
                 sendApprentissageToDB();
@@ -195,6 +193,8 @@ function apprentissages() {
             function noterApprentissage() {
                 var note = 0;
                 for(var i=0;i<clicks_memo.length;i++) if(clicks_memo[i] !== undefined) if(clicks_memo[i][2] == "߁") note++;
+                note = (note*20)/clicks_memo.length;
+
                 return note;
                 
                 function nombreDeBoutonClicke() {

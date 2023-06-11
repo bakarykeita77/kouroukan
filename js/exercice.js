@@ -71,7 +71,7 @@ function exercices() {
                 $('.ordre_question').html(parseIntNko(compteur_de_question)+question_rang);
                 question_posee = exercice_questions[i];
                 
-                alert( question_posee ); 
+               // alert( question_posee ); 
   
                 $(this).css('display','none');
                 $('.oreille_icon_container').css('display','block');

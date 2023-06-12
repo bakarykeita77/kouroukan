@@ -28,6 +28,10 @@
 					
 					<div class="profile_menu_head" id="profile_utilisateur_btn">Profile</div>
 					<div class="profile_menu_body" id='profile_utilisateur_container'>
+						<div id="profile_utilisateur_image_container">
+							<img src="/kouroukan/pages/get-avatar.php?client_id=<?= $_SESSION['id'] ?>" alt="logo"/>
+							<div id='modifier_avatar'>ߖߌ߬ߦߊ߬ߓߍ ߡߊߝߊ߬ߟߋ߲߬</div>  <!--Voir la fonction profileUtilisateurModificationAvatar() dans js/profile.js-->
+						</div>
 						<div id="profile_utilisateur_renseignements">
 							<!-- 						
 							<div> <span>ߕߐ߮ </span>    <span id="profile_prenom"   ><?=$_SESSION['prenom'];?></span></div>
@@ -38,20 +42,16 @@
 							<div> <table><tr><td><span>Mail</span></td><td><span id="profile_mail"><?=$_SESSION['email'];?></span></td></tr></table></div>
 							-->
 						</div>
-						<div id="profile_utilisateur_image_container">
-							<img height="100%" src="/kouroukan/pages/get-avatar.php?client_id=<?= $_SESSION['id'] ?>" alt="logo"/>
-							<div id='modifier_avatar'>ߖߌ߬ߦߊ߬ߓߍ ߡߊߝߊ߬ߟߋ߲߬</div>  <!--Voir la fonction profileUtilisateurModificationAvatar() dans js/profile.js-->
-						</div>
 					</div>
 					
 					<div class="profile_menu_head" id="profile_teste_btn">ߘߋ߰ߟߌ ߗߏߦߊ</div>
 					<div class="profile_menu_body" id="profile_teste_menu">
 						<div id= "profile_menu_body_content">
-							<div style="width:48%; float:right">
+							<div>
 								<h4  id="titre_des_matieres_apprises" style="margin:4px 0">ߥߟߊ߬ߘߊ߫ ߘߋ߰ߣߍ߲ ߠߎ߬</h4>
 								<div id="liste_des_matieres_apprises"></div>
 							</div>
-							<div style="width:48%; float:left">
+							<div>
 								<h4  id="titre_des_matieres_a_apprendre" style="margin:4px 0">ߥߟߊ߬ߘߊ߫ ߘߋ߰ߕߊ ߟߎ߬</h4>
 								<div id="liste_des_matieres_a_apprendre"></div>
 							</div>

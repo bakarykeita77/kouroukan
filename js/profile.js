@@ -57,13 +57,13 @@ $(document).ready(function(){
                 profile_teste_btn.onclick = toggleProfileTesteMenu();
                 
                 function toggleProfileTesteMenu(){
-                    if(profile_teste_menu.style.height == '180px'){
+                    if(profile_teste_menu.style.height == 'auto'){
                         profile_teste_menu.style.height = 0;
                         setTimeout(function() { profile_teste_menu.style.display = 'none'; }, (250));
                         setTimeout(function() { profile_teste.style.display = 'none'; }, (200));
                     }else{
                         profile_teste_menu.style.display = 'block';
-                        setTimeout(function() { profile_teste_menu.style.height = '180px'; }, (10));
+                        setTimeout(function() { profile_teste_menu.style.height = 'auto'; }, (10));
                     }
                 }
             }
@@ -332,7 +332,7 @@ $(document).ready(function(){
                                     for(var i=0;i<teste.length;i++){
                                         var data = teste[i].split(',');
                                        
-                                        profile_teste_body_content += '<tr style="border:1px solid #fff; width:302px"><td>'+data[0]+'</td><td>'+data[1]+'</td><td>'+data[2]+'</td><td>'+data[3]+'</td></tr>\n';
+                                        profile_teste_body_content += '<tr style="border:1px solid #fff"><td>'+data[0]+'</td><td>'+data[1]+'</td><td>'+data[2]+'</td><td>'+data[3]+'</td></tr>\n';
                                     }
                                     return profile_teste_body_content;
                                 }
@@ -375,12 +375,12 @@ $(document).ready(function(){
             function profileUtilisateurAffichage(){
                     this.onclick = toggleProfileUtilisateur();
                     function toggleProfileUtilisateur(){
-                        if(profile_utilisateur_container.style.height == '180px'){
+                        if(profile_utilisateur_container.style.height == 'auto'){
                             profile_utilisateur_container.style.height = 0;
                             setTimeout(function() { profile_utilisateur_container.style.display = 'none'; }, (150));
                         }else{
                             profile_utilisateur_container.style.display = 'block';
-                            setTimeout(function() { profile_utilisateur_container.style.height = '180px'; }, (10));
+                            setTimeout(function() { profile_utilisateur_container.style.height = 'auto'; }, (10));
                         } 
                     }
             }

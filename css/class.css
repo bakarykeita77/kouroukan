@@ -308,7 +308,6 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0;}
     left: 0;
     height: calc(100% - 3rem);
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
 }
 
 /* --------------------------------------------------------------------------------------------------------- */
@@ -710,6 +709,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0;}
 }
 .phases_container li {
     height: 3rem;
+    margin: 0.25rem;
     line-height: 3rem;
     font-weight: bold;
     cursor: pointer;
@@ -917,32 +917,34 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0;}
 
 
 @media screen and (orientation: landscape) {
-	.page_body { width: 80%; max-width: 800px;  margin: auto; }
-    .phases {
-        height: 5rem;
-        width: 90%;
-        padding: 1rem; 
+    .cover {
+        background-color: rgba(0, 0, 0, 0.7);
     }
-    .phases { flex-direction: row; }
+	.page_body { width: 80%; max-width: 800px;  margin: auto; }
+    .parametres_popup {  width: auto; }
+    .phases { flex-direction: row;  height: 5rem;  width: 90%; padding: 1rem; }
     .phases li {
         display: inline-block;
-        width: 15%;
+        width: 30%;
         min-width: 5rem;
         text-align: center;
     }
     .travaux { display: block; }
 }
 @media screen and (orientation: portrait) {
+    .cover {
+        background-color: none;
+    }
+    .lesson_title { width: 75vw; margin: auto; }
 	.page_body {  width: 100%; margin: 0;  padding: 0; }
+    .parametres_popup { width: 80vw; }
     .phases {
-        height: 15rem;
+        flex-direction: column;
+        height: auto;
         width: 80%;
         padding: 3rem 0; 
         max-width: 30rem;
     }
-    .phases { flex-direction: column; }
-    .phases li {
-        width: 80%;
-    }
+    .phases li { width: 80%; }
     .travaux { display: none; }
 }

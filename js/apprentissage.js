@@ -1,8 +1,8 @@
 
 function apprentissages() {
         
-    var id              = JSON.parse(sessionStorage.getItem('id'));  
-    var niveau_actif    = JSON.parse(sessionStorage.getItem('niveau_actif'));   // Voir programmes.js fonction storagesDuProgramme()
+    var id = JSON.parse(sessionStorage.getItem('id'));  
+    var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));   // Voir programmes.js fonction storagesDuProgramme()
     
     var table_id = $('.table_parlante').attr('id');
         
@@ -12,7 +12,6 @@ function apprentissages() {
     var nbr_table = table.length;
     var nbr_tr = tr.length;
     var nbr_td = td.length;
-    var lesson_courante = JSON.parse(sessionStorage.getItem("lesson_courante"));
 
     var clicks_memo = [];
   
@@ -27,11 +26,11 @@ function apprentissages() {
  /*-----------------------------------------------------------------------------------------------------------------------------------*/
     
     function apprendre() {
-        
+
         affichageDesBoutonsMedia();
-        lectureSemiAutomatique();   // Voir fonctions.js
-        lecturePersonnalisee();   // Voir fonctions.js
-        arreterLecture(lesson_courante);    // Voir fonctions.js
+        lectureSemiAutomatique();  // Voir fonctions.js
+        lecturePersonnalisee();    // Voir fonctions.js
+        arreterLecture();          // Voir fonctions.js
         apprentissageProgressBarr();
 
       
@@ -71,6 +70,8 @@ function apprentissages() {
             function initialiserApprentissageProgressBarr() {
                 $('.parametres_popup td').on('click', function() {  
                     
+                    var nbr_td = JSON.parse(sessionStorage.getItem("nbr_td"));    // Voir parametres.js fonction lettresCochees()
+                    var nbr_click = nbr_td;
                     elements_clickes = [];
                     progress_unity = 0;
 
@@ -80,7 +81,7 @@ function apprentissages() {
             }
             function progression(nbr_click) {
                 var progress_unity = $('#apprentissage_progress_bar').width()/nbr_click;
-                td.on('click', function() {
+                $('.table_parlante td').on('click', function() {
                     if(elements_clickes.indexOf($(this).html()) == -1) $('.progress_bonne_reponse_bar').css('width','+='+progress_unity+'px');
                     elements_clickes.push($(this).html());
                 });

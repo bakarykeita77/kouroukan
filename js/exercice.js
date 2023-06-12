@@ -56,9 +56,8 @@ function exercices() {
     function exercer(){
         
         var i=0;
-        var question_posee, reponse_montree; 
+        var question_posee = '', reponse_montree = ''; 
 
-        question_posee = '';
         poserExerciceQuestion();
         repondreExerciceQuestion();
         

@@ -58,8 +58,7 @@
             'transition':'transform 0.6s'
         });
         
-        setTimeout(function() { $('#croix').css('transform', 'scale(1.5)'); }, 50);
-        setTimeout(function() { $('#croix').css('opacity', 0.6 ); }, 50);
+        setTimeout(function() { $('#croix').css({'transform':'scale(1.5)', 'opacity':0.6, 'color':'red' }); }, 50);
         setTimeout(function() { td.html(fausse_reponse); }, 2000);
     }
 
@@ -86,7 +85,7 @@
         localStorage.clear();
     }
     function clignotage(reponse_ratee) {
-        $.each($('.table_muette td'), function() {
+        $.each($('.table_parlante td'), function() {
             if ($(this).html() == reponse_ratee) {
                 var td = $(this);
 
@@ -129,8 +128,11 @@
 	    var i=0;
 	    return function(){ return i += 1; };
 	}
-    function initialiserProgressBarr() { $('.progress_question_bar, .progress_bonne_reponse_bar').css('width',0); }
-	
+    function initialiserProgressBarr() { 
+        $('.parametres_popup td').on('click', function() {
+            $('.progress_question_bar, .progress_bonne_reponse_bar').css('width',0); 
+        });
+    }
 	function fermer(element) {
 	    element.animate({ 'height':0 }, 200);
 	    setTimeout((function(){ element.css({ 'display':'none' }) }),180);

@@ -1,14 +1,14 @@
+function parametrageDeLesson() {
 
 /* Declaration des variables */   
-    var parametres_btn, parametres;
+    var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));   // Voir programmes.js fonction storagesDuProgramme()
+    var phase_id = JSON.parse(sessionStorage.getItem('phase_id'));   // Voir lessons.js fonction matiere()
+    var parametres = '';
+
     var voyelles_checker, consonnes_checker, tedo_checker, tons_checker, nasalisation_checker;
-    var checkbox_titre, check_btn_container, checkbox_parent, check_btn, checkbox_children;
     var voyelles = [], consonnes = [], tedoo = [], tons = [], nasalisations = [];
     var voyelles_cochees = [], consonnes_cochees = [], tedos_coches = [], tons_coches = [], nasalisations_cochees = [], caracteres_coches = [],syllabes_coches = [];
-    var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));   // Voir programmes.js fonction storagesDuProgramme()
-    var phase_id = JSON.parse(sessionStorage.getItem('phase_id'));
-    var lesson_courante = [], lesson_content = [];
-
+    
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
  
  /* Les variables tableaux regroupant les caracteres par types */  
@@ -19,14 +19,12 @@
     tons = lesTons();                 // Voir caracteres.js
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/    
-    parametrageDeLesson();
+    parametrage();
     affichageDeParametres();
-
-    var lesson_content = JSON.parse(sessionStorage.getItem('lesson_content'));  // Voir fonction collecteDesCaracteresCoches()
  
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/    
 
-    function parametrageDeLesson(){
+    function parametrage(){
      
         parametres = $('#parametres');
         lesson_parametres = $('#lesson_parametres');
@@ -193,7 +191,7 @@
         $('.checkbox_titre').on('click', function(){ $(this).find('.checkbox_parent').click(); });
         $('.check_btn').on('click', function(){ $(this).children().first().click(); });
             
-        function checkbox_parentClick(){
+        function checkbox_parentClick() {
             
             $('.checkbox_parent').on('click', function(){
             
@@ -205,25 +203,24 @@
                 collecteDesCaracteresCoches(); 
                 rechargerLesSousTableauxDesCaracteresCoches();
                 chargementDeLesson();
-                
             });
         }
-        function checkbox_childrenClick(){
-            $('.checkbox_children').on('click', function(){ 
+        function checkbox_childrenClick() {
+            $('.checkbox_children').on('click', function() { 
                 viderLesSousTableauxDesCaracteresCoches();
                 collecteDesCaracteresCoches(); 
                 rechargerLesSousTableauxDesCaracteresCoches();
                 chargementDeLesson();
             }); 
         }
-        function viderLesSousTableauxDesCaracteresCoches(){
+        function viderLesSousTableauxDesCaracteresCoches() {
             voyelles_cochees.splice(0,voyelles_cochees.length);
             consonnes_cochees.splice(0,consonnes_cochees.length);
             tedos_coches.splice(0,tedos_coches.length);
             tons_coches.splice(0,tons_coches.length);
             nasalisations_cochees.splice(0,nasalisations_cochees.length);
         }
-        function collecteDesCaracteresCoches(){
+        function collecteDesCaracteresCoches() {
             
             if(niveau_actif==1){
                 $.each($('.voyelle'), function(){
@@ -309,18 +306,8 @@
                 
                 caracteres_coches = voyelles_cochees.concat(consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees);
             }
-
-            // Storage des caractères cochés
-            sessionStorage.setItem('voyelles_cochees'     , JSON.stringify(voyelles_cochees));
-            sessionStorage.setItem('consonnes_cochees'    , JSON.stringify(consonnes_cochees));
-            sessionStorage.setItem('tedos_coches'         , JSON.stringify(tedos_coches));
-            sessionStorage.setItem('tons_coches'          , JSON.stringify(tons_coches));
-            sessionStorage.setItem('nasalisations_cochees', JSON.stringify(nasalisations_cochees));
-            sessionStorage.setItem('caracteres_coches'    , JSON.stringify(caracteres_coches));
-
-            sessionStorage.setItem('lesson_content', JSON.stringify(lesson_content));
         }
-        function rechargerLesSousTableauxDesCaracteresCoches(){
+        function rechargerLesSousTableauxDesCaracteresCoches() {
             $('#voyelles_cochees').html(voyelles_cochees);
             $('#consonnes_cochees').html(consonnes_cochees);
             $('#tedos_coches').html(tedos_coches);
@@ -348,6 +335,8 @@
             $('#exercice_body').html(exercice_html);
             $('#pratique_body').html(pratique_html);
             $('#evaluation_body').html(evaluation_html);
+            
+            continuerLeCours();    // Voir fonctions.js
 
             sessionStorage.setItem('nbr_td', JSON.stringify(nombreDeTdDeLaTableParlante()));
 
@@ -449,4 +438,14 @@
                 return nbr_td;
             }
         }
+        function continuerLeCours() {
+
+            // switch (phase_id) {
+            //     case 'alphabet_apprentissage':lecturePersonnalisee(); break;   // Voir fonction.js
+            //     case 'exercice'     ://;      break;   // Voir exercice.js
+            //     case 'pratique'     ://;       break;   // Voir pratiques.js
+            //     case 'evaluation'   ://;    break;   // Voir evaluations.js
+            // }
+        }
     }
+}

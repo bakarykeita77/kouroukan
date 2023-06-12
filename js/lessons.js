@@ -1,15 +1,15 @@
 $('document').ready(function() {
     
-//Declaration des variables  
-    var matieres = JSON.parse(sessionStorage.getItem('matieres'));     
-    var matiere_index = JSON.parse(sessionStorage.getItem('matiere_index'));
-    var niveau_max          = JSON.parse(sessionStorage.getItem('niveau_max'));
-    var niveau_en_cours     = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
-    var niveau_max = 0;
-    var phases_distinctes   = JSON.parse(sessionStorage.getItem('phases_distinctes'));
+ //Récupération des données reçues sur l'apprenant  
+    var matieres          = JSON.parse(sessionStorage.getItem('matieres'));     
+    var matiere_index     = JSON.parse(sessionStorage.getItem('matiere_index'));
+    var niveau_en_cours   = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
+    var phases_distinctes = JSON.parse(sessionStorage.getItem('phases_distinctes'));
     
     var rang = '';
-    var data_phase_nbr = 0, nbr = 0;
+    var data_phase_nbr = 0;
+
+    matieres_length = (matieres !== null) ? matieres.length : 0;
 
     /*-------------------------------------------------------------------------------------------------------------------
     1)- La situation des études est faite par récupération et traitement des données reçues sur l'apprenant.
@@ -18,28 +18,12 @@ $('document').ready(function() {
     4)- Les phases s'affichent et
     5)- On peut surfer
 
-    /*--------------------------------------------------------------------*/
- //Récupération des données reçues sur l'apprenant  
-    matieres        = JSON.parse(sessionStorage.getItem('matieres')); 
-    matieres_length = (matieres !== null) ? matieres.length : 0;
-
     /*-----------------------------------------------------------------------------------------------------------------*/
 
  //Traitement des données reçues sur l'apprenant
     if(matieres_length === 0) {
         matiere_index = 0;
-        
-        niveau_max = 0;
         niveau_en_cours = 1;
-        
-        phase_en_cours = 'alphabet_apprentissage';
-        
-        nbr = 0;
-    }
-    if(matieres_length > 0) {
-
-        
-        nbr = JSON.parse(sessionStorage.getItem('nbr')); 
     }
 
     /*-----------------------------------------------------------------------------------------------------------------*/
@@ -158,7 +142,7 @@ $('document').ready(function() {
     }
     function nombreDePhasesEtudiees() {
         let n = 0; // nombre de phases étudiées.
-        let phases = JSON.parse(sessionStorage.getItem('phases_distinctes'));
+        let phases = JSON.parse(sessionStorage.getItem('phases_distinctes')); // Voir accueil.js fonction dataStorage()
         
         $.each($('#phases_list li'), function() {
             let phase_id = $(this).attr('id');
@@ -173,19 +157,17 @@ $('document').ready(function() {
             
             var phase_class = $(this).attr('class');
             var phase_id = $(this).attr('id');
-            sessionStorage.setItem('phase', JSON.stringify(phase_id));
             var phase_nom = $(this).html();
             var course_id = phase_id.split('_')[1];
             var autorisation_d_acces_aux_cours = 'non';
-            var lesson_courante = lessonHTML(lesson_content);
-
-            sessionStorage.setItem('lesson_courante',JSON.stringify(lesson_courante));
+            
+            sessionStorage.setItem('phase', JSON.stringify(phase_id));
             sessionStorage.setItem('phase_class', JSON.stringify(phase_class));
             sessionStorage.setItem("course_id", JSON.stringify(course_id));
             sessionStorage.setItem("phase_id", JSON.stringify(phase_id));
- 
-         /*--------------------------------------------------------------------*/ 
 
+         /*--------------------------------------------------------------------*/ 
+         
             autorisationDAccesAuxCours();
             suivreLesCours();
             
@@ -226,8 +208,6 @@ $('document').ready(function() {
                     parametrageDeLesson();  // Voir parametres.js
                     afficherLesson();
                     dispenserLesson(); 
-                    
-                    sessionStorage.setItem('session_niveau_max', niveau_max);
 
                     
                     function afficherLesson(){

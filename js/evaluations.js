@@ -2,34 +2,29 @@ function evaluations() {
         
     var id = JSON.parse(sessionStorage.getItem('id')); 
     var matiere_nom = JSON.parse(sessionStorage.getItem('matiere_nom')); 
-    var evaluation = $('#evaluation');
-    var niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
+    var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));
     var total_phase = $('.phases li').lenth;
     var phase_class = JSON.parse(sessionStorage.getItem('phase_class'));
+    var questions_evaluation = JSON.parse(sessionStorage.getItem('questions'));
 
-    var nbr_max_de_questions_a_poser = 2;
-    var questions_evaluation = questions(niveau_en_cours);
+    var nbr_max_de_questions_a_poser = 20;
     var question_evaluation = '', questions_a_evaluer = [], reponse_evaluation = [];
     var note_d_evaluation = 0;
     var moyenne_d_evaluation = 1 ;
     var compteur = incrementer();
     var evaluation_counter = 0;
     
-    var memoire_rang = [], memoire_question = [], memoire_reponse = [], memoire_vraie_reponse = [];
-    var memoire_point = [], memoire_point_total = [];
+    var memoire_rang = [];
      
     var q_index = 0, q_rang = '߭';
     var q_ordre = parseIntNko(q_index+1);
     var evaluation_a_stocker = [];
 
     var evaluation_fiche_body = $('#evaluation_fiche_body');
-    var fiche_body_html = evaluation_fiche_body.html();
 
     $('#pratique_options').css('display','none');
-     
     $('.fermeture').attr('id', 'fermer_evaluation');
 
-    afficherCourse(evaluation);
     initialiserEvaluation();
     evaluer();
     correctionEvaluation();
@@ -42,9 +37,8 @@ function evaluations() {
         initialiserEvaluationAStocker();
        
         function initialisationDEvaluationEntete(){
+
             var q_total = parseIntNko(nbr_max_de_questions_a_poser);
-             
-            var compteur = incrementer();
             var q_index = 0;
             var q_ordre = parseIntNko(q_index+1);
             var q_label = 'ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ';
@@ -61,13 +55,10 @@ function evaluations() {
             $('.correction_btn').css('display','none');
         }
         function initialiserEvaluationAStocker() {
-            for (var i = 0; i < 20; i++) questions_a_evaluer[i] = questions_evaluation[i];
-            for(var i=0;i<questions_a_evaluer.length;i++){
-                            
-                var q = questions_a_evaluer[i];
-                var r = '';
-                var p = 0;
-                            
+            for(var i = 0; i < 20; i++) questions_a_evaluer[i] = questions_evaluation[i];
+            for(var i=0;i<questions_a_evaluer.length;i++) {
+
+                var q = questions_a_evaluer[i], r = '', p = 0;
                 evaluation_a_stocker[i] = [q,r,p];
             } 
         }
@@ -157,6 +148,8 @@ function evaluations() {
         }
     }
     function correctionEvaluation() {
+        
+        var evaluation_html = '';
         $('.correction_btn').on('click', function(){
              
             corrigerEvaluation();
@@ -176,34 +169,27 @@ function evaluations() {
                 
                 evaluation_counter++;
                 note_d_evaluation += p; 
-
                 evaluation_a_stocker.splice(evaluation_counter,1,question_reponse);
-                chargerEvaluationFicheBody();
-                chargerEvaluationFicheFoot();
+
+                chargerEvaluationTbody();
                 marquerReponseEvaluation(); 
                 defilementDeEvaluationFicheVersLeHaut();
 
+                                   
+                function chargerEvaluationTbody() {
 
-                function chargerEvaluationFicheBody() {
-                    if(q == r) fiche_body_html += "<div class='tr'>\n <span class='affiche_question'>"+q+"</span>\n<span class='affiche_reponse'><span id='fiche_vraie_reponse'>"+r+"</span></span>\n<span class='affiche_point'>"+parseIntNko(p)+"</span>\n </div>\n\n";
-                    if(q != r) fiche_body_html += "<div class='tr'>\n <span class='affiche_question'>"+q+"</span>\n<span class='affiche_reponse'><span id='fiche_mauvaise_reponse'>"+r+"</span><span id='fiche_croix'>&#10060;</span></span>\n<span class='affiche_point'>"+parseIntNko(p)+"</span>\n </div>\n\n";
-                 
-                    evaluation_fiche_body.html(fiche_body_html);
-                    afficherLaDerniereLigne();
-                    
-                    function afficherLaDerniereLigne() {
-                        $('#evaluation_fiche_body .tr:last-child').css({
-                            'height':0,
-                            'overflow':'hidden',
-                            'transition':'height 0.6s ease-out'
-                        });
+                    var n = parseIntNko(evaluation_counter);
+                    n = (n == '߁') ? n+'߭' : n+'߲';
 
-                        $('.tr:last-child').css({'height':'2rem'});
-                    }
-                }
-                function chargerEvaluationFicheFoot() {
-                    $('#total_point_d_evaluation').html(parseIntNko(nbr_max_de_questions_a_poser)+'/'+parseIntNko(note_d_evaluation));
-                    $('#pourcentage_point_d_evaluation').html('%'+parseIntNko(Math.floor((note_d_evaluation/nbr_max_de_questions_a_poser)*100)));
+                    evaluation_html += '<tr>\n';
+                        evaluation_html += '<td>'+n+'</td>\n';
+                        evaluation_html += '<td>'+q+'</td>\n';
+                        evaluation_html += '<td>'+r+'</td>\n';
+                        evaluation_html += '<td>'+parseIntNko(p)+'</td>\n';
+                    evaluation_html += '</tr>\n';
+
+                    $('#evaluation_tbody').html(evaluation_html);
+                    $('#evaluation_tfoot td:last-child').html(parseIntNko(note_d_evaluation));
                 }                                    
                 function marquerReponseEvaluation() {    
                     if(reponse_evaluation.join('') == question_evaluation) {
@@ -220,7 +206,7 @@ function evaluations() {
                     }
                 } 
                 function defilementDeEvaluationFicheVersLeHaut() {
-                    $('#evaluation_fiche_body').animate({ scrollTop:$('#evaluation_fiche_body')[0].scrollHeight }, 1000);
+                    $('#evaluation_tbody_container').animate({ scrollTop:$('#evaluation_tbody_container')[0].scrollHeight }, 1000);
                 }
             }
             function actualiserEvaluationProgressBar(){
@@ -276,7 +262,7 @@ function evaluations() {
                     
                     if(index_phase_active === total_phase) {
                         sessionStorage.setItem('niveau_max',JSON.stringify(niveau_max+1));                                            
-                        sessionStorage.setItem('niveau_en_cours',JSON.stringify(niveau_max+2));
+                        sessionStorage.setItem('niveau_actif',JSON.stringify(niveau_max+2));
                         sessionStorage.setItem('phase_nbr',JSON.stringify(0));
                     }
                 }
@@ -292,7 +278,7 @@ function evaluations() {
                     const evaluation_data = new URLSearchParams({
                         id     : id,
                         matiere: matiere,
-                        niveau : niveau_en_cours,
+                        niveau : niveau_actif,
                         phase  : phase,
                         lesson : lesson,
                         note   : note_d_evaluation

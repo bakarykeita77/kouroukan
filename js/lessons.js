@@ -4,34 +4,31 @@ $('document').ready(function() {
     var matieres          = JSON.parse(sessionStorage.getItem('matieres'));     
     var matiere_index     = JSON.parse(sessionStorage.getItem('matiere_index'));
     var niveau_en_cours   = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
+    var niveau_actif      = JSON.parse(sessionStorage.getItem('niveau_actif'));
     var phases_distinctes = JSON.parse(sessionStorage.getItem('phases_distinctes'));
     
     var rang = '';
     var data_phase_nbr = 0;
 
-    matieres_length = (matieres !== null) ? matieres.length : 0;
 
-    /*-------------------------------------------------------------------------------------------------------------------
+ /*-------------------------------------------------------------------------------------------------------------------
     1)- La situation des études est faite par récupération et traitement des données reçues sur l'apprenant.
     2)- La liste des phases est établie en fonction du niveau d'étude de l'apprenant (selon les phases étudiées ou pas)
     3)- Le paramétrage conséquent est défini pour la leçon future.
     4)- Les phases s'affichent et
     5)- On peut surfer
 
-    /*-----------------------------------------------------------------------------------------------------------------*/
+ /*-----------------------------------------------------------------------------------------------------------------*/
 
- //Traitement des données reçues sur l'apprenant
-    if(matieres_length === 0) {
-        matiere_index = 0;
-        niveau_en_cours = 1;
-    }
+    matieres_length = (matieres !== null) ? matieres.length : 0;
+    if(matieres_length === 0) {  matiere_index = 0; niveau_en_cours = 1; }
 
-    /*-----------------------------------------------------------------------------------------------------------------*/
-    
+ /*-----------------------------------------------------------------------------------------------------------------*/
+  
     phases();
     matiere();
     
-    /*-----------------------------------------------------------------------------------------------------------------*/
+ /*-----------------------------------------------------------------------------------------------------------------*/
     
     function phases() {
         

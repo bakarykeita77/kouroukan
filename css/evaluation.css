@@ -19,8 +19,7 @@
 }
 
 #evaluation_body {
-    border: 0.5rem solid white;
-    height: calc(100% - 16rem);
+    height: calc(100% - 18rem);
     box-sizing: border-box;
 }
 #evaluation_guide {
@@ -48,6 +47,35 @@
     height: 100%;
     width: 100%;
 }
+
+
+#evaluation_tbody_container {
+    padding: 0;
+    margin: 0;
+    border: 0.25rem solid transparent;
+    border-top-color: #444;
+    border-bottom-color: #444;
+    height: calc(100% - 5rem); 
+    overflow: auto;
+}
+.evaluation_table {
+    padding: 0;
+    margin: 0;
+    border-collapse: collapse;
+    border-color: #444;
+    width: 100%;
+}
+#evaluation_thead { height: 2rem; }
+tr th:nth-child(1), tr td:nth-child(1) { width: 2rem; padding-left: 1rem; text-align: left; }
+tr th:nth-child(2), tr th:nth-child(3) { padding-right: 0.5rem; text-align: right; }
+tr td:nth-child(2), tr td:nth-child(3) { padding-right: 0.5rem; text-align: right; }
+tr th:nth-child(4), tr td:nth-child(4) { width: 3rem; text-align: left; padding-left: 1rem; }
+#evaluation_tfoot { margin-top: 0.25rem; }
+#evaluation_tfoot td:first-child { padding-right: 0.5rem; text-align: right; }
+#evaluation_tfoot td:last-child { width: 3rem; }
+
+
+
 #evaluation_reponse_container {
     position: relative;
     background-color: var(--couleur_6);
@@ -248,12 +276,18 @@
 #fiche_croix { color: rgba(255,0,0,0.5); }
 #lesson_entete div { width: 160px; overflow: hidden; }
 .stop_btn_container, .oreille_icon_container { display: none; }
-#evaluation_body { padding: 0; }
+#evaluation_body { 
+    padding: 0; 
+    background-color: rgba(0,0,0,0.8);
+    color: white;
+    box-sizing: border-box;
+}
 #evaluation_clavier_container { border-radius: var(--radiusSmall); }
 #teste_container {
     position: relative;
     width: 100%;
     margin: 0;
+    bottom: -2px;
 }
 #reponse {
     position: relative;
@@ -325,12 +359,12 @@
     #evaluation_head, #evaluation_body, #evaluation_foot {
         position: absolute;
         width: 96%;
-        max-width: 400px;
+        max-width: 500px;
         left: 50%;
         transform: translate(-50%,0);
     }
     #evaluation_head { top: 0; display: none; }
-    #evaluation_body { top: 0; }
+    #evaluation_body { top: 2rem; }
     #evaluation_foot { height: 16.5rem; bottom: 0; }
     #evaluation_fiche_foot div:nth-child(2) { display: none; }
     #teste_container {  height: calc(3.75rem - 2px); }

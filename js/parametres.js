@@ -2,13 +2,11 @@ function parametrageDeLesson() {
 
 /* Declaration des variables */   
     var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));   // Voir programmes.js fonction storagesDuProgramme()
-    var phase_id = JSON.parse(sessionStorage.getItem('phase_id'));   // Voir lessons.js fonction matiere()
-    var parametres = '';
 
     var voyelles_checker, consonnes_checker, tedo_checker, tons_checker, nasalisation_checker;
     var voyelles = [], consonnes = [], tedoo = [], tons = [], nasalisations = [];
     var voyelles_cochees = [], consonnes_cochees = [], tedos_coches = [], tons_coches = [], nasalisations_cochees = [], caracteres_coches = [],syllabes_coches = [];
-    
+        
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
  
  /* Les variables tableaux regroupant les caracteres par types */  
@@ -317,24 +315,23 @@ function parametrageDeLesson() {
         function chargementDeLesson() {
         
          // Récupération des caractères cochés
-            voyelles_cochees = $('#voyelles_cochees').html().split('');
+            voyelles_cochees  = $('#voyelles_cochees' ).html().split('');
             consonnes_cochees = $('#consonnes_cochees').html().split('');
-            tedos_coches = $('#tedos_coches').html().split('');
-            tons_coches = $('#tons_coches').html().split('');
+            tedos_coches      = $('#tedos_coches'     ).html().split('');
+            tons_coches       = $('#tons_coches'      ).html().split('');
             nasalisations_cochees;
             caracteres_coches = voyelles_cochees.concat(consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees);
 
             var apprentissage_html = apprentissageHTML();
             var exercice_html      = exerciceHTML();
-            var pratique_html = pratiqueHTML();
-            var evaluation_html = evaluationHTML();
-
+            var pratique_html      = pratiqueHTML();
+            var evaluation_html    = evaluationHTML();
 
          // Rechargement du tableau noir avec les caractères cochés
             $('#apprentissage_body').html(apprentissage_html);
-            $('#exercice_body').html(exercice_html);
-            $('#pratique_body').html(pratique_html);
-            $('#evaluation_body').html(evaluation_html);
+            $('#exercice_body'     ).html(exercice_html);
+            $('#pratique_body'     ).html(pratique_html);
+            $('#evaluation_body'   ).html(evaluation_html);
             
             continuerLeCours();    // Voir fonctions.js
 
@@ -377,7 +374,7 @@ function parametrageDeLesson() {
             }
             function pratiqueHTML(){
                 
-                var pratique_html = ['Non coder encore'];
+                var pratique_html = ['Non coder'];
 
                 //
 
@@ -385,11 +382,39 @@ function parametrageDeLesson() {
             }
             function evaluationHTML(){
                 
-                var evaluation_html = ['Non coder encore'];
-
-                //
+                var q = questions(niveau_actif);
+                sessionStorage.setItem('questions', JSON.stringify(q));
+                var evaluation_html = evaluationHTML();
 
                 return evaluation_html;
+
+                function evaluationHTML() {
+                    var evaluation_html = '';
+
+                    evaluation_html += '<table class="evaluation_table" id="evaluation_thead">\n';
+                        evaluation_html += '<tr>\n';
+                            evaluation_html += '<th>ߝ</th>\n';
+                            evaluation_html += '<th>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</th>\n';
+                            evaluation_html += '<th>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ</th>\n';
+                            evaluation_html += '<th>ߓߍ߬ߙߍ</th>\n';
+                        evaluation_html += '</tr>\n';
+                    evaluation_html += '</table>\n';
+                    
+                    evaluation_html += '<div id="evaluation_tbody_container">\n';
+                    evaluation_html += '<table class="evaluation_table" id="evaluation_tbody" border=1>\n';
+                        
+                    evaluation_html += '</table>\n';
+                    evaluation_html += '</div>\n';
+
+                    evaluation_html += '<table class="evaluation_table" id="evaluation_tfoot">\n';
+                        evaluation_html += '<tr>\n';
+                            evaluation_html += '<td colspan=3>ߓߍ߬ߙߍ ߡߎ߬ߡߍ</td>\n';
+                            evaluation_html += '<td></td>\n';
+                        evaluation_html += '</tr>\n';
+                    evaluation_html += '</table>\n';
+
+                    return evaluation_html;
+                }
             }
 
             function lettresCochees() {
@@ -426,6 +451,16 @@ function parametrageDeLesson() {
                 var chiffre = chiffres;    // Voir caracteres.js
                 sessionStorage.setItem('chiffres', JSON.stringify(chiffre));
                 return chiffre;
+            }
+            function questions(niveau) {
+                var lq = '';
+                
+                if(niveau==1) lq = malaxer(lettresCochees());
+                if(niveau==2) lq = malaxer(syllabesSimplesActualisees());
+                if(niveau==3) lq = malaxer(syllabesTonifieesActualisees());
+                if(niveau==4) lq = malaxer(chiffresDeBaseActualisees());
+                
+                return lq;
             }
             function nombreDeTdDeLaTableParlante() {
                 var nbr_td = 0;

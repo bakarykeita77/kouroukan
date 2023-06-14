@@ -337,18 +337,7 @@
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
 
-    function questions(niveau) {
-        
-        var lesson_content = JSON.parse(sessionStorage.getItem("lesson_content"));
-        var lq = '';
-        
-        if(niveau==1) lq = malaxer(lettres);
-        if(niveau==2) lq = malaxer(syllabes);
-        if(niveau==3) lq = malaxer(syllabes_tonifies);
-        if(niveau==4) lq = malaxer(chiffres);
-        
-        return lq;
-    }
+    
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
 

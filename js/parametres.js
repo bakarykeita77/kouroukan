@@ -401,9 +401,7 @@ function parametrageDeLesson() {
                     evaluation_html += '</table>\n';
                     
                     evaluation_html += '<div id="evaluation_tbody_container">\n';
-                    evaluation_html += '<table class="evaluation_table" id="evaluation_tbody" border=1>\n';
-                        
-                    evaluation_html += '</table>\n';
+                        evaluation_html += '<table class="evaluation_table" id="evaluation_tbody" border=1></table>\n';
                     evaluation_html += '</div>\n';
 
                     evaluation_html += '<table class="evaluation_table" id="evaluation_tfoot">\n';

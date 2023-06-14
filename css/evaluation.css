@@ -18,10 +18,6 @@
     line-height: 1.5rem;
 }
 
-#evaluation_body {
-    height: calc(100% - 18rem);
-    box-sizing: border-box;
-}
 #evaluation_guide {
     display: flex;
     flex-direction: column;
@@ -47,6 +43,13 @@
     height: 100%;
     width: 100%;
 }
+#evaluation_tbody_default_content {
+    width: 80%;
+    font-size: larger;
+    font-weight: bold;
+    color: #666;
+    text-align: center;
+}
 
 
 #evaluation_tbody_container {
@@ -55,7 +58,6 @@
     border: 0.25rem solid transparent;
     border-top-color: #444;
     border-bottom-color: #444;
-    height: calc(100% - 5rem); 
     overflow: auto;
 }
 .evaluation_table {
@@ -66,11 +68,11 @@
     width: 100%;
 }
 #evaluation_thead { height: 2rem; }
-tr th:nth-child(1), tr td:nth-child(1) { width: 2rem; padding-left: 1rem; text-align: left; }
-tr th:nth-child(2), tr th:nth-child(3) { padding-right: 0.5rem; text-align: right; }
-tr td:nth-child(2), tr td:nth-child(3) { padding-right: 0.5rem; text-align: right; }
-tr th:nth-child(4), tr td:nth-child(4) { width: 3rem; text-align: left; padding-left: 1rem; }
-#evaluation_tfoot { margin-top: 0.25rem; }
+#evaluation_thead tr th:nth-child(1), #evaluation_tbody tr td:nth-child(1) { width: 2rem; padding-left: 1rem; text-align: left; }
+#evaluation_thead tr th:nth-child(2), #evaluation_thead tr th:nth-child(3) { padding-right: 0.5rem; text-align: right; }
+#evaluation_tbody tr td:nth-child(2), #evaluation_tbody tr td:nth-child(3) { padding-right: 0.5rem; text-align: right; }
+#evaluation_thead tr th:nth-child(4), #evaluation_tbody tr td:nth-child(4) { width: 3rem; text-align: left; padding-left: 1rem; }
+#evaluation_tfoot { height: 2rem; }
 #evaluation_tfoot td:first-child { padding-right: 0.5rem; text-align: right; }
 #evaluation_tfoot td:last-child { width: 3rem; }
 
@@ -277,6 +279,9 @@ tr th:nth-child(4), tr td:nth-child(4) { width: 3rem; text-align: left; padding-
 #lesson_entete div { width: 160px; overflow: hidden; }
 .stop_btn_container, .oreille_icon_container { display: none; }
 #evaluation_body { 
+    top: 2rem;
+    height: calc(100% - 18rem);
+    box-sizing: border-box;
     padding: 0; 
     background-color: rgba(0,0,0,0.8);
     color: white;
@@ -364,7 +369,6 @@ tr th:nth-child(4), tr td:nth-child(4) { width: 3rem; text-align: left; padding-
         transform: translate(-50%,0);
     }
     #evaluation_head { top: 0; display: none; }
-    #evaluation_body { top: 2rem; }
     #evaluation_foot { height: 16.5rem; bottom: 0; }
     #evaluation_fiche_foot div:nth-child(2) { display: none; }
     #teste_container {  height: calc(3.75rem - 2px); }
@@ -375,23 +379,12 @@ tr th:nth-child(4), tr td:nth-child(4) { width: 3rem; text-align: left; padding-
         transform: translateX(-50%);
     }
 
-/* 
+
+@media screen and (orientation: portrait) {
+    #evaluation_tbody_container { height: calc(100% - 3rem); }    
+    #evaluation_tfoot { display: none; }
+}
+
 @media screen and (orientation: landscape) {
-    #evaluation_body, #evaluation_head, #evaluation_foot { position: absolute; }
-    #evaluation_body {
-        height: calc(100% - 4px);
-        width: 52%;
-        left: 0;
-    }
-    #evaluation_head, #evaluation_foot {
-        width: 40%; 
-        right: 1rem;
-    }
-    #evaluation_foot { bottom: 0; border-radius: var(--radiusSmall); }
-    #teste_container {  height: calc(100% - 12.5rem); }
-    #evaluation_fiche {
-        left: 50%;
-        width: calc(100% - 1rem);
-        transform: translateX(-50%);
-    }
-} */
+    #evaluation_tbody_container { height: calc(100% - 5rem); }
+}

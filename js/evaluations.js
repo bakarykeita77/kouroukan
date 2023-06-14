@@ -12,6 +12,7 @@ function evaluations() {
     var note_d_evaluation = 0;
     var moyenne_d_evaluation = 1 ;
     var compteur = incrementer();
+    var evaluation_tbody_default_message = 'ߞߘߐߓߐߟߌ ߞߐߝߟߌ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬.';
     var evaluation_counter = 0;
     
     var memoire_rang = [];
@@ -20,11 +21,10 @@ function evaluations() {
     var q_ordre = parseIntNko(q_index+1);
     var evaluation_a_stocker = [];
 
-    var evaluation_fiche_body = $('#evaluation_fiche_body');
-
     $('#pratique_options').css('display','none');
     $('.fermeture').attr('id', 'fermer_evaluation');
 
+    $('#evaluation_tbody').html("<p class='centertransform' id='evaluation_tbody_default_content'>"+evaluation_tbody_default_message+"</p>");
     initialiserEvaluation();
     evaluer();
     correctionEvaluation();

@@ -90,36 +90,76 @@
     z-index: 1;
 }
 #evaluation_reponse, #evaluation_cross {
-    position: absolute;
     font-weight: bold;
 }
 #evaluation_reponse {
+    position: relative;
     background-color: var(--couleur_6);
+    color: var(--couleurNeutre);
     border-radius: 0.5rem 0.5rem 0 0;
-    color: white;
-    width: 80%;
-    height: calc(3.75rem - 4px);
-    line-height: 3.75rem;
+    width: calc(75% - 1rem);
+    height: 3.5rem;
+    line-height: 3.5rem;
     margin: 0;
-    padding: 0;
-    text-align: center;
+    padding-right: 1rem;
+}
+#bonne_reponse {
+    margin: 0;
+    height: 100%;
+    line-height: 100%;
 }
 #correcteur_d_evaluation {
-    position: absolute;
+    position: relative;
     height: calc(100% - 2rem);
     width: calc(20% - 2rem);
     min-width: 3rem;
     font-size: 0.8rem;
     text-align: center;
     top: 1rem;
-    left: 1rem;
     background-color: var(--couleurNeutre);
     box-shadow: var(--shadow_16);
     border-radius: var(--radiusSmall);
+    z-index: 0;
+}
+#bonne_reponse, #check_mark_container {
+    display: inline-block;
+    position: relative;
+} 
+#evaluation_reponse, #correcteur_d_evaluation {
+    display: inline-block;
 }
 #evaluation_foot {
     padding: 0;
 }
+#evaluation_cross {
+    display: none;
+    width: 3rem;
+    border-radius: 0.5rem 0.5rem 0 0;
+    top: 0;
+    right: 1rem;
+    padding: 0;
+    color: rgba(255,0,0,0.8);
+    transform: scale(0.75);
+    transition: 0.15s;
+}
+#mauvaise_reponse, #evaluation_cross {
+    position: absolute;
+    margin: 0;
+    text-align: center;
+}
+#check_mark, #check_mark_cover {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    width: 2rem;
+    height: 2rem;
+    font-size: 2rem;
+    text-align: center;
+}
+#check_mark{  color: blue; transform: rotateY(180deg); }
+#check_mark_cover { transition: 1s; background-color: var(--couleur_f); }
+
+
 
 #evaluation_fiche {
     display: flex;
@@ -305,49 +345,22 @@
     font-size: 6rem;
     font-weight: bold;
 }
-#evaluation_cross {
-    display: none;
-    position: absolute;
-    border-radius: 0.5rem 0.5rem 0 0;
-    width: 100%;
-    text-align: center;
-    top: 0;
-    left: 0;
-    margin: 0;
-    padding: 0;
-    color: rgba(255,0,0,0.8);
-    transform: scale(0.75);
-    transition: 0.6s;
-}
 #check_mark_container {
     display: none;
-    position: absolute;
     background-color: var(--couleur_f);
     padding: 0;
     margin: 0;
-    height: 5rem;
-    width: 5rem;
+    height: 2rem;
+    width: 2rem;
     text-align: center;
-    line-height: 5rem;
-    top: 0;
-    left: 0;
+    line-height: 2rem;
+    top: 0.25rem;
     border-radius: 50%;
     overflow: hidden;
     box-shadow: var(--shadow_36);
+    z-index: 1;
 }
 #reponse, #check_mark_container { vertical-align: top; }
-#check_mark, #check_mark_cover {
-    position: absolute;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    font-size: 4rem;
-    font-weight: bold;
-    text-align: center;
-}
-#check_mark{  color: blue; transform: rotateY(180deg); }
-#check_mark_cover { left: 0; transition: 1s; background-color: var(--couleur_f); }
 #teste_annexes_container {
     position: absolute;
     top: 0.25rem;
@@ -355,7 +368,7 @@
     margin: 0;
     vertical-align: top;
     height: 100%;
-    width: 30%;
+    width: 20%;
     left: 0;
 }
 

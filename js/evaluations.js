@@ -193,15 +193,16 @@ function evaluations() {
                 }                                    
                 function marquerReponseEvaluation() {    
                     if(reponse_evaluation.join('') == question_evaluation) {
-                      
-                        $('#check_mark_container').css('display','block');
-                        $('#check_mark_cover').css({'left':0});
+                        
+                        $("#evaluation_reponse").html("<p id='bonne_reponse'>"+reponse_evaluation.join('')+"</p><div id='check_mark_container'> <p id='check_mark'></p> <p id='check_mark_cover'></p> </div>");
+                        $('#check_mark_container').css({'display':'inline-block', 'margin-right':'4px'});
+                        $('#check_mark_cover').css({'right':'0.25rem'});
                         $('#check_mark').html("&#10003;"); 
-                        setTimeout(function(){ $('#check_mark_cover').css({'left':'-100%'}); },100);
-                        setTimeout(function(){ $('#check_mark_container').css({'display':'none'}); },2500);
+                        setTimeout(function(){ $('#check_mark_cover').css({'right':'2rem'}); },100);
+                        setTimeout(function(){ $('#check_mark_container').css({'display':'none'}); },1000);
                     }else{
-                        $("#evaluation_reponse").html(reponse_evaluation.join('')+"<div id='evaluation_cross'>&#10060;</div>");
-                        $('#evaluation_cross').css({'display':'block', 'transform':'scale(0.5)', 'opacity':0});
+                        $("#evaluation_reponse").html("<p id='mauvaise_reponse'>"+reponse_evaluation.join('')+"</p><p id='evaluation_cross'>&#10060;</p>");
+                        $('#evaluation_cross').css({'display':'block', 'right':reponse_evaluation.length/2+'rem', 'transform':'scale(0.5)', 'opacity':0});
                         setTimeout(function(){ $('#evaluation_cross').css({'transform':'scale(1.5)', 'opacity':0.75}); }, 100);
                     }
                 } 
@@ -230,7 +231,7 @@ function evaluations() {
             function effacerCheckMark() {
                 setTimeout(function(){
                     $('#check_mark').empty();
-                }, 2500);
+                }, 1000);
             }
             function afficherQuestionButton(){
                 $('.correction_btn').css('display','none');

@@ -45,19 +45,14 @@
 
         <div id='teste_container'>  
         
-            <p id="evaluation_reponse_container">
-                <span id='evaluation_reponse'></span>
-                <span class='correcteur' id='correcteur_d_evaluation'>ߖߐ߬ߛߌ߬ߙߊ߲</span>
-            </p>
-            
-            <div id='check_mark_container'>
-                <p id='check_mark'></p>
-                <p id='check_mark_cover'></p>
-            </div>
-            
-            <div id='teste_annexes_container'>
-                <div id='alerte'></div>
-                <div id='autre'></div>
+            <div id="evaluation_reponse_container">
+                <div id='evaluation_reponse'></div>
+                    
+                <div id='teste_annexes_container'>
+                    <div id='alerte'></div>
+                    <div id='autre'></div>
+                </div>
+                <div class='correcteur' id='correcteur_d_evaluation'>ߖߐ߬ߛߌ߬ߙߊ߲</div>
             </div>
         </div>
 

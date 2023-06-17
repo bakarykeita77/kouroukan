@@ -1,5 +1,5 @@
 function pratique() {
-                    
+                       
     let niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
     var id = JSON.parse(sessionStorage.getItem('id'));
 
@@ -40,7 +40,7 @@ function pratique() {
     let pratique = $('#pratique');
 
     var question_d_option = '', reponse_d_option = [];
-    var limite_des_questions_d_option = 2;
+    var limite_des_questions_d_option = 10;
     var moyenne_d_option = 1;
     var moyenne_de_pratique = 1;
     var table = "";
@@ -471,13 +471,12 @@ function pratique() {
                 total_point = 0;
                
                 $('.correction_btn').on('click',  function() {
-  
-                    reponse_d_option = reponse_d_option.join('');
-                    point = (question_d_option == reponse_d_option)?1:0;
+                    
+                    point = (question_d_option == reponse_d_option.join(''))?1:0;
                     total_point = total_point + point;
                     effort_d_option = '%'+parseIntNko(Math.round(total_point*100/limite_des_questions_d_option));
-                    memoire_pratique[memoire_pratique.length] = [question_d_option, reponse_d_option, point];
-        
+                    memoire_pratique[memoire_pratique.length] = [question_d_option, reponse_d_option.join(''), point];
+                    
                     var option_status = '';
                     var option_de_syllabe = optionDeSyllabe();
                     var message_1 = 'ߌ ߞߎߟߎ߲ߖߋ߫.<br/>'+option_de_syllabe+'  ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߎ߬ ߟߊߡߌ߬ߘߊ ߢߊ߬ߣߍ߲߬ '+effort_d_option+' ߟߊ߫. ߌ ߘߌ߫ ߛߋ߫ ߥߊ߫ ߟߊ߫ ߢߍ ߝߍ߬.';
@@ -508,20 +507,28 @@ function pratique() {
                         chargerImageName();                                            
                         chargerPratiquesImagesContainer();
                         afficherPratiquesImage();
+                        affichageDeLaNotification();
 
-                        function chargerImageName() { $('#image_name').html(reponse_d_option); }
+                        function chargerImageName() { $('#image_name').html(reponse_d_option.join('')); }
                         function chargerPratiquesImagesContainer() {
                         
                             let dossier_image = dossierImage();
-                            $('#pratiques_images_container img').attr('src', dossier_image+reponse_d_option+".jpg");
+                            $('#pratiques_images_container img').attr('src', dossier_image+reponse_d_option.join('')+".jpg");
 
-                            if(question_d_option == reponse_d_option) {  nePasMettreCroixSurImage(); }
-                            if(question_d_option !== reponse_d_option) { mettreCroixSurImage(); }
+                            if(question_d_option == reponse_d_option.join('')) {  nePasMettreCroixSurImage(); }
+                            if(question_d_option !== reponse_d_option.join('')) { mettreCroixSurImage(); }
+                        }
+                        function affichageDeLaNotification() {
+
+                            $('#message_de_fin_container').css({'display':'block'});
+                            $('#message_de_fin_container').animate({'width':'100%'}, 400);
+                            setTimeout(function(){$('#message_de_fin_container').animate({'width':0}, 400);}, 4000);
+                            setTimeout(function(){$('#message_de_fin_container').css({'display':'block'});}, 6000);
                         }
                     }
                     function controlerPratiqueBody() {
-                        if(question_d_option == reponse_d_option) { nePasMettreCroixSurImage(); }
-                        if(question_d_option != reponse_d_option) { mettreCroixSurImage(); }
+                        if(question_d_option == reponse_d_option.join('')) { nePasMettreCroixSurImage(); }
+                        if(question_d_option != reponse_d_option.join('')) { mettreCroixSurImage(); }
                     }
                     function chargerPratiqueFiche() {
                         
@@ -531,9 +538,9 @@ function pratique() {
 
                         function chargerPratiqueFicheBody() {
 
-                            if(question_d_option == reponse_d_option) table += "<div class='tr'>\n <span class='affiche_question'>"+question_d_option+"</span>\n<span class='affiche_reponse'><span class='fiche_vraie_reponse'>"+reponse_d_option+"</span></span>\n<span class='affiche_point'>"+parseIntNko(point)+"</span>\n </div>\n\n";
-                            if(question_d_option != reponse_d_option) table += "<div class='tr'>\n <span class='affiche_question'>"+question_d_option+"</span>\n<span class='affiche_reponse'><span class='fiche_mauvaise_reponse'>"+reponse_d_option+"</span><span class='fiche_croix'>&#10060;</span></span>\n<span class='affiche_point'>"+parseIntNko(point)+"</span>\n </div>\n\n";
-                          
+                            if(question_d_option == reponse_d_option.join('')) table += "<div class='tr'>\n <span class='affiche_question'>"+question_d_option+"</span>\n<span class='affiche_reponse'><span class='fiche_vraie_reponse'>"+reponse_d_option.join('')+"</span></span>\n<span class='affiche_point'>"+parseIntNko(point)+"</span>\n </div>\n\n";
+                            if(question_d_option != reponse_d_option.join('')) table += "<div class='tr'>\n <span class='affiche_question'>"+question_d_option+"</span>\n<span class='affiche_reponse'><span class='fiche_mauvaise_reponse'>"+reponse_d_option.join('')+"</span><span class='fiche_croix'>&#10060;</span></span>\n<span class='affiche_point'>"+parseIntNko(point)+"</span>\n </div>\n\n";
+ console.log(table);                         
                             $('#pratique_fiche_body').html(table);
                         }
                         function chargerPratiqueFicheFoot() {
@@ -543,12 +550,9 @@ function pratique() {
                     }
                     function animerPratiqueFiche() {
 
-                        defilementDePratiqueFicheVersLeHaut();
+                        defilementDuContenuLeHaut($('#pratique_fiche_body'));
                         affichageAnimeDeLaDerniereLigneDePratiqueFicheBody();
 
-                        function defilementDePratiqueFicheVersLeHaut() {
-                            $('#pratique_fiche_body').animate({ scrollTop:$('#pratique_fiche_body')[0].scrollHeight }, 1000);
-                        }
                         function affichageAnimeDeLaDerniereLigneDePratiqueFicheBody() {
                             $('#pratique_fiche_body .tr:last-child').css('height',0);
                             $('#pratique_fiche_body .tr:last-child').animate({'height':'1.5rem'}, 600);
@@ -566,7 +570,6 @@ function pratique() {
                     }
                     function effacerQuestion() { question_d_option = ''; }
                     function effacerReponse() {
-                        reponse_d_option = reponse_d_option.split(',');
                         reponse_d_option.splice(0,reponse_d_option.length);
                     }
                     function initialiserCompteurDeCaractere() { compteur_de_caractere = 0; }
@@ -587,7 +590,7 @@ function pratique() {
                     function actualiserPratiquesProgressBar(){
                         var progress_unity = $('#pratique_progress_bar').width()/limite_des_questions_d_option;
                                   
-                        if(question_d_option != reponse_d_option){ 
+                        if(question_d_option != reponse_d_option.join('')){ 
                             $('.progress_question_bar').css('width','+='+progress_unity+'px');
                         }else{ 
                             $('.progress_question_bar, .progress_bonne_reponse_bar').css('width','+='+progress_unity+'px');
@@ -595,8 +598,8 @@ function pratique() {
                     }
                     function enregistrerPratique() {
 
-                        point = (question_d_option == reponse_d_option) ? 1:0;
-                        let question_reponse = [question_d_option,reponse_d_option,point];
+                        point = (question_d_option == reponse_d_option.join('')) ? 1:0;
+                        let question_reponse = [question_d_option,reponse_d_option.join(''),point];
                         
                         
                         switch(option_index) {

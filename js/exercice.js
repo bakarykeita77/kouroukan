@@ -2,7 +2,7 @@ function exercices() {
                 
     var id = JSON.parse(sessionStorage.getItem('id'));
     var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));
-    var nbr_de_questionnaires = 20;
+    var nbr_de_questionnaires = 2;
     var exercice_questions = [];
     var moyenne_d_exercice = 1;
 
@@ -70,7 +70,7 @@ function exercices() {
                 $('.ordre_question').html(parseIntNko(compteur_de_question)+question_rang);
                 question_posee = exercice_questions[i];
                 
-               // alert( question_posee ); 
+                alert( question_posee ); 
   
                 $(this).css('display','none');
                 $('.oreille_icon_container').css('display','block');

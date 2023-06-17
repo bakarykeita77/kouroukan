@@ -29,38 +29,17 @@
     </div>
     
     <!--pratique_body---------------------------------------------------->
-    <div class="course_body" id="pratique_body">
-
-        <div id="pratique_fiche">
-            <div id="pratique_fiche_head">
-                <span class="th">ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</span>
-                <span class="th">ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ</span>
-                <span class="th">ߓߙߍ߬ߦߊ</span>
-            </div>
-            <div id="pratique_fiche_body"></div>
-            <div id="pratique_fiche_foot">
-                <div>
-                    <span id="label_total_point">ߓߍ߬ߙߍ ߡߎ߬ߡߍ</span>
-                    <span id="total_point"></span>
-                </div>
-                <div>
-                    <span id="label_pourcentage_point" colspan="2">ߓߍ߬ߙߍ ߗߡߍ߬ߘߐ߬ߦߊ</span>
-                    <span id="pourcentage_point"></span>
-                </div>
-            </div>
-        </div>
-
-        <div id="message_de_fin_container">
-            <p id="message_de_fin"></p>
-            <div id="message_btn_container"> <button id="message_btn_1"></button><button id="message_btn_2"></button> </div>
-        </div>
-        
-    </div>
+    <div class="course_body" id="pratique_body"></div>
     
     <!--pratique_foot---------------------------------------------------->
     <div class="course_foot" id="pratique_foot">
 
         <div id="foot_cadre">
+        
+            <div id="message_de_fin_container">        
+               <p id="message_de_fin"></p>                                         
+            </div> 
+
             <div id="pratiques_images_container">
                 <h1 id="image_name"></h1>
                 <img src="" alt="?">

@@ -23,7 +23,7 @@
 
 	}
     function afficherCourse(course) {
-        course.css({'display':'block', 'transform':'scale(0.75)', 'opacity':0});
+        course.css({'display':'block', 'transform':'scale(0.75)', 'opacity':1});
         setTimeout(function() { course.css({'transform':'scale(1)'}); }, 5);
         setTimeout(function() { course.css({'opacity':'1'});}, 5);
     }
@@ -123,6 +123,11 @@
     function couleurDeFont(element,couleur)	{ element.css('color', couleur); }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
+    function defilementDuContenuLeHaut(container) {
+        container.animate({ scrollTop:container[0].scrollHeight }, 1000);
+    }
+
+/*-------------------------------------------------------------------------------------------------------------------------------------*/
 	
 	function incrementer(){
 	    var i=0;
@@ -184,9 +189,9 @@
             },600);
          });
      }
-     function lessonHTML(array, table_id = '#') {
+    function lessonHTML(array, table_id = '#') {
 
-        var table = "<table class = 'table_parlante' id='"+table_id+"'>\n";
+    var table = "<table class = 'table_parlante' id='"+table_id+"'>\n";
         for(var i=0;i<array.length-array.length%7;i+=7) {
             table += "<tr>\n";
             for(var j=0;j<7;j++) table += "<td>"+array[i+j]+"</td>\n";
@@ -200,26 +205,26 @@
         table += "</table>";
                 
         return table;
-     }
-     function lessonHTML2(voyelles_length,tons_length,syllabes_tonifies_length,syllabes_tonifies) {
-             
-         var tons_apprentissage_html = '';
-         var n1 = voyelles_length*tons_length;
-                     
-         for(var sous_table=0;sous_table<syllabes_tonifies_length;sous_table+=n1){
-             tons_apprentissage_html += '<table class="table_parlante">\n\n';
-             for(var ligne=0;ligne<n1;ligne+=tons_coches.length){
-                 tons_apprentissage_html += '<tr>\n';
-                 for(var colonne=0;colonne<tons_coches.length;colonne++){
-                     tons_apprentissage_html += '<td>'+syllabes_tonifies[sous_table+ligne+colonne]+'</td>\n';
-                 }
-                 tons_apprentissage_html += '</tr>\n\n';
-             }
-             tons_apprentissage_html += "</table><br><br><hr><br>\n";
-         }
-                     
-         return tons_apprentissage_html;
-     }
+    }
+    function lessonHTML2(voyelles_length,tons_length,syllabes_tonifies_length,syllabes_tonifies) {
+            
+        var tons_apprentissage_html = '';
+        var n1 = voyelles_length*tons_length;
+                    
+        for(var sous_table=0;sous_table<syllabes_tonifies_length;sous_table+=n1){
+            tons_apprentissage_html += '<table class="table_parlante">\n\n';
+            for(var ligne=0;ligne<n1;ligne+=tons_coches.length){
+                tons_apprentissage_html += '<tr>\n';
+                for(var colonne=0;colonne<tons_coches.length;colonne++){
+                    tons_apprentissage_html += '<td>'+syllabes_tonifies[sous_table+ligne+colonne]+'</td>\n';
+                }
+                tons_apprentissage_html += '</tr>\n\n';
+            }
+            tons_apprentissage_html += "</table><br><br><hr><br>\n";
+        }
+                    
+        return tons_apprentissage_html;
+    }
     function lire_mot() {
 	   for(var i=0; i<texte_memoire.length; i++) {
 	       var mot = texte_memoire[i];

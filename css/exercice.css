@@ -15,7 +15,6 @@
 #exercice_dialogue_btn { border-radius: 0.5rem; }
 #exercice_dialogue_btn div  { 
     text-align: center; 
-    width: 15rem; 
     padding: var(--paddingSmall);
     border: var(--borderPrimaire); 
     border-radius: var(--radiusMedium);

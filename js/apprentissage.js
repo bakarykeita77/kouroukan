@@ -178,7 +178,7 @@ function apprentissages() {
     function stockerApprentissage() {
   
         $('#fermer_apprentissage').one('click',function() {
-            let moyenne_d_apprentissage = 18; 
+            let moyenne_d_apprentissage = 1; 
             let index_phase_active = $('.phases_container ul li .active').index();
 
             note = noterApprentissage();

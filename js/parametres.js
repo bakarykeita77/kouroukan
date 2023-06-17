@@ -304,6 +304,8 @@ function parametrageDeLesson() {
                 
                 caracteres_coches = voyelles_cochees.concat(consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees);
             }
+
+            sessionStorage.setItem('caracteres_coches', JSON.stringify(caracteres_coches));
         }
         function rechargerLesSousTableauxDesCaracteresCoches() {
             $('#voyelles_cochees').html(voyelles_cochees);
@@ -321,6 +323,8 @@ function parametrageDeLesson() {
             tons_coches       = $('#tons_coches'      ).html().split('');
             nasalisations_cochees;
             caracteres_coches = voyelles_cochees.concat(consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees);
+            var q = questions(niveau_actif);
+            sessionStorage.setItem('questions', JSON.stringify(q));
 
             var apprentissage_html = apprentissageHTML();
             var exercice_html      = exerciceHTML();
@@ -332,8 +336,6 @@ function parametrageDeLesson() {
             $('#exercice_body'     ).html(exercice_html);
             $('#pratique_body'     ).html(pratique_html);
             $('#evaluation_body'   ).html(evaluation_html);
-            
-            continuerLeCours();    // Voir fonctions.js
 
             sessionStorage.setItem('nbr_td', JSON.stringify(nombreDeTdDeLaTableParlante()));
 
@@ -374,45 +376,52 @@ function parametrageDeLesson() {
             }
             function pratiqueHTML(){
                 
-                var pratique_html = ['Non coder'];
-
-                //
+                var pratique_html = '\
+                    \   <div id="pratique_fiche">\
+                    \      <div id="pratique_fiche_head">\
+                    \         <span class="th">ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</span>\
+                    \         <span class="th">ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ</span>\
+                    \         <span class="th">ߓߍ߬ߙߍ</span> \
+                    \      </div>\
+                    \      <div id="pratique_fiche_body"></div>\
+                    \      <div id="pratique_fiche_foot">\
+                    \         <div>\
+                    \         <span id="label_total_point">ߓߍ߬ߙߍ ߡߎ߬ߡߍ</span> \
+                    \             <span id="total_point"></span>\
+                    \         </div>\
+                    \         <div>\
+                    \             <span id="label_pourcentage_point" colspan="2">ߓߍ߬ߙߍ ߗߡߍ߬ߘߐ߬ߦߊ</span>\
+                    \             <span id="pourcentage_point"></span>\
+                    \         </div>\
+                    \      </div>\
+                    \   </div>\
+                ';
 
                 return pratique_html;
             }
             function evaluationHTML(){
-                
-                var q = questions(niveau_actif);
-                sessionStorage.setItem('questions', JSON.stringify(q));
-                var evaluation_html = evaluationHTML();
+
+                var evaluation_html = '\
+                    \   <table class="evaluation_table" id="evaluation_thead">\
+                    \       <tr>\
+                    \           <th>ߝ</th>\
+                    \           <th>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</th>\
+                    \           <th>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ</th>\
+                    \           <th>ߓߍ߬ߙߍ</th>\
+                    \       </tr>\n\
+                    \   </table>\
+                    \   <div id="evaluation_tbody_container">\
+                    \       <table class="evaluation_table" id="evaluation_tbody" border=1></table>\
+                    \   </div>\
+                    \   <table class="evaluation_table" id="evaluation_tfoot">\
+                    \       <tr>\
+                    \           <td colspan=3>ߓߍ߬ߙߍ ߡߎ߬ߡߍ</td>\
+                    \           <td></td>\
+                    \       </tr>\
+                    \   </table>\
+                ';
 
                 return evaluation_html;
-
-                function evaluationHTML() {
-                    var evaluation_html = '';
-
-                    evaluation_html += '<table class="evaluation_table" id="evaluation_thead">\n';
-                        evaluation_html += '<tr>\n';
-                            evaluation_html += '<th>ߝ</th>\n';
-                            evaluation_html += '<th>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</th>\n';
-                            evaluation_html += '<th>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ</th>\n';
-                            evaluation_html += '<th>ߓߍ߬ߙߍ</th>\n';
-                        evaluation_html += '</tr>\n';
-                    evaluation_html += '</table>\n';
-                    
-                    evaluation_html += '<div id="evaluation_tbody_container">\n';
-                        evaluation_html += '<table class="evaluation_table" id="evaluation_tbody" border=1></table>\n';
-                    evaluation_html += '</div>\n';
-
-                    evaluation_html += '<table class="evaluation_table" id="evaluation_tfoot">\n';
-                        evaluation_html += '<tr>\n';
-                            evaluation_html += '<td colspan=3>ߓߍ߬ߙߍ ߡߎ߬ߡߍ</td>\n';
-                            evaluation_html += '<td></td>\n';
-                        evaluation_html += '</tr>\n';
-                    evaluation_html += '</table>\n';
-
-                    return evaluation_html;
-                }
             }
 
             function lettresCochees() {
@@ -471,14 +480,171 @@ function parametrageDeLesson() {
                 return nbr_td;
             }
         }
-        function continuerLeCours() {
-
-            // switch (phase_id) {
-            //     case 'alphabet_apprentissage':lecturePersonnalisee(); break;   // Voir fonction.js
-            //     case 'exercice'     ://;      break;   // Voir exercice.js
-            //     case 'pratique'     ://;       break;   // Voir pratiques.js
-            //     case 'evaluation'   ://;    break;   // Voir evaluations.js
-            // }
-        }
     }
+         
+    
+}        
+                
+function monoSyllabes() {
+
+    var mono_syllabes = [
+        [
+            'ߓߐ',
+            'ߖߌ',
+            'ߖߍ',
+            'ߖߎ',
+            'ߘߊ',
+            'ߛߊ',
+            'ߛߌ',
+            'ߛߍ',
+            'ߛߍ߲',
+            'ߛߏ',
+            'ߜߊ',
+            'ߝߍ',
+            'ߞߎ',
+            'ߞߐ',
+            'ߟߌ',
+            'ߟߎ',
+            'ߟߐ',
+            'ߡߎ',
+            'ߢߊ',
+            'ߣߊ'
+        ],
+        [
+            'ߓߌ߲',
+            'ߓߎ߲',
+            'ߓߏ߲',
+            'ߔߎ߲',
+            'ߗߍ߲',
+            'ߘߋ߲',
+            'ߛߊ߲',
+            'ߜߊ߲',
+            'ߜߋ߲',
+            'ߞߏ߲',
+            'ߟߍ߲',
+            'ߢߌ߲'
+        ]
+    ];       
+        
+    return mono_syllabes;
+}
+function biSyllabes() {
+    var bi_syllabes = [
+        [
+            'ߓߊߘߊ',
+            'ߓߊߛߊ',
+            'ߓߊߛߌ',
+            'ߓߊߟߊ',
+            'ߓߌߙߊ',
+            'ߓߌߓߌ',
+            'ߓߌߘߌ',
+            'ߓߎߘߎ',
+            'ߕߎߙߊ',
+            'ߕߎߟߎ',
+            'ߖߏߟߏ',
+            'ߗߌߙߏ',
+            'ߘߋߣߍ߲',
+            'ߝߊߘߊ',
+            'ߝߊߙߊ',
+            'ߝߋߙߋ',
+            'ߞߊߓߊ',
+            'ߞߏߙߊ',
+            'ߞߏߙߏ',
+            'ߞߏߟߏ',
+            'ߞߎߟߎ߲',
+            'ߞߐߙߍ',
+            'ߞߍߙߍ',
+            'ߟߌߡߐ',
+            'ߛߏߟߌ',
+            'ߢߊߘߊ',
+            'ߢߊߛߌ',
+            'ߢߌߣߊ',
+            'ߥߊߘߊ',
+            'ߦߌߙߌ'
+        ],
+        [
+            'ߓߊߘߋ߲',
+            'ߓߌ߲ߞߊ',
+            'ߕߌ߲ߛߐ߲',
+            'ߕߍߓߍ߲',
+            'ߛߊߣߌ߲',
+            'ߛߊ߲ߣߍ߲',
+            'ߛߊ߲ߕߌ߲',
+            'ߛߊ߲ߛߊ߲',
+            'ߝߏߘߏ߲',
+            'ߟߊߝߋ߲',
+            'ߢߌߡߌ߲',
+            'ߣߐ߲ߛߌ߲',
+            'ߥߎߛߋ߲'
+        ]
+    ];
+    
+    return bi_syllabes;
+}
+function triSyllabes() {
+    var tri_syllabes = [
+        [
+            'ߘߌߦߊߢߍ',
+            'ߞߐߣߐߡߊ',
+            'ߞߎߡߊߟߊ',
+            'ߛߊߙߊߖߋ',
+            'ߛߋߙߋߥߊ',
+            'ߛߌߟߊߓߊ',
+            'ߛߎߟߎߞߎ',
+            'ߟߌߞߌߛߍ',
+            'ߡߌߣߌߢߊ߲',
+            'ߕߌߓߌߟߌ',
+            'ߦߌߙߌߖߋ',
+            'ߦߌߙߌߝߍ'
+        ],
+        [
+            'ߛߊ߲ߡߊߘߊ߲',
+            'ߛߊ߲ߝߍߙߍ߲',
+            'ߛߎߙߎ߲ߘߎ',
+            'ߘߊ߲ߘߊߟߌ',
+            'ߘߋ߲ߓߊߕߌ',
+            'ߘߋ߲ߓߊߦߊ',
+            'ߛߊ߲ߜߊߛߌ',
+            'ߛߊ߲ߞߌߘߊ߲',
+            'ߛߎ߲ߞߎߘߎ߲',
+            'ߛߊߟߌߓߊ',
+            'ߛߋߙߋߟߋ߲',
+            'ߝߐߟߌߝߋ߲',
+            'ߞߊߡߋߙߋ߲',
+            'ߞߎߟߎ߲ߣߍ߲',
+            'ߟߌߝߊ߲ߝߊ߲'
+        ]
+    ];
+
+    return tri_syllabes;
+}
+function quadriSyllabes() {
+    var quadri_syllabes = [
+        [
+            'ߕߊߙߊߟߌߟߊ',
+            'ߕߌߓߌߟߌߟߊ',
+            'ߜߊߛߊߞߊߙߊ',
+            'ߝߊߘߌߦߊߓߐ',
+            'ߞߎߡߊߓߎߘߎ',
+            'ߛߍߓߍߟߌߟߊ',
+            'ߞߊߙߊߟߌߟߊ',
+            'ߡߍߣߍߡߍߣߍ',
+            'ߢߊߡߊߞߎߖߌ'
+        ],
+        [
+            'ߓߏߟߏߞߏߟߏ߲',
+            'ߓߏߟߏߡߊߘߏ߲',
+            'ߕߊߟߊ߲ߕߊߟߊ߲',
+            'ߕߌ߲ߓߌߘߌ߲ߘߊ',
+            'ߕߏߟߏߜߋߘߋ߲',
+            'ߘߊ߲ߘߊߟߌߟߊ',
+            'ߛߊ߲ߜߊߟߌߡߊ',
+            'ߛߊ߲ߡߊߞߎߟߎ߲',
+            'ߛߍߓߍߟߌߝߋ߲',
+            'ߞߊ߲ߥߏߙߏߝߋ',
+            'ߞߐߣߐߡߊߣߍ߲'
+        ]
+    ];
+    
+    return quadri_syllabes;
 }

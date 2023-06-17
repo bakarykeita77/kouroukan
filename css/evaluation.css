@@ -60,6 +60,13 @@
     border-bottom-color: #444;
     overflow: auto;
 }
+#evaluation_tbody td { position: relative; }
+.evaluation_mauvaise_repponse, .evaluation_croix {
+    position: absolute;
+    margin: 0;
+    top: 0;
+}
+.evaluation_croix { color: red; opacity: 0.5; font-weight: bold; }
 .evaluation_table {
     padding: 0;
     margin: 0;
@@ -71,7 +78,7 @@
 #evaluation_thead tr th:nth-child(1), #evaluation_tbody tr td:nth-child(1) { width: 2rem; padding-left: 1rem; text-align: left; }
 #evaluation_thead tr th:nth-child(2), #evaluation_thead tr th:nth-child(3) { padding-right: 0.5rem; text-align: right; }
 #evaluation_tbody tr td:nth-child(2), #evaluation_tbody tr td:nth-child(3) { padding-right: 0.5rem; text-align: right; }
-#evaluation_thead tr th:nth-child(4), #evaluation_tbody tr td:nth-child(4) { width: 3rem; text-align: left; padding-left: 1rem; }
+#evaluation_thead tr th:nth-child(4), #evaluation_tbody tr td:nth-child(4) { width: 2rem; padding-left: 1rem; text-align: left; }
 #evaluation_tfoot { height: 2rem; }
 #evaluation_tfoot td:first-child { padding-right: 0.5rem; text-align: right; }
 #evaluation_tfoot td:last-child { width: 3rem; }

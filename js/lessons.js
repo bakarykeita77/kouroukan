@@ -1,5 +1,5 @@
 $('document').ready(function() {
-    
+      
  //Récupération des données reçues sur l'apprenant  
     var matieres          = JSON.parse(sessionStorage.getItem('matieres'));     
     var matiere_index     = JSON.parse(sessionStorage.getItem('matiere_index'));

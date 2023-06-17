@@ -107,7 +107,6 @@
     margin: 0 0 1rem 0;
     border-bottom: 0.25rem solid #ddd;
 }
-#pratique { max-width: 50rem; }
 #pratique_head { position: relative; padding: 0; }
 #pratique_head span {
     padding: 0;
@@ -120,13 +119,12 @@
 #pratique_body, #pratique_foot {
     position: relative;
     width: 96%;
-    max-width: 400px;
+    max-width: 32rem;
     margin: auto ;
 }
 #pratique_body {
-    height: calc(100% - 20rem);
+    height: calc(100% - 18rem);
     border: 1px solid transparent;
-    color: black;
 }
 #guide_container {
     width: 100%;
@@ -144,26 +142,21 @@
     background-color: #eee;
     box-sizing: border-box;
 }
-#bulles_container, #cumule_des_caracteres {
-    margin: 0.125rem 0;
-    text-align: center;
-    font-size: 2rem;
-    font-weight: bold;
-}
-#bulles_container { 
-    height: calc(100% - 2rem); 
-    line-height: calc(100% - 2rem); 
-    margin: 0; 
-}
-#bulles_container .plus { color: #aaa; }
-#pratique_guide span { vertical-align: middle; margin: 2px; }
 #reponse_container {
     position: relative;
     background-color: var(--couleur_f);
     margin: 0;
-    height: 2rem;
+    height: 2.5rem;
     line-height: 2rem;
 }
+#bulles_container, #cumule_des_caracteres {
+    margin-bottom: 0.25rem;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+}
+#bulles_container .plus { color: #aaa; }
+#pratique_guide span { vertical-align: middle; }
 #cumule_des_caracteres {
     height: 2rem;
     line-height: 2rem;
@@ -179,12 +172,15 @@
     display: flex;
     flex-direction: column;
     position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
 }
 #pratique_fiche_head, #pratique_fiche_body, #pratique_fiche_foot { position: relative; }
 #pratique_fiche_head {
     padding: 0.25rem 0;
     margin: 0.125rem 0;
-    background-color: #eee;
+    background-color: #ccc;
     border-bottom: 0.25rem solid #aaa;
 }
 #pratique_fiche_head, #pratique_fiche_body div, #pratique_fiche_foot div {
@@ -196,17 +192,21 @@
 #pratique_fiche span:nth-child(3) { flex-grow: 1; text-align: center; }
 #pratique_fiche_body {
     min-height: 3.5rem;
-    margin: 0.125rem;
-    background-color: #fff;
-    border: 1px solid #ccc;
+    margin: 0.125rem 0;
+    background-color: #002;
+    border: 0.5rem solid #002;
     overflow: auto;
     transition: 0.6s;
 }
 #pratique_fiche_body .tr {
     height: 1.5rem;
-    border: 1px solid #fff;
+    border: 1px solid transparent;
 }
-#pratique_fiche_body .tr > span { border: 1px solid #eee; margin: 0 1px; }
+#pratique_fiche_body .tr span:not(.fiche_croix) { 
+    background-color: #223;
+    color: white;
+    margin: 0 2px;
+}
 .affiche_question, .affiche_reponse {
     position: relative;
     text-align: right;
@@ -216,7 +216,14 @@
 .affiche_reponse span {
     border-style: none;
 }
-.fiche_croix { position: absolute; padding-right: 0.5rem; text-align: center; color: red; opacity: 0.5; }
+.fiche_croix {
+    position: absolute;
+    padding-right: 0.5rem;
+    text-align: center;
+    font-weight: bolder;
+    color: red;
+    opacity: 0.6;
+}
 .fiche_mauvaise_reponse, .fiche_croix {
     right: 0;
     border: none;
@@ -228,7 +235,7 @@
 #pratique_fiche_foot {
     padding: 0.25rem 0;
     margin: 0.125rem 0;
-    background-color: #fff;
+    background-color: #ccc;
     border: 1px solid #ccc;
     border-top-width: 0.25rem;
     border-top-color: #aaa;
@@ -242,14 +249,11 @@
 }
 #pratique_fiche_foot span:nth-child(2) { 
     flex-grow: 1; 
-    text-align:center; 
-    border: 0.125rem solid #ddd;
-}
-
-#pratique_dialogue_btn {
-    bottom: 0;
-    width: 100%;
-    margin: 0.5rem auto;
+    text-align:center;
+    font-weight: bold; 
+    border: 0.125rem solid transparent;
+    background-color: #002;
+    color: white;
 }
 #pratique_clavier_container { 
     position: relative;
@@ -257,14 +261,15 @@
 }
 #pratiques_images_container {
     position: absolute;
-    border: 1px solid #ccc;
-    width: calc(100% - 2px);
+    border: 1px solid transparent;
+    height: 100%;
+    width: 100%;
     background-color: #fff;
+    z-index: 0;
 }
 #pratiques_images_container img {
     position: absolute;
-    display: block;
-    height: 100%;
+    height: calc(100% - 0.25rem);
     width: 100%;
     object-fit: contain;
     z-index: 0;
@@ -317,10 +322,13 @@
     position: absolute;
     display: none;
     height: 6rem;
-    width: 100%;
     padding: 0;
     margin: 0;
-    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    overflow: hidden;
+    z-index: 1;
 }
 #message_de_fin {
     background-color: #000;
@@ -355,22 +363,25 @@
 
 
 
-#pratique_foot {  height: 18rem;  overflow: hidden; }
+#pratique_foot {  height: 17rem;  overflow: hidden; }
 #foot_cadre {
     position: relative;
-    height: calc(100% - 3rem);
+    height: calc(100% - 3.5rem);
+    border: 1px solid transparent;
+    border-bottom-width: 0.25rem;
+    border-bottom-color: #aaa;
+    margin-bottom: 0.5rem;
     overflow: hidden;
 }
-#pratiques_images_container { height: calc(100% - 0.5rem); }
 #image_name { display: none; }
-#guide_et_clavier_container { position: absolute; height: 100%; width: 100%; z-index: 1; top: 100%; transition: 0.2s; }
-#guide_container { position: relative;  height: calc(100% - 9rem); }
-#pratique_clavier_container { bottom: 0; }
-#pratique_fiche { top: 0; width: 100%;  height: 100%; }
+#guide_et_clavier_container { 
+    position: absolute; 
+    height: calc(100% - 1.5rem);
+    width: 100%; 
+    top: 100%; 
+    z-index: 1; 
+    transition: 0.2s; 
+}
+#guide_container { position: relative;  height: calc(100% - 7rem); }
 #pratique_fiche_body { height: calc(100% - 6rem); }
 #image_croix { height: calc(100% - 4rem); }
-#message_de_fin_container {
-    top: calc(100% - 7rem);
-    left: 50%;
-    transform: translateX(-50%);
-}

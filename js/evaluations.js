@@ -173,13 +173,14 @@ function evaluations() {
 
                 chargerEvaluationTbody();
                 marquerReponseEvaluation(); 
-                defilementDeEvaluationFicheVersLeHaut();
+                defilementDuContenuLeHaut($('#evaluation_tbody_container'));
 
                                    
                 function chargerEvaluationTbody() {
 
                     var n = parseIntNko(evaluation_counter);
                     n = (n == '߁') ? n+'߭' : n+'߲';
+                    r = (q == r) ? r : "<p class='evaluation_mauvaise_repponse'>"+r+"</p><p class='evaluation_croix'>&#10060;</p>";
 
                     evaluation_html += '<tr>\n';
                         evaluation_html += '<td>'+n+'</td>\n';
@@ -205,10 +206,11 @@ function evaluations() {
                         $('#evaluation_cross').css({'display':'block', 'right':reponse_evaluation.length/2+'rem', 'transform':'scale(0.5)', 'opacity':0});
                         setTimeout(function(){ $('#evaluation_cross').css({'transform':'scale(1.5)', 'opacity':0.75}); }, 100);
                     }
+
+                    setTimeout(() => {
+                        $('#evaluation_reponse p').html('');
+                    }, 1000);
                 } 
-                function defilementDeEvaluationFicheVersLeHaut() {
-                    $('#evaluation_tbody_container').animate({ scrollTop:$('#evaluation_tbody_container')[0].scrollHeight }, 1000);
-                }
             }
             function actualiserEvaluationProgressBar(){
                         

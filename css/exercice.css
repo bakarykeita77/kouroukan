@@ -16,10 +16,8 @@
 #exercice_dialogue_btn div  { 
     text-align: center; 
     padding: var(--paddingSmall);
-    border: var(--borderPrimaire); 
-    border-radius: var(--radiusMedium);
-    box-shadow: var(--shadow_16);
     margin: 0 auto; 
+    box-sizing: border-box;
 }
 #exercice_dialogue_btn div:active {
     box-shadow: none;

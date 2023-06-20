@@ -377,24 +377,27 @@ function parametrageDeLesson() {
             function pratiqueHTML(){
                 
                 var pratique_html = '\
-                    \   <div id="pratique_fiche">\
-                    \      <div id="pratique_fiche_head">\
-                    \         <span class="th">ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</span>\
-                    \         <span class="th">ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ</span>\
-                    \         <span class="th">ߓߍ߬ߙߍ</span> \
-                    \      </div>\
-                    \      <div id="pratique_fiche_body"></div>\
-                    \      <div id="pratique_fiche_foot">\
-                    \         <div>\
-                    \         <span id="label_total_point">ߓߍ߬ߙߍ ߡߎ߬ߡߍ</span> \
-                    \             <span id="total_point"></span>\
-                    \         </div>\
-                    \         <div>\
-                    \             <span id="label_pourcentage_point" colspan="2">ߓߍ߬ߙߍ ߗߡߍ߬ߘߐ߬ߦߊ</span>\
-                    \             <span id="pourcentage_point"></span>\
-                    \         </div>\
-                    \      </div>\
-                    \   </div>\
+                    <div id="pratique_table">\
+                        <div id="pratique_thead">\
+                            <span class="th">ߝ</span>\
+                            <span class="th">ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</span>\
+                            <span class="th">ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ</span>\
+                            <span class="th">ߓߍ߬ߙߍ</span> \
+                        </div>\
+                        <div id="pratique_tbody">\
+                            \
+                        </div>\
+                        <div id="pratique_tfoot">\
+                            <div>\
+                                <span id="label_total_point">ߓߍ߬ߙߍ ߡߎ߬ߡߍ</span> \
+                                <span id="total_point"></span>\
+                            </div>\
+                            <div>\
+                                <span id="label_pourcentage_point" colspan="2">ߓߍ߬ߙߍ ߗߡߍ߬ߘߐ߬ߦߊ</span>\
+                                <span id="pourcentage_point"></span>\
+                            </div>\
+                        </div>\
+                    </div>\
                 ';
 
                 return pratique_html;
@@ -402,23 +405,27 @@ function parametrageDeLesson() {
             function evaluationHTML(){
 
                 var evaluation_html = '\
-                    \   <table class="evaluation_table" id="evaluation_thead">\
-                    \       <tr>\
-                    \           <th>ߝ</th>\
-                    \           <th>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</th>\
-                    \           <th>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ</th>\
-                    \           <th>ߓߍ߬ߙߍ</th>\
-                    \       </tr>\n\
-                    \   </table>\
-                    \   <div id="evaluation_tbody_container">\
-                    \       <table class="evaluation_table" id="evaluation_tbody" border=1></table>\
-                    \   </div>\
-                    \   <table class="evaluation_table" id="evaluation_tfoot">\
-                    \       <tr>\
-                    \           <td colspan=3>ߓߍ߬ߙߍ ߡߎ߬ߡߍ</td>\
-                    \           <td></td>\
-                    \       </tr>\
-                    \   </table>\
+                    <div class="evaluation_table">\
+                        <div id="evaluation_thead">\
+                            <span class="th">ߝ</span>\
+                            <span class="th">ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</span>\
+                            <span class="th">ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ</span>\
+                            <span class="th">ߓߍ߬ߙߍ</span> \
+                        </div>\
+                        <div id="evaluation_tbody">\
+                            \
+                        </div>\
+                        <div id="evaluation_tfoot">\
+                            <div>\
+                                <span>ߓߍ߬ߙߍ ߡߎ߬ߡߍ</span> \
+                                <span id="evaluation_total_point"></span>\
+                            </div>\
+                            <div>\
+                                <span>ߓߍ߬ߙߍ ߗߡߍ߬ߘߐ߬ߦߊ</span>\
+                                <span id="evaluation_pourcentage_point"></span>\
+                            </div>\
+                        </div>\
+                    </div>\
                 ';
 
                 return evaluation_html;
@@ -480,9 +487,7 @@ function parametrageDeLesson() {
                 return nbr_td;
             }
         }
-    }
-         
-    
+    } 
 }        
                 
 function monoSyllabes() {

@@ -540,13 +540,16 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0;}
 .masqueur_de_parent:active { background-color: #aaa; }
 .matiere { position: relative; }
 .media {
-    position: absolute;
+    position: relative;
+    display: inline-block;
     background-color: var(--couleurNeutre);
     height: 1.5rem;
+    width: 3rem;
+    margin: 0;
     padding: 0 0.5rem;
-    top: 0;
-    border: var(--borderSecondaire);
+    border: var(--border_c);
     border-radius: var(--radiusSmall);
+    float: right;
     cursor: pointer;
 }
 .media_btns {
@@ -647,13 +650,16 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0;}
     z-index: 5;
 }
 .parametre {
-    position: absolute;
+    position: relative;
+    display: inline-block;
     background-color: var(--couleurNeutre);
     height: 1.5rem;
+    width: 5rem;
     padding: 0 0.5rem;
-    top: 0;
-    border: var(--borderSecondaire);
+    margin: 0;
+    border: var(--border_c);
     border-radius: var(--radiusSmall);
+    float: left;
     cursor: pointer;
 }
 .parametres_container {

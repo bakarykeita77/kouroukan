@@ -1,23 +1,45 @@
 
 #evaluation { overflow: hidden; }
 
-#evaluation_head {
+
+#evaluation_head, #evaluation_body, #evaluation_foot {
     position: relative;
+    width: 96%;
+    max-width: 500px;
+    margin: auto;
+}
+
+
+#evaluation_thead {
+    height: 2rem;
     width: 100%;
     margin: 0;
     padding: 0;
+    background-color: #ccc;
+    border-bottom: 0.25rem solid #aaa;
 }
-#evaluation_head span {
-    padding: 0;
-    margin: 0.25rem;
-    font-size: 0.75rem;
+#evaluation_thead span {
+    position: relative;
+    padding: 0 0.25rem;
+    margin: 0 0.25rem;
     font-weight: bold;
-    text-align: center;
-    width: 20%;
     height: 1.5rem;
-    line-height: 1.5rem;
+    line-height: 2.5rem;
 }
 
+
+#evaluation_tbody { 
+    position: relative;
+    background-color: #002;
+    color: white;
+    box-sizing: border-box;
+}
+#evaluation_tbody span {
+    position: relative;
+    background-color: #223;
+    margin: 1px 0.125rem;
+    height: 1.5rem;
+}
 #evaluation_guide {
     display: flex;
     flex-direction: column;
@@ -44,6 +66,10 @@
     width: 100%;
 }
 #evaluation_tbody_default_content {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 80%;
     font-size: larger;
     font-weight: bold;
@@ -52,21 +78,17 @@
 }
 
 
-#evaluation_tbody_container {
+#evaluation_tbody {
     padding: 0;
-    margin: 0;
-    border: 0.25rem solid transparent;
-    border-top-color: #444;
-    border-bottom-color: #444;
+    margin: 0.125rem 0;
+    border: 0.5rem solid transparent;
     overflow: auto;
 }
-#evaluation_tbody td { position: relative; }
-.evaluation_mauvaise_repponse, .evaluation_croix {
-    position: absolute;
-    margin: 0;
-    top: 0;
+.barre {
+    text-decoration: line-through; 
+    text-decoration-color: red; 
+    text-decoration-thickness: 0.125rem;
 }
-.evaluation_croix { color: red; opacity: 0.5; font-weight: bold; }
 .evaluation_table {
     padding: 0;
     margin: 0;
@@ -74,14 +96,25 @@
     border-color: #444;
     width: 100%;
 }
-#evaluation_thead { height: 2rem; }
-#evaluation_thead tr th:nth-child(1), #evaluation_tbody tr td:nth-child(1) { width: 2rem; padding-left: 1rem; text-align: left; }
-#evaluation_thead tr th:nth-child(2), #evaluation_thead tr th:nth-child(3) { padding-right: 0.5rem; text-align: right; }
-#evaluation_tbody tr td:nth-child(2), #evaluation_tbody tr td:nth-child(3) { padding-right: 0.5rem; text-align: right; }
-#evaluation_thead tr th:nth-child(4), #evaluation_tbody tr td:nth-child(4) { width: 2rem; padding-left: 1rem; text-align: left; }
-#evaluation_tfoot { height: 2rem; }
-#evaluation_tfoot td:first-child { padding-right: 0.5rem; text-align: right; }
-#evaluation_tfoot td:last-child { width: 3rem; }
+#evaluation_thead, #evaluation_tbody div, #evaluation_tfoot div { display: flex; }
+#evaluation_thead  .th:nth-child(1), #evaluation_thead  .th:nth-child(4) { width: 2rem; padding-left: 1rem; text-align: left; }
+#evaluation_tbody  span:nth-child(1), #evaluation_tbody  span:nth-child(4) { width: 2rem; padding-left: 1rem; text-align: left; }
+#evaluation_thead  .th:nth-child(2), #evaluation_thead  .th:nth-child(3) { flex-grow: 2; padding-right: 0.5rem; text-align: right; }
+#evaluation_tbody  span:nth-child(2), #evaluation_tbody  span:nth-child(3) { flex-grow: 2; padding-right: 0.5rem; text-align: right; }
+#evaluation_tfoot { 
+    padding: 0.125rem;
+    background-color: #ccc; 
+    border-top: 0.25rem solid #aaa;
+}
+#evaluation_tfoot span { margin: 0.125rem; }
+#evaluation_tfoot span:first-child { width: calc(100% - 3rem); padding-right: 0.5rem; text-align: right; }
+#evaluation_tfoot span:last-child { 
+    width: 3rem; 
+    background-color: #002; 
+    color: white;
+    padding-left: 0.5rem; 
+    text-align: left; 
+}
 
 
 
@@ -325,15 +358,6 @@
 #fiche_croix { color: rgba(255,0,0,0.5); }
 #lesson_entete div { width: 160px; overflow: hidden; }
 .stop_btn_container, .oreille_icon_container { display: none; }
-#evaluation_body { 
-    top: 2rem;
-    height: calc(100% - 18rem);
-    box-sizing: border-box;
-    padding: 0; 
-    background-color: rgba(0,0,0,0.8);
-    color: white;
-    box-sizing: border-box;
-}
 #evaluation_clavier_container { border-radius: var(--radiusSmall); }
 #teste_container {
     position: relative;
@@ -381,30 +405,30 @@
 
 
 
-    #evaluation_head, #evaluation_body, #evaluation_foot {
-        position: absolute;
-        width: 96%;
-        max-width: 500px;
-        left: 50%;
-        transform: translate(-50%,0);
-    }
-    #evaluation_head { top: 0; display: none; }
-    #evaluation_foot { height: 16.5rem; bottom: 0; }
-    #evaluation_fiche_foot div:nth-child(2) { display: none; }
-    #teste_container {  height: calc(3.75rem - 2px); }
-    #evaluation_fiche { width: 100%; top: 0; }
-    #evaluation_message_de_fin_container {
-        top: calc(100% - 7rem);
-        left: 50%;
-        transform: translateX(-50%);
-    }
+#evaluation_foot { height: 16.5rem; bottom: 0; }
+#evaluation_fiche_foot div:nth-child(2) { display: none; }
+#teste_container {  height: calc(3.75rem - 2px); }
+#evaluation_fiche { width: 100%; top: 0; }
+#evaluation_message_de_fin_container {
+    top: calc(100% - 7rem);
+    left: 50%;
+    transform: translateX(-50%);
+}
 
 
 @media screen and (orientation: portrait) {
-    #evaluation_tbody_container { height: calc(100% - 3rem); }    
+    #evaluation_body {
+        height: calc(100% - 18rem);
+    }
+    .evaluation_table {  height: 100%; }
+    #evaluation_tbody { height: calc(100% - 2rem); }    
     #evaluation_tfoot { display: none; }
 }
 
 @media screen and (orientation: landscape) {
-    #evaluation_tbody_container { height: calc(100% - 5rem); }
+    #evaluation_body {
+        height: calc(100% - 18rem);
+    }
+    .evaluation_table {  height: calc(100% - 2rem);  }
+    #evaluation_tbody { height: calc(100% - 5rem); }
 }

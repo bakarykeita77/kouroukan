@@ -24,7 +24,7 @@ function evaluations() {
     $('#pratique_options').css('display','none');
     $('.fermeture').attr('id', 'fermer_evaluation');
 
-    $('#evaluation_tbody').html("<p class='centertransform' id='evaluation_tbody_default_content'>"+evaluation_tbody_default_message+"</p>");
+    $('#evaluation_tbody').html("<p id='evaluation_tbody_default_content'>"+evaluation_tbody_default_message+"</p>");
     initialiserEvaluation();
     evaluer();
     correctionEvaluation();
@@ -173,24 +173,27 @@ function evaluations() {
 
                 chargerEvaluationTbody();
                 marquerReponseEvaluation(); 
-                defilementDuContenuLeHaut($('#evaluation_tbody_container'));
+                defilementDuContenuLeHaut($('#evaluation_tbody'));
 
                                    
                 function chargerEvaluationTbody() {
 
                     var n = parseIntNko(evaluation_counter);
                     n = (n == '߁') ? n+'߭' : n+'߲';
-                    r = (q == r) ? r : "<p class='evaluation_mauvaise_repponse'>"+r+"</p><p class='evaluation_croix'>&#10060;</p>";
+                    r = (q == r) ? r : "<del class='barre'>"+r+"</del>";
 
-                    evaluation_html += '<tr>\n';
-                        evaluation_html += '<td>'+n+'</td>\n';
-                        evaluation_html += '<td>'+q+'</td>\n';
-                        evaluation_html += '<td>'+r+'</td>\n';
-                        evaluation_html += '<td>'+parseIntNko(p)+'</td>\n';
-                    evaluation_html += '</tr>\n';
+                    evaluation_html += '\
+                        <div>\
+                            <span>'+n+'</span>\
+                            <span>'+q+'</span>\
+                            <span>'+r+'</span>\
+                            <span>'+parseIntNko(p)+'</span>\
+                        </div>\
+                    ';
 
                     $('#evaluation_tbody').html(evaluation_html);
-                    $('#evaluation_tfoot td:last-child').html(parseIntNko(note_d_evaluation));
+                    $('#evaluation_total_point').html(parseIntNko(note_d_evaluation));
+                    $('#evaluation_pourcentage_point').html('%'+parseIntNko(note_d_evaluation*100/nbr_max_de_questions_a_poser));
                 }                                    
                 function marquerReponseEvaluation() {    
                     if(reponse_evaluation.join('') == question_evaluation) {

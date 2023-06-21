@@ -326,6 +326,11 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0;}
     transform: translateX(-50%);
     transition: 0.25s;
 }
+del {
+    text-decoration: line-through; 
+    text-decoration-color: red; 
+    text-decoration-thickness: 0.125rem;
+}
 
 /* --------------------------------------------------------------------------------------------------------- */
 
@@ -501,6 +506,9 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0;}
     margin: 1rem 0;
     height: 2.5rem;
     line-height: 2.5rem;
+}
+.ligne_active {
+    color: orange;
 }
 .liste_affichage_cascade { display: none; }
 .liste_affichage_cascade li {
@@ -764,9 +772,17 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0;}
     transition: 0.3s;
 }
 .pratique_tr_actif {
-    color: orange;
+    position: relative;
     font-weight: bold;
+    background-color: #228;
+    border-right: 0.4rem solid #228;
+    border-left: 0.4rem solid #228;
+    width: 100%;
+    left: 0.4rem;
+}
+.pratique_tr_actif span {
     background-color: yellow;
+    color: orange;
 }
 .profile_menu {
     display: flex;

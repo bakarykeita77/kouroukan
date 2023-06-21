@@ -11,32 +11,32 @@
 
 
 #evaluation_thead {
-    height: 2rem;
+    height: 1.5rem;
     width: 100%;
     margin: 0;
-    padding: 0;
+    padding: 0.125rem 0;
     background-color: #ccc;
     border-bottom: 0.25rem solid #aaa;
+    overflow: hidden;
 }
 #evaluation_thead span {
     position: relative;
-    padding: 0 0.25rem;
     margin: 0 0.25rem;
     font-weight: bold;
     height: 1.5rem;
-    line-height: 2.5rem;
+    line-height: 1.5rem;
 }
 
 
 #evaluation_tbody { 
     position: relative;
     background-color: #002;
-    color: white;
     box-sizing: border-box;
 }
 #evaluation_tbody span {
     position: relative;
     background-color: #223;
+    color: white;
     margin: 1px 0.125rem;
     height: 1.5rem;
 }
@@ -84,11 +84,6 @@
     border: 0.5rem solid transparent;
     overflow: auto;
 }
-.barre {
-    text-decoration: line-through; 
-    text-decoration-color: red; 
-    text-decoration-thickness: 0.125rem;
-}
 .evaluation_table {
     padding: 0;
     margin: 0;
@@ -99,8 +94,8 @@
 #evaluation_thead, #evaluation_tbody div, #evaluation_tfoot div { display: flex; }
 #evaluation_thead  .th:nth-child(1), #evaluation_thead  .th:nth-child(4) { width: 2rem; padding-left: 1rem; text-align: left; }
 #evaluation_tbody  span:nth-child(1), #evaluation_tbody  span:nth-child(4) { width: 2rem; padding-left: 1rem; text-align: left; }
-#evaluation_thead  .th:nth-child(2), #evaluation_thead  .th:nth-child(3) { flex-grow: 2; padding-right: 0.5rem; text-align: right; }
-#evaluation_tbody  span:nth-child(2), #evaluation_tbody  span:nth-child(3) { flex-grow: 2; padding-right: 0.5rem; text-align: right; }
+#evaluation_thead  .th:nth-child(2), #evaluation_thead  .th:nth-child(3) { width: calc((100% - 4rem)/2); padding-right: 0.5rem; text-align: right; }
+#evaluation_tbody  span:nth-child(2), #evaluation_tbody  span:nth-child(3) { width: calc((100% - 4rem)/2); padding-right: 0.5rem; text-align: right; }
 #evaluation_tfoot { 
     padding: 0.125rem;
     background-color: #ccc; 
@@ -430,5 +425,5 @@
         height: calc(100% - 18rem);
     }
     .evaluation_table {  height: calc(100% - 2rem);  }
-    #evaluation_tbody { height: calc(100% - 5rem); }
+    #evaluation_tbody { height: calc(100% - 4rem); }
 }

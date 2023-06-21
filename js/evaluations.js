@@ -180,7 +180,7 @@ function evaluations() {
 
                     var n = parseIntNko(evaluation_counter);
                     n = (n == '߁') ? n+'߭' : n+'߲';
-                    r = (q == r) ? r : "<del class='barre'>"+r+"</del>";
+                    r = (q == r) ? r : "<del>"+r+"</del>";
 
                     evaluation_html += '\
                         <div>\

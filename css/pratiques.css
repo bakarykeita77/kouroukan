@@ -178,8 +178,8 @@
     width: 100%;
     height: 100%;
 }
-#pratique_thead, #table_body, #pratique_tfoot { position: relative; }
-#pratique_thead, #table_body div, #pratique_tfoot div {
+#pratique_thead, #pratique_tbody, #pratique_tfoot { position: relative; }
+#pratique_thead, #pratique_tbody div, #pratique_tfoot div {
     display: flex;
     flex-direction: row;
 }
@@ -192,25 +192,26 @@
 #pratique_thead span { font-size: 0.8rem; height: 1rem; margin:  0 0.125rem; text-align: right; padding-right: 0.5rem; }
 #pratique_thead span:first-child, #pratique_thead span:last-child { width: 2rem; padding-left: 0.5rem; }
 #pratique_thead span:nth-child(2), #pratique_thead span:nth-child(3) { flex-grow: 2; padding-right: 0.5rem; }
-#table_body {
+#pratique_tbody {
+    height: calc(100% - 4rem);
     min-height: 3.5rem;
     margin: 0.125rem 0;
+    padding: 0.5rem;
     background-color: #002;
-    border: 0.5rem solid #002;
-    overflow: auto;
+    border: 1px solid #002;
+    overflow-y: auto;
+    overflow-x: hidden;
     transition: 0.6s;
 }
-#table_body .tr {
-    height: 1.5rem;
-    border: 1px solid transparent;
-}
-#table_body .tr span:not(.fiche_croix) { 
+#pratique_tbody span {
+    position: relative;
     background-color: #223;
     color: white;
-    margin: 0 0.125rem;
+    margin: 1px 0.125rem;
+    height: 1.5rem;
 }
-#table_body span:first-child, #table_body span:last-child { width: 2rem; text-align: left; padding-left: 0.5rem; }
-#table_body span:nth-child(2), #table_body span:nth-child(3) { flex-grow: 2; text-align: right; padding-right: 0.5rem; }
+#pratique_tbody span:first-child, #pratique_tbody span:last-child { width: 2rem; text-align: left; padding-left: 0.5rem; }
+#pratique_tbody span:nth-child(2), #pratique_tbody span:nth-child(3) { width: calc((100% - 4rem)/2); text-align: right; padding-right: 0.5rem; }
 #pratique_progress_bar {
     width: 100%;
 }
@@ -236,7 +237,7 @@
     background-color: #002;
     color: white;
 }
-#table_body { height: calc(100% - 6rem); }
+#pratique_tbody { height: calc(100% - 6rem); }
 
  /*-------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -258,7 +259,7 @@
     color: red;
     opacity: 0.6;
 }
-.fiche_mauvaise_reponse, .fiche_croix {
+.fiche_croix {
     right: 0;
     border: none;
 }
@@ -391,3 +392,11 @@
 }
 #guide_container { position: relative;  height: calc(100% - 7rem); }
 #image_croix { height: calc(100% - 4rem); }
+
+@media screen and (orientation: portrait) {
+    
+}
+
+@media screen and (orientation: landscape) {
+
+}

@@ -113,7 +113,7 @@ function pratique() {
         let pratique_fiche_body_height = pratique_fiche_height-pratique_fiche_head_height-pratique_fiche_foot_height-54;
 
         $('#pratique_table').css('height', pratique_fiche_height+'px');
-        $('#table_body').css('height', pratique_fiche_body_height+'px');
+        $('#pratique_tbody').css('height', pratique_fiche_body_height+'px');
     }
     function initialiserPratiques() {
        
@@ -134,7 +134,7 @@ function pratique() {
 
             function viderPratiqueFicheBody() {                                        
                 table = "";
-                $('#table_body').html(table);
+                $('#pratique_tbody').html(table);
             }
             function viderPratiqueFicheFoot() {
                 total_point = 0;
@@ -162,9 +162,7 @@ function pratique() {
             $('#pratiques_images_container img').css('opacity',1);
             nePasMettreCroixSurImage();
         }
-        function masquerMessageDeFin() {
-            $('#message_de_fin_container').css('display','none');
-        }
+        function masquerMessageDeFin() { $('#message_de_fin_container').css('display','none'); }
     }
     function monoSyllabe() {
         let syllabes_1 = [];
@@ -415,6 +413,7 @@ function pratique() {
                     }
 
                     reponse_d_option[reponse_d_option.length] = caractere;
+ console.log(reponse_d_option);
                     chargerBulles();
                     styliserBulles();
                     $('#cumule_des_caracteres').html(reponse_d_option);
@@ -471,12 +470,13 @@ function pratique() {
                 total_point = 0;
                
                 $('.correction_btn').on('click',  function() {
-                    
+                   
                     compteur++;
-                    point = (question_d_option == reponse_d_option.join(''))?1:0;
+                    reponse_d_option = (question_d_option == reponse_d_option.join('')) ? reponse_d_option.join('') : '<del>'+reponse_d_option.join('')+'</del>';
+                    point = (question_d_option == reponse_d_option)?1:0;
                     total_point = total_point + point;
                     effort_d_option = '%'+parseIntNko(Math.round(total_point*100/limite_des_questions_d_option));
-                    memoire_pratique[memoire_pratique.length] = [question_d_option, reponse_d_option.join(''), point];
+                    memoire_pratique[memoire_pratique.length] = [question_d_option, reponse_d_option, point];
                     
                     var option_status = '';
                     var option_de_syllabe = optionDeSyllabe();
@@ -509,14 +509,15 @@ function pratique() {
                         afficherPratiquesImage();
                         affichageDeLaNotification();
 
-                        function chargerImageName() { $('#image_name').html(reponse_d_option.join('')); }
+                        function chargerImageName() { $('#image_name').html(reponse_d_option); }
                         function chargerPratiquesImagesContainer() {
-console.log(reponse_d_option.join(''));                        
+                            reponse_d_option = (question_d_option == reponse_d_option) ? reponse_d_option : $('.pratique_tr_actif del').html();
+                        
                             let dossier_image = dossierImage();
-                            $('#pratiques_images_container img').attr('src', dossier_image+reponse_d_option.join('')+'.jpg');
+                            $('#pratiques_images_container img').attr('src', dossier_image+reponse_d_option+'.jpg');
 
-                            // if(question_d_option == reponse_d_option.join('')) {  nePasMettreCroixSurImage(); }
-                            // if(question_d_option !== reponse_d_option.join('')) { mettreCroixSurImage(); }
+                            if(question_d_option == reponse_d_option) {  nePasMettreCroixSurImage(); }
+                            if(question_d_option != reponse_d_option) { mettreCroixSurImage(); }
                         }
                         function affichageDeLaNotification() {
                             if(questions.length === compteur) {
@@ -528,31 +529,30 @@ console.log(reponse_d_option.join(''));
                         }
                     }
                     function controlerPratiqueBody() {
-                        if(question_d_option == reponse_d_option.join('')) { nePasMettreCroixSurImage(); }
-                        if(question_d_option != reponse_d_option.join('')) { mettreCroixSurImage(); }
+                        if(question_d_option == reponse_d_option) { nePasMettreCroixSurImage(); }
+                        if(question_d_option != reponse_d_option) { mettreCroixSurImage(); }
                     }
                     function chargerPratiqueFiche() {
                         
                         chargerPratiqueFicheBody();
                         chargerPratiqueFicheFoot();
-                        table_body = $('#table_body');
+                        pratique_tbody = $('#pratique_tbody');
 
                         function chargerPratiqueFicheBody() {
 
                             var n = parseIntNko(compteur);
                             n = (n == '߁') ? n+'߭' : n+'߲';
-
-                            if(question_d_option == reponse_d_option.join('')) { table += "\
+ 
+                            table += "\
                                 <div class='tr'>\
                                     <span class='affiche_numero'>"+n+"</span>\
                                     <span class='affiche_question'>"+question_d_option+"</span>\
-                                    <span class='affiche_reponse'><span class='fiche_vraie_reponse'>"+reponse_d_option.join('')+"</span></span>\
+                                    <span class='affiche_reponse'>"+reponse_d_option+"</span>\
                                     <span class='affiche_point'>"+parseIntNko(point)+"</span>\
-                                </div>";
-                            }
-                            if(question_d_option != reponse_d_option.join('')) table += "<div class='tr'>\n <span class='affiche_question'>"+question_d_option+"</span>\n<span class='affiche_reponse'><span class='fiche_mauvaise_reponse'>"+reponse_d_option.join('')+"</span><span class='fiche_croix'>&#10060;</span></span>\n<span class='affiche_point'>"+parseIntNko(point)+"</span>\n </div>\n\n";
-                         
-                            $('#table_body').html(table);
+                                </div>\
+                            ";
+                        
+                            $('#pratique_tbody').html(table);
                         }
                         function chargerPratiqueFicheFoot() {
                             $('#total_point').html(parseIntNko(total_point));
@@ -561,19 +561,19 @@ console.log(reponse_d_option.join(''));
                     }
                     function animerPratiqueFiche() {
 
-                        defilementDuContenuLeHaut($('#table_body'));
+                        defilementDuContenuLeHaut($('#pratique_tbody'));
                         affichageAnimeDeLaDerniereLigneDePratiqueFicheBody();
 
                         function affichageAnimeDeLaDerniereLigneDePratiqueFicheBody() {
-                            $('#table_body .tr:last-child').css('height',0);
-                            $('#table_body .tr:last-child').animate({'height':'1.5rem'}, 600);
+                            $('#pratique_tbody .tr:last-child').css('height',0);
+                            $('#pratique_tbody .tr:last-child').animate({'height':'1.6rem'}, 600);
                         }
                     }
                     function stylesDePratiqueFicheBody() {
-                        $('#table_body div:last-child').addClass('pratique_tr_actif'); 
-                        $('#table_body div:last-child').siblings().removeClass('pratique_tr_actif'); 
-                    } 
-                  
+                        $('#pratique_tbody div:last-child').addClass('pratique_tr_actif'); 
+                        $('#pratique_tbody div:last-child').siblings().removeClass('pratique_tr_actif'); 
+                        stylesDePratiqueTrActif();
+                    }
                     function afficherQuestionBouton() {
                         $('.repetition_btn').css('display','none');
                         $('.correction_btn').css('display','none');
@@ -597,7 +597,7 @@ console.log(reponse_d_option.join(''));
                     function actualiserPratiquesProgressBar(){
                         var progress_unity = $('#pratique_progress_bar').width()/limite_des_questions_d_option;
                                   
-                        if(question_d_option != reponse_d_option.join('')){ 
+                        if(question_d_option != reponse_d_option){ 
                             $('.progress_question_bar').css('width','+='+progress_unity+'px');
                         }else{ 
                             $('.progress_question_bar, .progress_bonne_reponse_bar').css('width','+='+progress_unity+'px');
@@ -605,8 +605,8 @@ console.log(reponse_d_option.join(''));
                     }
                     function enregistrerPratique() {
 
-                        point = (question_d_option == reponse_d_option.join('')) ? 1:0;
-                        let question_reponse = [question_d_option,reponse_d_option.join(''),point];
+                        point = (question_d_option == reponse_d_option) ? 1:0;
+                        let question_reponse = [question_d_option,reponse_d_option,point];
                         
                         
                         switch(option_index) {
@@ -619,10 +619,7 @@ console.log(reponse_d_option.join(''));
                         function actualiserOption(syllabe) {
                             let index = '';
                             
-                            $.each(syllabe, function() {
-                                if(question_d_option == this[0]) index = syllabe.indexOf(this);
-                            });
-                                
+                            $.each(syllabe, function() { if(question_d_option == this[0]) index = syllabe.indexOf(this); });
                             syllabe.splice(index,1,question_reponse); 
                         }
                     }
@@ -634,7 +631,7 @@ console.log(reponse_d_option.join(''));
                         return syllabe;             
                     }
                     function effacerQuestion() { question_d_option = ''; }
-                    function effacerReponse() { reponse_d_option.splice(0,reponse_d_option.length); }
+                    function effacerReponse() { reponse_d_option = []; }
                     function stockerOptionDansLocalStorage(syllabe) {
                         let note_d_option = noterOption(syllabe)[1];
                        
@@ -724,7 +721,7 @@ console.log(reponse_d_option.join(''));
                                 
                                 
                                 $('#pratique_table').css({'height':pratique_fiche_height+'px'});
-                                $('#table_body').css({'display':'block', 'height':pratique_fiche_body_height+'px'});
+                                $('#pratique_tbody').css({'display':'block', 'height':pratique_fiche_body_height+'px'});
                                 $('#pratique_tfoot').css({'display':'block'});
                                 $('#message_de_fin_container').css({'display':'block'});
                             }
@@ -788,16 +785,18 @@ console.log(reponse_d_option.join(''));
     }
     function revisionDOption() {
             
-        $('#table_body .tr').on('click', function() {
+        $('#pratique_tbody .tr').on('click', function() {
           
             $('#pratiques_images_container img').css('display','none');
             $(this).siblings().removeClass('pratique_tr_actif');
             $(this).addClass('pratique_tr_actif'); 
+            stylesDePratiqueTrActif();
             
             let question_d_option = $('.pratique_tr_actif .affiche_question').html(); 
-            let reponse_d_option = $('.pratique_tr_actif .affiche_reponse span:nth-child(1)').html();
-                          
+            let reponse_d_option = $('.pratique_tr_actif .affiche_reponse').html();
             let dossier_image = dossierImage();
+
+            reponse_d_option = (question_d_option == reponse_d_option) ? reponse_d_option : $('.pratique_tr_actif del').html();
             
             if(question_d_option == reponse_d_option) { nePasMettreCroixSurImage(); }
             if(question_d_option != reponse_d_option) { mettreCroixSurImage(); }
@@ -880,8 +879,16 @@ console.log(reponse_d_option.join(''));
                 localStorage.removeItem(id+'_'+3);        
             }
         });
+    } 
+    function stylesDePratiqueTrActif() {
+        $('.pratique_tr_actif span:nth-child(1)').css({'background-color':'#226', 'color':'yellow'});
+        $('.pratique_tr_actif span:nth-child(2)').css({'background-color':'#226', 'color':'yellow'});
+        $('.pratique_tr_actif span:nth-child(3)').css({'background-color':'#226', 'color':'yellow'});
+        $('.pratique_tr_actif span:nth-child(4)').css({'background-color':'#226', 'color':'yellow'});
+
+        $('.pratique_tr_actif').siblings().find('span').css({'background-color':'#223', 'color':'white'});
     }
-    
+
     function initialiserDialogueBtn() {
             
         afficherQuestionBtn();

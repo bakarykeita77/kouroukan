@@ -5,7 +5,6 @@
     left: 0;
 }
 #exercice_body {
-    border: 0.5rem solid white;
     height: calc(100% - 3rem);
     background-color: rgba(0,0,0,0.8);
     color: white;
@@ -23,3 +22,12 @@
     box-shadow: none;
 }
 #croix { color: red; }
+
+@media screen and (orientation: portrait) {
+    #exercice_body {  border: none; }
+    #exercices_player { border: 1px solid #aaa; }
+}
+@media screen and (orientation: landscape) {
+    #exercice_body { border: 0.5rem solid white; }
+    #exercices_player { border: 0; }
+}

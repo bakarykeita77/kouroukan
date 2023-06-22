@@ -1,9 +1,10 @@
 
 #programmes_container {
     position: relative;
+    width: calc(100% - 2rem);
     max-width: 50rem;
     margin: auto;
-    padding: 0 1.5rem;
+    padding: 0px 1rem;
     background-color: var(--couleurNeutre);
     direction: rtl;
 }
@@ -22,7 +23,7 @@
     margin: 2rem 0;
     padding: 0;
     width: 100%;
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 #programme_ul {
     display: flex;
@@ -59,7 +60,8 @@
 }
 #programme_commentaire p {
     position: relative;
-    margin: 2rem 0;
+    margin: 1rem 0;
+    text-align: justify;
 }
 
 
@@ -84,6 +86,6 @@
     }
     #programme_ul li { 
         width: 80%;
-        margin: 0.25rem auto;
+        margin: 0.125rem auto;
     }
 }

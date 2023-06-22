@@ -55,7 +55,7 @@
     border-radius: var(--radiusSmall);
     box-shadow: 0 0 1rem #ccc;
     width: 100%;
-    max-width: 500px;
+    max-width: 400px;
     margin: var(--marginSmall)*2 0;
     padding: var(--paddingMedium);
     top: 3rem;
@@ -65,7 +65,7 @@
     display: none;
     direction: rtl;
     overflow: auto;
-    z-index: 1000;
+    z-index: 0;
 }
 #profile_entete ul {
     direction: rtl;
@@ -423,9 +423,6 @@
     #profile_utilisateur_image_container img{
         height: auto;
         width: 100%;
-    }
-    #profile_menu_container {
-        height: 90vh;
     }
     #profile_menu_body_content div { display: block; width: 99%; }
 }

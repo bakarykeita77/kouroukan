@@ -394,9 +394,9 @@
 #image_croix { height: calc(100% - 4rem); }
 
 @media screen and (orientation: portrait) {
-    
+    #pratique_dialogue_btn { border: 1px solid #aaa; }
 }
 
 @media screen and (orientation: landscape) {
-
+    #pratique_dialogue_btn { border: 0; }
 }

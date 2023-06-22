@@ -413,7 +413,7 @@ function pratique() {
                     }
 
                     reponse_d_option[reponse_d_option.length] = caractere;
- console.log(reponse_d_option);
+
                     chargerBulles();
                     styliserBulles();
                     $('#cumule_des_caracteres').html(reponse_d_option);

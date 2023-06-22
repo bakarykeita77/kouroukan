@@ -280,17 +280,11 @@
     width: calc(20% - 0.25rem);
 }
 
-#evaluation_dialogue_btn {   
-    margin: 0.5rem auto;
-    bottom: 0;
-    width: 100%;
-    border-radius: var(--radiusLarge);
-    border: var(--border_c);
+#evaluation_dialogue_btn {  
+    bottom: 1rem;
     background-color: var(--couleurNeutre);
     box-shadow: var(--shadow_1a);
-    left: 50%;
     box-sizing: border-box;
-    transform: translate(-50%, 0);
 }
 #evaluation_dialogue_btn:active { box-shadow: none; }
 #evaluation_image_container {
@@ -413,7 +407,7 @@
 
 @media screen and (orientation: portrait) {
     #evaluation_body {
-        height: calc(100% - 18rem);
+        height: calc(100% - 16rem);
     }
     .evaluation_table {  height: 100%; }
     #evaluation_tbody { height: calc(100% - 2rem); }    
@@ -422,7 +416,7 @@
 
 @media screen and (orientation: landscape) {
     #evaluation_body {
-        height: calc(100% - 18rem);
+        height: calc(100% - 17rem);
     }
     .evaluation_table {  height: calc(100% - 2rem);  }
     #evaluation_tbody { height: calc(100% - 4rem); }

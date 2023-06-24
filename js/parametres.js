@@ -181,7 +181,7 @@ function parametrageDeLesson() {
     function chargerLesson() {
 
         checkbox_parentClick();
-        checkbox_childrenClick();
+      //  checkbox_childrenClick();
         
         $.each($('.checkbox_parent'), function(){ $(this).click(); }); /* Cochage par defaut */
         $.each($('.check_btn'), function(){ $(this).click(); }); /* Cochage par defaut */
@@ -196,7 +196,7 @@ function parametrageDeLesson() {
                 var checkbox_children_actifs = $(this).parent().parent().next().find('.checkbox_children');
                 if($(this).prop('checked')==true){ checkbox_children_actifs.prop('checked',true); }
                 if($(this).prop('checked')==false){ checkbox_children_actifs.prop('checked',false); }
-                
+             
                 viderLesSousTableauxDesCaracteresCoches();
                 collecteDesCaracteresCoches(); 
                 rechargerLesSousTableauxDesCaracteresCoches();
@@ -330,7 +330,7 @@ function parametrageDeLesson() {
             var exercice_html      = exerciceHTML();
             var pratique_html      = pratiqueHTML();
             var evaluation_html    = evaluationHTML();
-
+   
          // Rechargement du tableau noir avec les caractères cochés
             $('#apprentissage_body').html(apprentissage_html);
             $('#exercice_body'     ).html(exercice_html);

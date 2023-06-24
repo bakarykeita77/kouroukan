@@ -207,22 +207,22 @@
         return table;
     }
     function lessonHTML2(voyelles_length,tons_length,syllabes_tonifies_length,syllabes_tonifies) {
-            
+           
         var tons_apprentissage_html = '';
-        var n1 = voyelles_length*tons_length;
+        var m = voyelles_length*tons_length;
                     
-        for(var sous_table=0;sous_table<syllabes_tonifies_length;sous_table+=n1){
+        for(var sous_table_index=0;sous_table_index<syllabes_tonifies_length;sous_table_index+=m){
             tons_apprentissage_html += '<table class="table_parlante">\n\n';
-            for(var ligne=0;ligne<n1;ligne+=tons_coches.length){
+            for(var ligne=0;ligne<m;ligne+=tons_length){
                 tons_apprentissage_html += '<tr>\n';
-                for(var colonne=0;colonne<tons_coches.length;colonne++){
-                    tons_apprentissage_html += '<td>'+syllabes_tonifies[sous_table+ligne+colonne]+'</td>\n';
+                for(var colonne=0;colonne<tons_length;colonne++){
+                    tons_apprentissage_html += '<td>'+syllabes_tonifies[sous_table_index+ligne+colonne]+'</td>\n';
                 }
                 tons_apprentissage_html += '</tr>\n\n';
             }
             tons_apprentissage_html += "</table><br><br><hr><br>\n";
         }
-                    
+                   
         return tons_apprentissage_html;
     }
     function lire_mot() {

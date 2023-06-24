@@ -3,16 +3,30 @@ body {
     padding: 0;
     font-family:Courier new, monospace;
  }
- #image_d_accueil { position: relative; top: 2px; }
-#site_name {
-    position: absolute;
+#index_haut_de_page {
+    position: relative;
+    background-color: #002;
+    height: 12rem;
     width: 100%;
-    padding: 0 0.5rem;
+    margin: 0.25rem 0;
+    padding-top: 2rem;
+    box-sizing: border-box;
+}
+#site_name {
+    padding: 1rem;
+    width: calc(100% - 2rem);
+    height: calc(100% - 2rem);
     color: var(--couleurPrimaire);
-    border-bottom: 2px solid var(--couleurTertiaire);
-    margin: 0;
     text-align: center;
 }
+ /* #image_d_accueil { 
+    width: 30%; 
+}
+#image_d_accueil img { height: 100%; } */
+#site_name {
+}
+#site_name h1 { height: 3rem; line-height: 3rem; font-size: 2.5rem; }
+#site_name h3 { height: 1.5rem; line-height: 1.5rem; }
 #site_name h1, #site_name h3 {
     margin: 0.25rem 0;
 }
@@ -20,7 +34,7 @@ body {
     padding: 0 0.5rem;
     margin: auto;
 }
-#site_name, #asides_container p, #btn_container {
+#asides_container p, #btn_container {
     padding: 0.25rem 0;
     box-sizing: border-box;
 }

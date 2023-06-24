@@ -60,7 +60,7 @@
 
 /* --------------------------------------------------------------------------------------------------------- */
 
-html { direction: rtl; font-size: 16px; padding: 0; margin: 0;}
+html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 
 /* --------------------------------------------------------------------------------------------------------- */
 
@@ -940,7 +940,7 @@ del {
 }
 
 
-@media screen and (orientation: portrait) {
+@media screen and (width < 400px) {
     .cover {
         background-color: none;
     }
@@ -962,7 +962,7 @@ del {
     .dialogue_btn { box-shadow: none; }
     .travaux { display: none; }
 }
-@media screen and (orientation: landscape) {
+@media screen and (width >= 400px) {
     .cover {
         background-color: rgba(0, 0, 0, 0.7);
     }

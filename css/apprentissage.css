@@ -8,15 +8,10 @@
     width: 100%;
     overflow: auto;
 }
-#apprentissage_head, #apprentissage_body, #apprentissage_foot {
-    position: relative;
-    width: 100%;
-}
-#apprentissage_head {
-    height: 0.5rem;
+#apprentissage_head { 
+    border-radius: 0.25rem 0.25rem 0 0;
 }
 #apprentissage_body {
-    border: 0.5rem solid white;
     height: calc(100% - 3rem);
     background-color: rgba(0,0,0,0.8);
     color: white;
@@ -27,17 +22,7 @@
     bottom: 0;
     height: 3rem; 
     background-color: var(--couleurNeutre);
+    border-radius: 0 0 0.5rem 0.5rem;
 }
 #apprentissage_dialogue_btn .btns:nth-child(1) { right: 0; }
 #apprentissage_dialogue_btn .btns:nth-child(2) { left: 0; }
-
-@media screen and (orientation: portrait) {
-   #apprentissage_body {
-        border: none;
-    } 
-}
-@media screen and (orientation: landscape) {
-    #apprentissage_body {
-        border: 0.5rem solid white;
-    }
-}

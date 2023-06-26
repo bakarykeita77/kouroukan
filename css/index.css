@@ -27,17 +27,14 @@ body {
 }
 #site_name h1 { height: 3rem; line-height: 3rem; font-size: 2.5rem; }
 #site_name h3 { height: 1.5rem; line-height: 1.5rem; }
-#site_name h1, #site_name h3 {
-    margin: 0.25rem 0;
+#site_name h1, #site_name h3 { margin: 0.25rem 0; }
+#asides_container { padding: 0 0.5rem; margin: auto; }
+#asides_commentaire { 
+    padding: 2rem; 
+    margin: 1rem auto;
+    background-color: #eee;
 }
-#asides_container {
-    padding: 0 0.5rem;
-    margin: auto;
-}
-#asides_container p, #btn_container {
-    padding: 0.25rem 0;
-    box-sizing: border-box;
-}
+#asides_container p, #btn_container { padding: 0; box-sizing: border-box; }
 .pied_de_page { display: none; }
 #affiche_de_tableau { display: none; }
 .afficher { transform:scaleX(1); }
@@ -48,8 +45,10 @@ body {
     justify-content: space-between;
     align-items: center;
 
-    border-top: 2px solid var(--couleurTertiaire); 
     width: 100%;
+    padding: 0 2rem; 
+    border-top: 0.25rem solid #ddd; 
+    background-color: #eee; 
 }
 #pied_de_page { position:relative; width: 100vw; }
 

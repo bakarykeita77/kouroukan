@@ -1,11 +1,6 @@
 
-#exercice_head, #exercice_body, #exercice_foot {
-    position: relative;
-    width: 100%;
-    left: 0;
-}
 #exercice_body {
-    height: calc(100% - 3rem);
+    height: calc(100% - 5rem);
     background-color: rgba(0,0,0,0.8);
     color: white;
     box-sizing: border-box;

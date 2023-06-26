@@ -8,6 +8,7 @@
     max-width: 500px;
     margin: auto;
 }
+#evaluation_body { height: calc(100% - 18rem); }
 
 
 #evaluation_thead {
@@ -406,18 +407,12 @@
 
 
 @media screen and (orientation: portrait) {
-    #evaluation_body {
-        height: calc(100% - 16rem);
-    }
     .evaluation_table {  height: 100%; }
     #evaluation_tbody { height: calc(100% - 2rem); }    
     #evaluation_tfoot { display: none; }
 }
 
 @media screen and (orientation: landscape) {
-    #evaluation_body {
-        height: calc(100% - 17rem);
-    }
     .evaluation_table {  height: calc(100% - 2rem);  }
     #evaluation_tbody { height: calc(100% - 4rem); }
 }

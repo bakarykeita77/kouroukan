@@ -8,6 +8,7 @@
     background-color: var(--couleurNeutre);
     direction: rtl;
 }
+#programme_body hr { border-width: 0.125rem; }
 #programme_body span {
     display: inline-block;
     padding: 1px;
@@ -18,12 +19,9 @@
 }
 #programmes_container h1 {
     position: relative;
-    border: 1px solid transparent;
-    border-bottom-color: var(--couleurQuaternaire);
-    margin: 2rem 0;
-    padding: 0;
+    padding: 1rem;
     width: 100%;
-    font-size: 1.5rem;
+    font-size: 1.75rem;
 }
 #programme_ul {
     display: flex;
@@ -53,10 +51,15 @@
     flex-direction: column;
     justify-content: center;
 
-    margin: 1rem auto;
+    margin: 2rem auto;
     padding: var(--paddingSmall);
     border: 1px solid transparent;
     box-shadow: var(--shadow_1a);
+}
+#programme_commentaire {
+    padding: 2rem;
+    margin: 1rem 0;
+    background-color: #eee;
 }
 #programme_commentaire p {
     position: relative;

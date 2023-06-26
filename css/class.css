@@ -265,7 +265,6 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     z-index: 0;
     transition: 0.6s;
 }
-.course_body { overflow: auto; }
 .course_container {
     display: none;
     position: fixed;
@@ -280,12 +279,11 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     box-sizing: border-box;
 }
 .course_foot { background-color: var(--couleurNeutre); }
-.course_head { top: -0.75rem; height: 0.5rem; }
+.course_head { height: 0.6rem; }
 .course_head div {
     color: #fff;
     font-weight: bold;
     text-shadow: 0 0.25rem 0.5rem #000;
-    border-radius: 0.25rem;
 }
 .course_head div label {
     padding: 0 0.5rem;
@@ -425,7 +423,7 @@ del {
 }
 .fond_blanc_casse { background-color: #666; }
 .flowerblue { background-color: cornflowerblue; }
-.fond_blanc { box-shadow: var(--couleurNeutre); }
+.fond_blanc { background-color: var(--couleurNeutre); }
 .fond_jaune { background-color: yellow; }
 .fond_noir_clair { background-color: #bbb; }
 .fond_orange { background-color: orange; }
@@ -816,7 +814,6 @@ del {
     width: calc(100% - 2px);
     background-color: #fff;
     border: 1px solid #ccc;
-    border-radius: var(--radiusSmall);
     transition: 1s;
 }
 .progress_bar span {
@@ -941,9 +938,7 @@ del {
 
 
 @media screen and (width < 400px) {
-    .cover {
-        background-color: none;
-    }
+    .cover { background-color: none; }
     .lesson_title { width: 80vw; margin: auto; }
 	.page_body {  width: 100%; margin: 0;  padding: 0; }
     .parametres_popup { width: 80vw; }
@@ -955,10 +950,15 @@ del {
         max-width: 30rem;
     }
     .phases li { width: 80%; }
-    .course {
-        border-radius: 0;
-        box-shadow: none;
-    }
+    .course {  border-radius: 0; box-shadow: none; }
+    .course_head, .course_body, .course_foot { 
+        position: relative;
+        width: 98%;
+        margin: auto;
+        border: none;
+        left: 0;
+        overflow: auto; 
+}
     .dialogue_btn { box-shadow: none; }
     .travaux { display: none; }
 }
@@ -979,6 +979,10 @@ del {
         border-radius: 0.5rem;
         background-color: var(--couleurNeutre);
         box-shadow: var(--shadow_36);
+    }
+    .course_head, .course_body, .course_foot { 
+        width: 100%;
+        overflow: auto; 
     }
     .dialogue_btn { box-shadow: var(--shadow_16); }
     .travaux { display: block; }

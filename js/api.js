@@ -1,5 +1,5 @@
 
- fetch('http://localhost:8080/kouroukan/pages/api.php')
+ fetch('http://localhost:8080/kouroukan/php/api.php')
     .then(response => response.json())
     .then(clients => {
         console.log(clients);

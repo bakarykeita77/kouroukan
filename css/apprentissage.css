@@ -11,12 +11,6 @@
 #apprentissage_head { 
     border-radius: 0.25rem 0.25rem 0 0;
 }
-#apprentissage_body {
-    height: calc(100% - 3rem);
-    background-color: rgba(0,0,0,0.8);
-    color: white;
-    box-sizing: border-box;
-}
 #apprentissage_foot { 
     padding: 0;
     bottom: 0;

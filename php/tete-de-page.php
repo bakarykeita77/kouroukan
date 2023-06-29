@@ -17,7 +17,7 @@
 	<div id="tete_de_page_container">
 		<div id="topbar">
 			
-			<div id="logo"> <img src="/kouroukan/pages/get-avatar.php?client_id=<?= $avatar_id ?>" alt="avatar"/></div>
+			<div id="logo"> <img src="/kouroukan/php/get-avatar.php?client_id=<?= $avatar_id ?>" alt="avatar"/></div>
 			
 			<div id='profile_menu_container'>
 
@@ -29,7 +29,7 @@
 					<div class="profile_menu_head" id="profile_utilisateur_btn">Profile</div>
 					<div class="profile_menu_body" id='profile_utilisateur_container'>
 						<div id="profile_utilisateur_image_container">
-							<img src="/kouroukan/pages/get-avatar.php?client_id=<?= $_SESSION['id'] ?>" alt="logo"/>
+							<img src="/kouroukan/php/get-avatar.php?client_id=<?= $_SESSION['id'] ?>" alt="logo"/>
 							<div id='modifier_avatar'>ߖߌ߬ߦߊ߬ߓߍ ߡߊߝߊ߬ߟߋ߲߬</div>  <!--Voir la fonction profileUtilisateurModificationAvatar() dans js/profile.js-->
 						</div>
 						<div id="profile_utilisateur_renseignements">
@@ -68,9 +68,9 @@
 				<div id="menu_deroulant">
 					<ul>
 						<li class="hover_anim" id="home"     ><a href = "/kouroukan/index.php">ߝߊ߲ߓߊ </a></li>
-						<li class="hover_anim" id="programme"><a href = "/kouroukan/pages/programmes.php"> ߢߍߥߟߊ </a></li>
-						<li class="hover_anim" id="blog"     ><a href = "/kouroukan/pages/blog.php"> ߞߊ߬ߙߊ߲߬ߜߍ </a></li>
-						<li class="hover_anim" id="contact"  ><a href = "/kouroukan/pages/contact.php">ߛߊ߲߬ߓߊ߬ߕߐ߮ </a></li>
+						<li class="hover_anim" id="programme"><a href = "/kouroukan/php/programmes.php"> ߢߍߥߟߊ </a></li>
+						<li class="hover_anim" id="blog"     ><a href = "/kouroukan/php/blog.php"> ߞߊ߬ߙߊ߲߬ߜߍ </a></li>
+						<li class="hover_anim" id="contact"  ><a href = "/kouroukan/php/contact.php">ߛߊ߲߬ߓߊ߬ߕߐ߮ </a></li>
 					</ul>
 				</div>
 				

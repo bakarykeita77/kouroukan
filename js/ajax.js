@@ -10,7 +10,7 @@ $(document).ready(function(){
         };
         xhr.send();
     }
-    ajaxGet("/kouroukan/pages/clients-data.php",   function(response){
+    ajaxGet("/kouroukan/php/clients-data.php",   function(response){
         var ajax_clients = [];
         const clients = JSON.parse(response);
         for(var i=0;i<clients.length;i++){
@@ -18,7 +18,7 @@ $(document).ready(function(){
             ajax_clients.push(ajax_client);
         }
     }, function(){});
-    ajaxGet("/kouroukan/pages/lesson-data.php",    function(response){
+    ajaxGet("/kouroukan/php/lesson-data.php",    function(response){
         var lessons_data = JSON.parse(response);
         var lessons_brutes = [];
         
@@ -39,7 +39,7 @@ $(document).ready(function(){
      
         document.getElementById('client_lessons_bruts_container').innerHTML = lessons_brutes.join('%');
     }, function(){});
-    ajaxGet("/kouroukan/pages/exercices-data.php", function(response){
+    ajaxGet("/kouroukan/php/exercices-data.php", function(response){
         
         var exercices_data = JSON.parse(response);
         var exercices = [];
@@ -62,7 +62,7 @@ $(document).ready(function(){
         
         document.getElementById('client_exercices_bruts_container').innerHTML = exercices.join('%');
     }, function(){});
-    ajaxGet("/kouroukan/pages/testes-data.php",    function(response){
+    ajaxGet("/kouroukan/php/testes-data.php",    function(response){
         
         var testes_bruts = JSON.parse(response);
         var testes_traites = traitementDeTestesBruts();
@@ -153,7 +153,7 @@ $(document).ready(function(){
         
         var xhr = new XMLHttpRequest();
         var methode = "GET";
-        var url = "http://localhost:8080/kouroukan/pages/testes-data.php";
+        var url = "http://localhost:8080/kouroukan/php/testes-data.php";
         var asynchronous = true;
     
         xhr.open(methode,url,asynchronous);

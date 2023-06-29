@@ -201,7 +201,7 @@ function exercices() {
                     note   : note
                 });
 
-                fetch("/kouroukan/pages/actions.php", {
+                fetch("/kouroukan/php/actions.php", {
                     method: "POST",
                     body: exercice_data 
                 })

@@ -265,6 +265,14 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     z-index: 0;
     transition: 0.6s;
 }
+.course_body { 
+    position: relative; 
+    height: calc(100% - 4rem);
+    margin: 0.2rem 0;
+    color: white;
+    box-sizing: border-box;
+    background-color: rgba(0,0,0,0.8);
+ }
 .course_container {
     display: none;
     position: fixed;
@@ -278,8 +286,8 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     overflow: auto;
     box-sizing: border-box;
 }
-.course_foot { background-color: var(--couleurNeutre); }
-.course_head { height: 0.6rem; }
+.course_foot { position: relative; background-color: var(--couleurNeutre); }
+.course_head { position: relative; height: 0.6rem; }
 .course_head div {
     color: #fff;
     font-weight: bold;

@@ -14,11 +14,13 @@
 <body>
     <div class="container" id="index_container">
         
-        <div class="page_head"><?php require('pages/tete-de-page.php'); ?></div>
+        <div class="page_head"><?php require('php/tete-de-page.php'); ?></div>
      
         <div class="page_body" id="accueil_body">
 
             <div id="index_haut_de_page">
+
+                
                 <div id="site_name">
                     <h1>ߞߙߎ߬ߞߊ߲߬:</h1>
                     <h3>ߒߞߏ ߛߓߍߛߎ߲߫ ߞߊ߲ߡߊߛߙߋߡߊ ߘߋ߰ߘߊ ߓߟߐߟߐ ߞߊ߲߬</h3>
@@ -34,8 +36,8 @@
                     <p>ߊ߬ ߦߋ߫ ߓߍ߯ ߟߊߘߍ߬ߣߍ߲ ߛߊ߬ߥߏ߬ ߘߐ߫. ߏ߬ ߘߐ߬߸ ߡߐ߰-ߐ߫-ߡߐ߬ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߒߞߏ ߘߋ߰߸ ߦߴߌ ߕߐ߮ ߟߋ߬ ߝߟߐ߫ ߛߓߍ߫ ߟߊ߫. ߕߐ߯ ߛߓߍ߫ ߞߘߎ ߝߟߍ߫ ߘߎ߱ߡߊ߬ ߡߊ߬ߙߊ߲߬ ߓߟߏ ߝߍ߬߸ ߣߴߌ ߕߐ߮ ߛߓߍߣߍ߲߫ ߞߘߐ ߟߋ߬߸ ߌ ߘߌ߫ ߛߋ߫ ߞߵߌ ߜߌ߲߬ߞߎ߲߬. ߜߊ߲߬ߞߎ߲߬ߠߌ߬ ߞߘߎ ߝߟߍ߫ ߘߎ߱ߡߊ߬ ߞߌߣߌ߲߫ ߓߟߏ ߝߍ߬</p>
                 </div>
                 <div id="btn_container">
-                    <p class="asides_btn" id="connexion_btn"><a href="pages/connexion.php">ߌ ߜߊ߲߬ߞߎ߲߬</a></p>
-                    <p class="asides_btn" id="inscription_btn"><a href="pages/inscription.php">ߌ ߕߐ߮ ߛߓߍ߫ </a></p>
+                    <p class="asides_btn" id="connexion_btn"><a href="php/connexion.php">ߌ ߜߊ߲߬ߞߎ߲߬</a></p>
+                    <p class="asides_btn" id="inscription_btn"><a href="php/inscription.php">ߌ ߕߐ߮ ߛߓߍ߫ </a></p>
                 </div>
                 <div class="note_container">
                     <p class="note" id="note_inscription_success"></p>
@@ -52,7 +54,7 @@
     
     
     <!-- <?php
-        if($_SERVER['HTTP_REFERER'] == "/kouroukan/pages/inscription.php") {
+        if($_SERVER['HTTP_REFERER'] == "/kouroukan/php/inscription.php") {
             echo "<script> affichageAsides(); notifier(); </script>";
         }
     ?> -->

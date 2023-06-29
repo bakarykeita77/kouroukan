@@ -19,12 +19,12 @@
 			
 			ajouterClient($prenom, $nom, $naissance, $sexe, $adresse, $email, $password);
 
-			header("location:/kouroukan/pages/gestion_clients.php");
+			header("location:/kouroukan/php/gestion_clients.php");
 		 break;
 		case 'supprimer_client':
 			$id = isset($_GET['id']) ?$_GET['id']:"";
 			supprimerClient($id);
-			header("location:/kouroukan/pages/gestion_clients.php");
+			header("location:/kouroukan/php/gestion_clients.php");
 		 break;
 		case 'modifier_client':
 
@@ -39,7 +39,7 @@
 
 			modifierClient($id, $prenom, $nom, $naissance, $sexe, $adresse, $email, $password);
 
-			header("location:/kouroukan/pages/gestion_clients.php");
+			header("location:/kouroukan/php/gestion_clients.php");
 		 break;
 		case 'connexion':
 
@@ -54,7 +54,7 @@
 			$db_password = passCorrespondant($client_email);
 
 			if(in_array($client_email, $db_emails)  && $client_password===$db_password){
-				header("location:/kouroukan/pages/formations.php");
+				header("location:/kouroukan/php/formations.php");
 			}else{
 				die("Email ou Mot de pass incorrect");
 			};

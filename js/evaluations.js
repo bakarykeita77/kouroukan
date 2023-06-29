@@ -290,7 +290,7 @@ function evaluations() {
                         note   : note_d_evaluation
                     });
            
-                    fetch("/kouroukan/pages/actions.php", {
+                    fetch("/kouroukan/php/actions.php", {
                         method: "POST",
                         body: evaluation_data 
                     })
@@ -300,7 +300,7 @@ function evaluations() {
             }
         });
         $('#fermer_evaluation').on('click', function() {
-            (location.replace("/kouroukan/pages/programmes.php"))();
+            (location.replace("/kouroukan/php/programmes.php"))();
         });
     }
 }

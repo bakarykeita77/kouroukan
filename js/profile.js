@@ -388,7 +388,7 @@ $(document).ready(function(){
                 
                  var avatar_image = document.getElementById('avatar_image');
                  modifier_avatar.onclick = function(){
-                     document.location.href = "http://localhost/kouroukan/pages/upload-avatar.php";
+                     document.location.href = "http://localhost/kouroukan/php/upload-avatar.php";
                  }
             }
         });

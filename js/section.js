@@ -2,7 +2,7 @@ var section=document.getElementById('section');
 
 document.onload=aff();
 
-aff(){
+function aff(){
 	$('#cadreConnexion')  .css('display', 'none');
 	$('#cadreHome')       .css('display', 'block');
 	$('#cadreAlphabet')   .css('display', 'none');

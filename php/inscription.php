@@ -15,7 +15,7 @@
 				
 				<h2>ߕߐ߯ߛߓߍ߫ ߥߟߊ</h2>
 				
-				<form action="/kouroukan/pages/actions.php" method="POST" id="formulaire_de_connexion">
+				<form action="/kouroukan/php/actions.php" method="POST" id="formulaire_de_connexion">
 					
 					<div class="input_box">
 						<input type="text" autocomplete="off" name="prenom" class="inscription_input" id="prenom" required />
@@ -67,7 +67,7 @@
     	<script src="/kouroukan/js/inscription.js"></script>
     	
     	<?php
-            if($_SERVER['HTTP_REFERER'] == "/kouroukan/pages/inscription.php") {
+            if($_SERVER['HTTP_REFERER'] == "/kouroukan/php/inscription.php") {
                 echo('<script> notifier(); </script>'); 
             }
         ?>

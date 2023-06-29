@@ -1,6 +1,6 @@
 function parametrageDeLesson() {
 
-/* Declaration des variables */   
+/* Declaration des variables */  
     var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));   // Voir programmes.js fonction storagesDuProgramme()
 
     var voyelles_checker, consonnes_checker, tedo_checker, tons_checker, nasalisation_checker;
@@ -33,7 +33,7 @@ function parametrageDeLesson() {
         chargerLesson(); // Chaque fois qu'un checkbox est clické, le cochage doit etre actualisé et le tableau noir rechargé. 
     }
     function affichageDeParametres(){ 
-        
+    
         $("#parametre_lesson").on('mouseover', function() { afficherParametres(); });
         $(".parametres_popup").on('mouseleave', function(){ masquerParametres(); });
         $('#submit_btn').on('click', function(){ masquerParametres(); });
@@ -181,7 +181,7 @@ function parametrageDeLesson() {
     function chargerLesson() {
 
         checkbox_parentClick();
-      //  checkbox_childrenClick();
+        checkbox_childrenClick();
         
         $.each($('.checkbox_parent'), function(){ $(this).click(); }); /* Cochage par defaut */
         $.each($('.check_btn'), function(){ $(this).click(); }); /* Cochage par defaut */

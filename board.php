@@ -40,10 +40,10 @@ session_start();
         <form action="#" id="tableau_form"> <textarea name="" id="tableau_noir" cols="30" rows="10"></textarea> </form>
     </div>
     <div class="outils">
-    	<?php include "pages/parametres_tableau.php"; ?>
-    	<?php include "pages/assistant.php"; ?>
-    	<?php include "pages/memoire.php"; ?>
-    	<?php include "pages/smartboard.php";?>
+    	<?php include "php/parametres_tableau.php"; ?>
+    	<?php include "php/assistant.php"; ?>
+    	<?php include "php/memoire.php"; ?>
+    	<?php include "php/smartboard.php";?>
     </div>
     <?php include "fonctions/fonctions_tableau.php"; ?>
     

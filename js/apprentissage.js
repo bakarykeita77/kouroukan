@@ -223,7 +223,7 @@ function apprentissages() {
                     note   : note
                 }); 
 
-                fetch("/kouroukan/pages/actions.php", {
+                fetch("/kouroukan/php/actions.php", {
                     method: "POST",
                     body: apprentissage_data
                 })

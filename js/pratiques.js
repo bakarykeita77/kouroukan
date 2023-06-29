@@ -858,7 +858,7 @@ function pratique() {
                         note   : note_de_pratique
                     });
 
-                    fetch("/kouroukan/pages/actions.php", {
+                    fetch("/kouroukan/php/actions.php", {
                         method: "POST",
                         body: pratique_data 
                     })

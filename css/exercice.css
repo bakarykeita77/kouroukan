@@ -1,10 +1,4 @@
 
-#exercice_body {
-    height: calc(100% - 5rem);
-    background-color: rgba(0,0,0,0.8);
-    color: white;
-    box-sizing: border-box;
-}
 #exercice_foot { height: 3rem; }
 #exercice_dialogue_btn { border-radius: 0.5rem; }
 #exercice_dialogue_btn div  { 
@@ -19,10 +13,8 @@
 #croix { color: red; }
 
 @media screen and (orientation: portrait) {
-    #exercice_body {  border: none; }
     #exercices_player { border: 1px solid #aaa; }
 }
 @media screen and (orientation: landscape) {
-    #exercice_body { border: 0.5rem solid white; }
     #exercices_player { border: 0; }
 }

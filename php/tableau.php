@@ -58,13 +58,13 @@
 		<textarea readonly="false" id="tableau_noir"></textarea>
 	</form>
 
-	<div class = "outils" id = "cadre_assistant"> <?php include "/kouroukan/pages/assistant.php"; ?> </div>
-	<div class = "outils" id = "cadre_memoire"  > <?php include "/kouroukan/pages/memoire.php";   ?> </div>
+	<div class = "outils" id = "cadre_assistant"> <?php include "/kouroukan/php/assistant.php"; ?> </div>
+	<div class = "outils" id = "cadre_memoire"  > <?php include "/kouroukan/php/memoire.php";   ?> </div>
 	<div class = "outils" id = "clavier_tableau"> 
 		<span id="fermer_clavier">&times;</span>		     
-		<?php include "/kouroukan/pages/clavier.php";   ?>
+		<?php include "/kouroukan/php/clavier.php";   ?>
 	</div>
-	<div class = "outils" id = "cadre_smartboard"> <?php include "/kouroukan/pages/smartboard.php";?> </div>
+	<div class = "outils" id = "cadre_smartboard"> <?php include "/kouroukan/php/smartboard.php";?> </div>
 
 	<?php include "/kouroukan/fonctions/fonctions_tableau.php"; ?>
 	<script src="jquery-3.3.1.js" type="text/javascript"></script>

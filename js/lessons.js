@@ -27,11 +27,11 @@ $('document').ready(function() {
   
     phases();
     matiere();
-    
+            
  /*-----------------------------------------------------------------------------------------------------------------*/
     
     function phases() {
-        
+    
         let all_options = JSON.parse(localStorage.getItem('all_options')); 
         let localOptionsLength = (all_options == null) ? 0 : all_options.length;
 

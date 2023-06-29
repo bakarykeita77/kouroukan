@@ -49,7 +49,7 @@
 	
 	<?php
 	    
-	    if($_SERVER['HTTP_REFERER'] == "/kouroukan/pages/connexion.php") {
+	    if($_SERVER['HTTP_REFERER'] == "/kouroukan/php/connexion.php") {
 	        echo("<script> notifier(); </script>");
 	    }
 	?>

@@ -65,11 +65,6 @@ function evaluations() {
     }
     function evaluer() {
 
-        var reponse_font_size = $('#evaluation_reponse').height()/2;
-        var correction_line_height = $('#correcteur_d_evaluation').height();
-        $('#evaluation_reponse').css('font-size',reponse_font_size+'px');
-        $('#correcteur_d_evaluation').css('line-height',correction_line_height+'px');
-                        
         poserQuestionEvaluation();
         repeterQuestionEvaluation();
         repondreEvaluation();
@@ -207,12 +202,12 @@ function evaluations() {
                     }else{
                         $("#evaluation_reponse").html("<p id='mauvaise_reponse'>"+reponse_evaluation.join('')+"</p><p id='evaluation_cross'>&#10060;</p>");
                         $('#evaluation_cross').css({'display':'block', 'right':reponse_evaluation.length/2+'rem', 'transform':'scale(0.5)', 'opacity':0});
-                        setTimeout(function(){ $('#evaluation_cross').css({'transform':'scale(1.5)', 'opacity':0.75}); }, 100);
+                        setTimeout(function(){ $('#evaluation_cross').css({'transform':'scale(1)', 'opacity':0.75}); }, 100);
                     }
 
                     setTimeout(() => {
                         $('#evaluation_reponse p').html('');
-                    }, 1000);
+                    }, 2000);
                 } 
             }
             function actualiserEvaluationProgressBar(){

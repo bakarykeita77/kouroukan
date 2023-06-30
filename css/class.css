@@ -226,7 +226,6 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     margin: 0;
     padding-top: 1rem;
     background-color: #666;
-    border: 1px solid transparent;
 }
 .clicker { transform-origin: 50% 0; animation: animate_hand 1.5s 1; }
 .container {
@@ -240,14 +239,18 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     overflow: auto;
 }
 .correcteur { 
+    position: relative;
+    margin-left: 0.125rem;
     height: 1.5rem;
     line-height: 1.5rem;
+    background-color: var(--couleurNeutre);
     border: 1px solid var(--couleurTertiaire);
     border-radius: var(--couleurTertiaire);
     box-shadow: 0 0 1rem #666; 
     padding: 0.125rem; 
     font-size: 0.8rem;
     font-weight: normal;
+    text-align: center;
     cursor: pointer;
     float: left;
     transition: 0.2s; 
@@ -255,7 +258,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 .correction_btn { cursor: pointer; }
 .course {
     position: relative;
-    top: 5rem;
+    top: 6rem;
     height: calc(90vh - 3rem);
     min-height: 25rem;
     width: calc(100vw - 0.25rem);

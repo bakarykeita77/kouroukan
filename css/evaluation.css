@@ -117,11 +117,9 @@
 #evaluation_reponse_container {
     position: relative;
     background-color: var(--couleur_6);
-    border: var(--border_6);
+    height: 100%;
     width: 100%;
-    height: calc(100% - 2px);
     margin: auto;
-    line-height: 100%;
     transition: 0.4s;
     z-index: 1;
 }
@@ -133,9 +131,10 @@
     background-color: var(--couleur_6);
     color: var(--couleurNeutre);
     border-radius: 0.5rem 0.5rem 0 0;
-    width: calc(75% - 1rem);
-    height: 3.5rem;
-    line-height: 3.5rem;
+    width: calc(100% - 4rem);
+    height: 100%;
+    line-height: 100%;
+    font-size: 4rem;
     margin: 0;
     padding-right: 1rem;
 }
@@ -145,16 +144,7 @@
     line-height: 100%;
 }
 #correcteur_d_evaluation {
-    position: relative;
-    height: calc(100% - 2rem);
-    width: calc(20% - 2rem);
-    min-width: 3rem;
-    font-size: 0.8rem;
-    text-align: center;
-    top: 1rem;
-    background-color: var(--couleurNeutre);
-    box-shadow: var(--shadow_16);
-    border-radius: var(--radiusSmall);
+    top: 1.25rem;
     z-index: 0;
 }
 #bonne_reponse, #check_mark_container {
@@ -172,7 +162,6 @@
     width: 3rem;
     border-radius: 0.5rem 0.5rem 0 0;
     top: 0;
-    right: 1rem;
     padding: 0;
     color: rgba(255,0,0,0.8);
     transform: scale(0.75);
@@ -353,7 +342,6 @@
     position: relative;
     width: 100%;
     margin: 0;
-    bottom: -2px;
 }
 #reponse {
     position: relative;
@@ -397,7 +385,7 @@
 
 #evaluation_foot { height: 16.5rem; bottom: 0; }
 #evaluation_fiche_foot div:nth-child(2) { display: none; }
-#teste_container {  height: calc(3.75rem - 2px); }
+#teste_container {  height: 4rem; }
 #evaluation_fiche { width: 100%; top: 0; }
 #evaluation_message_de_fin_container {
     top: calc(100% - 7rem);

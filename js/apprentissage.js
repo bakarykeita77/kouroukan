@@ -222,7 +222,7 @@ function apprentissages() {
                     lesson : lesson,
                     note   : note
                 }); 
-
+console.log(note);
                 fetch("/kouroukan/php/actions.php", {
                     method: "POST",
                     body: apprentissage_data

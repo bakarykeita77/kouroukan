@@ -47,11 +47,6 @@
         
             <div id="evaluation_reponse_container">
                 <div id='evaluation_reponse'></div>
-                    
-                <div id='teste_annexes_container'>
-                    <div id='alerte'></div>
-                    <div id='autre'></div>
-                </div>
                 <div class='correcteur' id='correcteur_d_evaluation'>ߖߐ߬ߛߌ߬ߙߊ߲</div>
             </div>
         </div>

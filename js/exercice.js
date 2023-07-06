@@ -2,9 +2,10 @@ function exercices() {
                 
     var id = JSON.parse(sessionStorage.getItem('id'));
     var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));
-    var nbr_de_questionnaires = 2;
+    var nbr_de_questionnaires = 20;
     var exercice_questions = [];
-    var moyenne_d_exercice = 1;
+    var moyenne_d_exercice = 18;
+    var note = 0;
 
     var compteur_de_question = 1;
     var question_rang = '߭';
@@ -166,7 +167,7 @@ function exercices() {
             
             note = noterExercice();
  
-            if(note <  moyenne_d_exercice) alert( "reprendre" ); 
+            if(note <  moyenne_d_exercice) alert( "ߌ ߟߊ߫ ߓߍ߬ߙߍ߫ ߛߐ߬ߘߐ߲߬ߣߍ߲ ߡߎ߬ߡߍ ߦߋ߫ "+parseIntNko(note)+" ߟߋ߬ ߘߌ߫\n ߊ߬ ߡߊ߫ "+parseIntNko(moyenne_d_exercice)+" ߖߘߍ߬ ߓߐ߫ \n\n ߏ߬ߘߐ߬ ߛߍ߬ߦߌ߬ ߦߙߐ ߢߌ߲߬ ߡߊ߫." ); 
             if(note >= moyenne_d_exercice) { 
                 sendExerciceToDB(); 
                 changerPhaseActive(index_phase_active); 

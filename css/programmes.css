@@ -1,7 +1,7 @@
 
 #programmes_container {
     position: relative;
-    width: calc(100% - 2rem);
+    width: calc(100% - 4rem);
     max-width: 50rem;
     margin: auto;
     padding: 0px 1rem;

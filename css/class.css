@@ -717,6 +717,7 @@ del {
 }
 .phases_container {
     position: relative;
+    margin: 1.5rem 0;
 }
 .phases_container h2, .phases_container h4 {  padding: var(--paddingSmall); }
 .phases_container h2 {
@@ -883,10 +884,10 @@ del {
 .transparent { animation: transperer; }
 .travaux { 
     position: absolute; 
-    height: 65vh;
     width: 100%;
     max-width: 50rem;
     margin: auto;
+    border-top: 1px solid #bbb;
     vertical-align: top; 
     box-sizing: border-box;
     left: 0;
@@ -896,13 +897,31 @@ del {
 .travaux table { border-collapse: collapse; }
 .travail {
     position: relative;
-    padding: 1rem 1.5rem;
     margin: 0.25rem;
     border-radius: var(--radiusSmall);
-    background-color: var(--couleur_e);
 }
 .travail:not(first-child) { margin-top: 0; }
 .travail:not(last-child) { border-bottom-color: var(--couleurTertiaire); }
+.travail_titre {
+    padding: 0 1.5rem;
+    background-color: var(--couleur_e);
+}
+.travail_content { 
+    height: 0; 
+    border: 0.125rem solid transparent;
+    border-top-color: #bbb;
+    border-bottom-color: #bbb;
+    padding: 0 1.5rem;
+    background-color: var(--couleur_e);
+    background-color: #fff;  
+    overflow: auto; 
+}
+.travail_entete, .travail_corps, .travail_foot {
+    padding: 0;
+    margin: 1rem 0;
+    display: inline-block; 
+    vertical-align: top; 
+}
 .travail_corps td, .travail_foot td:last-child { text-align: center; }
 
 

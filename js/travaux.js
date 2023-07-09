@@ -14,6 +14,7 @@
         if( matiere_nom == "ߞߊ߲ߡߊߛߙߋ") chargerTravaux(2);
         if( matiere_nom == "ߖߊ߰ߕߋ߬ߘߋ߲") chargerTravaux(3);
     } 
+    afficherTravauxContent();
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/    
     
@@ -260,4 +261,13 @@
                 $('#bulles_d_evaluation    .bulles_glissiere').css('width', nombre_de_cercle_4*2.75+'rem');
             }
         }
+    }
+    function afficherTravauxContent() {
+        $('.travail').on('click', function(e){ 
+            e.stopPropagation();
+            var h = $('.travail_content' ,this).height();
+            
+            if(h == 0)   {$('.travail_content' ,this).animate({'height':'10rem'}, 250);} 
+            if(h == 160) {$('.travail_content' ,this).animate({'height':0}, 250);} 
+        });
     }

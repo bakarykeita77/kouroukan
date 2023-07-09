@@ -13,12 +13,6 @@
 }
 .travail_corps_table { position: relative; top: 0; }
 .travail_foot { left: 0; width: 3rem; overflow: auto; }
-.travail_entete, .travail_corps, .travail_foot { 
-    margin: 0;
-    padding: 0;
-    display: inline-block; 
-    vertical-align: top; 
-}
 .travail_titre h3, .bulles_container { display: inline-block; vertical-align: middle; }
 .travail td { min-width: 2rem; }
 .bulles_container { width: calc(100% - 12rem); height: 3rem; overflow: auto; }

@@ -506,7 +506,6 @@ del {
 .lesson_progress_bonne_reponse_bar { background-color: yellow; }
 .lesson_title {
     position: relative;
-    background-color: var(--couleur_d);
     padding: 0.5rem 1.5rem;
     height: 2.5rem;
     line-height: 2.5rem;
@@ -716,6 +715,7 @@ del {
     list-style: none;
 }
 .phases_container {
+    display: none;
     position: relative;
     margin: 1.5rem 0;
 }
@@ -906,11 +906,14 @@ del {
     padding: 0 1.5rem;
     background-color: var(--couleur_e);
 }
+.travail_titre:hover {
+    background-color: #bbb;
+}
 .travail_content { 
-    height: 0; 
-    border: 0.125rem solid transparent;
-    border-top-color: #bbb;
-    border-bottom-color: #bbb;
+    height: 1px; 
+    border-top: 0.125rem solid #bbb;
+    border-bottom: 0.25rem solid #bbb;
+    color: #00A;
     padding: 0 1.5rem;
     background-color: var(--couleur_e);
     background-color: #fff;  

@@ -1,3 +1,4 @@
+    var matieres = JSON.parse(sessionStorage.getItem('matieres'));
     var travail_1 = $('#travail_1'), travail_2 = $('#travail_2'), travail_3 = $('#travail_3'), travail_4 = $('#travail_4');
     var matiere_nom = $('#matiere_nom_container').html();
     var fiche_html_vide = "<h1 class='neant'>ߝߏߦߊ߲߫ ߹</h1>";
@@ -138,49 +139,50 @@
                 }
             }   
             function travailCorpsHTML(phase,lesson) {
-            if(lesson !== undefined) {
+                if(lesson !== undefined) {
 
-                var corps_html = "";
-              
-                if(phase == "pratique") {
-                    for(var i=0; i<lesson.length; i++) {
-                    corps_html += "<table class='travail_corps_table' border=1>\n";
-                        for(var j=0; j<3; j++) { 
-                          
-                            if(j !== 2) {              
-                                corps_html += "<tr>\n";
-                                    for(var k=0; k<lesson[i].length; k++) corps_html += "<td>"+lesson[i][k][j]+"</td>\n";
-                                corps_html += "</tr>\n";
-                            }
+                    var corps_html = "";
+                
+                    if(phase == "pratique") {
+                        for(var i=0; i<lesson.length; i++) {
+                        corps_html += "<table class='travail_corps_table' border=1>\n";
+                            for(var j=0; j<3; j++) { 
+                            
+                                if(j !== 2) {              
+                                    corps_html += "<tr>\n";
+                                        for(var k=0; k<lesson[i].length; k++) corps_html += "<td>"+lesson[i][k][j]+"</td>\n";
+                                    corps_html += "</tr>\n";
+                                }
 
-                            if(j === 2) { 
-                                corps_html += "<tr>\n";
-                                    for(var k=0; k<lesson[i].length; k++) corps_html += "<td>"+parseIntNko(lesson[i][k][j])+"</td>\n";
-                                corps_html += "</tr>\n";
+                                if(j === 2) { 
+                                    corps_html += "<tr>\n";
+                                        for(var k=0; k<lesson[i].length; k++) corps_html += "<td>"+parseIntNko(lesson[i][k][j])+"</td>\n";
+                                    corps_html += "</tr>\n";
+                                }
                             }
+                        corps_html += "</table>\n---\n";
                         }
-                    corps_html += "</table>\n---\n";
+
+                        corps_html = corps_html.split('---');
                     }
 
-                    corps_html = corps_html.split('---');
+                    if(phase != "pratique") {
+                        corps_html = "<table class='travail_corps_table' border=1>\n";
+                            corps_html += "<tr>\n";    
+                                for(let i=0; i<lesson.length; i++) if(lesson[i] !== null) corps_html += "<td>"+lesson[i][0]+"</td>\n";
+                            corps_html += "</tr>\n";
+                            corps_html += "<tr>\n";
+                                for(let j=0; j<lesson.length; j++) if(lesson[j] !== null) corps_html += "<td>"+lesson[j][1]+"</td>\n";
+                            corps_html += "</tr>\n";
+                            corps_html += "<tr>\n";
+                                for(let k=0; k<lesson.length; k++) if(lesson[k] !== null) corps_html += "<td>"+lesson[k][2]+"</td>\n";
+                            corps_html += "</tr>\n";               
+                        corps_html += "</table>\n\n\n";
+                    }                        
+
+                    return  corps_html;
                 }
-
-                if(phase != "pratique") {
-                    corps_html = "<table class='travail_corps_table' border=1>\n";
-                        corps_html += "<tr>\n";    
-                            for(let i=0; i<lesson.length; i++) if(lesson[i] !== null) corps_html += "<td>"+lesson[i][0]+"</td>\n";
-                        corps_html += "</tr>\n";
-                        corps_html += "<tr>\n";
-                            for(let j=0; j<lesson.length; j++) if(lesson[j] !== null) corps_html += "<td>"+lesson[j][1]+"</td>\n";
-                        corps_html += "</tr>\n";
-                        corps_html += "<tr>\n";
-                            for(let k=0; k<lesson.length; k++) if(lesson[k] !== null) corps_html += "<td>"+lesson[k][2]+"</td>\n";
-                        corps_html += "</tr>\n";               
-                    corps_html += "</table>\n\n\n";
-                }                        
-
-                return  corps_html;
-            }}
+            }
             function rechargerApprentissage() {
                 
                 $('#bulles_d_apprentissage p').click(function() {
@@ -241,12 +243,91 @@
             }
             function styleDuCercleActif() {
 
-                $('.bulles_container p:last-child').css({'box-shadow':'0 0 0.5rem #666', 'background-color':'white', 'color':'black'});
+                $('.bulles_container p:last-child').addClass('cercle_actif');
 
-                $('.bulles_container p').click(function() {
-                    $(this).css({'box-shadow':'0 0 0.5rem #666', 'background-color':'white', 'color':'black'});
-                    $(this).siblings().css({'box-shadow':'none', 'background-color':'var(--couleur_e)', 'color':'#bbb'});
-                });
+                chargerTravailName();
+                chargerTravailDate();
+                reChargerTravailName();
+                reChargerTravailDate();
+
+                function chargerTravailName() {
+                    $.each($('.travail_titre'), function() {
+                        var travail_name_container = $(this).next().find('.travail_name');
+                        var titre = $(this).find('h3').html();
+                        var rang = $(this).find('.cercle_actif').html();
+   
+                        rang = (rang == '߁') ? rang+'߭' : rang+'߲';
+                        var travail_name = titre+' '+rang;
+
+                        travail_name_container.html(travail_name);
+                    });
+                }     
+                function chargerTravailDate() {
+                    $.each($('.travail_titre'), function() {
+                        var travail_date_container = $(this).next().find('.travail_date');
+                        var n = $('.bulles_container p', this).length;
+                        var date = matieres[0][n].date;
+                        var date_en_nko = '', heure_en_nko = '';
+
+                        var a = parseIntNko(date.split(' ')[0].split('-')[0]);
+                        var m = mois[parseInt(date.split(' ')[0].split('-')[1]) - 1];
+                        var j = parseIntNko(date.split(' ')[0].split('-')[2]);
+
+                        var h = parseIntNko(date.split(' ')[1].split(':')[0]);
+                        var mn = parseIntNko(date.split(' ')[1].split(':')[1]);
+
+                        date_en_nko = '&#128197; '+ m +' ߕߟߋ߬ '+j+' ߛߊ߲߭ '+a;
+                        heure_en_nko = ' &#128338; '+h+':'+mn;
+
+                        var travail_date = 'ߞߍ߫ ߕߎߡߊ :___ '+date_en_nko+' ___ '+heure_en_nko;
+
+                        travail_date_container.html(travail_date);
+
+                    });
+                }
+                function reChargerTravailName() {
+                    $.each($('.bulles_container p'), function() {
+
+                        $(this).click(function(){
+                            $(this).addClass('cercle_actif');
+                            $(this).siblings().removeClass('cercle_actif');
+
+                            var travail_name = $(this).parent().parent().parent().next().find('.travail_name');
+                            var travail_titre = $(this).parent().parent().prev();
+                            var rang = $(this).html();
+
+                            rang = (rang == '߁') ? rang+'߭' : rang+'߲';
+                            travail_name.html( travail_titre.html()+' '+rang );
+                        });
+                    });
+                }  
+                function reChargerTravailDate() {
+                    $.each($('.bulles_container p'), function() {
+
+                        $(this).click(function(){
+                            var travail_date_container = $(this).parent().parent().parent().next().find('.travail_date');
+                            var n = $(this).index();
+                            var date = matieres[0][n].date;
+                            var date_en_nko = '', heure_en_nko = '';
+
+                            var a = parseIntNko(date.split(' ')[0].split('-')[0]);
+                            var m = mois[parseInt(date.split(' ')[0].split('-')[1]) - 1];
+                            var j = parseIntNko(date.split(' ')[0].split('-')[2]);
+
+                            var h = parseIntNko(date.split(' ')[1].split(':')[0]);
+                            var mn = parseIntNko(date.split(' ')[1].split(':')[1]);
+
+                            date_en_nko = '&#128197; '+ m +' ߕߟߋ߬ '+j+' ߛߊ߲߭ '+a;
+                            heure_en_nko = ' &#128338; '+h+':'+mn;
+
+                            var travail_date = 'ߞߍ߫ ߕߎߡߊ :___ '+date_en_nko+' ___ '+heure_en_nko;
+
+                            travail_date_container.html(travail_date);
+
+                        });
+                    });
+                }
+
             }
             function designDesCercles() {
 
@@ -263,11 +344,17 @@
         }
     }
     function afficherTravauxContent() {
-        $('.travail').on('click', function(e){ 
-            e.stopPropagation();
-            var h = $('.travail_content' ,this).height();
+     
+        $('.travail').on('click', function(){ 
+            var h = $('.travail_content', this).height();
             
-            if(h == 0)   {$('.travail_content' ,this).animate({'height':'10rem'}, 250);} 
-            if(h == 160) {$('.travail_content' ,this).animate({'height':0}, 250);} 
+            if(h == 1)   {$('.travail_content', this).animate({'height':'10rem'}, 250);} 
+            if(h == 160) {$('.travail_content', this).animate({'height':1}, 250);} 
+        });
+
+     // Empecher la propagation de l'évenement pouvant declencher la fermeture de travail_content
+        $('.bulles_container p').on('click', function(e){ 
+            var h = $(this).parent().parent().parent().next().height(); 
+            if(h == 160)  e.stopPropagation();
         });
     }

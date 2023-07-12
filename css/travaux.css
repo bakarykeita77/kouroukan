@@ -11,7 +11,7 @@
     border-left-color: #aaa;
     overflow: auto; 
 }
-.travail_corps_table { position: relative; top: 0; }
+.travail_corps_table { position: relative; top: 0; font-weight: bold; }
 .travail_foot { left: 0; width: 3rem; overflow: auto; }
 .travail_titre h3, .bulles_container { display: inline-block; vertical-align: middle; }
 .travail td { min-width: 2rem; }
@@ -26,11 +26,18 @@
     line-height: 2rem;
     text-align: center;
     font-weight: bold;
-    background-color: #eee;
-    color: var(--couleur_a);
     border: var(--border_b);
     border-radius: 50%;
     cursor: pointer;
 }
-.bulles_container p:hover { box-shadow: 0 0 0.5rem #666; color: black; }
-.cercle_actif  { box-shadow: 0 0 0.5rem #666; color: black; }
+.bulles_container p:hover { 
+    background-color: white;
+    box-shadow: 0 0 0.5rem #444; 
+    color: black; 
+}
+.bulles_container p:not(.cercle_actif) { color: #999; }
+.cercle_actif  { 
+    background-color: white;
+    box-shadow: 0 0 0.5rem #444; 
+    color: black; 
+}

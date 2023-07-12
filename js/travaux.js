@@ -250,12 +250,14 @@
                 reChargerTravailName();
                 reChargerTravailDate();
 
+
                 function chargerTravailName() {
                     $.each($('.travail_titre'), function() {
                         var travail_name_container = $(this).next().find('.travail_name');
                         var titre = $(this).find('h3').html();
                         var rang = $(this).find('.cercle_actif').html();
    
+console.log($('.bulles_container p', this).length);
                         rang = (rang == '߁') ? rang+'߭' : rang+'߲';
                         var travail_name = titre+' '+rang;
 

@@ -715,7 +715,7 @@ del {
     list-style: none;
 }
 .phases_container {
-    display: none;
+    display: block;
     position: relative;
     margin: 1.5rem 0;
 }

@@ -257,7 +257,6 @@
                         var titre = $(this).find('h3').html();
                         var rang = $(this).find('.cercle_actif').html();
    
-console.log($('.bulles_container p', this).length);
                         rang = (rang == '߁') ? rang+'߭' : rang+'߲';
                         var travail_name = titre+' '+rang;
 
@@ -267,7 +266,7 @@ console.log($('.bulles_container p', this).length);
                 function chargerTravailDate() {
                     $.each($('.travail_titre'), function() {
                         var travail_date_container = $(this).next().find('.travail_date');
-                        var n = $('.bulles_container p', this).length;
+                        var n = $('.bulles_container p:last-child', this).length;
                         var date = matieres[0][n].date;
                         var date_en_nko = '', heure_en_nko = '';
 

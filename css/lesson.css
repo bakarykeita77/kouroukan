@@ -1,3 +1,6 @@
 .course_body hr {
     border-color: #555;
 }
+h4, .lesson_title {
+    display: inline-block;
+}

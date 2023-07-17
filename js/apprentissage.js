@@ -19,6 +19,7 @@ function apprentissages() {
     
     $('.fermeture').attr('id', 'fermer_apprentissage');
 
+    // Le chargement deApprentissage se fait dans parametres.js
     apprendre();
     enregistrerApprentissage();
     stockerApprentissage();

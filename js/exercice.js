@@ -89,7 +89,7 @@ function exercices() {
                     
             $('.table_parlante').on('click', function(e){
                 if(question_posee=='')
-                { rappel($('.play_icon_container')); }
+                { rappel($('.dialogue_btn')); }
                 else
                 {   
                     var td = $(e.target);

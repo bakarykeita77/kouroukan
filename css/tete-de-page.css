@@ -53,7 +53,7 @@
     position: absolute;
     border: 1px solid transparent; 
     border-radius: var(--radiusSmall);
-    box-shadow: 0 0 1rem #ccc;
+    box-shadow: 0 0 1rem #aaa;
     width: 100%;
     max-width: 400px;
     margin: var(--marginSmall)*2 0;
@@ -388,7 +388,6 @@
         position: relative;
         display: inline-block;
         margin: var(--marginSmall);
-        width: 46%;
         height: 172px;
         border-radius: var(--radiusSmall);
         vertical-align: top;
@@ -408,6 +407,7 @@
     }
     #profile_menu_container {
         height: auto;
+
     }
     #profile_menu_body_content div { display: inline-block; width: 48%; }
 }

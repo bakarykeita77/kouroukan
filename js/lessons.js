@@ -77,12 +77,6 @@ $('document').ready(function() {
                 }
                 content += '</ul>';
                 
-            //Barre de navigation               
-                // content += '<div class="nav_fleches_container">';
-                //     content += '<span id="back_to_programmes"><a href="programmes.php">ߛߋ߬ߦߌ߬ ߞߐ߫</a></span>';
-                //     content += '<span id="go_to_lesson">ߥߊ߫ ߢߍ߫</</span>';
-                // content += '</div>';
-
                 return content;
             }
         }

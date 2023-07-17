@@ -8,7 +8,8 @@ body {
     background-color: #002;
     height: 12rem;
     width: 100%;
-    margin: 0.25rem 0;
+    max-width: 50rem;
+    margin: 0.25rem auto;
     padding-top: 2rem;
     box-sizing: border-box;
 }
@@ -27,12 +28,19 @@ body {
 }
 #site_name h1 { height: 3rem; line-height: 3rem; font-size: 2.5rem; }
 #site_name h3 { height: 1.5rem; line-height: 1.5rem; }
-#site_name h1, #site_name h3 { margin: 0.25rem 0; }
+#site_name h1, #site_name h3 { 
+    margin: 0.25rem 0; 
+    width: 100%;
+    max-width: 50rem; 
+}
 #asides_container { padding: 0 0.5rem; margin: auto; }
 #asides_commentaire { 
-    padding: 2rem; 
-    margin: 1rem auto;
+    padding: 1rem; 
+    width: 100%;
+    max-width: 50rem;
+    margin: 0.25rem auto;
     background-color: #eee;
+    box-sizing: border-box;
 }
 #asides_container p, #btn_container { padding: 0; box-sizing: border-box; }
 .pied_de_page { display: none; }
@@ -46,8 +54,11 @@ body {
     align-items: center;
 
     width: 100%;
-    padding: 0 2rem; 
     border-top: 0.25rem solid #ddd; 
+    padding: 0 1rem; 
+    max-width: 50rem;
+    margin: 0.25rem auto;
+    box-sizing: border-box;
     background-color: #eee; 
 }
 #pied_de_page { position:relative; width: 100vw; }

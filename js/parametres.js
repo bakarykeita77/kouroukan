@@ -170,13 +170,13 @@ function parametrageDeLesson() {
         }
     }
     function affichageDeLessonParametres(){
-            
+alert('affichageDeLessonParametres()');            
         choixDesOptionsNecessaires();
         function choixDesOptionsNecessaires(){
             
             if(niveau_actif==1){ tons_checker.hide(); nasalisation_checker.hide(); }
             if(niveau_actif==2){ tons_checker.hide(); tedo_checker.hide(); }
-            }
+        }
     }
     function chargerLesson() {
 

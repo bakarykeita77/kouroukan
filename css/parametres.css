@@ -1,18 +1,8 @@
 
-#table1{
-    position: relative;
-    left: 0;
-    padding: 0;
-}
-.check_btn {
-    height: 1.5rem;
-}
+#table1{ position: relative; left: 0; padding: 0; }
+.check_btn { height: 1.5rem; }
 #table2 { position: relative; left: 0; }
-#table2{
-    margin: 0 auto;
-    padding: 0;
-    height: 2rem;
-}
+#table2{ margin: 0 auto; padding: 0; height: 2rem; }
 #checkbox_consonnes { width: 11rem; }
 #checkbox_tedo { width: 5rem; }
 #checkbox_voyelles { width: 5rem; }

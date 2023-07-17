@@ -40,13 +40,13 @@ if(isset($_SESSION["id"])) {
                 <p id='niveau_max_container'    ><?= $niveau_max; ?></p>
             </div>
           <!----------------------------------------------------------------------------------------------------------->  
-            <h4>ߘߋ߰ߟߌ ߞߛߊߞߊ : <span class="niveau_courant"><?= $chiffres[$niveau]; ?></span><span class='rang'></span></h4>
+            <h4>ߘߋ߰ߟߌ ߞߛߊߞߊ <span class="niveau_courant"><?= $chiffres[$niveau]; ?></span><span class='rang'></span> :</h4>
           <!----------------------------------------------------------------------------------------------------------->  
-            <h1 class="lesson_title" id="<?= $matiere_id ?>"> <?= $matiere_nom; ?> ߥߟߊ߬ߘߊ  </h1>
+            <h1 class="lesson_title" id="<?= $matiere_id ?>"> <?= $matiere_nom; ?> ߥߟߊ߬ߘߊ  </h1> 
           <!----------------------------------------------------------------------------------------------------------->  
-            <div class="phases_container"></div>
+          <div class="phases_container"></div>
           <!----------------------------------------------------------------------------------------------------------->  
-            <div id="travaux_container"><?php include("travaux.php"); ?></div>
+          <div id="travaux_container"><?php include("travaux.php"); ?></div>
 
         </div>
         <div class="page_foot"><?php include("pied-de-lesson.php"); ?></div>
@@ -91,6 +91,15 @@ if(isset($_SESSION["id"])) {
 
     <script src="/kouroukan/js/travaux.js"></script>
     <script src="/kouroukan/js/lessons.js"></script>
+
+    <script>
+  document.write(
+    '<script src="http://' +
+      (location.host || '${1:localhost}').split(':')[0] +
+      ':${2:8080}/livereload.js?snipver=1"></' +
+      'script>'
+  );
+</script>
 </body>
 </html>
 <?php

@@ -1,6 +1,10 @@
 .travail_titre h3 { width: 10rem; }
- #travaux_container { position: relative; }
+ #travaux_container { position: relative; margin-top: 0.5rem; }
 
+.travail_name { margin-top: 0.5rem; }
+.travail_data {
+    margin: 1rem 0;
+}
 .travail_entete { right: 0; width: 4.5rem; overflow: auto; }
 .travail_corps { 
     position: relative;
@@ -10,14 +14,11 @@
     border-left-color: #aaa;
     overflow: auto; 
 }
-.travail_name {
-    margin-top: 0.5rem;
-}
 .travail_corps_table { position: relative; top: 0; font-weight: bold; }
 .travail_foot { left: 0; width: 3rem; overflow: auto; }
 .travail_titre h3, .bulles_container { display: inline-block; vertical-align: middle; }
 .travail td { min-width: 2rem; }
-.bulles_container { width: calc(100% - 12rem); height: 3rem; overflow: auto; }
+.bulles_container { height: 3rem; overflow: auto; }
 .bulles_container .bulles_glissiere { width: 16rem; height: 3rem; }
 .bulles_container p { 
     position: relative;
@@ -43,3 +44,14 @@
     box-shadow: 0 0 0.5rem #444; 
     color: black; 
 }
+.reevaluation {
+    border: 1px solid #aaa;
+    background-color: #eee;
+    width: 10rem;
+    padding: 0.25em;
+    margin-bottom: 0.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+.reevaluation:hover { box-shadow: 0 0 1rem #666; }
+.reevaluation:active { box-shadow: none; }

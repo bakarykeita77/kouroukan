@@ -90,7 +90,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 .apprises { border: var(--border_c); color: var(--couleur_flowerBlue); }
 .apprises a { color: var(--couleur_flowerBlue); }
 .apprises:active { box-shadow: none; }
-.apprises:hover { background-color: var(--couleur_e); }
+.apprises:hover { background-color: var(--couleur_a); color: black; }
 .apprises:hover a { color: blue; }
 .a_apprendre { background-color: var(--couleur_d); color: var(--couleur_a); }
 .a_apprendre a { color:  #888; }
@@ -137,6 +137,8 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 }
 .btn span:last-child { margin-right: 0.5rem; }
 .btns { bottom: 0; }
+.btns:hover { box-shadow: 0 0 1rem #aaa; }
+.btns:active { box-shadow: none; }
 .bulle {
     position: relative;
     display: inline-block;
@@ -316,6 +318,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     margin: 0 4px;
     font-size: 1rem;
 }
+.course_head, .course_body { overflow: auto; }
 .cover {
     position: absolute;
     margin: 0;
@@ -705,12 +708,14 @@ del {
     line-height: 1.5rem;
 }
 .parametres_popup {
+    position: relative;
     margin: 0;
     height: 60vh;
     max-height: 21rem;
     max-width: 35rem;
     background-color: var(--couleurNeutre);
     overflow: auto;
+    z-index: 1000;
 }
 .parentgrid { display: grid; }
 .parentcell { display: table-cell; vertical-align: middle; }
@@ -1001,9 +1006,8 @@ del {
         margin: auto;
         border: none;
         left: 0;
-        overflow: auto; 
-}
-    .dialogue_btn { box-shadow: none; }
+    }
+    .course_head, .course_body { overflow: auto; }
     .travaux { display: none; }
 }
 @media screen and (width >= 400px) {
@@ -1029,9 +1033,7 @@ del {
         box-shadow: var(--shadow_36);
     }
     .course_head, .course_body, .course_foot { 
-        width: 100%;
-        overflow: auto; 
+        width: 100%; 
     }
-    .dialogue_btn { box-shadow: var(--shadow_16); }
     .travaux { display: block; }
 }

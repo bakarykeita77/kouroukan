@@ -170,7 +170,7 @@ function parametrageDeLesson() {
         }
     }
     function affichageDeLessonParametres(){
-alert('affichageDeLessonParametres()');            
+           
         choixDesOptionsNecessaires();
         function choixDesOptionsNecessaires(){
             

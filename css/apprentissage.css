@@ -11,6 +11,49 @@
 #apprentissage_head { 
     border-radius: 0.25rem 0.25rem 0 0;
 }
+#pre_apprentissage {
+    position: absolute;
+    height: 4rem;
+    width: calc(100% + 2px);
+    left: -2px;
+    bottom: 0.6rem;
+    border: 1px solid #aaa;
+    border-radius: 0.5rem 0.5rem 0 0;
+    background-color: #aaa;
+    overflow: hidden;
+}
+.parti_de_lesson {
+    display: inline-block;
+    margin: 0;
+    width: calc(50% - 3px);
+    height: 4rem;
+    line-height: 4rem;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+}
+.parti_de_lesson:first-child {
+    border-left: 1px solid #666;
+} 
+.cercles_des_partis > span {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+    border: 1px solid #666;
+    border-radius: 2rem;
+    margin: 0.5rem;
+    color: #666;
+    cursor: pointer;
+}
+.cercles_des_partis > span:hover {
+    box-shadow: 0 0 1rem #666;
+    color: black;
+}
+.cercles_des_partis > span:active {
+    box-shadow: none;
+    color: #666;
+}
 #apprentissage_foot { 
     padding: 0;
     bottom: 0;

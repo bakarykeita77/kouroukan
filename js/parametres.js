@@ -74,7 +74,6 @@ function parametrageDeLesson() {
         tedo_checker = $('#tedo_checker');
         tons_checker = $('#tons_checker');
         nasalisation_checker = $('#nasalisation_checker');
-
     }
     function chargementDesElementsDeParametres(){
 
@@ -106,20 +105,20 @@ function parametrageDeLesson() {
                 cch += "<tr class='checkbox_titre'><td colspan='3'><input type='checkbox' name='consonne_checkbox' class='checkbox_parent'><label for='consonne_checkbox'>ߛߌ߬ߙߊ߬ߕߊ</label></td></tr>\n";
                 cch += "<tr class='check_btn_container'>\n";
                     for(var i=0;i<14;i+=7){
-                        cch += "<td><table class='check_consonnes'>\n";
-                        cch += "<tr>\n";
-                            for(var j=0;j<7;j++){
-                            cch += "<td class='check_btn'><input type='checkbox' name='consonne_"+i+j+"' value='"+consonnes[i+j]+"' class='checkbox_children consonne'><label for='consonne_"+i+j+"'>"+consonnes[i+j]+"</label></td>\n";
-                            }
-                        cch += "</tr>\n";
+                        cch += "<td id='td_"+i+"'><table class='check_consonnes'>\n";
+                            cch += "<tr>\n";
+                                for(var j=0;j<7;j++){
+                                cch += "<td class='check_btn'><input type='checkbox' name='consonne_"+i+j+"' value='"+consonnes[i+j]+"' class='checkbox_children consonne'><label for='consonne_"+i+j+"'>"+consonnes[i+j]+"</label></td>\n";
+                                }
+                            cch += "</tr>\n";
                         cch += "</table>";
                     }
-                    cch += "<td><table class='check_consonnes'>\n";
-                    cch += "<tr>\n";
-                        for(var k=14;k<19;k++){
-                        cch += "<td class='check_btn'><input type='checkbox' name='consonne_"+k+"' value='"+consonnes[k]+"' class='checkbox_children consonne'><label for='consonne_"+k+"'>"+consonnes[k]+"</label></td>\n";
-                        }
-                    cch += "</tr>\n";
+                    cch += "<td id='td_14'><table class='check_consonnes'>\n";
+                        cch += "<tr>\n";
+                            for(var k=14;k<19;k++){
+                            cch += "<td class='check_btn'><input type='checkbox' name='consonne_"+k+"' value='"+consonnes[k]+"' class='checkbox_children consonne'><label for='consonne_"+k+"'>"+consonnes[k]+"</label></td>\n";
+                            }
+                        cch += "</tr>\n";
                     cch += "</table>";
     
                 cch += "</tr></td>\n";

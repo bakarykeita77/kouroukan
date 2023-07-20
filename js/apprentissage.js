@@ -20,12 +20,85 @@ function apprentissages() {
     $('.fermeture').attr('id', 'fermer_apprentissage');
 
     // Le chargement deApprentissage se fait dans parametres.js
+    preApprendre();
     apprendre();
     enregistrerApprentissage();
     stockerApprentissage();
                     
  /*-----------------------------------------------------------------------------------------------------------------------------------*/
     
+    function preApprendre() {
+
+        chargementDeCerclesDesPartis();
+        chargementDePreLesson();
+        
+        
+        
+        $('.parti_de_lesson:nth-child(1)').click(function() {
+            //
+        });
+
+        function cocherToutesLesCases() {
+            if($('#voyelles_checker' ).find('.checkbox_parent').prop("checked") == false) { $('#voyelles_checker' ).find('.checkbox_parent').next().click(); }
+            if($('#consonnes_checker').find('.checkbox_parent').prop("checked") == false) { $('#consonnes_checker').find('.checkbox_parent').next().click(); }
+            if($('#tedo_checker'     ).find('.checkbox_parent').prop("checked") == false) { $('#tedo_checker'     ).find('.checkbox_parent').next().click(); }
+        }
+        function chargementDePreLesson() {
+            $('.cercles_des_partis > span').click(function() {
+                var cercle_index = $(this).index();
+
+
+                if(cercle_index == 0) { 
+                    cocherToutesLesCases();
+                    $('#consonnes_checker, #tedo_checker').find('.checkbox_parent').next().click(); 
+                }
+                if(cercle_index == 1) { 
+                    cocherToutesLesCases();
+                    if($('#voyelles_checker' ).find('.checkbox_parent').prop('checked') == true ) { $('#voyelles_checker' ).find('.checkbox_parent').next().click(); }
+                    if($('#consonnes_checker').find('.checkbox_parent').prop('checked') == true ) { $('#consonnes_checker').find('.checkbox_parent').click();        }
+                    if($('#consonnes_checker').find('.checkbox_parent').prop('checked') == false) { $('#consonnes_checker').find('.checkbox_parent').next().click(); }
+                    if($('#tedo_checker'     ).find('.checkbox_parent').prop('checked') == true ) { $('#tedo_checker'     ).find('.checkbox_parent').click();        }
+
+                   
+                    if($('#td_7 .check_btn' ).find('input').prop('checked') == true) { $('#td_7 .check_btn' ).find('label').click(); }
+                    if($('#td_14 .check_btn').find('input').prop('checked') == true) { $('#td_14 .check_btn').find('label').click(); }
+                }
+                if(cercle_index == 2) { 
+                    cocherToutesLesCases();
+                    if($('#voyelles_checker' ).find('.checkbox_parent').prop('checked') == true ) { $('#voyelles_checker' ).find('.checkbox_parent').next().click(); }
+                    if($('#consonnes_checker').find('.checkbox_parent').prop('checked') == true ) { $('#consonnes_checker').find('.checkbox_parent').click();        }
+                    if($('#consonnes_checker').find('.checkbox_parent').prop('checked') == false) { $('#consonnes_checker').find('.checkbox_parent').next().click(); }
+                    if($('#tedo_checker'     ).find('.checkbox_parent').prop('checked') == true ) { $('#tedo_checker'     ).find('.checkbox_parent').click();        }
+
+                    if($('#td_0 .check_btn' ).find('input').prop('checked') == true) { $('#td_0 .check_btn').find('label').click();  }
+                    if($('#td_14 .check_btn').find('input').prop('checked') == true) { $('#td_14 .check_btn').find('label').click(); }
+                }
+                if(cercle_index == 3) { 
+                    cocherToutesLesCases();
+                    if($('#voyelles_checker' ).find('.checkbox_parent').prop('checked') == true ) { $('#voyelles_checker' ).find('.checkbox_parent').click();        }
+                    if($('#consonnes_checker').find('.checkbox_parent').prop('checked') == true ) { $('#consonnes_checker').find('.checkbox_parent').click();        }
+                    if($('#consonnes_checker').find('.checkbox_parent').prop('checked') == false) { $('#consonnes_checker').find('.checkbox_parent').next().click(); }
+
+                    if($('#td_0 .check_btn').find('input').prop('checked') == true) { $('#td_0 .check_btn').find('label').click(); }
+                    if($('#td_7 .check_btn').find('input').prop('checked') == true) { $('#td_7 .check_btn').find('label').click(); }
+                }
+            });
+        }
+    }
+        
+
+    function chargementDeCerclesDesPartis() {
+        var cercle_de_parti_1_html = cerclesDeParti1HTML();
+        switch(niveau_actif) {
+            case 1 : $('.cercles_des_partis').html(cercle_de_parti_1_html);
+        }
+        
+        function cerclesDeParti1HTML() {
+            var html = '';
+            for(var i=0;i<4;i++) { html += "<span>"+parseIntNko(i+1)+"</span>"; }
+            return html;
+        }
+    }
     function apprendre() {
 
         affichageDesBoutonsMedia();

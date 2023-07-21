@@ -268,10 +268,10 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     transition: 0.2s; 
 }
 .correction_btn { cursor: pointer; }
-.course {
+.course {    
     position: relative;
-    top: 5rem;
-    height: calc(90vh - 3rem);
+    top: 3rem;
+    height: 90vh;
     min-height: 25rem;
     width: calc(100vw - 0.25rem);
     max-width: 50rem;
@@ -282,7 +282,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 }
 .course_body { 
     position: relative; 
-    height: calc(100% - 4rem);
+    height: calc(100% - 10.5rem);
     margin: 0.2rem 0;
     color: white;
     box-sizing: border-box;
@@ -302,7 +302,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     box-sizing: border-box;
 }
 .course_foot { position: relative; background-color: var(--couleurNeutre); }
-.course_head { position: relative; height: 0.6rem; }
+.course_head { position: relative; height: 5rem; }
 .course_head div label {
     padding: 0 0.5rem;
     border-radius: 0.25rem;
@@ -331,8 +331,9 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 .dialogue_btn {
     position: absolute;
     width: 80%;
+    height: 3rem;
     text-align: center;
-    padding: var(--paddingSmall);
+    padding: 0.75rem;
     margin: 0.25rem auto;
     border-radius: var(--radiusMedium);
     left: 50%;
@@ -834,6 +835,7 @@ del {
 .progress_bar {
     position: absolute;
     left: 0;
+    bottom: 0;
     margin: 0;
     height: 0.5rem;
     width: calc(100% - 2px);

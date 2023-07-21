@@ -14,9 +14,8 @@
 #pre_apprentissage {
     position: absolute;
     height: 4rem;
-    width: calc(100% + 2px);
-    left: -2px;
-    bottom: 0.6rem;
+    width: calc(100% - 2px);
+    margin: 0 auto;
     border: 1px solid #aaa;
     border-radius: 0.5rem 0.5rem 0 0;
     background-color: #aaa;
@@ -35,7 +34,14 @@
 .parti_de_lesson:first-child {
     border-left: 1px solid #666;
 } 
-.cercles_des_partis > span {
+.cercles_des_partis {
+    min-width: 4rem;
+    overflow: auto;
+}
+#cercles_des_partis_cadre {
+    position: relative;
+}
+.cercles_des_partis #cercles_des_partis_cadre span {
     display: inline-block;
     width: 2rem;
     height: 2rem;
@@ -46,19 +52,21 @@
     color: #666;
     cursor: pointer;
 }
-.cercles_des_partis > span:hover {
-    box-shadow: 0 0 1rem #666;
+.cercles_des_partis #cercles_des_partis_cadre span:hover {
+    box-shadow: 0 0 1rem #444;
+    background-color: #fff;
     color: black;
 }
-.cercles_des_partis > span:active {
+.cercles_des_partis #cercles_des_partis_cadre span:active {
     box-shadow: none;
+    background-color: #aaa;
     color: #666;
 }
 #apprentissage_foot { 
     padding: 0;
-    bottom: 0;
-    height: 3rem; 
-    background-color: var(--couleurNeutre);
+    bottom: -0.5rem;
+    height: 4.5rem;
+    background-color: #aaa;
     border-radius: 0 0 0.5rem 0.5rem;
 }
 #apprentissage_dialogue_btn .btns:nth-child(1) { right: 0; }

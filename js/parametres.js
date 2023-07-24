@@ -304,6 +304,9 @@ function parametrageDeLesson() {
                 caracteres_coches = voyelles_cochees.concat(consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees);
             }
 
+            sessionStorage.setItem('voyelles_cochees', JSON.stringify(caracteres_coches));
+            sessionStorage.setItem('consonnes_cochees', JSON.stringify(caracteres_coches));
+            sessionStorage.setItem('tedos_coches', JSON.stringify(caracteres_coches));
             sessionStorage.setItem('caracteres_coches', JSON.stringify(caracteres_coches));
         }
         function rechargerLesSousTableauxDesCaracteresCoches() {
@@ -366,10 +369,10 @@ function parametrageDeLesson() {
                 var syllabes_tonifies_melanges = malaxer(syllabesTonifieesActualisees());
                 var chiffres_melanges          = malaxer(syllabesTonifieesActualisees())
 
-                if(niveau_actif == 1) exercice_html = lessonHTML(lettres_melangees, 'table_alphabet_exercice');
-                if(niveau_actif == 2) exercice_html = lessonHTML(syllabes_simples_melanges, 'table_syllabe_exercice');
-                if(niveau_actif == 3) exercice_html = lessonHTML(syllabes_tonifies_melanges, 'table_tons_exercice');
-                if(niveau_actif == 4) exercice_html = lessonHTML(chiffres_melanges, 'table_chiffre_exercice');
+                if(niveau_actif == 1) exercice_html = lessonDExerciceHTML(lettres_melangees, 'table_alphabet_exercice');
+                if(niveau_actif == 2) exercice_html = lessonDExerciceHTML(syllabes_simples_melanges, 'table_syllabe_exercice');
+                if(niveau_actif == 3) exercice_html = lessonDExerciceHTML(syllabes_tonifies_melanges, 'table_tons_exercice');
+                if(niveau_actif == 4) exercice_html = lessonDExerciceHTML(chiffres_melanges, 'table_chiffre_exercice');
 
                 return exercice_html;
             }

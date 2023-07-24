@@ -191,7 +191,24 @@
      }
     function lessonHTML(array, table_id = '#') {
 
-    var table = "<table class = 'table_parlante' id='"+table_id+"'>\n";
+        var table = "<table class = 'table_parlante' id='"+table_id+"'>\n";
+        for(var i=0;i<array.length-array.length%7;i+=7) {
+            table += "<tr>\n";
+            for(var j=0;j<7;j++) table += "<td>"+array[i+j]+"</td>\n";
+            table += "</tr>\n";
+        }
+        for(var k=array.length-array.length%7;k<array.length;k+=array.length%7){
+            table += "<tr>\n";
+            for(var l=0;l<array.length%7;l++) table += "<td>"+array[k+l]+"</td>\n";
+            table += "</tr>\n";
+        }
+        table += "</table>";
+                
+        return table;
+    }
+    function lessonDExerciceHTML(array, table_id = '#') {
+
+        var table = "<table class = 'table_muette' id='"+table_id+"'>\n";
         for(var i=0;i<array.length-array.length%7;i+=7) {
             table += "<tr>\n";
             for(var j=0;j<7;j++) table += "<td>"+array[i+j]+"</td>\n";

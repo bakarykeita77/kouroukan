@@ -29,7 +29,10 @@ function apprentissages() {
     
     function preApprendre() {
 
+        //$('.parametre').css('display','none');
+
         chargementDeCerclesDesPartis();
+        chargementParDefautDePreLesson();
         chargementDePreLesson();
         melangerPreLesson();
         
@@ -39,8 +42,12 @@ function apprentissages() {
             if($('#consonnes_checker').find('.checkbox_parent').prop("checked") == false) { $('#consonnes_checker').find('.checkbox_parent').next().click(); }
             if($('#tedo_checker'     ).find('.checkbox_parent').prop("checked") == false) { $('#tedo_checker'     ).find('.checkbox_parent').next().click(); }
         }
+        function chargementParDefautDePreLesson() {
+            $('#consonnes_checker, #tedo_checker').find('.checkbox_parent').next().click();
+            $('#cercles_des_partis_cadre span:first-child').addClass('active_2');
+        }
         function chargementDePreLesson() {
-            $('.cercles_des_partis #cercles_des_partis_cadre span').click(function() {
+            $('#cercles_des_partis_cadre span').click(function() {
                 var cercle_index = $(this).index();
 
                 if(cercle_index == 0) { 
@@ -84,36 +91,85 @@ function apprentissages() {
                     if($('#td_7 .check_btn' ).find('input').prop('checked') == false) { $('#td_7 .check_btn' ).find('label').click(); }
                     if($('#td_14 .check_btn').find('input').prop('checked') == false) { $('#td_14 .check_btn').find('label').click(); }
                 }
+
+                $(this).addClass('active_2');
+                $(this).siblings().removeClass('active_2');
             });
         }
         function melangerPreLesson() {
 
-            $('.parti_de_lesson:nth-child(2)').click(function() {
+            $('.partis_de_lesson:nth-child(2)').click(function() {
                 
                 var caracteres_coches = JSON.parse(sessionStorage.getItem('caracteres_coches'));
                 var caracteres_coches_melanges = malaxer(caracteres_coches);
-                var pre_leson_melange_html = lessonHTML(caracteres_coches_melanges, 'table_parlante');
+                var pre_lesson_melange_html = lessonHTML(caracteres_coches_melanges, 'table_parlante');
 
-                $('#apprentissage_body').html(pre_leson_melange_html);
+                $('#apprentissage_body').html(pre_lesson_melange_html);
             });
         }
     }
         
 
     function chargementDeCerclesDesPartis() {
-        var cercle_de_parti_1_html = cerclesDeParti1HTML();
+        var cercle_de_parti_1_html = cerclesDePartiHTML();
+        var panneaux_html = panneauxHTML();
+
         switch(niveau_actif) {
-            case 1 : $('.cercles_des_partis').html(cercle_de_parti_1_html);
+            case 1 : $('.partis_de_lesson:first-child').html('<div class="titre_de_parti"> ߞߎߘߎ߲</div><div id="cercles_des_partis">'+cercle_de_parti_1_html+'</div>'); break;
+            case 2 : preApprendreSyllabes();  break;
         }
-        
-        function cerclesDeParti1HTML() {
-            var html = '<span id="cercles_des_partis_cadre">';
+
+
+        function preApprendreSyllabes(){
+            
+            chargerLePanneau();
+            afficherLePanneau();
+            masquerLePanneau();
+
+
+            function chargerLePanneau() {
+                $('.partis_de_lesson:last-child' ).html('<div class="titre_de_parti"> ߞߎߘߎ߲</div><div id="panneaux">'+panneaux_html+'</div>');
+            }
+            function afficherLePanneau() {
+                $('.titre_de_parti').on('mouseover', function() {
+                    $('#panneaux').css('height','12rem');
+                    $('#consonnes_cadre').animate({'top':0}, 250);
+                });
+            }
+            function masquerLePanneau() {
+                $('#submit_panneau').on('click', function() {
+                    $('#consonnes_cadre').animate({'top':'-10rem'}, 250);
+                    setTimeout(function(){$('#panneaux').css('height',0);}, 250);
+                });
+            }
+        }
+        function cerclesDePartiHTML() {
+            var html_1 = '<div id="cercles_des_partis_cadre">';
             for(var i=0;i<5;i++) { 
                 var index = (i==0) ? parseIntNko(i+1)+'߭' : parseIntNko(i+1)+'߲';
-                html += (i == 4) ? "<span>ߓߍ߯</span>" : "<span>"+index+"</span>"; 
+                html_1 += (i == 4) ? "<span>ߓߍ߯</span>" : "<span>"+index+"</span>"; 
             }
-            html += '</span>';
-            return html;
+            html_1 += '</div>';
+            return html_1;
+        }
+        function panneauxHTML() {
+            
+            var consonnes = caracteres[1];
+            var consonnes_melanges = malaxer(consonnes);
+            var pre_lesson_melange_html = lessonHTML(consonnes_melanges, 'table_parlante');
+           
+            var html_2 = '<div id="consonnes_cadre">';
+            for(var i=0;i<18;i+=6) { 
+                html_2 += "<div>"; 
+                for(var j=0;j<6;j++) { 
+                    html_2 += "<span>"+consonnes[i+j]+"</span>"; 
+                }
+                html_2 += "</div>"; 
+            }
+            html_2 += '<div id="submit_panneau">ߏ߬ ߞߊߢߌ߲߬</div>';
+            html_2 += '</div>';
+            
+            return html_2;
         }
     }
     function apprendre() {

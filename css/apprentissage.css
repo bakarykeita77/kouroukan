@@ -19,29 +19,39 @@
     border: 1px solid #aaa;
     border-radius: 0.5rem 0.5rem 0 0;
     background-color: #aaa;
-    overflow: hidden;
 }
-.parti_de_lesson {
+.partis_de_lesson {
     display: inline-block;
+    position: relative;
     margin: 0;
     width: calc(50% - 3px);
-    height: 4rem;
-    line-height: 4rem;
     font-weight: bold;
     color: black;
     text-align: center;
+    z-index: 1;
 }
-.parti_de_lesson:first-child {
+.titre_de_parti, #cercles_des_partis {
+    display: inline-block;
+}
+.titre_de_parti {
+    height: 4rem;
+    line-height: 4rem;
+}
+.partis_de_lesson:first-child {
     border-left: 1px solid #666;
 } 
-.cercles_des_partis {
+#panneaux {
+    position: relative;
+    height: 0;
+    overflow: hidden;
+}
+#cercles_des_partis {
     min-width: 4rem;
-    overflow: auto;
 }
 #cercles_des_partis_cadre {
     position: relative;
 }
-.cercles_des_partis #cercles_des_partis_cadre span {
+#cercles_des_partis_cadre > span {
     display: inline-block;
     width: 2rem;
     height: 2rem;
@@ -52,15 +62,34 @@
     color: #666;
     cursor: pointer;
 }
-.cercles_des_partis #cercles_des_partis_cadre span:hover {
+#cercles_des_partis_cadre span:hover {
     box-shadow: 0 0 1rem #444;
     background-color: #fff;
     color: black;
 }
-.cercles_des_partis #cercles_des_partis_cadre span:active {
-    box-shadow: none;
-    background-color: #aaa;
-    color: #666;
+#consonnes_cadre {
+    position: absolute;
+    top: -10rem;
+    height: 10rem;
+    margin: 0.125rem 1rem;
+    padding: 1rem;
+    display: block;
+    border: 1px solid #aaa;
+    border-radius: 0.25rem;
+    background-color: #fff;
+}
+#consonnes_cadre span {
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+    border: 1px solid #aaa;
+    cursor: pointer;
+}h
+#consonnes_cadre span:hover {
+    background-color: #666;
 }
 #apprentissage_foot { 
     padding: 0;
@@ -71,3 +100,12 @@
 }
 #apprentissage_dialogue_btn .btns:nth-child(1) { right: 0; }
 #apprentissage_dialogue_btn .btns:nth-child(2) { left: 0; }
+#submit_panneau {
+    position: absolute;
+    margin: 1rem 1rem 0.5rem 1rem;
+    padding: 0.125rem 1rem;
+    bottom: 0;
+    background-color: #fff;
+    border: 1px solid #aaa;
+}
+#submit_panneau:hover { background-color: #aaa; }

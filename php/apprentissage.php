@@ -3,10 +3,8 @@
 
     <div class="course_head" id="apprentissage_head">
         <div id="pre_apprentissage" style="display:block">
-            <div id="niveaux_de_pre_apprentissage">
-                <div class="parti_de_lesson"><span> ߞߎߘߎ߲</span><span class="cercles_des_partis"></span></div>
-                <div class="parti_de_lesson"> ߞߎߘߎ߲ ߢߊ߯ߡߌߣߍ߲</div>
-            </div>
+            <div class="partis_de_lesson"></div>
+            <div class="partis_de_lesson"> ߞߎߘߎ߲ ߢߊ߯ߡߌߣߍ߲</div>
         </div>
 
         <div class = 'progress_bar' id = "apprentissage_progress_bar">

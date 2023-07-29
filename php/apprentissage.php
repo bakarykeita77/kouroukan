@@ -2,9 +2,9 @@
 	<link rel="stylesheet" href="/kouroukan/css/apprentissage.css"/>
 
     <div class="course_head" id="apprentissage_head">
-        <div id="pre_apprentissage" style="display:block">
-            <div class="partis_de_lesson"></div>
-            <div class="partis_de_lesson"> ߞߎߘߎ߲ ߢߊ߯ߡߌߣߍ߲</div>
+        <div id="pre_apprentissage">
+            <div class="partis_de_lesson" id="parti_1"></div>
+            <div class="partis_de_lesson" id="parti_2"> ߞߎߘߎ߲ ߢߊ߯ߡߌߣߍ߲</div>
         </div>
 
         <div class = 'progress_bar' id = "apprentissage_progress_bar">

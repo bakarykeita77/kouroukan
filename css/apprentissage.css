@@ -12,6 +12,10 @@
     border-radius: 0.25rem 0.25rem 0 0;
 }
 #pre_apprentissage {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    
     position: absolute;
     height: 4rem;
     width: calc(100% - 2px);
@@ -21,8 +25,6 @@
     background-color: #aaa;
 }
 .partis_de_lesson {
-    display: inline-block;
-    position: relative;
     margin: 0;
     width: calc(50% - 3px);
     font-weight: bold;
@@ -30,27 +32,18 @@
     text-align: center;
     z-index: 1;
 }
-.titre_de_parti, #cercles_des_partis {
-    display: inline-block;
-}
-.titre_de_parti {
+#parti_2 {
     height: 4rem;
     line-height: 4rem;
 }
+.titre_de_parti, #cercles_des_partis { display: inline-block; }
+.titre_de_parti { height: 4rem; line-height: 4rem; }
 .partis_de_lesson:first-child {
     border-left: 1px solid #666;
 } 
-#panneaux {
-    position: relative;
-    height: 0;
-    overflow: hidden;
-}
-#cercles_des_partis {
-    min-width: 4rem;
-}
-#cercles_des_partis_cadre {
-    position: relative;
-}
+#panneaux { position: relative; height: 0; overflow: hidden; }
+#cercles_des_partis { min-width: 4rem; }
+#cercles_des_partis_cadre { position: relative; }
 #cercles_des_partis_cadre > span {
     display: inline-block;
     width: 2rem;
@@ -87,10 +80,8 @@
     line-height: 2rem;
     border: 1px solid #aaa;
     cursor: pointer;
-}h
-#consonnes_cadre span:hover {
-    background-color: #666;
 }
+#consonnes_cadre span:hover { background-color: #aaa; }
 #apprentissage_foot { 
     padding: 0;
     bottom: -0.5rem;

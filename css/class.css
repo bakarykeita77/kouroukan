@@ -309,12 +309,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     border-radius: 0.25rem;
     font-size: 0.75rem;
 }
-.course_head div span:last-child {
-    padding: 0;
-    margin: 0 4px;
-    font-size: 1rem;
-}
-.course_body { overflow: auto; }
+.course_body { overflow-y: auto; overflow-x: hidden; }
 .cover {
     position: absolute;
     margin: 0;
@@ -477,7 +472,7 @@ del {
 
 /* --------------------------------------------------------------------------------------------------------- */
 
-
+.indexe { color: orangered; }
 .images_container {
     position: relative;
     top: 48px;

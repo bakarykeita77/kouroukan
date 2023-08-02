@@ -27,6 +27,41 @@
         setTimeout(function() { course.css({'transform':'scale(1)'}); }, 5);
         setTimeout(function() { course.css({'opacity':'1'});}, 5);
     }
+    function affichageAnimeDeLaTable1(td) {
+        setTimeout(() => {
+
+            $.each(td, function() {
+                let td = $(this);
+                let td_index = $(this).index();
+                let td_value = $(this).html();
+
+                setTimeout(() => {
+                    td.css('transform','scale(1)');
+                }, 250*td_index);
+            });
+        });
+    }
+    function affichageAnimeDeLaTable(tr) {
+        $.each(tr, function(){
+            var tr = $(this);
+            var tr_index = $(this).index();
+            var td = $('td', this);
+            var td_length = $('td', this).length;
+
+            setTimeout(() => {
+
+                $.each(td, function() {
+                    let td = $(this);
+                    let td_index = $(this).index();
+                    let td_value = $(this).html();
+
+                    setTimeout(() => {
+                        td.css('transform','scale(1)');
+                    }, 50*td_index);
+                });
+            }, 350*tr_index);
+        });
+    }
 	function aggrandir_caractere_de(element) { element.css( 'font-size','+=32px' ); }
 	function appetir_caractere_de(element) { element.css( 'font-size','-=32px' ); }
     function arreterLecture(lessonHTML) {

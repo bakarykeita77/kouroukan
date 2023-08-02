@@ -57,6 +57,9 @@ function apprentissages() {
         function chargementParDefautDeCorpsDePreLesson() {
             $('#consonnes_checker, #tedo_checker').find('.checkbox_parent').next().click();
             $('#cercles_des_partis_cadre span:first-child').addClass('active_2');
+            setTimeout(function(){
+                affichageAnimeDeLaTable($('.table_parlante tr'));
+            }, 1000);
         }
         function chargerCorpsDePrelesson() {
 
@@ -158,17 +161,17 @@ function apprentissages() {
                 if(niveau_actif == 1) {
                     var caracteres_coches = JSON.parse(sessionStorage.getItem('caracteres_coches'));
                     var caracteres_coches_melanges = malaxer(caracteres_coches);
-                    pre_lesson_melange_html = lessonHTML(caracteres_coches_melanges, 'table_parlante');
+                    pre_lesson_melange_html = lessonHTML(caracteres_coches_melanges, '');
                 }
                 if(niveau_actif == 2) {
                     var syllabes_simples = JSON.parse(sessionStorage.getItem('syllabes_simples'));
                     var syllabes_simples_melanges = malaxer(syllabes_simples);
-                    pre_lesson_melange_html = lessonHTML(syllabes_simples_melanges, 'table_parlante');
+                    pre_lesson_melange_html = lessonHTML(syllabes_simples_melanges, '');
                 }
                 if(niveau_actif == 3) {
                     var syllabes_tonifies = JSON.parse(sessionStorage.getItem('syllabes_tonifies'));
                     var syllabes_tonifies_melanges = malaxer(syllabes_tonifies);
-                    pre_lesson_melange_html = lessonHTML(syllabes_tonifies_melanges, 'table_parlante');
+                    pre_lesson_melange_html = lessonHTML(syllabes_tonifies_melanges, '');
                 }
 
 
@@ -180,40 +183,8 @@ function apprentissages() {
             $('.dialogue_btn').css('display','none');
 
             $('#cercles_des_partis span, #panneaux span, .pre_lesson_head_2').click(function() {
-                
-                var tr_length = $('.table_parlante tr').length;
-                var td_length = $('.table_parlante td').length;
-
-                $.each($('.table_parlante tr'), function(){
-                    var tr_index = $(this).index();
-                    var td = $('td', this);
-                    var td_length = $('td', this).length;
-
-                    for(var i=0; i<td_length; i++) {
-                        console.log($('td:nth-child('+i+1+')', this).html());
-                    }
-                });
-
-                // for(var i=0; i<tr_length*td_length; i+=td_length) {
-                //     for(var j=0; j<7; j++) {
-                //         setTimeout(() => {
-                //             $('.table_parlante tr:nth-child('+i+') td:nth-child('+i+j+')').css('transform','scale(1.5)');
-                //         }, 200*(i+j));
-                //     }
-                // }
-
-                // $.each($('.table_parlante td'), function() { 
-
-                //     var td_actif = $(this);
-                //     var td_index = $(this).index();
-
-                //     td_actif.css('transform','scale(0)');
-
-                //     setTimeout(() => {
-                //         td_actif.css('transform','scale(1.5)');
-                //     }, 200*td_index);
-                
-                // });
+                var tr =  '';
+                affichageAnimeDeLaTable($('.table_parlante tr'));
             });
             
         }
@@ -507,7 +478,7 @@ function apprentissages() {
                     lesson : lesson,
                     note   : note
                 }); 
-console.log(note);
+
                 fetch("/kouroukan/php/actions.php", {
                     method: "POST",
                     body: apprentissage_data

@@ -145,7 +145,8 @@ $('document').ready(function() {
     function matiere() {		
         
         $('#phases_list li').on('click', function(){
-            
+  console.log(lesCaracteres());          
+  console.log(apprentissageHTML());          
             var phase_class = $(this).attr('class');
             var phase_id = $(this).attr('id');
             var phase_nom = $(this).html();

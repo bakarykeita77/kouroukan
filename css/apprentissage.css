@@ -45,6 +45,67 @@
 .pre_lesson_head_1 {
     border-left: 1px solid #666;
 } 
+#table_pre_apprentissage {
+    padding: 1rem;
+    width: calc(100% - 2.25rem);
+}
+.pre_apprentissage_tr {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    position: relative;
+    margin: 0.125rem 0;
+    padding: 1rem;
+    background-color: transparent;
+    border-radius: 0.5rem;
+    color: #666;
+    box-sizing: border-box;
+}
+#tr_actif {
+    background-color: #444;
+    padding: 0.5rem 0;
+    border-radius: 0.5rem;
+}
+#tr_actif .pre_apprentissage_td {
+    transform: scale(2);
+    box-sizing: border-box;
+}
+.pre_apprentissage_td {
+    position: relative;
+    border-radius: 0.5rem;
+    display: inline-block;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+}
+.pre_td {
+    font-weight: bold;
+    color: yellow;
+}
+#traducteur {
+    position: absolute;
+    height: 1rem;
+    width: 100%;
+    top: 100%;
+    margin-top: 0.5rem;
+    background-color: #444;
+    overflow: hidden;
+    z-index: 1;
+}
+#manche_traducteur {
+    height: 0.5rem;
+    width: 2rem;
+    margin: auto;
+    line-height: 0.125rem;
+    padding: 0;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+}
 #panneaux { 
     display: flex;
     justify-content: left;
@@ -110,3 +171,10 @@
     border: 1px solid #aaa;
 }
 #submit_panneau:hover { background-color: #aaa; }
+
+@media screen and (width < 400px) {
+    .pre_apprentissage_td { width: 1rem;  }
+}
+@media screen and (width >= 400px) {
+    .pre_apprentissage_td { width: 3rem;  }
+}

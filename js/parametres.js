@@ -353,8 +353,10 @@ function parametrageDeLesson() {
                 var voyelles_length          = voyelles_cochees.length;
                 var tons_length              = tons_coches.length;
                 var syllabes_tonifies_length = syllabes_tonifies.length;
+       
 
-                if(niveau_actif == 1) apprentissage_html = lessonHTML(lettres_cochees, 'table_alphabet_apprentissage');
+                if(niveau_actif == 1) apprentissage_html = preApprentissageHTML();
+                //if(niveau_actif == 1) apprentissage_html = lessonHTML(lettres_cochees, 'table_alphabet_apprentissage');
                 if(niveau_actif == 2) apprentissage_html = lessonHTML(syllabes_simples_coches, 'table_syllabe_apprentissage');
                 if(niveau_actif == 3) apprentissage_html = lessonHTML2(voyelles_length,tons_length,syllabes_tonifies_length,syllabes_tonifies);
                 if(niveau_actif == 4) apprentissage_html = lessonHTML(chiffres, 'table_chiffre_apprentissage');

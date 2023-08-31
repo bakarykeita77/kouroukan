@@ -382,7 +382,7 @@
         
         return nombre_converti;
      }
-    function preApprentissageHTML() {
+    function preApprentissageCorpsHTML() {
          var c = alphabet_nko[0];
          c.push('');
  

@@ -187,6 +187,7 @@ function parametrageDeLesson() {
 
         $('.checkbox_titre').on('click', function(){ $(this).find('.checkbox_parent').click(); });
         $('.check_btn').on('click', function(){ $(this).children().first().click(); });
+
             
         function checkbox_parentClick() {
             
@@ -355,7 +356,7 @@ function parametrageDeLesson() {
                 var syllabes_tonifies_length = syllabes_tonifies.length;
        
 
-                if(niveau_actif == 1) apprentissage_html = preApprentissageHTML();
+                //if(niveau_actif == 1) apprentissage_html = preApprentissageHTML();
                 //if(niveau_actif == 1) apprentissage_html = lessonHTML(lettres_cochees, 'table_alphabet_apprentissage');
                 if(niveau_actif == 2) apprentissage_html = lessonHTML(syllabes_simples_coches, 'table_syllabe_apprentissage');
                 if(niveau_actif == 3) apprentissage_html = lessonHTML2(voyelles_length,tons_length,syllabes_tonifies_length,syllabes_tonifies);

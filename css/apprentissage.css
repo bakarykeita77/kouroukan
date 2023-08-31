@@ -38,6 +38,7 @@
 .pre_lesson_head_2 {
     height: 4rem;
     line-height: 4rem;
+    cursor: pointer;
 }
 .titre_de_parti, #cercles_des_partis { display: inline-block; }
 .titre_de_parti { height: 4rem; line-height: 4rem; }
@@ -61,7 +62,7 @@
     border-radius: 0.5rem;
     color: #666;
     box-sizing: border-box;
-}
+}b
 #tr_actif {
     background-color: #444;
     padding: 0.5rem 0;
@@ -153,6 +154,74 @@
     cursor: pointer;
 }
 #consonnes_cadre span:hover { background-color: #aaa; }
+#pre_exercice_cover {
+    position: absolute;
+    display: none;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.25);
+    z-index: 1;
+}
+#pre_exercice {
+    position: absolute;
+    top: 4rem;
+    background-color: white;
+    box-shadow: 0 0 1rem #666;
+    height: calc(100% - 14rem);
+    width: 80%;
+    margin-right: 10%;
+    padding: 2rem 0;
+    transform: scale(0.8);
+    border-radius: 0.5rem;
+    opacity: 0;
+    transition: 400ms;
+}
+#pre_exercice_head {
+    position: absolute;
+    width: 95%;
+    margin: auto;
+    top: 2rem;
+    border: 1px solid transparent;
+    border-bottom-color: #aaa;
+    padding: 0.5rem 1rem;
+}
+#pre_exercice_head h3 { margin: 0; }
+#pre_exercice_body {
+    position: absolute;
+    width: 95%;
+    margin: auto;
+    top: 7rem;
+    border: 1px solid transparent;
+    padding: 0.5rem 1rem;
+}
+#pre_exercice_body td { font-size: 3rem; }
+#pre_exercice_foot { 
+    position: absolute;
+    width: 95%;
+    margin: auto;
+    bottom: 3rem;
+    border: 1px solid transparent;
+    border-top-color: #aaa;
+    padding: 0.5rem 1rem;
+}
+#pre_question, #pre_correction {
+    position: absolute;
+    display: inline-block;
+    margin: 0 1rem;
+    width: 8rem;
+    height: 2rem;
+    line-height: 2rem;
+    box-shadow: 0 0 1rem #aaa;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+#pre_question:active, #pre_correction:active {
+    box-shadow: none;
+}
+#pre_question { right: 0; }
+#pre_correction { left: 0; }
 #apprentissage_foot { 
     padding: 0;
     bottom: -0.5rem;

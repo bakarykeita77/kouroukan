@@ -1,4 +1,8 @@
 
+#apprentissage_container {
+    height: 100%;
+}
+#apprentissage { height: calc(100% - 5rem); }
 #table_parlante_container {
     position: absolute;
     top: 1rem;
@@ -32,15 +36,11 @@
     text-align: center;
     z-index: 1;
 }
-/* #pre_apprentissage_head > div:hover {
-    background-color: #666;
-} */
 .pre_lesson_head_2 {
     height: 4rem;
     line-height: 4rem;
-    cursor: pointer;
 }
-.titre_de_parti, #cercles_des_partis { display: inline-block; }
+.titre_de_parti, #cercles_des_partis, #carres_pour_exercices { display: inline-block; }
 .titre_de_parti { height: 4rem; line-height: 4rem; }
 .titre_de_parti > div { display: inline-block; vertical-align: middle; }
 .pre_lesson_head_1 {
@@ -49,6 +49,7 @@
 #table_pre_apprentissage {
     padding: 1rem;
     width: calc(100% - 2.25rem);
+    overflow: hidden;
 }
 .pre_apprentissage_tr {
     display: flex;
@@ -59,14 +60,32 @@
     margin: 0.125rem 0;
     padding: 1rem;
     background-color: transparent;
-    border-radius: 0.5rem;
+    border-radius: 0.5rem 0.5rem 0 0;
     color: #666;
     box-sizing: border-box;
-}b
+}
+.traducteur_tr {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    position: relative;
+    margin: 0.125rem 0;
+    padding: 0.5rem;
+    background-color: transparent;
+    border-radius: 0.5rem 0.5rem 0 0;
+    color: #666;
+    box-sizing: border-box;
+}
+.traducteur_tr:nth-child(2) { font-size: 2rem; }
 #tr_actif {
     background-color: #444;
     padding: 0.5rem 0;
     border-radius: 0.5rem;
+}
+#tr_actif .pre_apprentissage_tr {
+    padding: 2rem 0;
+    background-color: #444;
 }
 #tr_actif .pre_apprentissage_td {
     transform: scale(2);
@@ -90,15 +109,16 @@
     height: 1rem;
     width: 100%;
     top: 100%;
-    margin-top: 0.5rem;
+    margin-top: 0;
     background-color: #444;
     overflow: hidden;
+    border-radius: 0 0 0.5rem 0.5rem;
     z-index: 1;
 }
 #manche_traducteur {
     height: 0.5rem;
     width: 2rem;
-    margin: auto;
+    margin: 0 auto 1rem auto;
     line-height: 0.125rem;
     padding: 0;
     font-weight: bold;
@@ -107,6 +127,7 @@
     text-align: center;
     cursor: pointer;
 }
+#traducteur .pre_apprentissage_tr { margin: 0; }
 #panneaux { 
     display: flex;
     justify-content: left;
@@ -127,10 +148,19 @@
     color: #666;
     cursor: pointer;
 }
-#cercles_des_partis_cadre span:hover {
+#cercles_des_partis_cadre span:hover, #carres_pour_exercices span:hover {
     box-shadow: 0 0 1rem #444;
     background-color: #fff;
     color: black;
+}
+#carres_pour_exercices span {
+    border: 1px solid #666;
+    border-radius: 0.5rem;
+    padding: 0.25rem;
+    margin: 0.5rem;
+    height: 2rem;
+    line-height: 2rem;
+    cursor: pointer;
 }
 #consonnes_cadre {
     position: absolute;
@@ -172,9 +202,7 @@
     width: 80%;
     margin-right: 10%;
     padding: 2rem 0;
-    transform: scale(0.8);
     border-radius: 0.5rem;
-    opacity: 0;
     transition: 400ms;
 }
 #pre_exercice_head {
@@ -195,7 +223,11 @@
     border: 1px solid transparent;
     padding: 0.5rem 1rem;
 }
-#pre_exercice_body td { font-size: 3rem; }
+#pre_exercice_body td { 
+    font-size: 3rem; 
+    transform: scale(0);
+    opacity: 0;
+}
 #pre_exercice_foot { 
     position: absolute;
     width: 95%;

@@ -1,7 +1,7 @@
 
 	<link rel="stylesheet" href="/kouroukan/css/apprentissage.css"/>
 
-    <div id="apprentissage">
+    <div id="apprentissage_container">
         <div class="course_head" id="apprentissage_head">
             <div id="pre_apprentissage_head">
                 <div class="pre_lesson_head_1"></div>

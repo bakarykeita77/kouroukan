@@ -891,7 +891,6 @@ del {
     border-radius: 10%;
     cursor: pointer;
     overflow: hidden;
-    transform: scale(0);
     transition: 0.5s;
 }
 .transparent { animation: transperer; }

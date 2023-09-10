@@ -159,6 +159,29 @@
 	    var i=0;
 	    return function(){ return i += 1; };
 	}
+    function indexer(element) { 
+        setTimeout(function() { 
+            element.addClass('indicateur'); 
+            let element_id = $('.indicateur').attr('id');
+            repeterIndexation($('#'+element_id)); 
+        }, 5); 
+        
+        function repeterIndexation(element) {
+            let element_class = element.attr('class');
+            let r = setInterval(function(){
+                element.removeClass(element_class); 
+                setTimeout(function(){ element.addClass(element_class); }, 5); 
+            },5000);
+            element.click(function() { clearInterval(r); $(this).removeClass(element_class); });
+        }
+    }
+    function indiquer(element) {
+        setTimeout(function(){ 
+            element.wrap('<div class="indicateur"></div>');
+            let w = $('.indicateur span').width()+32;
+            $('.indicateur').css({'height':w+'px', 'width':w+'px', 'line-height':w-16+'px'});
+        }, 1000); 
+    }
     function initialiserProgressBarr() { 
         $('.parametres_popup td').on('click', function() {
             $('.progress_question_bar, .progress_bonne_reponse_bar').css('width',0); 
@@ -268,17 +291,19 @@
                    
         return tons_apprentissage_html;
     }
+    function lireLettre(lettre) { $('#audio').attr({ src:'son/mp3/'+lettre+'.mp3', autoplay:'on' }); }
     function lire_mot() {
 	   for(var i=0; i<texte_memoire.length; i++) {
 	       var mot = texte_memoire[i];
 	   
-	   	        var lecture = setInterval(lire, 800);
-	   	        var r = 0;
-	   	        function lire() {
-	   	            audio.attr({ src:'son/mp3/'+mot[r]+'.mp3', autoplay:'on' });
-	   	            r++;
-	   	            if( r>mot.length ) { clearInterval( lecture ); }
-	       }
+            var lecture = setInterval(lire, 800);
+            var r = 0;
+            
+            function lire() {
+                $('#audio').attr({ src:'son/mp3/'+mot[r]+'.mp3', autoplay:'on' });
+                r++;
+                if( r>mot.length ) { clearInterval( lecture ); }
+	        }
 	   
 	   }
     }
@@ -362,17 +387,6 @@
         
         return nombre_converti.join('');
      }
-    function reverseIntNko(nombre_a_convertir){
-        var nombre_converti = [];
-        
-        for(i=0;i<nombre_a_convertir.length;i++){
-            nombre_converti[nombre_converti.length] = chiffres_latins[ chiffres.indexOf(nombre_a_convertir[i]) ];
-        }
-        nombre_converti = nombre_converti.join('');
-        nombre_converti = parseInt(nombre_converti);
-        
-        return nombre_converti;
-     }
     function preApprentissageCorpsHTML() {
          var c = alphabet_nko[0];
          c.push('');
@@ -421,6 +435,17 @@
         setTimeout(() => { button.css('box-shadow','none'); }, 900);
         setTimeout(() => { button.css('box-shadow','var(--shadow_16)'); }, 1000);
     }
+    function reverseIntNko(nombre_a_convertir){
+        var nombre_converti = [];
+        
+        for(i=0;i<nombre_a_convertir.length;i++){
+            nombre_converti[nombre_converti.length] = chiffres_latins[ chiffres.indexOf(nombre_a_convertir[i]) ];
+        }
+        nombre_converti = nombre_converti.join('');
+        nombre_converti = parseInt(nombre_converti);
+        
+        return nombre_converti;
+     }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
 	

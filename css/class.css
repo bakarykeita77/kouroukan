@@ -233,6 +233,8 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     justify-content: center;
     align-items: center;
 }
+.cercle { transition: 0.25s; }
+.cercle:active { box-shadow: none; }
 .cercle_active { background-color: white; box-shadow: 0 0 1rem #444; }
 .clavier_container {
     height: 8rem;
@@ -243,6 +245,18 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     background-color: #666;
 }
 .clicker { transform-origin: 50% 0; animation: animate_hand 1.5s 1; }
+.indicateur { position: relative; background-color: yellow; }
+.indicateur::before {
+    position: absolute;
+    top: 120%;
+    left: 50%;
+    content: "➜";
+    font-size: 3rem;
+    color: blue;
+    transform: rotate(-120deg);  
+    animation: indexation 0.2s 0.4s 5;
+}
+.indicateur:hover::before { color: transparent; }
 .container {
     position: fixed;
     margin: 0;
@@ -290,7 +304,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     color: white;
     box-sizing: border-box;
     background-color: rgba(0,0,0,0.8);
- }
+}
 .course_container {
     display: none;
     position: fixed;
@@ -968,6 +982,20 @@ del {
     80% { text-shadow: 16px 16px 16px #666; transform: scale(1); }
     100% { text-shadow: 16px 16px 16px #666; transform: scale(1); }
 }
+@keyframes indexation {
+    0% {
+            top: 120%;
+            left: 50%;
+        }
+    50% {
+            top: 150%;
+            left: 55%;
+        }
+    100% {
+            top: 120%;
+            left: 50%;
+        }
+}
 @keyframes descendre_doucement {
     from { line-height: 16px; opacity: 0; font-size: 0; }
     top { line-height: 56px; opacity: 1; font-size: 20px; }
@@ -979,6 +1007,10 @@ del {
 @keyframes transperer {
     from { opacity: 1; }
     to { opacity: 0; }
+}
+@keyframes indicateur {
+    from { box-shadow: none; }
+    to { box-shadow: 0 0 1rem #444; }
 }
 
 

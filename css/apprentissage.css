@@ -36,10 +36,6 @@
     text-align: center;
     z-index: 1;
 }
-.pre_lesson_head_2 {
-    height: 4rem;
-    line-height: 4rem;
-}
 .titre_de_parti, #cercles_des_partis, #carres_pour_exercices { display: inline-block; }
 .titre_de_parti { height: 4rem; line-height: 4rem; }
 .titre_de_parti > div { display: inline-block; vertical-align: middle; }
@@ -154,14 +150,17 @@
     color: black;
 }
 #carres_pour_exercices span {
+    display: inline-block;
     border: 1px solid #666;
     border-radius: 0.5rem;
-    padding: 0.25rem;
-    margin: 0.5rem;
+    padding: 0 0.5rem;
+    margin: 0.25rem;
     height: 2rem;
     line-height: 2rem;
     cursor: pointer;
+    transition: 0.25s;
 }
+#carres_pour_exercices span:active { box-shadow: none; }
 #consonnes_cadre {
     position: absolute;
     top: -10rem;
@@ -183,7 +182,7 @@
     border: 1px solid #aaa;
     cursor: pointer;
 }
-#consonnes_cadre span:hover { background-color: #aaa; }
+#consonnes_cadre span:hover { background-color: yellow; }
 #pre_exercice_cover {
     position: absolute;
     display: none;
@@ -217,11 +216,11 @@
 #pre_exercice_head h3 { margin: 0; }
 #pre_exercice_body {
     position: absolute;
-    width: 95%;
+    height: calc(100% - 9rem);
+    width: 100%;
     margin: auto;
-    top: 7rem;
-    border: 1px solid transparent;
-    padding: 0.5rem 1rem;
+    top: 5rem;
+    overflow: auto;
 }
 #pre_exercice_body td { 
     font-size: 3rem; 

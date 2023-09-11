@@ -160,27 +160,21 @@
 	    return function(){ return i += 1; };
 	}
     function indexer(element) { 
+        let element_id = element.attr('id');
+        
         setTimeout(function() { 
             element.addClass('indicateur'); 
-            let element_id = $('.indicateur').attr('id');
             repeterIndexation($('#'+element_id)); 
         }, 5); 
         
         function repeterIndexation(element) {
-            let element_class = element.attr('class');
             let r = setInterval(function(){
-                element.removeClass(element_class); 
-                setTimeout(function(){ element.addClass(element_class); }, 5); 
+                element.removeClass('indicateur'); 
+                setTimeout(function(){ element.addClass('indicateur'); }, 5); 
             },5000);
-            element.click(function() { clearInterval(r); $(this).removeClass(element_class); });
+            
+            element.click(function() { clearInterval(r); $(this).removeClass('indicateur'); });
         }
-    }
-    function indiquer(element) {
-        setTimeout(function(){ 
-            element.wrap('<div class="indicateur"></div>');
-            let w = $('.indicateur span').width()+32;
-            $('.indicateur').css({'height':w+'px', 'width':w+'px', 'line-height':w-16+'px'});
-        }, 1000); 
     }
     function initialiserProgressBarr() { 
         $('.parametres_popup td').on('click', function() {

@@ -44,10 +44,15 @@
 
     <div id="pre_exercice_cover">
         <div id="pre_exercice">
-            <span class="fermeture" id="fermeture_pre_exercice">&times;</span>
-            <div id="pre_exercice_head"></div>
-            <div id="pre_exercice_body"></div>
-            <div id="pre_exercice_foot">&#10140;</div>
+            <span id="fermeture_pre_exercice">&times;</span>
+            <div id="pre_exercice_container">
+                    
+                <div id="pre_exercice_head"></div>
+                <div id="pre_exercice_body"></div>
+                <div id="pre_exercice_foot">&#10140;</div>
+
+                <div id="pre_exercice_resultat"></div>
+            </div>
         </div>
     </div>
     

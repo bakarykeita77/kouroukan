@@ -134,6 +134,24 @@
             }
         });
     }
+    function clignoter(element) {
+        element.addClass('shadow');
+        setTimeout((function() { td.removeClass('shadow'); }), 200);
+        setTimeout((function() { td.addClass('shadow');    }), 600);
+        setTimeout((function() { td.removeClass('shadow'); }), 1000);
+        setTimeout((function() { td.addClass('shadow');    }), 1400);
+         setTimeout((function() { td.removeClass('shadow'); }), 1800);
+        // setTimeout((function() { td.addClass('shadow');    }), 825);
+        // setTimeout((function() { td.removeClass('shadow'); }), 950);
+        // setTimeout((function() { td.addClass('shadow');    }), 1075);
+        // setTimeout((function() { td.removeClass('shadow'); }), 1200);
+        // setTimeout((function() { td.addClass('shadow');    }), 1325);
+        // setTimeout((function() { td.removeClass('shadow'); }), 1450);
+        // setTimeout((function() { td.addClass('shadow');    }), 1575);
+        // setTimeout((function() { td.removeClass('shadow'); }), 1700);
+        // setTimeout((function() { td.addClass('shadow');    }), 1825);
+        // setTimeout((function() { td.removeClass('shadow'); }), 1950);
+    }
     function conversionDeDateEnNko(timestamp){
        vartimestamp = timestamp.split(' ');
        timestamp = timestamp[0].split('-');
@@ -288,8 +306,8 @@
     function lireLettre(lettre) { $('#audio').attr({ src:'son/mp3/'+lettre+'.mp3', autoplay:'on' }); }
     function lire_mot() {
 	   for(var i=0; i<texte_memoire.length; i++) {
-	       var mot = texte_memoire[i];
-	   
+           
+            var mot = texte_memoire[i];
             var lecture = setInterval(lire, 800);
             var r = 0;
             
@@ -298,9 +316,9 @@
                 r++;
                 if( r>mot.length ) { clearInterval( lecture ); }
 	        }
-	   
 	   }
     }
+    function lire(son) { $('#audio').attr({ src:'son/mp3/'+son+'.mp3', autoplay:'on' }); }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
     

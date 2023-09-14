@@ -245,18 +245,14 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     background-color: #666;
 }
 .clicker { transform-origin: 50% 0; animation: animate_hand 1.5s 1; }
-.indicateur { position: relative; background-color: yellow; }
-.indicateur::before {
+.clignotant { animation: clignotant 0.15s 7; }
+.coche::after {
     position: absolute;
-    top: 120%;
-    left: 50%;
-    content: "➜";
-    font-size: 3rem;
+    top: -30%;
+    content: '✓';
     color: blue;
-    transform: rotate(-120deg);  
-    animation: indexation 0.2s 0.4s 5;
+    rotate: y 180deg;
 }
-.indicateur:hover::before { color: transparent; }
 .container {
     position: fixed;
     margin: 0;
@@ -334,6 +330,13 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     left: 0;
     height: calc(100% - 3rem);
     width: 100%;
+}
+.croix::after {
+    position: absolute;
+    left: 30%;
+    content: '✖';
+    color: red;
+    opacity: 0.6;
 }
 
 /* --------------------------------------------------------------------------------------------------------- */
@@ -489,6 +492,18 @@ del {
 /* --------------------------------------------------------------------------------------------------------- */
 
 .indexe { color: orangered; }
+.indicateur { position: relative; background-color: yellow; }
+.indicateur::before {
+    position: absolute;
+    top: 120%;
+    left: 50%;
+    content: "➜";
+    font-size: 3rem;
+    color: blue;
+    transform: rotate(-120deg);  
+    animation: indexation 0.2s 0.4s 5;
+}
+.indicateur:hover::before { color: transparent; }
 .images_container {
     position: relative;
     top: 48px;
@@ -884,7 +899,7 @@ del {
 
 /* --------------------------------------------------------------------------------------------------------- */
 
-.shadow { box-shadow: 0 8px 8px #666; }
+.shadow { box-shadow: 0 0 8px #aaa; }
 .surbrillance { border: 1px solid yellow; color: yellow; }
 
 
@@ -956,6 +971,16 @@ del {
 
 /* --------------------------------------------------------------------------------------------------------- */
 
+.vrais {
+    background-color: #fff;
+    min-width: 2rem;
+    box-shadow: 0 0 1rem #aaa;
+    animation: zoomer 2s 1;
+    overflow: visible;
+}
+
+/* --------------------------------------------------------------------------------------------------------- */
+
 
 .wraped {
     border: 1px solid transparent;
@@ -981,6 +1006,10 @@ del {
     60% { text-shadow: 8px 8px 8px #666; transform: scale(0.85); }
     80% { text-shadow: 16px 16px 16px #666; transform: scale(1); }
     100% { text-shadow: 16px 16px 16px #666; transform: scale(1); }
+}
+@keyframes clignotant {
+    from{ box-shadow: 0 0 1rem #000; }
+    to{ box-shadow: none; }
 }
 @keyframes indexation {
     0% {
@@ -1011,6 +1040,12 @@ del {
 @keyframes indicateur {
     from { box-shadow: none; }
     to { box-shadow: 0 0 1rem #444; }
+}
+@keyframes zoomer {
+    0%{ transform: scale(1); }
+    10%{ transform: scale(1.5); }
+    90%{ transform: scale(1.5); }
+    100%{ transform: scale(1); }
 }
 
 

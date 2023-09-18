@@ -51,7 +51,18 @@
                 <div id="pre_exercice_body"></div>
                 <div id="pre_exercice_foot">&#10140;</div>
 
-                <div id="pre_exercice_resultat"></div>
+                <div id="pre_exercice_resultat">
+                    <div id="pre_exercice_resultat_head"><h3></h3></div>
+                    <div id="pre_exercice_resultat_body">
+                        <div id="resultat_container"><div id="resultat"></div></div>
+                        <div id="resultat_diagram">
+                            <div id="libelles"></div>
+                            <div id="diagram"></div>
+                            <div id="legende"></div>
+                        </div>
+                    </div>
+                    <div id="pre_exercice_resultat_foot"></div>
+                </div>
             </div>
         </div>
     </div>

@@ -34,7 +34,7 @@
                 let td = $(this);
                 let td_index = $(this).index();
 
-                setTimeout(() => { td.css({'transform':'scale(1)', 'opacity':1}); }, 150*td_index);
+                setTimeout(() => { td.css({'transform':'scale(1)', 'opacity':1}); }, 60*td_index);
             });
         }, 10);
     }
@@ -48,7 +48,7 @@
                     let td = $(this);
                     let td_index = $(this).index();
 
-                    setTimeout(() => { td.css({'transform':'scale(1)', 'opacity':1}); }, 100*td_index);
+                    setTimeout(() => { td.css({'transform':'scale(1)', 'opacity':1}); }, 60*td_index);
                 });
             }, 700*tr_index);
         });

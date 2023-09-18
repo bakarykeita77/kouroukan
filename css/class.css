@@ -742,6 +742,13 @@ del {
 }
 .parentgrid { display: grid; }
 .parentcell { display: table-cell; vertical-align: middle; }
+.diagram_circulaire {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    margin: auto;
+    rotate: y 180deg
+}
 .phases {
     display: flex;
     justify-content: space-around;

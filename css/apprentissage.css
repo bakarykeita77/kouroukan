@@ -191,13 +191,12 @@
 }
 #pre_exercice_container {
     position: relative;
-    border: 1px solid blue;
     height: 100%;
 }
 #pre_exercice {
     position: absolute;
     top: 4rem;
-    background-color: white;
+    background-color: #aaa;
     box-shadow: 0 0 1rem #666;
     height: calc(100% - 12rem);
     width: 80%;
@@ -220,6 +219,7 @@
     border-radius: 50%;
     cursor: pointer;
 }
+#pre_exercice_container { background-color: #ddd; }
 #pre_exercice_head {
     position: absolute;
     width: 95%;
@@ -277,10 +277,78 @@
 #pre_correction { left: 0; }
 #pre_exercice_resultat {
     position: absolute;
-    border: 1px solid red;
+    display: none;
     width: 100%;
+    height: 0;
     min-height: 2rem;
     background-color: #fff;
+    padding: 1rem;
+    box-sizing: border-box;
+    border-radius: 0.5rem;
+}
+#pre_exercice_resultat h3 {
+    margin: 0;
+}
+#resultat, #resultat_diagram {
+    background-color: #fff;
+    position: absolute;
+    height: calc(100% - 4rem);
+    width: 45%;
+    padding: 1rem;
+    box-sizing: border-box;
+    border: 1px solid #bbb;
+    overflow: auto;
+}
+#resultat_container table {
+    width: 100%;
+    border-color: transparent;
+}
+#resultat_container table th {
+    border-color: transparent;
+}
+#pre_exercice_resultat td:not(#tfoot_td1) {
+    text-align: center;
+    border-color: #aaa;
+}
+#tfoot_td1 { padding-right: 1rem; font-weight: bold; }
+#tfoot_td2 { border: 4px solid #aaa; background-color: #ccc; font-weight: bold; }
+#resultat_container, #resultat_diagram {
+    display: inline-block;
+    width: 45%;
+    margin: 2%;
+    vertical-align: top;
+}
+#libelles {
+    height: 2rem;
+    line-height: 2rem;
+    margin-bottom: 0.5rem;
+}
+#libelles > div {
+    width: 8.6rem;
+    margin: auto;
+}
+#libelles span {
+    padding: 0.125rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    text-align: center;
+}
+#legende {
+    margin: 0.5rem auto;
+}
+#legende table {
+    border-collapse: collapse;
+    width: 100%;
+}
+#legende table td {
+    padding: 0 0.5rem;
+    box-sizing: border-box;
+}
+#legende table td:first-child {
+    text-align: right;
+}
+#legende table td:last-child {
+    text-align: left;
 }
 
 

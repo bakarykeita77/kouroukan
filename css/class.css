@@ -127,7 +127,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 
 /* --------------------------------------------------------------------------------------------------------- */
 
-
+.border_blue { border: 0.5rem solid blue; }
 .btn { 
     height: 1.5rem; 
 }
@@ -236,6 +236,8 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 .cercle { transition: 0.25s; }
 .cercle:active { box-shadow: none; }
 .cercle_active { background-color: white; box-shadow: 0 0 1rem #444; }
+.cercle_en_cours, .carre_en_cours { background-color: yellow; box-shadow: 0 0 1rem #444; }
+.cercle_depasse, .carre_depasse { background-color: white; box-shadow: none; }
 .clavier_container {
     height: 8rem;
     min-height: 4rem;
@@ -363,7 +365,7 @@ del {
 
 /* --------------------------------------------------------------------------------------------------------- */
 
-
+.etudie { background-color: white; }
 .error_message { color: rgba(255,0,0,0.5); }
 .evaluation_container {
     display: none;
@@ -492,7 +494,12 @@ del {
 /* --------------------------------------------------------------------------------------------------------- */
 
 .indexe { color: orangered; }
-.indicateur { position: relative; background-color: yellow; }
+.indicateur { 
+    position: relative; 
+    background-color: yellow;
+    box-shadow: 0 0 1rem #444; 
+    border: 0.25rem solid blue;
+}
 .indicateur::before {
     position: absolute;
     top: 120%;
@@ -914,7 +921,8 @@ del {
 
 .table_parlante, .table_muette {
     padding: 1.5rem;
-    width: 100%;
+    width: 96%;
+    margin: auto;
 }
 .table_parlante tr, .table_muette tr { position: relative; width: 100%; }
 .table_parlante td, .table_muette td {

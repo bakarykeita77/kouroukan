@@ -461,6 +461,12 @@
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
 	
+    
+    function selectionDeTr(tr) {
+        tr.siblings().unwrap();
+        $('#traducteur').remove();
+        tr.wrap('<div id="tr_actif"></div>');
+    }
 	function softDisplay() {
 	    var element = $('.soft_display');
 	    var elements_secondaires = element.children();

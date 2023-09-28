@@ -508,7 +508,7 @@ del {
     font-size: 3rem;
     color: blue;
     transform: rotate(-120deg);  
-    animation: indexation 0.2s 0.4s 5;
+    animation: indexation 0.2s 0s 5;
 }
 .indicateur:hover::before { color: transparent; }
 .images_container {

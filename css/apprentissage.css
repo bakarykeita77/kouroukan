@@ -127,17 +127,6 @@
 }
 #cercles_des_partis { min-width: 4rem; }
 #cercles_des_partis_cadre { position: relative; }
-.cercle {
-    display: inline-block;
-    box-shadow: 0 0 1px black;
-    width: 2rem;
-    height: 2rem;
-    line-height: 2rem;
-    border-radius: 2rem;
-    margin: 0.5rem;
-    color: #666;
-    cursor: pointer;
-}
 #cercles_des_partis_cadre span:hover, #carres_pour_exercices span:hover {
     box-shadow: 0 0 1rem #444;
     background-color: #fff;
@@ -145,7 +134,7 @@
 }
 #carres_pour_exercices span {
     display: inline-block;
-    box-shadow: 0 0 1px black;
+    border: 1px solid #ccc;
     border-radius: 0.5rem;
     padding: 0 0.5rem;
     margin: 0.25rem;
@@ -190,17 +179,20 @@
     z-index: 1;
 }
 #pre_exercice_container {
-    position: relative;
-    height: 100%;
+    position: absolute;
+    height: calc(100% - 2rem);
+    width: 100%;
+    background-color: #ddd;
+    border-radius: 0.5rem;
 }
 #pre_exercice {
     position: absolute;
     top: 4rem;
     background-color: #aaa;
     box-shadow: 0 0 1rem #666;
-    height: calc(100% - 12rem);
-    width: 80%;
-    margin-right: 10%;
+    height: calc(100% - 8rem);
+    width: 86%;
+    margin-right: 7%;
     padding-top: 2rem;
     border-radius: 0.5rem;
     transition: 400ms;
@@ -223,7 +215,6 @@
     background-color: #bbb;
     font-weight: bold;
 }
-#pre_exercice_container { background-color: #ddd; }
 #pre_exercice_head {
     position: absolute;
     width: 95%;
@@ -243,9 +234,12 @@
     overflow: auto;
 }
 #pre_exercice_body td { 
+    width: 3rem;
+    height: 3rem;
+    line-height: 4rem;
     font-size: 3rem;
     border: 0.25rem solid transparent; 
-    transform: scale(0);
+    overflow: visible;
     opacity: 0;
 }
 #pre_exercice_body td:hover { 

@@ -431,6 +431,15 @@ function apprentissages() {
                 pre_apprentissage_clicks_memo.splice(0,pre_apprentissage_clicks_memo.length); 
             }
         }
+        function autorsationDePreExercice() {
+            let autorisation = 'pre_exercice_non_permis';
+
+            $.each($('.cercle'), function() {
+                if($(this).hasClass('cercle_en_cours')) autorisation = 'pre_exercice_permis';
+            });
+
+            return autorisation;
+        }
         function preExercice() {
             $('#carre_1').click(function() {
 
@@ -447,20 +456,11 @@ function apprentissages() {
                 preLessonExercice();
             });
         }
-        function autorsationDePreExercice() {
-            let autorisation = 'pre_exercice_non_permis';
-
-            $.each($('.cercle'), function() {
-                if($(this).hasClass('cercle_en_cours')) autorisation = 'pre_exercice_permis';
-            });
-
-            return autorisation;
-        }
         function preLessonExercice(){
 
-                chargerPreExercice();
-                afficherPreExercice();
-                preExercer();
+            chargerPreExercice();
+            afficherPreExercice();
+            preExercer();
 
 
             function chargerPreExercice() {
@@ -514,7 +514,7 @@ function apprentissages() {
                     }, 10); 
                 }
                 function afficherPreExerciceContenus() {
-   console.log($('#pre_exercice_body tr').html()); 
+    
                     afficherExerciceDeLaLigneEnCours();
                     afficherExerciceDeToutesLesLignesEtudiees();
                         
@@ -562,7 +562,7 @@ function apprentissages() {
                         $('#pre_exercice_body .table_parlante td').css('border','0.25rem solid blue');
     
                         pre_question = pre_questions[i];
-    console.log(pre_questions[i]);
+    console.log(pre_question);
     
                         if(i < pre_questions.length) { 
                             lire(pre_question); 
@@ -578,22 +578,23 @@ function apprentissages() {
                     });
                 }
                 function repondreLaPreQuestion() {
-                    $('#pre_exercice_body').click(function(e) {
+                    $.each($('#pre_exercice_body td'), function() {
+                        $(this).click(function(){
                             
-                        if(pre_question !== '') {
-    
-                            pre_reponse = e.target.innerHTML;
-                            element_actif = e.target;
-                            $(element_actif).css('background-color','#aaa').siblings().css('background-color','transparent');
-                            $('#pre_exercice_body .table_parlante td').css('border','0.25rem solid transparent');
-                            indexer($('#pre_correction'));
-                        }
-    
-    
-                        if(pre_question == '') { 
-                            $('#pre_question').addClass('clignotant'); 
-                            setTimeout(function() { $('#pre_question').removeClass('clignotant'); }, 1200);
-                        }
+                            if(pre_question !== '') {
+                                pre_reponse = this.innerHTML;
+    console.log(pre_reponse);                  
+                                element_actif = $(this);
+                                $(element_actif).css('background-color','#aaa').siblings().css('background-color','transparent');
+                                $('#pre_exercice_body .table_parlante td').css('border','0.25rem solid transparent');
+                                indexer($('#pre_correction'));
+                            }
+        
+                            if(pre_question == '') { 
+                                $('#pre_question').addClass('clignotant'); 
+                                setTimeout(function() { $('#pre_question').removeClass('clignotant'); }, 1200);
+                            }
+                        });
                     });
                 }
                 function corrigerLaPreQuestion() {
@@ -609,7 +610,7 @@ function apprentissages() {
     
                         $('#repeter_pre_question').css('display','none');
                         $('#poser_pre_question').css('display','block');
-                        setTimeout(() => { $('#pre_exercice_container td').css('background-color','transparent'); }, 1600);
+                        $('#pre_exercice_container td').css('background-color','transparent');
     
                         if(pre_question == '') { return false; }
     

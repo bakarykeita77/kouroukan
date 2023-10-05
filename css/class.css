@@ -234,7 +234,6 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     align-items: center;
 }
 .cercle {
-    display: inline-block;
     border: 1px solid #ccc;
     border-radius: 50%;
     width: 2rem;
@@ -506,7 +505,6 @@ del {
 
 .indexe { color: orangered; }
 .indicateur { 
-    position: relative; 
     background-color: yellow;
     box-shadow: 0 0 1rem #444; 
 }
@@ -518,7 +516,7 @@ del {
     font-size: 3rem;
     color: blue;
     transform: rotate(-120deg);  
-    animation: indexation 0.2s 0s 5;
+    animation: indexation 5s 0s infinite;
 }
 .indicateur:hover::before { color: transparent; }
 .images_container {
@@ -931,7 +929,7 @@ del {
 
 .table_parlante, .table_muette {
     padding: 1.5rem;
-    width: 96%;
+    width: calc(100% - 4rem);
     margin: auto;
 }
 .table_parlante tr, .table_muette tr { position: relative; width: 100%; }
@@ -1037,18 +1035,22 @@ del {
     to{ box-shadow: none; }
 }
 @keyframes indexation {
-    0% {
-            top: 120%;
-            left: 50%;
-        }
-    50% {
-            top: 150%;
-            left: 55%;
-        }
-    100% {
-            top: 120%;
-            left: 50%;
-        }
+
+    0% { top: 120%; left: 50%; }
+    2% { top: 150%; left: 55%; }
+    4% { top: 120%; left: 50%; }
+    6% { top: 150%; left: 55%; }
+    8% { top: 120%; left: 50%; }
+    10% { top: 150%; left: 55%; }
+    12% { top: 120%; left: 50%; }
+    14% { top: 150%; left: 55%; }
+    16% { top: 120%; left: 50%; }
+    18% { top: 150%; left: 55%; }
+    20% { top: 120%; left: 50%; }
+    22% { top: 120%; left: 50%; }
+    24% { top: 120%; left: 50%; }
+    
+    100% { top: 120%; left: 50%; }
 }
 @keyframes descendre_doucement {
     from { line-height: 16px; opacity: 0; font-size: 0; }

@@ -85,7 +85,6 @@ function apprentissages() {
                             <div id='cercles_des_partis'>"+cercles_html+"</div> \
                         ";
                         var pre_lesson_head_21_html = "\
-                            <div class='titre_de_parti'>ߞߎߘߎ߲ ߢߊ߯ߡߌߣߍ߲</div> \
                             <div id='carres_pour_exercices'>"+carres_html+"</div>\
                         ";
 
@@ -104,8 +103,8 @@ function apprentissages() {
                         }
                         function carresHTML() {
                             var carres_html = "\
-                                <span id='carre_1'>ߞߎߘߊ</span>  \
-                                <span id='carre_2'>ߞߎߙߎ߬</span>  \
+                                <span id='carre_1'>ߘߋ߰ߣߍ߲߬ ߞߎߘߊ ߢߊ߯ߡߌ߲߫</span>  \
+                                <span id='carre_2'>ߘߋ߰ߣߍ߲ ߞߎߙߎ߬ ߢߊ߯ߡߌ߲߫</span>  \
                             ";
                             return carres_html;
                         }
@@ -465,18 +464,10 @@ function apprentissages() {
 
             function chargerPreExercice() {
 
-                chargerEnteteDePreExercice();
                 chargerCorpsDePreExercice();
                 chargerPiedDePreExercice();
 
                 
-                function chargerEnteteDePreExercice() {
-
-                    let pre_exercice_head_html = '';
-
-                    let = pre_exercice_head_html = '<h3>ߞߎߘߎ߲߫ '+rang+' ߢߊ߯ߡߌߣߍ߲</h3>'; 
-                    $('#pre_exercice_head').html(pre_exercice_head_html);
-                }
                 function chargerCorpsDePreExercice() {
 
                     chargerCorpsPreExercice1();
@@ -751,12 +742,13 @@ function apprentissages() {
                                             let carre_id = $('.carre_en_cours').attr('id');
     
                                             if(carre_id == 'carre_1') { 
-                                                $('#carre_1').removeClass('carre_en_cours').addClass('carre_depasse');
+                                                $('#carre_1').removeClass('carre_en_cours').addClass('carre_depasse').css('display','none');
+                                                $('#carre_2').css('display','block');
                                                 indexer($('#carre_2')); 
                                             }
                                             if(carre_id == 'carre_2') { 
-                                                $('#carre_1').removeClass('carre_depasse');
-                                                $('#carre_2').removeClass('carre_en_cours');
+                                                $('#carre_1').removeClass('carre_depasse').css('display','block');
+                                                $('#carre_2').removeClass('carre_en_cours').css('display','none');
                                                 $('#'+cercle_id).removeClass('cercle_en_cours').addClass('cercle_depasse');
                                                 indexer($('#'+cercle_id).next()); 
                                             }

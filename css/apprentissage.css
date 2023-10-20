@@ -1,6 +1,9 @@
 
 #apprentissage_container { height: 100%; }
-#apprentissage { height: calc(100% - 5rem); }
+#apprentissage { 
+    height: calc(100% - 5rem); 
+    max-height: 45rem;
+}
 #table_parlante_container {
     position: absolute;
     top: 1rem;
@@ -142,10 +145,11 @@
     border-radius: 0.5rem;
     padding: 0 0.5rem;
     height: 2rem;
-    width: 8rem;
+    width: 16rem;
     left: 50%;
     transform: translateX(-50%);
     line-height: 2rem;
+    text-align: center;
     cursor: pointer;
     transition: 0.25s;
 }

@@ -303,7 +303,7 @@
                    
         return tons_apprentissage_html;
     }
-    function lireLettre(lettre) { $('#audio').attr({ src:'son/mp3/'+lettre+'.mp3', autoplay:'on' }); }
+    function lireLettre(lettre) { $('#audio').attr({ src:'son/m4a/'+lettre+'.m4a', autoplay:'on' }); }
     function lire_mot() {
 	   for(var i=0; i<texte_memoire.length; i++) {
            
@@ -318,7 +318,7 @@
 	        }
 	   }
     }
-    function lire(son) { $('#audio').attr({ src:'son/mp3/'+son+'.mp3', autoplay:'on' }); }
+    function lire(son) { $('#audio').attr({ src:'son/m4a/'+son+'.m4a', autoplay:'on' }); }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
     

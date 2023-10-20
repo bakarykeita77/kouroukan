@@ -39,6 +39,8 @@ function apprentissages() {
         let lettres_pre_apprises = [];
 
         let pre_questions = [];
+        let ordre_de_question = '';
+        let total_questions = '';
         let melange_des_lettres_actives = [];
         let melange_des_lettres_pre_apprises = [];
         
@@ -445,12 +447,11 @@ function apprentissages() {
                 if(autorsationDePreExercice() == 'pre_exercice_non_permis') { alert("ߞߎߘߎ߲߫ ߞߎߘߊ ߘߋ߲߰ ߝߟߐ߫߹ '\n' ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫߹"); return; }
                 
                 $('#carres_pour_exercices span').removeClass('carre_en_cours');
-                $(this).addClass('carre_en_cours');
+                $(this).addClass('carre_en_cours').html('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߣߌ߫ ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ ߟߎ߬ ߓߘߊ߫ ߓߌ߫');
                 carre_index = $(this).index();
 
                 melange_des_lettres_actives = malaxer(les_lettres_actives);
-                pre_questions = melange_des_lettres_actives;
-                pre_questions = malaxer(pre_questions);
+                pre_questions = malaxer(melange_des_lettres_actives);
 
                 preLessonExercice();
             });
@@ -536,6 +537,7 @@ function apprentissages() {
                 let element_actif = '';
                 let questions_posees = [];
                 let pre_question = '', pre_reponse = '';
+
        
                 ecouterLaPreQuestion();
                 repondreLaPreQuestion();
@@ -552,6 +554,8 @@ function apprentissages() {
                         $('#repeter_pre_question').css('display','block');
                         $('#pre_exercice_body .table_parlante td').css('border','0.25rem solid blue');
     
+                        ordre_de_question = (total_questions == parseIntNko(i+2)) ? 'ߟߊߓߊ߲' : parseIntNko(i+2);
+                        $('#poser_pre_question').html('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ '+total_questions+' \\ '+ordre_de_question+'߲ ߠߊߡߍ߲߫');
                         pre_question = pre_questions[i];
     console.log(pre_question);
     
@@ -822,12 +826,13 @@ function apprentissages() {
             }); 
         }
         function chargerPiedDePreExercice() {
-            
+        
+            total_questions = parseIntNko(pre_questions.length);
             var pre_exercice_foot_html = '\
                 <div id="pre_foot_btns_container"> \
                     <div id="pre_exercice_foot_btns"> \
                         <div id="pre_question"> \
-                            <div id="poser_pre_question">ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߊߡߍ߲߫</div> \
+                            <div id="poser_pre_question">ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ '+total_questions+' \\ ߁߭ ߟߊߡߍ߲߫</div> \
                             <div id="repeter_pre_question">ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߊߡߍ߲߫ ߕߎ߯ߣߌ߫</div> \
                         </div> \
                         <div id="pre_correction">ߏ߬ ߛߊߞߍ߫</div> \

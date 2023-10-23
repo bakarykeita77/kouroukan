@@ -6,7 +6,7 @@ body {
 #index_haut_de_page {
     position: relative;
     background-color: #002;
-    height: 12rem;
+    height: calc(100% - 30rem);
     width: 100%;
     max-width: 50rem;
     margin: 0.25rem auto;
@@ -14,9 +14,11 @@ body {
     box-sizing: border-box;
 }
 #site_name {
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
     padding: 1rem;
     width: calc(100% - 2rem);
-    height: calc(100% - 2rem);
     color: var(--couleurPrimaire);
     text-align: center;
 }

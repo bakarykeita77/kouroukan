@@ -28,9 +28,9 @@
     background-color: #aaa;
 }
 #pre_apprentissage_head > div {
-    margin: 0;
     height: 4rem;
-    width: calc(50% - 3px);
+    width: 50%;
+    margin: auto;
     font-weight: bold;
     color: black;
     text-align: center;
@@ -140,12 +140,12 @@
     color: black;
 }
 #carres_pour_exercices span {
-    position: absolute;
+    position: relative;
+    top: 1rem;
     border: 1px solid #ccc;
     border-radius: 0.5rem;
     padding: 0 0.5rem;
     height: 2rem;
-    width: 16rem;
     left: 50%;
     transform: translateX(-50%);
     line-height: 2rem;

@@ -303,14 +303,14 @@
                    
         return tons_apprentissage_html;
     }
-    function lireLettre(lettre) { 
-        $('#audio').attr({ src:'../son/aac/'+lettre+'.aac', autoplay:'on' }); 
-        $('#audio').attr({ src:'../son/amr/'+lettre+'.amr', autoplay:'on' }); 
-        $('#audio').attr({ src:'../son/flac/'+lettre+'.flac', autoplay:'on' }); 
-        $('#audio').attr({ src:'../son/ogg/'+lettre+'.ogg', autoplay:'on' }); 
-        $('#audio').attr({ src:'../son/wav/'+lettre+'.wav', autoplay:'on' }); 
-        $('#audio').attr({ src:'../son/m4a/'+lettre+'.m4a', autoplay:'on' }); 
-        $('#audio').attr({ src:'../son/mp3/'+lettre+'.mp3', autoplay:'on' }); 
+    function lireLettre(tons,lettre) { 
+        //$('#audio').attr({ src:'../son/aac/'+tons+'/'+lettre+'.aac', autoplay:'on' }); 
+        //$('#audio').attr({ src:'../son/amr/'+tons+'/'+lettre+'.amr', autoplay:'on' }); 
+        //$('#audio').attr({ src:'../son/flac/'+tons+'/'+lettre+'.flac', autoplay:'on' }); 
+        //$('#audio').attr({ src:'../son/ogg/'+tons+'/'+lettre+'.ogg', autoplay:'on' }); 
+        //$('#audio').attr({ src:'../son/wav/'+tons+'/'+lettre+'.wav', autoplay:'on' }); 
+        $('#audio').attr({ src:'../son/m4a/'+tons+'/'+lettre+'.m4a', autoplay:'on' }); 
+        //$('#audio').attr({ src:'../son/mp3/'+tons+'/'+lettre+'.mp3', autoplay:'on' }); 
     }
     function lire_mot() {
 	   for(var i=0; i<texte_memoire.length; i++) {
@@ -320,28 +320,31 @@
             var r = 0;
             
             function lire() {
+                $('#audio').attr({ src:'../son/m4a/'+tons+'/'+lettre+'.m4a', autoplay:'on' }); 
 
-                $('#audio').attr({ src:'../son/aac/'+lettre+'.aac', autoplay:'on' }); 
-                $('#audio').attr({ src:'../son/amr/'+lettre+'.amr', autoplay:'on' }); 
-                $('#audio').attr({ src:'../son/flac/'+lettre+'.flac', autoplay:'on' }); 
-                $('#audio').attr({ src:'../son/ogg/'+lettre+'.ogg', autoplay:'on' }); 
-                $('#audio').attr({ src:'../son/wav/'+lettre+'.wav', autoplay:'on' }); 
-                $('#audio').attr({ src:'../son/m4a/'+lettre+'.m4a', autoplay:'on' }); 
-                $('#audio').attr({ src:'../son/mp3/'+lettre+'.mp3', autoplay:'on' }); 
+                // $('#audio').attr({ src:'../son/aac/'+lettre+'.aac', autoplay:'on' }); 
+                // $('#audio').attr({ src:'../son/amr/'+lettre+'.amr', autoplay:'on' }); 
+                // $('#audio').attr({ src:'../son/flac/'+lettre+'.flac', autoplay:'on' }); 
+                // $('#audio').attr({ src:'../son/ogg/'+lettre+'.ogg', autoplay:'on' }); 
+                // $('#audio').attr({ src:'../son/wav/'+lettre+'.wav', autoplay:'on' }); 
+                // $('#audio').attr({ src:'../son/m4a/'+lettre+'.m4a', autoplay:'on' }); 
+                // $('#audio').attr({ src:'../son/mp3/'+lettre+'.mp3', autoplay:'on' }); 
 
                 r++;
                 if( r>mot.length ) { clearInterval( lecture ); }
 	        }
 	   }
     }
-    function lire(son) { 
-        $('#audio').attr({ src:'../son/aac/'+lettre+'.aac', autoplay:'on' }); 
-        $('#audio').attr({ src:'../son/amr/'+lettre+'.amr', autoplay:'on' }); 
-        $('#audio').attr({ src:'../son/flac/'+lettre+'.flac', autoplay:'on' }); 
-        $('#audio').attr({ src:'../son/ogg/'+lettre+'.ogg', autoplay:'on' }); 
-        $('#audio').attr({ src:'../son/wav/'+lettre+'.wav', autoplay:'on' }); 
-        $('#audio').attr({ src:'../son/m4a/'+lettre+'.m4a', autoplay:'on' }); 
-        $('#audio').attr({ src:'../son/mp3/'+lettre+'.mp3', autoplay:'on' });  
+    function lire(dossier,son) { 
+        $('#audio').attr({ src:'../son/m4a/'+dossier+'/'+son+'.m4a', autoplay:'on' }); 
+
+        // $('#audio').attr({ src:'../son/aac/'+lettre+'.aac', autoplay:'on' }); 
+        // $('#audio').attr({ src:'../son/amr/'+lettre+'.amr', autoplay:'on' }); 
+        // $('#audio').attr({ src:'../son/flac/'+lettre+'.flac', autoplay:'on' }); 
+        // $('#audio').attr({ src:'../son/ogg/'+lettre+'.ogg', autoplay:'on' }); 
+        // $('#audio').attr({ src:'../son/wav/'+lettre+'.wav', autoplay:'on' }); 
+        // $('#audio').attr({ src:'../son/m4a/'+lettre+'.m4a', autoplay:'on' }); 
+        // $('#audio').attr({ src:'../son/mp3/'+lettre+'.mp3', autoplay:'on' });  
     }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/

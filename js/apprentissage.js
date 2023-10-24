@@ -357,7 +357,7 @@ function apprentissages() {
                         $.each($('.table_parlante td, .pre_apprentissage_td'), function() {
                             var lettre = $(this).html();
                             $(this).click(()=>{
-                                if(lettres_pre_apprises.includes(lettre)) { lireLettre(lettre); }
+                                if(lettres_pre_apprises.includes(lettre)) { lireLettre('alphabet/',lettre); }
                             });
                         });
                     }
@@ -560,15 +560,16 @@ function apprentissages() {
     console.log(pre_question);
     
                         if(i < pre_questions.length) { 
-                            lire(pre_question); 
+                            lire('alphabet/',pre_question); 
                             relire(pre_question); 
                             questions_posees.push(pre_question);
-                        } 
+                        }
+                         
                         i++; 
                         if(i == pre_questions.length) { i = 0; }
     
                         function relire(question) {
-                            $('#repeter_pre_question').click(function() { lire(question); });
+                            $('#repeter_pre_question').click(function() { lire('alphabet/',question); });
                         }
                     });
                 }

@@ -2,18 +2,26 @@
 	<link rel="stylesheet" href="/kouroukan/css/apprentissage.css"/>
 
     <div id="apprentissage_container">
-        <div class="course_head" id="apprentissage_head">
-            <div id="pre_apprentissage_head">
-                <div class="pre_lesson_head_1"></div>
-                <div class="pre_lesson_head_2"></div>
-            </div>
-
-            <div class = 'progress_bar' id = "apprentissage_progress_bar">
-                <div class='progress_bonne_reponse_bar'></div>
+        
+        <div class="course_head" id="apprentissage_note">
+            <div id="pre_apprentissage_note">
+                
             </div>
         </div>
         <div class="course_body" id="apprentissage_body"></div>
         <div class="course_foot" id="apprentissage_foot">
+
+            <div class="course_head" id="apprentissage_head">
+                <div id="pre_apprentissage_head">
+                    <div class="pre_lesson_head_1"></div>
+                    <div class="pre_lesson_head_2"></div>
+                </div>
+
+                <div class = 'progress_bar' id = "apprentissage_progress_bar">
+                    <div class='progress_bonne_reponse_bar'></div>
+                </div>
+            </div>
+
             <div class="dialogue_btn" id="apprentissage_dialogue_btn">
 
                 <div class="btns media" id="media_apprentissage">
@@ -38,7 +46,9 @@
                         <span class='parametre_label'>ߛߏ߯ߙߏߟߊ߲</span>  
                     </div>
                 </div>
+
             </div>
+
         </div>
     </div>
 

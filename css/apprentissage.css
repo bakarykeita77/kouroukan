@@ -13,12 +13,22 @@
     width: 100%;
     overflow: auto;
 }
-#apprentissage_head { border-radius: 0.25rem 0.25rem 0 0; }
+#apprentissage_note {   
+    border-radius: 0.25rem 0.25rem 0 0;
+    height: 6rem;
+    overflow: auto;
+}
+#apprentissage_note h3 { margin: 0; }
+#apprentissage_note p { margin: 0.25rem 0; }
+#pre_apprentissage_note {  
+    position: relative;
+    height: calc(100% - 1rem);
+    width: calc(98% - 2rem);
+    margin: auto;
+    padding: 0.5rem 1rem;
+    font-size: 12px;
+}
 #pre_apprentissage_head {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    
     position: absolute;
     height: 4rem;
     width: calc(100% - 2px);
@@ -28,14 +38,17 @@
     background-color: #aaa;
 }
 #pre_apprentissage_head > div {
+    position: absolute;
     height: 4rem;
-    width: 50%;
+    width: 100%;
     margin: auto;
     font-weight: bold;
     color: black;
     text-align: center;
-    z-index: 1;
+    background-color: #aaa;
 }
+#pre_apprentissage_head > div:first-child { z-index: 1; }
+#pre_apprentissage_head > div:last-child { z-index: 0; }
 .titre_de_parti, #cercles_des_partis, #carres_pour_exercices { position: relative; display: inline-block; }
 .titre_de_parti { height: 4rem; line-height: 4rem; }
 .titre_de_parti > div { display: inline-block; vertical-align: middle; }
@@ -140,12 +153,12 @@
     color: black;
 }
 #carres_pour_exercices span {
-    position: relative;
-    top: 1rem;
+    position: absolute;
     border: 1px solid #ccc;
     border-radius: 0.5rem;
     padding: 0 0.5rem;
     height: 2rem;
+    width: 8rem;
     left: 50%;
     transform: translateX(-50%);
     line-height: 2rem;
@@ -153,8 +166,6 @@
     cursor: pointer;
     transition: 0.25s;
 }
-#carre_1  { display: block; }
-#carre_2  { display: none; }
 #carres_pour_exercices span:active { box-shadow: none; }
 #consonnes_cadre {
     position: absolute;
@@ -199,7 +210,7 @@
 }
 #pre_exercice {
     position: absolute;
-    top: 4rem;
+    top: 7rem;
     background-color: #aaa;
     box-shadow: 0 0 1rem #666;
     height: calc(100% - 8rem);
@@ -421,7 +432,7 @@
         display: inline-block;
     }
     #pre_exercice {
-        height: calc(100% - 8rem);
+        height: calc(100% - 16rem);
         width: 86%;
         margin-right: 7%;
     }

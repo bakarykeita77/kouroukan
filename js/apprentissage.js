@@ -54,10 +54,11 @@ function apprentissages() {
         let nbr_bonne_reponse = 0;
         let nbr_mauvaise_reponse = 0;
         let taux_de_fausse_reponse = 0;
-        let taux_de_vraie_reponse = 0;
+        let taux_de_vraie_reponse_1 = 0;
+        let taux_de_vraie_reponse_2 = 0;
+        let taux = 0;
         let point_total = 0;
 
-        
 
         preApprentissage();
         preExercice();
@@ -430,6 +431,9 @@ function apprentissages() {
                                         <h3>ߡߊ߬ߘߋ߲߰ߠߌ</h3>\
                                         <p>ߣߌ߫ ߟߊ߲ߞߣߍߡߊߣߍ߲ ߠߎ߬ ߓߘߊ߫ ߟߐ߲߫ ߌ ߓߟߏ߫߸ ߢߊ߯ߡߌߟߊ߲ ߞߘߎ ߘߌ߲߯ ߘߎ߭ߡߊ߬ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫߹) ߞߊ߬ ߘߋ߲߬ߣߍ߲߬ ߞߎߘߊ ߟߎ߬ ߢߊ߯ߡߌ߲߫ ߡߊ߬ߞߟߏ߬ߟߌ ߞߊ߲ߡߊ߬.</p>\
                                     ');
+
+                                    $('#carre_1').css('z-index','1');
+                                    $('#carre_2').css('z-index','0');
                                 }
                             }
                             function indexerExerciceBtn1() {
@@ -488,6 +492,7 @@ function apprentissages() {
             $('#carre_1').click(function() {
                 let carre_actif = $(this);
                 
+                initialiserLeResultat();
                 carre_index = $(this).index();
                 carre_id = $(this).attr('id');
                 melange_des_lettres_actives = malaxer(les_lettres_actives);
@@ -513,8 +518,9 @@ function apprentissages() {
             $('#carre_2').click(function() { 
                 let carre_actif = $(this);
 
-                carre_id = $(this).attr('id');
+                initialiserLeResultat();
                 carre_index = $(this).index();
+                carre_id = $(this).attr('id');
                 melange_des_lettres_pre_apprises = malaxer(lettres_pre_apprises);
                 pre_questions = melange_des_lettres_pre_apprises;
                 pre_questions = malaxer(pre_questions);
@@ -683,7 +689,7 @@ function apprentissages() {
                         pre_exercice_memoire.push(question_reponse);
                         pre_question = '';
                         pre_question = '';
-    
+  
                         if(questions_posees.length < pre_questions.length) { indexer($('#pre_question')); }
                         if(questions_posees.length == pre_questions.length) { 
                             
@@ -757,12 +763,15 @@ function apprentissages() {
                                         let n_m_r = nbr_mauvaise_reponse;
     
                                         taux_de_fausse_reponse = Math.ceil((n_m_r/n_q)*100);
-                                        taux_de_vraie_reponse = 100 - taux_de_fausse_reponse;
+                                        if(carre_index == 0) { taux_de_vraie_reponse_1 =  100 - taux_de_fausse_reponse; }
+                                        if(carre_index == 1) { taux_de_vraie_reponse_2 =  100 - taux_de_fausse_reponse; }
     
+                                        taux = (carre_index == 0) ? taux_de_vraie_reponse_1 : taux_de_vraie_reponse_2;
+
                                         html += ' \
                                             <table id="legende_table" border=1> \
                                                 <tr> <td>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߡߎ߬ߡߍ</td> <td>'+parseIntNko(n_q)+'</td> <td>%߁߀߀</td> </tr>  \
-                                                <tr> <td>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ߫ ߢߊ߬ߣߍ߲</td> <td>'+parseIntNko(n_b_r)+'</td> <td>%<span>'+parseIntNko(taux_de_vraie_reponse)+'</span></td> </tr>  \
+                                                <tr> <td>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ߫ ߢߊ߬ߣߍ߲</td> <td>'+parseIntNko(n_b_r)+'</td> <td>%<span>'+parseIntNko(taux)+'</span></td> </tr>  \
                                                 <tr> <td>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ߫ ߝߏߣߍ߲</td> <td>'+parseIntNko(n_m_r)+'</td> <td>%<span>'+parseIntNko(taux_de_fausse_reponse)+'</span></td> </tr>  \
                                             </table>  \
                                         ';
@@ -785,8 +794,8 @@ function apprentissages() {
                             }
                             function resultatDePreExerciceNote() {
 
-                                if(taux_de_vraie_reponse == 100) {
-                                    if(carre_index == 0) {
+                                if(carre_index == 0) {
+                                    if(taux_de_vraie_reponse_1 == 100) {
                                         ecrire('pre_apprentissage_note','\
                                             <h3>ߡߊ߬ߞߟߏ߬ߟߌ ߢߊ߬ߣߍ߲߬</h3>\
                                             <p>ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ ߕߊ߯ ߣߐ߰ߡߊ߬ߛߍߦߌ ߦߙߐ.<br>\
@@ -794,8 +803,18 @@ function apprentissages() {
                                             ߘߊߕߎ߲ߠߊ߲߫ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߓߐ߫ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫)</p>\
                                         ');
                                     }
-                                    
-                                    if(carre_index == 1) {
+                                    if(taux_de_vraie_reponse_1 < 100) {
+                                        ecrire('pre_apprentissage_note','\
+                                            <h3>ߡߊ߬ߞߟߏ߬ߟߌ ߡߊ߫ ߢߊ߬</h3>\
+                                            <p>ߌ ߓߘߊ߫ ߗߌߙߏ߲߫ ߡߊ߬ߞߟߏ߬ߟߌ ߢߌ߲߬ ߘߐ߫.<br>\
+                                            ߞߐߝߟߌ ߝߟߍ߫ ߘߎ߭ߡߊ߬ ߓߊ߫߹<br>\
+                                            ߘߊߕߎ߲ߠߊ߲߫ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߓߐ߫ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫)</p>\
+                                        ');
+                                    }
+                                }
+                                
+                                if(carre_index == 1) {
+                                    if(taux_de_vraie_reponse_2 == 100) {
                                         ecrire('pre_apprentissage_note','\
                                             <h3>ߣߐ߰ߡߊ߬ߛߍߦߌ ߢߊ߬ߣߍ߲߬</h3>\
                                             <p>ߞߎߘߎ߲߫ ߁߭ ߤߊ߲߯ ߞߎߘߎ߲߫ '+cercle_actif.html()+' ߠߎ߬ ߓߍ߯ ߓߘߊ߫ ߢߊߦߋ߫ ߌ ߓߟߏ߫<br>\
@@ -804,20 +823,7 @@ function apprentissages() {
                                             ߘߊߕߎ߲ߠߊ߲߫ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߓߐ߫ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫)</p>\
                                         ');
                                     }
-                                }
-                                
-                                if(taux_de_vraie_reponse < 100) {
-                                    
-                                    if(carre_index == 0) {
-                                        ecrire('pre_apprentissage_note','\
-                                            <h3>ߡߊ߬ߞߟߏ߬ߟߌ ߡߊ߫ ߢߊ߬</h3>\
-                                            <p>ߌ ߓߘߊ߫ ߗߌߙߏ߲߫ ߡߊ߬ߞߟߏ߬ߟߌ ߢߌ߲߬ ߘߐ߫.<br>\
-                                            ߞߐߝߟߌ ߝߟߍ߫ ߘߎ߭ߡߊ߬ ߓߊ߫߹<br>\
-                                            ߘߊߕߎ߲ߠߊ߲߫ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߓߐ߫ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫)</p>\
-                                        ');
-                                    }
-                                    
-                                    if(carre_index == 1) {
+                                    if(taux_de_vraie_reponse_2 < 100) {
                                         ecrire('pre_apprentissage_note','\
                                             <h3>ߣߐ߰ߡߊ߬ߛߍߦߌ ߡߊ߫ ߢߊ߬</h3>\
                                             <p>ߌ ߓߘߊ߫ ߗߌߙߏ߲߫ ߣߐ߰ߡߊ߬ߛߍߦߌ ߢߌ߲߬ ߘߐ߫.<br>\
@@ -873,8 +879,7 @@ function apprentissages() {
             function enregistrementDePreExercice() {}
             function stockageDeDePreExercice() {}
             function fermerPreExercice() {
-                $('#fermeture_pre_exercice').one('click',function(){ 
-                                            
+                $('#fermeture_pre_exercice').one('click',function(){                                            
                     cercle_id = $('.cercle_en_cours').attr('id');
                     carre_id = $('.carre_en_cours').attr('id');
  
@@ -884,41 +889,42 @@ function apprentissages() {
                     $('#carre_1').css('z-index',0);
                     $('#carre_2').css('z-index',1);
                     
-                    setTimeout(function() {  $('#pre_exercice_cover, #pre_exercice, #pre_exercice_resultat').css({'display':'none'}); }, 300); 
-                    
-                    if(taux_de_vraie_reponse == 100) {
-                      
-                        setTimeout(() => {
-                              
-                            if(carre_index == 0) { 
-                                $('#carre_1').removeClass('carre_en_cours').addClass('carre_depasse').css('display','none');
-                                $('#carre_2').css('display','block');
-                                $('#carre_2').click();
-                                
-                                return;
+                    setTimeout(() => {
+console.log('carre_index = '+carre_index+'\n'+'taux_de_vraie_reponse_1 = '+taux_de_vraie_reponse_1+'\n'+'taux_de_vraie_reponse_2 = '+taux_de_vraie_reponse_2); 
+                        $('#pre_exercice_cover, #pre_exercice, #pre_exercice_resultat').css({'display':'none'});
+                        
+                        if(carre_index == 0) { 
+                            if(taux_de_vraie_reponse_1 < 100) {
+                                $('#carre_1').click(); 
                             }
-                            if(carre_index == 1) { 
-                                $('#carre_1').removeClass('carre_depasse').css('display','block');
-                                $('#carre_2').removeClass('carre_en_cours').css('display','none');
-                                $('#'+cercle_id).removeClass('cercle_en_cours').addClass('cercle_depasse');
-                                indexer($('#'+cercle_id).next()); 
-
+                            if(taux_de_vraie_reponse_1 == 100) {
+                                $('#carre_1').removeClass('carre_en_cours').addClass('carre_depasse').css('z-index',0);
+                                $('#carre_2').css('z-index',1);
+                                $('#carre_2').click();
+                            }
+                        }
+                    
+                        if(carre_index == 1) { 
+                            
+                            if(taux_de_vraie_reponse_2 < 100) {
+                                $('#carre_2').click();
+                            }
+                            if(taux_de_vraie_reponse_2 == 100) {
                                 $('.pre_lesson_head_1').css('z-index','1');
                                 $('.pre_lesson_head_2').css('z-index','0');
-                    
+                                $('#'+cercle_id).removeClass('cercle_en_cours').addClass('cercle_depasse');
+                                indexer($('#'+cercle_id).next()); 
                                 
                                 ecrire('pre_apprentissage_note','\
                                     <h3>ߡߊ߬ߘߋ߲߰ߠߌ</h3>\
                                     <p>ߞߎߘߎ߲߫ '+cercle_actif.next().html()+' ߘߌ߲߯ ߘߎ߭ߡߊ߬</p>\
                                 ');
-
-                                initialiserLeResultat();
-                               
-                                return;
                             }
+                        }
 
-                        }, 400);
-                    }
+                        return;
+                        
+                    }, 400);
                 });
             }
         }
@@ -947,7 +953,9 @@ function apprentissages() {
             nbr_bonne_reponse = 0;
             nbr_mauvaise_reponse = 0;
             taux_de_fausse_reponse = 0;
-            taux_de_vraie_reponse = 0;
+            taux = 0;
+            taux_de_vraie_reponse_1 = 0;
+            taux_de_vraie_reponse_2 = 0;
             point_total = 0;
                     
             $('#pre_exercice_resultat h3').html('ߞߎߘߎ߲߫ ߞߐߝߟߌ');

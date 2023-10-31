@@ -57,7 +57,6 @@
             <span id="fermeture_pre_exercice">&times;</span>
             <div id="pre_exercice_container">
                     
-                <div id="pre_exercice_head"></div>
                 <div id="pre_exercice_body"></div>
                 <div id="pre_exercice_foot">&#10140;</div>
 

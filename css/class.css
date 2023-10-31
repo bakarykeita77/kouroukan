@@ -297,7 +297,6 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     position: relative;
     top: 3rem;
     height: 90vh;
-    min-height: 25rem;
     width: calc(100vw - 0.25rem);
     max-width: 50rem;
     margin: 0 auto;
@@ -307,12 +306,11 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 }
 .course_body { 
     position: relative; 
-    height: calc(100% - 12rem);
+    height: calc(100% - 8.5rem);
     margin: 0.2rem 0;
     color: white;
     box-sizing: border-box;
     background-color: rgba(0,0,0,0.8);
-    border-radius: 0.5rem;
 }
 .course_container {
     display: none;
@@ -518,6 +516,7 @@ del {
     color: blue;
     transform: rotate(-120deg);  
     animation: indexation 5s 0s infinite;
+    z-index: 1;
 }
 .indicateur:hover::before { color: transparent; }
 .images_container {
@@ -558,7 +557,7 @@ del {
 .lesson_progress_bonne_reponse_bar { background-color: yellow; }
 .lesson_title {
     position: relative;
-    padding: 0.5rem 0;
+    padding: 0.5rem;
     margin: 0.25rem;
     height: 2.5rem;
     line-height: 2.5rem;
@@ -1079,7 +1078,7 @@ del {
 
 @media screen and (width < 400px) {
     .cover { background-color: none; }
-    .lesson_title { width: 80vw; margin: auto; }
+    .lesson_title { width: 96vw; margin: auto; }
     .parametres_popup { width: 80vw; }
     .phases {
         flex-direction: column;

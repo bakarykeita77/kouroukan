@@ -11,10 +11,10 @@
         <div class="course_body" id="apprentissage_body"></div>
         <div class="course_foot" id="apprentissage_foot">
 
-            <div class="course_head" id="apprentissage_head">
-                <div id="pre_apprentissage_head">
-                    <div class="pre_lesson_head_1"></div>
-                    <div class="pre_lesson_head_2"></div>
+            <div>
+                <div id="pre_apprentissage_foot">
+                    <div class="pre_lesson_foot_1"></div>
+                    <div class="pre_lesson_foot_2"></div>
                 </div>
 
                 <div class = 'progress_bar' id = "apprentissage_progress_bar">
@@ -63,10 +63,12 @@
                 <div id="pre_exercice_resultat">
                     <div id="pre_exercice_resultat_head"><h3></h3></div>
                     <div id="pre_exercice_resultat_body">
-                        <div id="resultat_container"><div id="resultat"></div></div>
                         <div id="resultat_diagram">
                             <div id="libelles"></div>
                             <div id="diagram"></div>
+                        </div>
+                        <div id="resultat_container">
+                            <div id="resultat"></div>
                             <div id="legende"></div>
                         </div>
                     </div>

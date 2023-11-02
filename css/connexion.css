@@ -4,7 +4,7 @@
     padding: 0;
 	width: 80%;
 	max-width: 50rem;
-	min-height: 25rem;
+	min-height: 20rem;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%,-50%);
@@ -93,7 +93,7 @@
 	right: 0;
 }
 #connexion_form, #connexion_note  {
-	padding: 2rem;
+	padding: 1rem;
 	max-width: 30rem;
 	box-sizing: border-box;
 }

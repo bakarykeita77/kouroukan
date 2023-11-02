@@ -107,8 +107,8 @@ function apprentissages() {
                             <h3>ߡߊ߬ߘߋ߲߰ߠߌ</h3>\
                             <p>ߞߎߘߎ߲߫ ߝߟߐߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬</p>\
                         ');
-                        $('.pre_lesson_head_1').html(pre_lesson_head_11_html);
-                        $('.pre_lesson_head_2').html(pre_lesson_head_21_html);
+                        $('.pre_lesson_foot_1').html(pre_lesson_head_11_html);
+                        $('.pre_lesson_foot_2').html(pre_lesson_head_21_html);
 
                         
                         function cerclesHTML() {
@@ -147,8 +147,8 @@ function apprentissages() {
                             ";
                             var pre_lesson_head_22_html = "ߞߎߘߎ߲ ߢߊ߯ߡߌߣߍ߲";
 
-                            $('.pre_lesson_head_1' ).html(pre_lesson_head_12_html);
-                            $('.pre_lesson_head_2' ).html(pre_lesson_head_22_html);
+                            $('.pre_lesson_foot_1' ).html(pre_lesson_head_12_html);
+                            $('.pre_lesson_foot_2' ).html(pre_lesson_head_22_html);
                             
                             function panneauxDesLettresHTML() {
                                 
@@ -237,11 +237,11 @@ function apprentissages() {
             function afficherPreApprentissage() {
                 $('.dialogue_btn').css('display','none');
     
-                $('#table_pre_apprentissage').css('height',0);
+                $('#table_pre_apprentissage').css('mpn-height',0);
                 setTimeout(function(){ $('#table_pre_apprentissage').animate({'min-height':'90%'},600); }, 200);
 
-                $('.pre_lesson_head_1').css('z-index',1);
-                $('.pre_lesson_head_2').css('z-index',0);
+                $('.pre_lesson_foot_1').css('z-index',1);
+                $('.pre_lesson_foot_2').css('z-index',0);
                 
 
                 $('#cercles_des_partis_cadre span').click(function() {
@@ -440,8 +440,8 @@ function apprentissages() {
                                 let n = indice();
     
                                 if(n == 7) { 
-                                    $('.pre_lesson_head_1').css('z-index',0);
-                                    $('.pre_lesson_head_2').css('z-index',1);
+                                    $('.pre_lesson_foot_1').css('z-index',0);
+                                    $('.pre_lesson_foot_2').css('z-index',1);
                                     $('#carre_1').css('z-index',1);
                                     $('#carre_2').css('z-index',0);
                                     
@@ -546,8 +546,8 @@ function apprentissages() {
         }
         function preLessonExercice(){
 
-            $('.pre_lesson_head_1').css('z-index','1');
-            $('.pre_lesson_head_2').css('z-index','0');
+            $('.pre_lesson_foot_1').css('z-index','1');
+            $('.pre_lesson_foot_2').css('z-index','0');
 
             chargerPreExercice();
             afficherPreExercice();
@@ -884,8 +884,8 @@ function apprentissages() {
                     carre_id = $('.carre_en_cours').attr('id');
  
                     $('#pre_exercice').css({'transform':'scale(0.8)', 'opacity':0});
-                    $('.pre_lesson_head_1').css('z-index',0);
-                    $('.pre_lesson_head_2').css('z-index',1);
+                    $('.pre_lesson_foot_1').css('z-index',0);
+                    $('.pre_lesson_foot_2').css('z-index',1);
                     $('#carre_1').css('z-index',0);
                     $('#carre_2').css('z-index',1);
                     
@@ -910,8 +910,8 @@ console.log('carre_index = '+carre_index+'\n'+'taux_de_vraie_reponse_1 = '+taux_
                                 $('#carre_2').click();
                             }
                             if(taux_de_vraie_reponse_2 == 100) {
-                                $('.pre_lesson_head_1').css('z-index','1');
-                                $('.pre_lesson_head_2').css('z-index','0');
+                                $('.pre_lesson_foot_1').css('z-index','1');
+                                $('.pre_lesson_foot_2').css('z-index','0');
                                 $('#'+cercle_id).removeClass('cercle_en_cours').addClass('cercle_depasse');
                                 indexer($('#'+cercle_id).next()); 
                                 

@@ -1,10 +1,8 @@
 
 #programmes_container {
     position: relative;
-    width: calc(100% - 4rem);
     max-width: 50rem;
     margin: auto;
-    padding: 0px 1rem;
     background-color: var(--couleurNeutre);
     direction: rtl;
 }
@@ -57,7 +55,7 @@
     box-shadow: var(--shadow_1a);
 }
 #programme_commentaire {
-    padding: 2rem;
+    padding: 1rem;
     margin: 1rem 0;
     background-color: #eee;
 }
@@ -69,6 +67,7 @@
 
 
 @media(orientation: landscape) {
+    #programmes_container { width: calc(100% - 4rem); }
     #programmes_fond { box-shadow: var(--shadowQuaternaire); }
     #programme_ul {
         display: flex;
@@ -81,6 +80,7 @@
     }
 }
 @media(orientation: portrait) {
+    #programmes_container { width: calc(100% - 1rem); }
     #programmes_fond { box-shadow: none; }
     #programme_ul {
         display: flex;

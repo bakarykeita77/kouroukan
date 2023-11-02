@@ -1,9 +1,5 @@
 
-#apprentissage_container { height: calc(100% - 3rem); 
-}
-#apprentissage { 
-    height: calc(100% - 3rem);
-    max-height: 40rem;
+#apprentissage_container { height: calc(100% - 11.5rem); 
 }
 #table_parlante_container {
     position: absolute;
@@ -16,7 +12,6 @@
 }
 #apprentissage_note {   
     border-radius: 0.25rem 0.25rem 0 0;
-    height: 6.5rem;
     background-color: #ddd;
     overflow: auto;
 }
@@ -30,7 +25,7 @@
     padding: 0.5rem 1rem;
     font-size: 12px;
 }
-#pre_apprentissage_head {
+#pre_apprentissage_foot {
     position: absolute;
     height: 4rem;
     width: calc(100% - 2px);
@@ -38,7 +33,7 @@
     border: 1px solid #ccc;
     border-radius: 0.5rem 0.5rem 0 0;
 }
-#pre_apprentissage_head > div {
+#pre_apprentissage_foot > div {
     position: absolute;
     height: 4rem;
     width: 100%;
@@ -48,12 +43,12 @@
     text-align: center;
     background-color: #ccc;
 }
-#pre_apprentissage_head > div:first-child { z-index: 1; }
-#pre_apprentissage_head > div:last-child { z-index: 0; }
+#pre_apprentissage_foot > div:first-child { z-index: 1; }
+#pre_apprentissage_foot > div:last-child { z-index: 0; }
 .titre_de_parti, #cercles_des_partis, #carres_pour_exercices { position: relative; display: inline-block; }
 .titre_de_parti { height: 4rem; line-height: 4rem; }
 .titre_de_parti > div { display: inline-block; vertical-align: middle; }
-.pre_lesson_head_1 { border-left: 1px solid #666; } 
+.pre_lesson_foot_1 { border-left: 1px solid #666; } 
 #table_pre_apprentissage {
     padding: 1rem;
     width: calc(100% - 2.25rem);
@@ -211,10 +206,10 @@
 }
 #pre_exercice {
     position: absolute;
-    top: 7rem;
+    top: 6.8rem;
     background-color: #aaa;
     box-shadow: 0 0 1rem #666;
-    height: calc(100% - 8rem);
+    height: calc(100% - 14.125rem);
     padding-top: 2rem;
     border-radius: 0.5rem;
     transition: 400ms;
@@ -307,7 +302,6 @@
     position: absolute;
     display: none;
     width: 100%;
-    height: 0;
     min-height: 2rem;
     background-color: #fff;
     padding: 1rem;
@@ -317,14 +311,11 @@
 #pre_exercice_resultat h3 {
     margin: 0;
 }
-#resultat, #resultat_diagram {
-    background-color: #fff;
-    position: absolute;
+#resultat, #legende #resultat_diagram {
+    background-color: #eee;
     height: calc(100% - 4rem);
-    width: 45%;
     padding: 1rem;
     box-sizing: border-box;
-    border: 1px solid #bbb;
     overflow: auto;
 }
 #resultat_container table {
@@ -334,22 +325,18 @@
 #resultat_container table th {
     border-color: transparent;
 }
-#pre_exercice_resultat td:not(#tfoot_td1) {
+#pre_exercice_resultat td:not(#legende_table td:first-child) {
     text-align: center;
     border-color: #aaa;
 }
 #tfoot_td1 { padding-right: 1rem; font-weight: bold; }
 #tfoot_td2 { border: 4px solid #aaa; background-color: #ccc; font-weight: bold; }
 #resultat_container, #resultat_diagram {
-    display: inline-block;
-    width: 45%;
     margin: 2%;
-    vertical-align: top;
 }
 #libelles {
     height: 2rem;
     line-height: 2rem;
-    margin-bottom: 0.5rem;
 }
 #libelles > div {
     width: 8.6rem;
@@ -363,12 +350,15 @@
 }
 #legende {
     margin: 0.5rem auto;
+    padding: 1rem;
+    background-color: #eee;
 }
 #legende table {
-    border-collapse: collapse;
     width: 100%;
 }
-#legende table td {
+#resultat_container table td {
+    border: none;
+    background-color: #fff;
     padding: 0 0.5rem;
     box-sizing: border-box;
 }
@@ -379,12 +369,21 @@
     text-align: left;
 }
 
-
+#pre_exercice_resultat_head { width: 1.5rem; }
+#pre_exercice_resultat_body { 
+    border: 1px solid transparent;
+    border-top-color: #aaa;
+    position: absolute;
+    top: 3rem;
+    width: calc(100% - 3rem); 
+    overflow: auto; 
+}
+#pre_exercice_resultat_foot { width: 1.5rem; }
+#pre_exercice_resultat h3 { position: absolute; width: 100%; }
 #apprentissage_foot { 
     position: absolute;
     padding: 0;
     margin: 0;
-    bottom: 0;
     height: 5rem;
     border-radius: 0 0 0.5rem 0.5rem;
 }
@@ -411,7 +410,6 @@
     #carre_1 { display: block; }
     #carre_2 { display: none; }
     #pre_exercice {
-        height: calc(100% - 14rem);
         width: 95%;
         margin-right: 2%;
     }
@@ -423,7 +421,6 @@
         display: inline-block;
     }
     #pre_exercice {
-        height: calc(100% - 14rem);
         width: 86%;
         margin-right: 7%;
     }

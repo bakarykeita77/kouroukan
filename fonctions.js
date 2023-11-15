@@ -318,14 +318,16 @@
                    
         return tons_apprentissage_html;
     }
-    function lireLettre(tons,lettre) { 
-        //$('#audio').attr({ src:'../son/aac/'+tons+'/'+lettre+'.aac', autoplay:'on' }); 
-        //$('#audio').attr({ src:'../son/amr/'+tons+'/'+lettre+'.amr', autoplay:'on' }); 
-        //$('#audio').attr({ src:'../son/flac/'+tons+'/'+lettre+'.flac', autoplay:'on' }); 
-        //$('#audio').attr({ src:'../son/ogg/'+tons+'/'+lettre+'.ogg', autoplay:'on' }); 
-        //$('#audio').attr({ src:'../son/wav/'+tons+'/'+lettre+'.wav', autoplay:'on' }); 
-        $('#audio').attr({ src:'../son/m4a/'+tons+'/'+lettre+'.m4a', autoplay:'on' }); 
-        //$('#audio').attr({ src:'../son/mp3/'+tons+'/'+lettre+'.mp3', autoplay:'on' }); 
+    function lireLettre(paremt_direct,lettre) { 
+        //$('#audio').attr({ src:'../son/aac/'+paremt_direct+'/'+lettre+'.aac', autoplay:'on' }); 
+        //$('#audio').attr({ src:'../son/amr/'+paremt_direct+'/'+lettre+'.amr', autoplay:'on' }); 
+        //$('#audio').attr({ src:'../son/flac/'+paremt_direct+'/'+lettre+'.flac', autoplay:'on' }); 
+        //$('#audio').attr({ src:'../son/ogg/'+paremt_direct+'/'+lettre+'.ogg', autoplay:'on' }); 
+        //$('#audio').attr({ src:'../son/wav/'+paremt_direct+'/'+lettre+'.wav', autoplay:'on' }); 
+        //$('#audio').attr({ src:'../son/m4a/'+paremt_direct+'/'+lettre+'.m4a', autoplay:'on' }); 
+        $('#audio').attr({ src:'../son/mp3/'+paremt_direct+'/'+lettre+'.mp3', autoplay:'on' }); 
+
+        console.log($('#audio').attr('src'));
     }
     function lire_mot() {
 	   for(var i=0; i<texte_memoire.length; i++) {
@@ -350,16 +352,15 @@
 	        }
 	   }
     }
-    function lire(dossier,son) { 
-        $('#audio').attr({ src:'../son/m4a/'+dossier+'/'+son+'.m4a', autoplay:'on' }); 
-
-        // $('#audio').attr({ src:'../son/aac/'+lettre+'.aac', autoplay:'on' }); 
-        // $('#audio').attr({ src:'../son/amr/'+lettre+'.amr', autoplay:'on' }); 
-        // $('#audio').attr({ src:'../son/flac/'+lettre+'.flac', autoplay:'on' }); 
-        // $('#audio').attr({ src:'../son/ogg/'+lettre+'.ogg', autoplay:'on' }); 
-        // $('#audio').attr({ src:'../son/wav/'+lettre+'.wav', autoplay:'on' }); 
-        // $('#audio').attr({ src:'../son/m4a/'+lettre+'.m4a', autoplay:'on' }); 
-        // $('#audio').attr({ src:'../son/mp3/'+lettre+'.mp3', autoplay:'on' });  
+    function lire(paremt_direct,son) { 
+         //$('#audio').attr({ src:'../son/m4a/'+paremt_direct+'/'+son+'.m4a', autoplay:'on' }); 
+        // $('#audio').attr({ src:'../son/aac/'+'+paremt_direct+'/'lettre+'.aac', autoplay:'on' }); 
+        // $('#audio').attr({ src:'../son/amr/'+'+paremt_direct+'/'lettre+'.amr', autoplay:'on' }); 
+        // $('#audio').attr({ src:'../son/flac/'+'+paremt_direct+'/'lettre+'.flac', autoplay:'on' }); 
+        // $('#audio').attr({ src:'../son/ogg/'+'+paremt_direct+'/'lettre+'.ogg', autoplay:'on' }); 
+        // $('#audio').attr({ src:'../son/wav/'+'+paremt_direct+'/'lettre+'.wav', autoplay:'on' }); 
+        // $('#audio').attr({ src:'../son/m4a/'+'+paremt_direct+'/'lettre+'.m4a', autoplay:'on' }); 
+        $('#audio').attr({ src:'../son/mp3/'+paremt_direct+'/'+son+'.mp3', autoplay:'on' });  
     }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/

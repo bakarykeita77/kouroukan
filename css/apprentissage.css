@@ -1,6 +1,35 @@
 
-#apprentissage_container { height: calc(100% - 11.5rem); 
+#apprentissage_container > div { position: absolute; width: calc(100% - 0.25rem); }
+#apprentissage_container > div:nth-child(1) { z-index: 1; max-width: 15rem; border-radius: 0.5rem; }
+#apprentissage_container > div:nth-child(2) { display: none; background-color: #fff; z-index: 0; }
+#apprentissage_options {
+    background-color: #fff;
+    box-shadow: 0 0 1rem #666;
+    top: 50%;
+    left: 50%;
+    padding: 1rem;
+    transform: translate(-50%,-100%);
 }
+#apprentissage_options div:nth-child(1) { font-weight: bold; margin-bottom: 0.5rem; }
+#apprentissage_container > div:nth-child(2) { height: calc(100% - 11.8rem); }
+#apprentissage_options p { 
+    border-radius: 0.5rem;
+    padding: 0.25rem;
+    margin: 0;
+    cursor: pointer; 
+}
+#apprentissage_options p:hover { background-color: #ddd; }
+#apprentissage_options span { 
+    display: inline-block;
+    position: relative;
+    border: 1px solid #aaa;
+    height: 1rem;
+    width: 1rem;
+    border-radius: 50%;
+    padding: 0.25rem;
+    font-size: 0.8rem;
+    text-align: center;
+ }
 #table_parlante_container {
     position: absolute;
     top: 1rem;

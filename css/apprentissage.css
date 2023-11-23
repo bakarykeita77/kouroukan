@@ -11,7 +11,7 @@
     transform: translate(-50%,-100%);
 }
 #apprentissage_options div:nth-child(1) { font-weight: bold; margin-bottom: 0.5rem; }
-#apprentissage_container > div:nth-child(2) { height: calc(100% - 11.8rem); }
+#apprentissage_container > div:nth-child(2) { height: 100%; }
 #apprentissage_options p { 
     border-radius: 0.5rem;
     padding: 0.25rem;
@@ -41,7 +41,6 @@
 }
 #apprentissage_note {   
     border-radius: 0.25rem 0.25rem 0 0;
-    background-color: #ddd;
     overflow: auto;
 }
 #apprentissage_note h3 { margin: 0; }
@@ -59,7 +58,6 @@
     height: 4rem;
     width: calc(100% - 2px);
     margin: 0 auto;
-    border: 1px solid #ccc;
     border-radius: 0.5rem 0.5rem 0 0;
 }
 #pre_apprentissage_foot > div {
@@ -70,14 +68,13 @@
     font-weight: bold;
     color: black;
     text-align: center;
-    background-color: #ccc;
+    background-color: #fff;
 }
 #pre_apprentissage_foot > div:first-child { z-index: 1; }
 #pre_apprentissage_foot > div:last-child { z-index: 0; }
 .titre_de_parti, #cercles_des_partis, #carres_pour_exercices { position: relative; display: inline-block; }
 .titre_de_parti { height: 4rem; line-height: 4rem; }
 .titre_de_parti > div { display: inline-block; vertical-align: middle; }
-.pre_lesson_foot_1 { border-left: 1px solid #666; } 
 #table_pre_apprentissage {
     padding: 1rem;
     width: calc(100% - 2.25rem);
@@ -238,7 +235,7 @@
     top: 6.8rem;
     background-color: #aaa;
     box-shadow: 0 0 1rem #666;
-    height: calc(100% - 14.125rem);
+    height: calc(100% - 14.35rem);
     padding-top: 2rem;
     border-radius: 0.5rem;
     transition: 400ms;
@@ -313,6 +310,7 @@
     display: inline-block;
     margin: 0.5rem 1rem;
     padding: 0 1rem;
+    min-width: 12rem;
     height: 2rem;
     line-height: 2rem;
     border-radius: 0.5rem;
@@ -398,19 +396,18 @@
     text-align: left;
 }
 
-#pre_exercice_resultat_head { width: 1.5rem; }
 #pre_exercice_resultat_body { 
     border: 1px solid transparent;
     border-top-color: #aaa;
     position: absolute;
     top: 3rem;
     width: calc(100% - 3rem); 
+    height: calc(100% - 3rem);
     overflow: auto; 
 }
 #pre_exercice_resultat_foot { width: 1.5rem; }
 #pre_exercice_resultat h3 { position: absolute; width: 100%; }
 #apprentissage_foot { 
-    position: absolute;
     padding: 0;
     margin: 0;
     height: 5rem;
@@ -441,6 +438,9 @@
     #pre_exercice {
         width: 95%;
         margin-right: 2%;
+    }
+    #pre_question, #pre_correction {
+        position: absolute;
     }
 }
 @media screen and (width >= 400px) {

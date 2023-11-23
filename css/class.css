@@ -295,6 +295,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 .correction_btn { cursor: pointer; }
 .course {    
     position: relative;
+    background: #fff;
     top: 3rem;
     width: calc(100vw - 0.25rem);
     max-width: 50rem;
@@ -302,14 +303,16 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     margin: 0 auto;
     padding: 0.125rem;
     z-index: 0;
+    overflow: hidden;
     transition: 0.6s;
 }
 .course_body { 
     position: relative; 
-    height: 100%;
+    height: calc(100% - 12rem);
     color: white;
     box-sizing: border-box;
     background-color: rgba(0,0,0,0.8);
+    border-radius: 0.5rem;
 }
 .course_container {
     display: none;
@@ -757,8 +760,8 @@ del {
 .parentgrid { display: grid; }
 .parentcell { display: table-cell; vertical-align: middle; }
 .diagram_circulaire {
-    width: 10rem;
-    height: 10rem;
+    width: 8rem;
+    height: 8rem;
     border-radius: 50%;
     margin: auto;
     rotate: y 180deg
@@ -927,9 +930,11 @@ del {
 /* --------------------------------------------------------------------------------------------------------- */
 
 .table_parlante, .table_muette {
-    padding: 1.5rem;
+    position: relative;
     width: calc(100% - 4rem);
     margin: auto;
+    top: 50%;
+    transform: translate(0,-50%);
 }
 .table_parlante tr, .table_muette tr { position: relative; width: 100%; }
 .table_parlante td, .table_muette td {

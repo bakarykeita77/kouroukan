@@ -172,6 +172,7 @@
     }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
+
     function ecrire(element_id,message) {
         let longueur = message.length;
         let indice = 0;
@@ -181,7 +182,7 @@
             indice++;
             document.getElementById(element_id).innerHTML = message.substr(0,indice);
             if(indice<longueur) {
-                setTimeout(() => { write(); }, 0.1);
+                setTimeout(() => { write(); }, 5);
             }
         }
     }

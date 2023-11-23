@@ -296,19 +296,20 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 .course {    
     position: relative;
     background: #fff;
-    top: 3rem;
-    width: calc(100vw - 0.25rem);
+    top: 4rem;
+    width: calc(100vw - 1rem);
     max-width: 50rem;
     max-height: 45rem;
     margin: 0 auto;
     padding: 0.125rem;
+    border-radius: 0.5rem; 
     z-index: 0;
     overflow: hidden;
     transition: 0.6s;
 }
 .course_body { 
     position: relative; 
-    height: calc(100% - 12rem);
+    height: calc(100% - 11.75rem);
     color: white;
     box-sizing: border-box;
     background-color: rgba(0,0,0,0.8);
@@ -1091,7 +1092,7 @@ del {
         max-width: 30rem;
     }
     .phases li { width: 80%; }
-    .course { height: calc(100% - 3rem); border-radius: 0; box-shadow: none; }
+    .course { height: calc(100% - 4.5rem); box-shadow: none; }
     .course_head, .course_body, .course_foot { 
         width: 98%;
         margin: auto;

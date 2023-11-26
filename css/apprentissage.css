@@ -280,7 +280,6 @@
 #pre_exercice_foot { 
     position: absolute;
     height: 3rem;
-    line-height: 3rem;
     width: 95%;
     bottom: 0;
     margin: auto;
@@ -288,7 +287,6 @@
     border-top-color: #aaa;
     padding: 0.5rem 1rem;
     font-weight: bold;
-    text-align: center;
 }
 #pre_foot_btns_container {
     position: relative;
@@ -309,10 +307,10 @@
     position: absolute;
     display: inline-block;
     margin: 0.5rem 1rem;
-    padding: 0 1rem;
     min-width: 12rem;
     height: 2rem;
     line-height: 2rem;
+    text-align: center;
     border-radius: 0.5rem;
     cursor: pointer;
 }
@@ -324,7 +322,6 @@
 }
 #poser_pre_question:active, #repeter_pre_question:active { box-shadow: none; }
 #repeter_pre_question { display: none; }
-#pre_correction { left: 0; }
 #pre_exercice_resultat {
     position: absolute;
     display: none;
@@ -439,9 +436,6 @@
         width: 95%;
         margin-right: 2%;
     }
-    #pre_question, #pre_correction {
-        position: absolute;
-    }
 }
 @media screen and (width >= 400px) {
     .pre_apprentissage_td { width: 3rem;  }
@@ -453,4 +447,5 @@
         width: 86%;
         margin-right: 7%;
     }
+    #pre_correction { left: 0; }
 }

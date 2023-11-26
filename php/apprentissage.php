@@ -4,7 +4,7 @@
     <div id="apprentissage_container">
 
         <div id="apprentissage_options">
-            <div>ߌ ߢߣߊߕߊ߬ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߞߍߢߊ߫ ߂ ߢߌ߲߬ ߘߐ߫</div>
+            <div>ߌ ߢߣߊߕߊ߬ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߞߍߢߊ߫ ߂ ߢߌ߲߬ ߠߎ߬ ߘߐ߫</div>
             <div>
                 <p id='apprentissage_option_1'><span>߁߭</span> - ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߘߏߣߍ߲߫ ߘߏߣߍ߲߫ ߘߋ߲߮</p>
                 <p id='apprentissage_option_2'><span>߂߲</span> - ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߜߘߏߓߊ߫ ߘߋ߲߮</p>

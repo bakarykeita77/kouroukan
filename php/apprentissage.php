@@ -36,12 +36,12 @@
                     <div class="btns media" id="media_apprentissage">
                         <div class="media_btns">
                             <div class='btn'>
-                                <span class='play_icon'>&#9664;</span>
+                                <span class='play_icon enrober'>&#9664;</span>
                                 <span class='play_label'>ߝߐߟߊ߲</span>
                             </div>
 
                             <div class='btn'>
-                                <span class='stop_icon'>&#9632;</span>
+                                <span class='stop_icon enrober'>&#9632;</span>
                                 <span class='stop_label'>ߘߊ߬ߘߋ߬ߟߊ߲ </span> 
                             </div>
                         </div>
@@ -89,4 +89,3 @@
     </div>
     
     <script src="/kouroukan/js/apprentissage.js"></script>
-    <script src="/kouroukan/js/pre-apprentissage.js"></script>

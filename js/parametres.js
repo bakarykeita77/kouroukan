@@ -34,14 +34,18 @@ function parametrageDeLesson() {
     }
     function affichageDeParametres(){ 
     
-        $("#parametre_lesson").on('mouseover', function() { afficherParametres(); });
-        $(".parametres_popup").on('mouseleave', function(){ masquerParametres(); });
-        $('#submit_btn').on('click', function(){ masquerParametres(); });
+        $("#parametre_lesson").on('mouseover', function() { 
+            if($('#pre_apprentissage_note h3').text() == 'ߟߊ߬ߡߍ߲߬ߠߌ ߞߍ߫') return false;
+            
+            afficherParametres(); 
+        });
+        $('.parametres_container').on('mouseleave', function(){ masquerParametres(); });
+        $('.parametres_container #submit_btn').on('click', function(){ masquerParametres(); });
+        
         
         function afficherParametres() { 
-          
             $(".media_btns").css({"tansform":"scale(0.75)", "opacity":0});
-            $(".media_btns").css({"display":"none"});
+            setTimeout(() => { $(".media_btns").css({"display":"none"}); }, 300);
 
             $(".parametres_container").css({"display":"block", "opacity":0}); 
             setTimeout(() => { $(".parametres_container").css({"transform":"scale(1)", "opacity":1}); }, 10);
@@ -356,8 +360,7 @@ function parametrageDeLesson() {
                 var syllabes_tonifies_length = syllabes_tonifies.length;
        
 
-                //if(niveau_actif == 1) apprentissage_html = preApprentissageHTML();
-                //if(niveau_actif == 1) apprentissage_html = lessonHTML(lettres_cochees, 'table_alphabet_apprentissage');
+                if(niveau_actif == 1) apprentissage_html = lessonHTML(lettres_cochees, 'table_alphabet_apprentissage');
                 if(niveau_actif == 2) apprentissage_html = lessonHTML(syllabes_simples_coches, 'table_syllabe_apprentissage');
                 if(niveau_actif == 3) apprentissage_html = lessonHTML2(voyelles_length,tons_length,syllabes_tonifies_length,syllabes_tonifies);
                 if(niveau_actif == 4) apprentissage_html = lessonHTML(chiffres, 'table_chiffre_apprentissage');

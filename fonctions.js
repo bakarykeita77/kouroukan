@@ -55,10 +55,9 @@
     }
 	function aggrandir_caractere_de(element) { element.css( 'font-size','+=32px' ); }
 	function appetir_caractere_de(element) { element.css( 'font-size','-=32px' ); }
-    function arreterLecture(lessonHTML) {
+    function arreterLecture() {
         $('.stop_icon').parent().on('click',function(){ 
-             $('#lesson_corps').html(lessonHTML());
-             lecturePersonnalisee();
+             return;
         });
     }
 /*-------------------------------------------------------------------------------------------------------------------------------------*/ 
@@ -222,33 +221,22 @@
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
 	
-    function guiderClient(){
-
-        $('.hand').css({ 'display':'block' });
-        setTimeout(function(){ $('.hand').addClass('clicker'); }, 100);
-        setTimeout(function() { $('.course_head').addClass('fond_noir_clair'); }, 300);
-        setTimeout(function() { $('.course_head').removeClass('fond_noir_clair'); }, 800);
-        setTimeout(function() { $('.hand').removeClass('clicker'); }, 1600);
-        setTimeout(function() { $('.hand').css('display','none'); }, 1600);
-        
-        return;
-    }
-
-/*-------------------------------------------------------------------------------------------------------------------------------------*/
-	
     function lecturePersonnalisee() {
         $('.table_parlante').on('click', function(e) {
             var td_actif = e.target;
             var td_actif_value = td_actif.textContent;
     
-            $('#audio').attr({ src: '../son/mp3/'+td_actif_value+'.mp3', autoplay:'on' });
+            $('#audio').attr({ src: '../son/mp3/alphabet/'+td_actif_value+'.mp3', autoplay:'on' });
     
             $(td_actif).addClass('ombrage');
             setTimeout(function() { $(td_actif).removeClass('ombrage'); }, 600);
         });
      }
     function lectureSemiAutomatique() {
+        let play = false;
         $(".play_icon").parent().on('click',function(){
+
+            if(play == true) return;
 
             setTimeout(function(){
             var td = $('.table_parlante td');
@@ -256,14 +244,25 @@
             var read_events = [];
             var td_delay = '';
             var td_index = -1;
+            var stop_indice = td.length; 
         
             for (i = 0; i < td.length; i++) {
+
+                // $('.stop_icon').parent().on('click',function(){ 
+                //     stop_indice = 4;
+                //     console.log(stop_indice);
+                // });
+
+                // if(i == stop_indice) { break; }
+
                 td_delay = 0;
                 read_events[read_events.length] = setTimeout((function() {
                     td[td_index += 1].click();
                 }), td_delay += i*2000)+'\n';
             }
             },600);
+
+            play = true;
          });
      }
     function lessonHTML(array, table_id = '#') {
@@ -478,7 +477,7 @@
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
 
-    function raffraichirLaPage() { alert('raffraichissement'); location = location; }
+    function raffraichirLaPage() { location = location; }
     function rappel(button) {
         setTimeout(() => { button.css('box-shadow','none'); }, 100);
         setTimeout(() => { button.css('box-shadow','var(--shadow_30)'); }, 200);

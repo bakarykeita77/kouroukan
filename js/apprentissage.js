@@ -15,14 +15,19 @@ function apprentissages() {
 
     var clicks_memo = [];
   
- /*-----------------------------------------------------------------------------------------------------------------------------------*/
- $('.fermeture').attr('id', 'fermer_apprentissage');
- /*-----------------------------------------------------------------------------------------------------------------------------------*/
 
  // Le chargement de Apprentissage se fait dans parametres.js
           
-    $('#apprentissage_option_1').click(function(){ preApprentissage(); fermerApprentissage(); });
-    $('#apprentissage_option_2').click(function(){ apprentissage(); fermerApprentissage(); });
+    $('#apprentissage_option_1').click(function(){
+        $('.fermeture').attr('id', 'fermer_pre_apprentissage'); 
+        preApprentissage(); 
+        afficherLesson(); 
+    });
+    $('#apprentissage_option_2').click(function(){ 
+        $('.fermeture').attr('id', 'fermer_apprentissage'); 
+        apprentissage(); 
+        afficherLesson(); 
+    });
           
                     
  /*-----------------------------------------------------------------------------------------------------------------------------------*/
@@ -66,6 +71,7 @@ function apprentissages() {
         preApprendre();
         preExercice();
         preRevision();
+        raffraichissementDeLaPage();
 
 
         
@@ -214,6 +220,7 @@ function apprentissages() {
                                 decocherLesConsonnes();
                                 decocherLaNasalisation();
                                 chargerTableauNoir(); 
+
                             
                                 function marquerLaConsonneCliquee() {
                                     clicked_consonne_container.css('background-color',consonne_background);
@@ -1050,40 +1057,139 @@ function apprentissages() {
         }
     }
     function apprentissage() {
-
+    
+        afficherApprentissage();
+        assistantDeApprentissage();
         apprendre();
         enregistrerApprentissage();
         stockerApprentissage();
+        raffraichissementDeLaPage();
 
+
+        function afficherApprentissage() {
+            
+         /* Pour l'affichage des parametres voir parsmetres.js dans fonction affichageDeLessonParametres() */
+            affichageDesBoutonsMedia();
+        
+            function affichageDesBoutonsMedia() {
+           
+                $('#pre_apprentissage_foot').css('display','none');
+                $(".media_label").on('mouseover', function() { afficherMediaBoutons(); masquerParametreBoutons(); });
+                $(".media_btns").on('click', function() { masquerMediaBoutons(); });
+                $(".media_btns").on('mouseleave', function() { masquerMediaBoutons(); });
+                $(".media_btns .btn").on('mouseover', function() {
+                    $(".media_btns .btn").css('background-color','white');
+                    $(this).css('background-color','yellow');
+                });
+
+                function afficherMediaBoutons() { $(".media_btns").css({"display":"block", "transform":"scale(1)", "opacity":1}); }
+                function masquerMediaBoutons() {
+                    $(".media_btns").css({"tansform":"scale(0.75)", "opacity":0});
+                    setTimeout(() => { $(".media_btns").css({"display":"none"}); }, 300);
+                }
+                function masquerParametreBoutons() { 
+                    $(".parametres_container").css({"transform":"scale(0.75)", "opacity":0});
+                    setTimeout(() => { $(".parametres_container").css({"display":"none"}); }, 250);
+                }
+            }
+        }
+        function assistantDeApprentissage() {
+            
+            let note_1_affiche = 'off';
+            let note_2_affiche = 'off';
+            let note_3_affiche = 'off';
+            let note_4_affiche = 'off';
+                      
+            noteDApprentissage1();
+
+            $('.parametres_container #submit_btn').on('click', function() { noteDApprentissage1(); });
+            $('.parametres_container').on('mouseleave', function(){ noteDApprentissage1(); });
+
+            $(".media_label").on('mouseenter', function() { noteDApprentissage3(); });
+
+            $(".media_btns .btn:nth-child(1)").on('click', function() { noteDApprentissage2(); });
+            $(".media_btns .btn:nth-child(2)").on('click', function() { noteDApprentissage1(); note_2_affiche = 'off'; });
+            $(".media_btns").on('mouseleave', function() { noteDApprentissage1(); });
+
+            $('#parametre_lesson_btn').on('mouseenter', function() { noteDApprentissage4(); });
+
+            $('.table_parlante td').click(function() {
+                console.log(nbr_td);
+            });
+
+
+
+            function noteDApprentissage1() {
+                if(note_1_affiche == 'on') return;
+                if(note_2_affiche == 'on') return;
+
+                ecrire('pre_apprentissage_note','\
+                    <h3>ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ</h3>\
+                    <p>ߛߓߍߘߋ߲ ߠߎ߬ ߓߍ߯ ߘߌ߲߯ ߞߋߟߋ߲߫ ߞߋߟߋ߲߫߸ ߦߴߌ ߕߟߏߡߊߟߐ߬ ߊ߬ ߣߴߌ ߦߴߌ ߖߊ߲߬ߕߏ߬ ߊ߬ߟߎ߬ ߝߐߢߊ ߘߐ߫ ߞߏߛߓߍ߫߹<br>\
+                    ߌ ߣߊ߬ߕߐ߫ ߟߋ߬ ߢߌ߬ߣߌ߲߬ߞߊ߬ ߟߴߊ߬ߟߎ߬ ߓߍ߯ ߡߊ߬.</p>\
+                ');
+                
+                note_1_affiche = 'on';
+                note_2_affiche = 'off';
+                note_3_affiche = 'off';
+                note_4_affiche = 'off';
+            }
+            function noteDApprentissage2() {
+                if(note_2_affiche == 'on') return;
+
+                ecrire('pre_apprentissage_note','\
+                    <h3>ߟߊ߬ߡߍ߲߬ߠߌ ߞߍ߫</h3>\
+                    <p>ߌ ߕߟߏߡߊߟߐ߬ ߛߓߍߘߋ߲ ߠߎ߬ ߓߍ߯ ߟߊ߫ ߞߋߟߋ߲߫ ߞߋߟߋ߲߫߸ ߊ߬ ߣߴߌ ߦߴߌ ߖߊ߲߬ߕߏ߬ ߊ߬ߟߎ߬ ߝߐߢߊ ߘߐ߫ ߞߏߛߓߍ߫<br>\
+                    ߌ ߣߊ߬ߕߐ߫ ߟߋ߬ ߢߌ߬ߣߌ߲߬ߞߊ߬ ߟߴߊ߬ߟߎ߬ ߓߍ߯ ߡߊ߬.</p>\
+                    <p> <b class="enrober">■</b> ߘߊߘߋ߰ߟߊ߲߬ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߝߐߟߌ ߟߊߟߐ߬.</p>\
+                ');
+                
+                note_1_affiche = 'off';
+                note_2_affiche = 'on';
+                note_3_affiche = 'off';
+                note_4_affiche = 'off';
+            }
+            function noteDApprentissage3() {
+                if(note_3_affiche == 'on') return;
+                if(note_2_affiche == 'on') return;
+
+                ecrire('pre_apprentissage_note','\
+                    <h3>ߝߊߟߊ߲ߞߏ</h3>\
+                    <p> <b class="enrober">◀</b> ߝߐߟߊ߲߫ ߞߘߎ ߘߌ߲߯߸ ߦߴߌ ߕߟߏߡߊߟߐ߬ ߛߓߍߘߋ߲ ߠߎ߬ ߝߐߢߊ ߟߊ߫ ߞߋߟߋ߲߫ ߞߋߟߋ߲߫.</p>\
+                    <p> <b class="enrober">■</b> ߘߊߘߋ߰ߟߊ߲߬ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߝߐߟߌ ߟߊߟߐ߬.</p>\
+                ');
+                
+                note_1_affiche = 'off';
+                note_2_affiche = 'off';
+                note_3_affiche = 'on';
+                note_4_affiche = 'off';
+            };
+            function noteDApprentissage4() {
+                if(note_4_affiche == 'on') return;
+                if(note_2_affiche == 'on') return;
+
+                ecrire('pre_apprentissage_note','\
+                    <h3>ߛߏ߯ߙߏߟߌ</h3>\
+                    <p>ߞߊ߬ ߥߟߊ߬ߓߊ ߛߓߍߘߋ߲ ߠߎ߬ ߛߏ߯ߙߏ߫ ߌ ߖߍ߬ߘߍ ߢߣߊߕߊ ߟߊ߫</p>\
+                    <p>ߞߊ߬ߞߘߐ߬߸ ߛߓߍߘߋ߲ ߠߎ߬ ߓߍ߯ ߞߐߞߘߎ ߘߐߞߍߣߍ߲߫ ߠߋ߬߸ ߞߵߊ߬ߟߎ߫ ߦߌ߬ߘߊ߬.<br>\
+                    ߞߐ߬ߣߌ߬ ߣߴߌ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߡߍ߲ ߠߎ߬ ߟߊߕߎߣߎ߲߫߸ ߦߴߏ߬ ߟߎ߬ ߞߐߞߘߎ ߘߐߞߊ߬<br>\
+                    ߣߴߌ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߡߍ߲ ߠߎ߬ ߦߌ߬ߘߊ߬߸ ߦߴߏ߬ ߟߎ߬ ߞߐߞߘߎ ߘߐߞߍ߫.</p>\
+                ');
+                
+                note_1_affiche = 'off';
+                note_2_affiche = 'off';
+                note_3_affiche = 'off';
+                note_4_affiche = 'on';
+            };
+        }
         function apprendre() {
 
-            affichageDesBoutonsMedia();
             lectureSemiAutomatique();  // Voir fonctions.js
             lecturePersonnalisee();    // Voir fonctions.js
             arreterLecture();          // Voir fonctions.js
             apprentissageProgressBarr();
 
-        
-            function affichageDesBoutonsMedia(){
-                $(".media_label").on('mouseover', function() { afficherMediaBoutons(); });
-                $(".media_btns").on('mouseleave', function(){ masquerMediaBoutons(); });
-                $('.course_container').on('click', function(){ masquerMediaBoutons(); });
-
-                $(".media_btns .btn").click(function() {
-                    $(".media_btns .btn").css('background-color','white');
-                    $(this).css('background-color','yellow');
-                });
-            }
-            function afficherMediaBoutons() { 
-                $(".parametres_container").css({"transform":"scale(0.75)", "opacity":0});
-                setTimeout(() => { $(".parametres_container").css({"display":"none"}); }, 250);
-
-                $(".media_btns").css({"display":"block", "transform":"scale(1)", "opacity":1}); 
-            }
-            function masquerMediaBoutons(){
-                $(".media_btns").css({"tansform":"scale(0.75)", "opacity":0});
-                setTimeout(() => { $(".media_btns").css({"display":"none"}); }, 300);
-            }
+            
             function apprentissageProgressBarr() {
             /*
             A chaque click sur un élément, progress barr avance d'une unité égale à progress_unity px.
@@ -1263,8 +1369,11 @@ function apprentissages() {
             });
         } 
     }
-    function fermerApprentissage() {
+    function afficherLesson() {
         $('#apprentissage_options').css('display','none');
         $('#apprentissage_container > div:nth-child(2)').css('display','block');
+    }
+    function raffraichissementDeLaPage() {
+        $('#fermer_pre_apprentissage, #fermer_apprentissage').on('click',function() { raffraichirLaPage(); });
     }
 }

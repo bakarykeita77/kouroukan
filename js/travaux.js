@@ -31,13 +31,13 @@
             return false;
         }
         function chargerTravail(n) {
-            
+          
             if(matieres[n] == undefined) chargerAVideLesFiches();
             if(matieres[n] != undefined) chargerLesFiches();
 
             function chargerLesFiches() {
 
-                var fiche_phase  = "";
+                var fiche_phase  = '';
 
                 var travail_d_apprentissage_corps_html = [];
                 var travail_d_exercice_corps_html = [];

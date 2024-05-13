@@ -43,7 +43,6 @@ body {
     width: 100%;
     max-width: 50rem;
     margin: 0.25rem auto;
-    background-color: #eee;
     box-sizing: border-box;
 }
 #asides_container p, #btn_container { padding: 0; box-sizing: border-box; }

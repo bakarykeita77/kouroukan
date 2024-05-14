@@ -7,6 +7,7 @@ body {
     position: relative;
     background-color: #002;
     height: calc(100% - 30rem);
+    max-height: 10rem;
     min-height: 10rem;
     width: 100%;
     max-width: 50rem;

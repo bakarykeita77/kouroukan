@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/bakarykeita77/kouroukan/issues"
   },
-  "homepage": "https://github.com/bakarykeita77/kouroukan#readme"
+  "homepage": "https://github.com/bakarykeita77/kouroukan#readme",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.19.2"
+  }
 }

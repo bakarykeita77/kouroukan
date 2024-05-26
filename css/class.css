@@ -1120,7 +1120,7 @@ del {
         min-width: 5rem;
         text-align: center;
     }
-    .course { height: 100%;  border-radius: 0.5rem; box-shadow: var(--shadow_36); }
+    .course { height: calc(100% - 5rem);  border-radius: 0.5rem; box-shadow: var(--shadow_36); }
     .course_head, .course_body, .course_foot { 
         width: 100%; 
     }

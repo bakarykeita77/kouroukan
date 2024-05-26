@@ -11,11 +11,9 @@
             </div>
         </div>
         
-        <div>
+        <div id="apprentissage">
             <div class="course_head" id="apprentissage_note">
-                <div id="pre_apprentissage_note">
-                    
-                </div>
+                <div id="pre_apprentissage_note"></div>
             </div>
             <div class="course_body" id="apprentissage_body"></div>
             <div class="course_foot" id="apprentissage_foot">
@@ -60,32 +58,33 @@
 
             </div>
         </div>
-    </div>
 
-    <div id="pre_exercice_cover">
-        <div id="pre_exercice">
-            <span id="fermeture_pre_exercice">&times;</span>
-            <div id="pre_exercice_container">
-                    
-                <div id="pre_exercice_body"></div>
-                <div id="pre_exercice_foot">&#10140;</div>
+        <div id="pre_exercice_cover">
+            <div id="pre_exercice">
+                <span id="fermeture_pre_exercice">&times;</span>
+                <div id="pre_exercice_container">
+                        
+                    <div id="pre_exercice_body"></div>
+                    <div id="pre_exercice_foot">&#10140;</div>
 
-                <div id="pre_exercice_resultat">
-                    <div id="pre_exercice_resultat_head"><h3></h3></div>
-                    <div id="pre_exercice_resultat_body">
-                        <div id="resultat_diagram">
-                            <div id="libelles"></div>
-                            <div id="diagram"></div>
+                    <div id="pre_exercice_resultat">
+                        <div id="pre_exercice_resultat_head"><h3></h3></div>
+                        <div id="pre_exercice_resultat_body">
+                            <div id="resultat_diagram">
+                                <div id="libelles"></div>
+                                <div id="diagram"></div>
+                            </div>
+                            <div id="resultat_container">
+                                <div id="resultat"></div>
+                                <div id="legende"></div>
+                            </div>
                         </div>
-                        <div id="resultat_container">
-                            <div id="resultat"></div>
-                            <div id="legende"></div>
-                        </div>
+                        <div id="pre_exercice_resultat_foot"></div>
                     </div>
-                    <div id="pre_exercice_resultat_foot"></div>
                 </div>
             </div>
         </div>
     </div>
+
     
     <script src="/kouroukan/js/apprentissage.js"></script>

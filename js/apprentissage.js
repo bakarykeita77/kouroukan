@@ -16,7 +16,7 @@ function apprentissages() {
     var clicks_memo = [];
   
 
- // Le chargement de Apprentissage se fait dans parametres.js
+ // Nota Beni: Le chargement de Apprentissage se fait dans parametres.js
           
     $('#apprentissage_option_1').click(function(){
         $('.fermeture').attr('id', 'fermer_pre_apprentissage'); 
@@ -110,7 +110,7 @@ function apprentissages() {
                         var pre_lesson_head_21_html = "<div id='carres_pour_exercices'>"+carres_html+"</div>";
 
                         ecrire('pre_apprentissage_note','\
-                            <h3>ߡߊ߬ߘߋ߲߰ߠߌ</h3>\
+                            <h3>'+liste_de_matieres[0][1]+' ߡߊ߬ߘߋ߲߰ߠߌ</h3>\
                             <p>ߞߎߘߎ߲߫ ߝߟߐߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬</p>\
                         ');
                         $('.pre_lesson_foot_1').html(pre_lesson_head_11_html);
@@ -288,7 +288,7 @@ function apprentissages() {
                         $('.pre_apprentissage_tr:nth-child('+index+')').wrap('<div id="tr_actif"></div>');
                         
                         ecrire('pre_apprentissage_note','\
-                            <h3>ߡߊ߬ߘߋ߲߰ߠߌ</h3>\
+                            <h3>'+liste_de_matieres[0][1]+' ߡߊ߬ߘߋ߲߰ߠߌ</h3>\
                             <p>ߛߓߍߘߋ߲߫ ߟߊ߲ߞߣߍߡߊߣߍ߲ ߠߎ߬ ߘߏߣߍ߲߫ ߘߏߣߍ߲߫ ߘߋ߲߯ ߤߊ߲߯ ߊ߬ߟߎ߬ ߦߋ߫ ߕߏ߫ ߌ ߞߣߐ߫.</p>\
                         ');
                     }
@@ -417,9 +417,9 @@ function apprentissages() {
                             let n = indice();
                             if(n == 7) {
                                 if($('#pre_apprentissage_note p').html() != 'ߛߓߍߘߋ߲߫ ߟߊ߲ߞߣߍߡߊߣߍ߲ ߠߎ߬ ߘߏߣߍ߲߫ ߘߏߣߍ߲߫ ߘߋ߲߯ ߤߊ߲߯ ߊ߬ߟߎ߬ ߦߋ߫ ߕߏ߫ ߌ ߞߣߐ߫.') { return false; }
-                                
+                             
                                 ecrire('pre_apprentissage_note','\
-                                    <h3>ߡߊ߬ߘߋ߲߰ߠߌ</h3>\
+                                    <h3>'+liste_de_matieres[0][1]+' ߡߊ߬ߘߋ߲߰ߠߌ</h3>\
                                     <p>ߣߌ߫ ߟߊ߲ߞߣߍߡߊߣߍ߲ ߠߎ߬ ߓߘߊ߫ ߟߐ߲߫ ߌ ߓߟߏ߫߸ ߢߊ߯ߡߌߟߊ߲ ߞߘߎ ߘߌ߲߯ ߘߎ߭ߡߊ߬ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫߹) ߞߊ߬ ߘߋ߲߬ߣߍ߲߬ ߞߎߘߊ ߟߎ߬ ߢߊ߯ߡߌ߲߫ ߡߊ߬ߞߟߏ߬ߟߌ ߞߊ߲ߡߊ߬.</p>\
                                 ');
                             }
@@ -494,7 +494,7 @@ function apprentissages() {
 
                 function preExerciceNote() {
                     ecrire('pre_apprentissage_note','\
-                        <h3>ߡߊ߬ߞߟߏ߬ߟߌ</h3>\
+                        <h3>'+liste_de_matieres[0][1]+' ߡߊ߬ߞߟߏ߬ߟߌ</h3>\
                         <p>ߓߌ߬ߟߊ߬ ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߞߐ߫. ߦߋ߫ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߣߌ߫ ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ ߣߌ߫ ߛߊߞߍߟߌ ߟߎ߬ ߞߍ߫ ߦߊ߲߬߸ ߤߊ߲߯ ߞߐߝߟߌ߫ ߥߟߊ ߦߋ߫ ߓߐ߫.</p>\
                     ');
                 }
@@ -555,7 +555,7 @@ function apprentissages() {
 
                 function preRevisionNote() {
                     ecrire('pre_apprentissage_note','\
-                        <h3>ߣߐ߰ߡߊ߬ߛߍߦߌ</h3>\
+                        <h3>'+liste_de_matieres[0][1]+' ߣߐ߰ߡߊ߬ߛߍߦߌ</h3>\
                         <p>ߘߋ߰ߣߍ߲߬ ߞߎߘߊ ߣߌ߫ ߞߘߐ߬ߡߊ߲ ߠߎ߬ ߟߋ߬ ߓߍ߯ ߢߊ߯ߡߌߣߍ߲߫ ߢߐ߲ ߘߐ߫ ߣߌ߲߬<br>\
                         ߣߴߌ ߛߋ߫ ߘߊ߫ ߞߵߊ߬ߟߎ߬ ߓߍ߯ ߢߊߓߐ߫ ߗߡߍ߬ߘߐ߬ߦߊ߫ ߗߍ߬ߡߍ ߟߊ߫߸ ߏ߬ߘߐ߬ ߌ ߓߘߊ߫ ߛߎߘߊ߲߫<br>\
                         ߓߌ߬ߟߊ߬ ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߞߐ߫.\
@@ -662,7 +662,8 @@ function apprentissages() {
                         ordre_de_question = (total_questions == parseIntNko(i+2)) ? 'ߟߊߓߊ߲' : parseIntNko(i+2);
                         $('#poser_pre_question').html('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ '+total_questions+' \\ '+ordre_de_question+'߲ ߠߊߡߍ߲߫');
                         pre_question = pre_questions[i];
-    console.log(pre_question);
+                        
+   // console.log(pre_question);
     
                         if(i < pre_questions.length) { 
                             lire('alphabet',pre_question); 
@@ -711,6 +712,7 @@ function apprentissages() {
                         if(pre_question != pre_reponse) { nePasValiderLaPreReponse(); }
     
                         pre_exercice_memoire.push(question_reponse);
+console.log(pre_exercice_memoire);
                         pre_question = '';
                         pre_question = '';
 
@@ -820,7 +822,7 @@ function apprentissages() {
                                 if(carre_index == 0) {
                                     if(taux_de_vraie_reponse_1 == 100) {
                                         ecrire('pre_apprentissage_note','\
-                                            <h3>ߡߊ߬ߞߟߏ߬ߟߌ ߢߊ߬ߣߍ߲߬</h3>\
+                                            <h3>'+liste_de_matieres[0][1]+' ߡߊ߬ߞߟߏ߬ߟߌ ߢߊ߬ߣߍ߲߬</h3>\
                                             <p>ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ ߕߊ߯ ߣߐ߰ߡߊ߬ߛߍߦߌ ߦߙߐ.<br>\
                                             ߞߐߝߟߌ ߝߟߍ߫ ߘߎ߭ߡߊ߬ ߓߊ߫߹<br>\
                                             ߘߊߕߎ߲ߠߊ߲߫ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߓߐ߫ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫)</p>\
@@ -828,7 +830,7 @@ function apprentissages() {
                                     }
                                     if(taux_de_vraie_reponse_1 < 100) {
                                         ecrire('pre_apprentissage_note','\
-                                            <h3>ߡߊ߬ߞߟߏ߬ߟߌ ߡߊ߫ ߢߊ߬</h3>\
+                                            <h3>'+liste_de_matieres[0][1]+' ߡߊ߬ߞߟߏ߬ߟߌ ߡߊ߫ ߢߊ߬</h3>\
                                             <p>ߌ ߓߘߊ߫ ߗߌߙߏ߲߫ ߡߊ߬ߞߟߏ߬ߟߌ ߢߌ߲߬ ߘߐ߫.<br>\
                                             ߞߐߝߟߌ ߝߟߍ߫ ߘߎ߭ߡߊ߬ ߓߊ߫߹<br>\
                                             ߘߊߕߎ߲ߠߊ߲߫ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߓߐ߫ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫)</p>\
@@ -839,7 +841,7 @@ function apprentissages() {
                                 if(carre_index == 1) {
                                     if(taux_de_vraie_reponse_2 == 100) {
                                         ecrire('pre_apprentissage_note','\
-                                            <h3>ߣߐ߰ߡߊ߬ߛߍߦߌ ߢߊ߬ߣߍ߲߬</h3>\
+                                            <h3>'+liste_de_matieres[0][1]+' ߣߐ߰ߡߊ߬ߛߍߦߌ ߢߊ߬ߣߍ߲߬</h3>\
                                             <p>ߞߎߘߎ߲߫ ߁߭ ߤߊ߲߯ ߞߎߘߎ߲߫ '+cercle_actif.html()+' ߠߎ߬ ߓߍ߯ ߓߘߊ߫ ߢߊߦߋ߫ ߌ ߓߟߏ߫<br>\
                                             <p>ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ ߞߎߘߎ߲߫ '+cercle_actif.next().html()+' ߘߋ߲߰.<br>\
                                             ߞߐߝߟߌ ߝߟߍ߫ ߘߎ߭ߡߊ߬ ߓߊ߫߹<br>\
@@ -848,7 +850,7 @@ function apprentissages() {
                                     }
                                     if(taux_de_vraie_reponse_2 < 100) {
                                         ecrire('pre_apprentissage_note','\
-                                            <h3>ߣߐ߰ߡߊ߬ߛߍߦߌ ߡߊ߫ ߢߊ߬</h3>\
+                                            <h3>'+liste_de_matieres[0][1]+' ߣߐ߰ߡߊ߬ߛߍߦߌ ߡߊ߫ ߢߊ߬</h3>\
                                             <p>ߌ ߓߘߊ߫ ߗߌߙߏ߲߫ ߣߐ߰ߡߊ߬ߛߍߦߌ ߢߌ߲߬ ߘߐ߫.<br>\
                                             ߞߐߝߟߌ ߝߟߍ߫ ߘߎ߭ߡߊ߬ ߓߊ߫߹<br>\
                                             ߘߊߕߎ߲ߠߊ߲߫ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߓߐ߫ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫)</p>\
@@ -981,7 +983,7 @@ function apprentissages() {
                                 indexer($('#'+cercle_id).next()); 
                                 
                                 ecrire('pre_apprentissage_note','\
-                                    <h3>ߡߊ߬ߘߋ߲߰ߠߌ</h3>\
+                                    <h3>'+liste_de_matieres[0][1]+' ߡߊ߬ߘߋ߲߰ߠߌ</h3>\
                                     <p>ߞߎߘߎ߲߫ '+cercle_actif.next().html()+' ߘߌ߲߯ ߘߎ߭ߡߊ߬</p>\
                                 ');
                             }
@@ -1124,7 +1126,7 @@ function apprentissages() {
                 if(note_2_affiche == 'on') return;
 
                 ecrire('pre_apprentissage_note','\
-                    <h3>ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ</h3>\
+                    <h3>'+liste_de_matieres[0][1]+' ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ</h3>\
                     <p>ߛߓߍߘߋ߲ ߠߎ߬ ߓߍ߯ ߘߌ߲߯ ߞߋߟߋ߲߫ ߞߋߟߋ߲߫߸ ߦߴߌ ߕߟߏߡߊߟߐ߬ ߊ߬ ߣߴߌ ߦߴߌ ߖߊ߲߬ߕߏ߬ ߊ߬ߟߎ߬ ߝߐߢߊ ߘߐ߫ ߞߏߛߓߍ߫߹<br>\
                     ߌ ߣߊ߬ߕߐ߫ ߟߋ߬ ߢߌ߬ߣߌ߲߬ߞߊ߬ ߟߴߊ߬ߟߎ߬ ߓߍ߯ ߡߊ߬.</p>\
                 ');
@@ -1138,7 +1140,7 @@ function apprentissages() {
                 if(note_2_affiche == 'on') return;
 
                 ecrire('pre_apprentissage_note','\
-                    <h3>ߟߊ߬ߡߍ߲߬ߠߌ ߞߍ߫</h3>\
+                    <h3>'+liste_de_matieres[0][1]+' ߟߊ߬ߡߍ߲߬ߠߌ ߞߍ߫</h3>\
                     <p>ߌ ߕߟߏߡߊߟߐ߬ ߛߓߍߘߋ߲ ߠߎ߬ ߓߍ߯ ߟߊ߫ ߞߋߟߋ߲߫ ߞߋߟߋ߲߫߸ ߊ߬ ߣߴߌ ߦߴߌ ߖߊ߲߬ߕߏ߬ ߊ߬ߟߎ߬ ߝߐߢߊ ߘߐ߫ ߞߏߛߓߍ߫<br>\
                     ߌ ߣߊ߬ߕߐ߫ ߟߋ߬ ߢߌ߬ߣߌ߲߬ߞߊ߬ ߟߴߊ߬ߟߎ߬ ߓߍ߯ ߡߊ߬.</p>\
                     <p> <b class="enrober">■</b> ߘߊߘߋ߰ߟߊ߲߬ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߝߐߟߌ ߟߊߟߐ߬.</p>\

@@ -36,7 +36,6 @@ $('document').ready(function() {
         let localOptionsLength = (all_options == null) ? 0 : all_options.length;
 
         chargerPhases();
-        
         data_phase_nbr = nombreDePhasesEtudiees();
         sessionStorage.setItem('data_phase_nbr', JSON.stringify(data_phase_nbr));
         sessionStorage.setItem('total_phase', JSON.stringify($('#phases_list li').length));

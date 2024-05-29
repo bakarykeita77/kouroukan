@@ -1,6 +1,6 @@
-
+// Cette fonction est utilisée dans lesson.js au niveau de la fonction dispenserLesson().
 function apprentissages() {
-        
+        console.log('apprentissage.js fonctionne');
     var id = JSON.parse(sessionStorage.getItem('id'));  
     var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));   // Voir programmes.js fonction storagesDuProgramme()
     
@@ -16,7 +16,7 @@ function apprentissages() {
     var clicks_memo = [];
   
 
- // Nota Beni: Le chargement de Apprentissage se fait dans parametres.js
+ // Nota Beni: Le chargement de Apprentissage se fait dans parametres.js par la fonction parametrage()/chargerLesson().
           
     $('#apprentissage_option_1').click(function(){
         $('.fermeture').attr('id', 'fermer_pre_apprentissage'); 
@@ -663,7 +663,7 @@ function apprentissages() {
                         $('#poser_pre_question').html('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ '+total_questions+' \\ '+ordre_de_question+'߲ ߠߊߡߍ߲߫');
                         pre_question = pre_questions[i];
                         
-   // console.log(pre_question);
+    console.log(pre_question);
     
                         if(i < pre_questions.length) { 
                             lire('alphabet',pre_question); 
@@ -712,7 +712,7 @@ function apprentissages() {
                         if(pre_question != pre_reponse) { nePasValiderLaPreReponse(); }
     
                         pre_exercice_memoire.push(question_reponse);
-console.log(pre_exercice_memoire);
+
                         pre_question = '';
                         pre_question = '';
 

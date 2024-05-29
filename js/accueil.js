@@ -1,26 +1,22 @@
-
+ // Declaration et initialisation des variables
 	let niveau_actif = 1, niveau_en_cours = 1, niveaux_etudies = [], niveau_max = 0;
 	let phase_active = '', phase_en_cours = '', phases_etudiees = [], derniere_phase = '';
     let phases_distinctes = [], phases_1_distinctes = [], phases_2_distinctes = [], phases_3_distinctes = [], phases_4_distinctes = [];
+    let niveau_1_statut = "non_evalue", niveau_2_statut = "non_evalue", niveau_3_statut = "non_evalue", niveau_4_statut = "non_evalue";
+    var moyenne = 1;
 
     let niveau_1_phases = ["alphabet_apprentissage", "alphabet_exercice", "alphabet_evaluation"];
     let niveau_2_phases = ["syllabes_apprentissage", "syllabes_exercice", "syllabes_pratique", "syllabes_evaluation"];
     let niveau_3_phases = ["tons_apprentissage", "tons_exercice", "tons_pratique", "tons_evaluation"];
     let niveau_4_phases = ["chiffres_apprentissage", "chiffres_exercice", "chiffres_pratique", "chiffres_evaluation"];
 
-    let niveau_1_statut = "non_evalue", niveau_2_statut = "non_evalue", niveau_3_statut = "non_evalue", niveau_4_statut = "non_evalue";
 
-    var moyenne = 1;
-    
-    
-    userIdentityStorage();
-    dataStorage();
-    //sessionStorage.removeItem('nbr');
+    userIdentityStorage(); // Storage des Identités récuperées de l'étudiant
+    dataStorage();         // Récuperation et storage des data recuperés de l'étudiant
     afficherLogo();
     
 
     function userIdentityStorage() {
-                
         sessionStorage.setItem('id',        JSON.stringify(document.getElementById('id').innerHTML));
         sessionStorage.setItem('prenom',    JSON.stringify(document.getElementById('prenom').innerHTML));
         sessionStorage.setItem('nom',       JSON.stringify(document.getElementById('nom').innerHTML));
@@ -30,8 +26,11 @@
         sessionStorage.setItem('email',     JSON.stringify(document.getElementById('email').innerHTML));
      }
     function dataStorage() {
-        let user_id = parseInt(JSON.parse(sessionStorage.getItem('id'))); 
 
+     // Identifiant id de l'apprenant.
+        let user_id = parseInt(JSON.parse(sessionStorage.getItem('id'))); 
+     
+     // Recperation de toutes les matières étdiées par l'apprenant par envoi de son id à api de kouroukan.
     	fetch("/kouroukan/api/index.php?id_user="+user_id)
     	.then(response => response.json())
     	.then(matiere_collection => {

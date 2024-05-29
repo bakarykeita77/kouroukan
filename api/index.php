@@ -22,13 +22,9 @@
         $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
         
     
-     /*
-     -------------------------------------------------------------------------------------
-      Extraction des leçons étudiées par l'étudiant, à partir de la database
-     -------------------------------------------------------------------------------------
-     */   
-        $matieres = ["alphabet","syllabes","tons","chiffres"];
+     /* Extraction des leçons étudiées par l'étudiant, à partir de la database */ 
      
+        $matieres = ["alphabet","syllabes","tons","chiffres"];
      
      /*------------------------------------------------------------------------------------- 
      Toutes les matieres 

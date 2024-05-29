@@ -4,7 +4,7 @@
 
 -------------------------------------------------------------------------------------------------------------------------*/   
 
- // Récupération du niveau d'avancement des études 
+ // Récupération du niveau d'avancement des études déterminé depuis accueil.js
     var niveaux_etudies   = JSON.parse(sessionStorage.getItem('niveaux_etudies'));
     var niveau_max        = JSON.parse(sessionStorage.getItem('niveau_max'));
     var niveau_en_cours   = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
@@ -50,6 +50,7 @@
                 
                 if(niveau_max > 0) {
                     var phases_lien = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees+'&derniere_phase='+derniere_phase;
+                    
                     if (niveau_max < matiere_index || $('#'+matiere_id).hasClass('a_apprendre')) {
                         if(matiere_index > 0) programme_html += '<li><a href="#">'+liste_de_matieres[i][1]+'</a></li>';
                     }

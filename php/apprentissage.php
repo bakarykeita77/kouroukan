@@ -1,5 +1,5 @@
 
-	<link rel="stylesheet" href="/kouroukan/css/apprentissage.css"/>
+	<link rel="stylesheet" href="../css/apprentissage.css"/>
 
     <div id="apprentissage_container">
 
@@ -87,4 +87,4 @@
     </div>
 
     
-    <script src="/kouroukan/js/apprentissage.js"></script>
+    <script src="../js/apprentissage.js"></script>

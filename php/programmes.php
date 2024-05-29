@@ -1,10 +1,7 @@
 <?php
 session_start();
-
 $racine = $_SERVER['DOCUMENT_ROOT'];
-
 if(isset($_SESSION['id'])) {
-    
 ?>
     <!DOCTYPE html>
     <html>
@@ -44,6 +41,8 @@ if(isset($_SESSION['id'])) {
                             </p>
                         </div>
                         <hr>
+
+                     <!-- Ce programme est chargé dans programmes.js par la fonction chargementDuProgramme(). -->
                         <div id="programme_matieres"></div>
                     </div>
 

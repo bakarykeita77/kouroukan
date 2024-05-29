@@ -6,7 +6,8 @@ session_start();
         $client_pass = isset($_POST['client_pass'])? $_POST['client_pass']:'';
          
         if($client_email !== '' && $client_pass !== ''){
-        
+          
+          // Connexion à la base de données
             require("connexionToDB.php");
             global $db;
  
@@ -17,7 +18,7 @@ session_start();
             $client = $requette->fetchAll();
             
           //Si lesdonnées  sont absentes, le client est redirigé sur la page de provenance (connexion.php).
-            if(empty($client)) header("location:".$_SERVER['HTTP_REFERER']);
+            if(empty($client)) { header("location:".$_SERVER['HTTP_REFERER']); }
 
           //Si les données sont presentes, mais les mots de passesne correspondent pas, le client est redirigé sur la page de provenance.
             $data_pass = $client[0]['pass'];
@@ -35,8 +36,6 @@ session_start();
           /*---------------------------------------------------------------------------------------------------*/
             
         }else{ $warning = "Veuillez remplir tous les champs !"; }  
-        
-    /* Creation de la base de donnees*/
     }
 ?>
 <!DOCTYPE html>
@@ -46,31 +45,27 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
-    <link rel="stylesheet" href="/kouroukan/css/tete-de-page.css"/>
-	  <link rel="stylesheet" href="/kouroukan/css/accueil.css"/>
+    <link rel="stylesheet" href="../css/tete-de-page.css"/>
+	  <link rel="stylesheet" href="../css/accueil.css"/>
 </head>
 <body>
 
     <div class="container" id="accueil">
         
-      <!----------------------------------------------------------------------------------------------------->  
-        <div id="user_info" style="display: none">
+      <!---------------------------------------------------------------------------------------------------
+        Pour rendre des  variables globales accessibles dans javascript, placons les dans des elements html avec un id determiné.   -->  
+        <div id="user_info" style="display:none">
             <?php if(isset($_SESSION["id"])): ?>
-            <div id="identification">
-                <p id="id"       ><?= $_SESSION["id"];        ?></p>
-                <p id="prenom"   ><?= $_SESSION["prenom"];    ?></p>
-                <p id="nom"      ><?= $_SESSION["nom"];       ?></p>
-                <p id="naissance"><?= $_SESSION["naissance"]; ?></p>
-                <p id="sexe"     ><?= $_SESSION["sexe"];      ?></p>
-                <p id="adresse"  ><?= $_SESSION["adresse"];   ?></p>
-                <p id="email"    ><?= $_SESSION["email"];     ?></p>
-            </div>
+                <div id="identification">
+                    <p id="id"       ><?= $_SESSION["id"];        ?></p>
+                    <p id="prenom"   ><?= $_SESSION["prenom"];    ?></p>
+                    <p id="nom"      ><?= $_SESSION["nom"];       ?></p>
+                    <p id="naissance"><?= $_SESSION["naissance"]; ?></p>
+                    <p id="sexe"     ><?= $_SESSION["sexe"];      ?></p>
+                    <p id="adresse"  ><?= $_SESSION["adresse"];   ?></p>
+                    <p id="email"    ><?= $_SESSION["email"];     ?></p>
+                </div>
             <?php endif ?>
-            <div id="matieres">
-                <div id="matieres_etudiees"></div>
-                <div id="matiere_active"></div>
-                <div id="matieres_a_etudiees"></div>
-            </div>
          </div> 
       <!----------------------------------------------------------------------------------------------------->  
 
@@ -90,7 +85,7 @@ session_start();
         <div class="page_foot"><?php include("pied-de-lesson.php"); ?></div>
     </div>
 
-    <script src="/kouroukan/js/accueil.js"></script>
+    <script src="../js/accueil.js"></script>
 
 </body>
 </html>

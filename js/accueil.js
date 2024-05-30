@@ -10,6 +10,8 @@
     let niveau_3_phases = ["tons_apprentissage", "tons_exercice", "tons_pratique", "tons_evaluation"];
     let niveau_4_phases = ["chiffres_apprentissage", "chiffres_exercice", "chiffres_pratique", "chiffres_evaluation"];
 
+ // Initialisation de sessionStorage.
+    sessionStorage.clear();
 
     userIdentityStorage(); // Storage des Identités récuperées de l'étudiant
     dataStorage();         // Récuperation et storage des data recuperés de l'étudiant

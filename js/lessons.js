@@ -1,6 +1,6 @@
 $('document').ready(function() {
       
- //Récupération des données reçues sur l'apprenant  
+ //Récupération des données, storées depuis aaccueil.js, sur l'apprenant  
     var matieres          = JSON.parse(sessionStorage.getItem('matieres'));     
     var matiere_index     = JSON.parse(sessionStorage.getItem('matiere_index'));
     var niveau_en_cours   = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
@@ -110,7 +110,6 @@ $('document').ready(function() {
             
             let li = $('#phases_list li');
             let indice = 0, ls = "";
-            
             $.each(li, function() { 
                 let li_id = $(this).attr('id');
                 indice = ($.inArray(li_id, phases_distinctes) === -1) ? indice : indice+=1; 

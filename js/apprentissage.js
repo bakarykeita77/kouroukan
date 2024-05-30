@@ -570,8 +570,6 @@ function apprentissages() {
         }
         function exercice(){
 
-            let lettres_apprises = [];
-
             $('.pre_lesson_foot_1').css('z-index','1');
             $('.pre_lesson_foot_2').css('z-index','0');
 
@@ -711,24 +709,18 @@ function apprentissages() {
                             let question_reponse = [pre_question,pre_reponse,point];
                             
                             if(pre_question == pre_reponse) {
-                                
                                 nbr_bonne_reponse++;
                                 point_total++;
-                                if(lesson_active == 'pre_revision') lettres_apprises.push([pre_question,pre_reponse,point]);
-
                                 validerLaPreReponse(); 
                             }
                             if(pre_question != pre_reponse) { 
-                                
                                 nbr_mauvaise_reponse++;
                                 nePasValiderLaPreReponse(); 
                             }
         
                             pre_exercice_memoire.push(question_reponse);
-
                             pre_question = '';
                             pre_question = '';
-
                             indexer($('#pre_question')); 
         
                             function validerLaPreReponse() {
@@ -907,13 +899,15 @@ function apprentissages() {
                         if(questions_posees.length == pre_questions.length) { 
                             if(lesson_active == 'pre_revision') {       
 
-                                sendPreApprentissageToDB();
-                                console.log('Lesson envoyee a la base de donnee.');
+                                if(pre_exercice_memoire.length === 27) {
+                                    sendPreApprentissageToDB();
+                                    console.log('Lesson envoyée à la base de donnée.');
+                                }
 
                                 function sendPreApprentissageToDB() {
                                     var matiere = JSON.parse(sessionStorage.getItem('matiere_active')); // Voir programmes.js fonction storagesDuProgramme()
                                     var phase   = 'alphabet_apprentissage';
-                                    var lesson  = lettres_apprises;
+                                    var lesson  = pre_exercice_memoire;
                                     var note = 20;
                                 
                                     const apprentissage_data = new URLSearchParams({

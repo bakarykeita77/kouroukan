@@ -53,7 +53,7 @@
 
         <div class="clavier_container" id="clavier_evaluation"><?php include "clavier.php"; ?></div>
 
-        <div class="dialogue_btn" id="evaluation_dialogue_btn">
+        <div class="dialogue_btn centrer_parfait" id="evaluation_dialogue_btn">
             <div class="question_btn">
                 <span class="question_label"></span>
                 <span class="question_total"></span> :

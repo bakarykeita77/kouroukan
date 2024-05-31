@@ -82,6 +82,7 @@ function evaluations() {
                 $('#evaluation_cross').css('display','none');
                 $('#evaluation_cross').css('transform','scale(0.4)');
                 $('#evaluation_reponse_container').css({'top':0});  
+                $('#teste_container').css({'top':'-6rem'});  
                 // memoriserQuestionRang();
     
                 q_index = compteur();
@@ -148,6 +149,7 @@ function evaluations() {
         $('.correction_btn').on('click', function(){
              
             corrigerEvaluation();
+            masquerTesteContainer();
             actualiserEvaluationProgressBar();
             effacerQuestion();
             effacerCheckMark();
@@ -210,6 +212,7 @@ function evaluations() {
                     }, 2000);
                 } 
             }
+            function masquerTesteContainer() { $('#teste_container').css({'top':0}); }
             function actualiserEvaluationProgressBar(){
                         
                 var course_width = $('#evaluation_foot').width();

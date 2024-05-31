@@ -18,15 +18,13 @@
             <div class="course_body" id="apprentissage_body"></div>
             <div class="course_foot" id="apprentissage_foot">
 
-                <div>
-                    <div id="pre_apprentissage_foot">
-                        <div class="pre_lesson_foot_1"></div>
-                        <div class="pre_lesson_foot_2"></div>
-                    </div>
+                <div id="pre_apprentissage_foot">
+                    <div class="pre_lesson_foot_1"></div>
+                    <div class="pre_lesson_foot_2"></div>
+                </div>
 
-                    <div class = 'progress_bar' id = "apprentissage_progress_bar">
-                        <div class='progress_bonne_reponse_bar'></div>
-                    </div>
+                <div class = 'progress_bar' id = "apprentissage_progress_bar">
+                    <div class='progress_bonne_reponse_bar'></div>
                 </div>
 
                 <div class="dialogue_btn" id="apprentissage_dialogue_btn">

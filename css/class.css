@@ -243,12 +243,15 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 .cercle_en_cours, .carre_en_cours { background-color: yellow; box-shadow: 0 0 1rem #444; }
 .cercle_depasse, .carre_depasse { background-color: white; box-shadow: none; }
 .clavier_container {
+    position: relative;
     height: 8rem;
     min-height: 4rem;
     width: 100%;
     margin: 0;
     padding-top: 1rem;
     background-color: #666;
+    box-sizing: border-box;
+    z-index: 1;
 }
 .clicker { transform-origin: 50% 0; animation: animate_hand 1.5s 1; }
 .clignotant { animation: clignotant 0.15s 7; }
@@ -298,7 +301,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     padding: 0.125rem;
     border-radius: 0.5rem; 
     z-index: 0;
-    overflow: hidden;
+    overflow: auto;
     transition: 0.6s;
 }
 .course_body { 
@@ -323,7 +326,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     box-sizing: border-box;
 }
 .course_foot { position: relative; background-color: var(--couleurNeutre); }
-.course_head { position: relative; height: 6.5rem; }
+.course_head { position: relative; max-height: 6.5rem; height: 10%; }
 .course_head div label {
     padding: 0 0.5rem;
     border-radius: 0.25rem;

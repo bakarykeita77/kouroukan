@@ -181,7 +181,7 @@
             indice++;
             document.getElementById(element_id).innerHTML = message.substr(0,indice);
             if(indice<longueur) {
-                setTimeout(() => { write(); }, 5);
+                setTimeout(() => { write(); }, 1);
             }
         }
     }
@@ -238,31 +238,25 @@
 
             if(play == true) return;
 
-            setTimeout(function(){
-            var td = $('.table_parlante td');
-        
-            var read_events = [];
-            var td_delay = '';
-            var td_index = -1;
-            var stop_indice = td.length; 
-        
-            for (i = 0; i < td.length; i++) {
+            let lecture = setTimeout(function(){
+                var td = $('.table_parlante td');
+            
+                var read_events = [];
+                var td_delay = '';
+                var td_index = -1;
+                var td_length = td.length;
+            
+                for (let i = 0; i <= td_length; i++) {
+                    td_delay = 0;
+                    read_events[read_events.length] = setTimeout((function() {
+                        if(td_index < td_length) {
+                            td[td_index++].click();
+                        }
+                    }), td_delay += i*2000)+'\n';
 
-                // $('.stop_icon').parent().on('click',function(){ 
-                //     stop_indice = 4;
-                //     console.log(stop_indice);
-                // });
-
-                // if(i == stop_indice) { break; }
-
-                td_delay = 0;
-                read_events[read_events.length] = setTimeout((function() {
-                    td[td_index += 1].click();
-                }), td_delay += i*2000)+'\n';
-            }
+                    play = true;
+                }
             },600);
-
-            play = true;
          });
      }
     function lessonHTML(array, table_id = '#') {

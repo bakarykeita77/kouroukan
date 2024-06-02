@@ -326,7 +326,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     box-sizing: border-box;
 }
 .course_foot { position: relative; background-color: var(--couleurNeutre); }
-.course_head { position: relative; max-height: 6.5rem; height: 10%; }
+.course_head { position: relative; height: 6.5rem; }
 .course_head div label {
     padding: 0 0.5rem;
     border-radius: 0.25rem;

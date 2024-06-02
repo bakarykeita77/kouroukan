@@ -1,6 +1,6 @@
 // Cette fonction est utilisée dans lesson.js au niveau de la fonction dispenserLesson().
 function apprentissages() {
-        console.log('apprentissage.js fonctionne');
+        
     var id = JSON.parse(sessionStorage.getItem('id'));  
     var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));   // Voir programmes.js fonction storagesDuProgramme()
     
@@ -480,7 +480,6 @@ function apprentissages() {
             return autorisation;
         }
         function preExercice() {
-
             $('#carre_1').click(function() {
                 
                 lesson_active = 'pre_exercice';
@@ -509,7 +508,6 @@ function apprentissages() {
                     carre_actif.addClass('carre_en_cours');
                 }
             });
-
         }
         function preRevision() {
             $('#carre_2').click(function() { 
@@ -1099,11 +1097,7 @@ function apprentissages() {
             $(".media_btns").on('mouseleave', function() { noteDApprentissage1(); });
 
             $('#parametre_lesson_btn').on('mouseenter', function() { noteDApprentissage4(); });
-
-            $('.table_parlante td').click(function() {
-                console.log(nbr_td);
-            });
-
+            
 
 
             function noteDApprentissage1() {
@@ -1171,9 +1165,9 @@ function apprentissages() {
         }
         function apprendre() {
 
-            lectureSemiAutomatique();  // Voir fonctions.js
+           // lectureSemiAutomatique();  // Voir fonctions.js
             lecturePersonnalisee();    // Voir fonctions.js
-            arreterLecture();          // Voir fonctions.js
+           // arreterLecture();          // Voir fonctions.js
             apprentissageProgressBarr();
 
             
@@ -1204,7 +1198,7 @@ function apprentissages() {
                 }
                 function progression(nbr_click) {
                     var progress_unity = $('#apprentissage_progress_bar').width()/nbr_click;
-console.log($('#apprentissage_progress_bar').width());                    
+                    
                     $('.table_parlante td').on('click', function() {
                         if(elements_clickes.indexOf($(this).html()) == -1) $('.progress_bonne_reponse_bar').css('width','+='+progress_unity+'px');
                         elements_clickes.push($(this).html());
@@ -1272,9 +1266,14 @@ console.log($('#apprentissage_progress_bar').width());
                     --------------------------------------------------------------------*/
                                                     
                         var clicked_element = $(this).html(); // Élément clické.
-                        element_click_counter++; // Compteur de click pour chaque élément.
+                        element_click_counter++; // Compteur de click specifique pour chaque élément.
+
+                     /*Quand un éléent est cliqué au moins 5 fois, il est considéré comme étant suffisemment appris.
+                      *Il est noté par 1 et cette note est enregitrée dans  la varible new_mark. */ 
                         var new_mark = (element_click_counter >= 5) ? "߁" : "߀";
             
+                     /*A chaque élément correspond un tableau (new_click_value) de 3 composants dont l'élément cliqué, le nombre de click de
+                      *cet élément et le point new_mark. Ce tableau est régulièrement actualisé à chaque click */ 
                         var new_click_value = [clicked_element,parseIntNko(element_click_counter),new_mark];  // Enregistrement elementaire.
                         var non_clicked_elements = '';
             
@@ -1284,7 +1283,6 @@ console.log($('#apprentissage_progress_bar').width());
                         clicks_memo.splice(element_index,1,new_click_value);
                         non_clicked_elements = nonClickedElementsTable();
                         nbr_clicked_elements = td.length - non_clicked_elements.length;
-                    
 
                         function nonClickedElementsTable(){
                             var table_elements_non_cliques = [];
@@ -1329,11 +1327,11 @@ console.log($('#apprentissage_progress_bar').width());
                     }
                 }
                 function sendApprentissageToDB() {       
-                /*
-                A la fermeture, on s'assure que chaque élément est clické au moins un nombre de fois défini.
-                - Si oui le mémoire de click est envoyé au serveur;
-                - Sinon, un message s'affiche et le mémoire n'est pas envoyé.
-                */
+                 /*
+                 A la fermeture, on s'assure que chaque élément est clické au moins un nombre de fois défini.
+                 - Si oui le mémoire de click est envoyé au serveur;
+                 - Sinon, un message s'affiche et le mémoire n'est pas envoyé.
+                 */
                     var matiere = JSON.parse(sessionStorage.getItem('matiere_active')); // Voir programmes.js fonction storagesDuProgramme()
                     var phase   = JSON.parse(sessionStorage.getItem('phase'));  // Voir lessons.js fonction phaseActiveName()
                     var lesson  = JSON.stringify(clicks_memo);
@@ -1352,7 +1350,9 @@ console.log($('#apprentissage_progress_bar').width());
                         body: apprentissage_data
                     })
                     .then(response => response.text())
-                    .catch(error => console.log(error));  
+                    .catch(error => console.log(error)); 
+                    
+                    console.log("Félicitations. Les données d'apprentissage sont envoyées à la base de données");
                 }
             });
         } 

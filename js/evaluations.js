@@ -74,9 +74,7 @@ function evaluations() {
         function poserQuestionEvaluation() {
             $('.question_btn').on('click', function(){
                 effacerPrecedenteReponse();
-                question_evaluation = questions_evaluation[q_index];
-
-                alert(question_evaluation);            
+                question_evaluation = questions_evaluation[q_index]; 
                 
                 dicterLaQuestion();
                 $('#evaluation_cross').css('display','none');
@@ -102,8 +100,7 @@ function evaluations() {
                     $('.correction_btn').css('display','none');
                 }
                 function dicterLaQuestion(){
-                    $('#audio').attr({'src':'/kouroukan/son/mp3/'+question_evaluation+'.mp3', 'autoplay':'on'});
-                    $('#progress_bar').css('top',0);
+                    lireLettre('alphabet',question_evaluation);
                 }
                 function memoriserQuestionRang(){
                     memoire_rang[memoire_rang.length] = q_ordre+q_rang;
@@ -113,7 +110,7 @@ function evaluations() {
         }
         function repeterQuestionEvaluation() {
             $('.repetition_btn').on('click', function(){
-                $('#audio').attr({'src':'/kouroukan/son/mp3/'+question_evaluation+'.mp3', 'autoplay':'on'});
+                lireLettre('alphabet',question_evaluation);
             });
         }
         function repondreEvaluation() {
@@ -169,7 +166,7 @@ function evaluations() {
                 evaluation_a_stocker.splice(evaluation_counter,1,question_reponse);
 
                 chargerEvaluationTbody();
-                marquerReponseEvaluation(); 
+                // marquerReponseEvaluation(); 
                 defilementDuContenuLeHaut($('#evaluation_tbody'));
 
                                    

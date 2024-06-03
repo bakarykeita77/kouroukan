@@ -22,19 +22,19 @@ function exercices() {
 
     function reductionDesElementsDeExerciceCouranteA49() {
 
-        if($('#exercice .table_parlante tr').length >= 6) {
-            for( var i = $('#exercice .table_parlante tr').length-1; i > 6; i--) {
-                document.querySelector('#exercice .table_parlante').deleteRow(i);
+        if($('#exercice .table_muette tr').length >= 6) {
+            for( var i = $('#exercice .table_muette tr').length-1; i > 6; i--) {
+                document.querySelector('#exercice .table_muette').deleteRow(i);
             }
-            $.each($('#exercice .table_parlante tr td'), function() {
+            $.each($('#exercice .table_muette tr td'), function() {
                 exercice_questions.push($(this).html());
             });
         }
-        if($('#exercice .table_parlante tr').length < 6) {
-            $.each($('#exercice .table_parlante tr td'), function() {
+        if($('#exercice .table_muette tr').length < 6) {
+            $.each($('#exercice .table_muette tr td'), function() {
                 exercice_questions.push($(this).html());
             });
-        }
+        }            
         
         exercice_questions = malaxer(exercice_questions);
     }
@@ -45,7 +45,7 @@ function exercices() {
         function dialogueBtnHTML(){
             var exercices_entete_html = "<div class='dialogue_btn' id='exercice_dialogue_btn'>";   
             exercices_entete_html += "<div class='play_icon_container' id='exercices_player'>";
-            exercices_entete_html += "<span class='play_label'>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ </span>";
+            exercices_entete_html += "<span class='play_label' id='exercice_play_label'>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ </span>";
             exercices_entete_html += "<span class='qtite_question'>"+parseIntNko(nbr_de_questionnaires)+"</span> : <span class='ordre_question'>"+parseIntNko(compteur_de_question)+question_rang+" </span>";
             exercices_entete_html += "<span class='ecouter_question'> ߟߊߡߍ߲߫</span><span class='play_icon'>&#9664;</span>";
             exercices_entete_html += "</div>";
@@ -60,36 +60,37 @@ function exercices() {
         var question_posee = '', reponse_montree = ''; 
 
         poserExerciceQuestion();
+        repeterExerciceQuestion();
         repondreExerciceQuestion();
         
         function poserExerciceQuestion(){
-            $('#exercices_player').on('click',function() {
-              
+            indexer($('#exercice_dialogue_btn'));
+            $('.play_icon_container').on('click',function() {
+             
                 compteur_de_question++;
                 question_rang = '߲';
                 $('.ecouter_question').html(' ߠߊߡߍ߲߫');
                 $('.ordre_question').html(parseIntNko(compteur_de_question)+question_rang);
                 question_posee = exercice_questions[i];
                 
-                alert( question_posee ); 
+                // alert( question_posee ); 
   
                 $(this).css('display','none');
                 $('.oreille_icon_container').css('display','block');
                 
                 lireQuestion();
-                repeteQuestion();
-
                 i++;
                 
-                function lireQuestion() {  $('#audio').attr({'src':'/kouroukan/son/mp3/'+question_posee+'.mp3', 'autoplay':'on'}); }
-                function repeteQuestion(){ $('.oreille_icon_container').on('click', function() { lireQuestion();}); }
+                function lireQuestion() { lire('alphabet',question_posee); }
             });
+        }
+        function repeterExerciceQuestion(){ 
+            $('.oreille_icon_container').on('click', function() { lire('alphabet',question_posee); }); 
         }
         function repondreExerciceQuestion(){
                     
-            $('.table_parlante').on('click', function(e){
-                if(question_posee=='')
-                { rappel($('.dialogue_btn')); }
+            $('#exercice .table_muette').on('click', function(e){
+                if(question_posee=='') { rappel($('.dialogue_btn')); }
                 else
                 {   
                     var td = $(e.target);
@@ -120,6 +121,7 @@ function exercices() {
                         if(compteur_de_question - 1 == nbr_de_questionnaires){
                             $('#exercices_player').off('click');
                             $('#exercices_player').html('ߡߊ߬ߞߟߏ߬ߟߌ ߓߘߊ߫ ߓߊ߲߫. ߌ ߞߎߟߎ߲ߖߋ߫߹ ');
+                            indexer($('#fermer_exercice'));
                         }
                     }
                 }
@@ -128,7 +130,7 @@ function exercices() {
     }
     function enregistrerExercice(){
         
-        var td = $('.table_parlante td');
+        var td = $('#exercice .table_muette td');
         var exercice_counter = 0;
 
         initialiserExerciceAStocker();
@@ -160,8 +162,7 @@ function exercices() {
             });
         }
     }
-    function stockerExercice() {
-                                         
+    function stockerExercice() {      
         $('#fermer_exercice').one('click',function(){ 
             let index_phase_active = $('.phases_container ul li .active').index();
             
@@ -208,6 +209,8 @@ function exercices() {
                 })
                 .then(response => response.text())
                 .catch(error => console.log(error));
+
+                console.log("Les données de exercice sont envoyées à la base de données");
             }
         });
     }

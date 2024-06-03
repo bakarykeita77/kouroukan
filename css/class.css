@@ -357,7 +357,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 .dialogue_btn {
     position: absolute;
     width: 80%;
-    height: 3rem;
+    height: 1rem;
     padding: 1rem;
     margin: 0.25rem auto;
     border-radius: var(--radiusMedium);

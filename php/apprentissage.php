@@ -12,8 +12,11 @@
         </div>
         
         <div id="apprentissage">
-            <div class="course_head" id="apprentissage_note">
-                <div id="pre_apprentissage_note"></div>
+            <div class="course_head" id="apprentissage_head">
+                <div id="pre_apprentissage_note">
+                    <div id="pre_apprentissage_notification_titre"></div>
+                    <div id="pre_apprentissage_notification_corps"></div>
+                </div>
             </div>
             <div class="course_body" id="apprentissage_body"></div>
             <div class="course_foot" id="apprentissage_foot">

@@ -1,10 +1,9 @@
 
 #apprentissage_container > div { position: absolute; width: calc(100% - 0.25rem); }
-#apprentissage_container > div:nth-child(1) { z-index: 1; max-width: 15rem; border-radius: 0.5rem; }
+#apprentissage_container > div:nth-child(1) { z-index: 1; max-width: 16rem; border-radius: 0.5rem; }
 #apprentissage_container > div:nth-child(2) { display: none; background-color: #fff; z-index: 0; }
 #apprentissage_options {
     background-color: #fff;
-    box-shadow: 0 0 1rem #666;
     top: 50%;
     left: 50%;
     padding: 1rem;
@@ -53,6 +52,7 @@
     padding: 0.5rem 1rem;
     font-size: 12px;
 }
+#pre_apprentissage_note h3 { margin: 0; padding: 0; }
 #pre_apprentissage_foot {
     position: absolute;
     height: 4rem;
@@ -208,10 +208,10 @@
     width: 2rem;
     height: 2rem;
     line-height: 2rem;
-    border: 1px solid #aaa;
+    border: 1px solid #eee;
     cursor: pointer;
 }
-#consonnes_cadre span:hover { background-color: yellow; }
+#consonnes_cadre span:hover { background-color: #ddd; }
 
 
 
@@ -420,6 +420,9 @@
     bottom: 0;
     background-color: #fff;
     border: 1px solid #aaa;
+    left: 0;
+    transform: translate(75%, 0);
+    cursor: pointer;
 }
 #submit_panneau:hover { background-color: #aaa; }
 
@@ -431,8 +434,8 @@
     }
     #cercles_des_partis span:not(.indicateur, .cercle_en_cours) { z-index: 0; }
     .indicateur, .cercle_en_cours { z-index: 1; }
-    #carre_1 { display: block; }
-    #carre_2 { display: none; }
+    #questions_malaxer_1 { display: block; }
+    #questions_malaxer_2 { display: none; }
     #pre_exercice {
         width: 95%;
         margin-right: 2%;

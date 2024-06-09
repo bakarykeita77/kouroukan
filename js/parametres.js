@@ -208,7 +208,7 @@ function parametrageDeLesson() {
             });
         }
         function checkbox_childrenClick() {
-            $('.checkbox_children').on('click', function() { 
+            $('.check_btn').on('click', function() { 
                 viderLesSousTableauxDesCaracteresCoches();
                 collecteDesCaracteresCoches(); 
                 rechargerLesSousTableauxDesCaracteresCoches();
@@ -309,9 +309,6 @@ function parametrageDeLesson() {
                 caracteres_coches = voyelles_cochees.concat(consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees);
             }
 
-            sessionStorage.setItem('voyelles_cochees', JSON.stringify(caracteres_coches));
-            sessionStorage.setItem('consonnes_cochees', JSON.stringify(caracteres_coches));
-            sessionStorage.setItem('tedos_coches', JSON.stringify(caracteres_coches));
             sessionStorage.setItem('caracteres_coches', JSON.stringify(caracteres_coches));
         }
         function rechargerLesSousTableauxDesCaracteresCoches() {

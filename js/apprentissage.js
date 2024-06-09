@@ -69,6 +69,7 @@ function apprentissages() {
         let quantite_normale_de_click = 1;
 
         let panneau_status = "masque";
+        let instruction_de_lecture = "non_affice";
         let consonnes_choisies = [];
 
 
@@ -159,11 +160,11 @@ function apprentissages() {
                     $('#panneaux span').click(function() {
 
                         var clicked_consonne_container = $(this);
-                        var clicked_consonne = $(this).html();
+                        var clicked_consonne = $(this).text();
                         var bc = this.style.backgroundColor;
                         var consonne_background = (bc == 'rgb(170, 170, 170)') ? '#fff' : 'rgb(170, 170, 170)';
-
-                        consonnes_choisies.push(clicked_consonne);
+                        let element_index = 0;
+                        
                         $('.table_parlante td').css('transform','scale(0)');
 
                         marquerLaConsonneCliquee();
@@ -174,6 +175,16 @@ function apprentissages() {
                     
                         function marquerLaConsonneCliquee() {
                             clicked_consonne_container.css('background-color',consonne_background);
+
+                            consonnes_choisies.forEach(element => {
+                                if(element == clicked_consonne) {
+                                    element_index = consonnes_choisies.indexOf(clicked_consonne);
+                                }
+                            });
+
+                            if(consonne_background == 'rgb(170, 170, 170)') { consonnes_choisies.push(clicked_consonne); }
+                            if(consonne_background == '#fff') { consonnes_choisies.splice(element_index,1); }
+
                         }
                         function chargerTableauNoir() {
                             $.each($('.check_btn'), function(){
@@ -425,16 +436,18 @@ function apprentissages() {
                     });
                 }
                 function lectureDePreApprentissageSyllabes() {
-                    $.each($('#apprentissage .table_parlante td'), function() {
-                        $(this).click(function() {
-                            let clicked_letter = $(this).html();
-                            lire('ߊ',clicked_letter);
-                        });
-                    });
                     
-                    $('#apprentissage .table_parlante').click(function(e) {
+                    $('#apprentissage_body').click(function(e) {
+                        
+                        let id = this.id;
+                        let td = $('#'+id+' .table_parlante td');
 
-console.log(e.target);
+                        $.each(td, function(){
+                            $(this).click(function(){ 
+                                let son = $(this).text();
+                                lire('ߊ',son); 
+                            });
+                        });
                     });
                 }
                 function lectureDePreApprentissageTons() {}
@@ -545,21 +558,27 @@ console.log(e.target);
 
                     $('#afficheur_de_panneau').click(function() {
                         if(panneau_status == "affiche") {
-                            ecrire("pre_apprentissage_notification_corps","ߛߌ߬ߙߕߊ߬ ߞߋߟߋ߲߫ ߥߟߊ ߛߌߦߊߡߊ߲߫ ߛߎߥߊ߲ߘߌ߫߸ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߡߍ߲ ߜߋ߲߭ ߠߎ߬ ߘߋ߲߰.");
+                            if(consonnes_choisies.length != 0) {
+                                ecrire("pre_apprentissage_notification_corps","ߛߌ߬ߙߕߊ߬ ߞߋߟߋ߲߫ ߥߟߊ ߛߌߦߊߡߊ߲߫ ߛߎߥߊ߲ߘߌ߫߸ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߡߍ߲ ߜߋ߲߭ ߠߎ߬ ߘߋ߲߰.");
+                            }
+                            if(consonnes_choisies.length == 0) {
+                                ecrire("pre_apprentissage_notification_corps","ߛߌ߬ߙߕߊ߬ ߞߋߟߋ߲߫ ߥߟߊ ߛߌߦߊߡߊ߲߫ ߛߎߥߊ߲ߘߌ߫߸ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߡߍ߲ ߜߋ߲߭ ߠߎ߬ ߘߋ߲߰.");
+                            }
                         }
-                    }); 
+                    });
 
                     $('#afficheur_de_panneau, #panneaux, #apprentissage_body, #submit_panneau').click(function() {
                         if(panneau_status == "masque") {
-                        if(consonnes_choisies.length != 0) {
-                            ecrire("pre_apprentissage_notification_corps","ߛߌ߬ߙߕߊ߬ ߛߎߥߊ߲ߘߌߣߍ߲ ߠߎ߬ ߜߋ߲߭ ߢߌ߲߬ ߠߎ߫ ߞߋ߬ߟߋ߲߬ ߞߋ߬ߟߋ߲߬ ߘߋ߲߯ ߤߊ߲߯ ߊ߬ߟߎ߬ ߦߋ߫ ߕߴߌ ߞߣߐ߫.");
-                        }}
-
+                            if(consonnes_choisies.length == 0) {
+                                ecrire("pre_apprentissage_notification_corps","ߞߏ߰ߙߌ߫ ߣߘߍ߬ߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬ ߞߊ߬ ߛߌ߬ߙߕߊ߬ ߥߟߊߟߋ߲ ߦߌ߬ߘߊ߬.");
+                                indexer($('#afficheur_de_panneau'));
+                            }
+                        }
                         if(panneau_status == "masque") {
-                        if(consonnes_choisies.length == 0) {
-                            ecrire("pre_apprentissage_notification_corps","ߞߏ߰ߙߌ߫ ߣߘߍ߬ߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬ ߞߊ߬ ߛߌ߬ߙߕߊ߬ ߥߟߊߟߋ߲ ߦߌ߬ߘߊ߬.");
-                            indexer($('#afficheur_de_panneau'));
-                        }}
+                            if(consonnes_choisies.length != 0) {
+                                ecrire("pre_apprentissage_notification_corps","ߜߋ߲߭ ߢߌ߲߬ ߠߎ߫ ߞߋ߬ߟߋ߲߬ ߞߋ߬ߟߋ߲߬ ߘߋ߲߯ ߤߊ߲߯ ߊ߬ߟߎ߬ ߦߋ߫ ߕߴߌ ߞߣߐ߫.");
+                            }
+                        }
                     });
 
                 }

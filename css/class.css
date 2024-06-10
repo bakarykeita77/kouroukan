@@ -939,6 +939,7 @@ del {
 .table_parlante, .table_muette {
     position: relative;
     width: calc(100% - 4rem);
+    max-width: 40rem;
     margin: auto;
     top: 15%;
 }
@@ -947,10 +948,10 @@ del {
     position: relative;
     padding: 8px 0;
     font-weight: 900;
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-stretch: expanded;
     text-align: center;
-    border-radius: 50%;
+    border-radius: 0.5rem;
     cursor: pointer;
     overflow: hidden;
     transition: 0.5s;

@@ -372,6 +372,39 @@
     
         return mixted_table;
     }
+    function memoriserClicks(table,elements){
+
+        let id = table.attr('id');
+        let td = $('#'+id+' td');
+        
+        elements = [];
+        td.css({'background-color':'rgb(85, 85, 85)', 'color':'yellow'});
+
+        initialiserMemoire();
+        memorisation();
+
+        
+        function initialiserMemoire() {
+            for(i=0; i<td.length; i++) { 
+                let clicked_syllabe = td[i].textContent;
+                elements.push([clicked_syllabe,0]); 
+            }
+        }
+        function memorisation() {
+            $.each(td, function(){
+
+                let compteur = 1;
+                let syllabe_clique = $(this).text();
+                let td_index = $(this).index();
+                
+                $(this).click(function(){
+                    let n = compteur++;
+                    elements.splice(td_index,1,[syllabe_clique,n]);
+                    console.log(elements);
+                });
+            });
+        }
+    }
     function mix2D(tableau){
         var mixted_table = [];
         for(var i=0; mixted_table.length<tableau[0].length*tableau[1].length;i++){

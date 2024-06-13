@@ -12,22 +12,21 @@
         </div>
         
         <div id="apprentissage">
+         <!--Course head ------------------------------------------------------------------ -->
             <div class="course_head" id="apprentissage_head">
-                <div id="pre_apprentissage_note">
+                <div id="pre_apprentissage_notification">
                     <div id="pre_apprentissage_notification_titre"></div>
                     <div id="pre_apprentissage_notification_corps"></div>
                 </div>
             </div>
+         <!--Course body ------------------------------------------------------------------ -->
             <div class="course_body" id="apprentissage_body"></div>
-            <div class="course_foot" id="apprentissage_foot">
+         <!--Course foot ------------------------------------------------------------------ -->
+            <div class="course_foot" id="pre_foot">
 
-                <div id="pre_apprentissage_foot">
-                    <div class="pre_lesson_foot_1"></div>
-                    <div class="pre_lesson_foot_2"></div>
-                </div>
-
-                <div class = 'progress_bar' id = "apprentissage_progress_bar">
-                    <div class='progress_bonne_reponse_bar'></div>
+                <div class="dialogue_btn" id="pre_apprentissage_dialogue_btn">
+                    <div id="pre_apprentissage_btns"></div>
+                    <div id="pre_exercice_btns"></div>
                 </div>
 
                 <div class="dialogue_btn" id="apprentissage_dialogue_btn">
@@ -57,7 +56,12 @@
 
                 </div>
 
+                <div class = 'progress_bar' id = "apprentissage_progress_bar">
+                    <div class='progress_bonne_reponse_bar'></div>
+                </div>
+
             </div>
+         <!--Fin course ------------------------------------------------------------------- -->
         </div>
 
         <div id="pre_exercice_cover">
@@ -66,7 +70,7 @@
                 <div id="pre_exercice_container">
                         
                     <div id="pre_exercice_body"></div>
-                    <div id="pre_exercice_foot">&#10140;</div>
+                    <div id="pre_exercice_foot"></div>
 
                     <div id="pre_exercice_resultat">
                         <div id="pre_exercice_resultat_head"><h3></h3></div>

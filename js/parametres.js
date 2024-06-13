@@ -35,7 +35,7 @@ function parametrageDeLesson() {
     function affichageDeParametres(){ 
     
         $("#parametre_lesson").on('mouseover', function() { 
-            if($('#pre_apprentissage_note h3').text() == 'ߟߊ߬ߡߍ߲߬ߠߌ ߞߍ߫') return false;
+            if($('#pre_apprentissage_notification h3').text() == 'ߟߊ߬ߡߍ߲߬ߠߌ ߞߍ߫') return false;
             
             afficherParametres(); 
         });

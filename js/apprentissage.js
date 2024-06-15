@@ -257,22 +257,21 @@ function apprentissages() {
                     case 3 : affichageDePreApprentissageTons(); break;
                     case 4 : affichageDePreApprentissageChiffres(); break;
                 }
-                
+            
 
                 $('#apprentissage_option_1').click(function(){ 
                     $('#apprentissage_dialogue_btn').css('z-index',0); 
                     $('#pre_apprentissage_dialogue_btn').css('z-index',1); 
-                    $('#pre_exercice_bouton, #pre_revision_bouton').css({'transfom':'scale(0) translateX(-50%)'});
                 });
                 $('#apprentissage_option_2').click(function(){ 
                     $('#pre_apprentissage_dialogue_btn').css('z-index',0); 
                     $('#apprentissage_dialogue_btn').css('z-index',1); 
-                    $('#pre_exercice_bouton, #pre_revision_bouton').css({'transfom':'scale(0) translateX(-50%)'});
                 });
 
                 
                 function affichageDePreApprentissageAlphabet() {
 
+                    afficherPreApprentissagesBtns();
                     $('#cercles_des_partis_cadre span').click(function() {
                                     
                         lesson_active = 'pre_apprentissage';
@@ -290,7 +289,8 @@ function apprentissages() {
                         selectionDeLaLigneActive();
                         styleDeLaLigneActive();
                         traductionDeLaLigneActive();
-                        afficherPreApprentissagesBtns();
+                        affichageDePreApprentissageBtns();
+                        masquerDialogueBtn();
                         
                         reInitialiserPreApprentissageClicksMemo();
                     
@@ -367,6 +367,23 @@ function apprentissages() {
 
                                 return th;
                             }
+                        }
+                        function affichageDePreApprentissageBtns() {
+
+        
+                            $.each($('.pre_apprentissage_td'), function() {
+        
+                                $(this).click(function() {
+
+                                    let n = indice();
+    
+                                    if(n == 7) { 
+                                        afficherPreExerciceBtn(); 
+                                    }
+                                });
+                            });
+                            
+                            $('#pre_exercice_bouton').click(function() { masquerDialogueBtn(); });
                         }
                     });
 
@@ -611,14 +628,13 @@ function apprentissages() {
                                 let n = indice();
 
                                 if(n == 7) { 
-                                    $('#pre_apprentissage_btns').css('z-index',0);
-                                    $('#pre_exercice_btns').css('z-index',1);
-                                    
+                                    afficherPreExerciceBtn();
                                     indexer($('#pre_exercice_bouton'));
                                 }
                                 
                                 $('.cercle, #pre_revision_btn').click(()=>{ 
                                     $('#pre_revision_bouton').removeClass('indicateur'); 
+                                    masquerDialogueBtn();
                                     reInitialiserPreApprentissageClicksMemo();
                                 });
                             }
@@ -692,6 +708,7 @@ function apprentissages() {
                 lesson_active = 'pre_exercice';
                 let carre_actif = $(this);
                 
+                masquerDialogueBtn();
                 initialiserLeResultat();
                 exercice_btn_index = $(this).index();
                 exercice_btn_id = $(this).attr('id');
@@ -715,6 +732,7 @@ function apprentissages() {
                 lesson_active = 'pre_revision';
                 let carre_actif = $(this);
 
+                masquerDialogueBtn();
                 initialiserLeResultat();
                 exercice_btn_index = $(this).index();
                 exercice_btn_id = $(this).attr('id');
@@ -732,8 +750,6 @@ function apprentissages() {
             }); 
         }
         function exercice(){
-
-            afficherPreExercicesBtns();
 
             chargerPreExercice();
             afficherPreExercice();
@@ -838,7 +854,7 @@ function apprentissages() {
                 function afficherEnteteDePreExerciceAlphabet() {
                 }
                 function afficherPiedDePreExerciceAlphabet() {
-                    afficherPreExerciceBtn();
+                    
                 }
                 function afficherCorpsDePreExerciceAlphabet() {
                         
@@ -874,33 +890,16 @@ function apprentissages() {
                     }
                     function gestionDeExerciceFootBtn() {
 
-                        if(screen.width < 400) { 
-                            $('#pre_question').css('display','block');
-                            $('#pre_correction').css('display','none');
-                        }
-                        if(screen.width > 400) { 
-                            $('#pre_question').css('display','block'); 
-                            $('#pre_correction').css('display','block'); 
-                        }
+                        $('#pre_question').css('display','block');
+                        $('#pre_correction').css('display','none');
 
                         $('#pre_question, #pre_correction').click(function() {
-                            if(screen.width < 400) { 
-                                $('#pre_question').css('display','block');
-                                $('#pre_correction').css('display','none');
-                            }
+                            $('#pre_question').css('display','block');
+                            $('#pre_correction').css('display','none');
                         });
                         $('#pre_exercice_body td').click(function() {
-                            if(screen.width < 400) { 
-                                $('#pre_correction').css('display','block');
-                                $('#pre_question').css('display','none');
-                            }
-                        });
-
-                        $('#pre_question, #pre_exercice_body td, #pre_correction').click(function() {
-                            if(screen.width > 400) { 
-                                $('#pre_question').css('display','block'); 
-                                $('#pre_correction').css('display','block'); 
-                            }
+                            $('#pre_correction').css('display','block');
+                            $('#pre_question').css('display','none');
                         });
                     }
                     function indexerPreQuestionBtn() {
@@ -940,9 +939,7 @@ function apprentissages() {
     
                         $('#poser_pre_question').css('display','none');
                         $('#repeter_pre_question').css('display','block');
-                        
-                        $('#pre_exercice_body .table_parlante td').css('border','0.25rem solid blue');
-                                    
+                                                            
                         ordre_de_question = (total_questions == parseIntNko(i+2)) ? 'ߟߊߓߊ߲' : parseIntNko(i+2);
                         $('#poser_pre_question').html('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ '+total_questions+' \\ '+ordre_de_question+'߲ ߠߊߡߍ߲߫');
                         pre_question = pre_questions[i];
@@ -968,7 +965,7 @@ function apprentissages() {
                                 pre_reponse = this.innerHTML;
                 
                                 element_actif = $(this);
-                                $(element_actif).css('background-color','#aaa').siblings().css('background-color','transparent');
+                                $(element_actif).css('background-color','#aaa').siblings().css('background-color','rgba(85,85,85,0.25)');
                                 $('#pre_exercice_body .table_parlante td').css('border','0.25rem solid transparent');
                                 indexer($('#pre_correction'));
                             }
@@ -986,7 +983,7 @@ function apprentissages() {
 
                             $('#repeter_pre_question').css('display','none');
                             $('#poser_pre_question').css('display','block');
-                            $('#pre_exercice_container td').css('background-color','transparent');
+                            $('#pre_exercice_container td').css('background-color','rgba(85,85,85,0.25)');
         
                             if(pre_question == '') { return false; }
         
@@ -1180,31 +1177,33 @@ function apprentissages() {
                     exercice_btn_id = $('.exercice_en_cours').attr('id');
 
                     $('#pre_exercice').css({'transform':'scale(0.8)', 'opacity':0});
-                    afficherPreExercicesBtns();
-                    afficherPreRevisionBtn();
+                    setTimeout(() => {
+                        $('#pre_exercice_cover').css('display','none');
+                        $('#pre_exercice_resultat').css('display','none');
+                    }, 250);
+
                     
                     setTimeout(() => {
-
-                        $('#pre_exercice_cover, #pre_exercice, #pre_exercice_resultat').css({'display':'none'});
                         
                         if(exercice_btn_index == 0) { 
                             if(taux_de_vraie_reponse_1 < 100) {
+                                afficherPreExerciceBtn();
                                 $('#pre_exercice_bouton').click(); 
                             }
                             if(taux_de_vraie_reponse_1 == 100) {
-                                $('#pre_exercice_bouton').removeClass('exercice_en_cours').addClass('carre_depasse').css('z-index',0);
                                 afficherPreRevisionBtn();
+                                $('#pre_exercice_bouton').removeClass('exercice_en_cours').addClass('carre_depasse').css('z-index',0);
                             }
                         }
                     
                         if(exercice_btn_index == 1) { 
                             
                             if(taux_de_vraie_reponse_2 < 100) {
-                                $('#pre_revision_bouton').click();
+                                afficherPreRevisionBtn();
+                                $('#pre_revision_bouton').text('ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫ ߕߎ߲߯');
                             }
                             if(taux_de_vraie_reponse_2 == 100) {
                                 afficherPreApprentissagesBtns();
-                                
                                 $('#'+cercle_id).removeClass('apprentissage_en_cours').addClass('cercle_depasse');
                                 indexer($('#'+cercle_id).next()); 
                                 
@@ -1637,23 +1636,44 @@ function apprentissages() {
         $('#apprentissage_container > div:nth-child(2)').css('display','block');
     }
     function afficherPreApprentissagesBtns() {
-        $('#pre_exercice_btns').css('z-index',0);
-        $('#pre_apprentissage_btns').css('z-index',1);
+        $('.dialogue_btn').css({'display':'block', 'width':0});
+
+        $('#pre_apprentissage_dialogue_btn').css('display','block');
+        $('#apprentissage_dialogue_btn').css('display','none');
+
+        $('#pre_exercice_btns').css('display','none');
+        $('#pre_apprentissage_btns').css('display','block');
+
+        $('.dialogue_btn').animate({'width':'480px'}, 400);
     }
-    function afficherPreExercicesBtns() {
-        $('#pre_exercice_bouton, #pre_revision_bouton').css({'transfom':'scale(0) translateX(-50%)'});
-        $('#pre_apprentissage_btns').css('z-index',0);
-        $('#pre_exercice_btns').css('z-index',1);
+    function masquerDialogueBtn() { $('.dialogue_btn').css({'width':0, 'display':'none'}); }
+    function afficherPreExerciceBtn() {  
+        $('.dialogue_btn').css({'display':'block', 'width':0});
+
+        $('#apprentissage_dialogue_btn').css('display','none');
+        $('#pre_apprentissage_dialogue_btn').css('display','block');
+
+        $('#pre_apprentissage_btns').css('display','none');
+        $('#pre_exercice_btns').css('display','block');
+   
+        $('#pre_revision_bouton').css('display','none');
+        $('#pre_exercice_bouton').css('display','block');
+
+        $('.dialogue_btn').animate({'width':'480px'}, 400);
     }
-    function afficherPreExerciceBtn() {        
-        $('#pre_revision_bouton').css('z-index',0);
-        $('#pre_exercice_bouton').css('z-index',1);
-        $('#pre_exercice_bouton').css({'transfom':'scale(1) translateX(-50%)'});
-    }
-    function afficherPreRevisionBtn() {        
-        $('#pre_exercice_bouton').css('z-index',0);
-        $('#pre_revision_bouton').css('z-index',1);
-        $('#pre_revision_bouton').css({'transfom':'scale(1) translateX(-50%)'});
+    function afficherPreRevisionBtn() {
+        $('.dialogue_btn').css({'display':'block', 'width':0});
+
+        $('#apprentissage_dialogue_btn').css('display','none');
+        $('#pre_apprentissage_dialogue_btn').css('display','block');
+
+        $('#pre_apprentissage_btns').css('display','none');
+        $('#pre_exercice_btns').css('display','block');
+   
+        $('#pre_exercice_bouton').css('display','none');
+        $('#pre_revision_bouton').css('display','block');
+
+        $('.dialogue_btn').animate({'width':'480px'}, 400);
     }
     function raffraichissementDeLaPage() {
         $('#fermer_pre_apprentissage, #fermer_apprentissage').on('click',function() { raffraichirLaPage(); });

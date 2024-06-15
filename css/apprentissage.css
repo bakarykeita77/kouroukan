@@ -10,7 +10,7 @@
     transform: translate(-50%,-100%);
 }
 #apprentissage_options div:nth-child(1) { font-weight: bold; margin-bottom: 0.5rem; }
-#apprentissage_container > div:nth-child(2) { height: 100%; }
+#apprentissage_container > div:nth-child(2) { height: calc(100% - 0.75rem); }
 #apprentissage_options p { 
     border-radius: 0.5rem;
     padding: 0.25rem;
@@ -59,13 +59,14 @@
     text-align: center;
     z-index: 1;
 }
-#pre_apprentissage_btns { z-index: 1; }
+#pre_apprentissage_btns { overflow: visible; }
 #pre_exercice_btns span:active { box-shadow: none; }
 #pre_exercice_btns { z-index: 0; }
 #pre_exercice_btns span { 
-    width: 10rem;
+    margin: 0;
+    padding: 0;
+    width: 100%;
     border-radius: 0.5rem;
-    box-shadow: 0 0 1rem #aaa;
     left: 50%;
     transform: translateX(-50%);
     cursor: pointer;
@@ -227,12 +228,11 @@
     position: absolute;
     height: calc(100% - 2rem);
     width: 100%;
-    background-color: #ddd;
     border-radius: 0.5rem;
 }
 #pre_exercice {
     position: absolute;
-    top: 6.8rem;
+    bottom: 4rem;
     background-color: #aaa;
     box-shadow: 0 0 1rem #666;
     height: calc(100% - 14.35rem);
@@ -260,9 +260,11 @@
 }
 #pre_exercice_body {
     position: absolute;
-    height: calc(100% - 4rem);
-    width: 100%;
-    margin: auto;
+    height: calc(100% - 5.5rem);
+    width: 98%;
+    border-radius: 0.5rem 0.5rem 0 0;
+    left: 1%;
+    background-color: #fff;
     overflow: auto;
 }
 #pre_exercice_body td { 
@@ -279,21 +281,22 @@
 }
 #pre_exercice_foot { 
     position: absolute;
-    height: 3rem;
-    width: 95%;
-    bottom: 0;
+    height: 5.125rem;
+    width: 98%;
+    left: 1%;
+    bottom: 0.25rem;
     margin: auto;
-    border: 1px solid transparent;
-    border-top-color: #aaa;
-    padding: 0.5rem 1rem;
+    background-color: #fff;
+    border-radius: 0 0 0.5rem 0.5rem;
     font-weight: bold;
 }
 #pre_foot_btns_container {
     position: relative;
-    height: 3rem;
+    top: 0.5rem;
+    height: 4rem;
 }
 #pre_exercice_foot_btns, #pre_exercice_foot_alerte { position: absolute; }
-#pre_exercice_foot_btns { height: 2rem; width: 100%; }
+#pre_exercice_foot_btns { height: 4rem; width: 100%; }
 #pre_exercice_foot_alerte { 
     margin: auto;
     height: 3rem; 
@@ -305,16 +308,16 @@
 }
 #pre_question, #pre_correction {
     position: absolute;
-    display: inline-block;
     margin: 0.5rem 1rem;
-    min-width: 12rem;
-    height: 2rem;
-    line-height: 2rem;
+    width: 15rem;
+    height: 3rem;
+    line-height: 3rem;
     text-align: center;
     border-radius: 0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
     cursor: pointer;
 }
-#pre_question { right: 0; }
 #poser_pre_question, #repeter_pre_question {
     text-align: center;
     cursor: pointer;
@@ -408,7 +411,7 @@
 #pre_foot { 
     padding: 0;
     margin: 0;
-    height: 5rem;
+    height: 1rem;
     border-radius: 0 0 0.5rem 0.5rem;
 }
 #apprentissage_dialogue_btn { 
@@ -461,5 +464,4 @@
         width: 86%;
         margin-right: 7%;
     }
-    #pre_correction { left: 0; }
 }

@@ -240,7 +240,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 }
 .cercle:active { box-shadow: none; }
 .cercle_active { background-color: white; box-shadow: 0 0 1rem #444; }
-.apprentissage_en_cours, .exercice_en_cours { background-color: yellow; box-shadow: 0 0 1rem #444; }
+.exercice_en_cours { background-color: yellow; box-shadow: 0 0 1rem #444; }
 .cercle_depasse, .carre_depasse { background-color: white; box-shadow: none; }
 .clavier_container {
     position: relative;
@@ -306,7 +306,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 }
 .course_body { 
     position: relative; 
-    height: calc(100% - 11.75rem);
+    height: calc(100% - 8rem);
     color: white;
     box-sizing: border-box;
     background-color: rgba(0,0,0,0.8);
@@ -356,16 +356,16 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 .dark_backgound { background-color: #aaa; }
 .dialogue_btn {
     position: absolute;
-    width: 80%;
+    width: 480px;
     height: 4rem;
     line-height: 4rem;
-    padding: 0.25rem;
+    padding: 0;
     margin: 0.25rem auto;
     border-radius: var(--radiusMedium);
+    bottom: 4rem;
     left: 50%;
     transform: translateX(-50%);
     background-color: #fff;
-    transition: 0.25s;
 }
 .dialogue_btn > div {
     position: absolute;
@@ -373,6 +373,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     width: 100%;
     height: 4rem;
     line-height: 4rem;
+    border-radius: 0.5rem;
 }
 del {
     text-decoration: line-through; 
@@ -901,13 +902,15 @@ del {
 .profile_menu_head a { text-decoration: none; }
 .progress_bar {
     position: absolute;
+    position: absolute;
     left: 0;
-    bottom: 0;
+    top: 4px;
     margin: 0;
-    height: 0.5rem;
+    height: 1.5rem;
     width: calc(100% - 2px);
     background-color: #fff;
     border: 1px solid #ccc;
+    border-radius: 0.5rem;
     transition: 1s;
 }
 .progress_bar span {

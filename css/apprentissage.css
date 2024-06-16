@@ -232,13 +232,16 @@
 }
 #pre_exercice {
     position: absolute;
-    bottom: 4rem;
+    bottom: 2.25rem;
     background-color: #aaa;
     box-shadow: 0 0 1rem #666;
     height: calc(100% - 14.35rem);
+    width: 90%;
+    max-width: 40rem;
     padding-top: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
     border-radius: 0.5rem;
-    transition: 400ms;
 }
 #fermeture_pre_exercice {
     position: absolute;
@@ -449,19 +452,11 @@
     }
     #cercles_des_partis span:not(.indicateur, .apprentissage_en_cours) { z-index: 0; }
     .indicateur, .apprentissage_en_cours { z-index: 1; }
-    #pre_exercice {
-        width: 95%;
-        margin-right: 2%;
-    }
 }
 @media screen and (width >= 400px) {
     .pre_apprentissage_td { min-width: 9%;  }
     .cercle {
         position: relative;
         display: inline-block;
-    }
-    #pre_exercice {
-        width: 86%;
-        margin-right: 7%;
     }
 }

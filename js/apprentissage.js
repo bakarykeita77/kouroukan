@@ -870,7 +870,7 @@ function apprentissages() {
                         $('#pre_exercice').css({'transform':'scale(0.8)', 'opacity':0});
         
                         setTimeout(function() { 
-                            $('#pre_exercice').css({'transform':'scale(1)', 'opacity':1}); 
+                            $('#pre_exercice').css({'transform':'translateX(-50%) scale(1)', 'opacity':1}); 
                             $('#pre_exercice_body td').css({'transform':'scale(0)', 'opacity':0});
                         }, 10); 
                     }
@@ -1644,7 +1644,7 @@ function apprentissages() {
         $('#pre_exercice_btns').css('display','none');
         $('#pre_apprentissage_btns').css('display','block');
 
-        $('.dialogue_btn').animate({'width':'480px'}, 400);
+        $('.dialogue_btn').animate({'width':'90%'}, 400);
     }
     function masquerDialogueBtn() { $('.dialogue_btn').css({'width':0, 'display':'none'}); }
     function afficherPreExerciceBtn() {  
@@ -1659,7 +1659,7 @@ function apprentissages() {
         $('#pre_revision_bouton').css('display','none');
         $('#pre_exercice_bouton').css('display','block');
 
-        $('.dialogue_btn').animate({'width':'480px'}, 400);
+        $('.dialogue_btn').animate({'width':'90%'}, 400);
     }
     function afficherPreRevisionBtn() {
         $('.dialogue_btn').css({'display':'block', 'width':0});
@@ -1673,7 +1673,7 @@ function apprentissages() {
         $('#pre_exercice_bouton').css('display','none');
         $('#pre_revision_bouton').css('display','block');
 
-        $('.dialogue_btn').animate({'width':'480px'}, 400);
+        $('.dialogue_btn').animate({'width':'90%'}, 400);
     }
     function raffraichissementDeLaPage() {
         $('#fermer_pre_apprentissage, #fermer_apprentissage').on('click',function() { raffraichirLaPage(); });

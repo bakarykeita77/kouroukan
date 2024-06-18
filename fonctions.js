@@ -197,7 +197,7 @@
         
         setTimeout(function() { 
             element.addClass('indicateur'); 
-            repeterIndexation($('#'+element_id)); 
+            // repeterIndexation($('#'+element_id)); 
         }, 5);
         
         function repeterIndexation(element) {
@@ -453,6 +453,9 @@
         }
         return mixted_table;
     }
+    function montrer(element) {
+        element.addClass('actif');
+    }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
     
@@ -552,3 +555,23 @@
 
     function zoomArriere(element) { element.css('fontSize','-=16px'); }
     function zoomAvant(element)	{ element.css('fontSize','+=16px'); }
+    function zoomDown(element) {
+        element.css({'opacity':0});
+        element.css({
+            'left':'50%', 
+            'transform':'translate(-50%) scale(0.6)', 
+            'transition':'0.5s'
+        });
+        setTimeout(() => { element.css('display','none'); }, 600);
+    }
+    function zoomUp(element) {
+        element.css({'display':'block'});
+        setTimeout(() => {
+            element.css({
+                'opacity':1,
+                'left':'50%', 
+                'transform':'translate(-50%) scale(1)', 
+                'transition':'0.5s'
+            });
+        }, 50);
+    }

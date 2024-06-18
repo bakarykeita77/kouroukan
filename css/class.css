@@ -66,13 +66,12 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 
 
 .actif, .active, .apprises, .a_apprendre {
-    padding: 0 1rem;
     border-radius: var(--radiusSmall);
 }
 .actif, .active {
     border: var(--border_yellow); 
     background-color: rgb(255,255,0);
-    color: var(--couleur_flowerBlue);
+    box-shadow: 0 0 0.5rem #666;
     font-weight: bold;
 }
 .active_2 { box-shadow: 0 0 1rem #222; background-color: #fff; color: black; }
@@ -80,10 +79,10 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     color: var(--couleur_flowerBlue);
     font-weight: bold;
 }
-.actif:active { background-color: #FFF000; box-shadow: 0 0 2rem yellow; }
-.active:active { background-color: #FFF000; box-shadow: 0 0 2rem yellow; }
-.actif:hover { background-color: rgb(225,225,0); color: blue; }
-.active:hover { background-color: rgb(225,225,0); color: blue; }
+.actif:active { background-color: #FFF000; box-shadow: none; }
+.active:active { background-color: #FFF000; box-shadow: none; }
+.actif:hover { background-color: rgb(225,225,0); }
+.active:hover { background-color: rgb(225,225,0); }
 .actif:hover a { color: blue; }
 .active:hover a { color: blue; }
 .a_apprendre { font-weight: bold; border: 1px solid #ddd; }
@@ -365,8 +364,9 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     border-radius: var(--radiusMedium);
     bottom: 1rem;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) scale(0.6);
     background-color: #fff;
+    opacity: 0;
 }
 .dialogue_btn > div {
     position: absolute;

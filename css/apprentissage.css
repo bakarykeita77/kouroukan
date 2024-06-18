@@ -65,6 +65,7 @@
 #pre_exercice_btns span { 
     margin: 0;
     padding: 0;
+    height: 6rem;
     width: 100%;
     border-radius: 0.5rem;
     left: 50%;
@@ -240,8 +241,9 @@
     max-width: 40rem;
     padding-top: 2rem;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) scale(0.6);
     border-radius: 0.5rem;
+    opacity: 0;
 }
 #fermeture_pre_exercice {
     position: absolute;
@@ -309,7 +311,7 @@
     text-align: center;
     z-index: 1; 
 }
-#pre_question, #pre_correction {
+#pre_question_btn, #repeter_pre_question_btn, #pre_correction_btn {
     position: absolute;
     margin: 0.5rem 1rem;
     width: 15rem;
@@ -320,14 +322,10 @@
     left: 50%;
     transform: translateX(-50%);
     cursor: pointer;
-}
-#poser_pre_question, #repeter_pre_question {
-    text-align: center;
-    cursor: pointer;
     transition: 0.2s;
 }
-#poser_pre_question:active, #repeter_pre_question:active { box-shadow: none; }
-#repeter_pre_question { display: none; }
+#pre_question_btn:active, #repeter_pre_question_btn:active { box-shadow: none; }
+#repeter_pre_question_btn { display: none; }
 #pre_exercice_resultat {
     position: absolute;
     display: none;

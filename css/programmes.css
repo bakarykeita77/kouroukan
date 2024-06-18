@@ -37,6 +37,7 @@
     line-height: 3rem;
     overflow-x: auto;
     overflow-y: hidden;
+    text-align: center;
 }
 #programme_ul a {
     text-decoration: none;

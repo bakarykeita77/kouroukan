@@ -197,7 +197,7 @@
         
         setTimeout(function() { 
             element.addClass('indicateur'); 
-            // repeterIndexation($('#'+element_id)); 
+             repeterIndexation($('#'+element_id)); 
         }, 5);
         
         function repeterIndexation(element) {

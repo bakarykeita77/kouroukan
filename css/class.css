@@ -354,7 +354,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 
 .dark_backgound { background-color: #aaa; }
 .dialogue_btn {
-    position: absolute;
+    position: relative;
     width: 90%;
     max-width: 40rem;
     height: 6rem;
@@ -362,9 +362,8 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     padding: 0;
     margin: 0.25rem auto;
     border-radius: var(--radiusMedium);
-    bottom: 1rem;
-    left: 50%;
-    transform: translateX(-50%) scale(0.6);
+    bottom: 6.5rem;
+    transform: scale(0.6);
     background-color: #fff;
     opacity: 0;
 }

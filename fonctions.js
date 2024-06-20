@@ -557,9 +557,8 @@
     function zoomAvant(element)	{ element.css('fontSize','+=16px'); }
     function zoomDown(element) {
         element.css({'opacity':0});
-        element.css({
-            'left':'50%', 
-            'transform':'translate(-50%) scale(0.6)', 
+        element.css({ 
+            'transform':'scale(0.6)', 
             'transition':'0.5s'
         });
         setTimeout(() => { element.css('display','none'); }, 600);
@@ -569,8 +568,7 @@
         setTimeout(() => {
             element.css({
                 'opacity':1,
-                'left':'50%', 
-                'transform':'translate(-50%) scale(1)', 
+                'transform':'scale(1)', 
                 'transition':'0.5s'
             });
         }, 50);

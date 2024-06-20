@@ -754,6 +754,8 @@ function apprentissages() {
             chargerPreExercice();
             afficherPreExercice();
             preExercer();
+            chargerPreResultat();
+            afficherPreResultat();
             fermerPreExercice();
             assistantDePreExercice();
 
@@ -800,11 +802,11 @@ function apprentissages() {
                                 <div id="repeter_pre_question_btn">ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߊߡߍ߲߫ ߕߎ߯ߣߌ߫</div> \
                                 <div id="pre_correction_btn">ߏ߬ ߛߊߞߍ߫</div> \
                             </div> \
-                            <div id="pre_exercice_foot_alerte">ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߎ߬ ߓߘߊ߫ ߓߊ߲߫. ߌ ߞߎߟߎ߲ߖߋ߫߹</div> \
                         </div> \
                     ';
 
                     total_questions = parseIntNko(pre_questions.length);
+                    
                     $('#pre_exercice_foot').html(pre_exercice_foot_html);
                 }
                 function chargerCorpsDePreExerciceAlphabet() {
@@ -851,9 +853,7 @@ function apprentissages() {
 
                 function afficherEnteteDePreExerciceAlphabet() {
                 }
-                function afficherPiedDePreExerciceAlphabet() {
-                    
-                }
+                function afficherPiedDePreExerciceAlphabet() {}
                 function afficherCorpsDePreExerciceAlphabet() {
                         
                     afficherPreExerciceCadres();
@@ -945,7 +945,6 @@ function apprentissages() {
                 ecouterLaPreQuestion();
                 repondreLaPreQuestion();
                 corrigerLaPreQuestion();
-                calculDuResultatDePreLesson();
                 prestockageDePreLesson();
             
     
@@ -968,7 +967,10 @@ function apprentissages() {
                         }
 
                         i++; 
-                        if(i == pre_questions.length) { i = 0; }
+                        if(i == pre_questions.length) { 
+                            $('#pre_question_btn').html('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߓߘߊ߫ ߓߊ߲߫').off('click');
+                            i = 0; 
+                        }
     
                         function relire(question) { $('#repeter_pre_question_btn').click(function() { lire('alphabet',question); }); }
                     });
@@ -996,7 +998,7 @@ function apprentissages() {
                     $('#pre_correction_btn').click(function() { 
                         if(questions_posees.length <= pre_questions.length) { 
 
-                            $('#pre_exercice_container td').css('background-color','rgba(85,85,85,0.25)');
+                            $('#pre_exercice_container .table_parlante td').css('background-color','rgba(85,85,85,0.25)');
         
                             if(pre_question == '') { return false; }
         
@@ -1035,114 +1037,19 @@ function apprentissages() {
                                 setTimeout(function(){ $(element_actif).removeClass('faux'); }, 2000);
                             }
                         } 
-                    });
-                }
-                function calculDuResultatDePreLesson() {
-                    $('#pre_correction_btn').click(function() { 
-                        if(questions_posees.length == pre_questions.length) {    
-                           
-                            resultatDePreExercice();
-                            notificationDeFinDExercice();
-                            
-    
-                            function resultatDePreExercice() {
-    
-                                chargerPreExerciceResultat();
-                                afficherPreExerciceResultat();
-    
-    
-                                function chargerPreExerciceResultat() {
-    
-                                    let resultat_html = resultatHTML();
-                                    let libelles_html = libellesHTML();
-                                    let diagram_html = diagramHTML();
-                                    let legende_html = legendeHTML();
-    
-    
-                                    $('#pre_exercice_resultat h3').html('ߞߎߘߎ߲߫ '+rang+' ߞߐߝߟߌ');
-                                    $('#pre_exercice_resultat #resultat').html(resultat_html);
-                                    $('#pre_exercice_resultat #libelles').html(libelles_html);
-                                    $('#pre_exercice_resultat #diagram').html(diagram_html);
-                                    $('#pre_exercice_resultat #legende').html(legende_html);
-    
-    
-                                    function resultatHTML() {
-    
-                                        let html = '<table border=1>';
-    
-                                        html += '<thead><tr><th>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</th> <th>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ</th><th>ߓߍ߬ߙߍ</th><tr></thead>';
-                                        html += '<tbody>';
-                                        for(let i=0; i<pre_exercice_memoire.length; i++) {
-    
-                                            let question = pre_exercice_memoire[i][0];
-                                            let reponse = pre_exercice_memoire[i][1];
-                                            let point = pre_exercice_memoire[i][2];
-        
-                                            html += '<tr>';
-                                                html += '<td>'+question+'</td> <td>'+reponse+'</td> <td>'+parseIntNko(point)+'</td>';
-                                            html += '</tr>';
-                                        }
-                                        html += '</tbody>';
-                                        html += '<tfoot><tr><td colspan=2 id="tfoot_td1">ߓߍ߬ߙߍ ߡߎ߬ߡߍ</td> <td id="tfoot_td2">'+parseIntNko(point_total)+'</td><tr></tfoot>';
-                                        html += '</table>';
-    
-                                        return html;
-                                    }
-                                    function libellesHTML() {
-                                        let html = ' \
-                                            <div> \
-                                                <span style="background-color:yellow">ߢߊ߬ߣߍ߲</span> \
-                                                <span style="background-color:#aaa">ߝߏߣߍ߲</span> \
-                                            </div>' 
-                                        ;
-                                        return html;
-                                    }
-                                    function diagramHTML() {
-                                        let html = '<div class="diagram_circulaire" id="pre_exercice_diagram_circulaire"></div>';
-                                        return html;
-                                    }
-                                    function legendeHTML() {
-                                        
-                                        let html = '';
-                                        let n_q = pre_questions.length;
-                                        let n_b_r = nbr_bonne_reponse;
-                                        let n_m_r = nbr_mauvaise_reponse;
-    
-                                        taux_de_fausse_reponse = Math.ceil((n_m_r/n_q)*100);
-                                        if(exercice_btn_index == 0) { taux_de_vraie_reponse_1 =  100 - taux_de_fausse_reponse; }
-                                        if(exercice_btn_index == 1) { taux_de_vraie_reponse_2 =  100 - taux_de_fausse_reponse; }
-    
-                                        taux = (exercice_btn_index == 0) ? taux_de_vraie_reponse_1 : taux_de_vraie_reponse_2;
+                        
+                        if(questions_posees.length == pre_questions.length) {  
 
-                                        html += ' \
-                                            <table id="legende_table" border=1> \
-                                                <tr> <td>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߡߎ߬ߡߍ</td> <td>'+parseIntNko(n_q)+'</td> <td>%߁߀߀</td> </tr>  \
-                                                <tr> <td>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ߫ ߢߊ߬ߣߍ߲</td> <td>'+parseIntNko(n_b_r)+'</td> <td>%<span>'+parseIntNko(taux)+'</span></td> </tr>  \
-                                                <tr> <td>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ߫ ߝߏߣߍ߲</td> <td>'+parseIntNko(n_m_r)+'</td> <td>%<span>'+parseIntNko(taux_de_fausse_reponse)+'</span></td> </tr>  \
-                                            </table>  \
-                                        ';
-    
-                                        return html;
-                                    }
-                                }
-                                function afficherPreExerciceResultat() {
-                                    setTimeout(() => {
-                                        $('#pre_exercice_resultat').css('display','block');
-                                        $('#pre_exercice_resultat').animate({'height':'100%'}, 250);
-                                        $('#diagram .diagram_circulaire').css({ 
-                                            'background': 'conic-gradient( #aaa 0 '+taux_de_fausse_reponse+'%, yellow '+taux_de_fausse_reponse+'% 100% )'
-                                        });
-                                    }, 2000);
-    
-                                    setTimeout(() => { montrer($('#fermeture_pre_exercice')); }, 5000);
-                                }
-                            }
-                            function notificationDeFinDExercice() {
-                                $('#pre_exercice_foot_alerte').animate({'width':'100%'}, 250);
-                                setTimeout(() => {
-                                    $('#pre_exercice_foot_alerte').animate({'width':0},250);
-                                }, 3000);
-                            }
+                            let n_q = pre_questions.length;
+                            let n_b_r = nbr_bonne_reponse;
+                            let n_m_r = nbr_mauvaise_reponse;
+
+                            taux_de_fausse_reponse = Math.ceil((n_m_r/n_q)*100);
+                            if(exercice_btn_index == 0) { taux_de_vraie_reponse_1 =  100 - taux_de_fausse_reponse; }
+                            if(exercice_btn_index == 1) { taux_de_vraie_reponse_2 =  100 - taux_de_fausse_reponse; }
+
+                            taux = (exercice_btn_index == 0) ? taux_de_vraie_reponse_1 : taux_de_vraie_reponse_2;
+
                         }
                     });
                 }
@@ -1183,6 +1090,105 @@ function apprentissages() {
                     });
                 }
             }
+            function chargerPreResultat() {
+                $('#pre_correction_btn').click(function(){
+                    if(pre_exercice_memoire.length === pre_questions.length) {
+
+                        let pre_resultat_titre_html = preResultatTitreHTML();
+                        let question_row_html = questionRowHTML();
+                        let response_row_html = responseRowHTML();
+                        let mark_row_html = markRowHTML();
+
+                        let total_question_html = totalQuestionHTML();
+                        let total_response_html = totalResponseHTML();
+                        let total_mark_html = totalMarkHTML();
+
+                        $('#pre_resultat_titre').html(pre_resultat_titre_html);
+
+                        $('#question_row').html(question_row_html);
+                        $('#response_row').html(response_row_html);
+                        $('#mark_row').html(mark_row_html);
+
+                        $('#total_question').html(total_question_html);
+                        $('#total_response').html(total_response_html);
+                        $('#total_mark').html(total_mark_html);
+
+                        $('#total_question').html(total_question_html);
+                        $('#total_respone').html(total_response_html);
+                        $('#total_mark').html(total_mark_html);
+
+
+                        function preResultatTitreHTML() {
+                            let prth = (exercice_btn_index == 0) ? matiere_nom+' ߡߊ߬ߞߟߏ߬ߟߌ ߞߐߝߟߌ' : matiere_nom+' ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߐߝߟߌ';
+                            return prth;
+                        }
+                        function questionRowHTML() {
+                            let qrh = '';
+                            for(let i=0; i<pre_exercice_memoire.length; i++) {
+                                qrh += '<td>'+pre_exercice_memoire[i][0]+'</td>';
+                            }
+                            return qrh;
+                        }
+                        function responseRowHTML() {
+                            let qrh = '';
+                            for( let i=0; i<pre_exercice_memoire.length; i++) {
+                                qrh += '<td>'+pre_exercice_memoire[i][1]+'</td>';
+                            }
+                            return qrh;
+                        }
+                        function markRowHTML() {
+                            let mrh = '';
+                            for( let i=0; i<pre_exercice_memoire.length; i++) {
+                                mrh += '<td>'+parseIntNko(pre_exercice_memoire[i][2])+'</td>';
+                            }
+                            return mrh;
+                        }
+
+                        function totalQuestionHTML() {
+                            let tqh = pre_questions.length;
+                            return parseIntNko(tqh);
+                        }
+                        function totalResponseHTML() {
+                            let trh = 0;
+                            for(let i=0; i<pre_exercice_memoire.length; i++) { trh++; }
+                            return parseIntNko(trh);
+                        }
+                        function totalMarkHTML() {
+                            let tmh = 0;
+                            for(let i=0; i<pre_exercice_memoire.length; i++) { tmh += pre_exercice_memoire[i][2]; }
+                            return parseIntNko(tmh);
+                        }
+                    }
+                });
+            }
+            function afficherPreResultat() {
+                    $('#pre_correction_btn').click(function() { 
+
+                        if(questions_posees.length == pre_questions.length) {  
+                            
+                            afficherPreExerciceResultat();
+
+                            function afficherPreExerciceResultat() {
+                                
+                                setTimeout(() => { $('#pre_exercice_resultat').animate({'top':0}, 300); }, 400);
+
+                                // setTimeout(() => {
+                                //     $('#pre_exercice_resultat').css('display','block');
+                                //     $('#pre_exercice_resultat').animate({'height':'100%'}, 250);
+                                //     $('#diagram .diagram_circulaire').css({ 
+                                //         'background': 'conic-gradient( #aaa 0 '+taux_de_fausse_reponse+'%, yellow '+taux_de_fausse_reponse+'% 100% )'
+                                //     });
+                                // }, 2000);
+
+                                setTimeout(() => { montrer($('#fermeture_pre_exercice')); }, 5000);
+                            }  
+                        }
+                    });
+
+                    $('#pre_exercice_resultat').on('click', function(){
+                        $(this).animate({'top':'-100%'}, 300);
+                    });
+            }
             function fermerPreExercice() {
                 $('#fermeture_pre_exercice').one('click',function(){                                            
                     cercle_id = $('.apprentissage_en_cours').attr('id');
@@ -1191,11 +1197,11 @@ function apprentissages() {
                     zoomDown($('#pre_exercice'));
                     setTimeout(() => {
                         $('#pre_exercice_cover').css('display','none');
-                        $('#pre_exercice_resultat').css('display','none');
+                         $('#pre_exercice_resultat').css('top','-100%');
                     }, 250);
 
                     setTimeout(() => {
-                        
+                       
                         if(exercice_btn_index == 0) { 
                             if(taux_de_vraie_reponse_1 < 100) {
                                 $('#pre_exercice_bouton').text('ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫ ߕߎ߲߯'); 

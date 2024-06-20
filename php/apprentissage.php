@@ -75,7 +75,7 @@
                     <div id="pre_exercice_body"></div>
                     <div id="pre_exercice_foot"></div>
 
-                    <div id="pre_exercice_resultat">
+                    <!-- <div id="pre_exercice_resultat">
                         <div id="pre_exercice_resultat_head"><h3></h3></div>
                         <div id="pre_exercice_resultat_body">
                             <div id="resultat_diagram">
@@ -88,6 +88,34 @@
                             </div>
                         </div>
                         <div id="pre_exercice_resultat_foot"></div>
+                    </div> -->
+
+                    <div id="pre_exercice_resultat">
+                        <h2 id="pre_resultat_titre"></h2>
+                       
+                        <div id="pre_exercice_resultat_container">
+                            <div id="resultat_entete">
+                                <table>
+                                    <tr><td>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</td></tr>
+                                    <tr><td>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ</td></tr>
+                                    <tr><td>ߓߍ߬ߙߍ</td></tr>
+                                </table>
+                            </div>
+                            <div id="resultat_corps">
+                                <table>
+                                    <tr id="question_row"></tr>
+                                    <tr id="response_row"></tr>
+                                    <tr id="mark_row"></tr>
+                                </table>
+                            </div>
+                            <div id="resultat_pied">
+                                <table>
+                                    <tr><td id="total_question"></td></tr>
+                                    <tr><td id="total_response"></td></tr>
+                                    <tr><td id="total_mark"></td></tr>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

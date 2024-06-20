@@ -73,6 +73,33 @@
     cursor: pointer;
     transition: 0.3s;
 }
+
+#pre_exercice_resultat_container {
+    position: relative;
+    height: 7.5rem;
+    width: max-content;
+    max-width: 90%;
+    margin: auto;
+    padding: 0.5rem 1rem;
+    top: 20%;
+    border: 1px solid #aaa;
+}
+#pre_exercice_resultat_container > div { display: inline-block; }
+#pre_exercice_resultat td { min-width: 1.5rem; height: 2rem; }
+#resultat_entete{ width: 5rem; }
+#resultat_entete td{ width: 5rem; text-align: right; font-weight: bold; padding: 0 0.5rem; }
+#resultat_corps{
+    max-width: calc(100% - 12rem);
+    padding: 0 0.5rem;
+    font-size: 1.5rem;
+    border-left: 0.5rem solid #aaa;
+    border-right: 0.5rem solid #aaa;
+    overflow-x: auto;
+}
+#resultat_corps td { background-color: #eee; padding: 2px; }
+#resultat_pied{ width: 4rem; }
+#resultat_pied td { width: 4rem; text-align: left; font-weight: bold; border: 1px solid #ddd; }
+
 .titre_de_parti, #cercles_des_partis, #carres_pour_exercices { position: relative; display: inline-block; }
 .titre_de_parti { height: 4rem; line-height: 4rem; }
 .titre_de_parti > div { display: inline-block; vertical-align: middle; }
@@ -230,18 +257,19 @@
     height: calc(100% - 2rem);
     width: 100%;
     border-radius: 0.5rem;
+    overflow: hidden;
 }
 #pre_exercice {
-    position: absolute;
-    bottom: 2.25rem;
+    position: relative;
     background-color: #aaa;
+    top: 25%;
     box-shadow: 0 0 1rem #666;
     height: calc(100% - 14.35rem);
     width: 90%;
     max-width: 40rem;
+    margin: auto;
     padding-top: 2rem;
-    left: 50%;
-    transform: translateX(-50%) scale(0.6);
+    transform: scale(0.6);
     border-radius: 0.5rem;
     opacity: 0;
 }
@@ -300,17 +328,8 @@
     top: 0.5rem;
     height: 4rem;
 }
-#pre_exercice_foot_btns, #pre_exercice_foot_alerte { position: absolute; }
+#pre_exercice_foot_btns { position: absolute; }
 #pre_exercice_foot_btns { height: 4rem; width: 100%; }
-#pre_exercice_foot_alerte { 
-    margin: auto;
-    height: 3rem; 
-    width: 0;
-    background-color: white; 
-    overflow: hidden;
-    text-align: center;
-    z-index: 1; 
-}
 #pre_question_btn, #repeter_pre_question_btn, #pre_correction_btn {
     position: absolute;
     margin: 0.5rem 1rem;
@@ -326,15 +345,22 @@
 }
 #pre_question_btn:active, #repeter_pre_question_btn:active { box-shadow: none; }
 #repeter_pre_question_btn { display: none; }
+#pre_resultat_titre {
+    position: absolute;
+    width: 20rem;
+    margin: 1rem 4rem;
+}
 #pre_exercice_resultat {
     position: absolute;
-    display: none;
+    top: -100%;
+    height: 100%;
     width: 100%;
-    min-height: 2rem;
     background-color: #fff;
-    padding: 1rem;
+    padding: 0;
     box-sizing: border-box;
     border-radius: 0.5rem;
+    border-bottom: 0.25rem solid #aaa;
+    overflow: hidden;
 }
 #pre_exercice_resultat h3 {
     margin: 0;
@@ -353,7 +379,7 @@
 #resultat_container table th {
     border-color: transparent;
 }
-#pre_exercice_resultat td:not(#legende_table td:first-child) {
+#pre_exercice_resultat td:not(#legende_table td:first-child, #resultat_entete td) {
     text-align: center;
     border-color: #aaa;
 }

@@ -66,7 +66,7 @@ function apprentissages() {
     
         let pre_apprentissage_memo = [];
         let pre_apprentissage_clicks_memo = [];
-        let quantite_normale_de_click = 1;
+        let quantite_normale_de_click = 2;
 
         let panneau_status = "masque";
         let consonnes_choisies = [];
@@ -85,6 +85,7 @@ function apprentissages() {
             afficherPreApprentissage();
             lectureDePreApprentissage();
             memoireDePreApprentissage();
+            diagrammDePreApprentissage();
             assistantDePreApprentissage()
 
             
@@ -446,7 +447,6 @@ function apprentissages() {
                 }
                 function affichageDePreApprentissageTons() {}
                 function affichageDePreApprentissageChiffres() {}
-
             }
             function lectureDePreApprentissage() {
 
@@ -585,6 +585,39 @@ function apprentissages() {
                 function memoriserPreApprentissageTons() {}
                 function memoriserPreApprentissageChiffres() {}
                 
+            }
+            function diagrammDePreApprentissage() {
+                let apprentissage_width = 0;
+                let global_clicks_counter = 1;
+
+                $.each($('.pre_apprentissage_td'), function() {
+
+                    let td_click_counter = 0;
+
+                    $(this).click(function() {
+                        td_click_counter++;
+                        if(td_click_counter <= quantite_normale_de_click) {
+
+                            let total_click = quantite_normale_de_click*les_lettres_actives.length;
+                            let diagramm_unity = 100/total_click;
+                            let global_clicks_count = global_clicks_counter++;
+
+                            apprentissage_width = global_clicks_count*diagramm_unity;
+                            $('#apprentissage_progress_bar .progress_bonne_reponse_bar').css('width', apprentissage_width+'%');
+                           
+                         // Initialiser la barre de progression
+                            if(global_clicks_count/quantite_normale_de_click == les_lettres_actives.length) { 
+                                setTimeout(() => {
+                                    $('#apprentissage_progress_bar .progress_bonne_reponse_bar').css('width', 0);
+                                    td_click_counter = 0;
+                                    apprentissage_width = 0;
+                                    global_clicks_counter = 1;
+                                }, 1000);
+                            }
+                        }
+                    });
+                      
+                });
             }
             function assistantDePreApprentissage() {
                 
@@ -945,6 +978,7 @@ function apprentissages() {
                 ecouterLaPreQuestion();
                 repondreLaPreQuestion();
                 corrigerLaPreQuestion();
+                diagrammDeExercice();
                 prestockageDePreLesson();
             
     
@@ -1052,6 +1086,9 @@ function apprentissages() {
 
                         }
                     });
+                }
+                function diagrammDeExercice() {
+
                 }
                 function prestockageDePreLesson() {
                     $('#pre_correction_btn').click(function() { 

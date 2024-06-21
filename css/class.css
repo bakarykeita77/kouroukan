@@ -906,7 +906,7 @@ del {
     left: 0;
     top: 4px;
     margin: 0;
-    height: 1.5rem;
+    height: 1rem;
     width: calc(100% - 2px);
     background-color: #fff;
     border: 1px solid #ccc;
@@ -925,7 +925,7 @@ del {
     position: absolute;
     top: 0;
     right: 0;
-    height: 0.5rem;
+    height: 1rem;
     margin: 0;
     transition: 1s;
 }

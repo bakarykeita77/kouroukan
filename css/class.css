@@ -369,10 +369,10 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 }
 .dialogue_btn > div {
     position: absolute;
-    background-color: #fff;
     width: 100%;
     height: 6rem;
     line-height: 6rem;
+    background-color: #fff;
     border-radius: 0.5rem;
 }
 del {
@@ -572,8 +572,6 @@ del {
 .lessons_apprises a { color: yellow; }
 .lessons_a_apprendre { background-color: #ccc; }
 .lessons_a_apprendre a { color: #aaa; }
-.lesson_progress_question_bar { background-color: #ddd; }
-.lesson_progress_bonne_reponse_bar { background-color: yellow; }
 .lesson_title {
     position: relative;
     padding: 0.5rem;
@@ -623,15 +621,15 @@ del {
 .matiere { position: relative; }
 .media {
     position: relative;
-    display: inline-block;
+    top: 1.75rem;
+    float: right;
     background-color: var(--couleurNeutre);
-    height: 1.5rem;
-    width: 3rem;
-    margin: 0;
+    height: 2.5rem;
+    width: 4rem;
+    margin: 0 1rem;
     padding: 0 0.5rem;
     border: var(--border_c);
     border-radius: var(--radiusSmall);
-    float: right;
     cursor: pointer;
 }
 .media_btns {
@@ -651,8 +649,8 @@ del {
     transition: 1s;
 }
 .media_label {
-    height: 1.5rem;
-    line-height: 1.5rem;
+    height: 2.5rem;
+    line-height: 2.5rem;
 }
 
 /* --------------------------------------------------------------------------------------------------------- */
@@ -733,15 +731,15 @@ del {
 }
 .parametre {
     position: relative;
-    display: inline-block;
+    top: 1.75rem;
+    float: left;
     background-color: var(--couleurNeutre);
-    height: 1.5rem;
+    height: 2.5rem;
     width: 5rem;
     padding: 0 0.5rem;
-    margin: 0;
+    margin: 0 1rem;
     border: var(--border_c);
     border-radius: var(--radiusSmall);
-    float: left;
     cursor: pointer;
 }
 .parametres_container {
@@ -761,8 +759,8 @@ del {
 }
 .parametres_container .btn:hover { box-shadow: var(--shadow_3a); }
 .parametres_btns {
-    height: 1.5rem;
-    line-height: 1.5rem;
+    height: 2.5rem;
+    line-height: 2.5rem;
 }
 .parametres_popup {
     position: relative;
@@ -902,7 +900,7 @@ del {
 .profile_menu_head a { text-decoration: none; }
 .progress_bar {
     position: absolute;
-    position: absolute;
+    display: none;
     left: 0;
     top: 4px;
     margin: 0;
@@ -921,15 +919,20 @@ del {
     width: 0;
     transition: 0.6s
 }
-.progress_bonne_reponse_bar, .progress_question_bar {
+.lesson_progress_question_bar { background-color: #ddd; }
+.lesson_progress_bonne_reponse_bar { background-color: yellow; }
+.progress_bonne_reponse_bar, .progress_mauvaise_reponse_bar, .progress_question_bar {
     position: absolute;
     top: 0;
     right: 0;
     height: 1rem;
+    width: 0;
     margin: 0;
-    transition: 1s;
+    border-radius: 0.5rem;
+    transition: 0.4s;
 }
-.progress_bonne_reponse_bar { background-color: yellow; }
+.progress_bonne_reponse_bar { background-color: yellow; z-index: 1; }
+.progress_mauvaise_reponse_bar { background-color: #bbb; z-index: 0; }
 .progress_question_bar { background-color: #bbb; }
 
 /* --------------------------------------------------------------------------------------------------------- */

@@ -442,13 +442,10 @@
     border-radius: 0 0 0.5rem 0.5rem;
 }
 #apprentissage_dialogue_btn { 
-    display: none; 
     font-weight: bold;
     color: black;
     text-align: center;
 }
-#apprentissage_dialogue_btn .btns:nth-child(1) { right: 0; }
-#apprentissage_dialogue_btn .btns:nth-child(2) { left: 0; }
 .pre_exercice_btn {
     position: absolute;
     background-color: #fff;

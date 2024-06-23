@@ -559,9 +559,9 @@
         element.css({'opacity':0});
         element.css({ 
             'transform':'scale(0.6)', 
-            'transition':'0.5s'
+            'transition':'0.25s'
         });
-        setTimeout(() => { element.css('display','none'); }, 600);
+        setTimeout(() => { element.css('display','none'); }, 250);
     }
     function zoomUp(element) {
         element.css({'display':'block'});
@@ -569,7 +569,7 @@
             element.css({
                 'opacity':1,
                 'transform':'scale(1)', 
-                'transition':'0.5s'
+                'transition':'0.25s'
             });
         }, 50);
     }

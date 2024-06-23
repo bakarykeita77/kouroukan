@@ -260,7 +260,7 @@ function apprentissages() {
                     case 4 : affichageDePreApprentissageChiffres(); break;
                 }
             
-
+                
                 $('#apprentissage_option_1').click(function(){ 
                     $('#apprentissage_dialogue_btn').css({'display':'none', 'opacity':'0'}); 
                     $('#pre_apprentissage_dialogue_btn').css('display','block'); 
@@ -592,7 +592,7 @@ function apprentissages() {
                 let apprentissage_width = 0;
                 let global_clicks_counter = 1;
 
-                zoomUp($('#apprentissage_progress_bar'));
+                $('.dialogue_btn').click(()=>{ zoomUp($('#apprentissage_progress_bar')); });
 
                 $.each($('.pre_apprentissage_td'), function() {
 
@@ -614,8 +614,7 @@ function apprentissages() {
                             if(global_clicks_count/quantite_normale_de_click == les_lettres_actives.length) { 
                                 setTimeout(() => {
                                     zoomDown($('#apprentissage_progress_bar')); 
-                                    $('#apprentissage_progress_bar .progress_bonne_reponse_bar').css('width', 0);
-                                    td_click_counter = 0;
+                                    $('.progress_bonne_reponse_bar, .progress_mauvaise_reponse_bar').css('width', 0);                                    td_click_counter = 0;
                                     apprentissage_width = 0;
                                     global_clicks_counter = 1;
                                 }, 1000);
@@ -902,7 +901,7 @@ function apprentissages() {
         
                     function afficherPreExerciceCadres() {
                         $('#pre_exercice_cover').css({'display':'block'}); 
-                        setTimeout(function() { zoomUp($('#pre_exercice')); }, 400); 
+                        setTimeout(function() { zoomUp($('#pre_exercice')); }, 150); 
                     }
                     function afficherPreExerciceContenus() {
         
@@ -1063,17 +1062,17 @@ function apprentissages() {
                                 
                                 $(element_actif).addClass('vrais');
         
-                                setTimeout(function(){ $('.vrais').addClass('coche'); }, 300);
-                                setTimeout(function(){ $('.vrais').removeClass('coche'); }, 1600);
-                                setTimeout(function(){ $(element_actif).removeClass('vrais'); }, 2000);
+                                setTimeout(function(){ $('.vrais').addClass('coche'); }, 100);
+                                setTimeout(function(){ $('.vrais').removeClass('coche'); }, 600);
+                                setTimeout(function(){ $(element_actif).removeClass('vrais'); }, 600);
                             }
                             function nePasValiderLaPreReponse() {
                                 
                                 $(element_actif).addClass('faux');
         
-                                setTimeout(function(){ $('.faux').addClass('croix'); }, 300);
-                                setTimeout(function(){ $('.faux').removeClass('croix'); }, 1600);
-                                setTimeout(function(){ $(element_actif).removeClass('faux'); }, 2000);
+                                setTimeout(function(){ $('.faux').addClass('croix'); }, 100);
+                                setTimeout(function(){ $('.faux').removeClass('croix'); }, 600);
+                                setTimeout(function(){ $(element_actif).removeClass('faux'); }, 600);
                             }
                         } 
                         
@@ -1114,6 +1113,7 @@ function apprentissages() {
                             $('.progress_mauvaise_reponse_bar').css('width',pre_question_counter*diagramm_unity+'%');
                         }
 
+                     // Initialiser la barre de progression
                         if(pre_question_counter === pre_questions.length) { 
                             setTimeout(() => { 
                                 zoomDown($('#apprentissage_progress_bar')); 
@@ -1301,7 +1301,7 @@ function apprentissages() {
 
                         return;
                         
-                    }, 400);
+                    }, 250);
                 });
             } 
             function assistantDePreExercice() {
@@ -1433,7 +1433,7 @@ function apprentissages() {
                 function afficherMediaBoutons() { $(".media_btns").css({"display":"block", "transform":"scale(1)", "opacity":1}); }
                 function masquerMediaBoutons() {
                     $(".media_btns").css({"tansform":"scale(0.75)", "opacity":0});
-                    setTimeout(() => { $(".media_btns").css({"display":"none"}); }, 300);
+                    setTimeout(() => { $(".media_btns").css({"display":"none"}); }, 250);
                 }
                 function masquerParametreBoutons() { 
                     $(".parametres_container").css({"transform":"scale(0.75)", "opacity":0});

@@ -38,10 +38,16 @@
     width: 100%;
     overflow: auto;
 }
+#table_alphabet_apprentissage {
+    height: 75%;
+    max-height: 45rem;
+    top: 10%;
+}
 #apprentissage_note {   
     border-radius: 0.25rem 0.25rem 0 0;
     overflow: auto;
 }
+#pre_apprentissage_notification_titre { margin: 0; }
 #apprentissage_note h3 { margin: 0; }
 #apprentissage_note p { margin: 0.25rem 0; }
 #pre_apprentissage_notification {  

@@ -15,7 +15,7 @@
          <!--Course head ------------------------------------------------------------------ -->
             <div class="course_head" id="apprentissage_head">
                 <div id="pre_apprentissage_notification">
-                    <div id="pre_apprentissage_notification_titre"></div>
+                    <h2 id="pre_apprentissage_notification_titre"></h2>
                     <div id="pre_apprentissage_notification_corps"></div>
                 </div>
             </div>

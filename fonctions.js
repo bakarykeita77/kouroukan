@@ -228,8 +228,8 @@
     
             $('#audio').attr({ src: '../son/mp3/alphabet/'+td_actif_value+'.mp3', autoplay:'on' });
     
-            $(td_actif).addClass('ombrage');
-            setTimeout(function() { $(td_actif).removeClass('ombrage'); }, 600);
+            // $(td_actif).addClass('ombrage');
+            // setTimeout(function() { $(td_actif).removeClass('ombrage'); }, 600);
         });
      }
     function lectureSemiAutomatique() {
@@ -469,7 +469,7 @@
         }
         
         return nombre_converti.join('');
-     }
+    }
     function preApprentissageCorpsHTML() {
          var c = alphabet_nko[0];
          c.push('');
@@ -528,7 +528,7 @@
         nombre_converti = parseInt(nombre_converti);
         
         return nombre_converti;
-     }
+    }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
 	

@@ -362,8 +362,8 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     padding: 0;
     margin: 0.25rem auto;
     border-radius: var(--radiusMedium);
-    bottom: 6.5rem;
-    transform: scale(0.6);
+    font-weight: bold;
+    transform: scale(0.9);
     background-color: #fff;
     opacity: 0;
 }
@@ -956,15 +956,12 @@ del {
     width: calc(100% - 4rem);
     max-width: 45rem;
     margin: auto;
-    top: 15%;
 }
 .table_parlante tr, .table_muette tr { position: relative; width: 100%; }
 .table_parlante td, .table_muette td {
     position: relative;
     padding: 8px 0;
     font-weight: 900;
-    font-size: 2.5rem;
-    font-stretch: expanded;
     text-align: center;
     background-color: rgba(85,85,85,0.25);
     border-radius: 0.5rem;

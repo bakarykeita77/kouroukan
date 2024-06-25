@@ -1,6 +1,13 @@
 
+#table_alphabet_exercice {
+    height: calc(100% - 10rem);
+    top: 10%;
+}
+#table_alphabet_exercice td {
+    font-size: 2rem;
+}
 #exercice_foot { height: 5rem; }
-#exercice_dialogue_btn { border-radius: 0.5rem; }
+#exercice_dialogue_btn { bottom: 6.5rem; }
 #exercice_dialogue_btn div  { 
     text-align: center; 
     padding: var(--paddingSmall);

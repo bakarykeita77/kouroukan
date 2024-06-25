@@ -172,18 +172,47 @@
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
 
-    function ecrire(element_id,message) {
+    function ecrire(element_class,message) {
         let longueur = message.length;
         let indice = 0;
 
         write();
         function write() {
             indice++;
-            document.getElementById(element_id).innerHTML = message.substr(0,indice);
+            $('.'+element_class).html(message.substr(0,indice));
             if(indice<longueur) {
                 setTimeout(() => { write(); }, 1);
             }
         }
+    }
+
+/*-------------------------------------------------------------------------------------------------------------------------------------*/
+
+    function gestionDeExerciceDialogueBtns() {
+
+        $('.dialogue_btn > div:nth-child(1)').css('display','block');
+        $('.dialogue_btn > div:nth-child(2)').css('display','none');
+        zoomUp($('#exercice_dialogue_btn'));
+        
+        $('.dialogue_btn > div:nth-child(1)').click(function(){
+            zoomDown($('#exercice_dialogue_btn'));
+            setTimeout(() => {
+                $('.dialogue_btn > div:nth-child(1)').css('display','none');
+                $('.dialogue_btn > div:nth-child(2)').css('display','block');
+                
+                zoomUp($('#exercice_dialogue_btn'));
+            }, 200);
+        });
+
+        $('.table_muette td, .table_parlante td').click(function(){
+            zoomDown($('#exercice_dialogue_btn'));
+            setTimeout(() => {
+                $('.dialogue_btn > div:nth-child(1)').css('display','block');
+                $('.dialogue_btn > div:nth-child(2)').css('display','none');
+                
+                zoomUp($('#exercice_dialogue_btn'));
+            }, 200);
+        });
     }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
@@ -558,10 +587,10 @@
     function zoomDown(element) {
         element.css({'opacity':0});
         element.css({ 
-            'transform':'scale(0.6)', 
+            'transform':'scale(0.9)', 
             'transition':'0.25s'
         });
-        setTimeout(() => { element.css('display','none'); }, 250);
+        setTimeout(() => { element.css('display','none'); }, 150);
     }
     function zoomUp(element) {
         element.css({'display':'block'});

@@ -1,7 +1,7 @@
 
 #apprentissage_container > div { position: absolute; width: calc(100% - 0.25rem); }
-#apprentissage_container > div:nth-child(1) { z-index: 1; max-width: 16rem; border-radius: 0.5rem; }
-#apprentissage_container > div:nth-child(2) { display: none; background-color: #fff; z-index: 0; }
+#apprentissage_container > div:nth-child(1) { display: block; max-width: 16rem; border-radius: 0.5rem; }
+#apprentissage_container > div:nth-child(2) { display: none; background-color: #fff; }
 #apprentissage_options {
     background-color: #fff;
     top: 50%;
@@ -43,14 +43,18 @@
     max-height: 45rem;
     top: 10%;
 }
+#table_alphabet_apprentissage td {
+    font-size: 2.5rem;
+}
 #apprentissage_note {   
     border-radius: 0.25rem 0.25rem 0 0;
     overflow: auto;
 }
-#pre_apprentissage_notification_titre { margin: 0; }
+.notification_titre { margin: 0; }
 #apprentissage_note h3 { margin: 0; }
 #apprentissage_note p { margin: 0.25rem 0; }
-#pre_apprentissage_notification {  
+#apprentissages_dialogue_btn { bottom: 6.5rem; }
+.notification {  
     position: relative;
     height: calc(100% - 1rem);
     width: calc(98% - 2rem);
@@ -58,7 +62,7 @@
     padding: 0.5rem 1rem;
     font-size: 12px;
 }
-#pre_apprentissage_notification h3 { margin: 0; padding: 0; }
+.notification h3 { margin: 0; padding: 0; }
 #pre_apprentissage_dialogue_btn {
     font-weight: bold;
     color: black;
@@ -261,7 +265,7 @@
     max-width: 40rem;
     margin: auto;
     padding-top: 2rem;
-    transform: scale(0.6);
+    transform: scale(0.9);
     border-radius: 0.5rem;
     opacity: 0;
 }

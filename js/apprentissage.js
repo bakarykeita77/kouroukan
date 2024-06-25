@@ -80,7 +80,7 @@ function apprentissages() {
 
         
         function afficherPreApprentissage() { afficherLesson(); }
-        function preApprendre(){
+        function preApprendre() {
 
             chargerPreApprentissage();
             afficherPreApprentissage();
@@ -116,7 +116,7 @@ function apprentissages() {
                 
                 
                 function chargerEnteteDePreApprentissageDeAlphabet() {
-                    document.getElementById('pre_apprentissage_notification_titre').innerHTML = '<h3>ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ</h3>';
+                    $('.notification_titre').html('ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ');
                 }
                 function chargerFootDePreApprentissageDeAlphabet() {
                     
@@ -154,7 +154,7 @@ function apprentissages() {
                 
                 
                 function chargerEnteteDePreApprentissageDeSyllabes() {
-                    document.getElementById('pre_apprentissage_notification_titre').innerHTML = '<h3>ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ</h3>';
+                    $('.notification_titre').html('ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ');
                 }
                 function chargerCorpsDePreApprentissageDeSyllabes() {
                     $('#panneaux span').click(function() {
@@ -633,13 +633,12 @@ function apprentissages() {
                     case 4 : assistantDePreApprentissageChiffres(); break;
                 }
 
-
                 function assistantDePreApprentissageAlphabet() {
 
-                    ecrire('pre_apprentissage_notification_corps','ߞߏ߰ߙߌ߬ ߝߟߐߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬');
+                    ecrire('notification_corps','ߞߏ߰ߙߌ߬ ߝߟߐߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬');
                     
                     $('#cercles_des_partis_cadre span').click(function() {
-                        ecrire('pre_apprentissage_notification_corps','\
+                        ecrire('notification_corps','\
                             ߛߓߍߘߋ߲߫ ߟߊ߲ߞߣߍߡߊߣߍ߲ ߠߎ߬ ߘߏߣߍ߲߫ ߘߏߣߍ߲߫ ߘߋ߲߯ ߤߊ߲߯ ߊ߬ߟߎ߬ ߦߋ߫ ߕߏ߫ ߌ ߞߣߐ߫.\
                         ');
                     });
@@ -657,7 +656,7 @@ function apprentissages() {
 
                                 if(n == 7) {
                                 
-                                    ecrire('pre_apprentissage_notification_corps','\
+                                    ecrire('notification_corps','\
                                         ߣߌ߫ ߟߊ߲ߞߣߍߡߊߣߍ߲ ߠߎ߬ ߓߘߊ߫ ߟߐ߲߫ ߌ ߓߟߏ߫߸ ߢߊ߯ߡߌߟߊ߲ ߞߘߎ ߘߌ߲߯ ߘߎ߭ߡߊ߬ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫߹) ߞߊ߬ ߘߋ߲߬ߣߍ߲߬ ߞߎߘߊ ߟߎ߬ ߢߊ߯ߡߌ߲߫ ߡߊ߬ߞߟߏ߬ߟߌ ߞߊ߲ߡߊ߬.\
                                     ');
                                 }
@@ -680,24 +679,24 @@ function apprentissages() {
                     });
 
                     $('#pre_exercice_bouton').click(function() {
-                        ecrire('pre_apprentissage_notification_corps','\
+                        ecrire('notification_corps','\
                             ߓߌ߬ߟߊ߬ ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߞߐ߫.\n ߦߋ߫ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߣߌ߫ ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ ߣߌ߫ ߛߊߞߍߟߌ ߟߎ߬ ߞߍ߫ ߦߊ߲߬߸ ߤߊ߲߯ ߞߐߝߟߌ߫ ߥߟߊ ߦߋ߫ ߓߐ߫.\
                         ');
                     });
                 }
                 function assistantDePreApprentissageSyllabes() {
 
-                    ecrire("pre_apprentissage_notification_corps","ߞߏ߰ߙߌ߫ ߣߘߍ߬ߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬ ߞߊ߬ ߛߌ߬ߙߕߊ߬ ߥߟߊߟߋ߲ ߦߌ߬ߘߊ߬.");
+                    ecrire("notification_corps","ߞߏ߰ߙߌ߫ ߣߘߍ߬ߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬ ߞߊ߬ ߛߌ߬ߙߕߊ߬ ߥߟߊߟߋ߲ ߦߌ߬ߘߊ߬.");
 
                     montrer($('#afficheur_de_panneau'));
 
                     $('#afficheur_de_panneau').click(function() {
                         if(panneau_status == "affiche") {
                             if(consonnes_choisies.length != 0) {
-                                ecrire("pre_apprentissage_notification_corps","ߛߌ߬ߙߕߊ߬ ߞߋߟߋ߲߫ ߥߟߊ ߛߌߦߊߡߊ߲߫ ߛߎߥߊ߲ߘߌ߫߸ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߡߍ߲ ߜߋ߲߭ ߠߎ߬ ߘߋ߲߰.");
+                                ecrire("notification_corps","ߛߌ߬ߙߕߊ߬ ߞߋߟߋ߲߫ ߥߟߊ ߛߌߦߊߡߊ߲߫ ߛߎߥߊ߲ߘߌ߫߸ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߡߍ߲ ߜߋ߲߭ ߠߎ߬ ߘߋ߲߰.");
                             }
                             if(consonnes_choisies.length == 0) {
-                                ecrire("pre_apprentissage_notification_corps","ߛߌ߬ߙߕߊ߬ ߞߋߟߋ߲߫ ߥߟߊ ߛߌߦߊߡߊ߲߫ ߛߎߥߊ߲ߘߌ߫߸ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߡߍ߲ ߜߋ߲߭ ߠߎ߬ ߘߋ߲߰.");
+                                ecrire("notification_corps","ߛߌ߬ߙߕߊ߬ ߞߋߟߋ߲߫ ߥߟߊ ߛߌߦߊߡߊ߲߫ ߛߎߥߊ߲ߘߌ߫߸ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߡߍ߲ ߜߋ߲߭ ߠߎ߬ ߘߋ߲߰.");
                             }
                         }
                     });
@@ -705,13 +704,13 @@ function apprentissages() {
                     $('#afficheur_de_panneau, #panneaux, #apprentissage_body, #submit_panneau').click(function() {
                         if(panneau_status == "masque") {
                             if(consonnes_choisies.length == 0) {
-                                ecrire("pre_apprentissage_notification_corps","ߞߏ߰ߙߌ߫ ߣߘߍ߬ߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬ ߞߊ߬ ߛߌ߬ߙߕߊ߬ ߥߟߊߟߋ߲ ߦߌ߬ߘߊ߬.");
+                                ecrire("notification_corps","ߞߏ߰ߙߌ߫ ߣߘߍ߬ߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬ ߞߊ߬ ߛߌ߬ߙߕߊ߬ ߥߟߊߟߋ߲ ߦߌ߬ߘߊ߬.");
                                 indexer($('#afficheur_de_panneau'));
                             }
                         }
                         if(panneau_status == "masque") {
                             if(consonnes_choisies.length != 0) {
-                                ecrire("pre_apprentissage_notification_corps","ߜߋ߲߭ ߢߌ߲߬ ߠߎ߫ ߞߋ߬ߟߋ߲߬ ߞߋ߬ߟߋ߲߬ ߘߋ߲߯ ߤߊ߲߯ ߊ߬ߟߎ߬ ߦߋ߫ ߕߴߌ ߞߣߐ߫.");
+                                ecrire("notification_corps","ߜߋ߲߭ ߢߌ߲߬ ߠߎ߫ ߞߋ߬ߟߋ߲߬ ߞߋ߬ߟߋ߲߬ ߘߋ߲߯ ߤߊ߲߯ ߊ߬ߟߎ߬ ߦߋ߫ ߕߴߌ ߞߣߐ߫.");
                             }
                         }
                     });
@@ -825,10 +824,10 @@ function apprentissages() {
                 
                 function chargerEnteteDePreExerciceAlphabet() {
                     if(exercice_btn_index == 0) {
-                        document.getElementById('pre_apprentissage_notification_titre').innerHTML = '<h3>ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ</h3>';
+                        $('.notification_titre').html('ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ');
                     }
                     if(exercice_btn_index == 1) {
-                        document.getElementById('pre_apprentissage_notification_titre').innerHTML = '<h3>ߛߓߍߛߎ߲ ߣߐ߰ߡߊ߬ߛߍߦߌ</h3>';
+                        $('.notification_titre').html('ߛߓߍߛߎ߲ ߣߐ߰ߡߊ߬ߛߍߦߌ</h3>');
                     }
                 }
                 function chargerPiedDePreExerciceAlphabet() {
@@ -1295,7 +1294,7 @@ function apprentissages() {
                                 $('#'+cercle_id).removeClass('apprentissage_en_cours').addClass('cercle_depasse');
                                 indexer($('#'+cercle_id).next()); 
                                 
-                                ecrire('pre_apprentissage_notification_corps','ߞߎߘߎ߲߫ '+cercle_actif.next().html()+' ߘߌ߲߯ ߘߎ߭ߡߊ߬');
+                                ecrire('notification_corps','ߞߎߘߎ߲߫ '+cercle_actif.next().html()+' ߘߌ߲߯ ߘߎ߭ߡߊ߬');
                             }
                         }
 
@@ -1318,7 +1317,7 @@ function apprentissages() {
 
                     $('#pre_revision_bouton').click(function() {
                         let notification = "ߘߋ߰ߣߍ߲߬ ߞߎߘߊ ߣߌ߫ ߞߘߐ߬ߡߊ߲ ߠߎ߬ ߟߋ߬ ߓߍ߯ ߢߊ߯ߡߌߣߍ߲߫ ߢߐ߲ ߘߐ߫ ߣߌ߲߬ .ߣߴߌ ߛߋ߫ ߘߊ߫ ߞߵߊ߬ߟߎ߬ ߓߍ߯ ߢߊߓߐ߫ ߗߡߍ߬ߘߐ߬ߦߊ߫ ߗߍ߬ߡߍ ߟߊ߫ ߏ߬ߘߐ߬ ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ .ߓߌ߬ߟߊ߬ ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߞߐ߫";
-                        ecrire('pre_apprentissage_notification_corps',notification);
+                        ecrire('notification_corps',notification);
                     });
                     
                     $('#pre_correction_btn').click(function() {
@@ -1327,18 +1326,18 @@ function apprentissages() {
                         if(questions_posees.length == pre_questions.length) {
                             if(taux_de_vraie_reponse_1 == 100) {
                                 let notification = liste_de_matieres[0][1]+" ߡߊ߬ߞߟߏ߬ߟߌ ߢߊ߬ߣߍ߲߬ .ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ ߕߊ߯ ߣߐ߰ߡߊ߬ߛߍߦߌ ߦߙߐ. ߞߐߝߟߌ ߝߟߍ߫ ߘߎ߭ߡߊ߬ ߓߊ߫. ߘߊߕߎ߲ߠߊ߲߫ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߓߐ߫ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫)";
-                                ecrire('pre_apprentissage_notification_corps',notification);
+                                ecrire('notification_corps',notification);
                             }
                             if(taux_de_vraie_reponse_1 < 100) {
                                 let notification = liste_de_matieres[0][1]+" ߡߊ߬ߞߟߏ߬ߟߌ ߡߊ߫ ߢߊ߬ .ߌ ߓߘߊ߫ ߗߌߙߏ߲߫ ߡߊ߬ߞߟߏ߬ߟߌ ߢߌ߲߬ ߘߐ߫. ߞߐߝߟߌ ߝߟߍ߫ ߘߎ߭ߡߊ߬ ߓߊ߫ .ߘߊߕߎ߲ߠߊ߲߫ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߓߐ߫ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫)";
-                                ecrire('pre_apprentissage_notification_corps',notification);
+                                ecrire('notification_corps',notification);
                             }
                         }}
                         
                         if(exercice_btn_index == 1) {
                         if(questions_posees.length == pre_questions.length) {
                             if(taux_de_vraie_reponse_2 == 100) {
-                                ecrire('pre_apprentissage_notification_corps','\
+                                ecrire('notification_corps','\
                                     '+liste_de_matieres[0][1]+' ߣߐ߰ߡߊ߬ߛߍߦߌ ߢߊ߬ߣߍ߲߬\n\
                                     ߞߎߘߎ߲߫ ߁߭ ߤߊ߲߯ ߞߎߘߎ߲߫ '+cercle_actif.html()+' ߠߎ߬ ߓߍ߯ ߓߘߊ߫ ߢߊߦߋ߫ ߌ ߓߟߏ߫\n\
                                     ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ ߞߎߘߎ߲߫ '+cercle_actif.next().html()+' ߘߋ߲߰.\n\
@@ -1347,7 +1346,7 @@ function apprentissages() {
                                 ');
                             }
                             if(taux_de_vraie_reponse_2 < 100) {
-                                ecrire('pre_apprentissage_notification_corps','\
+                                ecrire('notification_corps','\
                                     '+liste_de_matieres[0][1]+' ߣߐ߰ߡߊ߬ߛߍߦߌ ߡߊ߫ ߢߊ߬\n\
                                     ߌ ߓߘߊ߫ ߗߌߙߏ߲߫ ߣߐ߰ߡߊ߬ߛߍߦߌ ߢߌ߲߬ ߘߐ߫.\n\
                                     ߞߐߝߟߌ ߝߟߍ߫ ߘߎ߭ߡߊ߬ ߓߊ߫߹\n\
@@ -1359,12 +1358,12 @@ function apprentissages() {
                 }
                 function assistantDePreExerciceSyllabes() {
 
-                    ecrire("pre_apprentissage_notification_corps"," \
+                    ecrire("notification_corps"," \
                         ߞߏ߰ߙߌ߫ ߣߘߍ߬ߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬ ߞߊ߬ ߛߌ߬ߙߕߊ߬ ߥߟߊߟߋ߲ ߦߌ߬ߘߊ߬. \
                     ");
 
                     $('#afficheur_de_panneau').click(function() {
-                        ecrire("pre_apprentissage_notification_corps"," \
+                        ecrire("notification_corps"," \
                             ߛߌ߬ߙߕߊ߬ ߞߋߟߋ߲߫ ߥߟߊ ߛߌߦߊߡߊ߲߫ ߛߎߥߊ߲ߘߌ߫߸ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߡߍ߲ ߜߋ߲߭ ߠߎ߬ ߘߋ߲߰. \
                         ");
                     }); 
@@ -1436,16 +1435,7 @@ function apprentissages() {
 
                 
                 function chargerApprentissageAlphabet() {
-                    
-
-                    chargerEnteteDeApprentissageDeAlphabet();
-                    chargerFootDeApprentissageDeAlphabet();
-                    chargerCorpsDeApprentissageDeAlphabet();
-
-
-                    function chargerEnteteDeApprentissageDeAlphabet() {}
-                    function chargerFootDeApprentissageDeAlphabet() {}
-                    function chargerCorpsDeApprentissageDeAlphabet() {}
+                    // Voir fonctions chargerLesson() / chargementDeLesson() dans parametrageDeLesson.js
                 }
                 function afficherApprentissageAlphabet() {
 
@@ -1664,9 +1654,9 @@ function apprentissages() {
                     let total_click = nbr_raisonnable_de_click*nbr_td;
                     let click_counter = 0;
 
-                    $('#pre_apprentissage_notification_titre').text(liste_de_matieres[0][1]+' ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ');
+                    $('.notification_titre').text(liste_de_matieres[0][1]+' ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ');
 
-                    ecrire('pre_apprentissage_notification_corps','\
+                    ecrire('notification_corps','\
                         ߛߓߍߘߋ߲ ߠߎ߬ ߓߍ߯ ߘߌ߲߯ ߞߋߟߋ߲߫ ߞߋߟߋ߲߫߸ ߦߴߌ ߕߟߏߡߊߟߐ߬ ߊ߬ ߣߴߌ ߦߴߌ ߖߊ߲߬ߕߏ߬ ߊ߬ߟߎ߬ ߝߐߢߊ ߘߐ߫ ߞߏߛߓߍ߫߹<br>\
                         ߌ ߣߊ߬ߕߐ߫ ߟߋ߬ ߢߌ߬ߣߌ߲߬ߞߊ߬ ߟߴߊ߬ߟߎ߬ ߓߍ߯ ߡߊ߬.\
                     ');
@@ -1677,7 +1667,7 @@ function apprentissages() {
                             click_counter++;
 
                             if(click_counter === total_click) {
-                                ecrire('pre_apprentissage_notification_corps','\
+                                ecrire('notification_corps','\
                                     ߌ ߞߎߟߎ߲ߖߋ߫ ߘߐ߬ߖߊ ߟߊ߫ ߛߓߍߘߋ߲ ߠߎ߫ ߘߋ߲߱ ߠߊ߫<br>\
                                     ߣߴߌ ߓߘߴߊ߬ߟߎ߬ ߟߐ߲߫߸ ߓߐߟߌ߫ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߓߐ߫ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫ ߛߊ߲ߝߍ߬ ߣߎߡߊ߲߫ ߓߟߏ ߟߊ߫)<br>\
                                     ߣߴߌ ߘߏ߲߬ ߡߊ߫ ߓߊ߲߫ ߊ߬ߟߎ߬ ߟߐ߲߫ ߠߊ߫߸ ߒ߬ߓߊ߬ ߥߊ߫ ߘߋ߲߰ߠߌ ߡߊ߫ ߤߊ߲߯ ߌ ߦߴߊ߬ߟߎ߬ ߟߐ߲߫ ߞߊ߬ ߣߊ߬ߕߏ߫ ߓߐ߫ ߟߊ߫.\
@@ -1693,7 +1683,7 @@ function apprentissages() {
             function exerciceAlphabet() {
                 
                 chargerExerciceAlphabet();
-                afficheExerciceAlphabe();
+                afficheExerciceAlphabet();
                 lectureExerciceAlphabet();
                 enregistrerExerciceAlphabet();
                 progressBarrExerciceAlphabet();
@@ -1701,13 +1691,17 @@ function apprentissages() {
                 assistantExerciceAlphabet();
 
 
-                function chargerExerciceAlphabet() {}
-                function afficheExerciceAlphabe() {}
+                function chargerExerciceAlphabet() {
+                    // Voir fonctions chargerLesson() / chargementDeLesson() dans parametrageDeLesson.js
+                }
+                function afficheExerciceAlphabet() {}
                 function lectureExerciceAlphabet() {}
                 function enregistrerExerciceAlphabet() {}
                 function progressBarrExerciceAlphabet() {}
                 function stockerExerciceAlphabet() {}
-                function assistantExerciceAlphabet() {}
+                function assistantExerciceAlphabet() {
+                    $('.notification_titre').text('ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ');
+                }
             }
             function revisionAlphabet() {
                 
@@ -1720,7 +1714,9 @@ function apprentissages() {
                 assistantRevisionAlphabet();
 
 
-                function chargerRevisionAlphabet() {}
+                function chargerRevisionAlphabet() {
+                    // Voir fonctions chargerLesson() / chargementDeLesson() dans parametrageDeLesson.js
+                }
                 function afficheRevisionAlphabe() {}
                 function lectureRevisionAlphabet() {}
                 function enregistrerRevisionAlphabet() {}
@@ -1739,7 +1735,9 @@ function apprentissages() {
                 assistantEvaluationAlphabet();
 
 
-                function chargerEvaluationAlphabet() {}
+                function chargerEvaluationAlphabet() {
+                    // Voir fonctions chargerLesson() / chargementDeLesson() dans parametrageDeLesson.js
+                }
                 function afficheEvaluationAlphabe() {}
                 function lectureEvaluationAlphabet() {}
                 function enregistrerEvaluationAlphabet() {}
@@ -1776,7 +1774,7 @@ function apprentissages() {
                     if(note_1_affiche == 'on') return;
                     if(note_2_affiche == 'on') return;
 
-                    ecrire('pre_apprentissage_notification_corps','\
+                    ecrire('notification_corps','\
                         <h3>'+liste_de_matieres[0][1]+' ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ</h3>\
                         <p>ߛߓߍߘߋ߲ ߠߎ߬ ߓߍ߯ ߘߌ߲߯ ߞߋߟߋ߲߫ ߞߋߟߋ߲߫߸ ߦߴߌ ߕߟߏߡߊߟߐ߬ ߊ߬ ߣߴߌ ߦߴߌ ߖߊ߲߬ߕߏ߬ ߊ߬ߟߎ߬ ߝߐߢߊ ߘߐ߫ ߞߏߛߓߍ߫߹<br>\
                         ߌ ߣߊ߬ߕߐ߫ ߟߋ߬ ߢߌ߬ߣߌ߲߬ߞߊ߬ ߟߴߊ߬ߟߎ߬ ߓߍ߯ ߡߊ߬.</p>\
@@ -1790,7 +1788,7 @@ function apprentissages() {
                 function notificationDApprentissage2() {
                     if(note_2_affiche == 'on') return;
 
-                    ecrire('pre_apprentissage_notification_corps','\
+                    ecrire('notification_corps','\
                         <h3>'+liste_de_matieres[0][1]+' ߟߊ߬ߡߍ߲߬ߠߌ ߞߍ߫</h3>\
                         <p>ߌ ߕߟߏߡߊߟߐ߬ ߛߓߍߘߋ߲ ߠߎ߬ ߓߍ߯ ߟߊ߫ ߞߋߟߋ߲߫ ߞߋߟߋ߲߫߸ ߊ߬ ߣߴߌ ߦߴߌ ߖߊ߲߬ߕߏ߬ ߊ߬ߟߎ߬ ߝߐߢߊ ߘߐ߫ ߞߏߛߓߍ߫<br>\
                         ߌ ߣߊ߬ߕߐ߫ ߟߋ߬ ߢߌ߬ߣߌ߲߬ߞߊ߬ ߟߴߊ߬ߟߎ߬ ߓߍ߯ ߡߊ߬.</p>\
@@ -1806,7 +1804,7 @@ function apprentissages() {
                     if(note_3_affiche == 'on') return;
                     if(note_2_affiche == 'on') return;
 
-                    ecrire('pre_apprentissage_notification_corps','\
+                    ecrire('notification_corps','\
                         <h3>ߝߊߟߊ߲ߞߏ</h3>\
                         <p> <b class="enrober">◀</b> ߝߐߟߊ߲߫ ߞߘߎ ߘߌ߲߯߸ ߦߴߌ ߕߟߏߡߊߟߐ߬ ߛߓߍߘߋ߲ ߠߎ߬ ߝߐߢߊ ߟߊ߫ ߞߋߟߋ߲߫ ߞߋߟߋ߲߫.</p>\
                         <p> <b class="enrober">■</b> ߘߊߘߋ߰ߟߊ߲߬ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߝߐߟߌ ߟߊߟߐ߬.</p>\
@@ -1821,7 +1819,7 @@ function apprentissages() {
                     if(note_4_affiche == 'on') return;
                     if(note_2_affiche == 'on') return;
 
-                    ecrire('pre_apprentissage_notification_corps','\
+                    ecrire('notification_corps','\
                         <h3>ߛߏ߯ߙߏߟߌ</h3>\
                         <p>ߞߊ߬ ߥߟߊ߬ߓߊ ߛߓߍߘߋ߲ ߠߎ߬ ߛߏ߯ߙߏ߫ ߌ ߖߍ߬ߘߍ ߢߣߊߕߊ ߟߊ߫</p>\
                         <p>ߞߊ߬ߞߘߐ߬߸ ߛߓߍߘߋ߲ ߠߎ߬ ߓߍ߯ ߞߐߞߘߎ ߘߐߞߍߣߍ߲߫ ߠߋ߬߸ ߞߵߊ߬ߟߎ߫ ߦߌ߬ߘߊ߬.<br>\
@@ -2002,83 +2000,338 @@ function apprentissages() {
         }
         function apprendreTon() {
 
-            chargerTon();
-            afficherTon();
-            lectureTon();
-            enregistrerTon();
-            tonProgressBarr();
-            stockerTon();
-            assistantTon();
+            apprentissageTon();
+            exerciceTon();
+            revisionTon();
+            evaluationTon();
+
+            function apprentissageTon() {
+               
+                chargerApprentissageTon();
+                afficherApprentissageTon();
+                lectureApprentissageTon();
+                enregistrerApprentissageTon();
+                progressBarrApprentissageTon();
+                stockerApprentissgeTon();
+                assistantApprentissageTon();
 
 
-            function chargerTon() {
+                function chargerApprentissageTon() {
 
-                chargerEnteteDeTon();
-                chargerFootDeTon();
-                chargerCorpsDeTon();
-                
-                function chargerEnteteDeTon() {}
-                function chargerFootDeTon() {}
-                function chargerCorpsDeTon() {}
+                    chargerEnteteDeTon();
+                    chargerFootDeTon();
+                    chargerCorpsDeTon();
+                    
+                    function chargerEnteteDeTon() {}
+                    function chargerFootDeTon() {}
+                    function chargerCorpsDeTon() {}
+                }
+                function afficherApprentissageTon() {
+                    
+                    afficherLesson(); 
+                    
+                    afficherEnteteDeTon();
+                    afficherFootDeTon();
+                    afficherCorpsDeTon();
+                            
+                    function afficherEnteteDeTon() {}
+                    function afficherFootDeTon() {}
+                    function afficherCorpsDeTon() {}
+                }
+                function lectureApprentissageTon() {}
+                function enregistrerApprentissageTon() {}
+                function progressBarrApprentissageTon() {}
+                function stockerApprentissgeTon() {}
+                function assistantApprentissageTon() {} 
             }
-            function afficherTon() {
+            function exerciceTon() {
                 
-                afficherLesson(); 
-                
-                afficherEnteteDeTon();
-                afficherFootDeTon();
-                afficherCorpsDeTon();
-                        
-                function afficherEnteteDeTon() {}
-                function afficherFootDeTon() {}
-                function afficherCorpsDeTon() {}
+                chargerAExerciceTon();
+                afficherAExerciceTon();
+                lectureAExerciceTon();
+                enregistrerExerciceTon();
+                progressBarrAExerciceTon();
+                stockerExerciceTon();
+                assistantAExerciceTon();
+
+
+                function chargerAExerciceTon() {
+
+                    chargerEnteteDeTon();
+                    chargerFootDeTon();
+                    chargerCorpsDeTon();
+                    
+                    function chargerEnteteDeTon() {}
+                    function chargerFootDeTon() {}
+                    function chargerCorpsDeTon() {}
+                }
+                function afficherAExerciceTon() {
+                    
+                    afficherLesson(); 
+                    
+                    afficherEnteteDeTon();
+                    afficherFootDeTon();
+                    afficherCorpsDeTon();
+                            
+                    function afficherEnteteDeTon() {}
+                    function afficherFootDeTon() {}
+                    function afficherCorpsDeTon() {}
+                }
+                function lectureAExerciceTon() {}
+                function enregistrerExerciceTon() {}
+                function progressBarrAExerciceTon() {}
+                function stockerExerciceTon() {}
+                function assistantAExerciceTon() {} 
             }
-            function lectureTon() {}
-            function enregistrerTon() {}
-            function tonProgressBarr() {}
-            function stockerTon() {}
-            function assistantTon() {}
+            function revisionTon() {
+                
+                chargerRevisionTon();
+                afficherRevisionTon();
+                lectureRevisionTon();
+                enregistrerRevisionTon();
+                progressBarrRevisionTon();
+                stockerRevisionTon();
+                assistantRevisionTon();
+
+
+                function chargerRevisionTon() {
+
+                    chargerEnteteDeTon();
+                    chargerFootDeTon();
+                    chargerCorpsDeTon();
+                    
+                    function chargerEnteteDeTon() {}
+                    function chargerFootDeTon() {}
+                    function chargerCorpsDeTon() {}
+                }
+                function afficherRevisionTon() {
+                    
+                    afficherLesson(); 
+                    
+                    afficherEnteteDeTon();
+                    afficherFootDeTon();
+                    afficherCorpsDeTon();
+                            
+                    function afficherEnteteDeTon() {}
+                    function afficherFootDeTon() {}
+                    function afficherCorpsDeTon() {}
+                }
+                function lectureRevisionTon() {}
+                function enregistrerRevisionTon() {}
+                function progressBarrRevisionTon() {}
+                function stockerRevisionTon() {}
+                function assistantRevisionTon() {} 
+            }
+            function evaluationTon() {
+                
+                chargerEvaluationTon();
+                afficherEvaluationTon();
+                lectureEvaluationTon();
+                enregistrerEvaluationTon();
+                progressBarrEvaluationTon();
+                stockerEvaluationTon();
+                assistantEvaluationTon();
+
+
+                function chargerEvaluationTon() {
+
+                    chargerEnteteDeTon();
+                    chargerFootDeTon();
+                    chargerCorpsDeTon();
+                    
+                    function chargerEnteteDeTon() {}
+                    function chargerFootDeTon() {}
+                    function chargerCorpsDeTon() {}
+                }
+                function afficherEvaluationTon() {
+                    
+                    afficherLesson(); 
+                    
+                    afficherEnteteDeTon();
+                    afficherFootDeTon();
+                    afficherCorpsDeTon();
+                            
+                    function afficherEnteteDeTon() {}
+                    function afficherFootDeTon() {}
+                    function afficherCorpsDeTon() {}
+                }
+                function lectureEvaluationTon() {}
+                function enregistrerEvaluationTon() {}
+                function progressBarrEvaluationTon() {}
+                function stockerEvaluationTon() {}
+                function assistantEvaluationTon() {} 
+            }
         }
         function apprendreChiffre() {
 
-            chargerChiffre();
-            afficherChiffre();
-            lectureChiffre();
-            enregistrerChiffre();
-            chiffreProgressBarr();
-            stockerChiffre();
-            assistantChiffre();
+            apprentissageChiffre();
+            exerciceChiffre();
+            revisionChiffre();
+            evaluationChiffre();
 
-
-            
-            function chargerChiffre() {
-
-                chargerEnteteDeChiffre();
-                chargerFootDeChiffre();
-                chargerCorpsDeChiffre();
+            function apprentissageChiffre() {
                 
-                function chargerEnteteDeChiffre() {}
-                function chargerFootDeChiffre() {}
-                function chargerCorpsDeChiffre() {}
+                chargerApprentissageChiffre();
+                afficherApprentissageChiffre();
+                lectureApprentissageChiffre();
+                enregistrerApprentissageChiffre();
+                progressBarrApprentissageChiffre();
+                stockerApprentissageChiffre();
+                assistantApprentissageChiffre();
+
+
+                
+                function chargerApprentissageChiffre() {
+
+                    chargerEnteteDeChiffre();
+                    chargerFootDeChiffre();
+                    chargerCorpsDeChiffre();
+                    
+                    function chargerEnteteDeChiffre() {}
+                    function chargerFootDeChiffre() {}
+                    function chargerCorpsDeChiffre() {}
+                }
+                function afficherApprentissageChiffre() {
+                    
+                    afficherLesson(); 
+                    
+                    afficherEnteteDeChiffre();
+                    afficherFootDeChiffre();
+                    afficherCorpsDeChiffre();
+                            
+                    function afficherEnteteDeChiffre() {}
+                    function afficherFootDeChiffre() {}
+                    function afficherCorpsDeChiffre() {}
+                }
+                function lectureApprentissageChiffre() {}
+                function enregistrerApprentissageChiffre() {}
+                function progressBarrApprentissageChiffre() {}
+                function stockerApprentissageChiffre() {}
+                function assistantApprentissageChiffre() {}
             }
-            function afficherChiffre() {
+            function exerciceChiffre() {
                 
-                afficherLesson(); 
+                chargerExerciceChiffre();
+                afficherExerciceChiffre();
+                lectureExerciceChiffre();
+                enregistrerExerciceChiffre();
+                progressBarrExerciceChiffre();
+                stockerExerciceChiffre();
+                assistantExerciceChiffre();
+
+
                 
-                afficherEnteteDeChiffre();
-                afficherFootDeChiffre();
-                afficherCorpsDeChiffre();
-                        
-                function afficherEnteteDeChiffre() {}
-                function afficherFootDeChiffre() {}
-                function afficherCorpsDeChiffre() {}
+                function chargerExerciceChiffre() {
+
+                    chargerEnteteDeChiffre();
+                    chargerFootDeChiffre();
+                    chargerCorpsDeChiffre();
+                    
+                    function chargerEnteteDeChiffre() {}
+                    function chargerFootDeChiffre() {}
+                    function chargerCorpsDeChiffre() {}
+                }
+                function afficherExerciceChiffre() {
+                    
+                    afficherLesson(); 
+                    
+                    afficherEnteteDeChiffre();
+                    afficherFootDeChiffre();
+                    afficherCorpsDeChiffre();
+                            
+                    function afficherEnteteDeChiffre() {}
+                    function afficherFootDeChiffre() {}
+                    function afficherCorpsDeChiffre() {}
+                }
+                function lectureExerciceChiffre() {}
+                function enregistrerExerciceChiffre() {}
+                function progressBarrExerciceChiffre() {}
+                function stockerExerciceChiffre() {}
+                function assistantExerciceChiffre() {}
             }
-            function lectureChiffre() {}
-            function enregistrerChiffre() {}
-            function chiffreProgressBarr() {}
-            function stockerChiffre() {}
-            function assistantChiffre() {}
+            function revisionChiffre() {
+                
+                chargerRevisionChiffre();
+                afficherRevisionChiffre();
+                lectureRevisionChiffre();
+                enregistrerRevisionChiffre();
+                progressBarrRevisionChiffre();
+                stockerRevisionChiffre();
+                assistantRevisionChiffre();
+
+
+                
+                function chargerRevisionChiffre() {
+
+                    chargerEnteteDeChiffre();
+                    chargerFootDeChiffre();
+                    chargerCorpsDeChiffre();
+                    
+                    function chargerEnteteDeChiffre() {}
+                    function chargerFootDeChiffre() {}
+                    function chargerCorpsDeChiffre() {}
+                }
+                function afficherRevisionChiffre() {
+                    
+                    afficherLesson(); 
+                    
+                    afficherEnteteDeChiffre();
+                    afficherFootDeChiffre();
+                    afficherCorpsDeChiffre();
+                            
+                    function afficherEnteteDeChiffre() {}
+                    function afficherFootDeChiffre() {}
+                    function afficherCorpsDeChiffre() {}
+                }
+                function lectureRevisionChiffre() {}
+                function enregistrerRevisionChiffre() {}
+                function progressBarrRevisionChiffre() {}
+                function stockerRevisionChiffre() {}
+                function assistantRevisionChiffre() {}
+            }
+            function evaluationChiffre() {
+                
+                chargerEvaluationChiffre();
+                afficherEvaluationChiffre();
+                lectureEvaluationChiffre();
+                enregistrerEvaluationChiffre();
+                progressBarrEvaluationChiffre();
+                stockerEvaluationChiffre();
+                assistantEvaluationChiffre();
+
+
+                
+                function chargerEvaluationChiffre() {
+
+                    chargerEnteteDeChiffre();
+                    chargerFootDeChiffre();
+                    chargerCorpsDeChiffre();
+                    
+                    function chargerEnteteDeChiffre() {}
+                    function chargerFootDeChiffre() {}
+                    function chargerCorpsDeChiffre() {}
+                }
+                function afficherEvaluationChiffre() {
+                    
+                    afficherLesson(); 
+                    
+                    afficherEnteteDeChiffre();
+                    afficherFootDeChiffre();
+                    afficherCorpsDeChiffre();
+                            
+                    function afficherEnteteDeChiffre() {}
+                    function afficherFootDeChiffre() {}
+                    function afficherCorpsDeChiffre() {}
+                }
+                function lectureEvaluationChiffre() {}
+                function enregistrerEvaluationChiffre() {}
+                function progressBarrEvaluationChiffre() {}
+                function stockerEvaluationChiffre() {}
+                function assistantEvaluationChiffre() {}
+            }
         }
+
+
 
         function afficherApprentissage() {
             

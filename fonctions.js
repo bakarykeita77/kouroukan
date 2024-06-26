@@ -110,8 +110,9 @@
         localStorage.clear();
     }
     function clignotage(reponse_ratee) {
-        $.each($('.table_parlante td'), function() {
-            if ($(this).html() == reponse_ratee) {
+        $.each($('.table_muette td'), function() {
+            if($(this).text() == reponse_ratee) {
+console.log($(this).text());
                 var td = $(this);
 
                 td.addClass('fond_blanc_casse');

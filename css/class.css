@@ -354,11 +354,11 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 
 .dark_backgound { background-color: #aaa; }
 .dialogue_btn {
-    position: relative;
+    position: absolute;
     width: 90%;
     max-width: 40rem;
-    height: 6rem;
-    line-height: 6rem;
+    height: 4rem;
+    line-height: 4rem;
     padding: 0;
     margin: 0.25rem auto;
     border-radius: var(--radiusMedium);
@@ -370,8 +370,8 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 .dialogue_btn > div {
     position: absolute;
     width: 100%;
-    height: 6rem;
-    line-height: 6rem;
+    height: 4rem;
+    line-height: 4rem;
     background-color: #fff;
     border-radius: 0.5rem;
 }
@@ -902,7 +902,7 @@ del {
     position: absolute;
     display: none;
     left: 0;
-    top: 4px;
+    top: 3px;
     margin: 0;
     height: 1rem;
     width: calc(100% - 2px);
@@ -923,8 +923,6 @@ del {
 .lesson_progress_bonne_reponse_bar { background-color: yellow; }
 .progress_bonne_reponse_bar, .progress_mauvaise_reponse_bar, .progress_question_bar {
     position: absolute;
-    top: 0;
-    right: 0;
     height: 1rem;
     width: 0;
     margin: 0;
@@ -963,11 +961,12 @@ del {
     padding: 8px 0;
     font-weight: 900;
     text-align: center;
-    background-color: rgba(85,85,85,0.25);
     border-radius: 0.5rem;
     cursor: pointer;
     overflow: hidden;
 }
+.table_parlante td {  background-color: rgba(85,85,85,0.25); }
+.table_muette td {  border: 1px solid #666; }
 .transparent { animation: transperer; }
 .travaux { 
     width: 100%;

@@ -28,7 +28,7 @@
 		</div>
 		
 
-		<div class = 'progress_bar' id = "apprentissage_progress_bar">
+		<div class = 'progress_bar' id = "exercice_progress_bar">
 			<div class='progress_bonne_reponse_bar'></div>
 			<div class='progress_mauvaise_reponse_bar'></div>
 		</div>

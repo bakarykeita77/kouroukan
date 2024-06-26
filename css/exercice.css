@@ -7,7 +7,7 @@
     font-size: 2rem;
 }
 #exercice_foot { height: 5rem; }
-#exercice_dialogue_btn { bottom: 6.5rem; }
+#exercice_dialogue_btn { bottom: 1rem; }
 #exercice_dialogue_btn div  { 
     text-align: center; 
     padding: var(--paddingSmall);

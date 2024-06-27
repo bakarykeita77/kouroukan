@@ -84,17 +84,18 @@ function exercices() {
             }
             function repondreExerciceAlphabetQuestion(){
                         
-                $('#exercice .table_muette').on('click', function(e){
+                $('#exercice .table_muette').on('click', function(e) {
                     if(question_posee=='') { rappel($('.dialogue_btn')); }
                     else
                     {   
-                        var td = $(e.target);
+                        let td = $(e.target);
+                        let bonne_reponse = question_posee;
+
                         reponse_montree = td.html();
                         point = (question_posee==reponse_montree)?1:0;
                                             
-                        if(question_posee != reponse_montree){ barrerLaFausseReponse(td); clignotage(question_posee); }
-                        if(question_posee == reponse_montree){ td.addClass('ombrage'); }
-                        setTimeout(function(){ td.removeClass('ombrage'); },1000);
+                        if(question_posee != reponse_montree){ barrer(td); clignotage(bonne_reponse); }
+                        if(question_posee == reponse_montree){ valider(td); }
                         
                         question_posee = '';    /* Vider la variable question_posee. */
                         finDExercice();
@@ -229,8 +230,13 @@ function exercices() {
             $('.notification_titre').text('ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ');
             
             ecrire('notification_corps','\
-                ߛߓߍߘߋ߲߫ ߟߊ߲ߞߣߍߡߊߣߍ߲ ߠߎ߬ ߘߏߣߍ߲߫ ߘߏߣߍ߲߫ ߘߋ߲߯ ߤߊ߲߯ ߊ߬ߟߎ߬ ߦߋ߫ ߕߏ߫ ߌ ߞߣߐ߫.\
+                ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ߬ ߞߘߎ ߘߌ߲߯ ߘߎ߭ߡߊ߬߸ ߦߴߌ ߕߟߏߡߊߟߐ߬߸ߦߋ߫ ߛߓߍߘߋ߲߫ ߟߊߡߍ߲ߣߍ߲ ߦߌ߬ߘߊ߬߸ ߤߊ߲߯ ߡߊ߬ߞߟߏ߬ߟߌ ߦߋ߫ ߓߊ߲߫.\
             ');
+
+            if(compteur_de_question - 1 == nbr_de_questionnaires){
+                
+                indexer($('#fermer_exercice'));
+            }
         }
     }
     function reductionDesElementsDeExerciceCouranteA49() {

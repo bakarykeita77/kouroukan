@@ -15,7 +15,7 @@
         });
     }
     
-    function barrerLaFausseReponse(td) {
+    function barrer(td) {
         var fausse_reponse = td.html();
         td.html(fausse_reponse+"<p id='croix'>&#10060;</p>");
         

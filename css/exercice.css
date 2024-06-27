@@ -17,7 +17,7 @@
 #exercice_dialogue_btn div:active {
     box-shadow: none;
 }
-#croix { color: red; }
+
 
 @media screen and (orientation: portrait) {
     #exercices_player { border: 1px solid #aaa; }

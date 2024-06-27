@@ -62,7 +62,7 @@
     }
 /*-------------------------------------------------------------------------------------------------------------------------------------*/ 
     
-    function barrerLaFausseReponse(td) {
+    function barrer(td) {
         var fausse_reponse = td.html();
         td.html(fausse_reponse+"<p id='croix'>&#10060;</p>");
        
@@ -73,9 +73,9 @@
             'padding':'8px 0',
             'width':'100%', 
             'height':'100%', 
-            'top':'4px',
+            'top':'5%',
             'left':0,
-            'font-size':'16px',
+            'font-size':'32px',
             'textAlign':'center', 
             'boxSizing':'border-box',
             'transform':'scale(0)',
@@ -83,7 +83,7 @@
             'transition':'transform 0.6s'
         });
         
-        setTimeout(function() { $('#croix').css({'transform':'scale(1.5)', 'opacity':0.6, 'color':'red' }); }, 50);
+        setTimeout(function() { $('#croix').css({'transform':'scale(1.5)', 'opacity':0.5, 'color':'red' }); }, 50);
         setTimeout(function() { td.html(fausse_reponse); }, 2000);
     }
 
@@ -112,7 +112,7 @@
     function clignotage(reponse_ratee) {
         $.each($('.table_muette td'), function() {
             if($(this).text() == reponse_ratee) {
-console.log($(this).text());
+
                 var td = $(this);
 
                 td.addClass('fond_blanc_casse');
@@ -578,6 +578,48 @@ console.log($(this).text());
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
 
+    function valider(td) {
+        
+        var vraie_reponse = td.html();
+        td.html(vraie_reponse+"<p id='coche'>✓</p><p id='coche_couvercle'></p>");
+        td.addClass('ombrage');
+       
+        $('#coche').css({
+            'position':'absolute', 
+            'display':'block',
+            'margin':0,
+            'padding':0,
+            'width':'40%', 
+            'height':'40%', 
+            'line-height':'100%', 
+            'top':0,
+            'left':0,
+            'font-size':'1.5rem',
+            'textAlign':'center', 
+            'boxSizing':'border-box',
+            'color':'blue',
+            'rotate':'y 180deg',
+            'z-index':0,
+            'transition':'transform 0.6s'
+        });
+        $('#coche_couvercle').css({
+            'position':'absolute', 
+            'display':'block',
+            'background-color':'#fff',
+            'margin':0,
+            'padding':0,
+            'width':'40%', 
+            'height':'40%',  
+            'top':0,
+            'left':0,
+            'border-radius':'0.5rem',
+            'z-index':1,
+            'transition':'1200ms'
+        });
+        
+        setTimeout(function() { $('#coche_couvercle').css({'left':'-40%' }); }, 10);
+        setTimeout(function() { td.html(vraie_reponse).removeClass('ombrage'); }, 1200);
+    }
     function viderLeTableau(array) { array.splice(0,array.length); }
     
 

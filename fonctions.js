@@ -1,5 +1,13 @@
     var total_phase = JSON.parse(sessionStorage.getItem('total_phase'));
-	
+	  
+    function accorder(element) {
+                                    
+        $(element).addClass('vrais');
+
+        setTimeout(function(){ $('.vrais').addClass('coche'); }, 100);
+        setTimeout(function(){ $('.vrais').removeClass('coche'); }, 600);
+        setTimeout(function(){ $(element).removeClass('vrais'); }, 600);
+    }
     function activerSonDuClavier() {
 		$('#clavier_nko td').on('click',function(){
 			lettre = $(this).attr('id');
@@ -548,6 +556,14 @@
         setTimeout(() => { button.css('box-shadow','none'); }, 900);
         setTimeout(() => { button.css('box-shadow','var(--shadow_16)'); }, 1000);
     }
+    function refuser(element) {
+        
+        $(element).addClass('faux');
+
+        setTimeout(function(){ $('.faux').addClass('croix'); }, 100);
+        setTimeout(function(){ $('.faux').removeClass('croix'); }, 600);
+        setTimeout(function(){ $(element).removeClass('faux'); }, 600);
+    }
     function reverseIntNko(nombre_a_convertir){
         var nombre_converti = [];
         
@@ -578,6 +594,7 @@
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
 
+      
     function valider(td) {
         
         var vraie_reponse = td.html();

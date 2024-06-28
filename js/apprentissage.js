@@ -1045,34 +1045,17 @@ function apprentissages() {
                             if(pre_question == pre_reponse) {
                                 nbr_bonne_reponse++;
                                 point_total++;
-                                validerLaPreReponse(); 
+                                 accorder(element_actif); 
                             }
                             if(pre_question != pre_reponse) { 
                                 nbr_mauvaise_reponse++;
-                                nePasValiderLaPreReponse(); 
+                                barrer(element_actif);
                             }
         
                             pre_exercice_memoire.push(question_reponse);
                             pre_question = '';
                             pre_reponse = '';
                             montrer($('#pre_question_btn')); 
-        
-                            function validerLaPreReponse() {
-                                
-                                $(element_actif).addClass('vrais');
-        
-                                setTimeout(function(){ $('.vrais').addClass('coche'); }, 100);
-                                setTimeout(function(){ $('.vrais').removeClass('coche'); }, 600);
-                                setTimeout(function(){ $(element_actif).removeClass('vrais'); }, 600);
-                            }
-                            function nePasValiderLaPreReponse() {
-                                
-                                $(element_actif).addClass('faux');
-        
-                                setTimeout(function(){ $('.faux').addClass('croix'); }, 100);
-                                setTimeout(function(){ $('.faux').removeClass('croix'); }, 600);
-                                setTimeout(function(){ $(element_actif).removeClass('faux'); }, 600);
-                            }
                         } 
                         
                         if(questions_posees.length == pre_questions.length) {  

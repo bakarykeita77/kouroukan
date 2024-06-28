@@ -32,6 +32,7 @@ function exercices() {
         progressBarrExerciceAlphabet();
         stockerExerciceAlphabet();
         assistantExerciceAlphabet();
+        finDExercice();
 
 
         function chargerExerciceAlphabet() {
@@ -98,19 +99,9 @@ function exercices() {
                         if(question_posee == reponse_montree){ valider(td); }
                         
                         question_posee = '';    /* Vider la variable question_posee. */
-                        finDExercice();
                         
                         $('.oreille_icon_container').css('display','none');
                         $('.play_icon_container').css('display','block');
-                        
-
-                        function finDExercice() {
-                            if(compteur_de_question - 1 == nbr_de_questionnaires){
-                                $('#exercices_player').off('click');
-                                $('#exercices_player').html('ߡߊ߬ߞߟߏ߬ߟߌ ߓߘߊ߫ ߓߊ߲߫. ߌ ߞߎߟߎ߲ߖߋ߫߹ ');
-                                indexer($('#fermer_exercice'));
-                            }
-                        }
                     }
                 });
             }
@@ -237,6 +228,112 @@ function exercices() {
                 
                 indexer($('#fermer_exercice'));
             }
+        }
+        function finDExercice() {
+            $('#exercice .table_muette td').on('click', function() {
+
+                 if(compteur_de_question - 1 == nbr_de_questionnaires){
+
+                    $('#exercices_player').html('ߡߊ߬ߞߟߏ߬ߟߌ ߓߘߊ߫ ߓߊ߲߫. ߌ ߞߎߟߎ߲ߖߋ߫߹ ');
+                    $('#exercices_player').off('click');
+                    exerciceResultat();
+                    repriseDeExercice();
+                    passageARevivsion();
+                    indexer($('#fermer_exercice'));
+
+                    function exerciceResultat() {
+                        chargerExerciceAlphabetResultat();
+                        afficherExerciceAlphabetResultat();
+
+                        function chargerExerciceAlphabetResultat() {
+
+                            chargerExerciceAlphabetResultatHead();
+                            chargerExerciceAlphabetResultatBody();
+                            chargerExerciceAlphabetResultatFoot();
+
+                            
+
+                            function chargerExerciceAlphabetResultatHead() {
+
+                                let prenom = JSON.parse(sessionStorage.getItem('prenom'));
+                                let nom = JSON.parse(sessionStorage.getItem('nom'));
+                                let d = new Date();
+                                let an = d.getFullYear();
+                                let lune = d.getMonth();
+                                let date = d.getDate();
+                                let jour = d.getDay();
+                                let heure = d.getHours();
+                                let minute = d.getMinutes();
+
+                                $('#exercice #resultat_titre').text('ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ ߞߐߝߟߌ');
+                                $('#exercice #etudiant').text(prenom+' '+nom);
+                                $('#exercice #resultat_date').text(jours[jour-1]+' '+mois[lune]+' ߕߟߋ߬ '+parseIntNko(date)+' ߛߊ߲߭ '+parseIntNko(an));
+                                $('#exercice #resultat_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
+                            }
+                            function chargerExerciceAlphabetResultatBody() {
+                                let table_body_html = tableBodyHTML();
+                                let total_point_html = totalPointHTML();
+                                        
+                                $('#exercice #table_body').html(table_body_html);
+                                $('#exercice #total_question').html(parseIntNko(exercice_a_stocker.length));
+                                $('#exercice #total_reponse').html(parseIntNko(exercice_a_stocker.length));
+                                $('#exercice #total_point').html(total_point_html);
+
+                                function tableBodyHTML() {
+                                    let html = '';
+
+                                    html +=  '<tr>';
+                                    for(let j=0; j<exercice_a_stocker.length; j++) {
+                                        html += '<td>'+parseIntNko(j+1)+'</td>';
+                                    }
+                                    html +=  '</tr>';
+
+                                    html +=  '<tr>';
+                                    for(let k=0; k<exercice_a_stocker.length; k++) {
+                                        html += '<td>'+exercice_a_stocker[k][0]+'</td>';
+                                    }
+                                    html +=  '</tr>';
+
+                                    html +=  '<tr>';
+                                    for(let l=0; l<exercice_a_stocker.length; l++) {
+                                        html += '<td>'+exercice_a_stocker[l][1]+'</td>';
+                                    }
+                                    html +=  '</tr>';
+
+                                    html +=  '<tr>';
+                                    for(let m=0; m<exercice_a_stocker.length; m++) {
+                                        html += '<td>'+exercice_a_stocker[m][2]+'</td>';
+                                    }
+                                    html +=  '</tr>';
+
+                                    return html;
+                                }
+                                function totalPointHTML() {
+                                    let html = 0;
+
+                                    for(let i=0; i<exercice_a_stocker.length; i++) {
+                                        html += reverseIntNko(exercice_a_stocker[i][2]);
+                                    }
+
+                                    return parseIntNko(html);
+                                }
+                            }
+                            function chargerExerciceAlphabetResultatFoot() {
+
+                                let table_foot_html = tableFootHTML();
+                                $('#exercice #table_foot').html(table_foot_html);
+
+                                function tableFootHTML() {}
+                            }
+                           
+
+                        }
+                        function afficherExerciceAlphabetResultat() {}
+                    }
+                    function repriseDeExercice() {}
+                    function passageARevivsion() {}
+                 }
+            });
         }
     }
     function reductionDesElementsDeExerciceCouranteA49() {

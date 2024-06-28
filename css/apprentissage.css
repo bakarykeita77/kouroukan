@@ -341,19 +341,13 @@
 }
 #pre_question_btn:active, #repeter_pre_question_btn:active { box-shadow: none; }
 #repeter_pre_question_btn { display: none; }
-#resultat_entete{ width: 5rem; }
-#resultat_entete td{ width: 5rem; text-align: right; font-weight: bold; padding: 0 0.5rem; }
 #resultat_corps{
-    max-width: calc(100% - 12rem);
     padding: 0 0.5rem;
-    font-size: 1.5rem;
     border-left: 0.5rem solid #aaa;
     border-right: 0.5rem solid #aaa;
     overflow-x: auto;
 }
-#resultat_corps td { background-color: #eee; padding: 2px; }
-#resultat_pied{ width: 4rem; }
-#resultat_pied td { width: 4rem; text-align: left; font-weight: bold; border: 1px solid #ddd; }
+#resultat_pied td { text-align: left; font-weight: bold; border: 1px solid #ddd; }
 
 #pre_resultat_titre {
     position: absolute;

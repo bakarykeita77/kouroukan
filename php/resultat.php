@@ -1,0 +1,155 @@
+
+
+<div class="resultat_container">
+    <span id='fermer_resultat'>&times;</span>
+    <div class="resultat">
+        <div id="resultat_entete">
+           
+            <table>
+                <tr><td><h2 id="resultat_titre"></h2></td></tr>
+                <tr><td id="etudiant"></td></tr>
+                <tr><td>ߞߍ߫ ߕߎߡߊ :__📅 <span id="resultat_date"></span> __🕒 <span id="resultat_heure"></span></td></tr>
+            </table>
+        </div>
+     <!--------------------------------------------------------------------------------------------------------------------------------------------->
+        <hr>
+        <div id="resultat_corps">
+            <table id="table_head">
+                <tr><td>ߝߙߍߕߍ</td></tr>
+                <tr><td>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</td></tr>
+                <tr><td>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ</td></tr>
+                <tr><td>ߓߍ߬ߙߍ</td></tr>
+            </table>
+            <table id="table_body"></table>
+            <table id="table_foot">
+                <tr><td id="total">ߡߎ߬ߡߍ</td></tr>
+                <tr><td id="total_question_1"></td></tr>
+                <tr><td id="total_reponse_1"></td></tr>
+                <tr><td id="total_point_1"></td></tr>
+            </table>
+        </div>
+     <!--------------------------------------------------------------------------------------------------------------------------------------------->
+        <hr>
+        <div id="resultat_pied">
+            <div>
+                <div><span>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߡߎ߬ߡߍ</span> <span id="total_question_2"></span></div>
+                <div><span>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ߫ ߢߊ߬ߣߍ߲</span> <span id="total_bonne_reponse"></span></div>
+                <div><span>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ߬ ߝߏߣߍ߲</span><span id="total_fausse_reponse"></span></div>
+                <div><span>ߓߍ߬ߙߍ ߡߎ߬ߡߍ</span>   <span id="total_point_2"></span></div>
+                <div><span>ߓߍ߬ߙߍ ߗߡߍ߬ߘߐ߬ߦߊ</span> <span id="pourcentage_point"></span></div>
+            </div>
+        </div>
+     <!--------------------------------------------------------------------------------------------------------------------------------------------->
+        <hr>
+        <div id="deliberation"></div>
+        
+    </div>
+</div>
+
+
+<style>
+    .resultat_container { 
+        position: relative; 
+        top: -100%; 
+        border-radius: 0.5rem;
+        overflow: hidden; 
+    } 
+    #fermer_resultat {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1rem;
+        height: 1rem;
+        line-height: 1rem;
+        margin: 0.5rem;
+        text-align: center;
+        background-color: #ccc;
+        border: 1px solid #ccc;
+        border-radius: 50%;
+        cursor: pointer;
+        overflow: auto;
+    }
+    #resultat_titre { margin-top: 0; }
+    #resultat_entete, #resultat_corps, #resultat_pied, #deliberation {
+        height: max-content;
+        border: 1px solid transparent;
+        margin: 0.5rem auto;
+        max-width: 30rem;
+    }
+    #resultat_corps table {
+        border: 1px solid #aaa;
+        height: max-content;
+        display: inline-block;
+        vertical-align: top;
+        margin: 0;
+    }
+    #table_head td, #table_foot td {
+        border: 1px solid transparent;
+        background-color: #ddd;
+        padding: 0 0.5rem;
+        box-sizing: border-box;
+    }
+    #table_head {
+        width: 5.5rem;
+    }
+    #table_foot {
+        width: 4rem;
+        text-align: left;
+    }
+    #table_body {
+        background-color: #eee;
+        max-width: calc(100% - 10rem);
+        overflow: auto
+    }
+    #table_body td {
+        min-width: 1.5rem;
+        text-align: center;
+        border-color: #fff;
+        border-radius: 0.5rem;
+        background-color: #fff;
+    }
+    #resultat_pied{
+        width: max-content;
+        height: max-content;
+    }
+    #resultat_pied > div {
+        width: 60%;
+        max-width: 60rem;
+    }
+    #resultat_pied > div > div {
+        border: 1px solid transparent;
+        border-bottom-color: #aaa;
+        padding: 2px 2px 2px 8px;
+        height: 1.6rem;
+    }
+    #resultat_pied span { display: inline-block; }
+    #resultat_pied span:first-child { 
+        text-align: right;
+        border: none;
+        width: 8rem;
+        padding: 0 0.5rem;
+    }
+    #resultat_pied span:last-child { 
+        border: 2px solid #aaa; 
+        width: 3rem; 
+        text-align: left;
+        padding: 0 1rem; 
+        float: left;
+    }
+
+    @media screen and (width < 600px) {
+        
+        #resultat_entete, #resultat_corps, #resultat_pied { width: 100%; }
+    }
+    @media screen and (width >= 600px) {
+
+        #resultat_entete, #resultat_corps, #resultat_pied { width: 60%; }
+    }
+
+</style>
+
+<script>
+    $('#exercice #fermer_resultat').click(function() {
+        goUp($('#exercice .resultat_container'));
+    });
+</script>

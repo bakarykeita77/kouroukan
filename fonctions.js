@@ -171,6 +171,20 @@
        timestamp = moi+' '+jour+' '+annee; 
        return timestamp;
     }
+    function comeDown(element) {
+        element.wrap('<div id="wrap"></div>');
+
+        $('#wrap').css({
+            'height':'100%',
+            'width':'100%',
+            'margin':'auto',
+            'over-flow':'hidden',
+            'z-index': 1
+        });
+
+        element.css('display','block');
+        setTimeout(() => { element.animate({'top':0}, 400); }, 200);
+    }
     function couleurDeFond(element,couleur)	{ element.css('backgroundColor', couleur); }
     function couleurDeFont(element,couleur)	{ element.css('color', couleur); }
 
@@ -222,6 +236,10 @@
                 zoomUp($('#exercice_dialogue_btn'));
             }, 200);
         });
+    }
+    function goUp(element) {
+        element.animate({'top':'-100%'}, 400);
+        setTimeout(() => { $('#wrap').css('display','none'); }, 400);
     }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/

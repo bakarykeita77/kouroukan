@@ -1,5 +1,6 @@
 function exercices() {
        
+    var prenom = JSON.parse(sessionStorage.getItem('prenom'));
     var id = JSON.parse(sessionStorage.getItem('id'));
     var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));
     var nbr_de_questionnaires = 20;
@@ -22,6 +23,7 @@ function exercices() {
         case 4 : exercerChiffre(); break;
     }
 
+    $('#exercice .resultat_container').css('display','none');
          
     function exercerAlphabet() {
 
@@ -232,7 +234,8 @@ function exercices() {
         function finDExercice() {
             $('#exercice .table_muette td').on('click', function() {
 
-                 if(compteur_de_question - 1 == nbr_de_questionnaires){
+                // if(compteur_de_question - 1 == nbr_de_questionnaires){
+                if(compteur_de_question == 2){
 
                     $('#exercices_player').html('ߡߊ߬ߞߟߏ߬ߟߌ ߓߘߊ߫ ߓߊ߲߫. ߌ ߞߎߟߎ߲ߖߋ߫߹ ');
                     $('#exercices_player').off('click');
@@ -241,7 +244,10 @@ function exercices() {
                     passageARevivsion();
                     indexer($('#fermer_exercice'));
 
+                    $('#exercice .resultat_container').css('display','block');
+
                     function exerciceResultat() {
+
                         chargerExerciceAlphabetResultat();
                         afficherExerciceAlphabetResultat();
 
@@ -252,10 +258,8 @@ function exercices() {
                             chargerExerciceAlphabetResultatFoot();
 
                             
-
                             function chargerExerciceAlphabetResultatHead() {
 
-                                let prenom = JSON.parse(sessionStorage.getItem('prenom'));
                                 let nom = JSON.parse(sessionStorage.getItem('nom'));
                                 let d = new Date();
                                 let an = d.getFullYear();
@@ -271,13 +275,14 @@ function exercices() {
                                 $('#exercice #resultat_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
                             }
                             function chargerExerciceAlphabetResultatBody() {
+
                                 let table_body_html = tableBodyHTML();
-                                let total_point_html = totalPointHTML();
+                                let total_point = totalPoint();
                                         
                                 $('#exercice #table_body').html(table_body_html);
-                                $('#exercice #total_question').html(parseIntNko(exercice_a_stocker.length));
-                                $('#exercice #total_reponse').html(parseIntNko(exercice_a_stocker.length));
-                                $('#exercice #total_point').html(total_point_html);
+                                $('#exercice #total_question_1').html(parseIntNko(exercice_a_stocker.length));
+                                $('#exercice #total_reponse_1').html(parseIntNko(exercice_a_stocker.length));
+                                $('#exercice #total_point_1').html(parseIntNko(total_point));
 
                                 function tableBodyHTML() {
                                     let html = '';
@@ -308,27 +313,38 @@ function exercices() {
 
                                     return html;
                                 }
-                                function totalPointHTML() {
-                                    let html = 0;
-
-                                    for(let i=0; i<exercice_a_stocker.length; i++) {
-                                        html += reverseIntNko(exercice_a_stocker[i][2]);
-                                    }
-
-                                    return parseIntNko(html);
-                                }
                             }
                             function chargerExerciceAlphabetResultatFoot() {
 
-                                let table_foot_html = tableFootHTML();
-                                $('#exercice #table_foot').html(table_foot_html);
+                                let total_question = exercice_a_stocker.length;
+                                let total_bonne_reponse = totalPoint();
+                                let total_fausse_reponse = total_question - total_bonne_reponse;
 
-                                function tableFootHTML() {}
+                                $('#exercice #total_question_2').text(parseIntNko(total_question));
+                                $('#exercice #total_bonne_reponse').text(parseIntNko(total_bonne_reponse));
+                                $('#exercice #total_fausse_reponse').text(parseIntNko(total_fausse_reponse));
+                                $('#exercice #total_point_2').text(parseIntNko(total_bonne_reponse));
+                                $('#exercice #pourcentage_point').text('%'+parseIntNko(Math.floor(total_bonne_reponse*100/total_question)));
+
+                                if(total_bonne_reponse < 1) {
+                                    $('#exercice #deliberation').html('ߌ ߖߌߖߊ߬ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ ߓߍ߬ߙߍ ߡߊ߫ ߤߊߟߌ߬ ߁߈ ߓߐ߫. ߏ߬ߘߐ߬߸ ߌ ߞߐߛߍ߬ߦߌ߬ ߦߊ߲߬ ߡߊ߫.');
+                                }else{
+                                    $('#exercice #deliberation').html('ߌ ߞߎߟߎ߲ߖߋ߫ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ ߘߐ߬ߖߊ ߟߊ߫ ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ ߟߐ߲ ߠߊ߫ ߤߊ߲߯ '+$('#exercice #pourcentage_point').text()+' ߟߊ߫. ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ ߛߓߍߛߎ߲ ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫.');
+                                }
                             }
-                           
+                            function totalPoint() {
+                                let html = 0;
 
+                                for(let i=0; i<exercice_a_stocker.length; i++) {
+                                    html += reverseIntNko(exercice_a_stocker[i][2]);
+                                }
+
+                                return html;
+                            }
                         }
-                        function afficherExerciceAlphabetResultat() {}
+                        function afficherExerciceAlphabetResultat() {
+                            comeDown($('#exercice .resultat_container'));
+                        }
                     }
                     function repriseDeExercice() {}
                     function passageARevivsion() {}

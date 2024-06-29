@@ -949,9 +949,10 @@ del {
 }
 .resultat {
     position: absolute;
+    top: 1.6rem;
     background-color: #fff;
     width: calc(100% - 1rem);
-    height: calc(100% - 1rem);
+    height: calc(100% - 1.5rem);
     box-sizing: border-box;
     z-index: 1;
 }

@@ -53,7 +53,7 @@
 .notification_titre { margin: 0; }
 #apprentissage_note h3 { margin: 0; }
 #apprentissage_note p { margin: 0.25rem 0; }
-#apprentissages_dialogue_btn { bottom: 6.5rem; }
+#apprentissages_dialogue_btn { bottom: 4.5rem; }
 .notification {  
     position: relative;
     height: calc(100% - 1rem);

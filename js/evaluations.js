@@ -65,6 +65,7 @@ function evaluations() {
     }
     function evaluer() {
 
+        zoomUp($('#evaluation_dialogue_btn'));
         poserQuestionEvaluation();
         repeterQuestionEvaluation();
         repondreEvaluation();

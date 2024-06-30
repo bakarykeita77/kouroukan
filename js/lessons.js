@@ -204,7 +204,6 @@ $('document').ready(function() {
                         var lesson_active = lessonActive();
 
                         $('.course_container').css({'display':'block'});
-
                         $('.course').css('display','none');
                         afficherCourse(lesson_active);
 

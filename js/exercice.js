@@ -1,5 +1,6 @@
 function exercices() {
        
+    var nom = JSON.parse(sessionStorage.getItem('nom'));
     var prenom = JSON.parse(sessionStorage.getItem('prenom'));
     var id = JSON.parse(sessionStorage.getItem('id'));
     var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));
@@ -12,8 +13,8 @@ function exercices() {
     var question_rang = '߭';
     var exercice_a_stocker = [];
    
+
     $('.fermeture').attr('id', 'fermer_exercice');
-     
     reductionDesElementsDeExerciceCouranteA49(); // Réduction du nombre de questions à une quantité raisonable
 
     switch(niveau_actif) {
@@ -29,7 +30,7 @@ function exercices() {
 
         chargerExerciceAlphabet();
         afficheExerciceAlphabet();
-        exercerAlphabet();
+        exercerAlphabetNko();
         enregistrerExerciceAlphabet();
         progressBarrExerciceAlphabet();
         stockerExerciceAlphabet();
@@ -49,7 +50,7 @@ function exercices() {
                 $('.ordre_question').html(parseIntNko(compteur_de_question)+question_rang);
             }
         }
-        function exercerAlphabet() {
+        function exercerAlphabetNko() {
             
             var i=0;
             var question_posee = '', reponse_montree = ''; 
@@ -101,9 +102,7 @@ function exercices() {
                         if(question_posee == reponse_montree){ valider(td); }
                         
                         question_posee = '';    /* Vider la variable question_posee. */
-                        
-                        $('.oreille_icon_container').css('display','none');
-                        $('.play_icon_container').css('display','block');
+                        initialiserExerciceDialogueBtn();
                     }
                 });
             }
@@ -235,9 +234,9 @@ function exercices() {
             $('#exercice .table_muette td').on('click', function() {
 
                 // if(compteur_de_question - 1 == nbr_de_questionnaires){
-                if(compteur_de_question == 2){
+                if(compteur_de_question == 5){
 
-                    $('#exercices_player').html('ߡߊ߬ߞߟߏ߬ߟߌ ߓߘߊ߫ ߓߊ߲߫. ߌ ߞߎߟߎ߲ߖߋ߫߹ ');
+                    // $('#exercices_player').html('ߡߊ߬ߞߟߏ߬ߟߌ ߓߘߊ߫ ߓߊ߲߫. ߌ ߞߎߟߎ߲ߖߋ߫߹ ');
                     $('#exercices_player').off('click');
                     exerciceResultat();
                     repriseDeExercice();
@@ -260,7 +259,6 @@ function exercices() {
                             
                             function chargerExerciceAlphabetResultatHead() {
 
-                                let nom = JSON.parse(sessionStorage.getItem('nom'));
                                 let d = new Date();
                                 let an = d.getFullYear();
                                 let lune = d.getMonth();
@@ -326,10 +324,10 @@ function exercices() {
                                 $('#exercice #total_point_2').text(parseIntNko(total_bonne_reponse));
                                 $('#exercice #pourcentage_point').text('%'+parseIntNko(Math.floor(total_bonne_reponse*100/total_question)));
 
-                                if(total_bonne_reponse < 1) {
-                                    $('#exercice #deliberation').html('ߌ ߖߌߖߊ߬ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ ߓߍ߬ߙߍ ߡߊ߫ ߤߊߟߌ߬ ߁߈ ߓߐ߫. ߏ߬ߘߐ߬߸ ߌ ߞߐߛߍ߬ߦߌ߬ ߦߊ߲߬ ߡߊ߫.');
+                                if(total_bonne_reponse < 3) {
+                                    $('#exercice #deliberation').html('ߌ ߖߌߖߊ߬ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ <b id="redirige_sur_alphabet_exercice">ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ</b> ߓߍ߬ߙߍ ߡߊ߫ ߤߊߟߌ߬ ߁߈ ߓߐ߫. ߏ߬ߘߐ߬߸ ߌ ߞߐߛߍ߬ߦߌ߬ ߦߊ߲߬ ߡߊ߫.');
                                 }else{
-                                    $('#exercice #deliberation').html('ߌ ߞߎߟߎ߲ߖߋ߫ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ ߘߐ߬ߖߊ ߟߊ߫ ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ ߟߐ߲ ߠߊ߫ ߤߊ߲߯ '+$('#exercice #pourcentage_point').text()+' ߟߊ߫. ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ ߛߓߍߛߎ߲ ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫.');
+                                    $('#exercice #deliberation').html('ߌ ߞߎߟߎ߲ߖߋ߫ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ ߘߐ߬ߖߊ ߟߊ߫ <b id="redirige_sur_alphabet_exercice">ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ</b> ߟߐ߲ ߠߊ߫ ߤߊ߲߯  <b>'+$('#exercice #pourcentage_point').text()+'</b> ߟߊ߫. ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ <b id="redirige_sur_alphabet_revision">ߛߓߍߛߎ߲ ߣߐ߰ߡߊ߬ߛߍߦߌ</b> ߞߍ߫.');
                                 }
                             }
                             function totalPoint() {
@@ -344,12 +342,31 @@ function exercices() {
                         }
                         function afficherExerciceAlphabetResultat() {
                             comeDown($('#exercice .resultat_container'));
+                            gestionDeExerciceDialogueBtns();
                         }
                     }
-                    function repriseDeExercice() {}
-                    function passageARevivsion() {}
+                    function repriseDeExercice() {
+                        $('#redirige_sur_alphabet_exercice').click(function() {
+                        
+                            initialiserExerciceDialogueBtn();
+                            goUp($('#exercice .resultat_container'));
+                            initialiserProgressBar('exercice');
+                            setTimeout(() => { $('#alphabet_exercice').click(); }, 400);
+                        });
+                    }
+                    function passageARevivsion() {
+                        $('#redirige_sur_alphabet_revision').click(function() {
+                            goUp($('#exercice .resultat_container'));
+                            initialiserProgressBar('exercice');
+                            setTimeout(() => { $('#alphabet_evaluation').click(); }, 400);
+                        });
+                    }
                  }
             });
+        }
+        function initialiserExerciceDialogueBtn() {
+            $('.oreille_icon_container').css('display','none');
+            $('.play_icon_container').css('display','block');
         }
     }
     function reductionDesElementsDeExerciceCouranteA49() {

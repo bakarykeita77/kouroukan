@@ -1,13 +1,15 @@
 
-
 <div class="resultat_container">
+
     <span id='fermer_resultat'>&times;</span>
+
     <div class="resultat">
+     <!--------------------------------------------------------------------------------------------------------------------------------------------->
         <div id="resultat_entete">
            
             <table>
                 <tr><td><h2 id="resultat_titre"></h2></td></tr>
-                <tr><td id="etudiant"></td></tr>
+                <tr><td><b id="etudiant"></b> ߓߟߏ߫</td></tr>
                 <tr><td>ߞߍ߫ ߕߎߡߊ :__📅 <span id="resultat_date"></span> __🕒 <span id="resultat_heure"></span></td></tr>
             </table>
         </div>
@@ -42,14 +44,15 @@
      <!--------------------------------------------------------------------------------------------------------------------------------------------->
         <hr>
         <div id="deliberation"></div>
-        
-    </div>
+     <!--------------------------------------------------------------------------------------------------------------------------------------------->
+     </div>
 </div>
 
 
 <style>
     .resultat_container { 
         position: relative; 
+        display: none;
         top: -100%; 
         border-radius: 0.5rem;
         overflow: hidden; 
@@ -69,12 +72,14 @@
         cursor: pointer;
         overflow: auto;
     }
-    #resultat_titre { margin-top: 0; }
+    #resultat_titre { 
+        margin: 0 0 0.25rem 0; 
+    }
     #resultat_entete, #resultat_corps, #resultat_pied, #deliberation {
         height: max-content;
         border: 1px solid transparent;
-        margin: 0.5rem auto;
         max-width: 30rem;
+        margin: 0.5rem auto;
     }
     #resultat_corps table {
         border: 1px solid #aaa;
@@ -113,8 +118,8 @@
         height: max-content;
     }
     #resultat_pied > div {
-        width: 60%;
-        max-width: 60rem;
+        width: 100%;
+        max-width: 16rem;
     }
     #resultat_pied > div > div {
         border: 1px solid transparent;
@@ -126,15 +131,24 @@
     #resultat_pied span:first-child { 
         text-align: right;
         border: none;
-        width: 8rem;
+        min-width: 8rem;
         padding: 0 0.5rem;
     }
     #resultat_pied span:last-child { 
         border: 2px solid #aaa; 
-        width: 3rem; 
+        min-width: 1.5rem; 
         text-align: left;
         padding: 0 1rem; 
         float: left;
+    }
+    #deliberation {
+        padding: 0.5rem;
+        background-color: #ccc;
+    }
+    #redirige_sur_alphabet_exercice, #redirige_sur_alphabet_revision {
+        color: cornflowerblue;
+        text-decoration: underline;
+        cursor: pointer;
     }
 
     @media screen and (width < 600px) {

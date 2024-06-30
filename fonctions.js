@@ -172,6 +172,7 @@
        return timestamp;
     }
     function comeDown(element) {
+        
         element.wrap('<div id="wrap"></div>');
 
         $('#wrap').css({
@@ -222,7 +223,6 @@
             setTimeout(() => {
                 $('.dialogue_btn > div:nth-child(1)').css('display','none');
                 $('.dialogue_btn > div:nth-child(2)').css('display','block');
-                
                 zoomUp($('#exercice_dialogue_btn'));
             }, 200);
         });
@@ -239,7 +239,10 @@
     }
     function goUp(element) {
         element.animate({'top':'-100%'}, 400);
-        setTimeout(() => { $('#wrap').css('display','none'); }, 400);
+        setTimeout(() => { 
+            element.unwrap();
+            element.css('display','none'); 
+        }, 400);
     }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
@@ -264,6 +267,9 @@
             
             element.click(function() { clearInterval(r); $(this).removeClass('indicateur'); });
         }
+    }
+    function initialiserProgressBar(lesson_id) { 
+        $('#'+lesson_id+' .progress_mauvaise_reponse_bar, #'+lesson_id+' .progress_bonne_reponse_bar').css('width',0);
     }
     function initialiserProgressBarr() { 
         $('.parametres_popup td').on('click', function() {

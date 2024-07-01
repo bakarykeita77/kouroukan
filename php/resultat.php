@@ -50,13 +50,6 @@
 
 
 <style>
-    .resultat_container { 
-        position: relative; 
-        display: none;
-        top: -100%; 
-        border-radius: 0.5rem;
-        overflow: hidden; 
-    } 
     #fermer_resultat {
         position: absolute;
         top: 0;
@@ -81,6 +74,8 @@
         max-width: 30rem;
         margin: 0.5rem auto;
     }
+    #resultat_entete table { width: 100%; }
+    #resultat_entete table h2 { border: 1px solid #aaa; border-bottom-width: 4px; padding: 0.25rem; }
     #resultat_corps table {
         border: 1px solid #aaa;
         height: max-content;
@@ -125,9 +120,13 @@
         border: 1px solid transparent;
         border-bottom-color: #aaa;
         padding: 2px 2px 2px 8px;
-        height: 1.6rem;
+        height: 1.3rem;
     }
-    #resultat_pied span { display: inline-block; }
+    #resultat_pied span { 
+        display: inline-block; 
+        height: 1rem;
+        line-height: 1rem;
+    }
     #resultat_pied span:first-child { 
         text-align: right;
         border: none;

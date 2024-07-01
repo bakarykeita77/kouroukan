@@ -1,7 +1,7 @@
 
 #apprentissage_container > div { position: absolute; width: calc(100% - 0.25rem); }
 #apprentissage_container > div:nth-child(1) { display: block; max-width: 16rem; border-radius: 0.5rem; }
-#apprentissage_container > div:nth-child(2) { display: none; background-color: #fff; }
+#apprentissage_container > div:nth-child(2) { display: none; height: calc(100% - 0.75rem); background-color: #fff; }
 #apprentissage_options {
     background-color: #fff;
     top: 50%;
@@ -10,7 +10,6 @@
     transform: translate(-50%,-100%);
 }
 #apprentissage_options div:nth-child(1) { font-weight: bold; margin-bottom: 0.5rem; }
-#apprentissage_container > div:nth-child(2) { height: calc(100% - 0.75rem); }
 #apprentissage_options p { 
     border-radius: 0.5rem;
     padding: 0.25rem;
@@ -53,7 +52,6 @@
 .notification_titre { margin: 0; }
 #apprentissage_note h3 { margin: 0; }
 #apprentissage_note p { margin: 0.25rem 0; }
-#apprentissages_dialogue_btn { bottom: 4.5rem; }
 .notification {  
     position: relative;
     height: calc(100% - 1rem);
@@ -66,7 +64,6 @@
 #pre_apprentissage_dialogue_btn {
     font-weight: bold;
     color: black;
-    text-align: center;
     z-index: 1;
 }
 #pre_apprentissage_btns { overflow: visible; }
@@ -75,7 +72,7 @@
 #pre_exercice_btns span { 
     margin: 0;
     padding: 0;
-    height: 6rem;
+    height: 4rem;
     width: 100%;
     border-radius: 0.5rem;
     left: 50%;
@@ -446,7 +443,7 @@
     align-items: center;
     padding: 0;
     margin: 0;
-    height: 1rem;
+    height: 2rem;
     border-radius: 0 0 0.5rem 0.5rem;
 }
 #apprentissage_dialogue_btn { 

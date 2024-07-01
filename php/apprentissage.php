@@ -11,7 +11,7 @@
             </div>
         </div>
         
-        <div id="apprentissage">
+        <div>
          <!--Course head ------------------------------------------------------------------ -->
             <div class="course_head" id="apprentissage_head">
                 <div class="notification">
@@ -75,22 +75,6 @@
                         
                     <div id="pre_exercice_body"></div>
                     <div id="pre_exercice_foot"></div>
-
-                    <!-- <div id="pre_exercice_resultat">
-                        <div id="pre_exercice_resultat_head"><h3></h3></div>
-                        <div id="pre_exercice_resultat_body">
-                            <div id="resultat_diagram">
-                                <div id="libelles"></div>
-                                <div id="diagram"></div>
-                            </div>
-                            <div id="resultat_container">
-                                <div id="resultat"></div>
-                                <div id="legende"></div>
-                            </div>
-                        </div>
-                        <div id="pre_exercice_resultat_foot"></div>
-                    </div> -->
-
                     <div id="pre_exercice_resultat">
                         <h2 id="pre_resultat_titre"></h2>
                        
@@ -118,6 +102,7 @@
                             </div>
                         </div>
                     </div>
+                    
                 </div>
             </div>
         </div>

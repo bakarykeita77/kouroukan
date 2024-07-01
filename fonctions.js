@@ -176,15 +176,17 @@
         element.wrap('<div id="wrap"></div>');
 
         $('#wrap').css({
+            'position':'absolute',
+            'top':0,
             'height':'100%',
-            'width':'100%',
+            'width':'98%',
             'margin':'auto',
             'over-flow':'hidden',
             'z-index': 1
         });
 
         element.css('display','block');
-        setTimeout(() => { element.animate({'top':0}, 400); }, 200);
+        setTimeout(() => { element.animate({'top':'1rem'}, 400); }, 200);
     }
     function couleurDeFond(element,couleur)	{ element.css('backgroundColor', couleur); }
     function couleurDeFont(element,couleur)	{ element.css('color', couleur); }

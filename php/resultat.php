@@ -26,7 +26,7 @@
             <table id="table_foot">
                 <tr><td id="total">ߡߎ߬ߡߍ</td></tr>
                 <tr><td id="total_question_1"></td></tr>
-                <tr><td id="total_reponse_1"></td></tr>
+                <tr><td id="total_reponse"></td></tr>
                 <tr><td id="total_point_1"></td></tr>
             </table>
         </div>
@@ -160,9 +160,3 @@
     }
 
 </style>
-
-<script>
-    $('#exercice #fermer_resultat').click(function() {
-        goUp($('#exercice .resultat_container'));
-    });
-</script>

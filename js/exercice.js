@@ -249,6 +249,7 @@ function exercices() {
 
                         chargerExerciceAlphabetResultat();
                         afficherExerciceAlphabetResultat();
+                        masquerExerciceAlphabetResultat();
 
                         function chargerExerciceAlphabetResultat() {
 
@@ -279,7 +280,7 @@ function exercices() {
                                         
                                 $('#exercice #table_body').html(table_body_html);
                                 $('#exercice #total_question_1').html(parseIntNko(exercice_a_stocker.length));
-                                $('#exercice #total_reponse_1').html(parseIntNko(exercice_a_stocker.length));
+                                $('#exercice #total_reponse').html(parseIntNko(exercice_a_stocker.length));
                                 $('#exercice #total_point_1').html(parseIntNko(total_point));
 
                                 function tableBodyHTML() {
@@ -342,6 +343,11 @@ function exercices() {
                         }
                         function afficherExerciceAlphabetResultat() {
                             comeDown($('#exercice .resultat_container'));
+                        }
+                        function masquerExerciceAlphabetResultat() {
+                            $('#exercice #fermer_resultat').click(function() {
+                                goUp($('#exercice .resultat_container'));
+                            });
                         }
                     }
                     function repriseDeExercice() {

@@ -247,100 +247,11 @@ function exercices() {
 
                     function exerciceResultat() {
 
-                        chargerExerciceAlphabetResultat();
+                        chargerResultat(exercice_a_stocker);
                         afficherExerciceAlphabetResultat();
                         masquerExerciceAlphabetResultat();
 
-                        function chargerExerciceAlphabetResultat() {
-
-                            chargerExerciceAlphabetResultatHead();
-                            chargerExerciceAlphabetResultatBody();
-                            chargerExerciceAlphabetResultatFoot();
-
-                            
-                            function chargerExerciceAlphabetResultatHead() {
-
-                                let d = new Date();
-                                let an = d.getFullYear();
-                                let lune = d.getMonth();
-                                let date = d.getDate();
-                                let jour = d.getDay();
-                                let heure = d.getHours();
-                                let minute = d.getMinutes();
-
-                                $('#exercice #resultat_titre').text('ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ ߞߐߝߟߌ');
-                                $('#exercice #etudiant').text(prenom+' '+nom);
-                                $('#exercice #resultat_date').text(jours[jour-1]+' '+mois[lune]+' ߕߟߋ߬ '+parseIntNko(date)+' ߛߊ߲߭ '+parseIntNko(an));
-                                $('#exercice #resultat_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
-                            }
-                            function chargerExerciceAlphabetResultatBody() {
-
-                                let table_body_html = tableBodyHTML();
-                                let total_point = totalPoint();
-                                        
-                                $('#exercice #table_body').html(table_body_html);
-                                $('#exercice #total_question_1').html(parseIntNko(exercice_a_stocker.length));
-                                $('#exercice #total_reponse').html(parseIntNko(exercice_a_stocker.length));
-                                $('#exercice #total_point_1').html(parseIntNko(total_point));
-
-                                function tableBodyHTML() {
-                                    let html = '';
-
-                                    html +=  '<tr>';
-                                    for(let j=0; j<exercice_a_stocker.length; j++) {
-                                        html += '<td>'+parseIntNko(j+1)+'</td>';
-                                    }
-                                    html +=  '</tr>';
-
-                                    html +=  '<tr>';
-                                    for(let k=0; k<exercice_a_stocker.length; k++) {
-                                        html += '<td>'+exercice_a_stocker[k][0]+'</td>';
-                                    }
-                                    html +=  '</tr>';
-
-                                    html +=  '<tr>';
-                                    for(let l=0; l<exercice_a_stocker.length; l++) {
-                                        html += '<td>'+exercice_a_stocker[l][1]+'</td>';
-                                    }
-                                    html +=  '</tr>';
-
-                                    html +=  '<tr>';
-                                    for(let m=0; m<exercice_a_stocker.length; m++) {
-                                        html += '<td>'+exercice_a_stocker[m][2]+'</td>';
-                                    }
-                                    html +=  '</tr>';
-
-                                    return html;
-                                }
-                            }
-                            function chargerExerciceAlphabetResultatFoot() {
-
-                                let total_question = exercice_a_stocker.length;
-                                let total_bonne_reponse = totalPoint();
-                                let total_fausse_reponse = total_question - total_bonne_reponse;
-
-                                $('#exercice #total_question_2').text(parseIntNko(total_question));
-                                $('#exercice #total_bonne_reponse').text(parseIntNko(total_bonne_reponse));
-                                $('#exercice #total_fausse_reponse').text(parseIntNko(total_fausse_reponse));
-                                $('#exercice #total_point_2').text(parseIntNko(total_bonne_reponse));
-                                $('#exercice #pourcentage_point').text('%'+parseIntNko(Math.floor(total_bonne_reponse*100/total_question)));
-
-                                if(total_bonne_reponse < 1) {
-                                    $('#exercice #deliberation').html('ߌ ߖߌߖߊ߬ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ <b id="redirige_sur_alphabet_exercice">ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ</b> ߓߍ߬ߙߍ ߡߊ߫ ߤߊߟߌ߬ ߁߈ ߓߐ߫. ߏ߬ߘߐ߬߸ ߌ ߞߐߛߍ߬ߦߌ߬ ߦߊ߲߬ ߡߊ߫.');
-                                }else{
-                                    $('#exercice #deliberation').html('ߌ ߞߎߟߎ߲ߖߋ߫ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ ߘߐ߬ߖߊ ߟߊ߫ <b id="redirige_sur_alphabet_exercice">ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ</b> ߟߐ߲ ߠߊ߫ ߤߊ߲߯  <b>'+$('#exercice #pourcentage_point').text()+'</b> ߟߊ߫. ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ <b id="redirige_sur_alphabet_revision">ߛߓߍߛߎ߲ ߣߐ߰ߡߊ߬ߛߍߦߌ</b> ߞߍ߫.');
-                                }
-                            }
-                            function totalPoint() {
-                                let html = 0;
-
-                                for(let i=0; i<exercice_a_stocker.length; i++) {
-                                    html += reverseIntNko(exercice_a_stocker[i][2]);
-                                }
-
-                                return html;
-                            }
-                        }
+                        
                         function afficherExerciceAlphabetResultat() {
                             comeDown($('#exercice .resultat_container'));
                         }

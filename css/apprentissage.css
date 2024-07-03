@@ -37,6 +37,13 @@
     width: 100%;
     overflow: auto;
 }
+#apprentissage_head span {
+    text-decoration: underline;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: cornflowerblue;
+    cursor: pointer;
+}
 #table_alphabet_apprentissage {
     height: 75%;
     max-height: 45rem;

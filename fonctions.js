@@ -113,6 +113,95 @@
             sessionStorage.setItem('nbr',JSON.stringify(phase_index));
         }
     }
+    
+    function chargerResultat(memoire) {
+        
+        let nom = JSON.parse(sessionStorage.getItem('nom'));
+        let prenom = JSON.parse(sessionStorage.getItem('prenom'));
+
+        chargerResultatHead();
+        chargerResultatBody();
+        chargerResultatFoot();
+        
+        function chargerResultatHead() {
+
+            let d = new Date();
+            let an = d.getFullYear();
+            let lune = d.getMonth();
+            let date = d.getDate();
+            let jour = d.getDay();
+            let heure = d.getHours();
+            let minute = d.getMinutes();
+
+            $('#apprentissage #resultat_titre').text('ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ ߞߐߝߟߌ');
+            $('#apprentissage #etudiant').text(prenom+' '+nom);
+            $('#apprentissage #resultat_date').text(jours[jour-1]+' '+mois[lune]+' ߕߟߋ߬ '+parseIntNko(date)+' ߛߊ߲߭ '+parseIntNko(an));
+            $('#apprentissage #resultat_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
+        }
+        function chargerResultatBody() {
+
+            let table_body_html = resultatTableBodyHTML();
+            let total_point = totalPoint();
+                
+            $('#apprentissage #table_body').html(table_body_html);
+            $('#apprentissage #total_question_1').html(parseIntNko(memoire.length));
+            $('#apprentissage #total_reponse').html(parseIntNko(memoire.length));
+            $('#apprentissage #total_point_1').html(parseIntNko(total_point));
+
+            function resultatTableBodyHTML() {
+                let html = '';
+
+                html +=  '<tr>';
+                for(let j=0; j<memoire.length; j++) {
+                    html += '<td>'+parseIntNko(j+1)+'</td>';
+                }
+                html +=  '</tr>';
+
+                html +=  '<tr>';
+                for(let k=0; k<memoire.length; k++) {
+                    html += '<td>'+memoire[k][0]+'</td>';
+                }
+                html +=  '</tr>';
+
+                html +=  '<tr>';
+                for(let l=0; l<memoire.length; l++) {
+                    html += '<td>'+memoire[l][1]+'</td>';
+                }
+                html +=  '</tr>';
+
+                html +=  '<tr>';
+                for(let m=0; m<memoire.length; m++) {
+                    html += '<td>'+memoire[m][2]+'</td>';
+                }
+                html +=  '</tr>';
+
+                return html;
+            }
+        }
+        function chargerResultatFoot() {
+
+            let total_question = memoire.length;
+            let total_bonne_reponse = totalPoint();
+            let total_fausse_reponse = total_question - total_bonne_reponse;
+
+            $('#apprentissage #total_question_2').text(parseIntNko(total_question));
+            $('#apprentissage #total_bonne_reponse').text(parseIntNko(total_bonne_reponse));
+            $('#apprentissage #total_fausse_reponse').text(parseIntNko(total_fausse_reponse));
+            $('#apprentissage #total_point_2').text(parseIntNko(total_bonne_reponse));
+            $('#apprentissage #pourcentage_point').text('%'+parseIntNko(Math.floor(total_bonne_reponse*100/total_question)));
+
+            if(total_bonne_reponse < 1) {
+                $('#apprentissage #deliberation').html('ߌ ߖߌߖߊ߬ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ <b id="redirige_sur_alphabet_exercice">ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ</b> ߓߍ߬ߙߍ ߡߊ߫ ߤߊߟߌ߬ ߁߈ ߓߐ߫. ߏ߬ߘߐ߬߸ ߌ ߞߐߛߍ߬ߦߌ߬ ߦߊ߲߬ ߡߊ߫.');
+            }else{
+                $('#apprentissage #deliberation').html('ߌ ߞߎߟߎ߲ߖߋ߫ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ ߘߐ߬ߖߊ ߟߊ߫ <b id="redirige_sur_alphabet_exercice">ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ</b> ߟߐ߲ ߠߊ߫ ߤߊ߲߯  <b>'+$('#apprentissage #pourcentage_point').text()+'</b> ߟߊ߫. ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ <b id="redirige_sur_alphabet_revision">ߛߓߍߛߎ߲ ߣߐ߰ߡߊ߬ߛߍߦߌ</b> ߞߍ߫.');
+            }
+        }
+        function totalPoint() {
+            let html = 0;
+            for(let i=0; i<memoire.length; i++) { html += memoire[i][2]; }
+            return html;
+        }
+    }
     function clearStorage() {
         sessionStorage.clear();
         localStorage.clear();

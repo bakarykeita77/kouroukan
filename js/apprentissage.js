@@ -835,7 +835,7 @@ function apprentissages() {
 
             chargerPreExerciceAlphabet();
             afficherPreExerciceAlphabet();
-            apprendrePreExerciceAlphabetNko();
+            exercicerAlphabet();
             enregistrerPreExerciceAlphabet();
             progressBarrPreExerciceAlphabet();
             stockerPreExerciceAlphabet();
@@ -882,7 +882,7 @@ function apprentissages() {
                         <div id="pre_foot_btns_container"> \
                             <div id="pre_exercice_foot_btns"> \
                                 <div id="pre_question_btn">ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ '+total_questions+' \\ ߁߭ ߟߊߡߍ߲߫</div> \
-                                <div id="repeter_pre_question_btn">ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߊߡߍ߲߫ ߕߎ߯ߣߌ߫</div> \
+                                <div id="repeter_pre_question_btn"></div> \
                                 <div id="pre_correction_btn">ߏ߬ ߛߊߞߍ߫</div> \
                             </div> \
                         </div> \
@@ -1022,7 +1022,7 @@ function apprentissages() {
                 function afficherPiedDePreExerciceChiffres() {}
                 function afficherCorpsDePreExerciceChiffres() {}
             }
-            function apprendrePreExerciceAlphabetNko() {
+            function exercicerAlphabet() {
     
                 ecouterLaPreQuestion();
                 repondreLaPreQuestion();
@@ -1037,6 +1037,7 @@ function apprentissages() {
                                                             
                         ordre_de_question = (total_questions == parseIntNko(i+2)) ? 'ߟߊߓߊ߲' : parseIntNko(i+2);
                         $('#pre_question_btn').html('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ '+total_questions+' \\ '+ordre_de_question+'߲ ߠߊߡߍ߲߫');
+                        $('#repeter_pre_question_btn').html('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ '+parseIntNko(i+1)+'߲ ߠߊߡߍ߲߫ ߕߎ߲߯');
                         pre_question = pre_questions[i];
                         
     console.log(pre_question);
@@ -1216,11 +1217,11 @@ function apprentissages() {
                         if(exercice_btn_index == 0) {
                         if(questions_posees.length == pre_questions.length) {
                             if(taux_de_vraie_reponse_1 == 100) {
-                                let notification = liste_de_matieres[0][1]+" ߡߊ߬ߞߟߏ߬ߟߌ ߢߊ߬ߣߍ߲߬ .ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ ߕߊ߯ ߣߐ߰ߡߊ߬ߛߍߦߌ ߦߙߐ. ߞߐߝߟߌ ߝߟߍ߫ ߘߎ߭ߡߊ߬ ߓߊ߫. ߘߊߕߎ߲ߠߊ߲߫ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߓߐ߫ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫)";
+                                let notification = liste_de_matieres[0][1]+" ߡߊ߬ߞߟߏ߬ߟߌ ߢߊ߬ߣߍ߲߬ .ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ ߕߊ߯ ߣߐ߰ߡߊ߬ߛߍߦߌ ߦߙߐ. ߞߐߝߟߌ ߝߟߍ߫ \n .<span class='pre_exercice_resultat_affiche'>ߞߐߝߟߌ ߝߟߍ߫ ߦߊ߲߬</span> . ߘߊߕߎ߲ߠߊ߲߫ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߓߐ߫ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫)";
                                 ecrire('notification_corps',notification);
                             }
                             if(taux_de_vraie_reponse_1 < 100) {
-                                let notification = liste_de_matieres[0][1]+" ߡߊ߬ߞߟߏ߬ߟߌ ߡߊ߫ ߢߊ߬ .ߌ ߓߘߊ߫ ߗߌߙߏ߲߫ ߡߊ߬ߞߟߏ߬ߟߌ ߢߌ߲߬ ߘߐ߫. ߞߐߝߟߌ ߝߟߍ߫ ߘߎ߭ߡߊ߬ ߓߊ߫ .ߘߊߕߎ߲ߠߊ߲߫ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߓߐ߫ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫)";
+                                let notification = liste_de_matieres[0][1]+" ߡߊ߬ߞߟߏ߬ߟߌ ߡߊ߫ ߢߊ߬ .ߌ ߓߘߊ߫ ߗߌߙߏ߲߫ ߡߊ߬ߞߟߏ߬ߟߌ ߢߌ߲߬ ߘߐ߫\n .<span class='pre_exercice_resultat_affiche'>ߞߐߝߟߌ ߝߟߍ߫ ߦߊ߲߬</span> .ߘߊߕߎ߲ߠߊ߲߫ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߓߐ߫ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫)";
                                 ecrire('notification_corps',notification);
                             }
                         }}
@@ -1263,7 +1264,6 @@ function apprentissages() {
                 }
                 function assistantDePreExerciceTons() {}
                 function assistantDePreExerciceChiffres() {}
-
             }
             function finDePreExerciceAlphabet() {
 
@@ -1321,102 +1321,12 @@ function apprentissages() {
 
                     $('#pre_correction_btn').click(function() {
                         if(questions_posees.length === pre_questions.length) {
-                            chargerExerciceAlphabetResultat();
+                            chargerResultat(pre_exercice_memoire);
                             afficherExerciceAlphabetResultat();
                             masquerExerciceAlphabetResultat();
                         }
                     });
 
-                    function chargerExerciceAlphabetResultat() {
-
-                        chargerExerciceAlphabetResultatHead();
-                        chargerExerciceAlphabetResultatBody();
-                        chargerExerciceAlphabetResultatFoot();
-
-                        
-                        function chargerExerciceAlphabetResultatHead() {
-
-                            let d = new Date();
-                            let an = d.getFullYear();
-                            let lune = d.getMonth();
-                            let date = d.getDate();
-                            let jour = d.getDay();
-                            let heure = d.getHours();
-                            let minute = d.getMinutes();
-
-                            $('#apprentissage #resultat_titre').text('ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ ߞߐߝߟߌ');
-                            $('#apprentissage #etudiant').text(prenom+' '+nom);
-                            $('#apprentissage #resultat_date').text(jours[jour-1]+' '+mois[lune]+' ߕߟߋ߬ '+parseIntNko(date)+' ߛߊ߲߭ '+parseIntNko(an));
-                            $('#apprentissage #resultat_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
-                        }
-                        function chargerExerciceAlphabetResultatBody() {
-
-                            let table_body_html = tableBodyHTML();
-                            let total_point = totalPoint();
-                                  
-                            $('#apprentissage #table_body').html(table_body_html);
-                            $('#apprentissage #total_question_1').html(parseIntNko(pre_exercice_memoire.length));
-                            $('#apprentissage #total_reponse').html(parseIntNko(pre_exercice_memoire.length));
-                            $('#apprentissage #total_point_1').html(parseIntNko(total_point));
-
-                            function tableBodyHTML() {
-                                let html = '';
-
-                                html +=  '<tr>';
-                                for(let j=0; j<pre_exercice_memoire.length; j++) {
-                                    html += '<td>'+parseIntNko(j+1)+'</td>';
-                                }
-                                html +=  '</tr>';
-
-                                html +=  '<tr>';
-                                for(let k=0; k<pre_exercice_memoire.length; k++) {
-                                    html += '<td>'+pre_exercice_memoire[k][0]+'</td>';
-                                }
-                                html +=  '</tr>';
-
-                                html +=  '<tr>';
-                                for(let l=0; l<pre_exercice_memoire.length; l++) {
-                                    html += '<td>'+pre_exercice_memoire[l][1]+'</td>';
-                                }
-                                html +=  '</tr>';
-
-                                html +=  '<tr>';
-                                for(let m=0; m<pre_exercice_memoire.length; m++) {
-                                    html += '<td>'+pre_exercice_memoire[m][2]+'</td>';
-                                }
-                                html +=  '</tr>';
-
-                                return html;
-                            }
-                        }
-                        function chargerExerciceAlphabetResultatFoot() {
-
-                            let total_question = pre_exercice_memoire.length;
-                            let total_bonne_reponse = totalPoint();
-                            let total_fausse_reponse = total_question - total_bonne_reponse;
-
-                            $('#apprentissage #total_question_2').text(parseIntNko(total_question));
-                            $('#apprentissage #total_bonne_reponse').text(parseIntNko(total_bonne_reponse));
-                            $('#apprentissage #total_fausse_reponse').text(parseIntNko(total_fausse_reponse));
-                            $('#apprentissage #total_point_2').text(parseIntNko(total_bonne_reponse));
-                            $('#apprentissage #pourcentage_point').text('%'+parseIntNko(Math.floor(total_bonne_reponse*100/total_question)));
-
-                            if(total_bonne_reponse < 1) {
-                                $('#apprentissage #deliberation').html('ߌ ߖߌߖߊ߬ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ <b id="redirige_sur_alphabet_exercice">ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ</b> ߓߍ߬ߙߍ ߡߊ߫ ߤߊߟߌ߬ ߁߈ ߓߐ߫. ߏ߬ߘߐ߬߸ ߌ ߞߐߛߍ߬ߦߌ߬ ߦߊ߲߬ ߡߊ߫.');
-                            }else{
-                                $('#apprentissage #deliberation').html('ߌ ߞߎߟߎ߲ߖߋ߫ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ ߘߐ߬ߖߊ ߟߊ߫ <b id="redirige_sur_alphabet_exercice">ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ</b> ߟߐ߲ ߠߊ߫ ߤߊ߲߯  <b>'+$('#apprentissage #pourcentage_point').text()+'</b> ߟߊ߫. ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ <b id="redirige_sur_alphabet_revision">ߛߓߍߛߎ߲ ߣߐ߰ߡߊ߬ߛߍߦߌ</b> ߞߍ߫.');
-                            }
-                        }
-                        function totalPoint() {
-                            let html = 0;
-
-                            for(let i=0; i<pre_exercice_memoire.length; i++) {
-                                html += pre_exercice_memoire[i][2];
-                            }
-
-                            return html;
-                        }
-                    }
                     function afficherExerciceAlphabetResultat() {
                         comeDown($('#apprentissage .resultat_container'));
                     }
@@ -1426,7 +1336,9 @@ function apprentissages() {
                         });
                     }
                 }
-                function repriseDePreExercice() {}
+                function repriseDePreExercice() {
+                    $('#redirige_sur_alphabet_exercice').click(function() { $('#fermeture_pre_exercice').click(); }); 
+                }
                 function passageARevision() {}
             }
         }                          

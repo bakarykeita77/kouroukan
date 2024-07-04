@@ -85,23 +85,22 @@
     }
     #table_head td, #table_foot td {
         border: 1px solid transparent;
+        height: 1rem;
         background-color: #ddd;
         padding: 0 0.5rem;
         box-sizing: border-box;
     }
-    #table_head {
-        width: 5.5rem;
-    }
-    #table_foot {
-        width: 4rem;
-        text-align: left;
-    }
+    #table_head td { width: 5rem; }
+    #table_foot td { width: 3rem; text-align: left; }
+    #table_head { width: 5.25rem; }
+    #table_foot { width: 3.85rem; }
     #table_body {
         background-color: #eee;
         max-width: calc(100% - 10rem);
         overflow: auto
     }
     #table_body td {
+        height: 1.32rem;
         min-width: 1.5rem;
         text-align: center;
         border-color: #fff;
@@ -135,7 +134,7 @@
     }
     #resultat_pied span:last-child { 
         border: 2px solid #aaa; 
-        min-width: 1.5rem; 
+        min-width: 2.5rem; 
         text-align: left;
         padding: 0 1rem; 
         float: left;

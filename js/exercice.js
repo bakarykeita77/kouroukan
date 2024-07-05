@@ -262,7 +262,7 @@ function exercices() {
                         }
                     }
                     function repriseDeExercice() {
-                        $('#redirige_sur_alphabet_exercice').click(function() {
+                        $('#redirige_sur_exercice_pre_alphabet').click(function() {
                         
                             initialiserExerciceDialogueBtn();
                             goUp($('#exercice .resultat_container'));
@@ -271,7 +271,7 @@ function exercices() {
                         });
                     }
                     function passageARevivsion() {
-                        $('#redirige_sur_alphabet_revision').click(function() {
+                        $('#redirige_sur_revision_pre_alphabet').click(function() {
                             goUp($('#exercice .resultat_container'));
                             initialiserProgressBar('exercice');
                             setTimeout(() => { $('#alphabet_evaluation').click(); }, 400);

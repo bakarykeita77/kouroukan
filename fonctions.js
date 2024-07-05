@@ -183,6 +183,8 @@
             let total_question = memoire.length;
             let total_bonne_reponse = totalPoint();
             let total_fausse_reponse = total_question - total_bonne_reponse;
+            let reprendre_pre_apprentissage = '<b id="redirige_sur_apprendre_pre_alphabet">ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߞߍ߫ ߕߎ߲߯</b>';
+            let continu_sur_pre_exercice = '<b id="redirige_sur_exercice_pre_alphabet">ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫</b>';
 
             $('#apprentissage #total_question_2').text(parseIntNko(total_question));
             $('#apprentissage #total_bonne_reponse').text(parseIntNko(total_bonne_reponse));
@@ -191,9 +193,14 @@
             $('#apprentissage #pourcentage_point').text('%'+parseIntNko(Math.floor(total_bonne_reponse*100/total_question)));
 
             if(total_bonne_reponse < 1) {
-                $('#apprentissage #deliberation').html('ߌ ߖߌߖߊ߬ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ <b id="redirige_sur_alphabet_exercice">ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ</b> ߓߍ߬ߙߍ ߡߊ߫ ߤߊߟߌ߬ ߁߈ ߓߐ߫. ߏ߬ߘߐ߬߸ ߌ ߞߐߛߍ߬ߦߌ߬ ߦߊ߲߬ ߡߊ߫.');
+                $('#apprentissage #deliberation').html('ߌ ߖߌߖߊ߬ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߓߍ߬ߙߍ ߡߊ߫ ߤߊߟߌ߬ ߁߈ ߓߐ߫. ߏ߬ߘߐ߬߸ ߌ ߞߐߛߍ߬ߦߌ߬ ߦߊ߲߬ ߡߊ߫.'+reprendre_pre_apprentissage);
             }else{
-                $('#apprentissage #deliberation').html('ߌ ߞߎߟߎ߲ߖߋ߫ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ ߘߐ߬ߖߊ ߟߊ߫ <b id="redirige_sur_alphabet_exercice">ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ</b> ߟߐ߲ ߠߊ߫ ߤߊ߲߯  <b>'+$('#apprentissage #pourcentage_point').text()+'</b> ߟߊ߫. ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ <b id="redirige_sur_alphabet_revision">ߛߓߍߛߎ߲ ߣߐ߰ߡߊ߬ߛߍߦߌ</b> ߞߍ߫.');
+                $('#apprentissage #deliberation').html(
+                    'ߌ ߞߎߟߎ߲ߖߋ߫ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ ߘߐ߬ߖߊ ߟߊ߫ ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߟߐ߲ ߠߊ߫ ߤߊ߲߯ '+$('#apprentissage #pourcentage_point').text()+
+                    '</b> ߟߊ߫. ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫.<br/>'+
+                    'ߣߴߌ ߟߊ߫ ߓߍ߬ߙߍ ߡߴߌ ߥߛߊ߬߸ '+reprendre_pre_apprentissage+'<br/>'+
+                    'ߣߴߌ ߟߊ߫ ߓߍ߬ߙߍ ߞߵߌ ߥߛߊ߬߸ '+continu_sur_pre_exercice
+                );
             }
         }
         function totalPoint() {
@@ -262,10 +269,11 @@
     }
     function comeDown(element) {
         
-        element.wrap('<div id="wrap"></div>');
+        element.wrap('<div id="envelope"></div>');
 
-        $('#wrap').css({
+        $('#envelope').css({
             'position':'absolute',
+            'display':'block',
             'top':0,
             'height':'100%',
             'width':'98%',
@@ -333,6 +341,17 @@
         setTimeout(() => { 
             element.unwrap();
             element.css('display','none'); 
+
+            $('#envelope').css({
+                'position':'absolute',
+                'display':'none',
+                'top':0,
+                'height':0,
+                'width':'98%',
+                'margin':'auto',
+                'over-flow':'hidden',
+                'z-index': 0
+            });
         }, 400);
     }
 

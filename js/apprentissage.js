@@ -74,6 +74,7 @@ function apprentissages() {
         let panneau_status = "masque";
         let consonnes_choisies = [];
         let phase_d_etude = 'apprentissage';
+
 /*-------------------------------------------------------------------------------------------------------------------*/ 
 
         
@@ -165,9 +166,10 @@ function apprentissages() {
                         rang = cercle_actif.html();
                     
                         var index = cercle_index+1;
-                        var pre_apprentissage_permission = '';
+                        var pre_apprentissage_permission = autorisationDePreExercice();
 
 
+                        reInitialiserPreApprentissageClicksMemo();
                         controleDuNiveau();
                         if(pre_apprentissage_permission == 'pre_lesson_non_permise') return false;
                         preLessonEntete1Style();
@@ -177,7 +179,6 @@ function apprentissages() {
                         affichageDePreApprentissageBtns();
                         zoomDown($('.dialogue_btn'));
                         
-                        reInitialiserPreApprentissageClicksMemo();
                     
 
                         function controleDuNiveau() {
@@ -446,49 +447,89 @@ function apprentissages() {
                             let span_click_counter =0;
                             $(this).click(function() {
                                 span_click_counter++;
-                                if(span_click_counter <= quantite_normale_de_click) { total_click++; }
-                                if(total_click === total_yellow_letter*quantite_normale_de_click) {
-                                    $('#apprentissage_head').click(function() {
-                                       
-                                        switch(phase_id) {
-                                            case 'alphabet_apprentissage' : 
+                                if(span_click_counter <= quantite_normale_de_click) { 
+                                    total_click++; 
+                                    if(total_click === total_yellow_letter*quantite_normale_de_click) {
+                                        $('#apprentissage_head').click(function() {
+
+                                            chargerResultat(pre_apprentissage_clicks_memo);
+                                            adapterLeResultatAuFormatDApprentissage();
+                                            afficherApprendrePreResultat();
+                                            masquerApprendrePreResultat();
+                                            reprendreApprentissagePreAlphabet();
+                                            exercerPreAlphabet();
+                                            
+                                            
+                                            function adapterLeResultatAuFormatDApprentissage() {
+
+                                                if(phase_id == 'alphabet_apprentissage') {
+                                                   
                                                     $('#table_head tr:nth-child(2) td').text('ߛߓߍߘߋ߲');
                                                     $('#table_head tr:nth-child(3) td').text('ߘߌ߯ߟߌ');
-console.log(totalDAppui());
-                                                    $('#resultat_pied > div > div:nth-child(1) span:first-child').text('ߛߓߍߘߋ ߡߎ߬ߡߍ');
-                                                    $('#resultat_pied > div > div:nth-child(2) span:first-child').text('ߘߌ߯ߟߌ ߡߎ߬ߡߍ');
-                                                    $('#resultat_pied > div > div:nth-child(3)').css('display','none');
+
+                                                    $.each($('#table_body tr:nth-child(3) td, #table_body tr:nth-child(4) td'), function() {
+                                                        $(this).html(parseIntNko($(this).html()));
+                                                    });
 
                                                     $('#total_reponse').text(parseIntNko(totalDAppui()));
                                                     $('#total_point_1').text(parseIntNko(totalApprentissagePoint()));
 
+                                                    $('#resultat_pied > div > div:nth-child(1) span:first-child').text('ߛߓߍߘߋ ߡߎ߬ߡߍ');
+                                                    $('#resultat_pied > div > div:nth-child(2) span:first-child').text('ߘߌ߯ߟߌ ߡߎ߬ߡߍ');
+                                                    $('#resultat_pied > div > div:nth-child(3)').css('display','none');
+
                                                     $('#total_bonne_reponse').text(parseIntNko(totalDAppui()));
                                                     $('#total_point_2').text(parseIntNko(totalApprentissagePoint()));
+                                                }
 
-                                                    break;
-                                        }
+                                                function totalDAppui() {
+                                                    let ta = 0;
+                                                    for(let i=0; i<pre_apprentissage_clicks_memo.length; i++) {
+                                                        ta += pre_apprentissage_clicks_memo[i][1];
+                                                    }
+                                                    return ta;
+                                                }
+                                                function totalApprentissagePoint() {
+                                                    let tap = 0;
+                                                    for(let i=0; i<pre_apprentissage_clicks_memo.length; i++) {
+                                                        tap += pre_apprentissage_clicks_memo[i][2];
+                                                    }
+                                                    return tap;
+                                                }
+                                            }
+                                            function afficherApprendrePreResultat() { comeDown($('#apprentissage .resultat_container')); }
+                                            function masquerApprendrePreResultat() {  
+                                                $('#apprentissage #fermer_resultat').click(function() {
+                                                    goUp($('#apprentissage .resultat_container'));
+                                                    formatParDefautDuResultat();
+                                                });
+                                            }
+                                            function reprendreApprentissagePreAlphabet() {
+                                                $('#redirige_sur_apprendre_pre_alphabet').click(function() {
+                                                    
+                                                    goUp($('#apprentissage .resultat_container'));
 
-                                        chargerResultat(pre_apprentissage_clicks_memo);
-                                        comeDown($('#apprentissage .resultat_container'));
-                                        $('#apprentissage #fermer_resultat').click(function() {
-                                            goUp($('#apprentissage .resultat_container'));
+                                                    setTimeout(() => { 
+                                                        cercle_actif.click(); 
+                                                        reInitialiserPreApprentissageClicksMemo();
+                                                        apprendrePreApprendreAlphabetNko();
+                                                        enregistrerPreApprendreAlphabet();
+                                                        progressBarrPreApprendreAlphabet();
+                                                        stockerPreApprendreAlphabet();
+                                                        assistantPreApprendreAlphabet();
+                                                        finDePreApprendreAlphabet();
+                                                    }, 400);
+                                                });
+                                            }
+                                            function exercerPreAlphabet() {
+                                                $('#redirige_sur_exercice_pre_alphabet').click(function() {
+                                                    goUp($('#apprentissage .resultat_container'));
+                                                    setTimeout(() => { $('#pre_exercice_bouton').click(); }, 400);
+                                                });
+
+                                            }
                                         });
-
-                                        function totalDAppui() {
-                                            let ta = 0;
-                                            for(let i=0; i<pre_apprentissage_clicks_memo.length; i++) {
-                                                ta += pre_apprentissage_clicks_memo[i][1];
-                                            }
-                                            return ta;
-                                        }
-                                        function totalApprentissagePoint() {
-                                            let tap = 0;
-                                            for(let i=0; i<pre_apprentissage_clicks_memo.length; i++) {
-                                                tap += pre_apprentissage_clicks_memo[i][2];
-                                            }
-                                            return tap;
-                                        }
-                                    });
+                                    }
                                 }
                             });
                         });
@@ -880,6 +921,31 @@ console.log(totalDAppui());
             }
             return n;
         } 
+        function formatParDefautDuResultat() {
+
+            switch(phase_id) {
+                case 'alphabet_apprentissage' : 
+
+                    $('#table_head tr:nth-child(2) td').text('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ');
+                    $('#table_head tr:nth-child(3) td').text('ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ');
+
+                    $.each($('#table_body tr:nth-child(3) td, #table_body tr:nth-child(4) td'), function() {
+                        $(this).html('');
+                    });
+
+                    $('#total_reponse').text('');
+                    $('#total_point_1').text('');
+
+                    $('#resultat_pied > div > div:nth-child(1) span:first-child').text('');
+                    $('#resultat_pied > div > div:nth-child(2) span:first-child').text('');
+                    $('#resultat_pied > div > div:nth-child(3)').css('display','block');
+
+                    $('#total_bonne_reponse').text('');
+                    $('#total_point_2').text('');
+
+                    break;
+            }
+        }
         function autorisationDePreExercice() {
             let autorisation = 'pre_exercice_non_permis';
 
@@ -1402,6 +1468,7 @@ console.log(totalDAppui());
 
                     $('#pre_correction_btn').click(function() {
                         if(questions_posees.length === pre_questions.length) {
+                            formatParDefautDuResultat();
                             chargerResultat(pre_exercice_memoire);
                             afficherExerciceAlphabetResultat();
                             masquerExerciceAlphabetResultat();
@@ -1418,7 +1485,7 @@ console.log(totalDAppui());
                     }
                 }
                 function repriseDePreExercice() {
-                    $('#redirige_sur_alphabet_exercice').click(function() { $('#fermeture_pre_exercice').click(); }); 
+                    $('#redirige_sur_exercice_pre_alphabet').click(function() { $('#fermeture_pre_exercice').click(); }); 
                 }
                 function passageARevision() {}
             }

@@ -143,9 +143,8 @@
         padding: 0.5rem;
         background-color: #ccc;
     }
-    #redirige_sur_alphabet_exercice, #redirige_sur_alphabet_revision {
+    #redirige_sur_exercice_pre_alphabet, #redirige_sur_apprendre_pre_alphabet {
         color: cornflowerblue;
-        text-decoration: underline;
         cursor: pointer;
     }
 

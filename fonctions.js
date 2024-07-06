@@ -118,6 +118,7 @@
         
         let nom = JSON.parse(sessionStorage.getItem('nom'));
         let prenom = JSON.parse(sessionStorage.getItem('prenom'));
+        let lesson_en_cours = $('.notification_titre').html();
 
         chargerResultatHead();
         chargerResultatBody();
@@ -133,7 +134,7 @@
             let heure = d.getHours();
             let minute = d.getMinutes();
 
-            $('#apprentissage #resultat_titre').text('ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ ߞߐߝߟߌ');
+            $('#apprentissage #resultat_titre').text(lesson_en_cours+' ߞߐߝߟߌ');
             $('#apprentissage #etudiant').text(prenom+' '+nom);
             $('#apprentissage #resultat_date').text(jours[jour-1]+' '+mois[lune]+' ߕߟߋ߬ '+parseIntNko(date)+' ߛߊ߲߭ '+parseIntNko(an));
             $('#apprentissage #resultat_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
@@ -180,11 +181,12 @@
         }
         function chargerResultatFoot() {
 
+            let lesson_suivante = lessonSuivante();
             let total_question = memoire.length;
             let total_bonne_reponse = totalPoint();
             let total_fausse_reponse = total_question - total_bonne_reponse;
-            let reprendre_pre_apprentissage = '<b id="redirige_sur_apprendre_pre_alphabet">ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߞߍ߫ ߕߎ߲߯</b>';
-            let continu_sur_pre_exercice = '<b id="redirige_sur_exercice_pre_alphabet">ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫</b>';
+            let reprendre_l_etape_en_cours = '<b id="reprendre">'+lesson_en_cours+' ߞߍ߫ ߕߎ߲߯</b>';
+            let continu_sur_l_etape_suivante = '<b id="avance">'+lesson_suivante+' ߞߍ߫</b>';
 
             $('#apprentissage #total_question_2').text(parseIntNko(total_question));
             $('#apprentissage #total_bonne_reponse').text(parseIntNko(total_bonne_reponse));
@@ -193,13 +195,13 @@
             $('#apprentissage #pourcentage_point').text('%'+parseIntNko(Math.floor(total_bonne_reponse*100/total_question)));
 
             if(total_bonne_reponse < 1) {
-                $('#apprentissage #deliberation').html('ߌ ߖߌߖߊ߬ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߓߍ߬ߙߍ ߡߊ߫ ߤߊߟߌ߬ ߁߈ ߓߐ߫. ߏ߬ߘߐ߬߸ ߌ ߞߐߛߍ߬ߦߌ߬ ߦߊ߲߬ ߡߊ߫.'+reprendre_pre_apprentissage);
+                $('#apprentissage #deliberation').html('ߌ ߖߌߖߊ߬ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߓߍ߬ߙߍ ߡߊ߫ ߤߊߟߌ߬ ߁߈ ߓߐ߫. ߏ߬ߘߐ߬߸ ߌ ߞߐߛߍ߬ߦߌ߬ ߦߊ߲߬ ߡߊ߫.'+reprendre_l_etape_en_cours);
             }else{
                 $('#apprentissage #deliberation').html(
                     'ߌ ߞߎߟߎ߲ߖߋ߫ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ ߘߐ߬ߖߊ ߟߊ߫ ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߟߐ߲ ߠߊ߫ ߤߊ߲߯ '+$('#apprentissage #pourcentage_point').text()+
                     '</b> ߟߊ߫. ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫.<br/>'+
-                    'ߣߴߌ ߟߊ߫ ߓߍ߬ߙߍ ߡߴߌ ߥߛߊ߬߸ '+reprendre_pre_apprentissage+'<br/>'+
-                    'ߣߴߌ ߟߊ߫ ߓߍ߬ߙߍ ߞߵߌ ߥߛߊ߬߸ '+continu_sur_pre_exercice
+                    'ߣߴߌ ߟߊ߫ ߓߍ߬ߙߍ ߡߴߌ ߥߛߊ߬߸ '+reprendre_l_etape_en_cours+'<br/>'+
+                    'ߣߴߌ ߟߊ߫ ߓߍ߬ߙߍ ߞߵߌ ߥߛߊ߬߸ '+continu_sur_l_etape_suivante
                 );
             }
         }
@@ -207,6 +209,15 @@
             let html = 0;
             for(let i=0; i<memoire.length; i++) { html += memoire[i][2]; }
             return html;
+        }
+        function lessonSuivante() {
+            let ls = '';
+            switch(lesson_en_cours) {
+                case 'ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ' : ls = 'ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ'; break;
+                case 'ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ' : ls = 'ߛߓߍߛߎ߲ ߣߐ߰ߡߊ߬ߛߍߦߌ'; break;
+                case 'ߛߓߍߛߎ߲ ߣߐ߰ߡߊ߬ߛߍߦߌ' : ls = 'ߛߓߍߛߎ߲ ߞߘߐߓߐߟߌ'; break;
+            }
+            return ls;
         }
     }
     function clearStorage() {

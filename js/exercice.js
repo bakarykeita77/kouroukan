@@ -262,7 +262,7 @@ function exercices() {
                         }
                     }
                     function repriseDeExercice() {
-                        $('#redirige_sur_exercice_pre_alphabet').click(function() {
+                        $('#avance').click(function() {
                         
                             initialiserExerciceDialogueBtn();
                             goUp($('#exercice .resultat_container'));

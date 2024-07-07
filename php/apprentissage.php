@@ -70,7 +70,7 @@
 
         <div id="pre_exercice_cover">
             <div id="pre_exercice">
-                <span id="fermeture_pre_exercice">&times;</span>
+                <span class="fermeture_pre">&times;</span>
                 <div id="pre_exercice_container">
                         
                     <div id="pre_exercice_body"></div>

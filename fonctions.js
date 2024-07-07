@@ -119,7 +119,6 @@
         let nom = JSON.parse(sessionStorage.getItem('nom'));
         let prenom = JSON.parse(sessionStorage.getItem('prenom'));
         let lesson_en_cours = $('.notification_titre').html();
-
         chargerResultatHead();
         chargerResultatBody();
         chargerResultatFoot();
@@ -134,9 +133,10 @@
             let heure = d.getHours();
             let minute = d.getMinutes();
 
+
             $('#apprentissage #resultat_titre').text(lesson_en_cours+' ߞߐߝߟߌ');
             $('#apprentissage #etudiant').text(prenom+' '+nom);
-            $('#apprentissage #resultat_date').text(jours[jour-1]+' '+mois[lune]+' ߕߟߋ߬ '+parseIntNko(date)+' ߛߊ߲߭ '+parseIntNko(an));
+            $('#apprentissage #resultat_date').text(jours[jour]+' '+mois[lune]+' ߕߟߋ߬ '+parseIntNko(date)+' ߛߊ߲߭ '+parseIntNko(an));
             $('#apprentissage #resultat_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
         }
         function chargerResultatBody() {
@@ -182,11 +182,12 @@
         function chargerResultatFoot() {
 
             let lesson_suivante = lessonSuivante();
+            if(lesson_suivante == 'ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߥߴߊ߬ ߡߊ߬') { $('.notification_titre').html('ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ'); }
             let total_question = memoire.length;
             let total_bonne_reponse = totalPoint();
             let total_fausse_reponse = total_question - total_bonne_reponse;
             let reprendre_l_etape_en_cours = '<b id="reprendre">'+lesson_en_cours+' ߞߍ߫ ߕߎ߲߯</b>';
-            let continu_sur_l_etape_suivante = '<b id="avance">'+lesson_suivante+' ߞߍ߫</b>';
+            let continu_sur_l_etape_suivante = '<b id="avance">'+lesson_suivante+'</b>';
 
             $('#apprentissage #total_question_2').text(parseIntNko(total_question));
             $('#apprentissage #total_bonne_reponse').text(parseIntNko(total_bonne_reponse));
@@ -213,9 +214,9 @@
         function lessonSuivante() {
             let ls = '';
             switch(lesson_en_cours) {
-                case 'ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ' : ls = 'ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ'; break;
-                case 'ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ' : ls = 'ߛߓߍߛߎ߲ ߣߐ߰ߡߊ߬ߛߍߦߌ'; break;
-                case 'ߛߓߍߛߎ߲ ߣߐ߰ߡߊ߬ߛߍߦߌ' : ls = 'ߛߓߍߛߎ߲ ߞߘߐߓߐߟߌ'; break;
+                case 'ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ' : ls = 'ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫'; break;
+                case 'ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ' : ls = 'ߛߓߍߛߎ߲ ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫'; break;
+                case 'ߛߓߍߛߎ߲ ߣߐ߰ߡߊ߬ߛߍߦߌ' : ls = 'ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߥߴߊ߬ ߡߊ߬'; break;
             }
             return ls;
         }
@@ -294,7 +295,7 @@
         });
 
         element.css('display','block');
-        setTimeout(() => { element.animate({'top':'1rem'}, 400); }, 200);
+        setTimeout(() => { element.animate({'top':'0.5rem'}, 400); }, 200);
     }
     function couleurDeFond(element,couleur)	{ element.css('backgroundColor', couleur); }
     function couleurDeFont(element,couleur)	{ element.css('color', couleur); }
@@ -372,7 +373,7 @@
 	    var i=0;
 	    return function(){ return i += 1; };
 	}
-    function indexer(element) { 
+    function montrer(element) { 
         let element_id = element.attr('id');
         
         setTimeout(function() { 

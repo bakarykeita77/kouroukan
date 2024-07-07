@@ -525,10 +525,11 @@ del {
 }
 .indicateur::before {
     position: absolute;
-    top: 120%;
+    margin: 0;
+    top: 100%;
     left: 50%;
     content: "➜";
-    font-size: 3rem;
+    font-size: 2rem;
     color: blue;
     transform: rotate(-120deg);  
     animation: indexation 5s 0s infinite;
@@ -943,13 +944,12 @@ del {
     border-radius: 0.5rem;
     overflow: hidden;
     background-color: #fff;
-    width: 96%;
+    width: calc(100% + 1rem);
     max-width: 50rem;
-    height: calc(100% - 3.25rem);
+    height: calc(100% - 0.75rem);
     left: 50%;
     transform: translateX(-50%);
     padding: 0.5rem;
-    margin: auto;
     box-sizing: border-box;
     box-shadow: 0 0 1rem #444;
     z-index: 1;
@@ -1084,21 +1084,21 @@ del {
 }
 @keyframes indexation {
 
-    0% { top: 120%; left: 50%; }
-    2% { top: 150%; left: 55%; }
-    4% { top: 120%; left: 50%; }
-    6% { top: 150%; left: 55%; }
-    8% { top: 120%; left: 50%; }
-    10% { top: 150%; left: 55%; }
-    12% { top: 120%; left: 50%; }
-    14% { top: 150%; left: 55%; }
-    16% { top: 120%; left: 50%; }
-    18% { top: 150%; left: 55%; }
-    20% { top: 120%; left: 50%; }
+    0% { top: 100%; left: 50%; }
+    2% { top: 120%; left: 55%; }
+    4% { top: 100%; left: 50%; }
+    6% { top: 120%; left: 55%; }
+    8% { top: 100%; left: 50%; }
+    10% { top: 120%; left: 55%; }
+    12% { top: 100%; left: 50%; }
+    14% { top: 120%; left: 55%; }
+    16% { top: 100%; left: 50%; }
+    18% { top: 120%; left: 55%; }
+    20% { top: 100%; left: 50%; }
     22% { top: 120%; left: 50%; }
-    24% { top: 120%; left: 50%; }
-    
+    24% { top: 100%; left: 50%; }
     100% { top: 120%; left: 50%; }
+    100% { top: 100%; left: 50%; }
 }
 @keyframes descendre_doucement {
     from { line-height: 16px; opacity: 0; font-size: 0; }

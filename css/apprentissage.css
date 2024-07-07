@@ -265,7 +265,7 @@
     top: 7.5rem;
     box-shadow: 0 0 1rem #666;
     height: calc(100% - 12.5rem);
-    width: 90%;
+    width: 100%;
     max-width: 40rem;
     margin: auto;
     padding-top: 2rem;
@@ -273,7 +273,7 @@
     border-radius: 0.5rem;
     opacity: 0;
 }
-#fermeture_pre_exercice {
+.fermeture_pre {
     position: absolute;
     top: 0;
     left: 0;
@@ -287,7 +287,7 @@
     cursor: pointer;
     z-index: 1;
 }
-#fermeture_pre_exercice:hover {
+.fermeture_pre:hover {
     background-color: #bbb;
     font-weight: bold;
 }

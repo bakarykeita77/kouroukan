@@ -373,7 +373,7 @@
 	    var i=0;
 	    return function(){ return i += 1; };
 	}
-    function montrer(element) { 
+    function indexer(element) { 
         let element_id = element.attr('id');
         
         setTimeout(function() { 

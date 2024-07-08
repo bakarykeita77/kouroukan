@@ -329,7 +329,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     box-sizing: border-box;
     z-index: 0;
 }
-.course_foot { height: 2rem; background-color: #fff; }
+.course_foot { height: 2rem; background-color: #fff; border-radius: 0 0 0.5rem 0.5rem; }
 .course_head { height: 7rem; background-color: #fff; }
 .course_head div label {
     padding: 0 0.5rem;
@@ -352,7 +352,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 .dark_backgound { background-color: #aaa; }
 .dialogue_btn {
     position: relative;
-    bottom: 3.125rem;
+    bottom: 4.35rem;
     width: 90%;
     max-width: 40rem;
     height: 4rem;
@@ -900,7 +900,7 @@ del {
     position: absolute;
     display: none;
     left: 0;
-    top: 3px;
+    top: 1.35rem;
     margin: 0;
     height: 1rem;
     width: calc(100% - 2px);

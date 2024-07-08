@@ -52,7 +52,7 @@ function apprentissages() {
         let exercice_pre_questions = [];
         let revision_pre_questions = [];
         let ordre_de_question = '';
-        let total_questions = '';
+        let total_questions = 0;
         let questions_posees = [];
         let pre_question = '', pre_reponse = '';
         let point = 0;
@@ -85,6 +85,7 @@ function apprentissages() {
             case 3 : preTon(); break;
             case 4 : preChiffre(); break;
         }
+        raffraichissementDeLaPage();
 
         $('#apprentissage_dialogue_btn').css({'display':'none', 'opacity':'0'}); 
         $('#pre_apprentissage_dialogue_btn').css('display','block');
@@ -421,7 +422,7 @@ function apprentissages() {
 
                                 if(n == 7) { 
                                     afficherPreExerciceBtn();
-                                    indexer($('#pre_exercice_bouton'));
+                                    montrer($('#pre_exercice_bouton'));
                                 }
                                 
                                 $('.cercle, #pre_revision_btn').click(()=>{ 
@@ -557,7 +558,7 @@ function apprentissages() {
     
     
                     function preExerciceEnteteStyle() {
-                        // $('#pre_revision_bouton').removeClass('exercice_en_cours');
+                        $('#pre_revision_bouton').removeClass('exercice_en_cours');
                         carre_actif.addClass('exercice_en_cours');
                     }
                 });
@@ -575,8 +576,8 @@ function apprentissages() {
                     initialiserLeResultat();
                     exercice_btn_index = $(this).index();
                     exercice_btn_id = $(this).attr('id');
-                    melange_des_lettres_actives = malaxer(lettres_pre_apprises);
-                    exercice_pre_questions = malaxer(melange_des_lettres_actives);
+                    melange_des_lettres_pre_apprises = malaxer(lettres_pre_apprises);
+                    exercice_pre_questions = malaxer(melange_des_lettres_pre_apprises);
                                 
 
                     preRevisionEnteteStyle();
@@ -915,12 +916,7 @@ function apprentissages() {
             function assistantPreChiffre() {}
             function finDePreChiffre() {}
         }
-     /*-------------------------------------------------------------------------------------------------------------------*/ 
-  
-        preRevision();
-        raffraichissementDeLaPage();
 
-        
         function indice() {
             let n = 0;
 
@@ -963,29 +959,6 @@ function apprentissages() {
 
             return autorisation;
         }
-        function preRevision() {
-            $('#pre_revision_bouton').click(function() { 
-                
-                let carre_actif = $(this);
-                lesson_active = 'pre_revision';
-
-                zoomDown($('.dialogue_btn'));
-                initialiserLeResultat();
-                exercice_btn_index = $(this).index();
-                exercice_btn_id = $(this).attr('id');
-                melange_des_lettres_pre_apprises = malaxer(lettres_pre_apprises);
-                revision_pre_questions = melange_des_lettres_pre_apprises;
-                revision_pre_questions = malaxer(revision_pre_questions);
-
-                preRevisionEnteteStyle();
-                exercice();
-
-                function preRevisionEnteteStyle() {
-                    $('#pre_revision_bouton').removeClass('exercice_en_cours');
-                    carre_actif.addClass('exercice_en_cours');
-                }
-            }); 
-        }
         function exercice(){
 
             chargerPreExerciceAlphabet();
@@ -1021,8 +994,7 @@ function apprentissages() {
                              chargerCorpsDePreExerciceChiffres();
                              break;
                 }
-
-                
+              
                 function chargerEnteteDePreExerciceAlphabet() {
                     if(exercice_btn_index == 0) {
                         $('.notification_titre').html('ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ');
@@ -1033,6 +1005,8 @@ function apprentissages() {
                 }
                 function chargerPiedDePreExerciceAlphabet() {
 
+                    total_questions = parseIntNko(exercice_pre_questions.length);
+                    
                     var pre_exercice_foot_html = '\
                         <div id="pre_foot_btns_container"> \
                             <div id="pre_exercice_foot_btns"> \
@@ -1043,8 +1017,6 @@ function apprentissages() {
                         </div> \
                     ';
 
-                    total_questions = parseIntNko(exercice_pre_questions.length);
-                    
                     $('#pre_exercice_foot').html(pre_exercice_foot_html);
                 }
                 function chargerCorpsDePreExerciceAlphabet() {
@@ -1134,6 +1106,8 @@ function apprentissages() {
                         });
 
                         $('#pre_exercice_body td').click(function() {
+                        
+                            if(pre_question === '') { return; }
                             $('#pre_question_btn').css('display','none');
                             $('#repeter_pre_question_btn').css('display','none');
                             setTimeout(() => { 
@@ -1943,132 +1917,6 @@ function apprentissages() {
             function progressBarrApprentissageChiffre() {}
             function stockerApprentissageChiffre() {}
             function assistantApprentissageChiffre() {}
-        }
-    }
-
-    function apprendre() {
-
-
-        function assistantsAlphabet() {
-            
-            let note_1_affiche = 'off';
-            let note_2_affiche = 'off';
-            let note_3_affiche = 'off';
-            let note_4_affiche = 'off';
-                    
-            notificationDApprentissage1();
-
-            $('.parametres_container #submit_btn').on('click', function() { notificationDApprentissage1(); });
-            $('.parametres_container').on('mouseleave', function(){ notificationDApprentissage1(); });
-
-            $(".media_label").on('mouseenter', function() { notificationDApprentissage3(); });
-
-            $(".media_btns .btn:nth-child(1)").on('click', function() { notificationDApprentissage2(); });
-            $(".media_btns .btn:nth-child(2)").on('click', function() { notificationDApprentissage1(); note_2_affiche = 'off'; });
-            $(".media_btns").on('mouseleave', function() { notificationDApprentissage1(); });
-
-            $('#parametre_lesson_btn').on('mouseenter', function() { notificationDApprentissage4(); });
-            
-
-
-            function notificationDApprentissage1() {
-                if(note_1_affiche == 'on') return;
-                if(note_2_affiche == 'on') return;
-
-                ecrire('notification_corps','\
-                    <h3>'+liste_de_matieres[0][1]+' ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ</h3>\
-                    <p>ߛߓߍߘߋ߲ ߠߎ߬ ߓߍ߯ ߘߌ߲߯ ߞߋߟߋ߲߫ ߞߋߟߋ߲߫߸ ߦߴߌ ߕߟߏߡߊߟߐ߬ ߊ߬ ߣߴߌ ߦߴߌ ߖߊ߲߬ߕߏ߬ ߊ߬ߟߎ߬ ߝߐߢߊ ߘߐ߫ ߞߏߛߓߍ߫߹<br>\
-                    ߌ ߣߊ߬ߕߐ߫ ߟߋ߬ ߢߌ߬ߣߌ߲߬ߞߊ߬ ߟߴߊ߬ߟߎ߬ ߓߍ߯ ߡߊ߬.</p>\
-                ');
-                
-                note_1_affiche = 'on';
-                note_2_affiche = 'off';
-                note_3_affiche = 'off';
-                note_4_affiche = 'off';
-            }
-            function notificationDApprentissage2() {
-                if(note_2_affiche == 'on') return;
-
-                ecrire('notification_corps','\
-                    <h3>'+liste_de_matieres[0][1]+' ߟߊ߬ߡߍ߲߬ߠߌ ߞߍ߫</h3>\
-                    <p>ߌ ߕߟߏߡߊߟߐ߬ ߛߓߍߘߋ߲ ߠߎ߬ ߓߍ߯ ߟߊ߫ ߞߋߟߋ߲߫ ߞߋߟߋ߲߫߸ ߊ߬ ߣߴߌ ߦߴߌ ߖߊ߲߬ߕߏ߬ ߊ߬ߟߎ߬ ߝߐߢߊ ߘߐ߫ ߞߏߛߓߍ߫<br>\
-                    ߌ ߣߊ߬ߕߐ߫ ߟߋ߬ ߢߌ߬ߣߌ߲߬ߞߊ߬ ߟߴߊ߬ߟߎ߬ ߓߍ߯ ߡߊ߬.</p>\
-                    <p> <b class="enrober">■</b> ߘߊߘߋ߰ߟߊ߲߬ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߝߐߟߌ ߟߊߟߐ߬.</p>\
-                ');
-                
-                note_1_affiche = 'off';
-                note_2_affiche = 'on';
-                note_3_affiche = 'off';
-                note_4_affiche = 'off';
-            }
-            function notificationDApprentissage3() {
-                if(note_3_affiche == 'on') return;
-                if(note_2_affiche == 'on') return;
-
-                ecrire('notification_corps','\
-                    <h3>ߝߊߟߊ߲ߞߏ</h3>\
-                    <p> <b class="enrober">◀</b> ߝߐߟߊ߲߫ ߞߘߎ ߘߌ߲߯߸ ߦߴߌ ߕߟߏߡߊߟߐ߬ ߛߓߍߘߋ߲ ߠߎ߬ ߝߐߢߊ ߟߊ߫ ߞߋߟߋ߲߫ ߞߋߟߋ߲߫.</p>\
-                    <p> <b class="enrober">■</b> ߘߊߘߋ߰ߟߊ߲߬ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߝߐߟߌ ߟߊߟߐ߬.</p>\
-                ');
-                
-                note_1_affiche = 'off';
-                note_2_affiche = 'off';
-                note_3_affiche = 'on';
-                note_4_affiche = 'off';
-            }
-            function notificationDApprentissage4() {
-                if(note_4_affiche == 'on') return;
-                if(note_2_affiche == 'on') return;
-
-                ecrire('notification_corps','\
-                    <h3>ߛߏ߯ߙߏߟߌ</h3>\
-                    <p>ߞߊ߬ ߥߟߊ߬ߓߊ ߛߓߍߘߋ߲ ߠߎ߬ ߛߏ߯ߙߏ߫ ߌ ߖߍ߬ߘߍ ߢߣߊߕߊ ߟߊ߫</p>\
-                    <p>ߞߊ߬ߞߘߐ߬߸ ߛߓߍߘߋ߲ ߠߎ߬ ߓߍ߯ ߞߐߞߘߎ ߘߐߞߍߣߍ߲߫ ߠߋ߬߸ ߞߵߊ߬ߟߎ߫ ߦߌ߬ߘߊ߬.<br>\
-                    ߞߐ߬ߣߌ߬ ߣߴߌ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߡߍ߲ ߠߎ߬ ߟߊߕߎߣߎ߲߫߸ ߦߴߏ߬ ߟߎ߬ ߞߐߞߘߎ ߘߐߞߊ߬<br>\
-                    ߣߴߌ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߡߍ߲ ߠߎ߬ ߦߌ߬ߘߊ߬߸ ߦߴߏ߬ ߟߎ߬ ߞߐߞߘߎ ߘߐߞߍ߫.</p>\
-                ');
-                
-                note_1_affiche = 'off';
-                note_2_affiche = 'off';
-                note_3_affiche = 'off';
-                note_4_affiche = 'on';
-            }
-        }
-        function afficherApprentissage() {
-            
-         /* Pour l'affichage des parametres voir parsmetres.js dans fonction affichageDeLessonParametres() */
-            afficherApprentissagesBtns();
-            // affichageDesBoutonsMedia();
-        
-            function affichageDesBoutonsMedia() {
-           
-                $('#pre_apprentissage_dialogue_btn').css('display','none');
-                $(".media_label").on('mouseover', function() { afficherMediaBoutons(); masquerParametreBoutons(); });
-                $(".media_btns").on('click', function() { masquerMediaBoutons(); });
-                $(".media_btns").on('mouseleave', function() { masquerMediaBoutons(); });
-                $(".media_btns .btn").on('mouseover', function() {
-                    $(".media_btns .btn").css('background-color','white');
-                    $(this).css('background-color','yellow');
-                });
-
-                function afficherMediaBoutons() { $(".media_btns").css({"display":"block", "transform":"scale(1)", "opacity":1}); }
-                function masquerMediaBoutons() {
-                    $(".media_btns").css({"tansform":"scale(0.75)", "opacity":0});
-                    setTimeout(() => { $(".media_btns").css({"display":"none"}); }, 250);
-                }
-                function masquerParametreBoutons() { 
-                    $(".parametres_container").css({"transform":"scale(0.75)", "opacity":0});
-                    setTimeout(() => { $(".parametres_container").css({"display":"none"}); }, 250);
-                }
-            }
-            function afficherApprentissagesBtns() {
-                $('#pre_apprentissage_dialogue_btn').css('display','none');
-                $('#apprentissage_dialogue_btn').css('display','block');
-        
-                zoomUp($('.dialogue_btn'));
-                $('#apprentissage_body').on('click', function(){ zoomUp($('.dialogue_btn')); });
-                $('.dialogue_btn').click('click', function(){ zoomDown($(this)); });
-            }
         }
     }
     function afficherLesson() {

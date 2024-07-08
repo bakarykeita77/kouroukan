@@ -444,13 +444,8 @@
 #pre_exercice_resultat h3 { position: absolute; width: 100%; }
 #table_syllabe_apprentissage td:hover {background-color: rgba(85,85,85);}
 #pre_foot { 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     padding: 0;
     margin: 0;
-    height: 2rem;
     border-radius: 0 0 0.5rem 0.5rem;
 }
 #apprentissage_dialogue_btn { 

@@ -725,6 +725,10 @@
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
 	
     
+    function secouer(element) { 
+        element.addClass('clignotant'); 
+        setTimeout(function() { element.removeClass('clignotant'); }, 1200);
+    }
     function selectionDeTr(tr) {
         tr.siblings().unwrap();
         $('#traducteur').remove();

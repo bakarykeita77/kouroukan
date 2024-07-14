@@ -466,7 +466,7 @@ function apprentissages() {
                                                     $('#table_head tr:nth-child(2) td').text('ߛߓߍߘߋ߲');
                                                     $('#table_head tr:nth-child(3) td').text('ߘߌ߯ߟߌ');
 
-                                                    $.each($('#table_body tr:nth-child(3) td, #table_body tr:nth-child(4) td'), function() {
+                                                    $.each($('#table_body tr:nth-child(3) td'), function() {
                                                         $(this).html(parseIntNko($(this).html()));
                                                     });
 
@@ -544,8 +544,6 @@ function apprentissages() {
                     zoomDown($('.dialogue_btn'));
                     initialiserLeResultat();
                     exercice_btn_id = $(this).attr('id');
-console.log('les_lettres_actives_length = '+les_lettres_actives.length);
-console.log('les_lettres_actives = '+les_lettres_actives);
                     exercice_pre_questions = malaxer(malaxer(les_lettres_actives));
     
                     preExerciceEnteteStyle();
@@ -568,8 +566,6 @@ console.log('les_lettres_actives = '+les_lettres_actives);
                     zoomDown($('.dialogue_btn'));
                     initialiserLeResultat();
                     exercice_btn_id = $(this).attr('id');
-console.log('lettres_pre_apprises_length = '+lettres_pre_apprises.length);
-console.log('lettres_pre_apprises = '+lettres_pre_apprises);
                     revision_pre_questions = malaxer(malaxer(lettres_pre_apprises));
 
                     preRevisionEnteteStyle();
@@ -1272,9 +1268,6 @@ console.log('lettres_pre_apprises = '+lettres_pre_apprises);
                         taux_de_fausse_reponse = Math.ceil((n_m_r/n_q)*100);
                         if(lesson_active == 'pre_exercice') { taux_de_vraie_reponse_1 =  100 - taux_de_fausse_reponse; }
                         if(lesson_active == 'pre_revision') { taux_de_vraie_reponse_2 =  100 - taux_de_fausse_reponse; }
-
-                        taux = (lesson_active == 'pre_exercice') ? taux_de_vraie_reponse_1 : taux_de_vraie_reponse_2;
-
                     }
                 });
             }
@@ -1436,8 +1429,21 @@ console.log('lettres_pre_apprises = '+lettres_pre_apprises);
 
                 fermerPreExercice();
                 preExerciceResultat();
-
-
+                
+                $('#pre_correction_btn').click(function() {
+                    if(questions_posees.length === total_questions) {
+                        if(lesson_active == 'pre_exercice') {
+                            if(taux_de_vraie_reponse_1 < 100) { reprendreExercicePreAlphabet(); }
+                            if(taux_de_vraie_reponse_1 == 100) { continuSurRevisionPreAlphabet(); }
+                        }
+                        if(lesson_active == 'pre_revision') {
+                            if(taux_de_vraie_reponse_2 < 92) { reprendreRevisionPreAlphabet(); }
+                            if(taux_de_vraie_reponse_2 >= 92) { continuSurApprendrePreAlphabet(); }
+                        }
+                    }
+                });
+                
+                
                 function fermerPreExercice() {
                     $('#apprentissage .fermeture_pre').one('click',function(){    
 
@@ -1502,8 +1508,6 @@ console.log('lettres_pre_apprises = '+lettres_pre_apprises);
                             chargerResultat(pre_exercice_memoire);
                             afficherExerciceAlphabetResultat();
                             masquerExerciceAlphabetResultat();
-                            reprendreExercicePreAlphabet();
-                            continuSurRevisionPreAlphabet();
 
 
                             function afficherExerciceAlphabetResultat() {
@@ -1514,31 +1518,37 @@ console.log('lettres_pre_apprises = '+lettres_pre_apprises);
                                     goUp($('#apprentissage .resultat_container'));
                                 });
                             }
-                            function reprendreExercicePreAlphabet() {
-                                $('#reprendre').click(function() {
-                                    goUp($('#apprentissage .resultat_container'));
-                                    setTimeout(() => { $('#pre_exercice_bouton').click(); }, 400);
-                                });
-                            }
-                            function continuSurRevisionPreAlphabet() {
-                                $('#avance').click(function() {
-                                    
-                                    cercle_index++;                           
-                          
-                                    if(lesson_active == 'pre_exercice') {
-                                        goUp($('#apprentissage .resultat_container'));
-                                        setTimeout(() => { $('#pre_revision_bouton').click(); }, 400);
-                                    }
-                                    if(lesson_active == 'pre_revision') {
-                                        $('#fermeture_pre_revision').click();
-                                        setTimeout(() => { 
-                                            $('#cercles_des_partis_cadre span:nth-child('+cercle_index+')').click(); 
-                                        }, 400);
-                                        setTimeout(() => { goUp($('#apprentissage .resultat_container')); }, 500);
-                                    }
-                                }); 
-                            }
                         }
+                    });
+                }
+                function reprendreExercicePreAlphabet() {
+                    $('#reprendre').click(function() {
+                        goUp($('#apprentissage .resultat_container'));
+                        setTimeout(() => { $('#pre_exercice_bouton').click(); }, 400);
+                    });
+                }
+                function continuSurRevisionPreAlphabet() {
+                    $('#avance').click(function() {
+                        
+                        cercle_index++;                           
+              
+                        if(lesson_active == 'pre_exercice') {
+                            goUp($('#apprentissage .resultat_container'));
+                            setTimeout(() => { $('#pre_revision_bouton').click(); }, 400);
+                        }
+                    }); 
+                }
+                function reprendreRevisionPreAlphabet() {}
+                function continuSurApprendrePreAlphabet() {
+                    $('#avance').click(function() {
+                        
+                        cercle_index++;       
+            
+                        $('#fermeture_pre_revision').click();
+                        setTimeout(() => { 
+                            $('#cercles_des_partis_cadre span:nth-child('+cercle_index+')').click(); 
+                        }, 400);
+                        setTimeout(() => { goUp($('#apprentissage .resultat_container')); }, 500);
                     });
                 }
             }
@@ -1550,7 +1560,6 @@ console.log('lettres_pre_apprises = '+lettres_pre_apprises);
             nbr_bonne_reponse = 0;
             nbr_mauvaise_reponse = 0;
             taux_de_fausse_reponse = 0;
-            taux = 0;
             taux_de_vraie_reponse_1 = 0;
             taux_de_vraie_reponse_2 = 0;
             point_total = 0;

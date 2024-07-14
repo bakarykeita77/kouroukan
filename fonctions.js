@@ -172,7 +172,7 @@
 
                 html +=  '<tr>';
                 for(let m=0; m<memoire.length; m++) {
-                    html += '<td>'+memoire[m][2]+'</td>';
+                    html += '<td>'+parseIntNko(memoire[m][2])+'</td>';
                 }
                 html +=  '</tr>';
 
@@ -186,6 +186,8 @@
             let total_question = memoire.length;
             let total_bonne_reponse = totalPoint();
             let total_fausse_reponse = total_question - total_bonne_reponse;
+            let taux_de_vraie_reponse = Math.floor(total_bonne_reponse*100/total_question);
+            let taux_acceptable_de_vraie_reponse = (lesson_active = 'pre_exercice') ? 100 : 92;
             let reprendre_l_etape_en_cours = '<b id="reprendre">'+lesson_en_cours+' ߞߍ߫ ߕߎ߲߯</b>';
             let continu_sur_l_etape_suivante = '<b id="avance">'+lesson_suivante+'</b>';
 
@@ -193,14 +195,14 @@
             $('#apprentissage #total_bonne_reponse').text(parseIntNko(total_bonne_reponse));
             $('#apprentissage #total_fausse_reponse').text(parseIntNko(total_fausse_reponse));
             $('#apprentissage #total_point_2').text(parseIntNko(total_bonne_reponse));
-            $('#apprentissage #pourcentage_point').text('%'+parseIntNko(Math.floor(total_bonne_reponse*100/total_question)));
+            $('#apprentissage #pourcentage_point').text('%'+parseIntNko(taux_de_vraie_reponse));
 
-            if(total_bonne_reponse < 1) {
-                $('#apprentissage #deliberation').html('ߌ ߖߌߖߊ߬ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߓߍ߬ߙߍ ߡߊ߫ ߤߊߟߌ߬ ߁߈ ߓߐ߫. ߏ߬ߘߐ߬߸ ߌ ߞߐߛߍ߬ߦߌ߬ ߦߊ߲߬ ߡߊ߫.'+reprendre_l_etape_en_cours);
+            if(taux_de_vraie_reponse < taux_acceptable_de_vraie_reponse) {
+                $('#apprentissage #deliberation').html('ߌ ߖߌߖߊ߬ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ '+lesson_en_cours+' ߓߍ߬ߙߍ ߡߊ߫ ߤߊߟߌ߬ ߁߈ ߓߐ߫. ߏ߬ߘߐ߬߸ ߌ ߞߐߛߍ߬ߦߌ߬ ߦߊ߲߬ ߡߊ߫.'+reprendre_l_etape_en_cours);
             }else{
                 $('#apprentissage #deliberation').html(
-                    'ߌ ߞߎߟߎ߲ߖߋ߫ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ ߘߐ߬ߖߊ ߟߊ߫ ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߟߐ߲ ߠߊ߫ ߤߊ߲߯ '+$('#apprentissage #pourcentage_point').text()+
-                    '</b> ߟߊ߫. ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫.<br/>'+
+                    'ߌ ߞߎߟߎ߲ߖߋ߫ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ ߘߐ߬ߖߊ ߟߊ߫ '+lesson_en_cours+' ߟߐ߲ ߠߊ߫ ߤߊ߲߯ '+$('#apprentissage #pourcentage_point').text()+
+                    '</b> ߟߊ߫. ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ '+lesson_suivante+'.<br/>'+
                     'ߣߴߌ ߟߊ߫ ߓߍ߬ߙߍ ߡߴߌ ߥߛߊ߬߸ '+reprendre_l_etape_en_cours+'<br/>'+
                     'ߣߴߌ ߟߊ߫ ߓߍ߬ߙߍ ߞߵߌ ߥߛߊ߬߸ '+continu_sur_l_etape_suivante
                 );
@@ -287,15 +289,15 @@
             'position':'absolute',
             'display':'block',
             'top':0,
+            'left':0,
             'height':'100%',
-            'width':'98%',
-            'margin':'auto',
+            'width':'100%',
             'over-flow':'hidden',
             'z-index': 1
         });
 
         element.css('display','block');
-        setTimeout(() => { element.animate({'top':'0.5rem'}, 400); }, 200);
+        setTimeout(() => { element.animate({'top':0}, 400); }, 200);
     }
     function couleurDeFond(element,couleur)	{ element.css('backgroundColor', couleur); }
     function couleurDeFont(element,couleur)	{ element.css('color', couleur); }

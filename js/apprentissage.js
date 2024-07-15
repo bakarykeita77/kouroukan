@@ -63,10 +63,13 @@ function apprentissages() {
         let taux_de_vraie_reponse_1 = 0;
         let taux_de_vraie_reponse_2 = 0;
         let point_total = 0;
+
+        let total_lettres_apprises = [];
+        let total_lettres_exercees = [];
     
         let pre_apprentissage_memo = [];
         let pre_apprentissage_clicks_memo = [];
-        let quantite_normale_de_click = 1;
+        let quantite_normale_de_click = 5;
 
         let panneau_status = "masque";
         let consonnes_choisies = [];
@@ -384,7 +387,22 @@ function apprentissages() {
                         
                     });
                 }
-                function stockerPreApprendreAlphabet() {}
+                function stockerPreApprendreAlphabet() {
+                    $.each($('.pre_apprentissage_td'), function() {
+                        $(this).click(function() {
+                            if(lesson_active == 'pre_apprentissage') {        
+                                if(pre_apprentissage_clicks_memo.length === les_lettres_actives.length) {
+
+                                    total_lettres_apprises = total_lettres_apprises.concat(pre_apprentissage_clicks_memo);
+                                    if(total_lettres_apprises.length == 27) { 
+                                        sendLessonDataToDB('alphabet_apprentissage',total_lettres_apprises);
+                                        console.log('Lesson de pre_apprentissage envoyée à la base de donnée.');
+                                    }
+                                } 
+                            } 
+                        });
+                    });
+                }
                 function assistantPreApprendreAlphabet() {
                     
                     ecrire('notification_corps','ߞߏ߰ߙߌ߬ ߝߟߐߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬');
@@ -1321,38 +1339,22 @@ function apprentissages() {
                 total_questions = pre_questions.length;
 
                 $('#pre_correction_btn').click(function() { 
-                    if(questions_posees.length == total_questions) { 
-                        if(lesson_active == 'pre_revision') {       
-
-                            if(pre_exercice_memoire.length === 27) {
-                                sendPreApprentissageToDB();
-                                console.log('Lesson envoyée à la base de donnée.');
+                    if(lesson_active == 'pre_exercice') {       
+                        if(pre_exercice_memoire.length === total_questions) {
+                            total_lettres_exercees = total_lettres_exercees.concat(pre_exercice_memoire);
+                            if(total_lettres_exercees.length == 27) { 
+                                sendLessonDataToDB('alphabet_exercice',total_lettres_exercees);
+                                console.log('Lesson de pre_exercice envoyée à la base de donnée.');
                             }
-
-                            function sendPreApprentissageToDB() {
-                                var matiere = JSON.parse(sessionStorage.getItem('matiere_active')); // Voir programmes.js fonction storagesDuProgramme()
-                                var phase   = 'alphabet_apprentissage';
-                                var lesson  = pre_exercice_memoire;
-                                var note = 20;
-                            
-                                const apprentissage_data = new URLSearchParams({
-                                    id     : id,
-                                    matiere: matiere,
-                                    niveau : niveau_actif,
-                                    phase  : phase,
-                                    lesson : lesson,
-                                    note   : note
-                                }); 
-
-                                fetch("/kouroukan/php/actions.php", {
-                                    method: "POST",
-                                    body: apprentissage_data
-                                })
-                                .then(response => response.text())
-                                .catch(error => console.log(error));  
-                            }
-                        }
+                        } 
                     }
+
+                    if(lesson_active == 'pre_revision') {       
+                        if(pre_exercice_memoire.length === 27) {
+                            sendLessonDataToDB('alphabet_evaluation',pre_exercice_memoire);
+                            console.log('Lesson de pre_revision envoyée à la base de donnée.');
+                        } 
+                    } 
                 });
             }
             function assistantPreExerciceAlphabet() {

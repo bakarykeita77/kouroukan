@@ -290,12 +290,13 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 .course {    
     position: relative;
     background: #fff;
-    top: 4rem;
+    top: 3.5rem;
     width: calc(100vw - 1rem);
     max-width: 60rem;
     max-height: 45rem;
     margin: 0 auto;
     padding: 0.125rem;
+    border: 1px solid #aaa;
     border-radius: 0.5rem; 
     z-index: 0;
     overflow: auto;
@@ -324,12 +325,12 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     padding: 0;
     height: 100%;
     width: 100%;
-    background-color: rgba(0,0,0,0.6);
+    background-color: rgba(0,0,0,0);
     overflow: auto;
     box-sizing: border-box;
     z-index: 0;
 }
-.course_foot { height: 2rem; background-color: #fff; border-radius: 0 0 0.5rem 0.5rem; }
+.course_foot { height: 1.5rem; background-color: #fff; border-radius: 0 0 0.5rem 0.5rem; }
 .course_head { height: 7rem; background-color: #fff; }
 .course_head div label {
     padding: 0 0.5rem;
@@ -352,6 +353,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 .dark_backgound { background-color: #aaa; }
 .dialogue_btn {
     position: relative;
+    background-color: #fff;
     bottom: 4.35rem;
     width: 90%;
     max-width: 40rem;
@@ -361,7 +363,6 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     border-radius: var(--radiusMedium);
     font-weight: bold;
     transform: scale(0.9);
-    background-color: #fff;
     opacity: 0;
 }
 .dialogue_btn > div {
@@ -369,7 +370,6 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     height: 4rem;
     line-height: 4rem;
     text-align: center;
-    background-color: #fff;
     border-radius: 0.5rem;
 }
 del {
@@ -900,7 +900,7 @@ del {
     position: absolute;
     display: none;
     left: 0;
-    top: 1.35rem;
+    top: 0.5rem;
     margin: 0;
     height: 1rem;
     width: calc(100% - 2px);

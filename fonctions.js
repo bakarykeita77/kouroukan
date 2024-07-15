@@ -329,6 +329,7 @@
 
         $('.dialogue_btn > div:nth-child(1)').css('display','block');
         $('.dialogue_btn > div:nth-child(2)').css('display','none');
+  
         zoomUp($('#exercice_dialogue_btn'));
         
         $('.dialogue_btn > div:nth-child(1)').click(function(){
@@ -736,12 +737,58 @@
         $('#traducteur').remove();
         tr.wrap('<div id="tr_actif"></div>');
     }
+    function sendLessonDataToDB(lesson_phase,lesson_data) {
+
+        var id = JSON.parse(sessionStorage.getItem('id'));
+        var matiere = JSON.parse(sessionStorage.getItem('matiere_active')); // Voir programmes.js fonction storagesDuProgramme()
+        var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));
+        var phase   = lesson_phase;
+        var lesson  = JSON.stringify(lesson_data);
+        var note = totalPoint(lesson_data);
+    
+        const data_to_send = new URLSearchParams({
+            id     : id,
+            matiere: matiere,
+            niveau : niveau_actif,
+            phase  : phase,
+            lesson : lesson,
+            note   : note
+        }); 
+
+        fetch("/kouroukan/php/actions.php", {
+            method: "POST",
+            body: data_to_send
+        })
+        .then(response => response.text())
+        .catch(error => console.log(error));  
+    }
 	function softDisplay() {
 	    var element = $('.soft_display');
 	    var elements_secondaires = element.children();
 	    
 	   // alert( elements_secondaires ); 
 	}
+
+/*-------------------------------------------------------------------------------------------------------------------------------------*/
+
+    function triDuTableauParOrdreAlphabetique(table) {
+        let elements_tries = [];
+
+            table.forEach(function(element) {
+                if(alphabet_nko[0][i] = element[0]) {
+                    elements_tries.push(element);
+                }
+            });
+
+        return elements_tries;
+    }
+    function totalPoint(data) {
+        let tp = 0;
+        for(let i=0; i<data.length; i++) {
+            tp += data[i][2];
+        }
+        return  Math.floor(tp*100/data.length);
+    }
 
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/

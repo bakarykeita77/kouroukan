@@ -55,6 +55,8 @@
                             </div>
                         </div>
 
+                        <div class="lesson_suivante" id="redirige_sur_exercice">ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫</div>
+
                     </div>
                 </div>
                 

@@ -42,9 +42,9 @@
                 let td = $(this);
                 let td_index = $(this).index();
 
-                setTimeout(() => { td.css({'transform':'scale(1)', 'opacity':1}); }, 60*td_index);
+                setTimeout(() => { td.css({'transform':'scale(1)', 'opacity':1}); }, 120*td_index);
             });
-        }, 10);
+        }, 200);
     }
     function affichageAnimeDesTr(tr) {
         $.each(tr, function(){

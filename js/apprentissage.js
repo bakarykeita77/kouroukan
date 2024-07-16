@@ -17,6 +17,8 @@ function apprentissages() {
     var nbr_td = td.length;
 
     var clicks_memo = [];
+    let nbr_raisonnable_de_click = 1;
+    let clicked_elements_quantity = 0;
   
 
  // Nota Beni: Le chargement de Apprentissage se fait dans parametres.js par la fonction parametrage()/chargerLesson().
@@ -1589,15 +1591,10 @@ function apprentissages() {
             case 3 : apprentissageTon(); break;
             case 4 : apprentissageChiffre(); break;
         }
-         
-        $('#pre_apprentissage_dialogue_btn').css('display','none'); 
-        $('#apprentissage_dialogue_btn').css({'display':'block', 'opacity':'1'}); 
 
 
         function apprentissageAlphabet() {
-
-            let nbr_raisonnable_de_click = 1;
-
+         
             chargerApprentissageAlphabet();
             afficherApprentissageAlphabet();
             apprendreAlphabetNko();
@@ -1622,7 +1619,16 @@ function apprentissages() {
                 afficherCorpsDeAlphabet();
                         
                 function afficherEnteteDeAlphabet() {}
-                function afficherFootDeAlphabet() {}
+                function afficherFootDeAlphabet() {
+                    
+                    zoomDown($('.dialogue_btn')); 
+
+                    $('#pre_apprentissage_dialogue_btn').css('display','none'); 
+                    $('.media').css({'display':'none', 'opacity':0});
+                    $('.parametre').css({'display':'none', 'opacity':0});
+                    $('.lesson_suivante').css({'display':'block', 'opacity':1});
+
+                }
                 function afficherCorpsDeAlphabet() {}
             }
             function apprendreAlphabetNko() {
@@ -1657,9 +1663,10 @@ function apprentissages() {
                     /*
                     --------------------------------------------------------------------------------------------------------
                         Initialisation de mémoire d'enregistrement qui est un tableau bidimentionnel.
-                        Il contient des petits tableaux de deux éléments chacun:
+                        Il contient des petits tableaux de trois éléments chacun:
                         - Le premier est le nom de l'élément clické;
                         - Le deuxième est le nombre de fois que cet élément est clické.
+                        - Le troisieme est le point pour cet element.
                         
                         L'initialisation consiste à donner la valeur 0 click à tous les éléments.
                         On considère qu'aucun élément n'est clické pour le moment. 
@@ -1689,23 +1696,17 @@ function apprentissages() {
                         /*A chaque élément correspond un tableau (new_click_value) de 3 composants dont l'élément cliqué, le nombre de click de
                         *cet élément et le point new_mark. Ce tableau est régulièrement actualisé à chaque click */ 
                             var new_click_value = [clicked_element,parseIntNko(element_click_counter),new_mark];  // Enregistrement elementaire.
-                            var non_clicked_elements = '';
                 
                         /*Actualisation de mémoire d'enregistrement
                             C'est à dire qu'après chaque click,les anciennes valeurs de chaque enregistrement elementaire sont remplacés par les nouvelles valeurs.                 */
                             
                             clicks_memo.splice(element_index,1,new_click_value);
-                            non_clicked_elements = nonClickedElementsTable();
-                            nbr_clicked_elements = td.length - non_clicked_elements.length;
+                            clicked_elements_quantity = clickedElementsQuantity();
 
-                            function nonClickedElementsTable(){
-                                var table_elements_non_cliques = [];
-
-                                $.each(clicks_memo, function(){
-                                    if($(this)[1]==0){ table_elements_non_cliques[table_elements_non_cliques.length] = $(this); }
-                                });
-                                
-                                return table_elements_non_cliques;
+                            function clickedElementsQuantity() {
+                                var qtity = [];
+                                $.each(clicks_memo, function(){ if($(this)[2]=='߁'){ qtity++; }});
+                                return qtity;
                             }
                         });   
                     });
@@ -1855,7 +1856,21 @@ function apprentissages() {
                     });
                 });
             }
-            function finDApprentissageAlphabet() {}
+            function finDApprentissageAlphabet() {
+                
+                td.click(() => {
+                        
+                    if(clicked_elements_quantity === clicks_memo.length) { zoomUp($('.dialogue_btn')); }
+                });
+                continuSurExerciceAlphabet();
+
+                function continuSurExerciceAlphabet() {
+                    $('#redirige_sur_exercice').click(function() {
+                        // $('#fermer_apprentissage').click();
+                        $('#alphabet_exercice').click();
+                    });
+                }
+            }
         }
         function apprentissageSyllabe() {
             

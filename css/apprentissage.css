@@ -44,6 +44,10 @@
     color: cornflowerblue;
     cursor: pointer;
 }
+#apprentissages_dialogue_btn {
+    box-shadow: 0 0 0.5rem #aaa;
+    bottom: 0;
+}
 #table_alphabet_apprentissage {
     height: 75%;
     max-height: 45rem;
@@ -79,7 +83,7 @@
 #pre_exercice_btns span { 
     margin: 0;
     padding: 0;
-    height: 4rem;
+    height: 3rem;
     width: 100%;
     border-radius: 0.5rem;
     left: 50%;
@@ -101,7 +105,7 @@
 #pre_exercice_resultat_container > div { display: inline-block; }
 #pre_exercice_resultat td { min-width: 1.5rem; height: 2rem; }
 .titre_de_parti, #cercles_des_partis, #carres_pour_exercices { position: relative; display: inline-block; }
-.titre_de_parti { height: 4rem; line-height: 4rem; }
+.titre_de_parti { height: 3rem; line-height: 3rem; }
 .titre_de_parti > div { display: inline-block; vertical-align: middle; }
 #table_pre_apprentissage {
     padding: 1rem;
@@ -195,7 +199,7 @@
 }
 #cercles_des_partis { 
     min-width: 4rem; 
-    height: 2rem; 
+    height: 3rem; 
 }
 #cercles_des_partis_cadre { position: relative; }
 #cercles_des_partis_cadre span:hover, #pre_revision_btn:hover {
@@ -262,9 +266,9 @@
 #pre_exercice {
     position: relative;
     background-color: #aaa;
-    top: 7.5rem;
+    top: 6.7rem;
     box-shadow: 0 0 1rem #666;
-    height: calc(100% - 12.5rem);
+    height: calc(100% - 12.9rem);
     width: 100%;
     max-width: 40rem;
     margin: auto;

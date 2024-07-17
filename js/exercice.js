@@ -43,14 +43,17 @@ function exercices() {
             // Voir fonctions chargerLesson() / chargementDeLesson() dans parametrageDeLesson.js
         }
         function afficheExerciceAlphabet() {
-            actualiserDialogueBtn();
 
-            $('.dialogue_btn > div:nth-child(1)').css('display','block');
-            $('.dialogue_btn > div:nth-child(2)').css('display','none');
-        
+            actualiserDialogueBtn();
+            initialiserProgressBar('exercice');
             zoomDown($('#exercice_dialogue_btn'));
+
+            $('.progress_bar').css({'display':'block', 'z-index':0});
+            $('#exercice_dialogue_btn').css({'display':'block', 'z-index':1, 'background-color':'transparent'});
+            $('#exercice_dialogue_btn > div:nth-child(1)').css('display','block');
+            $('#exercice_dialogue_btn > div:nth-child(2)').css('display','none');
+        
             setTimeout(() => { zoomUp($('#exercice_dialogue_btn')); }, 600);
-            setTimeout(() => { montrer($('#exercice_dialogue_btn')); }, 800);
 
 
 

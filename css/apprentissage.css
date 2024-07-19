@@ -267,14 +267,14 @@
 #pre_exercice {
     position: relative;
     background-color: #aaa;
-    top: 6.7rem;
+    top: 6.25rem;
     box-shadow: 0 0 1rem #666;
-    height: calc(100% - 12.9rem);
+    height: calc(100% - 13rem);
     width: 100%;
     max-width: 40rem;
     margin: auto;
     padding-top: 2rem;
-    transform: scale(0.9);
+    transform: scale(0.75);
     border-radius: 0.5rem;
     opacity: 0;
 }

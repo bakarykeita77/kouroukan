@@ -4,6 +4,7 @@ function exercices() {
     var prenom = JSON.parse(sessionStorage.getItem('prenom'));
     var id = JSON.parse(sessionStorage.getItem('id'));
     var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));
+    let phase_id = JSON.parse(sessionStorage.getItem('phase_id'));
     var nbr_de_questionnaires = 20;
     var exercice_questions = [];
     var moyenne_d_exercice = 18;
@@ -44,6 +45,7 @@ function exercices() {
         }
         function afficheExerciceAlphabet() {
 
+            afficherCourse($('#pre_exercice'));
             actualiserDialogueBtn();
             initialiserProgressBar('exercice');
             zoomDown($('#exercice_dialogue_btn'));
@@ -186,54 +188,33 @@ function exercices() {
             });
         }
         function stockerExerciceAlphabet() {  
-            $('#fermer_exercice').one('click',function(){ 
-                let index_phase_active = $('.phases_container ul li .active').index();
-                
-                note = noterExercice();
-    
-                if(note <  moyenne_d_exercice) alert( "ߌ ߟߊ߫ ߓߍ߬ߙߍ߫ ߛߐ߬ߘߐ߲߬ߣߍ߲ ߡߎ߬ߡߍ ߦߋ߫ "+parseIntNko(note)+" ߟߋ߬ ߘߌ߫\n ߊ߬ ߡߊ߫ "+parseIntNko(moyenne_d_exercice)+" ߖߘߍ߬ ߓߐ߫ \n\n ߏ߬ߘߐ߬ ߛߍ߬ߦߌ߬ ߦߙߐ ߢߌ߲߬ ߡߊ߫." ); 
-                if(note >= moyenne_d_exercice) { 
-                    sendExerciceToDB(); 
-                    changerPhaseActive(index_phase_active); 
-                    initialiserProgressBarr();
-                }
-            
-                function noterExercice() {
-                    var note_d_exercice = 0;
+            $('#exercice .table_muette td').on('click', function() {
+                if(compteur_de_question - 1 == nbr_de_questionnaires){
+                    let index_phase_active = $('#'+phase_id).index();
                     
-                    for (var i = 0; i < nbr_de_questionnaires; i++) {
-                    if(exercice_a_stocker[i] !== undefined) {
-                        if(exercice_a_stocker[i][2] == "߁") {
-                            note_d_exercice ++;
-                        }
-                    }}
+                    note = noterExercice();
+        
+                    if(note <  moyenne_d_exercice) alert( "ߌ ߟߊ߫ ߓߍ߬ߙߍ߫ ߛߐ߬ߘߐ߲߬ߣߍ߲ ߡߎ߬ߡߍ ߦߋ߫ "+parseIntNko(note)+" ߟߋ߬ ߘߌ߫\n ߊ߬ ߡߊ߫ "+parseIntNko(moyenne_d_exercice)+" ߖߘߍ߬ ߓߐ߫ \n\n ߏ߬ߘߐ߬ ߛߍ߬ߦߌ߬ ߦߙߐ ߢߌ߲߬ ߡߊ߫." ); 
+                    if(note >= moyenne_d_exercice) { 
+                        sendLessonDataToDB(phase_id,exercice_a_stocker); 
+                        changerPhaseActive(index_phase_active); 
+                        initialiserProgressBarr();
+                        console.log("Les données de exercice_alphabet sont envoyées à la base de données");
+                    }
+                
+                    function noterExercice() {
+                        var note_d_exercice = 0;
+                        
+                        for (var i = 0; i < nbr_de_questionnaires; i++) {
+                        if(exercice_a_stocker[i] !== undefined) {
+                            if(exercice_a_stocker[i][2] == "߁") {
+                                note_d_exercice ++;
+                            }
+                        }}
 
-                    var note = Math.floor((note_d_exercice*20)/nbr_de_questionnaires);
-                    return note;
-                }                                
-                function sendExerciceToDB() {
-
-                    let matiere = JSON.parse(sessionStorage.getItem('matiere_active')); // Voir programmes.js fonction storagesDuProgramme() 
-                    let phase   = JSON.parse(sessionStorage.getItem('phase'));  // Voir lessons.js fonction phaseActiveName()  
-                    let lesson  = JSON.stringify(exercice_a_stocker);
-                                                                
-                    const exercice_data = new URLSearchParams({
-                        id     : id,
-                        matiere: matiere,
-                        niveau : niveau_actif,
-                        phase  : phase,
-                        lesson : lesson,
-                        note   : note
-                    });
-
-                    fetch("/kouroukan/php/actions.php", {
-                        method: "POST",
-                        body: exercice_data 
-                    })
-                    .then(response => response.text())
-                    .catch(error => console.log(error));
-
-                    console.log("Les données de exercice sont envoyées à la base de données");
+                        var note = Math.floor((note_d_exercice*20)/nbr_de_questionnaires);
+                        return note;
+                    }  
                 }
             });
         }
@@ -248,11 +229,9 @@ function exercices() {
         }
         function finDExercice() {
             $('#exercice .table_muette td').on('click', function() {
+                if(compteur_de_question - 1 == nbr_de_questionnaires){
 
-                // if(compteur_de_question - 1 == nbr_de_questionnaires){
-                if(compteur_de_question == 5){
-
-                    // $('#exercices_player').html('ߡߊ߬ߞߟߏ߬ߟߌ ߓߘߊ߫ ߓߊ߲߫. ߌ ߞߎߟߎ߲ߖߋ߫߹ ');
+                    $('#exercices_player').html('ߡߊ߬ߞߟߏ߬ߟߌ ߓߘߊ߫ ߓߊ߲߫. ߌ ߞߎߟߎ߲ߖߋ߫߹ ');
                     $('#exercices_player').off('click');
                     exerciceResultat();
                     repriseDeExercice();
@@ -262,14 +241,16 @@ function exercices() {
                     $('#exercice .resultat_container').css('display','block');
 
                     function exerciceResultat() {
-
+console.log(exercice_a_stocker);
                         chargerResultat(exercice_a_stocker);
                         afficherExerciceAlphabetResultat();
                         masquerExerciceAlphabetResultat();
 
                         
                         function afficherExerciceAlphabetResultat() {
-                            comeDown($('#exercice .resultat_container'));
+                            if(compteur_de_question - 1 == nbr_de_questionnaires){
+                                goDown($('#exercice .resultat_container'));
+                            }
                         }
                         function masquerExerciceAlphabetResultat() {
                             $('#exercice #fermer_resultat').click(function() {

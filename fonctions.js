@@ -35,13 +35,12 @@
             'display':'block', 
             'transform':'scale(0.75)', 
             'opacity':0,
-            'transition':'0.6s'
+            'transition':'0.8s'
         });
         setTimeout(function() { course.css({
             'transform':'scale(1)',
             'opacity':1
         }); }, 5);
-        setTimeout(function() { course.css({});}, 5);
     }
     function affichageAnimeDesTd(td) {
         setTimeout(() => {
@@ -289,24 +288,6 @@
        timestamp = moi+' '+jour+' '+annee; 
        return timestamp;
     }
-    function comeDown(element) {
-        
-        element.wrap('<div id="envelope"></div>');
-
-        $('#envelope').css({
-            'position':'absolute',
-            'display':'block',
-            'top':0,
-            'left':0,
-            'height':'100%',
-            'width':'100%',
-            'over-flow':'hidden',
-            'z-index': 1
-        });
-
-        element.css('display','block');
-        setTimeout(() => { element.animate({'top':0}, 400); }, 200);
-    }
     function couleurDeFond(element,couleur)	{ element.css('backgroundColor', couleur); }
     function couleurDeFont(element,couleur)	{ element.css('color', couleur); }
 
@@ -359,6 +340,25 @@
             }, 200);
         });
     }
+    function goDown(element) {
+        
+        element.wrap('<div id="envelope"></div>');
+
+        $('#envelope').css({
+            'position':'absolute',
+            'display':'block',
+            'top':0,
+            'left':0,
+            'height':'100%',
+            'width':'100%',
+            'margin':'auto',
+            'over-flow':'hidden',
+            'z-index': 1
+        });
+
+        element.css('display','block');
+        setTimeout(() => { element.animate({'top':0}, 400); }, 200);
+    }
     function goUp(element) {
         element.animate({'top':'-100%'}, 400);
         setTimeout(() => { 
@@ -366,13 +366,8 @@
             element.css('display','none'); 
 
             $('#envelope').css({
-                'position':'absolute',
                 'display':'none',
-                'top':0,
                 'height':0,
-                'width':'98%',
-                'margin':'auto',
-                'over-flow':'hidden',
                 'z-index': 0
             });
         }, 400);
@@ -569,6 +564,10 @@
         }
     
         return mixted_table;
+    }
+    function masquerCourse(course) {
+        course.css({'transform':'scale(0.5)', 'opacity':0, 'display':'none'});
+        setTimeout(() => { course.css('display','none'); }, 250);
     }
     function memoriserClicks(table,elements){
 
@@ -857,8 +856,7 @@
     function zoomDown(element) {
         element.css({ 
             'opacity':0,
-            'transform':'scale(0.75)', 
-            'transition':'0.25s'
+            'transform':'scale(0.75)'
         });
         setTimeout(() => { element.css('display','none'); }, 150);
     }

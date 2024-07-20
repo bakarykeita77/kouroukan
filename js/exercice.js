@@ -1,5 +1,7 @@
 function exercices() {
        
+    var lesson_active = 'exercice';
+    sessionStorage.setItem('lesson_active', JSON.stringify(lesson_active));
     var nom = JSON.parse(sessionStorage.getItem('nom'));
     var prenom = JSON.parse(sessionStorage.getItem('prenom'));
     var id = JSON.parse(sessionStorage.getItem('id'));
@@ -26,7 +28,7 @@ function exercices() {
         case 4 : exercerChiffre(); break;
     }
 
-    $('#exercice .resultat_container').css('display','none');
+    $('.resultat_container').css('display','none');
          
     function exercerAlphabet() {
 
@@ -151,7 +153,7 @@ function exercices() {
                             
                         var q = exercice_a_stocker[exercice_counter][0];
                         var r = $(this).html();
-                        var p = (q==r) ? "߁":"߀";
+                        var p = (q==r) ? 1:0;
                         var question_reponse = [q,r,p];
                         
                         exercice_a_stocker.splice(exercice_counter,1,question_reponse);
@@ -207,7 +209,7 @@ function exercices() {
                         
                         for (var i = 0; i < nbr_de_questionnaires; i++) {
                         if(exercice_a_stocker[i] !== undefined) {
-                            if(exercice_a_stocker[i][2] == "߁") {
+                            if(exercice_a_stocker[i][2] == 1) {
                                 note_d_exercice ++;
                             }
                         }}
@@ -235,43 +237,48 @@ function exercices() {
                     $('#exercices_player').off('click');
                     exerciceResultat();
                     repriseDeExercice();
-                    passageARevivsion();
+                    passageAAlphabetEvaluation();
                     indexer($('#fermer_exercice'));
 
-                    $('#exercice .resultat_container').css('display','block');
+                    $('.resultat_container').css('display','block');
+                    setTimeout(() => { masquerCourse($('#exercice')); }, 200);
 
                     function exerciceResultat() {
-console.log(exercice_a_stocker);
+
                         chargerResultat(exercice_a_stocker);
                         afficherExerciceAlphabetResultat();
                         masquerExerciceAlphabetResultat();
 
                         
-                        function afficherExerciceAlphabetResultat() {
-                            if(compteur_de_question - 1 == nbr_de_questionnaires){
-                                goDown($('#exercice .resultat_container'));
-                            }
+                        function afficherExerciceAlphabetResultat() { 
+                            goDown($('.resultat_container')); 
+                            setTimeout(() => {
+                                masquerCourse($('#exercice'));
+                                initialiserExerciceDialogueBtn();
+                                initialiserProgressBar('exercice');
+                            }, 200);
                         }
                         function masquerExerciceAlphabetResultat() {
                             $('#exercice #fermer_resultat').click(function() {
-                                goUp($('#exercice .resultat_container'));
+                                goUp($('.resultat_container'));
+                                setTimeout(() => { $('#envelope').css('display','none'); }, 200);
                             });
                         }
                     }
                     function repriseDeExercice() {
-                        $('#avance').click(function() {
-                        
-                            initialiserExerciceDialogueBtn();
-                            goUp($('#exercice .resultat_container'));
-                            initialiserProgressBar('exercice');
-                            setTimeout(() => { $('#alphabet_exercice').click(); }, 400);
+                        $('#reprendre').click(function() {
+                            setTimeout(() => {
+                                $('#envelope').css('display','none');
+                                afficherCourse($('#exercice'));
+                                exercerAlphabet();
+                            }, 100);
                         });
                     }
-                    function passageARevivsion() {
-                        $('#redirige_sur_revision_pre_alphabet').click(function() {
-                            goUp($('#exercice .resultat_container'));
+                    function passageAAlphabetEvaluation() {
+                        $('#avance').click(function() {
+                            $('#envelope').css('display','none');
                             initialiserProgressBar('exercice');
-                            setTimeout(() => { $('#alphabet_evaluation').click(); }, 400);
+                            $('#alphabet_evaluation').click();
                         });
                     }
                  }

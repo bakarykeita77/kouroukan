@@ -1,51 +1,48 @@
 
-<div class="resultat_container">
+<span id='fermer_resultat'>&times;</span>
 
-    <span id='fermer_resultat'>&times;</span>
-
-    <div class="resultat">
-     <!--------------------------------------------------------------------------------------------------------------------------------------------->
-        <div id="resultat_entete">
-           
-            <table>
-                <tr><td><h2 id="resultat_titre"></h2></td></tr>
-                <tr><td><b id="etudiant"></b> ߓߟߏ߫</td></tr>
-                <tr><td>ߞߍ߫ ߕߎߡߊ :__📅 <span id="resultat_date"></span> __🕒 <span id="resultat_heure"></span></td></tr>
-            </table>
+<div class="resultat">
+    <!--------------------------------------------------------------------------------------------------------------------------------------------->
+    <div id="resultat_entete">
+        
+        <table>
+            <tr><td><h2 id="resultat_titre"></h2></td></tr>
+            <tr><td><b id="etudiant"></b> ߓߟߏ߫</td></tr>
+            <tr><td>ߞߍ߫ ߕߎߡߊ :__📅 <span id="resultat_date"></span> __🕒 <span id="resultat_heure"></span></td></tr>
+        </table>
+    </div>
+    <!--------------------------------------------------------------------------------------------------------------------------------------------->
+    <hr>
+    <div id="resultat_corps">
+        <table id="table_head">
+            <tr><td>ߝߙߍߕߍ</td></tr>
+            <tr><td>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</td></tr>
+            <tr><td>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ</td></tr>
+            <tr><td>ߓߍ߬ߙߍ</td></tr>
+        </table>
+        <table id="table_body"></table>
+        <table id="table_foot">
+            <tr><td id="total">ߡߎ߬ߡߍ</td></tr>
+            <tr><td id="total_question_1"></td></tr>
+            <tr><td id="total_reponse"></td></tr>
+            <tr><td id="total_point_1"></td></tr>
+        </table>
+    </div>
+    <!--------------------------------------------------------------------------------------------------------------------------------------------->
+    <hr>
+    <div id="resultat_pied">
+        <div>
+            <div><span>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߡߎ߬ߡߍ</span> <span id="total_question_2"></span></div>
+            <div><span>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ߫ ߢߊ߬ߣߍ߲</span> <span id="total_bonne_reponse"></span></div>
+            <div><span>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ߬ ߝߏߣߍ߲</span><span id="total_fausse_reponse"></span></div>
+            <div><span>ߓߍ߬ߙߍ ߡߎ߬ߡߍ</span>   <span id="total_point_2"></span></div>
+            <div><span>ߓߍ߬ߙߍ ߗߡߍ߬ߘߐ߬ߦߊ</span> <span id="pourcentage_point"></span></div>
         </div>
-     <!--------------------------------------------------------------------------------------------------------------------------------------------->
-        <hr>
-        <div id="resultat_corps">
-            <table id="table_head">
-                <tr><td>ߝߙߍߕߍ</td></tr>
-                <tr><td>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</td></tr>
-                <tr><td>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ</td></tr>
-                <tr><td>ߓߍ߬ߙߍ</td></tr>
-            </table>
-            <table id="table_body"></table>
-            <table id="table_foot">
-                <tr><td id="total">ߡߎ߬ߡߍ</td></tr>
-                <tr><td id="total_question_1"></td></tr>
-                <tr><td id="total_reponse"></td></tr>
-                <tr><td id="total_point_1"></td></tr>
-            </table>
-        </div>
-     <!--------------------------------------------------------------------------------------------------------------------------------------------->
-        <hr>
-        <div id="resultat_pied">
-            <div>
-                <div><span>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߡߎ߬ߡߍ</span> <span id="total_question_2"></span></div>
-                <div><span>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ߫ ߢߊ߬ߣߍ߲</span> <span id="total_bonne_reponse"></span></div>
-                <div><span>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ߬ ߝߏߣߍ߲</span><span id="total_fausse_reponse"></span></div>
-                <div><span>ߓߍ߬ߙߍ ߡߎ߬ߡߍ</span>   <span id="total_point_2"></span></div>
-                <div><span>ߓߍ߬ߙߍ ߗߡߍ߬ߘߐ߬ߦߊ</span> <span id="pourcentage_point"></span></div>
-            </div>
-        </div>
-     <!--------------------------------------------------------------------------------------------------------------------------------------------->
-        <hr>
-        <div id="deliberation"></div>
-     <!--------------------------------------------------------------------------------------------------------------------------------------------->
-     </div>
+    </div>
+    <!--------------------------------------------------------------------------------------------------------------------------------------------->
+    <hr>
+    <div id="deliberation"></div>
+    <!--------------------------------------------------------------------------------------------------------------------------------------------->
 </div>
 
 
@@ -74,6 +71,8 @@
         max-width: 30rem;
         margin: 0.5rem auto;
     }
+    .bold { font-weight: bold; }
+    .thin { font-size: 0.8rem; }
     #resultat_entete table { width: 100%; }
     #resultat_entete table h2 { border: 1px solid #aaa; border-bottom-width: 4px; padding: 0.25rem; }
     #resultat_corps table {

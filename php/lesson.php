@@ -70,10 +70,12 @@ if(isset($_SESSION["id"])) {
           <!-------------------------------------------------------------------------------------------------------------
           
             Ces div contiennent les cours. Chacune d'elle s'affiche au click du nom correspondant au cours dans la div coursse_container -->
-            <div class="course" id="apprentissage"><?php include("apprentissage.php"); include("resultat.php"); ?></div>
-            <div class="course" id="exercice">     <?php include("exercice.php");      include("resultat.php"); ?></div>
-            <div class="course" id="pratique">     <?php include("pratiques.php");     include("resultat.php"); ?></div>
-            <div class="course" id="evaluation">   <?php include("evaluation.php");    include("resultat.php"); ?></div>
+            <div class="course" id="apprentissage"> <?php include("apprentissage.php"); ?></div>
+            <div class="course" id="exercice">      <?php include("exercice.php");      ?></div>
+            <div class="course" id="pratique">      <?php include("pratiques.php");     ?></div>
+            <div class="course" id="evaluation">    <?php include("evaluation.php");    ?></div>
+            
+            <div class="resultat_container">        <?php include("resultat.php"); ?>   </div>
 
           <!-------------------------------------------------------------------------------------------------------------
         

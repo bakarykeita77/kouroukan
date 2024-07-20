@@ -34,7 +34,7 @@
         course.css({
             'display':'block', 
             'transform':'scale(0.75)', 
-            'opacity':0,
+            'opacity':'0.25',
             'transition':'0.8s'
         });
         setTimeout(function() { course.css({
@@ -126,6 +126,7 @@
         let nom = JSON.parse(sessionStorage.getItem('nom'));
         let prenom = JSON.parse(sessionStorage.getItem('prenom'));
         let lesson_en_cours = $('.notification_titre').html();
+
         chargerResultatHead();
         chargerResultatBody();
         chargerResultatFoot();
@@ -141,43 +142,44 @@
             let minute = d.getMinutes();
 
 
-            $('#apprentissage #resultat_titre').text(lesson_en_cours+' ߞߐߝߟߌ');
-            $('#apprentissage #etudiant').text(prenom+' '+nom);
-            $('#apprentissage #resultat_date').text(jours[jour]+' '+mois[lune]+' ߕߟߋ߬ '+parseIntNko(date)+' ߛߊ߲߭ '+parseIntNko(an));
-            $('#apprentissage #resultat_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
+            $('#resultat_titre').text(lesson_en_cours+' ߞߐߝߟߌ');
+            $('#etudiant').text(prenom+' '+nom);
+            $('#resultat_date').text(jours[jour]+' '+mois[lune]+' ߕߟߋ߬ '+parseIntNko(date)+' ߛߊ߲߭ '+parseIntNko(an));
+            $('#resultat_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
         }
         function chargerResultatBody() {
 
             let table_body_html = resultatTableBodyHTML();
             let total_point = totalPoint();
                 
-            $('#apprentissage #table_body').html(table_body_html);
-            $('#apprentissage #total_question_1').html(parseIntNko(memoire.length));
-            $('#apprentissage #total_reponse').html(parseIntNko(memoire.length));
-            $('#apprentissage #total_point_1').html(parseIntNko(total_point));
+            $('#table_body').html(table_body_html);
+            $('#total_question_1').html(parseIntNko(memoire.length));
+            $('#total_reponse').html(parseIntNko(memoire.length));
+            $('#total_point_1').html(parseIntNko(total_point));
 
             function resultatTableBodyHTML() {
                 let html = '';
 
-                html +=  '<tr>';
+                html +=  '<tr class="thin">';
                 for(let j=0; j<memoire.length; j++) {
-                    html += '<td>'+parseIntNko(j+1)+'</td>';
+                    let ordre = (j === 0) ? parseIntNko(j+1)+'߭' : parseIntNko(j+1)+'߲';
+                    html += '<td>'+ordre+'</td>';
                 }
                 html +=  '</tr>';
 
-                html +=  '<tr>';
+                html +=  '<tr class="bold">';
                 for(let k=0; k<memoire.length; k++) {
                     html += '<td>'+memoire[k][0]+'</td>';
                 }
                 html +=  '</tr>';
 
-                html +=  '<tr>';
+                html +=  '<tr class="bold">';
                 for(let l=0; l<memoire.length; l++) {
                     html += '<td>'+memoire[l][1]+'</td>';
                 }
                 html +=  '</tr>';
 
-                html +=  '<tr>';
+                html +=  '<tr class="bold">';
                 for(let m=0; m<memoire.length; m++) {
                     html += '<td>'+parseIntNko(memoire[m][2])+'</td>';
                 }
@@ -188,6 +190,7 @@
         }
         function chargerResultatFoot() {
 
+            let lesson_active = JSON.parse(sessionStorage.getItem('lesson_active'));
             let lesson_suivante = lessonSuivante();
             if(lesson_suivante == 'ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߥߴߊ߬ ߡߊ߬') { $('.notification_titre').html('ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ'); }
             let total_question = memoire.length;
@@ -198,17 +201,17 @@
             let reprendre_l_etape_en_cours = '<b id="reprendre">'+lesson_en_cours+' ߞߍ߫ ߕߎ߲߯</b>';
             let continu_sur_l_etape_suivante = '<b id="avance">'+lesson_suivante+'</b>';
 
-            $('#apprentissage #total_question_2').text(parseIntNko(total_question));
-            $('#apprentissage #total_bonne_reponse').text(parseIntNko(total_bonne_reponse));
-            $('#apprentissage #total_fausse_reponse').text(parseIntNko(total_fausse_reponse));
-            $('#apprentissage #total_point_2').text(parseIntNko(total_bonne_reponse));
-            $('#apprentissage #pourcentage_point').text('%'+parseIntNko(taux_de_vraie_reponse));
+            $('#total_question_2').text(parseIntNko(total_question));
+            $('#total_bonne_reponse').text(parseIntNko(total_bonne_reponse));
+            $('#total_fausse_reponse').text(parseIntNko(total_fausse_reponse));
+            $('#total_point_2').text(parseIntNko(total_bonne_reponse));
+            $('#pourcentage_point').text('%'+parseIntNko(taux_de_vraie_reponse));
 
             if(taux_de_vraie_reponse < taux_acceptable_de_vraie_reponse) {
-                $('#apprentissage #deliberation').html('ߌ ߖߌߖߊ߬ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ '+lesson_en_cours+' ߓߍ߬ߙߍ ߡߊ߫ ߤߊߟߌ߬ ߁߈ ߓߐ߫. ߏ߬ߘߐ߬߸ ߌ ߞߐߛߍ߬ߦߌ߬ ߦߊ߲߬ ߡߊ߫.'+reprendre_l_etape_en_cours);
+                $('#deliberation').html('ߌ ߖߌߖߊ߬ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ '+lesson_en_cours+' ߓߍ߬ߙߍ ߡߊ߫ ߤߊߟߌ߬ ߁߈ ߓߐ߫. ߏ߬ߘߐ߬߸ ߌ ߞߐߛߍ߬ߦߌ߬ ߦߊ߲߬ ߡߊ߫.'+reprendre_l_etape_en_cours);
             }else{
-                $('#apprentissage #deliberation').html(
-                    'ߌ ߞߎߟߎ߲ߖߋ߫ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ ߘߐ߬ߖߊ ߟߊ߫ '+lesson_en_cours+' ߟߐ߲ ߠߊ߫ ߤߊ߲߯ '+$('#apprentissage #pourcentage_point').text()+
+                $('#deliberation').html(
+                    'ߌ ߞߎߟߎ߲ߖߋ߫ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ ߘߐ߬ߖߊ ߟߊ߫ '+lesson_en_cours+' ߟߐ߲ ߠߊ߫ ߤߊ߲߯ '+$('#pourcentage_point').text()+
                     '</b> ߟߊ߫. ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ '+lesson_suivante+'.<br/>'+
                     'ߣߴߌ ߟߊ߫ ߓߍ߬ߙߍ ߡߴߌ ߥߛߊ߬߸ '+reprendre_l_etape_en_cours+'<br/>'+
                     'ߣߴߌ ߟߊ߫ ߓߍ߬ߙߍ ߞߵߌ ߥߛߊ߬߸ '+continu_sur_l_etape_suivante
@@ -347,12 +350,12 @@
         $('#envelope').css({
             'position':'absolute',
             'display':'block',
-            'top':0,
+            'top':'3.5rem',
             'left':0,
-            'height':'100%',
+            'height':'calc(100% - 3.5rem)',
             'width':'100%',
             'margin':'auto',
-            'over-flow':'hidden',
+            'overflow':'hidden',
             'z-index': 1
         });
 
@@ -566,8 +569,8 @@
         return mixted_table;
     }
     function masquerCourse(course) {
-        course.css({'transform':'scale(0.5)', 'opacity':0, 'display':'none'});
-        setTimeout(() => { course.css('display','none'); }, 250);
+        course.css({'transform':'scale(0.5)', 'opacity':'0.4', 'display':'none'});
+        setTimeout(() => { course.css('display','none'); }, 100);
     }
     function memoriserClicks(table,elements){
 

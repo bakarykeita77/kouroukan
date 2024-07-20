@@ -163,6 +163,7 @@ function apprentissages() {
                     $('#cercles_des_partis_cadre span').click(function() {
                                     
                         lesson_active = 'pre_apprentissage';
+                        sessionStorage.setItem('lesson_active', JSON.stringify(lesson_active)); 
                         cercle_actif = $(this);
                         cercle_index = $(this).index();
                         rang = cercle_actif.html();
@@ -479,17 +480,17 @@ function apprentissages() {
                                             exercerPreAlphabet();
                                             
                                             
-                                            function afficherApprendrePreResultat() { goDown($('#apprentissage .resultat_container')); }
+                                            function afficherApprendrePreResultat() { goDown($('.resultat_container')); }
                                             function masquerApprendrePreResultat() {  
-                                                $('#apprentissage #fermer_resultat').click(function() {
-                                                    goUp($('#apprentissage .resultat_container'));
+                                                $('#fermer_resultat').click(function() {
+                                                    goUp($('.resultat_container'));
                                                     formatParDefautDuResultat();
                                                 });
                                             }
                                             function reprendreApprentissagePreAlphabet() {
                                                 $('#reprendre').click(function() {
                                                     
-                                                    goUp($('#apprentissage .resultat_container'));
+                                                    goUp($('.resultat_container'));
 
                                                     setTimeout(() => { 
                                                         cercle_actif.click(); 
@@ -504,7 +505,7 @@ function apprentissages() {
                                             }
                                             function exercerPreAlphabet() {
                                                 $('#avance').click(function() {
-                                                    goUp($('#apprentissage .resultat_container'));
+                                                    goUp($('.resultat_container'));
                                                     setTimeout(() => { $('#pre_exercice_bouton').click();  }, 400);
                                                 });
                                             }
@@ -522,6 +523,7 @@ function apprentissages() {
                     let carre_actif = $(this);
                     
                     lesson_active = 'pre_exercice';  
+                    sessionStorage.setItem('lesson_active', JSON.stringify(lesson_active)); 
                     $('.fermeture_pre').attr('id','fermeture_pre_exercice');
                     
                     zoomDown($('.dialogue_btn'));
@@ -543,7 +545,8 @@ function apprentissages() {
                 
                     let carre_actif = $(this);
 
-                    lesson_active = 'pre_revision'; 
+                    lesson_active = 'pre_revision';
+                    sessionStorage.setItem('lesson_active', JSON.stringify(lesson_active)); 
                     $('.fermeture_pre').attr('id','fermeture_pre_revision');
 
                     zoomDown($('.dialogue_btn'));
@@ -1455,11 +1458,11 @@ function apprentissages() {
 
 
                             function afficherExerciceAlphabetResultat() {
-                                goDown($('#apprentissage .resultat_container'));
+                                goDown($('.resultat_container'));
                             }
                             function masquerExerciceAlphabetResultat() {
                                 $('#apprentissage #fermer_resultat').click(function() {
-                                    goUp($('#apprentissage .resultat_container'));
+                                    goUp($('.resultat_container'));
                                 });
                             }
                         }
@@ -1467,20 +1470,20 @@ function apprentissages() {
                 }
                 function reprendreExercicePreAlphabet() {
                     $('#reprendre').click(function() {
-                        goUp($('#apprentissage .resultat_container'));
+                        goUp($('.resultat_container'));
                         setTimeout(() => { $('#pre_exercice_bouton').click(); }, 400);
                     });
                 }
                 function continuSurRevisionPreAlphabet() {
                     $('#avance').click(function() {
                         cercle_index++;                           
-                        goUp($('#apprentissage .resultat_container'));
+                        goUp($('.resultat_container'));
                         setTimeout(() => { $('#pre_revision_bouton').click(); }, 400);
                     });
                 }
                 function reprendreRevisionPreAlphabet() {
                     $('#reprendre').click(function() {
-                        goUp($('#apprentissage .resultat_container'));
+                        goUp($('.resultat_container'));
                         setTimeout(() => { $('#pre_revision_bouton').click(); }, 400);
                     });
                 }
@@ -1489,7 +1492,7 @@ function apprentissages() {
                         cercle_index++;       
                         $('#fermeture_pre_revision').click();
                         setTimeout(() => { $('#cercles_des_partis_cadre span:nth-child('+cercle_index+')').click(); }, 400);
-                        setTimeout(() => { goUp($('#apprentissage .resultat_container')); }, 500);
+                        setTimeout(() => { goUp($('.resultat_container')); }, 500);
                     });
                 }
             }
@@ -1774,10 +1777,10 @@ function apprentissages() {
                     masquerApprentissageResultat();
 
                     
-                    function afficherApprentissageResultat() { goDown($('#apprentissage .resultat_container')); }
+                    function afficherApprentissageResultat() { goDown($('.resultat_container')); }
                     function masquerApprentissageResultat() {  
-                        $('#apprentissage #fermer_resultat, #avance').click(function() {
-                            $('#apprentissage .resultat_container').css('display','none');
+                        $('#fermer_resultat, #avance').click(function() {
+                            $('.resultat_container').css('display','none');
                             formatParDefautDuResultat();
                         });
                     }
@@ -1785,7 +1788,7 @@ function apprentissages() {
                 function reprendreApprentissageAlphabet() {
                     $('#reprendre').click(function() {
                         
-                        goUp($('#apprentissage .resultat_container'));
+                        goUp($('.resultat_container'));
 
                         setTimeout(() => { 
                             cercle_actif.click(); 

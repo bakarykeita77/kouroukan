@@ -103,7 +103,7 @@ function apprentissages() {
                     
                 chargerPreApprendreAlphabet();
                 afficherPreApprendreAlphabet();
-                apprendrePreApprendreAlphabetNko();
+                preApprendreAlphabetNko();
                 enregistrerPreApprendreAlphabet();
                 progressBarrPreApprendreAlphabet();
                 stockerPreApprendreAlphabet();
@@ -281,7 +281,7 @@ function apprentissages() {
                     setTimeout(function(){ montrer($('.cercle:nth-child(1)')); }, 1000);
 
                 }
-                function apprendrePreApprendreAlphabetNko() {
+                function preApprendreAlphabetNko() {
                     $.each($('.pre_apprentissage_td'), function() {
                         let clicks_counter = 1;
                         
@@ -383,7 +383,7 @@ function apprentissages() {
                                         $('.progress_bonne_reponse_bar, .progress_mauvaise_reponse_bar').css('width', 0);                                    td_click_counter = 0;
                                         apprentissage_width = 0;
                                         global_clicks_counter = 1;
-                                    }, 1000);
+                                    }, 400);
                                 }
                             }
                         });
@@ -408,7 +408,9 @@ function apprentissages() {
                 }
                 function assistantPreApprendreAlphabet() {
                     
-                    ecrire('notification_corps','ߞߏ߰ߙߌ߬ ߝߟߐߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬');
+                    setTimeout(() => {
+                        ecrire('notification_corps','ߞߏ߰ߙߌ߬ ߝߟߐߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬');
+                    }, 800);
                         
                     $('#cercles_des_partis_cadre span').click(function() {
                         ecrire('notification_corps','\
@@ -810,7 +812,9 @@ function apprentissages() {
                 function stockerApprendrePreSyllabe() {}
                 function assistantApprendrePreSyllabe() {
                     
-                    ecrire("notification_corps","ߞߏ߰ߙߌ߫ ߣߘߍ߬ߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬ ߞߊ߬ ߛߌ߬ߙߕߊ߬ ߥߟߊߟߋ߲ ߦߌ߬ߘߊ߬.");
+                    setTimeout(() => {
+                        ecrire("notification_corps","ߞߏ߰ߙߌ߫ ߣߘߍ߬ߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬ ߞߊ߬ ߛߌ߬ߙߕߊ߬ ߥߟߊߟߋ߲ ߦߌ߬ߘߊ߬.");
+                    }, 1000);
 
                     montrer($('#afficheur_de_panneau'));
 
@@ -1166,6 +1170,7 @@ function apprentissages() {
                             if(pre_question == '') { 
                                 $('#pre_question_btn').addClass('clignotant'); 
                                 setTimeout(function() { $('#pre_question_btn').removeClass('clignotant'); }, 1200);
+                                return;
                             }
                         });
                     });
@@ -1314,7 +1319,10 @@ function apprentissages() {
 
                     $('#pre_revision_bouton').click(function() {
                         let notification = "ߘߋ߰ߣߍ߲߬ ߞߎߘߊ ߣߌ߫ ߞߘߐ߬ߡߊ߲ ߠߎ߬ ߟߋ߬ ߓߍ߯ ߢߊ߯ߡߌߣߍ߲߫ ߢߐ߲ ߘߐ߫ ߣߌ߲߬ .ߣߴߌ ߛߋ߫ ߘߊ߫ ߞߵߊ߬ߟߎ߬ ߓߍ߯ ߢߊߓߐ߫ ߗߡߍ߬ߘߐ߬ߦߊ߫ ߗߍ߬ߡߍ ߟߊ߫ ߏ߬ߘߐ߬ ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ .ߓߌ߬ߟߊ߬ ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߞߐ߫";
-                        ecrire('notification_corps',notification);
+                        
+                        setTimeout(() => {
+                            ecrire('notification_corps',notification);
+                        }, 1000);
                     });
                     
                     $('#pre_correction_btn').click(function() {
@@ -1537,7 +1545,7 @@ function apprentissages() {
             apprendreAlphabetNko();
             enregistrerApprentissageAlphabet();
             progressBarrApprentissageAlphabet();
-            // stockerApprentissageAlphabet();
+            stockerApprentissageAlphabet();
             assistantApprentissageAlphabet();
             finDApprentissageAlphabet();
 
@@ -1802,10 +1810,10 @@ function apprentissages() {
                     });
                 }
                 function continuSurExerciceAlphabet() {
-                    $('#apprentissage #avance').click(function() {
-                        $('#apprentissage').css('display','none');
-                        exercices();
+                    $('#avance').click(function() {
+                        $('#apprentissage, #envelope').css('display','none');
                         afficherCourse($('#exercice'));
+                        exercices();
                     });
                 }
             }

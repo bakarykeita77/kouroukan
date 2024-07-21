@@ -79,7 +79,7 @@ function exercices() {
             function poserExerciceAlphabetQuestion(){
                 montrer($('#exercice_dialogue_btn'));
                 $('.play_icon_container').on('click',function() {
-        
+      
                     zoomDown($('#exercice_dialogue_btn'));
                     setTimeout(() => { zoomUp($('#exercice_dialogue_btn')); }, 200);
         
@@ -92,8 +92,6 @@ function exercices() {
                     $('.ecouter_question').html(' ߠߊߡߍ߲߫');
                     $('.ordre_question').html(parseIntNko(compteur_de_question)+question_rang);
                     question_posee = exercice_questions[i];
-                    
-                    // alert( question_posee ); 
     
                     $(this).css('display','none');
                     $('.oreille_icon_container').css('display','block');
@@ -109,24 +107,27 @@ function exercices() {
             }
             function repondreExerciceAlphabetQuestion(){
                         
-                $('#exercice .table_muette').on('click', function(e) {
-                    
-                    if(question_posee == '') { rappel($('#exercice_dialogue_btn')); return; }
-        
-                    zoomDown($('#exercice_dialogue_btn'));
-                    setTimeout(() => { zoomUp($('#exercice_dialogue_btn')); }, 200);
-                      
-                    let td = $(e.target);
-                    let bonne_reponse = question_posee;
+                $.each($('#exercice .table_muette td'), function() {
+                    let td = $(this);
+                    td.click(function() {
+                        if(question_posee == '') { rappel($('#exercice_dialogue_btn')); return; }
+                        if(question_posee != '') {
+                            zoomDown($('#exercice_dialogue_btn'));
+                            setTimeout(() => { zoomUp($('#exercice_dialogue_btn')); }, 200);
+                            
+                            let td = $(this);
+                            let bonne_reponse = question_posee;
 
-                    reponse_montree = td.html();
-                    point = (question_posee == reponse_montree) ? 1 : 0;
-                                        
-                    if(question_posee != reponse_montree){ barrer(td); clignotage(bonne_reponse); }
-                    if(question_posee == reponse_montree){ valider(td); }
+                            reponse_montree = td.text();
+                            point = (question_posee == reponse_montree) ? 1 : 0;
+                                                
+                            if(question_posee != reponse_montree){ barrer(td); clignotage(bonne_reponse); }
+                            if(question_posee == reponse_montree){ valider(td); }
+                            initialiserExerciceDialogueBtn();
+                        }
+                            
+                    });
                     
-                    question_posee = '';    /* Vider la variable question_posee. */
-                    initialiserExerciceDialogueBtn();
                 });
             }
         }
@@ -150,41 +151,39 @@ function exercices() {
             function actualiserExerciceAStocker() {
                 $.each(td, function(){
                     $(this).on('click', function(){
-                            
-                        var q = exercice_a_stocker[exercice_counter][0];
-                        var r = $(this).html();
-                        var p = (q==r) ? 1:0;
-                        var question_reponse = [q,r,p];
-                        
-                        exercice_a_stocker.splice(exercice_counter,1,question_reponse);
-                        
-                        exercice_counter++;
+                        if(question_posee == '') return;       
+                        if(question_posee != '') {       
+                            var question_reponse = [question_posee,reponse_montree,point];
+                            exercice_a_stocker.splice(exercice_counter,1,question_reponse);
+                            exercice_counter++;
+                        }
                     });
                 });
             }
         }
         function progressBarrExerciceAlphabet() {
-            let question_counter = 0;
+
             let good_response_counter = 0;
             let progress_unity = 100/nbr_de_questionnaires;
             
             zoomUp($('#exercice_progress_bar'));
 
             $('#exercice .table_muette td').one('click', function(){
-                
-                let question_posee = exercice_questions[question_counter];
-                let reponse_montree = $(this).text();
-                actualiserLessonProgressBar();
-                question_counter++;
+                    
+                if(question_posee == '') return;
+                if(question_posee != '') {
+                    actualiserLessonProgressBar();
+                    
+                    function actualiserLessonProgressBar(){
+                        let bar_width = (compteur_de_question - 1)*progress_unity;
+                        $('.progress_mauvaise_reponse_bar').css('width', bar_width+'%');
+                        if(question_posee == reponse_montree) { 
+                            good_response_counter++;
+                            let good_response_width = good_response_counter*progress_unity;
+                            $('.progress_bonne_reponse_bar').css('width', good_response_width+'%');
+                        }
 
-                function actualiserLessonProgressBar(){
-                    let bar_width = (question_counter+1)*progress_unity;
-            
-                    $('.progress_mauvaise_reponse_bar').css('width', bar_width+'%');
-                    if(question_posee == reponse_montree) { 
-                        good_response_counter++;
-                        let good_response_width = good_response_counter*progress_unity;
-                        $('.progress_bonne_reponse_bar').css('width', good_response_width+'%');
+                        question_posee = ''; //Vider la variable question_posee après son utilisation.
                     }
                 }
             });
@@ -223,15 +222,18 @@ function exercices() {
         function assistantExerciceAlphabet() {
             $('.notification_titre').text('ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ');
             
-            ecrire('notification_corps','\
-                ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ߬ ߞߘߎ ߘߌ߲߯ ߘߎ߭ߡߊ߬߸ ߦߴߌ ߕߟߏߡߊߟߐ߬߸ߦߋ߫ ߛߓߍߘߋ߲߫ ߟߊߡߍ߲ߣߍ߲ ߦߌ߬ߘߊ߬߸ ߤߊ߲߯ ߡߊ߬ߞߟߏ߬ߟߌ ߦߋ߫ ߓߊ߲߫.\
-            ');
+            setTimeout(() => {
+                ecrire('notification_corps','\
+                    ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ߬ ߞߘߎ ߘߌ߲߯ ߘߎ߭ߡߊ߬߸ ߦߴߌ ߕߟߏߡߊߟߐ߬߸ߦߋ߫ ߛߓߍߘߋ߲߫ ߟߊߡߍ߲ߣߍ߲ ߦߌ߬ߘߊ߬߸ ߤߊ߲߯ ߡߊ߬ߞߟߏ߬ߟߌ ߦߋ߫ ߓߊ߲߫.\
+                ');
+            }, 1000);
 
             if(compteur_de_question - 1 == nbr_de_questionnaires){ indexer($('#fermer_exercice')); }
         }
         function finDExercice() {
             $('#exercice .table_muette td').on('click', function() {
-                if(compteur_de_question - 1 == nbr_de_questionnaires){
+                // if(compteur_de_question - 1 == nbr_de_questionnaires){
+                if(compteur_de_question == 5){
 
                     $('#exercices_player').html('ߡߊ߬ߞߟߏ߬ߟߌ ߓߘߊ߫ ߓߊ߲߫. ߌ ߞߎߟߎ߲ߖߋ߫߹ ');
                     $('#exercices_player').off('click');
@@ -278,7 +280,8 @@ function exercices() {
                         $('#avance').click(function() {
                             $('#envelope').css('display','none');
                             initialiserProgressBar('exercice');
-                            $('#alphabet_evaluation').click();
+                            afficherCourse($('#evaluation'));
+                            evaluations();
                         });
                     }
                  }

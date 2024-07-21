@@ -928,7 +928,7 @@ del {
 .repetition_btn { display: none; cursor: pointer; }
 .right { float: right; }
 .resultat_container {
-    position: relative;
+    position: absolute;
     display: none;
     top: -100%;
     width: calc(100vw - 1rem);
@@ -937,6 +937,8 @@ del {
     height: calc(100% - 0.75rem);
     margin: 0 auto;
     padding: 0.125rem;
+    left: 50%;
+    transform: translateX(-50%);
     background-color: #fff;
     border: 1px solid #aaa;
     border-radius: 0.5rem; 

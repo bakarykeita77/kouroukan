@@ -3,10 +3,10 @@
 
 <div class="resultat">
     <!--------------------------------------------------------------------------------------------------------------------------------------------->
+    <div id="resultat_titre"></div>
+    <!--------------------------------------------------------------------------------------------------------------------------------------------->
     <div id="resultat_entete">
-        
         <table>
-            <tr><td><h2 id="resultat_titre"></h2></td></tr>
             <tr><td><b id="etudiant"></b> ߓߟߏ߫</td></tr>
             <tr><td>ߞߍ߫ ߕߎߡߊ :__📅 <span id="resultat_date"></span> __🕒 <span id="resultat_heure"></span></td></tr>
         </table>
@@ -62,14 +62,19 @@
         cursor: pointer;
         overflow: auto;
     }
-    #resultat_titre { 
-        margin: 0 0 0.25rem 0; 
-    }
-    #resultat_entete, #resultat_corps, #resultat_pied, #deliberation {
+    #resultat_titre, #resultat_entete, #resultat_corps, #resultat_pied, #deliberation {
         height: max-content;
-        border: 1px solid transparent;
         max-width: 30rem;
-        margin: 0.5rem auto;
+        margin: 0 auto;
+    }
+    #resultat_titre { 
+        border-bottom: 0.25rem solid #ddd; 
+        padding: 0.25rem;
+        background-color: #eee;
+    }
+    #resultat_titre h2 { margin: 0.125rem 0.5rem; }
+    #resultat_entete, #resultat_corps, #resultat_pied, #deliberation {
+        border: 1px solid transparent;
     }
     .bold { font-weight: bold; }
     .thin { font-size: 0.8rem; }

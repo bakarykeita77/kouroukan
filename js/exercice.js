@@ -49,7 +49,7 @@ function exercices() {
 
             afficherCourse($('#pre_exercice'));
             actualiserDialogueBtn();
-            initialiserProgressBar('exercice');
+            initialiserProgressBar();
             zoomDown($('#exercice_dialogue_btn'));
 
             $('.progress_bar').css({'display':'block', 'z-index':0});
@@ -221,19 +221,17 @@ function exercices() {
         }
         function assistantExerciceAlphabet() {
             $('.notification_titre').text('ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ');
-            
             setTimeout(() => {
                 ecrire('notification_corps','\
                     ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ߬ ߞߘߎ ߘߌ߲߯ ߘߎ߭ߡߊ߬߸ ߦߴߌ ߕߟߏߡߊߟߐ߬߸ߦߋ߫ ߛߓߍߘߋ߲߫ ߟߊߡߍ߲ߣߍ߲ ߦߌ߬ߘߊ߬߸ ߤߊ߲߯ ߡߊ߬ߞߟߏ߬ߟߌ ߦߋ߫ ߓߊ߲߫.\
                 ');
             }, 1000);
-
-            if(compteur_de_question - 1 == nbr_de_questionnaires){ indexer($('#fermer_exercice')); }
+            // if(compteur_de_question - 1 == nbr_de_questionnaires){ indexer($('#fermer_exercice')); }
         }
         function finDExercice() {
             $('#exercice .table_muette td').on('click', function() {
                 // if(compteur_de_question - 1 == nbr_de_questionnaires){
-                if(compteur_de_question == 5){
+                if(compteur_de_question == 3){
 
                     $('#exercices_player').html('ߡߊ߬ߞߟߏ߬ߟߌ ߓߘߊ߫ ߓߊ߲߫. ߌ ߞߎߟߎ߲ߖߋ߫߹ ');
                     $('#exercices_player').off('click');
@@ -257,7 +255,7 @@ function exercices() {
                             setTimeout(() => {
                                 masquerCourse($('#exercice'));
                                 initialiserExerciceDialogueBtn();
-                                initialiserProgressBar('exercice');
+                                initialiserProgressBar();
                             }, 200);
                         }
                         function masquerExerciceAlphabetResultat() {
@@ -269,17 +267,19 @@ function exercices() {
                     }
                     function repriseDeExercice() {
                         $('#reprendre').click(function() {
-                            setTimeout(() => {
-                                $('#envelope').css('display','none');
-                                afficherCourse($('#exercice'));
-                                exercerAlphabet();
-                            }, 100);
+                            $('#envelope').css('display','none');
+                            $('#alphabet_exercice').click();
+                            // progressBarrExerciceAlphabet();
+                            // parametrageDeLesson();
+                            // afficherCourse($('#exercice'));
+                            // exercerAlphabet();
                         });
                     }
                     function passageAAlphabetEvaluation() {
                         $('#avance').click(function() {
                             $('#envelope').css('display','none');
-                            initialiserProgressBar('exercice');
+                            initialiserProgressBar();
+                            parametrageDeLesson();
                             afficherCourse($('#evaluation'));
                             evaluations();
                         });

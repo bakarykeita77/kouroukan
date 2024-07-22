@@ -2,10 +2,10 @@
 	<link rel="stylesheet" href="/kouroukan/css/evaluation.css"/>
 
     <div class="course_head" id="evaluation_head">
-        <div class='progress_bar' id="evaluation_progress_bar">
-            <p class='progress_question_bar'></p>
-            <p class='progress_bonne_reponse_bar'></p>
-        </div>
+		<div class="notification">
+			<h2 class="notification_titre"></h2>
+			<div class="notification_corps"></div>
+		</div>
     </div>
 
     <div class="course_body" id="evaluation_body">

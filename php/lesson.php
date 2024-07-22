@@ -76,6 +76,10 @@ if(isset($_SESSION["id"])) {
             <div class="course" id="evaluation">    <?php include("evaluation.php");    ?></div>
             
             <div class="resultat_container">        <?php include("resultat.php"); ?>   </div>
+            <div class = 'progress_bar'>
+              <div class='progress_bonne_reponse_bar'></div>
+              <div class='progress_mauvaise_reponse_bar'></div>
+            </div>
 
           <!-------------------------------------------------------------------------------------------------------------
         

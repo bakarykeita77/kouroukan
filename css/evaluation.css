@@ -5,7 +5,7 @@
     max-width: 500px;
     margin: auto;
 }
-#evaluation_body { height: calc(100% - 15rem); background-color: #002; }
+#evaluation_body { height: calc(100% - 18rem); background-color: #002; }
 
 
 #evaluation_thead {
@@ -268,6 +268,7 @@
 }
 
 #evaluation_dialogue_btn {  
+    top: 8.5rem;
     background-color: var(--couleurNeutre);
     box-shadow: var(--shadow_1a);
     box-sizing: border-box;
@@ -375,7 +376,7 @@
 
 
 #evaluation_foot { 
-    height: 50%;
+    height: 6rem;
     min-height: 12rem; 
     max-height: 16.5rem; 
     bottom: 0; 

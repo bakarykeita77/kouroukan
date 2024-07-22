@@ -358,7 +358,7 @@ function apprentissages() {
                     let apprentissage_width = 0;
                     let global_clicks_counter = 1;
 
-                    $('.dialogue_btn').click(()=>{ zoomUp($('#apprentissage_progress_bar')); });
+                    $('.dialogue_btn').click(()=>{ $('.progress_bar').css('display','block'); });
 
                     $.each($('.pre_apprentissage_td'), function() {
 
@@ -374,12 +374,12 @@ function apprentissages() {
                                 let global_clicks_count = global_clicks_counter++;
 
                                 apprentissage_width = global_clicks_count*diagramm_unity;
-                                $('#apprentissage_progress_bar .progress_bonne_reponse_bar').css('width', apprentissage_width+'%');
+                                $('.progress_bonne_reponse_bar').css('width', apprentissage_width+'%');
                             
                             // Initialiser la barre de progression
                                 if(global_clicks_count/quantite_normale_de_click == les_lettres_actives.length) { 
                                     setTimeout(() => {
-                                        zoomDown($('#apprentissage_progress_bar')); 
+                                        $('.progress_bar').css('display','none'); 
                                         $('.progress_bonne_reponse_bar, .progress_mauvaise_reponse_bar').css('width', 0);                                    td_click_counter = 0;
                                         apprentissage_width = 0;
                                         global_clicks_counter = 1;
@@ -1251,7 +1251,7 @@ function apprentissages() {
                 let pre_exercice_width = total_questions;
                 let diagramm_unity = 100/pre_exercice_width;
 
-                zoomUp($('#apprentissage_progress_bar'));
+                $('.progress_bar').css('display','block');
 
                 $('#pre_correction_btn').click(function() { 
                     
@@ -1269,7 +1269,7 @@ function apprentissages() {
                     // Initialiser la barre de progression
                     if(pre_question_counter === total_questions) { 
                         setTimeout(() => { 
-                            zoomDown($('#apprentissage_progress_bar')); 
+                            $('.progress_bar').css('display','none');
                             $('.progress_bonne_reponse_bar, .progress_mauvaise_reponse_bar').css('width', 0);
                             pre_question_counter = 0;
                             bonne_reponse_counter = 0;
@@ -1396,7 +1396,6 @@ function apprentissages() {
                         }
                     }
                 });
-
                 
                 
                 function fermerPreExercice() {
@@ -1664,7 +1663,7 @@ function apprentissages() {
                 let elements_clickes = [];
                 let click_counter = 0;
                 
-                zoomUp($('#apprentissage_progress_bar'));
+                $('.progress_bar').css('display','block');
 
                 $.each(td, function() {
                     let td_click_counter = 0;
@@ -1678,7 +1677,7 @@ function apprentissages() {
                             $('.progress_bonne_reponse_bar').css('width',click_counter*barr_unity+'%');
 
                             if(click_counter === total_click) {
-                                setTimeout(() => { zoomDown($('#apprentissage_progress_bar')); }, 1000);
+                                setTimeout(() => { $('.progress_bar').css('display','none'); }, 1000);
                             }
                         }
 
@@ -1704,7 +1703,7 @@ function apprentissages() {
                     });
                 }
                 function progression(nbr_click) {
-                    var progress_unity = $('#apprentissage_progress_bar').width()/nbr_click;
+                    var progress_unity = $('.progress_bar').width()/nbr_click;
                     
                     $('.table_parlante td').on('click', function() {
                         if(elements_clickes.indexOf($(this).html()) == -1) $('.progress_bonne_reponse_bar').css('width','+='+progress_unity+'px');

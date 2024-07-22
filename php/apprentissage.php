@@ -56,16 +56,8 @@
                         </div>
 
                         <div class="lesson_suivante" id="redirige_sur_exercice">ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫</div>
-
                     </div>
                 </div>
-                
-
-                <div class = 'progress_bar' id = "apprentissage_progress_bar">
-                    <div class='progress_bonne_reponse_bar'></div>
-                    <div class='progress_mauvaise_reponse_bar'></div>
-                </div>
-
             </div>
          <!--Fin course ------------------------------------------------------------------- -->
         </div>

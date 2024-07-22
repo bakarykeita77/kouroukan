@@ -889,11 +889,13 @@ del {
 .progress_bar {
     position: absolute;
     display: none;
-    left: 0;
-    top: 0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0.5rem;
     margin: 0;
     height: 3rem;
-    width: calc(100% - 2px);
+    width: calc(100% - 1.25rem);
+    max-width: 60rem;
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 0.5rem;

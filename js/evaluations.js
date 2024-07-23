@@ -13,6 +13,7 @@ function evaluations() {
     var moyenne_d_evaluation = 1 ;
     var compteur = incrementer();
     var evaluation_counter = 0;
+    let good_response_counter = 0;
     
     var memoire_rang = [];
      
@@ -28,7 +29,6 @@ function evaluations() {
     afficheEvaluationAlphabet();
     evaluerAlphabet();
     enregistrerExerciceAlphabet();
-    progressBarrEvaluationAlphabet();
     stockerEvaluationAlphabet();
     assistantEvaluationAlphabet();
     finDEvaluationAlphabet();
@@ -83,8 +83,8 @@ function evaluations() {
                 dicterLaQuestion();
                 $('#evaluation_cross').css('display','none');
                 $('#evaluation_cross').css('transform','scale(0.4)');
-                $('#evaluation_reponse_container').css({'top':0});  
-                $('#teste_container').css({'top':'-6rem'});  
+                $('#evaluation_reponse_container').css({'top':0}); 
+                afficherTesteContainer(); 
                 // memoriserQuestionRang();
     
                 q_index = compteur();
@@ -106,6 +106,7 @@ function evaluations() {
                 function dicterLaQuestion(){
                     lireLettre('alphabet',question_evaluation);
                 }
+                function afficherTesteContainer() { $('#teste_container').css({'top':'-6rem'}); }
                 function memoriserQuestionRang(){
                     memoire_rang[memoire_rang.length] = q_ordre+q_rang;
                     return memoire_rang;
@@ -150,7 +151,7 @@ function evaluations() {
                 
                 corrigerEvaluation();
                 masquerTesteContainer();
-                actualiserEvaluationProgressBar();
+                progressBarrEvaluationAlphabet();
                 effacerQuestion();
                 effacerCheckMark();
                 afficherQuestionButton();
@@ -169,8 +170,8 @@ function evaluations() {
                     evaluation_a_stocker.splice(evaluation_counter,1,question_reponse);
 
                     chargerEvaluationTbody();
-                    // marquerReponseEvaluation(); 
-                    defilementDuContenuLeHaut($('#evaluation_tbody'));
+                    marquerReponseEvaluation(); 
+                    setTimeout(() => { defilementDuContenuLeHaut($('#evaluation_tbody')); }, 1200);
 
                                     
                     function chargerEvaluationTbody() {
@@ -212,18 +213,30 @@ function evaluations() {
                         }, 2000);
                     } 
                 }
-                function masquerTesteContainer() { $('#teste_container').css({'top':0}); }
-                function actualiserEvaluationProgressBar(){
-                            
-                    var course_width = $('#evaluation_foot').width();
-                    $('#evaluation_progress_bar').width( course_width - 2 );
-                    
-                    var progress_unity = $('#evaluation_progress_bar').width()/nbr_max_de_questions_a_poser;
+                function masquerTesteContainer() { 
+                    setTimeout(() => { $('#teste_container').css({'top':0}); }, 1000); 
+                }
+                function progressBarrEvaluationAlphabet() {
+            
+                    let progress_unity = 100/nbr_max_de_questions_a_poser;
+                           
+                    if(question_evaluation == '') return;
+                    if(question_evaluation != '') {
+                        actualiserLessonProgressBar();
                         
-                    if(question_evaluation != reponse_evaluation.join('')){ 
-                        $('.progress_question_bar').css('width','+='+progress_unity+'px');
-                    }else{ 
-                        $('.progress_question_bar, .progress_bonne_reponse_bar').css('width','+='+progress_unity+'px');
+                        function actualiserLessonProgressBar(){
+                    
+                            let bar_width = evaluation_counter*progress_unity;
+
+                            $('.progress_mauvaise_reponse_bar_integre').css('width', bar_width+'%');
+                            if(question_evaluation == reponse_evaluation) { 
+                                good_response_counter++;
+                                let good_response_width = good_response_counter*progress_unity;
+                                $('.progress_bonne_reponse_bar_integre').css('width', good_response_width+'%');
+                            }
+        
+                            question_evaluation = ''; //Vider la variable question_evaluation après son utilisation.
+                        }
                     }
                 }
                 function effacerQuestion() {
@@ -251,7 +264,6 @@ function evaluations() {
         }
     }
     function enregistrerExerciceAlphabet() {}
-    function progressBarrEvaluationAlphabet() {}
     function stockerEvaluationAlphabet() {
         $('.correction_btn').on('click', function(){
             let index_phase_active = $('.phases_container ul li .active').index();
@@ -305,7 +317,14 @@ function evaluations() {
         });
     }
     function assistantEvaluationAlphabet() {}
-    function finDEvaluationAlphabet() {}
+    function finDEvaluationAlphabet() {
+        $('.notification_titre').text('ߛߓߍߛߎ߲ ߞߘߐߓߐߟߌ');
+            setTimeout(() => {
+                ecrire('notification_corps','\
+                    ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ߬ ߞߘߎ ߘߌ߲߯ ߘߎ߭ߡߊ߬߸ ߦߴߌ ߕߟߏߡߊߟߐ߬߸ߦߋ߫ ߛߓߍߘߋ߲߫ ߟߊߡߍ߲ߣߍ߲ ߛߓߍ߫߸ ߤߊ߲߯ ߞߘߐߓߐߟߌ ߦߋ߫ ߓߊ߲߫.\
+                ');
+            }, 1000);
+        }
 
     
     function initialiserEvaluation() {

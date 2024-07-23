@@ -54,6 +54,12 @@
         <div class="clavier_container" id="clavier_evaluation"><?php include "clavier.php"; ?></div>
 
         <div class="dialogue_btn centrer_parfait" id="evaluation_dialogue_btn">
+            
+            <div class = 'progress_bar_integre'>
+                <div class='progress_bonne_reponse_bar_integre'></div>
+                <div class='progress_mauvaise_reponse_bar_integre'></div>
+            </div>
+
             <div class="question_btn">
                 <span class="question_label"></span>
                 <span class="question_total"></span> :

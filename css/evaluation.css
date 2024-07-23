@@ -5,7 +5,7 @@
     max-width: 500px;
     margin: auto;
 }
-#evaluation_body { height: calc(100% - 18rem); background-color: #002; }
+#evaluation_body { height: calc(100% - 22rem); background-color: #002; }
 
 
 #evaluation_thead {
@@ -31,14 +31,17 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0.125rem 0;
-    overflow: auto;
+    overflow: hidden;
 }
 #evaluation_tbody span {
     position: relative;
     background-color: #223;
+    font-size: 1.25rem;
     color: white;
     margin: 1px 0.125rem;
+    padding: 0.25rem 1rem;
     height: 1.5rem;
+    border-radius: 0.25rem;
 }
 #evaluation_guide {
     display: flex;
@@ -56,6 +59,7 @@
     z-index: 1;
 }
 #clavier_evaluation { 
+    height: 12rem;
     border: 1px solid #fff;
     border-top-width: 0.25rem;
     border-radius: 0.5rem; 
@@ -86,24 +90,26 @@
     width: 100%;
 }
 #evaluation_thead, #evaluation_tbody div, #evaluation_tfoot div { display: flex; }
-#evaluation_thead  .th:nth-child(1), #evaluation_thead  .th:nth-child(4) { width: 2rem; padding-left: 1rem; text-align: left; }
-#evaluation_tbody  span:nth-child(1), #evaluation_tbody  span:nth-child(4) { width: 2rem; padding-left: 1rem; text-align: left; width: 4.5rem; text-align: center; }
-#evaluation_thead  .th:nth-child(2), #evaluation_thead  .th:nth-child(3) { width: calc((100% - 4rem)/2); padding-right: 0.5rem; text-align: right; }
-#evaluation_tbody  span:nth-child(2), #evaluation_tbody  span:nth-child(3) { width: calc((100% - 4rem)/2); padding-right: 0.5rem; text-align: right; }
+#evaluation_thead  .th:nth-child(1), #evaluation_thead  .th:nth-child(4) { width: 4.5rem; padding-right: 1rem; }
+#evaluation_tbody  span:nth-child(1), #evaluation_tbody  span:nth-child(4) { padding-left: 1rem; text-align: left; width: 4.5rem; }
+#evaluation_thead  .th:nth-child(2), #evaluation_thead  .th:nth-child(3) { width: calc((100% - 4rem)/2); padding-right: 1rem; text-align: right; }
+#evaluation_tbody  span:nth-child(2), #evaluation_tbody  span:nth-child(3) { width: calc((100% - 4rem)/2); padding-right: 1.5rem; text-align: right; }
 #evaluation_tfoot { 
+    position: absolute;
     padding: 0.125rem;
     background-color: #000; 
+    width: 50%;
+    left: 0px;
 }
 #evaluation_tfoot span { margin: 0.125rem; }
-#evaluation_tfoot span:first-child { width: calc(100% - 3rem); padding-right: 0.5rem; text-align: right; }
+#evaluation_tfoot span:first-child { width: calc(100% - 4rem); padding-right: 1rem; text-align: right; }
 #evaluation_tfoot span:last-child { 
-    width: 3rem; 
+    width: 4rem; 
     background-color: #002; 
     color: white;
-    padding-left: 0.5rem; 
-    text-align: center; 
+    padding-left: 1rem; 
+    text-align: left; 
     border: 1px solid #223;
-    width: 4rem;
 }
 
 
@@ -139,6 +145,7 @@
     margin: 0;
     height: 100%;
     line-height: 100%;
+    position: relative;
 }
 #correcteur_d_evaluation {
     top: 1.25rem;
@@ -146,7 +153,6 @@
 }
 #bonne_reponse, #check_mark_container {
     display: inline-block;
-    position: relative;
 } 
 #evaluation_reponse, #correcteur_d_evaluation {
     display: inline-block;
@@ -155,8 +161,9 @@
     padding: 0;
 }
 #evaluation_cross {
+    position: absolute;
     display: none;
-    width: 3rem;
+    width: 100%;
     border-radius: 0.5rem 0.5rem 0 0;
     top: 0;
     padding: 0;
@@ -165,7 +172,6 @@
     transition: 0.15s;
 }
 #mauvaise_reponse, #evaluation_cross {
-    position: absolute;
     margin: 0;
     text-align: center;
 }
@@ -173,13 +179,13 @@
     position: absolute;
     margin: 0;
     padding: 0;
-    width: 2rem;
-    height: 2rem;
-    font-size: 2rem;
+    width: 3rem;
+    height: 3rem;
+    font-size: 3rem;
     text-align: center;
 }
 #check_mark{  color: blue; transform: rotateY(180deg); }
-#check_mark_cover { transition: 1s; background-color: var(--couleur_f); }
+#check_mark_cover { transition: 0.6s; background-color: var(--couleur_f); }
 
 
 
@@ -268,7 +274,7 @@
 }
 
 #evaluation_dialogue_btn {  
-    top: 8.5rem;
+    top: 12.5rem;
     background-color: var(--couleurNeutre);
     box-shadow: var(--shadow_1a);
     box-sizing: border-box;
@@ -347,14 +353,15 @@
     font-weight: bold;
 }
 #check_mark_container {
+    position: absolute;
     display: none;
     background-color: var(--couleur_f);
     padding: 0;
     margin: 0;
-    height: 2rem;
-    width: 2rem;
+    height: 3rem;
+    width: 3rem;
     text-align: center;
-    line-height: 2rem;
+    line-height: 3rem;
     top: 0.25rem;
     border-radius: 50%;
     overflow: hidden;
@@ -376,7 +383,7 @@
 
 
 #evaluation_foot { 
-    height: 6rem;
+    height: 10rem;
     min-height: 12rem; 
     max-height: 16.5rem; 
     bottom: 0; 
@@ -386,8 +393,8 @@
     position: absolute;
     top: 0;
     height: 6rem; 
-    width: 80%;
-    margin: 0 10%; 
+    width: 98%;
+    margin: 0 1%; 
     border-radius: 0.5rem 0.5rem 0 0;
     overflow: hidden;
     transition: 0.3s;

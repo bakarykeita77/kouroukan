@@ -216,7 +216,7 @@ button:active { background-color: #ccc; }
         right: 0;
         width: 60%;
         margin: 0;
-        padding: 0 var(--paddingLarge);
+        padding: 0 var(--1rem);
         box-sizing: border-box;
     }
     

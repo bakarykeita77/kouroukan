@@ -360,7 +360,7 @@
         });
 
         element.css('display','block');
-        setTimeout(() => { element.animate({'top':0}, 400); }, 200);
+        setTimeout(() => { element.animate({'top':0}, 400); }, 1200);
     }
     function goUp(element) {
         element.animate({'top':'-100%'}, 400);
@@ -401,6 +401,9 @@
     }
     function initialiserProgressBar() { 
         $('.progress_mauvaise_reponse_bar, .progress_bonne_reponse_bar').css('width',0);
+    }
+    function initialiserProgressBarIntegre() { 
+        $('.progress_mauvaise_reponse_bar_integre, .progress_bonne_reponse_bar_integre').css('width',0);
     }
     function initialiserProgressBarr() { 
         $('.parametres_popup td').on('click', function() {

@@ -11,15 +11,15 @@
 
 #logo {
     position: absolute;
-    margin: var(--marginSmall);
+    margin: var(-- 0.25rem);
     padding: 0;
     top: 0;
     left: 2rem;
 	width: 5rem;
 	height: 5rem;
-	border-radius: var(--radiusCircle);
+	border-radius: var(--50%);
 	box-sizing: border-box;
-	box-shadow: var(--shadow_1a);
+	box-shadow: var(--0 0 1rem #aaa);
 	overflow: hidden;
 	background-color: var(--couleureNeutre);
 	z-index: 1;
@@ -38,8 +38,8 @@
     bottom:0; 
     background-color:var(--couleureNeutre); 
     border:var(--borderPrimaire); 
-    border-radius: var(--radiusSmall); 
-    padding:var(--paddingSmall);
+    border-radius: var(--0.25rem); 
+    padding:var(--0.25rem);
     font-size:10px; 
     overflow:hidden; 
     right:50%; 
@@ -52,12 +52,12 @@
 #profile_menu_container {
     position: absolute;
     border: 1px solid transparent; 
-    border-radius: var(--radiusSmall);
+    border-radius: var(--0.25rem);
     box-shadow: 0 0 1rem #aaa;
     width: 100%;
     max-width: 400px;
-    margin: var(--marginSmall)*2 0;
-    padding: var(--paddingMedium);
+    margin: var(-- 0.25rem)*2 0;
+    padding: var(--0.5rem);
     top: 3rem;
     left: 0;
     background-color: #fff;
@@ -90,7 +90,7 @@
     left: 3vw;
     border: 1px solid transparent;
     overflow: hidden;
-    border-radius: var(--radiusSmall);
+    border-radius: var(--0.25rem);
     box-sizing: border-box;
     box-shadow: 0 0 16px #666;
     transform: scale(0.6);
@@ -104,28 +104,28 @@
 .matiere_menu {
     display: inline-block;
     width: 40%;
-    margin: 0 var(--marginLarge);
+    margin: 0 var(--1rem);
     vertical-align: top;
 }
 #liste_des_matieres_apprises, #liste_des_matieres_a_apprendre {
     position: relative;
     border: 1px solid #ccc;
-    border-radius: var(--radiusSmall);
+    border-radius: var(--0.25rem);
     padding: 0;
     text-align: right;
     overflow: auto;
     height: 120px;
 }
 .matiere_menu h3 {
-    margin: var(--marginMedium) 0 0;
-    padding: 0 var(--paddingLarge);
+    margin: var(-- 0.5rem) 0 0;
+    padding: 0 var(--1rem);
     text-align: right;
 }
 .matiere_menu ul {
     position: absolute;
     top: 0;
-    padding: 0 var(--paddingLarge);
-    margin: var(--marginMedium) 0;
+    padding: 0 var(--1rem);
+    margin: var(-- 0.5rem) 0;
 }
 .rien{
     position: absolute;
@@ -141,7 +141,7 @@
 
 #profile_teste_menu p {
     margin: 0;
-    padding: 0 var(--paddingLarge);
+    padding: 0 var(--1rem);
     height: 24px;
     line-height: 24px;
 }
@@ -149,18 +149,18 @@
     background-color: #fff;
     height: 70vh;
     margin: 0;
-    padding-top: var(--paddingLarge)*2;
+    padding-top: var(--1rem)*2;
     box-sizing: border-box;
 }
 #fermeture_affiche{
     position: absolute;
-    margin: var(--marginSmall);
+    margin: var(-- 0.25rem);
     width: 20px;
     height: 20px;
     line-height: 20px;
     text-align: center;
     background-color: #ddd;
-    border-radius: var(--radiusCircle);
+    border-radius: var(--50%);
     cursor: pointer;
     left: 0;
     top: 0;
@@ -182,17 +182,17 @@
     position: relative;
     top: 4px;
     padding: 0;
-    margin: 0 var(--marginLarge);
+    margin: 0 var(--1rem);
 }
 #teste_switcher td {
     display: inline-block;
     height: 16px;
     width: 16px;
-    margin: 0 var(--marginSmall);
+    margin: 0 var(-- 0.25rem);
     line-height: 16px;
     text-align: center;
     border: 1px solid #ddd;
-    border-radius: var(--radiusCircle);
+    border-radius: var(--50%);
 }
 #profile_teste_thead, #profile_teste_tbody, #profile_teste_tfoot {
     display: block;
@@ -213,7 +213,7 @@
 }
 #profile_teste_thead th, #profile_teste_tfoot td{ 
     top: 0;
-    margin: var(--marginSmall);
+    margin: var(-- 0.25rem);
     background-color: #aaa; 
 }
 #affiche_table tr:nth-child(even){ background-color: #eee; }
@@ -227,7 +227,7 @@
 }
 #profile_teste_tfoot tr td:first-child {
     width: 228px;
-    padding: 0 var(--paddingLarge);
+    padding: 0 var(--1rem);
     text-align: right;
 }
 
@@ -268,9 +268,9 @@
 	    display: inline;
 		overflow: auto;
 		cursor: pointer;
-		border-radius: var(--radiusSmall);
-		padding: var(--paddingSmall);
-		margin: 0 var(--marginSmall);
+		border-radius: var(--0.25rem);
+		padding: var(--0.25rem);
+		margin: 0 var(-- 0.25rem);
 	}
 	
     #menu_deroulant {
@@ -299,11 +299,11 @@
 	    padding: 0;
 	    height: 100%;
 	    line-height: 3rem;
-	    margin-left: var(--marginSmall)*10;
+	    margin-left: var(-- 0.25rem)*10;
 	}
     #menu_deroulant ul {
         width: 100%;
-        margin: var(--marginSmall);
+        margin: var(-- 0.25rem);
     }
     #menu_non_deroulant ul {
         margin: 0;
@@ -318,7 +318,7 @@
 	    display: none;
 	    width: 100%;
 	    margin: 0;
-	    padding: var(--paddingSmall);
+	    padding: var(--0.25rem);
 	    top: 3.5em;
 	    right: 0;
 	    background-color:#eee;
@@ -333,8 +333,8 @@
 	    padding: 0;
 	}
 	#menu_deroulant li {
-	    padding: 0 var(--paddingLarge);
-		margin: var(--marginSmall);
+	    padding: 0 var(--1rem);
+		margin: var(-- 0.25rem);
 		height: 2em;
 		line-height: 2rem;
 		background-color:#fff;
@@ -348,7 +348,7 @@
 	#menu_non_deroulant {
 	    height: 100%;
 	    width: 75%;
-	    padding: 0 var(--paddingLarge);
+	    padding: 0 var(--1rem);
 	    box-sizing: border-box;
 	}
 	#menu_non_deroulant ul {
@@ -363,12 +363,12 @@
 	}
 	#menu_non_deroulant ul li {
 	    display: inline-block;
-	    border-radius: var(--radiusSmall);
+	    border-radius: var(--0.25rem);
 	    height: 2rem;
 	    line-height: 2rem;
 	    width: 30%;
-	    margin: var(--marginSmall);
-	    padding: 0 var(--paddingLarge);
+	    margin: var(-- 0.25rem);
+	    padding: 0 var(--1rem);
         font-size: 0.8rem;
 	    text-align: center;
 	    box-sizing: border-box;
@@ -387,9 +387,9 @@
     #profile_utilisateur_renseignements, #profile_utilisateur_image_container{
         position: relative;
         display: inline-block;
-        margin: var(--marginSmall);
+        margin: var(-- 0.25rem);
         height: 172px;
-        border-radius: var(--radiusSmall);
+        border-radius: var(--0.25rem);
         vertical-align: top;
     }
     #profile_utilisateur_renseignements{
@@ -417,8 +417,8 @@
         position: relative;
         width: 100%;
         display: block;
-        margin: var(--marginSmall);
-        border-radius: var(--radiusSmall);
+        margin: var(-- 0.25rem);
+        border-radius: var(--0.25rem);
     }
     #profile_utilisateur_image_container img{
         height: auto;

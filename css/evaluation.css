@@ -185,7 +185,7 @@
     text-align: center;
 }
 #check_mark{  color: blue; transform: rotateY(180deg); }
-#check_mark_cover { transition: 0.6s; background-color: var(--couleur_f); }
+#check_mark_cover { transition: 0.6s; background-color: var(--#fff); }
 
 
 
@@ -239,8 +239,8 @@
 }
 #evaluation_fiche_body .affiche_reponse {
     margin: 0;
-    border-left-color: var(--couleur_f);
-    border-right-color: var(--couleur_f);
+    border-left-color: var(--#fff);
+    border-right-color: var(--#fff);
     overflow: hidden;
 }
 .affiche_reponse { right:0; }
@@ -276,7 +276,7 @@
 #evaluation_dialogue_btn {  
     top: 12.5rem;
     background-color: var(--couleurNeutre);
-    box-shadow: var(--shadow_1a);
+    box-shadow: var(--0 0 1rem #aaa);
     box-sizing: border-box;
 }
 #evaluation_dialogue_btn:active { box-shadow: none; }
@@ -340,7 +340,7 @@
 #fiche_croix { color: rgba(255,0,0,0.5); }
 #lesson_entete div { width: 160px; overflow: hidden; }
 .stop_btn_container, .oreille_icon_container { display: none; }
-#evaluation_clavier_container { border-radius: var(--radiusSmall); }
+#evaluation_clavier_container { border-radius: var(--0.25rem); }
 #reponse {
     position: relative;
     height: 8rem;
@@ -355,7 +355,7 @@
 #check_mark_container {
     position: absolute;
     display: none;
-    background-color: var(--couleur_f);
+    background-color: var(--#fff);
     padding: 0;
     margin: 0;
     height: 3rem;
@@ -365,7 +365,7 @@
     top: 0.25rem;
     border-radius: 50%;
     overflow: hidden;
-    box-shadow: var(--shadow_36);
+    box-shadow: var(--0 0 3rem #666);
     z-index: 1;
 }
 #reponse, #check_mark_container { vertical-align: top; }

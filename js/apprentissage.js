@@ -598,7 +598,7 @@ function apprentissages() {
 
                 chargerApprendrePreSyllabe();
                 afficherApprendrePreSyllabe();
-                apprentissagePreAlpSyllabe();
+                apprentissagePreSyllabe();
                 enregistrerApprendrePreSyllabe();
                 progressBarrApprendrePreSyllabe();
                 stockerApprendrePreSyllabe();
@@ -614,6 +614,7 @@ function apprentissages() {
 
                     
                     function chargerEnteteDePreSyllabe() {
+alert('nous sommes dans pre_syllabe');
                         $('.notification_titre').html('ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ');
                     }
                     function chargerCorpsDePreSyllabe() {
@@ -703,6 +704,9 @@ function apprentissages() {
                     }
                 }
                 function afficherApprendrePreSyllabe() {
+
+                    $('#apprentissage_container > div:nth-child(1)').css('display','none');
+                    $('#apprentissage_container > div:nth-child(2)').css('display','block');
                     
                     afficherLePanneauDesConsonnes();
                     masquerLePanneauDesConsonnes();
@@ -757,7 +761,7 @@ function apprentissages() {
                         });
                     }
                 }
-                function apprentissagePreAlpSyllabe() {
+                function apprentissagePreSyllabe() {
                     
                     $('#apprentissage_body').click(function(e) {
                             

@@ -11,5 +11,5 @@
 #submit_btn{ 
     width: 200px; 
     border: var(--borderPrimaire); 
-    border-radius: var(--radiusSmall); 
+    border-radius: var(--0.25rem); 
 }

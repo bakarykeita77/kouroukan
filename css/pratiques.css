@@ -88,7 +88,7 @@
     height: 100%;
     width: 100%;
     background-color: #fff;
-    border-radius: var(--radiusSmall);
+    border-radius: var(--0.25rem);
     z-index: 2;
 }
 #pratique_options div { margin-top: 2rem; }
@@ -128,7 +128,7 @@
 #guide_container {
     width: 100%;
     background-color: #eee;
-    border: var(--border_e);
+    border: var(--1px solid #eee);
     overflow-y: hidden;
     z-index: 1;
 }
@@ -143,7 +143,7 @@
 }
 #reponse_container {
     position: relative;
-    background-color: var(--couleur_f);
+    background-color: var(--#fff);
     margin: 0;
     height: 2.5rem;
     line-height: 2rem;
@@ -262,7 +262,7 @@
 }
 #pratique_clavier_container { 
     position: relative;
-    border-radius: var(--radiusSmall); 
+    border-radius: var(--0.25rem); 
 }
 #pratiques_images_container {
     position: absolute;
@@ -317,7 +317,7 @@
 }
 #pratique_travail_foot span:first-child { float: right; }
 #pratique_travail_foot span:last-child {
-    border: var(--border_c);
+    border: var(--1px solid #ccc);
      width: 15%;
      text-align: center; 
     float: left; 

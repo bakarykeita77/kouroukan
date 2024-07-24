@@ -23,13 +23,13 @@
 .bulles_container p { 
     position: relative;
     display: inline-block; 
-    margin: var(--marginSmall);
+    margin: var(-- 0.25rem);
     width: 2rem;
     height: 2rem;
     line-height: 2rem;
     text-align: center;
     font-weight: bold;
-    border: var(--border_b);
+    border: var(--1px solid #bbb);
     border-radius: 50%;
     cursor: pointer;
 }

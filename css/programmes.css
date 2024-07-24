@@ -11,7 +11,7 @@
     display: inline-block;
     padding: 1px;
     border: 1px solid #ddd;
-    border-radius: var(--radiusSmall);
+    border-radius: var(--0.25rem);
     width: 4rem;
     text-align: center;
 }
@@ -51,9 +51,9 @@
     justify-content: center;
 
     margin: 2rem auto;
-    padding: var(--paddingSmall);
+    padding: var(--0.25rem);
     border: 1px solid transparent;
-    box-shadow: var(--shadow_1a);
+    box-shadow: var(--0 0 1rem #aaa);
 }
 #programme_commentaire {
     padding: 1rem;

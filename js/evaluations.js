@@ -28,12 +28,9 @@ function evaluations() {
     chargerEvaluationAlphabet();
     afficheEvaluationAlphabet();
     evaluerAlphabet();
-    enregistrerExerciceAlphabet();
-    stockerEvaluationAlphabet();
+    // stockerEvaluationAlphabet();
     assistantEvaluationAlphabet();
-    finDEvaluationAlphabet();
-
-
+    finDeEvaluationAlphabet();
     initialiserEvaluation();
 
 
@@ -124,12 +121,12 @@ function evaluations() {
                 if(question_evaluation == '') rappel($('#evaluation_dialogue_btn'));
                 if(question_evaluation != '') {
                     
-                    var caractere = $(this).html();
+                    var caractere = $(this).text();
                     
-                    reponse_evaluation[reponse_evaluation.length] = caractere;
+                    reponse_evaluation.push(caractere);
                     $('#evaluation_reponse').html(reponse_evaluation.join(''));
                     afficherCorrectionButton();
-                    
+                  
                     function afficherCorrectionButton(){
                         $('.question_btn').css('display','none');
                         $('.repetition_btn').css('display','none');
@@ -150,31 +147,35 @@ function evaluations() {
             $('.correction_btn').on('click', function(){
                 
                 corrigerEvaluation();
-                masquerTesteContainer();
                 progressBarrEvaluationAlphabet();
-                effacerQuestion();
-                effacerCheckMark();
+                effacerQuestions();
                 afficherQuestionButton();
                 finDEvaluation();
                 
-                
+                                   
                 function corrigerEvaluation(){
-                    
+
                     let q = question_evaluation;
                     let r = reponse_evaluation.join('');
                     let p = (q == r) ? 1:0;
                     let question_reponse = [q,r,p];
-                    
-                    evaluation_counter++;
+                     
                     note_d_evaluation += p; 
-                    evaluation_a_stocker.splice(evaluation_counter,1,question_reponse);
-
-                    chargerEvaluationTbody();
-                    marquerReponseEvaluation(); 
+                    
+                    enregistrerExerciceAlphabet();
+                    chargerInstantannementEvaluationTbody();
+                    marquerReponseEvaluation();
+                    effacerCheckMark(); 
+                    masquerTesteContainer();
                     setTimeout(() => { defilementDuContenuLeHaut($('#evaluation_tbody')); }, 1200);
 
-                                    
-                    function chargerEvaluationTbody() {
+                    evaluation_counter++;
+
+                    
+                    function enregistrerExerciceAlphabet() { 
+                        evaluation_a_stocker.splice(evaluation_counter,1,question_reponse); 
+                    }
+                    function chargerInstantannementEvaluationTbody() {
 
                         var n = parseIntNko(evaluation_counter);
                         n = (n == '߁') ? n+'߭' : n+'߲';
@@ -212,9 +213,14 @@ function evaluations() {
                             $('#evaluation_reponse p').html('');
                         }, 2000);
                     } 
-                }
-                function masquerTesteContainer() { 
-                    setTimeout(() => { $('#teste_container').css({'top':0}); }, 1000); 
+                    function effacerCheckMark() {
+                        setTimeout(function(){
+                            $('#check_mark').empty();
+                        }, 1000);
+                    }
+                    function masquerTesteContainer() { 
+                        setTimeout(() => { $('#teste_container').css({'top':0}); }, 1000); 
+                    }
                 }
                 function progressBarrEvaluationAlphabet() {
             
@@ -239,15 +245,10 @@ function evaluations() {
                         }
                     }
                 }
-                function effacerQuestion() {
+                function effacerQuestions() {
                     question_evaluation = '';
                     reponse_evaluation.splice(0,reponse_evaluation.length);
                     $('#reponse').html(reponse_evaluation);
-                }
-                function effacerCheckMark() {
-                    setTimeout(function(){
-                        $('#check_mark').empty();
-                    }, 1000);
                 }
                 function afficherQuestionButton(){
                     $('.correction_btn').css('display','none');
@@ -263,7 +264,6 @@ function evaluations() {
             });
         }
     }
-    function enregistrerExerciceAlphabet() {}
     function stockerEvaluationAlphabet() {
         $('.correction_btn').on('click', function(){
             let index_phase_active = $('.phases_container ul li .active').index();
@@ -271,12 +271,13 @@ function evaluations() {
             if(evaluation_counter == nbr_max_de_questions_a_poser) {
                 if(note_d_evaluation <  moyenne_d_evaluation) alert( "ߛߍ߬ߦߵߊ߬ ߡߊ߬" ); 
                 if(note_d_evaluation >= moyenne_d_evaluation) {
-                    if(phase_class == "apprises") {alert("ߦߙߐ ߢߌ߲߬ ߞߍߣߍ߲߫ ߞߘߐ ߟߋ߬"); return false;}
+                    // if(phase_class == "apprises") {alert("ߦߙߐ ߢߌ߲߬ ߞߍߣߍ߲߫ ߞߘߐ ߟߋ߬"); return false;}
                    
                     let phase_nbr = JSON.parse(sessionStorage.getItem('data_phase_nbr'));
-                    sendEvaluationToDB();
+                    sendLessonDataToDB('alphabet_evaluation',evaluation_a_stocker);
                     changerPhaseActive(index_phase_active);
                     sessionStorage.setItem('phase_nbr',JSON.stringify(phase_nbr));
+                    console.log('Les données de Alphabet_evaluation sont envoyées à la base de données.');
                     
                     
                     if(index_phase_active === total_phase) {
@@ -285,59 +286,54 @@ function evaluations() {
                         sessionStorage.setItem('phase_nbr',JSON.stringify(0));
                     }
                 }
-                
-                    
-                function sendEvaluationToDB() {
-                   
-                    let matiere = JSON.parse(sessionStorage.getItem('matiere_active')); // Voir programmes.js fonction storagesDuProgramme()
-                    let phase   = JSON.parse(sessionStorage.getItem('phase'));  // Voir lessons.js fonction phaseActiveName()
-                    let lesson  = JSON.stringify(evaluation_a_stocker);
-                            
-                        
-                    const evaluation_data = new URLSearchParams({
-                        id     : id,
-                        matiere: matiere,
-                        niveau : niveau_actif,
-                        phase  : phase,
-                        lesson : lesson,
-                        note   : note_d_evaluation
-                    });
-           
-                    fetch("/kouroukan/php/actions.php", {
-                        method: "POST",
-                        body: evaluation_data 
-                    })
-                    .then(response =>  response.text())
-                    .catch(error => console.log(error));
-                }
             }
         });
         $('#fermer_evaluation').on('click', function() {
             (location.replace("/kouroukan/php/programmes.php"))();
         });
     }
-    function assistantEvaluationAlphabet() {}
-    function finDEvaluationAlphabet() {
+    function assistantEvaluationAlphabet() {
         $('.notification_titre').text('ߛߓߍߛߎ߲ ߞߘߐߓߐߟߌ');
-            setTimeout(() => {
-                ecrire('notification_corps','\
-                    ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ߬ ߞߘߎ ߘߌ߲߯ ߘߎ߭ߡߊ߬߸ ߦߴߌ ߕߟߏߡߊߟߐ߬߸ߦߋ߫ ߛߓߍߘߋ߲߫ ߟߊߡߍ߲ߣߍ߲ ߛߓߍ߫߸ ߤߊ߲߯ ߞߘߐߓߐߟߌ ߦߋ߫ ߓߊ߲߫.\
-                ');
-            }, 1000);
-        }
-
+        setTimeout(() => {
+            ecrire('notification_corps','\
+                ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ߬ ߞߘߎ ߘߌ߲߯ ߘߎ߭ߡߊ߬߸ ߦߴߌ ߕߟߏߡߊߟߐ߬߸ߦߋ߫ ߛߓߍߘߋ߲߫ ߟߊߡߍ߲ߣߍ߲ ߛߓߍ߫߸ ߤߊ߲߯ ߞߘߐߓߐߟߌ ߦߋ߫ ߓߊ߲߫.\
+            ');
+        }, 1000);
+    }
+    function finDeEvaluationAlphabet() {
+        $('.correction_btn').on('click', function(){
+            if(evaluation_counter == nbr_max_de_questions_a_poser) {
+                chargerResultat(evaluation_a_stocker);
+                afficherEvaluationAlphabetResultat();
+                reprendreEvaluationAlphabet();
+                continuSurSyllabe();
+                
+                function afficherEvaluationAlphabetResultat() {
+                    goDown($('.resultat_container'));
+                    setTimeout(() => { masquerCourse($('#evaluation')); }, 1500);
+                }
+                function reprendreEvaluationAlphabet() {
+                    $('#reprendre').click(function() {
+                        $('#envelope').css('display','none');
+                        goUp($('.resultat_container'));
+                        initialiserProgressBarIntegre();
+                        afficherCourse($('#evaluation'));
+                        $('#alphabet_evaluation').click();
+                    });
+                }
+                function continuSurSyllabe() {
+                    $('#avance').html("<a href='http://localhost/kouroukan/php/programmes.php'>ߜߋ߲߭ ߥߟߊ߬ߘߊ ߕߊ߬ ߦߊ߲߬</a>");
+                }
+            }
+        });
+    }
+        
     
     function initialiserEvaluation() {
-        
-        initialiserEvaluationAStocker();
-       
-        function initialiserEvaluationAStocker() {
-            for(var i = 0; i < 20; i++) questions_a_evaluer[i] = questions_evaluation[i];
-            for(var i=0;i<questions_a_evaluer.length;i++) {
-
-                var q = questions_a_evaluer[i], r = '', p = 0;
-                evaluation_a_stocker[i] = [q,r,p];
-            } 
+        for(var i = 0; i < 20; i++) questions_a_evaluer[i] = questions_evaluation[i];
+        for(var i=0;i<questions_a_evaluer.length;i++) {
+            var q = questions_a_evaluer[i], r = '', p = 0;
+            evaluation_a_stocker[i] = [q,r,p];
         }
     }
 }

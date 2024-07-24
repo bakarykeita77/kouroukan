@@ -10,7 +10,7 @@
 #exercice_foot { height: 5rem; }
 #exercice_dialogue_btn div  { 
     text-align: center; 
-    padding: var(--paddingSmall);
+    padding: var(--0.25rem);
     margin: 0 auto; 
     box-sizing: border-box;
 }

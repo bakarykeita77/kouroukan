@@ -67,6 +67,7 @@ if(isset($_SESSION["id"])) {
             Fermetre du cours -->
             <span class="fermeture" id="">&times;</span>
             
+
           <!-------------------------------------------------------------------------------------------------------------
           
             Ces div contiennent les cours. Chacune d'elle s'affiche au click du nom correspondant au cours dans la div coursse_container -->

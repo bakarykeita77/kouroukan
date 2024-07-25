@@ -21,6 +21,7 @@
     chargementDuProgramme();
     styleDuProgramme();
    // alerteDuProgramme();
+    choixDeProcedureDEtude()
     storagesDuProgramme();
 
 
@@ -49,13 +50,24 @@
                 }
                 
                 if(niveau_max > 0) {
+                    // var phases_lien = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees+'&derniere_phase='+derniere_phase;
+                    
+                    // if (niveau_max < matiere_index || $('#'+matiere_id).hasClass('a_apprendre')) {
+                    //     if(matiere_index > 0) programme_html += '<li><a href="#">'+liste_de_matieres[i][1]+'</a></li>';
+                    // }
+                    // if (niveau_max >= matiere_index || $('#'+matiere_id).hasClass('active')) {
+                    //     programme_html += '<li id="'+liste_de_matieres[i][0]+'"><a href="'+phases_lien+'">'+liste_de_matieres[i][1]+'</a></li>\n\n';
+                    // }
+
+
+
                     var phases_lien = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees+'&derniere_phase='+derniere_phase;
                     
                     if (niveau_max < matiere_index || $('#'+matiere_id).hasClass('a_apprendre')) {
-                        if(matiere_index > 0) programme_html += '<li><a href="#">'+liste_de_matieres[i][1]+'</a></li>';
+                        if(matiere_index > 0) programme_html += '<li>'+liste_de_matieres[i][1]+'</li>';
                     }
                     if (niveau_max >= matiere_index || $('#'+matiere_id).hasClass('active')) {
-                        programme_html += '<li id="'+liste_de_matieres[i][0]+'"><a href="'+phases_lien+'">'+liste_de_matieres[i][1]+'</a></li>\n\n';
+                        programme_html += '<li id="'+liste_de_matieres[i][0]+'">'+liste_de_matieres[i][1]+'</li>\n\n';
                     }
                 }
             }
@@ -90,6 +102,10 @@
             if($(this).hasClass('a_apprendre')) { alert("ߘߊߞߎ߲ ߡߊ߫ ߛߋ߫ ߦߊ߲߬ ߡߊ߫ ߝߟߐ߫");   return false; }
             if($(this).hasClass('apprises'))    { alert("ߕߊ߲߬ߓߌ߬ ߓߘߊ߫ ߞߍ߫ ߦߊ߲߬ ߘߐ߫ ߞߘߐ߬ߡߊ߲߬"); return false; }
         });
+    }
+    function choixDeProcedureDEtude() {
+        $('#programme_ul li').click(function() { afficherCourse($('#lesson_options')); });
+        $('#fermer_lesson_option').click(function() { $('#lesson_options').css('display','none'); });
     }
     function storagesDuProgramme() {
         $('#programme_ul li').on('click', function(){

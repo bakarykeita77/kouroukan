@@ -150,15 +150,17 @@ $('document').ready(function() {
             var course_id = phase_id.split('_')[1];
             var autorisation_d_acces_aux_cours = 'non';
             
-            sessionStorage.setItem('phase', JSON.stringify(phase_id));
             sessionStorage.setItem('phase_class', JSON.stringify(phase_class));
+            sessionStorage.setItem('phase', JSON.stringify(phase_id));
+            sessionStorage.setItem('phase_nom', JSON.stringify(phase_nom));
             sessionStorage.setItem("course_id", JSON.stringify(course_id));
             sessionStorage.setItem("phase_id", JSON.stringify(phase_id));
 
          /*--------------------------------------------------------------------*/ 
          
-            autorisationDAccesAuxCours();
-            suivreLesCours();
+            autorisationDAccesAuxCours(); 
+            choixDeProcedures();
+            // suivreLesCours();
             
          /*--------------------------------------------------------------------*/  
 
@@ -190,6 +192,19 @@ $('document').ready(function() {
                     });
                     return frecance;
                 }  
+            }
+            function choixDeProcedures() {
+                afficherCourse($('.course_container'));
+                // afficherCourse($('#apprentissage_container > div:nth-child(2)'));
+
+                // $('#lesson_option_1').click(function(){
+                //     $('.fermeture').attr('id', 'fermer_pre_apprentissage'); 
+                //     preApprentissage(); 
+                // });
+                // $('#lesson_option_2').click(function(){ 
+                //     $('.fermeture').attr('id', 'fermer_apprentissage'); 
+                //     apprentissage();
+                // });
             }
             function suivreLesCours() {              
                 if(autorisation_d_acces_aux_cours == 'oui') {

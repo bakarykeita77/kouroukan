@@ -44,11 +44,24 @@ if(isset($_SESSION['id'])) {
 
                      <!-- Ce programme est chargé dans programmes.js par la fonction chargementDuProgramme(). -->
                         <div id="programme_matieres"></div>
+                              
                     </div>
-
                 </div>
             </div>
-            <div class="page_foot"><?php include("pied-de-lesson.php"); ?></div>
+    
+         <!------------------------------------------------------------------------------------------------------------->
+        
+            <div id="lesson_options">
+                <span class="fermeture" id="fermer_lesson_option">&times;</span>
+                <div id="lesson_options_content">
+                    <div id="option_titre">ߌ ߢߣߊߕߊ߬ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߞߍߢߊ߫ ߂ ߢߌ߲߬ ߠߎ߬ ߘߐ߫</div>
+                    <div>
+                        <p id='lesson_option_1'><span>߁߭</span> - ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߘߏߣߍ߲߫ ߘߏߣߍ߲߫ ߘߋ߲߮</p>
+                        <p id='lesson_option_2'><span>߂߲</span> - ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߜߘߏߓߊ߫ ߘߋ߲߮</p>
+                    </div>
+                </div>
+            </div>
+        
         </div>
         
         <script src = "/kouroukan/js/programmes.js"></script>

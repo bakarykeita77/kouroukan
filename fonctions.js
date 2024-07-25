@@ -33,12 +33,13 @@
     function afficherCourse(course) {
         course.css({
             'display':'block', 
-            'transform':'scale(0.75)', 
+            'left':'50%', 
+            'transform':'translateX(-50%) scale(0.75)', 
             'opacity':'0.25',
             'transition':'0.8s'
         });
         setTimeout(function() { course.css({
-            'transform':'scale(1)',
+            'transform':'translateX(-50%) scale(1)', 
             'opacity':1
         }); }, 5);
     }
@@ -207,6 +208,7 @@
             $('#pourcentage_point').text('%'+parseIntNko(taux_de_vraie_reponse));
         }
         function chargerDeliberation() {
+console.log(taux_de_vraie_reponse +' / '+ taux_acceptable_de_vraie_reponse);
             if(taux_de_vraie_reponse < taux_acceptable_de_vraie_reponse) {
                 $('#deliberation').html('ߌ ߖߌߖߊ߬ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ '+lesson_en_cours+' ߓߍ߬ߙߍ ߡߊ߫ ߤߊߟߌ߬ ߁߈ ߓߐ߫. ߏ߬ߘߐ߬߸ ߌ ߞߐߛߍ߬ߦߌ߬ ߦߊ߲߬ ߡߊ߫.'+reprendre_l_etape_en_cours);
             }else{

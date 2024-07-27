@@ -160,7 +160,7 @@ $('document').ready(function() {
          
             autorisationDAccesAuxCours(); 
             choixDeProcedures();
-            // suivreLesCours();
+            suivreLesCours();
             
          /*--------------------------------------------------------------------*/  
 
@@ -195,7 +195,7 @@ $('document').ready(function() {
             }
             function choixDeProcedures() {
                 afficherCourse($('.course_container'));
-                // afficherCourse($('#apprentissage_container > div:nth-child(2)'));
+                afficherCourse($('#apprentissage_container > div:nth-child(2)'));
 
                 // $('#lesson_option_1').click(function(){
                 //     $('.fermeture').attr('id', 'fermer_pre_apprentissage'); 

@@ -38,6 +38,7 @@
     overflow-x: auto;
     overflow-y: hidden;
     text-align: center;
+    cursor: pointer;
 }
 #programme_ul a {
     text-decoration: none;
@@ -49,15 +50,11 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-
-    margin: 2rem auto;
-    padding: var(--0.25rem);
+    margin: 1rem auto;
     border: 1px solid transparent;
-    box-shadow: var(--0 0 1rem #aaa);
 }
 #programme_commentaire {
     padding: 1rem;
-    margin: 1rem 0;
     background-color: #eee;
 }
 #programme_commentaire p {
@@ -82,15 +79,19 @@
 }
 #lesson_options_content {
     position: relative;
-    width: 25rem;
+    width: 30rem;
     margin: auto;
     padding: 1rem;
-    top: 20%;
+    top: 25%;
 }
-#lesson_options div:nth-child(1) { font-weight: bold; margin-bottom: 0.5rem; }
-#option_titre { padding: 0.25rem 2rem; font-size: 1.2rem; }
+#lesson_options_titre { 
+    padding: 1rem 2rem; 
+    font-size: 1.2rem;
+    font-weight: bold; 
+    margin-bottom: 0.125rem;  
+    background-color: #ccc;
+}
 #lesson_options p { 
-    border-radius: 0.5rem;
     padding: 0.25rem 2rem;
     margin: 0.125rem;
     border: 1px solid transparent;
@@ -98,8 +99,11 @@
     border-bottom-color: #ccc;
     cursor: pointer; 
 }
-#lesson_options p:hover { background-color: #ddd; }
-#lesson_options p:hover { background-color: #ddd; }
+#lesson_options p a {
+    color: #000;
+    text-decoration: none;
+}
+#lesson_options p:hover { background-color: #eee; }
 #lesson_options span:not(.fermeture) { 
     display: inline-block;
     position: relative;

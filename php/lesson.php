@@ -43,7 +43,7 @@ if(isset($_SESSION["id"])) {
                <!---------------------------------------------------------------------------------------------------------
 
                Le titre de la page de lessons -->  
-                <h4>ߘߋ߰ߟߌ ߞߛߊߞߊ <span class="niveau_courant"><?= $chiffres[$niveau]; ?></span><span class='rang'></span> :</h4>  
+                <h4>ߘߋ߰ߟߌ ߞߛߊߞߊ <span class="niveau_courant"><?= $chiffres[(integer)$niveau]; ?></span><span class='rang'></span> :</h4>  
                 <h1 class="lesson_title" id="<?= $matiere_id ?>"> <?= $matiere_nom; ?> ߥߟߊ߬ߘߊ  </h1> 
 
                <!---------------------------------------------------------------------------------------------------------

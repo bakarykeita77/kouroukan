@@ -1158,6 +1158,7 @@ del {
         height: 8rem;  
         padding: 1rem; 
         margin-bottom: 2rem;
+        border: 1px solid #ccc;
     }
     .phases li {
         display: inline-block;

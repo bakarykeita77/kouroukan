@@ -9,9 +9,7 @@ if(isset($_SESSION['id'])) {
         <title>programmes</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
     	<link rel="stylesheet" href="/kouroukan/css/programmes.css"/>
-        
         <script src = "/kouroukan/js/caracteres.js"></script>
     </head>
     <body>
@@ -54,10 +52,10 @@ if(isset($_SESSION['id'])) {
             <div id="lesson_options">
                 <span class="fermeture" id="fermer_lesson_option">&times;</span>
                 <div id="lesson_options_content">
-                    <div id="option_titre">ߌ ߢߣߊߕߊ߬ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߞߍߢߊ߫ ߂ ߢߌ߲߬ ߠߎ߬ ߘߐ߫</div>
+                    <div id="lesson_options_titre"></div>
                     <div>
-                        <p id='lesson_option_1'><span>߁߭</span> - ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߘߏߣߍ߲߫ ߘߏߣߍ߲߫ ߘߋ߲߮</p>
-                        <p id='lesson_option_2'><span>߂߲</span> - ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߜߘߏߓߊ߫ ߘߋ߲߮</p>
+                        <p id='lesson_option_1'></p>
+                        <p id='lesson_option_2'></p>
                     </div>
                 </div>
             </div>

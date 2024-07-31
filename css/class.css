@@ -1,9 +1,5 @@
 :root{
     
-    --borderPrimaire: 1px solid #aaa;
-    --borderSecondaire: 1px solid cornflowerblue;
-    --borderTertiaire: 1px solid yellow;
-    
     --border_a: 1px solid #aaa;
     --border_b: 1px solid #bbb;
     --border_c: 1px solid #ccc;
@@ -11,7 +7,6 @@
     --border_e: 1px solid #eee;
     --border_f: 1px solid #fff;
     --border_6: 1px solid #666;
-    --border_flowerBlue: 1px solid cornflowerblue;
     --border_yellow: 1px solid yellow;
     
     --couleurPrimaire: cornflowerblue;
@@ -40,8 +35,6 @@
     --paddingMedium: 0.5rem;
     --paddingLarge: 1rem;
     
-    --radiusSmall: 0.25rem;
-    --radiusMedium: 0.5rem;
     --radiusLarge: 1rem;
     --radiusCircle: 50%;
     
@@ -51,7 +44,6 @@
 
     --shadow_16: 0 0 1rem #666;
     --shadow_26: 0 0 2rem #666;
-    --shadow_36: 0 0 3rem #666;
 
     --shadow_10: 0 0 1rem #000;
     --shadow_20: 0 0 2rem #000;
@@ -66,7 +58,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 
 
 .actif, .active, .apprises, .a_apprendre {
-    border-radius: var(--radiusSmall);
+    border-radius: 0.25rem;
 }
 .actif, .active {
     background-color: rgb(255,255,0);
@@ -99,7 +91,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     width: 48%;
     height: 3rem;
     background-color: var(--couleurPrimaire);
-    border-radius: var(--radiusSmall);
+    border-radius: 0.25rem;
     text-align: center;
 }
 .asides_btn:first-child { float: right; }
@@ -185,7 +177,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     display: block;
     min-width: 3rem;
     margin: 0;
-    border-radius: var(--radiusSmall);
+    border-radius: 0.25rem;
 }
 .check_btn_container {
     position: relative;
@@ -197,7 +189,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 .check_btn_container table { height: 12rem; }
 .check_btn:hover {
     background-color: var(--couleurNeutre);
-    box-shadow: var(--shadow_36);
+    box-shadow: 0 0 3rem #666;
 }
 .check_consonnes {
     position: relative;
@@ -287,10 +279,10 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 }
 .correction_btn { cursor: pointer; }
 .course {    
-    position: absolute;
+    position: relative;
     display: none;
     background: #fff;
-    top: 3.5rem;
+    top: 3.25rem;
     width: calc(100vw - 1rem);
     max-width: 60rem;
     max-height: 45rem;
@@ -358,7 +350,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     height: 3rem;
     padding: 0;
     margin: 0.25rem auto;
-    border-radius: var(--radiusMedium);
+    border-radius: 0.5rem;
     font-weight: bold;
     transform: scale(0.9);
 }
@@ -626,7 +618,7 @@ del {
     margin: 0 1rem;
     padding: 0 0.5rem;
     border: var(--border_c);
-    border-radius: var(--radiusSmall);
+    border-radius: 0.25rem;
     cursor: pointer;
 }
 .media_btns {
@@ -640,8 +632,8 @@ del {
     bottom: calc(100% + 0.5rem);
     overflow: hidden;
     background-color: var(--couleurNeutre);
-    border-radius: var(--radiusSmall);
-    box-shadow: var(--shadow_36);
+    border-radius: 0.25rem;
+    box-shadow: 0 0 3rem #666;
     opacity: 0;
     transition: 1s;
 }
@@ -729,7 +721,7 @@ del {
 .parametre {
     background-color: var(--couleurNeutre);
     margin: 0 auto;
-    border-radius: var(--radiusSmall);
+    border-radius: 0.25rem;
     cursor: pointer;
 }
 .parametres_container {
@@ -739,13 +731,13 @@ del {
     bottom: calc(100% + 0.5rem);
     margin: 0;
     padding: 0;
-    box-shadow: var(--shadow_36);
+    box-shadow: 0 0 3rem #666;
     transition: 0.25s;
     z-index: 10;
 }
 .parametres_container .btn {
     margin: var(--marginSmall);
-    border-radius: var(--radiusSmall);
+    border-radius: 0.25rem;
 }
 .parametres_container .btn:hover { box-shadow: var(--shadow_3a); }
 .parametres_btns {
@@ -780,7 +772,7 @@ del {
     width: 100%; 
     max-width: 50rem;
     padding: var(--paddingLarge);
-    border-radius: var(--radiusSmall);
+    border-radius: 0.25rem;
     box-sizing: border-box;
     list-style: none;
 }
@@ -823,7 +815,7 @@ del {
     padding: 0 1rem;
     text-align: right;
     font-weight: bold;
-    border-radius: var(--radiusMedium);
+    border-radius: 0.5rem;
     overflow: hidden;
     cursor: pointer;
 }
@@ -831,7 +823,7 @@ del {
     height: 1.5rem;
     line-height: 1rem;
     border: 1px solid #aaa;
-    border-radius: var(--radiusSmall);
+    border-radius: 0.25rem;
     cursor: pointer; 
 }
 .ponctuations input, .ponctuations label { display: inline-block; vertical-align: middle; }
@@ -893,7 +885,7 @@ del {
     display: none;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 0.5rem;
+    bottom: 0.75rem;
     margin: 0;
     height: 3rem;
     width: calc(100% - 1.25rem);
@@ -1014,7 +1006,7 @@ del {
 .travail {
     position: relative;
     margin: 0.25rem;
-    border-radius: var(--radiusSmall);
+    border-radius: 0.25rem;
 }
 .travail:not(first-child) { margin-top: 0; }
 .travail:not(last-child) { border-bottom-color: var(--couleurTertiaire); }
@@ -1165,7 +1157,7 @@ del {
         width: 30%;
         min-width: 5rem;
     }
-    .course { height: calc(100% - 4rem); box-shadow: var(--shadow_36); }
+    .course { height: calc(100% - 4rem); box-shadow: 0 0 3rem #666; }
     .course_head, .course_body, .course_foot { 
         width: 100%; 
     }

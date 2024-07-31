@@ -276,7 +276,7 @@
 #evaluation_dialogue_btn {  
     top: 12.5rem;
     background-color: var(--couleurNeutre);
-    box-shadow: var(--0 0 1rem #aaa);
+    box-shadow: 0 0 1rem #aaa;
     box-sizing: border-box;
 }
 #evaluation_dialogue_btn:active { box-shadow: none; }

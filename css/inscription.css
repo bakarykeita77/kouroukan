@@ -12,9 +12,9 @@
 }
 #inscription_form {
 	left: 0;
-	border: 1px solid var(--borderPrimaire);
+	border: 1px solid 1px solid #aaa;
 	background-color: var(--couleurNeutre);
-	border-radius: var(--radiusMedium);
+	border-radius: 0.5rem;
 	box-sizing: border-box;
 }
 #inscription_form h2 {
@@ -61,7 +61,7 @@
 .input_box input:hover { 
 	background-color: #aaa;
 	opacity: 0.25;
-	border-radius: var(--radiusMedium);
+	border-radius: 0.5rem;
 	border-color: transparent;
 }
 .input_box:hover label { color: cornflowerblue; } 
@@ -108,7 +108,7 @@
     color: var(--couleurSecondaire); 
     text-decoration: none; 
     font-weight: bold; 
-    border-bottom: var(--borderTertiaire);
+    border-bottom: 1px solid yellow;
 }
  
 

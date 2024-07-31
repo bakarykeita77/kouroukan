@@ -8,7 +8,8 @@ if(isset($_SESSION["id"])) {
     $matiere_nom     = $_GET['matiere_nom'];
     $niveau          = $_GET['niveau'];
     $niveau_max      = $_GET['niveau_max'];
-    $phases_etudiees = ($matiere_index > 0) ? $_GET['phases_etudiees'] : "";
+    $phases_etudiees = ((integer)$matiere_index > 0) ? $_GET['phases_etudiees'] : "";
+    $lesson_option   = ((integer)$niveau <= 2) ? $_GET['lesson_option'] : 0;
 
     $chiffres = ['߀','߁','߂','߃','߄','߅','߆','߇','߈','߉'];
 ?>
@@ -38,13 +39,14 @@ if(isset($_SESSION["id"])) {
                     <p id='matiere_nom_container'   ><?= $matiere_nom; ?></p>
                     <p id='niveau_container'        ><?= $niveau; ?></p>
                     <p id='niveau_max_container'    ><?= $niveau_max; ?></p>
+                    <p id='lesson_option'           ><?= $lesson_option; ?></p>
                 </div>
 
                <!---------------------------------------------------------------------------------------------------------
 
                Le titre de la page de lessons -->  
                 <h4>ߘߋ߰ߟߌ ߞߛߊߞߊ <span class="niveau_courant"><?= $chiffres[(integer)$niveau]; ?></span><span class='rang'></span> :</h4>  
-                <h1 class="lesson_title" id="<?= $matiere_id ?>"> <?= $matiere_nom; ?> ߥߟߊ߬ߘߊ  </h1> 
+                <h1 class="lesson_title" id="<?= $matiere_id; ?>"> <?= $matiere_nom; ?> ߥߟߊ߬ߘߊ  </h1> 
 
                <!---------------------------------------------------------------------------------------------------------
 
@@ -71,12 +73,13 @@ if(isset($_SESSION["id"])) {
           <!-------------------------------------------------------------------------------------------------------------
           
             Ces div contiennent les cours. Chacune d'elle s'affiche au click du nom correspondant au cours dans la div coursse_container -->
-            <div class="course" id="apprentissage"> <?php include("apprentissage.php"); ?></div>
-            <div class="course" id="exercice">      <?php include("exercice.php");      ?></div>
-            <div class="course" id="pratique">      <?php include("pratiques.php");     ?></div>
-            <div class="course" id="evaluation">    <?php include("evaluation.php");    ?></div>
+            <div class="course" id="alphabet"> <?php include("alphabet.php"); ?></div>
+            <div class="course" id="syllabee"> <?php include("syllabee.php"); ?></div>
+            <div class="course" id="ton">      <?php include("ton.php");      ?></div>
+            <div class="course" id="chiffre">  <?php include("chiffre.php");  ?></div>
+
             
-            <div class="resultat_container">        <?php include("resultat.php"); ?>   </div>
+            <div class="resultat_container">        <?php include("resultat.php");      ?></div>
             <div class = 'progress_bar'>
               <div class='progress_bonne_reponse_bar'></div>
               <div class='progress_mauvaise_reponse_bar'></div>
@@ -105,6 +108,11 @@ if(isset($_SESSION["id"])) {
 
         <script src="../js/travaux.js"></script>
         <script src="../js/lessons.js"></script>
+        
+        <script src="../js/alphabet.js"></script>
+        <script src="../js/syllabe.js"></script>
+        <script src="../js/ton.js"></script>
+        <script src="../js/chiffre.js"></script>
 
         <script>
           document.write(

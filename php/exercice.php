@@ -11,8 +11,15 @@
 	<!--Course body ------------------------------------------------------------------ -->
 	<div class="course_body" id="exercice_body"></div>   <!--Cette division est chargé par la fonction chargerExercice() dans exeercice.js-->
 	<!--Course foot ------------------------------------------------------------------ -->
-	<div class="course_foot" id="pre_foot">
+	<div class="course_foot" id="apprentissage_foot">
 		<div class="dialogue_btn" id="exercice_dialogue_btn">
+			
+            <div class = 'progress_bar_integre'>
+                <div class='progress_bonne_reponse_bar_integre'></div>
+                <div class='progress_mauvaise_reponse_bar_integre'></div>
+            </div>
+
+
 			<div class='play_icon_container' id='exercices_player'>
 				<span class='play_label' id='exercice_play_label'>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ </span>
 				<span class='qtite_question'></span>
@@ -20,6 +27,7 @@
 				<span class='ordre_question'></span>
 				<span class='ecouter_question'> ߟߊߡߍ߲߫</span>
 			</div>
+
 			<div class='oreille_icon_container'>
 				<span class='reecoute_label'>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ <span id="question_rang"></span> ߟߊߡߍ߲߫ ߕߎ߯ߣߌ߫  </span> 
 				<span class='oreille_icon'>&#128066;</span>

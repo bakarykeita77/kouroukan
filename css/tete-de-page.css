@@ -11,17 +11,17 @@
 
 #logo {
     position: absolute;
-    margin: var(-- 0.25rem);
+    margin: 0.25rem;
     padding: 0;
     top: 0;
     left: 2rem;
 	width: 5rem;
 	height: 5rem;
-	border-radius: var(--50%);
+	border-radius: 50%;
 	box-sizing: border-box;
-	box-shadow: var(--0 0 1rem #aaa);
+	box-shadow: 0 0 1rem #aaa;
 	overflow: hidden;
-	background-color: var(--couleureNeutre);
+	background-color: #fff;
 	z-index: 1;
 }
 #logo img { width: 5rem; }
@@ -36,8 +36,8 @@
 #modifier_avatar {
     position:absolute; 
     bottom:0; 
-    background-color:var(--couleureNeutre); 
-    border:var(--borderPrimaire); 
+    background-color:#fff; 
+    border:1px solid #aaa; 
     border-radius: var(--0.25rem); 
     padding:var(--0.25rem);
     font-size:10px; 
@@ -56,7 +56,7 @@
     box-shadow: 0 0 1rem #aaa;
     width: 100%;
     max-width: 400px;
-    margin: var(-- 0.25rem)*2 0;
+    margin: 0.25rem*2 0;
     padding: var(--0.5rem);
     top: 3rem;
     left: 0;
@@ -154,13 +154,13 @@
 }
 #fermeture_affiche{
     position: absolute;
-    margin: var(-- 0.25rem);
+    margin: 0.25rem;
     width: 20px;
     height: 20px;
     line-height: 20px;
     text-align: center;
     background-color: #ddd;
-    border-radius: var(--50%);
+    border-radius: 50%;
     cursor: pointer;
     left: 0;
     top: 0;
@@ -188,11 +188,11 @@
     display: inline-block;
     height: 16px;
     width: 16px;
-    margin: 0 var(-- 0.25rem);
+    margin: 0 0.25rem;
     line-height: 16px;
     text-align: center;
     border: 1px solid #ddd;
-    border-radius: var(--50%);
+    border-radius: 50%;
 }
 #profile_teste_thead, #profile_teste_tbody, #profile_teste_tfoot {
     display: block;
@@ -213,7 +213,7 @@
 }
 #profile_teste_thead th, #profile_teste_tfoot td{ 
     top: 0;
-    margin: var(-- 0.25rem);
+    margin: 0.25rem;
     background-color: #aaa; 
 }
 #affiche_table tr:nth-child(even){ background-color: #eee; }
@@ -270,7 +270,7 @@
 		cursor: pointer;
 		border-radius: var(--0.25rem);
 		padding: var(--0.25rem);
-		margin: 0 var(-- 0.25rem);
+		margin: 0 0.25rem;
 	}
 	
     #menu_deroulant {
@@ -299,11 +299,11 @@
 	    padding: 0;
 	    height: 100%;
 	    line-height: 3rem;
-	    margin-left: var(-- 0.25rem)*10;
+	    margin-left: 0.25rem*10;
 	}
     #menu_deroulant ul {
         width: 100%;
-        margin: var(-- 0.25rem);
+        margin: 0.25rem;
     }
     #menu_non_deroulant ul {
         margin: 0;
@@ -334,7 +334,7 @@
 	}
 	#menu_deroulant li {
 	    padding: 0 var(--1rem);
-		margin: var(-- 0.25rem);
+		margin: 0.25rem;
 		height: 2em;
 		line-height: 2rem;
 		background-color:#fff;
@@ -367,7 +367,7 @@
 	    height: 2rem;
 	    line-height: 2rem;
 	    width: 30%;
-	    margin: var(-- 0.25rem);
+	    margin: 0.25rem;
 	    padding: 0 var(--1rem);
         font-size: 0.8rem;
 	    text-align: center;
@@ -387,7 +387,7 @@
     #profile_utilisateur_renseignements, #profile_utilisateur_image_container{
         position: relative;
         display: inline-block;
-        margin: var(-- 0.25rem);
+        margin: 0.25rem;
         height: 172px;
         border-radius: var(--0.25rem);
         vertical-align: top;
@@ -417,7 +417,7 @@
         position: relative;
         width: 100%;
         display: block;
-        margin: var(-- 0.25rem);
+        margin: 0.25rem;
         border-radius: var(--0.25rem);
     }
     #profile_utilisateur_image_container img{

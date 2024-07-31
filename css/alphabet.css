@@ -1,4 +1,14 @@
 
+#apprentissage_container, #exercice_container, #evaluation_container {
+    position: relative;
+    height: calc(100% - 1rem);
+    width: calc(100% - 0.5rem);
+    margin: auto;
+    padding: 0;
+}
+#apprentissage_container {}
+#exercice_container {}
+#evaluation_container {}
 #clavier_container{
     position: absolute;
     background-color: #888;

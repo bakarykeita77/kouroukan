@@ -64,18 +64,17 @@
 }
 
 #lesson_options {
-    position: absolute;
+    position: relative;
     display: none;
     background-color: #fff;
-    top: 3.5rem;
+    top: calc(-100% + 3.5rem);
     height: calc(100% - 4rem);
-    max-height: 45rem;
     width: calc(100vw - 1rem);
     max-width: 60rem;
     margin: 0 auto;
     border: 1px solid #aaa;
     border-radius: 0.5rem;
-    box-shadow: var(--shadow_36);
+    box-shadow: 0 0 3rem #666;
 }
 #lesson_options_content {
     position: relative;

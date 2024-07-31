@@ -23,7 +23,7 @@
 .bulles_container p { 
     position: relative;
     display: inline-block; 
-    margin: var(-- 0.25rem);
+    margin: 0.25rem;
     width: 2rem;
     height: 2rem;
     line-height: 2rem;

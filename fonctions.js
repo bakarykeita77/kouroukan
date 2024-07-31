@@ -33,13 +33,12 @@
     function afficherCourse(course) {
         course.css({
             'display':'block', 
-            'left':'50%', 
-            'transform':'translateX(-50%) scale(0.75)', 
+            'transform':'scale(0.75)', 
             'opacity':'0.25',
             'transition':'0.8s'
         });
         setTimeout(function() { course.css({
-            'transform':'translateX(-50%) scale(1)', 
+            'transform':'scale(1)', 
             'opacity':1
         }); }, 5);
     }
@@ -321,27 +320,26 @@ console.log(taux_de_vraie_reponse +' / '+ taux_acceptable_de_vraie_reponse);
 
     function gestionDeExerciceDialogueBtns() {
 
-        $('.dialogue_btn > div:nth-child(1)').css('display','block');
-        $('.dialogue_btn > div:nth-child(2)').css('display','none');
+        $('#exercices_player').css('display','block');
+        $('.oreille_icon_container').css('display','none');
   
         zoomUp($('#exercice_dialogue_btn'));
         
-        $('.dialogue_btn > div:nth-child(1)').click(function(){
-            zoomDown($('#exercice_dialogue_btn'));
+        $('#exercices_player').click(function(){
+            zoomDown($('#exercices_player'));
             setTimeout(() => {
-                $('.dialogue_btn > div:nth-child(1)').css('display','none');
-                $('.dialogue_btn > div:nth-child(2)').css('display','block');
-                zoomUp($('#exercice_dialogue_btn'));
+                $('.oreille_icon_container').css('display','block');
+                zoomUp($('.oreille_icon_container'));
             }, 200);
         });
 
         $('.table_muette td, .table_parlante td').click(function(){
-            zoomDown($('#exercice_dialogue_btn'));
+            zoomDown($('.oreille_icon_container'));
             setTimeout(() => {
-                $('.dialogue_btn > div:nth-child(1)').css('display','block');
-                $('.dialogue_btn > div:nth-child(2)').css('display','none');
+                $('#exercices_player').css('display','block');
+                $('.oreille_icon_container').css('display','none');
                 
-                zoomUp($('#exercice_dialogue_btn'));
+                zoomUp($('#exercices_player'));
             }, 200);
         });
     }
@@ -574,7 +572,11 @@ console.log(taux_de_vraie_reponse +' / '+ taux_acceptable_de_vraie_reponse);
         return mixted_table;
     }
     function masquerCourse(course) {
-        course.css({'transform':'scale(0.5)', 'opacity':'0.4', 'display':'none'});
+        course.css({
+            'transform':'scale(0.5)', 
+            'opacity':'0.4', 
+            'display':'none'
+        });
         setTimeout(() => { course.css('display','none'); }, 100);
     }
     function memoriserClicks(table,elements){
@@ -866,7 +868,7 @@ console.log(taux_de_vraie_reponse +' / '+ taux_acceptable_de_vraie_reponse);
             'opacity':0,
             'transform':'scale(0.75)'
         });
-        setTimeout(() => { element.css('display','none'); }, 150);
+        setTimeout(() => { element.css('display','none'); }, 200);
     }
     function zoomUp(element) {
         setTimeout(() => {
@@ -874,7 +876,7 @@ console.log(taux_de_vraie_reponse +' / '+ taux_acceptable_de_vraie_reponse);
                 'display':'block',
                 'opacity':1,
                 'transform':'scale(1)', 
-                'transition':'0.25s'
+                'transition':'0.15s'
             });
-        }, 250);
+        }, 200);
     }

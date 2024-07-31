@@ -14,7 +14,7 @@
          <!--Course body ------------------------------------------------------------------ -->
             <div class="course_body" id="apprentissage_body"></div>
          <!--Course foot ------------------------------------------------------------------ -->
-            <div class="course_foot" id="pre_foot">
+            <div class="course_foot" id="apprentissage_foot">
 
                 <div class="dialogue_btn" id="apprentissages_dialogue_btn">
                     <div id="pre_apprentissage_dialogue_btn">

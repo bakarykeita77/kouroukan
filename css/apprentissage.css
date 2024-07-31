@@ -1,6 +1,11 @@
 
-#apprentissage_container > div { position: absolute; width: calc(100% - 0.25rem); }
-#apprentissage_container > div:nth-child(1) { display: block; max-width: 16rem; border-radius: 0.5rem; }
+#apprentissage_container > div { position: absolute; width: 100%; }
+#apprentissage_container > div:nth-child(1) { 
+    display: block; 
+    height: 100%;
+    max-width: 60rem; 
+    border-radius: 0.5rem; 
+}
 #apprentissage_container > div:nth-child(2) { display: none; height: calc(100% - 0.75rem); background-color: #fff; }
 #table_parlante_container {
     position: absolute;
@@ -248,8 +253,8 @@
     max-width: 40rem;
     margin: auto;
     padding-top: 2rem;
-    transform: scale(0.75);
     border-radius: 0.5rem;
+    transform: scale(0.75);
     opacity: 0;
 }
 .fermeture_pre {
@@ -302,7 +307,7 @@
     border-radius: 0 0 0.5rem 0.5rem;
     font-weight: bold;
 }
-#pre_foot_btns_container {
+#apprentissage_foot_btns_container {
     position: relative;
     top: 0.5rem;
     height: 4rem;
@@ -422,7 +427,7 @@
 #pre_exercice_resultat_foot { width: 1.5rem; }
 #pre_exercice_resultat h3 { position: absolute; width: 100%; }
 #table_syllabe_apprentissage td:hover {background-color: rgba(85,85,85);}
-#pre_foot { 
+#apprentissage_foot { 
     padding: 0;
     margin: 0;
     border-radius: 0 0 0.5rem 0.5rem;

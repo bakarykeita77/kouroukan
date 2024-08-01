@@ -54,10 +54,11 @@ function alphabet() {
         let quantite_normale_de_click = 1;
 
 
-        $('#pre_exercice_cover').css('display','none');
         $('#apprentissage_container').css('display','block');
         $('#exercice_container').css('display','none');
         $('#evaluation_container').css('display','none');
+        $('#pre_exercice_cover').css('display','none');
+        afficherCourse($('.course'));
 
 
         apprentissagePreAlphabet();
@@ -513,7 +514,7 @@ function alphabet() {
             });
         }
         function revisionPreAlphabet() {
-            $('#pre_revision_bouton, #phases_list li:nth-child(3)').click(function() {
+            $('#pre_revision_bouton').click(function() {
             
                 let carre_actif = $(this);
 
@@ -656,6 +657,7 @@ function alphabet() {
         
                     function afficherPreExerciceCadres() {
                         $('#pre_exercice_cover').css({'display':'block'}); 
+                        masquerCourse($('#pre_exercice'));
                         setTimeout(function() { afficherCourse($('#pre_exercice')); }, 200); 
                     }
                     function afficherPreExerciceContenus() {
@@ -1120,16 +1122,18 @@ function alphabet() {
                 }
                 function continuSurApprendrePreAlphabet() {
                     $('#avance').click(function() {
-                        cercle_index++;       
+                        cercle_index++; 
+    
                         $('#fermeture_pre_revision').click();
-                        setTimeout(() => { $('#cercles_des_partis_cadre span:nth-child('+cercle_index+')').click(); }, 400);
-                        setTimeout(() => { goUp($('.resultat_container')); }, 500);
+                        $('#pre_exercice_cover').css('display','none');
+                        goUp($('.resultat_container'));
+                        setTimeout(() => { $('#cercles_des_partis_cadre span:nth-child('+cercle_index+')').click(); }, 600);
                     });
                 }
             }
         }
         function evaluationPreAlphabet() {
-            $('#pre_revision_bouton, #phases_list li:nth-child(4)').click(function() {
+            $('#pre_revision_bouton').click(function() {
             
                 chargerPreEvaluerAlphabet();
                 afficherPreEvaluerAlphabet();
@@ -1194,6 +1198,7 @@ function alphabet() {
             $('#apprentissage_container').css('display','block');
             $('#exercice_container').css('display','none');
             $('#evaluation_container').css('display','none');
+            afficherCourse($('.course'));
                 
     
             chargerApprentissageAlphabet();
@@ -1494,6 +1499,7 @@ function alphabet() {
             $('#apprentissage_container').css('display','none');
             $('#exercice_container').css('display','block');
             $('#evaluation_container').css('display','none');
+            afficherCourse($('.course'));
                 
             
             reductionDesElementsDeExerciceCouranteA49(); // Réduction du nombre de questions à une quantité raisonable
@@ -1788,6 +1794,7 @@ function alphabet() {
             $('#apprentissage_container').css('display','none');
             $('#exercice_container').css('display','none');
             $('#evaluation_container').css('display','block');
+            afficherCourse($('.course'));
                      
         
             chargerEvaluationAlphabet();

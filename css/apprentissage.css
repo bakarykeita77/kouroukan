@@ -57,7 +57,7 @@
     color: black;
     z-index: 1;
 }
-#pre_apprentissage_btns { overflow: visible; }
+#pre_apprentissage_btns { overflow: visible; height: 3rem; }
 #pre_exercice_btns span:active { box-shadow: none; }
 #pre_exercice_btns { z-index: 0; }
 #pre_exercice_btns span { 
@@ -136,7 +136,7 @@
     position: relative;
     border-radius: 0.5rem;
     display: inline-block;
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: bold;
     text-align: center;
     cursor: pointer;
@@ -175,8 +175,10 @@
     position: relative; 
     height: 0; 
     overflow: hidden; 
-    bottom: 16.125rem;
+    bottom: 20.125rem;
 }
+#panneaux > div { font-size: 1.5rem; }
+#submit_panneau { font-size: 1rem; }
 #cercles_des_partis { 
     min-width: 4rem; 
     height: 3rem; 
@@ -205,22 +207,23 @@
 #consonnes_cadre {
     position: absolute;
     top: 0;
-    height: 10rem;
+    height: 14rem;
     margin: 0.25rem 0;
     padding: 1rem;
     display: block;
-    border: 1px solid #aaa;
-    border-radius: 0.25rem;
-    background-color: #fff;
+    border-radius: 0.5rem;
+    background-color: #eee;
 }
 #consonnes_cadre span {
     position: relative;
     display: inline-block;
-    margin: 0;
+    padding: 0.5rem;
+    margin: 0.25rem;
     width: 2rem;
     height: 2rem;
     line-height: 2rem;
-    border: 1px solid #eee;
+    background-color: #fff;
+    border-radius: 0.5rem;
     cursor: pointer;
 }
 #consonnes_cadre span:hover { background-color: #ddd; }
@@ -444,14 +447,14 @@
 #pre_exercice_bouton { z-index: 1; }
 #pre_revision_bouton { z-index: 0; }
 #submit_panneau {
-    position: absolute;
-    margin: 1rem 1rem 0.5rem 1rem;
+    position: relative;
+    width: 12rem;
+    margin: auto;
     padding: 0.125rem 1rem;
-    bottom: 0;
+    top: 0.5rem;
     background-color: #fff;
     border: 1px solid #aaa;
-    left: 0;
-    transform: translate(75%, 0);
+    border-radius: 0.5rem;
     cursor: pointer;
 }
 #submit_panneau:hover { background-color: #aaa; }

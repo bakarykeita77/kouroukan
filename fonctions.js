@@ -40,7 +40,7 @@
         setTimeout(function() { course.css({
             'transform':'scale(1)', 
             'opacity':1
-        }); }, 5);
+        }); }, 10);
     }
     function affichageAnimeDesTd(td) {
         setTimeout(() => {
@@ -573,11 +573,10 @@ console.log(taux_de_vraie_reponse +' / '+ taux_acceptable_de_vraie_reponse);
     }
     function masquerCourse(course) {
         course.css({
-            'transform':'scale(0.5)', 
-            'opacity':'0.4', 
-            'display':'none'
+            'transform':'scale(0.75)', 
+            'opacity':'0.25'
         });
-        setTimeout(() => { course.css('display','none'); }, 100);
+        setTimeout(() => { course.css('display','none'); }, 50);
     }
     function memoriserClicks(table,elements){
 

@@ -982,6 +982,7 @@ del {
 .table_parlante td, .table_muette td {
     position: relative;
     padding: 8px 0;
+    font-size: 2.5rem;
     font-weight: 900;
     text-align: center;
     border-radius: 0.5rem;

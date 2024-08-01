@@ -136,6 +136,7 @@ $('document').ready(function() {
                 if(lesson_option === 1) {
                     $('#phases_list li:nth-child(2)').css('display','none');
                     $('#phases_list li:nth-child(3)').css('display','none');
+                    $('#phases_list li:nth-child(4)').css('display','none');
                 }
             }
         }

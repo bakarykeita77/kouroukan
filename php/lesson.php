@@ -95,6 +95,12 @@ if(isset($_SESSION["id"])) {
                       <div class="course_foot" id="apprentissage_foot">
 
                           <div class="dialogue_btn" id="apprentissages_dialogue_btn">
+                              
+                              <div class = 'progress_bar_integre'>
+                                  <div class='progress_bonne_reponse_bar_integre'></div>
+                                  <div class='progress_mauvaise_reponse_bar_integre'></div>
+                              </div>
+
                               <div id="pre_apprentissage_dialogue_btn">
                                   <div id="pre_apprentissage_btns"></div>
                                   <div id="pre_exercice_btns"></div>

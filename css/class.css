@@ -982,12 +982,12 @@ del {
 .table_parlante td, .table_muette td {
     position: relative;
     padding: 8px 0;
-    font-size: 2.5rem;
+    font-size: 180%;
     font-weight: 900;
     text-align: center;
     border-radius: 0.5rem;
     cursor: pointer;
-    overflow: hidden;
+    overflow: auto;
 }
 .table_parlante td {  background-color: rgba(85,85,85,0.25); }
 .table_muette td {  border: 1px solid #666; }

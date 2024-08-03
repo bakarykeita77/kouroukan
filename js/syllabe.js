@@ -65,7 +65,7 @@ function syllabe() {
         let total_lettres_exercees = [];
 
         let pre_apprentissage_clicks_memo = [];
-        let quantite_normale_de_click = 1;
+        let quantite_normale_de_click = 2;
 
         let panneau_status = "masque";
         let consonnes_choisies = [];
@@ -87,7 +87,6 @@ function syllabe() {
             afficherApprendrePreSyllabe();
             apprendrePreSyllabe();
             enregistrerApprendrePreSyllabe();
-            progressBarrApprendrePreSyllabe();
             stockerApprendrePreSyllabe();
             assistantApprendrePreSyllabe();
             finDeApprendrePreSyllabe();
@@ -137,63 +136,144 @@ function syllabe() {
                     }
                 }
                 function chargerCorpsDePreSyllabe() {
-                    $('#panneaux span').click(function() {
 
-                        var clicked_consonne_container = $(this);
-                        var clicked_consonne = $(this).text();
-                        var td_to_click = '';
-                        var bc = this.style.backgroundColor;
-                        var consonne_background = (bc == 'rgb(170, 170, 170)') ? '#fff' : 'rgb(170, 170, 170)';
-                        let element_index = 0;
-                        
-                        $('.table_parlante td').css('transform','scale(0)');
-
-                        marquerLaConsonneCliquee();
-                        decocherLesConsonnes();
-                        decocherLaNasalisation();
-                        chargerTableauNoir();
-                        initialiserMemoire();
+                    preChargementDuTableauNoir();
+                    chargementDuTableauNoir();
                     
-                        function marquerLaConsonneCliquee() {
-                            clicked_consonne_container.css('background-color',consonne_background);
+                    function preChargementDuTableauNoir() {
+                        $('#table_syllabe_apprentissage').html("<div id='pre_texte'>ߜߋ߲߭ ߘߋ߲߰ߕߊ ߟߎ߬ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߋ߲߬ ߠߋ߬</div>");
+                    }
+                    function chargementDuTableauNoir() {
+                        $('#panneaux span').click(function() {
 
-                            consonnes_choisies.forEach(element => {
-                                if(element == clicked_consonne) {
-                                    element_index = consonnes_choisies.indexOf(clicked_consonne);
-                                }
-                            });
+                            var clicked_consonne_container = $(this);
+                            var clicked_consonne = $(this).text();
+                            var td_to_click = '';
+                            var bc = this.style.backgroundColor;
+                            var consonne_background = (bc == 'rgb(170, 170, 170)') ? '#fff' : 'rgb(170, 170, 170)';
+                            let element_index = 0;
+                            
+                            $('.table_parlante td').css('transform','scale(0)');
 
-                            if(consonne_background == 'rgb(170, 170, 170)') { consonnes_choisies.push(clicked_consonne); }
-                            if(consonne_background == '#fff') { consonnes_choisies.splice(element_index,1); }
+                            marquerLaConsonneCliquee();
+                            decocherLesConsonnes();
+                            decocherLaNasalisation();
+                            chargerTableauNoir();
+                            progressBarrApprendrePreSyllabe();
+                            stylesDesSyllabes();
+                            initialiserMemoire();
+                        
+                            function marquerLaConsonneCliquee() {
+                                clicked_consonne_container.css('background-color',consonne_background);
 
-                        }
-                        function decocherLesConsonnes() {
-                            if($('#consonnes_checker').find('.checkbox_parent').prop("checked") == true) { $('#consonnes_checker').find('.checkbox_parent').next().click(); }            
-                        }
-                        function decocherLaNasalisation() {
-                            if($('#nasalisation_checker').find('.check_btn:last-child input').prop("checked") == true) { $('#nasalisation_checker').find('.check_btn:last-child label').click(); }            
-                        }
-                        function chargerTableauNoir() {
-                            $.each($('.check_btn'), function(){
-                                var consonne_active = $('label', this);
-                                var consonne_corespondante = $('label', this).html();
+                                consonnes_choisies.forEach(element => {
+                                    if(element == clicked_consonne) {
+                                        element_index = consonnes_choisies.indexOf(clicked_consonne);
+                                    }
+                                });
 
-                                if(clicked_consonne == consonne_corespondante) { consonne_active.click(); }
-                                $('#table_syllabe_apprentissage td').css({'background-color':'rgb(85, 85, 85)', 'color':'yellow'});
-                            });
-                        }
-                        function initialiserMemoire() {
-                            consonnes_choisies.splice(0,consonnes.length);
-                            td_to_click = $('#table_syllabe_apprentissage td');
+                                if(consonne_background == 'rgb(170, 170, 170)') { consonnes_choisies.push(clicked_consonne); }
+                                if(consonne_background == '#fff') { consonnes_choisies.splice(element_index,1); }
 
-                            for(i=0; i<td_to_click.length; i++) { 
-                                let syllabe_to_click = td_to_click[i].textContent;
-                                let number_of_click = 0;
-                                let mark = 0;
-                                consonnes_choisies.push([syllabe_to_click,number_of_click,mark]); 
                             }
-                        } 
-                    }); 
+                            function decocherLesConsonnes() {
+                                if($('#consonnes_checker').find('.checkbox_parent').prop("checked") == true) { $('#consonnes_checker').find('.checkbox_parent').next().click(); }            
+                            }
+                            function decocherLaNasalisation() {
+                                if($('#nasalisation_checker').find('.check_btn:last-child input').prop("checked") == true) { $('#nasalisation_checker').find('.check_btn:last-child label').click(); }            
+                            }
+                            function chargerTableauNoir() {
+                                $.each($('.check_btn'), function(){
+                                    var consonne_active = $('label', this);
+                                    var consonne_corespondante = $('label', this).html();
+
+                                    if(clicked_consonne == consonne_corespondante) { consonne_active.click(); }
+                                    $('#table_syllabe_apprentissage td').css({'background-color':'rgb(85, 85, 85)', 'color':'yellow'});
+                                });
+                            }
+                            function progressBarrApprendrePreSyllabe() {
+                
+                                let td = $('#table_syllabe_apprentissage td');
+                                let progress_unity = 100/[(td.length)*quantite_normale_de_click];
+                                let good_response_width = 0;
+                                let total_clicks_normal = 0;
+                
+                                masquerDialogueBtn();
+
+                                $.each(td, function() {
+                                    let compteur_de_click = 0;
+            
+                                    $(this).click(function(){
+                                        if(compteur_de_click < quantite_normale_de_click) {
+                                            compteur_de_click++;
+                                            total_clicks_normal++;
+
+                                            actualiserPreSyllabeProgressBar()
+                                            reAfficherDialogueBtn();
+
+                                            function reAfficherDialogueBtn() {
+                                                if(total_clicks_normal === (td.length)*quantite_normale_de_click) {
+                                                    setTimeout(() => {
+                                                        initialiserProgressBar();
+                                                        $('.progress_bar_integre').css('display','none');
+                                                        $('#pre_apprentissage_dialogue_btn').css('display','block');
+                                                        $('#apprentissage_dialogue_btn').css('display','none');
+                                                    }, 1000); 
+                                                }
+                                            }
+                                        }
+
+                                        function actualiserPreSyllabeProgressBar() {
+                                            good_response_width += progress_unity;
+                                            $('.progress_bonne_reponse_bar_integre').css('width', good_response_width+'%');
+                                        }
+                                    });
+                                });
+
+                                function  masquerDialogueBtn() {
+                                    $('#panneaux').css('height',0);
+                                    $('.progress_bar_integre').css('display','block');
+                                    $('#pre_apprentissage_dialogue_btn').css('display','none');
+                                    $('#apprentissage_dialogue_btn').css('display','none'); 
+                                }
+                            }
+                            function stylesDesSyllabes() {
+                                let td = $('#table_syllabe_apprentissage td');
+        
+                                
+                                $.each(td, function(){
+                                    
+                                    $(this).css({'background-color':'rgb(85, 85, 85)', 'color':'yellow'});
+                                    let compteur = 0;
+        
+                                    $(this).click(function(){
+                        
+                                        let td_actif = $(this);
+                                        let n = compteur++;
+
+                                        
+                                        if(compteur == quantite_normale_de_click){
+                                            td_actif.css({
+                                                'background-color':'transparent', 
+                                                'color':'yellow'
+                                            });
+                                        }
+                                    });
+                                });
+                            }
+                            function initialiserMemoire() {
+                                consonnes_choisies.splice(0,consonnes.length);
+                                td_to_click = $('#table_syllabe_apprentissage td');
+
+                                for(i=0; i<td_to_click.length; i++) { 
+                                    let syllabe_to_click = td_to_click[i].textContent;
+                                    let number_of_click = 0;
+                                    let mark = 0;
+                                    consonnes_choisies.push([syllabe_to_click,number_of_click,mark]); 
+                                }
+                            } 
+                        });
+                    }
                 }
             }
             function afficherApprendrePreSyllabe() {
@@ -201,7 +281,6 @@ function syllabe() {
                 afficherDialogueBtn();
                 afficherLePanneauDesConsonnes();
                 masquerLePanneauDesConsonnes();
-                stylesDesSyllabes();
 
                     
                 function afficherDialogueBtn() {
@@ -232,36 +311,9 @@ function syllabe() {
                     setTimeout(function(){$('#panneaux').css('height',0);}, 250);
                     panneau_status = "masque";
                 }
-                function stylesDesSyllabes() {
-                    $('#apprentissage_body').click(function(){
-                    
-                        let id = $(this).attr('id');
-                        let td = $('#'+id+' td');
-
-                        $('#table_syllabe_apprentissage td').css({'background-color':'rgb(85, 85, 85)', 'color':'yellow'});
-                        
-                        $.each(td, function(){
-                            let click_optimal = 3;
-                            let compteur = 1;
-
-                            $(this).click(function(e){
-                
-                                let td_actif = $(this);
-                                let n = compteur++;
-                                
-                                if(compteur == click_optimal+1){
-                                    td_actif.css({'background-color':'transparent', 'color':'yellow'});
-                                }
-                            });
-                        });
-
-                    });
-                }
             }
             function apprendrePreSyllabe() {
                 $('#apprentissage_body').click(function(e) {
-                    let id = this.id;
-                    let td = $('#'+id+' .table_parlante td');
                     let son = $(e.target).text();
                     lire('ߊ',son); 
                 });
@@ -294,9 +346,6 @@ function syllabe() {
                         
                     }
                 });
-            }
-            function progressBarrApprendrePreSyllabe() {
-                
             }
             function stockerApprendrePreSyllabe() {}
             function assistantApprendrePreSyllabe() {

@@ -41,6 +41,7 @@
 }
 .notification_titre { margin: 0; }
 #apprentissage_note h3 { margin: 0; }
+#apprentissage_container .table_parlante td { border: 1px solid rgb(85, 85, 85); }
 #apprentissage_note p { margin: 0.25rem 0; }
 .notification {  
     position: relative;
@@ -49,6 +50,11 @@
     margin: auto;
     padding: 0.5rem 1rem;
     font-size: 12px;
+}
+#pre_texte {
+    color: #444;
+    font-size: 3.5rem;
+    font-weight: bold;
 }
 .notification h3 { margin: 0; padding: 0; }
 #redirige_sur_exercice { cursor: pointer; }

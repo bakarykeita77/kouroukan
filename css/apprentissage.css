@@ -24,7 +24,6 @@
     cursor: pointer;
 }
 #apprentissages_dialogue_btn {
-    box-shadow: 0 0 0.5rem #aaa;
     bottom: 0;
 }
 #table_alphabet_apprentissage {
@@ -213,7 +212,7 @@
 #pre_revision_btn:active { box-shadow: none; }
 #consonnes_cadre {
     position: absolute;
-    top: 0;
+    top: 12rem;
     height: 14rem;
     margin: 0.25rem 0;
     padding: 1rem;

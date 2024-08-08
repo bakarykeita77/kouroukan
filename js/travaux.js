@@ -25,9 +25,7 @@
 
         function chargerAVideLesFiches() {
             if(matiere_nom == "ߛߓߍߛߎ߲") $('#fiche_de_pratique').css('display','none');  // Masquer la partie pratique pour alphabet.     
-            
             $('.travail_content').html(fiche_html_vide);
-
             return false;
         }
         function chargerTravail(n) {

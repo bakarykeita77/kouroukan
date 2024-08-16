@@ -34,13 +34,13 @@
         course.css({
             'display':'block', 
             'transform':'scale(0.75)', 
-            'opacity':'0.25',
-            'transition':'0.8s'
+            'opacity':'0',
+            'transition':'0.6s'
         });
         setTimeout(function() { course.css({
             'transform':'scale(1)', 
             'opacity':1
-        }); }, 10);
+        }); }, 100);
     }
     function affichageAnimeDesTd(td) {
         setTimeout(() => {
@@ -135,7 +135,7 @@
         let reprendre_l_etape_en_cours = '<b id="reprendre">'+lesson_en_cours+' ߞߍ߫ ߕߎ߲߯</b>';
         let continu_sur_l_etape_suivante = '<b id="avance">'+lesson_suivante+'</b>';
 
-        if(lesson_suivante == 'ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߥߴߊ߬ ߡߊ߬') { $('.notification_titre').html('ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ'); }
+        if(lesson_suivante == lesson_en_cours+' ߥߴߊ߬ ߡߊ߬') { $('.notification_titre').html('ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ'); }
 
         chargerResultatTitre();
         chargerResultatHead();
@@ -207,7 +207,6 @@
             $('#pourcentage_point').text('%'+parseIntNko(taux_de_vraie_reponse));
         }
         function chargerDeliberation() {
-console.log(taux_de_vraie_reponse +' / '+ taux_acceptable_de_vraie_reponse);
             if(taux_de_vraie_reponse < taux_acceptable_de_vraie_reponse) {
                 $('#deliberation').html('ߌ ߖߌߖߊ߬ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ '+lesson_en_cours+' ߓߍ߬ߙߍ ߡߊ߫ ߤߊߟߌ߬ ߁߈ ߓߐ߫. ߏ߬ߘߐ߬߸ ߌ ߞߐߛߍ߬ߦߌ߬ ߦߊ߲߬ ߡߊ߫.'+reprendre_l_etape_en_cours);
             }else{
@@ -230,6 +229,11 @@ console.log(taux_de_vraie_reponse +' / '+ taux_acceptable_de_vraie_reponse);
                 case 'ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ' : ls = 'ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫'; break;
                 case 'ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ' : ls = 'ߛߓߍߛߎ߲ ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫'; break;
                 case 'ߛߓߍߛߎ߲ ߣߐ߰ߡߊ߬ߛߍߦߌ' : ls = 'ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߥߴߊ߬ ߡߊ߬'; break;
+
+                case 'ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ' : ls = 'ߜߋ߲߭ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫'; break;
+                case 'ߜߋ߲߭ ߡߊ߬ߞߟߏ߬ߟߌ' : ls = 'ߜߋ߲߭ ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫'; break;
+                case 'ߜߋ߲߭ ߣߐ߰ߡߊ߬ߛߍߦߌ' : ls = 'ߜߋ߲߭ ߞߘߐߓߐߟߌ ߞߍ߫'; break;
+                case 'ߜߋ߲߭ ߞߘߐߓߐߟߌ' : ls = 'ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߥߴߊ߬ ߡߊ߬'; break;
             }
             return ls;
         }
@@ -417,6 +421,25 @@ console.log(taux_de_vraie_reponse +' / '+ taux_acceptable_de_vraie_reponse);
 	    element.animate({ 'height':0 }, 200);
 	    setTimeout((function(){ element.css({ 'display':'none' }) }),180);
 	}
+    function formatParDefautDuResultat() {
+
+        $('#table_head tr:nth-child(2) td').text('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ');
+        $('#table_head tr:nth-child(3) td').text('ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ');
+
+        $.each($('#table_body tr:nth-child(3) td, #table_body tr:nth-child(4) td'), function() {
+            $(this).html('');
+        });
+
+        $('#total_reponse').text('');
+        $('#total_point_1').text('');
+
+        $('#resultat_pied > div > div:nth-child(1) span:first-child').text('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߡߎ߬ߡߍ');
+        $('#resultat_pied > div > div:nth-child(2) span:first-child').text('ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ߫ ߢߊ߬ߣߍ߲');
+        $('#resultat_pied > div > div:nth-child(3)').css('display','block');
+
+        $('#total_bonne_reponse').text('');
+        $('#total_point_2').text('');
+    }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
 	
@@ -556,10 +579,6 @@ console.log(taux_de_vraie_reponse +' / '+ taux_acceptable_de_vraie_reponse);
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
     
-    function mettreEnSurbrillance(element) {
-        element.addClass('surbrillance');
-        element.siblings().removeClass('surbrillance');
-    }
     function malaxer(tableau){  
         var mixted_table = [];
 
@@ -574,7 +593,7 @@ console.log(taux_de_vraie_reponse +' / '+ taux_acceptable_de_vraie_reponse);
     function masquerCourse(course) {
         course.css({
             'transform':'scale(0.75)', 
-            'opacity':'0.25'
+            'opacity':'0'
         });
         setTimeout(() => { course.css('display','none'); }, 50);
     }
@@ -610,6 +629,10 @@ console.log(taux_de_vraie_reponse +' / '+ taux_acceptable_de_vraie_reponse);
                 });
             });
         }
+    }
+    function mettreEnSurbrillance(element) {
+        element.addClass('surbrillance');
+        element.siblings().removeClass('surbrillance');
     }
     function mix2D(tableau){
         var mixted_table = [];
@@ -676,25 +699,6 @@ console.log(taux_de_vraie_reponse +' / '+ taux_acceptable_de_vraie_reponse);
         
         return nombre_converti.join('');
     }
-    function preApprentissageCorpsHTML() {
-         var c = alphabet_nko[0];
-         c.push('');
- 
-         var a_html = "<div id = 'table_pre_apprentissage'>\n";
-         for(var i=0;i<21;i+=7) {
-             a_html += "<div class='pre_apprentissage_tr'>\n";
-             for(var j=0;j<7;j++) a_html += "<span class='pre_apprentissage_td'>"+c[i+j]+"</span>\n";
-             a_html += "</div>\n";
-         }
-         for(var k=21;k<28;k+=7){
-             a_html += "<div class='pre_apprentissage_tr'>\n";
-             for(var l=0;l<7;l++) a_html += "<span class='pre_apprentissage_td'>"+c[k+l]+"</span>\n";
-             a_html += "</div>\n";
-         }
-         a_html += "</div>";
-                 
-         return a_html;
-     }
 	function prononcer(){
 		id=this.id;
 	

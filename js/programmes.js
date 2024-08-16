@@ -141,7 +141,7 @@
             $('#lesson_options_titre').text('ߌ ߢߣߊߕߊ߬ '+nom_de_lesson_a_etdier+' ߘߋ߲߰ߠߌ ߞߍߢߊ߫ ߝߌ߬ߟߊ ߢߌ߲߬ ߠߎ߬ ߘߐ߫'); 
             $('#lesson_option_1').html(lessonOption11HTML());
             $('#lesson_option_2').html(lessonOption12HTML());
-            afficherCourse($('#lesson_options')); 
+            $('#lesson_options').css('display','block'); 
            
             function lessonOption11HTML() {
                     
@@ -253,7 +253,7 @@
             $('#lesson_options_titre').text('ߌ ߢߣߊߕߊ߬ '+nom_de_lesson_a_etdier+' ߘߋ߲߰ߠߌ ߞߍߢߊ߫ ߝߌ߬ߟߊ ߢߌ߲߬ ߠߎ߬ ߘߐ߫'); 
             $('#lesson_option_1').html(lessonOption21HTML());
             $('#lesson_option_2').html(lessonOption22HTML());
-            afficherCourse($('#lesson_options')); 
+            $('#lesson_options').css('display','block'); 
             
            
             function lessonOption21HTML() {

@@ -239,9 +239,9 @@
 #pre_exercice_cover {
     position: absolute;
     display: none;
-    top: 0;
+    top: 5rem;
     width: 100%;
-    height: 100%;
+    height: calc(100% - 8rem);
     background-color: rgba(0,0,0,0);
     z-index: 1;
 }
@@ -253,18 +253,20 @@
     overflow: hidden;
 }
 #pre_exercice {
+    display: none;
     position: relative;
-    background-color: #aaa;
-    top: 6.25rem;
-    box-shadow: 0 0 1rem #666;
-    height: calc(100% - 13rem);
+    background-color: #ddd;
+    top: 0;
+    height: calc(100% - 2rem);
     width: 100%;
     max-width: 40rem;
     margin: auto;
     padding-top: 2rem;
+    border: 1px solid #bbb;
     border-radius: 0.5rem;
     transform: scale(0.75);
     opacity: 0;
+    transition: 0.6s;
 }
 .fermeture_pre {
     position: absolute;
@@ -288,16 +290,17 @@
     position: absolute;
     height: calc(100% - 5.5rem);
     width: 98%;
-    border-radius: 0.5rem 0.5rem 0 0;
+    border-radius: 0.5rem;
     left: 1%;
-    background-color: #fff;
+    background-color: rgba(0,0,0,0.8);;
     overflow: auto;
 }
 #pre_exercice_body td { 
     width: 3rem;
     height: 3rem;
     line-height: 4rem;
-    font-size: 3rem;
+    font-size: 2rem;
+    color: #fff;
     border: 0.25rem solid transparent; 
     overflow: visible;
     opacity: 0;
@@ -312,7 +315,7 @@
     left: 1%;
     bottom: 0.25rem;
     margin: auto;
-    background-color: #fff;
+    background-color: #ddd;
     border-radius: 0 0 0.5rem 0.5rem;
     font-weight: bold;
 }
@@ -437,8 +440,11 @@
 #pre_exercice_resultat h3 { position: absolute; width: 100%; }
 #table_syllabe_apprentissage td:hover {background-color: rgba(85,85,85);}
 #apprentissage_foot { 
+    position: absolute;
+    width: 100%;
     padding: 0;
     margin: 0;
+    bottom: -1rem;
     border-radius: 0 0 0.5rem 0.5rem;
 }
 #apprentissage_dialogue_btn { 

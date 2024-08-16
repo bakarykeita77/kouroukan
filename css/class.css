@@ -892,7 +892,7 @@ del {
     width: calc(100% - 1.25rem);
     max-width: 60rem;
     background-color: #fff;
-    border: 1px solid #ccc;
+    border: 1px solid #bbb;
     border-radius: 0.5rem;
 }
 .progress_bar_integre { z-index: 0; }

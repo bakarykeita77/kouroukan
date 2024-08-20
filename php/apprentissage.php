@@ -16,10 +16,10 @@
          <!--Course foot ------------------------------------------------------------------ -->
             <div class="course_foot" id="apprentissage_foot">
 
-                <div class="dialogue_btn" id="apprentissages_dialogue_btn">
-                    <div id="pre_apprentissage_dialogue_btn">
+                <div class="dialogue_btn" id="pre_apprentissage_btns">
+                    <div id="panneaux_de_consonnes_btn">
                         <div id="pre_apprentissage_btns"></div>
-                        <div id="pre_exercice_btns"></div>
+                        <div id="redirection_btns"></div>
                     </div>
 
                     <div id="apprentissage_dialogue_btn">

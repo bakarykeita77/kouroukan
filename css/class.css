@@ -303,6 +303,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     overflow-y: auto; overflow-x: hidden;
 }
 .course_body { 
+    padding-top: 2rem;
     height: calc(100% - 10rem);
     color: white;
     background-color: rgba(0,0,0,0.8);
@@ -321,7 +322,12 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     box-sizing: border-box;
     z-index: 0;
 }
-.course_foot { height: 3.5rem; background-color: #fff; border-radius: 0 0 0.5rem 0.5rem; }
+.course_foot { 
+    height: 3.5rem; 
+    bottom: -0.8rem;
+    background-color: #fff; 
+    border-radius: 0 0 0.5rem 0.5rem; 
+}
 .course_head { height: 6rem; background-color: #fff; }
 .course_head div label {
     padding: 0 0.5rem;
@@ -886,11 +892,12 @@ del {
     display: none;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 0.75rem;
-    margin: 0;
+    bottom: 0.8rem;
     height: 3rem;
-    width: calc(100% - 1.25rem);
-    max-width: 60rem;
+    width: calc(100% - 1.5rem);
+    max-width: 59rem;
+    margin: 0 auto;
+    padding: 0;
     background-color: #fff;
     border: 1px solid #bbb;
     border-radius: 0.5rem;

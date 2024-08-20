@@ -310,14 +310,14 @@
                 
 //                 function afficherEvaluationAlphabetResultat() {
 //                     goDown($('.resultat_container'));
-//                     setTimeout(() => { masquerCourse($('#evaluation')); }, 1500);
+//                     setTimeout(() => { masquer($('#evaluation')); }, 1500);
 //                 }
 //                 function reprendreEvaluationAlphabet() {
 //                     $('#reprendre').click(function() {
 //                         $('#envelope').css('display','none');
 //                         goUp($('.resultat_container'));
 //                         initialiserProgressBarIntegre();
-//                         afficherCourse($('#evaluation'));
+//                         afficher($('#evaluation'));
 //                         $('#alphabet_evaluation').click();
 //                     });
 //                 }

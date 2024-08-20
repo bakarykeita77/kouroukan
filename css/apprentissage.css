@@ -23,7 +23,7 @@
     color: cornflowerblue;
     cursor: pointer;
 }
-#apprentissages_dialogue_btn {
+#pre_apprentissage_btns {
     bottom: 0;
 }
 #table_alphabet_apprentissage {
@@ -57,16 +57,16 @@
 }
 .notification h3 { margin: 0; padding: 0; }
 #redirige_sur_exercice { cursor: pointer; }
-#pre_apprentissage_dialogue_btn {
+#pre_apprentissage_btns {
     font-weight: bold;
     color: black;
     z-index: 1;
 }
-#pre_apprentissage_dialogue_btn > div { position: relative; }
+#pre_apprentissage_btns > div { position: relative; }
 #pre_apprentissage_btns { overflow: visible; height: 3rem; }
-#pre_exercice_btns span:active { box-shadow: none; }
-#pre_exercice_btns { z-index: 0; }
-#pre_exercice_btns span { 
+#redirection_btns span:active { box-shadow: none; }
+#redirection_btns { z-index: 0; }
+#redirection_btns span { 
     margin: 0;
     padding: 0;
     height: 3rem;
@@ -324,8 +324,8 @@
     top: 0.5rem;
     height: 4rem;
 }
-#pre_exercice_foot_btns { position: absolute; }
-#pre_exercice_foot_btns { height: 4rem; width: 100%; }
+#pre_exercice_btns { position: absolute; }
+#pre_exercice_btns { height: 4rem; width: 100%; }
 #pre_question_btn, #repeter_pre_question_btn, #pre_correction_btn {
     position: absolute;
     margin: 0.5rem 1rem;
@@ -444,7 +444,6 @@
     width: 100%;
     padding: 0;
     margin: 0;
-    bottom: -1rem;
     border-radius: 0 0 0.5rem 0.5rem;
 }
 #apprentissage_dialogue_btn { 
@@ -452,7 +451,7 @@
     color: black;
     text-align: center;
 }
-.pre_exercice_btn {
+.redirection_btn {
     position: absolute;
     background-color: #fff;
 }

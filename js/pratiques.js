@@ -96,7 +96,7 @@ function pratique() {
         return options;
     }   
     function afficherPratique() {
-        afficherCourse(pratique);
+        afficher(pratique);
         optionStyles();
     }
     function dimensionnerPratique() {

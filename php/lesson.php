@@ -1,7 +1,6 @@
 <?php header('Content-Type: text/html; charset=utf-8');
 session_start();
 
-// Recuperation des données envoyées dans l'url
 if(isset($_SESSION["id"])) {
     $matiere_id      = $_GET['matiere_id'];
     $matiere_index   = $_GET['matiere_index'];
@@ -94,10 +93,19 @@ if(isset($_SESSION["id"])) {
                         <div id="pre_exercice_cover">
                             <div id="pre_exercice">
                                 <span class="fermeture_pre">&times;</span>
+                                
                                 <div id="pre_exercice_container">
                                         
                                     <div id="pre_exercice_body"></div>
-                                    <div id="pre_exercice_foot"></div>
+                                    <div id="pre_exercice_foot">
+                                        <div id="apprentissage_foot_btns_container">
+                                            <div id="pre_exercice_btns">
+                                                <div id="pre_question_btn"></div>
+                                                <div id="repeter_pre_question_btn"></div>
+                                                <div id="pre_correction_btn">ߏ߬ ߛߊߞߍ߫</div>
+                                            </div>
+                                        </div> 
+                                    </div>
                                     <div id="pre_exercice_resultat">
                                         <h2 id="pre_resultat_titre"></h2>
                                         
@@ -131,17 +139,24 @@ if(isset($_SESSION["id"])) {
                         </div>
                      <!--Course foot ---------------------------------------------- -->
                         <div class="course_foot" id="apprentissage_foot">
-
-                            <div class="dialogue_btn" id="apprentissages_dialogue_btn">
+                            <div class="dialogue_btn" id="pre_apprentissage_dialogue_btn">
                                 
                                 <div class = 'progress_bar_integre'>
                                     <div class='progress_bonne_reponse_bar_integre'></div>
                                     <div class='progress_mauvaise_reponse_bar_integre'></div>
                                 </div>
 
-                                <div id="pre_apprentissage_dialogue_btn">
-                                    <div id="pre_apprentissage_btns"></div>
-                                    <div id="pre_exercice_btns"></div>
+                                <div id="pre_apprentissage_btns">
+                                    <div class='titre_de_parti'>
+                                        <div>ߞߎߘߎ߲</div>
+                                        <div class='cercle' id='afficheur_de_panneau'>+</div>
+                                    </div>
+                                    <div id='panneaux'></div>
+                                </div>
+                                
+                                <div id="redirection_btns">
+                                    <span class='redirection_btn' id='pre_exercice_bouton'>ߜߋ߲߭ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫</span>
+                                    <span class='redirection_btn' id='pre_revision_bouton'>ߜߋ߲߭ ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫</span> 
                                 </div>
 
                                 <div id="apprentissage_dialogue_btn">
@@ -264,7 +279,6 @@ if(isset($_SESSION["id"])) {
                     <div class="course_foot" id="evaluation_foot">
 
                         <div id='teste_container'>  
-                        
                             <div id="evaluation_reponse_container">
                                 <div id='evaluation_reponse'></div>
                                 <div class='correcteur' id='correcteur_d_evaluation'>ߖߐ߬ߛߌ߬ߙߊ߲</div>
@@ -310,10 +324,10 @@ if(isset($_SESSION["id"])) {
             <script src="/kouroukan/js/evaluations.js"></script>
 
             
-            <div class="resultat_container">        <?php include("resultat.php");      ?></div>
+            <div class="resultat_container"><?php include("resultat.php"); ?></div>
             <div class = 'progress_bar'>
-              <div class='progress_bonne_reponse_bar'></div>
-              <div class='progress_mauvaise_reponse_bar'></div>
+                <div class='progress_bonne_reponse_bar'></div>
+                <div class='progress_mauvaise_reponse_bar'></div>
             </div>
 
           <!-------------------------------------------------------------------------------------------------------------

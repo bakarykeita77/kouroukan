@@ -47,7 +47,7 @@ function exercices() {
         }
         function afficheExerciceAlphabet() {
 
-            afficherCourse($('#pre_exercice'));
+            afficher($('#pre_exercice'));
             actualiserDialogueBtn();
             initialiserProgressBar();
             zoomDown($('#exercice_dialogue_btn'));
@@ -241,7 +241,7 @@ function exercices() {
                     indexer($('#fermer_exercice'));
 
                     $('.resultat_container').css('display','block');
-                    setTimeout(() => { masquerCourse($('#exercice')); }, 200);
+                    setTimeout(() => { masquer($('#exercice')); }, 200);
 
                     function exerciceResultat() {
 
@@ -253,7 +253,7 @@ function exercices() {
                         function afficherExerciceAlphabetResultat() { 
                             goDown($('.resultat_container')); 
                             setTimeout(() => {
-                                masquerCourse($('#exercice'));
+                                masquer($('#exercice'));
                                 initialiserExerciceDialogueBtn();
                                 initialiserProgressBar();
                             }, 200);
@@ -271,7 +271,7 @@ function exercices() {
                             $('#alphabet_exercice').click();
                             // progressBarrExerciceAlphabet();
                             // parametrageDeLesson();
-                            // afficherCourse($('#exercice'));
+                            // afficher($('#exercice'));
                             // exercerAlphabet();
                         });
                     }
@@ -280,7 +280,7 @@ function exercices() {
                             $('#envelope').css('display','none');
                             initialiserProgressBar();
                             parametrageDeLesson();
-                            afficherCourse($('#evaluation'));
+                            afficher($('#evaluation'));
                             evaluations();
                         });
                     }

@@ -218,7 +218,7 @@ $('document').ready(function() {
     
                             $('.course').css('display','none');
                             $('.course_container').css({'display':'block'});
-                            afficherCourse(lesson_active);
+                            afficher(lesson_active);
     
                             function lessonActive() {
                                 var lesson = '';

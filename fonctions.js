@@ -30,7 +30,7 @@
 	    });
 
 	}
-    function afficherCourse(course) {
+    function afficher(course) {
         course.css({
             'display':'block', 
             'transform':'scale(0.75)', 
@@ -590,7 +590,7 @@
     
         return mixted_table;
     }
-    function masquerCourse(course) {
+    function masquer(course) {
         course.css({
             'transform':'scale(0.75)', 
             'opacity':'0'

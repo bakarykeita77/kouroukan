@@ -26,6 +26,10 @@
 #pre_apprentissage_btns {
     bottom: 0;
 }
+#pre_apprentissage_btns > div {
+    width: 6.5rem;
+    margin: auto;
+}
 #table_alphabet_apprentissage {
     height: 75%;
     max-height: 45rem;
@@ -40,7 +44,7 @@
 }
 .notification_titre { margin: 0; }
 #apprentissage_note h3 { margin: 0; }
-#apprentissage_container .table_parlante td { border: 1px solid rgb(85, 85, 85); }
+#apprentissage_container .table_parlante td { border: 1px transparent; }
 #apprentissage_note p { margin: 0.25rem 0; }
 .notification {  
     position: relative;
@@ -176,12 +180,13 @@
 }
 #traducteur .pre_apprentissage_tr { margin: 0; }
 #panneaux { 
+    position: absolute;
     display: flex;
     justify-content: center;
     position: relative; 
     height: 0; 
     overflow: hidden; 
-    bottom: 20.125rem;
+    bottom: 3.85rem;
 }
 #panneaux > div { font-size: 1.5rem; }
 #submit_panneau { font-size: 1rem; }
@@ -301,7 +306,7 @@
     line-height: 4rem;
     font-size: 2rem;
     color: #fff;
-    border: 0.25rem solid transparent; 
+    border: 1px solid transparent; 
     overflow: visible;
     opacity: 0;
 }
@@ -472,10 +477,7 @@
 
 @media screen and (width < 400px) {
     .pre_apprentissage_td { width: 1rem; }
-    .cercle {
-        position: absolute;
-        display: block;
-    }
+    .cercle { display: block; }
     #cercles_des_partis span:not(.indicateur, .apprentissage_en_cours) { z-index: 0; }
     .indicateur, .apprentissage_en_cours { z-index: 1; }
 }

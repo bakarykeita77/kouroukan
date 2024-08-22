@@ -288,7 +288,6 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     max-height: 45rem;
     margin: 0 auto;
     padding: 0.125rem;
-    border: 1px solid #aaa;
     border-radius: 0.5rem; 
     z-index: 0;
     overflow: auto;
@@ -324,7 +323,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 }
 .course_foot { 
     height: 3.5rem; 
-    bottom: -0.8rem;
+    bottom: 0;
     background-color: #fff; 
     border-radius: 0 0 0.5rem 0.5rem; 
 }
@@ -350,16 +349,15 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 .dark_backgound { background-color: #aaa; }
 .dialogue_btn {
     position: absolute;
-    background-color: #fff;
-    top: 0.25rem;
-    width: 100%;
+    background-color: #ddd;
+    top: 10px;
+    width: calc(100% - 2px);
     height: 3rem;
     padding: 0;
     margin: 0.25rem auto;
     border: 1px solid #aaa;
     border-radius: 0.5rem;
     font-weight: bold;
-    transform: scale(0.9);
 }
 .dialogue_btn > div {
     position: absolute;
@@ -1142,7 +1140,7 @@ del {
         max-width: 30rem;
     }
     .phases li { width: 80%; }
-    .course { height: calc(100% - 4.5rem); box-shadow: none; }
+    .course { height: calc(100% - 4.5rem); box-shadow: none; border: none; }
     .course_head, .course_body, .course_foot { 
         width: 98%;
         margin: auto;
@@ -1167,7 +1165,7 @@ del {
         width: 30%;
         min-width: 5rem;
     }
-    .course { height: calc(100% - 4rem); box-shadow: 0 0 3rem #666; }
+    .course { height: calc(100% - 4rem); box-shadow: 0 0 3rem #666; border: 1px solid #aaa; }
     .course_head, .course_body, .course_foot { 
         width: 100%; 
     }

@@ -147,12 +147,15 @@ if(isset($_SESSION["id"])) {
                                 </div>
 
                                 <div id="pre_apprentissage_btns">
-                                    <div class='titre_de_parti'>
-                                        <div>ߞߎߘߎ߲</div>
-                                        <div class='cercle' id='afficheur_de_panneau'>+</div>
+                                    <div>
+                                        <div class='titre_de_parti'>
+                                            <div>ߞߎߘߎ߲</div>
+                                            <div class='cercle' id='afficheur_de_panneau'>+</div>
+                                        </div>
                                     </div>
-                                    <div id='panneaux'></div>
                                 </div>
+                                    
+                                <div id='panneaux'></div>
                                 
                                 <div id="redirection_btns">
                                     <span class='redirection_btn' id='pre_exercice_bouton'>ߜߋ߲߭ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫</span>

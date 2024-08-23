@@ -561,7 +561,7 @@ function pratique() {
                     }
                     function animerPratiqueFiche() {
 
-                        defilementDuContenuLeHaut($('#pratique_tbody'));
+                        defilementDuContenuVersLeHaut($('#pratique_tbody'));
                         affichageAnimeDeLaDerniereLigneDePratiqueFicheBody();
 
                         function affichageAnimeDeLaDerniereLigneDePratiqueFicheBody() {

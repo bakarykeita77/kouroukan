@@ -300,7 +300,7 @@
     function couleurDeFont(element,couleur)	{ element.css('color', couleur); }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
-    function defilementDuContenuLeHaut(container) {
+    function defilementDuContenuVersLeHaut(container) {
         container.animate({ scrollTop:container[0].scrollHeight }, 1000);
     }
 
@@ -595,7 +595,8 @@
             'transform':'scale(0.75)', 
             'opacity':'0'
         });
-        setTimeout(() => { course.css('display','none'); }, 50);
+        course.css('display','none');
+        // setTimeout(() => { course.css('display','none'); }, 50);
     }
     function memoriserClicks(table,elements){
 

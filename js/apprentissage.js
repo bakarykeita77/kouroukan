@@ -2293,7 +2293,7 @@ function apprentissages() {
                                 marquerReponseEvaluation();
                                 effacerCheckMark(); 
                                 masquerTesteContainer();
-                                setTimeout(() => { defilementDuContenuLeHaut($('#evaluation_tbody')); }, 1200);
+                                setTimeout(() => { defilementDuContenuVersLeHaut($('#evaluation_tbody')); }, 1200);
             
                                 evaluation_counter++;
             

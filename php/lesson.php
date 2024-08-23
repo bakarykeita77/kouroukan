@@ -314,6 +314,11 @@ if(isset($_SESSION["id"])) {
                                 <span class="correction_label">ߏ߬ ߛߊߞߍ߫</span>
                                 <span class="correction_icon"></span>
                             </div>
+
+                            <div class="redirection_btns" id="revision_redirection_btns">
+                                <div class="redirection_btn_1">ߜߋ߲߭ ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫ ߕߎ߲߯</div>
+                                <div class="redirection_btn_2">ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߥߴߊ߬ ߡߊ߬</div>
+                            </div>
                         </div>
 
                     </div>

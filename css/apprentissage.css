@@ -44,7 +44,7 @@
 }
 .notification_titre { margin: 0; }
 #apprentissage_note h3 { margin: 0; }
-#apprentissage_container .table_parlante td { border: 1px transparent; }
+#apprentissage_container .table_parlante td { border: 1px solid transparent; }
 #apprentissage_note p { margin: 0.25rem 0; }
 .notification {  
     position: relative;

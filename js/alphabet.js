@@ -1739,15 +1739,6 @@ function alphabet() {
             var q_ordre = parseIntNko(q_index+1);
             var evaluation_a_stocker = [];
         
-            $('#pratique_options').css('display','block');
-            $('.fermeture').attr('id', 'fermer_evaluation'); 
-
-            $('#pre_exercice_cover').css('display','none');
-            $('#apprentissage_container').css('display','none');
-            $('#exercice_container').css('display','none');
-            $('#evaluation_container').css('display','block');
-            afficher($('.course'));
-                     
         
             chargerEvaluationAlphabet();
             afficheEvaluationAlphabet();
@@ -1785,7 +1776,18 @@ function alphabet() {
                     $('.correction_btn').css('display','none');
                 }
             }
-            function afficheEvaluationAlphabet() {}
+            function afficheEvaluationAlphabet() {
+                
+                $('#pratique_options').css('display','block');
+                $('.fermeture').attr('id', 'fermer_evaluation'); 
+
+                $('#pre_exercice_cover').css('display','none');
+                $('#apprentissage_container').css('display','none');
+                $('#exercice_container').css('display','none');
+                $('#evaluation_container').css('display','block');
+                afficher($('.course'));
+                     
+            }
             function evaluerAlphabet() {
                 
                 zoomUp($('#evaluation_dialogue_btn'));
@@ -1891,7 +1893,7 @@ function alphabet() {
                             marquerReponseEvaluation();
                             effacerCheckMark(); 
                             masquerTesteContainer();
-                            setTimeout(() => { defilementDuContenuLeHaut($('#evaluation_tbody')); }, 1200);
+                            setTimeout(() => { defilementDuContenuVersLeHaut($('#evaluation_tbody')); }, 1200);
         
                             evaluation_counter++;
         

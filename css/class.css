@@ -928,7 +928,7 @@ del {
 .progress_bonne_reponse_bar, .progress_bonne_reponse_bar_integre { 
     background-color: rgba(255,255,0,0.6); 
 }
-.progress_mauvaise_reponse_bar, .progress_mauvaise_reponse_bar_integre { 
+.progress_mauvaise_reponse_bar, .f { 
     background-color: rgba(0,0,0,0.25);
 }
 .progress_question_bar { background-color: #bbb; }

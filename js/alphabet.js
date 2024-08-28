@@ -2053,8 +2053,6 @@ function alphabet() {
                     }
                 });
             }
-                
-            
             function initialiserEvaluation() {
                 for(var i = 0; i < 20; i++) questions_a_evaluer[i] = questions_evaluation[i];
                 for(var i=0;i<questions_a_evaluer.length;i++) {

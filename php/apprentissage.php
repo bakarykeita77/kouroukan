@@ -54,13 +54,13 @@
          <!--Fin course ------------------------------------------------------------------- -->
         </div>
 
-        <div id="pre_exercice_cover">
+        <div id="exercice_body">
             <div id="pre_exercice">
                 <span class="fermeture_pre">&times;</span>
                 <div id="pre_exercice_container">
                         
-                    <div id="pre_exercice_body"></div>
-                    <div id="pre_exercice_foot"></div>
+                    <div id="exercice_body"></div>
+                    <div id="exercice_foot"></div>
                     <div id="pre_exercice_resultat">
                         <h2 id="pre_resultat_titre"></h2>
                        

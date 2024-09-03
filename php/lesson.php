@@ -90,53 +90,6 @@ if(isset($_SESSION["id"])) {
                         </div>
                      <!--Course body ---------------------------------------------- -->
                         <div class="course_body" id="apprentissage_body"></div>
-                        <div id="pre_exercice_cover">
-                            <div id="pre_exercice">
-                                <span class="fermeture_pre">&times;</span>
-                                
-                                <div id="pre_exercice_container">
-                                        
-                                    <div id="pre_exercice_body"></div>
-                                    <div id="pre_exercice_foot">
-                                        <div id="apprentissage_foot_btns_container">
-                                            <div id="pre_exercice_btns">
-                                                <div id="pre_question_btn"></div>
-                                                <div id="repeter_pre_question_btn"></div>
-                                                <div id="pre_correction_btn">ߏ߬ ߛߊߞߍ߫</div>
-                                            </div>
-                                        </div> 
-                                    </div>
-                                    <div id="pre_exercice_resultat">
-                                        <h2 id="pre_resultat_titre"></h2>
-                                        
-                                        <div id="pre_exercice_resultat_container">
-                                            <div id="resultat_entete">
-                                                <table>
-                                                    <tr><td>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</td></tr>
-                                                    <tr><td>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ</td></tr>
-                                                    <tr><td>ߓߍ߬ߙߍ</td></tr>
-                                                </table>
-                                            </div>
-                                            <div id="resultat_corps">
-                                                <table>
-                                                    <tr id="question_row"></tr>
-                                                    <tr id="response_row"></tr>
-                                                    <tr id="mark_row"></tr>
-                                                </table>
-                                            </div>
-                                            <div id="resultat_pied">
-                                                <table>
-                                                    <tr><td id="total_question"></td></tr>
-                                                    <tr><td id="total_response"></td></tr>
-                                                    <tr><td id="total_mark"></td></tr>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        </div>
                      <!--Course foot ---------------------------------------------- -->
                         <div class="course_foot" id="apprentissage_foot">
                             <div class="dialogue_btn" id="pre_apprentissage_dialogue_btn">
@@ -159,7 +112,7 @@ if(isset($_SESSION["id"])) {
                                 
                                 <div id="redirection_btns">
                                     <span class='redirection_btn' id='pre_exercice_bouton'>ߜߋ߲߭ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫</span>
-                                    <span class='redirection_btn' id='pre_revision_bouton'>ߜߋ߲߭ ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫</span> 
+                                    <span class='redirection_btn' id='pre_evaluation_bouton'>ߜߋ߲߭ ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫</span> 
                                 </div>
 
                                 <div id="apprentissage_dialogue_btn">
@@ -204,34 +157,18 @@ if(isset($_SESSION["id"])) {
                         </div>
                     </div>
                  <!--Course body ------------------------------------------------------------------ -->
-                    <div class="course_body" id="exercice_body"></div>   <!--Cette division est chargé par la fonction chargerExercice() dans exeercice.js-->
-                 <!--Course foot ------------------------------------------------------------------ -->
-                    <div class="course_foot" id="exercice_foot">
-                        <div class="dialogue_btn" id="exercice_dialogue_btn">
+                    <div id="exercice_body_cadre">
+                        <div class="course_body" id="exercice_body"></div>   <!--Cette division est chargé par la fonction chargerExercice() dans exeercice.js-->
+                    
+                        <!--Course foot ------------------------------------------------------------------ -->
+                        <div class="course_foot" id="exercice_foot">
+                            <div class="dialogue_btn" id="exercice_dialogue_btn">
                             
-                            <div class = 'progress_bar_integre'>
-                                <div class='progress_bonne_reponse_bar_integre'></div>
-                                <div class='progress_mauvaise_reponse_bar_integre'></div>
-                            </div>
-
-                            <div id="play_btns">
-                                <div class='play_icon_container' id='exercices_player'>
-                                    <span class='play_label' id='exercice_play_label'>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ </span>
-                                    <span class='qtite_question'></span>
-                                    <span>\</span>
-                                    <span class='ordre_question'></span>
-                                    <span class='ecouter_question'> ߟߊߡߍ߲߫</span>
+                                <div id="exercice_btns">
+                                    <div id="exercice_question_btn"></div>
+                                    <div id="repeter_exercice_question_btn"></div>
+                                    <div id="exercice_correction_btn">ߏ߬ ߛߊߞߍ߫</div>
                                 </div>
-
-                                <div class='oreille_icon_container'>
-                                    <span class='reecoute_label'>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ <span id="question_rang"></span> ߟߊߡߍ߲߫ ߕߎ߯ߣߌ߫  </span> 
-                                    <span class='oreille_icon'>&#128066;</span>
-                                </div>
-                            </div> 
-                            
-                            <div id="redirection_btns">
-                                <div id="reprise_btn"></div>
-                                <div id="avance_btn"></div>
                             </div>
                         </div>
                     </div>

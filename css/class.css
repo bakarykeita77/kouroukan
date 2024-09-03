@@ -216,6 +216,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     align-items: center;
 }
 .cercle {
+    display: inline-block;
     border: 1px solid #ccc;
     border-radius: 50%;
     width: 2rem;
@@ -302,7 +303,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     overflow-y: auto; overflow-x: hidden;
 }
 .course_body { 
-    padding-top: 2rem;
+    padding-top: 1.5rem;
     height: calc(100% - 10rem);
     color: white;
     background-color: rgba(0,0,0,0.8);
@@ -322,7 +323,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     z-index: 0;
 }
 .course_foot { 
-    height: 3.5rem; 
+    height: 4rem; 
     bottom: 0;
     background-color: #fff; 
     border-radius: 0 0 0.5rem 0.5rem; 
@@ -352,10 +353,9 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     background-color: #ddd;
     top: 10px;
     width: calc(100% - 2px);
-    height: 3rem;
+    height: 4rem;
     padding: 0;
     margin: 0.25rem auto;
-    border: 1px solid #aaa;
     border-radius: 0.5rem;
     font-weight: bold;
 }

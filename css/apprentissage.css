@@ -26,10 +26,6 @@
 #pre_apprentissage_btns {
     bottom: 0;
 }
-#pre_apprentissage_btns > div {
-    width: 6.5rem;
-    margin: auto;
-}
 #table_alphabet_apprentissage {
     height: 75%;
     max-height: 45rem;
@@ -62,18 +58,24 @@
 .notification h3 { margin: 0; padding: 0; }
 #redirige_sur_exercice { cursor: pointer; }
 #pre_apprentissage_btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    height: 4rem;
     font-weight: bold;
     color: black;
     z-index: 1;
 }
 #pre_apprentissage_btns > div { position: relative; }
-#pre_apprentissage_btns { overflow: visible; height: 3rem; }
 #redirection_btns span:active { box-shadow: none; }
 #redirection_btns { z-index: 0; }
 #redirection_btns span { 
     margin: 0;
     padding: 0;
-    height: 3rem;
+    height: 4rem;
+    line-height: 4rem;
     width: 100%;
     border-radius: 0.5rem;
     left: 50%;
@@ -139,6 +141,10 @@
     background-color: #444;
 }
 #tr_actif .pre_apprentissage_td {
+    width: 8%;
+    min-width: 1.5rem;
+    height: 3rem;
+    line-height: 3rem;
     transform: scale(1.5);
     box-sizing: border-box;
 }
@@ -191,7 +197,7 @@
 #panneaux > div { font-size: 1.5rem; }
 #submit_panneau { font-size: 1rem; }
 #cercles_des_partis { 
-    min-width: 4rem; 
+    width: 16rem; 
     height: 3rem; 
 }
 #cercles_des_partis_cadre { position: relative; }
@@ -241,20 +247,17 @@
 
 
 
-#pre_exercice_cover {
+#exercice_body_cadre {
     position: absolute;
-    display: none;
     top: 5rem;
-    width: 100%;
     height: calc(100% - 8rem);
-    background-color: rgba(0,0,0,0);
-    z-index: 1;
-}
-#pre_exercice_container {
-    position: absolute;
-    height: calc(100% - 2rem);
-    width: 100%;
+    width: 98%;
+    max-width: 40rem;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 1px solid #bbb;
     border-radius: 0.5rem;
+    background-color: #ddd;
     overflow: hidden;
 }
 #pre_exercice {
@@ -291,29 +294,32 @@
     background-color: #bbb;
     font-weight: bold;
 }
-#pre_exercice_body {
+#exercice_body {
     position: absolute;
-    height: calc(100% - 5.5rem);
+    display: none;
+    top: 0.25rem;
+    height: calc(100% - 6rem);
+    z-index: 1;
     width: 98%;
     border-radius: 0.5rem;
     left: 1%;
     background-color: rgba(0,0,0,0.8);;
     overflow: auto;
 }
-#pre_exercice_body td { 
+#exercice_body td { 
     width: 3rem;
     height: 3rem;
     line-height: 4rem;
-    font-size: 2rem;
+    font-size: 3rem;
     color: #fff;
     border: 1px solid transparent; 
     overflow: visible;
     opacity: 0;
 }
-#pre_exercice_body td:hover { 
+#exercice_body td:hover { 
     background-color: #999;
 }
-#pre_exercice_foot { 
+#exercice_foot { 
     position: absolute;
     height: 5.125rem;
     width: 98%;
@@ -324,15 +330,13 @@
     border-radius: 0 0 0.5rem 0.5rem;
     font-weight: bold;
 }
-#apprentissage_foot_btns_container {
-    position: relative;
-    top: 0.5rem;
-    height: 4rem;
+#exercice_btns { 
+    height: 4rem; 
+    width: 100%; 
 }
-#pre_exercice_btns { position: absolute; }
-#pre_exercice_btns { height: 4rem; width: 100%; }
-#pre_question_btn, #repeter_pre_question_btn, #pre_correction_btn {
+#exercice_question_btn, #repeter_exercice_question_btn, #exercice_correction_btn {
     position: absolute;
+    top: 0.5rem;
     margin: 0.5rem 1rem;
     width: 15rem;
     height: 3rem;
@@ -344,8 +348,8 @@
     cursor: pointer;
     transition: 0.2s;
 }
-#pre_question_btn:active, #repeter_pre_question_btn:active { box-shadow: none; }
-#repeter_pre_question_btn { display: none; }
+#exercice_question_btn:active, #repeter_exercice_question_btn:active { box-shadow: none; }
+#repeter_exercice_question_btn { display: none; }
 #resultat_corps{
     padding: 0 0.5rem;
     border-left: 0.5rem solid #aaa;
@@ -461,7 +465,7 @@
     background-color: #fff;
 }
 #pre_exercice_bouton { z-index: 1; }
-#pre_revision_bouton { z-index: 0; }
+#pre_evaluation_bouton { z-index: 0; }
 #submit_panneau {
     position: relative;
     width: 12rem;
@@ -476,13 +480,11 @@
 #submit_panneau:hover { background-color: #aaa; }
 
 @media screen and (width < 400px) {
-    .pre_apprentissage_td { width: 1rem; }
     .cercle { display: block; }
     #cercles_des_partis span:not(.indicateur, .apprentissage_en_cours) { z-index: 0; }
     .indicateur, .apprentissage_en_cours { z-index: 1; }
 }
 @media screen and (width >= 400px) {
-    .pre_apprentissage_td { min-width: 9%;  }
     .cercle {
         position: relative;
         display: inline-block;

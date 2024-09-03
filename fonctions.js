@@ -30,18 +30,6 @@
 	    });
 
 	}
-    function afficher(course) {
-        course.css({
-            'display':'block', 
-            'transform':'scale(0.75)', 
-            'opacity':'0',
-            'transition':'0.6s'
-        });
-        setTimeout(function() { course.css({
-            'transform':'scale(1)', 
-            'opacity':1
-        }); }, 100);
-    }
     function affichageAnimeDesTd(td) {
         setTimeout(() => {
 
@@ -67,6 +55,46 @@
                 });
             }, 700*tr_index);
         });
+    }
+    function afficher(course) {
+        course.css({
+            'display':'block', 
+            'transform':'scale(0.75)', 
+            'opacity':'0',
+            'transition':'0.8s'
+        });
+        setTimeout(function() { course.css({
+            'transform':'scale(1)', 
+            'opacity':1
+        }); }, 50);
+    }
+    function afficherApprentissage() {
+        masquer($('.course'));
+        $('#exercice_container').css('display','none');
+        $('#evaluation_container').css('display','none');
+        $('#apprentissage_container').css('display','block');
+        setTimeout(() => { afficher($('.course')); }, 50);
+    }
+    function afficherEvaluation() {
+        masquer($('.course'));
+        $('#apprentissage_container').css('display','none');
+        $('#exercice_container').css('display','none');
+        $('#evaluation_container').css('display','block');
+        setTimeout(() => { afficher($('.course')); }, 50);
+    }
+    function afficherExercice() {
+        masquer($('.course'));
+        $('#apprentissage_container').css('display','none');
+        $('#evaluation_container').css('display','none');
+        $('#exercice_container').css('display','block');
+        setTimeout(() => { afficher($('.course')); }, 50);
+    }
+    function afficherRevision() {
+        masquer($('.course'));
+        $('#apprentissage_container').css('display','none');
+        $('#exercice_container').css('display','none');
+        $('#revision_container').css('display','block');
+        setTimeout(() => { afficher($('.course')); }, 50);
     }
 	function aggrandir_caractere_de(element) { element.css( 'font-size','+=32px' ); }
 	function appetir_caractere_de(element) { element.css( 'font-size','-=32px' ); }
@@ -367,10 +395,10 @@
         setTimeout(() => { element.animate({'top':0}, 400); }, 1200);
     }
     function goUp(element) {
+        element.css('display','none'); 
         element.animate({'top':'-100%'}, 400);
         setTimeout(() => { 
             element.unwrap();
-            element.css('display','none'); 
 
             $('#envelope').css({
                 'display':'none',
@@ -404,14 +432,23 @@
         }
     }
     function initialiserProgressBar() { 
-        $('.progress_mauvaise_reponse_bar, .progress_bonne_reponse_bar').css('width',0);
+        setTimeout(() => { 
+            $('.progress_bar').css('display','none');
+            $('.progress_bonne_reponse_bar, .progress_mauvaise_reponse_bar').css('width', 0);
+        }, 450);
     }
     function initialiserProgressBarIntegre() { 
-        $('.progress_mauvaise_reponse_bar_integre, .progress_bonne_reponse_bar_integre').css('width',0);
+        setTimeout(() => { 
+            $('.progress_bar').css('display','none');
+            $('.progress_mauvaise_reponse_bar_integre, .progress_bonne_reponse_bar_integre').css('width',0);
+        }, 450);
     }
     function initialiserProgressBarr() { 
         $('.parametres_popup td').on('click', function() {
-            $('.progress_question_bar, .progress_bonne_reponse_bar').css('width',0); 
+            setTimeout(() => { 
+                $('.progress_bar').css('display','none');
+                $('.progress_question_bar, .progress_bonne_reponse_bar').css('width',0); 
+            }, 450);
         });
     } 
 
@@ -592,11 +629,10 @@
     }
     function masquer(course) {
         course.css({
+            'display':'none',
             'transform':'scale(0.75)', 
             'opacity':'0'
         });
-        course.css('display','none');
-        // setTimeout(() => { course.css('display','none'); }, 50);
     }
     function memoriserClicks(table,elements){
 
@@ -875,6 +911,11 @@
         setTimeout(() => { element.css('display','none'); }, 200);
     }
     function zoomUp(element) {
+        element.css({
+            'display':'none',
+            'opacity':0,
+            'transform':'scale(0.75)'
+        });
         setTimeout(() => {
             element.css({
                 'display':'block',
@@ -882,5 +923,5 @@
                 'transform':'scale(1)', 
                 'transition':'0.15s'
             });
-        }, 200);
+        }, 250);
     }

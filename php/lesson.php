@@ -101,10 +101,10 @@ if(isset($_SESSION["id"])) {
 
                                 <div id="pre_apprentissage_btns">
                                     <div>
-                                        <div class='titre_de_parti'>
-                                            <div>ߞߎߘߎ߲</div>
-                                            <div class='cercle' id='afficheur_de_panneau'>+</div>
-                                        </div>
+                                        <p class='titre_de_parti'>
+                                            <span>ߞߎߘߎ߲</span>
+                                            <span class='cercle' id='afficheur_de_panneau'>+</span>
+                                        </p>
                                     </div>
                                 </div>
                                     
@@ -166,8 +166,34 @@ if(isset($_SESSION["id"])) {
                             
                                 <div id="exercice_btns">
                                     <div id="exercice_question_btn"></div>
-                                    <div id="repeter_exercice_question_btn"></div>
+                                    <div id="exercice_repeter_question_btn"></div>
                                     <div id="exercice_correction_btn">ߏ߬ ߛߊߞߍ߫</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              <!------------------------------------------------------------------------------------------------------------------------------>
+                <div id="revision_container">
+                 <!--Course head ------------------------------------------------------------------ -->
+                    <div class="course_head" id="revision_head">
+                        <div class="notification">
+                            <h2 class="notification_titre"></h2>
+                            <div class="notification_corps"></div>
+                        </div>
+                    </div>
+                 <!--Course body ------------------------------------------------------------------ -->
+                    <div id="revision_body_cadre">
+                        <div class="course_body" id="revision_body"></div>   <!--Cette division est chargé par la fonction chargerExercice() dans exercice.js-->
+                    
+                        <!--Course foot ------------------------------------------------------------------ -->
+                        <div class="course_foot" id="revision_foot">
+                            <div class="dialogue_btn" id="revision_dialogue_btn">
+                            
+                                <div id="revision_btns">
+                                    <div id="revision_question_btn"></div>
+                                    <div id="revision_repeter_question_btn"></div>
+                                    <div id="revision_correction_btn">ߏ߬ ߛߊߞߍ߫</div>
                                 </div>
                             </div>
                         </div>

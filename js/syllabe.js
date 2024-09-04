@@ -908,8 +908,8 @@ function syllabe() {
                             $('#exercice_correction_btn').css('display','none');
                             
                             setTimeout(() => { 
-                                montrer($('#repeter_exercice_question_btn'));
-                                $('#repeter_exercice_question_btn').css('display','block'); 
+                                montrer($('#exercice_repeter_question_btn'));
+                                $('#exercice_repeter_question_btn').css('display','block'); 
                             }, 200);
                         });
 
@@ -918,7 +918,7 @@ function syllabe() {
                             if(pre_question === '') { return; }
 
                             $('#exercice_question_btn').css('display','none');
-                            $('#repeter_exercice_question_btn').css('display','none');
+                            $('#exercice_repeter_question_btn').css('display','none');
 
                             setTimeout(() => { 
                                 montrer($('#exercice_correction_btn'));
@@ -928,7 +928,7 @@ function syllabe() {
 
                         $('#exercice_correction_btn').click(function() { 
                             if(questions_posees.length <= total_questions) { 
-                                $('#repeter_exercice_question_btn').css('display','none');
+                                $('#exercice_repeter_question_btn').css('display','none');
                                 $('#exercice_correction_btn').css('display','none');
                                 setTimeout(() => { 
                                     montrer($('#exercice_question_btn'));
@@ -943,7 +943,7 @@ function syllabe() {
                         $('#exercice_container').css('display','block');
                         $('#exercice_body').css('display','block');
                         setTimeout(() => { afficher($('#exercice_body')); }, 100);
-                        setTimeout(() => { affichageAnimeDesTr($('#exercice_body tr')); }, 600); 
+                        setTimeout(() => { affichageAnimeDeTable($('#exercice_body table')); }, 600); 
                     }
                 }
             }
@@ -965,7 +965,7 @@ function syllabe() {
                         e.stopImmediatePropagation();       
                         ordre_de_question = (total_questions == i+2) ? 'ߟߊߓߊ߲' : parseIntNko(i+2);
                         $('#exercice_question_btn').html('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ '+parseIntNko(total_questions)+' \\ '+ordre_de_question+'߲ ߠߊߡߍ߲߫');
-                        $('#repeter_exercice_question_btn').html('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ '+parseIntNko(i+1)+'߲ ߠߊߡߍ߲߫ ߕߎ߲߯');
+                        $('#exercice_repeter_question_btn').html('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ '+parseIntNko(i+1)+'߲ ߠߊߡߍ߲߫ ߕߎ߲߯');
                         pre_question = pre_questions[i];
                         
     // alert(pre_question);
@@ -982,7 +982,7 @@ function syllabe() {
                             i = 0; 
                         }
 
-                        function relire(pre_question) { $('#repeter_exercice_question_btn').click(function() { lire('alphabet',pre_question); }); }
+                        function relire(pre_question) { $('#exercice_repeter_question_btn').click(function() { lire('alphabet',pre_question); }); }
                     });
                 }
                 function repondreLaPreQuestion() {
@@ -1357,7 +1357,7 @@ function syllabe() {
         $('#redirection_btns').css('display','none');
 
         $('#exercice_question_btn').css('display','block');
-        $('#repeter_exercice_question_btn').css('display','none');
+        $('#exercice_repeter_question_btn').css('display','none');
         $('#exercice_correction_btn').css('display','none');
     }
     function afficherExerciceCorrectionQuestionBtn() {
@@ -1367,7 +1367,7 @@ function syllabe() {
         $('#redirection_btns').css('display','none');
 
         $('#exercice_question_btn').css('display','none');
-        $('#repeter_exercice_question_btn').css('display','none');
+        $('#exercice_repeter_question_btn').css('display','none');
         $('#exercice_correction_btn').css('display','block');
     }
     function afficherRepeterExerciceQuestionBtn() {
@@ -1377,7 +1377,7 @@ function syllabe() {
         $('#redirection_btns').css('display','none');
 
         $('#exercice_question_btn').css('display','none');
-        $('#repeter_exercice_question_btn').css('display','block');
+        $('#exercice_repeter_question_btn').css('display','block');
         $('#exercice_correction_btn').css('display','none');
     }
     function afficherPreApprentissageBtns() {

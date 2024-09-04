@@ -1,9 +1,7 @@
     var total_phase = JSON.parse(sessionStorage.getItem('total_phase'));
 	  
     function accorder(element) {
-                                    
         $(element).addClass('vrais');
-
         setTimeout(function(){ $('.vrais').addClass('coche'); }, 100);
         setTimeout(function(){ $('.vrais').removeClass('coche'); }, 600);
         setTimeout(function(){ $(element).removeClass('vrais'); }, 600);
@@ -31,30 +29,42 @@
 
 	}
     function affichageAnimeDesTd(td) {
-        setTimeout(() => {
-
-            $.each(td, function() {
-                let td = $(this);
-                let td_index = $(this).index();
-
-                setTimeout(() => { td.css({'transform':'scale(1)', 'opacity':1}); }, 120*td_index);
-            });
-        }, 200);
-    }
-    function affichageAnimeDesTr(tr) {
-        $.each(tr, function(){
-            var tr_index = $(this).index();
-            var td = $('td', this);
-
-            setTimeout(() => {
-                $.each(td, function() {
-                    let td = $(this);
-                    let td_index = $(this).index();
-
-                    setTimeout(() => { td.css({'transform':'scale(1)', 'opacity':1}); }, 60*td_index);
-                });
-            }, 700*tr_index);
+        td.css({
+            'transform':'scale(0.75)', 
+            'opacity':0,
+            'transition':'0.8s'
         });
+        setTimeout(() => {
+            $.each(td, function() {
+                let td_index = $(this).index();
+                setTimeout(() => { 
+                    $(this).css({
+                        'transform':'scale(1)', 
+                        'opacity':1,
+                    }); 
+                }, 80*td_index);
+            });
+        }, 600);
+    }
+    function affichageAnimeDeTable(table) {
+        let tr = '';
+        $.each(table, function() { tr = $('tr', this); })
+        setTimeout(() => {
+            $.each(tr, function(){
+
+                let tr_index = $(this).index();
+                let td = $('td', this);
+                let td_length = td.length;
+
+                $.each(td, function() {
+                    let td_index = $(this).index();
+                    setTimeout(() => {
+                        $(this).css({'transform':'scale(1)', 'opacity':1});
+                    }, 100*((tr_index*td_length)+td_index));
+                });
+            });
+        }, 600);
+        
     }
     function afficher(course) {
         course.css({
@@ -70,23 +80,26 @@
     }
     function afficherApprentissage() {
         masquer($('.course'));
-        $('#exercice_container').css('display','none');
-        $('#evaluation_container').css('display','none');
         $('#apprentissage_container').css('display','block');
+        $('#exercice_container').css('display','none');
+        $('#revision_container').css('display','none');
+        $('#evaluation_container').css('display','none');
         setTimeout(() => { afficher($('.course')); }, 50);
     }
     function afficherEvaluation() {
         masquer($('.course'));
         $('#apprentissage_container').css('display','none');
         $('#exercice_container').css('display','none');
+        $('#revision_container').css('display','none');
         $('#evaluation_container').css('display','block');
         setTimeout(() => { afficher($('.course')); }, 50);
     }
     function afficherExercice() {
         masquer($('.course'));
         $('#apprentissage_container').css('display','none');
-        $('#evaluation_container').css('display','none');
         $('#exercice_container').css('display','block');
+        $('#revision_container').css('display','none');
+        $('#evaluation_container').css('display','none');
         setTimeout(() => { afficher($('.course')); }, 50);
     }
     function afficherRevision() {
@@ -94,6 +107,7 @@
         $('#apprentissage_container').css('display','none');
         $('#exercice_container').css('display','none');
         $('#revision_container').css('display','block');
+        $('#evaluation_container').css('display','none');
         setTimeout(() => { afficher($('.course')); }, 50);
     }
 	function aggrandir_caractere_de(element) { element.css( 'font-size','+=32px' ); }

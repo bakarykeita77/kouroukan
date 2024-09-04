@@ -217,7 +217,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 }
 .cercle {
     display: inline-block;
-    border: 1px solid #ccc;
+    border: 1px solid #bbb;
     border-radius: 50%;
     width: 2rem;
     height: 2rem;
@@ -225,6 +225,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     margin: 0.5rem;
     color: #666;
     cursor: pointer;
+    box-shadow: 0 0 0.5rem #bbb;
     transition: 0.25s;
 }
 .cercle:active { box-shadow: none; }
@@ -325,7 +326,6 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 .course_foot { 
     height: 4rem; 
     bottom: 0;
-    background-color: #fff; 
     border-radius: 0 0 0.5rem 0.5rem; 
 }
 .course_head { height: 6rem; background-color: #fff; }
@@ -349,10 +349,10 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 
 .dark_backgound { background-color: #aaa; }
 .dialogue_btn {
-    position: absolute;
-    background-color: #ddd;
-    top: 10px;
+    position: relative;
+    top: 0.25rem;
     width: calc(100% - 2px);
+    max-width: 22rem;
     height: 4rem;
     padding: 0;
     margin: 0.25rem auto;
@@ -362,9 +362,12 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 .dialogue_btn > div {
     position: absolute;
     width: 100%;
-    height: 3rem;
-    line-height: 3rem;
+    height: 4rem;
+    line-height: 4rem;
     text-align: center;
+    padding: 0.25rem;
+    margin: 0 auto;
+    box-sizing: border-box;
     border-radius: 0.5rem;
     cursor: pointer;
 }
@@ -890,8 +893,8 @@ del {
     display: none;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 0.8rem;
-    height: 3rem;
+    bottom: 1rem;
+    height: 4rem;
     width: calc(100% - 1.5rem);
     max-width: 59rem;
     margin: 0 auto;
@@ -911,7 +914,7 @@ del {
 }
 .progress_bar > div, .progress_bar_integre > div {
     position: absolute; 
-    height: 3rem; 
+    height: 4rem; 
     width: 0;
     margin: 0;
     border-radius: 0.5rem;
@@ -989,15 +992,15 @@ del {
     position: relative;
     height: 3rem;
     padding: 8px 0;
-    font-size: 180%;
+    font-size: 3rem;
     font-weight: 900;
     text-align: center;
+    border: 1px solid rgb(85,85,85);
     border-radius: 0.5rem;
     cursor: pointer;
-    overflow: auto;
+    overflow: visible;
 }
 .table_parlante td {  background-color: rgba(85,85,85,0.25); }
-.table_muette td {  border: 1px solid #666; }
 .transparent { animation: transperer; }
 .travaux { 
     width: 100%;
@@ -1049,7 +1052,6 @@ del {
 
 .vrais {
     background-color: #fff;
-    min-width: 2rem;
     box-shadow: 0 0 1rem #aaa;
     animation: soulever 2s 1;
     overflow: visible;

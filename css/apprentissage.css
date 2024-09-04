@@ -23,9 +23,6 @@
     color: cornflowerblue;
     cursor: pointer;
 }
-#pre_apprentissage_btns {
-    bottom: 0;
-}
 #table_alphabet_apprentissage {
     height: 75%;
     max-height: 45rem;
@@ -64,6 +61,7 @@
     align-items: center;
 
     height: 4rem;
+    background-color: #ddd;
     font-weight: bold;
     color: black;
     z-index: 1;
@@ -98,7 +96,7 @@
 #pre_exercice_resultat td { min-width: 1.5rem; height: 2rem; }
 .titre_de_parti, #cercles_des_partis, #carres_pour_exercices { position: relative; display: inline-block; }
 .titre_de_parti { height: 3rem; line-height: 3rem; }
-.titre_de_parti > div { display: inline-block; vertical-align: middle; }
+.titre_de_parti > p { display: inline-block; vertical-align: middle; }
 #table_pre_apprentissage {
     padding: 1rem;
     width: calc(100% - 2.25rem);
@@ -199,6 +197,7 @@
 #cercles_des_partis { 
     width: 16rem; 
     height: 3rem; 
+    line-height: 3rem;
 }
 #cercles_des_partis_cadre { position: relative; }
 #cercles_des_partis_cadre span:hover, #pre_revision_btn:hover {
@@ -245,12 +244,12 @@
 }
 #consonnes_cadre span:hover { background-color: #ddd; }
 
-
-
-#exercice_body_cadre {
+#revision_body { height: calc(100% - 5rem); }
+#exercice_container, #revision_container { height: 100%; }
+#exercice_body_cadre, #revision_body_cadre {
     position: absolute;
     top: 5rem;
-    height: calc(100% - 8rem);
+    height: calc(100% - 10rem);
     width: 98%;
     max-width: 40rem;
     left: 50%;
@@ -312,7 +311,6 @@
     line-height: 4rem;
     font-size: 3rem;
     color: #fff;
-    border: 1px solid transparent; 
     overflow: visible;
     opacity: 0;
 }
@@ -334,13 +332,13 @@
     height: 4rem; 
     width: 100%; 
 }
-#exercice_question_btn, #repeter_exercice_question_btn, #exercice_correction_btn {
+#exercice_question_btn, #exercice_repeter_question_btn, #exercice_correction_btn {
     position: absolute;
-    top: 0.5rem;
-    margin: 0.5rem 1rem;
+    bottom: 0;
+    margin: 0.5rem auto;
     width: 15rem;
-    height: 3rem;
-    line-height: 3rem;
+    height: 4rem;
+    line-height: 4rem;
     text-align: center;
     border-radius: 0.5rem;
     left: 50%;
@@ -348,8 +346,8 @@
     cursor: pointer;
     transition: 0.2s;
 }
-#exercice_question_btn:active, #repeter_exercice_question_btn:active { box-shadow: none; }
-#repeter_exercice_question_btn { display: none; }
+#exercice_question_btn:active, #exercice_repeter_question_btn:active { box-shadow: none; }
+#exercice_repeter_question_btn { display: none; }
 #resultat_corps{
     padding: 0 0.5rem;
     border-left: 0.5rem solid #aaa;
@@ -477,6 +475,8 @@
     border-radius: 0.5rem;
     cursor: pointer;
 }
+
+#revision_dialogue_btn { width: 12rem; }
 #submit_panneau:hover { background-color: #aaa; }
 
 @media screen and (width < 400px) {

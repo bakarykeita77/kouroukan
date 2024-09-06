@@ -911,6 +911,9 @@
         setTimeout(function() { td.html(vraie_reponse).removeClass('ombrage'); }, 1200);
     }
     function viderLeTableau(array) { array.splice(0,array.length); }
+    function viderNotification() {
+        $('.notification_corps').text('');
+    }
     
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/

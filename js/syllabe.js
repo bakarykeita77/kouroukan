@@ -91,6 +91,15 @@ function syllabe() {
         evaluationPreSyllabe();
 
         function apprentissagePreSyllabe() {
+            
+            ecrire("notification_corps"," ߞߏ߰ߙߌ߫ ߣߘߍ߬ߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬ ߞߊ߬ ߛߌ߬ߙߕߊ߬ ߥߟߊߟߋ߲ ߦߌ߬ߘߊ߬. ");
+            montrer($('#afficheur_de_panneau'));
+
+            $('#afficheur_de_panneau').click(function() {
+                ecrire("notification_corps"," \
+                    ߛߌ߬ߙߕߊ߬ ߞߋߟߋ߲߫ ߥߟߊ ߛߌߦߊߡߊ߲߫ ߛߎߥߊ߲ߘߌ߫߸ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߡߍ߲ ߜߋ߲߭ ߠߎ߬ ߘߋ߲߰. \
+                ");
+            }); 
 
             chargerApprendrePreSyllabe();
             afficherApprendrePreSyllabe();

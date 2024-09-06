@@ -59,10 +59,9 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 
 .actif, .active, .apprises, .a_apprendre {
     border-radius: 0.25rem;
-}
-.actif, .active {
     background-color: rgb(255,255,0);
     font-weight: bold;
+    box-shadow: 0 0 0.5rem #aaa;
 }
 .active_2 { box-shadow: 0 0 1rem #222; background-color: #fff; color: black; }
 .actif a, .active a {
@@ -283,7 +282,6 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 .course {    
     position: relative;
     display: none;
-    background: #fff;
     top: 3.25rem;
     width: calc(100vw - 1rem);
     max-width: 60rem;
@@ -328,7 +326,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     bottom: 0;
     border-radius: 0 0 0.5rem 0.5rem; 
 }
-.course_head { height: 6rem; background-color: #fff; }
+.course_head { height: 6rem; }
 .course_head div label {
     padding: 0 0.5rem;
     border-radius: 0.25rem;

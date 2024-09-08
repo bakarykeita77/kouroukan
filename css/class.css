@@ -153,6 +153,38 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 }
 .centerH { left: 50%; transform: translateX(-50%); }
 .centerV { top: 50%; transform: translateY(-50%); }
+.centrerX { left: 50%; transform: translateX(-50%); }
+.centrerY { top: 50%; transform: translateY(-50%); }
+.centrerXY {
+    top: 50%;
+    left: 50%;
+    transform: translateXY(-50%,-50%);
+}
+.centercell { margin: auto; }
+.centrer_parfait {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.cercle {
+    display: inline-block;
+    border: 1px solid #bbb;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+    margin: 0.5rem;
+    color: #666;
+    cursor: pointer;
+    box-shadow: 0 0 0.5rem #888;
+    transition: 0.25s;
+}
+.cercle_a_faire { background-color: #bbb; }
+.cercle:active { box-shadow: none; }
+.cercle_active { background-color: white; box-shadow: 0 0 1rem #444; }
+.exercice_en_cours { background-color: yellow; box-shadow: 0 0 1rem #444; }
+.cercle_depasse, .carre_depasse { background-color: white; box-shadow: none; }
 .checkbox {
     position: relative;
     top: 0;
@@ -200,37 +232,6 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     background-color: #eee;
     height: 11rem;
 }
-.centrerX { left: 50%; transform: translateX(-50%); }
-.centrerY { top: 50%; transform: translateY(-50%); }
-.centrerXY {
-    top: 50%;
-    left: 50%;
-    transform: translateXY(-50%,-50%);
-}
-.centercell { margin: auto; }
-.centrer_parfait {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-.cercle {
-    display: inline-block;
-    border: 1px solid #bbb;
-    border-radius: 50%;
-    width: 2rem;
-    height: 2rem;
-    line-height: 2rem;
-    margin: 0.5rem;
-    color: #666;
-    cursor: pointer;
-    box-shadow: 0 0 0.5rem #bbb;
-    transition: 0.25s;
-}
-.cercle:active { box-shadow: none; }
-.cercle_active { background-color: white; box-shadow: 0 0 1rem #444; }
-.exercice_en_cours { background-color: yellow; box-shadow: 0 0 1rem #444; }
-.cercle_depasse, .carre_depasse { background-color: white; box-shadow: none; }
 .clavier_container {
     position: relative;
     height: 8rem;

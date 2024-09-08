@@ -77,7 +77,7 @@ function exercices() {
             repondreExerciceAlphabetQuestion();
             
             function poserExerciceAlphabetQuestion(){
-                montrer($('#exercice_dialogue_btn'));
+                rendreActif($('#exercice_dialogue_btn'));
                 $('.play_icon_container').on('click',function() {
       
                     zoomDown($('#exercice_dialogue_btn'));

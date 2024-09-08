@@ -108,8 +108,7 @@
     justify-content: space-around;
 
     position: relative;
-    margin: 0.125rem 0;
-    padding: 1rem;
+    padding: 0.125rem;
     background-color: transparent;
     border-radius: 0.5rem 0.5rem 0 0;
     color: #666;
@@ -130,25 +129,33 @@
 }
 .traducteur_tr:nth-child(2) { font-size: 2rem; }
 #tr_actif {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
     background-color: #444;
     padding: 0.5rem 0;
     border-radius: 0.5rem;
 }
 #tr_actif .pre_apprentissage_tr {
-    padding: 2rem 0;
+    padding: 2rem 0.5rem;
     background-color: #444;
+    width: 100%;
 }
 #tr_actif .pre_apprentissage_td {
-    width: 8%;
+    width: 9%;
     min-width: 1.5rem;
     height: 3rem;
-    line-height: 3rem;
+    line-height: 2rem;
     transform: scale(1.5);
     box-sizing: border-box;
 }
 .pre_apprentissage_td {
     position: relative;
+    width: 12%;
+    border: 1px solid transparent;
     border-radius: 0.5rem;
+    padding: 0.5rem;
     display: inline-block;
     font-size: 2rem;
     font-weight: bold;
@@ -479,14 +486,7 @@
 #revision_dialogue_btn { width: 12rem; }
 #submit_panneau:hover { background-color: #aaa; }
 
-@media screen and (width < 400px) {
-    .cercle { display: block; }
-    #cercles_des_partis span:not(.indicateur, .apprentissage_en_cours) { z-index: 0; }
-    .indicateur, .apprentissage_en_cours { z-index: 1; }
-}
-@media screen and (width >= 400px) {
-    .cercle {
-        position: relative;
-        display: inline-block;
-    }
+.cercle {
+    position: relative;
+    display: inline-block;
 }

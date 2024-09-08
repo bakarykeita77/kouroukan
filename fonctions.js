@@ -733,7 +733,7 @@
         }
         return mixted_table;
     }
-    function montrer(element) {
+    function rendreActif(element) {
         element.addClass('actif');
     }
 

@@ -41,11 +41,12 @@
 #apprentissage_note p { margin: 0.25rem 0; }
 .notification {  
     position: relative;
-    height: calc(100% - 1rem);
+    height: calc(100% - 1.5rem);
     width: calc(98% - 2rem);
     margin: auto;
     padding: 0.5rem 1rem;
     font-size: 12px;
+    overflow-y: auto;
 }
 #pre_texte {
     color: #444;
@@ -67,9 +68,24 @@
     z-index: 1;
 }
 #pre_apprentissage_btns > div { position: relative; }
-#redirection_btns span:active { box-shadow: none; }
-#redirection_btns { z-index: 0; }
-#redirection_btns span { 
+#exercice_redirection_btns {
+    border: 1px solid #bbb;
+    border-radius: 0.5rem;
+    position: relative;
+    height: 4rem;
+    width: 100%;
+    max-width: 25rem;
+    margin: auto;
+    top: 1.5rem;
+}
+.redirection_btns span:active { box-shadow: none; }
+.redirection_btns { 
+    text-align: center;
+    font-weight: bold; 
+    z-index: 0; 
+}
+.redirection_btns span { 
+    top: 0;
     margin: 0;
     padding: 0;
     height: 4rem;
@@ -100,6 +116,8 @@
 #table_pre_apprentissage {
     padding: 1rem;
     width: calc(100% - 2.25rem);
+    max-width: 45rem;
+    margin: auto;
     overflow: hidden;
 }
 .pre_apprentissage_tr {
@@ -152,7 +170,7 @@
 }
 .pre_apprentissage_td {
     position: relative;
-    width: 12%;
+    width: 11%;
     border: 1px solid transparent;
     border-radius: 0.5rem;
     padding: 0.5rem;
@@ -254,13 +272,12 @@
 #revision_body { height: calc(100% - 5rem); }
 #exercice_container, #revision_container { height: 100%; }
 #exercice_body_cadre, #revision_body_cadre {
-    position: absolute;
-    top: 5rem;
-    height: calc(100% - 10rem);
+    position: relative;
+    top: 1rem;
+    height: calc(100% - 12rem);
     width: 98%;
     max-width: 40rem;
-    left: 50%;
-    transform: translateX(-50%);
+    margin: auto;
     border: 1px solid #bbb;
     border-radius: 0.5rem;
     background-color: #ddd;
@@ -314,7 +331,7 @@
 }
 #exercice_body td { 
     width: 3rem;
-    height: 3rem;
+    height: 2.5rem;
     line-height: 4rem;
     font-size: 3rem;
     color: #fff;
@@ -469,7 +486,6 @@
     position: absolute;
     background-color: #fff;
 }
-#pre_exercice_bouton { z-index: 1; }
 #pre_evaluation_bouton { z-index: 0; }
 #submit_panneau {
     position: relative;

@@ -110,7 +110,7 @@ if(isset($_SESSION["id"])) {
                                     
                                 <div id='panneaux'></div>
                                 
-                                <div id="redirection_btns">
+                                <div class="redirection_btns" id="apprentissage_redirection_btns">
                                     <span class='redirection_btn' id='pre_exercice_bouton'>ߜߋ߲߭ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫</span>
                                     <span class='redirection_btn' id='pre_evaluation_bouton'>ߜߋ߲߭ ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫</span> 
                                 </div>
@@ -163,7 +163,6 @@ if(isset($_SESSION["id"])) {
                         <!--Course foot ------------------------------------------------------------------ -->
                         <div class="course_foot" id="exercice_foot">
                             <div class="dialogue_btn" id="exercice_dialogue_btn">
-                            
                                 <div id="exercice_btns">
                                     <div id="exercice_question_btn"></div>
                                     <div id="exercice_repeter_question_btn"></div>
@@ -172,6 +171,12 @@ if(isset($_SESSION["id"])) {
                             </div>
                         </div>
                     </div>
+                 <!--Redirection boutons ---------------------------------------------------------- -->
+                    <div class="redirection_btns" id="exercice_redirection_btns">
+                        <span class='redirection_btn' id='pre_exercice_bouton'>ߜߋ߲߭ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫ ߕߎ߲߯</span>
+                        <span class='redirection_btn' id='pre_revision_bouton'>ߜߋ߲߭ ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫</span> 
+                    </div>
+
                 </div>
               <!------------------------------------------------------------------------------------------------------------------------------>
                 <div id="revision_container">

@@ -1,53 +1,5 @@
 :root{
-    
-    --border_a: 1px solid #aaa;
-    --border_b: 1px solid #bbb;
-    --border_c: 1px solid #ccc;
-    --border_d: 1px solid #ddd;
-    --border_e: 1px solid #eee;
-    --border_f: 1px solid #fff;
-    --border_6: 1px solid #666;
-    --border_yellow: 1px solid yellow;
-    
-    --couleurPrimaire: cornflowerblue;
-    --couleurSecondaire: yellow;
-    --couleurTertiaire: #ddd;
-    --couleurQuaternaire: #aaa;
-    --couleurNeutre: #fff;
-
-    --couleur_flowerBlue: cornflowerblue;
-    --couleur_yellow: yellow;
-    --couleur_a: #aaa;
-    --couleur_b: #bbb;
-    --couleur_c: #ccc;
-    --couleur_d: #ddd;
-    --couleur_e: #eee;
-    --couleur_f: #fff;
-    
-    --couleur_0: #000;
-    --couleur_6: #666;
-
-    --marginSmall: 0.25rem;
-    --marginMedium: 0.5rem;
-    --marginLarge: 1rem;
-
-    --paddingSmall: 0.25rem;
-    --paddingMedium: 0.5rem;
-    --paddingLarge: 1rem;
-    
-    --radiusLarge: 1rem;
-    --radiusCircle: 50%;
-    
-    --shadow_1a: 0 0 1rem #aaa;
-    --shadow_2a: 0 0 2rem #aaa;
-    --shadow_3a: 0 0 3rem #aaa;
-
-    --shadow_16: 0 0 1rem #666;
-    --shadow_26: 0 0 2rem #666;
-
     --shadow_10: 0 0 1rem #000;
-    --shadow_20: 0 0 2rem #000;
-    --shadow_30: 0 0 3rem #000;
 }
 
 /* --------------------------------------------------------------------------------------------------------- */
@@ -58,14 +10,12 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 
 
 .actif, .active, .apprises, .a_apprendre {
-    border-radius: 0.25rem;
-    background-color: rgb(255,255,0);
     font-weight: bold;
-    box-shadow: 0 0 0.5rem #aaa;
+    background-color: rgb(225,225,0);
 }
 .active_2 { box-shadow: 0 0 1rem #222; background-color: #fff; color: black; }
 .actif a, .active a {
-    color: var(--couleur_flowerBlue);
+    color: cornflowerblue;
     font-weight: bold;
 }
 .actif:active { background-color: #FFF000; box-shadow: none; }
@@ -75,21 +25,21 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 .actif:hover a { color: blue; }
 .active:hover a { color: blue; }
 .a_apprendre { font-weight: bold; border: 1px solid #ddd; }
-.a_apprendre:hover { background-color: var(--couleur_c); }
+.a_apprendre:hover { background-color: #ccc; }
 .anime_au_click { transition: 0.6s; }
-.apprises { border: var(--border_c); color: var(--couleur_flowerBlue); }
-.apprises a { color: var(--couleur_flowerBlue); }
+.apprises { border: 1px solid #ccc; color: cornflowerblue; }
+.apprises a { color: cornflowerblue; }
 .apprises:active { box-shadow: none; }
-.apprises:hover { background-color: var(--couleur_a); color: black; }
+.apprises:hover { background-color: #aaa; color: black; }
 .apprises:hover a { color: blue; }
-.a_apprendre { background-color: var(--couleur_d); color: var(--couleur_a); }
+.a_apprendre { background-color: #ddd; color: #aaa; }
 .a_apprendre a { color:  #888; }
 .a_apprendre:hover a { color: black; }
 .asides_btn {
     display: inline-block;
     width: 48%;
     height: 3rem;
-    background-color: var(--couleurPrimaire);
+    background-color: cornflowerblue;
     border-radius: 0.25rem;
     text-align: center;
 }
@@ -220,7 +170,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 }
 .check_btn_container table { height: 12rem; }
 .check_btn:hover {
-    background-color: var(--couleurNeutre);
+    background-color: #fff;
     box-shadow: 0 0 3rem #666;
 }
 .check_consonnes {
@@ -268,9 +218,9 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     margin-left: 0.125rem;
     height: 1.5rem;
     line-height: 1.5rem;
-    background-color: var(--couleurNeutre);
-    border: 1px solid var(--couleurTertiaire);
-    border-radius: var(--couleurTertiaire);
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: #ddd;
     box-shadow: 0 0 1rem #666; 
     padding: 0.125rem; 
     font-size: 0.8rem;
@@ -308,6 +258,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     height: calc(100% - 10rem);
     color: white;
     background-color: rgba(0,0,0,0.8);
+    z-index: 0;
 }
 .course_container {
     display: none;
@@ -323,12 +274,8 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     box-sizing: border-box;
     z-index: 0;
 }
-.course_foot { 
-    height: 4rem; 
-    bottom: 0;
-    border-radius: 0 0 0.5rem 0.5rem; 
-}
-.course_head { top: 0.5rem; height: 6rem; }
+.course_foot { bottom: 0;z-index: 1; }
+.course_head { top: 0.5rem; height: 6rem; z-index: 1; }
 .course_head div label {
     padding: 0 0.5rem;
     border-radius: 0.25rem;
@@ -361,7 +308,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 }
 .dialogue_btn > div {
     position: absolute;
-    top: 0;
+    top: 0.5rem;
     width: 100%;
     height: 4rem;
     line-height: 4rem;
@@ -485,7 +432,7 @@ del {
 }
 .fond_blanc_casse { background-color: #666; }
 .flowerblue { background-color: cornflowerblue; }
-.fond_blanc { background-color: var(--couleurNeutre); }
+.fond_blanc { background-color: #fff; }
 .fond_jaune { background-color: yellow; }
 .fond_noir_clair { background-color: #bbb; }
 .fond_orange { background-color: orange; }
@@ -526,12 +473,13 @@ del {
 .indicateur::before {
     position: absolute;
     margin: 0;
-    top: 100%;
-    left: 50%;
+    padding: 0;
+    top: 80%;
+    right: 0;
     content: "➜";
     font-size: 2rem;
     color: blue;
-    transform: rotate(-120deg);  
+    transform: rotate(145deg) scale(1.5);
     animation: indexation 5s 0s infinite;
     z-index: 1;
 }
@@ -621,12 +569,12 @@ del {
     position: relative;
     top: 1.75rem;
     float: right;
-    background-color: var(--couleurNeutre);
+    background-color: #fff;
     height: 2.5rem;
     width: 4rem;
     margin: 0 1rem;
     padding: 0 0.5rem;
-    border: var(--border_c);
+    border: 1px solid #ccc;
     border-radius: 0.25rem;
     cursor: pointer;
 }
@@ -640,7 +588,7 @@ del {
     transform: scale(0.75);
     bottom: calc(100% + 0.5rem);
     overflow: hidden;
-    background-color: var(--couleurNeutre);
+    background-color: #fff;
     border-radius: 0.25rem;
     box-shadow: 0 0 3rem #666;
     opacity: 0;
@@ -687,7 +635,7 @@ del {
 .nav_fleches_container span:active { box-shadow: 0 0 1px #ccc; }
 .nav_fleches_container span:nth-child(1) { float: right; }
 .nav_fleches_container span:nth-child(2) { float: left; }
-.neant { color: var(--couleur_a); }
+.neant { color: #aaa; }
 .noir_clair { color: #000; background-color: #ddd; }
 
 /* --------------------------------------------------------------------------------------------------------- */
@@ -728,7 +676,7 @@ del {
     z-index: 5;
 }
 .parametre {
-    background-color: var(--couleurNeutre);
+    background-color: #fff;
     margin: 0 auto;
     border-radius: 0.25rem;
     cursor: pointer;
@@ -745,10 +693,10 @@ del {
     z-index: 10;
 }
 .parametres_container .btn {
-    margin: var(--marginSmall);
+    margin: 0.25rem;
     border-radius: 0.25rem;
 }
-.parametres_container .btn:hover { box-shadow: var(--shadow_3a); }
+.parametres_container .btn:hover { box-shadow: 0 0 3rem #aaa; }
 .parametres_btns {
     height: 2.5rem;
     line-height: 2.5rem;
@@ -759,7 +707,7 @@ del {
     height: 60vh;
     max-height: 21rem;
     max-width: 35rem;
-    background-color: var(--couleurNeutre);
+    background-color: #fff;
     overflow: auto;
     z-index: 1000;
 }
@@ -780,7 +728,7 @@ del {
     margin: 1rem auto;
     width: 100%; 
     max-width: 50rem;
-    padding: var(--paddingLarge);
+    padding: 1rem;
     border-radius: 0.25rem;
     box-sizing: border-box;
     list-style: none;
@@ -789,7 +737,7 @@ del {
     position: relative;
     margin: 1.5rem 0;
 }
-.phases_container h2, .phases_container h4 {  padding: var(--paddingSmall); }
+.phases_container h2, .phases_container h4 {  padding: 0.25rem; }
 .phases_container h2 {
     height: 48px;
     width: 100%;
@@ -815,14 +763,14 @@ del {
     width: 100%;
     top: 1rem;
 }
-.phases ul li {
+.phases li {
     position: relative;
     height: 3rem;
     line-height: 3rem;
     left: 0;
     margin: 0.25rem;
     padding: 0 1rem;
-    text-align: right;
+    text-align: center;
     font-weight: bold;
     border-radius: 0.5rem;
     overflow: hidden;
@@ -848,7 +796,7 @@ del {
     position: absolute;
     min-width: 10rem;
     min-height: 10rem;
-    background-color: var(--couleurNeutre);
+    background-color: #fff;
     transform: scale(0.75);
     opacity: 0;
     transition: 0.3s;
@@ -1021,10 +969,10 @@ del {
     border-radius: 0.25rem;
 }
 .travail:not(first-child) { margin-top: 0; }
-.travail:not(last-child) { border-bottom-color: var(--couleurTertiaire); }
+.travail:not(last-child) { border-bottom-color: #ddd; }
 .travail_titre {
     padding: 0 1.5rem;
-    background-color: var(--couleur_e);
+    background-color: #eee;
 }
 .travail_titre:hover {
     background-color: #bbb;
@@ -1036,7 +984,7 @@ del {
     border-bottom-width: 0.25rem;
     color: #00A;
     padding: 0 1.5rem;
-    background-color: var(--couleur_e);
+    background-color: #eee;
     background-color: #fff;  
     overflow: auto; 
 }
@@ -1091,22 +1039,21 @@ del {
     to{ box-shadow: none; }
 }
 @keyframes indexation {
-
-    0% { top: 100%; left: 50%; }
-    2% { top: 120%; left: 55%; }
-    4% { top: 100%; left: 50%; }
-    6% { top: 120%; left: 55%; }
-    8% { top: 100%; left: 50%; }
-    10% { top: 120%; left: 55%; }
-    12% { top: 100%; left: 50%; }
-    14% { top: 120%; left: 55%; }
-    16% { top: 100%; left: 50%; }
-    18% { top: 120%; left: 55%; }
-    20% { top: 100%; left: 50%; }
-    22% { top: 120%; left: 50%; }
-    24% { top: 100%; left: 50%; }
-    100% { top: 120%; left: 50%; }
-    100% { top: 100%; left: 50%; }
+    0%   { top: -80%; right: -2rem; }
+    2%   { top: -80%; right: -2rem; }
+    4%   { top: -80%; right: -2rem; }
+    6%   { top: -95%; right: -3rem; }
+    8%   { top: -80%; right: -2rem; }
+    10%  { top: -95%; right: -3rem; }
+    12%  { top: -80%; right: -2rem; }
+    14%  { top: -95%; right: -3rem; }
+    16%  { top: -80%; right: -2rem; }
+    18%  { top: -95%; right: -3rem; }
+    20%  { top: -80%; right: -2rem; }
+    22%  { top: -95%; right: -3rem; }
+    24%  { top: -80%; right: -2rem; }
+    100% { top: -80%; right: -2rem; }
+    100% { top: -80%; right: -2rem; }
 }
 @keyframes descendre_doucement {
     from { line-height: 16px; opacity: 0; font-size: 0; }

@@ -13,7 +13,7 @@
 #connexion_form {
 	left: 0;
 	border: 1px solid 1px solid #aaa;
-	background-color: var(--couleurNeutre);
+	background-color: #fff;
 	border-radius: 0.5rem;
 	box-sizing: border-box;
 	direction: rtl;
@@ -98,11 +98,11 @@
 	box-sizing: border-box;
 }
 #connexion_btn { cursor: pointer; }
-.note_titre { color: var(--couleurPrimaire) }
+.note_titre { color: cornflowerblue }
 .note { margin: 0; }
-.note p { color: var(--couleurNeutre); }
+.note p { color: #fff; }
 .note p a { 
-    color: var(--couleurSecondaire); 
+    color: yellow; 
     text-decoration: none; 
     font-weight: bold; 
     border-bottom: 1px solid yellow;
@@ -127,7 +127,7 @@
 		width: 100%;
 		margin: auto; 
 	}
-	#connexion_form { box-shadow: var(--shadow_3a); }
+	#connexion_form { box-shadow: 0 0 3rem #aaa; }
 	#connexion_note { display: none; }
 	
 }

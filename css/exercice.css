@@ -7,7 +7,8 @@
 #table_alphabet_exercice td {
     font-size: 2rem;
 }
-#exercice_foot { height: 5rem; }
+#exercice_body { z-index: 0; }
+#exercice_foot { height: 5rem; z-index: 1; }
 #exercice_dialogue_btn div:active {
     box-shadow: none;
 }

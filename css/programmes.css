@@ -3,7 +3,7 @@
     position: relative;
     max-width: 50rem;
     margin: auto;
-    background-color: var(--couleurNeutre);
+    background-color: #fff;
     direction: rtl;
 }
 #programme_body hr { border-width: 0.125rem; }
@@ -11,7 +11,7 @@
     display: inline-block;
     padding: 1px;
     border: 1px solid #ddd;
-    border-radius: var(--0.25rem);
+    border-radius: 0.25rem;
     width: 4rem;
     text-align: center;
 }

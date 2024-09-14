@@ -69,7 +69,6 @@
 }
 #pre_apprentissage_btns > div { position: relative; }
 #exercice_redirection_btns {
-    border: 1px solid #bbb;
     border-radius: 0.5rem;
     position: relative;
     height: 4rem;
@@ -82,18 +81,19 @@
 .redirection_btns { 
     text-align: center;
     font-weight: bold; 
-    z-index: 0; 
+    z-index: 1; 
 }
 .redirection_btns span { 
+    position: absolute;
     top: 0;
-    margin: 0;
-    padding: 0;
-    height: 4rem;
-    line-height: 4rem;
-    width: 100%;
-    border-radius: 0.5rem;
     left: 50%;
     transform: translateX(-50%);
+    margin: 0 auto;
+    padding: 0 3rem;
+    height: 4rem;
+    line-height: 4rem;
+    width: max-content;
+    border-radius: 0.5rem;
     cursor: pointer;
     transition: 0.3s;
 }
@@ -161,11 +161,11 @@
     width: 100%;
 }
 #tr_actif .pre_apprentissage_td {
-    width: 9%;
+    width: 11%;
     min-width: 1.5rem;
     height: 3rem;
     line-height: 2rem;
-    transform: scale(1.5);
+    transform: scale(1.25);
     box-sizing: border-box;
 }
 .pre_apprentissage_td {
@@ -475,7 +475,6 @@
     width: 100%;
     padding: 0;
     margin: 0;
-    border-radius: 0 0 0.5rem 0.5rem;
 }
 #apprentissage_dialogue_btn { 
     font-weight: bold;

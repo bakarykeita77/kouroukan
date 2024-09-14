@@ -22,7 +22,7 @@ body {
     padding: 1rem;
     width: calc(100% - 2rem);
     height: 8rem;
-    color: var(--couleurPrimaire);
+    color: cornflowerblue;
     text-align: center;
 }
  /* #image_d_accueil { 
@@ -216,7 +216,7 @@ button:active { background-color: #ccc; }
         right: 0;
         width: 60%;
         margin: 0;
-        padding: 0 var(--1rem);
+        padding: 0 1rem;
         box-sizing: border-box;
     }
     

@@ -430,11 +430,11 @@
 	}
     function indexer(element) { 
         let element_id = element.attr('id');
-        
+        rendreActif(element);
         setTimeout(function() { 
             element.addClass('indicateur'); 
              repeterIndexation($('#'+element_id)); 
-        }, 5);
+        }, 2000);
         
         function repeterIndexation(element) {
             let r = setInterval(function(){
@@ -769,15 +769,15 @@
     function raffraichirLaPage() { location = location; }
     function rappel(button) {
         setTimeout(() => { button.css('box-shadow','none'); }, 100);
-        setTimeout(() => { button.css('box-shadow','var(--shadow_30)'); }, 200);
+        setTimeout(() => { button.css('box-shadow','0 0 3rem #000'); }, 200);
         setTimeout(() => { button.css('box-shadow','none'); }, 300);
-        setTimeout(() => { button.css('box-shadow','var(--shadow_30)'); }, 400);
+        setTimeout(() => { button.css('box-shadow','0 0 3rem #000'); }, 400);
         setTimeout(() => { button.css('box-shadow','none'); }, 500);
-        setTimeout(() => { button.css('box-shadow','var(--shadow_30)'); }, 600);
+        setTimeout(() => { button.css('box-shadow','0 0 3rem #000'); }, 600);
         setTimeout(() => { button.css('box-shadow','none'); }, 700);
-        setTimeout(() => { button.css('box-shadow','var(--shadow_30)'); }, 800);
+        setTimeout(() => { button.css('box-shadow','0 0 3rem #000'); }, 800);
         setTimeout(() => { button.css('box-shadow','none'); }, 900);
-        setTimeout(() => { button.css('box-shadow','var(--shadow_16)'); }, 1000);
+        setTimeout(() => { button.css('box-shadow','0 0 1rem #666'); }, 1000);
     }
     function refuser(element) {
         

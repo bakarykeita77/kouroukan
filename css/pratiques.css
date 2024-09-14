@@ -88,7 +88,7 @@
     height: 100%;
     width: 100%;
     background-color: #fff;
-    border-radius: var(--0.25rem);
+    border-radius: 0.25rem;
     z-index: 2;
 }
 #pratique_options div { margin-top: 2rem; }
@@ -143,7 +143,7 @@
 }
 #reponse_container {
     position: relative;
-    background-color: var(--#fff);
+    background-color: #fff;
     margin: 0;
     height: 2.5rem;
     line-height: 2rem;
@@ -262,7 +262,7 @@
 }
 #pratique_clavier_container { 
     position: relative;
-    border-radius: var(--0.25rem); 
+    border-radius: 0.25rem; 
 }
 #pratiques_images_container {
     position: absolute;

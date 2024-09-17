@@ -120,8 +120,17 @@ function syllabe() {
                 function chargerFootDePreSyllabe() {
                             
                     var pre_exercice_panneaux_html = panneauxDesLettresHTML();
+                    var pre_apprentissage_dialogue_btns_html = "\
+                        <div> \
+                            <p class='titre_de_parti'> \
+                                <span>ߞߎߘߎ߲</span> \
+                                <span class='cercle' id='afficheur_de_panneau'>+</span> \
+                            </p> \
+                        </div> \
+                    ";
 
                     $('#panneaux').html(pre_exercice_panneaux_html);
+                    $('#pre_apprentissage_dialogue_btns').html(pre_apprentissage_dialogue_btns_html);
                     initialiserProgressBar();
                     panneauxStyle();
                     

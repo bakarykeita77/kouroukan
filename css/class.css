@@ -10,8 +10,10 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 
 
 .actif, .active, .apprises, .a_apprendre {
+    position: relative;
     font-weight: bold;
     background-color: rgb(225,225,0);
+    border-radius: 0.5rem;
 }
 .active_2 { box-shadow: 0 0 1rem #222; background-color: #fff; color: black; }
 .actif a, .active a {
@@ -295,9 +297,9 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 
 
 .dark_backgound { background-color: #aaa; }
-.dialogue_btn {
+.dialogue_btns {
     position: relative;
-    top: 0.25rem;
+    top: 0.5rem;
     width: calc(100% - 2px);
     max-width: 22rem;
     height: 4rem;
@@ -305,20 +307,19 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     margin: 0.25rem auto;
     border-radius: 0.5rem;
     font-weight: bold;
+    text-align: center;
 }
-.dialogue_btn > div {
-    position: absolute;
-    top: 0.5rem;
-    width: 100%;
+.dialogue_btns > div {
+    position: relative;
     height: 4rem;
     line-height: 4rem;
-    text-align: center;
-    padding: 0.25rem;
+    width: max-content;
     margin: 0 auto;
     box-sizing: border-box;
     border-radius: 0.5rem;
     cursor: pointer;
 }
+.dialogue_btns:not(#pre_apprentissage_dialogue_btns) > div { padding: 0 2rem; }
 del {
     text-decoration: line-through; 
     text-decoration-color: red; 
@@ -838,11 +839,9 @@ del {
 }
 .profile_menu_head a { text-decoration: none; }
 .progress_bar {
-    position: absolute;
+    position: relative;
     display: none;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 1rem;
+    top: 1.5rem;
     height: 4rem;
     width: calc(100% - 1.5rem);
     max-width: 59rem;
@@ -889,6 +888,26 @@ del {
 .question_btn { cursor: pointer; }
 
 /* --------------------------------------------------------------------------------------------------------- */
+.redirection_btns { 
+      top: 0.5rem;
+    position: relative;
+    text-align: center;
+    font-weight: bold; 
+    z-index: 1; 
+}
+.redirection_btns span:active { box-shadow: none; }
+.redirection_btns span { 
+    position: relative;
+    display: block;
+    margin: 0 auto;
+    padding: 0 3rem;
+    height: 4rem;
+    line-height: 4rem;
+    width: max-content;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
 .repetition_btn { display: none; cursor: pointer; }
 .right { float: right; }
 .resultat_container {

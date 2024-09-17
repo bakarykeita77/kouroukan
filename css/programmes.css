@@ -119,7 +119,7 @@
 
 @media(orientation: landscape) {
     #programmes_container { width: calc(100% - 4rem); }
-    #programmes_fond { box-shadow: var(--shadowQuaternaire); }
+    #programmes_fond { box-shadow: 0 0 1rem #aaa; }
     #programme_ul {
         display: flex;
         flex-direction: row;

@@ -117,7 +117,7 @@
 		display: inline-block; 
 		width: 50%;
 	}
-	#connexion_form { box-shadow: var(--shadowQuaternaire); }
+	#connexion_form { box-shadow: 0 0 1rem #aaa; }
 }
 @media screen and (max-width: 800px) {
 	#connexion_container { margin: auto; }

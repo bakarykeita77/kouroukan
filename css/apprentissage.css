@@ -55,7 +55,7 @@
 }
 .notification h3 { margin: 0; padding: 0; }
 #redirige_sur_exercice { cursor: pointer; }
-#pre_apprentissage_btns {
+#pre_apprentissage_dialogue_btns {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -67,7 +67,7 @@
     color: black;
     z-index: 1;
 }
-#pre_apprentissage_btns > div { position: relative; }
+#pre_apprentissage_dialogue_btns > div { position: relative; }
 #exercice_redirection_btns {
     border-radius: 0.5rem;
     position: relative;
@@ -76,26 +76,6 @@
     max-width: 25rem;
     margin: auto;
     top: 1.5rem;
-}
-.redirection_btns span:active { box-shadow: none; }
-.redirection_btns { 
-    text-align: center;
-    font-weight: bold; 
-    z-index: 1; 
-}
-.redirection_btns span { 
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    margin: 0 auto;
-    padding: 0 3rem;
-    height: 4rem;
-    line-height: 4rem;
-    width: max-content;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    transition: 0.3s;
 }
 
 #pre_exercice_resultat_container {
@@ -220,7 +200,6 @@
 #panneaux > div { font-size: 1.5rem; }
 #submit_panneau { font-size: 1rem; }
 #cercles_des_partis { 
-    width: 16rem; 
     height: 3rem; 
     line-height: 3rem;
 }
@@ -352,10 +331,7 @@
     border-radius: 0 0 0.5rem 0.5rem;
     font-weight: bold;
 }
-#exercice_btns { 
-    height: 4rem; 
-    width: 100%; 
-}
+#apprentissage_progress_bar { top: 0.5rem; }
 #exercice_question_btn, #exercice_repeter_question_btn, #exercice_correction_btn {
     position: absolute;
     bottom: 0;
@@ -482,7 +458,6 @@
     text-align: center;
 }
 .redirection_btn {
-    position: absolute;
     background-color: #fff;
 }
 #pre_evaluation_bouton { z-index: 0; }

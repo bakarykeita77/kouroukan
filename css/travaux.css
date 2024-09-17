@@ -29,7 +29,7 @@
     line-height: 2rem;
     text-align: center;
     font-weight: bold;
-    border: var(--1px solid #bbb);
+    border: 1px solid #bbb;
     border-radius: 50%;
     cursor: pointer;
 }

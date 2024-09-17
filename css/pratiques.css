@@ -128,7 +128,7 @@
 #guide_container {
     width: 100%;
     background-color: #eee;
-    border: var(--1px solid #eee);
+    border: 1px solid #eee;
     overflow-y: hidden;
     z-index: 1;
 }
@@ -317,7 +317,7 @@
 }
 #pratique_travail_foot span:first-child { float: right; }
 #pratique_travail_foot span:last-child {
-    border: var(--1px solid #ccc);
+    border: 1px solid #ccc;
      width: 15%;
      text-align: center; 
     float: left; 

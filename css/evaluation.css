@@ -365,7 +365,7 @@
     top: 0.25rem;
     border-radius: 50%;
     overflow: hidden;
-    box-shadow: var(--0 0 3rem #666);
+    box-shadow: 0 0 3rem #666;
     z-index: 1;
 }
 #reponse, #check_mark_container { vertical-align: top; }

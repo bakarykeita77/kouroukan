@@ -32,7 +32,7 @@
         td.css({
             'transform':'scale(0.75)', 
             'opacity':0,
-            'transition':'0.8s'
+            'transition':'0.6s'
         });
         setTimeout(() => {
             $.each(td, function() {
@@ -66,17 +66,19 @@
         }, 600);
         
     }
-    function afficher(course) {
-        course.css({
-            'display':'block', 
+    function afficher(element) {
+        element.css({
+            'display':'none', 
             'transform':'scale(0.75)', 
             'opacity':'0',
-            'transition':'0.8s'
+            'transition':'0.6s'
         });
-        setTimeout(function() { course.css({
+        setTimeout(function() { element.css({ 'display':'block' }); }, 500); 
+        setTimeout(function() { element.css({
+            'display':'block', 
             'transform':'scale(1)', 
             'opacity':1
-        }); }, 50);
+        }); }, 600);
     }
     function afficherApprentissage() {
         masquer($('.course'));
@@ -641,8 +643,8 @@
     
         return mixted_table;
     }
-    function masquer(course) {
-        course.css({
+    function masquer(element) {
+        element.css({
             'display':'none',
             'transform':'scale(0.75)', 
             'opacity':'0'

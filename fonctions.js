@@ -73,12 +73,11 @@
             'opacity':'0',
             'transition':'0.6s'
         });
-        setTimeout(function() { element.css({ 'display':'block' }); }, 500); 
+        setTimeout(function() { element.css({ 'display':'block' }); }, 150); 
         setTimeout(function() { element.css({
-            'display':'block', 
             'transform':'scale(1)', 
             'opacity':1
-        }); }, 600);
+        }); }, 200);
     }
     function afficherApprentissage() {
         masquer($('.course'));
@@ -436,7 +435,7 @@
         setTimeout(function() { 
             element.addClass('indicateur'); 
              repeterIndexation($('#'+element_id)); 
-        }, 2000);
+        }, 1000);
         
         function repeterIndexation(element) {
             let r = setInterval(function(){

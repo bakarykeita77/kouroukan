@@ -319,7 +319,10 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     border-radius: 0.5rem;
     cursor: pointer;
 }
-.dialogue_btns:not(#pre_apprentissage_dialogue_btns) > div { padding: 0 2rem; }
+.dialogue_btns:not(#pre_apprentissage_dialogue_btns) > div { 
+    min-width: 16rem;
+    padding: 0 2rem; 
+}
 del {
     text-decoration: line-through; 
     text-decoration-color: red; 
@@ -866,7 +869,7 @@ del {
     width: 0;
     margin: 0;
     border-radius: 0.5rem;
-    transition: 1s;
+    transition: 0.6s;
 }
 .lesson_progress_question_bar { background-color: #ddd; }
 .lesson_progress_bonne_reponse_bar { background-color: yellow; }
@@ -950,7 +953,7 @@ del {
 
 .table_parlante, .table_muette {
     position: relative;
-    top: 1.5rem;
+    top: 1rem;
     width: calc(100% - 4rem);
     max-width: 45rem;
     margin: auto;

@@ -16,6 +16,18 @@
     width: 100%;
     overflow: auto;
 }
+#contenu_par_defaut_du_tableau {
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    color: rgba(100, 100, 100, 0.25);
+    font-size: 4rem;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+    top: calc(50% - 1rem);
+    transform: translateY(-50%);
+}
 #apprentissage_head span {
     text-decoration: underline;
     font-weight: bold;

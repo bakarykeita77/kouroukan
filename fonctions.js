@@ -87,6 +87,10 @@
         $('#evaluation_container').css('display','none');
         setTimeout(() => { afficher($('.course')); }, 50);
     }
+	function afficher_en_jailli( element,largeur,hauteur,temps ) {
+        element.css({'display':'block', 'width':0, 'height':0});
+        element.animate({'width':largeur, 'height':hauteur}, temps);
+    }
     function afficherEvaluation() {
         masquer($('.course'));
         $('#apprentissage_container').css('display','none');
@@ -118,6 +122,7 @@
              return;
         });
     }
+
 /*-------------------------------------------------------------------------------------------------------------------------------------*/ 
     
     function barrer(td) {
@@ -147,6 +152,12 @@
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/	
     
+	function centrerHorizontalement(element) {
+		var largeur_element = element.width();
+		var largeur_ecran = window.screen.width;
+
+		element.css({ 'right':(largeur_ecran-largeur_element)/2+'px' });
+	}
     function changerPhaseActive(phase_index) {
         if(phase_index != -1) {
             phase_index++;
@@ -924,6 +935,7 @@
 
     function zoomArriere(element) { element.css('fontSize','-=16px'); }
     function zoomAvant(element)	{ element.css('fontSize','+=16px'); }
+    function zoomer(element) { element.addClass("zoom"); }
     function zoomDown(element) {
         element.css({ 
             'opacity':0,

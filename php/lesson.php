@@ -39,7 +39,7 @@ if(isset($_SESSION["id"])) {
               <!---------------------------------------------------------------------------------------------------------
               
               Pour rendre les données de l'url  disponibles dans lesson.js, placons les dans des elements html avec id déterminé-->  
-                <div id="donnees_recues_de_prorammes" style="display:none">
+                <div id="donnees_recues_de_programmes" style="display:none">
                     <p id='matiere_id_container'    ><?= $matiere_id; ?></p>
                     <p id='matiere_index_container' ><?= $matiere_index; ?></p>
                     <p id='matiere_nom_container'   ><?= $matiere_nom; ?></p>

@@ -13,7 +13,6 @@
   	<script src="/kouroukan/js/caracteres.js"></script>
 	
   <!------------------------------------------------------------------------------------------------------------------>	
-	<?php include("fonctions.php"); ?>  
 	<div id="tete_de_page_container">
 		<div id="topbar">
 			

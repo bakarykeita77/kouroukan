@@ -33,7 +33,7 @@
 
         function programmeHTML() {
             var programme_html = '<ul id="programme_ul">';
-        
+     
             for (var i = 0; i < 2; i++) {    // Pour liste_de_matieres, voir caracteres.js
 
                 var matiere_id    = liste_de_matieres[i][0];
@@ -102,7 +102,7 @@
                 }
             }
             programme_html += '</ul>';
-            
+               
             return programme_html;
         } 
     }          
@@ -141,7 +141,8 @@
             $('#lesson_options_titre').text('ߌ ߢߣߊߕߊ߬ '+nom_de_lesson_a_etdier+' ߘߋ߲߰ߠߌ ߞߍߢߊ߫ ߝߌ߬ߟߊ ߢߌ߲߬ ߠߎ߬ ߘߐ߫'); 
             $('#lesson_option_1').html(lessonOption11HTML());
             $('#lesson_option_2').html(lessonOption12HTML());
-            $('#lesson_options').css('display','block'); 
+            masquer($('#programmes_container')); 
+            afficher($('#lesson_options')); 
            
             function lessonOption11HTML() {
                     
@@ -253,7 +254,8 @@
             $('#lesson_options_titre').text('ߌ ߢߣߊߕߊ߬ '+nom_de_lesson_a_etdier+' ߘߋ߲߰ߠߌ ߞߍߢߊ߫ ߝߌ߬ߟߊ ߢߌ߲߬ ߠߎ߬ ߘߐ߫'); 
             $('#lesson_option_1').html(lessonOption21HTML());
             $('#lesson_option_2').html(lessonOption22HTML());
-            $('#lesson_options').css('display','block'); 
+            masquer($('#programmes_container')); 
+            afficher($('#lesson_options')); 
             
            
             function lessonOption21HTML() {
@@ -355,7 +357,7 @@
             }
         });
 
-        $('#fermer_lesson_option').click(function() { $('#lesson_options').css('display','none'); });
+        $('#fermer_lesson_option').click(function() { masquer($('#lesson_options')); });
     }
     function storagesDuProgramme() {
         $('#programme_ul li').on('click', function(){

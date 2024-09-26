@@ -303,7 +303,7 @@
 //     function finDeEvaluationAlphabet() {
 //         $('.correction_btn').on('click', function(){
 //             if(evaluation_counter == nbr_max_de_questions_a_poser) {
-//                 chargerResultat(evaluation_a_stocker);
+//                 resultat(evaluation_a_stocker);
 //                 afficherEvaluationAlphabetResultat();
 //                 reprendreEvaluationAlphabet();
 //                 continuSurSyllabe();

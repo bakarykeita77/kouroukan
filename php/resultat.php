@@ -1,45 +1,117 @@
 
 <span id='fermer_resultat'>&times;</span>
 
-<div class="resultat">
-    <!--------------------------------------------------------------------------------------------------------------------------------------------->
-    <div id="resultat_titre"></div>
-    <!--------------------------------------------------------------------------------------------------------------------------------------------->
+
+<div class="resultat_general">
+ <!--------------------------------------------------------------------------------------------------------------------------------------------->
     <div id="resultat_entete">
+        <div id="resultat_titre"></div>
+        <div id="etudiant"></div>
+        <br>
+    </div>
+    <hr>
+ <!--------------------------------------------------------------------------------------------------------------------------------------------->
+    
+    <div id="resultat_d_apprentissage_corps">
         <table>
-            <tr><td><b id="etudiant"></b> ߓߟߏ߫</td></tr>
-            <tr><td>ߞߍ߫ ߕߎߡߊ :__📅 <span id="resultat_date"></span> __🕒 <span id="resultat_heure"></span></td></tr>
+            <tr><td><h3 id="phase_d_apprentissage"></h3></td></tr>
+            <tr><td>ߞߍ߫ ߕߎߡߊ :__📅 <span id="apprentissage_date"></span> __🕒 <span id="apprentissage_heure"></span></td></tr>
         </table>
-    </div>
-    <!--------------------------------------------------------------------------------------------------------------------------------------------->
-    <hr>
-    <div id="resultat_corps">
-        <table id="table_head">
-            <tr><td>ߝߙߍߕߍ</td></tr>
-            <tr><td>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</td></tr>
-            <tr><td>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ</td></tr>
-            <tr><td>ߓߍ߬ߙߍ</td></tr>
-        </table>
-        <table id="table_body"></table>
-        <table id="table_foot">
-            <tr><td id="total">ߡߎ߬ߡߍ</td></tr>
-            <tr><td id="total_question_1"></td></tr>
-            <tr><td id="total_reponse"></td></tr>
-            <tr><td id="total_point_1"></td></tr>
-        </table>
-    </div>
-    <!--------------------------------------------------------------------------------------------------------------------------------------------->
-    <hr>
-    <div id="resultat_pied">
-        <div>
-            <div><span>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߡߎ߬ߡߍ</span> <span id="total_question_2"></span></div>
-            <div><span>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ߫ ߢߊ߬ߣߍ߲</span> <span id="total_bonne_reponse"></span></div>
-            <div><span>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ߬ ߝߏߣߍ߲</span><span id="total_fausse_reponse"></span></div>
-            <div><span>ߓߍ߬ߙߍ ߡߎ߬ߡߍ</span>   <span id="total_point_2"></span></div>
-            <div><span>ߓߍ߬ߙߍ ߗߡߍ߬ߘߐ߬ߦߊ</span> <span id="pourcentage_point"></span></div>
+        <div class="registre_des_notes">
+            <table class="table_head" id="apprentissage_resultat_head">
+                <tr><td>ߝߙߍߕߍ</td></tr>
+                <tr><td>ߛߓߍߘߋ߲</td></tr>
+                <tr><td>ߘߌ߯ߟߌ</td></tr>
+                <tr><td>ߓߍ߬ߙߍ</td></tr>
+            </table>
+            <table class="table_body" id="apprentissage_resultat_body"></table>
+            <table class="table_foot" id="apprentissage_resultat_foot">
+                <tr><td id="total_d_apprentissage">ߡߎ߬ߡߍ</td></tr>
+                <tr><td id="total_d_apprentissage_question"></td></tr>
+                <tr><td id="total_d_apprentissage_reponse"></td></tr>
+                <tr><td id="total_d_apprentissage_point"></td></tr>
+            </table>
         </div>
     </div>
     <!--------------------------------------------------------------------------------------------------------------------------------------------->
+    <div id="resultat_d_exercice_corps">
+        <table>
+            <tr><td><h3 id="phase_d_exercice"></h3></td></tr>
+            <tr><td>ߞߍ߫ ߕߎߡߊ :__📅 <span id="exercice_date"></span> __🕒 <span id="exercice_heure"></span></td></tr>
+        </table>
+        
+        <div class="registre_des_notes">
+            <table class="table_head" id="exercice_resultat_head">
+                <tr><td>ߝߙߍߕߍ</td></tr>
+                <tr><td>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</td></tr>
+                <tr><td>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ</td></tr>
+                <tr><td>ߓߍ߬ߙߍ</td></tr>
+            </table>
+            <table class="table_body" id="exercice_resultat_body"></table>
+            <table class="table_foot" id="exercice_resultat_foot">
+                <tr><td id="total_d_exercice">ߡߎ߬ߡߍ</td></tr>
+                <tr><td id="total_d_exercice_question"></td></tr>
+                <tr><td id="total_d_exercice_reponse"></td></tr>
+                <tr><td id="total_d_exercice_point"></td></tr>
+            </table>
+        </div>
+    </div>
+<!--------------------------------------------------------------------------------------------------------------------------------------------->
+    <div id="resultat_de_revision_corps">
+        <table>
+            <tr><td><h3 id="phase_de_revision"></h3></td></tr>
+            <tr><td>ߞߍ߫ ߕߎߡߊ :__📅 <span id="revision_date"></span> __🕒 <span id="revision_heure"></span></td></tr>
+        </table>
+        
+        <div class="registre_des_notes">
+            <table class="table_head" id="revision_resultat_head">
+                <tr><td>ߝߙߍߕߍ</td></tr>
+                <tr><td>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</td></tr>
+                <tr><td>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ</td></tr>
+                <tr><td>ߓߍ߬ߙߍ</td></tr>
+            </table>
+            <table class="table_body" id="revision_resultat_body"></table>
+            <table class="table_foot" id="revision_resultat_foot">
+                <tr><td id="total_d_revision">ߡߎ߬ߡߍ</td></tr>
+                <tr><td id="total_de_revision_question"></td></tr>
+                <tr><td id="total_de_revision_reponse"></td></tr>
+                <tr><td id="total_de_revision_point"></td></tr>
+            </table>
+        </div>
+    </div>
+<!--------------------------------------------------------------------------------------------------------------------------------------------->
+    <div id="resultat_d_evaluation_corps">
+        <table>
+            <tr><td><h3 id="phase_d_evaluation"></h3></td></tr>
+            <tr><td>ߞߍ߫ ߕߎߡߊ :__📅 <span id="evaluation_date"></span> __🕒 <span id="evaluation_heure"></span></td></tr>
+        </table>
+        
+        <div class="registre_des_notes">
+            <table class="table_head" id="evaluation_resultat_head">
+                <tr><td>ߝߙߍߕߍ</td></tr>
+                <tr><td>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</td></tr>
+                <tr><td>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ</td></tr>
+                <tr><td>ߓߍ߬ߙߍ</td></tr>
+            </table>
+            <table class="table_body" id="evaluation_resultat_body"></table>
+            <table class="table_foot" id="evaluation_resultat_foot">
+                <tr><td id="total_d_evaluation">ߡߎ߬ߡߍ</td></tr>
+                <tr><td id="total_d_evaluation_question"></td></tr>
+                <tr><td id="total_d_evaluation_reponse"></td></tr>
+                <tr><td id="total_d_evaluation_point"></td></tr>
+            </table>
+        </div>
+    </div>
+ <!--------------------------------------------------------------------------------------------------------------------------------------------->
+    <hr>
+    <div id="resultat_pied">
+        <div>
+            <div><span>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߡߎ߬ߡߍ</span> <span id="total_general_des_questions"></span></div>
+            <div><span>ߓߍ߬ߙߍ ߡߎ߬ߡߍ</span> <span id="total_general_des_bonnes_reponses"></span></div>
+            <div><span>ߓߍ߬ߙߍ ߗߡߍ߬ߘߐ߬ߦߊ</span><span id="pourcentage_point"></span></div>
+        </div>
+    </div>
+ <!--------------------------------------------------------------------------------------------------------------------------------------------->
     <hr>
     <div id="deliberation"></div>
     <!--------------------------------------------------------------------------------------------------------------------------------------------->
@@ -62,16 +134,16 @@
         cursor: pointer;
         overflow: auto;
     }
-    #resultat_titre, #resultat_entete, #resultat_corps, #resultat_pied, #deliberation {
+    .resultat_general h3 { margin: 0; }
+    #resultat_titre, #etudiant, #resultat_entete, #resultat_corps, #resultat_pied, #deliberation {
         height: max-content;
-        max-width: 30rem;
+        max-width: 40rem;
         margin: 0 auto;
     }
     #resultat_titre { 
-        border-bottom: 0.25rem solid #ddd; 
         padding: 0.25rem;
-        background-color: #eee;
     }
+    #etudiant h1, #etudiant span { display:inline-block; margin: 0.25rem; }
     #resultat_titre h2 { margin: 0.125rem 0.5rem; }
     #resultat_entete, #resultat_corps, #resultat_pied, #deliberation {
         border: 1px solid transparent;
@@ -87,24 +159,35 @@
         vertical-align: top;
         margin: 0;
     }
-    #table_head td, #table_foot td {
+    .registre_des_notes {
+        height: max-content;
+        padding: 0.5rem 0.5rem 0;
+        margin: 0.5rem 0;
+        background-color: #eee;
+    }
+    .registre_des_notes table {
+        display: inline-block;
+        height: 10.5rem;
+    }
+    .registre_des_notes td {
+        height: 2rem;
+        line-height: 2rem;
+    }
+    .table_head td, .table_foot td {
         border: 1px solid transparent;
-        height: 1rem;
-        background-color: #ddd;
+        background-color: #ccc;
         padding: 0 0.5rem;
         box-sizing: border-box;
     }
-    #table_head td { width: 5rem; }
-    #table_foot td { width: 3rem; text-align: left; }
-    #table_head { width: 5.25rem; }
-    #table_foot { width: 3.85rem; }
-    #table_body {
-        background-color: #eee;
+    .table_head td { width: 5rem; }
+    .table_foot td { width: 3rem; text-align: left; }
+    .table_head { width: 5rem; }
+    .table_foot { width: 4rem; }
+    .table_body {
         max-width: calc(100% - 10rem);
         overflow: auto
     }
-    #table_body td {
-        height: 1.32rem;
+    .table_body td {
         min-width: 1.5rem;
         text-align: center;
         border-color: #fff;
@@ -112,12 +195,12 @@
         background-color: #fff;
     }
     #resultat_pied{
-        width: max-content;
-        height: max-content;
+        position:relative;
+        height: 5rem;
     }
     #resultat_pied > div {
-        width: 100%;
-        max-width: 16rem;
+        position: relative;
+        width: 100%
     }
     #resultat_pied > div > div {
         border: 1px solid transparent;
@@ -154,11 +237,16 @@
 
     @media screen and (width < 600px) {
         
-        #resultat_entete, #resultat_corps, #resultat_pied { width: 100%; }
+        #resultat_entete, #resultat_d_apprentissage_corps, #resultat_d_exercice_corps, #resultat_de_revision_corps, #resultat_d_evaluation_corps,  #resultat_pied, #deliberation { 
+            width: 100%; 
+        }
     }
     @media screen and (width >= 600px) {
 
-        #resultat_entete, #resultat_corps, #resultat_pied { width: 60%; }
+        #resultat_entete, #resultat_d_apprentissage_corps, #resultat_d_exercice_corps, #resultat_de_revision_corps, #resultat_d_evaluation_corps,  #resultat_pied, #deliberation { 
+            width: 60%; 
+            margin: auto;
+        }
     }
 
 </style>

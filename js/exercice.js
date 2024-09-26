@@ -245,7 +245,7 @@ function exercices() {
 
                     function exerciceResultat() {
 
-                        chargerResultat(exercice_a_stocker);
+                        resultat(exercice_a_stocker);
                         afficherExerciceAlphabetResultat();
                         masquerExerciceAlphabetResultat();
 

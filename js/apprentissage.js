@@ -472,7 +472,7 @@
 //                                     if(total_click === total_yellow_letter*quantite_normale_de_click) {
 //                                         $('#apprentissage_head').click(function() {
 
-//                                             chargerResultat(pre_apprentissage_clicks_memo);
+//                                             resultat(pre_apprentissage_clicks_memo);
 //                                             adapterLeResultatAuFormatDApprentissage(pre_apprentissage_clicks_memo);
 //                                             afficherApprendrePreResultat();
 //                                             masquerApprendrePreResultat();
@@ -1459,7 +1459,7 @@
 //                         if(questions_posees.length === total_questions) {
 
 //                             formatParDefautDuResultat();
-//                             chargerResultat(pre_exercice_memoire);
+//                             resultat(pre_exercice_memoire);
 //                             afficherExerciceAlphabetResultat();
 //                             masquerExerciceAlphabetResultat();
 
@@ -1787,7 +1787,7 @@
     
 //                     function resultatApprentissageAlphabet() {
     
-//                         chargerResultat(apprentissage_clicks_memo);
+//                         resultat(apprentissage_clicks_memo);
 //                         adapterLeResultatAuFormatDApprentissage(apprentissage_clicks_memo);
 //                         afficherApprentissageResultat();
 //                         masquerApprentissageResultat();
@@ -2077,7 +2077,7 @@
             
 //                                 function exerciceResultat() {
             
-//                                     chargerResultat(exercice_a_stocker);
+//                                     resultat(exercice_a_stocker);
 //                                     afficherExerciceAlphabetResultat();
 //                                     masquerExerciceAlphabetResultat();
             
@@ -2428,7 +2428,7 @@
 //                 function finDeEvaluationAlphabet() {
 //                     $('.correction_btn').on('click', function(){
 //                         if(evaluation_counter == nbr_max_de_questions_a_poser) {
-//                             chargerResultat(evaluation_a_stocker);
+//                             resultat(evaluation_a_stocker);
 //                             afficherEvaluationAlphabetResultat();
 //                             reprendreEvaluationAlphabet();
 //                             continuSurSyllabe();

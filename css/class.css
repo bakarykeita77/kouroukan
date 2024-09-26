@@ -930,6 +930,7 @@ del {
     border: 1px solid #aaa;
     border-radius: 0.5rem; 
     box-shadow: 0 0 1rem #444;
+    overflow: auto;
     z-index: 1;
 }
 .resultat {

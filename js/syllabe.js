@@ -58,12 +58,6 @@ function syllabe() {
         let cercle_id = '';
         let cercle_index = 0;
         
-        let rang = '';
-        let les_lettres_actives = [];
-        let lettres_pre_apprises = [];
-        let total_lettres_apprises = [];
-        let pre_apprentissage_memo = [];
-        let pre_apprentissage_clicks_memo = [];
         let quantite_normale_de_click = 1;
 
         let panneau_status = "masque";
@@ -404,7 +398,7 @@ function syllabe() {
 
                                     function resultatApprentissagePreSyllabe() {
                                     
-                                        chargerResultat(syllabes_en_cours);
+                                        resultat(syllabes_en_cours);
                                         adapterLeResultatAuFormatDApprentissage(syllabes_en_cours);
                                         afficherApprentissagePreSyllabeResultat(); 
                                         masquerApprentissagePreSyllabeResultat(); 
@@ -1136,7 +1130,7 @@ function syllabe() {
                                     function preExerciceResultat() {
 
                                         formatParDefautDuResultat();
-                                        chargerResultat(pre_exercice_memoire);
+                                        resultat(pre_exercice_memoire);
                                         afficherExerciceAlphabetResultat();
                                         masquerExerciceAlphabetResultat();
 

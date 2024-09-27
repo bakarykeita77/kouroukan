@@ -32,19 +32,19 @@
      // Identifiant id de l'apprenant.
         let user_id = parseInt(JSON.parse(sessionStorage.getItem('id'))); 
      
-     // Recperation de toutes les matières étdiées par l'apprenant par envoi de son id à api de kouroukan.
+     // Recuperation de toutes les matières étdiées par l'apprenant par envoi de son id à api de kouroukan.
     	fetch("/kouroukan/api/index.php?id_user="+user_id)
     	.then(response => response.json())
     	.then(matiere_collection => {
-        /*-------------------------------------------------------------------------   
+         /*-------------------------------------------------------------------------   
           matieres
-        -------------------------------------------------------------------------*/   
+         -------------------------------------------------------------------------*/   
             let matieres = [];
 
     	    for(var i=0; i<matiere_collection.length; i++) {
     	        if(matiere_collection[i] != 0) matieres[i] = matiere_collection[i]; 
     	    }
-
+            
     	    sessionStorage.setItem('matieres',JSON.stringify(matieres));
 
             if(matieres.length === 0) {

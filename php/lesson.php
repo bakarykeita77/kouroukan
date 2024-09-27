@@ -177,6 +177,7 @@ if(isset($_SESSION["id"])) {
                     <div class="redirection_btns" id="revision_redirection_btns">
                         <span class='redirection_btn' id='reprendre_pre_revision_bouton'></span>
                         <span class='redirection_btn' id='pre_evaluation_bouton'></span> 
+                        <span class='redirection_btn' id='syllabe_bouton'><a href="http://localhost/kouroukan/php/programmes.php">ߜߋ߲߭ ߘߋ߲߰ߠߌ ߘߊߡߌ߬ߘߊ߬</a></span> 
                     </div>
                 </div>
               <!------------------------------------------------------------------------------------------------------------------------------>
@@ -287,6 +288,7 @@ if(isset($_SESSION["id"])) {
                 <input type="submit" id="submit_btn" value="Envoyer">
             </form>
         </div>
+
 
         <audio id="audio"></audio>
 

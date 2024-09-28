@@ -222,7 +222,7 @@
         // setTimeout((function() { td.removeClass('shadow'); }), 1950);
     }
     function conversionDeDateEnNko(timestamp){
-       vartimestamp = timestamp.split(' ');
+       var timestamp = timestamp.split(' ');
        timestamp = timestamp[0].split('-');
        
        var annee = 'ߛߊ߲߭ '+parseIntNko(timestamp[0]);
@@ -231,6 +231,15 @@
        
        timestamp = moi+' '+jour+' '+annee; 
        return timestamp;
+    }
+    function convertirDateEnNko(date){
+        
+        let annee = 'ߛߊ߲߭ '+parseIntNko(date.split(' ')[0].split('-')[0]);
+        let moi = mois[parseInt(date.split(' ')[0].split('-')[1][1]) - 1];
+        let jour = 'ߕߟߋ߬ '+parseIntNko(date.split(' ')[0].split('-')[2]);
+        
+        date = moi+' '+jour+' '+annee; 
+        return date;
     }
     function couleurDeFond(element,couleur)	{ element.css('backgroundColor', couleur); }
     function couleurDeFont(element,couleur)	{ element.css('color', couleur); }

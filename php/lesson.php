@@ -74,7 +74,6 @@ if(isset($_SESSION["id"])) {
             
             Fermetre du cours -->
             <span class="fermeture" id="">&times;</span>
-            
 
             <div class="course">  
               
@@ -118,7 +117,7 @@ if(isset($_SESSION["id"])) {
                         </div>
                     </div>
                  <!--Course body ------------------------------------------------------------------ -->
-                    <div id="exercice_body_cadre">
+                    <div class="body_cadre" id="exercice_body_cadre">
                         <div class="course_body" id="exercice_body"></div>   <!--Cette division est chargé par la fonction chargerExercice() dans exeercice.js-->
                     
                         <!--Course foot ------------------------------------------------------------------ -->
@@ -154,7 +153,7 @@ if(isset($_SESSION["id"])) {
                         </div>
                     </div>
                  <!--Course body ------------------------------------------------------------------ -->
-                    <div id="revision_body_cadre">
+                    <div class="body_cadre" id="revision_body_cadre">
                         <div class="course_body" id="revision_body"></div>   <!--Cette division est chargé par la fonction chargerExercice() dans exercice.js-->
                     
                         <!--Course foot ------------------------------------------------------------------ -->
@@ -252,7 +251,7 @@ if(isset($_SESSION["id"])) {
                             </div>
                         </div>
 
-                        <div class="redirection_btns" id="revision_redirection_btns">
+                        <div class="redirection_btns" id="evaluation_redirection_btns">
                             <div class="redirection_btn_1">ߜߋ߲߭ ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫ ߕߎ߲߯</div>
                             <div class="redirection_btn_2">ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߥߴߊ߬ ߡߊ߬</div>
                         </div>

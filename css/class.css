@@ -9,12 +9,19 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 /* --------------------------------------------------------------------------------------------------------- */
 
 
+.a_apprendre { 
+    border: 1px solid #bbb; 
+    background-color: #ccc; 
+    color: #aaa; 
+}
+.a_apprendre:hover { background-color: #bbb; }
+.a_apprendre:hover a { color: black; }
 .actif, .active, .apprises, .a_apprendre {
     position: relative;
     font-weight: bold;
-    background-color: rgb(225,225,0);
     border-radius: 0.5rem;
 }
+.actif, .active { background-color: rgb(255,255,0); }
 .active_2 { box-shadow: 0 0 1rem #222; background-color: #fff; color: black; }
 .actif a, .active a {
     color: cornflowerblue;
@@ -26,17 +33,16 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 .active:hover { background-color: rgb(225,225,0); }
 .actif:hover a { color: blue; }
 .active:hover a { color: blue; }
-.a_apprendre { font-weight: bold; border: 1px solid #ddd; }
-.a_apprendre:hover { background-color: #ccc; }
 .anime_au_click { transition: 0.6s; }
-.apprises { border: 1px solid #ccc; color: cornflowerblue; }
+.apprises {
+    border: 1px solid #ccc; 
+    background-color: rgb(255,255,255); 
+    color: cornflowerblue; 
+}
 .apprises a { color: cornflowerblue; }
 .apprises:active { box-shadow: none; }
-.apprises:hover { background-color: #aaa; color: black; }
+.apprises:hover { background-color: #eee; color: black; }
 .apprises:hover a { color: blue; }
-.a_apprendre { background-color: #ddd; color: #aaa; }
-.a_apprendre a { color:  #888; }
-.a_apprendre:hover a { color: black; }
 .asides_btn {
     display: inline-block;
     width: 48%;

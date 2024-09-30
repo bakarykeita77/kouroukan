@@ -12,6 +12,7 @@
     var phases_distinctes = JSON.parse(sessionStorage.getItem('phases_distinctes'));
     var derniere_phase    = JSON.parse(sessionStorage.getItem('derniere_phase'));
 
+console.log('niveau_max = '+niveau_max);
 /*-----------------------------------------------------------------------------------------------------------------------*/
     
  // Détermination du Programme

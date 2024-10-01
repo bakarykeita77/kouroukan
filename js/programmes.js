@@ -12,7 +12,10 @@
     var phases_distinctes = JSON.parse(sessionStorage.getItem('phases_distinctes'));
     var derniere_phase    = JSON.parse(sessionStorage.getItem('derniere_phase'));
 
+console.log('phases_etudiees = '+phases_etudiees);
+console.log('niveaux_etudies = '+niveaux_etudies);
 console.log('niveau_max = '+niveau_max);
+console.log('niveau_en_cours = '+niveau_en_cours);
 /*-----------------------------------------------------------------------------------------------------------------------*/
     
  // Détermination du Programme

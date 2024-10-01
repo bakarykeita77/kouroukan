@@ -366,6 +366,15 @@
     overflow-x: auto;
 }
 #resultat_pied td { text-align: left; font-weight: bold; border: 1px solid #ddd; }
+#afficheur_de_resultat {
+    display: inline-block;
+    position: relative;
+    padding: 0.5rem 1rem;
+    background-color: cornflowerblue;
+    font-size: 1.5rem;
+    font-weight: bold;
+    box-shadow: 0 0 0.125rem #aaa;
+}
 
 #pre_resultat_titre {
     position: absolute;

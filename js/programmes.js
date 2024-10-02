@@ -112,7 +112,7 @@ console.log('niveau_en_cours = '+niveau_en_cours);
     }          
     function styleDuProgramme() {
             
-        if(niveau_max > niveau_en_cours) niveau_max = niveau_en_cours;
+        // if(niveau_max > niveau_en_cours) niveau_max = niveau_en_cours;
 
         let programme_li = $("#programme_ul li");
             

@@ -56,6 +56,8 @@
                 let td = $('td', this);
                 let td_length = td.length;
 
+                td.css({'transition':'0.1s', 'transform':'scale(0)', 'opcity':0});
+
                 $.each(td, function() {
                     let td_index = $(this).index();
                     setTimeout(() => {
@@ -63,7 +65,7 @@
                     }, 100*((tr_index*td_length)+td_index));
                 });
             });
-        }, 600);
+        }, 200);
         
     }
     function afficher(element) {
@@ -235,7 +237,7 @@
     function convertirDateEnNko(date){
         
         let annee = 'ߛߊ߲߭ '+parseIntNko(date.split(' ')[0].split('-')[0]);
-        let moi = mois[parseInt(date.split(' ')[0].split('-')[1][1]) - 1];
+        let moi = mois[parseInt(date.split(' ')[0].split('-')[1]) - 1];
         let jour = 'ߕߟߋ߬ '+parseIntNko(date.split(' ')[0].split('-')[2]);
         
         date = moi+' '+jour+' '+annee; 
@@ -702,123 +704,123 @@
         setTimeout(function(){ $('.faux').removeClass('croix'); }, 600);
         setTimeout(function(){ $(element).removeClass('faux'); }, 600);
     }
-    // function resultat(memoire) {
+    function resultat(memoire) {
         
-    //     let nom = JSON.parse(sessionStorage.getItem('nom'));
-    //     let prenom = JSON.parse(sessionStorage.getItem('prenom'));
-    //     let lesson_en_cours = $('.notification_titre').html();
-    //     let lesson_suivante = lessonSuivante();
-    //     let total_question = memoire.length;
-    //     let total_bonne_reponse = totalPoint();
-    //     let total_fausse_reponse = total_question - total_bonne_reponse;
-    //     let taux_de_vraie_reponse = Math.floor(total_bonne_reponse*100/total_question);
-    //     let taux_acceptable_de_vraie_reponse = (lesson_active = 'pre_exercice') ? 100 : 92;
-    //     let reprendre_l_etape_en_cours = '<b id="reprendre">'+lesson_en_cours+' ߞߍ߫ ߕߎ߲߯</b>';
-    //     let continu_sur_l_etape_suivante = '<b id="avance">'+lesson_suivante+'</b>';
+        let nom = JSON.parse(sessionStorage.getItem('nom'));
+        let prenom = JSON.parse(sessionStorage.getItem('prenom'));
+        let lesson_en_cours = $('.notification_titre').html();
+        let lesson_suivante = lessonSuivante();
+        let total_question = memoire.length;
+        let total_bonne_reponse = totalPoint();
+        let total_fausse_reponse = total_question - total_bonne_reponse;
+        let taux_de_vraie_reponse = Math.floor(total_bonne_reponse*100/total_question);
+        let taux_acceptable_de_vraie_reponse = (lesson_active = 'pre_exercice') ? 100 : 92;
+        let reprendre_l_etape_en_cours = '<b id="reprendre">'+lesson_en_cours+' ߞߍ߫ ߕߎ߲߯</b>';
+        let continu_sur_l_etape_suivante = '<b id="avance">'+lesson_suivante+'</b>';
 
-    //     if(lesson_suivante == lesson_en_cours+' ߥߴߊ߬ ߡߊ߬') { $('.notification_titre').html('ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ'); }
+        if(lesson_suivante == lesson_en_cours+' ߥߴߊ߬ ߡߊ߬') { $('.notification_titre').html('ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ'); }
 
-    //     chargerResultatTitre();
-    //     chargerResultatHead();
-    //     chargerResultatBody();
-    //     chargerResultatFoot();
-    //     chargerDeliberation();
+        chargerResultatTitre();
+        chargerResultatHead();
+        chargerResultatBody();
+        chargerResultatFoot();
+        chargerDeliberation();
         
-    //     function chargerResultatTitre() { $('#resultat_titre').html('<h2>'+lesson_en_cours+' ߞߐߝߟߌ</h2>'); }
-    //     function chargerResultatHead() {
+        function chargerResultatTitre() { $('#resultat_titre').html('<h2>'+lesson_en_cours+' ߞߐߝߟߌ</h2>'); }
+        function chargerResultatHead() {
 
-    //         let d = new Date();
-    //         let an = d.getFullYear();
-    //         let lune = d.getMonth();
-    //         let date = d.getDate();
-    //         let jour = d.getDay();
-    //         let heure = d.getHours();
-    //         let minute = d.getMinutes();
+            let d = new Date();
+            let an = d.getFullYear();
+            let lune = d.getMonth();
+            let date = d.getDate();
+            let jour = d.getDay();
+            let heure = d.getHours();
+            let minute = d.getMinutes();
 
-    //         $('#etudiant h1').text(prenom+' '+nom);
-    //         $('#resultat_date').text(jours[jour]+' '+mois[lune]+' ߕߟߋ߬ '+parseIntNko(date)+' ߛߊ߲߭ '+parseIntNko(an));
-    //         $('#resultat_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
-    //     }
-    //     function chargerResultatBody() {
+            $('#etudiant h1').text(prenom+' '+nom);
+            $('#resultat_date').text(jours[jour]+' '+mois[lune]+' ߕߟߋ߬ '+parseIntNko(date)+' ߛߊ߲߭ '+parseIntNko(an));
+            $('#resultat_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
+        }
+        function chargerResultatBody() {
 
-    //         let table_body_html = resultatTableBodyHTML();
-    //         let total_point = totalPoint();
+            let table_body_html = resultatTableBodyHTML();
+            let total_point = totalPoint();
                 
-    //         $('.table_body').html(table_body_html);
-    //         $('#total_question_1').html(parseIntNko(memoire.length));
-    //         $('#total_reponse').html(parseIntNko(memoire.length));
-    //         $('#total_point_1').html(parseIntNko(total_point));
+            $('.table_body').html(table_body_html);
+            $('#total_question_1').html(parseIntNko(memoire.length));
+            $('#total_reponse').html(parseIntNko(memoire.length));
+            $('#total_point_1').html(parseIntNko(total_point));
 
-    //         function resultatTableBodyHTML() {
-    //             let html = '';
+            function resultatTableBodyHTML() {
+                let html = '';
 
-    //             html +=  '<tr class="thin">';
-    //             for(let j=0; j<memoire.length; j++) {
-    //                 let ordre = (j === 0) ? parseIntNko(j+1)+'߭' : parseIntNko(j+1)+'߲';
-    //                 html += '<td>'+ordre+'</td>';
-    //             }
-    //             html +=  '</tr>';
+                html +=  '<tr class="thin">';
+                for(let j=0; j<memoire.length; j++) {
+                    let ordre = (j === 0) ? parseIntNko(j+1)+'߭' : parseIntNko(j+1)+'߲';
+                    html += '<td>'+ordre+'</td>';
+                }
+                html +=  '</tr>';
 
-    //             html +=  '<tr class="bold">';
-    //             for(let k=0; k<memoire.length; k++) {
-    //                 html += '<td>'+memoire[k][0]+'</td>';
-    //             }
-    //             html +=  '</tr>';
+                html +=  '<tr class="bold">';
+                for(let k=0; k<memoire.length; k++) {
+                    html += '<td>'+memoire[k][0]+'</td>';
+                }
+                html +=  '</tr>';
 
-    //             html +=  '<tr class="bold">';
-    //             for(let l=0; l<memoire.length; l++) {
-    //                 html += '<td>'+memoire[l][1]+'</td>';
-    //             }
-    //             html +=  '</tr>';
+                html +=  '<tr class="bold">';
+                for(let l=0; l<memoire.length; l++) {
+                    html += '<td>'+memoire[l][1]+'</td>';
+                }
+                html +=  '</tr>';
 
-    //             html +=  '<tr class="bold">';
-    //             for(let m=0; m<memoire.length; m++) {
-    //                 html += '<td>'+parseIntNko(memoire[m][2])+'</td>';
-    //             }
-    //             html +=  '</tr>';
+                html +=  '<tr class="bold">';
+                for(let m=0; m<memoire.length; m++) {
+                    html += '<td>'+parseIntNko(memoire[m][2])+'</td>';
+                }
+                html +=  '</tr>';
 
-    //             return html;
-    //         }
-    //     }
-    //     function chargerResultatFoot() {
-    //         $('#total_question_2').text(parseIntNko(total_question));
-    //         $('#total_bonne_reponse').text(parseIntNko(total_bonne_reponse));
-    //         $('#total_fausse_reponse').text(parseIntNko(total_fausse_reponse));
-    //         $('#total_point_2').text(parseIntNko(total_bonne_reponse));
-    //         $('#pourcentage_point').text('%'+parseIntNko(taux_de_vraie_reponse));
-    //     }
-    //     function chargerDeliberation() {
-    //         if(taux_de_vraie_reponse < taux_acceptable_de_vraie_reponse) {
-    //             $('#deliberation').html('ߌ ߖߌߖߊ߬ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ '+lesson_en_cours+' ߓߍ߬ߙߍ ߡߊ߫ ߤߊߟߌ߬ ߁߈ ߓߐ߫. ߏ߬ߘߐ߬߸ ߌ ߞߐߛߍ߬ߦߌ߬ ߦߊ߲߬ ߡߊ߫.'+reprendre_l_etape_en_cours);
-    //         }else{
-    //             $('#deliberation').html(
-    //                 'ߌ ߞߎߟߎ߲ߖߋ߫ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ ߘߐ߬ߖߊ ߟߊ߫ '+lesson_en_cours+' ߟߐ߲ ߠߊ߫ ߤߊ߲߯ '+$('#pourcentage_point').text()+
-    //                 '</b> ߟߊ߫. ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ '+lesson_suivante+'.<br/>'+
-    //                 'ߣߴߌ ߟߊ߫ ߓߍ߬ߙߍ ߡߴߌ ߥߛߊ߬߸ '+reprendre_l_etape_en_cours+'<br/>'+
-    //                 'ߣߴߌ ߟߊ߫ ߓߍ߬ߙߍ ߞߵߌ ߥߛߊ߬߸ '+continu_sur_l_etape_suivante
-    //             );
-    //         }
-    //     }
-    //     function totalPoint() {
-    //         let html = 0;
-    //         for(let i=0; i<memoire.length; i++) { html += memoire[i][2]; }
-    //         return html;
-    //     }
-    //     function lessonSuivante() {
-    //         let ls = '';
-    //         switch(lesson_en_cours) {
-    //             case 'ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ' : ls = 'ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫'; break;
-    //             case 'ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ' : ls = 'ߛߓߍߛߎ߲ ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫'; break;
-    //             case 'ߛߓߍߛߎ߲ ߣߐ߰ߡߊ߬ߛߍߦߌ' : ls = 'ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߥߴߊ߬ ߡߊ߬'; break;
+                return html;
+            }
+        }
+        function chargerResultatFoot() {
+            $('#total_question_2').text(parseIntNko(total_question));
+            $('#total_bonne_reponse').text(parseIntNko(total_bonne_reponse));
+            $('#total_fausse_reponse').text(parseIntNko(total_fausse_reponse));
+            $('#total_point_2').text(parseIntNko(total_bonne_reponse));
+            $('#pourcentage_point').text('%'+parseIntNko(taux_de_vraie_reponse));
+        }
+        function chargerDeliberation() {
+            if(taux_de_vraie_reponse < taux_acceptable_de_vraie_reponse) {
+                $('#deliberation').html('ߌ ߖߌߖߊ߬ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ '+lesson_en_cours+' ߓߍ߬ߙߍ ߡߊ߫ ߤߊߟߌ߬ ߁߈ ߓߐ߫. ߏ߬ߘߐ߬߸ ߌ ߞߐߛߍ߬ߦߌ߬ ߦߊ߲߬ ߡߊ߫.'+reprendre_l_etape_en_cours);
+            }else{
+                $('#deliberation').html(
+                    'ߌ ߞߎߟߎ߲ߖߋ߫ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ ߘߐ߬ߖߊ ߟߊ߫ '+lesson_en_cours+' ߟߐ߲ ߠߊ߫ ߤߊ߲߯ '+$('#pourcentage_point').text()+
+                    '</b> ߟߊ߫. ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ '+lesson_suivante+'.<br/>'+
+                    'ߣߴߌ ߟߊ߫ ߓߍ߬ߙߍ ߡߴߌ ߥߛߊ߬߸ '+reprendre_l_etape_en_cours+'<br/>'+
+                    'ߣߴߌ ߟߊ߫ ߓߍ߬ߙߍ ߞߵߌ ߥߛߊ߬߸ '+continu_sur_l_etape_suivante
+                );
+            }
+        }
+        function totalPoint() {
+            let html = 0;
+            for(let i=0; i<memoire.length; i++) { html += memoire[i][2]; }
+            return html;
+        }
+        function lessonSuivante() {
+            let ls = '';
+            switch(lesson_en_cours) {
+                case 'ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ' : ls = 'ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫'; break;
+                case 'ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ' : ls = 'ߛߓߍߛߎ߲ ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫'; break;
+                case 'ߛߓߍߛߎ߲ ߣߐ߰ߡߊ߬ߛߍߦߌ' : ls = 'ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߥߴߊ߬ ߡߊ߬'; break;
 
-    //             case 'ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ' : ls = 'ߜߋ߲߭ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫'; break;
-    //             case 'ߜߋ߲߭ ߡߊ߬ߞߟߏ߬ߟߌ' : ls = 'ߜߋ߲߭ ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫'; break;
-    //             case 'ߜߋ߲߭ ߣߐ߰ߡߊ߬ߛߍߦߌ' : ls = 'ߜߋ߲߭ ߞߘߐߓߐߟߌ ߞߍ߫'; break;
-    //             case 'ߜߋ߲߭ ߞߘߐߓߐߟߌ' : ls = 'ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߥߴߊ߬ ߡߊ߬'; break;
-    //         }
-    //         return ls;
-    //     }
-    // }
+                case 'ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ' : ls = 'ߜߋ߲߭ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫'; break;
+                case 'ߜߋ߲߭ ߡߊ߬ߞߟߏ߬ߟߌ' : ls = 'ߜߋ߲߭ ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫'; break;
+                case 'ߜߋ߲߭ ߣߐ߰ߡߊ߬ߛߍߦߌ' : ls = 'ߜߋ߲߭ ߞߘߐߓߐߟߌ ߞߍ߫'; break;
+                case 'ߜߋ߲߭ ߞߘߐߓߐߟߌ' : ls = 'ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߥߴߊ߬ ߡߊ߬'; break;
+            }
+            return ls;
+        }
+    }
     function resultatGeneral(memoire_1='', memoire_2='', memoire_3='',memoire_4='') {
         
         let nom = JSON.parse(sessionStorage.getItem('nom'));
@@ -841,8 +843,13 @@
         chargerResultatGeneralCorps();
         chargerResultatFoot();
         chargerDeliberation();
-        goDown($('.resultat_container'));
+        afficherResultat();
+        masquerResultat();
         
+        function masquerResultat() {
+            $('#fermer_resultat').click(function() { masquer($('#enveloppe')); });
+        }
+        function afficherResultat() { goDown($('.resultat_container')); }
 
         function chargerResultatGeneralEntete() { 
             $('#resultat_titre').html('<h2>'+matiere_nom+' ߥߟߊ߬ߘߊ ߞߐߝߟߌ</h2>'); 

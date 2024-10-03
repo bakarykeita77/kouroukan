@@ -40,13 +40,13 @@ console.log('-------------------------------------------------------------------
    
     if(niveau_actif <= 2) {
         switch(lesson_option) {
-            case 1 : preAlphabet(); break;
-            // case 2 : alphabet(); break;
+            case 1 : preAlphabetNko(); break;
+            case 2 : alphabetNko(); break;
         } 
     }
     
 
-    function preAlphabet() {
+    function preAlphabetNko() {
 
         let pre_apprentissage_data_memo = preApprentisageDataMemo();
         let pre_exercice_data_memo = preExerciceDataMemo();
@@ -636,6 +636,7 @@ localStorage.removeItem('pre_revision_memoire');
                         let i=0;
                         
         console.log(pre_questions);
+        console.log('--------------------------------------------------------------------');
         
                         $('#exercice_question_btn').click(function() { 
 
@@ -1180,9 +1181,11 @@ console.log('-------------------------------------------------------------------
                                                 sendLessonDataToDB('alphabet_exercice',pre_exercice_memoire);
                                                 sendLessonDataToDB('alphabet_evaluation',pre_revision_memoire);
 
-                                                localStorage.removeItem('pre_apprentissage_memoire');
-                                                localStorage.removeItem('pre_exercice_memoire');
-                                                localStorage.removeItem('pre_revision_memoire');
+                                                setTimeout(() => {
+                                                    localStorage.removeItem('pre_apprentissage_memoire');
+                                                    localStorage.removeItem('pre_exercice_memoire');
+                                                    localStorage.removeItem('pre_revision_memoire');
+                                                }, 86400000);
                                                 
                                                 pourcentage_general = Math.floor([pourcentagePoint(pre_apprentissage_memoire) + pourcentagePoint(pre_exercice_memoire) + pourcentagePoint(pre_revision_memoire)]/3);
 
@@ -1195,12 +1198,6 @@ console.log('-------------------------------------------------------------------
                                                 sessionStorage.setItem('niveau_max', JSON.stringify(niveau_max));
                                                 sessionStorage.setItem('niveau_en_cours', JSON.stringify(niveau_en_cours));
                                                 sessionStorage.setItem('niveaux_etudies', JSON.stringify(niveaux_etudies));
-
-console.log('pre_revision_memoire.length = '+pre_revision_memoire.length);                                        
-console.log('Point = '+pourcentagePoint(pre_revision_memoire));                                        
-console.log('niveaux_etudies = '+niveaux_etudies);
-console.log('niveau_max = '+niveau_max);
-console.log('niveau_en_cours = '+niveau_en_cours);
 
                                                 console.log('Lesson de pre_apprentissage envoyée à la base de donnée.');
                                                 console.log('Lesson de pre_exercice envoyée à la base de donnée.');
@@ -1228,20 +1225,23 @@ console.log('niveau_en_cours = '+niveau_en_cours);
                                             effacerLeTableau();
                                         }, 400);
                                         
-console.log('taux_de_vraie_reponse = '+taux_de_vraie_reponse); 
-
                                         masquer($('#revision_question_btn'));
                                         $('#revision_question_btn').removeClass('actif');
                                         $('#revision_question_btn').html('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߓߘߊ߫ ߓߊ߲߫').off('click');
                                         
                                         setTimeout(() => { masquer($('#revision_progress_bar')); }, 600);
                                         afficherRevisionRedirectionBtns();
-                                     
+
+ console.log('pre_revision_memoire_ln = '+pre_revision_memoire.length);                                    
+ console.log('taux_de_vraie_reponse = '+taux_de_vraie_reponse);                                    
 
                                         // preAlphabetResultat();
-                                        if(taux_de_vraie_reponse >= 92) {
-                                            if(pre_revision_memoire.length < 27) {
-                                                
+                                        if(pre_revision_memoire.length < 27) {
+                                            
+                                            clickable_td = clickable_td.concat(les_lettres_actives);
+                                            
+                                            if(taux_de_vraie_reponse >= 92) {
+                                                    
                                                 ecrire('notification_corps','\
                                                     '+liste_de_matieres[0][1]+' ߣߐ߰ߡߊ߬ߛߍߦߌ ߢߊ߬ߣߍ߲߬\n\
                                                     ߞߎߘߎ߲߫ ߁߭ ߤߊ߲߯ ߞߎߘߎ߲߫ '+cercle_actif.html()+' ߠߎ߬ ߓߍ߯ ߓߘߊ߫ ߢߊߦߋ߫ ߌ ߓߟߏ߫\n\
@@ -1249,25 +1249,56 @@ console.log('taux_de_vraie_reponse = '+taux_de_vraie_reponse);
                                                     ߞߐߝߟߌ ߝߟߍ߫ ߘߎ߭ߡߊ߬ ߓߊ߫߹\n\
                                                     ߘߊߕߎ߲ߠߊ߲߫ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߓߐ߫ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫)\
                                                 ');
-                                                
-                                                clickable_td = clickable_td.concat(les_lettres_actives);
+                                                afficherApprentissageBouton();
                                                 continuSurApprendrePreAlphabet(); 
 
+                                                function afficherApprentissageBouton() {
+console.log('afficherApprentissageBouton');
+                                                    masquer($('#reprendre_pre_revision_bouton'));
+                                                    afficher($('#pre_evaluation_bouton'));
+                                                    masquer($('#syllabe_bouton'));
+                                                    indexer($('#pre_evaluation_bouton'));
+                                                }
                                                 function continuSurApprendrePreAlphabet() {
                                                     $('#pre_evaluation_bouton').click(function() { apprentissagePreAlphabet(); });
                                                 }
                                             }
-                                            if(pre_revision_memoire.length === 27) {
+                                            if(taux_de_vraie_reponse < 92) {
+                                                
+                                                ecrire('notification_corps','\
+                                                    '+liste_de_matieres[0][1]+' ߣߐ߰ߡߊ߬ߛߍߦߌ ߡߊ߫ ߢߊ߬\n\
+                                                    ߌ ߓߘߊ߫ ߗߌߙߏ߲߫ ߣߐ߰ߡߊ߬ߛߍߦߌ ߢߌ߲߬ ߘߐ߫.\n\
+                                                    ߞߐߝߟߌ ߝߟߍ߫ ߘߎ߭ߡߊ߬ ߓߊ߫߹\n\
+                                                    ߘߊߕߎ߲ߠߊ߲߫ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߓߐ߫ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫)\
+                                                ');
+                                                afficherRepriseEvaluationBouton();
+                                                reprendreRevisionPreAlphabet(); 
+
+                                                function reprendreRevisionPreAlphabet() {
+                                                    $('#reprendre_pre_revision_bouton').click(function() { preRevisionAlphabet(); });
+                                                }
+                                            }
+                                        }
+                                        if(pre_revision_memoire.length === 27) {
+
+                                            if(taux_de_vraie_reponse >= 92) {
                                                 
                                                 ecrire('notification_corps', 'ߌ ߞߎߟߎ߲ߖߋ߫ '+prenom+' '+nom+' ߌ ߟߊ߫ ߘߐ߬ߖߊ ߟߊ߫߸ ߞߊ߬ ߒߞߏ ߛߓߍߛߎ߲ ߘߋ߰.');
-
+                                                        
                                                 degagerRevisionBodyCadre();
+                                                afficherSyllabeBouton();
                                                 resultatGeneralDAlphabet();
 
-                                                
                                                 function degagerRevisionBodyCadre() {
                                                     $("#revision_body_cadre").css('background-color','#fff');
                                                     $("#revision_body_cadre > div").css('display','none');
+                                                }
+                                                function afficherSyllabeBouton() {
+console.log('afficherSyllabeBouton');
+                                                    masquer($('#reprendre_pre_revision_bouton'));
+                                                    masquer($('#pre_evaluation_bouton'));
+                                                    afficher($('#syllabe_bouton'));
+                                                    setTimeout(() => { indexer($('#syllabe_bouton')); }, 1000);
                                                 }
                                                 function resultatGeneralDAlphabet() {
 
@@ -1291,19 +1322,31 @@ console.log('taux_de_vraie_reponse = '+taux_de_vraie_reponse);
 
                                                 }
                                             }
-                                        }
-                                        if(taux_de_vraie_reponse < 92) {
-                                            ecrire('notification_corps','\
-                                                '+liste_de_matieres[0][1]+' ߣߐ߰ߡߊ߬ߛߍߦߌ ߡߊ߫ ߢߊ߬\n\
-                                                ߌ ߓߘߊ߫ ߗߌߙߏ߲߫ ߣߐ߰ߡߊ߬ߛߍߦߌ ߢߌ߲߬ ߘߐ߫.\n\
-                                                ߞߐߝߟߌ ߝߟߍ߫ ߘߎ߭ߡߊ߬ ߓߊ߫߹\n\
-                                                ߘߊߕߎ߲ߠߊ߲߫ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߓߐ߫ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫)\
-                                            '); 
-                                            
-                                            reprendreRevisionPreAlphabet();       
+                                            if(taux_de_vraie_reponse < 92) {
+                                                
+                                                ecrire('notification_corps','\
+                                                    '+liste_de_matieres[0][1]+' ߣߐ߰ߡߊ߬ߛߍߦߌ ߡߊ߫ ߢߊ߬\n\
+                                                    ߌ ߓߘߊ߫ ߗߌߙߏ߲߫ ߣߐ߰ߡߊ߬ߛߍߦߌ ߢߌ߲߬ ߘߐ߫.\n\
+                                                    ߞߐߝߟߌ ߝߟߍ߫ ߘߎ߭ߡߊ߬ ߓߊ߫߹\n\
+                                                    ߘߊߕߎ߲ߠߊ߲߫ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߓߐ߫ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫)\
+                                                '); 
+                                                    
+                                                afficherRepriseEvaluationBouton();
+                                                reprendrePreRevisionAlphabet();
+
+                                                function reprendrePreRevisionAlphabet() {
+                                                    $('#reprendre_pre_revision_bouton').click(function() { $('#pre_revision_bouton').click(); });
+                                                }
+                                            }
                                         }
                                     
                                     
+                                        function afficherRepriseEvaluationBouton() {
+                                            afficher($('#reprendre_pre_revision_bouton'));
+                                            masquer($('#pre_evaluation_bouton'));
+                                            masquer($('#syllabe_bouton'));
+                                            setTimeout(() => { indexer($('#reprendre_pre_revision_bouton')); }, 1000);
+                                        }
                                         function fermerPreEvaluer() {
                                             $('#apprentissage .fermeture_pre').one('click',function(){    
                     
@@ -1340,32 +1383,9 @@ console.log('taux_de_vraie_reponse = '+taux_de_vraie_reponse);
                                                 masquer($('#revision_progress_bar'));
                                                 masquer($('#revision_dialogue_btns'));
                                                 $('#revision_question_btn').text('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߓߘߊ߫ ߓߊ߲߫ ߹');
-                                                $('#revision_question_btn').removeClass('actif');
+                                                $('#revision_quecstion_btn').removeClass('actif');
                                                 afficher($('#revision_dialogue_btns'));
                                                 afficher($('#revision_redirection_btns'));
-
-                                                if(taux_de_vraie_reponse < 92) {
-                                                    afficher($('#reprendre_pre_revision_bouton'));
-                                                    masquer($('#pre_evaluation_bouton'));
-                                                    masquer($('#syllabe_bouton'));
-                                                    setTimeout(() => { indexer($('#reprendre_pre_revision_bouton')); }, 1000);
-                                                }
-                                                if(taux_de_vraie_reponse >= 92) {
-                                                    if(pre_revision_memoire.length < 27) {
-                                                        masquer($('#reprendre_pre_revision_bouton'));
-                                                        afficher($('#pre_evaluation_bouton'));
-                                                        masquer($('#syllabe_bouton'));
-                                                        indexer($('#pre_evaluation_bouton'));
-                                                    }
-                                                    if(pre_revision_memoire.length === 27) {
-                                                    if(sommePoint(pre_revision_memoire) === 100) {
-                                                        masquer($('#reprendre_pre_revision_bouton'));
-                                                        masquer($('#pre_evaluation_bouton'));
-                                                        masquer($('#revision_body_cadre'));
-                                                        afficher($('#syllabe_bouton'));
-                                                        setTimeout(() => { indexer($('#syllabe_bouton')); }, 1000);
-                                                    }}
-                                                }
                                             }, 1000);
                                         }
                                         function preAlphabetResultat() {
@@ -1384,14 +1404,6 @@ console.log('taux_de_vraie_reponse = '+taux_de_vraie_reponse);
                                                     goUp($('.resultat_container'));
                                                 });
                                             }
-                                        }
-                                        function reprendreRevisionPreAlphabet() {
-                                            $('#reprendre').click(function() {
-                                                goUp($('.resultat_container'));
-                                                setTimeout(() => { 
-                                                    $('#pre_revision_bouton').click();
-                                                }, 400);
-                                            });
                                         }
                                     }
                                 }
@@ -1414,7 +1426,7 @@ console.log('taux_de_vraie_reponse = '+taux_de_vraie_reponse);
             return ati;
         }
     }
-    function alphabet() {
+    function alphabetNko() {
         
         var table_id = $('.table_parlante').attr('id');
             
@@ -1463,6 +1475,14 @@ console.log('taux_de_vraie_reponse = '+taux_de_vraie_reponse);
             }
             function afficherApprentissageAlphabet() {
 
+                $('#apprentissage_container').css('display','block');
+                $('#exercice_container').css('display','none');
+                $('#revision_container').css('display','none');
+                $('#evaluation_container').css('display','none');
+        
+                $('#apprentissage_redirection_btns').css('display','none');
+                afficher($('.course'));
+
                 afficherEnteteDeAlphabet();
                 afficherFootDeAlphabet();
                 afficherCorpsDeAlphabet();
@@ -1477,7 +1497,9 @@ console.log('taux_de_vraie_reponse = '+taux_de_vraie_reponse);
                     $('.lesson_suivante').css({'display':'block', 'opacity':1});
 
                 }
-                function afficherCorpsDeAlphabet() {}
+                function afficherCorpsDeAlphabet() {
+                    affichageAnimeDeTable($('#apprentissage_body table'));
+                }
             }
             function apprendreAlphabetNko() {
                 lecturePersonnalisee();    // Voir fonctions.js
@@ -1537,15 +1559,15 @@ console.log('taux_de_vraie_reponse = '+taux_de_vraie_reponse);
                             var clicked_element = $(this).html(); // Élément clické.
                             element_click_counter++; // Compteur de click specifique pour chaque élément.
 
-                        /*Quand un élément est cliqué au moins 5 fois, il est considéré comme étant suffisemment appris.
+                         /*Quand un élément est cliqué au moins 5 fois, il est considéré comme étant suffisemment appris.
                         *Il est noté par 1 et cette note est enregitrée dans  la varible new_mark. */ 
                             var new_mark = (element_click_counter >= nbr_raisonnable_de_click) ? 1 : 0;
                 
-                        /*A chaque élément correspond un tableau (new_click_value) de 3 composants dont l'élément cliqué, le nombre de click de
+                         /*A chaque élément correspond un tableau (new_click_value) de 3 composants dont l'élément cliqué, le nombre de click de
                         *cet élément et le point new_mark. Ce tableau est régulièrement actualisé à chaque click */ 
                             var new_click_value = [clicked_element,element_click_counter,new_mark];  // Enregistrement elementaire.
                 
-                        /*Actualisation de mémoire d'enregistrement
+                         /*Actualisation de mémoire d'enregistrement
                             C'est à dire qu'après chaque click,les anciennes valeurs de chaque enregistrement elementaire sont remplacés par les nouvelles valeurs.                 */
                             
                             apprentissage_clicks_memo.splice(element_index,1,new_click_value);
@@ -1625,7 +1647,7 @@ console.log('taux_de_vraie_reponse = '+taux_de_vraie_reponse);
 
                         if(note <  moyenne_d_apprentissage) alert("ߌ ߡߊ߫ ߛߓߍߘߋ߲ ߥߟߊ ߜߋ߭ ߠߎ߬ ߓߍ߯ ߟߊߡߍ߲߫");
                         if(note >= moyenne_d_apprentissage) {
-                            sendLessonDataToDB('alphabet_apprentissage',apprentissage_clicks_memo);
+                            // sendLessonDataToDB('alphabet_apprentissage',apprentissage_clicks_memo);
                             changerPhaseActive(index_phase_active);
                             console.log('Les données de exercice sont envoyées à la base de données');
                         }
@@ -1672,6 +1694,7 @@ console.log('taux_de_vraie_reponse = '+taux_de_vraie_reponse);
             }
             function finDApprentissageAlphabet() {
                 $('#table_alphabet_apprentissage td').click(function(){
+console.log(clicked_elements_quantity +'==='+ apprentissage_clicks_memo.length);
                     if(clicked_elements_quantity === apprentissage_clicks_memo.length) {
                         resultatApprentissageAlphabet();
                         afficherBoutonDeRedirection();
@@ -1708,10 +1731,10 @@ console.log('taux_de_vraie_reponse = '+taux_de_vraie_reponse);
                         }, 400);
                     });
                 }
-                function afficherBoutonDeRedirection() {
-                    td.click(() => {
-                        if(clicked_elements_quantity === apprentissage_clicks_memo.length) { zoomUp($('.dialogue_btns')); }
-                    });
+                function afficherBoutonDeRedirection() { 
+                    masquer($('#pre_apprentissage_dialogue_btns'));
+                    masquer($('#pre_apprentissage_bouton'));
+                    afficher($('#apprentissage_redirection_btns')); 
                 }
                 function continuSurExerciceAlphabet() {
                     afficherApprentissageRedirectionBtns();

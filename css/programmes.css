@@ -38,6 +38,7 @@
     overflow-x: auto;
     text-align: center;
     cursor: pointer;
+    overflow: visible;
 }
 #programme_ul a {
     text-decoration: none;
@@ -136,6 +137,6 @@
     }
     #programme_ul li { 
         width: 80%;
-        margin: 0.125rem auto;
+        margin: 0.25rem auto;
     }
 }

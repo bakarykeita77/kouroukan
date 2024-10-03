@@ -130,6 +130,7 @@ console.log('niveau_en_cours = '+niveau_en_cours);
                 if(matiere_index+1 === niveau_en_cours) $(this).removeClass("a_apprendre").addClass("actif");
             }
         });
+        indexer($('.actif'));
     }
     function alerteDuProgramme() {
         $('#programme_ul li').on('click', function() {

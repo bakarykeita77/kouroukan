@@ -118,7 +118,53 @@
         setTimeout(() => { afficher($('.course')); }, 50);
     }
 	function aggrandir_caractere_de(element) { element.css( 'font-size','+=32px' ); }
-	function appetir_caractere_de(element) { element.css( 'font-size','-=32px' ); }
+	function appetir_caractere_de(element) { element.css( 'font-size','-=32px' ); } 
+    function approuver(bonne_reponse) {
+        $.each($('.table_parlante td, .table_muette td'), function() {
+            var td = $(this);
+            if(td.text() == bonne_reponse) {
+
+                td.html(bonne_reponse+"<p id='coche'>✓</p><p id='coche_couvercle'></p>");
+                td.addClass('ombrage');
+            
+                $('#coche').css({
+                    'position':'absolute', 
+                    'display':'block',
+                    'margin':0,
+                    'padding':0,
+                    'width':'40%', 
+                    'height':'40%', 
+                    'line-height':'100%', 
+                    'top':0,
+                    'left':0,
+                    'font-size':'1.5rem',
+                    'textAlign':'center', 
+                    'boxSizing':'border-box',
+                    'color':'blue',
+                    'rotate':'y 180deg',
+                    'z-index':0,
+                    'transition':'transform 0.6s'
+                });
+                $('#coche_couvercle').css({
+                    'position':'absolute', 
+                    'display':'block',
+                    'background-color':'#fff',
+                    'margin':0,
+                    'padding':0,
+                    'width':'40%', 
+                    'height':'40%',  
+                    'top':0,
+                    'left':0,
+                    'border-radius':'0.5rem',
+                    'z-index':1,
+                    'transition':'1200ms'
+                });
+            }
+        });
+        
+        setTimeout(function() { $('#coche_couvercle').css({'left':'-40%' }); }, 10);
+        setTimeout(function() { td.html(bonne_reponse).removeClass('ombrage'); }, 1200);
+    }
     function arreterLecture() {
         $('.stop_icon').parent().on('click',function(){ 
              return;
@@ -181,7 +227,7 @@
         localStorage.clear();
     }
     function clignotage(reponse_ratee) {
-        $.each($('.table_muette td'), function() {
+        $.each($('.table_parlante td, .table_muette td'), function() {
             if($(this).text() == reponse_ratee) {
 
                 var td = $(this);

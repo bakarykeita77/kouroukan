@@ -1872,12 +1872,13 @@ console.log('-------------------------------------------------------------------
                 }
                 function repondreExerciceAlphabetQuestion(){
                     $.each($('#exercice_body .table_parlante td'), function() {
-                        let td = $(this);
+                        let td = $(this);   
                         td.click(function() {
+                            $('#exercice_body .table_parlante td').css('background-color','rgba(85,85,85,0.25)');
                             if(exercice_question != '') {
                                 element_actif = $(this);
-                                reponse = element_actif.text();
-                                $(element_actif).css('background-color','#aaa').siblings().css('background-color','rgba(85,85,85,0.25)');
+                                exercice_reponse = element_actif.text();
+                                $(element_actif).css('background-color','#aaa');
                             }
                         });
                         
@@ -1887,10 +1888,22 @@ console.log('-------------------------------------------------------------------
                     $('#exercice_correction_btn').click(function() {
                         if(exercice_question != '') {
 
-                            point = (exercice_question == exercice_reponse) ? 1 : 0;
-                                                
-                            if(exercice_question != exercice_reponse){ barrer(td); clignotage(exercice_question); }
-                            if(exercice_question == exercice_reponse){ valider(td); }
+                            let bonne_reponse = "";
+                            let mauvaise_reponse = "";
+
+                            if(exercice_question == exercice_reponse) { bonne_reponse = exercice_reponse; }
+                            if(exercice_question != exercice_reponse) { mauvaise_reponse = exercice_reponse; }
+
+                            point = (exercice_question == exercice_reponse) ? 1 : 0; 
+                            $.each($('#exercice_body .table_parlante td'), function(){
+                                let td = $(this);
+                                if(td.text() == bonne_reponse) { valider(td); }
+                                if(td.text() == mauvaise_reponse) { barrer(td); clignotage(exercice_question); }
+                            }); 
+                            
+                            setTimeout(() => {
+                                $('#exercice_body .table_parlante td').css('background-color','rgba(85,85,85,0.25)');
+                            }, 600);
                         }
                     });
                 }

@@ -272,7 +272,7 @@
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
 
-    function gestionDeExerciceDialogueBtns() {
+    function gestionDeExerciceDialogueBtns2() {
 
         $('#exercices_player').css('display','block');
         $('.oreille_icon_container').css('display','none');

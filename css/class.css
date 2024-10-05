@@ -1,13 +1,7 @@
-:root{
-    --shadow_10: 0 0 1rem #000;
-}
-
-/* --------------------------------------------------------------------------------------------------------- */
 
 html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 
 /* --------------------------------------------------------------------------------------------------------- */
-
 
 .a_apprendre { 
     border: 1px solid #bbb; 
@@ -21,7 +15,10 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     font-weight: bold;
     border-radius: 0.5rem;
 }
-.actif, .active { background-color: rgb(255,255,0); }
+.actif, .active { 
+    background-color: rgb(255,255,0); 
+    box-shadow: 0 0 1rem #444;
+}
 .active_2 { box-shadow: 0 0 1rem #222; background-color: #fff; color: black; }
 .actif a, .active a {
     color: cornflowerblue;

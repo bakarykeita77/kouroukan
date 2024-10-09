@@ -1127,7 +1127,7 @@ del {
 }
 @media screen and (width >= 400px) {
     .cover {
-        background-color: rgba(0, 0, 0, 0.7);
+        background-color: rgba(0, 0, 0, 0.85);
     }
     .parametres_popup {  width: auto; }
     .phases { 

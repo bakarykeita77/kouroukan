@@ -228,27 +228,25 @@
     }
     function clignotage(reponse_ratee) {
         $.each($('.table_parlante td, .table_muette td'), function() {
-            if($(this).text() == reponse_ratee) {
-
-                var td = $(this);
-
-                td.addClass('fond_blanc_casse');
-                setTimeout((function() { td.removeClass('fond_blanc_casse'); }), 200);
-                setTimeout((function() { td.addClass('fond_blanc_casse');    }), 325);
-                setTimeout((function() { td.removeClass('fond_blanc_casse'); }), 450);
-                setTimeout((function() { td.addClass('fond_blanc_casse');    }), 575);
-                setTimeout((function() { td.removeClass('fond_blanc_casse'); }), 700);
-                setTimeout((function() { td.addClass('fond_blanc_casse');    }), 825);
-                setTimeout((function() { td.removeClass('fond_blanc_casse'); }), 950);
-                setTimeout((function() { td.addClass('fond_blanc_casse');    }), 1075);
-                setTimeout((function() { td.removeClass('fond_blanc_casse'); }), 1200);
-                setTimeout((function() { td.addClass('fond_blanc_casse');    }), 1325);
-                setTimeout((function() { td.removeClass('fond_blanc_casse'); }), 1450);
-                setTimeout((function() { td.addClass('fond_blanc_casse');    }), 1575);
-                setTimeout((function() { td.removeClass('fond_blanc_casse'); }), 1700);
-                setTimeout((function() { td.addClass('fond_blanc_casse');    }), 1825);
-                setTimeout((function() { td.removeClass('fond_blanc_casse'); }), 1950);
-            }
+            let td = $(this);
+            if(td.text() == reponse_ratee) {
+                td.css('background-color','#666');
+                setTimeout((function() { td.css('background-color','transparent'); }), 200);
+                setTimeout((function() { td.css('background-color','#666');        }), 325);
+                setTimeout((function() { td.css('background-color','transparent'); }), 450);
+                setTimeout((function() { td.css('background-color','#666');        }), 575);
+                setTimeout((function() { td.css('background-color','transparent'); }), 700);
+                setTimeout((function() { td.css('background-color','#666');        }), 825);
+                setTimeout((function() { td.css('background-color','transparent'); }), 950);
+                setTimeout((function() { td.css('background-color','#666');        }), 1075);
+                setTimeout((function() { td.css('background-color','transparent'); }), 1200);
+                setTimeout((function() { td.css('background-color','#666');        }), 1325);
+                setTimeout((function() { td.css('background-color','transparent'); }), 1450);
+                setTimeout((function() { td.css('background-color','#666');        }), 1575);
+                setTimeout((function() { td.css('background-color','transparent'); }), 1700);
+                setTimeout((function() { td.css('background-color','#666');        }), 1825);
+                setTimeout((function() { td.css('background-color','transparent'); }), 1950);
+            }  
         });
     }
     function clignoter(element) {
@@ -1190,22 +1188,36 @@
     function valider(td) {
         
         var vraie_reponse = td.html();
-        td.html(vraie_reponse+"<p id='coche'>✓</p><p id='coche_couvercle'></p>");
+        td.html(vraie_reponse+"<div id='coche_container'><p id='coche'>✓</p><p id='coche_couvercle'></p></div>");
         td.addClass('ombrage');
        
+        $('#coche_container').css({
+            'position':'absolute',
+            'background-color':'#fff',
+            'overflow':'hidden',
+            'margin':0,
+            'padding':0,
+            'top':'-2rem',
+            'left':'-2rem',
+            'width':'2.5rem',
+            'height':'2.5rem',
+            'border-radius':'2.5rem',
+            'z-index':1
+        });
         $('#coche').css({
             'position':'absolute', 
             'display':'block',
             'margin':0,
             'padding':0,
-            'width':'40%', 
-            'height':'40%', 
-            'line-height':'100%', 
+            'width':'2.5rem', 
+            'height':'2.5rem', 
+            'line-height':'2.5rem', 
             'top':0,
             'left':0,
-            'font-size':'1.5rem',
+            'font-size':'1.75rem',
             'textAlign':'center', 
             'boxSizing':'border-box',
+            'background-color':'#fff',
             'color':'blue',
             'rotate':'y 180deg',
             'z-index':0,
@@ -1217,8 +1229,8 @@
             'background-color':'#fff',
             'margin':0,
             'padding':0,
-            'width':'40%', 
-            'height':'40%',  
+            'width':'2.5rem', 
+            'height':'2.5rem',  
             'top':0,
             'left':0,
             'border-radius':'0.5rem',
@@ -1226,7 +1238,7 @@
             'transition':'1200ms'
         });
         
-        setTimeout(function() { $('#coche_couvercle').css({'left':'-40%' }); }, 10);
+        setTimeout(function() { $('#coche_couvercle').css({'left':'-100%' }); }, 10);
         setTimeout(function() { td.html(vraie_reponse).removeClass('ombrage'); }, 1200);
     }
     function viderLeTableau(array) { array.splice(0,array.length); }

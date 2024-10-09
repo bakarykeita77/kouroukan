@@ -648,7 +648,12 @@ del {
 /* --------------------------------------------------------------------------------------------------------- */
 
 
-.ombrage { box-shadow: 0 4px 43px #000; background-color: white; color: black; }
+.ombrage { 
+    box-shadow: 0 4px 43px #000; 
+    background-color: white; 
+    color: black; 
+    z-index: 1;
+}
 .opaque { animation: opacir0.6s 1; }
 .oreille_icon_container {
     height: 1.5rem;

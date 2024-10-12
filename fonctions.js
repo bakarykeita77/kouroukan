@@ -200,6 +200,19 @@
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/	
     
+    function calculerNote(data) {
+        var note_d_exercice = 0;
+        
+        for (var i = 0; i < data.length; i++) {
+        if(data[i] !== undefined) {
+            if(data[i][2] == 1) {
+                note_d_exercice ++;
+            }
+        }}
+
+        var note = Math.floor((note_d_exercice*100)/data.length);
+        return note;
+    }
 	function centrerHorizontalement(element) {
 		var largeur_element = element.width();
 		var largeur_ecran = window.screen.width;
@@ -891,7 +904,7 @@
         masquerResultat();
         
         function masquerResultat() {
-            $('#fermer_resultat').click(function() { masquer($('#enveloppe')); });
+            $('#fermer_resultat').click(function() { masquer($('#envelope')); });
         }
         function afficherResultat() { goDown($('.resultat_container')); }
 

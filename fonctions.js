@@ -75,7 +75,7 @@
             'opacity':'0',
             'transition':'0.6s'
         });
-        setTimeout(function() { element.css({ 'display':'block' }); }, 150); 
+        setTimeout(function() { element.css({ 'display':'block' }); }, 100); 
         setTimeout(function() { element.css({
             'transform':'scale(1)', 
             'opacity':1
@@ -314,14 +314,16 @@
         let longueur = message.length;
         let indice = 0;
 
-        write();
-        function write() {
-            indice++;
-            $('.'+element_class).html(message.substr(0,indice));
-            if(indice<longueur) {
-                setTimeout(() => { write(); }, 1);
+        setTimeout(() => { 
+            write();
+            function write() {
+                indice++;
+                $('.'+element_class).html(message.substr(0,indice));
+                if(indice<longueur) {
+                    setTimeout(() => { write(); }, 0.5);
+                }
             }
-        }
+        }, 400);
     }
     function effacerLeTableau() {
         $('.course_body').html("<p id='contenu_par_defaut_du_tableau'>ߥߟߊ߬ߓߊ ߓߘߊ߫ ߖߐ߬ߛߌ߬ ߹</p>");
@@ -329,6 +331,43 @@
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
 
+    function gestionDeExerciceFootBtn(total_questions) {
+        let i = 0;
+        
+        if(i <= total_questions) { 
+
+            masquer($('#exercice_repeter_question_btn'));
+            masquer($('#exercice_correction_btn'));
+            afficher($('#exercice_question_btn'));
+            rendreActif($('#exercice_question_btn'));
+
+            $('#exercice_question_btn').click(function() { 
+                masquer($('#exercice_question_btn'));
+                masquer($('#exercice_correction_btn'));
+                rendreActif($('#exercice_repeter_question_btn'));
+                afficher($('#exercice_repeter_question_btn')); 
+            });
+
+            $('#exercice_body td').click(function() {
+                masquer($('#exercice_question_btn'));
+                masquer($('#exercice_repeter_question_btn'));
+                rendreActif($('#exercice_correction_btn'));
+                afficher($('#exercice_correction_btn')); 
+            });
+
+            $('#exercice_correction_btn').click(function() { 
+                masquer($('#exercice_repeter_question_btn'));
+                masquer($('#exercice_correction_btn'));
+ 
+                if(i < total_questions - 1) { rendreActif($('#exercice_question_btn')); }
+                if(i === total_questions - 1) { 
+                    $('#exercice_question_btn').text('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߓߘߊ߫ ߓߊ߲߫').removeClass('actif').off('click');
+                }
+                afficher($('#exercice_question_btn')); 
+                i++;
+            });
+        }
+    }
     function gestionDeExerciceDialogueBtns2() {
 
         $('#exercices_player').css('display','block');

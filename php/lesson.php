@@ -126,7 +126,7 @@ if(isset($_SESSION["id"])) {
                             <div class="dialogue_btns" id="exercice_dialogue_btns">
                                 <div id="exercice_question_btn"></div>
                                 <div id="exercice_repeter_question_btn"></div>
-                                <div id="exercice_correction_btn"></div>
+                                <div id="exercice_correction_btn">ߏ߬ ߛߊߞߍ߫</div>
                             </div>
                         </div>
                     </div>

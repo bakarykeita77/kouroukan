@@ -203,7 +203,7 @@ $('document').ready(function() {
                         return frecance;
                     }  
                 }
-                function suivreLesCours() {  
+                function suivreLesCours() {
            
                     if(autorisation_d_acces_aux_cours == 'oui') {
     

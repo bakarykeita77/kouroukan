@@ -7,6 +7,11 @@
     border-radius: 0.5rem; 
 }
 #apprentissage_container > div:nth-child(2) { display: none; height: calc(100% - 0.75rem); background-color: #fff; }
+#apprentissage_head, #apprentissage_body { 
+    display: none;
+    transform: scale(0.75);
+    opacity: 0;
+}
 #table_parlante_container {
     position: absolute;
     top: 1rem;
@@ -170,6 +175,7 @@
     font-size: 2rem;
     font-weight: bold;
     text-align: center;
+    opacity: 0;
     cursor: pointer;
 }
 .pre_td {

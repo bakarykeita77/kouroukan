@@ -73,13 +73,13 @@
             'display':'none', 
             'transform':'scale(0.75)', 
             'opacity':'0',
-            'transition':'0.6s'
+            'transition':'0.3s'
         });
         setTimeout(function() { element.css({ 'display':'block' }); }, 100); 
         setTimeout(function() { element.css({
             'transform':'scale(1)', 
             'opacity':1
-        }); }, 200);
+        }); }, 150);
     }
     function afficherApprentissage() {
         masquer($('.course'));
@@ -202,7 +202,7 @@
     
     function calculerNote(data) {
         var note_d_exercice = 0;
-        
+       
         for (var i = 0; i < data.length; i++) {
         if(data[i] !== undefined) {
             if(data[i][2] == 1) {

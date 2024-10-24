@@ -227,21 +227,21 @@ localStorage.removeItem('pre_revision_memoire');
             function afficherPreApprendreAlphabet() {
 
                 afficherApprentissage();
-                setTimeout(() => { afficher($('#apprentissage_head')); }, 200);
-                setTimeout(() => { afficher($('#apprentissage_body')); }, 400);
+                setTimeout(() => { display($('#apprentissage_head')); }, 200);
+                setTimeout(() => { display($('#apprentissage_body')); }, 300);
 
                 masquer($('#panneaux'));
                 masquer($('#pre_apprentissage_dialogue_btns'));
                 masquer($('.redirection_btns'));
 
                 setTimeout(() => { 
-                    afficher($('.dialogue_btns'));
-                    afficher($('#pre_apprentissage_dialogue_btns'));
+                    display($('#pre_apprentissage_dialogue_btns'));
                     $('#pre_apprentissage_btns').css('display','flex'); 
-                }, 1200);
+                }, 2200);
 
                 tdStyle();
-                afficherPreApprendreAlphabetTd();
+                setTimeout(() => { afficherPreApprendreAlphabetTd(); }, 600);
+                setTimeout(() => { afficherPreApprendreAlphabetCercles(); }, 2600);
                 cerclesStyle();
                 
                 function cerclesStyle() {
@@ -502,8 +502,14 @@ localStorage.removeItem('pre_revision_memoire');
                     let tr_index = $(this).index();
                     $.each($('.pre_apprentissage_td', this), function(){
                         let td_index = tr_index*6 + $(this).index();
-                        setTimeout(() => { $(this).css('opacity',1); }, td_index*60);
+                        setTimeout(() => { $(this).css('opacity',1); }, td_index*80);
                     });
+                });
+            }
+            function afficherPreApprendreAlphabetCercles() {
+                $.each($('.cercle'), function(){
+                    let cercle_index = $(this).index();
+                    setTimeout(() => { $(this).css({'opacity':1, 'transform':'scale(1.125)'}); }, cercle_index*80);
                 });
             }
             function cercleRang() {

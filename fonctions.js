@@ -307,6 +307,15 @@
     function defilementDuContenuVersLeHaut(container) {
         container.animate({ scrollTop:container[0].scrollHeight }, 1000);
     }
+    function display(element) {
+        element.css({
+            'display':'block',
+            'opacity':0, 
+            'transition':'0.6s', 
+            'transform':'scale(0.75)'
+        });
+        setTimeout(() => { element.css({'opacity':1, 'transform':'scale(1)'}); }, 50);
+    }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
 

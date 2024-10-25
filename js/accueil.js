@@ -154,4 +154,7 @@
     	})
     	.catch(error => console.log( error ));
      }
+
+     afficher($('#reception'));
+
     function afficherLogo() { $('#logo').css('display', 'block'); }

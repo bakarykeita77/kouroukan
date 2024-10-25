@@ -1113,7 +1113,7 @@ del {
 }
 
 
-@media screen and (width < 400px) {
+@media(orientation: portrait) {
     .cover { background-color: none; }
     .lesson_title { width: 96vw; margin: auto; }
     .parametres_popup { width: 80vw; }
@@ -1132,7 +1132,7 @@ del {
     }
     .travaux { display: none; }
 }
-@media screen and (width >= 400px) {
+@media(orientation: landscape) {
     .cover {
         background-color: rgba(0, 0, 0, 0.85);
     }

@@ -47,6 +47,7 @@
 }
 
 #programme_matieres {
+    min-height: 12rem;
     display: flex;
     flex-direction: column;
     justify-content: center;

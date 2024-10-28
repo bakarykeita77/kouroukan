@@ -87,7 +87,7 @@
         $('#exercice_container').css('display','none');
         $('#revision_container').css('display','none');
         $('#evaluation_container').css('display','none');
-        setTimeout(() => { afficher($('.course')); }, 50);
+        setTimeout(() => { displayv($('.course')); }, 50);
     }
 	function afficher_en_jailli( element,largeur,hauteur,temps ) {
         element.css({'display':'block', 'width':0, 'height':0});
@@ -108,6 +108,16 @@
         $('#revision_container').css('display','none');
         $('#evaluation_container').css('display','none');
         setTimeout(() => { afficher($('.course')); }, 50);
+    }
+    function afficherList(ul) {
+        let li = $('li', ul);
+        li.css({'opacity':0, 'transform':'scale(0.75)'});
+        $.each(li, function(){
+            let li_actif = $(this);
+            let index = li_actif.index();
+            console.log(index);
+            setTimeout(() => { displayv(li_actif); }, 200*index);
+        });
     }
     function afficherRevision() {
         masquer($('.course'));
@@ -315,6 +325,16 @@
             'transform':'scale(0.75)'
         });
         setTimeout(() => { element.css({'opacity':1, 'transform':'scale(1)'}); }, 50);
+    }
+    function displayv(element) {
+        element.css({
+            'display':'block',
+            'opacity':0, 
+            'transition':'0.6s', 
+            'transform-origin':'0 0',
+            'transform':'scaleY(0.75)'
+        });
+        setTimeout(() => { element.css({'opacity':1, 'transform':'scaleY(1)'}); }, 50);
     }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/

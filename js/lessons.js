@@ -138,6 +138,11 @@ $('document').ready(function() {
                     $('#phases_list li:nth-child(3)').css('display','none');
                     $('#phases_list li:nth-child(4)').css('display','none');
                 }
+
+                setTimeout(() => { displayv($('#niveau_d_etude')); }, 100);
+                setTimeout(() => { displayv($('.lesson_title')); }, 300);
+                setTimeout(() => { displayv($('.phases_container')); }, 500);
+                setTimeout(() => { displayv($('#travaux_container')); }, 700);
             }
         }
         function nombreDePhasesEtudiees() {

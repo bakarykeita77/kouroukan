@@ -24,6 +24,7 @@ console.log('niveau_en_cours = '+niveau_en_cours);
  selectionDuProgramme();
  chargementDuProgramme();
  styleDuProgramme();
+ afficherProgrammes();
 // alerteDuProgramme();
  lessonOptions()
  storagesDuProgramme();
@@ -112,25 +113,34 @@ console.log('niveau_en_cours = '+niveau_en_cours);
  }          
  function styleDuProgramme() {
          
-     // if(niveau_max > niveau_en_cours) niveau_max = niveau_en_cours;
+    // if(niveau_max > niveau_en_cours) niveau_max = niveau_en_cours;
 
-     let programme_li = $("#programme_ul li");
-         
-     $.each(programme_li, function() {
-         
-         var matiere_index = $(this).index();
-         
-         if(niveau_max === 0) {
-             if(matiere_index === 0) $(this).addClass("actif");
-             if(matiere_index  >  0) $(this).addClass("a_apprendre");
-         }
-         if(niveau_max > 0) {
-             if($.inArray(matiere_index+1,niveaux_etudies) !== -1) $(this).addClass("apprises");
-             if($.inArray(matiere_index+1,niveaux_etudies) === -1) $(this).addClass("a_apprendre");
-             if(matiere_index+1 === niveau_en_cours) $(this).removeClass("a_apprendre").addClass("actif");
-         }
-     });
-     indexer($('.actif'));
+    let programme_li = $("#programme_ul li");
+        
+    $.each(programme_li, function() {
+        
+        var matiere_index = $(this).index();
+        
+        if(niveau_max === 0) {
+            if(matiere_index === 0) $(this).addClass("actif");
+            if(matiere_index  >  0) $(this).addClass("a_apprendre");
+        }
+        if(niveau_max > 0) {
+            if($.inArray(matiere_index+1,niveaux_etudies) !== -1) $(this).addClass("apprises");
+            if($.inArray(matiere_index+1,niveaux_etudies) === -1) $(this).addClass("a_apprendre");
+            if(matiere_index+1 === niveau_en_cours) $(this).removeClass("a_apprendre").addClass("actif");
+        }
+    });
+    indexer($('.actif'));
+ }
+ function afficherProgrammes() {
+    
+    setTimeout(() => { displayv($("#programmes_container h1")); }, 100);
+    setTimeout(() => { displayv($("#programme_commentaire")); }, 400);
+    setTimeout(() => {
+        displayv($("#programme_matieres"));
+        afficherList($("#programme_ul"));
+    }, 600);
  }
  function alerteDuProgramme() {
      $('#programme_ul li').on('click', function() {
@@ -251,15 +261,15 @@ console.log('niveau_en_cours = '+niveau_en_cours);
         }
         function afficherLessonOptions() {
         
-            afficher($('#lesson_options')); 
+            $('#lesson_options').css('display','block'); 
             $('#lesson_options_titre, #lesson_option_1, #lesson_option_2').css({
                 'opacity':0, 
-                'transition':'0.4s', 
-                'transform':'scale(0.75)'
+                'transition':'0.6s', 
+                'transform':'scaleY(0.75)'
             });
-            setTimeout(() => { $('#lesson_options_titre').css({'opacity':1, 'transform':'scale(1)'}); }, 200);
-            setTimeout(() => { $('#lesson_option_1').css({'opacity':1, 'transform':'scale(1)'}); }, 300);
-            setTimeout(() => { $('#lesson_option_2').css({'opacity':1, 'transform':'scale(1)'}); }, 400);
+            setTimeout(() => { displayv($('#lesson_options_titre')); }, 200);
+            setTimeout(() => { displayv($('#lesson_option_1')); }, 500);
+            setTimeout(() => { displayv($('#lesson_option_2')); }, 800);
         }
     });
      

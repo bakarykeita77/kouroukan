@@ -155,6 +155,6 @@
     	.catch(error => console.log( error ));
      }
 
-     afficher($('#reception'));
+     display($('#reception'));
 
     function afficherLogo() { $('#logo').css('display', 'block'); }

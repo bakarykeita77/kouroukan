@@ -1,6 +1,9 @@
 .course_body hr {
     border-color: #555;
 }
+#niveau_d_etude {
+    display: none;
+}
 h4, .lesson_title {
     display: inline-block;
 }

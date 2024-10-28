@@ -1,5 +1,9 @@
 .travail_titre h3 { width: 10rem; }
- #travaux_container { position: relative; margin-top: 0.5rem; }
+ #travaux_container { 
+    position: relative; 
+    display: none;
+    margin-top: 0.5rem; 
+}
 
 .travail_name { margin-top: 0.5rem; }
 .travail_data {

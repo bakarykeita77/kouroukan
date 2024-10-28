@@ -1,13 +1,13 @@
 #logo { display: none; }
 #connexion_container {
-	position: absolute;
-    padding: 0;
+	display: none;
+	position: relative;
 	width: 80%;
 	max-width: 50rem;
 	min-height: 20rem;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%,-50%);
+	top: 25%;
+    padding: 0;
+	margin: auto;
 	box-sizing: border-box;
 }
 #connexion_form {

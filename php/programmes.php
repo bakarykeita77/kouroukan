@@ -22,7 +22,7 @@ if(isset($_SESSION['id'])) {
                     <!-- <div id="programme_div"></div> -->
 
                     <div id="programme_body">
-                        <hr>
+                       
                         <div id="programme_commentaire">
                             <p>ߊ߲ ߞߊ߬ ߒߞߏ ߛߓߍߛߎ߲߫ ߞߊ߲ߡߊߛߙߋߡߊ ߘߋ߰ߟߌ ߕߟߊ߫ ߦߌߟߡߊ߫ ߛߊ߬ߓߊ߫ ߟߋ߬ ߘߌ߫ ߕߊ߲߬ߘߐ</p>
                             <p>
@@ -38,7 +38,6 @@ if(isset($_SESSION['id'])) {
                                 <span class="fond_noir_clair">ߢߟߊߝߌ߲</span> ߸ ߏ߬ ߦߋ߫ ߥߟߊ߬ߘߊ߫ ߘߋ߲߰ߕߊ ߟߎ߬ ߟߋ߬ ߦߌ߬ߘߊ߬ ߟߊ߫.
                             </p>
                         </div>
-                        <hr>
 
                      <!-- Ce programme est chargé dans programmes.js par la fonction chargementDuProgramme(). -->
                         <div id="programme_matieres"></div>

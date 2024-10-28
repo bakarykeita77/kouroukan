@@ -6,7 +6,6 @@
     background-color: #fff;
     direction: rtl;
 }
-#programme_body hr { border-width: 0.125rem; }
 #programme_body span {
     display: inline-block;
     padding: 1px;
@@ -17,9 +16,13 @@
 }
 #programmes_container h1 {
     position: relative;
+    display: none;
     padding: 1rem;
     width: 100%;
     font-size: 1.75rem;
+    transform-origin: 0 0;
+    transform: scaleY(0.75);
+    opacity: 0;
 }
 #programme_ul {
     display: flex;
@@ -28,9 +31,12 @@
     align-items: center;
 
     position: relative;
+    display: none;
     width: 100%;
     padding: 0;
     list-style-type: none;
+    transform-origin: 0 0;
+    transform: scaleY(0.75);
 }
 #programme_ul li {
     height: 3rem; 
@@ -44,19 +50,23 @@
     text-decoration: none;
     font-size: 1.25rem;
     font-weight: bold;
+    transform-origin: 0 0;
+    transform: scaleY(0.75);
 }
 
 #programme_matieres {
     min-height: 12rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    display: none;
     margin: 1rem auto;
     border: 1px solid transparent;
+    height: scaleY(0.75);
+    opacity: 0;
 }
 #programme_commentaire {
+    display: none;
     padding: 1rem;
     background-color: #eee;
+    transform-origin: 0 0;
 }
 #programme_commentaire p {
     position: relative;

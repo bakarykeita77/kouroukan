@@ -174,7 +174,7 @@ localStorage.removeItem('pre_revision_memoire');
                     if(pre_apprentissage_memoire.length < 27) {
                         setTimeout(() => { 
                             ecrire('notification_corps','ߞߏ߰ߙߌ߬ '+cercleRang() +' ('+parseIntNko(alphabet_tr_index)+'߲) ߘߌ߲߯ ߘߎ߭ߡߊ߬'); 
-                        }, 500);
+                        }, 3200);
                     }
                 }
                 function chargerFootDePreAlphabet() {
@@ -227,22 +227,27 @@ localStorage.removeItem('pre_revision_memoire');
             function afficherPreApprendreAlphabet() {
 
                 afficherApprentissage();
-                setTimeout(() => { display($('#apprentissage_head')); }, 200);
-                setTimeout(() => { display($('#apprentissage_body')); }, 300);
 
                 masquer($('#panneaux'));
                 masquer($('#pre_apprentissage_dialogue_btns'));
                 masquer($('.redirection_btns'));
+                tdStyle();
+                cerclesStyle();
+
+                setTimeout(() => { displayv($('#apprentissage_head')); }, 400);
 
                 setTimeout(() => { 
-                    display($('#pre_apprentissage_dialogue_btns'));
-                    $('#pre_apprentissage_btns').css('display','flex'); 
-                }, 2200);
+                    displayv($('#apprentissage_body')); 
+                    setTimeout(() => { afficherPreApprendreAlphabetTd(); }, 200);
+                }, 600);
 
-                tdStyle();
-                setTimeout(() => { afficherPreApprendreAlphabetTd(); }, 600);
-                setTimeout(() => { afficherPreApprendreAlphabetCercles(); }, 2600);
-                cerclesStyle();
+                setTimeout(() => { 
+                    displayv($('#apprentissage_foot')); 
+                    displayv($('#pre_apprentissage_dialogue_btns'));
+                    $('#pre_apprentissage_btns').css('display','flex'); 
+                    setTimeout(() => { afficherPreApprendreAlphabetCercles(); }, 400);
+                }, 2600);
+
                 
                 function cerclesStyle() {
                     if(pre_apprentissage_memoire.length < 27) {

@@ -266,9 +266,10 @@
 #consonnes_cadre span:hover { background-color: #ddd; }
 
 #revision_body { height: calc(100% - 5rem); }
-#exercice_container, #revision_container { height: 100%; }
+#exercice_container, #revision_container { display: none; height: 100%; }
 #exercice_body_cadre, #revision_body_cadre {
     position: relative;
+    display: none;
     top: 1rem;
     height: calc(100% - 12rem);
     width: 98%;
@@ -350,6 +351,7 @@
 #apprentissage_progress_bar { top: 0.5rem; }
 #exercice_question_btn, #exercice_repeter_question_btn, #exercice_correction_btn {
     position: relative;
+    display: none;
     bottom: 0;
     margin: 0.5rem auto;
     width: 15rem;

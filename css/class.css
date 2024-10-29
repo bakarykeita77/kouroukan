@@ -304,6 +304,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 .dark_backgound { background-color: #aaa; }
 .dialogue_btns {
     position: relative;
+    display: none;
     top: 0.5rem;
     width: calc(100% - 2px);
     max-width: 22rem;
@@ -316,6 +317,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 }
 .dialogue_btns > div {
     position: relative;
+    display: none;
     height: 4rem;
     line-height: 4rem;
     width: max-content;

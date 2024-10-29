@@ -99,7 +99,7 @@
         $('#exercice_container').css('display','none');
         $('#revision_container').css('display','none');
         $('#evaluation_container').css('display','block');
-        setTimeout(() => { afficher($('.course')); }, 50);
+        setTimeout(() => { displayv($('.course')); }, 50);
     }
     function afficherExercice() {
         masquer($('.course'));
@@ -107,7 +107,7 @@
         $('#exercice_container').css('display','block');
         $('#revision_container').css('display','none');
         $('#evaluation_container').css('display','none');
-        setTimeout(() => { afficher($('.course')); }, 50);
+        setTimeout(() => { displayv($('.course')); }, 50);
     }
     function afficherList(ul) {
         let li = $('li', ul);
@@ -125,7 +125,7 @@
         $('#exercice_container').css('display','none');
         $('#revision_container').css('display','block');
         $('#evaluation_container').css('display','none');
-        setTimeout(() => { afficher($('.course')); }, 50);
+        setTimeout(() => { displayv($('.course')); }, 50);
     }
 	function aggrandir_caractere_de(element) { element.css( 'font-size','+=32px' ); }
 	function appetir_caractere_de(element) { element.css( 'font-size','-=32px' ); } 

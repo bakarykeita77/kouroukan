@@ -979,7 +979,6 @@ del {
     position: relative;
     height: 3rem;
     padding: 8px 0;
-    font-size: 2.5rem;
     font-weight: 900;
     text-align: center;
     border: 1px solid rgb(85,85,85);
@@ -1138,6 +1137,10 @@ del {
         margin: auto;
         border: none;
     }
+    .table_parlante, .table_muette { top: 1rem; }
+    .table_parlante td, .table_muette td {
+        font-size: 3rem;
+    }
     .travaux { display: none; }
 }
 @media(orientation: landscape) {
@@ -1160,6 +1163,10 @@ del {
     .course { height: calc(100% - 4rem); box-shadow: 0 0 3rem #666; border: 1px solid #aaa; }
     .course_head, .course_body, .course_foot { 
         width: 100%; 
+    }
+    .table_parlante, .table_muette { top: 0.25rem; }
+    .table_parlante td, .table_muette td {
+        font-size: 2rem;
     }
     .travaux { display: block; }
 }

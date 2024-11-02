@@ -30,6 +30,7 @@ console.log('niveau_en_cours = '+niveau_en_cours);
  storagesDuProgramme();
 
 
+
  function selectionDuProgramme() { 
      programme_matieres = document.getElementById('programme_matieres'); 
  }

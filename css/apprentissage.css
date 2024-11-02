@@ -52,7 +52,11 @@
 }
 .notification_titre { margin: 0; }
 #apprentissage_note h3 { margin: 0; }
-#apprentissage_container .table_parlante td { border: 1px solid transparent; }
+#apprentissage_container .table_parlante td { 
+    border: 1px solid transparent; 
+    opacity: 0;
+    /* min-width: 2.5rem; */
+}
 #apprentissage_note p { margin: 0.25rem 0; }
 .notification {  
     position: relative;
@@ -71,12 +75,8 @@
 .notification h3 { margin: 0; padding: 0; }
 #redirige_sur_exercice { cursor: pointer; }
 #pre_apprentissage_dialogue_btns {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-
     height: 4rem;
+    line-height: 4rem;
     background-color: #ddd;
     font-weight: bold;
     color: black;

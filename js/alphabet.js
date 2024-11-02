@@ -587,8 +587,8 @@ localStorage.removeItem('pre_revision_memoire');
                         setTimeout(() => { affichageAnimeDeTable($('#exercice_foot')); }, 500); 
                     }, 700);
 
+                    masquer($('#exercice_redirection_btns'));
                     setTimeout(() => { 
-                        masquer($('#exercice_redirection_btns'));
                         setTimeout(() => { displayv($('#exercice_dialogue_btns')); }, 300);
                         setTimeout(() => { indexer($('#exercice_question_btn'));   }, 300);
                         setTimeout(() => { displayv($('#exercice_progress_bar'));  }, 600);
@@ -719,26 +719,23 @@ localStorage.removeItem('pre_revision_memoire');
                                         taux_de_fausse_reponse = Math.ceil((n_m_r/n_q)*100);
                                         taux_de_vraie_reponse =  100 - taux_de_fausse_reponse;
                 
-                                        setTimeout(() => {
-                                            fermerPreExercice();
-                                            viderNotification();
-                                        }, 200);
+                                        viderNotification();
+
+                                        setTimeout(() => { fermerPreExercice(); }, 200);
                                         afficherExerciceRedirectionBtns(pre_exercice_data);
                                         // preExerciceResultat();                            
 
                                         if(note_de_pre_exercice < 100) { 
                                             let notification = liste_de_matieres[0][1]+" ߡߊ߬ߞߟߏ߬ߟߌ ߡߊ߫ ߢߊ߬ .ߌ ߓߘߊ߫ ߗߌߙߏ߲߫ ߡߊ߬ߞߟߏ߬ߟߌ ߢߌ߲߬ ߘߐ߫\n .<span class='pre_exercice_resultat_affiche'>ߞߐߝߟߌ ߝߟߍ߫ ߦߊ߲߬</span> .ߘߊߕߎ߲ߠߊ߲߫ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߓߐ߫ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫)";
                                             
-                                            setTimeout(() => { ecrire('notification_corps',notification); }, 1000);
+                                            setTimeout(() => { ecrire('notification_corps', notification); }, 1000);
                                             viderLeTableau(pre_exercice_data);
-                                            effacerLeTableau();
                                             reprendreExercicePreAlphabet(); 
                                         }
                                         if(note_de_pre_exercice == 100) { 
                                             let notification = liste_de_matieres[0][1]+" ߡߊ߬ߞߟߏ߬ߟߌ ߢߊ߬ߣߍ߲߬ .ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ ߕߊ߯ ߣߐ߰ߡߊ߬ߛߍߦߌ ߦߙߐ. ߞߐߝߟߌ ߝߟߍ߫ \n .<span class='pre_exercice_resultat_affiche'>ߞߐߝߟߌ ߝߟߍ߫ ߦߊ߲߬</span> . ߘߊߕߎ߲ߠߊ߲߫ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߓߐ߫ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫)";
                                         
-                                            setTimeout(() => { ecrire('notification_corps',notification); }, 1000);
-                                            viderNotification();
+                                            setTimeout(() => { ecrire('notification_corps', notification); }, 1000);
                                             afficherPreRevisionBouton();
                                             revisionPreAlphabet();
                                         }
@@ -791,7 +788,7 @@ localStorage.removeItem('pre_revision_memoire');
                                         function reprendreExercicePreAlphabet() {
                                             $('#reprendre_pre_exercice_bouton').click(function(e) {
                                                 e.stopImmediatePropagation();    
-                                                // $('#pre_exercice_bouton').click();
+                                                $('#pre_exercice_bouton').click();
                                             });
                                             
                                             
@@ -1424,7 +1421,8 @@ console.log('afficherSyllabeBouton');
 
                 }
                 function afficherCorpsDeAlphabet() {
-                    affichageAnimeDeTable($('#apprentissage_body table'));
+                    $('#apprentissage_body').css('display','block');
+                    setTimeout(() => { affichageAnimeDeTableTr($('#apprentissage_body table')); }, 300);
                 }
             }
             function apprendreAlphabetNko() {
@@ -2318,7 +2316,6 @@ console.log('-------------------------------------------------------------------
     function afficherExerciceRedirectionBtns(data) {
         let note = calculerNote(data);
 
-        setTimeout(() => {
             masquer($('#exercice_progress_bar'));
             afficher($('#exercice_redirection_btns'));
 
@@ -2334,7 +2331,6 @@ console.log('-------------------------------------------------------------------
                 $('#pre_revision_bouton').text(liste_de_matieres[0][1]+' ߞߘߐߓߐߟߌ ߞߍ߫')
                 indexer($('#pre_revision_bouton'));
             }
-        }, 400);
     }
     function adapterLeResultatAuFormatDApprentissage(table) {
            

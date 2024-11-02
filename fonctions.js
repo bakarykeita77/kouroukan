@@ -48,6 +48,8 @@
     }
     function affichageAnimeDeTable(table) {
         let tr = '';
+
+        $('td', table).css({'transition':'0.1s', 'opacity':0});
         $.each(table, function() { tr = $('tr', this); })
         setTimeout(() => {
             $.each(tr, function(){
@@ -56,25 +58,38 @@
                 let td = $('td', this);
                 let td_length = td.length;
 
-                td.css({'transition':'0.1s', 'transform':'scale(0)', 'opcity':0});
-
                 $.each(td, function() {
                     let td_index = $(this).index();
                     setTimeout(() => {
-                        $(this).css({'transform':'scale(1)', 'opacity':1});
-                    }, 100*((tr_index*td_length)+td_index));
+                        $(this).css({'opacity':1});
+                    }, 60*((tr_index*td_length)+td_index));
                 });
             });
         }, 200);
         
     }
+    function affichageAnimeDeTableTr(table) {
+        let tr = ''; tr_length = 0;
+
+        $('td', table).css({'opacity':1});
+        $.each(table, function() { tr = $('tr', this); });
+        tr_length = tr.length;
+        tr.css({'opacity':0});
+
+        setTimeout(() => {
+            $.each(tr, function(){
+
+                let tr_index = $(this).index();
+
+                setTimeout(() => {
+                    $(this).css({'opacity':1});
+                }, 100*tr_index);
+            });
+        }, 200);
+        
+    }
     function afficher(element) {
-        element.css({
-            'display':'none', 
-            'transform':'scale(0.75)', 
-            'opacity':'0',
-            'transition':'0.3s'
-        });
+        masquer(element);
         setTimeout(function() { element.css({ 'display':'block' }); }, 100); 
         setTimeout(function() { element.css({
             'transform':'scale(1)', 
@@ -678,7 +693,8 @@
         element.css({
             'display':'none',
             'transform':'scale(0.75)', 
-            'opacity':'0'
+            'opacity':'0',
+            'transition':'0.3s'
         });
     }
     function memoriserClicks(table,elements){

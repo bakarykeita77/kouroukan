@@ -46,7 +46,7 @@
             });
         }, 600);
     }
-    function affichageAnimeDeTable(table) {
+    function affichageAnimeDeTableTd(table) {
         let tr = '';
 
         $('td', table).css({'transition':'0.1s', 'opacity':0});
@@ -83,7 +83,7 @@
 
                 setTimeout(() => {
                     $(this).css({'opacity':1});
-                }, 100*tr_index);
+                }, 150*tr_index);
             });
         }, 200);
         

@@ -955,7 +955,7 @@ function syllabe() {
                         $('#exercice_container').css('display','block');
                         $('#exercice_body').css('display','block');
                         setTimeout(() => { afficher($('#exercice_body')); }, 100);
-                        setTimeout(() => { affichageAnimeDeTable($('#exercice_body table')); }, 600); 
+                        setTimeout(() => { affichageAnimeDeTableTd($('#exercice_body table')); }, 600); 
                     }
                 }
             }

@@ -262,7 +262,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 }
 .course_body { 
     padding-top: 1.5rem;
-    height: calc(100% - 11rem);
+    height: calc(100% - 10rem);
     color: white;
     background-color: rgba(0,0,0,0.8);
     z-index: 0;

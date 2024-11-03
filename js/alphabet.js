@@ -32,6 +32,11 @@ function alphabet() {
     var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));   // Voir programmes.js fonction storagesDuProgramme()
     var lesson_option = parseInt(JSON.parse(sessionStorage.getItem('lesson_option')));
 
+    let apprentissage_data_memo = alphabetApprentisageDataMemo();
+    let exercice_data_memo = alphabetExerciceDataMemo();
+    let revision_data_memo = alphabetRevisionDataMemo();
+                 
+
 console.log('--------------------------------------------------------------------');
 console.log('id = '+id);
 console.log('niveaux_etudies = '+niveaux_etudies);
@@ -51,12 +56,42 @@ console.log('-------------------------------------------------------------------
     }
     
 
+    function alphabetApprentisageDataMemo() {
+        if(matieres.length === 0) return;
+        let padm = [];
+
+        for (let i = 0; i < matieres[0].length; i++) {
+            let phase = matieres[0][i].phase;
+            if(phase == "alphabet_apprentissage") { padm = matieres[0][i].lesson; }
+        }
+
+        if(padm.length != 0) return JSON.parse(padm);
+    }
+    function alphabetExerciceDataMemo() {
+        if(matieres.length === 0) return;
+        let pedm = [];
+
+        for (let j = 0; j < matieres[0].length; j++) {
+            let phase = matieres[0][j].phase;
+            if(phase == "alphabet_exercice") { pedm = matieres[0][j].lesson; }
+        }
+
+        if(pedm.length != 0) return JSON.parse(pedm);
+    }
+    function alphabetRevisionDataMemo() {
+        if(matieres.length === 0) return;
+        let prdm = [];
+
+        for (let k = 0; k < matieres[0].length; k++) {
+            let phase = matieres[0][k].phase;
+            if(phase == "alphabet_revision") { prdm = matieres[0][k].lesson; }
+            
+        }
+        if(prdm.length != 0) return JSON.parse(prdm);;
+        
+    }
     function preAlphabetNko() {
 
-        let pre_apprentissage_data_memo = preApprentisageDataMemo();
-        let pre_exercice_data_memo = preExerciceDataMemo();
-        let pre_revision_data_memo = preRevisionDataMemo();
-                     
         let pre_apprentissage_memo = JSON.parse(localStorage.getItem('pre_apprentissage_memoire'));
         let pre_exercice_memo = JSON.parse(localStorage.getItem('pre_exercice_memoire'));
         let pre_revision_memo = JSON.parse(localStorage.getItem('pre_revision_memoire'));
@@ -65,9 +100,9 @@ console.log('-------------------------------------------------------------------
         pre_exercice_memo = (pre_exercice_memo == null) ? [] : pre_exercice_memo;
         pre_revision_memo = (pre_revision_memo == null) ? [] : pre_revision_memo;
 
-        let pre_apprentissage_memoire = (pre_apprentissage_data_memo == undefined) ? pre_apprentissage_memo : pre_apprentissage_data_memo.concat(pre_apprentissage_memo);
-        let pre_exercice_memoire = (pre_exercice_data_memo == undefined) ? pre_exercice_memo : pre_exercice_data_memo.concat(pre_exercice_memo);
-        let pre_revision_memoire = (pre_revision_data_memo == undefined) ? pre_revision_memo : pre_revision_data_memo.concat(pre_revision_memo);
+        let pre_apprentissage_memoire = (apprentissage_data_memo == undefined) ? pre_apprentissage_memo : apprentissage_data_memo.concat(pre_apprentissage_memo);
+        let pre_exercice_memoire = (exercice_data_memo == undefined) ? pre_exercice_memo : exercice_data_memo.concat(pre_exercice_memo);
+        let pre_revision_memoire = (revision_data_memo == undefined) ? pre_revision_memo : revision_data_memo.concat(pre_revision_memo);
 
 console.log('pre_apprentissage_memoire = '+pre_apprentissage_memoire);   
 console.log('pre_exercice_memoire = '+pre_exercice_memoire);   
@@ -108,40 +143,6 @@ localStorage.removeItem('pre_revision_memoire');
         revisionPreAlphabet();
 
          
-        function preApprentisageDataMemo() {
-            if(matieres.length === 0) return;
-            let padm = [];
-
-            for (let i = 0; i < matieres[0].length; i++) {
-                let phase = matieres[0][i].phase;
-                if(phase == "alphabet_apprentissage") { padm = matieres[0][i].lesson; }
-            }
-
-            if(padm.length != 0) return JSON.parse(padm);
-        }
-        function preExerciceDataMemo() {
-            if(matieres.length === 0) return;
-            let pedm = [];
-
-            for (let j = 0; j < matieres[0].length; j++) {
-                let phase = matieres[0][j].phase;
-                if(phase == "alphabet_exercice") { pedm = matieres[0][j].lesson; }
-            }
-
-            if(pedm.length != 0) return JSON.parse(pedm);
-        }
-        function preRevisionDataMemo() {
-            if(matieres.length === 0) return;
-            let prdm = [];
-
-            for (let k = 0; k < matieres[0].length; k++) {
-                let phase = matieres[0][k].phase;
-                if(phase == "alphabet_revision") { prdm = matieres[0][k].lesson; }
-                
-            }
-            if(prdm.length != 0) return JSON.parse(prdm);;
-            
-        }
 
         function apprentissagePreAlphabet() {
             
@@ -583,8 +584,8 @@ localStorage.removeItem('pre_revision_memoire');
                     setTimeout(() => { 
                         $('#exercice_body').css({'display':'block'});
                         displayv($('#exercice_body_cadre'));
-                        setTimeout(() => { affichageAnimeDeTable($('#exercice_body table')); }, 200); 
-                        setTimeout(() => { affichageAnimeDeTable($('#exercice_foot')); }, 500); 
+                        setTimeout(() => { affichageAnimeDeTableTd($('#exercice_body table')); }, 200); 
+                        setTimeout(() => { affichageAnimeDeTableTd($('#exercice_foot')); }, 500); 
                     }, 700);
 
                     masquer($('#exercice_redirection_btns'));
@@ -856,7 +857,7 @@ localStorage.removeItem('pre_revision_memoire');
 
                     setTimeout(function() { 
                         displayv($('#revision_body')); 
-                        setTimeout(function() { affichageAnimeDeTable($('#revision_body table')); }, 300);
+                        setTimeout(function() { affichageAnimeDeTableTd($('#revision_body table')); }, 300);
                     }, 200); 
 
                     setTimeout(() => { 
@@ -1382,11 +1383,6 @@ console.log('afficherSyllabeBouton');
             chargerApprentissageAlphabet();
             afficherApprentissageAlphabet();
             apprendreAlphabetNko();
-            enregistrerApprentissageAlphabet();
-            progressBarrApprentissageAlphabet();
-            stockerApprentissageAlphabet();
-            // assistantApprentissageAlphabet();
-            finDApprentissageAlphabet();
 
             raffraichissementDeLaPage();
 
@@ -1394,6 +1390,23 @@ console.log('afficherSyllabeBouton');
             function chargerApprentissageAlphabet() {
 
                 $('.notification_titre').text(liste_de_matieres[0][1]+' ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ');
+                viderNotification();
+                setTimeout(() => {
+                    
+                    viderNotification();
+                    if(apprentissage_data_memo != undefined) {
+                        ecrire('notification_corps','\
+                            ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߘߋ߲߰ߣߍ߲߬ ߞߘߐ ߟߴߌ ߓߟߏ߫߸ ߏ߬ߘߐ߬ ߌ ߘߌ߫ ߛߴߊ߬ ߡߊߛߍ߬ߦߌ߬ ߟߊ߫߸ ߞߐ߬ߣߌ߲߬ ߊ߬ ߕߍ߫ ߖߊ߰ߕߋ߬ ߟߊ߫.<br>\
+                        ');
+                    }
+
+                    if(apprentissage_data_memo == undefined) {
+                        ecrire('notification_corps','\
+                            ߛߓߍߘߋ߲ ߠߎ߬ ߓߍ߯ ߘߌ߲߯ ߞߋߟߋ߲߫ ߞߋߟߋ߲߫߸ ߦߴߌ ߕߟߏߡߊߟߐ߬ ߊ߬ ߣߴߌ ߦߴߌ ߖߊ߲߬ߕߏ߬ ߊ߬ߟߎ߬ ߝߐߢߊ ߘߐ߫ ߞߏߛߓߍ߫߹<br>\
+                            ߌ ߣߊ߬ߕߐ߫ ߟߋ߬ ߢߌ߬ߣߌ߲߬ߞߊ߬ ߟߴߊ߬ߟߎ߬ ߓߍ߯ ߡߊ߬.\
+                        ');
+                    }
+                }, 2000);
                 // Voir fonctions chargerLesson() / chargementDeLesson() dans parametrageDeLesson.js
             }
             function afficherApprentissageAlphabet() {
@@ -1405,38 +1418,57 @@ console.log('afficherSyllabeBouton');
         
                 $('#apprentissage_redirection_btns').css('display','none');
                 afficher($('.course'));
+                     
+                setTimeout(() => {
+                    setTimeout(() => { displayv($('#apprentissage_head')); }, 300);
+                    setTimeout(() => { 
+                        displayv($('#apprentissage_body'));
+                        setTimeout(() => { affichageAnimeDeTableTr($('#apprentissage_body table')); }, 100);
+                    }, 600);
+                    setTimeout(() => { 
+                        displayv($('#apprentissage_foot')); 
+                        zoomDown($('.dialogue_btns')); 
 
-                afficherEnteteDeAlphabet();
-                afficherFootDeAlphabet();
-                afficherCorpsDeAlphabet();
-                        
-                function afficherEnteteDeAlphabet() {}
-                function afficherFootDeAlphabet() {
-                    
-                    zoomDown($('.dialogue_btns')); 
-
-                    $('.media').css({'display':'none', 'opacity':0});
-                    $('.parametre').css({'display':'none', 'opacity':0});
-                    $('.lesson_suivante').css({'display':'block', 'opacity':1});
-
-                }
-                function afficherCorpsDeAlphabet() {
-                    $('#apprentissage_body').css('display','block');
-                    setTimeout(() => { affichageAnimeDeTableTr($('#apprentissage_body table')); }, 300);
-                }
+                        $('.media').css({'display':'none', 'opacity':0});
+                        $('.parametre').css({'display':'none', 'opacity':0});
+                        $('.lesson_suivante').css({'display':'block', 'opacity':1});
+                    }, 1500);
+                }, 200);
             }
             function apprendreAlphabetNko() {
-                lecturePersonnalisee();    // Voir fonctions.js
-            }
-            function enregistrerApprentissageAlphabet() {
-                
-                nbr_td_par_table = Math.ceil(nbr_td/nbr_table);
-                nbr_td_par_tr = Math.ceil(nbr_td/nbr_tr);
-                memoriserApprentissageAlphabet();
-                
-                function memoriserApprentissageAlphabet() {
+                    
+                let nbr_td_par_table = Math.ceil(nbr_td/nbr_table);
+                let nbr_td_par_tr = Math.ceil(nbr_td/nbr_tr);
+                            
+                let clicked_td_length = nbr_raisonnable_de_click*nbr_td;
+                let barr_unity = 100/clicked_td_length;
+                let elements_clickes = [];
+                let click_counter = 0;
 
-                    $.each(td, function(){   
+                lecturePersonnalisee();    // Voir fonctions.js
+
+                if(apprentissage_data_memo != undefined) {
+                
+                    $('.progress_bar').css('display','none');
+
+                    $.each(td, function(){  
+
+                        let td_actif = $(this);
+                        let td_counter = 0;
+
+                        $(this).css({'background-color':'rgba(85,85,85,1)', 'color':'white'});
+                    });
+                }
+                if(apprentissage_data_memo == undefined) {
+                
+                    $('.progress_bar').css('display','block');
+
+                    $.each(td, function(){  
+
+                        let td_actif = $(this);
+                        let td_counter = 0;
+
+                        $(this).css({'background-color':'rgba(85,85,85,1)', 'color':'yellow'});
                     /* 
                     --------------------------------------------------------------------------------------------------------
                     Pour chaque click sur un bouton:
@@ -1446,155 +1478,179 @@ console.log('afficherSyllabeBouton');
                         4)- Et le memo de l'enregistrement est envoyé au serveur quand on ferme la leçon.
                     --------------------------------------------------------------------------------------------------------
                     */
-                        var element        = $(this).html();
-                        var table_courante = $(this).parent().parent().parent();
-                        var tr_index       = $(this).parent().index();
+                        var element        = td_actif.html();
+                        var table_courante = td_actif.parent().parent().parent();
+                        var tr_index       = td_actif.parent().index();
                         var table_index    = table.index(table_courante);
-                        var element_index  = table_index*nbr_td_par_table + tr_index*nbr_td_par_tr + $(this).index();
+                        var element_index  = table_index*nbr_td_par_table + tr_index*nbr_td_par_tr + td_actif.index();
                         var element_click_counter = 0;
-                        var point = 0;
+                        var point = 0; 
 
-                    /*
-                    --------------------------------------------------------------------------------------------------------
-                        Initialisation de mémoire d'enregistrement qui est un tableau bidimentionnel.
-                        Il contient des petits tableaux de trois éléments chacun:
-                        - Le premier est le nom de l'élément clické;
-                        - Le deuxième est le nombre de fois que cet élément est clické.
-                        - Le troisieme est le point pour cet element.
-                        
-                        L'initialisation consiste à donner la valeur 0 click à tous les éléments.
-                        On considère qu'aucun élément n'est clické pour le moment. 
-                    --------------------------------------------------------------------------------------------------------
-                    */
-                        apprentissage_clicks_memo[element_index] = [element,element_click_counter,point];
+                        initialisationDeApprentissageClicksMemo();
 
-                        $(this).on('click', function(){
+                        td_actif.on('click', function(){
+
+                            let clicked_td = $(this);
+                            td_counter++;
+
+                            styleDesTd();
+                            enregistrerApprentissageAlphabet();
+                            progressBarrApprentissageAlphabet();
+                            finDApprentissageAlphabet();
                             
-                        /*--------------------------------------------------------------------
-                        3)- Enregistrement des clicks 
-                        
-                        L'enregistrement par bouton ou élémentaire est un tableau de trois éléments dont
-                        - L'élément clické;
-                        - Le nombre de fois que cet élément est  clické. 
-                        - Le point.
-
-                        --------------------------------------------------------------------*/
-                                                        
-                            var clicked_element = $(this).html(); // Élément clické.
-                            element_click_counter++; // Compteur de click specifique pour chaque élément.
-
-                         /*Quand un élément est cliqué au moins 5 fois, il est considéré comme étant suffisemment appris.
-                        *Il est noté par 1 et cette note est enregitrée dans  la varible new_mark. */ 
-                            var new_mark = (element_click_counter >= nbr_raisonnable_de_click) ? 1 : 0;
-                
-                         /*A chaque élément correspond un tableau (new_click_value) de 3 composants dont l'élément cliqué, le nombre de click de
-                        *cet élément et le point new_mark. Ce tableau est régulièrement actualisé à chaque click */ 
-                            var new_click_value = [clicked_element,element_click_counter,new_mark];  // Enregistrement elementaire.
-                
-                         /*Actualisation de mémoire d'enregistrement
-                            C'est à dire qu'après chaque click,les anciennes valeurs de chaque enregistrement elementaire sont remplacés par les nouvelles valeurs.                 */
-                            
-                            apprentissage_clicks_memo.splice(element_index,1,new_click_value);
-                            clicked_elements_quantity = clickedElementsQuantity();
-
-                            function clickedElementsQuantity() {
-                                var qtity = [];
-                                $.each(apprentissage_clicks_memo, function(){ if($(this)[2]==1){ qtity++; }});
-                                return qtity;
+                            function styleDesTd() {
+                                if(td_counter === nbr_raisonnable_de_click) { 
+                                    $(this).css({'background-color':'rgba(85,85,85,0.25)', 'color':'white'}); 
+                                } 
                             }
-                        });   
+                            function enregistrerApprentissageAlphabet() {
+                                    
+                                /*--------------------------------------------------------------------
+                                3)- Enregistrement des clicks 
+                                
+                                L'enregistrement par bouton ou élémentaire est un tableau de trois éléments dont
+                                - L'élément clické;
+                                - Le nombre de fois que cet élément est  clické. 
+                                - Le point.
+
+                                --------------------------------------------------------------------*/
+                                                                
+                                    var clicked_element = clicked_td.html(); // Élément clické.
+                                    element_click_counter++; // Compteur de click specifique pour chaque élément.
+
+                                /*Quand un élément est cliqué au moins 5 fois, il est considéré comme étant suffisemment appris.
+                                *Il est noté par 1 et cette note est enregitrée dans  la varible new_mark. */ 
+                                    var new_mark = (element_click_counter >= nbr_raisonnable_de_click) ? 1 : 0;
+                        
+                                /*A chaque élément correspond un tableau (new_click_value) de 3 composants dont l'élément cliqué, le nombre de click de
+                                *cet élément et le point new_mark. Ce tableau est régulièrement actualisé à chaque click */ 
+                                    var new_click_value = [clicked_element,element_click_counter,new_mark];  // Enregistrement elementaire.
+                        
+                                /*Actualisation de mémoire d'enregistrement
+                                    C'est à dire qu'après chaque click,les anciennes valeurs de chaque enregistrement elementaire sont remplacés par les nouvelles valeurs.                 */
+                                    
+                                    apprentissage_clicks_memo.splice(element_index,1,new_click_value);
+                                    clicked_elements_quantity = clickedElementsQuantity();
+
+                                    function clickedElementsQuantity() {
+                                        var qtity = [];
+                                        $.each(apprentissage_clicks_memo, function(){ if($(this)[2]==1){ qtity++; }});
+                                        return qtity;
+                                    }
+                            }
+                            function progressBarrApprentissageAlphabet() {
+
+                                if(td_counter <= nbr_raisonnable_de_click) {
+                                    
+                                    click_counter++;
+                                    $('.progress_bonne_reponse_bar').css('width',click_counter*barr_unity+'%');
+
+                                    if(click_counter === clicked_td_length) {
+                                        setTimeout(() => { $('#apprentissage_progress_bar').css('display','none'); }, 400);
+                                    }
+                                }
+                                    
+                                initialiserApprentissageAlphabetProgressBarr();
+
+
+                                function initialiserApprentissageAlphabetProgressBarr() {
+                                    $('.parametres_popup td').on('click', function() {  
+                                        
+                                        var nbr_td = JSON.parse(sessionStorage.getItem("nbr_td"));    // Voir parametres.js fonction lettresCochees()
+                                        var nbr_click = nbr_td;
+                                        elements_clickes = [];
+                                        progress_unity = 0;
+
+                                        $('.progress_bonne_reponse_bar').css('width', progress_unity+'px');
+                                        progression(nbr_click);
+                                        
+                                        function progression(nbr_click) {
+                                            var progress_unity = $('.progress_bar').width()/nbr_click;
+                                            
+                                            $('.table_parlante td').on('click', function() {
+                                                if(elements_clickes.indexOf($(this).html()) == -1) $('.progress_bonne_reponse_bar').css('width','+='+progress_unity+'px');
+                                                elements_clickes.push($(this).html());
+                                            });
+                                        }
+                                    });
+                                }
+                            } 
+                            function finDApprentissageAlphabet() {
+                                if(clicked_elements_quantity === apprentissage_clicks_memo.length) {
+
+                                    stockerApprentissageAlphabet();
+                                    resultatApprentissageAlphabet();
+                                    afficherAlphabetExerciceBouton();
+
+                                    function stockerApprentissageAlphabet() {
+
+                                        let moyenne_d_apprentissage = 100; 
+                                        let index_phase_active = $('.phases_container ul li .active').index();
+                                        let note = noterApprentissageAlphabet();
+
+                                        if(note <  moyenne_d_apprentissage) alert("ߌ ߡߊ߫ ߛߓߍߘߋ߲ ߥߟߊ ߜߋ߭ ߠߎ߬ ߓߍ߯ ߟߊߡߍ߲߫");
+                                        if(note >= moyenne_d_apprentissage) {
+                                            // sendLessonDataToDB('alphabet_apprentissage',apprentissage_clicks_memo);
+                                            changerPhaseActive(index_phase_active);
+                                            console.log('Les données de exercice sont envoyées à la base de données');
+                                        }
+
+                                        function noterApprentissageAlphabet() {
+                                            var note = 0;
+                                            for(var i=0;i<apprentissage_clicks_memo.length;i++) if(apprentissage_clicks_memo[i] !== undefined) if(apprentissage_clicks_memo[i][2] == 1) note++;
+                                            note = (note*100)/apprentissage_clicks_memo.length;
+                                            return note;
+                                        }
+                                    }
+                                    function resultatApprentissageAlphabet() {
+
+                                        resultatGeneral(apprentissage_clicks_memo);
+                                        reprendreApprentissageAlphabet();
+                                        continuSurExerciceAlphabet();
+
+                                        
+                                        function reprendreApprentissageAlphabet() {
+                                            $('#reprendre').click(function() {
+                                                goUp($('.resultat_container'));
+                                                $('#alphabet_apprentissage').click(); 
+                                                afficher($('#apprentissage_progress_bar'));
+                                                viderLeTableau(apprentissage_clicks_memo);
+                                            });
+                                        }
+                                        function continuSurExerciceAlphabet() {
+                                            $('#avance').click(function() { 
+                                                goUp($('.resultat_container'));
+                                                $('#alphabet_exercice').click();
+                                            });
+                                        }
+                                    }
+                                }
+                            } 
+                        }); 
+                        
+                        function initialisationDeApprentissageClicksMemo() {
+                        /*
+                        --------------------------------------------------------------------------------------------------------
+                            Initialisation de mémoire d'enregistrement qui est un tableau bidimentionnel.
+                            Il contient des petits tableaux de trois éléments chacun:
+                            - Le premier est le nom de l'élément clické;
+                            - Le deuxième est le nombre de fois que cet élément est clické.
+                            - Le troisieme est le point pour cet element.
+                            
+                            L'initialisation consiste à donner la valeur 0 click à tous les éléments.
+                            On considère qu'aucun élément n'est clické pour le moment. 
+                        --------------------------------------------------------------------------------------------------------
+                        */
+                            apprentissage_clicks_memo[element_index] = [element,element_click_counter,point];  
+                        } 
                     });
                 }
             }
-            function progressBarrApprentissageAlphabet() {
-                
-                let clicked_td_length = nbr_raisonnable_de_click*nbr_td;
-                let barr_unity = 100/clicked_td_length;
-                let elements_clickes = [];
-                let click_counter = 0;
-                
-                $('.progress_bar').css('display','block');
-
-                $.each(td, function() {
-                    let td_counter = 0;
-
-                    $(this).css({'background-color':'rgba(85,85,85,1)', 'color':'yellow'});
-                    $(this).click(function(){
-                        td_counter++;
-                        if(td_counter <= nbr_raisonnable_de_click) {
-                            
-                            click_counter++;
-                            $('.progress_bonne_reponse_bar').css('width',click_counter*barr_unity+'%');
-
-                            if(click_counter === clicked_td_length) {
-                                setTimeout(() => { $('#apprentissage_progress_bar').css('display','none'); }, 400);
-                            }
-                        }
-
-                        if(td_counter === nbr_raisonnable_de_click) { 
-                            $(this).css({'background-color':'rgba(85,85,85,0.25)', 'color':'white'}); 
-                        }
-                    });
-                });
-                    
-                initialiserApprentissageAlphabetProgressBarr();
-
-
-                function initialiserApprentissageAlphabetProgressBarr() {
-                    $('.parametres_popup td').on('click', function() {  
-                        
-                        var nbr_td = JSON.parse(sessionStorage.getItem("nbr_td"));    // Voir parametres.js fonction lettresCochees()
-                        var nbr_click = nbr_td;
-                        elements_clickes = [];
-                        progress_unity = 0;
-
-                        $('.progress_bonne_reponse_bar').css('width', progress_unity+'px');
-                        progression(nbr_click);
-                    });
-                }
-                function progression(nbr_click) {
-                    var progress_unity = $('.progress_bar').width()/nbr_click;
-                    
-                    $('.table_parlante td').on('click', function() {
-                        if(elements_clickes.indexOf($(this).html()) == -1) $('.progress_bonne_reponse_bar').css('width','+='+progress_unity+'px');
-                        elements_clickes.push($(this).html());
-                    });
-                }
-            }
-            function stockerApprentissageAlphabet() {
-                $('#table_alphabet_apprentissage td').click(function(){
-                    if(clicked_elements_quantity === apprentissage_clicks_memo.length) {
-
-                        let moyenne_d_apprentissage = 100; 
-                        let index_phase_active = $('.phases_container ul li .active').index();
-                        let note = noterApprentissageAlphabet();
-
-                        if(note <  moyenne_d_apprentissage) alert("ߌ ߡߊ߫ ߛߓߍߘߋ߲ ߥߟߊ ߜߋ߭ ߠߎ߬ ߓߍ߯ ߟߊߡߍ߲߫");
-                        if(note >= moyenne_d_apprentissage) {
-                            // sendLessonDataToDB('alphabet_apprentissage',apprentissage_clicks_memo);
-                            changerPhaseActive(index_phase_active);
-                            console.log('Les données de exercice sont envoyées à la base de données');
-                        }
-
-                        function noterApprentissageAlphabet() {
-                            var note = 0;
-                            for(var i=0;i<apprentissage_clicks_memo.length;i++) if(apprentissage_clicks_memo[i] !== undefined) if(apprentissage_clicks_memo[i][2] == 1) note++;
-                            note = (note*100)/apprentissage_clicks_memo.length;
-                            return note;
-                        }
-                    }
-                });
-            } 
             function assistantApprentissageAlphabet() {
                 
                 let clicked_td_length = nbr_raisonnable_de_click*nbr_td;
                 let click_counter = 0;
 
-                viderNotification();
-                ecrire('notification_corps','\
-                    ߛߓߍߘߋ߲ ߠߎ߬ ߓߍ߯ ߘߌ߲߯ ߞߋߟߋ߲߫ ߞߋߟߋ߲߫߸ ߦߴߌ ߕߟߏߡߊߟߐ߬ ߊ߬ ߣߴߌ ߦߴߌ ߖߊ߲߬ߕߏ߬ ߊ߬ߟߎ߬ ߝߐߢߊ ߘߐ߫ ߞߏߛߓߍ߫߹<br>\
-                    ߌ ߣߊ߬ߕߐ߫ ߟߋ߬ ߢߌ߬ߣߌ߲߬ߞߊ߬ ߟߴߊ߬ߟߎ߬ ߓߍ߯ ߡߊ߬.\
-                ');
 
                 $.each(td, function() {
                     $(this).click(function(){
@@ -1613,37 +1669,6 @@ console.log('afficherSyllabeBouton');
                         }
                     });
                 });
-            }
-            function finDApprentissageAlphabet() {
-                $('#table_alphabet_apprentissage td').click(function(){
-                    if(clicked_elements_quantity === apprentissage_clicks_memo.length) {
-                        resultatApprentissageAlphabet();
-                        afficherAlphabetExerciceBouton();
-                    }
-                });
-
-                function resultatApprentissageAlphabet() {
-
-                    resultatGeneral(apprentissage_clicks_memo);
-                    reprendreApprentissageAlphabet();
-                    continuSurExerciceAlphabet();
-
-                    
-                    function reprendreApprentissageAlphabet() {
-                        $('#reprendre').click(function() {
-                            goUp($('.resultat_container'));
-                            $('#alphabet_apprentissage').click(); 
-                            afficher($('#apprentissage_progress_bar'));
-                            viderLeTableau(apprentissage_clicks_memo);
-                        });
-                    }
-                    function continuSurExerciceAlphabet() {
-                        $('#avance').click(function() { 
-                            goUp($('.resultat_container'));
-                            $('#alphabet_exercice').click();
-                        });
-                    }
-                }
             }
 
         }    
@@ -1708,7 +1733,7 @@ console.log('afficherSyllabeBouton');
                 function chargerCorpsDeExerciceAlphabet() {
                     var exercice_body_html = lessonHTML(exercice_questions, '');
                     $('#exercice_body').html(exercice_body_html);
-                    setTimeout(() => { affichageAnimeDeTable($('.table_parlante')); }, 400);
+                    setTimeout(() => { affichageAnimeDeTableTd($('.table_parlante')); }, 400);
 
                     /*revision body est chargé mais doit etre invisible jusqu'à l'éxécution de la fonction afficherPreRevisionAlphabet()*/
                     $('#revision_body td').css({'transform':'scale(0.75)', 'opacity':0});

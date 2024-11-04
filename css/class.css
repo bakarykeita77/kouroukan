@@ -974,7 +974,11 @@ del {
     max-width: 45rem;
     margin: auto;
 }
-.table_parlante tr, .table_muette tr { position: relative; width: 100%; }
+.table_parlante tr, .table_muette tr { 
+    position: relative; 
+    width: 100%; 
+    opacity: 0;
+}
 .table_parlante td, .table_muette td {
     position: relative;
     height: 3rem;

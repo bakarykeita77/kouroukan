@@ -9,7 +9,7 @@
 }
 #exercice_head { display: none; }
 #exercice_body { z-index: 0; }
-#exercice_foot { height: 5rem; z-index: 1; }
+#exercice_foot { display: none; height: 5rem; z-index: 1; }
 #exercice_dialogue_btn div:active {
     box-shadow: none;
 }

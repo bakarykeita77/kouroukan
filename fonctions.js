@@ -116,13 +116,42 @@
         $('#evaluation_container').css('display','block');
         setTimeout(() => { displayv($('.course')); }, 50);
     }
-    function afficherExercice() {
+    function afficherExerciceAlphabet() {
+        
         masquer($('.course'));
         $('#apprentissage_container').css('display','none');
         $('#exercice_container').css('display','block');
         $('#revision_container').css('display','none');
         $('#evaluation_container').css('display','none');
         setTimeout(() => { displayv($('.course')); }, 50);
+        
+        setTimeout(() => { displayv($('#exercice_head')); }, 300);
+
+        setTimeout(() => { 
+            $('#exercice_body').css({'display':'block'});
+            displayv($('#exercice_body_cadre'));
+            setTimeout(() => { 
+                $('#exercice_body td').css({'color':'yellow'});
+                affichageAnimeDeTableTr($('#exercice_body table')); 
+            }, 100); 
+            setTimeout(() => { 
+                $('#exercice_foot').css('display','block'); 
+                displayv($('#exercice_dialogue_btns'));
+                setTimeout(() => {
+                    $('#exercice_question_btn').css('display','block'); 
+                    $('#exercice_repeter_question_btn').css('display','none'); 
+                    $('#exercice_correction_btn').css('display','none');
+                }, 200); 
+            }, 800); 
+        }, 600);
+
+        masquer($('#exercice_redirection_btns'));
+
+        setTimeout(() => { 
+            setTimeout(() => { displayv($('#exercice_dialogue_btns')); }, 300);
+            setTimeout(() => { indexer($('#exercice_question_btn'));   }, 300);
+            setTimeout(() => { displayv($('#exercice_progress_bar'));  }, 600);
+        }, 1200);
     }
     function afficherList(ul) {
         let li = $('li', ul);
@@ -130,7 +159,7 @@
         $.each(li, function(){
             let li_actif = $(this);
             let index = li_actif.index();
-            console.log(index);
+            
             setTimeout(() => { displayv(li_actif); }, 200*index);
         });
     }
@@ -244,20 +273,20 @@
 
 		element.css({ 'right':(largeur_ecran-largeur_element)/2+'px' });
 	}
-    function changerPhaseActive(phase_index) {
-        if(phase_index != -1) {
-            phase_index++;
+    function changerPhaseActive(phase_active_index) {
+        if(phase_active_index != -1) {
+            phase_active_index++;
             $.each($('#phases_list li'), function() {
                 
                 var phase_index = $(this).index();
-                if(total_phase > phase_index) {  
-                    if(phase_index <= phase_index-1) $(this).removeClass('active').addClass('apprises');
-                    if(phase_index == phase_index  ) $(this).removeClass('a_apprendre').addClass('active');
-                    if(phase_index >= phase_index+1) $(this).addClass('a_apprendre');
+                if(total_phase > phase_active_index) {  
+                    if(phase_index <= phase_active_index-1) $(this).removeClass('active').addClass('apprises');
+                    if(phase_index == phase_active_index  ) $(this).removeClass('a_apprendre').addClass('active');
+                    if(phase_index >= phase_active_index+1) $(this).addClass('a_apprendre');
                 }       	    
-                if(total_phase == phase_index) $(this).removeClass('active a_apprendre').addClass('apprises');
+                if(total_phase == phase_active_index) $(this).removeClass('active a_apprendre').addClass('apprises');
             });
-            sessionStorage.setItem('nbr',JSON.stringify(phase_index));
+            sessionStorage.setItem('phase_active_index',JSON.stringify(phase_active_index));
         }
     }
     function clearStorage() {

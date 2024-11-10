@@ -307,17 +307,17 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     display: none;
     top: 0.5rem;
     width: calc(100% - 2px);
-    max-width: 22rem;
     height: 4rem;
     padding: 0;
-    margin: 0.25rem auto;
+    margin: auto;
     border-radius: 0.5rem;
     font-weight: bold;
     text-align: center;
+    border: 1px solid #ccc;
+    z-index: 1;
 }
-.dialogue_btns > div {
+.dialogue_btns > div:not(.progress_bar_integre) {
     position: relative;
-    display: none;
     height: 4rem;
     line-height: 4rem;
     width: max-content;
@@ -325,6 +325,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     box-sizing: border-box;
     border-radius: 0.5rem;
     cursor: pointer;
+    z-index: 1;
 }
 .dialogue_btns:not(#pre_apprentissage_dialogue_btns) > div { 
     min-width: 16rem;
@@ -763,14 +764,6 @@ del {
     border: 1px solid transparent;
     border-bottom: 1px solid #aaa;
 }
-.phases_container li {
-    height: 3rem;
-    margin: 0.125rem;
-    line-height: 3rem;
-    font-weight: bold;
-    text-align: center;
-    cursor: pointer;
-}
 .phases ul {
     display: flex;
     flex-direction: row;
@@ -858,7 +851,7 @@ del {
 .progress_bar {
     position: relative;
     display: none;
-    top: 1.5rem;
+    top: 1.25rem;
     height: 4rem;
     width: calc(100% - 1.5rem);
     max-width: 59rem;
@@ -868,7 +861,14 @@ del {
     border: 1px solid #bbb;
     border-radius: 0.5rem;
 }
-.progress_bar_integre { z-index: 0; }
+.progress_bar_integre { 
+    position: absolute; 
+    top: 0;
+    height: 4rem;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 0; 
+}
 .progress_bar span {
     position: absolute;
     top: 0;
@@ -879,6 +879,7 @@ del {
 }
 .progress_bar > div, .progress_bar_integre > div {
     position: absolute; 
+    right: 0;
     height: 4rem; 
     width: 0;
     margin: 0;
@@ -896,7 +897,7 @@ del {
 .progress_bonne_reponse_bar, .progress_bonne_reponse_bar_integre { 
     background-color: rgba(255,255,0,0.6); 
 }
-.progress_mauvaise_reponse_bar, .f { 
+.progress_mauvaise_reponse_bar, .progress_mauvaise_reponse_bar_integre { 
     background-color: rgba(0,0,0,0.25);
 }
 .progress_question_bar { background-color: #bbb; }

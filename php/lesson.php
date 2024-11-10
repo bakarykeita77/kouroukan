@@ -249,6 +249,10 @@ if(isset($_SESSION["id"])) {
                                 <span class="correction_label">ߏ߬ ߛߊߞߍ߫</span>
                                 <span class="correction_icon"></span>
                             </div>
+                            <div class="progress_bar_integre">
+                                <div class="progress_bonne_reponse_bar_integre"></div>
+                                <div class="progress_mauvaise_reponse_bar_integre"></div>
+                            </div>
                         </div>
 
                         <div class="redirection_btns" id="evaluation_redirection_btns">

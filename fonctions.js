@@ -153,6 +153,30 @@
             setTimeout(() => { displayv($('#exercice_progress_bar'));  }, 600);
         }, 1200);
     }
+    function afficherEvaluationAlphabet() {
+
+        $('#pratique_options').css('display','block');
+        $('.fermeture').attr('id', 'fermer_evaluation'); 
+
+        $('#exercice_body').css('display','none');
+        $('#apprentissage_container').css('display','none');
+        $('#exercice_container').css('display','none');
+        $('#evaluation_container').css('display','block');
+
+        afficher($('.course'));
+
+        setTimeout(() => { displayv($('#evaluation_head')); }, 600);
+
+        setTimeout(() => { displayv($('#evaluation_body')); }, 900);
+
+        setTimeout(() => { displayv($('#evaluation_foot')); }, 1200);
+
+        setTimeout(() => {
+            displayv($('#evaluation_dialogue_btns'));
+            $('#evaluation_redirection_btns').css('display','none');
+            $('#evaluation_progress_bar').css('display','none');
+        }, 1500);
+    }
     function afficherList(ul) {
         let li = $('li', ul);
         li.css({'opacity':0, 'transform':'scale(0.75)'});

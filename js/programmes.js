@@ -31,8 +31,9 @@
      programme_matieres = document.getElementById('programme_matieres'); 
  }
  function chargementDuProgramme() {
-     programme_matieres.innerHTML = programmeHTML();
-
+    let programme_matieres_html = programmeHTML();
+     programme_matieres.innerHTML = programme_matieres_html;
+alert(programme_matieres_html);
      function programmeHTML() {
          var programme_html = '<ul id="programme_ul">';
   

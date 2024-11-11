@@ -26,7 +26,6 @@
 }
 #programme_ul {
     display: flex;
-    flex-direction: row;
     justify-content: space-around;
     align-items: center;
 
@@ -55,8 +54,6 @@
 }
 
 #programme_matieres {
-    min-height: 12rem;
-    display: none;
     margin: 1rem auto;
     border: 1px solid transparent;
     height: scaleY(0.75);
@@ -129,9 +126,7 @@
     #programmes_container { width: calc(100% - 4rem); }
     #programmes_fond { box-shadow: 0 0 1rem #aaa; }
     #programme_ul {
-        display: flex;
         flex-direction: row;
-        justify-content: center;
     }
     #programme_ul li { 
         width: 18%;
@@ -142,9 +137,7 @@
     #programmes_container { width: calc(100% - 1rem); }
     #programmes_fond { box-shadow: none; }
     #programme_ul {
-        display: flex;
         flex-direction: column;
-        justify-content: center;
     }
     #programme_ul li { 
         width: 80%;

@@ -14,10 +14,10 @@
     var chiffres = ['߀', '߁', '߂', '߃', '߄', '߅', '߆', '߇', '߈', '߉'];
     var chiffres_latins = ['0','1','2','3','4','5','6','7','8','9'];
     var liste_de_matieres = [
-        ["alphabet",     "ߛߓߍߛߎ߲"],
-        ["syllabes",     "ߜߋ߲߭"],
-        ["tons",         "ߞߊ߲ߡߊߛߙߋ"],
-        ["chiffres",     "ߖߊ߰ߕߋ߬ߘߋ߲"]
+        ["alphabet", "ߛߓߍߛߎ߲"],
+        ["syllabes", "ߜߋ߲߭"],
+        ["tons", "ߞߊ߲ߡߊߛߙߋ"],
+        ["chiffres", "ߖߊ߰ߕߋ߬ߘߋ߲"]
      ];
     var liste_de_phases = [
         ["apprentissage", "ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ"],

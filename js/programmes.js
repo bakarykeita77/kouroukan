@@ -31,83 +31,68 @@
      programme_matieres = document.getElementById('programme_matieres'); 
  }
  function chargementDuProgramme() {
-    let programme_matieres_html = programmeHTML();
-     programme_matieres.innerHTML = programme_matieres_html;
-alert(programme_matieres_html);
-     function programmeHTML() {
-         var programme_html = '<ul id="programme_ul">';
-  
-         for (var i = 0; i < 2; i++) {    // Pour liste_de_matieres, voir caracteres.js
+    
+alert(programmeHTML()); 
+     programme_matieres.innerHTML = programmeHTML();
 
-             var matiere_id    = liste_de_matieres[i][0];
-             var matiere_nom   = liste_de_matieres[i][1];
-             var matiere_index = liste_de_matieres.indexOf(liste_de_matieres[i]);
-             var niveau        = matiere_index+1;                   
-     
-         
-             if(niveau_max === 0) {
-                 if(matiere_index === 0) programme_html += '<li id="'+liste_de_matieres[i][0]+'">'+liste_de_matieres[i][1]+'</li>\n\n';
-                 if(matiere_index  >  0) programme_html += '<li>'+liste_de_matieres[i][1]+'</li>';
-             }
-             
-             if(niveau_max > 0) {
-                 if (niveau_max < matiere_index || $('#'+matiere_id).hasClass('a_apprendre')) {
-                     if(matiere_index > 0) programme_html += '<li>'+liste_de_matieres[i][1]+'</li>';
-                 }
-                 if (niveau_max >= matiere_index || $('#'+matiere_id).hasClass('active')) {
-                     programme_html += '<li id="'+liste_de_matieres[i][0]+'">'+liste_de_matieres[i][1]+'</li>\n\n';
-                 }
-             }
-         }
+    function programmeHTML() {
+        var programme_html = '<ul id="programme_ul">\n\n';
 
-         for (var i = 2; i < liste_de_matieres.length; i++) {    // Pour liste_de_matieres, voir caracteres.js
+        for (var i = 0; i < 2; i++) {    // Pour liste_de_matieres, voir caracteres.js
 
-             var matiere_id    = liste_de_matieres[i][0];
-             var matiere_nom   = liste_de_matieres[i][1];
-             var matiere_index = liste_de_matieres.indexOf(liste_de_matieres[i]);
-             var niveau        = matiere_index+1;                   
-     
-         
-             if(niveau_max === 0) {
-
-                 var phases_lien = '\
-                     lesson.php?\
-                     matiere_id='+matiere_id+'\
-                     &matiere_index='+matiere_index+'\
-                     &matiere_nom='+matiere_nom+'\
-                     &niveau='+niveau+'\
-                     &niveau_max='+niveau_max
-                 ;
-                 
-                 if(matiere_index === 0) programme_html += '<li id="'+liste_de_matieres[i][0]+'"><a href="'+phases_lien+'">'+liste_de_matieres[i][1]+'</a></li>\n\n';
-                 if(matiere_index  >  0) programme_html += '<li><a href="#">'+liste_de_matieres[i][1]+'</a></li>';
-             }
-             
-             if(niveau_max > 0) {
-                 
-                 var phases_lien = '\
-                     lesson.php?\
-                     matiere_id='+matiere_id+'\
-                     &matiere_index='+matiere_index+'\
-                     &matiere_nom='+matiere_nom+'\
-                     &niveau='+niveau+'\
-                     &niveau_max='+niveau_max+'\
-                     &phases_etudiees='+phases_etudiees+'\
-                     &derniere_phase='+derniere_phase
-                 ;
-                 
-                 if (niveau_max < matiere_index || $('#'+matiere_id).hasClass('a_apprendre')) {
-                     if(matiere_index > 0) programme_html += '<li><a href="#">'+liste_de_matieres[i][1]+'</a></li>';
-                 }
-                 if (niveau_max >= matiere_index || $('#'+matiere_id).hasClass('active')) {
-                     programme_html += '<li id="'+liste_de_matieres[i][0]+'"><a href="'+phases_lien+'">'+liste_de_matieres[i][1]+'</a></li>\n\n';
-                 }
-             }
-         }
-         programme_html += '</ul>';
+            var matiere_id = liste_de_matieres[i][0];
+            var matiere_nom = liste_de_matieres[i][1];
+            var matiere_index = liste_de_matieres.indexOf(liste_de_matieres[i]);
+            var niveau = matiere_index+1;                   
+    
+        
+            if(niveau_max === 0) {
+                if(matiere_index === 0) programme_html += '<li id="'+matiere_id+'">'+matiere_nom+'</li>\n';
+                if(matiere_index  >  0) programme_html += '<li>'+matiere_nom+'</li>\n';
+            }
             
-         return programme_html;
-     } 
+            if(niveau_max > 0) {
+                if (niveau_max < matiere_index || $('#'+matiere_id).hasClass('a_apprendre')) {
+                    if(matiere_index > 0) programme_html += '<li>'+matiere_nom+'</li>\n';
+                }
+                if (niveau_max >= matiere_index || $('#'+matiere_id).hasClass('active')) {
+                    programme_html += '<li id="'+matiere_id+'">'+matiere_nom+'</li>\n';
+                }
+            }
+        }
+
+        for (var i = 2; i < liste_de_matieres.length; i++) {    // Pour liste_de_matieres, voir caracteres.js
+
+            var matiere_id = liste_de_matieres[i][0];
+            var matiere_nom = liste_de_matieres[i][1];
+            var matiere_index = liste_de_matieres.indexOf(liste_de_matieres[i]);
+            var niveau = matiere_index+1;                   
+    
+        
+            if(niveau_max === 0) {
+
+                var phases_lien = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max;
+                
+                if(matiere_index === 0) programme_html += '<li id="'+matiere_id+'"><a href="'+phases_lien+'">'+matiere_nom+'</a></li>\n';
+                if(matiere_index  >  0) programme_html += '<li><a href="#">'+matiere_nom+'</a></li>\n';
+            }
+            
+            if(niveau_max > 0) {
+                
+                var phases_lien = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees+'&derniere_phase='+derniere_phase;
+             
+                if (niveau_max < matiere_index || $('#'+matiere_id).hasClass('a_apprendre')) {
+                    if(matiere_index > 0) programme_html += '<li><a href="#">'+matiere_nom+'</a></li>\n';
+                }
+                if (niveau_max >= matiere_index || $('#'+matiere_id).hasClass('active')) {
+                    programme_html += '<li id="'+matiere_id+'"><a href="'+phases_lien+'">'+matiere_nom+'</a></li>\n';
+                }
+            }
+        }
+        programme_html += '\n</ul>';
+        
+        return programme_html;
+    } 
  }          
  function styleDuProgramme() {
          
@@ -169,15 +154,7 @@ alert(programme_matieres_html);
         
             if(niveau_max === 0) {
 
-                var phases_lien = '\
-                    lesson.php?\
-                    matiere_id='+matiere_id+'\
-                    &matiere_index='+matiere_index+'\
-                    &matiere_nom='+matiere_nom+'\
-                    &niveau='+niveau+'\
-                    &niveau_max='+niveau_max+'\
-                    &lesson_option=1'
-                ;
+                var phases_lien = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max+'&lesson_option=1';
                 
                 if(matiere_index === 0) option_1_html += '<a href="'+phases_lien+'" id="'+liste_de_matieres[0][0]+'">'+libele_du_choix_1+'</a>\n\n';
                 if(matiere_index  >  0) option_1_html += '<a href="#">'+libele_du_choix_1+'</a>';
@@ -185,17 +162,7 @@ alert(programme_matieres_html);
             
             if(niveau_max > 0) {
 
-                var phases_lien = '\
-                    lesson.php?\
-                    matiere_id='+matiere_id+'\
-                    &matiere_index='+matiere_index+'\
-                    &matiere_nom='+matiere_nom+'\
-                    &niveau='+niveau+'\
-                    &niveau_max='+niveau_max+'\
-                    &phases_etudiees='+phases_etudiees+'\
-                    &derniere_phase='+derniere_phase+'\
-                    &lesson_option=1'
-                ;
+                var phases_lien = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees+'&derniere_phase='+derniere_phase+'&lesson_option=1';
                 
                 if (niveau_max < matiere_index || $('#'+matiere_id).hasClass('a_apprendre')) {
                     if(matiere_index > 0) option_1_html += '<a href="#">'+libele_du_choix_1+'</a>';
@@ -219,15 +186,7 @@ alert(programme_matieres_html);
         
             if(niveau_max === 0) {
 
-                var phases_lien = '\
-                    lesson.php?\
-                    matiere_id='+matiere_id+'\
-                    &matiere_index='+matiere_index+'\
-                    &matiere_nom='+matiere_nom+'\
-                    &niveau='+niveau+'\
-                    &niveau_max='+niveau_max+'\
-                    &lesson_option=2'
-                ;
+                var phases_lien = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max+'&lesson_option=2';
                 
                 if(matiere_index === 0) option_2_html += '<a href="'+phases_lien+'" id="'+liste_de_matieres[0][0]+'">'+libele_du_choix_1+'</a>\n\n';
                 if(matiere_index  >  0) option_2_html += '<a href="#">'+libele_du_choix_1+'</a>';
@@ -235,17 +194,7 @@ alert(programme_matieres_html);
             
             if(niveau_max > 0) {
 
-                var phases_lien = '\
-                    lesson.php?\
-                    matiere_id='+matiere_id+'\
-                    &matiere_index='+matiere_index+'\
-                    &matiere_nom='+matiere_nom+'\
-                    &niveau='+niveau+'\
-                    &niveau_max='+niveau_max+'\
-                    &phases_etudiees='+phases_etudiees+'\
-                    &derniere_phase='+derniere_phase+'\
-                    &lesson_option=2'
-                ;
+                var phases_lien = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees+'&derniere_phase='+derniere_phase+'&lesson_option=2';
                 
                 if (niveau_max < matiere_index || $('#'+matiere_id).hasClass('a_apprendre')) {
                     if(matiere_index > 0) option_2_html += '<a href="#">'+libele_du_choix_1+'</a>';

@@ -25,10 +25,6 @@
     opacity: 0;
 }
 #programme_ul {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-
     position: relative;
     display: none;
     width: 100%;
@@ -126,7 +122,10 @@
     #programmes_container { width: calc(100% - 4rem); }
     #programmes_fond { box-shadow: 0 0 1rem #aaa; }
     #programme_ul {
+        display: flex;
         flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
     }
     #programme_ul li { 
         width: 18%;
@@ -137,7 +136,10 @@
     #programmes_container { width: calc(100% - 1rem); }
     #programmes_fond { box-shadow: none; }
     #programme_ul {
+        display: flex;
         flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
     }
     #programme_ul li { 
         width: 80%;

@@ -161,12 +161,13 @@ $('document').ready(function() {
              
             $('#phases_list li').on('click', function(){
 
+                phase_id = $(this).attr('id');
+                phase_nom = $(this).html();
+
                 var phase_class = $(this).attr('class');
                 var course_id = phase_id.split('_')[1];
                 var autorisation_d_acces_aux_cours = 'non';
                              
-                phase_id = $(this).attr('id');
-                phase_nom = $(this).html();
                
                 sessionStorage.setItem('phase_class', JSON.stringify(phase_class));
                 sessionStorage.setItem('phase_id', JSON.stringify(phase_id));
@@ -174,7 +175,7 @@ $('document').ready(function() {
                 sessionStorage.setItem("course_id", JSON.stringify(course_id));
                 sessionStorage.setItem("autorisation_d_acces_aux_cours", JSON.stringify(autorisation_d_acces_aux_cours));
    
-            /*--------------------------------------------------------------------*/ 
+             /*--------------------------------------------------------------------*/ 
                         
                 if(phase_class == "apprises") {
                     if(phase_nom != 'ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ') {
@@ -185,7 +186,7 @@ $('document').ready(function() {
                 autorisationDAccesAuxCours();
                 suivreLesCours();
                
-            /*--------------------------------------------------------------------*/  
+             /*--------------------------------------------------------------------*/  
    
                 function autorisationDAccesAuxCours() {
                     var frecance_du_cours = frecanceDuCours();
@@ -221,31 +222,8 @@ $('document').ready(function() {
                     if(autorisation_d_acces_aux_cours == 'oui') {
     
                         parametrageDeLesson();  // Voir parametres.js
-                        afficherLesson();
                         dispenserLesson(); 
-    
-                        
-                        function afficherLesson(){
-    
-                            var lesson_active = lessonActive();
-    
-                            $('.course').css('display','none');
-                            $('.course_container').css({'display':'block'});
-                            afficher(lesson_active);
-    
-                            function lessonActive() {
-                                var lesson = '';
-    
-                                switch (niveau_actif) {
-                                    case 1:lesson = $('#alphabet'); break;
-                                    case 2:lesson = $('#syllabee'); break;
-                                    case 3:lesson = $('#ton'); break;
-                                    case 4:lesson = $('#chiffre'); break;
-                                }
-    
-                                return lesson;
-                            }
-                        }		
+                        		
                         function dispenserLesson() {
                             switch(niveau_actif) {
                                 case 1 : alphabet(); break;

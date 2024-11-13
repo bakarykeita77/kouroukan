@@ -86,7 +86,6 @@ function syllabe() {
 
         function apprentissagePreSyllabe() {
             
-            ecrire("notification_corps"," ߞߏ߰ߙߌ߫ ߣߘߍ߬ߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬ ߞߊ߬ ߛߌ߬ߙߕߊ߬ ߥߟߊߟߋ߲ ߦߌ߬ߘߊ߬. ");
             rendreActif($('#afficheur_de_panneau'));
 
             $('#afficheur_de_panneau').click(function() {
@@ -110,6 +109,9 @@ function syllabe() {
                 
                 function chargerEnteteDePreSyllabe() {
                     $('.notification_titre').html('ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ');
+                    setTimeout(() => {
+                        ecrire("notification_corps"," ߞߏ߰ߙߌ߫ ߣߘߍ߬ߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬ ߞߊ߬ ߛߌ߬ߙߕߊ߬ ߥߟߊߟߋ߲ ߦߌ߬ߘߊ߬. ");
+                    }, 1000);
                 }
                 function chargerFootDePreSyllabe() {
                             

@@ -71,19 +71,15 @@
     function affichageAnimeDeTableTr(table) {
         let tr = ''; tr_length = 0;
 
-        $('td', table).css({'opacity':1});
+        $('td', table).css({'opacity':1, 'transform':'scale(1)'});
         $.each(table, function() { tr = $('tr', this); });
         tr_length = tr.length;
         tr.css({'opacity':0});
 
         setTimeout(() => {
             $.each(tr, function(){
-
                 let tr_index = $(this).index();
-
-                setTimeout(() => {
-                    $(this).css({'opacity':1});
-                }, 150*tr_index);
+                setTimeout(() => { $(this).css({'opacity':1}); }, 150*tr_index);
             });
         }, 200);
         
@@ -98,6 +94,8 @@
     }
     function afficherApprentissage() {
         masquer($('.course'));
+        $('.course_container').css({'display':'block'});
+
         $('#apprentissage_container').css('display','block');
         $('#exercice_container').css('display','none');
         $('#revision_container').css('display','none');
@@ -116,9 +114,37 @@
         $('#evaluation_container').css('display','block');
         setTimeout(() => { displayv($('.course')); }, 50);
     }
+    function afficherEvaluationAlphabet() {
+
+        $('#pratique_options').css('display','block');
+        $('.fermeture').attr('id', 'fermer_evaluation'); 
+
+        $('.course_container').css({'display':'block'});
+
+        $('#exercice_body').css('display','none');
+        $('#apprentissage_container').css('display','none');
+        $('#exercice_container').css('display','none');
+        $('#evaluation_container').css('display','block');
+
+        afficher($('.course'));
+
+        setTimeout(() => { displayv($('#evaluation_head')); }, 600);
+
+        setTimeout(() => { displayv($('#evaluation_body')); }, 900);
+
+        setTimeout(() => { displayv($('#evaluation_foot')); }, 1200);
+
+        setTimeout(() => {
+            displayv($('#evaluation_dialogue_btns'));
+            $('#evaluation_redirection_btns').css('display','none');
+            $('#evaluation_progress_bar').css('display','none');
+        }, 1500);
+    }
     function afficherExerciceAlphabet() {
         
         masquer($('.course'));
+        $('.course_container').css({'display':'block'});
+
         $('#apprentissage_container').css('display','none');
         $('#exercice_container').css('display','block');
         $('#revision_container').css('display','none');
@@ -153,30 +179,6 @@
             setTimeout(() => { displayv($('#exercice_progress_bar'));  }, 600);
         }, 1200);
     }
-    function afficherEvaluationAlphabet() {
-
-        $('#pratique_options').css('display','block');
-        $('.fermeture').attr('id', 'fermer_evaluation'); 
-
-        $('#exercice_body').css('display','none');
-        $('#apprentissage_container').css('display','none');
-        $('#exercice_container').css('display','none');
-        $('#evaluation_container').css('display','block');
-
-        afficher($('.course'));
-
-        setTimeout(() => { displayv($('#evaluation_head')); }, 600);
-
-        setTimeout(() => { displayv($('#evaluation_body')); }, 900);
-
-        setTimeout(() => { displayv($('#evaluation_foot')); }, 1200);
-
-        setTimeout(() => {
-            displayv($('#evaluation_dialogue_btns'));
-            $('#evaluation_redirection_btns').css('display','none');
-            $('#evaluation_progress_bar').css('display','none');
-        }, 1500);
-    }
     function afficherList(ul) {
         let li = $('li', ul);
         li.css({'opacity':0, 'transform':'scale(0.75)'});
@@ -189,11 +191,13 @@
     }
     function afficherRevision() {
         masquer($('.course'));
+        $('.course_container').css({'display':'block'});
+
         $('#apprentissage_container').css('display','none');
         $('#exercice_container').css('display','none');
         $('#revision_container').css('display','block');
         $('#evaluation_container').css('display','none');
-        setTimeout(() => { displayv($('.course')); }, 50);
+        setTimeout(() => { displayv($('.course')); }, 600);
     }
 	function aggrandir_caractere_de(element) { element.css( 'font-size','+=32px' ); }
 	function appetir_caractere_de(element) { element.css( 'font-size','-=32px' ); } 
@@ -252,6 +256,7 @@
 /*-------------------------------------------------------------------------------------------------------------------------------------*/ 
     
     function barrer(td) {
+
         var fausse_reponse = td.html();
         td.html(fausse_reponse+"<p id='croix'>&#10060;</p>");
        

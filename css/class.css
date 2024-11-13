@@ -907,7 +907,7 @@ del {
 
 /* --------------------------------------------------------------------------------------------------------- */
 .redirection_btns { 
-      top: 0.5rem;
+    top: 0;
     position: relative;
     text-align: center;
     font-weight: bold; 

@@ -30,8 +30,8 @@
         }
         function chargerTravail(n) {
           
-            if(matieres[n] == undefined) chargerAVideLesFiches();
-            if(matieres[n] != undefined) chargerLesFiches();
+            if(matieres[n-1] == undefined) chargerAVideLesFiches();
+            if(matieres[n-1] != undefined) chargerLesFiches();
 
             function chargerLesFiches() {
 
@@ -44,12 +44,12 @@
 
                 if(matiere_nom == "ߛߓߍߛߎ߲") $('#travail_de_pratique').css('display','none');  // Masquer la partie pratique pour alphabet.     
 
-                if(matieres[n]) {
-                    for (let i = 0; i < matieres[n].length; i++) {
+                if(matieres[n-1]) {
+                    for (let i = 0; i < matieres[n-1].length; i++) {
 
-                        fiche_phase  = matieres[n][i].phase.split('_')[1];
-                        let travail_lesson = matieres[n][i].lesson;   
-                        let travail_note   = matieres[n][i].note;
+                        fiche_phase  = matieres[n-1][i].phase.split('_')[1];
+                        let travail_lesson = matieres[n-1][i].lesson;   
+                        let travail_note   = matieres[n-1][i].note;
 
                         if(fiche_phase == "apprentissage") travail_d_apprentissage_corps_html.push([fiche_phase,travail_lesson,travail_note]);
                         if(fiche_phase == "exercice"     ) travail_d_exercice_corps_html     .push([fiche_phase,travail_lesson,travail_note]);
@@ -268,9 +268,10 @@
                         $.each($('.travail_titre'), function() {
                             var travail_date_container = $(this).next().find('.travail_date');
                             var n = $('.bulles_container p:last-child', this).length;
-                            var date = matieres[0][n].date;
+                            var date = matieres[0][n-1-1].date;
                             var date_en_nko = '', heure_en_nko = '';
 
+    console.log(matieres[0][n-1-1]);
                             var a = parseIntNko(date.split(' ')[0].split('-')[0]);
                             var m = mois[parseInt(date.split(' ')[0].split('-')[1]) - 1];
                             var j = parseIntNko(date.split(' ')[0].split('-')[2]);
@@ -308,7 +309,7 @@
                             $(this).click(function(){
                                 var travail_date_container = $(this).parent().parent().parent().next().find('.travail_date');
                                 var n = $(this).index();
-                                var date = matieres[0][n].date;
+                                var date = matieres[0][n-1].date;
                                 var date_en_nko = '', heure_en_nko = '';
 
                                 var a = parseIntNko(date.split(' ')[0].split('-')[0]);

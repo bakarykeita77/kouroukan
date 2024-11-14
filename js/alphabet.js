@@ -1395,7 +1395,10 @@ console.log('afficherSyllabeBouton');
         var nbr_td = td.length;
         let nbr_raisonnable_de_click = 1;
         let clicked_elements_quantity = 0;
+        
 
+        afficher($('.course_container'));
+        afficher($('.course'));
 
         switch(phase_id) {
             case 'alphabet_apprentissage' : apprentissageAlphabet(); break;
@@ -1472,13 +1475,13 @@ console.log('afficherSyllabeBouton');
                 let elements_clickes = [];
                 let click_counter = 0;
 
-                lecturePersonnalisee();    // Voir fonctions.js
 
-                if(apprentissage_alpabet_memoire != undefined) {
+                lecturePersonnalisee();    // Voir fonctions.js
+                if(apprentissage_alpabet_memoire != null) {
                     $('.progress_bar').css('display','none');
                     $.each(td, function(){ $(this).css({'background-color':'rgba(85,85,85,1)', 'color':'white'}); });
                 }
-                if(apprentissage_alpabet_memoire == undefined) {
+                if(apprentissage_alpabet_memoire == null) {
                 
                     $('.progress_bar').css('display','block');
 
@@ -1486,8 +1489,6 @@ console.log('afficherSyllabeBouton');
 
                         let td_actif = $(this);
                         let td_counter = 0;
-
-                        td_actif.css({'background-color':'rgba(85,85,85,1)', 'color':'yellow'});
                     /* 
                     --------------------------------------------------------------------------------------------------------
                     Pour chaque click sur un bouton:
@@ -1505,6 +1506,8 @@ console.log('afficherSyllabeBouton');
                         var element_click_counter = 0;
                         var point = 0; 
 
+
+                        td_actif.css({'background-color':'rgba(85,85,85,1)', 'color':'yellow'});
                         initialisationDeApprentissageClicksMemo();
 
                         td_actif.on('click', function(){
@@ -1597,29 +1600,32 @@ console.log('afficherSyllabeBouton');
                             function finDApprentissageAlphabet() {
                                 if(clicked_elements_quantity === apprentissage_clicks_memo.length) {
 
+                                    let note = noterApprentissageAlphabet();
+
                                     stockerApprentissageAlphabet();
-                                    resultatApprentissageAlphabet();
+                                    // resultatApprentissageAlphabet();
+                                    sortireDeAlphabetExercice();
                                     afficherAlphabetExerciceBouton();
 
                                     function stockerApprentissageAlphabet() {
 
                                         let moyenne_d_apprentissage = 1; 
-                                        let index_phase_active = $('.phases_container ul li .active').index();
-                                        let note = noterApprentissageAlphabet();
+                                        let index_phase_active = $('.phases_container ul .active').index();
 
                                         if(note <  moyenne_d_apprentissage) alert("ߌ ߡߊ߫ ߛߓߍߘߋ߲ ߥߟߊ ߜߋ߭ ߠߎ߬ ߓߍ߯ ߟߊߡߍ߲߫");
                                         if(note >= moyenne_d_apprentissage) {
                                             sendLessonDataToDB('alphabet_apprentissage',apprentissage_clicks_memo);
+                                            sessionStorage.setItem('apprentissage_alpabet_memoire', JSON.stringify(apprentissage_clicks_memo));
                                             changerPhaseActive(index_phase_active);
                                             console.log('Les données de exercice sont envoyées à la base de données');
                                         }
 
-                                        function noterApprentissageAlphabet() {
-                                            var note = 0;
-                                            for(var i=0;i<apprentissage_clicks_memo.length;i++) if(apprentissage_clicks_memo[i] !== undefined) if(apprentissage_clicks_memo[i][2] == 1) note++;
-                                            note = (note*100)/apprentissage_clicks_memo.length;
-                                            return note;
-                                        }
+                                    }
+                                    function noterApprentissageAlphabet() {
+                                        var note = 0;
+                                        for(var i=0;i<apprentissage_clicks_memo.length;i++) if(apprentissage_clicks_memo[i] !== undefined) if(apprentissage_clicks_memo[i][2] == 1) note++;
+                                        note = (note*100)/apprentissage_clicks_memo.length;
+                                        return note;
                                     }
                                     function resultatApprentissageAlphabet() {
 
@@ -1654,6 +1660,16 @@ console.log('afficherSyllabeBouton');
                                                 $('#alphabet_exercice').click();
                                             });
                                         }
+                                    }
+                                    function sortireDeAlphabetExercice() {
+                                        $('#pre_exercice_bouton').click(() => {
+                                            masquer($('.course_container'));
+                                            setTimeout(() => { 
+                                                $('.container').css('display','block'); 
+                                                displayv($('.page_body')); 
+                                            }, 400);
+                                        });
+                                        
                                     }
                                 }
                             } 

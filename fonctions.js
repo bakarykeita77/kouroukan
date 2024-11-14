@@ -304,13 +304,18 @@
 	}
     function changerPhaseActive(phase_active_index) {
         if(phase_active_index != -1) {
+            let total_phase = $('#phases_list li').length;
             phase_active_index++;
+
             $.each($('#phases_list li'), function() {
                 
                 var phase_index = $(this).index();
                 if(total_phase > phase_active_index) {  
                     if(phase_index <= phase_active_index-1) $(this).removeClass('active').addClass('apprises');
-                    if(phase_index == phase_active_index  ) $(this).removeClass('a_apprendre').addClass('active');
+                    if(phase_index == phase_active_index  ) {
+                        $(this).removeClass('a_apprendre').addClass('active');
+                        indexer($(this));
+                    }
                     if(phase_index >= phase_active_index+1) $(this).addClass('a_apprendre');
                 }       	    
                 if(total_phase == phase_active_index) $(this).removeClass('active a_apprendre').addClass('apprises');

@@ -280,7 +280,7 @@ if(isset($_SESSION["id"])) {
 
           <!-------------------------------------------------------------------------------------------------------------
         
-            Cette div envoi les resultats des études à actions.php qui à son tour envoi à la base de données -->
+            Cette div envoi les resultats des études à actions.php qui à son tour les envoi à la base de données -->
             <form method="POST" action="actions.php" id="lesson_form" style="display:none">
                 <input type="number" name="id"       id="id_input" value="<?= $_SESSION['id']; ?>">
                 <input type="text"   name="matiere"  id="matiere_nom_input">

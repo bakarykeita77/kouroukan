@@ -7,6 +7,7 @@ $('document').ready(function() {
         var niveau_actif      = JSON.parse(sessionStorage.getItem('niveau_actif'));
         var lesson_option     = parseInt($('#lesson_option').text());
         var phases_distinctes = JSON.parse(sessionStorage.getItem('phases_distinctes'));
+        var option_retenue = JSON.parse(localStorage.getItem('option_retenue'));
       
         var rang = '';
         var phase_id = '';
@@ -32,6 +33,9 @@ $('document').ready(function() {
         phases();
         matiere();
                
+
+// localStorage.clear();
+
     /*-----------------------------------------------------------------------------------------------------------------*/
         
         function phases() {
@@ -133,10 +137,9 @@ $('document').ready(function() {
                 $('.rang').html(rang);
             }
             function afficherLesPhases() {
-                if(lesson_option === 1) {
-                    $('#phases_list li:nth-child(2)').css('display','none');
-                    $('#phases_list li:nth-child(3)').css('display','none');
-                    $('#phases_list li:nth-child(4)').css('display','none');
+
+                if(option_retenue != null) {
+                    if(option_retenue == 1) $('.page_body').css('display','none');
                 }
 
                 setTimeout(() => { displayv($('#niveau_d_etude')); }, 100);
@@ -158,8 +161,17 @@ $('document').ready(function() {
         }
         function matiere() {
             let matiere_nom = JSON.parse(sessionStorage.getItem('matiere_nom')); //Déterminé depuis storagesDuProgramme() dans programmes.js
-             
-            $('#phases_list li').on('click', function(){
+            
+            if(option_retenue != null) {
+                if(option_retenue == 1) {
+                    switch(niveau_actif) {
+                        case 1 : alphabet(); break;
+                        case 2 : syllabe();  break;
+                    }
+                }
+            }
+
+            $('#phases_list li').on('click', function() {
 
                 phase_id = $(this).attr('id');
                 phase_nom = $(this).html();
@@ -167,15 +179,15 @@ $('document').ready(function() {
                 var phase_class = $(this).attr('class');
                 var course_id = phase_id.split('_')[1];
                 var autorisation_d_acces_aux_cours = 'non';
-                             
-               
+                            
+            
                 sessionStorage.setItem('phase_class', JSON.stringify(phase_class));
                 sessionStorage.setItem('phase_id', JSON.stringify(phase_id));
                 sessionStorage.setItem('phase_nom', JSON.stringify(phase_nom));
                 sessionStorage.setItem("course_id", JSON.stringify(course_id));
                 sessionStorage.setItem("autorisation_d_acces_aux_cours", JSON.stringify(autorisation_d_acces_aux_cours));
-   
-             /*--------------------------------------------------------------------*/ 
+
+            /*--------------------------------------------------------------------*/ 
                         
                 if(phase_class == "apprises") {
                     if(phase_nom != 'ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ') {
@@ -183,11 +195,11 @@ $('document').ready(function() {
                         return false;
                     }
                 }
-                autorisationDAccesAuxCours();
+                // autorisationDAccesAuxCours();
                 suivreLesCours();
-               
-             /*--------------------------------------------------------------------*/  
-   
+            
+            /*--------------------------------------------------------------------*/  
+
                 function autorisationDAccesAuxCours() {
                     var frecance_du_cours = frecanceDuCours();
     
@@ -218,12 +230,12 @@ $('document').ready(function() {
                     }  
                 }
                 function suivreLesCours() {
-           
-                    if(autorisation_d_acces_aux_cours == 'oui') {
+        
+                    // if(autorisation_d_acces_aux_cours == 'oui') {
     
                         parametrageDeLesson();  // Voir parametres.js
                         dispenserLesson(); 
-                        		
+                                
                         function dispenserLesson() {
                             switch(niveau_actif) {
                                 case 1 : alphabet(); break;
@@ -232,7 +244,7 @@ $('document').ready(function() {
                                 case 4 : chiffre();  break;
                             }
                         }
-                    }
+                    // }
                 }
             });
             

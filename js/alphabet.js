@@ -25,24 +25,22 @@ function alphabet() {
     var nom = JSON.parse(sessionStorage.getItem('nom'));
     var prenom = JSON.parse(sessionStorage.getItem('prenom'));
     var id = JSON.parse(sessionStorage.getItem('id'));
-    var lesson_option = $('#lesson_option').text(); 
     var niveaux_etudies = JSON.parse(sessionStorage.getItem('niveaux_etudies')); 
     var niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
     var niveau_max = JSON.parse(sessionStorage.getItem('niveau_max'));   // Voir programmes.js fonction storagesDuProgramme()
     var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));   // Voir programmes.js fonction storagesDuProgramme()
     var lesson_option = parseInt(JSON.parse(sessionStorage.getItem('lesson_option')));
+    var option_retenue = JSON.parse(localStorage.getItem('option_retenue'));
 
     let apprentissage_data_memo = alphabetApprentisageDataMemo();
     let exercice_data_memo = alphabetExerciceDataMemo();
     let revision_data_memo = alphabetRevisionDataMemo();
                  
 
-// localStorage.clear();
-
     $('.page_body').css('display','none');
-   
+  
     if(niveau_actif <= 2) {
-        switch(lesson_option) {
+        switch(option_retenue) {
             case 1 : preAlphabetNko(); break;
             case 2 : alphabetNko(); break;
         } 

@@ -69,12 +69,10 @@
         
     }
     function affichageAnimeDeTableTr(table) {
-        let tr = ''; tr_length = 0;
 
         $('td', table).css({'opacity':1, 'transform':'scale(1)'});
-        $.each(table, function() { tr = $('tr', this); });
-        tr_length = tr.length;
-        tr.css({'opacity':0});
+        let tr = $('tr', table);
+        tr.css('opacity',0);
 
         setTimeout(() => {
             $.each(tr, function(){

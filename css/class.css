@@ -13,11 +13,9 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 .actif, .active, .apprises, .a_apprendre {
     position: relative;
     font-weight: bold;
-    border-radius: 0.5rem;
 }
 .actif, .active { 
     background-color: rgb(255,255,0); 
-    box-shadow: 0 0 1rem #444;
 }
 .active_2 { box-shadow: 0 0 1rem #222; background-color: #fff; color: black; }
 .actif a, .active a {
@@ -480,7 +478,6 @@ del {
 .indexe { color: orangered; }
 .indicateur { 
     background-color: yellow;
-    box-shadow: 0 0 1rem #444; 
 }
 .indicateur::before {
     position: absolute;

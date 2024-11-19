@@ -135,16 +135,19 @@ function alerteDuProgramme() {
 }
 function lessonOptions() {
 
-    console.log('niveau_en_cours = '+niveau_en_cours);
-    console.log('option_retenue = '+option_retenue);
-
     if(option_retenue != null) {
         if(niveau_en_cours === 1) {
-            if(option_retenue == 1) $('#programme_ul li:nth-child(1)').html(lessonOption11HTML());
+            if(option_retenue == 1) {
+                $('#programme_ul li:nth-child(1)').html(lessonOption11HTML());
+                $('#lesson_options').css('display','none');
+            }
             if(option_retenue == 2) $('#programme_ul li:nth-child(1)').html(lessonOption12HTML());
         }
         if(niveau_en_cours === 2) {
-            if(option_retenue == 1) $('#programme_ul li:nth-child(2)').html(lessonOption21HTML());
+            if(option_retenue == 1) {
+                $('#programme_ul li:nth-child(2)').html(lessonOption21HTML());
+                $('#lesson_options').css('display','none');
+            }
             if(option_retenue == 2) $('#programme_ul li:nth-child(2)').html(lessonOption22HTML());
         }
     }

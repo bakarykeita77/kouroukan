@@ -161,9 +161,10 @@ $('document').ready(function() {
         }
         function matiere() {
             let matiere_nom = JSON.parse(sessionStorage.getItem('matiere_nom')); //Déterminé depuis storagesDuProgramme() dans programmes.js
-            
+
             if(option_retenue != null) {
                 if(option_retenue == 1) {
+                    parametrageDeLesson();  // Voir parametres.js
                     switch(niveau_actif) {
                         case 1 : alphabet(); break;
                         case 2 : syllabe();  break;
@@ -172,7 +173,7 @@ $('document').ready(function() {
             }
 
             $('#phases_list li').on('click', function() {
-
+ 
                 phase_id = $(this).attr('id');
                 phase_nom = $(this).html();
 

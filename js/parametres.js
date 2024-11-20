@@ -1,4 +1,4 @@
-function parametrageDeLesson() {
+function parametrageDeLesson() {       
 
 /* Declaration des variables */  
     var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));   // Voir programmes.js fonction storagesDuProgramme()
@@ -182,7 +182,7 @@ function parametrageDeLesson() {
         }
     }
     function chargerLesson() {
-
+ 
         checkbox_parentClick();
         checkbox_childrenClick();
         
@@ -334,7 +334,7 @@ function parametrageDeLesson() {
             var exercice_html      = exerciceHTML();
             var pratique_html      = pratiqueHTML();
             var evaluation_html    = evaluationHTML();
-   
+  
          // Rechargement du tableau noir avec les caractères cochés
             $('#apprentissage_body').html(apprentissage_html);
             $('#exercice_body'     ).html(exercice_html);

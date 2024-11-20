@@ -1141,7 +1141,7 @@ del {
     }
     .table_parlante, .table_muette { top: 1rem; }
     .table_parlante td, .table_muette td {
-        font-size: 3rem;
+        font-size: 2rem;
     }
     .travaux { display: none; }
 }

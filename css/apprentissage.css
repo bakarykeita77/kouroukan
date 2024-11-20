@@ -106,7 +106,7 @@
 #pre_exercice_resultat_container > div { display: inline-block; }
 #pre_exercice_resultat td { min-width: 1.5rem; height: 2rem; }
 .titre_de_parti, #cercles_des_partis, #carres_pour_exercices { position: relative; display: inline-block; }
-.titre_de_parti { height: 3rem; line-height: 3rem; }
+.titre_de_parti { margin: 0; height: 3rem; line-height: 3rem; }
 .titre_de_parti > p { display: inline-block; vertical-align: middle; }
 #table_pre_apprentissage {
     padding: 1rem;
@@ -211,11 +211,12 @@
     justify-content: center;
     position: relative; 
     height: 0; 
+    width: 100%;
     overflow: hidden; 
-    bottom: 3.85rem;
+    bottom: 4rem;
 }
 #panneaux > div { font-size: 1.5rem; }
-#submit_panneau { font-size: 1rem; }
+#submit_panneau { text-align: center; font-size: 1rem; }
 #cercles_des_partis { 
     height: 3rem; 
     line-height: 3rem;

@@ -3,7 +3,6 @@ function syllabe() {
     var nom = JSON.parse(sessionStorage.getItem('nom'));
     var prenom = JSON.parse(sessionStorage.getItem('prenom'));
     var id = JSON.parse(sessionStorage.getItem('id'));
-    var lesson_option = $('#lesson_option').text();  
     var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));   // Voir programmes.js fonction storagesDuProgramme()
     var lesson_option = parseInt(JSON.parse(sessionStorage.getItem('lesson_option')));
 
@@ -37,9 +36,9 @@ function syllabe() {
     var apprentissage_clicks_memo = [];
     let nbr_raisonnable_de_click = 1;
     let clicked_elements_quantity = 0;
-
+   
     
-    if(niveau_actif <= 2) {
+    if(niveau_actif < 3) {
         switch(lesson_option) {
             case 1 : preApprendreSyllabe(); break;
             case 2 : apprendreSyllabe(); break;
@@ -72,33 +71,21 @@ function syllabe() {
 
 //   console.log('memoire_consonnes_choisies : '+memoire_consonnes_choisies.length);
 //   console.log('memoire_syllabes_etudiees : '+memoire_syllabes_etudiees.length);
-        
-        $('#exercice_body').css('display','none');
-        $('#apprentissage_container').css('display','block');
-        $('#exercice_container').css('display','none');
-        $('#evaluation_container').css('display','none');
-        afficher($('.course'));
 
         apprentissagePreSyllabe();
         exercicePreSyllabe();
         revisionPreSyllabe();
         evaluationPreSyllabe();
 
+
         function apprentissagePreSyllabe() {
             
             rendreActif($('#afficheur_de_panneau'));
-
-            $('#afficheur_de_panneau').click(function() {
-                ecrire("notification_corps"," \
-                    ߛߌ߬ߙߕߊ߬ ߞߋߟߋ߲߫ ߥߟߊ ߛߌߦߊߡߊ߲߫ ߛߎߥߊ߲ߘߌ߫߸ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߡߍ߲ ߜߋ߲߭ ߠߎ߬ ߘߋ߲߰. \
-                ");
-            }); 
 
             chargerApprendrePreSyllabe();
             afficherApprendrePreSyllabe();
             apprendrePreSyllabe();
             assistantApprendrePreSyllabe();
-
 
             function chargerApprendrePreSyllabe() {
 
@@ -111,7 +98,7 @@ function syllabe() {
                     $('.notification_titre').html('ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ');
                     setTimeout(() => {
                         ecrire("notification_corps"," ߞߏ߰ߙߌ߫ ߣߘߍ߬ߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬ ߞߊ߬ ߛߌ߬ߙߕߊ߬ ߥߟߊߟߋ߲ ߦߌ߬ߘߊ߬. ");
-                    }, 1000);
+                    }, 1200);
                 }
                 function chargerFootDePreSyllabe() {
                             
@@ -221,6 +208,8 @@ function syllabe() {
                                     var consonne_corespondante = $('label', this);
                                     if(clicked_consonne == consonne_corespondante.text()) { consonne_corespondante.click(); }
                                 });
+                                $('#table_syllabe_apprentissage tr').css('opacity',1);
+                                $('.table_parlante td').css('opacity',1);
                             }
                             function effacerTableau() {
                                 if(panneau_consonne_index != '-1') {
@@ -331,7 +320,22 @@ function syllabe() {
             }
             function afficherApprendrePreSyllabe() {
                 
-                setTimeout(() => { afficherPreApprentissageBtns(); }, 400);
+                $('.page_body').css('display','none');
+                $('.course_container').css('display','block');
+
+                $('#apprentissage_container').css('display','block');
+                $('#exercice_container').css('display','none');
+                $('#evaluation_container').css('display','none');
+
+                afficher($('.course'));
+
+                setTimeout(() => { displayv($('#apprentissage_head')); }, 400);
+                setTimeout(() => { displayv($('#apprentissage_body')); }, 800);
+                setTimeout(() => { 
+                    displayv($('#apprentissage_foot')); 
+                    setTimeout(() => { afficherPreApprentissageBtns(); }, 100);
+                }, 1200);
+
                 afficherLePanneauDesConsonnes();
                 masquerLePanneauDesConsonnes();
                     
@@ -350,7 +354,14 @@ function syllabe() {
                     $('#submit_panneau, .table_parlante').on('click', masquerPanneau);
                 }
             }
-            function apprendrePreSyllabe() {       
+            function apprendrePreSyllabe() { 
+
+                $('#afficheur_de_panneau').click(function() {
+                    ecrire("notification_corps"," \
+                        ߛߌ߬ߙߕߊ߬ ߞߋߟߋ߲߫ ߥߟߊ ߛߌߦߊߡߊ߲߫ ߛߎߥߊ߲ߘߌ߫߸ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߡߍ߲ ߜߋ߲߭ ߠߎ߬ ߘߋ߲߰. \
+                    ");
+                }); 
+      
                 $('#panneaux span').click(function() {
 
                     let td = $('.table_parlante td');
@@ -1309,7 +1320,25 @@ function syllabe() {
         }
         function evaluationPreSyllabe() {}
     }
-    function apprendreSyllabe() {}
+    function apprendreSyllabe() {
+        
+        $('.page_body').css('display','none');
+        $('.course_container').css('display','block');
+
+        $('#apprentissage_container').css('display','block');
+        $('#exercice_container').css('display','none');
+        $('#evaluation_container').css('display','none');
+
+        afficher($('.course'));
+
+        setTimeout(() => { displayv($('#apprentissage_head')); }, 400);
+        setTimeout(() => { displayv($('#apprentissage_body')); }, 800);
+        setTimeout(() => { 
+            displayv($('#apprentissage_foot')); 
+            setTimeout(() => { afficherPreApprentissageBtns(); }, 100);
+        }, 1200);
+
+    }
     function formatParDefautDuResultat() {
 
         $('#table_head tr:nth-child(2) td').text('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ');
@@ -1395,12 +1424,11 @@ function syllabe() {
         $('#exercice_correction_btn').css('display','none');
     }
     function afficherPreApprentissageBtns() {
-        $('#pre_apprentissage_dialogue_btn').css('display','block');
-        $('#apprentissage_dialogue_btn').css('display','none');
-
-        $('.progress_bar_integre').css('display','block');
-        $('#pre_apprentissage_btns').css('display','block');
-        $('#redirection_btns').css('display','none');
+        $('#pre_apprentissage_dialogue_btns').css('display','block');
+        $('#apprentissage_progress_bar').css('display','none');
+        $('#apprentissage_redirection_btns').css('display','none');
+        
+        $('#afficheur_de_panneau').css({'opacity':1, 'transform':'scale(1)'});
     }
     function afficherPreExerciceBtn() {  
         $('#pre_apprentissage_dialogue_btn').css('display','block');

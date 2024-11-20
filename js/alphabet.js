@@ -157,7 +157,6 @@ localStorage.removeItem('pre_revision_memoire');
                 
                 function chargerEnteteDePreAlphabet() {
                     $('.notification_titre').html('ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ');
-                    viderNotification();
                     if(pre_apprentissage_memoire.length < 27) {
                         setTimeout(() => { 
                             ecrire('notification_corps','ߞߏ߰ߙߌ߬ '+cercleRang() +' ('+parseIntNko(alphabet_tr_index)+'߲) ߘߌ߲߯ ߘߎ߭ߡߊ߬'); 
@@ -271,7 +270,6 @@ localStorage.removeItem('pre_revision_memoire');
                             traductionDeLaLigneActive();
                             afficherApprentissageProgressBar(); 
 
-                            viderNotification();
                             setTimeout(() => { ecrire('notification_corps','ߛߓߍߘߋ߲߫ ߟߊ߲ߞߣߍߡߊߣߍ߲ ߠߎ߬ ߘߏߣߍ߲߫ ߘߏߣߍ߲߫ ߘߋ߲߯ ߤߊ߲߯ ߊ߬ߟߎ߬ ߦߋ߫ ߕߏ߫ ߌ ߞߣߐ߫. '); }, 1000);
 
                             les_lettres_actives = lesLettresActives();         
@@ -432,7 +430,6 @@ localStorage.removeItem('pre_revision_memoire');
                                                 function finDePreApprendreAlphabet() {
                                                     if(click_count + 1 === total_yellow_letter*quantite_normale_de_click) {
                                                     
-                                                        viderNotification();
                                                         ecrire('notification_corps','\
                                                             ߣߌ߫ ߟߊ߲ߞߣߍߡߊߣߍ߲ ߠߎ߬ ߓߘߊ߫ ߟߐ߲߫ ߌ ߓߟߏ߫߸ ߢߊ߯ߡߌߟߊ߲ ߞߘߎ ߘߌ߲߯ ߘߎ߭ߡߊ߬ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫߹) ߞߊ߬ ߘߋ߲߬ߣߍ߲߬ ߞߎߘߊ ߟߎ߬ ߢߊ߯ߡߌ߲߫ ߡߊ߬ߞߟߏ߬ߟߌ ߞߊ߲ߡߊ߬.\
                                                         ');
@@ -467,7 +464,6 @@ localStorage.removeItem('pre_revision_memoire');
                     }
                 });
                 if(pre_apprentissage_memoire.length === 27) {
-                    viderNotification();
                     if(matieres.length != 0) {
                         let date_d_apprentissage_d_alphabet = convertirDateEnNko(matieres[0][0].date);
                         ecrire('notification_corps','ߌ ߕߎ߲߬ ߓߘߊ߫ ߛߓߍߛߎ߲ ߘߋ߲߰ ߞߊ߬ ߢߊ߬߸ ߞߊ߬ߓߌ߯ '+date_d_apprentissage_d_alphabet+'\
@@ -541,7 +537,6 @@ localStorage.removeItem('pre_revision_memoire');
                     function chargerEnteteDePreExerciceAlphabet() {
                         $('.notification_titre').html('ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ');
         
-                        viderNotification();
                         setTimeout(() => { 
                             ecrire('notification_corps','\
                                 ߓߌ߬ߟߊ߬ ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߞߐ߫.\n ߦߋ߫ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߣߌ߫ ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ ߣߌ߫ ߛߊߞߍߟߌ ߟߎ߬ ߞߍ߫ ߦߊ߲߬߸ ߤߊ߲߯ ߞߐߝߟߌ߫ ߥߟߊ ߦߋ߫ ߓߐ߫.\
@@ -842,7 +837,6 @@ localStorage.removeItem('pre_revision_memoire');
                     function chargerEnteteDePreRevisionAlphabet() {
                         $('.notification_titre').html('ߛߓߍߛߎ߲ ߣߐ߰ߡߊ߬ߛߍߦߌ</h3>');
                   
-                        viderNotification();
                         let notification = "ߘߋ߰ߣߍ߲߬ ߞߎߘߊ ߣߌ߫ ߞߘߐ߬ߡߊ߲ ߠߎ߬ ߟߋ߬ ߓߍ߯ ߢߊ߯ߡߌߣߍ߲߫ ߢߐ߲ ߘߐ߫ ߣߌ߲߬ .ߣߴߌ ߛߋ߫ ߘߊ߫ ߞߵߊ߬ߟߎ߬ ߓߍ߯ ߢߊߓߐ߫ ߗߡߍ߬ߘߐ߬ߦߊ߫ ߗߍ߬ߡߍ ߟߊ߫ ߏ߬ߘߐ߬ ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ .ߓߌ߬ߟߊ߬ ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߞߐ߫";
                         setTimeout(() => { ecrire('notification_corps',notification); }, 1200);
                     }
@@ -1319,8 +1313,6 @@ console.log('afficherSyllabeBouton');
                                                         afficherPreApprentissageBtns();
                                                         $('#'+cercle_id).removeClass('apprentissage_en_cours').addClass('cercle_depasse');
                                                         indexer($('#'+cercle_id).next()); 
-                                                        
-                                                        viderNotification();
                                                         ecrire('notification_corps','ߞߎߘߎ߲߫ '+cercle_actif.next().html()+' ߘߌ߲߯ ߘߎ߭ߡߊ߬');
                                                     }
                                                 }, 250);
@@ -1418,10 +1410,7 @@ console.log('afficherSyllabeBouton');
             function chargerApprentissageAlphabet() {
 
                 $('.notification_titre').text(liste_de_matieres[0][1]+' ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ');
-                viderNotification();
                 setTimeout(() => {
-                    
-                    viderNotification();
                     if(apprentissage_data_memo != undefined) {
                         ecrire('notification_corps','\
                             ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߘߋ߲߰ߣߍ߲߬ ߞߘߐ ߟߴߌ ߓߟߏ߫߸ ߏ߬ߘߐ߬ ߌ ߘߌ߫ ߛߴߊ߬ ߡߊߛߍ߬ߦߌ߬ ߟߊ߫߸ ߞߐ߬ߣߌ߲߬ ߊ߬ ߕߍ߫ ߖߊ߰ߕߋ߬ ߟߊ߫.<br>\
@@ -1634,7 +1623,6 @@ console.log('afficherSyllabeBouton');
 
                                         function notificationDeFinDAlphabetApprentissage() {
                                             
-                                            viderNotification();
                                             ecrire('notification_corps','\
                                                 ߌ ߞߎߟߎ߲ߖߋ߫ ߘߐ߬ߖߊ ߟߊ߫ ߛߓߍߘߋ߲ ߠߎ߫ ߘߋ߲߱ ߠߊ߫<br>\
                                                 ߣߴߌ ߓߘߴߊ߬ߟߎ߬ ߟߐ߲߫߸ ߓߐߟߌ߫ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߓߐ߫ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫ ߛߊ߲ߝߍ߬ ߣߎߡߊ߲߫ ߓߟߏ ߟߊ߫)<br>\
@@ -1740,7 +1728,6 @@ console.log('afficherSyllabeBouton');
                 
                     function chargerEnteteDeExerciceAlphabet() {
                         $('.notification_titre').html('ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ');
-                        viderNotification();
                         setTimeout(() => {
                             ecrire('notification_corps','\
                                 ߓߌ߬ߟߊ߬ ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߞߐ߫.\n ߦߋ߫ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߣߌ߫ ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ ߣߌ߫ ߛߊߞߍߟߌ ߟߎ߬ ߞߍ߫ ߦߊ߲߬߸ ߤߊ߲߯ ߞߐߝߟߌ߫ ߥߟߊ ߦߋ߫ ߓߐ߫.\
@@ -2025,7 +2012,6 @@ console.log('afficherSyllabeBouton');
         
                 function chargerEnteteDeEvaluatonAlphabet() {
                     $('.notification_titre').text('ߛߓߍߛߎ߲ ߞߘߐߓߐߟߌ');
-                    viderNotification();
                     setTimeout(() => {
                         ecrire('notification_corps','\
                             ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ߬ ߞߘߎ ߘߌ߲߯ ߘߎ߭ߡߊ߬߸ ߦߴߌ ߕߟߏߡߊߟߐ߬߸ߦߋ߫ ߛߓߍߘߋ߲߫ ߟߊߡߍ߲ߣߍ߲ ߛߓߍ߫߸ ߤߊ߲߯ ߞߘߐߓߐߟߌ ߦߋ߫ ߓߊ߲߫.\

@@ -162,9 +162,10 @@ $('document').ready(function() {
         function matiere() {
             let matiere_nom = JSON.parse(sessionStorage.getItem('matiere_nom')); //Déterminé depuis storagesDuProgramme() dans programmes.js
 
+            parametrageDeLesson();  // Voir parametres.js
+
             if(option_retenue != null) {
                 if(option_retenue == 1) {
-                    parametrageDeLesson();  // Voir parametres.js
                     switch(niveau_actif) {
                         case 1 : alphabet(); break;
                         case 2 : syllabe();  break;
@@ -197,10 +198,15 @@ $('document').ready(function() {
                     }
                 }
                 // autorisationDAccesAuxCours();
-                suivreLesCours();
-            
-            /*--------------------------------------------------------------------*/  
-
+        
+                // if(autorisation_d_acces_aux_cours == 'oui') {
+                    switch(niveau_actif) {
+                        case 1 : alphabet(); break;
+                        case 2 : syllabe();  break;
+                        case 3 : ton();      break;
+                        case 4 : chiffre();  break;
+                    }
+                // }
                 function autorisationDAccesAuxCours() {
                     var frecance_du_cours = frecanceDuCours();
     
@@ -230,25 +236,6 @@ $('document').ready(function() {
                         return frecance;
                     }  
                 }
-                function suivreLesCours() {
-        
-                    // if(autorisation_d_acces_aux_cours == 'oui') {
-    
-                        parametrageDeLesson();  // Voir parametres.js
-                        dispenserLesson(); 
-                                
-                        function dispenserLesson() {
-                            switch(niveau_actif) {
-                                case 1 : alphabet(); break;
-                                case 2 : syllabe();  break;
-                                case 3 : ton();      break;
-                                case 4 : chiffre();  break;
-                            }
-                        }
-                    // }
-                }
             });
-            
-            $('#go_to_lesson').on('click', function() { $('.phases_container ul li').click(); });
         }
     });

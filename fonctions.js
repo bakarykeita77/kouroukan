@@ -419,6 +419,7 @@
         let longueur = message.length;
         let indice = 0;
 
+        viderNotification();
         setTimeout(() => { 
             write();
             function write() {

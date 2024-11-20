@@ -65,6 +65,13 @@ function syllabe() {
         let syllabes_revisees = [];
         let memoire_consonnes_choisies = JSON.parse(localStorage.getItem('memoire_consonnes_choisies'));
         let memoire_syllabes_etudiees = JSON.parse(localStorage.getItem('memoire_syllabes_etudiees'));
+        
+
+        let texte_1 = "ߞߏ߰ߙߌ߫ ߣߘߍ߬ߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬ ߞߊ߬ ߛߌ߬ߙߕߊ߬ ߥߟߊߟߋ߲ ߦߌ߬ߘߊ߬."
+        let texte_2 = "ߛߌ߬ߙߕߊ߬ ߞߋߟߋ߲߫ ߥߟߊ ߛߌߦߊߡߊ߲߫ ߛߎߥߊ߲ߘߌ߫߸ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߡߍ߲ ߜߋ߲߭ ߠߎ߬ ߘߋ߲߰.";
+        let texte_3 = "ߜߋ߲߭ ߢߌ߲߬ ߠߎ߫ ߞߋ߬ߟߋ߲߬ ߞߋ߬ߟߋ߲߬ ߘߋ߲߯ ߤߊ߲߯ ߊ߬ߟߎ߬ ߦߋ߫ ߕߴߌ ߞߣߐ߫.";
+        let texte_4 = "ߢߌ߬ߣߌ߲߬ߞߊߟߌ߬ ߞߘߎ ߘߌ߯߭ ߘߎ߭ߡߊ߬߸ ߦߴߌ ߕߟߏߡߊߟߐ߬ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߎ߬ ߟߊ߫ ߞߋߟߋ߲߫ ߞߋߟߋ߲߫߸ ߦߴߊߟߎ߬ ߛߓߍ߫߸ ߦߋ߫ ߓߊ߲߫ ߞߊ߬ ߛߊߞߍߟߌ߫ ߞߘߎ ߘߌ߲߯߸ ߞߵߊ߬ߟߎ߬ ߛߊߞߍ߫.";
+        let texte_5 = "ߘߋ߰ߣߍ߲߬ ߞߎߘߊ ߣߌ߫ ߞߘߐ߬ߡߊ߲ ߠߎ߬ ߟߋ߬ ߓߍ߯ ߢߊ߯ߡߌߣߍ߲߫ ߢߐ߲ ߘߐ߫ ߣߌ߲߬ .ߣߴߌ ߛߋ߫ ߘߊ߫ ߞߵߊ߬ߟߎ߬ ߓߍ߯ ߢߊߓߐ߫ ߗߡߍ߬ߘߐ߬ߦߊ߫ ߗߍ߬ߡߍ ߟߊ߫ ߏ߬ߘߐ߬ ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ .ߓߌ߬ߟߊ߬ ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߞߐ߫";
 
 // localStorage.removeItem('memoire_consonnes_choisies'); 
 // localStorage.removeItem('memoire_syllabes_etudiees'); 
@@ -79,13 +86,10 @@ function syllabe() {
 
 
         function apprentissagePreSyllabe() {
-            
-            rendreActif($('#afficheur_de_panneau'));
 
             chargerApprendrePreSyllabe();
             afficherApprendrePreSyllabe();
             apprendrePreSyllabe();
-            assistantApprendrePreSyllabe();
 
             function chargerApprendrePreSyllabe() {
 
@@ -97,7 +101,7 @@ function syllabe() {
                 function chargerEnteteDePreSyllabe() {
                     $('.notification_titre').html('ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ');
                     setTimeout(() => {
-                        ecrire("notification_corps"," ߞߏ߰ߙߌ߫ ߣߘߍ߬ߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬ ߞߊ߬ ߛߌ߬ߙߕߊ߬ ߥߟߊߟߋ߲ ߦߌ߬ߘߊ߬. ");
+                        ecrire("notification_corps",texte_1);
                     }, 1200);
                 }
                 function chargerFootDePreSyllabe() {
@@ -335,32 +339,14 @@ function syllabe() {
                     displayv($('#apprentissage_foot')); 
                     setTimeout(() => { afficherPreApprentissageBtns(); }, 100);
                 }, 1200);
-
-                afficherLePanneauDesConsonnes();
-                masquerLePanneauDesConsonnes();
-                    
-                function afficherLePanneauDesConsonnes() {
-                    $('#afficheur_de_panneau').click(function(e) {
-                        e.stopImmediatePropagation();
-                        if(panneau_status == "masque") { afficherPanneau(); }
-                        else{ masquerPanneau(); }
-                    });
-                }
-                function masquerLePanneauDesConsonnes() {
-                    $('#panneaux, #apprentissage_body').click(function(e) {
-                        if(e.target.id != "") { masquerPanneau(); }
-                    });
-                    $('#panneaux').on('mouseleave', function() { masquerPanneau(); });
-                    $('#submit_panneau, .table_parlante').on('click', masquerPanneau);
-                }
             }
             function apprendrePreSyllabe() { 
 
-                $('#afficheur_de_panneau').click(function() {
-                    ecrire("notification_corps"," \
-                        ߛߌ߬ߙߕߊ߬ ߞߋߟߋ߲߫ ߥߟߊ ߛߌߦߊߡߊ߲߫ ߛߎߥߊ߲ߘߌ߫߸ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߡߍ߲ ߜߋ߲߭ ߠߎ߬ ߘߋ߲߰. \
-                    ");
+                $('#afficheur_de_panneau').click(function(e) {
+                    e.stopImmediatePropagation();
+                    if(panneau_status == "masque") { afficherPanneau() }else{ masquerPanneau(); }; 
                 }); 
+                masquerLePanneauDesConsonnes();
       
                 $('#panneaux span').click(function() {
 
@@ -449,44 +435,29 @@ function syllabe() {
                         questions_posees.splice(0,questions_posees.length);
                     } 
                 });
-            }
-            function assistantApprendrePreSyllabe() {
-                
-                setTimeout(() => {
-                    ecrire("notification_corps","ߞߏ߰ߙߌ߫ ߣߘߍ߬ߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬ ߞߊ߬ ߛߌ߬ߙߕߊ߬ ߥߟߊߟߋ߲ ߦߌ߬ߘߊ߬.");
-                }, 1000);
 
-                rendreActif($('#afficheur_de_panneau'));
-
-                $('#afficheur_de_panneau').click(function() {
-                    if(panneau_status == "affiche") {
-                        ecrire("notification_corps","ߛߌ߬ߙߕߊ߬ ߞߋߟߋ߲߫ ߥߟߊ ߛߌߦߊߡߊ߲߫ ߛߎߥߊ߲ߘߌ߫߸ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߡߍ߲ ߜߋ߲߭ ߠߎ߬ ߘߋ߲߰.");
-                    }
-                });
-
-                $('#afficheur_de_panneau, #panneaux, #submit_panneau').click(function() {
-                    if(panneau_status == "masque") {
-                        if(consonnes_choisies.length == 0) {
-                            ecrire("notification_corps","ߞߏ߰ߙߌ߫ ߣߘߍ߬ߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬ ߞߊ߬ ߛߌ߬ߙߕߊ߬ ߥߟߊߟߋ߲ ߦߌ߬ߘߊ߬.");
-                            rendreActif($('#afficheur_de_panneau'));
-                        }
-                    }
-                    if(panneau_status == "masque") {
-                        if(consonnes_choisies.length != 0) {
-                            ecrire("notification_corps","ߜߋ߲߭ ߢߌ߲߬ ߠߎ߫ ߞߋ߬ߟߋ߲߬ ߞߋ߬ߟߋ߲߬ ߘߋ߲߯ ߤߊ߲߯ ߊ߬ߟߎ߬ ߦߋ߫ ߕߴߌ ߞߣߐ߫.");
-                        }
-                    }
-                });
+                function masquerLePanneauDesConsonnes() {
+                    $('#panneaux, #apprentissage_body').click(function(e) {
+                        if(e.target.id != "") { masquerPanneau(); }
+                    });
+                    $('#panneaux').on('mouseleave', function() { masquerPanneau(); });
+                    $('#submit_panneau, .table_parlante').on('click', masquerPanneau);
+                }
             }
             function afficherPanneau(){
                 $('#panneaux').css({'position':'absolute','height':'17rem'});
                 $('#consonnes_cadre').animate({'top':'10px'}, 250);
                 panneau_status = "affiche";
+
+                ecrire("notification_corps",texte_2);
             }
             function masquerPanneau(){
                 $('#consonnes_cadre').animate({'top':'12rem'}, 250);
                 setTimeout(function(){$('#panneaux').css('height',0);}, 250);
                 panneau_status = "masque";
+
+                if($('.table_parlante tr').length == 0) ecrire("notification_corps",texte_1);
+                if($('.table_parlante tr').length != 0) ecrire("notification_corps",texte_3);
             }
         }
         function exercicePreSyllabe() {
@@ -563,7 +534,7 @@ function syllabe() {
 
                     function chargerPreRevisionSyllabeHead() {
                         $('.notification_titre').text('ߜߋ߲߭ ߣߐ߰ߡߊ߬ߛߍߦߌ');
-                        ecrire("notification_corps","ߢߌ߬ߣߌ߲߬ߞߊߟߌ߬ ߞߘߎ ߘߌ߯߭ ߘߎ߭ߡߊ߬߸ ߦߴߌ ߕߟߏߡߊߟߐ߬ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߎ߬ ߟߊ߫ ߞߋߟߋ߲߫ ߞߋߟߋ߲߫߸ ߦߴߊߟߎ߬ ߛߓߍ߫߸ ߦߋ߫ ߓߊ߲߫ ߞߊ߬ ߛߊߞߍߟߌ߫ ߞߘߎ ߘߌ߲߯߸ ߞߵߊ߬ߟߎ߬ ߛߊߞߍ߫.");
+                        ecrire("notification_corps",texte_4);
                     }
                     function chargerPreRevisionSyllabeFoot() {
                         initialisationDEvaluationFoot();
@@ -1258,10 +1229,8 @@ function syllabe() {
                 function assistantDePreExerciceAlphabet() {
 
                     $('#pre_evaluation_bouton').click(function() {
-                        let notification = "ߘߋ߰ߣߍ߲߬ ߞߎߘߊ ߣߌ߫ ߞߘߐ߬ߡߊ߲ ߠߎ߬ ߟߋ߬ ߓߍ߯ ߢߊ߯ߡߌߣߍ߲߫ ߢߐ߲ ߘߐ߫ ߣߌ߲߬ .ߣߴߌ ߛߋ߫ ߘߊ߫ ߞߵߊ߬ߟߎ߬ ߓߍ߯ ߢߊߓߐ߫ ߗߡߍ߬ߘߐ߬ߦߊ߫ ߗߍ߬ߡߍ ߟߊ߫ ߏ߬ߘߐ߬ ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ .ߓߌ߬ߟߊ߬ ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߞߐ߫";
-                        
                         setTimeout(() => {
-                            ecrire('notification_corps',notification);
+                            ecrire('notification_corps',texte_5);
                         }, 1000);
                     });
                     
@@ -1299,20 +1268,6 @@ function syllabe() {
                         //     }
                         // }}
                     });
-                }
-                function assistantDePreExerciceSyllabes() {
-
-                    ecrire("notification_corps"," \
-                        ߞߏ߰ߙߌ߫ ߣߘߍ߬ߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬ ߞߊ߬ ߛߌ߬ߙߕߊ߬ ߥߟߊߟߋ߲ ߦߌ߬ߘߊ߬. \
-                    ");
-
-                    $('#afficheur_de_panneau').click(function() {
-                        ecrire("notification_corps"," \
-                            ߛߌ߬ߙߕߊ߬ ߞߋߟߋ߲߫ ߥߟߊ ߛߌߦߊߡߊ߲߫ ߛߎߥߊ߲ߘߌ߫߸ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߡߍ߲ ߜߋ߲߭ ߠߎ߬ ߘߋ߲߰. \
-                        ");
-                    }); 
-
-                    rendreActif($('#afficheur_de_panneau'));
                 }
                 function assistantDePreExerciceTons() {}
                 function assistantDePreExerciceChiffres() {}
@@ -1429,6 +1384,7 @@ function syllabe() {
         $('#apprentissage_redirection_btns').css('display','none');
         
         $('#afficheur_de_panneau').css({'opacity':1, 'transform':'scale(1)'});
+        rendreActif($('#afficheur_de_panneau'));
     }
     function afficherPreExerciceBtn() {  
         $('#pre_apprentissage_dialogue_btn').css('display','block');

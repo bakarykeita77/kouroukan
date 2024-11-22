@@ -246,11 +246,11 @@ function exercices() {
                     function exerciceResultat() {
 
                         resultat(exercice_a_stocker);
-                        afficherExerciceAlphabetResultat();
+                        afficherExerciceResultat();
                         masquerExerciceAlphabetResultat();
 
                         
-                        function afficherExerciceAlphabetResultat() { 
+                        function afficherExerciceResultat() { 
                             goDown($('.resultat_container')); 
                             setTimeout(() => {
                                 masquer($('#exercice'));

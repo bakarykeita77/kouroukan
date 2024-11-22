@@ -94,7 +94,7 @@ if(isset($_SESSION["id"])) {
                             
                             <div class="parametres_container" id="parametre_lesson_container"> <?php include("parametre.php"); ?> </div>
                             <div id='panneaux'></div>
-                            <div class="dialogue_btns" id="pre_apprentissage_dialogue_btns"></div>
+                            <div class="dialogue_btns" id="apprentissage_dialogue_btns"></div>
                             <div class = 'progress_bar' id="apprentissage_progress_bar">
                                 <div class='progress_bonne_reponse_bar'></div>
                                 <div class='progress_mauvaise_reponse_bar'></div>
@@ -102,6 +102,7 @@ if(isset($_SESSION["id"])) {
                             <div class="redirection_btns" id="apprentissage_redirection_btns">
                                 <span class='redirection_btn' id='pre_apprentissage_bouton'></span> 
                                 <span class='redirection_btn' id='pre_exercice_bouton'></span>
+                                <span class='redirection_btn' id='pre_evaluation_bouton'></span>
                             </div>
                         </div>
                      <!--Fin course ----------------------------------------------- -->

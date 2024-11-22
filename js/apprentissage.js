@@ -1460,11 +1460,11 @@
 
 //                             formatParDefautDuResultat();
 //                             resultat(pre_exercice_memoire);
-//                             afficherExerciceAlphabetResultat();
+//                             afficherExerciceResultat();
 //                             masquerExerciceAlphabetResultat();
 
 
-//                             function afficherExerciceAlphabetResultat() {
+//                             function afficherExerciceResultat() {
 //                                 goDown($('.resultat_container'));
 //                             }
 //                             function masquerExerciceAlphabetResultat() {
@@ -2078,11 +2078,11 @@
 //                                 function exerciceResultat() {
             
 //                                     resultat(exercice_a_stocker);
-//                                     afficherExerciceAlphabetResultat();
+//                                     afficherExerciceResultat();
 //                                     masquerExerciceAlphabetResultat();
             
                                     
-//                                     function afficherExerciceAlphabetResultat() { 
+//                                     function afficherExerciceResultat() { 
 //                                         goDown($('.resultat_container')); 
 //                                         setTimeout(() => {
 //                                             masquer($('#exercice'));

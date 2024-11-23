@@ -358,6 +358,8 @@ function syllabe() {
 
                     let td = $('.table_parlante td');
                     let compteur_de_syllabe = 0;
+                    let apprentissage_width = 0;
+                    let global_clicks_counter = 1;
 
                     initialiserSyllabePreAppriseMemoire(); 
                     $.each(td, function(){         
@@ -389,12 +391,32 @@ function syllabe() {
                                 }
                             }
                             function progressBarApprendrePreSyllabe() {
+                                if(compteur_td_click <= quantite_normale_de_click) {
+
+                                    let clicked_td_length = quantite_normale_de_click*syllabes_en_cours.length;
+                                    let diagramm_unity = 100/clicked_td_length;
+                                    let global_clicks_count = global_clicks_counter++;
+
+                                    apprentissage_width = global_clicks_count*diagramm_unity;
+                                    $('#apprentissage_progress_bar .progress_bonne_reponse_bar').css('width', apprentissage_width+'%');
                                 
+                                //Initialiser la barre de progression
+                                    if(global_clicks_count/quantite_normale_de_click == syllabes_en_cours.length) { 
+                                        setTimeout(() => {
+                                            $('#apprentissage_progress_bar').css('display','none'); 
+                                            $('.progress_bonne_reponse_bar, .progress_mauvaise_reponse_bar').css('width', 0);
+                                            td_click_counter = 0;
+                                            compteur_td_click = 0;
+                                            apprentissage_width = 0;
+                                            global_clicks_counter = 1;
+                                        }, 400);
+                                    }
+                                }
                             }
                             function finDeApprendrePreSyllabe() {
                                 if(compteur_de_syllabe === syllabes_en_cours.length) {
 
-                                    // resultatApprentissagePreSyllabe();
+                                    resultatApprentissagePreSyllabe();
                                     setTimeout(() => { 
                                         $('#apprentissage_dialogue_btns').css('display','none'); 
                                         initialiserProgressBarIntegre();

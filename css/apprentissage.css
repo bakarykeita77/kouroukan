@@ -487,7 +487,7 @@
 .redirection_btn {
     background-color: #fff;
 }
-#pre_evaluation_bouton { z-index: 0; }
+#evaluation_bouton { z-index: 0; }
 #submit_panneau {
     position: relative;
     width: 12rem;

@@ -306,6 +306,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     top: 0.5rem;
     width: calc(100% - 2px);
     height: 4rem;
+    line-height: 4rem;
     padding: 0;
     margin: auto;
     border-radius: 0.5rem;

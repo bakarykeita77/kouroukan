@@ -122,6 +122,7 @@ $('document').ready(function() {
                 $.each(li, function() { 
                     let li_id = $(this).attr('id');
                     indice = ($.inArray(li_id, phases_distinctes) === -1) ? indice : indice+=1;
+                    
                 });              
                 
                 if(indice === 0) ls = "lesson_a_etudier";

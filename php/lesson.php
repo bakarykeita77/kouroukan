@@ -101,8 +101,8 @@ if(isset($_SESSION["id"])) {
                             </div>
                             <div class="redirection_btns" id="apprentissage_redirection_btns">
                                 <span class='redirection_btn' id='pre_apprentissage_bouton'></span> 
-                                <span class='redirection_btn' id='pre_exercice_bouton'></span>
-                                <span class='redirection_btn' id='pre_evaluation_bouton'></span>
+                                <span class='redirection_btn' id='exercice_bouton'></span>
+                                <span class='redirection_btn' id='evaluation_bouton'></span>
                             </div>
                         </div>
                      <!--Fin course ----------------------------------------------- -->
@@ -125,9 +125,9 @@ if(isset($_SESSION["id"])) {
                         <div class="course_foot" id="exercice_foot">
 
                             <div class="dialogue_btns" id="exercice_dialogue_btns">
-                                <div id="exercice_question_btn"></div>
-                                <div id="exercice_repeter_question_btn"></div>
-                                <div id="exercice_correction_btn">ߏ߬ ߛߊߞߍ߫</div>
+                                <div class="question_btn" id="exercice_question_btn"></div>
+                                <div class="repeter_question_btn" id="exercice_repeter_question_btn"></div>
+                                <div class="correction_btn" id="exercice_correction_btn">ߏ߬ ߛߊߞߍ߫</div>
                             </div>
                         </div>
                     </div>
@@ -140,8 +140,8 @@ if(isset($_SESSION["id"])) {
 
                  <!--Redirection boutons ---------------------------------------------------------- -->
                     <div class="redirection_btns" id="exercice_redirection_btns">
-                        <span class='redirection_btn' id='reprendre_pre_exercice_bouton'></span>
-                        <span class='redirection_btn' id='pre_revision_bouton'></span> 
+                        <span class='redirection_btn' id='reprendre_exercice_bouton'></span>
+                        <span class='redirection_btn' id='revision_bouton'></span> 
                     </div>
                 </div>
               <!------------------------------------------------------------------------------------------------------------------------------>
@@ -160,9 +160,9 @@ if(isset($_SESSION["id"])) {
                         <!--Course foot ------------------------------------------------------------------ -->
                         <div class="course_foot" id="revision_foot">
                             <div class="dialogue_btns" id="revision_dialogue_btns">
-                                <div id="revision_question_btn"></div>
-                                <div id="revision_repeter_question_btn"></div>
-                                <div id="revision_correction_btn">ߏ߬ ߛߊߞߍ߫</div>
+                                <div class="question_btn" id="revision_question_btn"></div>
+                                <div class="repeter_question_btn" id="revision_repeter_question_btn"></div>
+                                <div class="correction_btn" id="revision_correction_btn">ߏ߬ ߛߊߞߍ߫</div>
                             </div>
                         </div>
                     </div>
@@ -175,8 +175,8 @@ if(isset($_SESSION["id"])) {
 
                     <!--Redirection boutons ---------------------------------------------------------- -->
                     <div class="redirection_btns" id="revision_redirection_btns">
-                        <span class='redirection_btn' id='reprendre_pre_revision_bouton'></span>
-                        <span class='redirection_btn' id='pre_evaluation_bouton'></span> 
+                        <span class='redirection_btn' id='reprendre_revision_bouton'></span>
+                        <span class='redirection_btn' id='evaluation_bouton'></span> 
                         <span class='redirection_btn' id='syllabe_bouton'><a href="http://localhost/kouroukan/php/programmes.php">ߜߋ߲߭ ߘߋ߲߰ߠߌ ߘߊߡߌ߬ߘߊ߬</a></span> 
                     </div>
                 </div>
@@ -235,21 +235,9 @@ if(isset($_SESSION["id"])) {
                         <div class="clavier_container" id="clavier_evaluation"><?php include "clavier.php"; ?></div>
 
                         <div class="dialogue_btns" id="evaluation_dialogue_btns">
-                            <div class="question_btn">
-                                <span class="question_label"></span>
-                                <span class="question_total"></span> :
-                                <span class="question_ordre"></span>
-                                <span class="question_action"></span>
-                                <span class="question_icon"></span>
-                            </div>
-                            <div class="repetition_btn">
-                                <span class="repetition_label">ߊ߬ ߟߊߡߍ߲߫ ߕߎ߯ߣߌ߫</span>
-                                <span class="repetition_icon"></span>
-                            </div>
-                            <div class="correction_btn">
-                                <span class="correction_label">ߏ߬ ߛߊߞߍ߫</span>
-                                <span class="correction_icon"></span>
-                            </div>
+                                <div class="question_btn" id="evaluation_question_btn"></div>
+                                <div class="repeter_question_btn" id="evaluation_repeter_question_btn"></div>
+                                <div class="correction_btn" id="evaluation_correction_btn">ߏ߬ ߛߊߞߍ߫</div>
                             <div class="progress_bar_integre">
                                 <div class="progress_bonne_reponse_bar_integre"></div>
                                 <div class="progress_mauvaise_reponse_bar_integre"></div>

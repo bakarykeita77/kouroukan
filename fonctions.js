@@ -106,12 +106,47 @@
         element.animate({'width':largeur, 'height':hauteur}, temps);
     }
     function afficherEvaluation() {
+        let td_total = $('#evaluation_body table td').length;
+        $('.course_container').css({'display':'block'});
+
         masquer($('.course'));
-        $('#apprentissage_container').css('display','none');
-        $('#exercice_container').css('display','none');
-        $('#revision_container').css('display','none');
-        $('#evaluation_container').css('display','block');
-        setTimeout(() => { displayv($('.course')); }, 50);
+        setTimeout(() => { 
+            displayv($('.course'));
+
+            $('#apprentissage_container').css('display','none');
+            $('#exercice_container').css('display','block');
+            $('#revision_container').css('display','none');
+            $('#evaluation_container').css('display','none');
+                
+            setTimeout(() => { displayv($('.course_head')); }, 60);
+            setTimeout(() => { 
+                displayv($('.body_cadre'));
+
+                setTimeout(() => { 
+                    $('.course_body').css({'display':'block'});
+                    affichageAnimeDeTableTd($('.course_body table')); 
+                }, 60); 
+                setTimeout(() => { 
+                    $('.course_foot').css('display','block'); 
+                    displayv($('.dialogue_btns'));
+                    setTimeout(() => {
+                        $('.question_btn').css('display','block'); 
+                        $('.repeter_question_btn').css('display','none'); 
+                        $('.correction_btn').css('display','none');
+                    }, 200); 
+                }, (400 + td_total*60)); 
+            }, 600);
+            setTimeout(() => { displayv($('.progress_bar')); }, (1600 + td_total*60));
+            $('.redirection_btns').css('display','none');
+        }, 50);
+        
+        masquer($('.redirection_btns'));
+
+        setTimeout(() => { 
+            setTimeout(() => { displayv($('.dialogue_btns')); }, 300);
+            setTimeout(() => { indexer($('.question_btn'));   }, 300);
+            setTimeout(() => { displayv($('.progress_bar'));  }, 600);
+        }, 1200);
     }
     function afficherEvaluationAlphabet() {
 
@@ -140,7 +175,7 @@
         }, 1500);
     }
     function afficherExercice() {
-        
+        let td_total = $('#exercice_body table td').length;
         $('.course_container').css({'display':'block'});
 
         masquer($('.course'));
@@ -152,36 +187,34 @@
             $('#revision_container').css('display','none');
             $('#evaluation_container').css('display','none');
                 
-            setTimeout(() => { displayv($('#exercice_head')); }, 100);
+            setTimeout(() => { displayv($('.course_head')); }, 60);
             setTimeout(() => { 
-                displayv($('#exercice_body_cadre'));
-                $('#exercice_progress_bar').css('display','none');
-                $('#redirection_btns').css('display','none');
+                displayv($('.body_cadre'));
 
-                $('#exercice_body').css({'display':'block'});
                 setTimeout(() => { 
-                    affichageAnimeDeTableTd($('#exercice_body table')); 
-                }, 200); 
+                    $('.course_body').css({'display':'block'});
+                    affichageAnimeDeTableTd($('.course_body table')); 
+                }, 60); 
                 setTimeout(() => { 
-                    $('#exercice_foot').css('display','block'); 
-                    displayv($('#exercice_dialogue_btns'));
+                    $('.course_foot').css('display','block'); 
+                    displayv($('.dialogue_btns'));
                     setTimeout(() => {
-                        $('#exercice_question_btn').css('display','block'); 
-                        $('#exercice_repeter_question_btn').css('display','none'); 
-                        $('#exercice_correction_btn').css('display','none');
-                    }, 100); 
-                }, 400); 
-            }, 400);
+                        $('.question_btn').css('display','block'); 
+                        $('.repeter_question_btn').css('display','none'); 
+                        $('.correction_btn').css('display','none');
+                    }, 200); 
+                }, (400 + td_total*60)); 
+            }, 600);
+            setTimeout(() => { displayv($('.progress_bar')); }, (1600 + td_total*60));
+            $('.redirection_btns').css('display','none');
         }, 50);
         
-
-
-        masquer($('#exercice_redirection_btns'));
+        masquer($('.redirection_btns'));
 
         setTimeout(() => { 
-            setTimeout(() => { displayv($('#exercice_dialogue_btns')); }, 300);
-            setTimeout(() => { indexer($('#exercice_question_btn'));   }, 300);
-            setTimeout(() => { displayv($('#exercice_progress_bar'));  }, 600);
+            setTimeout(() => { displayv($('.dialogue_btns')); }, 300);
+            setTimeout(() => { indexer($('.question_btn'));   }, 300);
+            setTimeout(() => { displayv($('.progress_bar'));  }, 600);
         }, 1200);
     }
     function afficherList(ul) {
@@ -195,14 +228,48 @@
         });
     }
     function afficherRevision() {
-        masquer($('.course'));
+        let td_total = $('#revision_body table td').length;
         $('.course_container').css({'display':'block'});
 
-        $('#apprentissage_container').css('display','none');
-        $('#exercice_container').css('display','none');
-        $('#revision_container').css('display','block');
-        $('#evaluation_container').css('display','none');
-        setTimeout(() => { displayv($('.course')); }, 600);
+        masquer($('.course'));
+        setTimeout(() => { 
+            displayv($('.course'));
+
+            $('#apprentissage_container').css('display','none');
+            $('#exercice_container').css('display','none');
+            $('#revision_container').css('display','block');
+            $('#evaluation_container').css('display','none');
+                
+            setTimeout(() => { displayv($('.course_head')); }, 60);
+            setTimeout(() => { 
+                displayv($('.body_cadre'));
+
+                $('.course_body').css({'display':'none'});
+                setTimeout(() => { 
+                    $('.course_body').css({'display':'block'});
+                    affichageAnimeDeTableTd($('.course_body table')); 
+                }, 60); 
+                setTimeout(() => { 
+                    $('.course_foot').css('display','block'); 
+                    displayv($('.dialogue_btns'));
+                    setTimeout(() => {
+                        $('.question_btn').css('display','block'); 
+                        $('.repeter_question_btn').css('display','none'); 
+                        $('.correction_btn').css('display','none');
+                    }, 200); 
+                }, (400 + td_total*60)); 
+            }, 600);
+            setTimeout(() => { displayv($('.progress_bar')); }, (1600 + td_total*60));
+            $('.redirection_btns').css('display','none');
+        }, 50);
+        
+        masquer($('.redirection_btns'));
+
+        setTimeout(() => { 
+            setTimeout(() => { displayv($('.dialogue_btns')); }, 300);
+            setTimeout(() => { indexer($('.question_btn'));   }, 300);
+            setTimeout(() => { displayv($('.progress_bar'));  }, 600);
+        }, 1200);
     }
 	function aggrandir_caractere_de(element) { element.css( 'font-size','+=32px' ); }
 	function appetir_caractere_de(element) { element.css( 'font-size','-=32px' ); } 
@@ -505,6 +572,46 @@
                 zoomUp($('#exercices_player'));
             }, 200);
         });
+    }
+    function gestionDeDialogueBtns() {
+
+        let question_status = 'repondue';
+
+        rendreActif($('.question_btn'));
+
+        $('.question_btn').click(function() { 
+            question_status = 'posee';
+            $(this).css('display','none');
+            $('.correction_btn').css('display','none');
+            setTimeout(() => { 
+                $('.repeter_question_btn').css('display','block'); 
+                rendreActif($('.repeter_question_btn'));
+            }, 200);
+        });
+
+        $('.table_parlante td').click(function() {
+            if(question_status == 'repondue') {
+                secouer($('.question_btn'));
+                return;
+            }
+
+            $('.question_btn').css('display','none');
+            $('.repeter_question_btn').css('display','none');
+            setTimeout(() => { 
+                $('.correction_btn').css('display','block'); 
+                rendreActif($('.correction_btn'));
+            }, 200);
+        });
+
+        $('.correction_btn').click(function() { 
+            question_status = 'repondue';
+            $('.repeter_question_btn').css('display','none');
+            $('.correction_btn').css('display','none');
+            setTimeout(() => { 
+                $('.question_btn').css('display','block'); 
+                rendreActif($('.question_btn'));
+            }, 200);
+        });               
     }
     function gestionDeExerciceBtns() {
 

@@ -118,34 +118,32 @@
             $('#revision_container').css('display','none');
             $('#evaluation_container').css('display','none');
                 
-            setTimeout(() => { displayv($('.course_head')); }, 60);
+            setTimeout(() => { displayv($('#evaluation_head')); }, 60);
             setTimeout(() => { 
-                displayv($('.body_cadre'));
-
                 setTimeout(() => { 
-                    $('.course_body').css({'display':'block'});
-                    affichageAnimeDeTableTd($('.course_body table')); 
+                    $('#evaluation_body').css({'display':'block'});
+                    affichageAnimeDeTableTd($('#evaluation_body table')); 
                 }, 60); 
                 setTimeout(() => { 
-                    $('.course_foot').css('display','block'); 
-                    displayv($('.dialogue_btns'));
+                    $('#evaluation_foot').css('display','block'); 
+                    displayv($('#evaluation_dialogue_btns'));
                     setTimeout(() => {
-                        $('.question_btn').css('display','block'); 
-                        $('.repeter_question_btn').css('display','none'); 
-                        $('.correction_btn').css('display','none');
+                        $('#evaluation_question_btn').css('display','block'); 
+                        $('#evaluation_repetition_btn').css('display','none'); 
+                        $('#evaluation_correction_btn').css('display','none');
                     }, 200); 
                 }, (400 + td_total*60)); 
             }, 600);
-            setTimeout(() => { displayv($('.progress_bar')); }, (1600 + td_total*60));
-            $('.redirection_btns').css('display','none');
+            setTimeout(() => { displayv($('#evaluation_progress_bar')); }, (1600 + td_total*60));
+            $('#evaluation_redirection_btns').css('display','none');
         }, 50);
         
-        masquer($('.redirection_btns'));
+        masquer($('#evaluation_redirection_btns'));
 
         setTimeout(() => { 
-            setTimeout(() => { displayv($('.dialogue_btns')); }, 300);
-            setTimeout(() => { indexer($('.question_btn'));   }, 300);
-            setTimeout(() => { displayv($('.progress_bar'));  }, 600);
+            setTimeout(() => { displayv($('#evaluation_dialogue_btns')); }, 300);
+            setTimeout(() => { indexer($('#evaluation_question_btn'));   }, 300);
+            setTimeout(() => { displayv($('#evaluation_progress_bar'));  }, 600);
         }, 1200);
     }
     function afficherEvaluationAlphabet() {
@@ -176,7 +174,7 @@
     }
     function afficherExercice() {
         let td_total = $('#exercice_body table td').length;
-        $('.course_container').css({'display':'block'});
+        $('#exercice_course_container').css({'display':'block'});
 
         masquer($('.course'));
         setTimeout(() => { 
@@ -187,34 +185,34 @@
             $('#revision_container').css('display','none');
             $('#evaluation_container').css('display','none');
                 
-            setTimeout(() => { displayv($('.course_head')); }, 60);
+            setTimeout(() => { displayv($('#exercice_course_head')); }, 60);
             setTimeout(() => { 
-                displayv($('.body_cadre'));
+                displayv($('#exercice_body_cadre'));
 
                 setTimeout(() => { 
-                    $('.course_body').css({'display':'block'});
-                    affichageAnimeDeTableTd($('.course_body table')); 
+                    $('#exercice_body').css({'display':'block'});
+                    affichageAnimeDeTableTd($('#exercice_body table')); 
                 }, 60); 
                 setTimeout(() => { 
-                    $('.course_foot').css('display','block'); 
-                    displayv($('.dialogue_btns'));
+                    $('#exercice_foot').css('display','block'); 
+                    displayv($('#exercice_dialogue_btns'));
                     setTimeout(() => {
-                        $('.question_btn').css('display','block'); 
-                        $('.repeter_question_btn').css('display','none'); 
-                        $('.correction_btn').css('display','none');
+                        $('#exercice_question_btn').css('display','block'); 
+                        $('#exercice_repetition_btn').css('display','none'); 
+                        $('#exercice_correction_btn').css('display','none');
                     }, 200); 
                 }, (400 + td_total*60)); 
             }, 600);
-            setTimeout(() => { displayv($('.progress_bar')); }, (1600 + td_total*60));
-            $('.redirection_btns').css('display','none');
+            setTimeout(() => { displayv($('#exercice_progress_bar')); }, (1600 + td_total*60));
+            $('#exercice_redirection_btns').css('display','none');
         }, 50);
         
-        masquer($('.redirection_btns'));
+        masquer($('#exercice_redirection_btns'));
 
         setTimeout(() => { 
-            setTimeout(() => { displayv($('.dialogue_btns')); }, 300);
-            setTimeout(() => { indexer($('.question_btn'));   }, 300);
-            setTimeout(() => { displayv($('.progress_bar'));  }, 600);
+            setTimeout(() => { displayv($('#exercice_dialogue_btns')); }, 300);
+            setTimeout(() => { indexer($('#exercice_question_btn'));   }, 300);
+            setTimeout(() => { displayv($('#exercice_progress_bar'));  }, 600);
         }, 1200);
     }
     function afficherList(ul) {
@@ -229,6 +227,7 @@
     }
     function afficherRevision() {
         let td_total = $('#revision_body table td').length;
+       
         $('.course_container').css({'display':'block'});
 
         masquer($('.course'));
@@ -240,35 +239,34 @@
             $('#revision_container').css('display','block');
             $('#evaluation_container').css('display','none');
                 
-            setTimeout(() => { displayv($('.course_head')); }, 60);
+            setTimeout(() => { displayv($('#revision_head')); }, 60);
             setTimeout(() => { 
-                displayv($('.body_cadre'));
+                displayv($('#revision_body_cadre'));
 
-                $('.course_body').css({'display':'none'});
                 setTimeout(() => { 
-                    $('.course_body').css({'display':'block'});
-                    affichageAnimeDeTableTd($('.course_body table')); 
+                    $('#revision_body').css({'display':'block'});
+                    affichageAnimeDeTableTd($('#revision_body table')); 
                 }, 60); 
                 setTimeout(() => { 
-                    $('.course_foot').css('display','block'); 
-                    displayv($('.dialogue_btns'));
+                    $('#revision_foot').css('display','block'); 
+                    displayv($('#revision_dialogue_btns'));
                     setTimeout(() => {
-                        $('.question_btn').css('display','block'); 
-                        $('.repeter_question_btn').css('display','none'); 
-                        $('.correction_btn').css('display','none');
+                        $('#revision_question_btn').css('display','block'); 
+                        $('#revision_repetition_btn').css('display','none'); 
+                        $('#revision_correction_btn').css('display','none');
                     }, 200); 
                 }, (400 + td_total*60)); 
             }, 600);
-            setTimeout(() => { displayv($('.progress_bar')); }, (1600 + td_total*60));
-            $('.redirection_btns').css('display','none');
+            setTimeout(() => { displayv($('#revision_progress_bar')); }, (1600 + td_total*60));
+            $('#revision_redirection_btns').css('display','none');
         }, 50);
         
-        masquer($('.redirection_btns'));
+        masquer($('#revision_redirection_btns'));
 
         setTimeout(() => { 
-            setTimeout(() => { displayv($('.dialogue_btns')); }, 300);
-            setTimeout(() => { indexer($('.question_btn'));   }, 300);
-            setTimeout(() => { displayv($('.progress_bar'));  }, 600);
+            setTimeout(() => { displayv($('#revision_dialogue_btns')); }, 300);
+            setTimeout(() => { indexer($('#revision_question_btn'));   }, 300);
+            setTimeout(() => { displayv($('#revision_progress_bar'));  }, 600);
         }, 1200);
     }
 	function aggrandir_caractere_de(element) { element.css( 'font-size','+=32px' ); }
@@ -516,7 +514,7 @@
         
         if(i <= total_questions) { 
 
-            masquer($('#exercice_repeter_question_btn'));
+            masquer($('#exercice_repetition_btn'));
             masquer($('#exercice_correction_btn'));
             afficher($('#exercice_question_btn'));
             rendreActif($('#exercice_question_btn'));
@@ -524,19 +522,19 @@
             $('#exercice_question_btn').click(function() { 
                 masquer($('#exercice_question_btn'));
                 masquer($('#exercice_correction_btn'));
-                rendreActif($('#exercice_repeter_question_btn'));
-                afficher($('#exercice_repeter_question_btn')); 
+                rendreActif($('#exercice_repetition_btn'));
+                afficher($('#exercice_repetition_btn')); 
             });
 
             $('#exercice_body td').click(function() {
                 masquer($('#exercice_question_btn'));
-                masquer($('#exercice_repeter_question_btn'));
+                masquer($('#exercice_repetition_btn'));
                 rendreActif($('#exercice_correction_btn'));
                 afficher($('#exercice_correction_btn')); 
             });
 
             $('#exercice_correction_btn').click(function() { 
-                masquer($('#exercice_repeter_question_btn'));
+                masquer($('#exercice_repetition_btn'));
                 masquer($('#exercice_correction_btn'));
  
                 if(i < total_questions - 1) { rendreActif($('#exercice_question_btn')); }
@@ -584,8 +582,8 @@
             $(this).css('display','none');
             $('.correction_btn').css('display','none');
             setTimeout(() => { 
-                $('.repeter_question_btn').css('display','block'); 
-                rendreActif($('.repeter_question_btn'));
+                $('.repetition_btn').css('display','block'); 
+                rendreActif($('.repetition_btn'));
             }, 200);
         });
 
@@ -596,7 +594,7 @@
             }
 
             $('.question_btn').css('display','none');
-            $('.repeter_question_btn').css('display','none');
+            $('.repetition_btn').css('display','none');
             setTimeout(() => { 
                 $('.correction_btn').css('display','block'); 
                 rendreActif($('.correction_btn'));
@@ -605,7 +603,7 @@
 
         $('.correction_btn').click(function() { 
             question_status = 'repondue';
-            $('.repeter_question_btn').css('display','none');
+            $('.repetition_btn').css('display','none');
             $('.correction_btn').css('display','none');
             setTimeout(() => { 
                 $('.question_btn').css('display','block'); 
@@ -624,8 +622,8 @@
             $(this).css('display','none');
             $('#exercice_correction_btn').css('display','none');
             setTimeout(() => { 
-                $('#exercice_repeter_question_btn').css('display','block'); 
-                rendreActif($('#exercice_repeter_question_btn'));
+                $('#exercice_repetition_btn').css('display','block'); 
+                rendreActif($('#exercice_repetition_btn'));
             }, 200);
         });
 
@@ -636,7 +634,7 @@
             }
 
             $('#exercice_question_btn').css('display','none');
-            $('#exercice_repeter_question_btn').css('display','none');
+            $('#exercice_repetition_btn').css('display','none');
             setTimeout(() => { 
                 $('#exercice_correction_btn').css('display','block'); 
                 rendreActif($('#exercice_correction_btn'));
@@ -645,7 +643,7 @@
 
         $('#exercice_correction_btn').click(function() { 
             question_status = 'repondue';
-            $('#exercice_repeter_question_btn').css('display','none');
+            $('#exercice_repetition_btn').css('display','none');
             $('#exercice_correction_btn').css('display','none');
             setTimeout(() => { 
                 $('#exercice_question_btn').css('display','block'); 

@@ -126,7 +126,7 @@ if(isset($_SESSION["id"])) {
 
                             <div class="dialogue_btns" id="exercice_dialogue_btns">
                                 <div class="question_btn" id="exercice_question_btn"></div>
-                                <div class="repeter_question_btn" id="exercice_repeter_question_btn"></div>
+                                <div class="repetition_btn" id="exercice_repetition_btn"></div>
                                 <div class="correction_btn" id="exercice_correction_btn">ߏ߬ ߛߊߞߍ߫</div>
                             </div>
                         </div>
@@ -161,7 +161,7 @@ if(isset($_SESSION["id"])) {
                         <div class="course_foot" id="revision_foot">
                             <div class="dialogue_btns" id="revision_dialogue_btns">
                                 <div class="question_btn" id="revision_question_btn"></div>
-                                <div class="repeter_question_btn" id="revision_repeter_question_btn"></div>
+                                <div class="repetition_btn" id="revision_repetition_btn"></div>
                                 <div class="correction_btn" id="revision_correction_btn">ߏ߬ ߛߊߞߍ߫</div>
                             </div>
                         </div>
@@ -236,7 +236,7 @@ if(isset($_SESSION["id"])) {
 
                         <div class="dialogue_btns" id="evaluation_dialogue_btns">
                                 <div class="question_btn" id="evaluation_question_btn"></div>
-                                <div class="repeter_question_btn" id="evaluation_repeter_question_btn"></div>
+                                <div class="repetition_btn" id="evaluation_repetition_btn"></div>
                                 <div class="correction_btn" id="evaluation_correction_btn">ߏ߬ ߛߊߞߍ߫</div>
                             <div class="progress_bar_integre">
                                 <div class="progress_bonne_reponse_bar_integre"></div>

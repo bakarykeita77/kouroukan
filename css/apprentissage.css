@@ -350,7 +350,7 @@
     font-weight: bold;
 }
 #apprentissage_progress_bar { top: 0.5rem; }
-#exercice_question_btn, #exercice_repeter_question_btn, #exercice_correction_btn {
+#exercice_question_btn, #exercice_repetition_btn, #exercice_correction_btn {
     position: relative;
     display: none;
     bottom: 0;
@@ -363,8 +363,8 @@
     cursor: pointer;
     transition: 0.2s;
 }
-#exercice_question_btn:active, #exercice_repeter_question_btn:active { box-shadow: none; }
-#exercice_repeter_question_btn { display: none; }
+#exercice_question_btn:active, #exercice_repetition_btn:active { box-shadow: none; }
+#exercice_repetition_btn { display: none; }
 #resultat_corps{
     padding: 0 0.5rem;
     border-left: 0.5rem solid #aaa;

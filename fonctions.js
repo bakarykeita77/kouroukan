@@ -357,7 +357,7 @@
         var note_d_exercice = 0;
        
         for (var i = 0; i < data.length; i++) {
-        if(data[i] !== undefined) {
+        if(data[i] != undefined) {
             if(data[i][2] == 1) {
                 note_d_exercice ++;
             }
@@ -707,6 +707,16 @@
             element.click(function() { clearInterval(r); $(this).removeClass('indicateur'); });
         }
     }
+    function initialiserDataAStocker(tableau) {
+        let data = [];
+        for(let i=0; i<tableau.length; i++) {
+            let qr = tableau[i];
+            let rr = '';
+            let pr = 0;
+            data.push([qr, rr, pr]);
+        }
+        return data;
+    }
     function initialiserProgressBar() { 
         setTimeout(() => { 
             $('.progress_bar').css('display','none');
@@ -903,6 +913,12 @@
     
         return mixted_table;
     }
+    function marquerReponse(td_actif,question) {
+        let reponse = td_actif.text();
+        $('.table_parlante td').css('background-color','rgba(85,85,85,0.25)');
+        if(question == reponse) { accorder(td_actif); }
+        if(question != reponse) { barrer(td_actif); }
+    }
     function masquer(element) {
         element.css({
             'display':'none',
@@ -1034,6 +1050,14 @@
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
 
+    function questions(tableau) {
+        let qr = [];
+        for(let i=0; i<tableau.length; i++) {
+            qr.push(tableau[i][0]);
+        }
+        qr = malaxer(qr);
+        return qr;
+    }
     
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
@@ -1050,6 +1074,12 @@
         setTimeout(() => { button.css('box-shadow','0 0 3rem #000'); }, 800);
         setTimeout(() => { button.css('box-shadow','none'); }, 900);
         setTimeout(() => { button.css('box-shadow','0 0 1rem #666'); }, 1000);
+    }
+    function rectificationDeReponse(text_container,texte) {
+        $('.correcteur').on('click',function() {
+            texte.pop();
+            text_container.html(texte);
+        });
     }
     function refuser(element) {
         

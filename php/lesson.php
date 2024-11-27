@@ -175,6 +175,7 @@ if(isset($_SESSION["id"])) {
 
                     <!--Redirection boutons ---------------------------------------------------------- -->
                     <div class="redirection_btns" id="revision_redirection_btns">
+                        <span class='redirection_btn' id='apprentissage_bouton'></span> 
                         <span class='redirection_btn' id='reprendre_revision_bouton'></span>
                         <span class='redirection_btn' id='evaluation_bouton'></span> 
                         <span class='redirection_btn' id='syllabe_bouton'><a href="http://localhost/kouroukan/php/programmes.php">ߜߋ߲߭ ߘߋ߲߰ߠߌ ߘߊߡߌ߬ߘߊ߬</a></span> 

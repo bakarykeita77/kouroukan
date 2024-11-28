@@ -1018,6 +1018,10 @@
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
     
+    function paire(nombre) {
+        let test = (nombre%2 === 0) ? true : false;
+        return test;
+    }
     function parseIntNko(nombre_a_convertir){
         var numberToString = String(nombre_a_convertir);
         var stringToTable = numberToString.split('');

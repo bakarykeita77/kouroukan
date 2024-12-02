@@ -83,7 +83,14 @@ if(isset($_SESSION["id"])) {
                      <!--Course head ---------------------------------------------- -->
                         <div class="course_head" id="apprentissage_head">
                             <div class="notification">
-                                <h2 class="notification_titre"></h2>
+                                <h2 class="notification_titre"></h2> 
+                                <div class="modificateur_de_choix">
+                                    <p class="modificateur_de_choix_btn">&#8942;</p>
+                                    <div class="modificateur_de_choix_message">
+                                        <p>ߌ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߘߋ߲߰ߠߌ ߞߍߢߊ ߡߊߝߊ߬ߟߋ߲߬ ؟</p>
+                                        <div><button>ߐ߬ߤߐ߲߫</button> <button>ߍ߬ߍ߫ߍ߲߬</button></div>
+                                    </div>
+                                </div>
                                 <div class="notification_corps"></div>
                             </div>
                         </div>

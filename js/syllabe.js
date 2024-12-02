@@ -344,6 +344,23 @@ function syllabe() {
                     displayv($('#apprentissage_foot')); 
                     setTimeout(() => { afficherPreApprentissageBtns(); }, 100);
                 }, 1200);
+
+                $('.modificateur_de_choix_btn').on('click', function(){
+                    if($('.modificateur_de_choix_message').css('display') == 'none') {
+                        $('.modificateur_de_choix_message').css({'display':'block', 'height':'5rem'});
+                    }else{
+                        $('.modificateur_de_choix_message').css('height',0);
+                        setTimeout(() => { $('.modificateur_de_choix_message').css('display','none'); }, 100);
+                    }
+                });
+
+                $('.modificateur_de_choix_message button').click(function() {
+                    $('.modificateur_de_choix_message').css('height',0);
+                    setTimeout(() => { $('.modificateur_de_choix_message').css('display','none'); }, 100);
+                });
+                $('.modificateur_de_choix_message button:first-child').click(function() {
+                    console.log('Changer option');
+                });
             }
             function apprendrePreSyllabe() { 
 
@@ -984,7 +1001,6 @@ function syllabe() {
                 function preRevisionSyllabe() {
 
                     let clicked_response_element = '';
-                    // let s = JSON.parse(sessionStorage.getItem('syllabes_a_reviser'));
 
                     questions_revision = malaxer(syllabes_a_reviser);
                     revision_a_stocker = initialiserDataAStocker(questions_revision);

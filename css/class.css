@@ -674,7 +674,7 @@ del {
     width: 10rem;
     height: 0;
     background-color: #fff;
-    overflow: auto;
+    overflow: hidden;
     box-shadow: 0 0 0.5rem #666;
     transition: 0.1s;
 }

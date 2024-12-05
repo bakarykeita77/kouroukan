@@ -257,7 +257,7 @@
                     }, 200); 
                 }, (400 + td_total*60)); 
             }, 600);
-            setTimeout(() => { displayv($('#revision_progress_bar')); }, (1600 + td_total*60));
+            setTimeout(() => { displayv($('#revision_progress_bar')); }, (1800 + td_total*60));
             $('#revision_redirection_btns').css('display','none');
         }, 50);
         

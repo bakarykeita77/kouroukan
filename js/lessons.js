@@ -191,7 +191,7 @@ $('document').ready(function() {
                 sessionStorage.setItem("autorisation_d_acces_aux_cours", JSON.stringify(autorisation_d_acces_aux_cours));
 
             /*--------------------------------------------------------------------*/ 
-console.log(niveau_actif);                        
+                       
                 if(phase_class == "apprises") {
                     if(phase_nom != 'ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ') {
                         alert(matiere_nom+" "+phase_nom+" ߢߌ߲߬ ߞߍߣߍ߲߫ ߞߘߐ ߟߋ߬"); 

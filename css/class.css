@@ -235,7 +235,10 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     float: left;
     transition: 0.2s; 
 }
-.correction_btn { cursor: pointer; }
+.correction_btn { 
+    box-shadow: 0 0 0.5rem #666;
+    cursor: pointer; 
+}
 .course {    
     position: relative;
     display: none;
@@ -316,7 +319,6 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     border-radius: 0.5rem;
     font-weight: bold;
     text-align: center;
-    border: 1px solid #ccc;
     z-index: 1;
 }
 .dialogue_btns > div:not(.progress_bar_integre) {
@@ -949,7 +951,10 @@ del {
 .progress_question_bar { background-color: #bbb; }
 
 /* --------------------------------------------------------------------------------------------------------- */
-.question_btn { cursor: pointer; }
+.question_btn { 
+    box-shadow: 0 0 0.5rem #666;
+    cursor: pointer; 
+}
 
 /* --------------------------------------------------------------------------------------------------------- */
 .redirection_btns { 
@@ -963,17 +968,22 @@ del {
 .redirection_btns span { 
     position: relative;
     top: 1rem;
-    display: block;
+    display: none;
     margin: 0 auto;
     padding: 0 3rem;
     height: 4rem;
     line-height: 4rem;
     width: max-content;
     border-radius: 0.5rem;
+    box-shadow: 0 0 0.5rem #666;
     cursor: pointer;
     transition: 0.3s;
 }
-.repetition_btn { display: none; cursor: pointer; }
+.repetition_btn { 
+    display: none; 
+    cursor: pointer; 
+    box-shadow: 0 0 0.5rem #666;
+}
 .right { float: right; }
 .resultat_container {
     position: absolute;

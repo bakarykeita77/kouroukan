@@ -913,6 +913,11 @@
     
         return mixted_table;
     }
+    function marquerLaConsonneCliquee(clicked_consonne_container) {
+        var bc = clicked_consonne_container.css('background-color');
+        var consonne_background = (bc == 'rgb(170, 170, 170)') ? '#fff' : 'rgb(170, 170, 170)';
+        clicked_consonne_container.css('background-color',consonne_background);
+    }
     function marquerReponse(td_actif,question) {
         let reponse = td_actif.text();
         $('.table_parlante td').css('background-color','rgba(85,85,85,0.25)');

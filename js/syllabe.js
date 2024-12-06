@@ -34,7 +34,6 @@ function syllabe() {
     let nbr_raisonnable_de_click = 1;
     let clicked_elements_quantity = 0;
    
-console.log('lesson_option = '+lesson_option);
     
     if(niveau_actif < 3) {
         switch(lesson_option) {
@@ -163,7 +162,7 @@ console.log('lesson_option = '+lesson_option);
                     function chargementDuTableauNoir() {
                     
                         initialiserConsonnesChoisies();
-
+console.log('consonnes_choisies = '+consonnes_choisies);
                         $('#panneaux span').click(function() {
 
                             var clicked_consonne_container = $(this);
@@ -181,7 +180,7 @@ console.log('lesson_option = '+lesson_option);
                                 return; 
                             }
 
-                            marquerLaConsonneCliquee();
+                            marquerLaConsonneCliquee(clicked_consonne_container);
                             decocherLesConsonnes();
                             decocherLaNasalisation();
                             afficherTableauNoir();
@@ -190,11 +189,6 @@ console.log('lesson_option = '+lesson_option);
                             progressBarrApprendrePreSyllabe();
 
                         
-                            function marquerLaConsonneCliquee() {
-                                var bc = clicked_consonne_container.css('background-color');
-                                var consonne_background = (bc == 'rgb(170, 170, 170)') ? '#fff' : 'rgb(170, 170, 170)';
-                                clicked_consonne_container.css('background-color',consonne_background);
-                            }
                             function decocherLesConsonnes() {
                                 if($('#consonnes_checker').find('.checkbox_parent').prop("checked") == true) { $('#consonnes_checker').find('.checkbox_parent').next().click(); }            
                             }
@@ -943,16 +937,19 @@ console.log('lesson_option = '+lesson_option);
 
                             function syllabesAReviser() {
 
-                                syllabes_nouvellement_apprises = malaxer(syllabesNouvellementapprises());
-                                syllabes_anciennement_apprises = malaxer(syllabesAnciennementapprises());
+                                syllabes_nouvellement_apprises = syllabesNouvellementapprises();
+                                syllabes_anciennement_apprises = syllabesAnciennementapprises();
                                 let sar = [];
 
                                 if(syllabes_anciennement_apprises.length == 0) {
                                     sar = malaxer(syllabes_nouvellement_apprises);
                                 }else{
-                                    for(let i=0; sar.length<(syllabes_nouvellement_apprises.length+7); i++) {
-                                        if(paire(i) == true)  { sar.push(syllabes_nouvellement_apprises.pop()); }
-                                        if(paire(i) == false) { sar.push(syllabes_anciennement_apprises.pop()); }
+                                    let nouveaux_syllabes_melanges = malaxer(syllabes_nouvellement_apprises);
+                                    let anciens_syllabes_melanges = malaxer(syllabes_anciennement_apprises);
+
+                                    for(let i=0; sar.length<(7 + syllabes_nouvellement_apprises.length); i++) {
+                                        if(paire(i) == true)  { sar.push(nouveaux_syllabes_melanges.pop()); }
+                                        if(paire(i) == false) { sar.push(anciens_syllabes_melanges.pop()); }
                                     }
                                 }
 
@@ -1054,7 +1051,10 @@ console.log(question_revision);
    
                             clicked_response_element = $(this);
                             if(question_revision == '') rappel($('#evaluation_dialogue_btn'));
-                            if(question_revision != '') { reponse_revision = $(this).text(); }
+                            if(question_revision != '') { 
+                                reponse_revision = $(this).text(); 
+                                marquerLaConsonneCliquee(reponse_revision);
+                            }
                         });
                     }
                     function correctionRevision() {

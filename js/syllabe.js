@@ -584,8 +584,8 @@ function syllabe() {
                                     pre_reponse = this.innerHTML;
                     
                                     element_actif = $(this);
-                                    $('#exercice_body .table_parlante td').css({'background-color':'rgba(85,85,85,0.25)', 'color':'white'});
-                                    $(element_actif).css({'background-color':'rgba(85,85,85)'});
+                                    $('#exercice_body table td').css({'background-color':'rgba(85,85,85,0.25)', 'color':'white'});
+                                    marquerLaConsonneCliquee(element_actif);
                                     rendreActif($('#exercice_correction_btn'));
                                 }
                             });
@@ -692,7 +692,7 @@ function syllabe() {
                                                 initialiserProgressBar(); 
                                                 initialiserExercice();
                                             }, 600);
-                                        }, 600);
+                                        }, 800);
     
                                         
                                         function preExerciceResultat() {
@@ -968,21 +968,21 @@ function syllabe() {
                         }
                     }
                     function chargerPreRevisionSyllabeFoot() {
-
-                        initialisationDEvaluationFoot();
                         
                         $('#revision_dialogue_btns').html('\
-                        <div class="question_btn" id="revision_question_btn"></div> \
-                        <div class="repetition_btn" id="revision_repetition_btn"></div> \
-                        <div class="correction_btn" id="revision_correction_btn">ߏ߬ ߛߊߞߍ߫</div> \
+                            <div class="question_btn" id="revision_question_btn"></div> \
+                            <div class="repetition_btn" id="revision_repetition_btn"></div> \
+                            <div class="correction_btn" id="revision_correction_btn">ߏ߬ ߛߊߞߍ߫</div> \
                         '); 
+
+                        initialisationDeRevisionFoot();
 
                         $('#continu_sur_apprentissage_bouton').html('ߥߊ߫ ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߊߌ ߡߊ߬');
                         $('#reprendre_revision_bouton').html('ߜߋ߲߭ ߣߐ߰ߡߊ߬ߛߍߌߦߌ ߞߍ߫ ߕߎ߲߯');
                         $('#evaluation_bouton').html('ߜߋ߲߭ ߞߘߐߓߐߟߌ ߞߍ߫');
                         $('#syllabe_bouton').html('ߞߊ߲ߡߊߛߙߋ ߘߊߡߌ߬ߘߊ߬');
 
-                        function initialisationDEvaluationFoot(){
+                        function initialisationDeRevisionFoot(){
                 
                             q_total = parseIntNko(syllabes_a_reviser.length);
                             q_index = 0;
@@ -1048,7 +1048,8 @@ console.log(question_revision);
                             clicked_response_element = $(this);
                             if(question_revision == '') rappel($('#evaluation_dialogue_btn'));
                             if(question_revision != '') { 
-                                reponse_revision = $(this).text(); 
+                                    reponse_revision = $(this).text(); 
+                                    $('#revision_body table td').css({'background-color':'rgba(85,85,85,0.25)', 'color':'white'});
                                 marquerLaConsonneCliquee(clicked_response_element);
                             }
                         });
@@ -1213,9 +1214,9 @@ console.log(question_revision);
                         ecrire("notification_corps",texte_4);
                     }
                     function chargerPreRevisionSyllabeFoot() {
-                        initialisationDEvaluationFoot();
+                        initialisationDeRevisionFoot();
 
-                        function initialisationDEvaluationFoot(){
+                        function initialisationDeRevisionFoot(){
                 
                             q_total = parseIntNko(syllabes_en_cours.length);
                             q_index = 0;

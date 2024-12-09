@@ -257,7 +257,10 @@
                     }, 200); 
                 }, (400 + td_total*60)); 
             }, 600);
-            setTimeout(() => { displayv($('#revision_progress_bar')); }, (1800 + td_total*60));
+            setTimeout(() => { 
+                reInitialiserProgressBar();
+                displayv($('#revision_progress_bar')); 
+            }, (1800 + td_total*60));
             $('#revision_redirection_btns').css('display','none');
         }, 50);
         
@@ -718,10 +721,7 @@
         return data;
     }
     function initialiserProgressBar() { 
-        setTimeout(() => { 
-            $('.progress_bar').css('display','none');
-            $('.progress_bonne_reponse_bar, .progress_mauvaise_reponse_bar').css('width', 0);
-        }, 450);
+        setTimeout(() => { reInitialiserProgressBar(); }, 450);
     }
     function initialiserProgressBarIntegre() { 
         setTimeout(() => { 
@@ -1097,6 +1097,9 @@
         setTimeout(function(){ $('.faux').addClass('croix'); }, 100);
         setTimeout(function(){ $('.faux').removeClass('croix'); }, 600);
         setTimeout(function(){ $(element).removeClass('faux'); }, 600);
+    }
+    function reInitialiserProgressBar() { 
+        $('.progress_bonne_reponse_bar, .progress_mauvaise_reponse_bar').css('width', 0);
     }
     function resultat(memoire) {
         

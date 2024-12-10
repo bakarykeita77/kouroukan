@@ -1270,12 +1270,11 @@ console.log(question_revision);
                     
                     
                     function poserQuestionRevision() {
-                        $('.question_btn').on('click', function(e){
+                        $('.question_btn').on('click', function(e) {
                             e.stopImmediatePropagation();
 
                             effacerPrecedenteReponse();
                             question_revision = questions_revision[q_index]; 
-    // alert(question_revision);                   
     console.log(question_revision);                   
                             dicterLaQuestion();
                             $('#evaluation_cross').css('display','none');

@@ -35,7 +35,7 @@ function alphabet() {
     let apprentissage_data_memo = alphabetApprentisageDataMemo();
     let exercice_data_memo = alphabetExerciceDataMemo();
     let revision_data_memo = alphabetRevisionDataMemo();
-                 
+console.log(option_retenue);                 
 
     $('.page_body').css('display','none');
   

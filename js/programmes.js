@@ -119,13 +119,12 @@ function styleDuProgramme() {
     indexer($('.actif'));
 }
 function afficherProgrammes() {
-
-setTimeout(() => { displayv($("#programmes_container h1")); }, 100);
-setTimeout(() => { displayv($("#programme_commentaire")); }, 400);
-setTimeout(() => {
-    displayv($("#programme_matieres"));
-    afficherList($("#programme_ul"));
-}, 600);
+    setTimeout(() => { displayv($("#programmes_container h1")); }, 100);
+    setTimeout(() => { displayv($("#programme_commentaire")); }, 400);
+    setTimeout(() => {
+        displayv($("#programme_matieres"));
+        afficherList($("#programme_ul"));
+    }, 600);
 }
 function alerteDuProgramme() {
     $('#programme_ul li').on('click', function() {

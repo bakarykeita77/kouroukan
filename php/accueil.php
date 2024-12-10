@@ -5,7 +5,7 @@ session_start();
         $client_email = isset($_POST['client_email'])? $_POST['client_email']:'';
         $client_pass = isset($_POST['client_pass'])? $_POST['client_pass']:'';
          
-        if($client_email !== '' && $client_pass !== ''){
+        if($client_email != '' && $client_pass != ''){
           
           // Connexion à la base de données
             require("connexionToDB.php");
@@ -24,7 +24,7 @@ session_start();
             $data_pass = $client[0]['pass'];
             if($client_pass != $data_pass) { echo("Les mots de passe ne correspondent pas"); return; }
             
-          //Si lesdonnées sont présentent et que les e-mails et les mots de passes correspondent, la connexion est établie.
+          //Si les données sont présentes et que les e-mails et les mots de passes correspondent, la connexion est établie.
             $_SESSION["id"]        = $client[0]["id"];
             $_SESSION["prenom"]    = $client[0]["prenom"];
             $_SESSION["nom"]       = $client[0]["nom"];

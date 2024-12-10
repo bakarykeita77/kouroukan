@@ -10,8 +10,15 @@
     let niveau_3_phases = ["tons_apprentissage", "tons_exercice", "tons_pratique", "tons_evaluation"];
     let niveau_4_phases = ["chiffres_apprentissage", "chiffres_exercice", "chiffres_pratique", "chiffres_evaluation"];
 
- // Initialisation de sessionStorage.
-    sessionStorage.clear();
+ /* 
+    Initialisation de sessionStorage et de localStorage.
+    Lorsequ'un navigateur change d'utilisateur (en changeant de compte), 
+    les données stockées (en sessionStorage et en localStorage) sont oubliées.
+ */
+    let precedent_id = JSON.parse(sessionStorage.getItem('id'));
+    let present_id = document.getElementById('id').innerHTML;
+    if(precedent_id != present_id) { sessionStorage.clear(); localStorage.clear(); }
+
 
     userIdentityStorage(); // Storage des Identités récuperées de l'étudiant
     dataStorage();         // Récuperation et storage des data recuperés de l'étudiant
@@ -26,7 +33,7 @@
         sessionStorage.setItem('sexe',      JSON.stringify(document.getElementById('sexe').innerHTML));
         sessionStorage.setItem('adresse',   JSON.stringify(document.getElementById('adresse').innerHTML));
         sessionStorage.setItem('email',     JSON.stringify(document.getElementById('email').innerHTML));
-     }
+    }
     function dataStorage() {
 
      // Identifiant id de l'apprenant.

@@ -50,7 +50,7 @@
         let tr = $('tr', table);
 
         tr.css('opacity',1);
-        $('td', table).css({'transition':'0.1s', 'opacity':0});
+        $('td', table).css({'transition':'0.1s', 'transform':'scale(0.75)', 'opacity':0});
         
         setTimeout(() => {
             $.each(tr, function(){
@@ -62,7 +62,7 @@
                 $.each(td, function() {
                     let td_index = $(this).index();
                     setTimeout(() => {
-                        $(this).css({'opacity':1});
+                        $(this).css({'opacity':1, 'transform':'scale(1)'});
                     }, 60*((tr_index*td_length)+td_index));
                 });
             });
@@ -174,7 +174,6 @@
     }
     function afficherExercice() {
         let td_total = $('#exercice_body table td').length;
-        $('#exercice_course_container').css({'display':'block'});
 
         masquer($('.course'));
         setTimeout(() => { 
@@ -236,15 +235,16 @@
 
             $('#apprentissage_container').css('display','none');
             $('#exercice_container').css('display','none');
-            $('#revision_container').css('display','block');
+            displayv($('#revision_container'));
             $('#evaluation_container').css('display','none');
                 
             setTimeout(() => { displayv($('#revision_head')); }, 60);
             setTimeout(() => { 
                 displayv($('#revision_body_cadre'));
+                masquer($('#revision_body'));
 
                 setTimeout(() => { 
-                    $('#revision_body').css({'display':'block'});
+                    displayv($('#revision_body'));
                     affichageAnimeDeTableTd($('#revision_body table')); 
                 }, 60); 
                 setTimeout(() => { 
@@ -254,6 +254,7 @@
                         $('#revision_question_btn').css('display','block'); 
                         $('#revision_repetition_btn').css('display','none'); 
                         $('#revision_correction_btn').css('display','none');
+                        setTimeout(() => { indexer($('#revision_question_btn'));   }, 300);
                     }, 200); 
                 }, (400 + td_total*60)); 
             }, 600);
@@ -261,16 +262,8 @@
                 reInitialiserProgressBar();
                 displayv($('#revision_progress_bar')); 
             }, (1800 + td_total*60));
-            $('#revision_redirection_btns').css('display','none');
+            masquer($('#revision_redirection_btns'));
         }, 50);
-        
-        masquer($('#revision_redirection_btns'));
-
-        setTimeout(() => { 
-            setTimeout(() => { displayv($('#revision_dialogue_btns')); }, 300);
-            setTimeout(() => { indexer($('#revision_question_btn'));   }, 300);
-            setTimeout(() => { displayv($('#revision_progress_bar'));  }, 600);
-        }, 1200);
     }
 	function aggrandir_caractere_de(element) { element.css( 'font-size','+=32px' ); }
 	function appetir_caractere_de(element) { element.css( 'font-size','-=32px' ); } 

@@ -109,7 +109,6 @@ if(isset($_SESSION["id"])) {
                             <div class="redirection_btns" id="apprentissage_redirection_btns">
                                 <span class='redirection_btn' id='pre_apprentissage_bouton'></span> 
                                 <span class='redirection_btn' id='continu_sur_exercice_bouton'></span>
-                                <span class='redirection_btn' id='evaluation_bouton'></span>
                             </div>
                         </div>
                      <!--Fin course ----------------------------------------------- -->

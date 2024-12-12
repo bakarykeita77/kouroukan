@@ -1167,7 +1167,6 @@ console.log(total_questions_posees +'<='+ total_questions);
                                                     $("#revision_body_cadre > div").css('display','none');
                                                 }
                                                 function afficherSyllabeBouton() {
-console.log('afficherSyllabeBouton');
                                                     masquer($('#reprendre_revision_bouton'));
                                                     masquer($('#evaluation_bouton'));
                                                     afficher($('#syllabe_bouton'));

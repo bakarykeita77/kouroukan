@@ -82,6 +82,7 @@ function alphabet() {
         
     }
     function preAlphabetNko() {
+        console.log('Option retenue est l\'option_'+option_retenue);
 
         let pre_apprentissage_memo = JSON.parse(localStorage.getItem('pre_apprentissage_memoire'));
         let pre_exercice_memo = JSON.parse(localStorage.getItem('pre_exercice_memoire'));
@@ -609,9 +610,10 @@ function alphabet() {
                     }
                     function repondreLaPreQuestion() {
                         $.each($('#exercice_body td'), function() {
+
                             let td = $(this);
                             td.click(function(){
-
+        console.log(pre_question);
                                 element_actif = $(this);
 
                                 rappelerQuestionBtnSiPasDeQuestion();
@@ -619,7 +621,7 @@ function alphabet() {
                                 actualiserLeLabelDeCorrectionBtn();
 
                                 function rappelerQuestionBtnSiPasDeQuestion() {
-                                    if(pre_question === '') { secouer($('#exercice_question_btn')); return; }
+                                    if(pre_question == '') { secouer($('#exercice_question_btn')); return; }
                                 }
                                 function repondre() {
                                     if(pre_question !== '') {
@@ -628,10 +630,12 @@ function alphabet() {
                                     }
                                 }
                                 function actualiserLeLabelDeCorrectionBtn() {
-                                    masquer($('#exercice_question_btn'));
-                                    masquer($('#exercice_repetition_btn'));
-                                    rendreActif($('#exercice_correction_btn'));
-                                    afficher($('#exercice_correction_btn')); 
+                                    if(pre_question != '') {
+                                        masquer($('#exercice_question_btn'));
+                                        masquer($('#exercice_repetition_btn'));
+                                        rendreActif($('#exercice_correction_btn'));
+                                        afficher($('#exercice_correction_btn')); 
+                                    }
                                 }
                             });
                         });

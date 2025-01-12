@@ -123,7 +123,7 @@ function afficherProgrammes() {
     setTimeout(() => { displayv($("#programme_commentaire")); }, 400);
     setTimeout(() => {
         displayv($("#programme_matieres"));
-        afficherList($("#programme_ul"));
+        displayv($("#programme_ul"));
     }, 600);
 }
 function alerteDuProgramme() {
@@ -176,12 +176,12 @@ function lessonOptions() {
             $('#lesson_options').css('display','block'); 
             $('#lesson_options_titre, #lesson_option_1, #lesson_option_2').css({
                 'opacity':0, 
-                'transition':'0.6s', 
+                'transition':'0.3s', 
                 'transform':'scaleY(0.75)'
             });
-            setTimeout(() => { displayv($('#lesson_options_titre')); }, 200);
-            setTimeout(() => { displayv($('#lesson_option_1')); }, 500);
-            setTimeout(() => { displayv($('#lesson_option_2')); }, 800);
+            setTimeout(() => { displayv($('#lesson_options_titre')); }, 100);
+            setTimeout(() => { displayv($('#lesson_option_1')); }, 300);
+            setTimeout(() => { displayv($('#lesson_option_2')); }, 500);
         }
     });
     

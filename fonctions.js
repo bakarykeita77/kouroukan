@@ -494,10 +494,10 @@
                 indice++;
                 $('.'+element_class).html(message.substr(0,indice));
                 if(indice<longueur) {
-                    setTimeout(() => { write(); }, 0.5);
+                    setTimeout(() => { write(); }, 5);
                 }
             }
-        }, 400);
+        }, 100);
     }
     function effacerLeTableau() {
         $('.course_body').html("<p id='contenu_par_defaut_du_tableau'>ߥߟߊ߬ߓߊ ߓߘߊ߫ ߖߐ߬ߛߌ߬ ߹</p>");
@@ -523,6 +523,7 @@
             });
 
             $('#exercice_body td').click(function() {
+console.log(total_questions[i]);
                 masquer($('#exercice_question_btn'));
                 masquer($('#exercice_repetition_btn'));
                 rendreActif($('#exercice_correction_btn'));

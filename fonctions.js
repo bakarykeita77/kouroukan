@@ -179,10 +179,10 @@
         setTimeout(() => { 
             displayv($('.course'));
 
-            $('#apprentissage_container').css('display','none');
-            $('#exercice_container').css('display','block');
-            $('#revision_container').css('display','none');
-            $('#evaluation_container').css('display','none');
+            masquer($('#apprentissage_container'));
+            afficher($('#exercice_container'));
+            masquer($('#revision_container'));
+            masquer($('#evaluation_container'));
                 
             setTimeout(() => { displayv($('#exercice_course_head')); }, 60);
             setTimeout(() => { 
@@ -351,8 +351,10 @@
     
     function calculerNote(data) {
         var note_d_exercice = 0;
-       
+  console.log(data);     
         for (var i = 0; i < data.length; i++) {
+
+  console.log(data[i]);     
         if(data[i] != undefined) {
             if(data[i][2] == 1) {
                 note_d_exercice ++;
@@ -465,7 +467,7 @@
         element.css({
             'display':'block',
             'opacity':0, 
-            'transition':'0.6s', 
+            'transition':'0.4s', 
             'transform':'scale(0.75)'
         });
         setTimeout(() => { element.css({'opacity':1, 'transform':'scale(1)'}); }, 50);

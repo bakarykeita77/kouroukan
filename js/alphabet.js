@@ -613,7 +613,7 @@ function alphabet() {
 
                             let td = $(this);
                             td.click(function(){
-        console.log(pre_question);
+  
                                 element_actif = $(this);
 
                                 rappelerQuestionBtnSiPasDeQuestion();
@@ -670,6 +670,7 @@ function alphabet() {
                                     if(i < total_questions - 1) { rendreActif($('#exercice_question_btn')); }
                                     if(i === total_questions - 1) { 
                                         $('#exercice_question_btn').text('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߓߘߊ߫ ߓߊ߲߫').removeClass('actif').off('click');
+                                        $('.question_btn').css('box-shadow','none');
                                     }
                                     afficher($('#exercice_question_btn')); 
                                     i++;
@@ -721,32 +722,35 @@ function alphabet() {
                                         let note_de_pre_exercice = calculerNote(pre_exercice_data);
                                         let n_q = total_questions;
                                         let n_m_r = nbr_mauvaise_reponse;
-
+                                      console.log('note d\'exercice = '+note_de_pre_exercice);
                                         taux_de_fausse_reponse = Math.ceil((n_m_r/n_q)*100);
                                         taux_de_vraie_reponse =  100 - taux_de_fausse_reponse;
                 
                                         viderNotification();
 
                                         setTimeout(() => { fermerPreExercice(); }, 200);
-                                        setTimeout(() => { afficherExerciceRedirectionBtns(pre_exercice_data); }, 600);
-                                        // preExerciceResultat();                            
+                                        setTimeout(() => { 
+                                            afficherExerciceRedirectionBtns(pre_exercice_data);                           
 
-                                        if(note_de_pre_exercice < 100) { 
-                                            let notification = liste_de_matieres[0][1]+" ߡߊ߬ߞߟߏ߬ߟߌ ߡߊ߫ ߢߊ߬ .ߌ ߓߘߊ߫ ߗߌߙߏ߲߫ ߡߊ߬ߞߟߏ߬ߟߌ ߢߌ߲߬ ߘߐ߫\n .<span class='pre_exercice_resultat_affiche'>ߞߐߝߟߌ ߝߟߍ߫ ߦߊ߲߬</span> .ߘߊߕߎ߲ߠߊ߲߫ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߓߐ߫ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫)";
+                                            if(note_de_pre_exercice < 100) {
+                                    
+                                                let notification = liste_de_matieres[0][1]+" ߡߊ߬ߞߟߏ߬ߟߌ ߡߊ߫ ߢߊ߬ .ߌ ߓߘߊ߫ ߗߌߙߏ߲߫ ߡߊ߬ߞߟߏ߬ߟߌ ߢߌ߲߬ ߘߐ߫\n .<span class='pre_exercice_resultat_affiche'>ߞߐߝߟߌ ߝߟߍ߫ ߦߊ߲߬</span> .ߘߊߕߎ߲ߠߊ߲߫ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߓߐ߫ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫)";
+                                                
+                                                setTimeout(() => { ecrire('notification_corps', notification); }, 1000);
+                                                viderLeTableau(pre_exercice_data);
+                                                reprendreExercicePreAlphabet(); 
+                                            }
+                                            if(note_de_pre_exercice == 100) { 
+                                                let notification = liste_de_matieres[0][1]+" ߡߊ߬ߞߟߏ߬ߟߌ ߢߊ߬ߣߍ߲߬ .ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ ߕߊ߯ ߣߐ߰ߡߊ߬ߛߍߦߌ ߦߙߐ. ߞߐߝߟߌ ߝߟߍ߫ \n .<span class='pre_exercice_resultat_affiche'>ߞߐߝߟߌ ߝߟߍ߫ ߦߊ߲߬</span> . ߘߊߕߎ߲ߠߊ߲߫ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߓߐ߫ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫)";
                                             
-                                            setTimeout(() => { ecrire('notification_corps', notification); }, 1000);
-                                            viderLeTableau(pre_exercice_data);
-                                            reprendreExercicePreAlphabet(); 
-                                        }
-                                        if(note_de_pre_exercice == 100) { 
-                                            let notification = liste_de_matieres[0][1]+" ߡߊ߬ߞߟߏ߬ߟߌ ߢߊ߬ߣߍ߲߬ .ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ ߕߊ߯ ߣߐ߰ߡߊ߬ߛߍߦߌ ߦߙߐ. ߞߐߝߟߌ ߝߟߍ߫ \n .<span class='pre_exercice_resultat_affiche'>ߞߐߝߟߌ ߝߟߍ߫ ߦߊ߲߬</span> . ߘߊߕߎ߲ߠߊ߲߫ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߓߐ߫ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫)";
-                                        
-                                            setTimeout(() => { ecrire('notification_corps', notification); }, 1000);
-                                            revisionPreAlphabet();
-                                        }
+                                                setTimeout(() => { ecrire('notification_corps', notification); }, 1000);
+                                                revisionPreAlphabet();
+                                            }
 
-                                     //Initialisation du nombre de mauvaise reponse
-                                        nbr_mauvaise_reponse = 0;
+                                        //Initialisation du nombre de mauvaise reponse
+                                            nbr_mauvaise_reponse = 0;
+                                        }, 600);
+                                        // preExerciceResultat();  
                                     
                                         
                                         function fermerPreExercice() {
@@ -791,11 +795,15 @@ function alphabet() {
                                             }
                                         }
                                         function reprendreExercicePreAlphabet() {
-                                            $('#reprendre_exercice_bouton').click(function(e) {
-                                                e.stopImmediatePropagation();    
-                                                $('#exercice_bouton').click();
-                                            });
-                                            
+
+                                            afficher($('#apprentissage_container'));
+                                            masquer($('#exercice_container'));
+
+                                            // $('#reprendre_exercice_bouton').click(function(e) {
+                                            //     e.stopImmediatePropagation();   
+                                            //     $('#exercice_bouton').click();
+                                            //     console.log('exercice_btn clické');
+                                            // });
                                             
                                             $('#reprendre').click(function(e) {
                                                 e.stopImmediatePropagation();    
@@ -981,7 +989,7 @@ console.log('-------------------------------------------------------------------
 
                         $('#revision_correction_btn').click(function(e) { 
                             e.stopImmediatePropagation();
-console.log(total_questions_posees +'<='+ total_questions);    
+   
                             if(total_questions_posees <= total_questions) { 
 
                                 $('#revision_container .table_parlante td').css('background-color','rgba(85, 85, 85, 0.25)');
@@ -1149,6 +1157,7 @@ console.log(total_questions_posees +'<='+ total_questions);
                                                         ߘߊߕߎ߲ߠߊ߲߫ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߓߐ߫ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫)\
                                                     ');
                                                 }, 1000);
+                                                
                                                 afficherRepriseEvaluationBouton();
                                                 reprendreRevisionPreAlphabet(); 
 
@@ -2243,7 +2252,7 @@ console.log(total_questions_posees +'<='+ total_questions);
 
             masquer($('#exercice_progress_bar'));
             afficher($('#exercice_redirection_btns'));
-
+console.log('note = '+note);
             if(note < 95) {
                 afficher($('#reprendre_exercice_bouton'));
                 masquer($('#continu_sur_revision_bouton'));

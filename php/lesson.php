@@ -79,48 +79,46 @@ if(isset($_SESSION["id"])) {
               
               <!------------------------------------------------------------------------------------------------------------------------------>
                 <div id="apprentissage_container">
-                    <div id="pre_apprentissage_cover">
-                     <!--Course head ---------------------------------------------- -->
-                        <div class="course_head" id="apprentissage_head">
-                            <div class="notification">
-                                <h2 class="notification_titre"></h2> 
-                                <div class="modificateur_de_choix">
-                                    <p class="modificateur_de_choix_btn">&#8942;</p>
-                                    <div class="modificateur_de_choix_message">
-                                        <p>ߌ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߘߋ߲߰ߠߌ ߞߍߢߊ ߡߊߝߊ߬ߟߋ߲߬ ؟</p>
-                                        <div><button>ߐ߬ߤߐ߲߫</button> <button>ߍ߬ߍ߫ߍ߲߬</button></div>
-                                    </div>
+                 <!--Course head ------------------------------------------------------------------ -->
+                    <div class="course_head" id="apprentissage_head">
+                        <div class="notification" id="apprentissage_notification">
+                            <h2 class="notification_titre" id="apprentissage_notification_titre"></h2> 
+                            <div class="modificateur_de_choix">
+                                <p class="modificateur_de_choix_btn">&#8942;</p>
+                                <div class="modificateur_de_choix_message">
+                                    <p>ߌ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߘߋ߲߰ߠߌ ߞߍߢߊ ߡߊߝߊ߬ߟߋ߲߬ ؟</p>
+                                    <div><button>ߐ߬ߤߐ߲߫</button> <button>ߍ߬ߍ߫ߍ߲߬</button></div>
                                 </div>
-                                <div class="notification_corps"></div>
                             </div>
+                            <div class="notification_corps" id="apprentissage_notification_corps"></div>
                         </div>
-                     <!--Course body ---------------------------------------------- -->
-                        <div class="course_body" id="apprentissage_body"></div>
-                     <!--Course foot ---------------------------------------------- -->
-                        <div class="course_foot" id="apprentissage_foot">
-                            
-                            <div class="parametres_container" id="parametre_lesson_container"> <?php include("parametre.php"); ?> </div>
-                            <div id='panneaux'></div>
-                            <div class="dialogue_btns" id="apprentissage_dialogue_btns"></div>
-                            <div class = 'progress_bar' id="apprentissage_progress_bar">
-                                <div class='progress_bonne_reponse_bar'></div>
-                                <div class='progress_mauvaise_reponse_bar'></div>
-                            </div>
-                            <div class="redirection_btns" id="apprentissage_redirection_btns">
-                                <span class='redirection_btn' id='pre_apprentissage_bouton'></span> 
-                                <span class='redirection_btn' id='continu_sur_exercice_bouton'></span>
-                            </div>
-                        </div>
-                     <!--Fin course ----------------------------------------------- -->
                     </div>
+                 <!--Course body ------------------------------------------------------------------ -->
+                    <div class="course_body" id="apprentissage_body"></div>
+                 <!--Course foot ------------------------------------------------------------------ -->
+                    <div class="course_foot" id="apprentissage_foot">
+                        
+                        <div class="parametres_container" id="parametre_lesson_container"> <?php include("parametre.php"); ?> </div>
+                        <div id='panneaux'></div>
+                        <div class="dialogue_btns" id="apprentissage_dialogue_btns"></div>
+                        <div class = 'progress_bar' id="apprentissage_progress_bar">
+                            <div class='progress_bonne_reponse_bar'></div>
+                            <div class='progress_mauvaise_reponse_bar'></div>
+                        </div>
+                        <div class="redirection_btns" id="apprentissage_redirection_btns">
+                            <span class='redirection_btn' id='pre_apprentissage_bouton'></span> 
+                            <span class='redirection_btn' id='continu_sur_exercice_bouton'></span>
+                        </div>
+                    </div>
+                 <!--Fin course ------------------------------------------------------------------- -->
                 </div>
               <!------------------------------------------------------------------------------------------------------------------------------>
                 <div id="exercice_container">
                  <!--Course head ------------------------------------------------------------------ -->
                     <div class="course_head" id="exercice_head">
-                        <div class="notification">
-                            <h2 class="notification_titre"></h2>
-                            <div class="notification_corps"></div>
+                        <div class="notification" id="exercice_notification">
+                            <h2 class="notification_titre" id="exercice_notification_titre"></h2>
+                            <div class="notification_corps" id="exercice_notification_corps"></div>
                         </div>
                     </div>
                  <!--Course body ------------------------------------------------------------------ -->
@@ -138,7 +136,7 @@ if(isset($_SESSION["id"])) {
                         </div>
                     </div>
 
-                 <!--Progress boutons ---------------------------------------------------------- -->
+                 <!--Progress boutons ------------------------------------------------------------- -->
                     <div class='progress_bar' id="exercice_progress_bar">
                         <div class='progress_bonne_reponse_bar'></div>
                         <div class='progress_mauvaise_reponse_bar'></div>
@@ -154,9 +152,9 @@ if(isset($_SESSION["id"])) {
                 <div id="revision_container">
                  <!--Course head ------------------------------------------------------------------ -->
                     <div class="course_head" id="revision_head">
-                        <div class="notification">
-                            <h2 class="notification_titre"></h2>
-                            <div class="notification_corps"></div>
+                        <div class="notification" id="revision_notification">
+                            <h2 class="notification_titre" id="revision_notification_titre"></h2>
+                            <div class="notification_corps" id="revision_notification_corps"></div>
                         </div>
                     </div>
                  <!--Course body ------------------------------------------------------------------ -->
@@ -173,13 +171,13 @@ if(isset($_SESSION["id"])) {
                         </div>
                     </div>
 
-                    <!--Progress boutons ---------------------------------------------------------- -->
+                 <!--Progress boutons ------------------------------------------------------------- -->
                     <div class='progress_bar' id="revision_progress_bar">
                         <div class='progress_bonne_reponse_bar'></div>
                         <div class='progress_mauvaise_reponse_bar'></div>
                     </div>
 
-                    <!--Redirection boutons ---------------------------------------------------------- -->
+                 <!--Redirection boutons ---------------------------------------------------------- -->
                     <div class="redirection_btns" id="revision_redirection_btns">
                         <span class='redirection_btn' id='continu_sur_apprentissage_bouton'></span> 
                         <span class='redirection_btn' id='reprendre_revision_bouton'></span>
@@ -189,14 +187,14 @@ if(isset($_SESSION["id"])) {
                 </div>
               <!------------------------------------------------------------------------------------------------------------------------------>
                 <div id="evaluation_container">
-                 <!--Course head ---------------------------------------------- -->
+                 <!--Course head ------------------------------------------------------------------ -->
                     <div class="course_head" id="evaluation_head">
-                        <div class="notification">
-                            <h2 class="notification_titre"></h2>
-                            <div class="notification_corps"></div>
+                        <div class="notification" id="evaluation_notification">
+                            <h2 class="notification_titre" id="evaluation_notification_titre"></h2>
+                            <div class="notification_corps" id="evaluation_notification_corps"></div>
                         </div>
                     </div>
-                 <!--Course body ---------------------------------------------- -->
+                 <!--Course body ------------------------------------------------------------------ -->
                     <div class="course_body" id="evaluation_body">
 
                         <div id="evaluation_fiche">
@@ -229,7 +227,7 @@ if(isset($_SESSION["id"])) {
                         </div>
                         
                     </div>
-                 <!--Course foot ---------------------------------------------- -->
+                 <!--Course foot ------------------------------------------------------------------ -->
                     <div class="course_foot" id="evaluation_foot">
 
                         <div id='teste_container'>  

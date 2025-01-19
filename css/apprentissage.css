@@ -1,12 +1,11 @@
 
-#apprentissage_container > div { position: absolute; width: 100%; }
-#apprentissage_container > div:nth-child(1) { 
+#apprentissage_container > div { 
+    position: relative; 
+    width: 100%; 
     display: block; 
-    height: 100%;
     max-width: 60rem; 
     border-radius: 0.5rem; 
 }
-#apprentissage_container > div:nth-child(2) { display: none; height: calc(100% - 0.75rem); background-color: #fff; }
 #apprentissage_head, #apprentissage_body { 
     display: none;
 }

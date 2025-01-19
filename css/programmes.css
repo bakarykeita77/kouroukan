@@ -39,6 +39,8 @@
 }
 #programme_ul li {
     height: 4rem; 
+    width: 90%;
+    margin: 0.125rem auto;
     line-height: 4rem;
     overflow-x: auto;
     text-align: center;
@@ -131,19 +133,11 @@
         justify-content: center;
         align-items: center;
     }
-    #programme_ul li { 
-        width: 23%;
-        margin: 0.5rem 1px;
-    }
 }
 @media(orientation: portrait) {
     #programmes_container { width: calc(100% - 1rem); }
     #programmes_fond { box-shadow: none; }
     #programme_ul {
         display: block;
-    }
-    #programme_ul li { 
-        width: 90%;
-        margin: 0.25rem auto;
     }
 }

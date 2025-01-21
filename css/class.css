@@ -16,6 +16,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 }
 .actif, .active { 
     background-color: rgb(255,255,0); 
+    box-shadow: 0 0 0.5rem #666;
 }
 .active_2 { box-shadow: 0 0 1rem #222; background-color: #fff; color: black; }
 .actif a, .active a {
@@ -236,7 +237,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     transition: 0.2s; 
 }
 .correction_btn { 
-    box-shadow: 0 0 0.5rem #666;
+    display: none; 
     cursor: pointer; 
 }
 .course {    
@@ -483,9 +484,6 @@ del {
 /* --------------------------------------------------------------------------------------------------------- */
 
 .indexe { color: orangered; }
-.indicateur { 
-    background-color: yellow;
-}
 .indicateur::before {
     position: absolute;
     margin: 0;
@@ -952,7 +950,6 @@ del {
 
 /* --------------------------------------------------------------------------------------------------------- */
 .question_btn { 
-    box-shadow: 0 0 0.5rem #666;
     cursor: pointer; 
 }
 
@@ -967,7 +964,7 @@ del {
 .redirection_btns span:active { box-shadow: none; }
 .redirection_btns span { 
     position: relative;
-    top: 1rem;
+    top: 1.5rem;
     display: none;
     margin: 0 auto;
     padding: 0 3rem;
@@ -982,7 +979,6 @@ del {
 .repetition_btn { 
     display: none; 
     cursor: pointer; 
-    box-shadow: 0 0 0.5rem #666;
 }
 .right { float: right; }
 .resultat_container {

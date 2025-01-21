@@ -32,7 +32,7 @@ if(isset($_SESSION["id"])) {
     </head>
 
     <body style="direction:rtl">
-
+       <!--container-------------------------------------------------------------------------------------------------------------------------->
         <div class="container">
             <div class="page_head"><?php require('tete-de-page.php'); ?></div>
             <div class="page_body">
@@ -68,16 +68,16 @@ if(isset($_SESSION["id"])) {
             <div class="page_foot"><?php include("pied-de-lesson.php"); ?></div>
         </div>
 
-       <!-- Cette div se superpose sur la div container et contient tous les cours à suivre par l'étudiant -->
+       <!--course_container-------------------------------------------------------------------------------------------------------------------- 
+        Cette div se superpose sur la div container et contient tous les cours à suivre par l'étudiant---------------------------------------->
         <div class="course_container">
-          <!-------------------------------------------------------------------------------------------------------------
             
-            Fermetre du cours -->
+          <!--Fermetre du cours--------------------------------------------------------------------------------------------------------------->
             <span class="fermeture" id="">&times;</span>
-
+            
+          <!--cours--------------------------------------------------------------------------------------------------------------------------->
             <div class="course">  
-              
-              <!------------------------------------------------------------------------------------------------------------------------------>
+              <!--apprentissage_container----------------------------------------------------------------------------------------------------->
                 <div id="apprentissage_container">
                  <!--Course head ------------------------------------------------------------------ -->
                     <div class="course_head" id="apprentissage_head">
@@ -112,7 +112,7 @@ if(isset($_SESSION["id"])) {
                     </div>
                  <!--Fin course ------------------------------------------------------------------- -->
                 </div>
-              <!------------------------------------------------------------------------------------------------------------------------------>
+              <!--exercice_container---------------------------------------------------------------------------------------------------------->
                 <div id="exercice_container">
                  <!--Course head ------------------------------------------------------------------ -->
                     <div class="course_head" id="exercice_head">
@@ -148,16 +148,16 @@ if(isset($_SESSION["id"])) {
                         <span class='redirection_btn' id='continu_sur_revision_bouton'></span> 
                     </div>
                 </div>
-              <!------------------------------------------------------------------------------------------------------------------------------>
+              <!--revision_container---------------------------------------------------------------------------------------------------------->
                 <div id="revision_container">
-                 <!--Course head ------------------------------------------------------------------ -->
+                  <!--Course head ------------------------------------------------------------------ -->
                     <div class="course_head" id="revision_head">
                         <div class="notification" id="revision_notification">
                             <h2 class="notification_titre" id="revision_notification_titre"></h2>
                             <div class="notification_corps" id="revision_notification_corps"></div>
                         </div>
                     </div>
-                 <!--Course body ------------------------------------------------------------------ -->
+                  <!--Course body ------------------------------------------------------------------ -->
                     <div class="body_cadre" id="revision_body_cadre">
                         <div class="course_body" id="revision_body"></div>   <!--Cette division est chargé par la fonction chargerExercice() dans exercice.js-->
                     
@@ -171,13 +171,13 @@ if(isset($_SESSION["id"])) {
                         </div>
                     </div>
 
-                 <!--Progress boutons ------------------------------------------------------------- -->
+                  <!--Progress boutons ------------------------------------------------------------- -->
                     <div class='progress_bar' id="revision_progress_bar">
                         <div class='progress_bonne_reponse_bar'></div>
                         <div class='progress_mauvaise_reponse_bar'></div>
                     </div>
 
-                 <!--Redirection boutons ---------------------------------------------------------- -->
+                  <!--Redirection boutons ---------------------------------------------------------- -->
                     <div class="redirection_btns" id="revision_redirection_btns">
                         <span class='redirection_btn' id='continu_sur_apprentissage_bouton'></span> 
                         <span class='redirection_btn' id='reprendre_revision_bouton'></span>
@@ -185,7 +185,7 @@ if(isset($_SESSION["id"])) {
                         <span class='redirection_btn' id='syllabe_bouton'><a href="http://localhost/kouroukan/php/programmes.php">ߜߋ߲߭ ߘߋ߲߰ߠߌ ߘߊߡߌ߬ߘߊ߬</a></span> 
                     </div>
                 </div>
-              <!------------------------------------------------------------------------------------------------------------------------------>
+              <!--evaluation_container-------------------------------------------------------------------------------------------------------->
                 <div id="evaluation_container">
                  <!--Course head ------------------------------------------------------------------ -->
                     <div class="course_head" id="evaluation_head">
@@ -261,8 +261,6 @@ if(isset($_SESSION["id"])) {
 
                     </div>
                 </div>
-              <!------------------------------------------------------------------------------------------------------------------------------>
-
             </div>
 
             <script src="../js/apprentissage.js"></script>
@@ -270,11 +268,12 @@ if(isset($_SESSION["id"])) {
             <script src="/kouroukan/js/evaluations.js"></script>
 
             
+          <!--Resultat------------------------------------------------------------------------------------------------------------------------>
             <div class="resultat_container"><?php include("resultat.php"); ?></div>
 
-          <!-------------------------------------------------------------------------------------------------------------
+          <!--Form pour envoi des données-----------------------------------------------------------------------------------------------------
         
-            Cette div envoi les resultats des études à actions.php qui à son tour les envoi à la base de données -->
+            Cette div envoi les resultats des études à actions.php qui à son tour les envoi à la base de données----------------------------->
             <form method="POST" action="actions.php" id="lesson_form" style="display:none">
                 <input type="number" name="id"       id="id_input" value="<?= $_SESSION['id']; ?>">
                 <input type="text"   name="matiere"  id="matiere_nom_input">
@@ -286,10 +285,10 @@ if(isset($_SESSION["id"])) {
             </form>
         </div>
 
-
+       <!--Audio pour la lecture audible------------------------------------------------------------------------------------------------------>
         <audio id="audio"></audio>
 
-        
+       <!--Link------------------------------------------------------------------------------------------------------------------------------->
         <script src="../fonctions.js"></script>
         <script src="../js/caracteres.js"></script>
         <script src="../js/clavier.js"></script>

@@ -386,7 +386,7 @@
     
     function calculerNote(data) {
         var note_d_exercice = 0;
- 
+
         for (var i = 0; i < data.length; i++) {
     
         if(data[i] != undefined) {
@@ -745,13 +745,13 @@ console.log(total_questions[i]);
         rendreActif(element);
         setTimeout(function() { 
             element.addClass('indicateur'); 
-             repeterIndexation($('#'+element_id)); 
+            repeterIndexation($('#'+element_id)); 
         }, 1000);
         
         function repeterIndexation(element) {
             let r = setInterval(function(){
                 element.removeClass('indicateur'); 
-                setTimeout(function(){ element.addClass('indicateur'); }, 5); 
+                setTimeout(function(){ if(element.hasClass('actif')) element.addClass('indicateur'); }, 5);
             },5000);
             
             element.click(function() { clearInterval(r); $(this).removeClass('indicateur'); });
@@ -1064,9 +1064,6 @@ console.log(total_questions[i]);
         }
         return mixted_table;
     }
-    function rendreActif(element) {
-        element.addClass('actif');
-    }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
     
@@ -1147,6 +1144,9 @@ console.log(total_questions[i]);
     }
     function reInitialiserProgressBar() { 
         $('.progress_bonne_reponse_bar, .progress_mauvaise_reponse_bar').css('width', 0);
+    }
+    function rendreActif(element) {
+        element.addClass('actif');
     }
     function resultat(memoire) {
         

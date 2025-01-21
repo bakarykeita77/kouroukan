@@ -235,9 +235,9 @@
                         $('#exercice_repetition_btn').css('display','none'); 
                         $('#exercice_correction_btn').css('display','none');
                     }, 200); 
-                }, (400 + td_total*60)); 
-            }, 600);
-            setTimeout(() => { displayv($('#exercice_progress_bar')); }, (1600 + td_total*60));
+                }, (60 + td_total*60)); 
+            }, 200);
+            setTimeout(() => { displayv($('#exercice_progress_bar')); }, (200 + td_total*60));
             $('#exercice_redirection_btns').css('display','none');
         }, 50);
         
@@ -291,12 +291,12 @@
                         $('#revision_correction_btn').css('display','none');
                         setTimeout(() => { indexer($('#revision_question_btn'));   }, 300);
                     }, 200); 
-                }, (400 + td_total*60)); 
-            }, 600);
+                }, (td_total*60)); 
+            }, 200);
             setTimeout(() => { 
                 reInitialiserProgressBar();
                 displayv($('#revision_progress_bar')); 
-            }, (1800 + td_total*60));
+            }, (1000 + td_total*60));
             masquer($('#revision_redirection_btns'));
         }, 50);
     }

@@ -2,20 +2,9 @@ function parametrageDeLesson() {
 
 /* Declaration des variables */  
     var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));   // Voir programmes.js fonction storagesDuProgramme()
-
     var voyelles_checker, consonnes_checker, tedo_checker, tons_checker, nasalisation_checker;
-    var voyelles = [], consonnes = [], tedoo = [], tons = [], nasalisations = [];
     var voyelles_cochees = [], consonnes_cochees = [], tedos_coches = [], tons_coches = [], nasalisations_cochees = [], caracteres_coches = [],syllabes_coches = [];
         
-/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
- 
- /* Les variables tableaux regroupant les caracteres par types */  
-    voyelles = lesVoyelles();         // Voir caracteres.js
-    consonnes = lesConsonnes();       // Voir caracteres.js
-    tedoo = leTedo();                 // Voir caracteres.js
-    nasalisations = laNasalisation(); // Voir caracteres.js
-    tons = lesTons();                 // Voir caracteres.js
-
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/    
     parametrage();
     affichageDeParametres();
@@ -36,7 +25,6 @@ function parametrageDeLesson() {
     
         $("#parametre_lesson").on('mouseover', function() { 
             if($('.notification h3').text() == 'ߟߊ߬ߡߍ߲߬ߠߌ ߞߍ߫') return false;
-            
             afficherParametres(); 
         });
         $('.parametres_container').on('mouseleave', function(){ masquerParametres(); });
@@ -65,12 +53,6 @@ function parametrageDeLesson() {
         check_btn = $('.check_btn');
         checkbox_parent = $('.checkbox_parent');
         checkbox_children = $('.checkbox_children');
-        
-        voyelle = $('.voyelle');
-        consonne = $('.consonne');
-        tedo = $('.tedo');
-        ton = $('.ton');
-        nasalisation = $('.nasalisation');
         
         parametres_btn = $('.parametre_btn_container');
         voyelles_checker = $('#voyelles_checker');

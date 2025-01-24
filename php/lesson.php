@@ -36,9 +36,8 @@ if(isset($_SESSION["id"])) {
         <div class="container">
             <div class="page_head"><?php require('tete-de-page.php'); ?></div>
             <div class="page_body">
-              <!---------------------------------------------------------------------------------------------------------
-              
-              Pour rendre les données de l'url  disponibles dans lesson.js, placons les dans des elements html avec id déterminé-->  
+              <!--donnees_recues_de_programmes----------------------------------------------------------------------------
+                Pour rendre les données de l'url  disponibles dans lesson.js, placons les dans des elements html avec id déterminé-->  
                 <div id="donnees_recues_de_programmes" style="display:none">
                     <p id='matiere_id_container'    ><?= $matiere_id; ?></p>
                     <p id='matiere_index_container' ><?= $matiere_index; ?></p>
@@ -48,20 +47,16 @@ if(isset($_SESSION["id"])) {
                     <p id='lesson_option'           ><?= $lesson_option; ?></p>
                 </div>
 
-               <!---------------------------------------------------------------------------------------------------------
-
-               Le titre de la page de lessons -->  
+              <!--titre de la page de lessons---------------------------------------------------------------------------->
                 <h4 id="niveau_d_etude">ߘߋ߰ߟߌ ߞߛߊߞߊ <span class="niveau_courant"><?= $chiffres[(integer)$niveau]; ?></span><span class='rang'></span> :</h4>  
                 <h1 class="lesson_title" id="<?= $matiere_id; ?>"> <?= $matiere_nom; ?> ߥߟߊ߬ߘߊ  </h1> 
 
-               <!---------------------------------------------------------------------------------------------------------
-
-               Le container des lessons à etudier, qui sera chargé dans lesson.js par la fonction chargerPhases() -->  
+              <!--phases_container----------------------------------------------------------------------------------------
+                Le container des lessons à etudier, qui sera chargé dans lesson.js par la fonction chargerPhases() -->  
                 <div class="phases_container"></div>
 
-               <!---------------------------------------------------------------------------------------------------------
-               
-               Le container des travaux qui trace tous les travaux effectués par l'étudiant -->  
+              <!--travaux_container---------------------------------------------------------------------------------------
+                Le container des travaux qui trace tous les travaux effectués par l'étudiant -->  
                 <div id="travaux_container"><?php include("travaux.php"); ?></div>
 
             </div>
@@ -110,7 +105,6 @@ if(isset($_SESSION["id"])) {
                             <span class='redirection_btn' id='continu_sur_exercice_bouton'></span>
                         </div>
                     </div>
-                 <!--Fin course ------------------------------------------------------------------- -->
                 </div>
               <!--exercice_container---------------------------------------------------------------------------------------------------------->
                 <div id="exercice_container">
@@ -150,14 +144,14 @@ if(isset($_SESSION["id"])) {
                 </div>
               <!--revision_container---------------------------------------------------------------------------------------------------------->
                 <div id="revision_container">
-                  <!--Course head ------------------------------------------------------------------ -->
+                 <!--Course head ------------------------------------------------------------------ -->
                     <div class="course_head" id="revision_head">
                         <div class="notification" id="revision_notification">
                             <h2 class="notification_titre" id="revision_notification_titre"></h2>
                             <div class="notification_corps" id="revision_notification_corps"></div>
                         </div>
                     </div>
-                  <!--Course body ------------------------------------------------------------------ -->
+                 <!--Course body ------------------------------------------------------------------ -->
                     <div class="body_cadre" id="revision_body_cadre">
                         <div class="course_body" id="revision_body"></div>   <!--Cette division est chargé par la fonction chargerExercice() dans exercice.js-->
                     
@@ -171,13 +165,13 @@ if(isset($_SESSION["id"])) {
                         </div>
                     </div>
 
-                  <!--Progress boutons ------------------------------------------------------------- -->
+                 <!--Progress boutons ------------------------------------------------------------- -->
                     <div class='progress_bar' id="revision_progress_bar">
                         <div class='progress_bonne_reponse_bar'></div>
                         <div class='progress_mauvaise_reponse_bar'></div>
                     </div>
 
-                  <!--Redirection boutons ---------------------------------------------------------- -->
+                 <!--Redirection boutons ---------------------------------------------------------- -->
                     <div class="redirection_btns" id="revision_redirection_btns">
                         <span class='redirection_btn' id='continu_sur_apprentissage_bouton'></span> 
                         <span class='redirection_btn' id='reprendre_revision_bouton'></span>
@@ -272,7 +266,6 @@ if(isset($_SESSION["id"])) {
             <div class="resultat_container"><?php include("resultat.php"); ?></div>
 
           <!--Form pour envoi des données-----------------------------------------------------------------------------------------------------
-        
             Cette div envoi les resultats des études à actions.php qui à son tour les envoi à la base de données----------------------------->
             <form method="POST" action="actions.php" id="lesson_form" style="display:none">
                 <input type="number" name="id"       id="id_input" value="<?= $_SESSION['id']; ?>">

@@ -109,7 +109,7 @@ $('document').ready(function() {
                     }
                     if(lesson_status == "lesson_etudie") $(this).addClass('apprises');
                     
-                //Cas specifique de pratiques                    
+                  //Cas specifique de pratiques                    
                     if(localOptionsLength === 4) {
                         $('#syllabes_pratique, #tons_pratique, #chiffres_pratique').removeClass('active').addClass('apprises');
                     }
@@ -122,7 +122,6 @@ $('document').ready(function() {
                 $.each(li, function() { 
                     let li_id = $(this).attr('id');
                     indice = ($.inArray(li_id, phases_distinctes) === -1) ? indice : indice+=1;
-                    
                 });              
                 
                 if(indice === 0) ls = "lesson_a_etudier";

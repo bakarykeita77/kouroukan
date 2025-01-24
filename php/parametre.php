@@ -30,8 +30,4 @@
 
   <!------------------------------------------------------------------------------------------------------------------>	 
 
-  <script src="/kouroukan/js/parametres.js"></script> 
-  
-  <script src="/kouroukan/js/syllabes.js"></script>
-  <script src="/kouroukan/js/tons.js"></script>
-  <script src="/kouroukan/js/chiffres.js"></script>
+  <script src="/kouroukan/js/parametres.js"></script>

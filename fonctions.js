@@ -78,7 +78,7 @@
         setTimeout(() => {
             $.each(tr, function(){
                 let tr_index = $(this).index();
-                setTimeout(() => { $(this).css({'opacity':1}); }, 150*tr_index);
+                setTimeout(() => { $(this).css({'opacity':1}); }, 200*tr_index);
             });
         }, 200);
         
@@ -1270,7 +1270,6 @@ console.log(total_questions[i]);
         let nom = JSON.parse(sessionStorage.getItem('nom'));
         let prenom = JSON.parse(sessionStorage.getItem('prenom'));
         let matiere_nom = JSON.parse(sessionStorage.getItem('matiere_nom'));
-        let phases = JSON.parse(localStorage.getItem('phases'));
         let lesson_en_cours = $('.notification_titre').html();
         let lesson_suivante = lessonSuivante();
 
@@ -1321,7 +1320,7 @@ console.log(total_questions[i]);
                     let heure = d.getHours();
                     let minute = d.getMinutes();
                     
-                    $('#phase_d_apprentissage').text(phases[0]);
+                    $('#phase_d_apprentissage').text(liste_de_phases[0]);
                     $('#apprentissage_date').text(jours[jour]+' '+mois[lune]+' ߕߟߋ߬ '+parseIntNko(date)+' ߛߊ߲߭ '+parseIntNko(an));
                     $('#apprentissage_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
                 }
@@ -1351,7 +1350,7 @@ console.log(total_questions[i]);
                     let heure = d.getHours();
                     let minute = d.getMinutes();
                     
-                    $('#phase_d_exercice').text(phases[1]);
+                    $('#phase_d_exercice').text(liste_de_phases[1]);
                     $('#exercice_date').text(jours[jour]+' '+mois[lune]+' ߕߟߋ߬ '+parseIntNko(date)+' ߛߊ߲߭ '+parseIntNko(an));
                     $('#exercice_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
                 }
@@ -1382,7 +1381,7 @@ console.log(total_questions[i]);
                     let heure = d.getHours();
                     let minute = d.getMinutes();
                     
-                    $('#phase_de_revision').text(phases[2]);
+                    $('#phase_de_revision').text(liste_de_phases[2]);
                     $('#revision_date').text(jours[jour]+' '+mois[lune]+' ߕߟߋ߬ '+parseIntNko(date)+' ߛߊ߲߭ '+parseIntNko(an));
                     $('#revision_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
                 }
@@ -1413,7 +1412,7 @@ console.log(total_questions[i]);
                     let heure = d.getHours();
                     let minute = d.getMinutes();
                     
-                    $('#phase_d_evaluation').text(phases[3]);
+                    $('#phase_d_evaluation').text(liste_de_phases[3]);
                     $('#evaluation_date').text(jours[jour]+' '+mois[lune]+' ߕߟߋ߬ '+parseIntNko(date)+' ߛߊ߲߭ '+parseIntNko(an));
                     $('#evaluation_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
                 }

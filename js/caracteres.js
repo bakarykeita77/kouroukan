@@ -33,7 +33,7 @@
  var parametres_btn, parametres;
  var voyelles_checker, consonnes_checker, tedo_checker, tons_checker, nasalisation_checker;
  var checkbox_titre, check_btn_container, checkbox_parent, check_btn, checkbox_children;
- var voyelle, consonne, tedo, ton, nasalisation;
+ var voyelle, consonne, tedoo, ton, nasalisation;
  var voyelles, consonnes, tedos, tons, nasalisations;
  var voyelles_cochees = [], consonnes_cochees = [], tedos_coches = [], tons_coches = [], nasalisations_cochees = [], caracteres_coches = [],syllabes_coches = [];
  var lettres = [], syllabes = [], syllabes_tonifies = [];

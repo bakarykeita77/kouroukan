@@ -407,9 +407,9 @@
     function changerPhaseActive(phase_active_index) {
         if(phase_active_index != -1) {
             let total_phase = $('#phases_list li').length;
-console.log(phase_active_index);
+
             phase_active_index++;
-console.log(phase_active_index);
+
             $.each($('#phases_list li'), function() {
                 
                 var phase_index = $(this).index();

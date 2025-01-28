@@ -234,8 +234,17 @@ if(isset($_SESSION["id"])) {
                         <div class="clavier_container" id="clavier_evaluation"><?php include "clavier.php"; ?></div>
 
                         <div class="dialogue_btns" id="evaluation_dialogue_btns">
-                                <div class="question_btn" id="evaluation_question_btn"></div>
-                                <div class="repetition_btn" id="evaluation_repetition_btn"></div>
+                                <div class="question_btn" id="evaluation_question_btn">
+                                    <span class="question_label"></span>
+                                    <span class="question_total"></span>
+                                    <span class="question_ordre"></span>
+                                    <span class="question_action"></span>
+                                </div>
+                                <div class="repetition_btn" id="evaluation_repetition_btn">
+                                    <span class="question_label"></span>
+                                    <span class="question_ordre"></span>
+                                    <span class="question_action"></span>
+                                </div>
                                 <div class="correction_btn" id="evaluation_correction_btn">ߏ߬ ߛߊߞߍ߫</div>
                             <div class="progress_bar_integre">
                                 <div class="progress_bonne_reponse_bar_integre"></div>

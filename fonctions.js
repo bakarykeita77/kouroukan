@@ -498,6 +498,20 @@
     function defilementDuContenuVersLeHaut(container) {
         container.animate({ scrollTop:container[0].scrollHeight }, 1000);
     }
+    function dialogueBtnsStyle() {
+        $('.dialogue_btns > div').removeClass('actif');
+        $.each($('.dialogue_btns > div'), function(){
+            let btn_actif = $(this);
+            if(btn_actif.css('display') == 'block') btn_actif.addClass('actif');
+        });
+    }
+    function reagirAuClickDeDialogueBtns() {
+        $.each($('.dialogue_btns > div'), function(){
+            $(this).click(function() {
+                $('.dialogue_btns').css('box-shadow','none');
+            });
+        });
+    }
     function display(element) {
         element.css({
             'display':'block',

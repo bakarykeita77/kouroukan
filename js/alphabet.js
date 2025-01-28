@@ -1204,7 +1204,6 @@ function alphabet() {
         switch(phase_id) {
             case 'alphabet_apprentissage' : apprentissageAlphabet(); break;
             case 'alphabet_exercice'      : exerciceAlphabet();      break;
-            case 'alphabet_revision'      : revisionAlphabet();      break;
             case 'alphabet_evaluation'    : evaluationAlphabet();    break;
         }
 
@@ -1777,7 +1776,6 @@ function alphabet() {
                 }
             }
         }
-        function revisionAlphabet() {}
         function evaluationAlphabet() {
  
             var matiere_nom = JSON.parse(localStorage.getItem('matiere_nom')); 
@@ -1793,7 +1791,6 @@ function alphabet() {
             let good_response_counter = 0;
             
             var q_index = 0, q_rang = '߭';
-            var q_ordre = parseIntNko(q_index+1);
             var evaluation_a_stocker = [];
         
         
@@ -1830,12 +1827,13 @@ function alphabet() {
 
                     var q_total = parseIntNko(nbr_max_de_questions_a_poser);
                     var q_label = 'ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ';
-                    var q_rang = '߭';
+                    var q_ordre = parseIntNko(q_index+1);
+                    var q_rang = (q_index == 0) ? '߭' : '߲';
                     var q_actiom = 'ߟߊߡߍ߲߫';
-                    
+
                     $('.question_label').html( q_label );
-                    $('.question_total').html( q_total );
-                    $('.question_ordre').html( q_ordre+q_rang );
+                    $('.question_total').html( q_total+' \\ ' );
+                    $('.question_ordre').html( q_ordre + q_rang );
                     $('.question_action').html( q_actiom );
             
                     $('.question_btn').css('display','block');
@@ -1871,7 +1869,9 @@ function alphabet() {
             
                         q_index = compteur();
                         q_ordre = parseIntNko(q_index+1);
-                        q_rang = '߲';
+
+                        var q_rang = (q_ordre == '߁') ? '߭' : '߲';
+                        var q_rang_1 = (q_index == 1) ? '߭' : '߲';
                         
                         actualiserLesLibellesDeDialogueBtn();
                         
@@ -1880,9 +1880,12 @@ function alphabet() {
                             if(q_index === 0) $('#evaluation_tbody').html("<p id='evaluation_tbody_default_content'></p>");
                         }
                         function actualiserLesLibellesDeDialogueBtn(){
+                            let action_1 = (q_index != 1) ? 'ߠߊߡߍ߲߫ ߕߎ߲߯' : 'ߟߊߡߍ߲߫ ߕߎ߲߯';
                             
-                            $('.question_ordre').html(q_ordre+q_rang);
-                            $('.question_action').html('ߠߊߡߍ߲߫');
+                            $('#evaluation_question_btn .question_ordre').html( q_ordre + q_rang );
+                            $('#evaluation_repetition_btn .question_ordre').html( parseIntNko(q_index) + q_rang_1 );
+                            $('#evaluation_question_btn .question_action').html('ߠߊߡߍ߲߫');
+                            $('#evaluation_repetition_btn .question_action').html(action_1);
                             
                             $('.question_btn').css('display','none');
                             $('.repetition_btn').css('display','block');
@@ -2042,14 +2045,14 @@ function alphabet() {
                             $('.repetition_btn').css('display','none');
                         }
                         function finDeEvaluationAlphabet() {
-                            if(q_index==nbr_max_de_questions_a_poser){
+                            if(q_index==nbr_max_de_questions_a_poser) {
 
                                 $('.question_btn').off('click');
                                 $('.question_btn').html(matiere_nom+' ߞߘߐߓߐߟߌ ߓߘߊ߫ ߓߊ߲߫. ߌ ߞߎߟߎ߲ߖߋ߫߹ ');
 
                                 stockerEvaluationAlphabet();
                                 resultat(evaluation_a_stocker);
-                                afficherEvaluationAlphabetResultat();
+                                // afficherEvaluationAlphabetResultat();
                                 reprendreEvaluationAlphabet();
                                 continuSurSyllabe();
                                 

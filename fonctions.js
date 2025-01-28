@@ -407,8 +407,9 @@
     function changerPhaseActive(phase_active_index) {
         if(phase_active_index != -1) {
             let total_phase = $('#phases_list li').length;
+console.log(phase_active_index);
             phase_active_index++;
-
+console.log(phase_active_index);
             $.each($('#phases_list li'), function() {
                 
                 var phase_index = $(this).index();
@@ -751,7 +752,7 @@ console.log(total_questions[i]);
         function repeterIndexation(element) {
             let r = setInterval(function(){
                 element.removeClass('indicateur'); 
-                setTimeout(function(){ if(element.hasClass('actif')) element.addClass('indicateur'); }, 5);
+                if(element.hasClass('actif')) element.addClass('indicateur');
             },5000);
             
             element.click(function() { clearInterval(r); $(this).removeClass('indicateur'); });

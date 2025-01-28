@@ -162,8 +162,6 @@ $('document').ready(function() {
         function matiere() {
             let matiere_nom = JSON.parse(sessionStorage.getItem('matiere_nom')); //Déterminé depuis storagesDuProgramme() dans programmes.js
 
-            parametrageDeLesson();  // Voir parametres.js
-
             if(option_retenue != null) {
                 if(option_retenue == 1) {
                     switch(niveau_actif) {
@@ -174,7 +172,8 @@ $('document').ready(function() {
             }
 
             $('#phases_list li').on('click', function() {
- 
+
+                parametrageDeLesson();  // Voir parametres.js
                 phase_id = $(this).attr('id');
                 phase_nom = $(this).html();
 
@@ -193,7 +192,7 @@ $('document').ready(function() {
                        
                 if(phase_class == "apprises") {
                     if(phase_nom != 'ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ') {
-                        alert(matiere_nom+" "+phase_nom+" ߢߌ߲߬ ߞߍߣߍ߲߫ ߞߘߐ ߟߋ߬"); 
+                        console.log(matiere_nom+" "+phase_nom+" ߢߌ߲߬ ߞߍߣߍ߲߫ ߞߘߐ ߟߋ߬"); 
                         return false;
                     }
                 }

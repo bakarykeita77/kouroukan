@@ -162,6 +162,7 @@ $('document').ready(function() {
         function matiere() {
             let matiere_nom = JSON.parse(sessionStorage.getItem('matiere_nom')); //Déterminé depuis storagesDuProgramme() dans programmes.js
 
+            parametrageDeLesson();  // Voir parametres.js
             if(option_retenue != null) {
                 if(option_retenue == 1) {
                     switch(niveau_actif) {

@@ -8,6 +8,7 @@
 var niveaux_etudies   = JSON.parse(sessionStorage.getItem('niveaux_etudies'));
 var niveau_max        = JSON.parse(sessionStorage.getItem('niveau_max'));
 var niveau_en_cours   = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
+var matiere_nouvellement_apprise = JSON.parse(sessionStorage.getItem('matiere_nouvellement_apprise'));
 var phases_etudiees   = JSON.parse(sessionStorage.getItem('phases_etudiees'));
 var phases_distinctes = JSON.parse(sessionStorage.getItem('phases_distinctes'));
 var derniere_phase    = JSON.parse(sessionStorage.getItem('derniere_phase'));
@@ -97,25 +98,39 @@ function chargementDuProgramme() {
     } 
 }          
 function styleDuProgramme() {
-            
+console.log(matiere_nouvellement_apprise);
+    
     // if(niveau_max > niveau_en_cours) niveau_max = niveau_en_cours;
 
     let programme_li = $("#programme_ul li");
-        
-    $.each(programme_li, function() {
-        
-        var matiere_index = $(this).index();
-        
-        if(niveau_max === 0) {
-            if(matiere_index === 0) $(this).addClass("actif");
-            if(matiere_index  >  0) $(this).addClass("a_apprendre");
-        }
-        if(niveau_max > 0) {
-            if($.inArray(matiere_index+1,niveaux_etudies) !== -1) $(this).addClass("apprises");
-            if($.inArray(matiere_index+1,niveaux_etudies) === -1) $(this).addClass("a_apprendre");
-            if(matiere_index+1 === niveau_en_cours) $(this).removeClass("a_apprendre").addClass("actif");
-        }
-    });
+
+    if(matiere_nouvellement_apprise != null) {
+        $.each(programme_li, function() {
+            let li_actif = $(this);
+            if(li_actif.text() == matiere_nouvellement_apprise) {
+                $('#programme_ul li').removeClass('apprises actif indicateur').addClass('a_apprendre');
+                li_actif.prev().removeClass('a_apprendre').addClass('apprises');
+                li_actif.removeClass('a_apprendre actif indicateur').addClass('apprises');
+                li_actif.next().removeClass('a_apprendre').addClass('actif indicateur');
+            }
+        });
+    } 
+    if(matiere_nouvellement_apprise == null) {
+        $.each(programme_li, function() {
+            
+            let matiere_index = $(this).index();
+            
+            if(niveau_max === 0) {
+                if(matiere_index === 0) $(this).addClass("actif");
+                if(matiere_index  >  0) $(this).addClass("a_apprendre");
+            }
+            if(niveau_max > 0) {
+                if($.inArray(matiere_index+1,niveaux_etudies) !== -1) $(this).addClass("apprises");
+                if($.inArray(matiere_index+1,niveaux_etudies) === -1) $(this).addClass("a_apprendre");
+                if(matiere_index+1 === niveau_en_cours) $(this).removeClass("a_apprendre").addClass("actif");
+            }
+        });
+    } 
     indexer($('.actif'));
 }
 function afficherProgrammes() {

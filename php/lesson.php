@@ -254,7 +254,7 @@ if(isset($_SESSION["id"])) {
 
                         <div class="redirection_btns" id="evaluation_redirection_btns">
                             <div class="redirection_btn_1">ߜߋ߲߭ ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫ ߕߎ߲߯</div>
-                            <div class="redirection_btn_2">ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߥߴߊ߬ ߡߊ߬</div>
+                            <div class="redirection_btn_2">ߥߊ߫ ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߡߊ߬</div>
                         </div>
 
                         <div class='progress_bar' id="evaluation_progress_bar">
@@ -265,6 +265,9 @@ if(isset($_SESSION["id"])) {
                     </div>
                 </div>
             </div>
+
+
+            
 
             <script src="../js/apprentissage.js"></script>
             <script src="/kouroukan/js/exercice.js"></script>

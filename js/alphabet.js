@@ -31,6 +31,7 @@ function alphabet() {
     let apprentissage_data_memo = alphabetApprentisageDataMemo();
     let exercice_data_memo = alphabetExerciceDataMemo();
     let revision_data_memo = alphabetRevisionDataMemo();
+
                  
     $('.page_body').css('display','none');
   
@@ -39,8 +40,7 @@ function alphabet() {
             case 1 : preAlphabetNko(); break;
             case 2 : alphabetNko(); break;
         } 
-    }
-    
+    }   
 
     function alphabetApprentisageDataMemo() {
         if(matieres.length === 0) return;
@@ -48,10 +48,10 @@ function alphabet() {
 
         for (let i = 0; i < matieres[0].length; i++) {
             let phase = matieres[0][i].phase;
-            if(phase == "alphabet_apprentissage") { padm = matieres[0][i].lesson; }
+            if(phase == "alphabet_apprentissage") { padm = matieres[0][i]; }
         }
 
-        if(padm.length != 0) return JSON.parse(padm);
+        return padm;
     }
     function alphabetExerciceDataMemo() {
         if(matieres.length === 0) return;
@@ -59,10 +59,10 @@ function alphabet() {
 
         for (let j = 0; j < matieres[0].length; j++) {
             let phase = matieres[0][j].phase;
-            if(phase == "alphabet_exercice") { pedm = matieres[0][j].lesson; }
+            if(phase == "alphabet_exercice") { pedm = matieres[0][j]; }
         }
 
-        if(pedm.length != 0) return JSON.parse(pedm);
+        return pedm;
     }
     function alphabetRevisionDataMemo() {
         if(matieres.length === 0) return;
@@ -70,11 +70,11 @@ function alphabet() {
 
         for (let k = 0; k < matieres[0].length; k++) {
             let phase = matieres[0][k].phase;
-            if(phase == "alphabet_revision") { prdm = matieres[0][k].lesson; }
+            if(phase == "alphabet_revision") { prdm = matieres[0][k]; }
             
         }
-        if(prdm.length != 0) return JSON.parse(prdm);;
         
+        return prdm;;
     }
     function preAlphabetNko() {
 
@@ -1182,7 +1182,7 @@ function alphabet() {
         let apprentissage_alpabet_memoire = (apprentissage_data_memo != undefined) ? apprentissage_data_memo : JSON.parse(sessionStorage.getItem('apprentissage_alpabet_memoire'));
         let exercice_alpabet_memoire      = (exercice_data_memo      != undefined) ? exercice_data_memo      : JSON.parse(sessionStorage.getItem('exercice_alpabet_memoire'));
         let evaluation_alpabet_memoire    = (revision_data_memo      != undefined) ? revision_data_memo      : JSON.parse(sessionStorage.getItem('evaluation_alpabet_memoire'));
-        
+      
         var table_id = $('.table_parlante').attr('id');
             
         var table = $('#'+table_id); 
@@ -1778,7 +1778,6 @@ function alphabet() {
         }
         function evaluationAlphabet() {
  
-            var matiere_nom = JSON.parse(localStorage.getItem('matiere_nom')); 
             var total_phase = $('.phases li').lenth;
             let index_phase_active = $('.phases_container ul li .active').index();
             var questions_evaluation = malaxer(alphabet_nko[0]);    // alphabet_nko est dans caracteres.js       
@@ -2045,19 +2044,28 @@ function alphabet() {
                             $('.repetition_btn').css('display','none');
                         }
                         function finDeEvaluationAlphabet() {
-                            if(q_index==nbr_max_de_questions_a_poser) {
+                            if(q_index==2) {
+                            // if(q_index==nbr_max_de_questions_a_poser) {
+
+                                viderNotification();
+                                setTimeout(() => {
+                                    ecris('evaluation_notification_corps','\
+                                        ߛߓߍߛߎ߲ ߘߋߟߌ ߓߘߊ߫ ߓߊ߲߫. ߌ ߞߎߟߎ߲ߖߋ߫.\
+                                    ');
+                                }, 800);
 
                                 $('.question_btn').off('click');
-                                $('.question_btn').html(matiere_nom+' ߞߘߐߓߐߟߌ ߓߘߊ߫ ߓߊ߲߫. ߌ ߞߎߟߎ߲ߖߋ߫߹ ');
+                                $('.question_btn').html('ߛߓߍߛߎ߲ ߞߘߐߓߐߟߌ ߓߘߊ߫ ߓߊ߲߫. ߌ ߞߎߟߎ߲ߖߋ߫߹');
 
-                                stockerEvaluationAlphabet();
-                                resultat(evaluation_a_stocker);
-                                // afficherEvaluationAlphabetResultat();
+                                // stockerEvaluationAlphabet();
+                                resultatGeneral(apprentissage_alpabet_memoire, exercice_alpabet_memoire, evaluation_a_stocker);
+                                afficherEvaluationAlphabetResultat();
+                                fermerEvaluationAlphabetResultat();
                                 reprendreEvaluationAlphabet();
                                 continuSurSyllabe();
+
                                 
                                 function stockerEvaluationAlphabet() {
-                                    if(note_d_evaluation <  moyenne_d_evaluation) alert( "ߛߍ߬ߦߵߊ߬ ߡߊ߬" ); 
                                     if(note_d_evaluation >= moyenne_d_evaluation) {
                                         // if(phase_class == "apprises") {alert("ߦߙߐ ߢߌ߲߬ ߞߍߣߍ߲߫ ߞߘߐ ߟߋ߬"); return false;}
                                         
@@ -2080,7 +2088,10 @@ function alphabet() {
                                 }
                                 function afficherEvaluationAlphabetResultat() {
                                     goDown($('.resultat_container'));
-                                    setTimeout(() => { masquer($('#evaluation')); }, 1500);
+                                    // setTimeout(() => { masquer($('#evaluation')); }, 1500);
+                                }
+                                function fermerEvaluationAlphabetResultat() {
+                                    $('#fermer_resultat').click(() => { masquer($('.resultat_container')); });
                                 }
                                 function reprendreEvaluationAlphabet() {
                                     $('#reprendre').click(function() {
@@ -2092,7 +2103,9 @@ function alphabet() {
                                     });
                                 }
                                 function continuSurSyllabe() {
-                                    $('#avance').html("<a href='http://localhost/kouroukan/php/programmes.php'>ߜߋ߲߭ ߥߟߊ߬ߘߊ ߕߊ߬ ߦߊ߲߬</a>");
+                                    sessionStorage.setItem('matiere_nouvellement_apprise',JSON.stringify(matiere_nom));
+                                    indexer($('#fermer_evaluation'));
+                                    $('#avance, #fermer_evaluation').html("<a href='http://localhost/kouroukan/php/programmes.php'>ߜߋ߲߭ ߥߟߊ߬ߘߊ ߕߊ߬ ߦߊ߲߬</a>");
                                 }
                             }
                         }

@@ -545,12 +545,11 @@
                 indice++;
                 $('#'+element_id).html(message.substr(0,indice));
                 if(indice<longueur) {
-                    setTimeout(() => { write(); }, 5);
+                    setTimeout(() => { write(); }, 25);
                 }
             }
         }, 100);
     }
-
     function ecrire(element_class,message) {
         let longueur = message.length;
         let indice = 0;
@@ -1167,6 +1166,7 @@ console.log(total_questions[i]);
         
         let nom = JSON.parse(sessionStorage.getItem('nom'));
         let prenom = JSON.parse(sessionStorage.getItem('prenom'));
+        let etudiant = '<h1>'+prenom+' '+nom+'<h1>';
         let lesson_en_cours = $('.notification_titre').html();
         let lesson_suivante = lessonSuivante();
         let total_question = memoire.length;
@@ -1177,18 +1177,22 @@ console.log(total_questions[i]);
         let reprendre_l_etape_en_cours = '<b id="reprendre">'+lesson_en_cours+' ߞߍ߫ ߕߎ߲߯</b>';
         let continu_sur_l_etape_suivante = '<b id="avance">'+lesson_suivante+'</b>';
 
-        if(lesson_suivante == lesson_en_cours+' ߥߴߊ߬ ߡߊ߬') { $('.notification_titre').html('ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ'); }
+        if(lesson_suivante == 'ߥߊ߫ '+lesson_en_cours+' ߡߊ߬') { $('.notification_titre').html('ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ'); }
 
-        chargerResultatTitre();
+        chargerResultatEntete();
         chargerResultatHead();
         chargerResultatBody();
         chargerResultatFoot();
         chargerDeliberation();
         
-        function chargerResultatTitre() { $('#resultat_titre').html('<h2>'+lesson_en_cours+' ߞߐߝߟߌ</h2>'); }
+        function chargerResultatEntete() {
+            $('#resultat_titre').html('<h3>'+lesson_en_cours+' ߞߐߝߟߌ</h3>'); 
+            $('#etudiant').html(etudiant+' ߓߟߏ߫');
+        }
         function chargerResultatHead() {
 
             let d = new Date();
+    
             let an = d.getFullYear();
             let lune = d.getMonth();
             let date = d.getDate();
@@ -1196,7 +1200,6 @@ console.log(total_questions[i]);
             let heure = d.getHours();
             let minute = d.getMinutes();
 
-            $('#etudiant h1').text(prenom+' '+nom);
             $('#resultat_date').text(jours[jour]+' '+mois[lune]+' ߕߟߋ߬ '+parseIntNko(date)+' ߛߊ߲߭ '+parseIntNko(an));
             $('#resultat_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
         }
@@ -1296,6 +1299,8 @@ console.log(total_questions[i]);
         let reprendre_l_etape_en_cours = '<b id="reprendre">'+lesson_en_cours+' ߞߍ߫ ߕߎ߲߯</b>';
         let continu_sur_l_etape_suivante = '<b id="avance">'+lesson_suivante+'</b>';
 
+        console.log(memoire_3);
+        console.log(memoire_4 == "");
 
         chargerResultatGeneralEntete();
         chargerResultatGeneralCorps();
@@ -1310,15 +1315,15 @@ console.log(total_questions[i]);
         function afficherResultat() { goDown($('.resultat_container')); }
 
         function chargerResultatGeneralEntete() { 
-            $('#resultat_titre').html('<h2>'+matiere_nom+' ߥߟߊ߬ߘߊ ߞߐߝߟߌ</h2>'); 
+            $('#resultat_titre').html('<h3>'+matiere_nom+' ߥߟߊ߬ߘߊ ߞߐߝߟߌ</h3>'); 
             $('#etudiant').html('<h1>'+prenom+' '+nom+'</h1> <span>ߓߟߏ߫</span>');
         }
         function chargerResultatGeneralCorps() {
 
             chargerResultatDApprentissageCorps();
             chargerResultatDExerciceCorps();
-            chargerResultatDeRevivsionCorps();
-            chargerResultatDEvaluationCorps();
+            // chargerResultatDeRevivsionCorps();
+            // chargerResultatDEvaluationCorps();
 
             function chargerResultatDApprentissageCorps() {
                         
@@ -1327,23 +1332,24 @@ console.log(total_questions[i]);
 
                 function chargerResultatHead() {
 
-                    let d = new Date();
-                    let an = d.getFullYear();
-                    let lune = d.getMonth();
-                    let date = d.getDate();
-                    let jour = d.getDay();
-                    let heure = d.getHours();
-                    let minute = d.getMinutes();
+                    let d = memoire_1.date;
+                    let an = d.split("-")[0];
+                    let lune = parseInt(d.split("-")[1]);
+                    let date = d.split("-")[2];
+                    let jour = parseInt(date.split(" ")[0]);
+                    let temps = date.split(" ")[1];
+                    let heure = parseInt(temps.split(":")[0]);
+                    let minute = parseInt(temps.split(":")[1]);
                     
-                    $('#phase_d_apprentissage').text(liste_de_phases[0]);
-                    $('#apprentissage_date').text(jours[jour]+' '+mois[lune]+' ߕߟߋ߬ '+parseIntNko(date)+' ߛߊ߲߭ '+parseIntNko(an));
+                    $('#phase_d_apprentissage').text(matiere_nom+' '+liste_de_phases[0][1]);
+                    $('#apprentissage_date').text(mois[lune]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
                     $('#apprentissage_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
                 }
                 function chargerResultatBody() {
 
-                    let apprentissage_resultat_body_html = resultatTableBodyHTML(memoire_1);
+                    let apprentissage_resultat_body_html = resultatTableBodyHTML(JSON.parse(memoire_1.lesson));
 
-                    if(memoire_1 == "") { $('#resultat_d_exercice_corps').css("display","none"); }
+                    if(memoire_1 == "") { $('#resultat_d_apprentissage_corps').css("display","none"); }
                     $('#apprentissage_resultat_body').html(apprentissage_resultat_body_html);
                     $('#total_d_apprentissage_question').html(parseIntNko(memoire_1.length));
                     $('#total_d_apprentissage_reponse').html(parseIntNko(memoire_1.length));
@@ -1357,21 +1363,22 @@ console.log(total_questions[i]);
 
                 function chargerResultatHead() {
 
-                    let d = new Date();
-                    let an = d.getFullYear();
-                    let lune = d.getMonth();
-                    let date = d.getDate();
-                    let jour = d.getDay();
-                    let heure = d.getHours();
-                    let minute = d.getMinutes();
+                    let d = memoire_2.date;
+                    let an = d.split("-")[0];
+                    let lune = d.split("-")[1];
+                    let date = d.split("-")[2];
+                    let jour = date.split(" ")[0];
+                    let temps = date.split(" ")[1];
+                    let heure = temps.split(":")[0];
+                    let minute = temps.split(":")[1];
                     
-                    $('#phase_d_exercice').text(liste_de_phases[1]);
-                    $('#exercice_date').text(jours[jour]+' '+mois[lune]+' ߕߟߋ߬ '+parseIntNko(date)+' ߛߊ߲߭ '+parseIntNko(an));
+                    $('#phase_d_exercice').text(matiere_nom+' '+liste_de_phases[1][1]);
+                    $('#exercice_date').text(mois[lune]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
                     $('#exercice_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
                 }
                 function chargerResultatBody() {
 
-                    let exercice_resultat_body_html = resultatTableBodyHTML(memoire_2);
+                    let exercice_resultat_body_html = resultatTableBodyHTML(JSON.parse(memoire_2.lesson));
 
                     if(memoire_2 == "") { $('#resultat_d_exercice_corps').css("display","none"); }
                     $('#exercice_resultat_body').html(exercice_resultat_body_html);
@@ -1388,16 +1395,17 @@ console.log(total_questions[i]);
 
                 function chargerResultatHead() {
 
-                    let d = new Date();
-                    let an = d.getFullYear();
-                    let lune = d.getMonth();
-                    let date = d.getDate();
-                    let jour = d.getDay();
-                    let heure = d.getHours();
-                    let minute = d.getMinutes();
+                    let d = memoire_3.date;
+                    let an = d.split("-")[0];
+                    let lune = d.split("-")[1];
+                    let date = d.split("-")[2];
+                    let jour = date.split(" ")[0];
+                    let temps = date.split(" ")[1];
+                    let heure = temps.split(":")[0];
+                    let minute = temps.split(":")[1];
                     
-                    $('#phase_de_revision').text(liste_de_phases[2]);
-                    $('#revision_date').text(jours[jour]+' '+mois[lune]+' ߕߟߋ߬ '+parseIntNko(date)+' ߛߊ߲߭ '+parseIntNko(an));
+                    $('#phase_de_revision').text(matiere_nom+' '+liste_de_phases[2][1]);
+                    $('#revision_date').text(mois[lune]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
                     $('#revision_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
                 }
                 function chargerResultatBody() {
@@ -1419,23 +1427,24 @@ console.log(total_questions[i]);
 
                 function chargerResultatHead() {
 
-                    let d = new Date();
-                    let an = d.getFullYear();
-                    let lune = d.getMonth();
-                    let date = d.getDate();
-                    let jour = d.getDay();
-                    let heure = d.getHours();
-                    let minute = d.getMinutes();
+                    let d = memoire_4.date;
+                    let an = d.split("-")[0];
+                    let lune = d.split("-")[1];
+                    let date = d.split("-")[2];
+                    let jour = date.split(" ")[0];
+                    let temps = date.split(" ")[1];
+                    let heure = temps.split(":")[0];
+                    let minute = temps.split(":")[1];
                     
-                    $('#phase_d_evaluation').text(liste_de_phases[3]);
-                    $('#evaluation_date').text(jours[jour]+' '+mois[lune]+' ߕߟߋ߬ '+parseIntNko(date)+' ߛߊ߲߭ '+parseIntNko(an));
+                    $('#phase_d_evaluation').text(matiere_nom+' '+liste_de_phases[3][1]);
+                    $('#evaluation_date').text(mois[lune]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
                     $('#evaluation_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
                 }
                 function chargerResultatBody() {
 
                     let evaluation_resultat_body_html = resultatTableBodyHTML(memoire_4);
 
-                    if(memoire_4 == "") { $('#resultat_d_evaluation_corps').css("display","none"); }
+                    if(memoire_4 == "") { $('#resultat_d_evaluation_corps').css("display","none"); alert('ok'); }
                     $('#evaluation_resultat_body').html(evaluation_resultat_body_html);
             
                     $('#total_d_evaluation_question').html(parseIntNko(memoire_4.length));

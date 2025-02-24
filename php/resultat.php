@@ -140,18 +140,15 @@
         max-width: 40rem;
         margin: 0 auto;
     }
-    #resultat_titre { 
-        padding: 0.25rem;
-    }
     #etudiant h1, #etudiant span { display:inline-block; margin: 0.25rem; }
-    #resultat_titre h2 { margin: 0.125rem 0.5rem; }
+    #resultat_titre h3, #etudiant { margin: 0.125rem 0.5rem; }
     #resultat_entete, #resultat_corps, #resultat_pied, #deliberation {
         border: 1px solid transparent;
     }
     .bold { font-weight: bold; }
     .thin { font-size: 0.8rem; }
     #resultat_entete table { width: 100%; }
-    #resultat_entete table h2 { border: 1px solid #aaa; border-bottom-width: 4px; padding: 0.25rem; }
+    #resultat_entete table h3 { border: 1px solid #aaa; border-bottom-width: 4px; padding: 0.25rem; }
     #resultat_corps table {
         border: 1px solid #aaa;
         height: max-content;

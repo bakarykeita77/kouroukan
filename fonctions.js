@@ -1299,8 +1299,6 @@ console.log(total_questions[i]);
         let reprendre_l_etape_en_cours = '<b id="reprendre">'+lesson_en_cours+' ߞߍ߫ ߕߎ߲߯</b>';
         let continu_sur_l_etape_suivante = '<b id="avance">'+lesson_suivante+'</b>';
 
-        console.log(memoire_2);
-        console.log(memoire_3);
 
         chargerResultatGeneralEntete();
         chargerResultatGeneralCorps();
@@ -1331,7 +1329,7 @@ console.log(total_questions[i]);
                     $('#resultat_d_apprentissage_corps').css("display","none"); 
                     return;
                 }
-                        
+                                          
                 chargerResultatHead();
                 chargerResultatBody();
 
@@ -1347,17 +1345,18 @@ console.log(total_questions[i]);
                     let minute = parseInt(temps.split(":")[1]);
                     
                     $('#phase_d_apprentissage').text(matiere_nom+' '+liste_de_phases[0][1]);
-                    $('#apprentissage_date').text(mois[lune]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
+                    $('#apprentissage_date').text(mois[parseInt(lune)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
                     $('#apprentissage_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
                 }
                 function chargerResultatBody() {
 
-                    let apprentissage_resultat_body_html = resultatTableBodyHTML(JSON.parse(memoire_1.lesson));
+                    let lesson = JSON.parse(memoire_1.lesson)
+                    let apprentissage_resultat_body_html = resultatTableBodyHTML(lesson);
 
                     $('#apprentissage_resultat_body').html(apprentissage_resultat_body_html);
-                    $('#total_d_apprentissage_question').html(parseIntNko(memoire_1.length));
-                    $('#total_d_apprentissage_reponse').html(parseIntNko(memoire_1.length));
-                    $('#total_d_apprentissage_point').html(parseIntNko(sommePoint(memoire_1)));
+                    $('#total_d_apprentissage_question').html(parseIntNko(lesson.length));
+                    $('#total_d_apprentissage_reponse').html(parseIntNko(lesson.length));
+                    $('#total_d_apprentissage_point').html(parseIntNko(sommePoint(lesson)));
                 }
             }
             function chargerResultatDExerciceCorps() {
@@ -1366,7 +1365,7 @@ console.log(total_questions[i]);
                     $('#resultat_d_exercice_corps').css("display","none"); 
                     return;
                 }
-                        
+                    
                 chargerResultatHead();
                 chargerResultatBody();
 
@@ -1382,17 +1381,18 @@ console.log(total_questions[i]);
                     let minute = temps.split(":")[1];
                     
                     $('#phase_d_exercice').text(matiere_nom+' '+liste_de_phases[1][1]);
-                    $('#exercice_date').text(mois[lune]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
+                    $('#exercice_date').text(mois[parseInt(lune)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
                     $('#exercice_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
                 }
                 function chargerResultatBody() {
 
-                    let exercice_resultat_body_html = resultatTableBodyHTML(JSON.parse(memoire_2.lesson));
+                    let lesson = JSON.parse(memoire_2.lesson)
+                    let exercice_resultat_body_html = resultatTableBodyHTML(lesson);
 
                     $('#exercice_resultat_body').html(exercice_resultat_body_html);
-                    $('#total_d_exercice_question').html(parseIntNko(memoire_2.length));
-                    $('#total_d_exercice_reponse').html(parseIntNko(memoire_2.length));
-                    $('#total_d_exercice_point').html(parseIntNko(sommePoint(memoire_2)));
+                    $('#total_d_exercice_question').html(parseIntNko(lesson.length));
+                    $('#total_d_exercice_reponse').html(parseIntNko(lesson.length));
+                    $('#total_d_exercice_point').html(parseIntNko(sommePoint(lesson)));
                 }
             }
             function chargerResultatDeRevivsionCorps() {
@@ -1401,13 +1401,14 @@ console.log(total_questions[i]);
                     $('#resultat_de_revision_corps').css("display","none"); 
                     return;
                 }
-                        
+                          
                 chargerResultatHead();
                 chargerResultatBody();
 
                 function chargerResultatHead() {
 
                     let d = memoire_3.date;
+
                     let an = d.split("-")[0];
                     let lune = d.split("-")[1];
                     let date = d.split("-")[2];
@@ -1415,19 +1416,19 @@ console.log(total_questions[i]);
                     let temps = date.split(" ")[1];
                     let heure = temps.split(":")[0];
                     let minute = temps.split(":")[1];
-                    
+                  
                     $('#phase_de_revision').text(matiere_nom+' '+liste_de_phases[2][1]);
-                    $('#revision_date').text(mois[lune]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
+                    $('#revision_date').text(mois[parseInt(lune)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
                     $('#revision_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
                 }
                 function chargerResultatBody() {
-
-                    let revision_resultat_body_html = resultatTableBodyHTML(memoire_3);
+                    let lesson = JSON.parse(memoire_3.lesson)
+                    let revision_resultat_body_html = resultatTableBodyHTML(lesson);
 
                     $('#revision_resultat_body').html(revision_resultat_body_html);
-                    $('#total_de_revision_question').html(parseIntNko(memoire_3.length));
-                    $('#total_de_revision_reponse').html(parseIntNko(memoire_3.length));
-                    $('#total_de_revision_point').html(parseIntNko(sommePoint(memoire_3)));
+                    $('#total_de_revision_question').html(parseIntNko(lesson.length));
+                    $('#total_de_revision_reponse').html(parseIntNko(lesson.length));
+                    $('#total_de_revision_point').html(parseIntNko(sommePoint(lesson)));
                 }
             }
             function chargerResultatDEvaluationCorps() {
@@ -1452,26 +1453,32 @@ console.log(total_questions[i]);
                     let minute = temps.split(":")[1];
                     
                     $('#phase_d_evaluation').text(matiere_nom+' '+liste_de_phases[3][1]);
-                    $('#evaluation_date').text(mois[lune]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
+                    $('#evaluation_date').text(mois[parseInt(lune)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
                     $('#evaluation_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
                 }
                 function chargerResultatBody() {
 
-                    let evaluation_resultat_body_html = resultatTableBodyHTML(memoire_4);
+                    let lesson = JSON.parse(memoire_4.lesson)
+                    let evaluation_resultat_body_html = resultatTableBodyHTML(lesson);
                     
                     $('#evaluation_resultat_body').html(evaluation_resultat_body_html);
-                    $('#total_d_evaluation_question').html(parseIntNko(memoire_4.length));
-                    $('#total_d_evaluation_reponse').html(parseIntNko(memoire_4.length));
-                    $('#total_d_evaluation_point').html(parseIntNko(sommePoint(memoire_4)));
+                    $('#total_d_evaluation_question').html(parseIntNko(lesson.length));
+                    $('#total_d_evaluation_reponse').html(parseIntNko(lesson.length));
+                    $('#total_d_evaluation_point').html(parseIntNko(sommePoint(lesson)));
                 }
 
             }
         }
         function chargerResultatFoot() {
 
-            let total_des_questions = memoire_1.length + memoire_2.length + memoire_3.length + memoire_4.length;
-            let total_des_points = sommePoint(memoire_1) + sommePoint(memoire_2) + sommePoint(memoire_3) + sommePoint(memoire_4);
+            let lesson_1 = (memoire_1 != "") ? JSON.parse(memoire_1.lesson) : [];
+            let lesson_2 = (memoire_2 != "") ? JSON.parse(memoire_2.lesson) : [];
+            let lesson_3 = (memoire_3 != "") ? JSON.parse(memoire_3.lesson) : [];
+            let lesson_4 = (memoire_4 != "") ? JSON.parse(memoire_4.lesson) : [];
 
+            let total_des_questions = lesson_1.length + lesson_2.length + lesson_3.length + lesson_4.length;
+            let total_des_points = sommePoint(lesson_1) + sommePoint(lesson_2) + sommePoint(lesson_3) + sommePoint(lesson_4);
+            
             $('#total_general_des_questions').text(parseIntNko(total_des_questions));
             $('#total_general_des_bonnes_reponses').text(parseIntNko(total_des_points));
             $('#pourcentage_point').text('%'+parseIntNko(Math.floor(total_des_points*100/total_des_questions)));
@@ -1584,7 +1591,11 @@ console.log(total_questions[i]);
     }
     function sommePoint(memoire) {
         let html = 0;
-        for(let i=0; i<memoire.length; i++) { html += memoire[i][2]; }
+        if(memoire != undefined) {
+            for(let i=0; i<memoire.length; i++) { 
+                html += memoire[i][2];
+            }
+        } 
         return html;
     }
 	function softDisplay() {

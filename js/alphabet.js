@@ -1792,12 +1792,12 @@ function alphabet() {
             var q_index = 0, q_rang = '߭';
 
             var date_d_evaluation = dateDEvaluation();
-            var niveau_d_evaluation = 0;
-            var phase_d_evaluation = '';
+            var niveau_d_evaluation = niveau_en_cours;
+            var phase_d_evaluation = phase_id;
             var lesson_d_evaluation = [];
             var note_d_evaluation = 0;
             var evaluation_a_stocker = [];
-        
+       
         
             initialiserEvaluation();
             chargerEvaluationAlphabet();
@@ -1806,7 +1806,16 @@ function alphabet() {
         
         
             function dateDEvaluation() {
-                let date_d_evaluation = '';
+
+                let d = new Date();
+                let an = d.getFullYear();
+                let lune = d.getMonth();
+                let date = d.getDate();
+                let nom_du_jour = d.getDay();
+                let heure = d.getHours();
+                let minute = d.getMinutes();
+                let temps = [heure+':'+minute];
+                let date_d_evaluation = an+'-'+lune+'-'+date+' '+temps+' '+nom_du_jour;
 
                 return date_d_evaluation;
             }
@@ -1816,13 +1825,7 @@ function alphabet() {
                     var q = questions_a_evaluer[i], r = '', p = 0;
                     lesson_d_evaluation[i] = [q,r,p];
                 }
-                evaluation_a_stocker = [
-                    ['date',date_d_evaluation], 
-                    ['niveau',niveau_d_evaluation], 
-                    ['phase',phase_d_evaluation],
-                    ['lesson',lesson_d_evaluation],
-                    ['note',note_d_evaluation],
-                ];
+                evaluation_a_stocker = {"date":date_d_evaluation, "niveau":niveau_d_evaluation, "phase":phase_d_evaluation, "lesson":lesson_d_evaluation, "note":note_d_evaluation};
             }
             function chargerEvaluationAlphabet() {
                 
@@ -2074,7 +2077,8 @@ function alphabet() {
 
                                 $('.question_btn').off('click');
                                 $('.question_btn').html('ߛߓߍߛߎ߲ ߞߘߐߓߐߟߌ ߓߘߊ߫ ߓߊ߲߫. ߌ ߞߎߟߎ߲ߖߋ߫߹');
-
+                                
+                                evaluation_a_stocker.lesson = JSON.stringify(evaluation_a_stocker.lesson);
                                 // stockerEvaluationAlphabet();
                                 resultatGeneral(apprentissage_alpabet_memoire, exercice_alpabet_memoire, evaluation_a_stocker);
                                 afficherEvaluationAlphabetResultat();

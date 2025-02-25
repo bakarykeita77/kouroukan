@@ -1299,8 +1299,8 @@ console.log(total_questions[i]);
         let reprendre_l_etape_en_cours = '<b id="reprendre">'+lesson_en_cours+' ߞߍ߫ ߕߎ߲߯</b>';
         let continu_sur_l_etape_suivante = '<b id="avance">'+lesson_suivante+'</b>';
 
+        console.log(memoire_2);
         console.log(memoire_3);
-        console.log(memoire_4 == "");
 
         chargerResultatGeneralEntete();
         chargerResultatGeneralCorps();
@@ -1322,10 +1322,15 @@ console.log(total_questions[i]);
 
             chargerResultatDApprentissageCorps();
             chargerResultatDExerciceCorps();
-            // chargerResultatDeRevivsionCorps();
-            // chargerResultatDEvaluationCorps();
+            chargerResultatDeRevivsionCorps();
+            chargerResultatDEvaluationCorps();
 
             function chargerResultatDApprentissageCorps() {
+
+                if(memoire_1 == "") { 
+                    $('#resultat_d_apprentissage_corps').css("display","none"); 
+                    return;
+                }
                         
                 chargerResultatHead();
                 chargerResultatBody();
@@ -1349,7 +1354,6 @@ console.log(total_questions[i]);
 
                     let apprentissage_resultat_body_html = resultatTableBodyHTML(JSON.parse(memoire_1.lesson));
 
-                    if(memoire_1 == "") { $('#resultat_d_apprentissage_corps').css("display","none"); }
                     $('#apprentissage_resultat_body').html(apprentissage_resultat_body_html);
                     $('#total_d_apprentissage_question').html(parseIntNko(memoire_1.length));
                     $('#total_d_apprentissage_reponse').html(parseIntNko(memoire_1.length));
@@ -1357,6 +1361,11 @@ console.log(total_questions[i]);
                 }
             }
             function chargerResultatDExerciceCorps() {
+
+                if(memoire_2 == "") { 
+                    $('#resultat_d_exercice_corps').css("display","none"); 
+                    return;
+                }
                         
                 chargerResultatHead();
                 chargerResultatBody();
@@ -1380,15 +1389,18 @@ console.log(total_questions[i]);
 
                     let exercice_resultat_body_html = resultatTableBodyHTML(JSON.parse(memoire_2.lesson));
 
-                    if(memoire_2 == "") { $('#resultat_d_exercice_corps').css("display","none"); }
                     $('#exercice_resultat_body').html(exercice_resultat_body_html);
-            
                     $('#total_d_exercice_question').html(parseIntNko(memoire_2.length));
                     $('#total_d_exercice_reponse').html(parseIntNko(memoire_2.length));
                     $('#total_d_exercice_point').html(parseIntNko(sommePoint(memoire_2)));
                 }
             }
             function chargerResultatDeRevivsionCorps() {
+
+                if(memoire_3 == "") { 
+                    $('#resultat_de_revision_corps').css("display","none"); 
+                    return;
+                }
                         
                 chargerResultatHead();
                 chargerResultatBody();
@@ -1412,15 +1424,18 @@ console.log(total_questions[i]);
 
                     let revision_resultat_body_html = resultatTableBodyHTML(memoire_3);
 
-                    if(memoire_3 == "") { $('#resultat_de_revision_corps').css("display","none"); }
                     $('#revision_resultat_body').html(revision_resultat_body_html);
-            
                     $('#total_de_revision_question').html(parseIntNko(memoire_3.length));
                     $('#total_de_revision_reponse').html(parseIntNko(memoire_3.length));
                     $('#total_de_revision_point').html(parseIntNko(sommePoint(memoire_3)));
                 }
             }
             function chargerResultatDEvaluationCorps() {
+
+                if(memoire_4 == "") { 
+                    $('#resultat_d_evaluation_corps').css("display","none"); 
+                    return;
+                }
                         
                 chargerResultatHead();
                 chargerResultatBody();
@@ -1443,10 +1458,8 @@ console.log(total_questions[i]);
                 function chargerResultatBody() {
 
                     let evaluation_resultat_body_html = resultatTableBodyHTML(memoire_4);
-
-                    if(memoire_4 == "") { $('#resultat_d_evaluation_corps').css("display","none"); alert('ok'); }
+                    
                     $('#evaluation_resultat_body').html(evaluation_resultat_body_html);
-            
                     $('#total_d_evaluation_question').html(parseIntNko(memoire_4.length));
                     $('#total_d_evaluation_reponse').html(parseIntNko(memoire_4.length));
                     $('#total_d_evaluation_point').html(parseIntNko(sommePoint(memoire_4)));

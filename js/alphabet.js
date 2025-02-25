@@ -1790,6 +1790,12 @@ function alphabet() {
             let good_response_counter = 0;
             
             var q_index = 0, q_rang = '߭';
+
+            var date_d_evaluation = dateDEvaluation();
+            var niveau_d_evaluation = 0;
+            var phase_d_evaluation = '';
+            var lesson_d_evaluation = [];
+            var note_d_evaluation = 0;
             var evaluation_a_stocker = [];
         
         
@@ -1799,12 +1805,24 @@ function alphabet() {
             evaluerAlphabet();
         
         
+            function dateDEvaluation() {
+                let date_d_evaluation = '';
+
+                return date_d_evaluation;
+            }
             function initialiserEvaluation() {
                 for(var i = 0; i < 20; i++) questions_a_evaluer[i] = questions_evaluation[i];
                 for(var i=0;i<questions_a_evaluer.length;i++) {
                     var q = questions_a_evaluer[i], r = '', p = 0;
-                    evaluation_a_stocker[i] = [q,r,p];
+                    lesson_d_evaluation[i] = [q,r,p];
                 }
+                evaluation_a_stocker = [
+                    ['date',date_d_evaluation], 
+                    ['niveau',niveau_d_evaluation], 
+                    ['phase',phase_d_evaluation],
+                    ['lesson',lesson_d_evaluation],
+                    ['note',note_d_evaluation],
+                ];
             }
             function chargerEvaluationAlphabet() {
                 
@@ -1961,7 +1979,7 @@ function alphabet() {
         
                             
                             function enregistrerExerciceAlphabet() { 
-                                evaluation_a_stocker.splice(evaluation_counter,1,question_reponse); 
+                                lesson_d_evaluation.splice(evaluation_counter,1,question_reponse); 
                             }
                             function chargerInstantannementEvaluationTbody() {
         
@@ -2070,7 +2088,7 @@ function alphabet() {
                                         // if(phase_class == "apprises") {alert("ߦߙߐ ߢߌ߲߬ ߞߍߣߍ߲߫ ߞߘߐ ߟߋ߬"); return false;}
                                         
                                         let phase_nbr = JSON.parse(sessionStorage.getItem('data_phase_nbr'));
-                                        sendLessonDataToDB('alphabet_evaluation',evaluation_a_stocker);
+                                        sendLessonDataToDB('alphabet_evaluation',lesson_d_evaluation);
                                         changerPhaseActive(index_phase_active);
                                         sessionStorage.setItem('phase_nbr',JSON.stringify(phase_nbr));
                                         console.log('Les données de Alphabet_evaluation sont envoyées à la base de données.');

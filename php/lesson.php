@@ -234,18 +234,18 @@ if(isset($_SESSION["id"])) {
                         <div class="clavier_container" id="clavier_evaluation"><?php include "clavier.php"; ?></div>
 
                         <div class="dialogue_btns" id="evaluation_dialogue_btns">
-                                <div class="question_btn" id="evaluation_question_btn">
-                                    <span class="question_label"></span>
-                                    <span class="question_total"></span>
-                                    <span class="question_ordre"></span>
-                                    <span class="question_action"></span>
-                                </div>
-                                <div class="repetition_btn" id="evaluation_repetition_btn">
-                                    <span class="question_label"></span>
-                                    <span class="question_ordre"></span>
-                                    <span class="question_action"></span>
-                                </div>
-                                <div class="correction_btn" id="evaluation_correction_btn">ߏ߬ ߛߊߞߍ߫</div>
+                            <div class="question_btn" id="evaluation_question_btn">
+                                <span class="question_label"></span>
+                                <span class="question_total"></span>
+                                <span class="question_ordre"></span>
+                                <span class="question_action"></span>
+                            </div>
+                            <div class="repetition_btn" id="evaluation_repetition_btn">
+                                <span class="question_label"></span>
+                                <span class="question_ordre"></span>
+                                <span class="question_action"></span>
+                            </div>
+                            <div class="correction_btn" id="evaluation_correction_btn">ߏ߬ ߛߊߞߍ߫</div>
                             <div class="progress_bar_integre">
                                 <div class="progress_bonne_reponse_bar_integre"></div>
                                 <div class="progress_mauvaise_reponse_bar_integre"></div>
@@ -255,6 +255,7 @@ if(isset($_SESSION["id"])) {
                         <div class="redirection_btns" id="evaluation_redirection_btns">
                             <div class="redirection_btn_1">ߜߋ߲߭ ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫ ߕߎ߲߯</div>
                             <div class="redirection_btn_2">ߥߊ߫ ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߡߊ߬</div>
+                            <div class="redirection_btn_3"> ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ </div>
                         </div>
 
                         <div class='progress_bar' id="evaluation_progress_bar">
@@ -265,15 +266,12 @@ if(isset($_SESSION["id"])) {
                     </div>
                 </div>
             </div>
-
-
             
 
             <script src="../js/apprentissage.js"></script>
             <script src="/kouroukan/js/exercice.js"></script>
             <script src="/kouroukan/js/evaluations.js"></script>
 
-            
           <!--Resultat------------------------------------------------------------------------------------------------------------------------>
             <div class="resultat_container"><?php include("resultat.php"); ?></div>
 

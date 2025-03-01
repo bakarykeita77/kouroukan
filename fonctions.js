@@ -732,7 +732,7 @@ console.log(total_questions[i]);
         });
 
         element.css('display','block');
-        setTimeout(() => { element.animate({'top':0}, 400); }, 1200);
+        element.animate({'top':0}, 400);
     }
     function goUp(element) {
         element.css('display','none'); 
@@ -745,7 +745,7 @@ console.log(total_questions[i]);
                 'height':0,
                 'z-index': 0
             });
-        }, 400);
+        }, 600);
     }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
@@ -1289,15 +1289,14 @@ console.log(total_questions[i]);
         let prenom = JSON.parse(sessionStorage.getItem('prenom'));
         let matiere_nom = JSON.parse(sessionStorage.getItem('matiere_nom'));
         let lesson_en_cours = $('.notification_titre').html();
-        let lesson_suivante = lessonSuivante();
-
-        let total_question_1 = memoire_1.length;
-
-        let total_bonne_reponse_1 = totalPoint()
-        let taux_de_vraie_reponse_1 = Math.floor(total_bonne_reponse_1*100/total_question_1);
-        let taux_acceptable_de_vraie_reponse = (lesson_active = 'pre_exercice') ? 100 : 92;
+        let lesson_actuelle = lessonActuelle(lesson_en_cours);
+        let total_question = totalQuestion(lesson_en_cours);
+        let total_point = totalPoint(lesson_actuelle);
+        let moyenne_d_evaluation = 1;
         let reprendre_l_etape_en_cours = '<b id="reprendre">'+lesson_en_cours+' ߞߍ߫ ߕߎ߲߯</b>';
-        let continu_sur_l_etape_suivante = '<b id="avance">'+lesson_suivante+'</b>';
+        let lesson_suivante = lessonSuivante(lesson_en_cours);
+        let phase = phaseEnCours(lesson_en_cours);
+        let continu_sur_l_etape_suivante = '<b id="avance"><a href="/kouroukan/php/programmes.php">'+lesson_suivante+'</a></b>';
 
 
         chargerResultatGeneralEntete();
@@ -1305,12 +1304,11 @@ console.log(total_questions[i]);
         chargerResultatFoot();
         chargerDeliberation();
         afficherResultat();
-        masquerResultat();
-        
-        function masquerResultat() {
-            $('#fermer_resultat').click(function() { masquer($('#envelope')); });
-        }
-        function afficherResultat() { goDown($('.resultat_container')); }
+        reprendreLesson();
+        continuSuLaLessonSuivante();
+    
+        $('#fermer_resultat').click(function() { masquerResultat(); });
+
 
         function chargerResultatGeneralEntete() { 
             $('#resultat_titre').html('<h3>'+matiere_nom+' ߥߟߊ߬ߘߊ ߞߐߝߟߌ</h3>'); 
@@ -1484,7 +1482,7 @@ console.log(total_questions[i]);
             $('#pourcentage_point').text('%'+parseIntNko(Math.floor(total_des_points*100/total_des_questions)));
         }
         function chargerDeliberation() {
-            if(taux_de_vraie_reponse_1 < taux_acceptable_de_vraie_reponse) {
+            if(total_point < moyenne_d_evaluation) {
                 $('#deliberation').html('ߌ ߖߌߖߊ߬ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ '+lesson_en_cours+' ߓߍ߬ߙߍ ߡߊ߫ ߤߊߟߌ߬ ߁߈ ߓߐ߫. ߏ߬ߘߐ߬߸ ߌ ߞߐߛߍ߬ߦߌ߬ ߦߊ߲߬ ߡߊ߫.'+reprendre_l_etape_en_cours);
             }else{
                 $('#deliberation').html(
@@ -1495,12 +1493,18 @@ console.log(total_questions[i]);
                 );
             }
         }
-        function lessonSuivante() {
+        function masquerResultat() { goUp($('.resultat_container')); }
+        function afficherResultat() { goDown($('.resultat_container')); }
+        function reprendreLesson() {
+            $('#reprendre').click(() => { raffraichirLaPage(); });
+        }
+        function lessonSuivante(lesson_en_cours) {
             let ls = '';
             switch(lesson_en_cours) {
                 case 'ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ' : ls = 'ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫'; break;
                 case 'ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ' : ls = 'ߛߓߍߛߎ߲ ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫'; break;
                 case 'ߛߓߍߛߎ߲ ߣߐ߰ߡߊ߬ߛߍߦߌ' : ls = 'ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߥߴߊ߬ ߡߊ߬'; break;
+                case 'ߛߓߍߛߎ߲ ߞߘߐߓߐߟߌ' : ls = 'ߜߋ߲߭ ߘߋ߰ߟߌ ߘߊߡߌ߬ߘߊ߬'; break;
 
                 case 'ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ' : ls = 'ߜߋ߲߭ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫'; break;
                 case 'ߜߋ߲߭ ߡߊ߬ߞߟߏ߬ߟߌ' : ls = 'ߜߋ߲߭ ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫'; break;
@@ -1508,6 +1512,81 @@ console.log(total_questions[i]);
                 case 'ߜߋ߲߭ ߞߘߐߓߐߟߌ' : ls = 'ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߥߴߊ߬ ߡߊ߬'; break;
             }
             return ls;
+        }
+        function continuSuLaLessonSuivante() {
+            
+        }
+        function phaseEnCours(lesson_en_cours) {
+
+            let m = lesson_en_cours.split(' ')[0];
+            let p = lesson_en_cours.split(' ')[1];
+            let phase = "";
+
+            if(m == 'ߛߓߍߛߎ߲') {
+                switch(p) {
+                    case 'ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ'  : phase = (memoire_1 != "") ? memoire_1.phase : ""; break;
+                    case 'ߡߊ߬ߞߟߏ߬ߟߌ'  : phase = (memoire_2 != "") ? memoire_2.phase : ""; break;
+                    case 'ߞߘߐߓߐߟߌ' : phase = (memoire_3 != "") ? memoire_3.phase : ""; break;
+                }
+            }
+            if(m == 'ߜߋ߲߭') {
+                switch(p) {
+                    case 'ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ'  : phase = (memoire_1 != "") ? memoire_1.phase : ""; break;
+                    case 'ߡߊ߬ߞߟߏ߬ߟߌ'  : phase = (memoire_2 != "") ? memoire_2.phase : ""; break;
+                    case 'ߣߐ߰ߡߊ߬ߛߍߦߌ' : phase = (memoire_3 != "") ? memoire_3.phase : ""; break;
+                    case 'ߞߘߐߓߐߟߌ' : phase = (memoire_4 != "") ? memoire_4.phase : ""; break;
+                }
+            }
+            return phase;
+        }
+        function totalQuestion(lesson_en_cours) {
+            
+            let tq = 0;
+            let m = lesson_en_cours.split(' ')[0];
+            let p = lesson_en_cours.split(' ')[1];
+            
+            if(m == 'ߛߓߍߛߎ߲') {
+                switch(p) {
+                    case 'ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ'  : tq = (memoire_1 != "") ? JSON.parse(memoire_1.lesson).length : 0; break;
+                    case 'ߡߊ߬ߞߟߏ߬ߟߌ'  : tq = (memoire_2 != "") ? JSON.parse(memoire_2.lesson).length : 0; break;
+                    case 'ߞߘߐߓߐߟߌ' : tq = (memoire_3 != "") ? JSON.parse(memoire_3.lesson).length : 0; break;
+                }
+            }
+            if(m == 'ߜߋ߲߭') {
+                switch(p) {
+                    case 'ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ'  : tq = (memoire_1 != "") ? JSON.parse(memoire_1.lesson).length : 0; break;
+                    case 'ߡߊ߬ߞߟߏ߬ߟߌ'  : tq = (memoire_2 != "") ? JSON.parse(memoire_2.lesson).length : 0; break;
+                    case 'ߣߐ߰ߡߊ߬ߛߍߦߌ' : tq = (memoire_3 != "") ? JSON.parse(memoire_3.lesson).length : 0; break;
+                    case 'ߞߘߐߓߐߟߌ' : tq = (memoire_4 != "") ? JSON.parse(memoire_4.lesson).length : 0; break;
+                }
+            }
+
+            return tq;
+        }
+        function lessonActuelle(lesson_en_cours) {
+            
+            let l = [];
+            let m = lesson_en_cours.split(' ')[0];
+            let p = lesson_en_cours.split(' ')[1];
+
+            if(m == 'ߛߓߍߛߎ߲') {
+                switch(p) {
+                    case 'ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ'  : l = (memoire_1 != "") ? memoire_1.lesson : []; break;
+                    case 'ߡߊ߬ߞߟߏ߬ߟߌ'  : l = (memoire_2 != "") ? memoire_2.lesson : []; break;
+                    case 'ߞߘߐߓߐߟߌ' : l = (memoire_3 != "") ? memoire_3.lesson : []; break;
+                }
+            }
+            if(m == 'ߜߋ߲߭') {
+                switch(p) {
+                    case 'ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ'  : l = (memoire_1 != "") ? memoire_1.lesson : []; break;
+                    case 'ߡߊ߬ߞߟߏ߬ߟߌ'  : l = (memoire_2 != "") ? memoire_2.lesson : []; break;
+                    case 'ߣߐ߰ߡߊ߬ߛߍߦߌ' : l = (memoire_3 != "") ? memoire_3.lesson : []; break;
+                    case 'ߞߘߐߓߐߟߌ' : l = (memoire_4 != "") ? memoire_4.lesson : []; break;
+                }
+            }
+            l = JSON.parse(l);
+    
+            return l;
         }
     }
     function resultatTableBodyHTML(memoire) {

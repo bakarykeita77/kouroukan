@@ -231,6 +231,7 @@
         color: cornflowerblue;
         cursor: pointer;
     }
+    #avance a { color: cornflowerblue; text-decoration: none; }
 
     @media screen and (width < 600px) {
         

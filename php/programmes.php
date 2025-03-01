@@ -67,6 +67,6 @@ if(isset($_SESSION['id'])) {
     </html>
 <?php
 }else{
-    header("location:index.php");
+    header("location:/kouroukan/index.php");
 }
 ?>

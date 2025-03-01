@@ -956,12 +956,22 @@ del {
 }
 
 /* --------------------------------------------------------------------------------------------------------- */
+.redirection_btn_1, .redirection_btn_2, .redirection_btn_3 {
+    max-width: 12rem;
+    padding: 0.5rem;
+    margin: auto;
+    border-radius: 0.5rem;
+}
 .redirection_btns { 
     top: 0;
     position: relative;
+    margin-top: 1rem;
     text-align: center;
     font-weight: bold; 
     z-index: 1; 
+}
+.redirection_btns a {
+    text-decoration: none;
 }
 .redirection_btns span:active { box-shadow: none; }
 .redirection_btns span { 
@@ -1011,6 +1021,17 @@ del {
     box-sizing: border-box;
     overflow-y: auto;
     z-index: 1;
+}
+.resultat_btn, .notification_titre {display: inline-block;}
+.resultat_btn {
+    position: absolute;
+    top: 5px;
+    box-shadow: 0 0 0.5rem #555;
+    margin: 0 1rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 00.5rem;
+    background-color: #fff;
+    cursor: pointer;
 }
 
 

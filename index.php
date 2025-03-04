@@ -16,7 +16,7 @@
         
         <div class="page_head"><?php require('php/tete-de-page.php'); ?></div>
      
-        <div class="page_body" id="accueil_body">
+        <div class="direction" id="accueil_body">
 
             <div id="index_haut_de_page">
                 <div id="site_name">

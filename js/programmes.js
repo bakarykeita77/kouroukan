@@ -5,6 +5,9 @@
 -------------------------------------------------------------------------------------------------------------------------*/   
 
 // Récupération du niveau d'avancement des études déterminé depuis accueil.js
+let alphabet_data = JSON.parse(localStorage.getItem('alphabet_data'));
+let memoire_syllabes_etudiees = JSON.parse(localStorage.getItem('memoire_syllabes_etudiees'));
+
 var niveaux_etudies   = JSON.parse(sessionStorage.getItem('niveaux_etudies'));
 var niveau_max        = JSON.parse(sessionStorage.getItem('niveau_max'));
 var niveau_en_cours   = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
@@ -14,6 +17,10 @@ var phases_distinctes = JSON.parse(sessionStorage.getItem('phases_distinctes'));
 var derniere_phase    = JSON.parse(sessionStorage.getItem('derniere_phase'));
 var option_retenue    = JSON.parse(localStorage.getItem('option_retenue'));
 
+option_retenue = (memoire_syllabes_etudiees == null) ? null : option_retenue;
+
+console.log('option_retenue = '+option_retenue);
+console.log('alphabet_data = '+alphabet_data);
 // localStorage.clear();
 
 /*-----------------------------------------------------------------------------------------------------------------------*/
@@ -98,7 +105,6 @@ function chargementDuProgramme() {
     } 
 }          
 function styleDuProgramme() {
-console.log(matiere_nouvellement_apprise);
     
     // if(niveau_max > niveau_en_cours) niveau_max = niveau_en_cours;
 
@@ -148,7 +154,6 @@ function alerteDuProgramme() {
     });
 }
 function lessonOptions() {
-
     if(option_retenue != null) {
         if(niveau_en_cours === 1) {
             if(option_retenue == 1) {

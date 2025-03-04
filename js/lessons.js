@@ -5,16 +5,14 @@ $('document').ready(function() {
         var matiere_index     = JSON.parse(sessionStorage.getItem('matiere_index'));
         var niveau_en_cours   = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
         var niveau_actif      = JSON.parse(sessionStorage.getItem('niveau_actif'));
-        var lesson_option     = parseInt($('#lesson_option').text());
         var phases_distinctes = JSON.parse(sessionStorage.getItem('phases_distinctes'));
-        var option_retenue = JSON.parse(localStorage.getItem('option_retenue'));
-      
+        var option_retenue = JSON.parse(localStorage.getItem('option_retenue'));     
         var rang = '';
         var phase_id = '';
         var phase_nom = '';
         var data_phase_nbr = 0;
 
-        sessionStorage.setItem('lesson_option', JSON.stringify(lesson_option));
+        sessionStorage.setItem('option_retenue', JSON.stringify(option_retenue));
  
     /*-------------------------------------------------------------------------------------------------------------------
        1)- La situation des études est faite par récupération et traitement des données reçues sur l'apprenant.
@@ -25,7 +23,7 @@ $('document').ready(function() {
    
     /*-----------------------------------------------------------------------------------------------------------------*/
     
-        matieres_length = (matieres !== null) ? matieres.length : 0;
+        matieres_length = (matieres != null) ? matieres.length : 0;
         if(matieres_length === 0) {  matiere_index = 0; niveau_en_cours = 1; }
     
     /*-----------------------------------------------------------------------------------------------------------------*/
@@ -33,7 +31,6 @@ $('document').ready(function() {
         phases();
         matiere();
                
-
 // localStorage.clear();
 
     /*-----------------------------------------------------------------------------------------------------------------*/
@@ -54,7 +51,7 @@ $('document').ready(function() {
                 
             function chargerPhases() { 
                 $('.phases_container').html(phasesHTML()); 
-    
+  
                 function phasesHTML() {
                 
                     var lesson_id = $('.lesson_title').attr('id');
@@ -138,8 +135,17 @@ $('document').ready(function() {
             }
             function afficherLesPhases() {
 
+             /*
+              Si l'option retenue est egal à 1, les phases ne s'affichent pas. L'étudiant est dirigé directement en classe ou il apprend 
+              tout l'alphabet en une seule cours.
+              Si l'option retenue est egal à 2, les phases s'affichent. L'étudiant apprend l'alphabet en differents cours.
+             */
                 if(option_retenue != null) {
-                    if(option_retenue == 1) $('.page_body').css('display','none');
+                    if(option_retenue == 1) {
+                        $('.direction').css('display','none');
+                        $('.salle_de_classe').css('display','block');
+                        alphabet();
+                    }
                 }
 
                 setTimeout(() => { displayv($('#niveau_d_etude')); }, 100);
@@ -163,14 +169,6 @@ $('document').ready(function() {
             let matiere_nom = JSON.parse(sessionStorage.getItem('matiere_nom')); //Déterminé depuis storagesDuProgramme() dans programmes.js
 
             parametrageDeLesson();  // Voir parametres.js
-            if(option_retenue != null) {
-                if(option_retenue == 1) {
-                    switch(niveau_actif) {
-                        case 1 : alphabet(); break;
-                        case 2 : syllabe();  break;
-                    }
-                }
-            }
 
             $('#phases_list li').on('click', function() {
 
@@ -213,14 +211,14 @@ $('document').ready(function() {
                     if(phase_class == 'apprises') { 
                         autorisation_d_acces_aux_cours = (frecance_du_cours < 5) ? 'oui' : 'non';
                         if(autorisation_d_acces_aux_cours === 'non') { 
-                            $('.course_container').css('display','none'); 
+                            $('.salle_de_classe').css('display','none'); 
                             alert("ߥߟߊ߬ߘߊ ߣߌ߲߰ ߡߊ߬ߛߍ߬ߦߌ߬ߟߌ ߓߘߊ߫ ߟߏ߯ߟߎ߫ ߓߐ߫.\n ߕߊ߲߬ߓߌ߫ ߥߟߊ߬ߘߊ߬ ߜߘߍ߫ ߝߍ߬،"); 
                         }
                         return false;
                     }
                     if(phase_class == 'a_apprendre') { 
                         autorisation_d_acces_aux_cours = 'non';
-                        $('.course_container').css('display','none'); alert("ߘߊߞߎ߲ ߡߊ߫ ߛߋ߫ ߦߊ߲߬ ߡߊ߫ ߝߟߐ߫"); 
+                        $('.salle_de_classe').css('display','none'); alert("ߘߊߞߎ߲ ߡߊ߫ ߛߋ߫ ߦߊ߲߬ ߡߊ߫ ߝߟߐ߫"); 
                         return false;
                     }
                     if(phase_class == 'active') { 

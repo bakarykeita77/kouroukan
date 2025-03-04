@@ -91,57 +91,13 @@
             'opacity':1
         }); }, 150);
     }
-    function afficherApprendreAlphabet() {
-        afficher($('.course_container'));
-        afficher($('.course'));
-
-        afficher($('#apprentissage_container'));
-        masquer($('#exercice_container'));
-        masquer($('#evaluation_container'));
-        
-        masquer($('#panneaux'));
-        masquer($('#apprentissage_dialogue_btns'));
-        masquer($('.redirection_btns'));
-
-        setTimeout(() => { displayv($('#apprentissage_head')); }, 400);
-
-        setTimeout(() => { 
-            displayv($('#apprentissage_body')); 
-            setTimeout(() => { afficherPreApprendreAlphabetTd(); }, 200);
-        }, 600);
-
-        setTimeout(() => { 
-            displayv($('#apprentissage_foot')); 
-            
-            displayv($('#apprentissage_dialogue_btns'));
-            $('#pre_apprentissage_btns').css('display','flex'); 
-            setTimeout(() => { afficherPreApprendreAlphabetCercles(); }, 400);
-        }, 2600);
-
-        
-        function afficherPreApprendreAlphabetCercles() {
-            $.each($('.cercle'), function(){
-                let cercle_index = $(this).index();
-                setTimeout(() => { $(this).css({'opacity':1, 'transform':'scale(1.125)'}); }, cercle_index*80);
-            });
-        }
-        function afficherPreApprendreAlphabetTd() {
-            $.each($('.pre_apprentissage_tr'), function(){
-                let tr_index = $(this).index();
-                $.each($('.pre_apprentissage_td', this), function(){
-                    let td_index = tr_index*6 + $(this).index();
-                    setTimeout(() => { $(this).css('opacity',1); }, td_index*80);
-                });
-            });
-        }
-    }
 	function afficher_en_jailli( element,largeur,hauteur,temps ) {
         element.css({'display':'block', 'width':0, 'height':0});
         element.animate({'width':largeur, 'height':hauteur}, temps);
     }
     function afficherEvaluation() {
         let td_total = $('#evaluation_body table td').length;
-        $('.course_container').css({'display':'block'});
+        $('.salle_de_classe').css({'display':'block'});
 
         masquer($('.course'));
         setTimeout(() => { 
@@ -185,7 +141,7 @@
         $('#pratique_options').css('display','block');
         $('.fermeture').attr('id', 'fermer_evaluation'); 
 
-        $('.course_container').css({'display':'block'});
+        $('.salle_de_classe').css({'display':'block'});
 
         $('#exercice_body').css('display','none');
         $('#apprentissage_container').css('display','none');
@@ -262,7 +218,7 @@
     function afficherRevision() {
         let td_total = $('#revision_body table td').length;
        
-        $('.course_container').css({'display':'block'});
+        $('.salle_de_classe').css({'display':'block'});
 
         masquer($('.course'));
         setTimeout(() => { 

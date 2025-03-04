@@ -6,6 +6,8 @@ function syllabe() {
     var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));   // Voir programmes.js fonction storagesDuProgramme()
     var lesson_option = parseInt(JSON.parse(sessionStorage.getItem('lesson_option')));
 
+console.log('niveau_actif = '+niveau_actif);
+console.log('lesson_option = '+lesson_option);
     var table_id = $('.table_parlante').attr('id');
         
     var table = $('#'+table_id); 
@@ -29,21 +31,23 @@ function syllabe() {
 
     let total_syllabes_exercees = [];
 
-
+console.log('lesson_option = '+lesson_option);
     var apprentissage_clicks_memo = [];
     let nbr_raisonnable_de_click = 1;
     let clicked_elements_quantity = 0;
    
     
     if(niveau_actif < 3) {
-        switch(lesson_option) {
-            case 1 : preApprendreSyllabe(); break;
-            case 2 : preApprendreSyllabe(); break;
-        } 
+        if(lesson_option != null) {
+            switch(lesson_option) {
+                case 1 : preSyllabeNko(); break;
+                case 2 : preSyllabeNko();  break;
+            }
+        }
     }
     
 
-    function preApprendreSyllabe() {
+    function preSyllabeNko() {
             
         let lesson_active = '';
         let element_actif = '';
@@ -70,7 +74,7 @@ function syllabe() {
         let texte_4 = "ߢߌ߬ߣߌ߲߬ߞߊߟߌ߬ ߞߘߎ ߘߌ߯߭ ߘߎ߭ߡߊ߬߸ ߦߴߌ ߕߟߏߡߊߟߐ߬ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߎ߬ ߟߊ߫ ߞߋߟߋ߲߫ ߞߋߟߋ߲߫߸ ߦߴߊߟߎ߬ ߛߓߍ߫߸ ߦߋ߫ ߓߊ߲߫ ߞߊ߬ ߛߊߞߍߟߌ߫ ߞߘߎ ߘߌ߲߯߸ ߞߵߊ߬ߟߎ߬ ߛߊߞߍ߫.";
         let texte_5 = "ߘߋ߰ߣߍ߲߬ ߞߎߘߊ ߣߌ߫ ߞߘߐ߬ߡߊ߲ ߠߎ߬ ߟߋ߬ ߓߍ߯ ߢߊ߯ߡߌߣߍ߲߫ ߢߐ߲ ߘߐ߫ ߣߌ߲߬ .ߣߴߌ ߛߋ߫ ߘߊ߫ ߞߵߊ߬ߟߎ߬ ߓߍ߯ ߢߊߓߐ߫ ߗߡߍ߬ߘߐ߬ߦߊ߫ ߗߍ߬ߡߍ ߟߊ߫ ߏ߬ߘߐ߬ ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ .ߓߌ߬ߟߊ߬ ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߞߐ߫";
 
-
+console.log('lesson_option = '+lesson_option);
         apprentissagePreSyllabe();
         exercicePreSyllabe();
         revisionPreSyllabe();
@@ -313,8 +317,8 @@ function syllabe() {
             }
             function afficherApprendrePreSyllabe() {
                 
-                $('.page_body').css('display','none');
-                $('.course_container').css('display','block');
+                $('.direction').css('display','none');
+                $('.salle_de_classe').css('display','block');
 
                 afficher($('.course'));
 
@@ -331,32 +335,61 @@ function syllabe() {
                     setTimeout(() => { afficherPreApprentissageBtns(); }, 100);
                 }, 1200);
 
-                $('.modificateur_de_choix_btn').on('click', function(){
-                    if($('.modificateur_de_choix_message').css('display') == 'none') {
-                        $('.modificateur_de_choix_message').css({'display':'block', 'height':'5rem'});
-                    }else{
+                affichageDeModificateurDeChoix();
+                affichageDePanneauDesConsonnes();
+
+                function affichageDeModificateurDeChoix() {
+                    $('.modificateur_de_choix_btn').on('click', function(){
+                        if($('.modificateur_de_choix_message').css('display') == 'none') {
+                            $('.modificateur_de_choix_message').css({'display':'block', 'height':'4rem'});
+                        }else{
+                            $('.modificateur_de_choix_message').css('height',0);
+                            setTimeout(() => { $('.modificateur_de_choix_message').css('display','none'); }, 100);
+                        }
+                    });
+    
+                    $('.modificateur_de_choix_message button').click(function() {
                         $('.modificateur_de_choix_message').css('height',0);
                         setTimeout(() => { $('.modificateur_de_choix_message').css('display','none'); }, 100);
+                    });
+                }
+                function affichageDePanneauDesConsonnes() {
+                    $('#afficheur_de_panneau').click(function(e) {
+                        e.stopImmediatePropagation();
+                        if(panneau_status == "masque") { afficherPanneau() }else{ masquerPanneau(); }; 
+                    }); 
+                    masquerLePanneauDesConsonnes();
+    
+                    function masquerLePanneauDesConsonnes() {
+                        $('#panneaux').on('mouseleave', function() { masquerPanneau(); });
+                        $('#submit_panneau').on('click', masquerPanneau);
                     }
-                });
-
-                $('.modificateur_de_choix_message button').click(function() {
-                    $('.modificateur_de_choix_message').css('height',0);
-                    setTimeout(() => { $('.modificateur_de_choix_message').css('display','none'); }, 100);
-                });
-
-                $('.modificateur_de_choix_message button:first-child').click(function() {
-                    localStorage.clear(); 
-                    sessionStorage.clear(); 
-                });
+                    function afficherPanneau(){
+                        $('#panneaux').css({'position':'absolute','height':'17rem'});
+                        $('#consonnes_cadre').animate({'top':'10px'}, 250);
+                        panneau_status = "affiche";
+        
+                        ecrire("notification_corps",texte_2);
+                    }
+                    function masquerPanneau(){
+                        $('#consonnes_cadre').animate({'top':'12rem'}, 250);
+                        setTimeout(function(){$('#panneaux').css('height',0);}, 250);
+                        panneau_status = "masque";
+        
+                        if($('.table_parlante tr').length == 0) ecrire("notification_corps",texte_1);
+                        if($('.table_parlante tr').length != 0) {
+                            ecrire("notification_corps",texte_3);
+                            setTimeout(() => { $('#apprentissage_dialogue_btns').css('display','none'); }, 400);
+                            setTimeout(() => { $('#apprentissage_progress_bar').css('display','block'); }, 500);
+                        }
+                    }
+                }
             }
             function apprendrePreSyllabe() { 
 
-                $('#afficheur_de_panneau').click(function(e) {
-                    e.stopImmediatePropagation();
-                    if(panneau_status == "masque") { afficherPanneau() }else{ masquerPanneau(); }; 
-                }); 
-                masquerLePanneauDesConsonnes();
+                $('.modificateur_de_choix_message button:first-child').click(function() {
+                    raffraichirLaPage();
+                });
       
                 $('#panneaux span').click(function() {
 
@@ -461,30 +494,6 @@ function syllabe() {
                         questions_posees.splice(0,questions_posees.length);
                     } 
                 });
-
-                function masquerLePanneauDesConsonnes() {
-                    $('#panneaux').on('mouseleave', function() { masquerPanneau(); });
-                    $('#submit_panneau').on('click', masquerPanneau);
-                }
-            }
-            function afficherPanneau(){
-                $('#panneaux').css({'position':'absolute','height':'17rem'});
-                $('#consonnes_cadre').animate({'top':'10px'}, 250);
-                panneau_status = "affiche";
-
-                ecrire("notification_corps",texte_2);
-            }
-            function masquerPanneau(){
-                $('#consonnes_cadre').animate({'top':'12rem'}, 250);
-                setTimeout(function(){$('#panneaux').css('height',0);}, 250);
-                panneau_status = "masque";
-
-                if($('.table_parlante tr').length == 0) ecrire("notification_corps",texte_1);
-                if($('.table_parlante tr').length != 0) {
-                    ecrire("notification_corps",texte_3);
-                    setTimeout(() => { $('#apprentissage_dialogue_btns').css('display','none'); }, 400);
-                    setTimeout(() => { $('#apprentissage_progress_bar').css('display','block'); }, 500);
-                }
             }
         }
         function exercicePreSyllabe() {
@@ -1530,7 +1539,7 @@ console.log(question_revision);
             });
         }
     }
-    function apprendreSyllabe() {}
+    function syllabeNko() {}
     function formatParDefautDuResultat() {
 
         $('#table_head tr:nth-child(2) td').text('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ');

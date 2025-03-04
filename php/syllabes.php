@@ -17,7 +17,7 @@ session_start();
         <h2 class="lesson_title" id="<?= $matiere_id ?>"> <?= $matiere_nom ?> </h2>
         <div class="phases"></div>
         
-        <div class="course_container" id="syllabes_lesson">
+        <div class="salle_de_classe" id="syllabes_lesson">
             <span class="fermeture">&times;</span>
             
             <div class="course" id="apprentissage">

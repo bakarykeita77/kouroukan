@@ -4,7 +4,10 @@ function parametrageDeLesson() {
     var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));   // Voir programmes.js fonction storagesDuProgramme()
     var voyelles_checker, consonnes_checker, tedo_checker, tons_checker, nasalisation_checker;
     var voyelles_cochees = [], consonnes_cochees = [], tedos_coches = [], tons_coches = [], nasalisations_cochees = [], caracteres_coches = [],syllabes_coches = [];
-        
+
+    let alphabet_data = JSON.parse(sessionStorage.getItem('alphabet_data'));
+    let alphabet_data_vide = tableau2DVide(alphabet_data);
+    
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/    
     parametrage();
     affichageDeParametres();
@@ -337,7 +340,6 @@ function parametrageDeLesson() {
                 var voyelles_length          = voyelles_cochees.length;
                 var tons_length              = tons_coches.length;
                 var syllabes_tonifies_length = syllabes_tonifies.length;
-       
 
                 if(niveau_actif == 1) apprentissage_html = lessonHTML(lettres_cochees, 'table_alphabet_apprentissage');
                 if(niveau_actif == 2) apprentissage_html = lessonHTML(syllabes_simples_coches, 'table_syllabe_apprentissage');

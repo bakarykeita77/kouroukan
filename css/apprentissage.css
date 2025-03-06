@@ -1,11 +1,4 @@
 
-#apprentissage_container > div { 
-    position: relative; 
-    width: 100%; 
-    display: block; 
-    max-width: 60rem; 
-    border-radius: 0.5rem; 
-}
 #apprentissage_head, #apprentissage_body { 
     display: none;
 }
@@ -72,15 +65,6 @@
     z-index: 1;
 }
 #apprentissage_dialogue_btns > div { position: relative; }
-#exercice_redirection_btns {
-    border-radius: 0.5rem;
-    position: relative;
-    height: 4rem;
-    width: 100%;
-    max-width: 25rem;
-    margin: auto;
-    top: 0.5rem;
-}
 
 #pre_exercice_resultat_container {
     position: relative;
@@ -98,7 +82,6 @@
 .titre_de_parti { margin: 0; height: 3rem; line-height: 3rem; }
 .titre_de_parti > p { display: inline-block; vertical-align: middle; }
 #table_pre_apprentissage {
-    padding: 1rem;
     width: calc(100% - 2.25rem);
     max-width: 45rem;
     margin: auto;
@@ -255,7 +238,6 @@
 }
 #consonnes_cadre span:hover { background-color: #ddd; }
 
-#revision_body { height: calc(100% - 5rem); }
 #exercice_container, #revision_container { display: none; height: 100%; }
 #exercice_body_cadre, #revision_body_cadre {
     position: relative;
@@ -303,18 +285,6 @@
     background-color: #bbb;
     font-weight: bold;
 }
-#exercice_body {
-    position: absolute;
-    display: none;
-    top: 0.25rem;
-    height: calc(100% - 6rem);
-    z-index: 1;
-    width: 98%;
-    border-radius: 0.5rem;
-    left: 1%;
-    background-color: rgba(0,0,0,0.8);;
-    overflow: auto;
-}
 #exercice_body td { 
     width: 3rem;
     height: 2rem;
@@ -326,17 +296,6 @@
 }
 #exercice_body td:hover { 
     background-color: #999;
-}
-#exercice_foot { 
-    position: absolute;
-    height: 5.125rem;
-    width: 98%;
-    left: 1%;
-    bottom: 0.25rem;
-    margin: auto;
-    background-color: #ddd;
-    border-radius: 0 0 0.5rem 0.5rem;
-    font-weight: bold;
 }
 #apprentissage_progress_bar { top: 0.5rem; }
 #exercice_question_btn, #exercice_repetition_btn, #exercice_correction_btn {
@@ -461,13 +420,6 @@
 #pre_exercice_resultat_foot { width: 1.5rem; }
 #pre_exercice_resultat h3 { position: absolute; width: 100%; }
 #table_syllabe_apprentissage td:hover {background-color: rgba(85,85,85);}
-#apprentissage_foot { 
-    position: absolute;
-    display: none;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-}
 #apprentissage_dialogue_btn { 
     font-weight: bold;
     color: black;

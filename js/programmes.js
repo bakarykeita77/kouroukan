@@ -5,7 +5,12 @@
 -------------------------------------------------------------------------------------------------------------------------*/   
 
 // Récupération du niveau d'avancement des études déterminé depuis accueil.js
-let alphabet_data = JSON.parse(localStorage.getItem('alphabet_data'));
+let alphabet_data = alphabetData();
+let syllabes_data = syllabesData();
+
+sessionStorage.setItem('alphabet_data',JSON.stringify(alphabet_data));
+sessionStorage.setItem('syllabes_data',JSON.stringify(syllabes_data));
+
 let memoire_syllabes_etudiees = JSON.parse(localStorage.getItem('memoire_syllabes_etudiees'));
 
 var niveaux_etudies   = JSON.parse(sessionStorage.getItem('niveaux_etudies'));
@@ -15,12 +20,10 @@ var matiere_nouvellement_apprise = JSON.parse(sessionStorage.getItem('matiere_no
 var phases_etudiees   = JSON.parse(sessionStorage.getItem('phases_etudiees'));
 var phases_distinctes = JSON.parse(sessionStorage.getItem('phases_distinctes'));
 var derniere_phase    = JSON.parse(sessionStorage.getItem('derniere_phase'));
+var lesson_option    = JSON.parse(localStorage.getItem('lesson_option'));
 var option_retenue    = JSON.parse(localStorage.getItem('option_retenue'));
 
-option_retenue = (memoire_syllabes_etudiees == null) ? null : option_retenue;
 
-console.log('option_retenue = '+option_retenue);
-console.log('alphabet_data = '+alphabet_data);
 // localStorage.clear();
 
 /*-----------------------------------------------------------------------------------------------------------------------*/
@@ -33,12 +36,27 @@ chargementDuProgramme();
 styleDuProgramme();
 afficherProgrammes();
 // alerteDuProgramme();
-lessonOptions()
-styleDeOptionChoisie();
+lessonOptions();
+
 storagesDuProgramme();
 
 
+function alphabetData() {
+    let alphabet_apprentissage_data = alphabetApprentisageDataMemo();
+    let alphabet_exercice_data = alphabetExerciceDataMemo();
+    let alphabet_evaluation_data = alphabetEvaluationDataMemo();
 
+    let a_d = [alphabet_apprentissage_data, alphabet_exercice_data, alphabet_evaluation_data];
+    return a_d;
+}
+function syllabesData() {
+    let syllabes_apprentissage_data = syllabesApprentisageDataMemo();
+    let syllabes_exercice_data = syllabesExerciceDataMemo();
+    let syllabes_evaluation_data = syllabesEvaluationDataMemo();
+
+    let s_d = [syllabes_apprentissage_data, syllabes_exercice_data, syllabes_evaluation_data];
+    return s_d;
+}
 function selectionDuProgramme() { 
     programme_matieres = document.getElementById('programme_matieres'); 
 }
@@ -154,76 +172,39 @@ function alerteDuProgramme() {
     });
 }
 function lessonOptions() {
-    if(option_retenue != null) {
-        if(niveau_en_cours === 1) {
-            if(option_retenue == 1) {
-                $('#programme_ul li:nth-child(1)').html(lessonOption11HTML());
-                $('#lesson_options').css('display','none');
-            }
-            if(option_retenue == 2) $('#programme_ul li:nth-child(1)').html(lessonOption12HTML());
-        }
-        if(niveau_en_cours === 2) {
-            if(option_retenue == 1) {
-                $('#programme_ul li:nth-child(2)').html(lessonOption21HTML());
-                $('#lesson_options').css('display','none');
-            }
-            if(option_retenue == 2) $('#programme_ul li:nth-child(2)').html(lessonOption22HTML());
-        }
-    }
-        
-    $('#programme_ul li:nth-child(1)').click(function() {
     
-        let nom_de_lesson_a_etdier = $(this).text();
 
-        $('#lesson_options_titre').text('ߌ ߢߣߊߕߊ߬ '+nom_de_lesson_a_etdier+' ߘߋ߲߰ߠߌ ߞߍߢߊ߫ ߝߌ߬ߟߊ ߢߌ߲߬ ߠߎ߬ ߘߐ߫'); 
-        $('#lesson_option_1').html(lessonOption11HTML());
-        $('#lesson_option_2').html(lessonOption12HTML());
-        
-        $('#lesson_option_1').click(function() {
-            localStorage.removeItem("option_retenue");
-            option_retenue = localStorage.setItem('option_retenue', JSON.stringify(1));
-        });
-        $('#lesson_option_2').click(function() {
-            localStorage.removeItem("option_retenue");
-            option_retenue = localStorage.setItem('option_retenue', JSON.stringify(2));
-        });
+    // if(niveau_en_cours === 1) {
+    //     let element_ln = 0;
+    //     alphabet_data.forEach(element => {
+    //         if(element != undefined) element_ln += element.length;
+    //     });
+    //     if(element_ln === 0) option_retenue = null;
+    //     console.log(option_retenue);
+    // }
+    // if(niveau_en_cours === 2) {
+    //     let element_ln = 0;
+    //     syllabes_data.forEach(element => {
+    //         if(element != undefined) element_ln += element.length;
+    //     });
+    //     if(element_ln === 0) option_retenue = null;
+    // }
 
-        masquer($('#programmes_container'));
+    if(location.href.split('=')[1] == 'option') {
+        $('.page_body').css('display','none');
+        chargerLesOptions();
+        stockerLOption();
         afficherLessonOptions();
+        styleDeOptionChoisie();
+    }
 
-        function afficherLessonOptions() {
         
-            $('#lesson_options').css('display','block'); 
-            $('#lesson_options_titre, #lesson_option_1, #lesson_option_2').css({
-                'opacity':0, 
-                'transition':'0.3s', 
-                'transform':'scaleY(0.75)'
-            });
-            setTimeout(() => { displayv($('#lesson_options_titre')); }, 100);
-            setTimeout(() => { displayv($('#lesson_option_1')); }, 300);
-            setTimeout(() => { displayv($('#lesson_option_2')); }, 500);
-        }
-    });
-    
-    $('#programme_ul li:nth-child(2)').click(function() {
+    $('#programme_ul li:nth-child(1), #programme_ul li:nth-child(2)').click(function() {
         
-        let nom_de_lesson_a_etdier = $(this).text();
-
-        $('#lesson_options_titre').text('ߌ ߢߣߊߕߊ߬ '+nom_de_lesson_a_etdier+' ߘߋ߲߰ߠߌ ߞߍߢߊ߫ ߝߌ߬ߟߊ ߢߌ߲߬ ߠߎ߬ ߘߐ߫'); 
-        $('#lesson_option_1').html(lessonOption21HTML());
-        $('#lesson_option_2').html(lessonOption22HTML());
-
-        $('#lesson_option_1').click(function() {
-            localStorage.removeItem("option_retenue");
-            option_retenue = localStorage.setItem('option_retenue', JSON.stringify(1));
-        });
-        $('#lesson_option_2').click(function() {
-            localStorage.removeItem("option_retenue");
-            option_retenue = localStorage.setItem('option_retenue', JSON.stringify(2));
-        });
-
-        masquer($('#programmes_container')); 
-        afficher($('#lesson_options')); 
+        $('.page_body').css('display','none');
+        chargerLesOptions();
+        stockerLOption();
+        afficherLessonOptions();
     });
 
     $('#fermer_lesson_option').click(function() { masquer($('#lesson_options')); }); 
@@ -389,9 +370,42 @@ function lessonOptions() {
 
         return option_2_html;
     }
-}
-function styleDeOptionChoisie() {
-    if(option_retenue != null) {
+    function chargerLesOptions() {
+        if(niveau_en_cours === 1) {
+            $('#lesson_options_titre').text('ߌ ߢߣߊߕߊ߬ ߛߓߍߛߎ߲ ߘߋ߲߰ߠߌ ߞߍߢߊ߫ ߝߌ߬ߟߊ ߢߌ߲߬ ߠߎ߬ ߘߐ߫'); 
+            $('#lesson_option_1').html(lessonOption11HTML());
+            $('#lesson_option_2').html(lessonOption12HTML());
+            // Annulation des apprentissages déja amorcés.
+        }
+        if(niveau_en_cours === 2) {
+            $('#lesson_options_titre').text('ߌ ߢߣߊߕߊ߬ ߜߋ߲߭ ߘߋ߲߰ߠߌ ߞߍߢߊ߫ ߝߌ߬ߟߊ ߢߌ߲߬ ߠߎ߬ ߘߐ߫'); 
+            $('#lesson_option_1').html(lessonOption21HTML());
+            $('#lesson_option_2').html(lessonOption22HTML());
+        }
+    }
+    function stockerLOption() {
+        $('#lesson_option_1').click(function() {
+            localStorage.removeItem("option_retenue");
+            option_retenue = localStorage.setItem('option_retenue', JSON.stringify(1));
+        });
+        $('#lesson_option_2').click(function() {
+            localStorage.removeItem("option_retenue");
+            option_retenue = localStorage.setItem('option_retenue', JSON.stringify(2));
+        });
+    }
+    function afficherLessonOptions() {
+        afficher($('#lesson_options')); 
+        $('#lesson_options_titre, #lesson_option_1, #lesson_option_2').css({
+            'opacity':0, 
+            'transition':'0.3s', 
+            'transform':'scaleY(0.75)'
+        });
+        setTimeout(() => { displayv($('#lesson_options_titre')); }, 100);
+        setTimeout(() => { displayv($('#lesson_option_1')); }, 300);
+        setTimeout(() => { displayv($('#lesson_option_2')); }, 500);
+    }
+    function styleDeOptionChoisie() {
+console.log('option_retenue = '+option_retenue);
         if(option_retenue == 1) { 
             $('#lesson_option_1').css('background','yellow');
             $('#lesson_option_1').click();

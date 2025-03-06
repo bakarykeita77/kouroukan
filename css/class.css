@@ -262,7 +262,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     display: none;
     top: 1rem;
     padding-top: 1.5rem;
-    height: calc(100% - 10.5rem);
+    height: calc(100% - 6.5rem);
     color: white;
     background-color: rgba(0,0,0,0.8);
     overflow-y: auto; overflow-x: hidden;
@@ -282,7 +282,10 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     box-sizing: border-box;
     z-index: 0;
 }
-.course_foot { z-index: 1; }
+.course_foot { 
+    z-index: 1; 
+    top: 1.5rem;
+}
 .course_head { 
     top: 0.5rem; 
     height: 6rem; 
@@ -636,10 +639,10 @@ del {
     top: 2.25rem;
     padding: 1rem;
     width: 6rem;
-    height: 0;
     background-color: #fff;
     overflow: hidden;
     box-shadow: 0 0 0.5rem #666;
+    border-radius: 0.5rem;
     transition: 0.1s;
 }
 .modificateur_de_choix_message button { cursor: pointer; }
@@ -963,9 +966,8 @@ del {
     border-radius: 0.5rem;
 }
 .redirection_btns { 
-    top: 0;
+    top: 1.5rem;
     position: relative;
-    margin-top: 1rem;
     text-align: center;
     font-weight: bold; 
     z-index: 1; 
@@ -976,7 +978,6 @@ del {
 .redirection_btns span:active { box-shadow: none; }
 .redirection_btns span { 
     position: relative;
-    top: 1.5rem;
     display: none;
     margin: 0 auto;
     padding: 0 3rem;
@@ -1213,7 +1214,6 @@ del {
     }
     .course_head, .course_body, .course_foot { 
         width: 98%;
-        margin: auto;
         border: none;
     }
     .table_parlante td, .table_muette td {

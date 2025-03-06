@@ -11,9 +11,11 @@ $('document').ready(function() {
         var phase_id = '';
         var phase_nom = '';
         var data_phase_nbr = 0;
+        let alphabet_data = JSON.parse(sessionStorage.getItem('alphabet_data'));
 
         sessionStorage.setItem('option_retenue', JSON.stringify(option_retenue));
  
+console.log(alphabet_data);    
     /*-------------------------------------------------------------------------------------------------------------------
        1)- La situation des études est faite par récupération et traitement des données reçues sur l'apprenant.
        2)- La liste des phases est établie en fonction du niveau d'étude de l'apprenant (selon les phases étudiées ou pas)
@@ -30,7 +32,7 @@ $('document').ready(function() {
         
         phases();
         matiere();
-               
+           
 // localStorage.clear();
 
     /*-----------------------------------------------------------------------------------------------------------------*/
@@ -168,7 +170,8 @@ $('document').ready(function() {
         function matiere() {
             let matiere_nom = JSON.parse(sessionStorage.getItem('matiere_nom')); //Déterminé depuis storagesDuProgramme() dans programmes.js
 
-            parametrageDeLesson();  // Voir parametres.js
+            modificationDuChoixDApprentissage();
+            if(tableau2DVide(alphabet_data) == false) parametrageDeLesson();  // Voir parametres.js
 
             $('#phases_list li').on('click', function() {
 
@@ -235,5 +238,30 @@ $('document').ready(function() {
                     }  
                 }
             });
+
+            function modificationDuChoixDApprentissage() {
+
+                affichageDeModificateurDeChoix();
+                modificationDuChoix();
+
+                function affichageDeModificateurDeChoix() {
+                    $('.modificateur_de_choix_btn').click(() => {
+                        if($('.modificateur_de_choix_message').css('display') == 'none') { 
+                            afficher($('.modificateur_de_choix_message'));
+                        }else{
+                            masquer($('.modificateur_de_choix_message'));
+                        }
+                    });
+
+                    $('#pas_changer_option_btn, #changer_option_btn').click(() => { masquer($('.modificateur_de_choix_message')); });   
+                }
+                function modificationDuChoix() {
+                    $('#changer_option_btn').click(() => {
+                        location.assign('programmes.php?changer=option');
+                        $('.page_body').css('display','none');
+                        $('#lesson_options').css('display','block');
+                    });
+                }
+            }
         }
     });

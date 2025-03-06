@@ -51,7 +51,6 @@
     	    for(var i=0; i<matiere_collection.length; i++) {
     	        if(matiere_collection[i] != 0) matieres[i] = matiere_collection[i]; 
     	    }
-            
     	    sessionStorage.setItem('matieres',JSON.stringify(matieres));
 
             if(matieres.length === 0) {

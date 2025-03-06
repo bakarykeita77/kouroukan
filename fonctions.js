@@ -257,6 +257,49 @@
         }, 50);
     }
 	function aggrandir_caractere_de(element) { element.css( 'font-size','+=32px' ); }
+    function alphabetApprentisageDataMemo() {
+
+        let matieres = JSON.parse(sessionStorage.getItem('matieres'));
+
+        if(matieres.length === 0) return;
+        let padm = [];
+
+        for (let i = 0; i < matieres[0].length; i++) {
+            let phase = matieres[0][i].phase;
+            if(phase == "alphabet_apprentissage") { padm = JSON.parse(matieres[0][i].lesson); }
+        }
+
+        return padm;
+    }
+    function alphabetExerciceDataMemo() {
+        
+        let matieres = JSON.parse(sessionStorage.getItem('matieres'));
+
+        if(matieres.length === 0) return;
+        let pedm = [];
+
+        for (let j = 0; j < matieres[0].length; j++) {
+            let phase = matieres[0][j].phase;
+            if(phase == "alphabet_exercice") { pedm = JSON.parse(matieres[0][j].lesson); }
+        }
+
+        return pedm;
+    }
+    function alphabetEvaluationDataMemo() {
+        
+        let matieres = JSON.parse(sessionStorage.getItem('matieres'));
+
+        if(matieres.length === 0) return;
+        let prdm = [];
+
+        for (let k = 0; k < matieres[0].length; k++) {
+            let phase = matieres[0][k].phase;
+            if(phase == "alphabet_revision") { prdm = JSON.parse(matieres[0][k].lesson); }
+            
+        }
+        
+        return prdm;;
+    }
 	function appetir_caractere_de(element) { element.css( 'font-size','-=32px' ); } 
     function approuver(bonne_reponse) {
         $.each($('.table_parlante td, .table_muette td'), function() {
@@ -1639,9 +1682,68 @@ console.log(total_questions[i]);
 	    
 	   // alert( elements_secondaires ); 
 	}
+    function syllabesApprentisageDataMemo() {
+
+        let matieres = JSON.parse(sessionStorage.getItem('matieres'));
+
+        if(matieres.length === 0) return;
+        let sad = [];
+
+        for (let i = 0; i < matieres[0].length; i++) {
+            let phase = matieres[0][i].phase;
+            if(phase == "syllabes_apprentissage") { sad = JSON.parse(matieres[0][i].lesson); }
+        }
+
+        return sad;
+    }
+    function syllabesExerciceDataMemo() {
+        
+        let matieres = JSON.parse(sessionStorage.getItem('matieres'));
+
+        if(matieres.length === 0) return;
+        let sed = [];
+
+        for (let j = 0; j < matieres[0].length; j++) {
+            let phase = matieres[0][j].phase;
+            if(phase == "syllabes_exercice") { sedpedm = JSON.parse(matieres[0][j].lesson); }
+        }
+
+        return sed;
+    }
+    function syllabesEvaluationDataMemo() {
+        
+        let matieres = JSON.parse(sessionStorage.getItem('matieres'));
+
+        if(matieres.length === 0) return;
+        let s_e_d = [];
+
+        for (let k = 0; k < matieres[0].length; k++) {
+            let phase = matieres[0][k].phase;
+            if(phase == "syllabes_revision") { s_e_d = JSON.parse(matieres[0][k].lesson); }
+            
+        }
+        
+        return s_e_d;;
+    }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
 
+    function tableau2DVide(tableau) {
+        let element_ln = 0;
+        tableau.forEach(element => {
+            if(element != undefined) element_ln += element.length;
+        });
+        if(element_ln === 0) { return true; }else{ return false; }
+    }
+    function totalPoint(data) {
+        if(data != null) {
+            let tp = 0;
+            for(let i=0; i<data.length; i++) {
+                tp += data[i][2];
+            }
+            return  Math.floor(tp*100/data.length); 
+        }
+    }
     function triDuTableauParOrdreAlphabetique(table) {
         let elements_tries = [];
 
@@ -1652,15 +1754,6 @@ console.log(total_questions[i]);
             });
 
         return elements_tries;
-    }
-    function totalPoint(data) {
-        if(data != null) {
-            let tp = 0;
-            for(let i=0; i<data.length; i++) {
-                tp += data[i][2];
-            }
-            return  Math.floor(tp*100/data.length); 
-        }
     }
 
 

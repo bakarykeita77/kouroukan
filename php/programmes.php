@@ -15,6 +15,7 @@ if(isset($_SESSION['id'])) {
     <body>
       
         <div class="container" id="programmes_fond">
+            
             <div class="page_head"><?php require('tete-de-page.php'); ?></div>
             <div class="page_body">
                 <div id="programmes_container">

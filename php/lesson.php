@@ -274,13 +274,14 @@ if(isset($_SESSION["id"])) {
 
                  <!--Form pour envoi des données-----------------------------------------------------------------------------------------------------
                     Cette div envoi les resultats des études à actions.php qui à son tour les envoi à la base de données----------------------------->
-                    <form method="POST" action="actions.php" id="lesson_form" style="display:none">
+                    <form method="POST" action="actions.php" id="lesson_form" style="display:none; width:75%; margin:auto">
                         <input type="number" name="id"       id="id_input" value="<?= $_SESSION['id']; ?>">
                         <input type="text"   name="matiere"  id="matiere_nom_input">
                         <input type="number" name="niveau"   id="niveau_input">
                         <input type="text"   name="phase"    id="phase_input">
                         <input type="text"   name="lesson"   id="lesson_input">
                         <input type="number" name="note"     id="note_input">
+                        <input type="text"   name="action"   id="action_input">
                         <input type="submit" id="submit_btn" value="Envoyer">
                     </form>
                 </div>

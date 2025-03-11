@@ -13,9 +13,10 @@ $('document').ready(function() {
         var data_phase_nbr = 0;
         let alphabet_data = JSON.parse(sessionStorage.getItem('alphabet_data'));
 
+console.log('option_retenue = '+option_retenue);
+
         sessionStorage.setItem('option_retenue', JSON.stringify(option_retenue));
  
-console.log(alphabet_data);    
     /*-------------------------------------------------------------------------------------------------------------------
        1)- La situation des études est faite par récupération et traitement des données reçues sur l'apprenant.
        2)- La liste des phases est établie en fonction du niveau d'étude de l'apprenant (selon les phases étudiées ou pas)
@@ -256,11 +257,7 @@ console.log(alphabet_data);
                     $('#pas_changer_option_btn, #changer_option_btn').click(() => { masquer($('.modificateur_de_choix_message')); });   
                 }
                 function modificationDuChoix() {
-                    $('#changer_option_btn').click(() => {
-                        location.assign('programmes.php?changer=option');
-                        $('.page_body').css('display','none');
-                        $('#lesson_options').css('display','block');
-                    });
+                    $('#changer_option_btn').click(() => { location.assign('programmes.php?changer=option'); });
                 }
             }
         }

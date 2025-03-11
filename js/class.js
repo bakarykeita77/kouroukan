@@ -35,7 +35,6 @@ $(document).ready(function() {
     var parametre_icone = "&#x2699;";
     $('.parametre_icone').html(parametre_icone);
     
-    var table_parlante = $(".table_parlante");
     $(".table_parlante td").on('click', function(){
         $(".table_parlante td").removeClass('ombrage');
         $(this).addClass('ombrage');
@@ -51,19 +50,5 @@ $(document).ready(function() {
     $('.scale').css({
         'transform':'scale(1.5)',
     });
-  
     
-    
-    // function windowResponsive(x){
-    //     if(x.matches){
-    //         $('.container').css({'width':'100vw'});
-    //     }else{
-    //         $('.container').css({'width':'70vw'});
-    //     }
-    // }
-    // x = window.matchMedia('(max-width:800px)');
-    // windowResponsive(x);
-    // x.addListener(windowResponsive);
-
-
 });

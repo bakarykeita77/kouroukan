@@ -68,7 +68,7 @@ function alphabet() {
                         
         let pre_apprentissage_data = [];
         let pre_exercice_data = [];
-        let pre_revision_data = [];
+        let pre_evaluation_data = [];
         
         let exercice_pre_questions = [];
         let  evaluation_pre_questions = [];
@@ -470,7 +470,6 @@ function alphabet() {
                 return cr;
             }
             function tdStyle() {
-                console.log(pre_apprentissage_memoire);
                 if(pre_apprentissage_memoire != null || pre_apprentissage_memoire != []) {
                     $.each($('.pre_apprentissage_td, .table_parlante td'), function() {
                         let td = $(this);
@@ -806,7 +805,7 @@ function alphabet() {
 
                 chargerEvaluationPreAlphabet();
                 afficherEvaluationAlphabet();
-                 evaluerPreAlphabet();
+                evaluerPreAlphabet();
 
 
                 function chargerEvaluationPreAlphabet() {
@@ -959,7 +958,7 @@ console.log( evaluation_pre_questions);
                         let bonne_reponse_counter = 0;
                         let taux_de_vraie_reponse = 0;
 
-                        viderLeTableau(pre_revision_data);
+                        viderLeTableau(pre_evaluation_data);
 
                         $('#revision_correction_btn').click(function(e) { 
                             e.stopImmediatePropagation();
@@ -988,7 +987,7 @@ console.log( evaluation_pre_questions);
                         
                                     point = (pre_question == pre_reponse) ? 1 : 0;
                                     question_reponse = [pre_question,pre_reponse,point];
-                                    pre_revision_data.push(question_reponse);
+                                    pre_evaluation_data.push(question_reponse);
                                      
                                     if(pre_question == pre_reponse) { nbr_bonne_reponse++; point_total++; }
                                     if(pre_question != pre_reponse) { nbr_mauvaise_reponse++; }
@@ -1026,7 +1025,7 @@ console.log( evaluation_pre_questions);
 
                                         pre_apprentissage_memoire = (pre_apprentissage_memoire  == null) ? pre_apprentissage_data : pre_apprentissage_memoire.concat(pre_apprentissage_data);
                                         pre_exercice_memoire = (pre_exercice_memoire  == null) ? pre_exercice_data : pre_exercice_memoire.concat(pre_exercice_data);
-                                        pre_evaluation_memoire = pre_revision_data;  
+                                        pre_evaluation_memoire = pre_evaluation_data;  
                                         
                                         localStorage.setItem('pre_apprentissage_memoire', JSON.stringify(pre_apprentissage_memoire));
                                         localStorage.setItem('pre_exercice_memoire', JSON.stringify(pre_exercice_memoire));
@@ -1084,13 +1083,13 @@ console.log( evaluation_pre_questions);
                                         setTimeout(() => { fermerPreEvaluer(); }, 200);
                                         
                                         setTimeout(() => { masquer($('#revision_progress_bar')); }, 600);
-                                        afficherRevisionRedirectionBtns(pre_revision_data);   
-                                        viderLeTableau(pre_revision_data);                                
+                                        viderLeTableau(pre_evaluation_data);                                
                                         preAlphabetResultat();
+                                        redirectionSurApprenissage(pre_evaluation_data);   
    
 
                                         if(pre_evaluation_memoire.length < 27) {
-                                            if(taux_de_vraie_reponse < 92) reprendreRevisionPreAlphabet();
+                                            if(taux_de_vraie_reponse < 92) reprendreEvaluationPreAlphabet();
                                             if(taux_de_vraie_reponse >= 92) continuSurApprendrePreAlphabet();
                                         }
                                         if(pre_evaluation_memoire.length === 27) {
@@ -1128,7 +1127,7 @@ console.log( evaluation_pre_questions);
                                                 }, 250);
                                             });
                                         }
-                                        function reprendreRevisionPreAlphabet() {
+                                        function reprendreEvaluationPreAlphabet() {
                                                 
                                             setTimeout(() => {
                                                 ecris('revision_notification_corps','\
@@ -2217,7 +2216,7 @@ console.log(question_evaluation);
             indexer($('#continu_sur_revision_bouton'));
         }
     }
-    function afficherRevisionRedirectionBtns(data) {
+    function redirectionSurApprenissage(data) {
         let note = calculerNote(data);
 
         masquer($('#revision_progress_bar'));
@@ -2245,6 +2244,8 @@ console.log(question_evaluation);
 
                 $('#continu_sur_apprentissage_bouton').text('ߥߊ߫ '+liste_de_matieres[0][1]+' ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߡߊ߬')
                 indexer($('#continu_sur_apprentissage_bouton'));
+
+                $('#continu_sur_revision_bouton').click(() => { raffraichirLaPage(); });
             }
             if(data.length === 27) {
                 masquer($('#continu_sur_apprentissage_bouton'));

@@ -53,7 +53,7 @@ if(isset($_SESSION['id'])) {
                 <span class="fermeture" id="fermer_lesson_option">&times;</span>
                 <div id="lesson_options_content">
                     <div id="lesson_options_titre"></div>
-                    <div>
+                    <div id="options">
                         <p id='lesson_option_1'></p>
                         <p id='lesson_option_2'></p>
                     </div>

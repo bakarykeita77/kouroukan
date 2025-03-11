@@ -7,32 +7,31 @@
     require_once("connexionToDB.php");
     global $db;
     
-    
   /*----------------------------------------------------------------------------------------------
     Reception des données réçues.
   ----------------------------------------------------------------------------------------------*/
-    $id_client = isset($_POST['id'])        ? $_POST['id']        : null;
+    $id_client = isset($_POST['id']) ? $_POST['id'] : null;
     
-    $prenom    = isset($_POST['prenom'])    ? $_POST['prenom']    : null;
-    $nom       = isset($_POST['nom'])       ? $_POST['nom']       : null;
+    $prenom = isset($_POST['prenom']) ? $_POST['prenom'] : null;
+    $nom = isset($_POST['nom']) ? $_POST['nom'] : null;
     $naissance = isset($_POST['naissance']) ? $_POST['naissance'] : null;
-    $sexe      = isset($_POST['sexe'])      ? $_POST['sexe']      : null;
-    $adresse   = isset($_POST['adresse'])   ? $_POST['adresse']   : null;
-    $email     = isset($_POST['email'])     ? $_POST['email']     : null;
-    $pass      = isset($_POST['pass'])      ? $_POST['pass']      : null;
+    $sexe = isset($_POST['sexe']) ? $_POST['sexe'] : null;
+    $adresse = isset($_POST['adresse']) ? $_POST['adresse'] : null;
+    $email = isset($_POST['email']) ? $_POST['email'] : null;
+    $pass = isset($_POST['pass']) ? $_POST['pass'] : null;
     
-    $matiere   = isset($_POST['matiere'])   ? $_POST['matiere']   : null;
-    $niveau    = isset($_POST['niveau'])    ? $_POST['niveau']    : null;
-    $phase     = isset($_POST['phase'])     ? $_POST['phase']     : null;
-    $lesson    = isset($_POST['lesson'])    ? $_POST['lesson']    : null;
-    $note      = isset($_POST['note'])      ? $_POST['note']      : null;
+    $matiere = isset($_POST['matiere']) ? $_POST['matiere'] : null;
+    $niveau = isset($_POST['niveau']) ? $_POST['niveau'] : null;
+    $phase = isset($_POST['phase']) ? $_POST['phase'] : null;
+    $lesson = isset($_POST['lesson']) ? $_POST['lesson'] : null;
+    $note = isset($_POST['note']) ? $_POST['note'] : null;
+    $action = isset($_POST['action']) ? $_POST['action'] : null;
 
     $syllabe_categorie = isset($_POST['syllabe_categorie']) ? $_POST['syllabe_categorie'] : null;
-    $image_name = isset($_FILES['image']['name'])    ? $_FILES['image']['name'] : null;
-    $taille    = isset($_FILES['image']['size'])     ? $_FILES['image']['size'] : null;
-    $type      = isset($_FILES['image']['type'])     ? $_FILES['image']['type'] : null;
-    $image     = isset($_FILES['image']['tmp_name']) ? file_get_contents($_FILES['image']['tmp_name']) : null;
-                
+    $image_name = isset($_FILES['image']['name']) ? $_FILES['image']['name'] : null;
+    $taille = isset($_FILES['image']['size']) ? $_FILES['image']['size'] : null;
+    $type = isset($_FILES['image']['type']) ? $_FILES['image']['type'] : null;
+    $image = isset($_FILES['image']['tmp_name']) ? file_get_contents($_FILES['image']['tmp_name']) : null;
    
   /*----------------------------------------------------------------------------------------------
     Sécurisation des données réçues.
@@ -40,46 +39,49 @@
     $id_client = securiser($id_client);
     $id_client = (int) $id_client;
     
-    $prenom    = securiser($prenom);
-    $nom       = securiser($nom);
+    $prenom = securiser($prenom);
+    $nom = securiser($nom);
     $naissance = securiser($naissance);
-    $sexe      = securiser($sexe);
-    $adresse   = securiser($adresse);
-    $email     = securiser($email);
-    $pass      = securiser($pass);
+    $sexe = securiser($sexe);
+    $adresse = securiser($adresse);
+    $email = securiser($email);
+    $pass = securiser($pass);
            
-    $matiere   = securiser($matiere);
-    $niveau    = securiser($niveau);
-    $niveau    = (int) $niveau;
-    $phase     = securiser($phase);
-    $lesson    = securiser($lesson);
-    $note      = securiser($note);
-    $note      = (int) $note;
+    $matiere = securiser($matiere);
+    $niveau = securiser($niveau);
+    $niveau = (int) $niveau;
+    $phase = securiser($phase);
+    $lesson = securiser($lesson);
+    $note = securiser($note);
+    $not = (int) $note;
+    $action = securiser($action);
 
     $syllabe_categorie = securiser($syllabe_categorie);
     $image_name = securiser($image_name);
-    $name       = explode('.',$image_name)[0];
+    $name = explode('.',$image_name)[0];
    // $extension = explode('.',$image_name)[1];
-    $taille    = securiser($taille);
-    $taille    = (int) $taille;
-    $type      = securiser($type);
+    $taille = securiser($taille);
+    $taille = (int) $taille;
+    $type = securiser($type);
 
     $table_name = $syllabe_categorie;
 
-	if($lesson !== '') {
-		echo "<script>alert('ok');</script>";
-	}
-
   /*----------------------------------------------------------------------------------------------
-    Gestion des dnnées dans la base de données.
+    Gestion des données dans la base de données.
   ----------------------------------------------------------------------------------------------*/
-    if($id_client != '' && $matiere != '' && $niveau == '' && $phase == '' && $lesson == '' && $note == '')                          getAllInfo($lesson,$id_client);
+    if($id_client != '' && $matiere != '' && $niveau == '' && $phase == '' && $lesson == '' && $note == '')                          getAllInfo($matiere,$id_client);
     if($id_client != '' && $matiere != '' && $niveau != '' && $phase != '' && $lesson != '' && $note != '')                          archiverLesson($id_client,$matiere,$niveau,$phase,$lesson,$note);     
     if($prenom != '' && $nom != '' && $naissance != '' && $sexe != '' && $adresse != '' && $email != '' && $pass != '')              addClient($prenom,$nom,$naissance,$sexe,$adresse,$email,$pass);       
     if($id_client != '' && $prenom != '' && $nom != '' && $naissance != '' && $sexe != '' && $adresse != '' && $email != '' && $pass != '') modifierClient($id_client,$prenom,$nom,$naissance,$sexe,$adresse,$email,$pass);           
     if($id_client != '')                                                                                                             getClient($id_client);       
-    if($matiere != '' && $id_client != '')                                                                                           getAllInfo($matiere,$id_client);     
     if($name != null && $extension != null && $taille != null && $type != null && $image != null && $table_name != null)             uploadImage($table_name,$id_client,$name,$extension,$taille,$type,$image);       
+    if($matiere != '' && $id_client != '' && $action != '')                                                                          if($action == 'supprimer_matiere_en_cours') supprimerLesson($matiere,$id_client);
+
+ /* Après récupération des données reçues, la requette correspondante est éxécutée et la redirection est faite immediatement sur la page de provenance*/
+	echo "<script>
+			let r = document.referrer;
+			console.log('Nous sommes à actions.php');
+		</script>";
 
   /*----------------------------------------------------------------------------------------------
     Les fonctions.
@@ -159,10 +161,10 @@
 	function getClient($id) {
 		global $db;
 
-		$sql = "SELECT * FROM users WHERE id=:id_client";
+		$sql = "SELECT * FROM users WHERE id=:id";
 
 		$requette = $db->prepare($sql);
-		$requette->bindValue(':id_client',$id_client,PDO::PARAM_INT);
+		$requette->bindValue(':id',$id,PDO::PARAM_INT);
 		$requette->execute();
 		return $utilisateurs = $requette->fetch(PDO::FETCH_ASSOC);
 	 }
@@ -247,6 +249,16 @@
 		$requette->bindValue(':id',   $id,   PDO::PARAM_INT);
 		$utilisateurs =  $requette->execute();
 		return $utilisateurs;
+	 }
+	function supprimerLesson($matiere,$id_client) {
+		global $db;
+
+		$sql = "DELETE FROM ".$matiere." WHERE id_client=:id_client";
+
+		$requette = $db->prepare($sql);
+		$requette->bindValue(':id_client', $id_client, PDO::PARAM_INT);
+		$data =  $requette->execute();
+	    return $data;
 	 }
 	function uploadImage($table_name,$id_client,$name,$extension,$taille,$type,$image) {
 	    global $db;

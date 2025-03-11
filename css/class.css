@@ -243,8 +243,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 .course {    
     position: relative;
     display: none;
-    width: calc(100vw - 1rem);
-    max-width: 60rem;
+    height: calc(100% - 1rem); 
     max-height: 45rem;
     margin: 0 auto;
     padding: 0.125rem;
@@ -260,9 +259,9 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 }
 .course_body { 
     display: none;
-    top: 1rem;
     padding-top: 1.5rem;
-    height: calc(100% - 6.5rem);
+    height: calc(100% - 5rem);
+    min-height: 20rem;
     color: white;
     background-color: rgba(0,0,0,0.8);
     overflow-y: auto; overflow-x: hidden;
@@ -284,7 +283,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 }
 .course_foot { 
     z-index: 1; 
-    top: 1.5rem;
+    top: 0.5rem;
 }
 .course_head { 
     top: 0.5rem; 
@@ -902,9 +901,8 @@ del {
 .progress_bar {
     position: relative;
     display: none;
-    top: 1.25rem;
     height: 4rem;
-    width: calc(100% - 1.5rem);
+    width: 100%;
     max-width: 59rem;
     margin: 0 auto;
     padding: 0;
@@ -966,7 +964,6 @@ del {
     border-radius: 0.5rem;
 }
 .redirection_btns { 
-    top: 1.5rem;
     position: relative;
     text-align: center;
     font-weight: bold; 
@@ -1208,7 +1205,7 @@ del {
     }
     .phases li { width: 80%; }
     .course { 
-        height: calc(100% - 4.5rem); 
+        width: calc(100vw - 1rem);
         box-shadow: none; 
         border: none; 
     }
@@ -1238,7 +1235,11 @@ del {
         width: 30%;
         min-width: 5rem;
     }
-    .course { height: calc(100% - 4rem); box-shadow: 0 0 3rem #666; border: 1px solid #aaa; }
+    .course { 
+        width: calc(100vw - 20rem);
+        box-shadow: 0 0 3rem #666; 
+        border: 1px solid #aaa; 
+    }
     .course_head, .course_body, .course_foot { 
         width: 100%; 
     }

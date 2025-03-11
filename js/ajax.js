@@ -145,51 +145,5 @@ $(document).ready(function(){
         }
     
     }, function(){});
-
-
-
-/*
-    function effectuerLaRequeteAjax(){
-        
-        var xhr = new XMLHttpRequest();
-        var methode = "GET";
-        var url = "http://localhost:8080/kouroukan/php/testes-data.php";
-        var asynchronous = true;
-    
-        xhr.open(methode,url,asynchronous);
-        xhr.onload = function(){
-            var response = JSON.parse(this.responseText);
-    
-            global_testes = reconstitutionDesTextes();
-    
-            function reconstitutionDesTextes(){
-                
-                var id_teste, id_client, niveau_teste, date_teste;
-                var recapitulatif_des_testes = [];
-                var teste = [];
-                var point = [];
-
-                for(var i=0;i<response.length;i++){
-                    
-                    id_teste     = response[i]['id'];
-                    id_client    = response[i]['id_client'];
-                    date_teste   = response[i]['Date'];
-                    niveau_teste = response[i]['Niveau'];
-                    teste        = response[i]['Teste'].split(';');
-                    point        = response[i]['Point'].split('\\');
-                    
-                    testes = [id_teste, id_client, date_teste, niveau_teste, teste, point];
-                    testes = testes.join('/');
-                  
-                    recapitulatif_des_testes[recapitulatif_des_testes.length] = testes;
-                }
-
-                return recapitulatif_des_testes;             
-            }
-        }
-        xhr.send(null);
-         
-    }
-*/
-    
+ 
 });

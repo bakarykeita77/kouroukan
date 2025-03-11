@@ -1,4 +1,6 @@
-
+#apprentissage_container {
+    height: calc(100% - 6rem);
+}
 #apprentissage_head, #apprentissage_body { 
     display: none;
 }
@@ -297,7 +299,6 @@
 #exercice_body td:hover { 
     background-color: #999;
 }
-#apprentissage_progress_bar { top: 0.5rem; }
 #exercice_question_btn, #exercice_repetition_btn, #exercice_correction_btn {
     position: relative;
     display: none;

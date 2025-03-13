@@ -5,8 +5,16 @@
 -------------------------------------------------------------------------------------------------------------------------*/   
 
 // Récupération du niveau d'avancement des études déterminé depuis accueil.js
+let pre_apprentissage_alpabet_memoire = JSON.parse(localStorage.getItem('pre_apprentissage_alpabet_memoire'));
+let pre_exercice_alpabet_memoire = JSON.parse(localStorage.getItem('pre_exercice_alpabet_memoire'));
+let pre_evaluation_alpabet_memoire = JSON.parse(localStorage.getItem('pre_evaluation_alpabet_memoire'));
+
 let alphabet_data = alphabetData();
 let syllabes_data = syllabesData();
+
+console.log(pre_apprentissage_alpabet_memoire);
+console.log(pre_exercice_alpabet_memoire);
+console.log(pre_evaluation_alpabet_memoire);
 
 sessionStorage.setItem('alphabet_data',JSON.stringify(alphabet_data));
 sessionStorage.setItem('syllabes_data',JSON.stringify(syllabes_data));

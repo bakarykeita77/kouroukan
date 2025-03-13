@@ -11,6 +11,7 @@
     box-shadow: none;
 }
 #exercice_progress_bar, #exercice_redirection_btns { top: 1.5rem; }
+#revision_redirection_btns { top: 1.5rem; }
 
 
 @media screen and (orientation: portrait) {

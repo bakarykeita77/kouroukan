@@ -265,7 +265,6 @@ if(isset($_SESSION["id"])) {
                     </div>
                     
 
-                    <script src="../js/apprentissage.js"></script>
                     <script src="/kouroukan/js/exercice.js"></script>
                     <script src="/kouroukan/js/evaluations.js"></script>
 

@@ -253,18 +253,20 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 }
 .course_body, .course_head, .course_foot {
     position: relative; 
+    width: 98%;
     margin: 0 auto;
     border-radius: 0.5rem;
     box-sizing: border-box;
 }
 .course_body { 
     display: none;
+    top: 1rem;
     padding-top: 1.5rem;
-    height: calc(100% - 6rem);
+    height: calc(100% - 7rem);
     min-height: 18rem;
     color: white;
     background-color: rgba(0,0,0,0.8);
-    overflow-y: auto; overflow-x: hidden;
+    overflow-y: auto;
     z-index: 0;
 }
 .salle_de_classe {
@@ -283,11 +285,12 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 }
 .course_foot { 
     z-index: 1; 
-    top: 0.5rem;
+    top: 1.5rem;
+    height: 4rem;
 }
 .course_head { 
     top: 0.5rem; 
-    height: 6rem; 
+    height: 7rem; 
     overflow: visible;
     z-index: 1; 
 }
@@ -311,8 +314,9 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 
 .dark_backgound { background-color: #aaa; }
 .dialogue_btns {
-    position: relative;
+    position: absolute;
     display: none;
+    top: 0;
     width: calc(100% - 2px);
     height: 4rem;
     line-height: 4rem;
@@ -616,17 +620,20 @@ del {
     line-height: 2.5rem;
 }
 .modificateur_de_choix, .notification_titre { display: inline-block; }
+.modificateur_de_choix { padding: 0.25rem; }
+.notification_titre { padding: 0.25rem 1rem 0.25rem 0; }
 .modificateur_de_choix {
     width: 2rem;
     height: 1rem;
+    vertical-align: top;
 }
 .modificateur_de_choix_btn {
-    top: 4px;
+    top: 0;
     height: 1.5rem;
     width: 1.5rem;
     text-align: center;
     line-height: 1.5rem;
-    margin: 0 1rem;
+    margin: 0;
     border: 1px solid #aaa;
     border-radius: 50%;
     font-size: 1.5rem;
@@ -635,7 +642,7 @@ del {
 }
 .modificateur_de_choix_message {
     display: none;
-    top: 2.25rem;
+    top: 2rem;
     padding: 1rem;
     width: 6rem;
     background-color: #fff;
@@ -693,11 +700,19 @@ del {
 .notification {
     position: relative;
     height: calc(100% - 1.5rem);
-    width: calc(98% - 2rem);
-    margin: auto;
-    padding: 0.5rem 1rem;
+    width: 100%;
     font-size: 12px;
     overflow-y: visible;
+}
+.notification_corps {
+    position: relative;
+    border: 1px solid transparent;
+    border-top-color: #aaa;
+    border-bottom-color: #aaa;
+    padding: 0.25rem 1rem;
+    height: 4rem;
+    top: 0.25rem;
+    overflow: auto;
 }
 
 /* --------------------------------------------------------------------------------------------------------- */
@@ -899,11 +914,11 @@ del {
 }
 .profile_menu_head a { text-decoration: none; }
 .progress_bar {
-    position: relative;
+    position: absolute;
     display: none;
+    top: 0;
     height: 4rem;
     width: 100%;
-    max-width: 59rem;
     margin: 0 auto;
     padding: 0;
     background-color: #fff;
@@ -964,7 +979,9 @@ del {
     border-radius: 0.5rem;
 }
 .redirection_btns { 
-    position: relative;
+    position: absolute;
+    top: 0;
+    height: 4rem;
     text-align: center;
     font-weight: bold; 
     z-index: 1; 
@@ -1209,12 +1226,8 @@ del {
         box-shadow: none; 
         border: none; 
     }
-    .course_head, .course_body, .course_foot { 
-        width: 98%;
-        border: none;
-    }
     .table_parlante td, .table_muette td {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
     .travaux { display: none; }
 }
@@ -1239,9 +1252,6 @@ del {
         width: calc(100vw - 20rem);
         box-shadow: 0 0 3rem #666; 
         border: 1px solid #aaa; 
-    }
-    .course_head, .course_body, .course_foot { 
-        width: 100%; 
     }
     .table_parlante, .table_muette { top: 0.25rem; }
     .table_parlante td, .table_muette td {

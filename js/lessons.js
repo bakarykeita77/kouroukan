@@ -12,7 +12,9 @@ $('document').ready(function() {
         var phase_nom = '';
         var data_phase_nbr = 0;
         let alphabet_data = JSON.parse(sessionStorage.getItem('alphabet_data'));
+        let syllabes_data = JSON.parse(sessionStorage.getItem('syllabes_data'));
 
+console.log('niveau_actif = '+niveau_actif);
 console.log('option_retenue = '+option_retenue);
 
         sessionStorage.setItem('option_retenue', JSON.stringify(option_retenue));
@@ -172,73 +174,40 @@ console.log('option_retenue = '+option_retenue);
             let matiere_nom = JSON.parse(sessionStorage.getItem('matiere_nom')); //Déterminé depuis storagesDuProgramme() dans programmes.js
 
             modificationDuChoixDApprentissage();
-            if(tableau2DVide(alphabet_data) == false) parametrageDeLesson();  // Voir parametres.js
 
-            $('#phases_list li').on('click', function() {
 
-                parametrageDeLesson();  // Voir parametres.js
-                phase_id = $(this).attr('id');
-                phase_nom = $(this).html();
+            // $('#phases_list li').on('click', function() {
 
-                var phase_class = $(this).attr('class');
-                var course_id = phase_id.split('_')[1];
-                var autorisation_d_acces_aux_cours = 'non';
+            //     parametrageDeLesson();  // Voir parametres.js
+
+            //     phase_id = $(this).attr('id');
+            //     phase_nom = $(this).html();
+
+            //     var phase_class = $(this).attr('class');
+            //     var course_id = phase_id.split('_')[1];
                             
             
-                sessionStorage.setItem('phase_class', JSON.stringify(phase_class));
-                sessionStorage.setItem('phase_id', JSON.stringify(phase_id));
-                sessionStorage.setItem('phase_nom', JSON.stringify(phase_nom));
-                sessionStorage.setItem("course_id", JSON.stringify(course_id));
-                sessionStorage.setItem("autorisation_d_acces_aux_cours", JSON.stringify(autorisation_d_acces_aux_cours));
+            //     sessionStorage.setItem('phase_class', JSON.stringify(phase_class));
+            //     sessionStorage.setItem('phase_id', JSON.stringify(phase_id));
+            //     sessionStorage.setItem('phase_nom', JSON.stringify(phase_nom));
+            //     sessionStorage.setItem("course_id", JSON.stringify(course_id));
 
-            /*--------------------------------------------------------------------*/ 
+            //  /*--------------------------------------------------------------------*/ 
                        
-                if(phase_class == "apprises") {
-                    if(phase_nom != 'ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ') {
-                        console.log(matiere_nom+" "+phase_nom+" ߢߌ߲߬ ߞߍߣߍ߲߫ ߞߘߐ ߟߋ߬"); 
-                        return false;
-                    }
+            //     if(phase_class == "apprises") {
+            //         if(phase_nom != 'ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ') {
+            //             console.log(matiere_nom+" "+phase_nom+" ߢߌ߲߬ ߞߍߣߍ߲߫ ߞߘߐ ߟߋ߬"); 
+            //             return false;
+            //         }
+            //     }
+
+                switch(niveau_actif) {
+                    case 1 : alphabet(); break;
+                    case 2 : syllabe();  break;
+                    case 3 : ton();      break;
+                    case 4 : chiffre();  break;
                 }
-                // autorisationDAccesAuxCours();
-        
-                // if(autorisation_d_acces_aux_cours == 'oui') {
-                    switch(niveau_actif) {
-                        case 1 : alphabet(); break;
-                        case 2 : syllabe();  break;
-                        case 3 : ton();      break;
-                        case 4 : chiffre();  break;
-                    }
-                // }
-                function autorisationDAccesAuxCours() {
-                    var frecance_du_cours = frecanceDuCours();
-    
-                    if(phase_class == 'apprises') { 
-                        autorisation_d_acces_aux_cours = (frecance_du_cours < 5) ? 'oui' : 'non';
-                        if(autorisation_d_acces_aux_cours === 'non') { 
-                            $('.salle_de_classe').css('display','none'); 
-                            alert("ߥߟߊ߬ߘߊ ߣߌ߲߰ ߡߊ߬ߛߍ߬ߦߌ߬ߟߌ ߓߘߊ߫ ߟߏ߯ߟߎ߫ ߓߐ߫.\n ߕߊ߲߬ߓߌ߫ ߥߟߊ߬ߘߊ߬ ߜߘߍ߫ ߝߍ߬،"); 
-                        }
-                        return false;
-                    }
-                    if(phase_class == 'a_apprendre') { 
-                        autorisation_d_acces_aux_cours = 'non';
-                        $('.salle_de_classe').css('display','none'); alert("ߘߊߞߎ߲ ߡߊ߫ ߛߋ߫ ߦߊ߲߬ ߡߊ߫ ߝߟߐ߫"); 
-                        return false;
-                    }
-                    if(phase_class == 'active') { 
-                        autorisation_d_acces_aux_cours = 'oui';
-                    }
-                    
-                    function frecanceDuCours() {
-                        let frecance = 0;
-                        $.each($('.travail'), function() {
-                            var phase_travaux_nom = $('h3', this).html().split(' ')[1];
-                            if(phase_travaux_nom == phase_nom) frecance = $('.bulles_container p', this).length;
-                        });
-                        return frecance;
-                    }  
-                }
-            });
+            // });
 
             function modificationDuChoixDApprentissage() {
 

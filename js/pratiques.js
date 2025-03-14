@@ -360,8 +360,6 @@ function pratique() {
                         $('#cumule_des_caracteres').html(questions[compteur]);
                         setTimeout(function() {$('#pratiques_image').attr('src','/kouroukan/server_images/server_images-1-syllabe/ߛߊ߲.jpg');}, 600);
                             
-                        $('#bulles_container').html(pratique_guide_html);
-                        $('#bulles_container span:last').remove();
                        // $('#guide_container').animate({'top':0}, 400);
                             
                         function pratiqueGuideHTML() {

@@ -263,10 +263,6 @@ if(isset($_SESSION["id"])) {
                             </div>
                         </div>
                     </div>
-                    
-
-                    <script src="/kouroukan/js/exercice.js"></script>
-                    <script src="/kouroukan/js/evaluations.js"></script>
 
                  <!--Resultat------------------------------------------------------------------------------------------------------------------------>
                     <div class="resultat_container"><?php include("resultat.php"); ?></div>

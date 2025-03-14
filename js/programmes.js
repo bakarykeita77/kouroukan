@@ -12,9 +12,6 @@ let pre_evaluation_alpabet_memoire = JSON.parse(localStorage.getItem('pre_evalua
 let alphabet_data = alphabetData();
 let syllabes_data = syllabesData();
 
-console.log(pre_apprentissage_alpabet_memoire);
-console.log(pre_exercice_alpabet_memoire);
-console.log(pre_evaluation_alpabet_memoire);
 
 sessionStorage.setItem('alphabet_data',JSON.stringify(alphabet_data));
 sessionStorage.setItem('syllabes_data',JSON.stringify(syllabes_data));
@@ -31,8 +28,10 @@ var derniere_phase    = JSON.parse(sessionStorage.getItem('derniere_phase'));
 var lesson_option    = JSON.parse(localStorage.getItem('lesson_option'));
 var option_retenue    = JSON.parse(localStorage.getItem('option_retenue'));
 
+let lesson_data = (niveau_en_cours == 1) ? alphabet_data : syllabes_data;
+
 console.log('option_retenue = '+option_retenue);
-console.log(alphabet_data);
+console.log(syllabes_data);
 
 // localStorage.clear();
 
@@ -192,6 +191,8 @@ function lessonOptions() {
     var libele_du_choix_12 = '<span>߂߲</span> - '+matiere_nom+' ߜߘߏߓߊ߫ ߘߋ߲߮';  
 
     let phase_lien = phaseLien();
+    
+    console.log('phase_lien = '+phase_lien);
 
     if(location.href.split('=')[1] == 'option') {
         $('.page_body').css('display','none');
@@ -202,13 +203,13 @@ function lessonOptions() {
     }
          
     $('#programme_ul li:nth-child(1), #programme_ul li:nth-child(2)').click(function() {
-        if(tableau2DVide(alphabet_data)) {
+        if(tableau2DVide(lesson_data)) {
             $('.page_body').css('display','none');
             chargerLesOptions();
             stockerLOption();
             afficherLessonOptions();
         }
-        if(!tableau2DVide(alphabet_data)) {
+        if(!tableau2DVide(lesson_data)) {
             $('.page_body').css('display','none');
             location.assign(phase_lien);
         }

@@ -10,7 +10,6 @@
  
     chargerTravaux(); 
     afficherTravauxContent();
-    reAfficherUnePhase();
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/    
     
@@ -245,12 +244,8 @@
                     }
                     function styleDuCercleActif() {
 
-                        $('.bulles_container p:last-child').addClass('cercle_actif');
-
                         chargerTravailName();
                         chargerTravailDate();
-                        reChargerTravailName();
-                        reChargerTravailDate();
 
 
                         function chargerTravailName() {
@@ -267,16 +262,13 @@
                         }     
                         function chargerTravailDate() {
                             $.each($('.travail_titre'), function() {
+                                
                                 var travail_date_container = $(this).next().find('.travail_date');
-                                var n = $('.bulles_container p:last-child', this).length;
-                                var date = matieres[0][n-1-1].date;
+                                var date = matieres[0][n-1].date;
                                 var date_en_nko = '', heure_en_nko = '';
-
-        console.log(matieres[0][n-1-1]);
                                 var a = parseIntNko(date.split(' ')[0].split('-')[0]);
                                 var m = mois[parseInt(date.split(' ')[0].split('-')[1]) - 1];
                                 var j = parseIntNko(date.split(' ')[0].split('-')[2]);
-
                                 var h = parseIntNko(date.split(' ')[1].split(':')[0]);
                                 var mn = parseIntNko(date.split(' ')[1].split(':')[1]);
 
@@ -288,49 +280,6 @@
                                 travail_date_container.html(travail_date);
                             });
                         }
-                        function reChargerTravailName() {
-                            $.each($('.bulles_container p'), function() {
-
-                                $(this).click(function(){
-                                    $(this).addClass('cercle_actif');
-                                    $(this).siblings().removeClass('cercle_actif');
-
-                                    var travail_name = $(this).parent().parent().parent().next().find('.travail_name');
-                                    var travail_titre = $(this).parent().parent().prev();
-                                    var rang = $(this).html();
-
-                                    rang = (rang == '߁') ? rang+'߭' : rang+'߲';
-                                    travail_name.html( travail_titre.html()+' '+rang );
-                                });
-                            });
-                        }  
-                        function reChargerTravailDate() {
-                            $.each($('.bulles_container p'), function() {
-
-                                $(this).click(function(){
-                                    var travail_date_container = $(this).parent().parent().parent().next().find('.travail_date');
-                                    var n = $(this).index();
-                                    var date = matieres[0][n-1].date;
-                                    var date_en_nko = '', heure_en_nko = '';
-
-                                    var a = parseIntNko(date.split(' ')[0].split('-')[0]);
-                                    var m = mois[parseInt(date.split(' ')[0].split('-')[1]) - 1];
-                                    var j = parseIntNko(date.split(' ')[0].split('-')[2]);
-
-                                    var h = parseIntNko(date.split(' ')[1].split(':')[0]);
-                                    var mn = parseIntNko(date.split(' ')[1].split(':')[1]);
-
-                                    date_en_nko = '&#128197; '+ m +' ߕߟߋ߬ '+j+' ߛߊ߲߭ '+a;
-                                    heure_en_nko = ' &#128338; '+h+':'+mn;
-
-                                    var travail_date = 'ߞߍ߫ ߕߎߡߊ :___ '+date_en_nko+' ___ '+heure_en_nko;
-
-                                    travail_date_container.html(travail_date);
-
-                                });
-                            });
-                        }
-
                     }
                     function designDesCercles() {
 
@@ -363,25 +312,5 @@
                 $('.travail_content', this).animate({'height':1}, 250);
                 $('.travail_titre', this).css('background-color','#eee');
             }       
-        });
-
-     // Empecher la propagation de l'évenement pouvant declencher la fermeture de travail_content
-        $('.bulles_container p').on('click', function(e){ 
-            var h = $(this).parent().parent().parent().next().height(); 
-            if(h == 240)  e.stopPropagation();
-        });
-    }
-    function reAfficherUnePhase() {
-        $('.reevaluation').on('click', function(e) { e.stopPropagation(); });
-        $('.reevaluation').on('click', function(){
-            let id = $(this).attr('id');
-
-            switch(id) {
-                case "reevaluation_de_apprentissage" : $('#phases_list li:nth-child(1)').click(); break;
-                case "reevaluation_de_exercice"      : $('#phases_list li:nth-child(2)').click(); break;
-                case "reevaluation_de_pratique"      : $('#phases_list li:nth-child(3)').click(); break;
-                case "reevaluation_de_evaluation"    : $('#phases_list li:nth-child(4)').click(); break;
-            }
-            
         });
     }

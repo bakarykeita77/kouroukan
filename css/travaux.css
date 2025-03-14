@@ -20,29 +20,8 @@
 }
 .travail_corps_table { position: relative; top: 0; font-weight: bold; }
 .travail_foot { left: 0; width: 3rem; overflow: auto; }
-.travail_titre h3, .bulles_container { display: inline-block; vertical-align: middle; }
+.travail_titre h3 { display: inline-block; vertical-align: middle; }
 .travail td { min-width: 2rem; }
-.bulles_container { height: 3rem; overflow: auto; }
-.bulles_container .bulles_glissiere { width: 16rem; height: 3rem; }
-.bulles_container p { 
-    position: relative;
-    display: inline-block; 
-    margin: 0.25rem;
-    width: 2rem;
-    height: 2rem;
-    line-height: 2rem;
-    text-align: center;
-    font-weight: bold;
-    border: 1px solid #bbb;
-    border-radius: 50%;
-    cursor: pointer;
-}
-.bulles_container p:hover { 
-    background-color: white;
-    box-shadow: 0 0 0.5rem #444; 
-    color: black; 
-}
-.bulles_container p:not(.cercle_actif) { color: #999; }
 .cercle_actif  { 
     background-color: white;
     box-shadow: 0 0 0.5rem #444; 

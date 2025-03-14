@@ -34,13 +34,14 @@ function alphabet() {
     let apprentissage_data_memo = alphabetApprentisageDataMemo();
     let exercice_data_memo = alphabetExerciceDataMemo();
     let evaluation_data_memo = alphabetEvaluationDataMemo();
+    
     let alphabet_data = [apprentissage_data_memo, exercice_data_memo, evaluation_data_memo];
     sessionStorage.setItem('alphabet_data', JSON.stringify(alphabet_data));
 
                  
     $('.direction').css('display','none');
   
-    if(niveau_actif < 3) {
+    if(niveau_actif === 1) {
         if(option_retenue != null) {
             switch(option_retenue) {
                 case 1 : preAlphabetNko(); break;
@@ -72,7 +73,7 @@ function alphabet() {
         let pre_exercice_data = [];
         
         let exercice_pre_questions = [];
-        let  evaluation_pre_questions = [];
+        let evaluation_pre_questions = [];
         let cercle_actif = '';
         let cercle_id = '';
 
@@ -691,6 +692,7 @@ function alphabet() {
                                         viderNotification();
                                         setTimeout(() => { fermerPreExercice(); }, 200);
                                         setTimeout(() => { 
+
                                             afficherExerciceRedirectionBtns(pre_exercice_data);                           
 
                                             if(note_de_pre_exercice < 100) {
@@ -1286,7 +1288,7 @@ console.log([pre_apprentissage_alpabet_memoire, pre_exercice_alpabet_memoire, pr
                 let click_counter = 0;
 
 
-                lecturePersonnalisee();    // Voir fonctions.js
+                lecturePersonnalisee('alphabet');    // Voir fonctions.js
                 if(apprentissage_alpabet_memoire != null) {
                     $('.progress_bar').css('display','none');
                     $.each(td, function(){ $(this).css({'background-color':'rgba(85,85,85,1)', 'color':'white'}); });

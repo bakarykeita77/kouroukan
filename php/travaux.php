@@ -7,7 +7,6 @@
                 <div class="travail_titre" id="travail_1_titre" >
                     <div class="titre_1">
                         <h3><?= $matiere_nom; ?> ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ</h3> 
-                        <div class="bulles_container" id="bulles_d_apprentissage"><div class="bulles_glissiere"></div></div>
                     </div>
                 </div>
                 <div class="travail_content" id="travail_1">
@@ -34,8 +33,6 @@
                             </table>  
                         </div>
                     </div> 
-
-                    <div class="reevaluation" id="reevaluation_de_apprentissage">ߞߘߐߓߐߟߌ ߞߍ߫ ߕߎ߯ߣߌ߫</div>
                     
                 </div>
             </div>
@@ -44,7 +41,6 @@
                 <div class="travail_titre" id="travail_2_titre" >
                     <div class="titre_1">
                         <h3><?= $matiere_nom; ?> ߡߊ߬ߞߟߏ߬ߟߌ</h3> 
-                        <div class="bulles_container" id="bulles_d_exercice"><div class="bulles_glissiere"></div></div>
                     </div>
                 </div>
                 <div class="travail_content" id="travail_2">
@@ -81,7 +77,6 @@
                 <div class="travail_titre" id="travail_3_titre" >
                     <div class="titre_1">
                         <h3><?= $matiere_nom; ?> ߓߟߏߦߊߟߌ</h3> 
-                        <div class="bulles_container" id="bulles_de_pratique"><div class="bulles_glissiere"></div></div>
                     </div>
                 </div>
                 <div class="travail_content" id="travail_3">
@@ -180,7 +175,6 @@
                 <div class="travail_titre" id="travail_4_titre" >
                     <div class="titre_1">
                         <h3><?= $matiere_nom; ?> ߞߘߐߓߐߟߌ</h3> 
-                        <div class="bulles_container" id="bulles_d_evaluation"><div class="bulles_glissiere"></div></div>
                     </div>
                 </div>
                 <div class="travail_content" id="travail_4">

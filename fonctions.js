@@ -47,6 +47,7 @@
         }, 600);
     }
     function affichageAnimeDeTableTd(table) {
+        console.log(table);
         let tr = $('tr', table);
 
         tr.css('opacity',1);
@@ -97,7 +98,9 @@
     }
     function afficherEvaluation() {
         let td_total = $('#evaluation_body table td').length;
-        $('.salle_de_classe').css({'display':'block'});
+
+        masquer($('.direction'));
+        afficher($('.salle_de_classe'));
 
         masquer($('.course'));
         setTimeout(() => { 
@@ -165,6 +168,9 @@
     function afficherExercice() {
         let td_total = $('#exercice_body table td').length;
 
+        masquer($('.direction'));
+        afficher($('.salle_de_classe'));
+
         masquer($('.course'));
         setTimeout(() => { 
             displayv($('.course'));
@@ -218,7 +224,8 @@
     function afficherRevision() {
         let td_total = $('#revision_body table td').length;
        
-        $('.salle_de_classe').css({'display':'block'});
+        masquer($('.direction'));
+        afficher($('.salle_de_classe'));
 
         masquer($('.course'));
         setTimeout(() => { 
@@ -256,7 +263,7 @@
             masquer($('#revision_redirection_btns'));
         }, 50);
     }
-	function aggrandir_caractere_de(element) { element.css( 'font-size','+=32px' ); }
+	function aggrandir_caractere_de(element) { element.css('font-size','+=32px'); }
     function alphabetApprentisageDataMemo() {
 
         let matieres = JSON.parse(sessionStorage.getItem('matieres'));
@@ -299,7 +306,7 @@
         
         return prdm;
     }
-	function appetir_caractere_de(element) { element.css( 'font-size','-=32px' ); } 
+	function appetir_caractere_de(element) { element.css('font-size','-=32px'); } 
     function approuver(bonne_reponse) {
         $.each($('.table_parlante td, .table_muette td'), function() {
             var td = $(this);
@@ -743,6 +750,49 @@
     function couleurDeFont(element,couleur)	{ element.css('color', couleur); }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
+
+    function dateAcuelle() {
+
+        let d = new Date();
+        let an = d.getFullYear();
+        let lune = d.getMonth();
+        let date = d.getDate();
+        let nom_du_jour = d.getDay();
+        let heure = d.getHours();
+        let minute = d.getMinutes();
+        let temps = [heure+':'+minute];
+        let date_actuelle = an+'-'+lune+'-'+date+' '+temps+' '+nom_du_jour;
+
+        return date_actuelle;
+    }
+    function dateEnNko(date_a_convertir) {
+
+        let d = date_a_convertir;
+
+        let an = parseIntNko(d.split('-')[0]);
+        let lune = mois[parseInt(d.split('-')[1])];
+        let date = parseIntNko(parseInt(d.split('-')[2]));
+        let heure = parseIntNko(parseInt(d.split(' ')[1].split(':')[0]));
+        let minute = parseIntNko(parseInt(d.split(' ')[1].split(':')[1]));
+        let temps = [heure+':'+minute];
+        let date_actuelle = temps+' '+lune+' ߕߟߋ߬ '+date+' ߛߊ߲߭ '+an;
+
+        return date_actuelle;
+    }
+    function dateEnNko1(date_a_convertir) {
+
+        let d = date_a_convertir;
+
+        let an = parseIntNko(d.split('-')[0]);
+        let lune = mois[parseInt(d.split('-')[1] - 1)];
+        let date = parseIntNko(parseInt(d.split('-')[2]));
+        let heure = parseIntNko(parseInt(d.split(' ')[1].split(':')[0]));
+        let minute = parseIntNko(parseInt(d.split(' ')[1].split(':')[1]));
+        let temps = [heure+':'+minute];
+        let date_actuelle = temps+' '+lune+' ߕߟߋ߬ '+date+' ߛߊ߲߭ '+an;
+
+        return date_actuelle;
+    }
     function defilementDuContenuVersLeHaut(container) {
         container.animate({ scrollTop:container[0].scrollHeight }, 1000);
     }
@@ -1113,23 +1163,40 @@ console.log(total_questions[i]);
             },600);
          });
      }
-    function lessonHTML(array, table_id = '#') {
-
-        var table = "<table class = 'table_parlante' id='"+table_id+"'>\n";
-        for(var i=0;i<array.length-array.length%7;i+=7) {
-            table += "<tr>\n";
-            for(var j=0;j<7;j++) table += "<td>"+array[i+j]+"</td>\n";
-            table += "</tr>\n";
-        }
-        for(var k=array.length-array.length%7;k<array.length;k+=array.length%7){
-            table += "<tr>\n";
-            for(var l=0;l<array.length%7;l++) table += "<td>"+array[k+l]+"</td>\n";
-            table += "</tr>\n";
-        }
-        table += "</table>";
-                
-        return table;
-    }
+     function lessonHTML(array, table_id = '#') {
+ 
+         var table = "<table class = 'table_parlante' id='"+table_id+"'>\n";
+         for(var i=0;i<array.length-array.length%7;i+=7) {
+             table += "<tr>\n";
+             for(var j=0;j<7;j++) table += "<td>"+array[i+j]+"</td>\n";
+             table += "</tr>\n";
+         }
+         for(var k=array.length-array.length%7;k<array.length;k+=array.length%7){
+             table += "<tr>\n";
+             for(var l=0;l<array.length%7;l++) table += "<td>"+array[k+l]+"</td>\n";
+             table += "</tr>\n";
+         }
+         table += "</table>";
+                 
+         return table;
+     }
+     function lessonHTML3(array, table_id = '#') {
+ 
+         var table = "<table class = 'table_parlante' id='"+table_id+"'>\n";
+         for(var i=0;i<array.length-array.length%7;i+=7) {
+             table += "<tr>\n";
+             for(var j=0;j<7;j++) table += "<td>"+array[i+j][0]+"</td>\n";
+             table += "</tr>\n";
+         }
+         for(var k=array.length-array.length%7;k<array.length;k+=array.length%7){
+             table += "<tr>\n";
+             for(var l=0;l<array.length%7;l++) table += "<td>"+array[k+l][0]+"</td>\n";
+             table += "</tr>\n";
+         }
+         table += "</table>";
+                 
+         return table;
+     }
     function lessonDExerciceHTML(array, table_id = '#') {
 
         var table = "<table class = 'table_muette' id='"+table_id+"'>\n";
@@ -1532,7 +1599,7 @@ console.log(total_questions[i]);
         }
     }
     function resultatGeneral(memoire_1='', memoire_2='', memoire_3='',memoire_4='') {
-        
+      
         let nom = JSON.parse(sessionStorage.getItem('nom'));
         let prenom = JSON.parse(sessionStorage.getItem('prenom'));
         let matiere_nom = JSON.parse(sessionStorage.getItem('matiere_nom'));

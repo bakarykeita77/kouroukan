@@ -31,7 +31,7 @@ var option_retenue    = JSON.parse(localStorage.getItem('option_retenue'));
 let lesson_data = (niveau_en_cours == 1) ? alphabet_data : syllabes_data;
 
 console.log('option_retenue = '+option_retenue);
-console.log(syllabes_data);
+console.log(lesson_data);
 
 // localStorage.clear();
 

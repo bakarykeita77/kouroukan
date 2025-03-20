@@ -260,10 +260,10 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 }
 .course_body { 
     display: none;
-    top: 1rem;
+    top: 0.5rem;
     padding-top: 1.5rem;
-    height: calc(100% - 7rem);
-    min-height: 18rem;
+    height: calc(100% - 5rem);
+    min-height: 16rem;
     color: white;
     background-color: rgba(0,0,0,0.8);
     overflow-y: auto;
@@ -285,7 +285,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 }
 .course_foot { 
     z-index: 1; 
-    top: 1.5rem;
+    top: 0.75rem;
     height: 4rem;
 }
 .course_head { 
@@ -314,7 +314,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 
 .dark_backgound { background-color: #aaa; }
 .dialogue_btns {
-    position: absolute;
+    position: relative;
     display: none;
     top: 0;
     width: calc(100% - 2px);
@@ -914,7 +914,7 @@ del {
 }
 .profile_menu_head a { text-decoration: none; }
 .progress_bar {
-    position: absolute;
+    position: relative;
     display: none;
     top: 0;
     height: 4rem;
@@ -979,7 +979,7 @@ del {
     border-radius: 0.5rem;
 }
 .redirection_btns { 
-    position: absolute;
+    position: relative;
     top: 0;
     height: 4rem;
     text-align: center;

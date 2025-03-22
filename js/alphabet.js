@@ -1216,7 +1216,7 @@ console.log([pre_lesson_d_apprentissage_alphabet_temporaire, pre_lesson_d_exerci
         let lesson_d_exercice_alphabet_temporaire = JSON.parse(sessionStorage.getItem('lesson_d_exercice_alphabet_temporaire'));
         let lesson_d_evaluation_alphabet_temporaire = JSON.parse(sessionStorage.getItem('lesson_d_evaluation_d_alphabet_temporaire'));
 
-console.log(lesson_d_apprentissage_alphabet_temporaire);
+
         if(lesson_d_apprentissage_alphabet_temporaire == null) parametrageDeLesson();
 
         lesson_d_apprentissage_alphabet_temporaire = (lesson_d_apprentissage_alphabet_temporaire == null) ? [] : lesson_d_apprentissage_alphabet_temporaire;
@@ -1322,7 +1322,7 @@ console.log(lesson_d_apprentissage_alphabet_temporaire);
                 function chargerPiedDeApprentissageAlphabet() {}
                 function chargerCorpsDeApprentissageAlphabet() {
                     // Voir fonctions chargerLesson() / chargementDeLesson() dans parametrageDeLesson.js
-console.log(lesson_d_apprentissage_alphabet); 
+
                     lesson_d_apprentissage_alphabet = (lesson_d_apprentissage_alphabet_du_serveur.length === 0) ? lesson_d_apprentissage_alphabet_temporaire : lesson_d_apprentissage_alphabet_du_serveur;
                     if(lesson_d_apprentissage_alphabet.length != 0) {
 
@@ -1578,7 +1578,12 @@ console.log(lesson_d_apprentissage_alphabet);
                                         function transitionVersExerciceAlphabet() {
                                             let index_phase_active = $('.phases_container ul .active').index();
 
+                                            if(note < 100) 
+                                            {console.log('La note d\'apprentissage est inférieure à 100. Cela bloque la transition vers Exercice Alphabet');}else
+                                            {console.log('La note d\'apprentissage est égale à 100. Félicitation, la transition vers Exercice Alphabet doit se passer avec succès! Cliquer sur la phase active "alphabet_exercice -> ߡߊ߬ߞߟߏ߬ߟߌ"');}
+
                                             if(note == 100) {
+                                                
                                                 $('#continu_sur_exercice_bouton').click(() => {
                                                     masquer($('.salle_de_classe'));
                                                     setTimeout(() => { 
@@ -1620,6 +1625,7 @@ console.log(lesson_d_apprentissage_alphabet);
                 var exercice_a_stocker_au_serveur = [];
 
                 $('.fermeture').attr('id', 'fermer_exercice');
+                $('.fermeture').click(function() { raffraichirLaPage(); });
                 
                 reductionDesElementsDeExerciceCouranteA49(); // Réduction du nombre de questions à une quantité raisonable
                 chargerExerciceAlphabet();

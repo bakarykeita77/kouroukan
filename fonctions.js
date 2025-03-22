@@ -47,7 +47,7 @@
         }, 600);
     }
     function affichageAnimeDeTableTd(table) {
-        console.log(table);
+        
         let tr = $('tr', table);
 
         tr.css('opacity',1);
@@ -154,11 +154,8 @@
         afficher($('.course'));
 
         setTimeout(() => { displayv($('#evaluation_head')); }, 600);
-
         setTimeout(() => { displayv($('#evaluation_body')); }, 900);
-
         setTimeout(() => { displayv($('#evaluation_foot')); }, 1200);
-
         setTimeout(() => {
             displayv($('#evaluation_dialogue_btns'));
             $('#evaluation_redirection_btns').css('display','none');

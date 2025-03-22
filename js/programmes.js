@@ -30,8 +30,6 @@ var option_retenue    = JSON.parse(localStorage.getItem('option_retenue'));
 
 let lesson_data = (niveau_en_cours == 1) ? alphabet_data : syllabes_data;
 
-console.log('option_retenue = '+option_retenue);
-console.log(lesson_data);
 
 // localStorage.clear();
 
@@ -192,7 +190,6 @@ function lessonOptions() {
 
     let phase_lien = phaseLien();
     
-    console.log('phase_lien = '+phase_lien);
 
     if(location.href.split('=')[1] == 'option') {
         $('.page_body').css('display','none');
@@ -299,16 +296,6 @@ function lessonOptions() {
         setTimeout(() => { displayv($('#lesson_options_titre')); }, 100);
         setTimeout(() => { displayv($('#lesson_option_1')); }, 300);
         setTimeout(() => { displayv($('#lesson_option_2')); }, 500);
-    }
-    function styleDeOptionChoisie() {
-        if(option_retenue == 1) { 
-            $('#lesson_option_1').css('background','yellow');
-            indexer($('#lesson_option_1'));
-        }
-        if(option_retenue == 2) { 
-            $('#lesson_option_2').css('background','yellow');
-            indexer($('#lesson_option_2'));
-        }
     }
  
     function annulerApprentissageEnCours() {

@@ -243,6 +243,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 .course {    
     position: relative;
     display: none;
+    top: 1.5rem;
     height: calc(100% - 3.5rem); 
     max-height: 45rem;
     margin: 0 auto;
@@ -619,8 +620,42 @@ del {
     height: 2.5rem;
     line-height: 2.5rem;
 }
+.message_d_annulation { margin: 0 0 2rem 0; }
 .modificateur_de_choix, .notification_titre { display: inline-block; }
 .modificateur_de_choix { padding: 0.25rem; }
+.modification_alerte {
+    position: absolute;
+    display: none;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    color: white;
+    z-index: 1;
+}
+.modification_alerte h2 { margin: 0; }
+.modification_alerte > div {
+    position: relative;
+    top: 30%;
+    width: max-content;
+    margin: auto;
+}
+.modification_alerte > div > p {
+    position: relative;
+    width: 100%;
+}
+.modification_alerte span {
+    position: absolute;
+    width: max-content;
+    padding: 0.25rem 1rem;
+    border-radius: 0.5rem;
+    border: 2px solid transparent;
+    background-color: #222;
+    cursor: pointer;
+}
+.modification_alerte span:hover { border-color: #aaa; }
+.modification_alerte span:nth-child(1) { right: 0; }
+.modification_alerte span:nth-child(2) { left: 0; }
 .notification_titre { padding: 0.25rem 1rem 0.25rem 0; }
 .modificateur_de_choix {
     width: 2rem;

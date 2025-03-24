@@ -23,6 +23,7 @@ var niveau_max        = JSON.parse(sessionStorage.getItem('niveau_max'));
 var niveau_en_cours   = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
 var matiere_nouvellement_apprise = JSON.parse(sessionStorage.getItem('matiere_nouvellement_apprise'));
 var phases_etudiees   = JSON.parse(sessionStorage.getItem('phases_etudiees'));
+var phases_etudiees_temporaires = JSON.parse(sessionStorage.getItem('phases_etudiees_temporaires'));
 var phases_distinctes = JSON.parse(sessionStorage.getItem('phases_distinctes'));
 var derniere_phase    = JSON.parse(sessionStorage.getItem('derniere_phase'));
 var lesson_option    = JSON.parse(localStorage.getItem('lesson_option'));
@@ -30,6 +31,11 @@ var option_retenue    = JSON.parse(localStorage.getItem('option_retenue'));
 
 let lesson_data = (niveau_en_cours == 1) ? alphabet_data : syllabes_data;
 
+phases_etudiees = (phases_etudiees == null) ? [] : phases_etudiees;
+phases_etudiees_temporaires = (phases_etudiees_temporaires == null) ? [] : phases_etudiees_temporaires;
+phases_etudiees_temporaires = (phases_etudiees == []) ? phases_etudiees_temporaires : phases_etudiees;
+
+console.log("Les phases étudiées sont : "+phases_etudiees_temporaires);
 
 // localStorage.clear();
 
@@ -114,7 +120,7 @@ function chargementDuProgramme() {
             
             if(niveau_max > 0) {
                 
-                var phases_lien = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees+'&derniere_phase='+derniere_phase;
+                var phases_lien = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees_temporaires+'&derniere_phase='+derniere_phase;
              
                 if (niveau_max < matiere_index || $('#'+matiere_id).hasClass('a_apprendre')) {
                     if(matiere_index > 0) programme_html += '<li><a href="#">'+matiere_nom+'</a></li>\n';
@@ -217,7 +223,7 @@ function lessonOptions() {
 
     function phaseLien() {
         let phase_lien_1 = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max+'&lesson_option='+option_retenue;
-        let phase_lien_2 = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees+'&derniere_phase='+derniere_phase+'&lesson_option='+option_retenue;
+        let phase_lien_2 = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees_temporaires+'&derniere_phase='+derniere_phase+'&lesson_option='+option_retenue;
         let pl = '';
         pl = (niveau_max == 0) ? phase_lien_1 : phase_lien_2;
         return pl;
@@ -306,6 +312,20 @@ function lessonOptions() {
 
         sendDataToDeleteLesson(matiere,id_client,action);
         console.log('La lesson en cours est annulée');
+
+        matieres = [];
+        matieres_temporaires = null;
+        lesson_d_apprentissage_alphabet = [];
+        lesson_d_apprentissage_alphabet_temporaire = null;
+        phases_etudiees = [];
+        phases_etudiees_temporaires = [];
+
+        sessionStorage.setItem('matieres', JSON.stringify(matieres));
+        sessionStorage.setItem('matieres_temporaires', JSON.stringify(matieres_temporaires));
+        sessionStorage.setItem('lesson_d_apprentissage_alphabet', JSON.stringify(lesson_d_apprentissage_alphabet));
+        sessionStorage.setItem('lesson_d_apprentissage_alphabet_temporaire', JSON.stringify(lesson_d_apprentissage_alphabet_temporaire));
+        sessionStorage.setItem('phases_etudiees', JSON.stringify(phases_etudiees));
+        sessionStorage.setItem('phases_etudiees_temporaires', JSON.stringify(phases_etudiees_temporaires));
         
         function matiereActuelle() {
             let ma = '';

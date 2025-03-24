@@ -2,6 +2,7 @@ function parametrageDeLesson() {
 
 /* Declaration des variables */  
     var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));   // Voir programmes.js fonction storagesDuProgramme()
+    let phase_id = JSON.parse(sessionStorage.getItem('phase_id'));
     var voyelles_checker, consonnes_checker, tedo_checker, tons_checker, nasalisation_checker;
     var voyelles_cochees = [], consonnes_cochees = [], tedos_coches = [], tons_coches = [], nasalisations_cochees = [], caracteres_coches = [],syllabes_coches = [];
 
@@ -24,6 +25,8 @@ function parametrageDeLesson() {
         chargementDesElementsDeParametres();
         affichageDeLessonParametres();
         chargerLesson(); // Chaque fois qu'un checkbox est clické, le cochage doit etre actualisé et le tableau noir rechargé. 
+
+        console.log("Cette chargement du tableau noir est éffectuée par la fonction chargementDeLesson() dans chargerLesson().");
     }
     function affichageDeParametres(){ 
     
@@ -321,11 +324,15 @@ function parametrageDeLesson() {
             var pratique_html      = pratiqueHTML();
             var evaluation_html    = evaluationHTML();
 
+            let phase = phase_id.split('_')[1];
+
          // Rechargement du tableau noir avec les caractères cochés
-            $('#apprentissage_body').html(apprentissage_html);
-            $('#exercice_body'     ).html(exercice_html);
-            $('#pratique_body'     ).html(pratique_html);
-            $('#evaluation_body'   ).html(evaluation_html);
+            switch(phase) {
+                case 'apprentissage' : $('#apprentissage_body').html(apprentissage_html); break;
+                case 'exercice' : $('#exercice_body' ).html(exercice_html); break;
+                case 'revision' : $('#pratique_body' ).html(pratique_html); break;
+                case 'evaluation' : $('#evaluation_body' ).html(evaluation_html); break;
+            }
 
             sessionStorage.setItem('nbr_td', JSON.stringify(nombreDeTdDeLaTableParlante()));
 

@@ -73,7 +73,7 @@ if(isset($_SESSION["id"])) {
                         <div class="modification_alerte">
                             <div class="alerte_d_annulation">
                                 <h2>ߌ߬ߦߐ߬߹</h2>
-                                <p class="message_d_annulation">La lesson en cours sera annulée !</p>
+                                <p class="message_d_annulation">ߥߟߊ߬ߘߊ ߢߌ߲߬ ߓߍ߯ ߘߌߣߊ߬ ߖߐ߬ߛߌ߬. ߌ ߘߌߣߊ߬ ߊ߬ ߡߊߛߍ߬ߦߌ߫ ߟߋ߬.</p>
                                 <p><span>ߊ߬ ߖߐ߬ߛߌ߬</span><span>ߊ߬ ߕߏ߫ ߦߋ߲߬</span></p>
                             </div>
                         </div>

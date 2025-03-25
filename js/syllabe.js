@@ -54,15 +54,15 @@ function syllabe() {
 
     function apprentisageSyllabeDataMemo() {
         
-        let matieres = JSON.parse(sessionStorage.getItem('matieres'));
+        let datas = JSON.parse(sessionStorage.getItem('datas'));
 
-        if(matieres.length === 0) return;
+        if(datas.length === 0) return;
         let asdm = [];
 
-        if(matieres[1] != undefined) {
-            for (let i = 0; i < matieres[1].length; i++) {
-                let phase = matieres[1][i].phase;
-                if(phase == "syllabe_apprentissage") { asdm = JSON.parse(matieres[1][i].lesson); }
+        if(datas[1] != undefined) {
+            for (let i = 0; i < datas[1].length; i++) {
+                let phase = datas[1][i].phase;
+                if(phase == "syllabe_apprentissage") { asdm = JSON.parse(datas[1][i].lesson); }
             }
         }
 
@@ -70,15 +70,15 @@ function syllabe() {
     }
     function exerciceSyllabeDataMemo() {
         
-        let matieres = JSON.parse(sessionStorage.getItem('matieres'));
+        let datas = JSON.parse(sessionStorage.getItem('datas'));
 
-        if(matieres.length === 0) return;
+        if(datas.length === 0) return;
         let esdm = [];
 
-        if(matieres[1] != undefined) {
-            for (let j = 0; j < matieres[1].length; j++) {
-                let phase = matieres[1][j].phase;
-                if(phase == "syllabe_exercice") { esdm = JSON.parse(matieres[1][j].lesson); }
+        if(datas[1] != undefined) {
+            for (let j = 0; j < datas[1].length; j++) {
+                let phase = datas[1][j].phase;
+                if(phase == "syllabe_exercice") { esdm = JSON.parse(datas[1][j].lesson); }
             }
         }
 
@@ -86,15 +86,15 @@ function syllabe() {
     }
     function evaluationSyllabeDataMemo() {
         
-        let matieres = JSON.parse(sessionStorage.getItem('matieres'));
+        let datas = JSON.parse(sessionStorage.getItem('datas'));
 
-        if(matieres.length === 0) return;
+        if(datas.length === 0) return;
         let evdm = [];
 
-        if(matieres[1] != undefined) {
-            for (let k = 0; k < matieres[1].length; k++) {
-                let phase = matieres[1][k].phase;
-                if(phase == "syllabe_evaluation") { evdm = JSON.parse(matieres[1][k].lesson); }
+        if(datas[1] != undefined) {
+            for (let k = 0; k < datas[1].length; k++) {
+                let phase = datas[1][k].phase;
+                if(phase == "syllabe_evaluation") { evdm = JSON.parse(datas[1][k].lesson); }
             }
         }
         

@@ -1,8 +1,8 @@
 $('document').ready(function() {
       
     //Récupération des données, storées depuis accueil.js, sur l'apprenant  
-        var matieres = JSON.parse(sessionStorage.getItem('matieres'));     
-        var matieres_temporaires = JSON.parse(sessionStorage.getItem('matieres_temporaires'));     
+        var datas = JSON.parse(sessionStorage.getItem('datas'));     
+        var data_apprentissage_alphabet = JSON.parse(sessionStorage.getItem('data_apprentissage_alphabet'));     
         var lesson_d_apprentissage_alphabet_temporaire = JSON.parse(sessionStorage.getItem('lesson_d_apprentissage_alphabet_temporaire'));     
         var matiere_index     = JSON.parse(sessionStorage.getItem('matiere_index'));
         var niveau_en_cours   = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
@@ -20,16 +20,16 @@ $('document').ready(function() {
         let alphabet_data = JSON.parse(sessionStorage.getItem('alphabet_data'));
         let syllabes_data = JSON.parse(sessionStorage.getItem('syllabes_data'));
 
-
-        matieres_temporaires = (matieres_temporaires == null) ? [] : matieres_temporaires;
-        matieres_temporaires = (matieres.length == 0) ? matieres_temporaires : matieres;
+console.log(datas);
+        data_apprentissage_alphabet = (data_apprentissage_alphabet == null) ? [] : data_apprentissage_alphabet;
+        data_apprentissage_alphabet = (datas.length == 0) ? data_apprentissage_alphabet : datas;
             
         phases_etudiees_temporaires = (phases_etudiees_temporaires == null) ? [] : phases_etudiees_temporaires;
         phases_etudiees_temporaires = (phases_etudiees.length == 0) ? phases_etudiees_temporaires : phases_etudiees;                      
  
-        if(matieres_temporaires.length === 0) 
-        {console.log("La varirable matieres est un tableau vide. La leçon commence à la première phase."); console.log(matieres_temporaires);}else
-        {console.log("La varirable matieres n'est pas un tableau vide. La phase suivante doit être acivée."); console.log(matieres_temporaires);}
+        if(data_apprentissage_alphabet.length === 0) 
+        {console.log("La varirable datas est un tableau vide. La leçon commence à la première phase."); console.log(data_apprentissage_alphabet);}else
+        {console.log("La varirable datas n'est pas un tableau vide. La phase suivante doit être acivée."); console.log(data_apprentissage_alphabet);}
         
 
         sessionStorage.setItem('option_retenue', JSON.stringify(option_retenue));
@@ -43,8 +43,8 @@ $('document').ready(function() {
    
     /*-----------------------------------------------------------------------------------------------------------------*/
     
-        matieres_length = (matieres_temporaires.length != 0) ? matieres_temporaires.length : 0;
-        if(matieres_length === 0) {  matiere_index = 0; niveau_en_cours = 1; }
+        datas_length = (data_apprentissage_alphabet.length != 0) ? data_apprentissage_alphabet.length : 0;
+        if(datas_length === 0) {  matiere_index = 0; niveau_en_cours = 1; }
     
     /*-----------------------------------------------------------------------------------------------------------------*/
         
@@ -112,7 +112,7 @@ $('document').ready(function() {
                 let lesson_status = lessonStatus();
                 let n = phases_etudiees_temporaires.length;
 
-                lesson = (matieres_temporaires.length === 0) ? [] : matieres_temporaires.lesson;
+                lesson = (data_apprentissage_alphabet.length === 0) ? [] : data_apprentissage_alphabet.lesson;
 
                 if(n === 0) 
                 {console.log("Le nombre de phases étudiées est 0. Cela veut dire qu'aucune des phases n'est étudiée ou ont été annulées. La leçon commence ou est reprise à zéro.");}else
@@ -253,15 +253,15 @@ $('document').ready(function() {
                         $('.modification_alerte span:nth-child(1)').click(() => { 
                             $('.modification_alerte').css('display','none'); 
 
-                            matieres = [];
-                            matieres_temporaires = null;
+                            datas = [];
+                            data_apprentissage_alphabet = null;
                             lesson_d_apprentissage_alphabet = [];
                             lesson_d_apprentissage_alphabet_temporaire = null;
                             phases_etudiees = [];
                             phases_etudiees_temporaires = [];
 
-                            sessionStorage.setItem('matieres', JSON.stringify(matieres));
-                            sessionStorage.setItem('matieres_temporaires', JSON.stringify(matieres_temporaires));
+                            sessionStorage.setItem('datas', JSON.stringify(datas));
+                            sessionStorage.setItem('data_apprentissage_alphabet', JSON.stringify(data_apprentissage_alphabet));
                             sessionStorage.setItem('lesson_d_apprentissage_alphabet', JSON.stringify(lesson_d_apprentissage_alphabet));
                             sessionStorage.setItem('lesson_d_apprentissage_alphabet_temporaire', JSON.stringify(lesson_d_apprentissage_alphabet_temporaire));
                             sessionStorage.setItem('phases_etudiees', JSON.stringify(phases_etudiees));

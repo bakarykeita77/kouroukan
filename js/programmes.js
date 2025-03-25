@@ -313,15 +313,15 @@ function lessonOptions() {
         sendDataToDeleteLesson(matiere,id_client,action);
         console.log('La lesson en cours est annulée');
 
-        matieres = [];
-        matieres_temporaires = null;
+        datas = [];
+        data_apprentissage_alphabet = null;
         lesson_d_apprentissage_alphabet = [];
         lesson_d_apprentissage_alphabet_temporaire = null;
         phases_etudiees = [];
         phases_etudiees_temporaires = [];
 
-        sessionStorage.setItem('matieres', JSON.stringify(matieres));
-        sessionStorage.setItem('matieres_temporaires', JSON.stringify(matieres_temporaires));
+        sessionStorage.setItem('datas', JSON.stringify(datas));
+        sessionStorage.setItem('data_apprentissage_alphabet', JSON.stringify(data_apprentissage_alphabet));
         sessionStorage.setItem('lesson_d_apprentissage_alphabet', JSON.stringify(lesson_d_apprentissage_alphabet));
         sessionStorage.setItem('lesson_d_apprentissage_alphabet_temporaire', JSON.stringify(lesson_d_apprentissage_alphabet_temporaire));
         sessionStorage.setItem('phases_etudiees', JSON.stringify(phases_etudiees));

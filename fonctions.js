@@ -263,42 +263,42 @@
 	function aggrandir_caractere_de(element) { element.css('font-size','+=32px'); }
     function alphabetApprentisageDataMemo() {
 
-        let matieres = JSON.parse(sessionStorage.getItem('matieres'));
+        let datas = JSON.parse(sessionStorage.getItem('datas'));
 
-        if(matieres.length === 0) return;
+        if(datas.length === 0) return;
         let padm = [];
 
-        for (let i = 0; i < matieres[0].length; i++) {
-            let phase = matieres[0][i].phase;
-            if(phase == "alphabet_apprentissage") { padm = JSON.parse(matieres[0][i].lesson); }
+        for (let i = 0; i < datas[0].length; i++) {
+            let phase = datas[0][i].phase;
+            if(phase == "alphabet_apprentissage") { padm = JSON.parse(datas[0][i].lesson); }
         }
 
         return padm;
     }
     function alphabetExerciceDataMemo() {
         
-        let matieres = JSON.parse(sessionStorage.getItem('matieres'));
+        let datas = JSON.parse(sessionStorage.getItem('datas'));
 
-        if(matieres.length === 0) return;
+        if(datas.length === 0) return;
         let pedm = [];
 
-        for (let j = 0; j < matieres[0].length; j++) {
-            let phase = matieres[0][j].phase;
-            if(phase == "alphabet_exercice") { pedm = JSON.parse(matieres[0][j].lesson); }
+        for (let j = 0; j < datas[0].length; j++) {
+            let phase = datas[0][j].phase;
+            if(phase == "alphabet_exercice") { pedm = JSON.parse(datas[0][j].lesson); }
         }
 
         return pedm;
     }
     function alphabetEvaluationDataMemo() {
         
-        let matieres = JSON.parse(sessionStorage.getItem('matieres'));
+        let datas = JSON.parse(sessionStorage.getItem('datas'));
 
-        if(matieres.length === 0) return;
+        if(datas.length === 0) return;
         let prdm = [];
 
-        for (let k = 0; k < matieres[0].length; k++) {
-            let phase = matieres[0][k].phase;
-            if(phase == "alphabet_evaluation") { prdm = JSON.parse(matieres[0][k].lesson); }
+        for (let k = 0; k < datas[0].length; k++) {
+            let phase = datas[0][k].phase;
+            if(phase == "alphabet_evaluation") { prdm = JSON.parse(datas[0][k].lesson); }
         }
         
         return prdm;
@@ -1017,10 +1017,10 @@ console.log(total_questions[i]);
         $('#envelope').css({
             'position':'absolute',
             'display':'block',
-            'top':'3.5rem',
-            'left':0,
-            'height':'calc(100% - 3.5rem)',
-            'width':'100%',
+            'top':'9.5rem',
+            'left':'2%',
+            'height':'calc(100% - 10rem)',
+            'width':'96%',
             'margin':'auto',
             'overflow':'hidden',
             'z-index': 1
@@ -1639,7 +1639,7 @@ console.log(total_questions[i]);
                     $('#resultat_d_apprentissage_corps').css("display","none"); 
                     return;
                 }
-                                          
+                                        
                 chargerResultatHead();
                 chargerResultatBody();
 
@@ -1660,7 +1660,7 @@ console.log(total_questions[i]);
                 }
                 function chargerResultatBody() {
 
-                    let lesson = JSON.parse(memoire_1.lesson)
+                    let lesson = memoire_1.lesson;
                     let apprentissage_resultat_body_html = resultatTableBodyHTML(lesson);
 
                     $('#apprentissage_resultat_body').html(apprentissage_resultat_body_html);
@@ -1781,10 +1781,10 @@ console.log(total_questions[i]);
         }
         function chargerResultatFoot() {
 
-            let lesson_1 = (memoire_1 != "") ? JSON.parse(memoire_1.lesson) : [];
-            let lesson_2 = (memoire_2 != "") ? JSON.parse(memoire_2.lesson) : [];
-            let lesson_3 = (memoire_3 != "") ? JSON.parse(memoire_3.lesson) : [];
-            let lesson_4 = (memoire_4 != "") ? JSON.parse(memoire_4.lesson) : [];
+            let lesson_1 = (memoire_1 != "") ? memoire_1.lesson : [];
+            let lesson_2 = (memoire_2 != "") ? memoire_2.lesson : [];
+            let lesson_3 = (memoire_3 != "") ? memoire_3.lesson : [];
+            let lesson_4 = (memoire_4 != "") ? memoire_4.lesson : [];
 
             let total_des_questions = lesson_1.length + lesson_2.length + lesson_3.length + lesson_4.length;
             let total_des_points = sommePoint(lesson_1) + sommePoint(lesson_2) + sommePoint(lesson_3) + sommePoint(lesson_4);
@@ -1996,42 +1996,42 @@ console.log(total_questions[i]);
 	}
     function syllabesApprentisageDataMemo() {
 
-        let matieres = JSON.parse(sessionStorage.getItem('matieres'));
+        let datas = JSON.parse(sessionStorage.getItem('datas'));
 
-        if(matieres.length === 0) return;
+        if(datas.length === 0) return;
         let sad = [];
 
-        for (let i = 0; i < matieres[0].length; i++) {
-            let phase = matieres[0][i].phase;
-            if(phase == "syllabes_apprentissage") { sad = JSON.parse(matieres[0][i].lesson); }
+        for (let i = 0; i < datas[0].length; i++) {
+            let phase = datas[0][i].phase;
+            if(phase == "syllabes_apprentissage") { sad = JSON.parse(datas[0][i].lesson); }
         }
 
         return sad;
     }
     function syllabesExerciceDataMemo() {
         
-        let matieres = JSON.parse(sessionStorage.getItem('matieres'));
+        let datas = JSON.parse(sessionStorage.getItem('datas'));
 
-        if(matieres.length === 0) return;
+        if(datas.length === 0) return;
         let sed = [];
 
-        for (let j = 0; j < matieres[0].length; j++) {
-            let phase = matieres[0][j].phase;
-            if(phase == "syllabes_exercice") { sedpedm = JSON.parse(matieres[0][j].lesson); }
+        for (let j = 0; j < datas[0].length; j++) {
+            let phase = datas[0][j].phase;
+            if(phase == "syllabes_exercice") { sedpedm = JSON.parse(datas[0][j].lesson); }
         }
 
         return sed;
     }
     function syllabesEvaluationDataMemo() {
         
-        let matieres = JSON.parse(sessionStorage.getItem('matieres'));
+        let datas = JSON.parse(sessionStorage.getItem('datas'));
 
-        if(matieres.length === 0) return;
+        if(datas.length === 0) return;
         let s_e_d = [];
 
-        for (let k = 0; k < matieres[0].length; k++) {
-            let phase = matieres[0][k].phase;
-            if(phase == "syllabes_revision") { s_e_d = JSON.parse(matieres[0][k].lesson); }
+        for (let k = 0; k < datas[0].length; k++) {
+            let phase = datas[0][k].phase;
+            if(phase == "syllabes_revision") { s_e_d = JSON.parse(datas[0][k].lesson); }
             
         }
         

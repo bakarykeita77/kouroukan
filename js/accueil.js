@@ -44,16 +44,16 @@
     	.then(response => response.json())
     	.then(matiere_collection => {
          /*-------------------------------------------------------------------------   
-          matieres
+          datas
          -------------------------------------------------------------------------*/   
-            let matieres = [];
+            let datas = [];
 
     	    for(var i=0; i<matiere_collection.length; i++) {
-    	        if(matiere_collection[i] != 0) matieres[i] = matiere_collection[i]; 
+    	        if(matiere_collection[i] != 0) datas[i] = matiere_collection[i]; 
     	    }
-    	    sessionStorage.setItem('matieres',JSON.stringify(matieres));
+    	    sessionStorage.setItem('datas',JSON.stringify(datas));
 
-            if(matieres.length === 0) {
+            if(datas.length === 0) {
                 sessionStorage.setItem('niveaux_etudies',JSON.stringify([]));
                 sessionStorage.setItem('niveau_max',JSON.stringify(0));
                 sessionStorage.setItem('niveau_en_cours',JSON.stringify(1));
@@ -63,7 +63,7 @@
                 sessionStorage.setItem('phase_active',JSON.stringify('alphabet_apprentissage'));
             }
             
-            if(matieres.length > 0) {
+            if(datas.length > 0) {
              /*-------------------------------------------------------------------------   
               Phases, Notes et Niveaux
              -------------------------------------------------------------------------*/   
@@ -71,13 +71,13 @@
                 var note_1 = 0, note_2 = 0, note_3 = 0, note_4 = 0;
                 var moyenne = 1, moyenne_1 = 0, moyenne_2 = 0, moyenne_3 = 0, moyenne_4 = 0;
                
-            	for (var i = 0; i < matieres.length ; i++) {
-            	for (var j = matieres[i].length; j > 0; j--) {
+            	for (var i = 0; i < datas.length ; i++) {
+            	for (var j = datas[i].length; j > 0; j--) {
                  
-                    phases_etudiees.push(matieres[i][j-1].phase);  
+                    phases_etudiees.push(datas[i][j-1].phase);  
                     
-                    let  nivo = parseInt(matieres[i][j-1].niveau);
-                    let  phase_note = parseInt(matieres[i][j-1].note);
+                    let  nivo = parseInt(datas[i][j-1].niveau);
+                    let  phase_note = parseInt(datas[i][j-1].note);
                     
                     if(nivo === 1) note_1 += phase_note;
                     if(nivo === 2) note_2 += phase_note;
@@ -103,10 +103,10 @@
                 sessionStorage.setItem('phases_3_distinctes', JSON.stringify(phases_3_distinctes));
                 sessionStorage.setItem('phases_4_distinctes', JSON.stringify(phases_4_distinctes));
     
-                if(matieres[0] !== undefined && phases_1_distinctes.length === 3) moyenne_1 = note_1/3; //Moyenne générale pour apprentissage
-                if(matieres[1] !== undefined && phases_2_distinctes.length === 4) moyenne_2 = note_2/4; //Moyenne générale pour syllabe
-                if(matieres[2] !== undefined && phases_3_distinctes.length === 4) moyenne_3 = note_3/4; //Moyenne générale pour tons
-                if(matieres[3] !== undefined && phases_4_distinctes.length === 4) moyenne_4 = note_4/4; //Moyenne générale pour chiffres
+                if(datas[0] !== undefined && phases_1_distinctes.length === 3) moyenne_1 = note_1/3; //Moyenne générale pour apprentissage
+                if(datas[1] !== undefined && phases_2_distinctes.length === 4) moyenne_2 = note_2/4; //Moyenne générale pour syllabe
+                if(datas[2] !== undefined && phases_3_distinctes.length === 4) moyenne_3 = note_3/4; //Moyenne générale pour tons
+                if(datas[3] !== undefined && phases_4_distinctes.length === 4) moyenne_4 = note_4/4; //Moyenne générale pour chiffres
            	
                 if(moyenne_1 >= moyenne) niveaux_etudies.push(1);   	    
                 if(moyenne_2 >= moyenne) niveaux_etudies.push(2);   	    
@@ -142,13 +142,13 @@
              -------------------------------------------------------------------------*/              
             	let pratiques = [];
            	
-            	for (var i = 0; i < matieres.length; i++) {
-            	for (var j = 0; j < matieres[i].length; j++) {
-            	    if(matieres[i][j]['phase'].split('_')[1] == "pratique") {
+            	for (var i = 0; i < datas.length; i++) {
+            	for (var j = 0; j < datas[i].length; j++) {
+            	    if(datas[i][j]['phase'].split('_')[1] == "pratique") {
             	        
-            	        let niveau = matieres[i][j]['niveau'];
-            	        let lesson = matieres[i][j]['lesson'];
-            	        let note   = matieres[i][j]['note'];
+            	        let niveau = datas[i][j]['niveau'];
+            	        let lesson = datas[i][j]['lesson'];
+            	        let note   = datas[i][j]['note'];
             	        
             	        pratiques.push([niveau,lesson,note]);
             	    }

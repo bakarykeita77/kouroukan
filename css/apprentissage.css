@@ -314,13 +314,6 @@
 }
 #exercice_question_btn:active, #exercice_repetition_btn:active { box-shadow: none; }
 #exercice_repetition_btn { display: none; }
-#resultat_corps{
-    padding: 0 0.5rem;
-    border-left: 0.5rem solid #aaa;
-    border-right: 0.5rem solid #aaa;
-    overflow-x: auto;
-}
-#resultat_pied td { text-align: left; font-weight: bold; border: 1px solid #ddd; }
 #afficheur_de_resultat {
     display: inline-block;
     position: relative;

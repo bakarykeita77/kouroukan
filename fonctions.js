@@ -387,17 +387,13 @@
 /*-------------------------------------------------------------------------------------------------------------------------------------*/	
     
     function calculerNote(data) {
-        var note_d_exercice = 0;
-
+        var point = 0;
         for (var i = 0; i < data.length; i++) {
-    
-        if(data[i] != undefined) {
-            if(data[i][2] == 1) {
-                note_d_exercice ++;
+            if(data[i] != undefined) {
+                if(data[i][2] == 1) {  point ++; }
             }
-        }}
-
-        var note = Math.floor((note_d_exercice*100)/data.length);
+        }
+        var note = Math.floor((point*100)/data.length);
         return note;
     }
 	function centrerHorizontalement(element) {

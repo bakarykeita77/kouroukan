@@ -48,9 +48,7 @@
          -------------------------------------------------------------------------*/   
             let datas = [];
 
-    	    for(var i=0; i<matiere_collection.length; i++) {
-    	        if(matiere_collection[i] != 0) datas[i] = matiere_collection[i]; 
-    	    }
+    	    for(var i=0; i<matiere_collection.length; i++) { datas[i] = (matiere_collection[i].length === 0)  ? [] : matiere_collection[i]; }
     	    sessionStorage.setItem('datas',JSON.stringify(datas));
 
             if(datas.length === 0) {
@@ -103,10 +101,10 @@
                 sessionStorage.setItem('phases_3_distinctes', JSON.stringify(phases_3_distinctes));
                 sessionStorage.setItem('phases_4_distinctes', JSON.stringify(phases_4_distinctes));
     
-                if(datas[0] !== undefined && phases_1_distinctes.length === 3) moyenne_1 = note_1/3; //Moyenne générale pour apprentissage
-                if(datas[1] !== undefined && phases_2_distinctes.length === 4) moyenne_2 = note_2/4; //Moyenne générale pour syllabe
-                if(datas[2] !== undefined && phases_3_distinctes.length === 4) moyenne_3 = note_3/4; //Moyenne générale pour tons
-                if(datas[3] !== undefined && phases_4_distinctes.length === 4) moyenne_4 = note_4/4; //Moyenne générale pour chiffres
+                if(datas[0] != undefined && phases_1_distinctes.length === 3) moyenne_1 = note_1/3; //Moyenne générale pour apprentissage
+                if(datas[1] != undefined && phases_2_distinctes.length === 4) moyenne_2 = note_2/4; //Moyenne générale pour syllabe
+                if(datas[2] != undefined && phases_3_distinctes.length === 4) moyenne_3 = note_3/4; //Moyenne générale pour tons
+                if(datas[3] != undefined && phases_4_distinctes.length === 4) moyenne_4 = note_4/4; //Moyenne générale pour chiffres
            	
                 if(moyenne_1 >= moyenne) niveaux_etudies.push(1);   	    
                 if(moyenne_2 >= moyenne) niveaux_etudies.push(2);   	    

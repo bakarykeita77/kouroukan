@@ -1404,6 +1404,18 @@ console.log(total_questions[i]);
         
         return nombre_converti.join('');
     }
+    function phasesEtudieesDuServeur() {
+
+        let datas = JSON.parse(sessionStorage.getItem('datas'));
+        let peds = [];
+
+        for (let i = 0; i < datas.length; i++) {
+        for (let j = 0; j < datas.length; j++) {
+            if(datas[i][j] != undefined) peds.push(datas[i][j].phase);
+        }}
+
+        return peds;
+    }
     function pourcentagePoint(memoire) {
         if(memoire != null) {
             let pp = 0;
@@ -1605,7 +1617,6 @@ console.log(total_questions[i]);
         let lesson_suivante = lessonSuivante(lesson_en_cours);
         let phase = phaseEnCours(lesson_en_cours);
         let continu_sur_l_etape_suivante = '<b id="avance"><a href="/kouroukan/php/programmes.php">'+lesson_suivante+'</a></b>';
-
 
         chargerResultatGeneralEntete();
         chargerResultatGeneralCorps();
@@ -1852,20 +1863,20 @@ console.log(total_questions[i]);
             let tq = 0;
             let m = lesson_en_cours.split(' ')[0];
             let p = lesson_en_cours.split(' ')[1];
-            
+         
             if(m == 'ߛߓߍߛߎ߲') {
                 switch(p) {
-                    case 'ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ'  : tq = (memoire_1 != "") ? JSON.parse(memoire_1.lesson).length : 0; break;
-                    case 'ߡߊ߬ߞߟߏ߬ߟߌ'  : tq = (memoire_2 != "") ? JSON.parse(memoire_2.lesson).length : 0; break;
-                    case 'ߞߘߐߓߐߟߌ' : tq = (memoire_3 != "") ? JSON.parse(memoire_3.lesson).length : 0; break;
+                    case 'ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ'  : tq = (memoire_1 != "") ? memoire_1.lesson.length : 0; break;
+                    case 'ߡߊ߬ߞߟߏ߬ߟߌ'  : tq = (memoire_2 != "") ? memoire_2.lesson.length : 0; break;
+                    case 'ߞߘߐߓߐߟߌ' : tq = (memoire_3 != "") ? memoire_3.lesson.length : 0; break;
                 }
             }
             if(m == 'ߜߋ߲߭') {
                 switch(p) {
-                    case 'ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ'  : tq = (memoire_1 != "") ? JSON.parse(memoire_1.lesson).length : 0; break;
-                    case 'ߡߊ߬ߞߟߏ߬ߟߌ'  : tq = (memoire_2 != "") ? JSON.parse(memoire_2.lesson).length : 0; break;
-                    case 'ߣߐ߰ߡߊ߬ߛߍߦߌ' : tq = (memoire_3 != "") ? JSON.parse(memoire_3.lesson).length : 0; break;
-                    case 'ߞߘߐߓߐߟߌ' : tq = (memoire_4 != "") ? JSON.parse(memoire_4.lesson).length : 0; break;
+                    case 'ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ'  : tq = (memoire_1 != "") ? memoire_1.lesson.length : 0; break;
+                    case 'ߡߊ߬ߞߟߏ߬ߟߌ'  : tq = (memoire_2 != "") ? memoire_2.lesson.length : 0; break;
+                    case 'ߣߐ߰ߡߊ߬ߛߍߦߌ' : tq = (memoire_3 != "") ? memoire_3.lesson.length : 0; break;
+                    case 'ߞߘߐߓߐߟߌ' : tq = (memoire_4 != "") ? memoire_4.lesson.length : 0; break;
                 }
             }
 
@@ -2037,6 +2048,7 @@ console.log(total_questions[i]);
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
 
     function tableau2DVide(tableau) {
+
         let element_ln = 0;
         tableau.forEach(element => {
             if(element != undefined) element_ln += element.length;

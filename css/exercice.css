@@ -2,7 +2,6 @@
 #table_alphabet_exercice {
     padding: 1rem;
     width: calc(100% - 2.25rem);
-    overflow: hidden;
 }
 #table_alphabet_exercice td {
     font-size: 2rem;

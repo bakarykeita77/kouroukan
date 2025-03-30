@@ -952,7 +952,7 @@ del {
     position: relative;
     display: none;
     top: 0;
-    height: 4rem;
+    height: 2rem;
     width: 100%;
     margin: 0 auto;
     padding: 0;
@@ -979,7 +979,7 @@ del {
 .progress_bar > div, .progress_bar_integre > div {
     position: absolute; 
     right: 0;
-    height: 4rem; 
+    height: 2rem; 
     width: 0;
     margin: 0;
     border-radius: 0.5rem;

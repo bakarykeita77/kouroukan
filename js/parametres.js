@@ -7,8 +7,6 @@ function parametrageDeLesson() {
     var voyelles_cochees = [], consonnes_cochees = [], tedos_coches = [], tons_coches = [], nasalisations_cochees = [], caracteres_coches = [],syllabes_coches = [];
 
     let option_retenue = JSON.parse(localStorage.getItem('option_retenue')); // Voir programmes.js : lessonOptions()
-    let alphabet_data = JSON.parse(sessionStorage.getItem('alphabet_data'));
-    let alphabet_data_vide = tableau2DVide(alphabet_data);
     
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/    
     parametrage();

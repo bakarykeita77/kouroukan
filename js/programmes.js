@@ -5,37 +5,31 @@
 -------------------------------------------------------------------------------------------------------------------------*/   
 
 // Récupération du niveau d'avancement des études déterminé depuis accueil.js
+let datas = JSON.parse(sessionStorage.getItem('datas'));
 let pre_apprentissage_alpabet_memoire = JSON.parse(localStorage.getItem('pre_apprentissage_alpabet_memoire'));
 let pre_exercice_alpabet_memoire = JSON.parse(localStorage.getItem('pre_exercice_alpabet_memoire'));
 let pre_evaluation_alpabet_memoire = JSON.parse(localStorage.getItem('pre_evaluation_alpabet_memoire'));
 
-let alphabet_data = alphabetData();
-let syllabes_data = syllabesData();
-
-
-sessionStorage.setItem('alphabet_data',JSON.stringify(alphabet_data));
-sessionStorage.setItem('syllabes_data',JSON.stringify(syllabes_data));
-
 let memoire_syllabes_etudiees = JSON.parse(localStorage.getItem('memoire_syllabes_etudiees'));
 
-var niveaux_etudies   = JSON.parse(sessionStorage.getItem('niveaux_etudies'));
-var niveau_max        = JSON.parse(sessionStorage.getItem('niveau_max'));
-var niveau_en_cours   = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
+var niveaux_etudies = JSON.parse(sessionStorage.getItem('niveaux_etudies'));
+var niveau_max = JSON.parse(sessionStorage.getItem('niveau_max'));
+var niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
 var matiere_nouvellement_apprise = JSON.parse(sessionStorage.getItem('matiere_nouvellement_apprise'));
-var phases_etudiees   = JSON.parse(sessionStorage.getItem('phases_etudiees'));
-var phases_etudiees_temporaires = JSON.parse(sessionStorage.getItem('phases_etudiees_temporaires'));
+var phases_etudiees = JSON.parse(sessionStorage.getItem('phases_etudiees'));
+var phases_etudiees = JSON.parse(sessionStorage.getItem('phases_etudiees'));
 var phases_distinctes = JSON.parse(sessionStorage.getItem('phases_distinctes'));
-var derniere_phase    = JSON.parse(sessionStorage.getItem('derniere_phase'));
-var lesson_option    = JSON.parse(localStorage.getItem('lesson_option'));
-var option_retenue    = JSON.parse(localStorage.getItem('option_retenue'));
+var derniere_phase = sessionStorage.getItem('derniere_phase');
+var lesson_option = JSON.parse(localStorage.getItem('lesson_option'));
+var option_retenue = JSON.parse(localStorage.getItem('option_retenue'));
 
-let lesson_data = (niveau_en_cours == 1) ? alphabet_data : syllabes_data;
+let phase_index = (phases_etudiees.length === 0) ? 0 : phases_etudiees.length - 1;
 
 phases_etudiees = (phases_etudiees == null) ? [] : phases_etudiees;
-phases_etudiees_temporaires = (phases_etudiees_temporaires == null) ? [] : phases_etudiees_temporaires;
-phases_etudiees_temporaires = (phases_etudiees == []) ? phases_etudiees_temporaires : phases_etudiees;
+phases_etudiees = (phases_etudiees == null) ? [] : phases_etudiees;
+phases_etudiees = (phases_etudiees == []) ? phases_etudiees : phases_etudiees;
 
-console.log("Les phases étudiées sont : "+phases_etudiees_temporaires);
+console.log("Les phases étudiées sont : "+phases_etudiees);
 
 // localStorage.clear();
 
@@ -120,7 +114,7 @@ function chargementDuProgramme() {
             
             if(niveau_max > 0) {
                 
-                var phases_lien = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees_temporaires+'&derniere_phase='+derniere_phase;
+                var phases_lien = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees+'&derniere_phase='+derniere_phase;
              
                 if (niveau_max < matiere_index || $('#'+matiere_id).hasClass('a_apprendre')) {
                     if(matiere_index > 0) programme_html += '<li><a href="#">'+matiere_nom+'</a></li>\n';
@@ -206,15 +200,27 @@ function lessonOptions() {
     }
          
     $('#programme_ul li:nth-child(1), #programme_ul li:nth-child(2)').click(function() {
-        if(tableau2DVide(lesson_data)) {
+        let matiere_index = $(this).index();
+
+        if(datas[matiere_index].length === 0) {
             $('.page_body').css('display','none');
             chargerLesOptions();
             stockerLOption();
             afficherLessonOptions();
         }
-        if(!tableau2DVide(lesson_data)) {
-            $('.page_body').css('display','none');
-            location.assign(phase_lien);
+
+        if(datas[matiere_index].length != 0) {
+            let data_lesson = JSON.parse(datas[matiere_index][phase_index].lesson);
+            if(tableau2DVide(data_lesson)) {
+                $('.page_body').css('display','none');
+                chargerLesOptions();
+                stockerLOption();
+                afficherLessonOptions();
+            }
+            if(!tableau2DVide(data_lesson)) {
+                $('.page_body').css('display','none');
+                location.assign(phase_lien);
+            }
         }
     });
 
@@ -222,8 +228,8 @@ function lessonOptions() {
     
 
     function phaseLien() {
-        let phase_lien_1 = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max+'&lesson_option='+option_retenue;
-        let phase_lien_2 = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees_temporaires+'&derniere_phase='+derniere_phase+'&lesson_option='+option_retenue;
+        let phase_lien_1 = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+0+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max+'&lesson_option='+option_retenue;
+        let phase_lien_2 = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+1+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees+'&derniere_phase='+derniere_phase+'&lesson_option='+option_retenue;
         let pl = '';
         pl = (niveau_max == 0) ? phase_lien_1 : phase_lien_2;
         return pl;
@@ -318,14 +324,14 @@ function lessonOptions() {
         lesson_d_apprentissage_alphabet = [];
         lesson_d_apprentissage_alphabet_temporaire = null;
         phases_etudiees = [];
-        phases_etudiees_temporaires = [];
+        phases_etudiees = [];
 
         sessionStorage.setItem('datas', JSON.stringify(datas));
         sessionStorage.setItem('data_apprentissage_alphabet', JSON.stringify(data_apprentissage_alphabet));
         sessionStorage.setItem('lesson_d_apprentissage_alphabet', JSON.stringify(lesson_d_apprentissage_alphabet));
         sessionStorage.setItem('lesson_d_apprentissage_alphabet_temporaire', JSON.stringify(lesson_d_apprentissage_alphabet_temporaire));
         sessionStorage.setItem('phases_etudiees', JSON.stringify(phases_etudiees));
-        sessionStorage.setItem('phases_etudiees_temporaires', JSON.stringify(phases_etudiees_temporaires));
+        sessionStorage.setItem('phases_etudiees', JSON.stringify(phases_etudiees));
         
         function matiereActuelle() {
             let ma = '';

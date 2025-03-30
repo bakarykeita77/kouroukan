@@ -9,7 +9,7 @@ $('document').ready(function() {
         var niveau_actif      = JSON.parse(sessionStorage.getItem('niveau_actif'));
         var phases_distinctes = JSON.parse(sessionStorage.getItem('phases_distinctes'));
         var phases_etudiees = JSON.parse(sessionStorage.getItem('phases_etudiees'));
-        var phases_etudiees_temporaires = JSON.parse(sessionStorage.getItem('phases_etudiees_temporaires'));
+        var phases_etudiees = JSON.parse(sessionStorage.getItem('phases_etudiees'));
         var option_retenue = JSON.parse(localStorage.getItem('option_retenue')); 
         var lesson_d_apprentissage_alphabet = [];
         var rang = '';
@@ -17,15 +17,12 @@ $('document').ready(function() {
         var phase_nom = '';
         var phase_index = 0;
         var data_phase_nbr = 0;
-        let alphabet_data = JSON.parse(sessionStorage.getItem('alphabet_data'));
-        let syllabes_data = JSON.parse(sessionStorage.getItem('syllabes_data'));
 
-console.log(datas);
         data_apprentissage_alphabet = (data_apprentissage_alphabet == null) ? [] : data_apprentissage_alphabet;
-        data_apprentissage_alphabet = (datas.length == 0) ? data_apprentissage_alphabet : datas;
+        data_apprentissage_alphabet = (datas[matiere_index].length == 0) ? data_apprentissage_alphabet : datas;
             
-        phases_etudiees_temporaires = (phases_etudiees_temporaires == null) ? [] : phases_etudiees_temporaires;
-        phases_etudiees_temporaires = (phases_etudiees.length == 0) ? phases_etudiees_temporaires : phases_etudiees;                      
+        phases_etudiees = (phases_etudiees == null) ? [] : phases_etudiees;
+        phases_etudiees = (phases_etudiees.length == 0) ? phases_etudiees : phases_etudiees;                      
  
         if(data_apprentissage_alphabet.length === 0) 
         {console.log("La varirable datas est un tableau vide. La leçon commence à la première phase."); console.log(data_apprentissage_alphabet);}else
@@ -61,7 +58,7 @@ console.log(datas);
             let localOptionsLength = (all_options == null) ? 0 : all_options.length;
         
             chargerPhases();
-            data_phase_nbr = phases_etudiees_temporaires.length;
+            data_phase_nbr = phases_etudiees.length;
             sessionStorage.setItem('data_phase_nbr', JSON.stringify(data_phase_nbr));
             sessionStorage.setItem('total_phase', JSON.stringify($('#phases_list li').length));
             actualiserTitre();
@@ -110,13 +107,13 @@ console.log(datas);
 
                 let lesson = [];
                 let lesson_status = lessonStatus();
-                let n = phases_etudiees_temporaires.length;
+                let n = phases_etudiees.length;
 
                 lesson = (data_apprentissage_alphabet.length === 0) ? [] : data_apprentissage_alphabet.lesson;
 
                 if(n === 0) 
                 {console.log("Le nombre de phases étudiées est 0. Cela veut dire qu'aucune des phases n'est étudiée ou ont été annulées. La leçon commence ou est reprise à zéro.");}else
-                {console.log("Le nombre de phases étudiées est "+n+", pas 0. Donc le nombre de phases étudiées est incrementé et la phase active doit passser à la suivante.");}
+                {console.log("Le nombre de phases étudiées est "+n+" ("+phases_etudiees+"). Donc le nombre de phases étudiées est incrementé et la phase active doit passser à la suivante.");}
     
                 $.each($('#phases_list li'), function() {
                     
@@ -145,7 +142,7 @@ console.log(datas);
                 let indice = 0, ls = "";
                 $.each(li, function() { 
                     let li_id = $(this).attr('id');
-                    indice = ($.inArray(li_id, phases_etudiees_temporaires) === -1) ? indice : indice+=1;
+                    indice = ($.inArray(li_id, phases_etudiees) === -1) ? indice : indice+=1;
                 });              
                 
                 if(indice === 0) ls = "lesson_a_etudier";
@@ -210,12 +207,12 @@ console.log(datas);
 
                 /*--------------------------------------------------------------------*/ 
                         
-                    if(phase_class == "apprises") {
-                        if(phase_nom != 'ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ') {
-                            console.log(matiere_nom+" "+phase_nom+" ߢߌ߲߬ ߞߍߣߍ߲߫ ߞߘߐ ߟߋ߬"); 
-                            return false;
-                        }
-                    }
+                    // if(phase_class == "apprises") {
+                    //     if(phase_nom != 'ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ') {
+                    //         console.log(matiere_nom+" "+phase_nom+" ߢߌ߲߬ ߞߍߣߍ߲߫ ߞߘߐ ߟߋ߬"); 
+                    //         return false;
+                    //     }
+                    // }
 
                     switch(niveau_actif) {
                         case 1 : alphabet(); break;
@@ -230,7 +227,6 @@ console.log(datas);
 
                 affichageDeModificateurDeChoix();
                 modificationDuChoix();
-                modificationDuChoixAnnuler();
 
                 function affichageDeModificateurDeChoix() {
                     $('.modificateur_de_choix_btn').click(() => {
@@ -258,14 +254,14 @@ console.log(datas);
                             lesson_d_apprentissage_alphabet = [];
                             lesson_d_apprentissage_alphabet_temporaire = null;
                             phases_etudiees = [];
-                            phases_etudiees_temporaires = [];
+                            phases_etudiees = [];
 
                             sessionStorage.setItem('datas', JSON.stringify(datas));
                             sessionStorage.setItem('data_apprentissage_alphabet', JSON.stringify(data_apprentissage_alphabet));
                             sessionStorage.setItem('lesson_d_apprentissage_alphabet', JSON.stringify(lesson_d_apprentissage_alphabet));
                             sessionStorage.setItem('lesson_d_apprentissage_alphabet_temporaire', JSON.stringify(lesson_d_apprentissage_alphabet_temporaire));
                             sessionStorage.setItem('phases_etudiees', JSON.stringify(phases_etudiees));
-                            sessionStorage.setItem('phases_etudiees_temporaires', JSON.stringify(phases_etudiees_temporaires));
+                            sessionStorage.setItem('phases_etudiees', JSON.stringify(phases_etudiees));
 
                             location.assign('programmes.php?changer=option');
                         });
@@ -275,9 +271,6 @@ console.log(datas);
                         });
 
                     });
-                }
-                function modificationDuChoixAnnuler() {
-                    
                 }
             }
         }

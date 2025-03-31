@@ -18,8 +18,9 @@ $('document').ready(function() {
         var phase_index = 0;
         var data_phase_nbr = 0;
 
+        datas[matiere_index] = (datas[matiere_index] == undefined) ? [] : datas[matiere_index]; //Pour éviter les erreurs d'undefined.
         data_apprentissage_alphabet = (data_apprentissage_alphabet == null) ? [] : data_apprentissage_alphabet;
-        data_apprentissage_alphabet = (datas[matiere_index].length == 0) ? data_apprentissage_alphabet : datas;
+        data_apprentissage_alphabet = (datas[matiere_index].length === 0) ? data_apprentissage_alphabet : datas;
             
         phases_etudiees = (phases_etudiees == null) ? [] : phases_etudiees;
         phases_etudiees = (phases_etudiees.length == 0) ? phases_etudiees : phases_etudiees;                      

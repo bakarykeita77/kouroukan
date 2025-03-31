@@ -221,6 +221,7 @@ if(isset($_SESSION["id"])) {
 
                                 <div id="evaluation_fiche">
                                     <div id="evaluation_fiche_head">
+                                        <span class="th">ߝߙߍߕߍ</span>
                                         <span class="th">ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</span>
                                         <span class="th">ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ</span>
                                         <span class="th">ߓߙߍ߬ߦߊ</span>

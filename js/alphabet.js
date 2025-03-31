@@ -2101,7 +2101,7 @@ console.log(evaluation_pre_questions);
                                 masquerTesteContainer();
                                 setTimeout(() => { 
                                     chargerInstantannementEvaluationTbody();
-                                    defilementDuContenuVersLeHaut($('#evaluation_tbody')); 
+                                    defilementDuContenuVersLeHaut($('#evaluation_fiche_body')); 
                                 }, 1400);
             
                                 evaluation_counter++;
@@ -2115,16 +2115,9 @@ console.log(evaluation_pre_questions);
                                     n = (n == '߁') ? n+'߭' : n+'߲';
                                     r = (q == r) ? r : "<del>"+r+"</del>";
             
-                                    evaluation_html += '\
-                                        <div>\
-                                            <span>'+n+'</span>\
-                                            <span>'+q+'</span>\
-                                            <span>'+r+'</span>\
-                                            <span>'+parseIntNko(p)+'</span>\
-                                        </div>\
-                                    ';
-            
-                                    $('#evaluation_tbody').html(evaluation_html);
+                                    evaluation_html += '<div><span>'+n+'</span><span>'+q+'</span><span>'+r+'</span><span>'+parseIntNko(p)+'</span></div>\n';
+  
+                                    $('#evaluation_fiche_body').html(evaluation_html);
                                     $('#evaluation_total_point').html(parseIntNko(note_d_evaluation));
                                     $('#evaluation_pourcentage_point').html('%'+parseIntNko(note_d_evaluation*100/nbr_max_de_questions_a_poser));
                                 }                                    

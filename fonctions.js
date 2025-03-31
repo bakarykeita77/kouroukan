@@ -787,6 +787,7 @@
         return date_actuelle;
     }
     function defilementDuContenuVersLeHaut(container) {
+console.log(container);
         container.animate({ scrollTop:container[0].scrollHeight }, 1000);
     }
     function dialogueBtnsStyle() {

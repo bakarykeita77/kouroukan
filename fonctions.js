@@ -260,49 +260,6 @@
             masquer($('#revision_redirection_btns'));
         }, 50);
     }
-	function aggrandir_caractere_de(element) { element.css('font-size','+=32px'); }
-    function alphabetApprentisageDataMemo() {
-
-        let datas = JSON.parse(sessionStorage.getItem('datas'));
-
-        if(datas.length === 0) return;
-        let padm = [];
-
-        for (let i = 0; i < datas[0].length; i++) {
-            let phase = datas[0][i].phase;
-            if(phase == "alphabet_apprentissage") { padm = JSON.parse(datas[0][i].lesson); }
-        }
-
-        return padm;
-    }
-    function alphabetExerciceDataMemo() {
-        
-        let datas = JSON.parse(sessionStorage.getItem('datas'));
-
-        if(datas.length === 0) return;
-        let pedm = [];
-
-        for (let j = 0; j < datas[0].length; j++) {
-            let phase = datas[0][j].phase;
-            if(phase == "alphabet_exercice") { pedm = JSON.parse(datas[0][j].lesson); }
-        }
-
-        return pedm;
-    }
-    function alphabetEvaluationDataMemo() {
-        
-        let datas = JSON.parse(sessionStorage.getItem('datas'));
-
-        if(datas.length === 0) return;
-        let prdm = [];
-
-        for (let k = 0; k < datas[0].length; k++) {
-            let phase = datas[0][k].phase;
-            if(phase == "alphabet_evaluation") { prdm = JSON.parse(datas[0][k].lesson); }
-        }
-        
-        return prdm;
-    }
 	function appetir_caractere_de(element) { element.css('font-size','-=32px'); } 
     function approuver(bonne_reponse) {
         $.each($('.table_parlante td, .table_muette td'), function() {
@@ -1063,11 +1020,21 @@ console.log(total_questions[i]);
             element.click(function() { clearInterval(r); $(this).removeClass('indicateur'); });
         }
     }
-    function initialiserDataAStocker(tableau) {
+    function initialiserData(tableau) {
         let data = [];
         for(let i=0; i<tableau.length; i++) {
             let qr = tableau[i];
             let rr = '';
+            let pr = 0;
+            data.push([qr, rr, pr]);
+        }
+        return data;
+    }
+    function initialiserData1(tableau) {
+        let data = [];
+        for(let i=0; i<tableau.length; i++) {
+            let qr = tableau[i];
+            let rr = 0;
             let pr = 0;
             data.push([qr, rr, pr]);
         }
@@ -1226,6 +1193,58 @@ console.log(total_questions[i]);
         }
                    
         return tons_apprentissage_html;
+    }
+	function aggrandir_caractere_de(element) { element.css('font-size','+=32px'); }
+    function lessonDApprentissagePreAlphabet() {
+
+        let datas = JSON.parse(sessionStorage.getItem('datas'));
+        let ldap = [];
+
+        if(datas.length === 0) { console.log("La variable datas est vide !"); }
+        if(datas.length === 0) {
+            console.log("La variable datas est :");
+            console.log(datas);
+            for (let i = 0; i < datas[0].length; i++) {
+                let phase = datas[0][i].phase;
+                if(phase == "alphabet_apprentissage") { ldap = JSON.parse(datas[0][i].lesson); }
+            }
+        }
+
+        return ldap;
+    }
+    function lessonDExercicePreAlphabet() {
+        
+        let datas = JSON.parse(sessionStorage.getItem('datas'));
+        let ldex = [];
+
+        if(datas.length === 0) { console.log("La variable datas est vide !"); }
+        if(datas.length === 0) {
+            console.log("La variable datas est :");
+            console.log(datas);
+            for (let j = 0; j < datas[0].length; j++) {
+                let phase = datas[0][j].phase;
+                if(phase == "alphabet_exercice") { ldex = JSON.parse(datas[0][j].lesson); }
+            }
+        }
+
+        return ldex;
+    }
+    function lessonDEvaluationPreAlphabet() {
+        
+        let datas = JSON.parse(sessionStorage.getItem('datas'));
+        let ldev = [];
+
+        if(datas.length === 0) { console.log("La variable datas est vide !"); }
+        if(datas.length === 0) {
+            console.log("La variable datas est :");
+            console.log(datas);
+            for (let k = 0; k < datas[0].length; k++) {
+                let phase = datas[0][k].phase;
+                if(phase == "alphabet_evaluation") { ldev = JSON.parse(datas[0][k].lesson); }
+            }
+        }
+        
+        return ldev;
     }
     function lireLettre(parent_direct,lettre) { 
         //$('#audio').attr({ src:'../son/aac/'+parent_direct+'/'+lettre+'.aac', autoplay:'on' }); 

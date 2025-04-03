@@ -1063,7 +1063,7 @@ function syllabe() {
                     let clicked_response_element = '';
 
                     questions_revision = malaxer(syllabes_a_reviser);
-                    revision_a_stocker = initialiserDataAStocker(questions_revision);
+                    revision_a_stocker = initialiserData(questions_revision);
 
                     gestionDeDialogueBtns();
                     poserQuestionRevision();

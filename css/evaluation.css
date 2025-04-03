@@ -213,9 +213,6 @@
 #evaluation_fiche_head span { font-size: 0.8rem; height: 1rem; }
 #evaluation_fiche_body { 
     min-height: 1.5rem;
-    margin: 0.125rem;
-    padding: 0.25rem;
-    height: calc(100% - 4rem);
     background-color: #fff;
     border: 1px solid transparent;
     border-top-color: #ccc;
@@ -288,6 +285,7 @@
     box-shadow: 0 0 1rem #aaa;
     box-sizing: border-box;
 }
+#evaluation_travail_foot { margin-top: 0.25rem; }
 #evaluation_dialogue_btn:active { box-shadow: none; }
 #evaluation_image_container {
     height: 100%;
@@ -422,10 +420,12 @@
     .evaluation_table {  height: 100%; }
     #evaluation_tbody { height: calc(100% - 2rem); }    
     #evaluation_tfoot { display: none; }
+    #evaluation_fiche_body { height: 6.375rem; }
 }
 
 @media screen and (orientation: landscape) {
     #evaluation_body { height: calc(100% - 5rem); min-height: 22rem; }
     .evaluation_table {  height: calc(100% - 2rem);  }
     #evaluation_tbody { height: calc(100% - 4rem); }
+    #evaluation_fiche_body { height: 14.875rem; }
 }

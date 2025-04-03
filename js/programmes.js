@@ -23,7 +23,7 @@ var derniere_phase = sessionStorage.getItem('derniere_phase');
 var lesson_option = JSON.parse(localStorage.getItem('lesson_option'));
 var option_retenue = JSON.parse(localStorage.getItem('option_retenue'));
 
-let phase_index = (phases_etudiees.length === 0) ? 0 : phases_etudiees.length - 1;
+let phase_index = (phases_etudiees == null) ? 0 : phases_etudiees.length - 1;
 
 phases_etudiees = (phases_etudiees == null) ? [] : phases_etudiees;
 phases_etudiees = (phases_etudiees == null) ? [] : phases_etudiees;
@@ -49,9 +49,9 @@ storagesDuProgramme();
 
 
 function alphabetData() {
-    let alphabet_apprentissage_data = alphabetApprentisageDataMemo();
-    let alphabet_exercice_data = alphabetExerciceDataMemo();
-    let alphabet_evaluation_data = alphabetEvaluationDataMemo();
+    let alphabet_apprentissage_data = lessonDApprentissagePreAlphabet();
+    let alphabet_exercice_data = lessonDExercicePreAlphabet();
+    let alphabet_evaluation_data = lessonDEvaluationPreAlphabet();
 
     let a_d = [alphabet_apprentissage_data, alphabet_exercice_data, alphabet_evaluation_data];
     return a_d;

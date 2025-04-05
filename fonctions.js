@@ -135,7 +135,6 @@
 
         setTimeout(() => { 
             setTimeout(() => { displayv($('#evaluation_dialogue_btns')); }, 300);
-            setTimeout(() => { indexer($('#evaluation_question_btn'));   }, 300);
             setTimeout(() => { displayv($('#evaluation_progress_bar'));  }, 600);
         }, 1200);
     }
@@ -204,7 +203,6 @@
 
         setTimeout(() => { 
             setTimeout(() => { displayv($('#exercice_dialogue_btns')); }, 300);
-            setTimeout(() => { indexer($('#exercice_question_btn'));   }, 300);
             setTimeout(() => { displayv($('#exercice_progress_bar'));  }, 600);
         }, 1200);
     }
@@ -249,7 +247,6 @@
                         $('#revision_question_btn').css('display','block'); 
                         $('#revision_repetition_btn').css('display','none'); 
                         $('#revision_correction_btn').css('display','none');
-                        setTimeout(() => { indexer($('#revision_question_btn'));   }, 300);
                     }, 200); 
                 }, (td_total*60)); 
             }, 200);
@@ -1201,9 +1198,7 @@ console.log(total_questions[i]);
         let ldap = [];
 
         if(datas.length === 0) { console.log("La variable datas est vide !"); }
-        if(datas.length === 0) {
-            console.log("La variable datas est :");
-            console.log(datas);
+        if(datas.length != 0) {
             for (let i = 0; i < datas[0].length; i++) {
                 let phase = datas[0][i].phase;
                 if(phase == "alphabet_apprentissage") { ldap = JSON.parse(datas[0][i].lesson); }
@@ -1218,9 +1213,7 @@ console.log(total_questions[i]);
         let ldex = [];
 
         if(datas.length === 0) { console.log("La variable datas est vide !"); }
-        if(datas.length === 0) {
-            console.log("La variable datas est :");
-            console.log(datas);
+        if(datas.length != 0) {
             for (let j = 0; j < datas[0].length; j++) {
                 let phase = datas[0][j].phase;
                 if(phase == "alphabet_exercice") { ldex = JSON.parse(datas[0][j].lesson); }
@@ -1235,9 +1228,7 @@ console.log(total_questions[i]);
         let ldev = [];
 
         if(datas.length === 0) { console.log("La variable datas est vide !"); }
-        if(datas.length === 0) {
-            console.log("La variable datas est :");
-            console.log(datas);
+        if(datas.length != 0) {
             for (let k = 0; k < datas[0].length; k++) {
                 let phase = datas[0][k].phase;
                 if(phase == "alphabet_evaluation") { ldev = JSON.parse(datas[0][k].lesson); }

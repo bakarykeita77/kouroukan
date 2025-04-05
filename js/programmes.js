@@ -29,7 +29,11 @@ phases_etudiees = (phases_etudiees == null) ? [] : phases_etudiees;
 phases_etudiees = (phases_etudiees == null) ? [] : phases_etudiees;
 phases_etudiees = (phases_etudiees == []) ? phases_etudiees : phases_etudiees;
 
-console.log("Les phases étudiées sont : "+phases_etudiees);
+
+console.log("La variable datas est :");
+console.log(datas);
+console.log("Les phases étudiées sont : ");
+console.log(phases_etudiees);
 
 // localStorage.clear();
 

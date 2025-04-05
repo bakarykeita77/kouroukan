@@ -127,8 +127,8 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     display: inline-block;
     border: 1px solid #bbb;
     border-radius: 50%;
-    width: 2rem;
-    height: 2rem;
+    width: 1.8rem;
+    height: 1.8rem;
     line-height: 2rem;
     margin: 0.5rem;
     color: #666;
@@ -259,7 +259,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 }
 .course_body, .course_head, .course_foot {
     position: relative; 
-    width: 98%;
+    width: 100%;
     margin: 0 auto;
     border-radius: 0.5rem;
     box-sizing: border-box;
@@ -267,8 +267,9 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 .course_body { 
     display: none;
     top: 0.5rem;
-    padding-top: 1.5rem;
-    height: calc(100% - 5rem);
+    padding-top: 2rem;
+    margin: 0.5rem 0;
+    height: calc(100% - 6rem);
     min-height: 16rem;
     color: white;
     background-color: rgba(0,0,0,0.8);
@@ -336,8 +337,8 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 }
 .dialogue_btns > div:not(.progress_bar_integre) {
     position: relative;
-    height: 4rem;
-    line-height: 4rem;
+    height: 3rem;
+    line-height: 3rem;
     width: max-content;
     margin: 0 auto;
     box-sizing: border-box;
@@ -747,6 +748,7 @@ del {
 .notification_corps {
     position: relative;
     box-shadow: 0 0 1rem #aaa;
+    border: 1px solid #ccc;
     border-radius: 0.5rem;
     padding: 0.25rem 1rem;
     height: 4rem;

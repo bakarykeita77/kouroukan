@@ -25,13 +25,14 @@ $('document').ready(function() {
         phases_etudiees = (phases_etudiees == null) ? [] : phases_etudiees;
         phases_etudiees = (phases_etudiees.length == 0) ? phases_etudiees : phases_etudiees;                      
  
-        if(data_apprentissage_alphabet.length === 0) 
-        {console.log("La varirable datas est un tableau vide. La leçon commence à la première phase."); console.log(data_apprentissage_alphabet);}else
-        {console.log("La varirable datas n'est pas un tableau vide. La phase suivante doit être acivée."); console.log(data_apprentissage_alphabet);}
-        
-
         sessionStorage.setItem('option_retenue', JSON.stringify(option_retenue));
  
+        console.log("La variable datas est :");
+        console.log(datas);
+        console.log("Les phases étudiées sont : ");
+        console.log(phases_etudiees);
+        console.log('option_retenue = '+option_retenue);
+
     /*-------------------------------------------------------------------------------------------------------------------
        1)- La situation des études est faite par récupération et traitement des données reçues sur l'apprenant.
        2)- La liste des phases est établie en fonction du niveau d'étude de l'apprenant (selon les phases étudiées ou pas)
@@ -108,14 +109,9 @@ $('document').ready(function() {
 
                 let lesson = [];
                 let lesson_status = lessonStatus();
-                let n = phases_etudiees.length;
 
                 lesson = (data_apprentissage_alphabet.length === 0) ? [] : data_apprentissage_alphabet.lesson;
 
-                if(n === 0) 
-                {console.log("Le nombre de phases étudiées est 0. Cela veut dire qu'aucune des phases n'est étudiée ou ont été annulées. La leçon commence ou est reprise à zéro.");}else
-                {console.log("Le nombre de phases étudiées est "+n+" ("+phases_etudiees+"). Donc le nombre de phases étudiées est incrementé et la phase active doit passser à la suivante.");}
-    
                 $.each($('#phases_list li'), function() {
                     
                     var phase_index = $(this).index();

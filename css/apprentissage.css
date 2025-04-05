@@ -4,6 +4,9 @@
 #apprentissage_head, #apprentissage_body { 
     display: none;
 }
+#apprentissage_body {
+    padding-top: 1rem;
+}
 #table_parlante_container {
     position: absolute;
     top: 1rem;
@@ -59,8 +62,8 @@
 .notification h3 { margin: 0; padding: 0; }
 #redirige_sur_exercice { cursor: pointer; }
 #apprentissage_dialogue_btns {
-    height: 4rem;
-    line-height: 4rem;
+    height: 3rem;
+    line-height: 3rem;
     background-color: #ddd;
     font-weight: bold;
     color: black;

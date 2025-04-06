@@ -350,6 +350,15 @@
         var note = Math.floor((point*100)/data.length);
         return note;
     }
+    function calculerPoint(data) {
+        var point = 0;
+        for (var i = 0; i < data.length; i++) {
+            if(data[i] != undefined) {
+                if(data[i][2] == 1) {  point ++; }
+            }
+        }
+        return point;
+    }
 	function centrerHorizontalement(element) {
 		var largeur_element = element.width();
 		var largeur_ecran = window.screen.width;
@@ -741,7 +750,6 @@
         return date_actuelle;
     }
     function defilementDuContenuVersLeHaut(container) {
-console.log(container);
         container.animate({ scrollTop:container[0].scrollHeight }, 1000);
     }
     function dialogueBtnsStyle() {
@@ -1714,7 +1722,7 @@ console.log(total_questions[i]);
                 }
                 function chargerResultatBody() {
 
-                    let lesson = JSON.parse(memoire_2.lesson)
+                    let lesson = memoire_2.lesson;
                     let exercice_resultat_body_html = resultatTableBodyHTML(lesson);
 
                     $('#exercice_resultat_body').html(exercice_resultat_body_html);
@@ -1750,7 +1758,7 @@ console.log(total_questions[i]);
                     $('#revision_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
                 }
                 function chargerResultatBody() {
-                    let lesson = JSON.parse(memoire_3.lesson)
+                    let lesson = memoire_3.lesson;
                     let revision_resultat_body_html = resultatTableBodyHTML(lesson);
 
                     $('#revision_resultat_body').html(revision_resultat_body_html);

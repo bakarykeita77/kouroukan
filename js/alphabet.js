@@ -1064,7 +1064,7 @@ function alphabet() {
                                             }, 1000);
                                         }
                                     }
-                                    function finDEvaluationPreAlphabet() {                    
+                                    function finDEvaluationPreAlphabet() {
                                         if(total_questions_posees === total_evaluation_questions) {
                                         
                                             let note_d_evaluation_pre_alphabet = calculerNote(pre_evaluation_alphabet_partiel);
@@ -1140,8 +1140,8 @@ function alphabet() {
                                                         lesson_d_evaluation_pre_alphabet = pre_evaluation_alphabet_partiel;
                                                         localStorage.setItem('lesson_d_evaluation_pre_alphabet', JSON.stringify(lesson_d_evaluation_pre_alphabet));
                 
-                                                        if(pourcentagePoint(lesson_d_apprentissage_pre_alphabet) >= 100) {
-                                                        if(pourcentagePoint(lesson_d_exercice_pre_alphabet) >= 100) {
+                                                        if(pourcentagePoint(lesson_d_apprentissage_pre_alphabet) === 100) {
+                                                        if(pourcentagePoint(lesson_d_exercice_pre_alphabet) === 100) {
                                                         if(pourcentagePoint(lesson_d_evaluation_pre_alphabet) >= 92) {
                                                             
                                                             sendLessonDataToDB('alphabet_apprentissage',lesson_d_apprentissage_pre_alphabet);
@@ -1243,77 +1243,81 @@ function alphabet() {
                                             }
                                             function resultatGeneralDAlphabet() {
 
-                                                console.log("Resultat général pre_alphabet");
-                                                console.log([data_apprentissage_alphabet,data_exercice_alphabet,data_evaluation_alphabet]);
+                                                console.log("Resultat général pre_alphabet");     
 
-                                                let note_d_apprentissage = pourcentagePoint(lesson_d_apprentissage_pre_alphabet);
-                                                let note_d_exercice = pourcentagePoint(lesson_d_exercice_pre_alphabet);
-                                                let note_d_evaluation = pourcentagePoint(lesson_d_evaluation_pre_alphabet);
+                                                if(data_apprentissage_alphabet.lesson != undefined) {
+                                                if(data_exercice_alphabet.lesson != undefined) {
+                                                if(data_evaluation_alphabet.lesson != undefined) {
 
-                                                let point_d_apprentissage = calculerPoint(data_apprentissage_alphabet.lesson);
-                                                let point_d_exercice = calculerPoint(data_exercice_alphabet.lesson);
-                                                let point_d_evaluation = calculerPoint(data_evaluation_alphabet.lesson);
-
-                                                if(note_d_apprentissage >= 1) {
-                                                if(note_d_exercice >= 1) {
-                                                if(note_d_evaluation >= 1) {
-                                                        
-                                                    $('#revision_body_cadre').append('\
-                                                        <div id="resultat_table_container">\
-                                                            <table id="resultat_table">\
-                                                                <tr>\
-                                                                    <th>ߝߐߘߊ</th>\
-                                                                    <th>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</th>\
-                                                                    <th>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ</th>\
-                                                                    <th>ߓߍ߬ߙߍ</th>\
-                                                                </tr>\
-                                                                <tr>\
-                                                                    <td>ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ</td>\
-                                                                    <td>'+parseIntNko(data_apprentissage_alphabet.lesson.length)+'</td>\
-                                                                    <td>'+parseIntNko(point_d_apprentissage)+'</td>\
-                                                                    <td>'+parseIntNko(note_d_apprentissage)+'</td>\
-                                                                </tr>\
-                                                                <tr>\
-                                                                    <td>ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ</td>\
-                                                                    <td>'+parseIntNko(data_exercice_alphabet.lesson.length)+'</td>\
-                                                                    <td>'+parseIntNko(point_d_exercice)+'</td>\
-                                                                    <td>'+parseIntNko(note_d_exercice)+'</td>\
-                                                                </tr>\
-                                                                <tr>\
-                                                                    <td>ߛߓߍߛߎ߲ ߞߘߐߓߐߟߌ</td>\
-                                                                    <td>'+parseIntNko(data_evaluation_alphabet.lesson.length)+'</td>\
-                                                                    <td>'+parseIntNko(point_d_evaluation)+'</td>\
-                                                                    <td>'+parseIntNko(note_d_evaluation)+'</td>\
-                                                                </tr>\
-                                                            </table>\
-                                                        </div> \
-                                                            \
-                                                        <div id="resultat_btn_container">\
+                                                    let note_d_apprentissage = pourcentagePoint(lesson_d_apprentissage_pre_alphabet);
+                                                    let note_d_exercice = pourcentagePoint(lesson_d_exercice_pre_alphabet);
+                                                    let note_d_evaluation = pourcentagePoint(lesson_d_evaluation_pre_alphabet);
+    
+                                                    let point_d_apprentissage = calculerPoint(data_apprentissage_alphabet.lesson);
+                                                    let point_d_exercice = calculerPoint(data_exercice_alphabet.lesson);
+                                                    let point_d_evaluation = calculerPoint(data_evaluation_alphabet.lesson);
+    
+                                                    if(note_d_apprentissage === 100) {
+                                                    if(note_d_exercice === 100) {
+                                                    if(note_d_evaluation >= 92) {
+                                                            
+                                                        $('#revision_body_cadre').append('\
                                                             <p>ߛߓߍߛߎ߲ ߘߋ߰ߟߌ ߢߊ߬ߣߍ߲߬ %/'+parseIntNko(pourcentage_general)+' ߟߊ߫.</p>\
-                                                            <p>ߞߐߝߟߌ ߝߟߍ߫ ߦߊ߬ <span id="afficheur_de_resultat">ߒߞߏ ߛߓߍߛߎ߲ ߘߋ߰ߟߌ ߞߐߝߟߌ</span></p>\
-                                                            <p>ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ ߜߋ߲߭ ߘߋ߰ߟߌ ߘߊߡߌ߬ߘߊ߬</p>\
-                                                        </div> \
-                                                    ');
+                                                            <h3>ߒߞߏ ߛߓߍߛߎ߲ ߘߋ߰ߟߌ ߞߐߝߟߌ ߟߊߛߎ߬ߘߎ߲߬ߧߊ߬ߣߍ߲ ߝߟߍ߫ ߕߊ߲߬</h3>\
+                                                            <div id="resultat_table_container">\
+                                                                <table id="resultat_table">\
+                                                                    <tr>\
+                                                                        <th>ߝߐߘߊ</th>\
+                                                                        <th>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</th>\
+                                                                        <th>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ ߢߊ߬ߣߍ߲</th>\
+                                                                        <th>ߓߍ߬ߙߍ</th>\
+                                                                    </tr>\
+                                                                    <tr>\
+                                                                        <td>ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ</td>\
+                                                                        <td>'+parseIntNko(data_apprentissage_alphabet.lesson.length)+'</td>\
+                                                                        <td>'+parseIntNko(point_d_apprentissage)+'</td>\
+                                                                        <td>'+parseIntNko(note_d_apprentissage)+'</td>\
+                                                                    </tr>\
+                                                                    <tr>\
+                                                                        <td>ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ</td>\
+                                                                        <td>'+parseIntNko(data_exercice_alphabet.lesson.length)+'</td>\
+                                                                        <td>'+parseIntNko(point_d_exercice)+'</td>\
+                                                                        <td>'+parseIntNko(note_d_exercice)+'</td>\
+                                                                    </tr>\
+                                                                    <tr>\
+                                                                        <td>ߛߓߍߛߎ߲ ߞߘߐߓߐߟߌ</td>\
+                                                                        <td>'+parseIntNko(data_evaluation_alphabet.lesson.length)+'</td>\
+                                                                        <td>'+parseIntNko(point_d_evaluation)+'</td>\
+                                                                        <td>'+parseIntNko(note_d_evaluation)+'</td>\
+                                                                    </tr>\
+                                                                </table>\
+                                                            </div> \
+                                                                \
+                                                            <div id="resultat_btn_container">\
+                                                                <p>ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ ߜߋ߲߭ ߘߋ߰ߟߌ ߘߊߡߌ߬ߘߊ߬</p>\
+                                                                <p>ߣߴߌ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߝߛߍ߬ߝߛߍ߬ߟߌ ߞߍ߫ ߌ ߟߊ߫ ߛߓߍߛߎ߲ ߘߋ߰ߟߌ ߞߐߝߟߌ ߞߊ߲߬߸ ߞߘߎ߬ ߓߊ߯ߡߊ ߢߌ߲߬ ߘߌ߲߯. <span id="afficheur_de_resultat">ߒߞߏ ߛߓߍߛߎ߲ ߘߋ߰ߟߌ ߞߐߝߟߌ ߕߐ߬ߝߍ߬ߦߊ߬ߣߍ߲</span></p>\
+                                                            </div> \
+                                                        ');
+    
+                                                        $('#resultat_table_container').css({
+                                                            'background-color':'#fff',
+                                                            'padding':'0.5rem'
+                                                        });
+                                                        $('#resultat_table td').css({
+                                                            'border':'1px solid #aaa', 
+                                                            'padding':'0.5rem'
+                                                        });
+                                                        $('#resultat_btn_container').css({'height':0, 'transition':'0.25s'});
 
-                                                    $('#resultat_table_container').css({
-                                                        'background-color':'#fff', 
-                                                        'width':'calc(100% - 5rem)',
-                                                        'margin':'1rem auto', 
-                                                        'padding':'1rem'
-                                                    });
-                                                    $('#resultat_table').css('width','100%');
-                                                    $('#resultat_table, #resultat_table td').css({
-                                                        'border':'1px solid #aaa', 
-                                                        'padding':'0.5rem'
-                                                    });
+                                                        masquer($('#resultat_table_container, #resultat_btn_container'));
+                                                        setTimeout(() => { $('.course_body, .course_foot').css('display','none'); }, 600);
+                                                        setTimeout(() => { afficher($('#resultat_table_container, #resultat_btn_container')); }, 800);
+                                                        setTimeout(() => { $('#resultat_btn_container').css({'height':'max-content'}); }, 2000);
 
-                                                    $('.course_body, .course_foot').css('display','none');
-
-                                                    $('#resultat_btn_container').css({'height':0, 'transition':'0.25s'});
-                                                    setTimeout(() => { $('#resultat_btn_container').css({'height':'max-content'}); }, 2000);
-                                                    $('#afficheur_de_resultat').click(function() {
-                                                        resultatGeneral(data_apprentissage_alphabet, data_exercice_alphabet, data_evaluation_alphabet);
-                                                    });
+                                                        $('#afficheur_de_resultat').click(function() {
+                                                            resultatGeneral(data_apprentissage_alphabet, data_exercice_alphabet, data_evaluation_alphabet);
+                                                        });
+                                                    }}}
                                                 }}}
                                             }
                                         }
@@ -2467,7 +2471,7 @@ function alphabet() {
             $('#revision_question_btn').text('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߓߘߊ߫ ߓߊ߲߫').off('click');
             $('#revision_question_btn').removeClass("actif");
 
-            if(note < 95) {
+            if(note < 92) {
                 masquer($('#continu_sur_apprentissage_bouton'));
                 afficher($('#reprendre_revision_bouton'));
                 masquer($('#evaluation_bouton'));
@@ -2477,7 +2481,7 @@ function alphabet() {
                 indexer($('#reprendre_revision_bouton'));
             }
 
-            if(note >= 95) {
+            if(note >= 92) {
                 if(data.length < 27) {
                     afficher($('#continu_sur_apprentissage_bouton'));
                     masquer($('#reprendre_revision_bouton'));

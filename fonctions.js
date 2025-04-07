@@ -352,9 +352,11 @@
     }
     function calculerPoint(data) {
         var point = 0;
-        for (var i = 0; i < data.length; i++) {
-            if(data[i] != undefined) {
-                if(data[i][2] == 1) {  point ++; }
+        if(data != undefined) {
+            for (var i = 0; i < data.length; i++) {
+                if(data[i] != undefined) {
+                    if(data[i][2] == 1) {  point ++; }
+                }
             }
         }
         return point;

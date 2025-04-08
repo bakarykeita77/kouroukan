@@ -4,11 +4,9 @@ $('document').ready(function() {
         var datas = JSON.parse(sessionStorage.getItem('datas'));     
         var data_apprentissage_alphabet = JSON.parse(sessionStorage.getItem('data_apprentissage_alphabet'));     
         var lesson_d_apprentissage_alphabet_temporaire = JSON.parse(sessionStorage.getItem('lesson_d_apprentissage_alphabet_temporaire'));     
-        var matiere_index     = JSON.parse(sessionStorage.getItem('matiere_index'));
-        var niveau_en_cours   = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
-        var niveau_actif      = JSON.parse(sessionStorage.getItem('niveau_actif'));
-        var phases_distinctes = JSON.parse(sessionStorage.getItem('phases_distinctes'));
-        var phases_etudiees = JSON.parse(sessionStorage.getItem('phases_etudiees'));
+        var matiere_index = JSON.parse(sessionStorage.getItem('matiere_index'));
+        var niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
+        var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));
         var phases_etudiees = JSON.parse(sessionStorage.getItem('phases_etudiees'));
         var option_retenue = JSON.parse(localStorage.getItem('option_retenue')); 
         var lesson_d_apprentissage_alphabet = [];
@@ -16,14 +14,12 @@ $('document').ready(function() {
         var phase_id = '';
         var phase_nom = '';
         var phase_index = 0;
-        var data_phase_nbr = 0;
 
         datas[matiere_index] = (datas[matiere_index] == undefined) ? [] : datas[matiere_index]; //Pour éviter les erreurs d'undefined.
         data_apprentissage_alphabet = (data_apprentissage_alphabet == null) ? [] : data_apprentissage_alphabet;
         data_apprentissage_alphabet = (datas[matiere_index].length === 0) ? data_apprentissage_alphabet : datas;
             
-        phases_etudiees = (phases_etudiees == null) ? [] : phases_etudiees;
-        phases_etudiees = (phases_etudiees.length == 0) ? phases_etudiees : phases_etudiees;                      
+        phases_etudiees = (phases_etudiees == null) ? [] : phases_etudiees;                     
  
         sessionStorage.setItem('option_retenue', JSON.stringify(option_retenue));
  
@@ -60,8 +56,6 @@ $('document').ready(function() {
             let localOptionsLength = (all_options == null) ? 0 : all_options.length;
         
             chargerPhases();
-            data_phase_nbr = phases_etudiees.length;
-            sessionStorage.setItem('data_phase_nbr', JSON.stringify(data_phase_nbr));
             sessionStorage.setItem('total_phase', JSON.stringify($('#phases_list li').length));
             actualiserTitre();
             stylesDesPhases();
@@ -107,14 +101,14 @@ $('document').ready(function() {
             }
             function stylesDesPhases() {
 
-                let lesson = [];
                 let lesson_status = lessonStatus();
 
                 lesson = (data_apprentissage_alphabet.length === 0) ? [] : data_apprentissage_alphabet.lesson;
 
                 $.each($('#phases_list li'), function() {
                     
-                    var phase_index = $(this).index();
+                    let n = phases_etudiees.length;
+                    let phase_index = $(this).index();
                        
                     if(lesson_status == "lesson_a_etudier") {
                         if(phase_index === 0) $(this).addClass('active');
@@ -122,7 +116,7 @@ $('document').ready(function() {
                     }
                     if(lesson_status == "lesson_en_cours") {
                         if(phase_index <= n-1) $(this).removeClass('active').addClass('apprises');
-                        if(phase_index == n  ) $(this).removeClass('a_apprendre').addClass('active');
+                        if(phase_index == n) $(this).removeClass('a_apprendre').addClass('active');
                         if(phase_index >= n+1) $(this).addClass('a_apprendre');
                     }
                     if(lesson_status == "lesson_etudie") $(this).addClass('apprises');

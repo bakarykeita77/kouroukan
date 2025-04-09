@@ -202,8 +202,8 @@
         masquer($('#exercice_redirection_btns'));
 
         setTimeout(() => { 
-            setTimeout(() => { displayv($('#exercice_dialogue_btns')); }, 300);
-            setTimeout(() => { displayv($('#exercice_progress_bar'));  }, 600);
+            setTimeout(() => { displayv($('#exercice_dialogue_btns')); }, 800);
+            setTimeout(() => { displayv($('#exercice_progress_bar'));  }, 1200);
         }, 1200);
     }
     function afficherList(ul) {
@@ -1835,9 +1835,7 @@ console.log(total_questions[i]);
         }
         function masquerResultat() { goUp($('.resultat_container')); }
         function afficherResultat() { goDown($('.resultat_container')); }
-        function reprendreLesson() {
-            $('#reprendre').click(() => { raffraichirLaPage(); });
-        }
+        function reprendreLesson() { $('#reprendre').click(() => { raffraichirLaPage(); }); }
         function lessonSuivante(lesson_en_cours) {
             let ls = '';
             switch(lesson_en_cours) {
@@ -1853,9 +1851,7 @@ console.log(total_questions[i]);
             }
             return ls;
         }
-        function continuSuLaLessonSuivante() {
-            
-        }
+        function continuSuLaLessonSuivante() {}
         function phaseEnCours(lesson_en_cours) {
 
             let m = lesson_en_cours.split(' ')[0];

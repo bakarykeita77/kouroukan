@@ -266,10 +266,9 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 }
 .course_body { 
     display: none;
-    top: 0.5rem;
-    padding-top: 2rem;
     margin: 0.5rem 0;
-    height: calc(100% - 6rem);
+    padding-top: 1.5rem;
+    height: calc(100% - 7rem);
     min-height: 15rem;
     color: white;
     background-color: rgba(0,0,0,0.8);

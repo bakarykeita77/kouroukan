@@ -77,6 +77,8 @@ function alphabet() {
 
             let clickable_td = [];
             
+            let alphabet_tr_index = 0;
+            let cercle_index = 0;
             let les_lettres_actives = [];
             let quantite_normale_de_click = 1;
 
@@ -96,7 +98,8 @@ function alphabet() {
                 console.log("Début d'apprentissage partiel d'alphabet");
                 
                 let pre_apprentissage_alphabet_partiel = [];
-                let alphabet_tr_index = alphabetTrIndex();
+
+                alphabet_tr_index = alphabetTrIndex();
 
                 chargerApprendrePreAlphabet();
                 afficherApprendreAlphabet();
@@ -189,7 +192,7 @@ function alphabet() {
                     }
                     function afficherPreApprendreAlphabetCercles() {
                         $.each($('.cercle'), function(){
-                            let cercle_index = $(this).index();
+                            cercle_index = $(this).index();
                             setTimeout(() => { $(this).css({'opacity':1, 'transform':'scale(1.125)'}); }, cercle_index*80);
                         });
                     }
@@ -756,6 +759,12 @@ function alphabet() {
                                             
                                             function stockerExercicePreAlphabet() {
                                                 if(note_d_exercice_pre_alphabet === 100) {
+                                                    
+                                                    if((cercle_index+1)*les_lettres_actives.length === lesson_d_exercice_pre_alphabet.length) {
+                                                        console.log("L'exercice pre_alphabet est déjà fait");
+                                                        return;
+                                                    }
+                                                   
                                                     lesson_d_exercice_pre_alphabet = (lesson_d_exercice_pre_alphabet.length === 0) ? pre_exercice_alphabet_partiel : lesson_d_exercice_pre_alphabet.concat(pre_exercice_alphabet_partiel);
                                                     console.log("La leçon d'exercice pre_alphabet fait :");
                                                     console.log(lesson_d_exercice_pre_alphabet); 
@@ -1124,6 +1133,12 @@ function alphabet() {
 
                                                 if(lesson_d_evaluation_pre_alphabet.length < 27) {
                                                     if(note_d_evaluation_pre_alphabet >= 92) {
+                                                    
+                                                        if((cercle_index+1)*les_lettres_actives.length === lesson_d_evaluation_pre_alphabet.length) {
+                                                            console.log("L'evaluation pre_alphabet est déjà fait");
+                                                            return;
+                                                        }
+                                                       
                                                         lesson_d_evaluation_pre_alphabet = pre_evaluation_alphabet_partiel;
                                                         console.log("La leçon d'évaluation pre_alphabet fait :");
                                                         console.log(lesson_d_evaluation_pre_alphabet); 

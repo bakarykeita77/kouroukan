@@ -164,6 +164,7 @@ function syllabe() {
 
                     initialiserProgressBar();
                     panneauxStyle();
+
                     
                     function panneauxDesLettresHTML() {
                         
@@ -190,7 +191,7 @@ function syllabe() {
 
                             if(memoire_consonnes_choisies != null) {
                                 memoire_consonnes_choisies.forEach(element => {
-                                    if(element == panneaux_consonne) { panneaux_span.css({'color':'orange'}); }
+                                    if(element == panneaux_consonne) { panneaux_span.css({'color':'orange', 'font-weight':'bold', 'box-shadow':'none'}); }
                                 });
                             }
                         });
@@ -398,6 +399,7 @@ function syllabe() {
                 function affichageDePanneauDesConsonnes() {
                     $('#afficheur_de_panneau').click(function(e) {
                         e.stopImmediatePropagation();
+                        $(this).removeClass('indicateur');
                         if(panneau_status == "masque") { afficherPanneau() }else{ masquerPanneau(); }; 
                     }); 
                     masquerLePanneauDesConsonnes();
@@ -1102,14 +1104,13 @@ console.log(question_revision);
                                         afficherRevisionRedirectionBtn();
                                         continuSurApprentissagePreSyllabe();
                                         evaluationPreSyllabe();
-                                        apprentissageDeTons();
                                         // initialiserExercice();
 
                                         
                                         function stockerPreRevisionSyllabe() {
                                             if(note_de_revision_pre_syllabe === 100) {
                                                 memoire_consonnes_choisies = (memoire_consonnes_choisies == null) ? consonnes_choisies : memoire_consonnes_choisies.concat(consonnes_choisies);
-console.log(memoire_consonnes_choisies);
+
                                                 sessionStorage.setItem('lesson_de_revision_pre_syllabe', JSON.stringify(lesson_de_revision_pre_syllabe));
                                                 localStorage.setItem('memoire_consonnes_choisies', JSON.stringify(memoire_consonnes_choisies));
                                                 localStorage.setItem('syllabes_etudiees', JSON.stringify(syllabes_etudiees));
@@ -1150,8 +1151,6 @@ console.log(memoire_consonnes_choisies);
                                         function continuSurApprentissagePreSyllabe() {
                                             $('#continu_sur_apprentissage_bouton').click(() => { raffraichirLaPage(); });
                                         }
-                                        function evaluationPreSyllabe() {}
-                                        function apprentissageDeTons() {}
                                     }
                                 }
                             }

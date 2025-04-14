@@ -15,6 +15,7 @@ $('document').ready(function() {
         var phase_nom = '';
         var phase_index = 0;
 
+        datas = (datas == null) ? [] : datas; //Pour éviter les erreurs de null.
         datas[matiere_index] = (datas[matiere_index] == undefined) ? [] : datas[matiere_index]; //Pour éviter les erreurs d'undefined.
         data_apprentissage_alphabet = (data_apprentissage_alphabet == null) ? [] : data_apprentissage_alphabet;
         data_apprentissage_alphabet = (datas[matiere_index].length === 0) ? data_apprentissage_alphabet : datas;

@@ -1,12 +1,15 @@
 function parametrageDeLesson() {       
 
 /* Declaration des variables */  
+    var datas = JSON.parse(sessionStorage.getItem('datas'));     
     var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));   // Voir programmes.js fonction storagesDuProgramme()
     let phase_id = JSON.parse(sessionStorage.getItem('phase_id'));
     var voyelles_checker, consonnes_checker, tedo_checker, tons_checker, nasalisation_checker;
     var voyelles_cochees = [], consonnes_cochees = [], tedos_coches = [], tons_coches = [], nasalisations_cochees = [], caracteres_coches = [],syllabes_coches = [];
 
     let option_retenue = JSON.parse(localStorage.getItem('option_retenue')); // Voir programmes.js : lessonOptions()
+
+    console.log(datas);
     
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/    
     parametrage();
@@ -322,7 +325,7 @@ function parametrageDeLesson() {
             var pratique_html      = pratiqueHTML();
             var evaluation_html    = evaluationHTML();
 
-            let phase = phase_id.split('_')[1];
+            let phase = (phase_id == null) ? 'apprentissage' : phase_id.split('_')[1];
 
          // Rechargement du tableau noir avec les caractères cochés
             switch(phase) {
@@ -346,9 +349,11 @@ function parametrageDeLesson() {
                 var voyelles_length          = voyelles_cochees.length;
                 var tons_length              = tons_coches.length;
                 var syllabes_tonifies_length = syllabes_tonifies.length;
-                var table_d_apprentissage_html = (option_retenue === 1) ? chargerCorpsDePreAlphabet() : lessonHTML(lettres_cochees, 'table_alphabet_apprentissage');
 
-                if(niveau_actif == 1) apprentissage_html = table_d_apprentissage_html;     //lessonHTML(lettres_cochees, 'table_alphabet_apprentissage');
+                var table_d_apprentissage_alphabet_html = (option_retenue === 1) ? chargerCorpsDePreAlphabet() : lessonHTML(lettres_cochees, 'table_alphabet_apprentissage');
+                // var table_d_apprentissage_syllabe_html = (option_retenue === 1) ? chargerApprendrePreSyllabe() : lessonHTML(syllabes_simples_coches, 'table_syllabe_apprentissage');
+                
+                if(niveau_actif == 1) apprentissage_html = table_d_apprentissage_alphabet_html;     //lessonHTML(lettres_cochees, 'table_alphabet_apprentissage');
                 if(niveau_actif == 2) apprentissage_html = lessonHTML(syllabes_simples_coches, 'table_syllabe_apprentissage');
                 if(niveau_actif == 3) apprentissage_html = lessonHTML2(voyelles_length,tons_length,syllabes_tonifies_length,syllabes_tonifies);
                 if(niveau_actif == 4) apprentissage_html = lessonHTML(chiffres, 'table_chiffre_apprentissage');

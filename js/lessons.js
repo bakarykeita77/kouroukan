@@ -19,9 +19,7 @@ $('document').ready(function() {
         data_apprentissage_alphabet = (data_apprentissage_alphabet == null) ? [] : data_apprentissage_alphabet;
         data_apprentissage_alphabet = (datas[matiere_index].length === 0) ? data_apprentissage_alphabet : datas;
             
-        phases_etudiees = (phases_etudiees == null) ? [] : phases_etudiees;                     
- 
-        sessionStorage.setItem('option_retenue', JSON.stringify(option_retenue));
+        phases_etudiees = (phases_etudiees == null) ? [] : phases_etudiees;           
  
         console.log("La variable datas est :");
         console.log(datas);
@@ -176,11 +174,10 @@ $('document').ready(function() {
             } 
         }
         function matiere() {
-            let matiere_nom = JSON.parse(sessionStorage.getItem('matiere_nom')); //Déterminé depuis storagesDuProgramme() dans programmes.js
 
             modificationDuChoixDApprentissage();
 
-            if(option_retenue == 2 || option_retenue == null) {
+            if(option_retenue == 2) {
                 $('#phases_list li').on('click', function() {
 
                     phase_id = $(this).attr('id');
@@ -196,22 +193,23 @@ $('document').ready(function() {
                     sessionStorage.setItem('phase_index', JSON.stringify(phase_index));
                     sessionStorage.setItem("course_id", JSON.stringify(course_id));
 
-                /*--------------------------------------------------------------------*/ 
+                 /*--------------------------------------------------------------------*/ 
                         
                     // if(phase_class == "apprises") {
+                        // let matiere_nom = JSON.parse(sessionStorage.getItem('matiere_nom')); //Déterminé depuis storagesDuProgramme() dans programmes.js
                     //     if(phase_nom != 'ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ') {
                     //         console.log(matiere_nom+" "+phase_nom+" ߢߌ߲߬ ߞߍߣߍ߲߫ ߞߘߐ ߟߋ߬"); 
                     //         return false;
                     //     }
                     // }
-
-                    switch(niveau_actif) {
-                        case 1 : alphabet(); break;
-                        case 2 : syllabe();  break;
-                        case 3 : ton();      break;
-                        case 4 : chiffre();  break;
-                    }
                 });
+            }
+
+            switch(niveau_actif) {
+                case 1 : alphabet(); break;
+                case 2 : syllabe();  break;
+                case 3 : ton();      break;
+                case 4 : chiffre();  break;
             }
 
             function modificationDuChoixDApprentissage() {
@@ -245,13 +243,11 @@ $('document').ready(function() {
                             lesson_d_apprentissage_alphabet = [];
                             lesson_d_apprentissage_alphabet_temporaire = null;
                             phases_etudiees = [];
-                            phases_etudiees = [];
 
                             sessionStorage.setItem('datas', JSON.stringify(datas));
                             sessionStorage.setItem('data_apprentissage_alphabet', JSON.stringify(data_apprentissage_alphabet));
                             sessionStorage.setItem('lesson_d_apprentissage_alphabet', JSON.stringify(lesson_d_apprentissage_alphabet));
                             sessionStorage.setItem('lesson_d_apprentissage_alphabet_temporaire', JSON.stringify(lesson_d_apprentissage_alphabet_temporaire));
-                            sessionStorage.setItem('phases_etudiees', JSON.stringify(phases_etudiees));
                             sessionStorage.setItem('phases_etudiees', JSON.stringify(phases_etudiees));
 
                             location.assign('programmes.php?changer=option');

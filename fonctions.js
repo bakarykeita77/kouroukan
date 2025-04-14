@@ -1311,7 +1311,7 @@ console.log(total_questions[i]);
     function marquerReponse(td_actif,question) {
         let reponse = td_actif.text();
         $('.table_parlante td').css('background-color','rgba(85,85,85,0.25)');
-        if(question == reponse) { accorder(td_actif); }
+        if(question == reponse) { valider(td_actif); }
         if(question != reponse) { barrer(td_actif); }
     }
     function masquer(element) {
@@ -1425,15 +1425,23 @@ console.log(total_questions[i]);
         
         return nombre_converti.join('');
     }
-    function phasesEtudieesDuServeur() {
+    function phasesEtudieesDuServeur(matiere) {
 
         let datas = JSON.parse(sessionStorage.getItem('datas'));
+        let niveau_max = JSON.parse(sessionStorage.getItem('niveau_max'));
         let peds = [];
 
-        for (let i = 0; i < datas.length; i++) {
-        for (let j = 0; j < datas.length; j++) {
-            if(datas[i][j] != undefined) peds.push(datas[i][j].phase);
-        }}
+        niveau_max = (niveau_max == undefined) ? [] : niveau_max;
+
+        if(matiere.length == 0) {
+            console.log("Cette matiere est vide !");
+            peds = [];
+        }
+        if(matiere.length != 0) {
+            for (let i = 0; i < datas[niveau_max].length; i++) {
+                if(datas[niveau_max][i] != undefined) peds.push(datas[niveau_max][i].phase);
+            }
+        }
 
         return peds;
     }

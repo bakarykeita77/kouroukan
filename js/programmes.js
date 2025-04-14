@@ -16,8 +16,10 @@ var niveaux_etudies = JSON.parse(sessionStorage.getItem('niveaux_etudies'));
 var niveau_max = JSON.parse(sessionStorage.getItem('niveau_max'));
 var niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
 var matiere_nouvellement_apprise = JSON.parse(sessionStorage.getItem('matiere_nouvellement_apprise'));
-var phases_etudiees_du_serveur = phasesEtudieesDuServeur();
-var phases_etudiees = JSON.parse(sessionStorage.getItem('phases_etudiees'));
+
+
+var phases_etudiees_du_serveur = phasesEtudieesDuServeur(datas[niveau_max]);
+var phases_etudiees = (datas[niveau_max].length == 0) ? [] : JSON.parse(sessionStorage.getItem('phases_etudiees'));
 var phases_distinctes = JSON.parse(sessionStorage.getItem('phases_distinctes'));
 var derniere_phase = sessionStorage.getItem('derniere_phase');
 var lesson_option = JSON.parse(localStorage.getItem('lesson_option'));
@@ -26,13 +28,9 @@ var option_retenue = JSON.parse(localStorage.getItem('option_retenue'));
 let phase_index = (phases_etudiees == null) ? 0 : phases_etudiees.length - 1;
 
 phases_etudiees = (phases_etudiees == null) ? [] : phases_etudiees;
-phases_etudiees = (phases_etudiees_du_serveur.length == 0) ? phases_etudiees : phases_etudiees_du_serveur;  
+phases_etudiees = (phases_etudiees_du_serveur.length == 0) ? phases_etudiees : phases_etudiees_du_serveur; 
 
 
-console.log("La variable datas est :");
-console.log(datas);
-console.log("Les phases étudiées sont : ");
-console.log(phases_etudiees);
 
 // localStorage.clear();
 
@@ -71,7 +69,7 @@ function selectionDuProgramme() {
     programme_matieres = document.getElementById('programme_matieres'); 
 }
 function chargementDuProgramme() {
-    
+   
     programme_matieres.innerHTML = programmeHTML();
 
     function programmeHTML() {
@@ -105,8 +103,7 @@ function chargementDuProgramme() {
             var matiere_nom = liste_de_matieres[i][1];
             var matiere_index = liste_de_matieres.indexOf(liste_de_matieres[i]);
             var niveau = matiere_index+1;                   
-    
-        
+           
             if(niveau_max === 0) {
 
                 var phases_lien = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max;
@@ -118,7 +115,7 @@ function chargementDuProgramme() {
             if(niveau_max > 0) {
                 
                 var phases_lien = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees+'&derniere_phase='+derniere_phase;
-             
+
                 if (niveau_max < matiere_index || $('#'+matiere_id).hasClass('a_apprendre')) {
                     if(matiere_index > 0) programme_html += '<li><a href="#">'+matiere_nom+'</a></li>\n';
                 }
@@ -193,9 +190,11 @@ function lessonOptions() {
     let option_du_serveur = optionDuServeur();
     
     option_retenue = (option_retenue ==null) ? option_du_serveur : option_retenue;
-    console.log('option_retenue = '+option_retenue);
-
+    
     let phase_lien = phaseLien();
+
+    console.log('option_retenue = '+option_retenue);
+    console.log('phase_lien = '+phase_lien);
 
     if(location.href.split('=')[1] == 'option') {
         $('.page_body').css('display','none');
@@ -212,8 +211,7 @@ function lessonOptions() {
             $('.page_body').css('display','none');
             location.assign(phase_lien);
         }
-        if(option_retenue == null) {
-            
+        if(option_retenue == null) {         
             if(datas[matiere_index].length === 0) {
                 $('.page_body').css('display','none');
                 chargerLesOptions();
@@ -309,11 +307,13 @@ function lessonOptions() {
     function stockerLOption() {
         $('#lesson_option_1').click(function() {
             localStorage.removeItem("option_retenue");
-            option_retenue = localStorage.setItem('option_retenue', JSON.stringify(1));
+            option_retenue = 1;
+            localStorage.setItem('option_retenue', JSON.stringify(option_retenue));
         });
         $('#lesson_option_2').click(function() {
             localStorage.removeItem("option_retenue");
-            option_retenue = localStorage.setItem('option_retenue', JSON.stringify(2));
+            option_retenue = 2;
+            localStorage.setItem('option_retenue', JSON.stringify(option_retenue));
         });
     }
     function afficherLessonOptions() {

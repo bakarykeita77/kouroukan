@@ -2,13 +2,15 @@
 session_start();
 
 if(isset($_SESSION["id"])) {
-    $matiere_id      = $_GET['matiere_id'];
-    $matiere_index   = $_GET['matiere_index'];
-    $matiere_nom     = $_GET['matiere_nom'];
-    $niveau          = $_GET['niveau'];
-    $niveau_max      = $_GET['niveau_max'];
+    $matiere_id = $_GET['matiere_id'];
+    $matiere_index = $_GET['matiere_index'];
+    $matiere_nom = $_GET['matiere_nom'];
+    $niveau = $_GET['niveau'];
+    $niveau_max = $_GET['niveau_max'];
     $phases_etudiees = ((integer)$matiere_index > 0) ? $_GET['phases_etudiees'] : "";
-    $lesson_option   = ((integer)$niveau <= 2) ? $_GET['lesson_option'] : 0;
+    if(isset($_GET['lesson_option'])) {
+        $lesson_option   = ((integer)$niveau <= 2) ? $_GET['lesson_option'] : 0;
+    }
 
     $chiffres = ['߀','߁','߂','߃','߄','߅','߆','߇','߈','߉'];
 ?>

@@ -1,6 +1,6 @@
 function parametrageDeLesson() {       
 
-/* Declaration des variables */  
+ /* Declaration des variables */  
     var datas = JSON.parse(sessionStorage.getItem('datas'));     
     var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));   // Voir programmes.js fonction storagesDuProgramme()
     let phase_id = JSON.parse(sessionStorage.getItem('phase_id'));
@@ -9,13 +9,12 @@ function parametrageDeLesson() {
 
     let option_retenue = JSON.parse(localStorage.getItem('option_retenue')); // Voir programmes.js : lessonOptions()
 
-    console.log(datas);
     
-/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/    
+ /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/    
     parametrage();
     affichageDeParametres();
  
-/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/    
+  /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/    
 
     function parametrage(){
      

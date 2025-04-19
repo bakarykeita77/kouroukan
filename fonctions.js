@@ -96,48 +96,48 @@
         element.css({'display':'block', 'width':0, 'height':0});
         element.animate({'width':largeur, 'height':hauteur}, temps);
     }
-    function afficherEvaluation() {
-        let td_total = $('#evaluation_body table td').length;
+    // function afficherEvaluation() {
+    //     let td_total = $('#evaluation_body table td').length;
 
-        masquer($('.direction'));
-        afficher($('.salle_de_classe'));
+    //     masquer($('.direction'));
+    //     afficher($('.salle_de_classe'));
 
-        masquer($('.course'));
-        setTimeout(() => { 
-            displayv($('.course'));
+    //     masquer($('.course'));
+    //     setTimeout(() => { 
+    //         displayv($('.course'));
 
-            $('#apprentissage_container').css('display','none');
-            $('#exercice_container').css('display','block');
-            $('#revision_container').css('display','none');
-            $('#evaluation_container').css('display','none');
+    //         $('#apprentissage_container').css('display','none');
+    //         $('#exercice_container').css('display','block');
+    //         $('#revision_container').css('display','none');
+    //         $('#evaluation_container').css('display','none');
                 
-            setTimeout(() => { displayv($('#evaluation_head')); }, 60);
-            setTimeout(() => { 
-                setTimeout(() => { 
-                    $('#evaluation_body').css({'display':'block'});
-                    affichageAnimeDeTableTd($('#evaluation_body table')); 
-                }, 60); 
-                setTimeout(() => { 
-                    $('#evaluation_foot').css('display','block'); 
-                    displayv($('#evaluation_dialogue_btns'));
-                    setTimeout(() => {
-                        $('#evaluation_question_btn').css('display','block'); 
-                        $('#evaluation_repetition_btn').css('display','none'); 
-                        $('#evaluation_correction_btn').css('display','none');
-                    }, 200); 
-                }, (400 + td_total*60)); 
-            }, 600);
-            setTimeout(() => { displayv($('#evaluation_progress_bar')); }, (1600 + td_total*60));
-            $('#evaluation_redirection_btns').css('display','none');
-        }, 50);
+    //         setTimeout(() => { displayv($('#evaluation_head')); }, 60);
+    //         setTimeout(() => { 
+    //             setTimeout(() => { 
+    //                 $('#evaluation_body').css({'display':'block'});
+    //                 affichageAnimeDeTableTd($('#evaluation_body table')); 
+    //             }, 60); 
+    //             setTimeout(() => { 
+    //                 $('#evaluation_foot').css('display','block'); 
+    //                 displayv($('#evaluation_dialogue_btns'));
+    //                 setTimeout(() => {
+    //                     $('#evaluation_question_btn').css('display','block'); 
+    //                     $('#evaluation_repetition_btn').css('display','none'); 
+    //                     $('#evaluation_correction_btn').css('display','none');
+    //                 }, 200); 
+    //             }, (400 + td_total*60)); 
+    //         }, 600);
+    //         setTimeout(() => { displayv($('#evaluation_progress_bar')); }, (1600 + td_total*60));
+    //         $('#evaluation_redirection_btns').css('display','none');
+    //     }, 50);
         
-        masquer($('#evaluation_redirection_btns'));
+    //     masquer($('#evaluation_redirection_btns'));
 
-        setTimeout(() => { 
-            setTimeout(() => { displayv($('#evaluation_dialogue_btns')); }, 300);
-            setTimeout(() => { displayv($('#evaluation_progress_bar'));  }, 600);
-        }, 1200);
-    }
+    //     setTimeout(() => { 
+    //         setTimeout(() => { displayv($('#evaluation_dialogue_btns')); }, 300);
+    //         // setTimeout(() => { displayv($('#evaluation_progress_bar'));  }, 600);
+    //     }, 1200);
+    // }
     function afficherEvaluationAlphabet() {
 
         $('#pratique_options').css('display','block');
@@ -389,29 +389,6 @@
             sessionStorage.setItem('phase_active_index',JSON.stringify(phase_active_index));
         }
     }
-    function chargerCorpsDePreAlphabet() {
-        $('#apprentissage_body').html(preApprentissageCorpsHTML());
-               
-        function preApprentissageCorpsHTML() {
-            var c = alphabet_nko[0];
-            c.push('');
-
-            var a_html = "<div id = 'table_pre_apprentissage'>\n";
-                for(var i=0;i<21;i+=7) {
-                    a_html += "<div class='pre_apprentissage_tr'>\n";
-                        for(var j=0;j<7;j++) a_html += "<span class='pre_apprentissage_td'>"+c[i+j]+"</span>\n";
-                    a_html += "</div>\n";
-                }
-                for(var k=21;k<28;k+=7){
-                    a_html += "<div class='pre_apprentissage_tr'>\n";
-                        for(var l=0;l<7;l++) a_html += "<span class='pre_apprentissage_td'>"+c[k+l]+"</span>\n";
-                    a_html += "</div>\n";
-                }
-            a_html += "</div>";
-              
-            return a_html;
-        }
-    }
     function chargerApprendrePreSyllabe() {
 
         chargerEnteteDePreSyllabe();
@@ -637,6 +614,29 @@
                 
                 function initialiserConsonnesChoisies() { consonnes_choisies.splice(0,consonnes_choisies.length); }
             }
+        }
+    }
+    function chargerCorpsDePreAlphabet() {
+        $('#apprentissage_body').html(preApprentissageCorpsHTML());
+               
+        function preApprentissageCorpsHTML() {
+            var c = alphabet_nko[0];
+            c.push('');
+
+            var a_html = "<div id = 'table_pre_apprentissage'>\n";
+                for(var i=0;i<21;i+=7) {
+                    a_html += "<div class='pre_apprentissage_tr'>\n";
+                        for(var j=0;j<7;j++) a_html += "<span class='pre_apprentissage_td'>"+c[i+j]+"</span>\n";
+                    a_html += "</div>\n";
+                }
+                for(var k=21;k<28;k+=7){
+                    a_html += "<div class='pre_apprentissage_tr'>\n";
+                        for(var l=0;l<7;l++) a_html += "<span class='pre_apprentissage_td'>"+c[k+l]+"</span>\n";
+                    a_html += "</div>\n";
+                }
+            a_html += "</div>";
+              
+            return a_html;
         }
     }
     function clearStorage() {

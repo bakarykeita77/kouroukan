@@ -71,7 +71,6 @@ function alphabet() {
             
             let lettres_apprises = JSON.parse(localStorage.getItem('lettres_apprises'));
             lettres_apprises = (lettres_apprises == null) ? [] : lettres_apprises;
-            
 
             lesson_d_apprentissage_pre_alphabet = (lesson_d_apprentissage_pre_alphabet == null) ? [] : lesson_d_apprentissage_pre_alphabet;
             lesson_d_exercice_pre_alphabet = (lesson_d_exercice_pre_alphabet == null) ? [] : lesson_d_exercice_pre_alphabet;
@@ -206,15 +205,15 @@ function alphabet() {
                 function apprendrePreAlphabet() {
 
                     rappelDuCercleActif();
-                    $('#cercles_des_partis_cadre span').on('mouseover', function() { $(this).removeClass('indicateur'); });
+                    // $('#cercles_des_partis_cadre span').on('mouseover', function() { $(this).removeClass('indicateur'); });
                     $('#cercles_des_partis_cadre span').click(function() {
-
+                        
                         cercle_actif = $(this);
                         cercle_index = $(this).index();
                         rang = cercle_actif.text();
-
-                        if(cercle_actif.attr('class') == 'cercle actif') {
-                            
+                 
+                        if(cercle_actif.attr('class') == 'cercle actif indicateur') {
+     
                             preparerPreAlphabet();
                             dispenserPreAlphabet();
         
@@ -233,6 +232,10 @@ function alphabet() {
                                 console.log(les_lettres_actives);
 
                                 clickable_td = (lesson_d_apprentissage_pre_alphabet == null) ? les_lettres_actives : lettres_apprises.concat(les_lettres_actives);
+
+                                sessionStorage.setItem('les_lettres_actives', JSON.stringify(les_lettres_actives));
+                                sessionStorage.setItem('clickable_td', JSON.stringify(clickable_td));
+
                                 initialiserPreApprentissageData();
 
 
@@ -510,12 +513,14 @@ function alphabet() {
 
                     $('.fermeture_pre').attr('id','fermeture_pre_exercice');
 
+                    les_lettres_actives = JSON.parse(sessionStorage.getItem('les_lettres_actives'));
                     lesson_d_exercice_pre_alphabet = JSON.parse(localStorage.getItem('lesson_d_exercice_pre_alphabet'));
                     lesson_d_exercice_pre_alphabet = (lesson_d_exercice_pre_alphabet == null) ? [] : lesson_d_exercice_pre_alphabet;
 
                     exercice_btn_id = $(this).attr('id');
                     questions_posees.splice(0,questions_posees.length);
                     exercice_pre_questions = malaxer(malaxer(les_lettres_actives));
+
                     total_exercice_questions = exercice_pre_questions.length;
                                     
                     chargerExercicePreAlphabet();
@@ -838,6 +843,7 @@ function alphabet() {
                     
                     $('.fermeture_pre').attr('id','fermeture_pre_revision');
                     
+                    clickable_td = JSON.parse(sessionStorage.getItem('clickable_td'));
                     lesson_d_evaluation_pre_alphabet = JSON.parse(localStorage.getItem('lesson_d_evaluation_pre_alphabet'));
                     lesson_d_evaluation_pre_alphabet = (lesson_d_evaluation_pre_alphabet == null) ? [] : lesson_d_evaluation_pre_alphabet;
 
@@ -846,7 +852,7 @@ function alphabet() {
                     total_evaluation_questions =  evaluation_pre_questions.length;
 
                     chargerEvaluationPreAlphabet();
-                    afficherEvaluationAlphabet();
+                    afficherEvaluationPreAlphabet();
                     evaluerPreAlphabet();
 
 
@@ -873,11 +879,11 @@ function alphabet() {
                             var revision_body_html =  lessonHTML(evaluation_pre_questions, '');
                             $('#revision_body').html(revision_body_html);
 
-                        /*revision body est chargé mais doit etre invisible jusqu'à l'éxécution de la fonction afficherEvaluationAlphabet()*/
+                         /*revision body est chargé mais doit etre invisible jusqu'à l'éxécution de la fonction afficherEvaluationPreAlphabet()*/
                             $('#revision_body td').css({'transform':'scale(0.75)', 'opacity':0});
                         }  
                     }
-                    function afficherEvaluationAlphabet() {
+                    function afficherEvaluationPreAlphabet() {
                 
                         afficherRevision();
                         gestionDePreEvaluationBtns();
@@ -916,8 +922,8 @@ function alphabet() {
                                     masquer($('#revision_repetition_btn'));
                                     masquer($('#revision_correction_btn'));
                                     
-                                    rendreActif($('#revision_question_btn'));
                                     afficher($('#revision_question_btn')); 
+                                    rendreActif($('#revision_question_btn'));
                                     
                                     if(total_questions_posees == total_evaluation_questions) { 
                                         masquer($('#revision_question_btn'));

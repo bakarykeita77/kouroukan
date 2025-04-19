@@ -267,14 +267,14 @@ if(isset($_SESSION["id"])) {
                                 <div class="dialogue_btns" id="evaluation_dialogue_btns">
                                     <div class="question_btn" id="evaluation_question_btn">
                                         <span class="question_label"></span>
-                                        <span class="question_total"></span>
+                                        <span class="question_total"></span> \
                                         <span class="question_ordre"></span>
                                         <span class="question_action"></span>
                                     </div>
                                     <div class="repetition_btn" id="evaluation_repetition_btn">
                                         <span class="question_label"></span>
                                         <span class="question_ordre"></span>
-                                        <span class="question_action"></span>
+                                        <span class="question_action"></span>ߠߊߡߍ߲߫ ߕߎ߲߯
                                     </div>
                                     <div class="correction_btn" id="evaluation_correction_btn">ߏ߬ ߛߊߞߍ߫</div>
                                     <div class="progress_bar_integre">

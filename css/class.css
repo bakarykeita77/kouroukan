@@ -14,7 +14,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     position: relative;
     font-weight: bold;
 }
-.actif, .active { 
+.actif:not(#evaluation_question_btn, #evaluation_repetition_btn, #evaluation_correction_btn), .active { 
     background-color: rgb(255,255,0); 
     color: #000;
     box-shadow: 0 0 0.5rem #666;

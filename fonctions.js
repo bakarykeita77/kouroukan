@@ -1425,13 +1425,15 @@ console.log(total_questions[i]);
         
         return nombre_converti.join('');
     }
-    function phasesEtudieesDuServeur(matiere) {
+    function phasesEtudieesDuServeur() {
 
         let datas = JSON.parse(sessionStorage.getItem('datas'));
         let niveau_max = JSON.parse(sessionStorage.getItem('niveau_max'));
+        niveau_max = (niveau_max == undefined) ? 0 : niveau_max;
         let peds = [];
 
-        niveau_max = (niveau_max == undefined) ? [] : niveau_max;
+        let matiere = datas[niveau_max];
+        matiere = (matiere == undefined) ? [] : matiere;
 
         if(matiere.length == 0) {
             console.log("Cette matiere est vide !");

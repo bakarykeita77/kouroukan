@@ -154,6 +154,10 @@ $('document').ready(function() {
             tout l'alphabet en une seule cours.
             Si l'option retenue est egal à 2, les phases s'affichent. L'étudiant apprend l'alphabet en differents cours.
             */
+                if(option_retenue == null) {
+                    $('.direction').css('display','block');
+                    $('.salle_de_classe').css('display','none');
+                }
                 if(option_retenue != null) {
                     if(option_retenue === 1) {
                         $('.direction').css('display','none');
@@ -179,6 +183,10 @@ $('document').ready(function() {
             modificationDuChoixDApprentissage();
 
             if(option_retenue == 2) {
+
+                $('.direction').css('display','none');
+                $('.salle_de_classe').css('display','block');
+
                 $('#phases_list li').on('click', function() {
 
                     phase_id = $(this).attr('id');
@@ -193,7 +201,7 @@ $('document').ready(function() {
                     sessionStorage.setItem('phase_nom', JSON.stringify(phase_nom));
                     sessionStorage.setItem('phase_index', JSON.stringify(phase_index));
                     sessionStorage.setItem("course_id", JSON.stringify(course_id));
-
+                    
                  /*--------------------------------------------------------------------*/ 
                         
                     // if(phase_class == "apprises") {
@@ -262,4 +270,4 @@ $('document').ready(function() {
                 }
             }
         }
-    });
+});

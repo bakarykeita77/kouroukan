@@ -6,6 +6,7 @@
 
 // Récupération du niveau d'avancement des études déterminé depuis accueil.js
 let datas = JSON.parse(sessionStorage.getItem('datas'));
+console.log(datas);
 let pre_apprentissage_alpabet_memoire = JSON.parse(localStorage.getItem('pre_apprentissage_alpabet_memoire'));
 let pre_exercice_alpabet_memoire = JSON.parse(localStorage.getItem('pre_exercice_alpabet_memoire'));
 let pre_evaluation_alpabet_memoire = JSON.parse(localStorage.getItem('pre_evaluation_alpabet_memoire'));
@@ -17,8 +18,9 @@ var niveau_max = JSON.parse(sessionStorage.getItem('niveau_max'));
 var niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
 var matiere_nouvellement_apprise = JSON.parse(sessionStorage.getItem('matiere_nouvellement_apprise'));
 
+datas[niveau_max] = (datas[niveau_max] == undefined) ? [] : datas[niveau_max];
 
-var phases_etudiees_du_serveur = phasesEtudieesDuServeur(datas[niveau_max]);
+var phases_etudiees_du_serveur = (datas[niveau_max].length == 0) ? [] : phasesEtudieesDuServeur(datas[niveau_max]);
 var phases_etudiees = (datas[niveau_max].length == 0) ? [] : JSON.parse(sessionStorage.getItem('phases_etudiees'));
 var phases_distinctes = JSON.parse(sessionStorage.getItem('phases_distinctes'));
 var derniere_phase = sessionStorage.getItem('derniere_phase');

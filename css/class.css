@@ -1,4 +1,4 @@
-
+ 
 html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 
 /* --------------------------------------------------------------------------------------------------------- */
@@ -285,7 +285,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     padding: 0;
     height: 100%;
     width: 100%;
-    background-color: rgba(0,0,0,0);
+    background-color: #fff;
     overflow: auto;
     box-sizing: border-box;
     z-index: 0;
@@ -1105,7 +1105,6 @@ del {
     margin: auto;
 }
 .table_parlante tr, .table_muette tr { 
-    position: relative; 
     width: 100%; 
     /* opacity: 0; */
 }

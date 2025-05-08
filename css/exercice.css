@@ -1,6 +1,5 @@
 
 #table_alphabet_exercice {
-    padding: 1rem;
     width: calc(100% - 2.25rem);
 }
 #table_alphabet_exercice td {
@@ -9,7 +8,7 @@
 #exercice_dialogue_btn div:active {
     box-shadow: none;
 }
-#exercice_progress_bar, #exercice_redirection_btns { top: 1.5rem; }
+#exercice_progress_bar, #exercice_redirection_btns { top: 1rem; }
 #revision_redirection_btns { top: 1.5rem; }
 
 

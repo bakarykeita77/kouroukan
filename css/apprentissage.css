@@ -248,8 +248,8 @@
 #exercice_body_cadre, #revision_body_cadre {
     position: relative;
     display: none;
-    top: 1rem;
-    height: calc(100% - 15rem);
+    top: 0.5rem;
+    height: calc(100% - 14rem);
     width: calc(100% - 4rem);
     max-width: 40rem;
     margin: auto;
@@ -309,7 +309,8 @@
     display: none;
     bottom: 0;
     margin: 0 auto;
-    width: 15rem;
+    width: 100%;
+    max-width: 20rem;
     height: 4rem;
     line-height: 4rem;
     text-align: center;

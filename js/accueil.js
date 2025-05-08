@@ -1,9 +1,9 @@
+$('document').ready(function() {
+      
  // Declaration et initialisation des variables
-	let niveau_actif = 1, niveau_en_cours = 1, niveaux_etudies = [], niveau_max = 0;
-	let phase_active = '', phase_en_cours = '', phases_etudiees = [], derniere_phase = '';
+	let niveau_en_cours = 1, niveau_max = 0;
+	let derniere_phase = '';
     let phases_distinctes = [], phases_1_distinctes = [], phases_2_distinctes = [], phases_3_distinctes = [], phases_4_distinctes = [];
-    let niveau_1_statut = "non_evalue", niveau_2_statut = "non_evalue", niveau_3_statut = "non_evalue", niveau_4_statut = "non_evalue";
-    var moyenne = 1;
 
     let niveau_1_phases = ["alphabet_apprentissage", "alphabet_exercice", "alphabet_evaluation"];
     let niveau_2_phases = ["syllabes_apprentissage", "syllabes_exercice", "syllabes_pratique", "syllabes_evaluation"];
@@ -162,3 +162,4 @@
      display($('#reception'));
 
     function afficherLogo() { $('#logo').css('display', 'block'); }
+});

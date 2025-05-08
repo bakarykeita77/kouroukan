@@ -67,18 +67,19 @@ if(isset($_SESSION["id"])) {
                 <div class="salle_de_classe">
                     
                  <!--Fermetre du cours--------------------------------------------------------------------------------------------------------------->
-                    <span class="fermeture" id="">&times;</span>
-                    
+                 <span class="fermeture" id="">&times;</span>
+                 
+                 <!--Modification alerte------------------------------------------------------------------------------------------------------------->
+                    <div class="modification_alerte">
+                        <div class="alerte_d_annulation">
+                            <h1>ߌ߬ߦߐ߬߹</h1>
+                            <p class="message_d_annulation">ߥߟߊ߬ߘߊ ߢߌ߲߬ ߓߍ߯ ߘߌߣߊ߬ ߖߐ߬ߛߌ߬. ߌ ߘߌߣߊ߬ ߊ߬ ߡߊߛߍ߬ߦߌ߫ ߟߋ߬.</p>
+                            <p><span>ߊ߬ ߖߐ߬ߛߌ߬</span><span>ߊ߬ ߕߏ߫ ߦߋ߲߬</span></p>
+                        </div>
+                    </div>
+
                  <!--cours--------------------------------------------------------------------------------------------------------------------------->
                     <div class="course">  
-
-                        <div class="modification_alerte">
-                            <div class="alerte_d_annulation">
-                                <h2>ߌ߬ߦߐ߬߹</h2>
-                                <p class="message_d_annulation">ߥߟߊ߬ߘߊ ߢߌ߲߬ ߓߍ߯ ߘߌߣߊ߬ ߖߐ߬ߛߌ߬. ߌ ߘߌߣߊ߬ ߊ߬ ߡߊߛߍ߬ߦߌ߫ ߟߋ߬.</p>
-                                <p><span>ߊ߬ ߖߐ߬ߛߌ߬</span><span>ߊ߬ ߕߏ߫ ߦߋ߲߬</span></p>
-                            </div>
-                        </div>
 
                      <!--apprentissage_container----------------------------------------------------------------------------------------------------->
                         <div id="apprentissage_container">
@@ -90,7 +91,7 @@ if(isset($_SESSION["id"])) {
                                         <p class="modificateur_de_choix_btn">&#8942;</p>
                                         <div class="modificateur_de_choix_message">
                                             <p>ߘߋ߲߰ߠߌ ߞߍߢߊ ߡߊߝߊ߬ߟߋ߲߬</p>
-                                            <div><button class="changer_option_btn">ߊ߬ߥߊ߬</button> <button id="pas_changer_option_btn">ߍ߬ߍ߲߫</button></div>
+                                            <div><button class="changer_option_btn">ߊ߬ߥߊ߬</button> <button class="pas_changer_option_btn">ߍ߬ߍ߲߫</button></div>
                                         </div>
                                     </div>
                                     <div class="notification_corps" id="apprentissage_notification_corps"></div>
@@ -125,7 +126,7 @@ if(isset($_SESSION["id"])) {
                                         
                                         <div class="modificateur_de_choix_message">
                                             <p>ߘߋ߲߰ߠߌ ߞߍߢߊ ߡߊߝߊ߬ߟߋ߲߬</p>
-                                            <div><button class="changer_option_btn">ߊ߬ߥߊ߬</button> <button id="pas_changer_option_btn">ߍ߬ߍ߲߫</button></div>
+                                            <div><button class="changer_option_btn">ߊ߬ߥߊ߬</button> <button class="pas_changer_option_btn">ߍ߬ߍ߲߫</button></div>
                                         </div>
                                     </div>
                                     <div class="notification_corps" id="exercice_notification_corps"></div>
@@ -168,7 +169,7 @@ if(isset($_SESSION["id"])) {
                                         <p class="modificateur_de_choix_btn">&#8942;</p>
                                         <div class="modificateur_de_choix_message">
                                             <p>ߘߋ߲߰ߠߌ ߞߍߢߊ ߡߊߝߊ߬ߟߋ߲߬</p>
-                                            <div><button class="changer_option_btn">ߊ߬ߥߊ߬</button> <button id="pas_changer_option_btn">ߍ߬ߍ߲߫</button></div>
+                                            <div><button class="changer_option_btn">ߊ߬ߥߊ߬</button> <button class="pas_changer_option_btn">ߍ߬ߍ߲߫</button></div>
                                         </div>
                                     </div>
                                     <div class="notification_corps" id="revision_notification_corps"></div>
@@ -212,7 +213,7 @@ if(isset($_SESSION["id"])) {
                                         <p class="modificateur_de_choix_btn">&#8942;</p>
                                         <div class="modificateur_de_choix_message">
                                             <p>ߘߋ߲߰ߠߌ ߞߍߢߊ ߡߊߝߊ߬ߟߋ߲߬</p>
-                                            <div><button class="changer_option_btn">ߊ߬ߥߊ߬</button> <button id="pas_changer_option_btn">ߍ߬ߍ߲߫</button></div>
+                                            <div><button class="changer_option_btn">ߊ߬ߥߊ߬</button> <button class="pas_changer_option_btn">ߍ߬ߍ߲߫</button></div>
                                         </div>
                                     </div>
                                     <div class="notification_corps" id="evaluation_notification_corps"></div>
@@ -336,14 +337,14 @@ if(isset($_SESSION["id"])) {
         <script src="../js/ton.js"></script>
         <script src="../js/chiffre.js"></script>
 
-        <!-- <script>
+        <script>
           document.write(
             '<script src="http://' +
               (location.host || '${1:localhost}').split(':')[0] +
               ':${2:8080}/livereload.js?snipver=1"></' +
               'script>'
           );
-        </script> -->
+        </script>
     </body>
 </html>
 

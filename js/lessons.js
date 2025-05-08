@@ -1,43 +1,46 @@
 $('document').ready(function() {
       
-    //Récupération des données, storées depuis accueil.js, sur l'apprenant  
+    /* Récupération des données, storées depuis accueil.js, sur l'apprenant */
         var datas = JSON.parse(sessionStorage.getItem('datas'));     
-        var data_apprentissage_alphabet = JSON.parse(sessionStorage.getItem('data_apprentissage_alphabet'));     
-        var lesson_d_apprentissage_alphabet_temporaire = JSON.parse(sessionStorage.getItem('lesson_d_apprentissage_alphabet_temporaire'));     
+        var data_apprentissage = JSON.parse(sessionStorage.getItem('data_apprentissage')); 
+        data_apprentissage = (data_apprentissage == null) ? {} : data_apprentissage; 
         var matiere_index = JSON.parse(sessionStorage.getItem('matiere_index'));
         var niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
         var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));
         var phases_etudiees = JSON.parse(sessionStorage.getItem('phases_etudiees'));
         var option_retenue = JSON.parse(localStorage.getItem('option_retenue')); 
-        var lesson_d_apprentissage_alphabet = [];
+        var lesson_d_apprentissage = data_apprentissage.lesson;
+        lesson_d_apprentissage = (lesson_d_apprentissage == null) ? [] : lesson_d_apprentissage;
+
         var rang = '';
-        var phase_id = '';
+        var phase_id = phaseId();
         var phase_nom = '';
         var phase_index = 0;
 
-        datas = (datas == null) ? [] : datas; //Pour éviter les erreurs de null.
-        datas[matiere_index] = (datas[matiere_index] == undefined) ? [] : datas[matiere_index]; //Pour éviter les erreurs d'undefined.
-        data_apprentissage_alphabet = (data_apprentissage_alphabet == null) ? [] : data_apprentissage_alphabet;
-        data_apprentissage_alphabet = (datas[matiere_index].length === 0) ? data_apprentissage_alphabet : datas;
-            
+        sessionStorage.setItem('phase_id', JSON.stringify(phase_id));
+
+        datas = (datas == null) ? [] : datas; /* Pour éviter les erreurs de null. */
+        datas[matiere_index] = (datas[matiere_index] == undefined) ? [] : datas[matiere_index]; /* Pour éviter les erreurs d'undefined. */
+        data_apprentissage = (data_apprentissage == null) ? [] : data_apprentissage;
         phases_etudiees = (phases_etudiees == null) ? [] : phases_etudiees;           
  
         console.log("La variable datas est :");
         console.log(datas);
         console.log("Les phases étudiées sont : ");
         console.log(phases_etudiees);
-        console.log('option_retenue = '+option_retenue);
+        console.log('data_apprentissage est :');
+        console.log(data_apprentissage);
+        console.log('option_retenue = '+option_retenue); 
 
     /*-------------------------------------------------------------------------------------------------------------------
        1)- La situation des études est faite par récupération et traitement des données reçues sur l'apprenant.
        2)- La liste des phases est établie en fonction du niveau d'étude de l'apprenant (selon les phases étudiées ou pas)
        3)- Le paramétrage conséquent est défini pour la leçon future.
-       4)- Les phases s'affichent et
-       5)- On peut surfer
+       4)- Les phases s'affichent
    
     /*-----------------------------------------------------------------------------------------------------------------*/
     
-        datas_length = (data_apprentissage_alphabet.length != 0) ? data_apprentissage_alphabet.length : 0;
+        datas_length = (data_apprentissage.length != 0) ? data_apprentissage.length : 0;
         if(datas_length === 0) {  matiere_index = 0; niveau_en_cours = 1; }
     
     /*-----------------------------------------------------------------------------------------------------------------*/
@@ -49,6 +52,27 @@ $('document').ready(function() {
 
     /*-----------------------------------------------------------------------------------------------------------------*/
         
+        function phaseId() {
+            
+            let pi = '';
+
+            if(matiere_index === 0) {
+                switch(phases_etudiees.length) {
+                    case 0 : pi = "alphabet_apprentissage"; break;
+                    case 1 : pi = "alphabet_exercice"; break;
+                    case 2 : pi = "alphabet_evaluation"; break;
+                }  
+            }
+            if(matiere_index === 1) {
+                switch(phases_etudiees.length) {
+                    case 0 : pi = "syllabe_apprentissage"; break;
+                    case 1 : pi = "syllabe_exercice"; break;
+                    case 2 : pi = "syllabe_evaluation"; break;
+                }  
+            }
+
+            return pi;
+        }
         function phases() {
           
             let all_options = JSON.parse(localStorage.getItem('all_options')); 
@@ -59,9 +83,11 @@ $('document').ready(function() {
             actualiserTitre();
             stylesDesPhases();
             afficherLesPhases();
+            phaseActive();
             
                 
             function chargerPhases() { 
+
                 $('.phases_container').html(phasesHTML()); 
 
                 function phasesHTML() {
@@ -69,28 +95,34 @@ $('document').ready(function() {
                     var lesson_id = $('.lesson_title').attr('id');
                     lesson_id = $.trim(lesson_id);       
                     
-                // Liste des phases
+                /* Liste des phases */
                     var content = '<ul class="phases" id="phases_list">';
+                    let li_id = "";
+
                     if(matiere_index == 0) {
-                        for(var i=0;i<2;i++){
+                        for(var i=0;i<2;i++) {
+
                             phase_id = liste_de_phases[i][0];
                             phase_nom = liste_de_phases[i][1];
-                        
-                            content += '<li id="'+lesson_id+'_'+phase_id+'">'+phase_nom+'</li>';
+                            li_id = lesson_id+'_'+phase_id;
+                     
+                            content += '<li id="'+li_id+'">'+phase_nom+'</li>';
                         }
                         for(var j=3;j<liste_de_phases.length;j++){
                             phase_id = liste_de_phases[j][0];
                             phase_nom = liste_de_phases[j][1];
+                            li_id = lesson_id+'_'+phase_id;
                             
-                            content += '<li id="'+lesson_id+'_'+phase_id+'">'+phase_nom+'</li>';
+                            content += '<li id="'+li_id+'">'+phase_nom+'</li>';
                         }
                     }
                     if(matiere_index > 0) {
                         for(var i=0;i<liste_de_phases.length;i++){
                             phase_id = liste_de_phases[i][0];
                             phase_nom = liste_de_phases[i][1];
+                            li_id = lesson_id+'_'+phase_id;
                                 
-                            content += '<li id="'+lesson_id+'_'+phase_id+'">'+phase_nom+'</li>';
+                            content += '<li id="'+li_id+'">'+phase_nom+'</li>';
                         }
                     }
                     content += '</ul>';
@@ -102,7 +134,7 @@ $('document').ready(function() {
 
                 let lesson_status = lessonStatus();
 
-                lesson = (data_apprentissage_alphabet.length === 0) ? [] : data_apprentissage_alphabet.lesson;
+                lesson = (data_apprentissage.length === 0) ? [] : data_apprentissage.lesson;
 
                 $.each($('#phases_list li'), function() {
                     
@@ -149,11 +181,11 @@ $('document').ready(function() {
             }
             function afficherLesPhases() {
 
-            /*
-            Si l'option retenue est egal à 1, les phases ne s'affichent pas. L'étudiant est dirigé directement en classe ou il apprend 
-            tout l'alphabet en une seule cours.
-            Si l'option retenue est egal à 2, les phases s'affichent. L'étudiant apprend l'alphabet en differents cours.
-            */
+             /*
+                Si l'option retenue est egal à 1, les phases ne s'affichent pas. L'étudiant est dirigé directement en classe ou il apprend 
+                tout l'alphabet en une seule cours.
+                Si l'option retenue est egal à 2, les phases s'affichent. L'étudiant apprend l'alphabet en differents cours.
+             */
                 if(option_retenue == null) {
                     $('.direction').css('display','block');
                     $('.salle_de_classe').css('display','none');
@@ -162,13 +194,10 @@ $('document').ready(function() {
                     if(option_retenue === 1) {
                         $('.direction').css('display','none');
                         $('.salle_de_classe').css('display','block');
-                        alphabet();
                     }
                     if(option_retenue === 2) {
-                        setTimeout(() => {
-                            $('.direction').css('display','block');
-                            $('.salle_de_classe').css('display','none');
-                        });
+                        $('.direction').css('display','block');
+                        $('.salle_de_classe').css('display','none');
                     }
                 }
 
@@ -176,6 +205,29 @@ $('document').ready(function() {
                 setTimeout(() => { displayv($('.lesson_title')); }, 300);
                 setTimeout(() => { displayv($('.phases_container')); }, 500);
                 setTimeout(() => { displayv($('#travaux_container')); }, 700);
+            }
+            function phaseActive() {
+                let phase_active = '';
+                $('#phases_list li').click((e) => {
+                    phase_active = e.target;
+                    let phase_active_class = phase_active.className;
+                    
+                    switch(phase_active_class) {
+                        case 'apprises' : phaseApprise(); break;
+                        case 'active' : phaseEnCours(); break;
+                        case 'a_apprendre' : phaseAApprendre(); break;
+                    }
+
+                    function phaseApprise() {
+                        console.log('apprise');
+                    }
+                    function phaseEnCours() {
+                        console.log('en cours');
+                    }
+                    function phaseAApprendre() {
+                        console.log('à apprendre');
+                    }
+                });
             } 
         }
         function matiere() {
@@ -183,10 +235,6 @@ $('document').ready(function() {
             modificationDuChoixDApprentissage();
 
             if(option_retenue == 2) {
-
-                $('.direction').css('display','none');
-                $('.salle_de_classe').css('display','block');
-
                 $('#phases_list li').on('click', function() {
 
                     phase_id = $(this).attr('id');
@@ -229,14 +277,10 @@ $('document').ready(function() {
                 function affichageDeModificateurDeChoix() {
                     $('.modificateur_de_choix_btn').click(() => {
                         console.log("Volonté de changer l'option d'apprentissage !");
-                        if($('.modificateur_de_choix_message').css('display') == 'none') { 
-                            afficher($('.modificateur_de_choix_message'));
-                        }else{
-                            masquer($('.modificateur_de_choix_message'));
-                        }
+                        afficher($('.modificateur_de_choix_message'));
                     });
 
-                    $('#pas_changer_option_btn, #changer_option_btn').click(() => { masquer($('.modificateur_de_choix_message')); });   
+                    $('.pas_changer_option_btn, .changer_option_btn').click(() => { masquer($('.modificateur_de_choix_message')); });   
                 }
                 function modificationDuChoix() {
                     $('.changer_option_btn').click(() => { 
@@ -244,28 +288,34 @@ $('document').ready(function() {
                         $('.modification_alerte').css('display','block');
                         console.log("Volonté de changer l'option confirmée !\n\nAttention !\nLa lesson en cours sera annulée de façon irreversible.");
 
+                        datas = [];
+                                   
                         $('.modification_alerte span:nth-child(1)').click(() => { 
-                            $('.modification_alerte').css('display','none'); 
+                                              
+                            data_apprentissage = null;
+                            lesson_d_apprentissage = [];
 
-                            datas = [];
-                            data_apprentissage_alphabet = null;
-                            lesson_d_apprentissage_alphabet = [];
-                            lesson_d_apprentissage_alphabet_temporaire = null;
                             phases_etudiees = [];
+                            localStorage.removeItem("option_retenue");
+                            option_retenue = null;
 
                             sessionStorage.setItem('datas', JSON.stringify(datas));
-                            sessionStorage.setItem('data_apprentissage_alphabet', JSON.stringify(data_apprentissage_alphabet));
-                            sessionStorage.setItem('lesson_d_apprentissage_alphabet', JSON.stringify(lesson_d_apprentissage_alphabet));
-                            sessionStorage.setItem('lesson_d_apprentissage_alphabet_temporaire', JSON.stringify(lesson_d_apprentissage_alphabet_temporaire));
+                            sessionStorage.setItem('data_apprentissage', JSON.stringify(data_apprentissage));
+                            sessionStorage.setItem('lesson_d_apprentissage', JSON.stringify(lesson_d_apprentissage));
                             sessionStorage.setItem('phases_etudiees', JSON.stringify(phases_etudiees));
-
-                            location.assign('programmes.php?changer=option');
+                            localStorage.setItem('option_retenue', JSON.stringify(option_retenue));
+console.log(option_retenue);
+                            location.assign('programmes.php?changer=option'); 
                         });
                         $('.modification_alerte span:nth-child(2)').click(() => { 
-                            $('.modification_alerte, .modificateur_de_choix_message').css('display','none');
-                            console.log("Volonté de changer l'option annulée !");
+                            $('.modification_alerte').css('display','none');
+                            console.log("Non ! N'ennuler pas.");
                         });
-
+                        
+                    });
+                    $('.pas_changer_option_btn').click(() => { 
+                        $('.modification_alerte, .modificateur_de_choix_message').css('display','none');
+                        console.log("Volonté de changer l'option annulée !");
                     });
                 }
             }

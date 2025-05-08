@@ -86,7 +86,10 @@
     }
     function afficher(element) {
         masquer(element);
-        setTimeout(function() { element.css({ 'display':'block' }); }, 100); 
+        setTimeout(function() { element.css({ 
+            'display':'block', 
+            'transition':'0.3s' 
+        }); }, 100); 
         setTimeout(function() { element.css({
             'transform':'scale(1)', 
             'opacity':1
@@ -785,7 +788,7 @@
             'transform-origin':'0 0',
             'transform':'scaleY(0.75)'
         });
-        setTimeout(() => { element.css({'opacity':1, 'transform':'scaleY(1)'}); }, 50);
+        setTimeout(() => { element.css({'opacity':1, 'transform':'scaleY(1)'}); }, 100);
     }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/

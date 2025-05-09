@@ -2166,7 +2166,7 @@ function alphabet() {
                                 var q_actiom = 'ߟߊߡߍ߲߫';
 
                                 $('.question_label').html( q_label );
-                                $('.question_total').html( q_total+' \\ ' );
+                                $('.question_total').html( q_total+' \ ' );
                                 $('.question_ordre').html( q_ordre + q_rang );
                                 $('.question_action').html( q_actiom );
                         
@@ -2321,8 +2321,8 @@ function alphabet() {
                                             evaluation_html += '<div><span>'+n+'</span><span>'+q+'</span><span>'+r+'</span><span>'+parseIntNko(p)+'</span></div>\n';
         
                                             $('#evaluation_fiche_body').html(evaluation_html);
-                                            $('#evaluation_total_point').html(parseIntNko(note_d_evaluation));
-                                            $('#evaluation_pourcentage_point').html('%'+parseIntNko(note_d_evaluation*100/nbr_max_de_questions_a_poser));
+                                            $('#total_point_d_evaluation').html(parseIntNko(note_d_evaluation));
+                                            $('#pourcentage_point_d_evaluation').html('%'+parseIntNko(note_d_evaluation*100/nbr_max_de_questions_a_poser));
                                         }                                    
                                         function marquerReponseEvaluation() {    
                                             if(reponse_evaluation.join('') == question_evaluation) {

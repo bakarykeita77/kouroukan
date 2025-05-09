@@ -14,6 +14,8 @@ $('document').ready(function() {
     var niveau_max = JSON.parse(sessionStorage.getItem('niveau_max'));
     var niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
     var matiere_nouvellement_apprise = JSON.parse(sessionStorage.getItem('matiere_nouvellement_apprise'));
+    
+    let data_apprentissage_alphabet = JSON.parse(sessionStorage.getItem('data_apprentissage_alphabet'));
 
     datas[niveau_max] = (datas[niveau_max] == undefined) ? [] : datas[niveau_max];
 

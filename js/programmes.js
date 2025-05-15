@@ -8,27 +8,35 @@ $('document').ready(function() {
 
     /* Récupération du niveau d'avancement des études déterminé depuis accueil.js */
     let datas = JSON.parse(sessionStorage.getItem('datas'));
-    console.log(datas);
 
     var niveaux_etudies = JSON.parse(sessionStorage.getItem('niveaux_etudies'));
     var niveau_max = JSON.parse(sessionStorage.getItem('niveau_max'));
     var niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
     var matiere_nouvellement_apprise = JSON.parse(sessionStorage.getItem('matiere_nouvellement_apprise'));
-    
     let data_apprentissage_alphabet = JSON.parse(sessionStorage.getItem('data_apprentissage_alphabet'));
 
     datas[niveau_max] = (datas[niveau_max] == undefined) ? [] : datas[niveau_max];
 
     var phases_etudiees_du_serveur = (datas[niveau_max].length == 0) ? [] : phasesEtudieesDuServeur(datas[niveau_max]);
     var phases_etudiees = (datas[niveau_max].length == 0) ? [] : JSON.parse(sessionStorage.getItem('phases_etudiees'));
-    var derniere_phase = sessionStorage.getItem('derniere_phase');
-    var option_retenue = JSON.parse(localStorage.getItem('option_retenue'));
 
-    let phase_index = (phases_etudiees == null) ? 0 : phases_etudiees.length - 1;
+    let phase_index = (phases_etudiees == null) ? 0 : phases_etudiees.length;
+    var option_retenue = (datas[niveau_max].length === 0) ? null : JSON.parse(localStorage.getItem('option_retenue')); 
+    localStorage.setItem("option_retenue", JSON.stringify(option_retenue));
 
     phases_etudiees = (phases_etudiees == null) ? [] : phases_etudiees;
     phases_etudiees = (phases_etudiees_du_serveur.length == 0) ? phases_etudiees : phases_etudiees_du_serveur; 
 
+    console.log('datas est :');
+    console.log(datas);
+    console.log('matiere est :');
+    console.log(datas[niveau_max]);
+    console.log('niveau_max est :');
+    console.log(niveau_max);
+    console.log('phases_etudiees est :');
+    console.log(phases_etudiees);
+    console.log('option_retenue est :');
+    console.log(option_retenue);
 
     // localStorage.clear();
 
@@ -112,7 +120,7 @@ $('document').ready(function() {
                 
                 if(niveau_max > 0) {
                     
-                    var phases_lien = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees+'&derniere_phase='+derniere_phase;
+                    var phases_lien = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees;
 
                     if (niveau_max < matiere_index || $('#'+matiere_id).hasClass('a_apprendre')) {
                         if(matiere_index > 0) programme_html += '<li><a href="#">'+matiere_nom+'</a></li>\n';
@@ -202,7 +210,7 @@ $('document').ready(function() {
             
         $('#programme_ul li:nth-child(1), #programme_ul li:nth-child(2)').click(function() {
             let matiere_index = $(this).index();
-        
+    
             if(option_retenue != null) {
                 $('.page_body').css('display','none');
                 location.assign(phase_lien);
@@ -235,13 +243,13 @@ $('document').ready(function() {
         
 
         function optionDuServeur() {
-            datas[matiere_index] = (datas[matiere_index] == null) ? [] : datas[matiere_index];
+         /* Si datas[matiere_index].length est différent de 0 cela veut dire que la leçon est étudiée par étapes donc option retenue est 2 */
             let option = (datas[matiere_index].length === 0) ? null : 2;
             return option;
         }
         function phaseLien() {
             let phase_lien_1 = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+0+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max+'&lesson_option='+option_retenue;
-            let phase_lien_2 = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+1+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees+'&derniere_phase='+derniere_phase+'&lesson_option='+option_retenue;
+            let phase_lien_2 = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+1+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees+'&lesson_option='+option_retenue;
             let pl = '';
             pl = (niveau_max == 0) ? phase_lien_1 : phase_lien_2;
             return pl;

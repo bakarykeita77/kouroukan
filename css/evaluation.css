@@ -209,7 +209,7 @@
 }
 #evaluation_fiche_head span { font-size: 0.8rem; height: 1rem; }
 #evaluation_fiche_body { 
-    min-height: 1.5rem;
+    min-height: 6.3rem;
     background-color: #fff;
     border: 1px solid transparent;
     border-top-color: #ccc;

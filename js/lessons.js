@@ -8,21 +8,23 @@ $('document').ready(function() {
         var niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
         var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));
         var phases_etudiees = JSON.parse(sessionStorage.getItem('phases_etudiees'));
-        var option_retenue = JSON.parse(localStorage.getItem('option_retenue')); 
         var lesson_d_apprentissage = data_apprentissage.lesson;
         lesson_d_apprentissage = (lesson_d_apprentissage == null) ? [] : lesson_d_apprentissage;
 
         var rang = '';
-        var phase_id = phaseId();
+        var phase_li_id = phaseLiId();
         var phase_nom = '';
         var phase_index = 0;
 
-        sessionStorage.setItem('phase_id', JSON.stringify(phase_id));
+        sessionStorage.setItem('phase_li_id', JSON.stringify(phase_li_id));
 
         datas = (datas == null) ? [] : datas; /* Pour éviter les erreurs de null. */
         datas[matiere_index] = (datas[matiere_index] == undefined) ? [] : datas[matiere_index]; /* Pour éviter les erreurs d'undefined. */
         data_apprentissage = (data_apprentissage == null) ? [] : data_apprentissage;
-        phases_etudiees = (phases_etudiees == null) ? [] : phases_etudiees;           
+        phases_etudiees = (phases_etudiees == null) ? [] : phases_etudiees;   
+        
+        var option_retenue = JSON.parse(localStorage.getItem("option_retenue"));
+        // option_retenue = (datas[matiere_index].length === 0) ? null : JSON.parse(localStorage.getItem('option_retenue')); 
  
         console.log("La variable datas est :");
         console.log(datas);
@@ -52,26 +54,26 @@ $('document').ready(function() {
 
     /*-----------------------------------------------------------------------------------------------------------------*/
         
-        function phaseId() {
+        function phaseLiId() {
             
-            let pi = '';
+            let pli = '';
 
             if(matiere_index === 0) {
                 switch(phases_etudiees.length) {
-                    case 0 : pi = "alphabet_apprentissage"; break;
-                    case 1 : pi = "alphabet_exercice"; break;
-                    case 2 : pi = "alphabet_evaluation"; break;
+                    case 0 : pli = "alphabet_apprentissage"; break;
+                    case 1 : pli = "alphabet_exercice"; break;
+                    case 2 : pli = "alphabet_evaluation"; break;
                 }  
             }
             if(matiere_index === 1) {
                 switch(phases_etudiees.length) {
-                    case 0 : pi = "syllabe_apprentissage"; break;
-                    case 1 : pi = "syllabe_exercice"; break;
-                    case 2 : pi = "syllabe_evaluation"; break;
+                    case 0 : pli = "syllabe_apprentissage"; break;
+                    case 1 : pli = "syllabe_exercice"; break;
+                    case 2 : pli = "syllabe_evaluation"; break;
                 }  
             }
 
-            return pi;
+            return pli;
         }
         function phases() {
           
@@ -95,34 +97,34 @@ $('document').ready(function() {
                     var lesson_id = $('.lesson_title').attr('id');
                     lesson_id = $.trim(lesson_id);       
                     
-                /* Liste des phases */
+                 /* Liste des phases */
                     var content = '<ul class="phases" id="phases_list">';
-                    let li_id = "";
+                    let phase_id = "";
 
                     if(matiere_index == 0) {
                         for(var i=0;i<2;i++) {
 
                             phase_id = liste_de_phases[i][0];
                             phase_nom = liste_de_phases[i][1];
-                            li_id = lesson_id+'_'+phase_id;
+                            phase_li_id = lesson_id+'_'+phase_id;
                      
-                            content += '<li id="'+li_id+'">'+phase_nom+'</li>';
+                            content += '<li id="'+phase_li_id+'">'+phase_nom+'</li>';
                         }
                         for(var j=3;j<liste_de_phases.length;j++){
                             phase_id = liste_de_phases[j][0];
                             phase_nom = liste_de_phases[j][1];
-                            li_id = lesson_id+'_'+phase_id;
+                            phase_li_id = lesson_id+'_'+phase_id;
                             
-                            content += '<li id="'+li_id+'">'+phase_nom+'</li>';
+                            content += '<li id="'+phase_li_id+'">'+phase_nom+'</li>';
                         }
                     }
                     if(matiere_index > 0) {
                         for(var i=0;i<liste_de_phases.length;i++){
                             phase_id = liste_de_phases[i][0];
                             phase_nom = liste_de_phases[i][1];
-                            li_id = lesson_id+'_'+phase_id;
+                            phase_li_id = lesson_id+'_'+phase_id;
                                 
-                            content += '<li id="'+li_id+'">'+phase_nom+'</li>';
+                            content += '<li id="'+phase_li_id+'">'+phase_nom+'</li>';
                         }
                     }
                     content += '</ul>';
@@ -163,8 +165,8 @@ $('document').ready(function() {
                 let li = $('#phases_list li');
                 let indice = 0, ls = "";
                 $.each(li, function() { 
-                    let li_id = $(this).attr('id');
-                    indice = ($.inArray(li_id, phases_etudiees) === -1) ? indice : indice+=1;
+                    let phase_li_id = $(this).attr('id');
+                    indice = ($.inArray(phase_li_id, phases_etudiees) === -1) ? indice : indice+=1;
                 });              
                 
                 if(indice === 0) ls = "lesson_a_etudier";
@@ -198,13 +200,13 @@ $('document').ready(function() {
                     if(option_retenue === 2) {
                         $('.direction').css('display','block');
                         $('.salle_de_classe').css('display','none');
+
+                        setTimeout(() => { displayv($('#niveau_d_etude')); }, 100);
+                        setTimeout(() => { displayv($('.lesson_title')); }, 300);
+                        setTimeout(() => { displayv($('.phases_container')); }, 500);
+                        setTimeout(() => { displayv($('#travaux_container')); }, 700);
                     }
                 }
-
-                setTimeout(() => { displayv($('#niveau_d_etude')); }, 100);
-                setTimeout(() => { displayv($('.lesson_title')); }, 300);
-                setTimeout(() => { displayv($('.phases_container')); }, 500);
-                setTimeout(() => { displayv($('#travaux_container')); }, 700);
             }
             function phaseActive() {
                 let phase_active = '';
@@ -237,15 +239,15 @@ $('document').ready(function() {
             if(option_retenue == 2) {
                 $('#phases_list li').on('click', function() {
 
-                    phase_id = $(this).attr('id');
+                    phase_li_id = $(this).attr('id');
                     phase_nom = $(this).html();
                     phase_index = $(this).index();
 
                     var phase_class = $(this).attr('class');
-                    var course_id = phase_id.split('_')[1];
+                    var course_id = phase_li_id.split('_')[1];
                 
                     sessionStorage.setItem('phase_class', JSON.stringify(phase_class));
-                    sessionStorage.setItem('phase_id', JSON.stringify(phase_id));
+                    sessionStorage.setItem('phase_li_id', JSON.stringify(phase_li_id));
                     sessionStorage.setItem('phase_nom', JSON.stringify(phase_nom));
                     sessionStorage.setItem('phase_index', JSON.stringify(phase_index));
                     sessionStorage.setItem("course_id", JSON.stringify(course_id));
@@ -289,9 +291,9 @@ $('document').ready(function() {
                         console.log("Volonté de changer l'option confirmée !\n\nAttention !\nLa lesson en cours sera annulée de façon irreversible.");
 
                         datas = [];
-                                   
+                                    
                         $('.modification_alerte span:nth-child(1)').click(() => { 
-                                              
+                                            
                             data_apprentissage = null;
                             lesson_d_apprentissage = [];
 
@@ -304,7 +306,7 @@ $('document').ready(function() {
                             sessionStorage.setItem('lesson_d_apprentissage', JSON.stringify(lesson_d_apprentissage));
                             sessionStorage.setItem('phases_etudiees', JSON.stringify(phases_etudiees));
                             localStorage.setItem('option_retenue', JSON.stringify(option_retenue));
-console.log(option_retenue);
+
                             location.assign('programmes.php?changer=option'); 
                         });
                         $('.modification_alerte span:nth-child(2)').click(() => { 

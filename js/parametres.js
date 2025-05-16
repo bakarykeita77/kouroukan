@@ -324,9 +324,10 @@ function parametrageDeLesson() {
             var pratique_html      = pratiqueHTML();
             var evaluation_html    = evaluationHTML();
 
+console.log(phase_id);
             let phase = (phase_id == null) ? 'apprentissage' : phase_id.split('_')[1];
 
-         // Rechargement du tableau noir avec les caractères cochés
+         /* Rechargement du tableau noir avec les caractères cochés */
             switch(phase) {
                 case 'apprentissage' : $('#apprentissage_body').html(apprentissage_html); break;
                 case 'exercice' : $('#exercice_body' ).html(exercice_html); break;

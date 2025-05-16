@@ -30,10 +30,6 @@ function alphabet() {
    
     if(niveau_actif === 1) {
 
-        let lesson_d_apprentissage_alphabet_du_serveur = lessonDApprentissagePreAlphabet();
-        let lesson_d_exercice_alphabet_du_serveur = lessonDExercicePreAlphabet();
-        let lesson_d_evaluation_alphabet_du_serveur = lessonDEvaluationPreAlphabet();
-        
         phases_etudiees = (phases_etudiees == null) ? [] : phases_etudiees;
                     
         if(option_retenue != null) {
@@ -1351,9 +1347,6 @@ function alphabet() {
         }
         function alphabetNko() {
 
-            let apprentissage_alphabet_stocker_au_serveur = {};
-            let exercice_alphabet_stocker_au_serveur = {};
-            let evaluation_alphabet_stocker_au_serveur = {}
 
             let phase_li_id = JSON.parse(sessionStorage.getItem('phase_li_id'));
             let nbr_raisonnable_de_click = 1;
@@ -1371,8 +1364,13 @@ function alphabet() {
 
                     console.log("Apprentissage d'alphabet");  
                     
+                    let phase_id = "alphabet_apprentissage";
+                    sessionStorage.setItem("phase_id", JSON.stringify(phase_id));
+                    let apprentissage_alphabet_stocker_au_serveur = {};
                     let date_d_apprentissage_alphabet_du_serveur = dateAcuelle(), niveau_d_apprentissage_alphabet_du_serveur = 1, phase_d_apprentissage_alphabet_du_serveur = phase_li_id, lesson_d_apprentissage_alphabet_du_serveur = [], note_d_apprentissage_alphabet_du_serveur = 0;
                     
+                    lesson_d_apprentissage_alphabet_du_serveur = lessonDApprentissagePreAlphabet();
+
                     if(datas.length != 0) {
                         date_d_apprentissage_alphabet_du_serveur = (datas[0][0] == undefined) ? dateAcuelle() : datas[0][0].date;
                         niveau_d_apprentissage_alphabet_du_serveur = (datas[0][0] == undefined) ? 1 : datas[0][0].niveau;
@@ -1729,7 +1727,14 @@ function alphabet() {
             function exerciceAlphabet() {
                 $('#alphabet_exercice').click(() => {
 
+                    console.log("Début d'Exercice d'alphabet");
+
+                    let phase_id = "alphabet_exercice";
+                    sessionStorage.setItem("phase_id", JSON.stringify(phase_id));
+                    let exercice_alphabet_stocker_au_serveur = {};
                     let date_d_exercice_alphabet_du_serveur = '', niveau_d_exercice_alphabet_du_serveur = 1, phase_d_exercice_alphabet_du_serveur = phase_li_id, lesson_d_exercice_alphabet_du_serveur = [], note_d_exercice_alphabet_du_serveur = 0;
+                    
+                    lesson_d_exercice_alphabet_du_serveur = lessonDExercicePreAlphabet();
                     
                     if(datas.length != 0) {
                         date_d_exercice_alphabet_du_serveur = (datas[0][1] == undefined) ? dateAcuelle() : datas[0][1].date;
@@ -1745,8 +1750,6 @@ function alphabet() {
                         console.log("La leçon d'exercice alphabet est déjà faite.");
                         return;
                     }
-
-                    console.log("Début d'Exercice d'alphabet");
 
                     let lesson_d_exercice_alphabet = JSON.parse(sessionStorage.getItem('lesson_d_exercice_alphabet'));
                     lesson_d_exercice_alphabet = (lesson_d_exercice_alphabet == null) ? [] : lesson_d_exercice_alphabet;
@@ -1811,7 +1814,10 @@ function alphabet() {
                                 }, 1300);
                             }
                             function chargerCorpsDeExerciceAlphabet() { 
-                                parametrageDeLesson(); 
+                                parametrageDeLesson();
+    console.log($('#exercice_body').html());
+    console.log($('#table_alphabet_exercice').html());
+    console.log(exercice_questions); 
                                 reductionDesElementsDeExerciceCouranteA49(); // Réduction du nombre de questions à une quantité raisonable
                             }
                             function chargerPiedDeExerciceAlphabet() {
@@ -2066,11 +2072,17 @@ function alphabet() {
                 $('#alphabet_evaluation').click(() => {
                 
                     console.log("Début d'Evaluation d'alphabet");
+                    
+                    let phase_id = "alphabet_evaluation";
+                    sessionStorage.setItem("phase_id", JSON.stringify(phase_id));
+                    let evaluation_alphabet_stocker_au_serveur = {}
                                                 
                     $('#fermer_evaluation').on('click', function() { raffraichirLaPage(); });
 
                     let date_d_evaluation_alphabet_du_serveur = dateAcuelle(), niveau_d_evaluation_alphabet_du_serveur = 1, phase_d_evaluation_alphabet_du_serveur = '', lesson_d_evaluation_alphabet_du_serveur = [], note_d_evaluation_alphabet_du_serveur = 0;
                     
+                    lesson_d_evaluation_alphabet_du_serveur = lessonDEvaluationPreAlphabet();
+
                     if(datas.length != 0) {
 
                         date_d_evaluation_alphabet_du_serveur = (datas[0][2] == undefined) ? dateAcuelle() : datas[0][2].date;
@@ -2368,8 +2380,7 @@ function alphabet() {
                                         $('.repetition_btn').css('display','none');
                                     }
                                     function finDeEvaluationAlphabet() {
-                                        // if(q_index==nbr_max_de_questions_a_poser) {
-                                        if(q_index==3) {
+                                        if(q_index==nbr_max_de_questions_a_poser) {
 
                                             viderNotification();
 
@@ -2377,8 +2388,7 @@ function alphabet() {
                                             $('.question_btn').html('ߛߓߍߛߎ߲ ߞߘߐߓߐߟߌ ߓߘߊ߫ ߓߊ߲߫. ߌ ߞߎߟߎ߲ߖߋ߫߹'); 
                                             initialiserProgressBarIntegre();
                                             
-                                            // if(note_d_evaluation >= moyenne_d_evaluation) {
-                                            if(note_d_evaluation >= 2) {
+                                            if(note_d_evaluation >= moyenne_d_evaluation) {
                                                 viderNotification();
                                                 setTimeout(() => {
                                                     ecris('evaluation_notification_corps','\
@@ -2423,12 +2433,12 @@ function alphabet() {
                                                 sessionStorage.setItem('phase_nbr',JSON.stringify(phase_nbr));
                                                 console.log('Les données de Alphabet_evaluation sont envoyées à la base de données.');
                                                 
-                                                // if(index_phase_active === total_phase) {
+                                                if(index_phase_active === total_phase) {
                                                     sessionStorage.setItem('matiere_nouvellement_apprise',JSON.stringify(matiere_nom));
                                                     sessionStorage.setItem('niveau_max',JSON.stringify(niveau_max+1));                                        
                                                     sessionStorage.setItem('niveau_actif',JSON.stringify(niveau_max+2));
                                                     sessionStorage.setItem('phase_nbr',JSON.stringify(0));
-                                                // }
+                                                }
 
                                                 console.log("Les données de evaluation_alphabet sont envoyées à la base de données");
                                                 console.log("Les phases étudiées sont : ");

@@ -71,6 +71,7 @@
   ----------------------------------------------------------------------------------------------*/
     if($id_client != '' && $matiere != '' && $niveau == '' && $phase == '' && $lesson == '' && $note == '')                          getAllInfo($matiere,$id_client);
     if($id_client != '' && $matiere != '' && $niveau != '' && $phase != '' && $lesson != '' && $note != '')                          archiverLesson($id_client,$matiere,$niveau,$phase,$lesson,$note);     
+    if($id_client != '' && $matiere != '' && $niveau != '' && $phase != '' && $lesson != '' && $note != '' && $action != '')         if($action == 'modifier_matiere_en_cours') modifierLesson($id_client,$matiere,$niveau,$phase,$lesson,$note);     
     if($prenom != '' && $nom != '' && $naissance != '' && $sexe != '' && $adresse != '' && $email != '' && $pass != '')              addClient($prenom,$nom,$naissance,$sexe,$adresse,$email,$pass);       
     if($id_client != '' && $prenom != '' && $nom != '' && $naissance != '' && $sexe != '' && $adresse != '' && $email != '' && $pass != '') modifierClient($id_client,$prenom,$nom,$naissance,$sexe,$adresse,$email,$pass);           
     if($id_client != '')                                                                                                             getClient($id_client);       
@@ -191,7 +192,7 @@
 
 		return $emailsAndPass;
 	 }
-	function modifierClient($iid_clientd, $prenom, $nom, $naissance, $sexe, $adresse, $email, $pass) {
+	function modifierClient($id, $prenom, $nom, $naissance, $sexe, $adresse, $email, $pass) {
 		global $db;
 
 		$sql = "UPDATE users SET prenom=:prenom, nom=:nom, naissance=:naissance, sexe=:sexe, adresse=:adresse, email=:email, pass=:pass WHERE id=:id";
@@ -207,8 +208,26 @@
 		$requette->bindValue(':email',    $email,    PDO::PARAM_STR);
 		$requette->bindValue(':pass',     $pass,     PDO::PARAM_STR);
 
-		$utilisateurs =  $requette->execute();
+		$utilisateurs = $requette->execute();
 		return $utilisateurs;
+	 }
+	function modifierLesson($id_client,$matiere,$niveau,$phase,$lesson,$note) {
+		global $db;
+
+		$sql = "UPDATE ".$matiere." SET id_client=:id_client, matiere=:matiere, niveau=:niveau, phase=:phase, lesson=:lesson, note=:note WHERE id=:id";
+
+		$requette = $db->prepare($sql);
+
+		$requette->bindValue(':id',       $id,       PDO::PARAM_INT);
+		$requette->bindValue(':id_client',$id_client,PDO::PARAM_INT);
+		$requette->bindValue(':matiere',  $matiere,  PDO::PARAM_STR);
+		$requette->bindValue(':niveau',   $niveau,   PDO::PARAM_STR);
+		$requette->bindValue(':phase',    $phase,    PDO::PARAM_STR);
+		$requette->bindValue(':lesson',	  $lesson, 	 PDO::PARAM_STR);
+		$requette->bindValue(':note',     $note,     PDO::PARAM_STR);
+
+		$matiere_actualisee = $requette->execute();
+		return $matiere_actualisee;
 	 }
 	function nbrEmails() {
 		global $db;

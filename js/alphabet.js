@@ -83,10 +83,7 @@ function alphabet() {
 
                 chargerApprendrePreAlphabet();
                 afficherApprendrePreAlphabet();
-                tdStyle();
-                cerclesStyle();
                 apprendrePreAlphabet();
-                lectureSimpleDeLAlphabet();
             
 
                 function chargerApprendrePreAlphabet() {
@@ -127,55 +124,83 @@ function alphabet() {
                             return html_1;
                         }
                     }
+                    function cercleRang() {
+                        let cr = '';
+
+                        if(alphabet_tr_index === 1) { cr = 'ߝߟߐߡߊ'; }
+                        if(alphabet_tr_index === 2) { cr = 'ߝߌߟߊߣߊ߲'; }
+                        if(alphabet_tr_index === 3) { cr = 'ߛߓߊߣߊ߲'; }
+                        if(alphabet_tr_index === 4) { cr = 'ߣߊ߯ߣߌߣߊ߲'; }
+
+                        return cr;
+                    }
                 }
                 function afficherApprendrePreAlphabet() {
 
-                    masquer($('.direction'));
-                    afficher($('.salle_de_classe'));
-                    afficher($('.course'));
-            
-                    afficher($('#apprentissage_container'));
-                    masquer($('#exercice_container'));
-                    masquer($('#evaluation_container'));
-                    
-                    masquer($('#panneaux'));
-                    masquer($('#apprentissage_dialogue_btns'));
-                    masquer($('.redirection_btns'));
-            
-                    setTimeout(() => { displayv($('#apprentissage_head')); }, 400);
-            
-                    setTimeout(() => { 
-                        displayv($('#apprentissage_body')); 
-                        setTimeout(() => { afficherPreApprendreAlphabetTd(); }, 200);
-                    }, 600);
-            
-                    setTimeout(() => { 
-                        displayv($('#apprentissage_foot')); 
+                    affichageDApprendrePreAlphabet();
+                    tdStyle();
+                    cerclesStyle();
+
+                    function affichageDApprendrePreAlphabet() {
+                      
+                        masquer($('.direction'));
+                        afficher($('.salle_de_classe'));
+                        afficher($('.course'));
+                
+                        afficher($('#apprentissage_container'));
+                        masquer($('#exercice_container'));
+                        masquer($('#evaluation_container'));
                         
-                        displayv($('#apprentissage_dialogue_btns'));
-                        $('#pre_apprentissage_btns').css('display','flex'); 
-                        setTimeout(() => { afficherPreApprendreAlphabetCercles(); }, 400);
-                    }, 2600);
-            
-                    
-                    function afficherPreApprendreAlphabetTd() { 
-                        $('.pre_apprentissage_td, .table_parlante td').each(function() {
+                        masquer($('#panneaux'));
+                        masquer($('#apprentissage_dialogue_btns'));
+                        masquer($('.redirection_btns'));
+                
+                        setTimeout(() => { displayv($('#apprentissage_head')); }, 400);
+                
+                        setTimeout(() => { 
+                            displayv($('#apprentissage_body')); 
+                            setTimeout(() => { afficherPreApprendreAlphabetTd(); }, 200);
+                        }, 600);
+                
+                        setTimeout(() => { 
+                            displayv($('#apprentissage_foot')); 
+                            
+                            displayv($('#apprentissage_dialogue_btns'));
+                            $('#pre_apprentissage_btns').css('display','flex'); 
+                            setTimeout(() => { afficherPreApprendreAlphabetCercles(); }, 400);
+                        }, 2600);
+                
+                        
+                        function afficherPreApprendreAlphabetTd() { 
+                            $('.pre_apprentissage_td, .table_parlante td').each(function() {
 
-                            $(this).css('opaciy', 0);
+                                $(this).css('opaciy', 0);
 
-                            let row = $(this).parent();
-                            let tr_index = row.index();
-                            let td_index = $(this).index();
-                            let index = tr_index*7 + td_index;  // 7 est le nombre maximal de td par tr.
-                    
-                            setTimeout(() => { $(this).css('opacity', 1); }, index*60); // 60 en milli second est le temps qui sépare l'affichage des td.
-                        });
+                                let row = $(this).parent();
+                                let tr_index = row.index();
+                                let td_index = $(this).index();
+                                let index = tr_index*7 + td_index;  // 7 est le nombre maximal de td par tr.
+                        
+                                setTimeout(() => { $(this).css('opacity', 1); }, index*60); // 60 en milli second est le temps qui sépare l'affichage des td.
+                            });
+                        }
+                        function afficherPreApprendreAlphabetCercles() {
+                            $.each($('.cercle'), function(){
+                                cercle_index = $(this).index();
+                                setTimeout(() => { $(this).css({'opacity':1, 'transform':'scale(1.125)'}); }, cercle_index*80);
+                            });
+                        }  
                     }
-                    function afficherPreApprendreAlphabetCercles() {
-                        $.each($('.cercle'), function(){
-                            cercle_index = $(this).index();
-                            setTimeout(() => { $(this).css({'opacity':1, 'transform':'scale(1.125)'}); }, cercle_index*80);
-                        });
+                    function cerclesStyle() {
+                        if(lesson_d_apprentissage_pre_alphabet.length < 27) {
+                            
+                            cercle_actif = $('.cercle:nth-child('+alphabet_tr_index+')');
+                            indexer(cercle_actif);
+
+                            cercle_actif.prevAll().addClass('cercle_depasse');
+                            cercle_actif.nextAll().addClass('cercle_a_faire');
+                        }
+                        if(lesson_d_apprentissage_pre_alphabet.length == 27) $('.cercle').removeClass('indicateur').addClass('cercle_depasse');
                     }
                 }
                 function apprendrePreAlphabet() {
@@ -405,10 +430,26 @@ function alphabet() {
                     });
                     if(lesson_d_apprentissage_pre_alphabet.length === 27) {
                         if(datas.length != 0) {
+                            lectureSimpleDeLAlphabet();
                             viderNotification();
                             ecrire('notification_corps','ߌ ߕߎ߲߬ ߓߘߊ߫ ߛߓߍߛߎ߲ ߘߋ߲߰ ߞߊ߬ ߢߊ߬߸ ߞߊ߬ߓߌ߯ '+date_d_apprentissage_alphabet_du_serveur+'\
                                 ߛߌߛߊ߲߬ ߌ ߘߌ߫ ߛߋ߫ ߛߓߍߛߎ߲ ߘߋ߲߰ ߠߊ߫ (ߞߵߊ߬ ߟߊߡߍ߲߫ ߘߐߙߐ߲߫ ߞߊ߬ߣߌ߲߬) ߒ߬ߞߊ߬ ߌ ߕߍߣߊ߬ ߖߊ߬ߕߋ߬ߓߐ߬ ߟߊ߫ ߊ߬ ߟߊ߫. ߏ߬ ߘߐ߫߸ ߡߊ߬ߞߟߏ߬ߟߌ߫ ߣߌ߫ ߞߘߐߓߐߟߌ߫ ߛߌ߫ ߕߍ߫ ߦߋ߲߬ ߓߊ ߏ߬ ߟߎ߬ ߞߍߣߍ߲߫ ߞߘߐ ߟߋ߬.\
                             ');
+                            
+                            function lectureSimpleDeLAlphabet() {
+                                if($('.cercle_depasse').length == 4) {
+                                    setTimeout(() => {
+                                        $.each($('.table_parlante td'), function() {
+                                            let t = $(this);
+
+                                            t.click(() => {
+                                                let clicked_letter = t.text();
+                                                lire('alphabet',clicked_letter); 
+                                            });
+                                        });
+                                    }, 400);
+                                }
+                            }
                         }
                         $('.pre_apprentissage_td').click(function() { lire('alphabet',$(this).text()); });
                     }
@@ -418,41 +459,6 @@ function alphabet() {
                             $('.pre_apprentissage_td, .table_parlante td, .cercle:not(.actif)').click(function() { secouer($('.cercle:nth-child('+alphabet_tr_index+')')); });
                         }
                     }
-                }
-                function lectureSimpleDeLAlphabet() {
-                    if($('.cercle_depasse').length == 4) {
-                        setTimeout(() => {
-                            $.each($('.table_parlante td'), function() {
-                                let t = $(this);
-
-                                t.click(() => {
-                                    let clicked_letter = t.text();
-                                    lire('alphabet',clicked_letter); 
-                                });
-                            });
-                        }, 400);
-                    }
-                }
-                function cerclesStyle() {
-                    if(lesson_d_apprentissage_pre_alphabet.length < 27) {
-                        
-                        cercle_actif = $('.cercle:nth-child('+alphabet_tr_index+')');
-                        indexer(cercle_actif);
-
-                        cercle_actif.prevAll().addClass('cercle_depasse');
-                        cercle_actif.nextAll().addClass('cercle_a_faire');
-                    }
-                    if(lesson_d_apprentissage_pre_alphabet.length == 27) $('.cercle').removeClass('indicateur').addClass('cercle_depasse');
-                }
-                function cercleRang() {
-                    let cr = '';
-
-                    if(alphabet_tr_index === 1) { cr = 'ߝߟߐߡߊ'; }
-                    if(alphabet_tr_index === 2) { cr = 'ߝߌߟߊߣߊ߲'; }
-                    if(alphabet_tr_index === 3) { cr = 'ߛߓߊߣߊ߲'; }
-                    if(alphabet_tr_index === 4) { cr = 'ߣߊ߯ߣߌߣߊ߲'; }
-
-                    return cr;
                 }
                 function tdStyle() {
                     if(lesson_d_apprentissage_pre_alphabet != null) {
@@ -1815,9 +1821,6 @@ function alphabet() {
                             }
                             function chargerCorpsDeExerciceAlphabet() { 
                                 parametrageDeLesson();
-    console.log($('#exercice_body').html());
-    console.log($('#table_alphabet_exercice').html());
-    console.log(exercice_questions); 
                                 reductionDesElementsDeExerciceCouranteA49(); // Réduction du nombre de questions à une quantité raisonable
                             }
                             function chargerPiedDeExerciceAlphabet() {

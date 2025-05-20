@@ -23,6 +23,7 @@ $('document').ready(function() {
     userIdentityStorage(); // Storage des Identités récuperées de l'étudiant
     dataStorage();         // Récuperation et storage des data recuperés de l'étudiant
     afficherLogo();
+    display($('#reception'));
     
 
     function userIdentityStorage() {
@@ -72,7 +73,20 @@ $('document').ready(function() {
             	for (var i = 0; i < datas.length ; i++) {
             	for (var j = datas[i].length; j > 0; j--) {
                  
-                    phases_etudiees.push(datas[i][j-1].phase);  
+                    if(i === 0) {
+                        phases_etudiees.push(datas[i][j-1].phase); 
+                    } 
+                    if(i === 1) {
+                        if(JSON.parse(datas[i][j-1].lesson).length === 126) {
+                            phases_etudiees.push(datas[i][j-1].phase); 
+                        }
+                    } 
+                    if(i === 2) {
+                        console.log("Phases_etudiees pour les tons sont à calculer");
+                        // if(JSON.parse(datas[i][j-1].lesson).length === 126) {
+                        //     phases_etudiees.push(datas[i][j-1].phase); 
+                        // }
+                    } 
                     
                     let  nivo = parseInt(datas[i][j-1].niveau);
                     let  phase_note = parseInt(datas[i][j-1].note);
@@ -111,7 +125,6 @@ $('document').ready(function() {
                 if(moyenne_3 >= moyenne) niveaux_etudies.push(3);   	    
                 if(moyenne_4 >= moyenne) niveaux_etudies.push(4);  
    
-                sessionStorage.setItem('niveaux_etudies', JSON.stringify(niveaux_etudies));
                 sessionStorage.setItem('niveaux_etudies', JSON.stringify(niveaux_etudies));
 
                 sessionStorage.setItem('phases_etudiees', JSON.stringify(phases_etudiees));
@@ -157,9 +170,6 @@ $('document').ready(function() {
             }
     	})
     	.catch(error => console.log( error ));
-     }
-
-     display($('#reception'));
-
+    }
     function afficherLogo() { $('#logo').css('display', 'block'); }
 });

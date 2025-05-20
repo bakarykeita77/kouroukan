@@ -82,7 +82,7 @@
     width: 80%;
     font-size: larger;
     font-weight: bold;
-    color: #666;
+    color: rgba(0, 0, 0, 0.3);
     text-align: center;
 }
 
@@ -211,9 +211,9 @@
 #evaluation_fiche_body { 
     min-height: 6.3rem;
     background-color: #fff;
-    border: 1px solid transparent;
-    border-top-color: #ccc;
-    border-bottom-color: #ccc;
+    border: 0.125rem solid transparent;
+    border-top-color: #aaa;
+    border-bottom-color: #aaa;
     color: black;
     font-weight: bold;
     overflow: auto;
@@ -264,9 +264,9 @@
     font-size: 0.8rem;
 }
 #total_point_d_evaluation, #pourcentage_point_d_evaluation { 
-    margin: 0;
+    margin: 1px 0;
     padding: 0;
-    border: 0.125rem solid #ddd;
+    border: 0.125rem solid #aaa;
     text-align:center; 
     height: 1.25rem;
     width: calc(20% - 0.25rem);

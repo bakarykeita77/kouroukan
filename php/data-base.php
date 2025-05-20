@@ -6,7 +6,7 @@
  /*------------------------------------------------------------------------------------------------------ */   
   //  $sql_database = "CREATE DATABASE IF NOT EXISTS `kouroukan`";
     
-    $sql_table_users    = "CREATE TABLE IF NOT EXISTS `kouroukan`.`users`(
+    $sql_table_users = "CREATE TABLE IF NOT EXISTS `kouroukan`.`users`(
         `id` INT(255) NOT NULL AUTO_INCREMENT,
         `date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
         `prenom` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
@@ -18,7 +18,7 @@
         `pass` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
         PRIMARY KEY (`id`)
      ) ENGINE = MyISAM CHARSET = utf8 COLLATE utf8_general_ci";
-    $sql_table_avatar   = "CREATE TABLE IF NOT EXISTS `kouroukan`.`avatar`(
+    $sql_table_avatar = "CREATE TABLE IF NOT EXISTS `kouroukan`.`avatar`(
         `id` int(255) not null auto_increment,
         `client_id` int(255) not null,
         `nom` varchar(100) character set utf8 collate utf8_general_ci,
@@ -47,7 +47,7 @@
         `note` INT(3) NOT NULL , 
         PRIMARY KEY (`id`)
      ) ENGINE = MyISAM CHARSET = utf8 COLLATE utf8_general_ci";
-    $sql_table_tons     = "CREATE TABLE IF NOT EXISTS `kouroukan`.`tons`( 
+    $sql_table_tons = "CREATE TABLE IF NOT EXISTS `kouroukan`.`tons`( 
         `id` INT(255) NOT NULL AUTO_INCREMENT , 
         `id_client` INT(255) NOT NULL , 
         `niveau` INT(2) NOT NULL , 

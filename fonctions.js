@@ -1033,20 +1033,20 @@ console.log(total_questions[i]);
     function initialiserData(tableau) {
         let data = [];
         for(let i=0; i<tableau.length; i++) {
-            let qr = tableau[i];
-            let rr = '';
-            let pr = 0;
-            data.push([qr, rr, pr]);
+            let q = tableau[i];
+            let r = '';
+            let p = 0;
+            data.push([q, r, p]);
         }
         return data;
     }
     function initialiserData1(tableau) {
         let data = [];
         for(let i=0; i<tableau.length; i++) {
-            let qr = tableau[i];
-            let rr = 0;
-            let pr = 0;
-            data.push([qr, rr, pr]);
+            let q = tableau[i];
+            let r = 0;
+            let p = 0;
+            data.push([q, r, p]);
         }
         return data;
     }
@@ -1443,8 +1443,17 @@ console.log(total_questions[i]);
             peds = [];
         }
         if(matiere.length != 0) {
-            for (let i = 0; i < datas[niveau_max].length; i++) {
-                if(datas[niveau_max][i] != undefined) peds.push(datas[niveau_max][i].phase);
+            if(niveau_max === 0) {
+                for (let i = 0; i < datas[niveau_max].length; i++) {
+                    if(datas[niveau_max][i] != undefined) peds.push(datas[niveau_max][i].phase);
+                }  
+            }
+            if(niveau_max === 1) {
+                if(JSON.parse(datas[niveau_max][3].lesson).length === 126) {
+                    for (let i = 0; i < datas[niveau_max].length; i++) {
+                        if(datas[niveau_max][i] != undefined) peds.push(datas[niveau_max][i].phase);
+                    } 
+                }
             }
         }
 
@@ -2109,6 +2118,33 @@ console.log(total_questions[i]);
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
 
+    function updateLessonData(phase,lesson) {
+
+        var action = "modifier_matiere_en_cours";
+        var id = JSON.parse(sessionStorage.getItem('id'));
+        var matiere = JSON.parse(sessionStorage.getItem('matiere_active')); // Voir programmes.js fonction storagesDuProgramme()
+        var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));
+        var phase   = phase;
+        var lesson  = JSON.stringify(lesson);
+        var note = totalPoint(lesson);
+
+        const data_to_send = new URLSearchParams({
+            action : action,
+            id     : id,
+            matiere: matiere,
+            niveau : niveau_actif,
+            phase  : phase,
+            lesson : lesson,
+            note   : note
+        }); 
+
+        fetch("/kouroukan/php/actions.php", {
+            method: "POST",
+            body: data_to_send
+        })
+        .then(response => response.text())
+        .catch(error => console.log(error));  
+    }
     function user(id,lesson_name,option) {
         user.id = id;
         user.lesson_name = lesson_name;
@@ -2116,7 +2152,6 @@ console.log(total_questions[i]);
     }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
-
       
     function valider(td) {
         

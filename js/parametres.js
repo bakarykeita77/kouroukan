@@ -324,7 +324,6 @@ function parametrageDeLesson() {
             var pratique_html      = pratiqueHTML();
             var evaluation_html    = evaluationHTML();
 
-console.log(phase_id);
             let phase = (phase_id == null) ? 'apprentissage' : phase_id.split('_')[1];
 
          /* Rechargement du tableau noir avec les caractères cochés */

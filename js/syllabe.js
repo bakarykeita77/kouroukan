@@ -1499,20 +1499,40 @@ function syllabe() {
                                         }
                                     }
                                     function finDEvaluationPreSyllabe() {
+    
                                         if(q_evaluation_index === evaluation_pre_syllabe_questions.length) {
 
                                             let note_d_evaluation_pre_syllabe_syllabe = calculerNote(lesson_d_evaluation_pre_syllabe_du_jour);
 
+                                            if(note_d_evaluation_pre_syllabe_syllabe < 100) {
+                                                    
+                                                setTimeout(() => { afficherRedirection1(); }, 600);
+                                                
+                                                $('.redirection_btn_1').click(function() { 
+                                                    $('#evaluation_bouton').click();
+                                                    initialiserProgressBarIntegre();
+                                                    setTimeout(() => { afficherEvaluationPreSyllabe(); }, 300); 
+                                                }); 
+
+                                                function afficherRedirection1() {
+                                                    
+                                                    masquer($('#evaluation_dialogue_btns'));
+                                                    afficher($('#evaluation_redirection_btns'));
+                                                    masquer($('#evaluation_progress_bar'));
+                                                    
+                                                    afficher($('.redirection_btn_1'));
+                                                    masquer($('.redirection_btn_2'));
+                                                    masquer($('.redirection_btn_3'));
+                                                    
+                                                    indexer($('.redirection_btn_1'));
+                                                }
+                                            }
                                             if(note_d_evaluation_pre_syllabe_syllabe === 100) {
                                                
                                                 stockerEvaluationPreSyllabe();
                                                 setTimeout(() => { afficherRedirection2(); }, 600);
                                                 
-                                                $('.redirection_btn_2').click(function() { 
-                                                    $('#syllabes_apprentissage').click();
-                                                    initialiserProgressBarIntegre();
-                                                    setTimeout(() => { afficherApprentissage(); }, 300); 
-                                                });                
+                                                $('.redirection_btn_2').click(function() { raffraichirLaPage(); });                
 
                                                 function stockerEvaluationPreSyllabe() {
 
@@ -1564,29 +1584,16 @@ function syllabe() {
                                                     localStorage.setItem('memoire_consonnes_choisies', JSON.stringify(memoire_consonnes_choisies));
                                                     localStorage.setItem('syllabes_etudiees', JSON.stringify(syllabes_etudiees));
                                                 }
-                                                function afficherRedirection1() {
-                                                    $('#evaluation_dialogue_btn').css('display','block');
-                                                    
-                                                    $('.progress_bar_integre').css('display','none');
-                                                    $('.question_btn').css('display','none');
-                                                    $('.repetition_btn').css('display','none');
-                                                    $('.correction_btn').css('display','none');
-                                                    $('.redirection_btns').css('display','block');
-                                                    
-                                                    $('.redirection_btn_1').css('display','block');
-                                                    $('.redirection_btn_2').css('display','none');
-                                                }
                                                 function afficherRedirection2() {
-                                                    afficher($('#evaluation_dialogue_btn'));
-                                                    
-                                                    masquer($('.progress_bar_integre'));
-                                                    masquer($('.question_btn'));
-                                                    masquer($('.repetition_btn'));
-                                                    masquer($('.correction_btn'));
-                                                    afficher($('.redirection_btns'));
+                                                    masquer($('#evaluation_dialogue_btns'));
+                                                    afficher($('#evaluation_redirection_btns'));
+                                                    masquer($('#evaluation_progress_bar'));
                                                     
                                                     masquer($('.redirection_btn_1'));
                                                     afficher($('.redirection_btn_2'));
+                                                    masquer($('.redirection_btn_3'));
+
+                                                    indexer($('.redirection_btn_2'));
                                                 } 
                                             }
                                         }

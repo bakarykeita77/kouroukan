@@ -2121,19 +2121,17 @@ console.log(total_questions[i]);
     function updateLessonData(phase,lesson) {
 
         var action = "modifier_matiere_en_cours";
-        var id = JSON.parse(sessionStorage.getItem('id'));
+        var id_client = JSON.parse(sessionStorage.getItem('id_client'));
         var matiere = JSON.parse(sessionStorage.getItem('matiere_active')); // Voir programmes.js fonction storagesDuProgramme()
-        var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));
-        var phase   = phase;
+        var phase  = JSON.stringify(phase);
         var lesson  = JSON.stringify(lesson);
-        var note = totalPoint(lesson);
+        var note = calculerNote(lesson);
 
         const data_to_send = new URLSearchParams({
             action : action,
-            id     : id,
+            id_client : id_client,
             matiere: matiere,
-            niveau : niveau_actif,
-            phase  : phase,
+            phase : phase,
             lesson : lesson,
             note   : note
         }); 

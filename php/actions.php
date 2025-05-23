@@ -69,14 +69,18 @@
   /*----------------------------------------------------------------------------------------------
     Gestion des données dans la base de données.
   ----------------------------------------------------------------------------------------------*/
-    if($id_client != '' && $matiere != '' && $niveau == '' && $phase == '' && $lesson == '' && $note == '')                          getAllInfo($matiere,$id_client);
-    if($id_client != '' && $matiere != '' && $niveau != '' && $phase != '' && $lesson != '' && $note != '')                          archiverLesson($id_client,$matiere,$niveau,$phase,$lesson,$note);     
-    if($id_client != '' && $matiere != '' && $niveau != '' && $phase != '' && $lesson != '' && $note != '' && $action != '')         if($action == 'modifier_matiere_en_cours') modifierLesson($id_client,$matiere,$niveau,$phase,$lesson,$note);     
-    if($prenom != '' && $nom != '' && $naissance != '' && $sexe != '' && $adresse != '' && $email != '' && $pass != '')              addClient($prenom,$nom,$naissance,$sexe,$adresse,$email,$pass);       
+    if($id_client != '' && $matiere != '' && $niveau == '' && $phase == '' && $lesson == '' && $note == '') getAllInfo($matiere,$id_client);
+    if($id_client != '' && $matiere != '' && $niveau != '' && $phase != '' && $lesson != '' && $note != '') archiverLesson($id_client,$matiere,$niveau,$phase,$lesson,$note);     
+    if($id != '' && $matiere != ''&& $phase != '' && $lesson != '' && $note != '' && $action != '') {
+		if($action == 'modifier_matiere_en_cours') modifierLesson($id,$matiere,$phase,$lesson,$note); 
+	}        
+    if($prenom != '' && $nom != '' && $naissance != '' && $sexe != '' && $adresse != '' && $email != '' && $pass != '') addClient($prenom,$nom,$naissance,$sexe,$adresse,$email,$pass);       
     if($id_client != '' && $prenom != '' && $nom != '' && $naissance != '' && $sexe != '' && $adresse != '' && $email != '' && $pass != '') modifierClient($id_client,$prenom,$nom,$naissance,$sexe,$adresse,$email,$pass);           
-    if($id_client != '')                                                                                                             getClient($id_client);       
-    if($name != null && $extension != null && $taille != null && $type != null && $image != null && $table_name != null)             uploadImage($table_name,$id_client,$name,$extension,$taille,$type,$image);       
-    if($matiere != '' && $id_client != '' && $action != '')                                                                          if($action == 'supprimer_matiere_en_cours') supprimerLesson($matiere,$id_client);
+    if($id_client != '') getClient($id_client);       
+    if($name != null && $extension != null && $taille != null && $type != null && $image != null && $table_name != null)  uploadImage($table_name,$id_client,$name,$extension,$taille,$type,$image);       
+    if($matiere != '' && $id_client != '' && $action != '') {
+		if($action == 'supprimer_matiere_en_cours') supprimerLesson($matiere,$id_client);
+	}
 
  /* Après récupération des données reçues, la requette correspondante est éxécutée et la redirection est faite immediatement sur la page de provenance*/
 	echo "<script>
@@ -211,18 +215,15 @@
 		$utilisateurs = $requette->execute();
 		return $utilisateurs;
 	 }
-	function modifierLesson($id_client,$matiere,$niveau,$phase,$lesson,$note) {
+	function modifierLesson($id_client,$matiere,$phase,$lesson,$note) {
 		global $db;
 
-		$sql = "UPDATE ".$matiere." SET id_client=:id_client, matiere=:matiere, niveau=:niveau, phase=:phase, lesson=:lesson, note=:note WHERE id=:id";
+		$sql = "UPDATE ".$matiere." SET phase=:phase, lesson=:lesson, note=:note WHERE id_client=:id_client";
 
 		$requette = $db->prepare($sql);
 
-		$requette->bindValue(':id',       $id,       PDO::PARAM_INT);
 		$requette->bindValue(':id_client',$id_client,PDO::PARAM_INT);
-		$requette->bindValue(':matiere',  $matiere,  PDO::PARAM_STR);
-		$requette->bindValue(':niveau',   $niveau,   PDO::PARAM_STR);
-		$requette->bindValue(':phase',    $phase,    PDO::PARAM_STR);
+		$requette->bindValue(':phase',	  $phase, 	 PDO::PARAM_STR);
 		$requette->bindValue(':lesson',	  $lesson, 	 PDO::PARAM_STR);
 		$requette->bindValue(':note',     $note,     PDO::PARAM_STR);
 

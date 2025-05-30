@@ -405,7 +405,8 @@ function syllabe() {
                             
                             let datas = JSON.parse(sessionStorage.getItem('datas'));
                             let cs = [];
-                            let lesson = JSON.parse(datas[1][0].lesson);
+
+                            let lesson = (datas[1][0] == undefined) ? [] : JSON.parse(datas[1][0].lesson);
 
                             lesson.forEach(element => {
                                 let consonne = element[0].split('')[0];
@@ -1636,7 +1637,8 @@ function syllabe() {
                 function lessonDApprentissagePreSyllabeDuServeur() {
                     let datas = JSON.parse(sessionStorage.getItem('datas'));
                     let lapss = [];
-                    if(datas[1] != undefined) lapss = JSON.parse(datas[1][0].lesson);
+    console.log(datas[1]);
+                    if(datas[1].length != 0) lapss = JSON.parse(datas[1][0].lesson);
                     return lapss;
                 }
             }
@@ -1653,7 +1655,7 @@ function syllabe() {
                 function lessonDExercicePreSyllabeDuServeur() {
                     let datas = JSON.parse(sessionStorage.getItem('datas'));
                     let lepss = [];
-                    if(datas[1] != undefined) lepss = JSON.parse(datas[1][1].lesson);
+                    if(datas[1].length != 0) lepss = JSON.parse(datas[1][1].lesson);
                     return lepss;
                 }
             }
@@ -1670,7 +1672,7 @@ function syllabe() {
                 function lessonDeRevisionPreSyllabeDuServeur() {
                     let datas = JSON.parse(sessionStorage.getItem('datas'));
                     let lrpss = [];
-                    if(datas[1] != undefined) lrpss = JSON.parse(datas[1][2].lesson);
+                    if(datas[1].length != 0) lrpss = JSON.parse(datas[1][2].lesson);
                     return lrpss;
                 }
             }
@@ -1687,7 +1689,7 @@ function syllabe() {
                 function lessonDEvaluationPreSyllabeDuServeur() {
                     let datas = JSON.parse(sessionStorage.getItem('datas'));
                     let levpss = [];
-                    if(datas[1] != undefined) levpss = JSON.parse(datas[1][3].lesson);
+                    if(datas[1].length != 0) levpss = JSON.parse(datas[1][3].lesson);
                     return levpss;
                 }
             }

@@ -2118,14 +2118,21 @@ console.log(total_questions[i]);
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
 
-    function updateLessonData(phase,lesson) {
+    function updateLessonData(lesson_phase,lesson_data) {
 
         var action = "modifier_matiere_en_cours";
         var id_client = JSON.parse(sessionStorage.getItem('id_client'));
         var matiere = JSON.parse(sessionStorage.getItem('matiere_active')); // Voir programmes.js fonction storagesDuProgramme()
-        var phase  = JSON.stringify(phase);
-        var lesson  = JSON.stringify(lesson);
+        var phase  = JSON.stringify(lesson_phase);
+        var lesson  = JSON.stringify(lesson_data);
         var note = calculerNote(lesson);
+
+console.log(action);
+console.log(id_client);
+console.log(matiere);
+console.log(phase);
+console.log(lesson);
+console.log(note);
 
         const data_to_send = new URLSearchParams({
             action : action,
@@ -2136,7 +2143,7 @@ console.log(total_questions[i]);
             note   : note
         }); 
 
-        fetch("/kouroukan/php/actions.php", {
+        fetch("#", {
             method: "POST",
             body: data_to_send
         })

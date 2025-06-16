@@ -1,14 +1,14 @@
 <?php
     session_start();
     
-    $id_client = isset($_SESSION['id']) ? $_SESSION['id']:'';
+    $id_client = isset($_SESSION["id_client"]) ? $_SESSION["id_client"]:'';
     $nom_table_image = isset($_POST['nom_table_image'])? $_POST['nom_table_image']:'';
     
 
    
     if($id_client){
         
-        if($_SESSION['id']){
+        if($_SESSION["id_client"]){
             
             include('connexionToDB.php');
             global $db;

@@ -4,7 +4,7 @@ include("connexionToDB.php");
 global $db;
 
 if($_SESSION['connected']){
-    $sql = "SELECT * FROM teste WHERE id_client = ".$_SESSION['id']." ORDER BY Date DESC";
+    $sql = "SELECT * FROM teste WHERE id_client = ".$_SESSION["id_client"]." ORDER BY Date DESC";
     $rqt = $db->prepare($sql);
     $rqt->execute();
     $testes = $rqt->fetchAll();

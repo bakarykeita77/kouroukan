@@ -13,7 +13,7 @@ session_start();
 <body>
     
     <center><h2>Users</h2></center>
-    <p id="id_user" style="display:none"><?= $_SESSION['id']; ?></p>
+    <p id="id_user" style="display:none"><?= $_SESSION["id_client"]; ?></p>
     <center><div id="users"></div></center>
     <script src="/kouroukan/js/clients-info.js"></script>
 </body>

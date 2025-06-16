@@ -1,7 +1,7 @@
 <?php
 session_start();
 $racine = $_SERVER['DOCUMENT_ROOT'];
-if(isset($_SESSION['id'])) {
+if(isset($_SESSION["id_client"])) {
 ?>
     <!DOCTYPE html>
     <html>

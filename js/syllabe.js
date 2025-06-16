@@ -1504,7 +1504,7 @@ function syllabe() {
                                         if(q_evaluation_index === evaluation_pre_syllabe_questions.length) {
 
                                             let note_d_evaluation_pre_syllabe_syllabe = calculerNote(lesson_d_evaluation_pre_syllabe_du_jour);
-
+                                            
                                             if(note_d_evaluation_pre_syllabe_syllabe < 100) {
                                                     
                                                 setTimeout(() => { afficherRedirection1(); }, 600);

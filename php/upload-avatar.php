@@ -1,9 +1,9 @@
 <?php
     session_start();
     
-    $client_id = isset($_SESSION['id'])? $_SESSION['id']:'';
+    $client_id = isset($_SESSION["id_client"])? $_SESSION["id_client"]:'';
     if($client_id){
-        if($_SESSION['id']){
+        if($_SESSION["id_client"]){
             
             include('connexionToDB.php');
             global $db;

@@ -1,7 +1,7 @@
 <?php header('Content-Type: text/html; charset=utf-8');
 session_start();
 
-if(isset($_SESSION["id"])) {
+if(isset($_SESSION["id_client"])) {
     $matiere_id = $_GET['matiere_id'];
     $matiere_index = $_GET['matiere_index'];
     $matiere_nom = $_GET['matiere_nom'];
@@ -305,7 +305,7 @@ if(isset($_SESSION["id"])) {
                  <!--Form pour envoi des données-----------------------------------------------------------------------------------------------------
                     Cette div envoi les resultats des études à actions.php qui à son tour les envoi à la base de données----------------------------->
                     <form method="POST" action="actions.php" id="lesson_form" style="display:none; width:75%; margin:auto">
-                        <input type="number" name="id"       id="id_input" value="<?= $_SESSION['id']; ?>">
+                        <input type="number" name="id"       id="id_input" value="<?= $_SESSION["id_client"]; ?>">
                         <input type="text"   name="matiere"  id="matiere_nom_input">
                         <input type="number" name="niveau"   id="niveau_input">
                         <input type="text"   name="phase"    id="phase_input">

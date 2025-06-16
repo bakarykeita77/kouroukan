@@ -25,7 +25,7 @@ session_start();
             if($client_pass != $data_pass) { echo("Les mots de passe ne correspondent pas"); return; }
             
           //Si les données sont présentes et que les e-mails et les mots de passes correspondent, la connexion est établie.
-            $_SESSION["id"]        = $client[0]["id"];
+            $_SESSION["id_client"] = $client[0]["id"];
             $_SESSION["prenom"]    = $client[0]["prenom"];
             $_SESSION["nom"]       = $client[0]["nom"];
             $_SESSION["naissance"] = $client[0]["naissance"];
@@ -55,9 +55,9 @@ session_start();
       <!---------------------------------------------------------------------------------------------------
         Pour rendre des  variables globales accessibles dans javascript, placons les dans des elements html avec un id determiné.   -->  
         <div id="user_info" style="display:none">
-            <?php if(isset($_SESSION["id"])): ?>
+            <?php if(isset($_SESSION["id_client"])): ?>
                 <div id="identification">
-                    <p id="id"       ><?= $_SESSION["id"];        ?></p>
+                    <p id="id"       ><?= $_SESSION["id_client"]; ?></p>
                     <p id="prenom"   ><?= $_SESSION["prenom"];    ?></p>
                     <p id="nom"      ><?= $_SESSION["nom"];       ?></p>
                     <p id="naissance"><?= $_SESSION["naissance"]; ?></p>

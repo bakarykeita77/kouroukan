@@ -9,7 +9,7 @@ session_start();
     
     if($connected == false){ header('location:connexion.php?error=3'); }
 
-    $_SESSION['id'] = $user_id;
+    $_SESSION["id_client"] = $user_id;
     $_SESSION['prenom'] = $user_prenom;
     $_SESSION['nom'] = $user_nom;
     $_SESSION['email'] = $user_email;

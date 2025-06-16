@@ -1,5 +1,5 @@
 <!-- Début de l'entete de la page ------------------------------------------------------------------------------------>
-	<?php $avatar_id = isset($_SESSION['id']) ? $_SESSION['id']:1; ?>
+	<?php $avatar_id = isset($_SESSION["id_client"]) ? $_SESSION["id_client"]:1; ?>
 	
   <!------------------------------------------------------------------------------------------------------------------>	
     <link rel="stylesheet" href="/kouroukan/css/class.css"/>
@@ -21,14 +21,14 @@
 			<div id='profile_menu_container'>
 
 				<div id="client_name" style="display: none"><h2><?=$_SESSION['prenom'].' '.$_SESSION['nom'] ?> ߹</h2></div>
-				<div id="profile_client_id" style="display: none"><?=$_SESSION['id']; ?></div>
+				<div id="profile_client_id" style="display: none"><?=$_SESSION["id_client"]; ?></div>
 			
 				<div class="profile_menu">
 					
 					<div class="profile_menu_head" id="profile_utilisateur_btn">Profile</div>
 					<div class="profile_menu_body" id='profile_utilisateur_container'>
 						<div id="profile_utilisateur_image_container">
-							<img src="/kouroukan/php/get-avatar.php?client_id=<?= $_SESSION['id'] ?>" alt="logo"/>
+							<img src="/kouroukan/php/get-avatar.php?client_id=<?= $_SESSION["id_client"] ?>" alt="logo"/>
 							<div id='modifier_avatar'>ߖߌ߬ߦߊ߬ߓߍ ߡߊߝߊ߬ߟߋ߲߬</div>  <!--Voir la fonction profileUtilisateurModificationAvatar() dans js/profile.js-->
 						</div>
 						<div id="profile_utilisateur_renseignements">

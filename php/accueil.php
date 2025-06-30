@@ -57,7 +57,7 @@ session_start();
         <div id="user_info" style="display:none">
             <?php if(isset($_SESSION["id_client"])): ?>
                 <div id="identification">
-                    <p id="id"       ><?= $_SESSION["id_client"]; ?></p>
+                    <p id="id_client"><?= $_SESSION["id_client"]; ?></p>
                     <p id="prenom"   ><?= $_SESSION["prenom"];    ?></p>
                     <p id="nom"      ><?= $_SESSION["nom"];       ?></p>
                     <p id="naissance"><?= $_SESSION["naissance"]; ?></p>

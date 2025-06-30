@@ -2002,7 +2002,7 @@ console.log(total_questions[i]);
     }
     function sendLessonDataToDB(lesson_phase,lesson_data) {
 
-        var id = JSON.parse(sessionStorage.getItem('id'));
+        var id_client = JSON.parse(sessionStorage.getItem('id_client'));
         var matiere = JSON.parse(sessionStorage.getItem('matiere_active')); // Voir programmes.js fonction storagesDuProgramme()
         var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));
         var phase   = lesson_phase;
@@ -2010,12 +2010,12 @@ console.log(total_questions[i]);
         var note = totalPoint(lesson_data);
     
         const data_to_send = new URLSearchParams({
-            id     : id,
-            matiere: matiere,
+            id_client : id_client,
+            matiere : matiere,
             niveau : niveau_actif,
-            phase  : phase,
+            phase : phase,
             lesson : lesson,
-            note   : note
+            note : note
         }); 
 
         fetch("/kouroukan/php/actions.php", {
@@ -2118,40 +2118,36 @@ console.log(total_questions[i]);
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
 
-    function updateLessonData(lesson_phase,lesson_data) {
+    function updateLessonData(id_lesson,lesson_data) {
 
         var action = "modifier_matiere_en_cours";
-        var id_client = JSON.parse(sessionStorage.getItem('id_client'));
         var matiere = JSON.parse(sessionStorage.getItem('matiere_active')); // Voir programmes.js fonction storagesDuProgramme()
-        var phase  = JSON.stringify(lesson_phase);
         var lesson  = JSON.stringify(lesson_data);
-        var note = calculerNote(lesson);
+        var note = calculerNote(lesson_data);
 
 console.log(action);
-console.log(id_client);
+console.log(id_lesson);
 console.log(matiere);
-console.log(phase);
 console.log(lesson);
 console.log(note);
 
         const data_to_send = new URLSearchParams({
             action : action,
-            id_client : id_client,
+            id_lesson : id_lesson,
             matiere: matiere,
-            phase : phase,
             lesson : lesson,
             note   : note
         }); 
 
-        fetch("#", {
+        fetch("/kouroukan/php/actions.php", {
             method: "POST",
             body: data_to_send
         })
         .then(response => response.text())
         .catch(error => console.log(error));  
     }
-    function user(id,lesson_name,option) {
-        user.id = id;
+    function user(id_client,lesson_name,option) {
+        user.id = id_client;
         user.lesson_name = lesson_name;
         user.option = option;
     }

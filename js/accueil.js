@@ -15,8 +15,8 @@ $('document').ready(function() {
     Lorsequ'un navigateur change d'utilisateur (en changeant de compte), 
     les données stockées (en sessionStorage et en localStorage) sont oubliées.
  */
-    let precedent_id = JSON.parse(sessionStorage.getItem('id'));
-    let present_id = document.getElementById('id').innerHTML;
+    let precedent_id = JSON.parse(sessionStorage.getItem('id_client'));
+    let present_id = document.getElementById('id_client').innerHTML;
     if(precedent_id != present_id) { sessionStorage.clear(); localStorage.clear(); }
 
 
@@ -27,7 +27,7 @@ $('document').ready(function() {
     
 
     function userIdentityStorage() {
-        sessionStorage.setItem('id',        JSON.stringify(document.getElementById('id').innerHTML));
+        sessionStorage.setItem('id_client', JSON.stringify(document.getElementById('id_client').innerHTML));
         sessionStorage.setItem('prenom',    JSON.stringify(document.getElementById('prenom').innerHTML));
         sessionStorage.setItem('nom',       JSON.stringify(document.getElementById('nom').innerHTML));
         sessionStorage.setItem('naissance', JSON.stringify(document.getElementById('naissance').innerHTML));
@@ -38,7 +38,7 @@ $('document').ready(function() {
     function dataStorage() {
 
      // Identifiant id de l'apprenant.
-        let user_id = parseInt(JSON.parse(sessionStorage.getItem('id'))); 
+        let user_id = parseInt(JSON.parse(sessionStorage.getItem('id_client'))); 
      
      // Recuperation de toutes les matières étdiées par l'apprenant par envoi de son id à api de kouroukan.
     	fetch("/kouroukan/api/index.php?id_user="+user_id)
@@ -51,7 +51,7 @@ $('document').ready(function() {
 
     	    for(var i=0; i<matiere_collection.length; i++) { datas[i] = (matiere_collection[i].length === 0)  ? [] : matiere_collection[i]; }
     	    sessionStorage.setItem('datas',JSON.stringify(datas));
-
+console.log(datas);
             if(datas.length === 0) {
                 sessionStorage.setItem('niveaux_etudies',JSON.stringify([]));
                 sessionStorage.setItem('niveau_max',JSON.stringify(0));
@@ -69,7 +69,10 @@ $('document').ready(function() {
                 var niveaux_etudies = [], phases_etudiees = [];
                 var note_1 = 0, note_2 = 0, note_3 = 0, note_4 = 0;
                 var moyenne = 1, moyenne_1 = 0, moyenne_2 = 0, moyenne_3 = 0, moyenne_4 = 0;
-               
+
+                sessionStorage.setItem("id_syllabe_apprentissage", JSON.stringify(datas[1][0].id));
+                sessionStorage.setItem("id_syllabe_exercice", JSON.stringify(datas[1][1].id));
+             
             	for (var i = 0; i < datas.length ; i++) {
             	for (var j = datas[i].length; j > 0; j--) {
                  
@@ -77,9 +80,7 @@ $('document').ready(function() {
                         phases_etudiees.push(datas[i][j-1].phase); 
                     } 
                     if(i === 1) {
-                        if(JSON.parse(datas[i][j-1].lesson).length === 126) {
-                            phases_etudiees.push(datas[i][j-1].phase); 
-                        }
+                        if(JSON.parse(datas[i][j-1].lesson).length === 126) phases_etudiees.push(datas[i][j-1].phase);
                     } 
                     if(i === 2) {
                         console.log("Phases_etudiees pour les tons sont à calculer");

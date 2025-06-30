@@ -328,7 +328,7 @@ console.log(phases_etudiees_du_serveur);
         function annulerApprentissageEnCours() {
 
             let matiere = matiereActuelle();
-            let id_client =  parseInt(JSON.parse(sessionStorage.getItem('id')));
+            let id_client =  parseInt(JSON.parse(sessionStorage.getItem('id_client')));
             let action = 'supprimer_matiere_en_cours';
 
             sendDataToDeleteLesson(matiere,id_client,action);
@@ -380,11 +380,8 @@ console.log(phases_etudiees_du_serveur);
 
                 let l1 = JSON.parse(datas[matiere_index][0].lesson).length;
                 let l2 = JSON.parse(datas[matiere_index][1].lesson).length;
-                let l3 = JSON.parse(datas[matiere_index][2].lesson).length;
-                let l4 = JSON.parse(datas[matiere_index][3].lesson).length;
 
-                if(l1 === l2 && l1 === l3 && l1 === l4) { option = 1; }
-                else{ option = 2; }
+                if(l1 === l2) { option = 1; }else{ option = 2; }
             }
         }
 

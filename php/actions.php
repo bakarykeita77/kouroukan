@@ -10,7 +10,9 @@
   /*----------------------------------------------------------------------------------------------
     Reception des données réçues.
   ----------------------------------------------------------------------------------------------*/
-    $id_client = isset($_POST['id']) ? $_POST['id'] : null;
+    $id = isset($_POST['id']) ? $_POST['id'] : null;
+    $id_client = isset($_POST['id_client']) ? $_POST['id_client'] : null;
+    $id_lesson = isset($_POST['id_lesson']) ? $_POST['id_lesson'] : null;
     
     $prenom = isset($_POST['prenom']) ? $_POST['prenom'] : null;
     $nom = isset($_POST['nom']) ? $_POST['nom'] : null;
@@ -37,7 +39,9 @@
     Sécurisation des données réçues.
   ----------------------------------------------------------------------------------------------*/
     $id_client = securiser($id_client);
+    $id_lesson = securiser($id_lesson);
     $id_client = (int) $id_client;
+    $id_lesson = (int) $id_lesson;
     
     $prenom = securiser($prenom);
     $nom = securiser($nom);
@@ -71,8 +75,8 @@
   ----------------------------------------------------------------------------------------------*/
     if($id_client != '' && $matiere != '' && $niveau == '' && $phase == '' && $lesson == '' && $note == '') getAllInfo($matiere,$id_client);
     if($id_client != '' && $matiere != '' && $niveau != '' && $phase != '' && $lesson != '' && $note != '') archiverLesson($id_client,$matiere,$niveau,$phase,$lesson,$note);     
-    if($id != '' && $matiere != ''&& $phase != '' && $lesson != '' && $note != '' && $action != '') {
-		if($action == 'modifier_matiere_en_cours') modifierLesson($id,$matiere,$phase,$lesson,$note); 
+    if($id_lesson != '' && $matiere != '' && $lesson != '' && $note != '' && $action != '') {
+		if($action == 'modifier_matiere_en_cours') modifierLesson($id_lesson,$matiere,$lesson,$note); 
 	}        
     if($prenom != '' && $nom != '' && $naissance != '' && $sexe != '' && $adresse != '' && $email != '' && $pass != '') addClient($prenom,$nom,$naissance,$sexe,$adresse,$email,$pass);       
     if($id_client != '' && $prenom != '' && $nom != '' && $naissance != '' && $sexe != '' && $adresse != '' && $email != '' && $pass != '') modifierClient($id_client,$prenom,$nom,$naissance,$sexe,$adresse,$email,$pass);           
@@ -215,15 +219,14 @@
 		$utilisateurs = $requette->execute();
 		return $utilisateurs;
 	 }
-	function modifierLesson($id_client,$matiere,$phase,$lesson,$note) {
+	function modifierLesson($id_lesson,$matiere,$lesson,$note) {
 		global $db;
 
-		$sql = "UPDATE ".$matiere." SET phase=:phase, lesson=:lesson, note=:note WHERE id_client=:id_client";
+		$sql = "UPDATE ".$matiere." SET lesson=:lesson, note=:note WHERE id=:id_lesson";
 
 		$requette = $db->prepare($sql);
 
-		$requette->bindValue(':id_client',$id_client,PDO::PARAM_INT);
-		$requette->bindValue(':phase',	  $phase, 	 PDO::PARAM_STR);
+		$requette->bindValue(':id_lesson',$id_lesson,PDO::PARAM_INT);
 		$requette->bindValue(':lesson',	  $lesson, 	 PDO::PARAM_STR);
 		$requette->bindValue(':note',     $note,     PDO::PARAM_STR);
 

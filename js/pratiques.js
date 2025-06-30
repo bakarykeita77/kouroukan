@@ -1,7 +1,7 @@
 function pratique() {
                        
     let niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
-    var id = JSON.parse(sessionStorage.getItem('id'));
+    var id = JSON.parse(sessionStorage.getItem('id_client'));
 
     var data_options_nbr = JSON.parse(sessionStorage.getItem('data_options_nbr'));
     var option = '';

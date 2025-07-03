@@ -55,8 +55,10 @@
 }
 #apprentissage_note p { margin: 0.25rem 0; }
 #pre_texte {
+    width: 100%;
     color: #444;
-    font-size: 3.5rem;
+    font-size: 7vh;
+    text-align: center;
     font-weight: bold;
 }
 .notification h3 { margin: 0; padding: 0; }
@@ -246,17 +248,7 @@
 
 #exercice_container, #revision_container { display: none; height: 100%; }
 #exercice_body_cadre, #revision_body_cadre {
-    position: relative;
     display: none;
-    top: 0.5rem;
-    height: calc(100% - 14rem);
-    width: calc(100% - 4rem);
-    max-width: 40rem;
-    margin: auto;
-    padding: 1rem 2rem;
-    border-radius: 0.5rem;
-    background-color: #ddd;
-    overflow: auto;
 }
 #pre_exercice {
     display: none;
@@ -448,4 +440,37 @@
 .cercle {
     position: relative;
     display: inline-block;
+}
+
+@media(orientation: portrait) {
+    #apprentissage_body_cadre { 
+        height: 20rem; 
+        padding: 1rem 0;
+    }
+    #exercice_body_cadre, #exercice_body_cadre { 
+        height: 20rem; 
+        padding: 1rem 0;
+    }
+    #apprentissage_body {
+        height: calc(100% - 1rem);
+    }
+    #exercice_body, #revision_body {
+        height: calc(100% - 5rem);
+    }
+}
+@media(orientation: landscape) {
+    #apprentissage_body_cadre { 
+        height: 20rem; 
+        padding: 1rem 0;
+    }
+    #exercice_body_cadre, #revision_body_cadre { 
+        height: 17rem; 
+        padding: 1rem 0;
+    }
+    #apprentissage_body {
+        height: calc(100% - 1rem);
+    }
+    #exercice_body, #revision_body {
+        height: calc(100% - 5rem);
+    }
 }

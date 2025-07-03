@@ -71,6 +71,13 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 
 /* --------------------------------------------------------------------------------------------------------- */
 
+.body_cadre {
+    position: relative;
+    max-width: 40rem;
+    margin: auto;
+    border-radius: 0.5rem;
+    overflow: auto;
+}
 .border_blue { border: 0.5rem solid blue; }
 .btn { 
     height: 1.5rem; 
@@ -266,10 +273,9 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 }
 .course_body { 
     display: none;
-    margin: 0.5rem 0;
+    top: 0.5rem;
+    margin: 0.5rem auto;
     padding-top: 1.5rem;
-    height: calc(100% - 8rem);
-    min-height: 16rem;
     color: white;
     background-color: rgba(0,0,0,0.8);
     overflow-y: auto;
@@ -413,7 +419,6 @@ del {
 
 /* --------------------------------------------------------------------------------------------------------- */
 
-.faux {}
 .fermeture, .fermeture_de_parent, .fermeture_note_btn {
     position: absolute;
     top: 0;
@@ -753,13 +758,18 @@ del {
     font-size: 12px;
     overflow-y: visible;
 }
+.notification_container {
+    border-top: 6px solid #bbb;
+    border-bottom: 1px solid #bbb;
+    height: 5rem;
+}
 .notification_corps {
     position: relative;
-    box-shadow: 0 0 1rem #aaa;
-    border: 1px solid #ccc;
-    border-radius: 0.5rem;
+    background-color: #eee;
     padding: 0.25rem 1rem;
+    margin: 1px 0.5rem;
     height: 4rem;
+    width: calc(100% - 3rem);
     top: 0.25rem;
     overflow: auto;
 }
@@ -1268,10 +1278,9 @@ del {
         max-width: 30rem;
     }
     .phases li { width: 80%; }
-    .course { 
-        width: calc(100vw - 1rem);
-        box-shadow: none; 
-        border: none; 
+    .course { width: calc(100vw - 1rem); }
+    .course_body { 
+        width: 100%;
     }
     .table_parlante td, .table_muette td {
         font-size: 1.8rem;
@@ -1295,10 +1304,8 @@ del {
         width: 30%;
         min-width: 5rem;
     }
-    .course { 
-        width: calc(100vw - 20rem);
-        box-shadow: 0 0 3rem #666; 
-        border: 1px solid #aaa; 
+    .course_body { 
+        width: calc(100% - 4rem);
     }
     .table_parlante, .table_muette { top: 0.25rem; }
     .table_parlante td, .table_muette td {

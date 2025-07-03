@@ -154,8 +154,6 @@ function syllabe() {
 
             function apprentissagePreSyllabe() {
 
-                lesson_d_apprentissage_pre_syllabe = lessonDApprentissagePreSyllabe();
-
                 chargerApprentissagePreSyllabe();
                 afficherApprentissagePreSyllabe();
                 apprendrePreSyllabe();
@@ -170,7 +168,7 @@ function syllabe() {
                     function chargerEnteteDApprentissagePreSyllabe() {
                         $('.notification_titre').html('ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ');
                         viderNotification();
-                        setTimeout(() => { ecris("apprentissage_notification_corps","ߞߏ߰ߙߌ߫ ߣߘߍ߬ߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬ ߞߊ߬ ߛߌ߬ߙߕߊ߬ ߥߟߊߟߋ߲ ߦߌ߬ߘߊ߬."); }, 2000);
+                        setTimeout(() => { ecris("apprentissage_notification_corps","ߞߏ߰ߙߌ߫ ߣߘߍ߬ߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬ ߞߊ߬ ߛߌ߬ߙߕߊ߬ ߥߟߊߟߋ߲ ߦߌ߬ߘߊ߬."); }, 3000);
                     }
                     function chargerFootDApprentissagePreSyllabe() {
                                 
@@ -265,13 +263,14 @@ function syllabe() {
                             $('#table_syllabe_apprentissage').html("<div id='pre_texte'>ߜߋ߲߭ ߘߋ߲߰ߕߊ ߟߎ߬ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬</div>");
                         }
                         function chargementDuTableauNoir() {
-                            chargerTableauNoir();
-                            stockage
+                            
                             $('#panneaux span').click(function() {
           
                                 var clicked_consonne_container = $(this);
                                 var clicked_consonne = $(this).text();
                                 var clicked_consonne_color = $(this).css('color');
+
+                                chargerTableauNoir();
 
                                 if(clicked_consonne_color == 'rgb(255, 165, 0)') { 
                                     alert('ߛߌ߬ߙߊ߬ߕߊ ߏ߬ ߜߋ߲߭ ߠߎ߬ ߘߋ߲߰ߣߍ߲߬ ߞߘߐ ߟߋ߬߹');
@@ -555,15 +554,15 @@ function syllabe() {
                                         
                                         let note_d_apprentissage_pre_syllabe = calculerNote(lesson_d_apprentissage_pre_syllabe_du_jour);
                                         if(note_d_apprentissage_pre_syllabe === 100) {
-                                            
-                                        /*    
-                                            viderNotification();
-                                            setTimeout(() => {
-                                                ecris('apprentissage_notification_corps',"ߌ ߞߎߟߎ߲ߖߋ߫ ߘߐ߬ߖߊ ߟߊ߫ ߞߊ߬ ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߞߍ߫߸ ߛߌߛߊ߲߬ ߡߊ߬ߞߟߏ߬ߟߌ߬ ߞߘߎ ߘߌ߲߯ ߘߎ߭ߡߊ߬ ߞߊ߬ ߜߋ߲߭ ߘߋ߰ߣߍ߲߬ ߞߎߘߊ ߟߎ߬ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫");
-                                            }, 800);
-                                        */
+                                             
                                             // resultatApprentissagePreSyllabe();
+                                            viderNotification();
                                             setTimeout(() => { 
+
+                                                setTimeout(() => {
+                                                    ecris('apprentissage_notification_corps',"ߌ ߞߎߟߎ߲ߖߋ߫ ߘߐ߬ߖߊ ߟߊ߫ ߞߊ߬ ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߞߍ߫߸ ߛߌߛߊ߲߬ ߡߊ߬ߞߟߏ߬ߟߌ߬ ߞߘߎ ߘߌ߲߯ ߘߎ߭ߡߊ߬ ߞߊ߬ ߜߋ߲߭ ߘߋ߰ߣߍ߲߬ ߞߎߘߊ ߟߎ߬ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫");
+                                                }, 400);
+                                       
                                                 $('#apprentissage_dialogue_btns').css('display','none'); 
                                                 initialiserProgressBarIntegre();
                                                 exercicePreSyllabe();

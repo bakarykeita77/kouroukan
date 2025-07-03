@@ -94,11 +94,15 @@ if(isset($_SESSION["id_client"])) {
                                             <div><button class="changer_option_btn">ߊ߬ߥߊ߬</button> <button class="pas_changer_option_btn">ߍ߬ߍ߲߫</button></div>
                                         </div>
                                     </div>
-                                    <div class="notification_corps" id="apprentissage_notification_corps"></div>
+                                    <div class="notification_container">
+                                        <div class="notification_corps" id="apprentissage_notification_corps"></div>
+                                    </div>
                                 </div>
                             </div>
                          <!--Course body ------------------------------------------------------------------ -->
-                            <div class="course_body" id="apprentissage_body"></div>
+                            <div class="body_cadre" id="apprentissage_body_cadre">
+                                <div class="course_body" id="apprentissage_body"></div>
+                            </div>
                          <!--Course foot ------------------------------------------------------------------ -->
                             <div class="course_foot" id="apprentissage_foot">
                                 
@@ -129,7 +133,9 @@ if(isset($_SESSION["id_client"])) {
                                             <div><button class="changer_option_btn">ߊ߬ߥߊ߬</button> <button class="pas_changer_option_btn">ߍ߬ߍ߲߫</button></div>
                                         </div>
                                     </div>
-                                    <div class="notification_corps" id="exercice_notification_corps"></div>
+                                    <div class="notification_container">
+                                        <div class="notification_corps" id="exercice_notification_corps"></div>
+                                    </div>
                                 </div>
                             </div>
                          <!--Course body ------------------------------------------------------------------ -->
@@ -172,7 +178,9 @@ if(isset($_SESSION["id_client"])) {
                                             <div><button class="changer_option_btn">ߊ߬ߥߊ߬</button> <button class="pas_changer_option_btn">ߍ߬ߍ߲߫</button></div>
                                         </div>
                                     </div>
-                                    <div class="notification_corps" id="revision_notification_corps"></div>
+                                    <div class="notification_container">
+                                        <div class="notification_corps" id="revision_notification_corps"></div>
+                                    </div>
                                 </div>
                             </div>
                          <!--Course body ------------------------------------------------------------------ -->
@@ -216,7 +224,9 @@ if(isset($_SESSION["id_client"])) {
                                             <div><button class="changer_option_btn">ߊ߬ߥߊ߬</button> <button class="pas_changer_option_btn">ߍ߬ߍ߲߫</button></div>
                                         </div>
                                     </div>
-                                    <div class="notification_corps" id="evaluation_notification_corps"></div>
+                                    <div class="notification_container">
+                                        <div class="notification_corps" id="evaluation_notification_corps"></div>
+                                    </div>
                                 </div>
                             </div>
                          <!--Course body ------------------------------------------------------------------ -->

@@ -17,29 +17,20 @@ $('document').ready(function() {
     let data_apprentissage_alphabet = JSON.parse(sessionStorage.getItem('data_apprentissage_alphabet'));
     let option_du_serveur = optionDuServeur();       
 
-console.log(JSON.parse(sessionStorage.getItem('phases_etudiees')));    
+console.log("Les données de la leçon de "+liste_de_matieres[niveau_en_cours-1][0]+" de l'apprenant");
+console.log(datas[niveau_en_cours - 1]);   
 
     datas[niveau_max] = (datas[niveau_max] == undefined) ? [] : datas[niveau_max];
 
     var phases_etudiees = (datas[niveau_max].length == 0) ? [] : JSON.parse(sessionStorage.getItem('phases_etudiees'));
     var phases_etudiees_du_serveur = (datas[niveau_max].length == 0) ? [] : phasesEtudieesDuServeur(datas[niveau_max]);
     phases_etudiees = (phases_etudiees == null) ? phases_etudiees_du_serveur : phases_etudiees;
-console.log(phases_etudiees_du_serveur);
 
     let phase_index = (phases_etudiees == null) ? 0 : phases_etudiees.length;
     var option_retenue = (datas[niveau_max].length === 0) ? null : JSON.parse(localStorage.getItem('option_retenue')); 
     option_retenue = (option_retenue == null) ? option_du_serveur : option_retenue;
     localStorage.setItem('option_retenue',JSON.stringify(option_retenue));
 
-
-    console.log('datas est :');
-    console.log(datas);
-    console.log('matiere est :');
-    console.log(datas[niveau_max]);
-    console.log('niveau_max est :');
-    console.log(niveau_max);
-    console.log('phases_etudiees est :');
-    console.log(phases_etudiees);
     console.log('option_retenue est :');
     console.log(option_retenue);
 
@@ -86,7 +77,7 @@ console.log(phases_etudiees_du_serveur);
         function programmeHTML() {
             var programme_html = '<ul id="programme_ul">\n\n';
 
-            for (var i = 0; i < 2; i++) {    // Pour liste_de_matieres, voir caracteres.js
+            for (var i = 0; i < 2; i++) {  // Pour liste_de_matieres, voir caracteres.js
 
                 var matiere_id = liste_de_matieres[i][0];
                 var matiere_nom = liste_de_matieres[i][1];

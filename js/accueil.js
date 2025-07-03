@@ -51,6 +51,8 @@ $('document').ready(function() {
 
     	    for(var i=0; i<matiere_collection.length; i++) { datas[i] = (matiere_collection[i].length === 0)  ? [] : matiere_collection[i]; }
     	    sessionStorage.setItem('datas',JSON.stringify(datas));
+
+console.log("Les données des leçons étudiées par l'apprenant");
 console.log(datas);
             if(datas.length === 0) {
                 sessionStorage.setItem('niveaux_etudies',JSON.stringify([]));
@@ -70,19 +72,24 @@ console.log(datas);
                 var note_1 = 0, note_2 = 0, note_3 = 0, note_4 = 0;
                 var moyenne = 1, moyenne_1 = 0, moyenne_2 = 0, moyenne_3 = 0, moyenne_4 = 0;
 
-                sessionStorage.setItem("id_syllabe_apprentissage", JSON.stringify(datas[1][0].id));
-                sessionStorage.setItem("id_syllabe_exercice", JSON.stringify(datas[1][1].id));
-             
+                if(datas[1][0] != undefined) {
+                    sessionStorage.setItem("id_syllabe_apprentissage", JSON.stringify(datas[1][0].id));
+                    sessionStorage.setItem("id_syllabe_exercice", JSON.stringify(datas[1][1].id));
+                }       
+          
             	for (var i = 0; i < datas.length ; i++) {
             	for (var j = datas[i].length; j > 0; j--) {
                  
                     if(i === 0) {
+                     //Phases_etudiees de alphabet
                         phases_etudiees.push(datas[i][j-1].phase); 
                     } 
                     if(i === 1) {
+                        //Phases_etudiees de syllabe
                         if(JSON.parse(datas[i][j-1].lesson).length === 126) phases_etudiees.push(datas[i][j-1].phase);
                     } 
                     if(i === 2) {
+                     //Phases_etudiees de tons
                         console.log("Phases_etudiees pour les tons sont à calculer");
                         // if(JSON.parse(datas[i][j-1].lesson).length === 126) {
                         //     phases_etudiees.push(datas[i][j-1].phase); 
@@ -135,8 +142,7 @@ console.log(datas);
                 sessionStorage.setItem('moyenne_2', JSON.stringify(moyenne_2));
                 sessionStorage.setItem('moyenne_3', JSON.stringify(moyenne_3));
                 sessionStorage.setItem('moyenne_4', JSON.stringify(moyenne_4));
-              
-                
+           
                 if(niveaux_etudies.length === 0) {
                 	sessionStorage.setItem('niveau_max', JSON.stringify(0));
                 	sessionStorage.setItem('niveau_en_cours', JSON.stringify(1));
@@ -148,7 +154,7 @@ console.log(datas);
                 	sessionStorage.setItem('niveau_max', JSON.stringify(niveau_max));
                 	sessionStorage.setItem('niveau_en_cours', JSON.stringify(niveau_en_cours));
                 }
-                         
+                        
              /*-------------------------------------------------------------------------   
               Les pratiques 
              -------------------------------------------------------------------------*/              

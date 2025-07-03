@@ -26,14 +26,6 @@ $('document').ready(function() {
         var option_retenue = JSON.parse(localStorage.getItem("option_retenue"));
         // option_retenue = (datas[matiere_index].length === 0) ? null : JSON.parse(localStorage.getItem('option_retenue')); 
  
-        console.log("La variable datas est :");
-        console.log(datas);
-        console.log("Les phases étudiées sont : ");
-        console.log(phases_etudiees);
-        console.log('data_apprentissage est :');
-        console.log(data_apprentissage);
-        console.log('option_retenue = '+option_retenue); 
-
     /*-------------------------------------------------------------------------------------------------------------------
        1)- La situation des études est faite par récupération et traitement des données reçues sur l'apprenant.
        2)- La liste des phases est établie en fonction du niveau d'étude de l'apprenant (selon les phases étudiées ou pas)

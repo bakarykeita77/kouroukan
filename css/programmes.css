@@ -54,11 +54,10 @@
     transform-origin: 0 0;
     transform: scaleY(0.75);
 }
-
 #programme_matieres {
     margin: 1rem auto;
     border: 1px solid transparent;
-    height: scaleY(0.75);
+    transform: scaleY(0.75);
     opacity: 0;
 }
 #programme_commentaire {

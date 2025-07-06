@@ -263,56 +263,110 @@ function syllabe() {
                             $('#table_syllabe_apprentissage').html("<div id='pre_texte'>ߜߋ߲߭ ߘߋ߲߰ߕߊ ߟߎ߬ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬</div>");
                         }
                         function chargementDuTableauNoir() {
-                            
                             $('#panneaux span').click(function() {
           
                                 var clicked_consonne_container = $(this);
-                                var clicked_consonne = $(this).text();
-                                var clicked_consonne_color = $(this).css('color');
+                                var clicked_consonne = clicked_consonne_container.text();
+                                var clicked_consonne_color = clicked_consonne_container.css('color');
+                                let panneau_consonne_index = '';
 
+                                choixDeLaConsonneAEtudier();
+                                marquerLaConsonneChoisie(clicked_consonne_container);
                                 chargerTableauNoir();
-
-                                if(clicked_consonne_color == 'rgb(255, 165, 0)') { 
-                                    alert('ߛߌ߬ߙߊ߬ߕߊ ߏ߬ ߜߋ߲߭ ߠߎ߬ ߘߋ߲߰ߣߍ߲߬ ߞߘߐ ߟߋ߬߹');
-                                    return; 
-                                }
-
-                                let panneau_consonne_index = consonnes_choisies.indexOf(clicked_consonne);
-
-                                if(panneau_consonne_index == '-1') { consonnes_choisies.push(clicked_consonne); }
-                                if(panneau_consonne_index != '-1') { consonnes_choisies.splice(panneau_consonne_index, 1); }
-
-                                console.log("Les consonnes choisies sont :");
-                                console.log(consonnes_choisies);
-                                console.log(memoire_consonnes_choisies);
-
-                                marquerLaConsonneCliquee(clicked_consonne_container);
-                                decocherLesConsonnes();
-                                decocherLaNasalisation();
                                 afficherTableauNoir();
-                                effacerTableau();
                                 stylesDesSyllabes();
+                                effacerTableau();
                                 progressBarrApprendrePreSyllabe();
 
-                            
-                                function decocherLesConsonnes() {
-                                    if($('#consonnes_checker').find('.checkbox_parent').prop("checked") == true) { $('#consonnes_checker').find('.checkbox_parent').next().click(); }            
-                                }
-                                function decocherLaNasalisation() {
-                                    if($('#nasalisation_checker').find('.check_btn:last-child input').prop("checked") == true) { $('#nasalisation_checker').find('.check_btn:last-child label').click(); }            
+                                function choixDeLaConsonneAEtudier() {
+
+                                    if(clicked_consonne_color == 'rgb(255, 165, 0)') { 
+                                        alert('ߛߌ߬ߙߊ߬ߕߊ ߏ߬ ߜߋ߲߭ ߠߎ߬ ߘߋ߲߰ߣߍ߲߬ ߞߘߐ ߟߋ߬߹');
+                                        return; 
+                                    }
+
+                                    panneau_consonne_index = consonnes_choisies.indexOf(clicked_consonne);
+
+                                    if(panneau_consonne_index == '-1') { consonnes_choisies.push(clicked_consonne); }
+                                    if(panneau_consonne_index != '-1') { consonnes_choisies.splice(panneau_consonne_index, 1); }
+
+                                    console.log("Les consonnes choisies sont :");
+                                    console.log(consonnes_choisies);
+                                    console.log(memoire_consonnes_choisies);
                                 }
                                 function chargerTableauNoir() {
-                                /*
-                                Cette fonction est liée à la fonction checkbox_childrenClick() dans la fonction chargerLesson() dans parametres.js.
-                                Lorsqu'on clique sur une consonne du panneaux, la valeur correspondante est recherchée et cliquée dans les check_btn
-                                au niveau de parametres.js. Ici la consonne cliquée est dans la variable clicked_consonne.
-                                */
-                                    $.each($('.check_btn'), function(){
-                                        var consonne_corespondante = $('label', this);
-                                        if(clicked_consonne == consonne_corespondante.text()) { consonne_corespondante.click(); }
+
+                                        decocherLesCaracteresNonConcernes();
+                                        cocherLeCaractereAUtiliser();
+
+                                        function decocherLesCaracteresNonConcernes() {
+                                                
+                                            decocherLesConsonnesNonUtilises();
+                                            decocherLaNasalisationNonUtilisee();
+                                            decocherLeTedo();
+                                                
+                                            function decocherLesConsonnesNonUtilises() {
+                                                if($('#consonnes_checker').find('.checkbox_parent').prop("checked") == true) { $('#consonnes_checker').find('.checkbox_parent').next().click(); }            
+                                            }
+                                            function decocherLaNasalisationNonUtilisee() {
+                                                if($('#nasalisation_checker').find('.check_btn:last-child input').prop("checked") == true) { $('#nasalisation_checker').find('.check_btn:last-child label').click(); }            
+                                            }
+                                            function decocherLeTedo() {
+                                                if($('#tedo_checker').find('.check_btn:last-child input').prop("checked") == true) { $('#tedo_checker').find('.check_btn:last-child label').click(); }            
+                                            }
+                                        }
+                                        function cocherLeCaractereAUtiliser() {
+                                         /*
+                                          Cette fonction est liée à la fonction checkbox_childrenClick() dans la fonction chargerLesson() dans parametres.js.
+                                          Lorsqu'on clique sur une consonne du panneaux, la valeur correspondante est recherchée et cliquée dans les check_btn
+                                          au niveau de parametres.js. Ici la consonne cliquée est dans la variable clicked_consonne.
+                                         */
+                                            $.each($('.check_btn'), function(){
+                                                var consonne_corespondante = $('label', this);
+                                                if(clicked_consonne == consonne_corespondante.text()) { consonne_corespondante.click(); }             
+                                            });
+                                        }
+                                }
+                                function afficherTableauNoir() {
+
+                                        $('#table_syllabe_apprentissage tr').css('opacity',1);
+                                        $('.table_parlante td').css('opacity',1);
+
+                                        $.each($('#apprentissage_body tr'), function() {
+                                            let consonne_du_tableau = $('td', this).text().split('')[0];
+                                            if(clicked_consonne == consonne_du_tableau) {
+                                                let td = $($('td', this));
+
+                                                td.css({'transform':'scale(0)', 'transition':'100ms'});
+                                                $.each(td, function() {
+                                                    let index_td = $(this).index();
+                                                    setTimeout(() => { $(this).css('transform','scale(1)'); }, index_td*100);
+                                                });
+                                            }
+                                        }); 
+                                }
+                                function stylesDesSyllabes() {
+                                    let td = $('#table_syllabe_apprentissage td');
+                                        
+                                    //$('#table_syllabe_apprentissage tr').css('opacity',1);
+                                    //$('.table_parlante td').css('opacity',1);
+                                    
+                                    $.each(td, function(){
+                                        let compteur = 0;
+                                        $(this).css({'background-color':'rgb(85, 85, 85)', 'color':'yellow'});
+                                        $(this).click(function(){
+                                            let td_actif = $(this);
+                                            compteur++;
+                                            
+                                            if(compteur == quantite_normale_de_click){
+                                                td_actif.css({ 
+                                                    'background-color':'transparent', 
+                                                    'color':'yellow', 
+                                                    'border':'1px solid rgb(85, 85, 85)' 
+                                                });
+                                            }
+                                        });
                                     });
-                                    $('#table_syllabe_apprentissage tr').css('opacity',1);
-                                    $('.table_parlante td').css('opacity',1);
                                 }
                                 function effacerTableau() {
                                     if(panneau_consonne_index != '-1') {
@@ -332,27 +386,11 @@ function syllabe() {
                                                 setTimeout(() => { 
                                                     tr_actif.css('display','none'); 
                                                     chargerTableauNoir();
+                                                    afficherTableauNoir();
                                                     stylesDesSyllabes();
                                                 }, 500);
                                             }
                                         });
-                                    }
-                                }
-                                function afficherTableauNoir() {
-                                    if(panneau_consonne_index == '-1') {
-                                        chargerTableauNoir();
-                                        $.each($('#apprentissage_body tr'), function() {
-                                            let consonne_du_tableau = $('td', this).text().split('')[0];
-                                            if(clicked_consonne == consonne_du_tableau) {
-                                                let td = $($('td', this));
-
-                                                td.css({'transform':'scale(0)', 'transition':'100ms'});
-                                                $.each(td, function() {
-                                                    let index_td = $(this).index();
-                                                    setTimeout(() => { $(this).css('transform','scale(1)'); }, index_td*100);
-                                                });
-                                            }
-                                        }); 
                                     }
                                 }
                                 function progressBarrApprendrePreSyllabe() {
@@ -395,26 +433,6 @@ function syllabe() {
                                         $('#pre_apprentissage_btns').css('display','none');
                                         $('#apprentissage_dialogue_btn').css('display','none'); 
                                     }
-                                }
-                                function stylesDesSyllabes() {
-                                    let td = $('#table_syllabe_apprentissage td');
-                                    
-                                    $.each(td, function(){
-                                        let compteur = 0;
-                                        $(this).css({'background-color':'rgb(85, 85, 85)', 'color':'yellow'});
-                                        $(this).click(function(){
-                                            let td_actif = $(this);
-                                            compteur++;
-                                            
-                                            if(compteur == quantite_normale_de_click){
-                                                td_actif.css({ 
-                                                    'background-color':'transparent', 
-                                                    'color':'yellow', 
-                                                    'border':'1px solid rgb(85, 85, 85)' 
-                                                });
-                                            }
-                                        });
-                                    });
                                 }
                             });
                             $("#submit_panneau, #afficheur_de_panneau").click(() => {
@@ -703,7 +721,7 @@ function syllabe() {
                         
                                         element_actif = $(this);
                                         $('#exercice_body table td').css({'background-color':'rgba(85,85,85,0.25)', 'color':'white'});
-                                        marquerLaConsonneCliquee(element_actif);
+                                        marquerLaConsonneChoisie(element_actif);
                                         rendreActif($('#exercice_correction_btn'));
                                     }
                                 });
@@ -1084,9 +1102,9 @@ function syllabe() {
                                 clicked_response_element = $(this);
                                 if(question_de_revision_pre_syllabe == '') rappel($('#evaluation_dialogue_btn'));
                                 if(question_de_revision_pre_syllabe != '') { 
-                                        reponse_de_revision_pre_syllabe = $(this).text(); 
-                                        $('#revision_body table td').css({'background-color':'rgba(85,85,85,0.25)', 'color':'white'});
-                                    marquerLaConsonneCliquee(clicked_response_element);
+                                    reponse_de_revision_pre_syllabe = $(this).text(); 
+                                    $('#revision_body table td').css({'background-color':'rgba(85,85,85,0.25)', 'color':'white'});
+                                    marquerLaConsonneChoisie(clicked_response_element);
                                 }
                             });
                         }
@@ -1711,7 +1729,7 @@ function syllabe() {
                 function lessonDeRevisionPreSyllabeDuServeur() {
                     let datas = JSON.parse(sessionStorage.getItem('datas'));
                     let lrpss = [];
-                    if(datas[1].length != 0) lrpss = JSON.parse(datas[1][2].lesson);
+                    if(datas[1].length != 0) lrpss = (datas[1][2] == undefined) ? [] : JSON.parse(datas[1][2].lesson);
                     return lrpss;
                 }
             }
@@ -1728,7 +1746,7 @@ function syllabe() {
                 function lessonDEvaluationPreSyllabeDuServeur() {
                     let datas = JSON.parse(sessionStorage.getItem('datas'));
                     let levpss = [];
-                    if(datas[1].length != 0) levpss = JSON.parse(datas[1][3].lesson);
+                    if(datas[1].length != 0) levpss = (datas[1][3] == undefined) ? [] : JSON.parse(datas[1][3].lesson);
                     return levpss;
                 }
             }

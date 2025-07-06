@@ -54,6 +54,9 @@
     /* min-width: 2.5rem; */
 }
 #apprentissage_note p { margin: 0.25rem 0; }
+#apprentissage_body_cadre { 
+    height: 15rem; 
+}
 #pre_texte {
     width: 100%;
     color: #444;
@@ -284,6 +287,12 @@
     background-color: #bbb;
     font-weight: bold;
 }
+#apprentissage_body {
+    height: calc(100% - 1rem);
+}
+#exercice_body, #revision_body {
+    height: calc(100% - 5rem);
+}
 #exercice_body td { 
     width: 3rem;
     height: 2rem;
@@ -443,34 +452,12 @@
 }
 
 @media(orientation: portrait) {
-    #apprentissage_body_cadre { 
-        height: 20rem; 
-        padding: 1rem 0;
-    }
-    #exercice_body_cadre, #exercice_body_cadre { 
-        height: 20rem; 
-        padding: 1rem 0;
-    }
-    #apprentissage_body {
-        height: calc(100% - 1rem);
-    }
-    #exercice_body, #revision_body {
-        height: calc(100% - 5rem);
+    #exercice_body_cadre, #revision_body_cadre { 
+        height: 17rem; 
     }
 }
 @media(orientation: landscape) {
-    #apprentissage_body_cadre { 
-        height: 20rem; 
-        padding: 1rem 0;
-    }
     #exercice_body_cadre, #revision_body_cadre { 
-        height: 17rem; 
-        padding: 1rem 0;
-    }
-    #apprentissage_body {
-        height: calc(100% - 1rem);
-    }
-    #exercice_body, #revision_body {
-        height: calc(100% - 5rem);
+        height: 22rem; 
     }
 }

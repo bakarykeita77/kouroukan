@@ -1,16 +1,8 @@
 
-#table_alphabet_exercice {
-    width: calc(100% - 2.25rem);
-}
-#table_alphabet_exercice td {
-    font-size: 2rem;
-}
-#exercice_dialogue_btn div:active {
-    box-shadow: none;
-}
-#exercice_progress_bar, #exercice_redirection_btns { top: 1rem; }
-#revision_redirection_btns { top: 1rem; }
-
+#table_alphabet_exercice { width: calc(100% - 2.25rem); }
+#table_alphabet_exercice td { font-size: 2rem; }
+#exercice_dialogue_btn div:active { box-shadow: none; }
+#exercice_progress_bar { top: 1rem; }
 
 @media screen and (orientation: portrait) {
     #exercices_player { border: 1px solid #aaa; }

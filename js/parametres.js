@@ -318,7 +318,6 @@ function parametrageDeLesson() {
             caracteres_coches = voyelles_cochees.concat(consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees);
             var q = questions(niveau_actif);
             sessionStorage.setItem('questions', JSON.stringify(q));
-
             var apprentissage_html = apprentissageHTML();
             var exercice_html      = exerciceHTML();
             var pratique_html      = pratiqueHTML();
@@ -339,14 +338,14 @@ function parametrageDeLesson() {
               
             function apprentissageHTML() {
 
-                var apprentissage_html      = [];
-                var lettres_cochees         = lettresCochees();       
+                var apprentissage_html = [];
+                var lettres_cochees = lettresCochees();       
                 var syllabes_simples_coches = syllabesSimplesActualisees();
-                var syllabes_tonifies       = syllabesTonifieesActualisees();  // Voir parametres.js fonction collecteDesCaracteresCoches()
+                var syllabes_tonifies = syllabesTonifieesActualisees();  // Voir parametres.js fonction collecteDesCaracteresCoches()
                 var chiffres = chiffresDeBaseActualisees();
 
-                var voyelles_length          = voyelles_cochees.length;
-                var tons_length              = tons_coches.length;
+                var voyelles_length = voyelles_cochees.length;
+                var tons_length = tons_coches.length;
                 var syllabes_tonifies_length = syllabes_tonifies.length;
 
                 var table_d_apprentissage_alphabet_html = (option_retenue === 1) ? chargerCorpsDePreAlphabet() : lessonHTML(lettres_cochees, 'table_alphabet_apprentissage');

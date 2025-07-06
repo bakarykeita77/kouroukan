@@ -1306,7 +1306,7 @@ console.log(total_questions[i]);
     
         return mixted_table;
     }
-    function marquerLaConsonneCliquee(clicked_consonne_container) {
+    function marquerLaConsonneChoisie(clicked_consonne_container) {
         var bc = clicked_consonne_container.css('background-color');
         var consonne_background = (bc == 'rgb(170, 170, 170)') ? '#fff' : 'rgb(170, 170, 170)';
         clicked_consonne_container.css('background-color',consonne_background);
@@ -1449,7 +1449,9 @@ console.log(total_questions[i]);
                 }  
             }
             if(niveau_max === 1) {
-                if(JSON.parse(datas[niveau_max][3].lesson).length === 126) {
+                
+                let lesson_d_evaluation = (datas[niveau_max][3] == undefined) ? [] : JSON.parse(datas[niveau_max][3].lesson);
+                if(lesson_d_evaluation.length === 126) {
                     for (let i = 0; i < datas[niveau_max].length; i++) {
                         if(datas[niveau_max][i] != undefined) peds.push(datas[niveau_max][i].phase);
                     } 

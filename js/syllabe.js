@@ -697,6 +697,7 @@ function syllabe() {
                                 $('#exercice_repetition_btn').html('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ '+parseIntNko(i+1)+'߲ ߠߊߡߍ߲߫ ߕߎ߲߯');
                                 exercice_pre_syllabe_question = exercice_pre_syllabe_questions[i];
                                 
+            alert(exercice_pre_syllabe_question);
             console.log(exercice_pre_syllabe_question);
         
                                 if(i < exercice_pre_syllabe_questions.length) { 
@@ -1069,7 +1070,8 @@ function syllabe() {
                                 e.stopImmediatePropagation();
 
                                 question_de_revision_pre_syllabe = revision_pre_syllabe_questions[q_revision_index];
-    console.log(question_de_revision_pre_syllabe);                     
+                alert(question_de_revision_pre_syllabe);
+                                console.log(question_de_revision_pre_syllabe);                     
                                 dicterLaQuestion();
                                 actualiserLesLibellesDeDialogueBtn();
 

@@ -269,13 +269,12 @@ function syllabe() {
                                 var clicked_consonne = clicked_consonne_container.text();
                                 var clicked_consonne_color = clicked_consonne_container.css('color');
                                 let panneau_consonne_index = '';
-
+                       
+                                effacerTableau();
                                 choixDeLaConsonneAEtudier();
-                                marquerLaConsonneChoisie(clicked_consonne_container);
                                 chargerTableauNoir();
                                 afficherTableauNoir();
                                 stylesDesSyllabes();
-                                effacerTableau();
                                 progressBarrApprendrePreSyllabe();
 
                                 function choixDeLaConsonneAEtudier() {
@@ -285,14 +284,11 @@ function syllabe() {
                                         return; 
                                     }
 
+                                    marquerLaConsonneChoisie(clicked_consonne_container);
                                     panneau_consonne_index = consonnes_choisies.indexOf(clicked_consonne);
 
                                     if(panneau_consonne_index == '-1') { consonnes_choisies.push(clicked_consonne); }
                                     if(panneau_consonne_index != '-1') { consonnes_choisies.splice(panneau_consonne_index, 1); }
-
-                                    console.log("Les consonnes choisies sont :");
-                                    console.log(consonnes_choisies);
-                                    console.log(memoire_consonnes_choisies);
                                 }
                                 function chargerTableauNoir() {
 
@@ -328,7 +324,7 @@ function syllabe() {
                                         }
                                 }
                                 function afficherTableauNoir() {
-
+                                    if(panneau_consonne_index != '-1') {
                                         $('#table_syllabe_apprentissage tr').css('opacity',1);
                                         $('.table_parlante td').css('opacity',1);
 
@@ -344,13 +340,11 @@ function syllabe() {
                                                 });
                                             }
                                         }); 
+                                    }
                                 }
                                 function stylesDesSyllabes() {
                                     let td = $('#table_syllabe_apprentissage td');
                                         
-                                    //$('#table_syllabe_apprentissage tr').css('opacity',1);
-                                    //$('.table_parlante td').css('opacity',1);
-                                    
                                     $.each(td, function(){
                                         let compteur = 0;
                                         $(this).css({'background-color':'rgb(85, 85, 85)', 'color':'yellow'});
@@ -371,24 +365,21 @@ function syllabe() {
                                 function effacerTableau() {
                                     if(panneau_consonne_index != '-1') {
                                         $.each($('#apprentissage_body tr'), function() {
-                                            let tr_actif = $(this);
                                             let consonne_du_tableau = $('td', this).text().split('')[0];
 
                                             if(clicked_consonne == consonne_du_tableau) {
                                                 let td = $($('td', this));
                                                 let td_ln = td.length;
 
+                                                td.css({'transform':'scale(1)', 'transition':'100ms'});
                                                 $.each(td, function() {
                                                     let index_td = $(this).index();
                                                     setTimeout(() => { $(this).css('transform','scale(0)'); }, (td_ln - index_td)*100);
                                                 });
 
                                                 setTimeout(() => { 
-                                                    tr_actif.css('display','none'); 
-                                                    chargerTableauNoir();
-                                                    afficherTableauNoir();
-                                                    stylesDesSyllabes();
-                                                }, 500);
+                                                    //tr_actif.css('display','none'); 
+                                                }, 1500);
                                             }
                                         });
                                     }
@@ -697,7 +688,7 @@ function syllabe() {
                                 $('#exercice_repetition_btn').html('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ '+parseIntNko(i+1)+'߲ ߠߊߡߍ߲߫ ߕߎ߲߯');
                                 exercice_pre_syllabe_question = exercice_pre_syllabe_questions[i];
                                 
-            alert(exercice_pre_syllabe_question);
+            //alert(exercice_pre_syllabe_question);
             console.log(exercice_pre_syllabe_question);
         
                                 if(i < exercice_pre_syllabe_questions.length) { 
@@ -1070,7 +1061,7 @@ function syllabe() {
                                 e.stopImmediatePropagation();
 
                                 question_de_revision_pre_syllabe = revision_pre_syllabe_questions[q_revision_index];
-                alert(question_de_revision_pre_syllabe);
+                //alert(question_de_revision_pre_syllabe);
                                 console.log(question_de_revision_pre_syllabe);                     
                                 dicterLaQuestion();
                                 actualiserLesLibellesDeDialogueBtn();
@@ -1636,10 +1627,10 @@ function syllabe() {
                                                     actualiserLessonPreSyllabe(lesson_d_evaluation_pre_syllabe,lesson_d_evaluation_pre_syllabe_du_jour);
                                                     localStorage.setItem('lesson_d_evaluation_pre_syllabe', JSON.stringify(lesson_d_evaluation_pre_syllabe));
 
-                                                    if(lesson_d_apprentissage_pre_syllabe.length === 126) { 
-                                                    if(lesson_d_exercice_pre_syllabe.length === 126) { 
+                                                    if(lesson_d_apprentissage_pre_syllabe.length === 14) { 
+                                                    if(lesson_d_exercice_pre_syllabe.length === 14) { 
                                                     if(lesson_de_revision_pre_syllabe.length === 14) { 
-                                                    if(lesson_d_evaluation_pre_syllabe.length === 21) {
+                                                    if(lesson_d_evaluation_pre_syllabe.length === 14) {
         
                                                         updateLessonData(id_syllabe_apprentissage,lesson_d_apprentissage_pre_syllabe);
                                                         updateLessonData(id_syllabe_exercice,lesson_d_exercice_pre_syllabe);

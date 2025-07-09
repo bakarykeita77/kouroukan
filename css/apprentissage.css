@@ -54,9 +54,6 @@
     /* min-width: 2.5rem; */
 }
 #apprentissage_note p { margin: 0.25rem 0; }
-#apprentissage_body_cadre { 
-    height: 15rem; 
-}
 #pre_texte {
     width: 100%;
     color: #444;
@@ -67,11 +64,7 @@
 .notification h3 { margin: 0; padding: 0; }
 #redirige_sur_exercice { cursor: pointer; }
 #apprentissage_dialogue_btns {
-    height: 3rem;
-    line-height: 3rem;
     background-color: #ddd;
-    font-weight: bold;
-    color: black;
     z-index: 1;
 }
 #apprentissage_dialogue_btns > div { position: relative; }
@@ -452,11 +445,13 @@
 }
 
 @media(orientation: portrait) {
+    #apprentissage_body_cadre { height: 16rem; }
     #exercice_body_cadre, #revision_body_cadre { 
         height: 17rem; 
     }
 }
 @media(orientation: landscape) {
+    #apprentissage_body_cadre { height: 20rem; }
     #exercice_body_cadre, #revision_body_cadre { 
         height: 22rem; 
     }

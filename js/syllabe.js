@@ -270,10 +270,10 @@ function syllabe() {
                                 var clicked_consonne_color = clicked_consonne_container.css('color');
                                 let panneau_consonne_index = '';
                        
-                                effacerTableau();
                                 choixDeLaConsonneAEtudier();
                                 chargerTableauNoir();
                                 afficherTableauNoir();
+                                effacerTableauNoir();
                                 stylesDesSyllabes();
                                 progressBarrApprendrePreSyllabe();
 
@@ -324,9 +324,10 @@ function syllabe() {
                                         }
                                 }
                                 function afficherTableauNoir() {
-                                    if(panneau_consonne_index != '-1') {
+                                    if(panneau_consonne_index == '-1') {
+
                                         $('#table_syllabe_apprentissage tr').css('opacity',1);
-                                        $('.table_parlante td').css('opacity',1);
+                                        $('#table_syllabe_apprentissage td').css('opacity',1);
 
                                         $.each($('#apprentissage_body tr'), function() {
                                             let consonne_du_tableau = $('td', this).text().split('')[0];
@@ -340,6 +341,34 @@ function syllabe() {
                                                 });
                                             }
                                         }); 
+                                    }
+                                }
+                                function effacerTableauNoir() {
+                                    if(panneau_consonne_index != '-1') {
+
+                                        $('#table_syllabe_apprentissage td').css('opacity',1);
+
+                                        $.each($('#apprentissage_body tr'), function() {
+
+                                            let tr = $(this);
+                                            let tds = $('td', this);
+                                            let td_ln = tds.length;
+
+                                            $.each(tds, () => {
+
+                                                let td = $(this);
+                                                let index_td = td.index();
+                                                let consonne_du_tableau = td.text().split('')[1];
+
+                                                td.css({'transform':'scale(1)', 'transition':'100ms'});
+                                                if(clicked_consonne == consonne_du_tableau) {
+                                                    let tr_actif = tr
+
+                                                    setTimeout(() => { td.css({'transform':'scale(0)', 'opacity':0}); }, (td_ln - index_td)*100);
+                                                    setTimeout(() => { tr_actif.css('display','none'); }, 1500);
+                                                }
+                                            });
+                                        });
                                     }
                                 }
                                 function stylesDesSyllabes() {
@@ -361,28 +390,6 @@ function syllabe() {
                                             }
                                         });
                                     });
-                                }
-                                function effacerTableau() {
-                                    if(panneau_consonne_index != '-1') {
-                                        $.each($('#apprentissage_body tr'), function() {
-                                            let consonne_du_tableau = $('td', this).text().split('')[0];
-
-                                            if(clicked_consonne == consonne_du_tableau) {
-                                                let td = $($('td', this));
-                                                let td_ln = td.length;
-
-                                                td.css({'transform':'scale(1)', 'transition':'100ms'});
-                                                $.each(td, function() {
-                                                    let index_td = $(this).index();
-                                                    setTimeout(() => { $(this).css('transform','scale(0)'); }, (td_ln - index_td)*100);
-                                                });
-
-                                                setTimeout(() => { 
-                                                    //tr_actif.css('display','none'); 
-                                                }, 1500);
-                                            }
-                                        });
-                                    }
                                 }
                                 function progressBarrApprendrePreSyllabe() {
                     

@@ -269,7 +269,6 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     position: relative; 
     width: 100%;
     margin: 0 auto;
-    border-radius: 0.5rem;
     box-sizing: border-box;
 }
 .course_body { 
@@ -298,8 +297,8 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 }
 .course_foot { 
     z-index: 1; 
-    top: 0.75rem;
     height: 4rem;
+    border-top: 0.125rem solid #ccc;
 }
 .course_head { 
     height: 7rem; 
@@ -330,10 +329,10 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     display: none;
     top: 0;
     width: calc(100% - 2px);
-    height: 4rem;
-    line-height: 4rem;
+    height: 3rem;
+    line-height: 3rem;
     padding: 0;
-    margin: auto;
+    margin: 0.125rem auto;
     border-radius: 0.5rem;
     font-weight: bold;
     text-align: center;
@@ -760,18 +759,18 @@ del {
     overflow-y: visible;
 }
 .notification_container {
-    border-top: 6px solid #bbb;
+    border-top: 1px solid #bbb;
     border-bottom: 1px solid #bbb;
+    padding: 0;
     height: 6rem;
 }
 .notification_corps {
     position: relative;
     background-color: #eee;
     padding: 0.25rem 1rem;
-    margin: 1px 0.5rem;
+    margin: 0.25rem 0.5rem;
     height: 5rem;
     width: calc(100% - 3rem);
-    top: 0.25rem;
     overflow: auto;
 }
 
@@ -979,7 +978,7 @@ del {
     top: 0;
     height: 2rem;
     width: 100%;
-    margin: 0 auto;
+    margin: 0.125rem auto;
     padding: 0;
     background-color: #fff;
     border: 1px solid #bbb;

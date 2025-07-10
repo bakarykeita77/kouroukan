@@ -171,7 +171,6 @@ console.log(datas[niveau_en_cours - 1]);
         setTimeout(() => { displayv($("#programme_commentaire")); }, 400);
         setTimeout(() => {
             displayv($("#programme_matieres"));
-            displayv($("#programme_ul"));
         }, 600);
     }
     function alerteDuProgramme() {

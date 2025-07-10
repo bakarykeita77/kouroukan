@@ -1279,19 +1279,15 @@ del {
     }
     .phases li { width: 80%; }
     .course { width: calc(100vw - 1rem); }
-    .course_body { 
-        width: 100%;
-    }
+    .course_body { width: 95%; }
     .table_parlante td, .table_muette td {
         font-size: 1.8rem;
     }
     .travaux { display: none; }
 }
 @media(orientation: landscape) {
-    .cover {
-        background-color: rgba(0, 0, 0, 0.85);
-    }
-    .parametres_popup {  width: auto; }
+    .cover { background-color: rgba(0, 0, 0, 0.85); }
+    .parametres_popup { width: auto; }
     .phases { 
         flex-direction: row;  
         height: 8rem;  
@@ -1304,12 +1300,8 @@ del {
         width: 30%;
         min-width: 5rem;
     }
-    .course_body { 
-        width: calc(100% - 4rem);
-    }
+    .course_body { width: calc(100% - 4rem); }
     .table_parlante, .table_muette { top: 0.25rem; }
-    .table_parlante td, .table_muette td {
-        font-size: 2rem;
-    }
+    .table_parlante td, .table_muette td { font-size: 2rem; }
     .travaux { display: block; }
 }

@@ -445,7 +445,7 @@
 }
 
 @media(orientation: portrait) {
-    #apprentissage_body_cadre { height: 16rem; }
+    #apprentissage_body_cadre { height: 18rem; }
     #exercice_body_cadre, #revision_body_cadre { 
         height: 17rem; 
     }

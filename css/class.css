@@ -1124,7 +1124,7 @@ del {
 }
 .table_parlante tr, .table_muette tr { 
     width: 100%; 
-    /* opacity: 0; */
+    opacity: 1;
 }
 .table_parlante td, .table_muette td {
     position: relative;
@@ -1136,6 +1136,7 @@ del {
     border-radius: 0.5rem;
     cursor: pointer;
     overflow: visible;
+    opacity: 1;
 }
 .table_parlante td {  background-color: rgba(85,85,85,0.25); }
 .transparent { animation: transperer; }

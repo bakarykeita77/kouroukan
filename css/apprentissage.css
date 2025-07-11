@@ -219,10 +219,10 @@
 #pre_revision_btn:active { box-shadow: none; }
 #consonnes_cadre {
     position: absolute;
-    top: 12rem;
-    height: 14rem;
+    top: 20rem;
+    height: 13rem;
     margin: 0.25rem 0;
-    padding: 1rem;
+    padding: 0.5rem;
     display: block;
     border-radius: 0.5rem;
     background-color: #eee;

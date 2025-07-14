@@ -397,7 +397,7 @@
         chargerEnteteDePreSyllabe();
         chargerFootDePreSyllabe();
         chargerCorpsDePreSyllabe();
-
+ߋ߭
         
         function chargerEnteteDePreSyllabe() {
             $('.notification_titre').html('ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ');

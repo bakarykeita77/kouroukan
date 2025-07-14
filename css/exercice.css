@@ -2,7 +2,6 @@
 #table_alphabet_exercice { width: calc(100% - 2.25rem); }
 #table_alphabet_exercice td { font-size: 2rem; }
 #exercice_dialogue_btn div:active { box-shadow: none; }
-#exercice_progress_bar { top: 1rem; }
 
 @media screen and (orientation: portrait) {
     #exercices_player { border: 1px solid #aaa; }

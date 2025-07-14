@@ -1,6 +1,4 @@
-#apprentissage_container {
-    height: calc(100% - 7rem);
-}
+
 #apprentissage_head, #apprentissage_body { 
     display: none;
 }
@@ -188,7 +186,7 @@
     height: 0; 
     width: 100%;
     overflow: hidden; 
-    bottom: 4rem;
+    bottom: 3rem;
 }
 #panneaux > div { font-size: 1.5rem; }
 #submit_panneau { text-align: center; font-size: 1rem; }
@@ -242,9 +240,15 @@
 }
 #consonnes_cadre span:hover { background-color: #ddd; }
 
+#apprentissage_body_cadre { 
+    min-height: 16rem;
+    height: 46vh;
+}
 #exercice_container, #revision_container { display: none; height: 100%; }
 #exercice_body_cadre, #revision_body_cadre {
     display: none;
+    height: 47vh;
+    min-height: 16rem;
 }
 #pre_exercice {
     display: none;
@@ -284,7 +288,8 @@
     height: calc(100% - 1rem);
 }
 #exercice_body, #revision_body {
-    height: calc(100% - 5rem);
+    height: 36vh;
+    min-height: 12rem;
 }
 #exercice_body td { 
     width: 3rem;
@@ -301,12 +306,12 @@
 #exercice_question_btn, #exercice_repetition_btn, #exercice_correction_btn {
     position: relative;
     display: none;
-    bottom: 0;
+    top: 0.25rem;
     margin: 0 auto;
     width: 100%;
     max-width: 20rem;
-    height: 4rem;
-    line-height: 4rem;
+    height: 3rem;
+    line-height: 3rem;
     text-align: center;
     border-radius: 0.5rem;
     cursor: pointer;
@@ -444,15 +449,5 @@
     display: inline-block;
 }
 
-@media(orientation: portrait) {
-    #apprentissage_body_cadre { height: 18rem; }
-    #exercice_body_cadre, #revision_body_cadre { 
-        height: 17rem; 
-    }
-}
-@media(orientation: landscape) {
-    #apprentissage_body_cadre { height: 20rem; }
-    #exercice_body_cadre, #revision_body_cadre { 
-        height: 22rem; 
-    }
-}
+@media(orientation: portrait) {}
+@media(orientation: landscape) {}

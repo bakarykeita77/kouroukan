@@ -10,6 +10,10 @@
     opacity: 0;
     transition: 0.6s;
 }
+#evaluation_body { 
+    height: 30vh;
+    min-height: 12rem;
+}
 
 
 #evaluation_thead {
@@ -176,7 +180,7 @@
     transform: scale(0.75);
     transition: 0.15s;
 }
-#revision_progress_bar { top: 1.5rem; }
+#revision_progress_bar { top: 0.5rem; }
 #mauvaise_reponse, #evaluation_cross {
     margin: 0;
     text-align: center;
@@ -413,7 +417,6 @@
 
 
 @media screen and (orientation: portrait) {
-    #evaluation_body { height: calc(100% - 13rem); min-height: 13rem; }
     .evaluation_table {  height: 100%; }
     #evaluation_tbody { height: calc(100% - 2rem); }    
     #evaluation_tfoot { display: none; }
@@ -421,7 +424,6 @@
 }
 
 @media screen and (orientation: landscape) {
-    #evaluation_body { height: calc(100% - 5rem); min-height: 22rem; }
     .evaluation_table {  height: calc(100% - 2rem);  }
     #evaluation_tbody { height: calc(100% - 4rem); }
     #evaluation_fiche_body { height: 14.875rem; }

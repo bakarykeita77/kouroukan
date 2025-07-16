@@ -101,6 +101,10 @@ if(isset($_SESSION["id_client"])) {
                             </div>
                          <!--Course body ------------------------------------------------------------------ -->
                             <div class="body_cadre" id="apprentissage_body_cadre">
+                                <div class = 'progress_bar' id="apprentissage_progress_bar">
+                                    <div class='progress_bonne_reponse_bar'></div>
+                                    <div class='progress_mauvaise_reponse_bar'></div>
+                                </div>
                                 <div class="course_body" id="apprentissage_body"></div>
                             </div>
                          <!--Course foot ------------------------------------------------------------------ -->
@@ -109,10 +113,6 @@ if(isset($_SESSION["id_client"])) {
                                 <div class="parametres_container" id="parametre_lesson_container"> <?php include("parametre.php"); ?> </div>
                                 <div id='panneaux'></div>
                                 <div class="dialogue_btns" id="apprentissage_dialogue_btns"></div>
-                                <div class = 'progress_bar' id="apprentissage_progress_bar">
-                                    <div class='progress_bonne_reponse_bar'></div>
-                                    <div class='progress_mauvaise_reponse_bar'></div>
-                                </div>
                                 <div class="redirection_btns" id="apprentissage_redirection_btns">
                                     <span class='redirection_btn' id='pre_apprentissage_bouton'></span> 
                                     <span class='redirection_btn' id='continu_sur_exercice_bouton'></span>
@@ -138,31 +138,31 @@ if(isset($_SESSION["id_client"])) {
                                     </div>
                                 </div>
                             </div>
+
                          <!--Course body ------------------------------------------------------------------ -->
                             <div class="body_cadre" id="exercice_body_cadre">
+                                <div class='progress_bar' id="exercice_progress_bar">
+                                    <div class='progress_bonne_reponse_bar'></div>
+                                    <div class='progress_mauvaise_reponse_bar'></div>
+                                </div>
                                 <div class="course_body" id="exercice_body"></div>   <!--Cette division est chargé par la fonction chargerExercice() dans exeercice.js-->
                             
-                                <!--Course foot ------------------------------------------------------------------ -->
-                                <div class="course_foot" id="exercice_foot">
+                            </div>
 
-                                    <div class="dialogue_btns" id="exercice_dialogue_btns">
-                                        <div class="question_btn" id="exercice_question_btn"></div>
-                                        <div class="repetition_btn" id="exercice_repetition_btn"></div>
-                                        <div class="correction_btn" id="exercice_correction_btn">ߏ߬ ߛߊߞߍ߫</div>
-                                    </div>
+                         <!--Course foot ------------------------------------------------------------------ -->
+                            <div class="course_foot" id="exercice_foot">
+
+                                <div class="dialogue_btns" id="exercice_dialogue_btns">
+                                    <div class="question_btn" id="exercice_question_btn"></div>
+                                    <div class="repetition_btn" id="exercice_repetition_btn"></div>
+                                    <div class="correction_btn" id="exercice_correction_btn">ߏ߬ ߛߊߞߍ߫</div>
                                 </div>
-                            </div>
 
-                         <!--Progress boutons ------------------------------------------------------------- -->
-                            <div class='progress_bar' id="exercice_progress_bar">
-                                <div class='progress_bonne_reponse_bar'></div>
-                                <div class='progress_mauvaise_reponse_bar'></div>
-                            </div>
-
-                         <!--Redirection boutons ---------------------------------------------------------- -->
-                            <div class="redirection_btns" id="exercice_redirection_btns">
-                                <span class='redirection_btn' id='reprendre_exercice_bouton'></span>
-                                <span class='redirection_btn' id='continu_sur_revision_bouton'></span> 
+                                <!--Redirection boutons ---------------------------------------------------------- -->
+                                <div class="redirection_btns" id="exercice_redirection_btns">
+                                    <span class='redirection_btn' id='reprendre_exercice_bouton'></span>
+                                    <span class='redirection_btn' id='continu_sur_revision_bouton'></span> 
+                                </div>
                             </div>
                         </div>
                      <!--revision_container---------------------------------------------------------------------------------------------------------->

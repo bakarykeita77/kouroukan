@@ -2,9 +2,6 @@
 #apprentissage_head, #apprentissage_body { 
     display: none;
 }
-#apprentissage_body {
-    padding-top: 1rem;
-}
 #table_parlante_container {
     position: absolute;
     top: 1rem;
@@ -240,16 +237,7 @@
 }
 #consonnes_cadre span:hover { background-color: #ddd; }
 
-#apprentissage_body_cadre { 
-    min-height: 16rem;
-    height: 46vh;
-}
 #exercice_container, #revision_container { display: none; height: 100%; }
-#exercice_body_cadre, #revision_body_cadre {
-    display: none;
-    height: 47vh;
-    min-height: 16rem;
-}
 #pre_exercice {
     display: none;
     position: relative;
@@ -284,13 +272,6 @@
     background-color: #bbb;
     font-weight: bold;
 }
-#apprentissage_body {
-    height: calc(100% - 1rem);
-}
-#exercice_body, #revision_body {
-    height: 36vh;
-    min-height: 12rem;
-}
 #exercice_body td { 
     width: 3rem;
     height: 2rem;
@@ -309,7 +290,6 @@
     top: 0.25rem;
     margin: 0 auto;
     width: 100%;
-    max-width: 20rem;
     height: 3rem;
     line-height: 3rem;
     text-align: center;

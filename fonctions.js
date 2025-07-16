@@ -1055,7 +1055,6 @@ console.log(total_questions[i]);
     }
     function initialiserProgressBarIntegre() { 
         setTimeout(() => { 
-            $('.progress_bar').css('display','none');
             $('.progress_mauvaise_reponse_bar_integre, .progress_bonne_reponse_bar_integre').css('width',0);
         }, 450);
     }
@@ -1522,7 +1521,8 @@ console.log(total_questions[i]);
         setTimeout(function(){ $(element).removeClass('faux'); }, 600);
     }
     function reInitialiserProgressBar() { 
-        $('.progress_bonne_reponse_bar, .progress_mauvaise_reponse_bar').css('width', 0);
+        $('.progress_bonne_reponse_bar, .progress_mauvaise_reponse_bar').css({'transition':0, 'width':0});
+        setTimeout(() => { $('.progress_bonne_reponse_bar, .progress_mauvaise_reponse_bar').css({'transition':'0.4ms'}); }, 500);
     }
     function rendreActif(element) {
         element.addClass('actif');

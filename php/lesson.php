@@ -101,9 +101,11 @@ if(isset($_SESSION["id_client"])) {
                             </div>
                          <!--Course body ------------------------------------------------------------------ -->
                             <div class="body_cadre" id="apprentissage_body_cadre">
-                                <div class = 'progress_bar' id="apprentissage_progress_bar">
-                                    <div class='progress_bonne_reponse_bar'></div>
-                                    <div class='progress_mauvaise_reponse_bar'></div>
+                                <div class="progress_bar_container">
+                                    <div class = 'progress_bar' id="apprentissage_progress_bar">
+                                        <div class='progress_bonne_reponse_bar'></div>
+                                        <div class='progress_mauvaise_reponse_bar'></div>
+                                    </div>
                                 </div>
                                 <div class="course_body" id="apprentissage_body"></div>
                             </div>
@@ -141,12 +143,13 @@ if(isset($_SESSION["id_client"])) {
 
                          <!--Course body ------------------------------------------------------------------ -->
                             <div class="body_cadre" id="exercice_body_cadre">
-                                <div class='progress_bar' id="exercice_progress_bar">
-                                    <div class='progress_bonne_reponse_bar'></div>
-                                    <div class='progress_mauvaise_reponse_bar'></div>
+                                <div class="progress_bar_container">
+                                    <div class='progress_bar' id="exercice_progress_bar">
+                                        <div class='progress_bonne_reponse_bar'></div>
+                                        <div class='progress_mauvaise_reponse_bar'></div>
+                                    </div>
                                 </div>
                                 <div class="course_body" id="exercice_body"></div>   <!--Cette division est chargé par la fonction chargerExercice() dans exeercice.js-->
-                            
                             </div>
 
                          <!--Course foot ------------------------------------------------------------------ -->
@@ -158,7 +161,6 @@ if(isset($_SESSION["id_client"])) {
                                     <div class="correction_btn" id="exercice_correction_btn">ߏ߬ ߛߊߞߍ߫</div>
                                 </div>
 
-                                <!--Redirection boutons ---------------------------------------------------------- -->
                                 <div class="redirection_btns" id="exercice_redirection_btns">
                                     <span class='redirection_btn' id='reprendre_exercice_bouton'></span>
                                     <span class='redirection_btn' id='continu_sur_revision_bouton'></span> 
@@ -185,30 +187,30 @@ if(isset($_SESSION["id_client"])) {
                             </div>
                          <!--Course body ------------------------------------------------------------------ -->
                             <div class="body_cadre" id="revision_body_cadre">
-                                <div class="course_body" id="revision_body"></div>   <!--Cette division est chargé par la fonction chargerExercice() dans exercice.js-->
-                            
-                                <!--Course foot ------------------------------------------------------------------ -->
-                                <div class="course_foot" id="revision_foot">
-                                    <div class="dialogue_btns" id="revision_dialogue_btns">
-                                        <div class="question_btn" id="revision_question_btn"></div>
-                                        <div class="repetition_btn" id="revision_repetition_btn"></div>
-                                        <div class="correction_btn" id="revision_correction_btn">ߏ߬ ߛߊߞߍ߫</div>
+
+                                <div class="progress_bar_container">
+                                    <div class='progress_bar' id="revision_progress_bar">
+                                        <div class='progress_bonne_reponse_bar'></div>
+                                        <div class='progress_mauvaise_reponse_bar'></div>
                                     </div>
                                 </div>
+                                <div class="course_body" id="revision_body"></div>   <!--Cette division est chargé par la fonction chargerExercice() dans exercice.js-->
                             </div>
-
-                         <!--Progress boutons ------------------------------------------------------------- -->
-                            <div class='progress_bar' id="revision_progress_bar">
-                                <div class='progress_bonne_reponse_bar'></div>
-                                <div class='progress_mauvaise_reponse_bar'></div>
-                            </div>
-
-                         <!--Redirection boutons ---------------------------------------------------------- -->
-                            <div class="redirection_btns" id="revision_redirection_btns">
-                                <span class='redirection_btn' id='continu_sur_apprentissage_bouton'></span> 
-                                <span class='redirection_btn' id='reprendre_revision_bouton'></span>
-                                <span class='redirection_btn' id='evaluation_bouton'></span> 
-                                <span class='redirection_btn' id='syllabe_bouton'><a href="http://localhost/kouroukan/php/programmes.php">ߜߋ߲߭ ߘߋ߲߰ߠߌ ߘߊߡߌ߬ߘߊ߬</a></span> 
+                        
+                         <!--Course foot ------------------------------------------------------------------ -->
+                            <div class="course_foot" id="revision_foot">
+                                
+                                <div class="dialogue_btns" id="revision_dialogue_btns">
+                                    <div class="question_btn" id="revision_question_btn"></div>
+                                    <div class="repetition_btn" id="revision_repetition_btn"></div>
+                                    <div class="correction_btn" id="revision_correction_btn">ߏ߬ ߛߊߞߍ߫</div>
+                                </div>
+                                <div class="redirection_btns" id="revision_redirection_btns">
+                                    <span class='redirection_btn' id='continu_sur_apprentissage_bouton'></span> 
+                                    <span class='redirection_btn' id='reprendre_revision_bouton'></span>
+                                    <span class='redirection_btn' id='evaluation_bouton'></span> 
+                                    <span class='redirection_btn' id='syllabe_bouton'><a href="http://localhost/kouroukan/php/programmes.php">ߜߋ߲߭ ߘߋ߲߰ߠߌ ߘߊߡߌ߬ߘߊ߬</a></span> 
+                                </div>
                             </div>
                         </div>
                      <!--evaluation_container-------------------------------------------------------------------------------------------------------->
@@ -229,7 +231,14 @@ if(isset($_SESSION["id_client"])) {
                                     </div>
                                 </div>
                             </div>
+                            
                          <!--Course body ------------------------------------------------------------------ -->
+                            <div class="progress_bar_container">
+                                <div class='progress_bar' id="evaluation_progress_bar">
+                                    <div class='progress_bonne_reponse_bar'></div>
+                                    <div class='progress_mauvaise_reponse_bar'></div>
+                                </div>
+                            </div>
                             <div class="course_body" id="evaluation_body">
 
                                 <div id="evaluation_fiche">
@@ -263,6 +272,7 @@ if(isset($_SESSION["id_client"])) {
                                 </div>
                                 
                             </div>
+
                          <!--Course foot ------------------------------------------------------------------ -->
                             <div class="course_foot" id="evaluation_foot">
 
@@ -295,14 +305,10 @@ if(isset($_SESSION["id_client"])) {
                                 </div>
 
                                 <div class="redirection_btns" id="evaluation_redirection_btns">
-                                    <div class="redirection_btn_1">ߜߋ߲߭ ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫ ߕߎ߲߯</div>
-                                    <div class="redirection_btn_2">ߥߊ߫ ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߡߊ߬</div>
-                                    <div class="redirection_btn_3"> ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ </div>
-                                </div>
-
-                                <div class='progress_bar' id="evaluation_progress_bar">
-                                    <div class='progress_bonne_reponse_bar'></div>
-                                    <div class='progress_mauvaise_reponse_bar'></div>
+                                    <div class="redirection_btn" id="revision_pre_syllabe_reprise_btn">ߜߋ߲߭ ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫ ߕߎ߲߯</div>
+                                    <div class="redirection_btn" id="continu_sur_apprentissage_pre_syllabe_btn">ߥߊ߫ ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߡߊ߬</div>
+                                    <div class="redirection_btn" id=""> ߜߋ߲߭ ߞߘߐߓߐߟߌ </div>
+                                    <span class='redirection_btn' id='syllabe_bouton'><a href="http://localhost/kouroukan/php/programmes.php"></a></span> 
                                 </div>
 
                             </div>

@@ -180,7 +180,6 @@
     transform: scale(0.75);
     transition: 0.15s;
 }
-#revision_progress_bar { top: 0.5rem; }
 #mauvaise_reponse, #evaluation_cross {
     margin: 0;
     text-align: center;

@@ -2389,7 +2389,7 @@ function alphabet() {
 
                                             $('.question_btn').off('click');
                                             $('.question_btn').html('ߛߓߍߛߎ߲ ߞߘߐߓߐߟߌ ߓߘߊ߫ ߓߊ߲߫. ߌ ߞߎߟߎ߲ߖߋ߫߹'); 
-                                            initialiserProgressBarIntegre();
+                                            initialiserProgressBar();
                                             
                                             if(note_d_evaluation >= moyenne_d_evaluation) {
                                                 viderNotification();

@@ -277,7 +277,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     padding-top: 1.5rem;
     color: white;
     background-color: rgba(0,0,0,0.8);
-    border-radius: 0 0 0.5rem 0.5rem;
+    border-radius: 0.5rem;
     overflow-y: auto;
     z-index: 0;
 }
@@ -535,6 +535,8 @@ del {
 .lessons_apprises a { color: yellow; }
 .lessons_a_apprendre { background-color: #ccc; }
 .lessons_a_apprendre a { color: #aaa; }
+.lesson_progress_question_bar { background-color: #ddd; }
+.lesson_progress_bonne_reponse_bar { background-color: yellow; }
 .lesson_title {
     position: relative;
     display: none;
@@ -735,7 +737,6 @@ del {
 .noir_clair { color: #000; background-color: #ddd; }
 .notification {
     position: relative;
-    height: calc(100% - 1.5rem);
     width: 100%;
     font-size: 12px;
     overflow-y: visible;
@@ -954,24 +955,30 @@ del {
     border-radius: 6px;
 }
 .profile_menu_head a { text-decoration: none; }
+.progress_bar_container {
+    padding: 0.125rem;
+    margin-top: 0.5rem;
+    height: 0.5rem;
+}
 .progress_bar {
     position: relative;
     display: none;
-    top: 0;
-    height: 1rem;
-    margin: 0 auto;
+    width: calc(100% - 1rem);
+    height: 0.25rem;
     padding: 0;
+    margin: 0 0.5rem;
     background-color: #fff;
     border: 1px solid #bbb;
-    border-radius: 0.5rem 0.5rem 0 0;
+    border-radius: 0.125rem;
 }
-.progress_bar_integre { 
+.progress_bar > div {
     position: absolute; 
-    top: 0;
-    height: 4rem;
-    width: 100%;
-    box-sizing: border-box;
-    z-index: 0; 
+    right: 0;
+    height: 0.25rem;
+    width: 0;
+    margin: 0;
+    border-left: 1px solid white;
+    transition: 0.4s;
 }
 .progress_bar span {
     position: absolute;
@@ -981,28 +988,8 @@ del {
     width: 0;
     transition: 0.6s
 }
-.progress_bar > div, .progress_bar_integre > div {
-    position: absolute; 
-    right: 0;
-    width: 0;
-    margin: 0;
-    transition: 0.6s;
-}
-.progress_bar > div { height: 1rem; }
-.progress_bar_integre > div {  height: 4rem; }
-.lesson_progress_question_bar { background-color: #ddd; }
-.lesson_progress_bonne_reponse_bar { background-color: yellow; }
-.progress_bonne_reponse_bar, .progress_mauvaise_reponse_bar, .progress_question_bar {
-    position: absolute;
-    height: 1rem;
-    transition: 0.4s;
-}
-.progress_bonne_reponse_bar, .progress_bonne_reponse_bar_integre { 
-    background-color: rgba(255,255,0,0.6); 
-}
-.progress_mauvaise_reponse_bar, .progress_mauvaise_reponse_bar_integre { 
-    background-color: rgba(0,0,0,0.25);
-}
+.progress_bonne_reponse_bar { background-color: rgb(255,255,0); z-index: 1; }
+.progress_mauvaise_reponse_bar { background-color: rgba(0,0,0,0.4); z-index: 0; }
 .progress_question_bar { background-color: #bbb; }
 
 /* --------------------------------------------------------------------------------------------------------- */
@@ -1011,11 +998,8 @@ del {
 }
 
 /* --------------------------------------------------------------------------------------------------------- */
-.redirection_btn_1, .redirection_btn_2, .redirection_btn_3 {
-    max-width: 12rem;
-    padding: 0.5rem;
-    margin: auto;
-    border-radius: 0.5rem;
+.redirection_btn {
+    background-color: #fff;
 }
 .redirection_btns { 
     position: relative;
@@ -1257,7 +1241,6 @@ del {
     }
     .phases li { width: 80%; }
     .course { width: calc(100vw - 1rem); }
-    .progress_bar { width: calc(95% - 2px); }
     .course_body { width: 95%; }
     .table_parlante td, .table_muette td {
         font-size: 1.8rem;
@@ -1279,7 +1262,7 @@ del {
         width: 30%;
         min-width: 5rem;
     }
-    .course_body, .progress_bar { width: calc(100% - 4rem); }
+    .course_body { width: calc(100% - 4rem); }
     .table_parlante, .table_muette { top: 0.25rem; }
     .table_parlante td, .table_muette td { font-size: 2rem; }
     .travaux { display: block; }

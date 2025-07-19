@@ -288,19 +288,6 @@
 #exercice_body td:hover { 
     background-color: #999;
 }
-#exercice_question_btn, #exercice_repetition_btn, #exercice_correction_btn {
-    position: relative;
-    display: none;
-    top: 0.25rem;
-    margin: 0 auto;
-    width: 100%;
-    height: 3rem;
-    line-height: 3rem;
-    text-align: center;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    transition: 0.2s;
-}
 #exercice_question_btn:active, #exercice_repetition_btn:active { box-shadow: none; }
 #exercice_repetition_btn { display: none; }
 #afficheur_de_resultat {

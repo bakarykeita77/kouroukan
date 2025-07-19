@@ -86,10 +86,7 @@
     }
     function afficher(element) {
         masquer(element);
-        setTimeout(function() { element.css({ 
-            'display':'block', 
-            'transition':'0.3s' 
-        }); }, 100); 
+        setTimeout(function() { element.css({ 'display':'block' }); }, 100); 
         setTimeout(function() { element.css({
             'transform':'scale(1)', 
             'opacity':1
@@ -542,7 +539,6 @@
         element.css({
             'display':'block',
             'opacity':0, 
-            'transition':'0.4s', 
             'transform':'scale(0.75)'
         });
         setTimeout(() => { element.css({'opacity':1, 'transform':'scale(1)'}); }, 50);
@@ -606,7 +602,7 @@
             masquer($('#exercice_repetition_btn'));
             masquer($('#exercice_correction_btn'));
             afficher($('#exercice_question_btn'));
-            rendreActif($('#exercice_question_btn'));
+            indexer($('#exercice_question_btn p'));
 
             $('#exercice_question_btn').click(function() { 
                 masquer($('#exercice_question_btn'));
@@ -706,6 +702,7 @@ console.log(total_questions[i]);
         let question_status = 'repondue';
 
         rendreActif($('#exercice_question_btn'));
+        indexer($('#exercice_question_btn p'));
 
         $('#exercice_question_btn').click(function() { 
             question_status = 'posee';
@@ -782,6 +779,24 @@ console.log(total_questions[i]);
 	}
     function indexer(element) { 
         let element_id = element.attr('id');
+        rendreActif(element);
+        setTimeout(function() { 
+            element.addClass('indicateur'); 
+            repeterIndexation($('#'+element_id)); 
+        }, 1000);
+        
+        function repeterIndexation(element) {
+            let r = setInterval(function(){
+                element.removeClass('indicateur'); 
+                if(element.hasClass('actif')) element.addClass('indicateur');
+            },5000);
+            
+            element.click(function() { clearInterval(r); $(this).removeClass('indicateur'); });
+        }
+    }
+    function indexerP(element) { 
+        let element_id = element.attr('id');
+        rendreActif(element.parent());
         rendreActif(element);
         setTimeout(function() { 
             element.addClass('indicateur'); 
@@ -1085,7 +1100,6 @@ console.log(total_questions[i]);
             'display':'none',
             'transform':'scale(0.75)', 
             'opacity':'0',
-            'transition':'0.3s'
         });
     }
     function memoriserClicks(table,elements){

@@ -116,8 +116,8 @@ if(isset($_SESSION["id_client"])) {
                                 <div id='panneaux'></div>
                                 <div class="dialogue_btns" id="apprentissage_dialogue_btns"></div>
                                 <div class="redirection_btns" id="apprentissage_redirection_btns">
-                                    <span class='redirection_btn' id='pre_apprentissage_bouton'></span> 
-                                    <span class='redirection_btn' id='continu_sur_exercice_bouton'></span>
+                                    <div class='redirection_btn' id='pre_apprentissage_bouton'></div> 
+                                    <div class='redirection_btn' id='continu_sur_exercice_bouton'></div>
                                 </div>
                             </div>
                         </div>
@@ -162,8 +162,8 @@ if(isset($_SESSION["id_client"])) {
                                 </div>
 
                                 <div class="redirection_btns" id="exercice_redirection_btns">
-                                    <span class='redirection_btn' id='reprendre_exercice_bouton'></span>
-                                    <span class='redirection_btn' id='continu_sur_revision_bouton'></span> 
+                                    <div class='redirection_btn' id='reprendre_exercice_bouton'></div>
+                                    <div class='redirection_btn' id='continu_sur_revision_bouton'></div> 
                                 </div>
                             </div>
                         </div>
@@ -203,13 +203,13 @@ if(isset($_SESSION["id_client"])) {
                                 <div class="dialogue_btns" id="revision_dialogue_btns">
                                     <div class="question_btn" id="revision_question_btn"></div>
                                     <div class="repetition_btn" id="revision_repetition_btn"></div>
-                                    <div class="correction_btn" id="revision_correction_btn">ߏ߬ ߛߊߞߍ߫</div>
+                                    <div class="correction_btn" id="revision_correction_btn"></div>
                                 </div>
                                 <div class="redirection_btns" id="revision_redirection_btns">
-                                    <span class='redirection_btn' id='continu_sur_apprentissage_bouton'></span> 
-                                    <span class='redirection_btn' id='reprendre_revision_bouton'></span>
-                                    <span class='redirection_btn' id='evaluation_bouton'></span> 
-                                    <span class='redirection_btn' id='syllabe_bouton'><a href="http://localhost/kouroukan/php/programmes.php">ߜߋ߲߭ ߘߋ߲߰ߠߌ ߘߊߡߌ߬ߘߊ߬</a></span> 
+                                    <div class='redirection_btn' id='continu_sur_apprentissage_bouton'></div> 
+                                    <div class='redirection_btn' id='reprendre_revision_bouton'></div>
+                                    <div class='redirection_btn' id='evaluation_bouton'></div> 
+                                    <div class='redirection_btn' id='ton_bouton'><a href="http://localhost/kouroukan/php/programmes.php">ߜߋ߲߭ ߘߋ߲߰ߠߌ ߘߊߡߌ߬ߘߊ߬</a></div> 
                                 </div>
                             </div>
                         </div>
@@ -308,7 +308,7 @@ if(isset($_SESSION["id_client"])) {
                                     <div class="redirection_btn" id="revision_pre_syllabe_reprise_btn">ߜߋ߲߭ ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫ ߕߎ߲߯</div>
                                     <div class="redirection_btn" id="continu_sur_apprentissage_pre_syllabe_btn">ߥߊ߫ ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߡߊ߬</div>
                                     <div class="redirection_btn" id=""> ߜߋ߲߭ ߞߘߐߓߐߟߌ </div>
-                                    <span class='redirection_btn' id='syllabe_bouton'><a href="http://localhost/kouroukan/php/programmes.php"></a></span> 
+                                    <div class='redirection_btn' id='syllabe_bouton'><p><a href="http://localhost/kouroukan/php/programmes.php"></a></p></div> 
                                 </div>
 
                             </div>

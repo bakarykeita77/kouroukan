@@ -116,7 +116,6 @@ if(isset($_SESSION["id_client"])) {
                                 <div id='panneaux'></div>
                                 <div class="dialogue_btns" id="apprentissage_dialogue_btns"></div>
                                 <div class="redirection_btns" id="apprentissage_redirection_btns">
-                                    <div class='redirection_btn' id='pre_apprentissage_bouton'></div> 
                                     <div class='redirection_btn' id='continu_sur_exercice_bouton'></div>
                                 </div>
                             </div>
@@ -209,7 +208,6 @@ if(isset($_SESSION["id_client"])) {
                                     <div class='redirection_btn' id='continu_sur_apprentissage_bouton'></div> 
                                     <div class='redirection_btn' id='reprendre_revision_bouton'></div>
                                     <div class='redirection_btn' id='evaluation_bouton'></div> 
-                                    <div class='redirection_btn' id='ton_bouton'><a href="http://localhost/kouroukan/php/programmes.php">ߜߋ߲߭ ߘߋ߲߰ߠߌ ߘߊߡߌ߬ߘߊ߬</a></div> 
                                 </div>
                             </div>
                         </div>

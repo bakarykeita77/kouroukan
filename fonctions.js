@@ -167,44 +167,38 @@
         masquer($('.direction'));
         afficher($('.salle_de_classe'));
 
+        masquer($('#exercice_redirection_btns'));
+
         masquer($('.course'));
         setTimeout(() => { 
             displayv($('.course'));
-            afficher($('#exercice_body'));
 
             masquer($('#apprentissage_container'));
             afficher($('#exercice_container'));
             masquer($('#revision_container'));
             masquer($('#evaluation_container'));
                 
-            setTimeout(() => { displayv($('#exercice_course_head')); }, 60);
+            setTimeout(() => { displayv($('#exercice_course_head'));}, 60);
             setTimeout(() => { 
                 displayv($('#exercice_body_cadre'));
+                setTimeout(() => { displayv($('#exercice_progress_bar')); }, 50);
 
                 setTimeout(() => { 
                     $('#exercice_body').css({'display':'block'});
                     affichageAnimeDeTableTd($('#exercice_body table')); 
+                    setTimeout(() => { 
+                        displayv($('#exercice_foot')); 
+                        displayv($('#exercice_dialogue_btns'));
+                        setTimeout(() => {
+                            $('#exercice_question_btn').css('display','block'); 
+                            $('#exercice_repetition_btn').css('display','none'); 
+                            $('#exercice_correction_btn').css('display','none');
+                        }, 200); 
+                    }, (td_total*50)); 
                 }, 60); 
-                setTimeout(() => { 
-                    $('#exercice_foot').css('display','block'); 
-                    displayv($('#exercice_dialogue_btns'));
-                    setTimeout(() => {
-                        $('#exercice_question_btn').css('display','block'); 
-                        $('#exercice_repetition_btn').css('display','none'); 
-                        $('#exercice_correction_btn').css('display','none');
-                    }, 200); 
-                }, (60 + td_total*60)); 
             }, 200);
-            setTimeout(() => { displayv($('#exercice_progress_bar')); }, (200 + td_total*60));
-            $('#exercice_redirection_btns').css('display','none');
         }, 50);
         
-        masquer($('#exercice_redirection_btns'));
-
-        setTimeout(() => { 
-            setTimeout(() => { displayv($('#exercice_dialogue_btns')); }, 800);
-            setTimeout(() => { displayv($('#exercice_progress_bar'));  }, 1200);
-        }, 1200);
     }
     function afficherList(ul) {
         let li = $('li', ul);
@@ -1028,15 +1022,6 @@ console.log(total_questions[i]);
         
         return ldev;
     }
-    function lireLettre(parent_direct,lettre) { 
-        //$('#audio').attr({ src:'../son/aac/'+parent_direct+'/'+lettre+'.aac', autoplay:'on' }); 
-        //$('#audio').attr({ src:'../son/amr/'+parent_direct+'/'+lettre+'.amr', autoplay:'on' }); 
-        //$('#audio').attr({ src:'../son/flac/'+parent_direct+'/'+lettre+'.flac', autoplay:'on' }); 
-        //$('#audio').attr({ src:'../son/ogg/'+parent_direct+'/'+lettre+'.ogg', autoplay:'on' }); 
-        //$('#audio').attr({ src:'../son/wav/'+parent_direct+'/'+lettre+'.wav', autoplay:'on' }); 
-        //$('#audio').attr({ src:'../son/m4a/'+parent_direct+'/'+lettre+'.m4a', autoplay:'on' }); 
-        $('#audio').attr({ src:'../son/mp3/'+parent_direct+'/'+lettre+'.mp3', autoplay:'on' }); 
-    }
     function lire_mot() {
 	   for(var i=0; i<texte_memoire.length; i++) {
            
@@ -1297,6 +1282,12 @@ console.log(total_questions[i]);
         setTimeout(function(){ $('.faux').addClass('croix'); }, 100);
         setTimeout(function(){ $('.faux').removeClass('croix'); }, 600);
         setTimeout(function(){ $(element).removeClass('faux'); }, 600);
+    }
+    function relire(question, repetition_btn) { 
+        repetition_btn.click(function () { 
+            lire('ߊ', question); 
+            clignoterUneFois(repetition_btn); 
+        });
     }
     function rendreActif(element) {
         element.addClass('actif');

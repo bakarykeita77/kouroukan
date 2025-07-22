@@ -71,6 +71,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 /* --------------------------------------------------------------------------------------------------------- */
 
 .body_cadre {
+    display: none;
     position: relative;
     margin: auto;
     min-height: 17rem;
@@ -296,6 +297,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     z-index: 0;
 }
 .course_foot { 
+    display: none;
     padding: 0.25rem;
     z-index: 1; 
     height: 10vh;
@@ -311,6 +313,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     padding: 0 1rem;
 }
 .course_head { 
+    display: none;
     height: 22vh;
     min-height: 9rem;
     overflow: visible;
@@ -345,6 +348,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     font-weight: bold;
     transition: 0.25s;
     z-index: 1;
+    cursor: pointer;
 }
 .dialogue_btns div {
     position: relative;
@@ -1019,7 +1023,8 @@ del {
     height: 3rem;
     text-align: center;
     font-weight: bold; 
-    z-index: 1; 
+    z-index: 1;
+    cursor: pointer;
 }
 .redirection_btns a {
     text-decoration: none;

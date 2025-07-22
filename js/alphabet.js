@@ -2238,14 +2238,14 @@ function alphabet() {
                                         $('.correction_btn').css('display','none');
                                     }
                                     function dicterLaQuestion(){
-                                        lireLettre('alphabet',question_evaluation);
+                                        lire('alphabet',question_evaluation);
                                     }
                                     function afficherTesteContainer() { $('#teste_container').css({'top':'-6rem'}); }
                                 });
                             }
                             function repeterQuestionDEvaluationAlphabet() {
                                 $('.repetition_btn').on('click', function(){
-                                    lireLettre('alphabet',question_evaluation);
+                                    lire('alphabet',question_evaluation);
                                 });
                             }
                             function repondreDEvaluationAlphabet() {

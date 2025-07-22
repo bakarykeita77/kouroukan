@@ -134,7 +134,6 @@ console.log(datas);
                 if(moyenne_4 >= moyenne) niveaux_etudies.push(4);  
    
                 sessionStorage.setItem('niveaux_etudies', JSON.stringify(niveaux_etudies));
-
                 sessionStorage.setItem('phases_etudiees', JSON.stringify(phases_etudiees));
                 sessionStorage.setItem('derniere_phase' , JSON.stringify(derniere_phase ));
                 

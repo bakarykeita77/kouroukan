@@ -175,7 +175,7 @@ button:active { background-color: #ccc; }
 
 @media screen and (orientation: portrait) {
     #asides_commentaire_container {
-        height: 16rem;
+        min-height: 50vh;
         max-width: 50rem;
         margin: 0 auto;
         overflow: auto;

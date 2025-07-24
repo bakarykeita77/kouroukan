@@ -266,13 +266,13 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     margin: auto;
 }
 .course_body, .course_head, .course_foot {
+    display: none;
     position: relative; 
     margin: 0 auto;
     box-sizing: border-box;
 }
 .course_head, .course_foot { width: 100%; }
 .course_body { 
-    display: none;
     height: 44vh;
     min-height: 15rem;
     padding-top: 1.5rem;
@@ -297,7 +297,6 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     z-index: 0;
 }
 .course_foot { 
-    display: none;
     padding: 0.25rem;
     z-index: 1; 
     height: 10vh;
@@ -313,7 +312,6 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     padding: 0 1rem;
 }
 .course_head { 
-    display: none;
     height: 22vh;
     min-height: 9rem;
     overflow: visible;
@@ -340,12 +338,14 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     position: relative;
     display: none;
     top: 0;
-    width: calc(100% - 2px);
     height: 3rem;
-    padding: 0;
+    line-height: 3rem;
+    width: calc(100% - 2px);
     margin: auto;
+    padding: 0;
     border-radius: 0.5rem;
     font-weight: bold;
+    text-align: center;
     transition: 0.25s;
     z-index: 1;
     cursor: pointer;

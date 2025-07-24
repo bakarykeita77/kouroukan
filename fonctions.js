@@ -167,7 +167,6 @@
         masquer($('.direction'));
         afficher($('.salle_de_classe'));
 
-        masquer($('#exercice_redirection_btns'));
 
         masquer($('.course'));
         setTimeout(() => { 
@@ -177,26 +176,38 @@
             afficher($('#exercice_container'));
             masquer($('#revision_container'));
             masquer($('#evaluation_container'));
-                
-            setTimeout(() => { displayv($('#exercice_course_head'));}, 60);
-            setTimeout(() => { 
-                displayv($('#exercice_body_cadre'));
-                setTimeout(() => { displayv($('#exercice_progress_bar')); }, 50);
 
+            afficherEnteteDExercicePreSyllabe();
+            afficherCorpsDExercicePreSyllabe();
+            afficherFootDExercicePreSyllabe();
+            
+            function afficherEnteteDExercicePreSyllabe() {
+                setTimeout(() => { displayv($('#exercice_head'));}, 60);
+            }
+            function afficherCorpsDExercicePreSyllabe() {
                 setTimeout(() => { 
-                    $('#exercice_body').css({'display':'block'});
-                    affichageAnimeDeTableTd($('#exercice_body table')); 
+                    displayv($('#exercice_body_cadre'));
+                    setTimeout(() => { displayv($('#exercice_progress_bar')); }, 50);
+    
                     setTimeout(() => { 
-                        displayv($('#exercice_foot')); 
-                        displayv($('#exercice_dialogue_btns'));
-                        setTimeout(() => {
-                            $('#exercice_question_btn').css('display','block'); 
-                            $('#exercice_repetition_btn').css('display','none'); 
-                            $('#exercice_correction_btn').css('display','none');
-                        }, 200); 
-                    }, (td_total*50)); 
-                }, 60); 
-            }, 200);
+                        $('#exercice_body').css({'display':'block'});
+                        affichageAnimeDeTableTd($('#exercice_body table')); 
+                    }, 60); 
+                }, 200);
+            }
+            function afficherFootDExercicePreSyllabe() {
+                setTimeout(() => { 
+                    displayv($('#exercice_foot')); 
+                    masquer($('#exercice_redirection_btns'));
+                    displayv($('#exercice_dialogue_btns'));
+                    
+                    setTimeout(() => {
+                        $('#exercice_question_btn').css('display','block'); 
+                        $('#exercice_repetition_btn').css('display','none'); 
+                        $('#exercice_correction_btn').css('display','none');
+                    }, 200); 
+                }, (td_total*50)); 
+            }
         }, 50);
         
     }

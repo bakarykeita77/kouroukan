@@ -157,7 +157,7 @@ if(isset($_SESSION["id_client"])) {
                                 <div class="dialogue_btns" id="exercice_dialogue_btns">
                                     <div class="question_btn" id="exercice_question_btn"></div>
                                     <div class="repetition_btn" id="exercice_repetition_btn"></div>
-                                    <div class="correction_btn" id="exercice_correction_btn">ߏ߬ ߛߊߞߍ߫</div>
+                                    <div class="correction_btn" id="exercice_correction_btn"></div>
                                 </div>
 
                                 <div class="redirection_btns" id="exercice_redirection_btns">
@@ -283,22 +283,9 @@ if(isset($_SESSION["id_client"])) {
                                 <div class="clavier_container" id="clavier_evaluation"><?php include "clavier.php"; ?></div>
 
                                 <div class="dialogue_btns" id="evaluation_dialogue_btns">
-                                    <div class="question_btn" id="evaluation_question_btn">
-                                        <span class="question_label"></span>
-                                        <span class="question_total"></span> \
-                                        <span class="question_ordre"></span>
-                                        <span class="question_action"></span>
-                                    </div>
-                                    <div class="repetition_btn" id="evaluation_repetition_btn">
-                                        <span class="question_label"></span>
-                                        <span class="question_ordre"></span>
-                                        <span class="question_action"></span>ߠߊߡߍ߲߫ ߕߎ߲߯
-                                    </div>
-                                    <div class="correction_btn" id="evaluation_correction_btn">ߏ߬ ߛߊߞߍ߫</div>
-                                    <div class="progress_bar_integre">
-                                        <div class="progress_bonne_reponse_bar_integre"></div>
-                                        <div class="progress_mauvaise_reponse_bar_integre"></div>
-                                    </div>
+                                    <div class="question_btn" id="evaluation_question_btn"></div>
+                                    <div class="repetition_btn" id="evaluation_repetition_btn"></div>
+                                    <div class="correction_btn" id="evaluation_correction_btn"></div>
                                 </div>
 
                                 <div class="redirection_btns" id="evaluation_redirection_btns">

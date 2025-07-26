@@ -360,7 +360,7 @@ html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
     line-height: 3rem;
     text-align: center;
     cursor: pointer;
-    transition: 0.2s;
+    transition: 0.1s;
 }
 del {
     text-decoration: line-through; 

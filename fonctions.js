@@ -86,11 +86,11 @@
     }
     function afficher(element) {
         masquer(element);
-        setTimeout(function() { element.css({ 'display':'block' }); }, 100); 
+        setTimeout(function() { element.css({ 'display':'block' }); }, 50); 
         setTimeout(function() { element.css({
             'transform':'scale(1)', 
             'opacity':1
-        }); }, 150);
+        }); }, 100);
     }
 	function afficher_en_jailli( element,largeur,hauteur,temps ) {
         element.css({'display':'block', 'width':0, 'height':0});
@@ -223,7 +223,7 @@
 
             $('#pratique_options').css('display', 'block');
             $('.fermeture').attr('id', 'fermer_revision');
-s
+
             masquer($('#apprentissage_container'));
             masquer($('#exercice_container'));
             masquer($('#revision_container'));
@@ -607,11 +607,11 @@ s
         element.css({
             'display':'block',
             'opacity':0, 
-            'transition':'0.6s', 
+            'transition':'0.4s', 
             'transform-origin':'0 0',
             'transform':'scaleY(0.75)'
         });
-        setTimeout(() => { element.css({'opacity':1, 'transform':'scaleY(1)'}); }, 100);
+        setTimeout(() => { element.css({'opacity':1, 'transform':'scaleY(1)'}); }, 50);
     }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
@@ -1152,6 +1152,12 @@ console.log(total_questions[i]);
             'transform':'scale(0.75)', 
             'opacity':'0',
         });
+
+        // element.css({
+        //     'transform':'scale(0.75)', 
+        //     'opacity':'0',
+        // });
+        // setTimeout(() => { element.css({'display':'none'}); }, 100);
     }
     function memoriserClicks(table,elements){
 
@@ -1958,11 +1964,7 @@ console.log(total_questions[i]);
         var lesson  = JSON.stringify(lesson_data);
         var note = calculerNote(lesson_data);
 
-console.log(action);
 console.log(id_lesson);
-console.log(matiere);
-console.log(lesson);
-console.log(note);
 
         const data_to_send = new URLSearchParams({
             action : action,

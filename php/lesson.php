@@ -205,8 +205,9 @@ if(isset($_SESSION["id_client"])) {
                                     <div class="correction_btn" id="revision_correction_btn">ߏ߬ ߛߊߞߍ߫</div>
                                 </div>
                                 <div class="redirection_btns" id="revision_redirection_btns">
+                                    <div class='redirection_btn' id='reprendre_revision_bouton'></div>
                                     <div class='redirection_btn' id='continu_sur_apprentissage_bouton'></div> 
-                                    <div class='redirection_btn' id='reprendre_evaluation_bouton'></div>
+                                    <div class='redirection_btn' id='continu_sur_evaluation_bouton'></div> 
                                 </div>
                             </div>
                         </div>

@@ -292,7 +292,6 @@ if(isset($_SESSION["id_client"])) {
                                 <div class="redirection_btns" id="evaluation_redirection_btns">
                                     <div class="redirection_btn" id="reprendre_evaluation_bouton"></div>
                                     <div class="redirection_btn" id="continu_sur_apprentissage_bouton"></div>
-                                    <div class="redirection_btn" id=""></div>
                                     <div class='redirection_btn' id='continu_sur_la_lesson_suivante'><p><a href="http://localhost/kouroukan/php/programmes.php"></a></p></div> 
                                 </div>
 

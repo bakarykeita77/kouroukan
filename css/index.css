@@ -198,7 +198,7 @@ button:active { background-color: #ccc; }
     #asides_commentaire { 
         padding: 0.125rem 2rem; 
         margin: 0.25rem 1rem;
-        min-height: calc(18rem - 0.525rem);
+        min-height: 17.5rem;
         width: calc(100% - 2rem);
         background-color: #eee;
         box-sizing: border-box;

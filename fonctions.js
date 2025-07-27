@@ -229,14 +229,14 @@
             masquer($('#revision_container'));
             afficher($('#evaluation_container'));
 
-            afficherEnteteDeRevisionPreSyllabe();
-            afficherCorpsDeRevisionPreSyllabe();
-            afficherFootDeRevisionPreSyllabe();
+            afficherEnteteDEvaluationPreSyllabe();
+            afficherCorpsDEvaluationPreSyllabe();
+            afficherFootDEvaluationPreSyllabe();
 
-            function afficherEnteteDeRevisionPreSyllabe() {
+            function afficherEnteteDEvaluationPreSyllabe() {
                 displayv($('#evaluation_head'));
             }
-            function afficherCorpsDeRevisionPreSyllabe() {
+            function afficherCorpsDEvaluationPreSyllabe() {
                 setTimeout(() => {
                     setTimeout(() => {
                         afficher($('#evaluation_body'));
@@ -244,7 +244,7 @@
                     }, 60);
                 }, 100);
             }
-            function afficherFootDeRevisionPreSyllabe() {
+            function afficherFootDEvaluationPreSyllabe() {
                 setTimeout(() => {
                     afficher($('#evaluation_foot'));
                     masquer($('#evaluation_redirection_btns'));
@@ -254,6 +254,9 @@
                         afficher($('#evaluation_question_btn'));
                         masquer($('#evaluation_repetition_btn'));
                         masquer($('#evaluation_correction_btn'));
+                        
+                        rendreActif($('#evaluation_question_btn'));
+                        indexerP($('#evaluation_question_btn p'));
                     }, 200);
                 }, 200);
             }
@@ -511,6 +514,10 @@
         setTimeout((function() { td.addClass('shadow');    }), 1400);
          setTimeout((function() { td.removeClass('shadow'); }), 1800);
     }
+	function compteur(){
+	    var i=0;
+	    return function(){ return i += 1; };
+	}
     function conversionDeDateEnNko(timestamp){
        var timestamp = timestamp.split(' ');
        timestamp = timestamp[0].split('-');

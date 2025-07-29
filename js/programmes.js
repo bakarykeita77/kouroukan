@@ -142,8 +142,9 @@ console.log(datas[niveau_en_cours - 1]);
                 let li_actif = $(this);
                 if(li_actif.text() == matiere_nouvellement_apprise) {
                     $('#programme_ul li').removeClass('apprises actif indicateur').addClass('a_apprendre');
+
                     li_actif.prev().removeClass('a_apprendre').addClass('apprises');
-                    li_actif.removeClass('a_apprendre actif indicateur').addClass('apprises');
+                    li_actif.removeClass('a_apprendre').addClass('apprises');
                     li_actif.next().removeClass('a_apprendre').addClass('actif indicateur');
                 }
             });

@@ -1,4 +1,5 @@
-<?php header('Content-Type: text/html; charset=utf-8');
+<?php
+header('Content-Type: text/html; charset=utf-8');
 session_start();
 
 if(isset($_SESSION["id_client"])) {
@@ -284,9 +285,9 @@ if(isset($_SESSION["id_client"])) {
                                 <div class="clavier_container" id="clavier_evaluation"><?php include "clavier.php"; ?></div>
 
                                 <div class="dialogue_btns" id="evaluation_dialogue_btns">
-                                    <div class="question_btn" id="evaluation_question_btn"></div>
-                                    <div class="repetition_btn" id="evaluation_repetition_btn"></div>
-                                    <div class="correction_btn" id="evaluation_correction_btn"></div>
+                                    <div class="question_btn" id="evaluation_question_bouton"></div>
+                                    <div class="repetition_btn" id="evaluation_repetition_bouton"></div>
+                                    <div class="correction_btn" id="evaluation_correction_bouton"></div>
                                 </div>
 
                                 <div class="redirection_btns" id="evaluation_redirection_btns">

@@ -1,4 +1,4 @@
-    var total_phase = JSON.parse(sessionStorage.getItem('total_phase'));
+    // var total_phase = JSON.parse(sessionStorage.getItem('total_phase'));
 	  
     function accorder(element) {
         $(element).addClass('vrais');
@@ -251,12 +251,12 @@
                     displayv($('#evaluation_dialogue_btns'));
 
                     setTimeout(() => {
-                        afficher($('#evaluation_question_btn'));
-                        masquer($('#evaluation_repetition_btn'));
-                        masquer($('#evaluation_correction_btn'));
+                        afficher($('#evaluation_question_bouton'));
+                        masquer($('#evaluation_repetition_bouton'));
+                        masquer($('#evaluation_correction_bouton'));
                         
-                        rendreActif($('#evaluation_question_btn'));
-                        indexerP($('#evaluation_question_btn p'));
+                        rendreActif($('#evaluation_question_bouton'));
+                        indexerP($('#evaluation_question_bouton p'));
                     }, 200);
                 }, 200);
             }
@@ -634,7 +634,7 @@
                 indice++;
                 $('#'+element_id).html(message.substr(0,indice));
                 if(indice<longueur) {
-                    setTimeout(() => { write(); }, 25);
+                    setTimeout(() => { write(); }, 5);
                 }
             }
         }, 100);
@@ -1513,7 +1513,6 @@ console.log(total_questions[i]);
         chargerDeliberation();
         afficherResultat();
         reprendreLesson();
-        continuSuLaLessonSuivante();
     
         $('#fermer_resultat').click(function() { masquerResultat(); });
 
@@ -1702,7 +1701,9 @@ console.log(total_questions[i]);
             }
         }
         function masquerResultat() { goUp($('.resultat_container')); }
-        function afficherResultat() { goDown($('.resultat_container')); }
+        function afficherResultat() { 
+            setTimeout(() => { goDown($('.resultat_container')); }, 3000);
+        }
         function reprendreLesson() { $('#reprendre').click(() => { raffraichirLaPage(); }); }
         function lessonSuivante(lesson_en_cours) {
             let ls = '';
@@ -1719,7 +1720,6 @@ console.log(total_questions[i]);
             }
             return ls;
         }
-        function continuSuLaLessonSuivante() {}
         function phaseEnCours(lesson_en_cours) {
 
             let m = lesson_en_cours.split(' ')[0];
@@ -1746,18 +1746,18 @@ console.log(total_questions[i]);
         function totalQuestion(lesson_en_cours) {
             
             let tq = 0;
-            let m = lesson_en_cours.split(' ')[0];
-            let p = lesson_en_cours.split(' ')[1];
+            let matiere = lesson_en_cours.split(' ')[0];
+            let phase = lesson_en_cours.split(' ')[1];
          
-            if(m == 'ߛߓߍߛߎ߲') {
-                switch(p) {
+            if(matiere == 'ߛߓߍߛߎ߲') {
+                switch(phase) {
                     case 'ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ'  : tq = (memoire_1 != "") ? memoire_1.lesson.length : 0; break;
                     case 'ߡߊ߬ߞߟߏ߬ߟߌ'  : tq = (memoire_2 != "") ? memoire_2.lesson.length : 0; break;
                     case 'ߞߘߐߓߐߟߌ' : tq = (memoire_3 != "") ? memoire_3.lesson.length : 0; break;
                 }
             }
-            if(m == 'ߜߋ߲߭') {
-                switch(p) {
+            if(matiere == 'ߜߋ߲߭') {
+                switch(phase) {
                     case 'ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ'  : tq = (memoire_1 != "") ? memoire_1.lesson.length : 0; break;
                     case 'ߡߊ߬ߞߟߏ߬ߟߌ'  : tq = (memoire_2 != "") ? memoire_2.lesson.length : 0; break;
                     case 'ߣߐ߰ߡߊ߬ߛߍߦߌ' : tq = (memoire_3 != "") ? memoire_3.lesson.length : 0; break;

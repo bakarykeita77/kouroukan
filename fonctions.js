@@ -812,9 +812,9 @@ console.log(total_questions[i]);
         $('#envelope').css({
             'position':'absolute',
             'display':'block',
-            'top':'9.5rem',
+            'top':'3.5rem',
             'left':'2%',
-            'height':'calc(100% - 10rem)',
+            'height':'calc(100% - 3.5rem)',
             'width':'96%',
             'margin':'auto',
             'overflow':'hidden',
@@ -1663,7 +1663,7 @@ console.log(total_questions[i]);
                 }
                 function chargerResultatBody() {
 
-                    let lesson = JSON.parse(memoire_4.lesson)
+                    let lesson = memoire_4.lesson;
                     let evaluation_resultat_body_html = resultatTableBodyHTML(lesson);
                     
                     $('#evaluation_resultat_body').html(evaluation_resultat_body_html);

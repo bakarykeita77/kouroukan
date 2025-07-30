@@ -149,7 +149,7 @@
     #resultat_entete table h3 { border: 1px solid #aaa; border-bottom-width: 4px; padding: 0.25rem; }
     #resultat_corps{
         border-color: #ccc;
-        height: calc(100vh - 30rem);
+        height: calc(100vh - 21rem);
         padding: 0 0.5rem;
         overflow-y: auto;
     }

@@ -1,6 +1,7 @@
 function syllabe() {
     
     var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));   // Voir programmes.js fonction storagesDuProgramme()
+    var niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
     var matiere_nom = JSON.parse(sessionStorage.getItem('matiere_nom'));
 
     if (niveau_actif === 2) {
@@ -1011,10 +1012,6 @@ console.log(lesson);
 
                     var q_revision_total = parseIntNko(lesson_d_apprentissage_pre_syllabe.length);
 
-                    let i = 0;
-                    let rang = '߭';
-                    let action = "ߟߊߡߍ߲߫";
-
                     lesson_active = 'pre_revision';
 
                     chargerRevisionPreSyllabe();
@@ -1120,6 +1117,10 @@ console.log(lesson);
 
                         let clicked_response_element = '';
                         let revision_pre_syllabe_questions = malaxer(syllabes_a_reviser);
+                        let i = 0;
+                        let rang = '߭';
+                        let action = "ߟߊߡߍ߲߫";
+
                         let question_status = 'repondue';
 
                         initialiserRevisionPreSyllabe();
@@ -1298,8 +1299,8 @@ console.log(lesson);
                                                     continuSurApprentissagePreSyllabe();
 
                                                     function afficherRedirectionSurApprentissagePreSyllabeBtn() {
-                                                        //if (lesson_d_apprentissage_pre_syllabe.length < 126) return;
-                                                        if (lesson_d_apprentissage_pre_syllabe.length === 14) {
+                                                        if (lesson_d_apprentissage_pre_syllabe.length < 126) return;
+                                                        if (lesson_d_apprentissage_pre_syllabe.length < 14) {
                                                                 display($('#continu_sur_apprentissage_bouton'));
                                                                 masquer($('#reprendre_revision_bouton'));
                                                                 masquer($('#continu_sur_evaluation_bouton'));
@@ -1308,8 +1309,8 @@ console.log(lesson);
                                                         }
                                                     }
                                                     function afficherRedirectionSurEvaluationPreSyllabeBtn() {
-                                                        //if (lesson_d_apprentissage_pre_syllabe.length < 126) return;
-                                                        if (lesson_d_apprentissage_pre_syllabe.length === 7) {
+                                                        if (lesson_d_apprentissage_pre_syllabe.length < 126) return;
+                                                        if (lesson_d_apprentissage_pre_syllabe.length === 14) {
                                                             masquer($('#continu_sur_apprentissage_bouton'));
                                                             masquer($('#reprendre_revision_bouton'));
                                                             display($('#continu_sur_evaluation_bouton'));
@@ -1472,8 +1473,9 @@ console.log(lesson);
                     }
                     function evaluerPreSyllabe() {
 
-                        var rang = '߭';
-                        var action = 'ߟߊߡߍ߲߫';
+                        let i = 0;
+                        let rang = '߭';
+                        let action = "ߟߊߡߍ߲߫";
                         let question_status = 'repondue';
 
                         evaluation_pre_syllabe_questions = questionsDEvaluation();
@@ -1488,7 +1490,7 @@ console.log(lesson);
 
 
                         function poserQuestionDEvaluationPreSyllabe() {
-                            $('.question_btn').on('click', function (e) {
+                            $('#evaluation_question_bouton').on('click', function (e) {
                                 e.stopImmediatePropagation();
 
                                 effacerPrecedenteReponse();
@@ -1729,7 +1731,7 @@ console.log(lesson);
                                                 chargerLaLessonSuivanteBtn();
                                                 afficherLaLessonSuivanteBtn();
                                                 resultatDePreSyllabe();
-                                                                                                
+
 
                                                 function stockerEvaluationPreSyllabe() {
 
@@ -1739,10 +1741,10 @@ console.log(lesson);
                                                     actualiserLessonPreSyllabe(lesson_d_evaluation_pre_syllabe, lesson_d_evaluation_pre_syllabe_du_jour);
                                                     localStorage.setItem('lesson_d_evaluation_pre_syllabe', JSON.stringify(lesson_d_evaluation_pre_syllabe));
 
-                                                    if (lesson_d_apprentissage_pre_syllabe.length === 7) {
-                                                        if (lesson_d_exercice_pre_syllabe.length === 7) {
-                                                            if (lesson_de_revision_pre_syllabe.length === 7) {
-                                                                if (lesson_d_evaluation_pre_syllabe.length === 7) {
+                                                    if (lesson_d_apprentissage_pre_syllabe.length === 14) {
+                                                        if (lesson_d_exercice_pre_syllabe.length === 14) {
+                                                            if (lesson_de_revision_pre_syllabe.length === 14) {
+                                                                if (lesson_d_evaluation_pre_syllabe.length === 14) {
 
                                                                     updateLessonData(id_syllabe_apprentissage, lesson_d_apprentissage_pre_syllabe);
                                                                     updateLessonData(id_syllabe_exercice, lesson_d_exercice_pre_syllabe);
@@ -1781,10 +1783,10 @@ console.log(lesson);
                                                     let revision_pre_syllabe_data= {};
                                                     let evaluation_pre_syllabe_data = {};
                                                 
-                                                    if (lesson_d_apprentissage_pre_syllabe.length === 7) {
-                                                        if (lesson_d_exercice_pre_syllabe.length === 7) {
-                                                            if (lesson_de_revision_pre_syllabe.length === 7) {
-                                                                if (lesson_d_evaluation_pre_syllabe.length === 7) {
+                                                    if (lesson_d_apprentissage_pre_syllabe.length === 14) {
+                                                        if (lesson_d_exercice_pre_syllabe.length === 14) {
+                                                            if (lesson_de_revision_pre_syllabe.length === 14) {
+                                                                if (lesson_d_evaluation_pre_syllabe.length === 14) {
 
                                                                     var date = dateAcuelle();
                                                                     var niveau = niveau_en_cours;
@@ -1813,8 +1815,8 @@ console.log(lesson);
                         }
                         function questionsDEvaluation() {
                             let qe = [];
-                            for (let i = 0; i < lesson_d_apprentissage_pre_syllabe.length; i++) {
-                                qe.push(lesson_d_apprentissage_pre_syllabe[i][0]);
+                            for (let j = 0; j < lesson_d_apprentissage_pre_syllabe.length; j++) {
+                                qe.push(lesson_d_apprentissage_pre_syllabe[j][0]);
                             }
                             qe = malaxer(qe);
                             return qe;

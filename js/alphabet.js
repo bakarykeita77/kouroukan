@@ -75,7 +75,6 @@ function alphabet() {
             
 
             function apprentissagePreAlphabet() {
-                console.log("Début d'apprentissage partiel d'alphabet");
                 
                 let pre_apprentissage_alphabet_partiel = [];
 

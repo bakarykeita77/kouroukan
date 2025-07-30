@@ -1,5 +1,5 @@
 function syllabe() {
-
+    
     var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));   // Voir programmes.js fonction storagesDuProgramme()
     var matiere_nom = JSON.parse(sessionStorage.getItem('matiere_nom'));
 
@@ -531,6 +531,7 @@ console.log(lesson);
                     }
                 }
                 function apprendrePreSyllabe() {
+
                     initialiserProgressBar();
 
                     $('#panneaux span').click(function () {
@@ -636,6 +637,7 @@ console.log(lesson);
 
                             lesson_d_apprentissage_pre_syllabe_du_jour.splice(0, consonnes.length);
                             lesson_d_apprentissage_pre_syllabe_du_jour = initialiserData(td_to_click);
+
                         }
                     });
                 }
@@ -1726,8 +1728,8 @@ console.log(lesson);
                                                 stockerEvaluationPreSyllabe();
                                                 chargerLaLessonSuivanteBtn();
                                                 afficherLaLessonSuivanteBtn();
-                                                resultatGeneral(lesson_d_apprentissage_pre_syllabe, lesson_d_exercice_pre_syllabe, lesson_de_revision_pre_syllabe, lesson_d_evaluation_pre_syllabe);
-                                                
+                                                resultatDePreSyllabe();
+                                                                                                
 
                                                 function stockerEvaluationPreSyllabe() {
 
@@ -1748,7 +1750,7 @@ console.log(lesson);
                                                                     sendLessonDataToDB('syllabe_evaluation', lesson_d_evaluation_pre_syllabe);
 
                                                                     sessionStorage.setItem('matiere_nouvellement_apprise', JSON.stringify(matiere_nom));
-
+                                                                    
                                                                     console.log("Lesson d'apprentissage pre_syllabe est modifiée à la base de donnée.");
                                                                     console.log("Lesson d'exercice pre_syllabe est modifiée à la base de donnée.");
                                                                     console.log("Lesson de revision pre_syllabe est envoyée à la base de donnée.");
@@ -1771,6 +1773,37 @@ console.log(lesson);
 
                                                     rendreActif($('#continu_sur_la_lesson_suivante'));
                                                     indexerP($('#continu_sur_la_lesson_suivante p'));
+                                                }
+                                                function resultatDePreSyllabe() {
+
+                                                    let apprentissage_pre_syllabe_data = {};
+                                                    let exercice_pre_syllabe_data= {};
+                                                    let revision_pre_syllabe_data= {};
+                                                    let evaluation_pre_syllabe_data = {};
+                                                
+                                                    if (lesson_d_apprentissage_pre_syllabe.length === 7) {
+                                                        if (lesson_d_exercice_pre_syllabe.length === 7) {
+                                                            if (lesson_de_revision_pre_syllabe.length === 7) {
+                                                                if (lesson_d_evaluation_pre_syllabe.length === 7) {
+
+                                                                    var date = dateAcuelle();
+                                                                    var niveau = niveau_en_cours;
+
+                                                                    let note_d_apprentissage_pre_syllabe = calculerNote(lesson_d_apprentissage_pre_syllabe);
+                                                                    var note_d_exercice_pre_syllabe = calculerNote(lesson_d_exercice_pre_syllabe);
+                                                                    var note_de_revision_pre_syllabe = calculerNote(lesson_de_revision_pre_syllabe);
+                                                                    var note_d_evaluation_pre_syllabe = calculerNote(lesson_d_evaluation_pre_syllabe);
+                                                        
+                                                                    apprentissage_pre_syllabe_data = {"date":date, "niveau":niveau, "phase":"syllabe_apprentissage", "lesson":lesson_d_apprentissage_pre_syllabe, "note":note_d_apprentissage_pre_syllabe};
+                                                                    exercice_pre_syllabe_data = {"date":date, "niveau":niveau, "phase":"syllabe_exercice", "lesson":lesson_d_exercice_pre_syllabe, "note":note_d_exercice_pre_syllabe};
+                                                                    revision_pre_syllabe_data = {"date":date, "niveau":niveau, "phase":"syllabe_revision", "lesson":lesson_d_evaluation_pre_syllabe, "note":note_de_revision_pre_syllabe};
+                                                                    evaluation_pre_syllabe_data = {"date":date, "niveau":niveau, "phase":"syllabe_evaluation", "lesson":lesson_d_evaluation_pre_syllabe, "note":note_d_evaluation_pre_syllabe};
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+
+                                                    resultatGeneral(apprentissage_pre_syllabe_data, exercice_pre_syllabe_data, revision_pre_syllabe_data, evaluation_pre_syllabe_data);
                                                 }
                                             }
                                         }

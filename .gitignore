@@ -2,3 +2,4 @@ image/*
 /test.php
 /test.js
 .git
+.vscode/

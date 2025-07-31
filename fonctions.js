@@ -1839,7 +1839,10 @@ console.log(total_questions[i]);
     
     function secouer(element) { 
         element.addClass('clignotant'); 
-        setTimeout(function() { element.removeClass('clignotant'); }, 1200);
+        setTimeout(function() { 
+            element.removeClass('clignotant');
+            indexerP($('p', element));
+        }, 1200);
     }
     function selectionDeTr(tr) {
         tr.siblings().unwrap();

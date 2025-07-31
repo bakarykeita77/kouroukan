@@ -33,7 +33,7 @@ body {
     max-width: 50rem; 
 }
 #asides_container { padding: 0 0.5rem; margin: auto; }
-#asides_container p, #btn_container { padding: 0; box-sizing: border-box; }
+#asides_container p, #btn_container { padding: 0; }
 .pied_de_page { display: none; }
 #affiche_de_tableau { display: none; }
 .afficher { transform:scaleX(1); }
@@ -44,6 +44,7 @@ body {
     justify-content: space-evenly;
     align-items: center;
 
+    height: 3rem;
     width: 100%; 
     max-width: 50rem;
     margin: auto;

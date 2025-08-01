@@ -138,8 +138,8 @@ function syllabe() {
             let panneau_status = "masque";
             let consonnes_choisies = [];
             let consonnes_choisies_du_serveur = consonnesChoisiesDuServeur();
-            let memoire_consonnes_choisies = [];
-console.log(memoire_consonnes_choisies);
+            let memoire_consonnes_choisies = JSON.parse(localStorage.getItem('memoire_consonnes_choisies'));
+            memoire_consonnes_choisies = (memoire_consonnes_choisies == null) ? [] : memoire_consonnes_choisies;
 
             let lesson_d_apprentissage_pre_syllabe = lessonDApprentissagePreSyllabe();
             let lesson_d_exercice_pre_syllabe = lessonDExercicePreSyllabe();
@@ -501,13 +501,13 @@ console.log(memoire_consonnes_choisies);
                             function panneauxStyle() {
 
                                 consonnesChoisies();
-console.log(memoire_consonnes_choisies);
+
                                 $.each($('#panneaux span'), function () {
 
                                     let panneaux_span = $(this);
                                     let panneaux_consonne = ($(this).text());
 
-                                    if (memoire_consonnes_choisies != null) {
+                                    if (memoire_consonnes_choisies.length > 0) {
                                         memoire_consonnes_choisies.forEach(element => {
                                             if (element == panneaux_consonne) { panneaux_span.css({ 'color':'orange', 'font-weight':'bold', 'box-shadow':'none' }); }
                                         });
@@ -515,17 +515,7 @@ console.log(memoire_consonnes_choisies);
                                 });
 
                                 function consonnesChoisies() {
-
-                                    memoire_consonnes_choisies = JSON.parse(localStorage.getItem("memoire_consonnes_choisies"));
-                                    memoire_consonnes_choisies = (memoire_consonnes_choisies == null) ? consonnes_choisies_du_serveur : memoire_consonnes_choisies;
-
-                                    let s1 = (consonnes_choisies.length < 2) ? "" : "s";
-                                    let s2 = (memoire_consonnes_choisies.length < 2) ? "" : "s";
-
-                                    console.log(consonnes_choisies.length+" nouvelle"+s1+" consonne"+s1+" choisie"+s1+" dont :");
-                                    console.log(consonnes_choisies);
-                                    console.log(consonnes_choisies_du_serveur.length+" ancienne"+s2+" consonne"+s2+" choisie"+s2+" dont :");
-
+                                    memoire_consonnes_choisies = (memoire_consonnes_choisies.length == 0) ? consonnes_choisies_du_serveur : consonnes_choisies_du_serveur.concat(memoire_consonnes_choisies);
                                     localStorage.setItem('memoire_consonnes_choisies', JSON.stringify(memoire_consonnes_choisies));
                                 }
                             }
@@ -537,7 +527,7 @@ console.log(memoire_consonnes_choisies);
                     rappelDesBoutons();
                     initialiserProgressBar();
                     apprenezPreSyllabe();
-                    
+
                     function rappelDesBoutons() {
                         $('#apprentissage_body').click(function (e) {
     
@@ -1363,7 +1353,7 @@ console.log(memoire_consonnes_choisies);
 
 
                                                         if (lesson_d_apprentissage_pre_syllabe.length === 7) {
-                                                            // sendLessonDataToDB('syllabe_apprentissage', lesson_d_apprentissage_pre_syllabe);
+                                                            sendLessonDataToDB('syllabe_apprentissage', lesson_d_apprentissage_pre_syllabe);
                                                             console.log("Lesson d'apprentissage pre_syllabe est envoyée à la base de donnée.");
                                                         }
                                                         if (lesson_d_apprentissage_pre_syllabe.length > 7) {
@@ -1386,7 +1376,7 @@ console.log(memoire_consonnes_choisies);
                                                         console.log(lesson_d_exercice_pre_syllabe);
 
                                                         if (lesson_d_exercice_pre_syllabe.length === 7) {
-                                                            // sendLessonDataToDB('syllabe_exercice', lesson_d_exercice_pre_syllabe);
+                                                            sendLessonDataToDB('syllabe_exercice', lesson_d_exercice_pre_syllabe);
                                                             console.log("Lesson d'exercice pre_syllabe est envoyée à la base de donnée.");
                                                         }
                                                         if (lesson_d_exercice_pre_syllabe.length > 7) {
@@ -1410,18 +1400,16 @@ console.log(memoire_consonnes_choisies);
 
                                                     consonnes_choisies = JSON.parse(localStorage.getItem("consonnes_choisies"));
                                                     consonnes_choisies = (consonnes_choisies == null) ? [] : consonnes_choisies;
-
-                                                    memoire_consonnes_choisies = JSON.parse(localStorage.getItem("memoire_consonnes_choisies"));
-                                                    memoire_consonnes_choisies = (memoire_consonnes_choisies == null) ? [] : memoire_consonnes_choisies;
-                                                    
+                                             
                                                     consonnes_choisies.forEach(element => {
                                                         if($.inArray(element, memoire_consonnes_choisies) === -1) {
-                                                            memoire_consonnes_choisies = (consonnes_choisies.length == 0) ? memoire_consonnes_choisies : memoire_consonnes_choisies.push(element);
+                                                            memoire_consonnes_choisies.push(element);
                                                         }
                                                     });
 
                                                     console.log("Les consonnes choisies sont :");
-                                                    console.log(consonnes_choisies);
+                                                    console.log(consonnes_choisies);                            
+                                                    console.log('memoire_consonnes_choisies');
                                                     console.log(memoire_consonnes_choisies);
 
                                                     localStorage.setItem('memoire_consonnes_choisies', JSON.stringify(memoire_consonnes_choisies));
@@ -1780,13 +1768,13 @@ console.log(memoire_consonnes_choisies);
                                             }
                                             if (note_d_evaluation_pre_syllabe_syllabe === 100) {
 
-                                                stockerEvaluationPreSyllabe();
+                                                stockerPreSyllabe();
                                                 chargerLaLessonSuivanteBtn();
                                                 afficherLaLessonSuivanteBtn();
                                                 resultatDePreSyllabe();
 
 
-                                                function stockerEvaluationPreSyllabe() {
+                                                function stockerPreSyllabe() {
 
                                                     let id_syllabe_apprentissage = JSON.parse(sessionStorage.getItem("id_syllabe_apprentissage"));  // Voir accueil.js
                                                     let id_syllabe_exercice = JSON.parse(sessionStorage.getItem("id_syllabe_exercice"));  // Voir accueil.js

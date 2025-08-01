@@ -71,7 +71,8 @@ console.log(datas);
                 var niveaux_etudies = [], phases_etudiees = [];
                 var note_1 = 0, note_2 = 0, note_3 = 0, note_4 = 0;
                 var moyenne = 1, moyenne_1 = 0, moyenne_2 = 0, moyenne_3 = 0, moyenne_4 = 0;
-
+console.log(datas);
+console.log(datas[1][0]);
                 if(datas[1][0] != undefined) {
                     sessionStorage.setItem("id_syllabe_apprentissage", JSON.stringify(datas[1][0].id));
                     sessionStorage.setItem("id_syllabe_exercice", JSON.stringify(datas[1][1].id));

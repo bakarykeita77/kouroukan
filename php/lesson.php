@@ -260,7 +260,7 @@ if(isset($_SESSION["id_client"])) {
                                     </div>
                                 </div>
 
-                                <div id="evaluation_message_de_fin_container">
+                                <!-- <div id="evaluation_message_de_fin_container">
                                     <p id="evaluation_message_de_fin"></p>
                                     <div id="evaluation_message_btn_container"> <button id="message_btn_1"></button><button id="message_btn_2"></button> </div>
                                 </div>
@@ -268,7 +268,7 @@ if(isset($_SESSION["id_client"])) {
                                 <div id="message_de_fin_container">
                                     <p id="message_de_fin"></p>
                                     <div id="message_btn_container"> <button id="message_btn_1"></button><button id="message_btn_2"></button> </div>
-                                </div>
+                                </div> -->
                                 
                             </div>
 

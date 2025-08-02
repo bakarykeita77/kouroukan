@@ -614,9 +614,18 @@
         element.css({
             'display':'block',
             'opacity':0, 
-            'transition':'0.4s', 
+            'transition':'0.25s', 
             'transform-origin':'0 0',
             'transform':'scaleY(0.75)'
+        });
+        setTimeout(() => { element.css({'opacity':1, 'transform':'scaleY(1)'}); }, 50);
+    }
+    function displayZoom(element) {
+        element.css({
+            'display':'block',
+            'opacity':0, 
+            'transition':'0.25s', 
+            'transform':'scale(0.75)'
         });
         setTimeout(() => { element.css({'opacity':1, 'transform':'scaleY(1)'}); }, 50);
     }
@@ -1159,12 +1168,6 @@ console.log(total_questions[i]);
             'transform':'scale(0.75)', 
             'opacity':'0',
         });
-
-        // element.css({
-        //     'transform':'scale(0.75)', 
-        //     'opacity':'0',
-        // });
-        // setTimeout(() => { element.css({'display':'none'}); }, 100);
     }
     function memoriserClicks(table,elements){
 
@@ -1969,19 +1972,22 @@ console.log(total_questions[i]);
 
     function updateLessonData(id_lesson,lesson_data) {
 
+console.log('------------------------------------------------------');
+console.log(id_lesson);
+console.log(lesson_data);
+console.log('------------------------------------------------------');
+
         var action = "modifier_matiere_en_cours";
         var matiere = JSON.parse(sessionStorage.getItem('matiere_active')); // Voir programmes.js fonction storagesDuProgramme()
         var lesson  = JSON.stringify(lesson_data);
         var note = calculerNote(lesson_data);
-
-console.log(id_lesson);
 
         const data_to_send = new URLSearchParams({
             action : action,
             id_lesson : id_lesson,
             matiere: matiere,
             lesson : lesson,
-            note   : note
+            note : note
         }); 
 
         fetch("/kouroukan/php/actions.php", {

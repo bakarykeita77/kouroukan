@@ -4,6 +4,8 @@
     max-width: 50rem;
     margin: auto;
     background-color: #fff;
+    opacity: 0;
+    transform: scale(0.75);
 }
 #programme_body span {
     display: inline-block;
@@ -15,23 +17,16 @@
 }
 #programmes_container h1 {
     position: relative;
-    display: none;
     padding: 0 1rem;
     width: calc(100% - 2rem);
     border-bottom: 2px solid #aaa;
     font-size: 1.75rem;
-    transform-origin: 0 0;
-    transform: scaleY(0.75);
-    opacity: 0;
 }
 #programme_ul {
     position: relative;
-    display: none;
     width: 100%;
     padding: 0.5rem 0.125rem;
     list-style-type: none;
-    transform-origin: 0 0;
-    transform: scaleY(0.75);
     border: 2px solid transparent;
     border-top-color: #aaa;
     border-bottom-color: #aaa;
@@ -48,21 +43,15 @@
     text-decoration: none;
     font-size: 1.25rem;
     font-weight: bold;
-    transform-origin: 0 0;
-    transform: scaleY(0.75);
 }
 #programme_matieres {
     margin: 1rem auto;
     border: 1px solid transparent;
-    transform: scaleY(0.75);
-    opacity: 0;
 }
 #programme_commentaire {
-    display: none;
     padding: 1rem;
     margin: auto;
     background-color: #eee;
-    transform-origin: 0 0;
 }
 #programme_commentaire p {
     position: relative;

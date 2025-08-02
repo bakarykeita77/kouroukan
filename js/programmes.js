@@ -167,13 +167,7 @@ console.log(datas[niveau_en_cours - 1]);
         } 
         indexer($('.actif'));
     }
-    function afficherProgrammes() {
-        setTimeout(() => { displayv($("#programmes_container h1")); }, 100);
-        setTimeout(() => { displayv($("#programme_commentaire")); }, 400);
-        setTimeout(() => {
-            displayv($("#programme_matieres"));
-        }, 600);
-    }
+    function afficherProgrammes() { displayZoom($("#programmes_container")); }
     function alerteDuProgramme() {
         $('#programme_ul li').on('click', function() {
             if($(this).hasClass('a_apprendre')) { alert("ߘߊߞߎ߲ ߡߊ߫ ߛߋ߫ ߦߊ߲߬ ߡߊ߫ ߝߟߐ߫");   return false; }

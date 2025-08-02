@@ -19,7 +19,6 @@
 
 		
 		<script src = "js/memoire.js"></script>
-		<?php include "/fonctions/fonctions_memoire.php" ?>
 		
 	</body>
 </html>

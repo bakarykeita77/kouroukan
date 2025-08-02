@@ -23,7 +23,7 @@ $('document').ready(function() {
     userIdentityStorage(); // Storage des Identités récuperées de l'étudiant
     dataStorage();         // Récuperation et storage des data recuperés de l'étudiant
     afficherLogo();
-    display($('#reception'));
+    displayZoom($('#reception'));
     
 
     function userIdentityStorage() {
@@ -71,12 +71,15 @@ console.log(datas);
                 var niveaux_etudies = [], phases_etudiees = [];
                 var note_1 = 0, note_2 = 0, note_3 = 0, note_4 = 0;
                 var moyenne = 1, moyenne_1 = 0, moyenne_2 = 0, moyenne_3 = 0, moyenne_4 = 0;
-console.log(datas);
-console.log(datas[1][0]);
+       
+                if(datas[1][0] == undefined) {
+                    sessionStorage.setItem("id_apprentissage", JSON.stringify("syllabe_apprentissage"));
+                    sessionStorage.setItem("id_exercice", JSON.stringify("syllabe_exercice"));
+                } 
                 if(datas[1][0] != undefined) {
-                    sessionStorage.setItem("id_syllabe_apprentissage", JSON.stringify(datas[1][0].id));
-                    sessionStorage.setItem("id_syllabe_exercice", JSON.stringify(datas[1][1].id));
-                }       
+                    sessionStorage.setItem("id_apprentissage", JSON.stringify(datas[1][0].id));
+                    sessionStorage.setItem("id_exercice", JSON.stringify(datas[1][1].id));
+                }      
           
             	for (var i = 0; i < datas.length ; i++) {
             	for (var j = datas[i].length; j > 0; j--) {

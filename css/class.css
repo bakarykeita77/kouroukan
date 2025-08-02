@@ -64,7 +64,6 @@
 /* --------------------------------------------------------------------------------------------------------- */
 
 .body_cadre {
-    display: none;
     position: relative;
     margin: auto;
     min-height: 17rem;
@@ -257,9 +256,10 @@
     width: calc(100vw - 1rem);
     max-width: 40rem;
     margin: auto;
+    opacity: 0;
+    transform: scale(0.75);
 }
 .course_body, .course_head, .course_foot {
-    display: none;
     position: relative; 
     margin: 0 auto;
     box-sizing: border-box;
@@ -345,7 +345,6 @@
 }
 .dialogue_btns div {
     position: relative;
-    display: none;
     top: 0.25rem;
     margin: 0 auto;
     width: 100%;
@@ -976,7 +975,6 @@ del {
 }
 .progress_bar {
     position: relative;
-    display: none;
     width: calc(100% - 1rem);
     height: 0.25rem;
     padding: 0;

@@ -82,7 +82,6 @@ session_start();
                
             </div>   
         </div>
-        <div class="page_foot"><?php include("pied-de-lesson.php"); ?></div>
     </div>
 
     <script src="../js/accueil.js"></script>

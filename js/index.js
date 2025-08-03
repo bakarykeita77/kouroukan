@@ -17,7 +17,6 @@
     $('#nav ul li:nth(0)').siblings().removeClass('surbrillance');
 
    
-   
    var ch = "", syllab = [], tonn = [];
 
  /* Dimensionnement de container */

@@ -39,7 +39,7 @@ $('document').ready(function() {
     
     /*-----------------------------------------------------------------------------------------------------------------*/
         
-        phases();
+        // phases();
         matiere();
            
 // localStorage.clear();
@@ -212,15 +212,9 @@ $('document').ready(function() {
                         case 'a_apprendre' : phaseAApprendre(); break;
                     }
 
-                    function phaseApprise() {
-                        console.log('apprise');
-                    }
-                    function phaseEnCours() {
-                        console.log('en cours');
-                    }
-                    function phaseAApprendre() {
-                        console.log('à apprendre');
-                    }
+                    function phaseApprise() { console.log('apprise'); }
+                    function phaseEnCours() { console.log('en cours'); }
+                    function phaseAApprendre() { console.log('à apprendre'); }
                 });
             } 
         }

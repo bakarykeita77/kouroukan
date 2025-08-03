@@ -218,16 +218,19 @@ function syllabe() {
 
                     }
                     function chargerCorpsDApprentissagePreSyllabe() {
-
-                        parametrageDeLesson();
+                        setTimeout(() => {
+                            parametrageDeLesson();
+                            preChargementDuTableauNoir();
+                        }, 800);
                         preChargementDuTableauNoir();
                         chargementDuTableauNoir();
 
                         function preChargementDuTableauNoir() {
-                            $('#table_syllabe_apprentissage').html("<div id='pre_texte'>ߜߋ߲߭ ߘߋ߲߰ߕߊ ߟߎ߬ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬</div>");
+                            $('#apprentissage_body').html("<table id='table_syllabe_apprentissage'><div id='pre_texte'>ߜߋ߲߭ ߘߋ߲߰ߕߊ ߟߎ߬ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬</div></table>");
                         }
                         function chargementDuTableauNoir() {
                             $('#panneaux span').click(function () {
+                                $(".table_parlante td").css("display","block");
 
                                 var clicked_consonne_container = $(this);
                                 var clicked_consonne = clicked_consonne_container.text();

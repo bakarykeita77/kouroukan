@@ -47,7 +47,8 @@
 }
 #apprentissage_note p { margin: 0.25rem 0; }
 #pre_texte {
-    width: 100%;
+    width: calc(100% - 2rem);
+    padding: 1rem;
     color: #444;
     font-size: 7vh;
     text-align: center;

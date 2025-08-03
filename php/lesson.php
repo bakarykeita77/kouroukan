@@ -318,7 +318,6 @@ if(isset($_SESSION["id_client"])) {
                 </div>
 
             </div>
-            <div class="page_foot"><?php include("pied-de-lesson.php"); ?></div>
         </div>
 
        <!--Audio pour la lecture audible------------------------------------------------------------------------------------------------------>

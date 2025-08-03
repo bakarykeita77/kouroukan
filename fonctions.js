@@ -624,7 +624,7 @@
         element.css({
             'display':'block',
             'opacity':0, 
-            'transition':'0.25s', 
+            'transition':'0.3s', 
             'transform':'scale(0.75)'
         });
         setTimeout(() => { element.css({'opacity':1, 'transform':'scaleY(1)'}); }, 50);

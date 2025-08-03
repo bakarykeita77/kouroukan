@@ -92,6 +92,7 @@
 }
 #connexion_form, #connexion_note  {
 	padding: 1rem;
+    height: 20rem;
 	max-width: 30rem;
 	box-sizing: border-box;
 }

@@ -1,5 +1,6 @@
 function syllabe() {
     
+    var niveaux_etudies = JSON.parse(sessionStorage.getItem('niveaux_etudies')); 
     var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));   // Voir programmes.js fonction storagesDuProgramme()
     var niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
     var matiere_nom = JSON.parse(sessionStorage.getItem('matiere_nom'));
@@ -1779,6 +1780,8 @@ function syllabe() {
                                                                     sendLessonDataToDB('syllabe_evaluation', lesson_d_evaluation_pre_syllabe);
 
                                                                     sessionStorage.setItem('matiere_nouvellement_apprise', JSON.stringify(matiere_nom));
+                                                                    niveaux_etudies.push(niveau_en_cours);
+                                                                    sessionStorage.setItem('niveaux_etudies', JSON.stringify(niveaux_etudies));
                                                                     
                                                                     console.log("Lesson d'apprentissage pre_syllabe est modifiée à la base de donnée.");
                                                                     console.log("Lesson d'exercice pre_syllabe est modifiée à la base de donnée.");

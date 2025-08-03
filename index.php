@@ -48,7 +48,6 @@
         <div class="page_foot"></div> 
     </div>
     
-    <script src="note-fonctions.js"></script>
     <script src="js/index.js"></script>
     
     

@@ -18,7 +18,9 @@ $('document').ready(function() {
     let option_du_serveur = optionDuServeur();       
 
 console.log("Les données de la leçon de "+liste_de_matieres[niveau_en_cours-1][0]+" de l'apprenant");
-console.log(datas[niveau_en_cours - 1]);   
+console.log(datas[niveau_en_cours - 1]); 
+console.log(niveaux_etudies);  
+console.log(matiere_index);  
 
     datas[niveau_max] = (datas[niveau_max] == undefined) ? [] : datas[niveau_max];
 
@@ -159,7 +161,7 @@ console.log(datas[niveau_en_cours - 1]);
                     if(matiere_index  >  0) $(this).addClass("a_apprendre");
                 }
                 if(niveau_max > 0) {
-                    if($.inArray(matiere_index+1,niveaux_etudies) !== -1) $(this).addClass("apprises");
+                    if($.inArray(matiere_index+1,niveaux_etudies) != -1) $(this).addClass("apprises");
                     if($.inArray(matiere_index+1,niveaux_etudies) === -1) $(this).addClass("a_apprendre");
                     if(matiere_index+1 === niveau_en_cours) $(this).removeClass("a_apprendre").addClass("actif");
                 }

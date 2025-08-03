@@ -290,7 +290,6 @@
     z-index: 0;
 }
 .course_foot { 
-    padding: 0.25rem;
     z-index: 1; 
     height: 10vh;
     min-height: 3rem;
@@ -1252,9 +1251,7 @@ del {
     .phases li { width: 80%; }
     .course { width: calc(100vw - 1rem); }
     .course_body { width: 95%; }
-    .table_parlante td, .table_muette td {
-        font-size: 1.8rem;
-    }
+    .table_parlante td, .table_muette td { font-size: 1.8rem; }
     .travaux { display: none; }
 }
 @media(orientation: landscape) {

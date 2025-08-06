@@ -47,7 +47,7 @@ console.log(matiere_index);
     chargementDuProgramme();
     styleDuProgramme();
     afficherProgrammes();
-    // alerteDuProgramme();
+    alerteDuProgramme();
     lessonOptions();
 
     storagesDuProgramme();
@@ -87,16 +87,16 @@ console.log(matiere_index);
                 var niveau = matiere_index+1; 
             
                 if(niveau_max === 0) {
-                    if(matiere_index === 0) programme_html += '<li id="'+matiere_id+'">'+matiere_nom+'</li>\n';
-                    if(matiere_index  >  0) programme_html += '<li>'+matiere_nom+'</li>\n';
+                    if(matiere_index === 0) programme_html += '<li id="'+matiere_id+'"><p>'+matiere_nom+'</p></li>\n';
+                    if(matiere_index  >  0) programme_html += '<li><p>'+matiere_nom+'</p></li>\n';
                 }
                 
                 if(niveau_max > 0) {
                     if (niveau_max < matiere_index || $('#'+matiere_id).hasClass('a_apprendre')) {
-                        if(matiere_index > 0) programme_html += '<li>'+matiere_nom+'</li>\n';
+                        if(matiere_index > 0) programme_html += '<li><p>'+matiere_nom+'</p></li>\n';
                     }
                     if (niveau_max >= matiere_index || $('#'+matiere_id).hasClass('active')) {
-                        programme_html += '<li id="'+matiere_id+'">'+matiere_nom+'</li>\n';
+                        programme_html += '<li id="'+matiere_id+'"><p>'+matiere_nom+'</p></li>\n';
                     }
                 }
             }
@@ -112,8 +112,8 @@ console.log(matiere_index);
 
                     var phases_lien = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max;
                     
-                    if(matiere_index === 0) programme_html += '<li id="'+matiere_id+'"><a href="'+phases_lien+'">'+matiere_nom+'</a></li>\n';
-                    if(matiere_index  >  0) programme_html += '<li><a href="#">'+matiere_nom+'</a></li>\n';
+                    if(matiere_index === 0) programme_html += '<li id="'+matiere_id+'"><p><a href="'+phases_lien+'">'+matiere_nom+'</a></p></li>\n';
+                    if(matiere_index  >  0) programme_html += '<li><p><a href="#">'+matiere_nom+'</a></p></li>\n';
                 }
                 
                 if(niveau_max > 0) {
@@ -121,10 +121,10 @@ console.log(matiere_index);
                     var phases_lien = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees;
 
                     if (niveau_max < matiere_index || $('#'+matiere_id).hasClass('a_apprendre')) {
-                        if(matiere_index > 0) programme_html += '<li><a href="#">'+matiere_nom+'</a></li>\n';
+                        if(matiere_index > 0) programme_html += '<li><p><a href="#">'+matiere_nom+'</a></li>\n';
                     }
                     if (niveau_max >= matiere_index || $('#'+matiere_id).hasClass('active')) {
-                        programme_html += '<li id="'+matiere_id+'"><a href="'+phases_lien+'">'+matiere_nom+'</a></li>\n';
+                        programme_html += '<li id="'+matiere_id+'"><p><a href="'+phases_lien+'">'+matiere_nom+'</a></li>\n';
                     }
                 }
             }
@@ -167,12 +167,15 @@ console.log(matiere_index);
                 }
             });
         } 
-        indexer($('.actif'));
+        indexer($('.actif p'));
     }
     function afficherProgrammes() { displayZoom($("#programmes_container")); }
     function alerteDuProgramme() {
         $('#programme_ul li').on('click', function() {
-            if($(this).hasClass('a_apprendre')) { alert("ߘߊߞߎ߲ ߡߊ߫ ߛߋ߫ ߦߊ߲߬ ߡߊ߫ ߝߟߐ߫");   return false; }
+            if($(this).hasClass('a_apprendre')) { 
+                alert("ߘߊߞߎ߲ ߡߊ߫ ߛߋ߫ ߦߊ߲߬ ߡߊ߫ ߝߟߐ߫");   
+                return false; 
+            }
             if($(this).hasClass('apprises'))    { alert("ߕߊ߲߬ߓߌ߬ ߓߘߊ߫ ߞߍ߫ ߦߊ߲߬ ߘߐ߫ ߞߘߐ߬ߡߊ߲߬"); return false; }
         });
     }
@@ -358,9 +361,9 @@ console.log(matiere_index);
     }
     function optionDuServeur() {
         /* Si datas[matiere_index].length est différent de 0 cela veut dire que la leçon est étudiée par étapes donc option retenue est 2 */
-        let option = 0;
+        let option = null;
 
-        if(matiere_index === 0) { option = (datas[matiere_index].length === 0) ? null : 2; }
+        if(matiere_index === 0) { option = null; }
         if(matiere_index === 1) { 
             if(datas[matiere_index].length === 0) { option = null; }
             if(datas[matiere_index].length > 0) {

@@ -256,7 +256,7 @@
                         masquer($('#evaluation_correction_bouton'));
                         
                         rendreActif($('#evaluation_question_bouton'));
-                        indexerP($('#evaluation_question_bouton p'));
+                        indexer($('#evaluation_question_bouton p'));
                     }, 200);
                 }, 200);
             }
@@ -852,41 +852,12 @@ console.log(total_questions[i]);
 	function incrementer(){
 	    var i=0;
 	    return function(){ return i += 1; };
-	}
+	}   
     function indexer(element) { 
-        let element_id = element.attr('id');
-        rendreActif(element);
-        setTimeout(function() { 
+        let r = setInterval(function(){
             element.addClass('indicateur'); 
-            repeterIndexation($('#'+element_id)); 
-        }, 1000);
-        
-        function repeterIndexation(element) {
-            let r = setInterval(function(){
-                element.removeClass('indicateur'); 
-                if(element.hasClass('actif')) element.addClass('indicateur');
-            },5000);
-            
-            element.click(function() { clearInterval(r); $(this).removeClass('indicateur'); });
-        }
-    }
-    function indexerP(element) { 
-        let element_id = element.attr('id');
-        rendreActif(element.parent());
-        rendreActif(element);
-        setTimeout(function() { 
-            element.addClass('indicateur'); 
-            repeterIndexation($('#'+element_id)); 
-        }, 1000);
-        
-        function repeterIndexation(element) {
-            let r = setInterval(function(){
-                element.removeClass('indicateur'); 
-                if(element.hasClass('actif')) element.addClass('indicateur');
-            },5000);
-            
-            element.click(function() { clearInterval(r); $(this).removeClass('indicateur'); });
-        }
+        },1000);
+        element.click(function() { clearInterval(r); $(this).removeClass('indicateur'); });
     }
     function initialiserData(tableau) {
         let data = [];
@@ -1371,9 +1342,7 @@ console.log(total_questions[i]);
             clignoterUneFois(repetition_btn); 
         });
     }
-    function rendreActif(element) {
-        element.addClass('actif');
-    }
+    function rendreActif(element) { element.addClass('actif'); }
     function resultat(memoire) {
         
         let nom = JSON.parse(sessionStorage.getItem('nom'));
@@ -1844,7 +1813,7 @@ console.log(total_questions[i]);
         element.addClass('clignotant'); 
         setTimeout(function() { 
             element.removeClass('clignotant');
-            indexerP($('p', element));
+            indexer($('p',element));
         }, 1200);
     }
     function selectionDeTr(tr) {
@@ -1989,6 +1958,7 @@ console.log('------------------------------------------------------');
             lesson : lesson,
             note : note
         }); 
+console.log(data_to_send);
 
         fetch("/kouroukan/php/actions.php", {
             method: "POST",

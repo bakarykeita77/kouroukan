@@ -57,7 +57,7 @@
 .notification h3 { margin: 0; padding: 0; }
 #redirige_sur_exercice { cursor: pointer; }
 #apprentissage_dialogue_btns { z-index: 1; }
-#apprentissage_dialogue_btns > div { position: relative; }
+#apprentissage_dialogue_btns > div { position: initial; }
 
 #pre_exercice_resultat_container {
     position: relative;
@@ -78,9 +78,8 @@
     border-radius: 0.5rem;
     cursor: pointer;
 }
-.titre_de_parti, #cercles_des_partis, #carres_pour_exercices { position: relative; display: inline-block; }
+#cercles_des_partis, #carres_pour_exercices { position: relative; display: inline-block; }
 .titre_de_parti { margin: 0; height: 3rem; line-height: 3rem; }
-.titre_de_parti > p { width: max-content; margin: auto; }
 #table_pre_apprentissage {
     width: calc(100% - 2.25rem);
     max-width: 45rem;

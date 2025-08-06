@@ -13,10 +13,11 @@
     position: relative;
     font-weight: bold;
 }
-.actif:not(#evaluation_question_btn, #evaluation_repetition_btn, #evaluation_correction_btn), .active { 
+.actif, .active { 
     background-color: rgb(255,255,0); 
     color: #000;
 }
+.actif p { position: relative; }
 .active_2 { box-shadow: 0 0 1rem #222; background-color: #fff; color: black; }
 .actif:active { background-color: #FFF000; box-shadow: none; }
 .active:active { background-color: #FFF000; box-shadow: none; }
@@ -297,9 +298,10 @@
 }
 .course_foot div { border-radius: 0.5rem; }
 .course_foot p {
+    top: 0.5rem;
     width: max-content;
-    height: 3rem;
-    line-height: 3rem;
+    height: 2rem;
+    line-height: 2rem;
     margin: auto;
     padding: 0 1rem;
 }
@@ -329,7 +331,7 @@
 .dialogue_btns {
     position: relative;
     display: none;
-    top: 0;
+    top: 0.25rem;
     height: 3rem;
     line-height: 3rem;
     width: calc(100% - 2px);
@@ -503,12 +505,10 @@ del {
     position: absolute;
     margin: 0;
     padding: 0;
-    top: 80%;
-    right: 0;
     content: "➜";
     font-size: 2rem;
     color: blue;
-    transform: rotate(145deg) scale(1.5);
+    transform: rotate(155deg) scale(1.5);
     animation: indexation 5s 0s infinite;
     z-index: 1;
 }
@@ -1201,15 +1201,15 @@ del {
     0%   { top: -80%; right: -2rem; }
     2%   { top: -80%; right: -2rem; }
     4%   { top: -80%; right: -2rem; }
-    6%   { top: -95%; right: -3rem; }
+    6%   { top: -100%; right: -3rem; }
     8%   { top: -80%; right: -2rem; }
-    10%  { top: -95%; right: -3rem; }
+    10%  { top: -100%; right: -3rem; }
     12%  { top: -80%; right: -2rem; }
-    14%  { top: -95%; right: -3rem; }
+    14%  { top: -100%; right: -3rem; }
     16%  { top: -80%; right: -2rem; }
-    18%  { top: -95%; right: -3rem; }
+    18%  { top: -100%; right: -3rem; }
     20%  { top: -80%; right: -2rem; }
-    22%  { top: -95%; right: -3rem; }
+    22%  { top: -100%; right: -3rem; }
     24%  { top: -80%; right: -2rem; }
     100% { top: -80%; right: -2rem; }
     100% { top: -80%; right: -2rem; }

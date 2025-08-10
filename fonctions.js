@@ -51,7 +51,7 @@
         let tr = $('tr', table);
 
         tr.css('opacity',1);
-        $('td', table).css({'transition':'0.1s', 'transform':'scale(0.75)', 'opacity':0});
+        $('td', table).css({'transition':'0.2s', 'transform':'scale(0.75)', 'opacity':0});
         
         setTimeout(() => {
             $.each(tr, function(){
@@ -162,18 +162,16 @@
         }, 1500);
     }
     function afficherExercice() {
-        let td_total = $('#exercice_body table td').length;
 
         masquer($('.direction'));
         afficher($('.salle_de_classe'));
 
-
         masquer($('.course'));
         setTimeout(() => { 
-            displayv($('.course'));
+            displayZoom($('.course'));
 
             masquer($('#apprentissage_container'));
-            afficher($('#exercice_container'));
+            displayZoom($('#exercice_container'));
             masquer($('#revision_container'));
             masquer($('#evaluation_container'));
 
@@ -181,34 +179,24 @@
             afficherCorpsDExercicePreSyllabe();
             afficherFootDExercicePreSyllabe();
             
-            function afficherEnteteDExercicePreSyllabe() {
-                setTimeout(() => { displayv($('#exercice_head'));}, 60);
-            }
+            function afficherEnteteDExercicePreSyllabe() { displayZoom($('#exercice_head')); }
             function afficherCorpsDExercicePreSyllabe() {
-                setTimeout(() => { 
-                    displayv($('#exercice_body_cadre'));
-                    setTimeout(() => { displayv($('#exercice_progress_bar')); }, 50);
-    
-                    setTimeout(() => { 
-                        $('#exercice_body').css({'display':'block'});
-                        affichageAnimeDeTableTd($('#exercice_body table')); 
-                    }, 60); 
-                }, 200);
+                displayZoom($('#exercice_body_cadre'));
+                displayZoom($('#exercice_progress_bar'));
+
+                displayZoom($('#exercice_body'));
+                setTimeout(() => { affichageAnimeDeTableTd($('#exercice_body table')); }, 400);
             }
             function afficherFootDExercicePreSyllabe() {
-                setTimeout(() => { 
-                    displayv($('#exercice_foot')); 
-                    masquer($('#exercice_redirection_btns'));
-                    displayv($('#exercice_dialogue_btns'));
-                    
-                    setTimeout(() => {
-                        $('#exercice_question_btn').css('display','block'); 
-                        $('#exercice_repetition_btn').css('display','none'); 
-                        $('#exercice_correction_btn').css('display','none');
-                    }, 200); 
-                }, (td_total*50)); 
+               
+                displayZoom($('#exercice_foot')); 
+                masquer($('#exercice_redirection_btns'));
+                displayZoom($('#exercice_dialogue_btns'));
+                
+                masquer($('#exercice_dialogue_btns > div'));
+                displayZoom($('#exercice_question_btn')); 
             }
-        }, 50);
+        }, 100);
         
     }
     function afficherEvaluation() {
@@ -219,48 +207,36 @@
         masquer($('.course'));
         setTimeout(() => { 
 
-            displayv($('.course'));
+            displayZoom($('.course'));
 
-            $('#pratique_options').css('display', 'block');
+            displayZoom($('#pratique_options'));
             $('.fermeture').attr('id', 'fermer_revision');
 
             masquer($('#apprentissage_container'));
             masquer($('#exercice_container'));
             masquer($('#revision_container'));
-            afficher($('#evaluation_container'));
+            displayZoom($('#evaluation_container'));
 
             afficherEnteteDEvaluationPreSyllabe();
             afficherCorpsDEvaluationPreSyllabe();
             afficherFootDEvaluationPreSyllabe();
 
-            function afficherEnteteDEvaluationPreSyllabe() {
-                displayv($('#evaluation_head'));
-            }
-            function afficherCorpsDEvaluationPreSyllabe() {
-                setTimeout(() => {
-                    setTimeout(() => {
-                        afficher($('#evaluation_body'));
-                        // affichageAnimeDeTableTd($('#evaluation_body table')); 
-                    }, 60);
-                }, 100);
-            }
+            function afficherEnteteDEvaluationPreSyllabe() { displayZoom($('#evaluation_head')); }
+            function afficherCorpsDEvaluationPreSyllabe() { displayZoom($('#evaluation_body')); }
             function afficherFootDEvaluationPreSyllabe() {
-                setTimeout(() => {
-                    afficher($('#evaluation_foot'));
-                    masquer($('#evaluation_redirection_btns'));
-                    displayv($('#evaluation_dialogue_btns'));
 
-                    setTimeout(() => {
-                        afficher($('#evaluation_question_bouton'));
-                        masquer($('#evaluation_repetition_bouton'));
-                        masquer($('#evaluation_correction_bouton'));
-                        
-                        rendreActif($('#evaluation_question_bouton'));
-                        indexer($('#evaluation_question_bouton p'));
-                    }, 200);
-                }, 200);
+                    displayZoom($('#evaluation_foot'));
+                    masquer($('#evaluation_redirection_btns'));
+                    displayZoom($('#evaluation_dialogue_btns'));
+
+                    displayZoom($('#evaluation_question_bouton'));
+                    masquer($('#evaluation_repetition_bouton'));
+                    masquer($('#evaluation_correction_bouton'));
+                    
+                    rendreActif($('#evaluation_question_bouton'));
+                    indexer($('#evaluation_question_bouton p'));
             }
-        });   
+        }, 100);   
     }
     function afficherList(ul) {
         let li = $('li', ul);
@@ -276,49 +252,37 @@
         let td_total = $('#revision_body table td').length;
        
         masquer($('.direction'));
-        afficher($('.salle_de_classe'));
+        displayZoom($('.salle_de_classe'));
 
         masquer($('.course'));
         setTimeout(() => { 
-            displayv($('.course'));
+            displayZoom($('.course'));
 
-            $('#apprentissage_container').css('display','none');
-            $('#exercice_container').css('display','none');
-            displayv($('#revision_container'));
-            $('#evaluation_container').css('display','none');
+            masquer($('#apprentissage_container'));
+            masquer($('#exercice_container'));
+            displayZoom($('#revision_container'));
+            masquer($('#evaluation_container'));
 
             afficherEnteteDeRevisionPreSyllabe();
             afficherCorpsDeRevisionPreSyllabe();
             afficherFootDeRevisionPreSyllabe();
             
-            function afficherEnteteDeRevisionPreSyllabe() {
-                setTimeout(() => { displayv($('#revision_head')); }, 60);
-            }  
+            function afficherEnteteDeRevisionPreSyllabe() { displayZoom($('#revision_head')); }  
             function afficherCorpsDeRevisionPreSyllabe() {
-                setTimeout(() => { 
-                    displayv($('#revision_body_cadre'));
-                    masquer($('#revision_body'));
-
-                    setTimeout(() => { 
-                        displayv($('#revision_body'));
-                        affichageAnimeDeTableTd($('#revision_body table')); 
-                    }, 60);  
-                }, 200);
+                displayZoom($('#revision_body_cadre'));
+                displayZoom($('#revision_body'));
+                setTimeout(() => { affichageAnimeDeTableTd($('#revision_body table')); }, 400);
             }
             function afficherFootDeRevisionPreSyllabe() {
-                setTimeout(() => { 
-                    displayv($('#revision_foot')); 
-                    masquer($('#revision_redirection_btns'));
-                    displayv($('#revision_dialogue_btns'));
+                displayZoom($('#revision_foot')); 
+                masquer($('#revision_redirection_btns'));
+                displayZoom($('#revision_dialogue_btns'));
 
-                    setTimeout(() => {
-                        $('#revision_question_btn').css('display','block'); 
-                        $('#revision_repetition_btn').css('display','none'); 
-                        $('#revision_correction_btn').css('display','none');
-                    }, 200); 
-                }, (td_total*60));
+                displayZoom($('#revision_question_btn')); 
+                masquer($('#revision_repetition_btn')); 
+                masquer($('#revision_correction_btn'));
             }
-        }, 50);
+        }, 100);
     }
 	function appetir_caractere_de(element) { element.css('font-size','-=32px'); } 
     function approuver(bonne_reponse) {
@@ -1138,6 +1102,7 @@ console.log(total_questions[i]);
             'display':'none',
             'transform':'scale(0.75)', 
             'opacity':'0',
+            'transition':'0.25s'
         });
     }
     function memoriserClicks(table,elements){
@@ -1171,6 +1136,24 @@ console.log(total_questions[i]);
                     console.log(elements);
                 });
             });
+        }
+    }
+    function mesDatas(user_id) {
+        
+        let  mes_datas = [];
+        extractionDesDatas();
+        mes_datas = JSON.parse(sessionStorage.getItem('mes_datas'));
+        return mes_datas;
+        
+        function extractionDesDatas() {
+        /*Recuperation de toutes les matières étdiées par l'apprenant par envoi de son id à api de kouroukan. */
+            fetch("/kouroukan/api/index.php?id_user="+user_id)
+            .then(response => response.json())
+            .then(matiere_collection => {
+                mes_datas = matiere_collection; 
+                sessionStorage.setItem('mes_datas', JSON.stringify(mes_datas));
+            })
+            .catch(error => console.log( error ));
         }
     }
     function mettreEnSurbrillance(element) {
@@ -1471,12 +1454,10 @@ console.log(total_questions[i]);
         let matiere_nom = JSON.parse(sessionStorage.getItem('matiere_nom'));
         let lesson_en_cours = $('.notification_titre').html();
         let lesson_actuelle = lessonActuelle(lesson_en_cours);
-        let total_question = totalQuestion(lesson_en_cours);
         let total_point = totalPoint(lesson_actuelle);
         let moyenne_d_evaluation = 1;
         let reprendre_l_etape_en_cours = '<b id="reprendre">'+lesson_en_cours+' ߞߍ߫ ߕߎ߲߯</b>';
         let lesson_suivante = lessonSuivante(lesson_en_cours);
-        let phase = phaseEnCours(lesson_en_cours);
         let continu_sur_l_etape_suivante = '<b id="avance"><a href="/kouroukan/php/programmes.php">'+lesson_suivante+'</a></b>';
 
         chargerResultatGeneralEntete();
@@ -1692,53 +1673,6 @@ console.log(total_questions[i]);
             }
             return ls;
         }
-        function phaseEnCours(lesson_en_cours) {
-
-            let m = lesson_en_cours.split(' ')[0];
-            let p = lesson_en_cours.split(' ')[1];
-            let phase = "";
-
-            if(m == 'ߛߓߍߛߎ߲') {
-                switch(p) {
-                    case 'ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ'  : phase = (memoire_1 != "") ? memoire_1.phase : ""; break;
-                    case 'ߡߊ߬ߞߟߏ߬ߟߌ'  : phase = (memoire_2 != "") ? memoire_2.phase : ""; break;
-                    case 'ߞߘߐߓߐߟߌ' : phase = (memoire_3 != "") ? memoire_3.phase : ""; break;
-                }
-            }
-            if(m == 'ߜߋ߲߭') {
-                switch(p) {
-                    case 'ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ'  : phase = (memoire_1 != "") ? memoire_1.phase : ""; break;
-                    case 'ߡߊ߬ߞߟߏ߬ߟߌ'  : phase = (memoire_2 != "") ? memoire_2.phase : ""; break;
-                    case 'ߣߐ߰ߡߊ߬ߛߍߦߌ' : phase = (memoire_3 != "") ? memoire_3.phase : ""; break;
-                    case 'ߞߘߐߓߐߟߌ' : phase = (memoire_4 != "") ? memoire_4.phase : ""; break;
-                }
-            }
-            return phase;
-        }
-        function totalQuestion(lesson_en_cours) {
-            
-            let tq = 0;
-            let matiere = lesson_en_cours.split(' ')[0];
-            let phase = lesson_en_cours.split(' ')[1];
-         
-            if(matiere == 'ߛߓߍߛߎ߲') {
-                switch(phase) {
-                    case 'ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ'  : tq = (memoire_1 != "") ? memoire_1.lesson.length : 0; break;
-                    case 'ߡߊ߬ߞߟߏ߬ߟߌ'  : tq = (memoire_2 != "") ? memoire_2.lesson.length : 0; break;
-                    case 'ߞߘߐߓߐߟߌ' : tq = (memoire_3 != "") ? memoire_3.lesson.length : 0; break;
-                }
-            }
-            if(matiere == 'ߜߋ߲߭') {
-                switch(phase) {
-                    case 'ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ'  : tq = (memoire_1 != "") ? memoire_1.lesson.length : 0; break;
-                    case 'ߡߊ߬ߞߟߏ߬ߟߌ'  : tq = (memoire_2 != "") ? memoire_2.lesson.length : 0; break;
-                    case 'ߣߐ߰ߡߊ߬ߛߍߦߌ' : tq = (memoire_3 != "") ? memoire_3.lesson.length : 0; break;
-                    case 'ߞߘߐߓߐߟߌ' : tq = (memoire_4 != "") ? memoire_4.lesson.length : 0; break;
-                }
-            }
-
-            return tq;
-        }
         function lessonActuelle(lesson_en_cours) {
             
             let l = [];
@@ -1939,26 +1873,25 @@ console.log(total_questions[i]);
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
 
-    function updateLessonData(id_lesson,lesson_data) {
-
-console.log('------------------------------------------------------');
-console.log(id_lesson);
-console.log(lesson_data);
-console.log('------------------------------------------------------');
+    function updateLessonData(id,lesson) {
 
         var action = "modifier_matiere_en_cours";
         var matiere = JSON.parse(sessionStorage.getItem('matiere_active')); // Voir programmes.js fonction storagesDuProgramme()
-        var lesson  = JSON.stringify(lesson_data);
-        var note = calculerNote(lesson_data);
+        var note = calculerNote(lesson);
+
+console.log(id);
+console.log(action);
+console.log(matiere);
+console.log(lesson);
+console.log(note);
 
         const data_to_send = new URLSearchParams({
+            id : id,
             action : action,
-            id_lesson : id_lesson,
             matiere: matiere,
             lesson : lesson,
             note : note
         }); 
-console.log(data_to_send);
 
         fetch("/kouroukan/php/actions.php", {
             method: "POST",

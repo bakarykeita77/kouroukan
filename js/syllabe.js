@@ -1,5 +1,7 @@
 function syllabe() {
     
+    var id_client = parseInt(JSON.parse(sessionStorage.getItem('id_client'))); 
+    var datas = JSON.parse(sessionStorage.getItem('datas')); 
     var niveaux_etudies = JSON.parse(sessionStorage.getItem('niveaux_etudies')); 
     var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));   // Voir programmes.js fonction storagesDuProgramme()
     var niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
@@ -154,8 +156,7 @@ function syllabe() {
 
             let syllabes_etudiees = JSON.parse(localStorage.getItem('syllabes_etudiees'));
             let texte_5 = "ߘߋ߰ߣߍ߲߬ ߞߎߘߊ ߣߌ߫ ߞߘߐ߬ߡߊ߲ ߘߏ߫ ߟߎ߫ ߟߋ߬ ߢߊ߯ߡߌߣߍ߲߫ ߢߐ߲ ߘߐ߫ ߣߌ߲߬ .ߣߴߌ ߛߋ߫ ߘߊ߫ ߞߵߊ߬ߟߎ߬ ߓߍ߯ ߢߊߓߐ߫ ߗߡߍ߬ߘߐ߬ߦߊ߫ ߗߍ߬ߡߍ ߟߊ߫ ߏ߬ߘߐ߬ ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ .ߓߌ߬ߟߊ߬ ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߞߐ߫";
-
-
+            
             apprentissagePreSyllabe();
             exercicePreSyllabe();
             revisionPreSyllabe();
@@ -406,19 +407,13 @@ function syllabe() {
                     masquer($('.direction'));
                     afficher($('.salle_de_classe'));
                     afficher($('.course'));
-                    afficherApprentissageContainer();
-                    affichageDePanneauDesConsonnes();
-                    afficherPreApprentissageBtns(); 
 
-                    
                     affichageDeModificateurDeChoix();
+                    afficherApprentissageContainer();
+                    afficherPreApprentissageBtns(); 
+                    affichageDePanneauDesConsonnes();
 
-                    function afficherApprentissageContainer() {
-                        displayZoom($("#apprentissage_container"));
-                        $('#exercice_container').css('display', 'none');
-                        $('#revision_container').css('display', 'none');
-                        $('#evaluation_container').css('display', 'none');
-                    }
+
                     function affichageDeModificateurDeChoix() {
                         $('.modificateur_de_choix_btn').on('click', function () {
                             if ($('.modificateur_de_choix_message').css('display') == 'none') {
@@ -433,6 +428,21 @@ function syllabe() {
                             $('.modificateur_de_choix_message').css('height', 0);
                             setTimeout(() => { $('.modificateur_de_choix_message').css('display', 'none'); }, 100);
                         });
+                    }
+                    function afficherApprentissageContainer() {
+                        displayZoom($("#apprentissage_container"));
+                        masquer($('#exercice_container'));
+                        masquer($('#revision_container'));
+                        masquer($('#evaluation_container'));
+                    }
+                    function afficherPreApprentissageBtns() {
+                        displayZoom($('#apprentissage_dialogue_btns'));
+                        displayZoom($('#apprentissage_progress_bar'));
+                        masquer($('#apprentissage_redirection_btns'));
+            
+                        $('#afficheur_de_panneau').css({ 'opacity': 1, 'transform': 'scale(1)' });
+                        rendreActif($('#afficheur_de_panneau'));
+                        indexer($('#afficheur_de_panneau p'));
                     }
                     function affichageDePanneauDesConsonnes() {
                             
@@ -570,8 +580,6 @@ function syllabe() {
                                     finDApprentissagePreSyllabe();
 
 
-
-
                                     function enregistrerApprentissagePreSyllabe() {
 
                                         let mark = (compteur_td_click >= quantite_normale_de_click) ? 1 : 0;
@@ -635,7 +643,14 @@ function syllabe() {
                                                     }
                                                     function affichageDePreExerciceBtn() {
                                                         masquer($('#apprentissage_dialogue_btns'));
-                                                        setTimeout(() => { afficherPreExerciceBtn(); }, 100);
+                                                        displayZoom($('#apprentissage_redirection_btns'));
+
+                                                        masquer($('#pre_apprentissage_bouton'));
+                                                        displayZoom($('#continu_sur_exercice_bouton'));
+                                                        masquer($('#evaluation_bouton'));
+                                                        rendreActif($('#continu_sur_exercice_bouton'));
+                                                        
+                                                        indexer($('#continu_sur_exercice_bouton p'));
                                                     }
                                                 }, 600);
 
@@ -953,6 +968,7 @@ function syllabe() {
 
                                                             display($('#reprendre_exercice_bouton'));
                                                             masquer($('#continu_sur_revision_bouton'));
+                                                            rendreActif($('#reprendre_exercice_bouton'));
                                                             indexer($('#reprendre_exercice_bouton p'));   //L'évenement click est attaché à ce bouton dès le début de la fonction  exercicePreSyllabe().
 
                                                             lesson_d_exercice_pre_syllabe_du_jour.splice(0, lesson_d_exercice_pre_syllabe_du_jour.length);
@@ -1306,6 +1322,7 @@ function syllabe() {
                                                         display($('#reprendre_revision_bouton'));
                                                         masquer($('#continu_sur_evaluation_bouton'));
 
+                                                        rendreActif($('#reprendre_revision_bouton'));
                                                         indexer($('#reprendre_revision_bouton p'));
                                                     }, 1800);
                                                 }
@@ -1321,8 +1338,7 @@ function syllabe() {
                                                          
 
                                                 function stockerApprentissagePreSyllabe() {
-
-                                                    let id_apprentissage = JSON.parse(sessionStorage.getItem("id_apprentissage"));  // Voir accueil.js
+                
                                                     let note_d_apprentissage_pre_syllabe = calculerNote(lesson_d_apprentissage_pre_syllabe_du_jour);
 
                                                     if (note_d_apprentissage_pre_syllabe === 100) {
@@ -1339,14 +1355,23 @@ function syllabe() {
                                                             console.log("Lesson d'apprentissage pre_syllabe est envoyée à la base de donnée.");
                                                         }
                                                         if (lesson_d_apprentissage_pre_syllabe.length > 7) {
-                                                            updateLessonData(id_apprentissage, lesson_d_apprentissage_pre_syllabe);
-                                                            console.log("Lesson d'apprentissage pre_syllabe est modifiée à la base de donnée.");
+                                                            if (lesson_d_apprentissage_pre_syllabe.length <= 14) {
+                                                
+                                                                let  mes_datas = mesDatas(id_client);
+                                                                let id_lesson = (mes_datas[1].length == 0) ? null : mes_datas[1][0].id;
+                                                    console.log('mes_datas');
+                                                    console.log(mes_datas);
+                                                    console.log('id_lesson');
+                                                    console.log(id_lesson);
+
+                                                                updateLessonData(id_lesson,lesson_d_apprentissage_pre_syllabe);
+                                                                console.log("Lesson d'apprentissage pre_syllabe est modifiée à la base de donnée.");
+                                                            }
                                                         }
                                                     }
                                                 }
                                                 function stockerExercicePreSyllabe() {
 
-                                                    let id_exercice = JSON.parse(sessionStorage.getItem("id_exercice"));  // Voir accueil.js
                                                     let note_d_exercice_pre_syllabe = calculerNote(lesson_d_exercice_pre_syllabe_du_jour);
 
                                                     if (note_d_exercice_pre_syllabe === 100) {
@@ -1362,10 +1387,18 @@ function syllabe() {
                                                             console.log("Lesson d'exercice pre_syllabe est envoyée à la base de donnée.");
                                                         }
                                                         if (lesson_d_exercice_pre_syllabe.length > 7) {
-                                                        if (lesson_d_exercice_pre_syllabe.length < 14) {
-                                                            updateLessonData(id_exercice, lesson_d_exercice_pre_syllabe);
-                                                            console.log("Lesson d'exercice pre_syllabe sera modifiée à la base de donnée pendant l'évaluation.");
-                                                        }
+                                                            if (lesson_d_exercice_pre_syllabe.length <= 14) {
+                                                
+                                                                let  mes_datas = mesDatas(id_client);
+                                                                let id_lesson = (mes_datas[1].length == 0) ? null : mes_datas[1][1].id;
+                                                    console.log('mes_datas');
+                                                    console.log(mes_datas);
+                                                    console.log('id_lesson');
+                                                    console.log(id_lesson);
+
+                                                                updateLessonData(id_lesson,lesson_d_exercice_pre_syllabe);
+                                                                console.log("Lesson d'exercice pre_syllabe sera modifiée à la base de donnée pendant l'évaluation.");
+                                                            }
                                                         }
                                                     }
                                                 }
@@ -1412,6 +1445,7 @@ function syllabe() {
                                                                 masquer($('#reprendre_revision_bouton'));
                                                                 masquer($('#continu_sur_evaluation_bouton'));
         
+                                                                rendreActif($('#continu_sur_apprentissage_bouton'));
                                                                 indexer($('#continu_sur_apprentissage_bouton p'));
                                                             }
                                                         }
@@ -1421,6 +1455,7 @@ function syllabe() {
                                                                 masquer($('#reprendre_revision_bouton'));
                                                                 display($('#continu_sur_evaluation_bouton'));
 
+                                                                rendreActif($('#continu_sur_evaluation_bouton'));
                                                                 indexer($('#continu_sur_evaluation_bouton p'));
                                                             }
                                                         }
@@ -1455,7 +1490,7 @@ function syllabe() {
             }
             function evaluationPreSyllabe() {
                 $('#evaluation_bouton, #reprendre_evaluation_bouton, #continu_sur_evaluation_bouton').click(function () {
-
+                
                     lesson_d_evaluation_pre_syllabe = lessonDEvaluationPreSyllabe();
 
                     var evaluation_pre_syllabe_questions = [];
@@ -1594,7 +1629,6 @@ function syllabe() {
                                         setTimeout(() => { 
                                             display($('#evaluation_correction_bouton')); 
                                             rendreActif($('#evaluation_correction_bouton'));
-                                            indexer($('#evaluation_correction_bouton p'));
                                         }, 100);
                                     }
                                 }
@@ -1747,6 +1781,7 @@ function syllabe() {
                                                     masquer($('#continu_sur_apprentissage_bouton'));
                                                     masquer($('#continu_sur_la_lesson_suivante'));
 
+                                                    rendreActif($('#reprendre_evaluation_bouton'));
                                                     indexer($('#reprendre_evaluation_bouton p'));
                                                 }, 400);
                                             }
@@ -1760,14 +1795,9 @@ function syllabe() {
 
                                                 function stockerPreSyllabe() {
 
-                                                    let id_apprentissage = JSON.parse(sessionStorage.getItem("id_apprentissage"));  // Voir accueil.js
-                                                    let id_exercice = JSON.parse(sessionStorage.getItem("id_exercice"));  // Voir accueil.js
-
                                                     actualiserLessonPreSyllabe(lesson_d_evaluation_pre_syllabe, lesson_d_evaluation_pre_syllabe_du_jour);
                                                     localStorage.setItem('lesson_d_evaluation_pre_syllabe', JSON.stringify(lesson_d_evaluation_pre_syllabe));
 
-                console.log(lesson_d_apprentissage_pre_syllabe);
-                console.log(lesson_d_exercice_pre_syllabe);
                 console.log(lesson_de_revision_pre_syllabe);
                 console.log(lesson_d_evaluation_pre_syllabe);
 
@@ -1776,20 +1806,13 @@ function syllabe() {
                                                             if (lesson_de_revision_pre_syllabe.length === 14) {
                                                                 if (lesson_d_evaluation_pre_syllabe.length === 14) {
 
-                                                                    updateLessonData(id_apprentissage, lesson_d_apprentissage_pre_syllabe);
-                                                                    updateLessonData(id_exercice, lesson_d_exercice_pre_syllabe);
                                                                     sendLessonDataToDB('syllabe_revision', lesson_de_revision_pre_syllabe);
                                                                     sendLessonDataToDB('syllabe_evaluation', lesson_d_evaluation_pre_syllabe);
-                                                                    
-                console.log(lesson_d_apprentissage_pre_syllabe);
-                console.log(lesson_d_exercice_pre_syllabe);
-
+                                                    
                                                                     sessionStorage.setItem('matiere_nouvellement_apprise', JSON.stringify(matiere_nom));
                                                                     niveaux_etudies.push(niveau_en_cours);
                                                                     sessionStorage.setItem('niveaux_etudies', JSON.stringify(niveaux_etudies));
                                                                     
-                                                                    console.log("Lesson d'apprentissage pre_syllabe est modifiée à la base de donnée.");
-                                                                    console.log("Lesson d'exercice pre_syllabe est modifiée à la base de donnée.");
                                                                     console.log("Lesson de revision pre_syllabe est envoyée à la base de donnée.");
                                                                     console.log("Lesson d'evaluation pre_syllabe est envoyée à la base de donnée.");
                                                                 }
@@ -2240,7 +2263,6 @@ function syllabe() {
 
                                                 resultatGeneral(syllabe_apprentissage_clicks_memo);
                                                 notificationDeFinDSyllabeApprentissage();
-                                                reprendreApprentissageSyllabe();
                                                 continuSurExerciceSyllabe();
 
                                                 function notificationDeFinDSyllabeApprentissage() {
@@ -2252,15 +2274,6 @@ function syllabe() {
                                                             ߣߴߌ ߘߏ߲߬ ߡߊ߫ ߓߊ߲߫ ߊ߬ߟߎ߬ ߟߐ߲߫ ߠߊ߫߸ ߒ߬ߓߊ߬ ߥߊ߫ ߘߋ߲߰ߠߌ ߡߊ߫ ߤߊ߲߯ ߌ ߦߴߊ߬ߟߎ߬ ߟߐ߲߫ ߞߊ߬ ߣߊ߬ߕߏ߫ ߓߐ߫ ߟߊ߫.\
                                                         ');
                                                     }, 1000);
-
-                                                    setTimeout(() => { indexer($('#fermer_apprentissage')); }, 1000);
-                                                }
-                                                function reprendreApprentissageSyllabe() {
-                                                    $('#reprendre').click(function () {
-                                                        goUp($('.resultat_container'));
-                                                        $('#syllabe_apprentissage').click();
-                                                        viderLeTableau(syllabe_apprentissage_clicks_memo);
-                                                    });
                                                 }
                                                 function continuSurExerciceSyllabe() {
                                                     $('#avance').click(function () {
@@ -2277,7 +2290,7 @@ function syllabe() {
                                                         masquer($('.salle_de_classe'));
                                                         setTimeout(() => {
                                                             $('.container').css('display', 'block');
-                                                            displayv($('.direction'));
+                                                            displayZoom($('.salle_de_classe'));
                                                         }, 400);
                                                     });
 
@@ -2481,24 +2494,6 @@ function syllabe() {
                 }
                 return tap;
             }
-        }
-        function afficherPreApprentissageBtns() {
-            $('#apprentissage_dialogue_btns').css('display', 'block');
-            $('#apprentissage_progress_bar').css('display', 'block');
-            $('#apprentissage_redirection_btns').css('display', 'none');
-
-            $('#afficheur_de_panneau').css({ 'opacity': 1, 'transform': 'scale(1)' });
-            rendreActif($('#afficheur_de_panneau'));
-            indexer($('#afficheur_de_panneau p'));
-        }
-        function afficherPreExerciceBtn() {
-            $('#apprentissage_dialogue_btns').css('display', 'none');
-            $('#apprentissage_redirection_btns').css('display', 'block');
-
-            $('#pre_apprentissage_bouton').css('display', 'none');
-            $('#continu_sur_exercice_bouton').css('display', 'block');
-            $('#evaluation_bouton').css('display', 'none');
-            indexer($('#continu_sur_exercice_bouton p'));
         }
         function afficherPreRevisionBtn() {
             $('#pre_apprentissage_dialogue_btn').css('display', 'block');

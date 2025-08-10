@@ -17,11 +17,6 @@ $('document').ready(function() {
     let data_apprentissage_alphabet = JSON.parse(sessionStorage.getItem('data_apprentissage_alphabet'));
     let option_du_serveur = optionDuServeur();       
 
-console.log("Les données de la leçon de "+liste_de_matieres[niveau_en_cours-1][0]+" de l'apprenant");
-console.log(datas[niveau_en_cours - 1]); 
-console.log(niveaux_etudies);  
-console.log(matiere_index);  
-
     datas[niveau_max] = (datas[niveau_max] == undefined) ? [] : datas[niveau_max];
 
     var phases_etudiees = (datas[niveau_max].length == 0) ? [] : JSON.parse(sessionStorage.getItem('phases_etudiees'));
@@ -143,11 +138,11 @@ console.log(matiere_index);
             $.each(programme_li, function() {
                 let li_actif = $(this);
                 if(li_actif.text() == matiere_nouvellement_apprise) {
-                    $('#programme_ul li').removeClass('apprises actif indicateur').addClass('a_apprendre');
+                    $('#programme_ul li').removeClass('apprises actif').addClass('a_apprendre');
 
                     li_actif.prev().removeClass('a_apprendre').addClass('apprises');
                     li_actif.removeClass('a_apprendre').addClass('apprises');
-                    li_actif.next().removeClass('a_apprendre').addClass('actif indicateur');
+                    li_actif.next().removeClass('a_apprendre').addClass('actif');
                 }
             });
         } 

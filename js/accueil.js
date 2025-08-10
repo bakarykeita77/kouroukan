@@ -70,10 +70,13 @@ console.log(datas);
                 if(datas[1][0] == undefined) {
                     sessionStorage.setItem("id_apprentissage", JSON.stringify("syllabe_apprentissage"));
                     sessionStorage.setItem("id_exercice", JSON.stringify("syllabe_exercice"));
+                    sessionStorage.setItem("id_revision", JSON.stringify("syllabe_revision"));
                 } 
                 if(datas[1][0] != undefined) {
                     sessionStorage.setItem("id_apprentissage", JSON.stringify(datas[1][0].id));
                     sessionStorage.setItem("id_exercice", JSON.stringify(datas[1][1].id));
+                    sessionStorage.setItem("id_revision", JSON.stringify(datas[1][2].id));
+                    sessionStorage.setItem("id_evaluation", JSON.stringify(datas[1][3].id));
                 }      
           
             	for (var i = 0; i < datas.length ; i++) {

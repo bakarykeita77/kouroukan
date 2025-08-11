@@ -53,7 +53,7 @@
 
             for($i=0;$i<count($matieres);$i++) {   
                 
-                $sql = "SELECT * FROM ".$matieres[$i]." WHERE id_client = :id_client ORDER BY id_client";
+                $sql = "SELECT * FROM ".$matieres[$i]." WHERE id_client = :id_client ORDER BY id ASC";
                               
                 $requete = $db -> prepare($sql);
                 $requete -> bindValue(':id_client',$id_user,PDO::PARAM_INT);
@@ -88,7 +88,7 @@
      Une matiere pour un client 
      -------------------------------------------------------------------------------------*/
         if($id_user != '' && $matiere != '' && $phase == '') {
-            $sql = "SELECT * FROM ".$matiere." WHERE id_client = :id_client ORDER BY phase";
+            $sql = "SELECT * FROM ".$matiere." WHERE id_client = :id_client ORDER BY phase ASC";
                           
             $requete = $db -> prepare($sql);
             $requete -> bindValue(':id_client',$id_user,PDO::PARAM_INT);
@@ -115,7 +115,7 @@
             
             for($i=0;$i<count($matieres);$i++) {   
                 
-                $sql = "SELECT * FROM ".$matieres[$i]." WHERE phase = :phase ORDER BY niveau";
+                $sql = "SELECT * FROM ".$matieres[$i]." WHERE phase = :phase ORDER BY niveau ASC";
                               
                 $requete = $db -> prepare($sql);
                 $requete -> bindValue(':phase',$phase,PDO::PARAM_STR);
@@ -136,7 +136,7 @@
             
             for($i=0;$i<count($matieres);$i++) {   
                 
-                $sql = "SELECT * FROM ".$matieres[$i]." WHERE id_client = :id_client AND phase = :phase ORDER BY niveau";
+                $sql = "SELECT * FROM ".$matieres[$i]." WHERE id_client = :id_client AND phase = :phase ORDER BY niveau ASC";
                               
                 $requete = $db -> prepare($sql);
                 $requete -> bindValue(':id_client',$id_user,PDO::PARAM_INT);
@@ -156,7 +156,7 @@
      -------------------------------------------------------------------------------------*/
         if($id_user != '' && $matiere != '' && $phase != '') {
 
-            $sql = "SELECT * FROM ".$matiere." WHERE id_client = :id_client AND phase = :phase ORDER BY niveau";
+            $sql = "SELECT * FROM ".$matiere." WHERE id_client = :id_client AND phase = :phase ORDER BY niveau ASC";
                           
             $requete = $db -> prepare($sql);
             $requete -> bindValue(':id_client',$id_user,PDO::PARAM_INT);

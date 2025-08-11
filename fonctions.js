@@ -50,10 +50,11 @@
         
         let tr = $('tr', table);
 
-        tr.css('opacity',1);
+        tr.css('opacity',0);
         $('td', table).css({'transition':'0.2s', 'transform':'scale(0.75)', 'opacity':0});
         
         setTimeout(() => {
+            tr.css('opacity',1);
             $.each(tr, function(){
 
                 let tr_index = $(this).index();
@@ -67,7 +68,7 @@
                     }, 60*((tr_index*td_length)+td_index));
                 });
             });
-        }, 200);
+        }, 250);
         
     }
     function affichageAnimeDeTableTr(table) {
@@ -96,48 +97,6 @@
         element.css({'display':'block', 'width':0, 'height':0});
         element.animate({'width':largeur, 'height':hauteur}, temps);
     }
-    // function afficherEvaluation() {
-    //     let td_total = $('#evaluation_body table td').length;
-
-    //     masquer($('.direction'));
-    //     afficher($('.salle_de_classe'));
-
-    //     masquer($('.course'));
-    //     setTimeout(() => { 
-    //         displayv($('.course'));
-
-    //         $('#apprentissage_container').css('display','none');
-    //         $('#exercice_container').css('display','block');
-    //         $('#revision_container').css('display','none');
-    //         $('#evaluation_container').css('display','none');
-                
-    //         setTimeout(() => { displayv($('#evaluation_head')); }, 60);
-    //         setTimeout(() => { 
-    //             setTimeout(() => { 
-    //                 $('#evaluation_body').css({'display':'block'});
-    //                 affichageAnimeDeTableTd($('#evaluation_body table')); 
-    //             }, 60); 
-    //             setTimeout(() => { 
-    //                 $('#evaluation_foot').css('display','block'); 
-    //                 displayv($('#evaluation_dialogue_btns'));
-    //                 setTimeout(() => {
-    //                     $('#evaluation_question_btn').css('display','block'); 
-    //                     $('#evaluation_repetition_btn').css('display','none'); 
-    //                     $('#evaluation_correction_btn').css('display','none');
-    //                 }, 200); 
-    //             }, (400 + td_total*60)); 
-    //         }, 600);
-    //         setTimeout(() => { displayv($('#evaluation_progress_bar')); }, (1600 + td_total*60));
-    //         $('#evaluation_redirection_btns').css('display','none');
-    //     }, 50);
-        
-    //     masquer($('#evaluation_redirection_btns'));
-
-    //     setTimeout(() => { 
-    //         setTimeout(() => { displayv($('#evaluation_dialogue_btns')); }, 300);
-    //         // setTimeout(() => { displayv($('#evaluation_progress_bar'));  }, 600);
-    //     }, 1200);
-    // }
     function afficherEvaluationAlphabet() {
 
         $('#pratique_options').css('display','block');
@@ -162,7 +121,6 @@
         }, 1500);
     }
     function afficherExercice() {
-
         masquer($('.direction'));
         afficher($('.salle_de_classe'));
 
@@ -196,8 +154,7 @@
                 masquer($('#exercice_dialogue_btns > div'));
                 displayZoom($('#exercice_question_btn')); 
             }
-        }, 100);
-        
+        }, 200);
     }
     function afficherEvaluation() {
 
@@ -236,7 +193,7 @@
                     rendreActif($('#evaluation_question_bouton'));
                     indexer($('#evaluation_question_bouton p'));
             }
-        }, 100);   
+        }, 200);   
     }
     function afficherList(ul) {
         let li = $('li', ul);
@@ -249,8 +206,6 @@
         });
     }
     function afficherRevision() {
-        let td_total = $('#revision_body table td').length;
-       
         masquer($('.direction'));
         displayZoom($('.salle_de_classe'));
 
@@ -282,7 +237,7 @@
                 masquer($('#revision_repetition_btn')); 
                 masquer($('#revision_correction_btn'));
             }
-        }, 100);
+        }, 200);
     }
 	function appetir_caractere_de(element) { element.css('font-size','-=32px'); } 
     function approuver(bonne_reponse) {
@@ -1138,24 +1093,6 @@ console.log(total_questions[i]);
             });
         }
     }
-    function mesDatas(user_id) {
-        
-        let  mes_datas = [];
-        extractionDesDatas();
-        mes_datas = JSON.parse(sessionStorage.getItem('mes_datas'));
-        return mes_datas;
-        
-        function extractionDesDatas() {
-        /*Recuperation de toutes les matières étdiées par l'apprenant par envoi de son id à api de kouroukan. */
-            fetch("/kouroukan/api/index.php?id_user="+user_id)
-            .then(response => response.json())
-            .then(matiere_collection => {
-                mes_datas = matiere_collection; 
-                sessionStorage.setItem('mes_datas', JSON.stringify(mes_datas));
-            })
-            .catch(error => console.log( error ));
-        }
-    }
     function mettreEnSurbrillance(element) {
         element.addClass('surbrillance');
         element.siblings().removeClass('surbrillance');
@@ -1207,6 +1144,12 @@ console.log(total_questions[i]);
             if($.inArray(element_aleatoire, mixted_table)==-1){ mixted_table[mixted_table.length] = element_aleatoire; }
         }
         return mixted_table;
+    }
+    function montrerReponse(question,element_correspondant) {
+        $.each(element_correspondant, function () {
+            let reponse = $(this);
+            if(question == reponse.text()) secouer(reponse);
+        });
     }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
@@ -1878,12 +1821,7 @@ console.log(total_questions[i]);
         var action = "modifier_matiere_en_cours";
         var matiere = JSON.parse(sessionStorage.getItem('matiere_active')); // Voir programmes.js fonction storagesDuProgramme()
         var note = calculerNote(lesson);
-
-console.log(id);
-console.log(action);
-console.log(matiere);
-console.log(lesson);
-console.log(note);
+        var lesson = JSON.stringify(lesson);
 
         const data_to_send = new URLSearchParams({
             id : id,

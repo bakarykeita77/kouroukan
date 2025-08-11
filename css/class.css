@@ -267,7 +267,6 @@
 }
 .course_head, .course_foot { width: 100%; }
 .course_body { 
-    display: none;
     height: 44vh;
     min-height: 15rem;
     padding-top: 1.5rem;

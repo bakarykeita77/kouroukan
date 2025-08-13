@@ -1,9 +1,12 @@
 $('document').ready(function() {
       
- // Declaration et initialisation des variables
+ /* Declaration et initialisation des variables */
     let niveaux_etudies = [], phases_etudiees = [];
 	let niveau_en_cours = 1, niveau_max = 0;
 	let derniere_phase = '';
+
+    let matieres_a_apprendre = [];
+    let matieres_apprises = [];
 
  /* 
     Initialisation de sessionStorage et de localStorage.
@@ -15,8 +18,8 @@ $('document').ready(function() {
     if(precedent_id != present_id) { sessionStorage.clear(); localStorage.clear(); }
 
 
-    userIdentityStorage(); // Storage des Identités récuperées de l'étudiant
-    dataStorage();         // Récuperation et storage des data recuperés de l'étudiant
+    userIdentityStorage(); /* Storage des Identités récuperées de l'étudiant */
+    dataStorage();         /* Récuperation et storage des data recuperés de l'étudiant */
     afficherLogo();
     displayZoom($('#reception'));
     
@@ -32,10 +35,10 @@ $('document').ready(function() {
     }
     function dataStorage() {
 
-     // Identifiant id de l'apprenant.
+     /* Identifiant id de l'apprenant. */
         let user_id = parseInt(JSON.parse(sessionStorage.getItem('id_client'))); 
      
-     // Recuperation de toutes les matières étdiées par l'apprenant par envoi de son id à api de kouroukan.
+     /* Recuperation de toutes les matières étdiées par l'apprenant par envoi de son id à api de kouroukan. */
     	fetch("/kouroukan/api/index.php?id_user="+user_id)
     	.then(response => response.json())
     	.then(matiere_collection => {
@@ -47,7 +50,10 @@ $('document').ready(function() {
     	    for(var i=0; i<matiere_collection.length; i++) { datas[i] = (matiere_collection[i].length === 0)  ? [] : matiere_collection[i]; }
     	    sessionStorage.setItem('datas',JSON.stringify(datas));
 
-console.log("Les données des leçons étudiées par l'apprenant");
+            calculDesMatieresApprisesEtNonApprises();
+            chargementDeProfileTesteMenu();
+
+console.log("Les données des leçons étudiées par l'apprenant est");
 console.log(datas);
 
             if(datas.length === 0) {
@@ -66,7 +72,7 @@ console.log(datas);
              -------------------------------------------------------------------------*/   
                 var note_1 = 0, note_2 = 0, note_3 = 0, note_4 = 0;
                 var moyenne = 1, moyenne_1 = 0, moyenne_2 = 0, moyenne_3 = 0, moyenne_4 = 0;
-       
+
                 if(datas[1][0] == undefined) {
                     sessionStorage.setItem("id_apprentissage", JSON.stringify("syllabe_apprentissage"));
                     sessionStorage.setItem("id_exercice", JSON.stringify("syllabe_exercice"));
@@ -157,6 +163,60 @@ console.log(datas);
              	
                 localStorage.setItem('pratiques', JSON.stringify(pratiques));
                 sessionStorage.setItem('pratiques', JSON.stringify(pratiques));
+            }
+
+    
+            function calculDesMatieresApprisesEtNonApprises() {
+                if(datas.length === 0) {
+                    matieres_apprises = [];
+                    for (let i = 0; i < liste_de_matieres.length; i++) { matieres_a_apprendre[i] = liste_de_matieres[i][1]; }
+                    
+                    sessionStorage.setItem('matieres_a_apprendre',JSON.stringify(matieres_a_apprendre));
+                    sessionStorage.setItem('matieres_apprises',JSON.stringify(matieres_apprises));
+                }
+                if(datas.length > 0) {
+                    for (let j = 0; j < datas.length; j++) {
+                        if(datas[j].length == 0) 
+                        { matieres_a_apprendre.push(liste_de_matieres[j][1]); }else
+                        { matieres_apprises.push(liste_de_matieres[j][1]); }
+                    }
+                    
+                    sessionStorage.setItem('matieres_apprises',JSON.stringify(matieres_apprises));
+                    sessionStorage.setItem('matieres_a_apprendre',JSON.stringify(matieres_a_apprendre));
+                }
+            }
+            function chargementDeProfileTesteMenu(){
+                
+                liste_des_matieres_apprises.innerHTML = (matieres_apprises.length === 0) ? '<p class="rien">ߝߏߦߊ߲߫߹</p>' : listeDesMatieresApprisesHtml();
+                liste_des_matieres_a_apprendre.innerHTML = (matieres_a_apprendre.length === 0) ? '<p class="rien">ߝߏߦߊ߲߫߹</p>' : listeDesMatieresAApprendreHtml();
+                profile_teste_btn.onclick = toggleProfileTesteMenu();
+                
+                function listeDesMatieresAApprendreHtml() {
+                    let html = "<ul>";
+                        for (let i = 0; i < matieres_a_apprendre.length; i++) {  
+                            html += "<li>"+matieres_a_apprendre[i]+"</li>";
+                        }
+                        html += "</ul>";
+                        return html;
+                }
+                function listeDesMatieresApprisesHtml() {
+                    let html = "<ul>";
+                        for (let i = 0; i < matieres_apprises.length; i++) {  
+                            html += "<li>"+matieres_apprises[i]+"</li>";
+                        }
+                        html += "</ul>";
+                        return html;
+                }
+                function toggleProfileTesteMenu(){
+                    if(profile_teste_menu.style.height == 'auto'){
+                        profile_teste_menu.style.height = 0;
+                        setTimeout(function() { profile_teste_menu.style.display = 'none'; }, (250));
+                        setTimeout(function() { profile_teste.style.display = 'none'; }, (200));
+                    }else{
+                        profile_teste_menu.style.display = 'block';
+                        setTimeout(function() { profile_teste_menu.style.height = 'auto'; }, (10));
+                    }
+                }
             }
     	})
     	.catch(error => console.log( error ));

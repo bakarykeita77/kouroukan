@@ -9,29 +9,20 @@ $(document).ready(function(){
     
     var profile_utilisateur_renseignements, profile_menu_container, profile_teste_btn, profile_teste_menu, profile_teste;
     var profile_utilisateur_btn, profile_utilisateur_container, modifier_avatar;
-    var client_identification_brute_container;
     var profile_teste_content;
-    var titre_des_matieres_apprises, titre_des_matieres_a_apprendre;
     var liste_des_matieres_apprises, liste_des_matieres_a_apprendre;
+
+    let datas = [];
+    let matieres_a_apprendre = JSON.parse(sessionStorage.getItem("matieres_a_apprendre"));
+    let matieres_apprises = JSON.parse(sessionStorage.getItem("matieres_apprises"));
    
     var nom_de_matiere_a_renseigne = '';
     var matiere_a_renseigne = '';
     var matiere_index = '';
     var niveau_teste = '';
-    var data_date = '';
-    var data_niveau = '';
-    
-    var studied_lessons_table = [];
-    var nombre_de_teste_par_niveau = [];
-    var profile_teste_point = [];
-    var profile_testes = '';
     var testes = [];
-    var nbr_teste_niveau_1 = 0;
-    var nbr_teste_niveau_2 = 0;
-    var nbr_teste_niveau_3 = 0;
-    var nbr_teste_niveau_4 = 0;
-    
 
+     
     selectionDesElementsDeProfile();
     affichageDeProfileEntete();
     manipulationDeProfileEntete();
@@ -47,15 +38,30 @@ $(document).ready(function(){
         profile_teste_btn.addEventListener('click', function(){
 
             affichageDeProfileTesteMenu();
-            chargementDeProfileTesteMenu();
             manipulationDeProfileTesteMenu();
             
             function affichageDeProfileTesteMenu(){
                 
-                liste_des_matieres_apprises.innerHTML = '<p class="rien">ߝߏߦߊ߲߫߹</p>';
-                liste_des_matieres_a_apprendre.innerHTML = listeDesMatieres();
+                liste_des_matieres_apprises.innerHTML = (matieres_apprises.length === 0) ? '<p class="rien">ߝߏߦߊ߲߫߹</p>' : listeDesMatieresApprisesHtml();
+                liste_des_matieres_a_apprendre.innerHTML = (matieres_a_apprendre.length === 0) ? '<p class="rien">ߝߏߦߊ߲߫߹</p>' : listeDesMatieresAApprendreHtml();
                 profile_teste_btn.onclick = toggleProfileTesteMenu();
                 
+                function listeDesMatieresAApprendreHtml() {
+                    let html = "<ul>";
+                        for (let i = 0; i < matieres_a_apprendre.length; i++) {  
+                            html += "<li>"+matieres_a_apprendre[i]+"</li>";
+                        }
+                        html += "</ul>";
+                        return html;
+                }
+                function listeDesMatieresApprisesHtml() {
+                    let html = "<ul>";
+                        for (let i = 0; i < matieres_apprises.length; i++) {  
+                            html += "<li>"+matieres_apprises[i]+"</li>";
+                        }
+                        html += "</ul>";
+                        return html;
+                }
                 function toggleProfileTesteMenu(){
                     if(profile_teste_menu.style.height == 'auto'){
                         profile_teste_menu.style.height = 0;
@@ -65,128 +71,6 @@ $(document).ready(function(){
                         profile_teste_menu.style.display = 'block';
                         setTimeout(function() { profile_teste_menu.style.height = 'auto'; }, (10));
                     }
-                }
-            }
-            function chargementDeProfileTesteMenu(){
-                
-                testes = reconstitutionDeTestes();
-                var matieres_apprises = matieresApprises();
-           
-                titre_des_matieres_apprises.innerHTML = titre1();
-                titre_des_matieres_a_apprendre.innerHTML = titre2();
-           
-                liste_des_matieres_apprises.innerHTML = listeDesMatieres1();
-                liste_des_matieres_a_apprendre.innerHTML = listeDesMatieres2();
-                
-                gestionAffichageDesMatieresDansLeMenu();
-                
-
-                function reconstitutionDeTestes(){
-              
-                    var testes_collection = profile_testes.innerHTML;
-                    var testes_reconstitues = [];
-                     
-                    testes_collection = testes_collection.split('%');
-                    
-                    for(var i=0;i<testes_collection.length;i++){
-                   
-                        var profile_teste = testes_collection[i].split('/');
-                        var teste = [];
-                       
-                        var phase     = profile_teste[0];
-                        var date      = profile_teste[1];
-                        var id_client = profile_teste[2];
-                        var niveau    = profile_teste[3];
-                        var test      = profile_teste[4].split(';');
-                        var point     = profile_teste[5];
-                        
-                        teste = [phase, date, id_client, niveau, test, point];
-                        testes_reconstitues[testes_reconstitues.length] = teste;
-                    }
-                  
-                    return testes_reconstitues;
-                }
-                function titre1(){
-                    var titre = '';
-                    
-                    if(matieres_apprises.length == 1)
-                    { titre = 'ߥߟߊ߬ߘߊ߫ ߘߋ߰ߣߍ߲'; }else
-                    { titre = 'ߥߟߊ߬ߘߊ߫ ߘߋ߰ߣߍ߲ ߠߎ߬'; }
-                    
-                    return titre;
-                }
-                function titre2(){
-                    var titre = '';
-                    
-                    if(liste_de_matieres.length - matieres_apprises.length == 1)
-                    { titre = 'ߥߟߊ߬ߘߊ߫ ߘߋ߰ߕߊ'; }else
-                    { titre = 'ߥߟߊ߬ߘߊ߫ ߘߋ߰ߕߊ ߟߎ߬'; }
-                    
-                    return titre;
-                }
-                function listeDesMatieres1(){
-                    var liste = '';
-                   
-                    if(matieres_apprises.length != 0)
-                    { liste = listeDesMatieres(); }else
-                    { liste = '<p class="rien">ߝߏߦߊ߲߫߹</p>'; }
-                    
-                    return liste;
-                }
-                function listeDesMatieres2(){
-                    var liste = '';
-                    
-                    if(liste_de_matieres.length - matieres_apprises.length != 0)
-                    { liste = listeDesMatieres(); }else
-                    { liste = '<p class="rien">ߝߏߦߊ߲߫߹</p>'; }
-                    
-                    return liste;
-                }
-                function gestionAffichageDesMatieresDansLeMenu(){
-                    var li1 = document.querySelectorAll('#liste_des_matieres_apprises ul li');
-                    var li2 = document.querySelectorAll('#liste_des_matieres_a_apprendre ul li');
-                    
-                    li1.forEach(function(matiere){
-                        if(matieres_apprises.indexOf(matiere.innerHTML) == -1)
-                        { matiere.style.display = 'none'; }else
-                        { matiere.style.display = 'block'; }
-                    });
-                    li2.forEach(function(matiere){
-                        if(matieres_apprises.indexOf(matiere.innerHTML) == -1)
-                        { matiere.style.display = 'block'; }else
-                        { matiere.style.display = 'none'; }
-                    });
-                }
-                function matieresApprises(){
-                    var matieres1 = [];
-                    for(var i=0;i<testes.length;i++){
-                       var point = testes[i][5];
-                       point = reverseIntNko(point);
-                       if(point>10){
-                           var id_matiere_apprise = testes[i][3]-1;
-                           
-                           if(matieres1.indexOf(liste_de_matieres[id_matiere_apprise][1]) == -1){
-                               matieres1[matieres1.length] = liste_de_matieres[id_matiere_apprise][1];
-                           }
-                       } 
-                    }
-           
-                    return matieres1;
-                }
-                function matieresAApprendre(){
-                    var matieres2 = [];
-                    for(var i=0;i<testes.length;i++){
-                       var point = testes[i][4];
-                       point = reverseIntNko(point);
-                       if(point<10){
-                           var id_matiere_a_apprendre = testes[i][2]-1;
-                           if(matieres2.indexOf(liste_de_matieres[id_matiere_a_apprendre][1]) == -1){
-                               matieres2[matieres2.length] = liste_de_matieres[id_matiere_a_apprendre][1];
-                           }
-                       }  
-                    }
-           
-                    return matieres2;
                 }
             }
             function manipulationDeProfileTesteMenu(){
@@ -393,15 +277,6 @@ $(document).ready(function(){
             }
         });
       /*-----------------------------------------------------------------------------*/   
-    }
-    function fermerProfileCorps(){
-        document.getElementById('profile_teste_content').style.display =  'none';
-    }
-    function listeDesMatieres(){
-        var liste = '<ul style="box-sizing:border-box; margin:8px auto; padding:0; width:98%">\n';
-            for(var i=0;i<liste_de_matieres.length;i++){ liste += '<li style="padding:0 28px; border-radius:6px">'+liste_de_matieres[i][1]+'</li>\n'; }
-        liste += '</ul>\n';
-        return liste;
     }
     function selectionDesElementsDeProfile(){
         

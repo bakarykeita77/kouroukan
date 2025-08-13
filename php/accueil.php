@@ -1,43 +1,44 @@
 <?php
 session_start();
-    if($_POST['submit']){
-    /* Reception des donnees envoyes de form de connexion */
-        $client_email = isset($_POST['client_email'])? $_POST['client_email']:'';
-        $client_pass = isset($_POST['client_pass'])? $_POST['client_pass']:'';
-         
-        if($client_email != '' && $client_pass != ''){
-          
-          // Connexion à la base de données
-            require("connexionToDB.php");
-            global $db;
- 
-          /*---------------------------------------------------------------------------------------------------*/
-          //Control de la presence des données reçues dans la table users
-            $requette = $db->prepare( "SELECT * FROM users WHERE email = ?" );
-            $requette->execute(array($client_email));
-            $client = $requette->fetchAll();
-            
-          //Si lesdonnées  sont absentes, le client est redirigé sur la page de provenance (connexion.php).
-            if(empty($client)) { header("location:".$_SERVER['HTTP_REFERER']); }
+if($_POST['submit']){
+/* Reception des donnees envoyes de form de connexion */
+    $client_email = isset($_POST['client_email']) ? $_POST['client_email'] : '';
+    $client_pass = isset($_POST['client_pass']) ? $_POST['client_pass'] : '';
+      
+    if($client_email != '' && $client_pass != ''){
+      
+      // Connexion à la base de données
+        require("connexionToDB.php");
+        global $db;
 
-          //Si les données sont presentes, mais les mots de passesne correspondent pas, le client est redirigé sur la page de provenance.
-            $data_pass = $client[0]['pass'];
-            if($client_pass != $data_pass) { echo("Les mots de passe ne correspondent pas"); return; }
-            
-          //Si les données sont présentes et que les e-mails et les mots de passes correspondent, la connexion est établie.
-            $_SESSION["id_client"] = $client[0]["id"];
-            $_SESSION["prenom"]    = $client[0]["prenom"];
-            $_SESSION["nom"]       = $client[0]["nom"];
-            $_SESSION["naissance"] = $client[0]["naissance"];
-            $_SESSION["sexe"]      = $client[0]["sexe"];
-            $_SESSION["adresse"]   = $client[0]["adresse"];
-            $_SESSION["email"]     = $client_email;
+      /*---------------------------------------------------------------------------------------------------*/
+      //Control de la presence des données reçues dans la table users
+        $requette = $db->prepare( "SELECT * FROM users WHERE email = ?" );
+        $requette->execute(array($client_email));
+        $client = $requette->fetchAll();
+        
+      //Si lesdonnées  sont absentes, le client est redirigé sur la page de provenance (connexion.php).
+        if(empty($client)) { header("location:".$_SERVER['HTTP_REFERER']); }
 
-          /*---------------------------------------------------------------------------------------------------*/
-            
-        }else{ $warning = "Veuillez remplir tous les champs !"; }  
-    }
+      //Si les données sont presentes, mais les mots de passesne correspondent pas, le client est redirigé sur la page de provenance.
+        $data_pass = $client[0]['pass'];
+        if($client_pass != $data_pass) { echo("Les mots de passe ne correspondent pas"); return; }
+        
+      //Si les données sont présentes et que les e-mails et les mots de passes correspondent, la connexion est établie.
+        $_SESSION["id_client"] = $client[0]["id"];
+        $_SESSION["prenom"]    = $client[0]["prenom"];
+        $_SESSION["nom"]       = $client[0]["nom"];
+        $_SESSION["naissance"] = $client[0]["naissance"];
+        $_SESSION["sexe"]      = $client[0]["sexe"];
+        $_SESSION["adresse"]   = $client[0]["adresse"];
+        $_SESSION["email"]     = $client_email;
+
+      /*---------------------------------------------------------------------------------------------------*/
+        
+    }else{ $warning = "Veuillez remplir tous les champs !"; }  
+}
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>

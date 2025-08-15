@@ -1211,6 +1211,26 @@ console.log(total_questions[i]);
             return pp;
         }
     }
+    function profileResulat() {
+
+        chargerLeResulat();
+        afficherLeResulat();
+        fermerLeResulat();
+
+        function chargerLeResulat() {
+
+        }
+        function afficherLeResulat() {
+            $('#afficheur_du_resultat').click(() => {
+                $('#profile_resultat').css('display','block');
+            });
+        }
+        function fermerLeResulat() {
+            $('#fermer_resultat').click(() => {
+                $('#profile_resultat').css('display','none');
+            });
+        }
+    }
 	function prononcer(){
 		id=this.id;
 	
@@ -1437,13 +1457,13 @@ console.log(total_questions[i]);
                 function chargerResultatHead() {
 
                     let d = memoire_1.date;
-                    let an = d.split("-")[0];
-                    let lune = parseInt(d.split("-")[1]);
-                    let date = d.split("-")[2];
-                    let jour = parseInt(date.split(" ")[0]);
-                    let temps = date.split(" ")[1];
-                    let heure = parseInt(temps.split(":")[0]);
-                    let minute = parseInt(temps.split(":")[1]);
+                    let an = (d != undefined) ? d.split("-")[0] : "";
+                    let lune = (d != undefined) ? parseInt(d.split("-")[1]) : "";
+                    let date = (d != undefined) ? d.split("-")[2] : "";
+                    let jour = (date != undefined) ? parseInt(date.split(" ")[0]) : "";
+                    let temps = (date != undefined) ? date.split(" ")[1] : "";
+                    let heure = (temps != undefined) ? parseInt(temps.split(":")[0]) : "";
+                    let minute = (temps != undefined) ? parseInt(temps.split(":")[1]) : "";
                     
                     $('#phase_d_apprentissage').text(matiere_nom+' '+liste_de_phases[0][1]);
                     $('#apprentissage_date').text(mois[parseInt(lune)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
@@ -1452,6 +1472,7 @@ console.log(total_questions[i]);
                 function chargerResultatBody() {
 
                     let lesson = memoire_1.lesson;
+                    lesson = (lesson != undefined) ? lesson : [];
                     let apprentissage_resultat_body_html = resultatTableBodyHTML(lesson);
 
                     $('#apprentissage_resultat_body').html(apprentissage_resultat_body_html);
@@ -1473,13 +1494,13 @@ console.log(total_questions[i]);
                 function chargerResultatHead() {
 
                     let d = memoire_2.date;
-                    let an = d.split("-")[0];
-                    let lune = d.split("-")[1];
-                    let date = d.split("-")[2];
-                    let jour = date.split(" ")[0];
-                    let temps = date.split(" ")[1];
-                    let heure = temps.split(":")[0];
-                    let minute = temps.split(":")[1];
+                    let an = (d != undefined) ? d.split("-")[0] : "";
+                    let lune = (d != undefined) ? d.split("-")[1] : "";
+                    let date = (d != undefined) ? d.split("-")[2] : "";
+                    let jour = (date != undefined) ? date.split(" ")[0] : "";
+                    let temps = (date != undefined) ? date.split(" ")[1] : "";
+                    let heure = (temps != undefined) ? temps.split(":")[0] : "";
+                    let minute = (temps != undefined) ? temps.split(":")[1] : "";
                     
                     $('#phase_d_exercice').text(matiere_nom+' '+liste_de_phases[1][1]);
                     $('#exercice_date').text(mois[parseInt(lune)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
@@ -1488,6 +1509,7 @@ console.log(total_questions[i]);
                 function chargerResultatBody() {
 
                     let lesson = memoire_2.lesson;
+                    lesson = (lesson != undefined) ? lesson : [];
                     let exercice_resultat_body_html = resultatTableBodyHTML(lesson);
 
                     $('#exercice_resultat_body').html(exercice_resultat_body_html);
@@ -1577,6 +1599,11 @@ console.log(total_questions[i]);
             let lesson_3 = (memoire_3 != "") ? memoire_3.lesson : [];
             let lesson_4 = (memoire_4 != "") ? memoire_4.lesson : [];
 
+            lesson_1 = (lesson_1 != undefined) ? lesson_1 : [];
+            lesson_2 = (lesson_2 != undefined) ? lesson_2 : [];
+            lesson_3 = (lesson_3 != undefined) ? lesson_3 : [];
+            lesson_4 = (lesson_4 != undefined) ? lesson_4 : [];
+
             let total_des_questions = lesson_1.length + lesson_2.length + lesson_3.length + lesson_4.length;
             let total_des_points = sommePoint(lesson_1) + sommePoint(lesson_2) + sommePoint(lesson_3) + sommePoint(lesson_4);
             
@@ -1596,9 +1623,9 @@ console.log(total_questions[i]);
                 );
             }
         }
-        function masquerResultat() { goUp($('.resultat_container')); }
+        function masquerResultat() { masquer($('.resultat_container')); }
         function afficherResultat() { 
-            setTimeout(() => { goDown($('.resultat_container')); }, 3000);
+            setTimeout(() => { displayZoom($('.resultat_container')); }, 3000);
         }
         function reprendreLesson() { $('#reprendre').click(() => { raffraichirLaPage(); }); }
         function lessonSuivante(lesson_en_cours) {
@@ -1619,8 +1646,8 @@ console.log(total_questions[i]);
         function lessonActuelle(lesson_en_cours) {
             
             let l = [];
-            let m = lesson_en_cours.split(' ')[0];
-            let p = lesson_en_cours.split(' ')[1];
+            let m = (lesson_en_cours != undefined) ? lesson_en_cours.split(' ')[0] : '';
+            let p = (lesson_en_cours != undefined) ? lesson_en_cours.split(' ')[1] : '';
 
             if(m == 'ߛߓߍߛߎ߲') {
                 switch(p) {
@@ -1645,29 +1672,32 @@ console.log(total_questions[i]);
         let html = '';
 
         html +=  '<tr class="thin">';
-        for(let j=0; j<memoire.length; j++) {
-            let ordre = (j === 0) ? parseIntNko(j+1)+'߭' : parseIntNko(j+1)+'߲';
-            html += '<td>'+ordre+'</td>';
-        }
-        html +=  '</tr>';
+        if(memoire != undefined) {
+            
+            for(let j=0; j<memoire.length; j++) {
+                let ordre = (j === 0) ? parseIntNko(j+1)+'߭' : parseIntNko(j+1)+'߲';
+                html += '<td>'+ordre+'</td>';
+            }
+            html +=  '</tr>';
 
-        html +=  '<tr class="bold">';
-        for(let k=0; k<memoire.length; k++) {
-            html += '<td>'+memoire[k][0]+'</td>';
-        }
-        html +=  '</tr>';
+            html +=  '<tr class="bold">';
+            for(let k=0; k<memoire.length; k++) {
+                html += '<td>'+memoire[k][0]+'</td>';
+            }
+            html +=  '</tr>';
 
-        html +=  '<tr class="bold">';
-        for(let l=0; l<memoire.length; l++) {
-            html += '<td>'+memoire[l][1]+'</td>';
-        }
-        html +=  '</tr>';
+            html +=  '<tr class="bold">';
+            for(let l=0; l<memoire.length; l++) {
+                html += '<td>'+memoire[l][1]+'</td>';
+            }
+            html +=  '</tr>';
 
-        html +=  '<tr class="bold">';
-        for(let m=0; m<memoire.length; m++) {
-            html += '<td>'+parseIntNko(memoire[m][2])+'</td>';
+            html +=  '<tr class="bold">';
+            for(let m=0; m<memoire.length; m++) {
+                html += '<td>'+parseIntNko(memoire[m][2])+'</td>';
+            }
+            html +=  '</tr>';
         }
-        html +=  '</tr>';
 
         return html;
     }

@@ -1,6 +1,10 @@
 $('document').ready(function() {
-      
+         
  /* Declaration et initialisation des variables */
+    
+    let alphabet = [], syllabe = [], tons = [], chiffres = [];
+    let phase_11 = "";
+
     let niveaux_etudies = [], phases_etudiees = [];
 	let niveau_en_cours = 1, niveau_max = 0;
 	let derniere_phase = '';
@@ -22,6 +26,7 @@ $('document').ready(function() {
     dataStorage();         /* Récuperation et storage des data recuperés de l'étudiant */
     afficherLogo();
     displayZoom($('#reception'));
+    profileResulat();
     
 
     function userIdentityStorage() {
@@ -50,8 +55,9 @@ $('document').ready(function() {
     	    for(var i=0; i<matiere_collection.length; i++) { datas[i] = (matiere_collection[i].length === 0)  ? [] : matiere_collection[i]; }
     	    sessionStorage.setItem('datas',JSON.stringify(datas));
 
-            calculDesMatieresApprisesEtNonApprises();
-            chargementDeProfileTesteMenu();
+            console.log();
+            profileTesteMenu();
+            chargerProfileResultat();
 
 console.log("Les données des leçons étudiées par l'apprenant est");
 console.log(datas);
@@ -165,61 +171,152 @@ console.log(datas);
                 sessionStorage.setItem('pratiques', JSON.stringify(pratiques));
             }
 
-    
-            function calculDesMatieresApprisesEtNonApprises() {
-                if(datas.length === 0) {
-                    matieres_apprises = [];
-                    for (let i = 0; i < liste_de_matieres.length; i++) { matieres_a_apprendre[i] = liste_de_matieres[i][1]; }
-                    
-                    sessionStorage.setItem('matieres_a_apprendre',JSON.stringify(matieres_a_apprendre));
-                    sessionStorage.setItem('matieres_apprises',JSON.stringify(matieres_apprises));
-                }
-                if(datas.length > 0) {
-                    for (let j = 0; j < datas.length; j++) {
-                        if(datas[j].length == 0) 
-                        { matieres_a_apprendre.push(liste_de_matieres[j][1]); }else
-                        { matieres_apprises.push(liste_de_matieres[j][1]); }
+            function calculDesLessonsEtudiees() {
+                
+                let lessons=[[],[],[],[]];
+                let lessons_d_alphabet=[], lessons_de_syllabes=[], lessons_de_tons=[], lessons_de_chiffres=[];
+
+                for (let i = 0; i < datas.length; i++) {
+                    if(datas[i] != undefined) {
+                        for (let j = 0; j < datas[i].length; j++) {
+                            if(datas[i][j] != undefined) {
+                                lessons[i][j] = [datas[i][j].date, datas[i][j].niveau, datas[i][j].phase, datas[i][j].lesson, datas[i][j].note];
+                            }
+                        }
                     }
-                    
-                    sessionStorage.setItem('matieres_apprises',JSON.stringify(matieres_apprises));
-                    sessionStorage.setItem('matieres_a_apprendre',JSON.stringify(matieres_a_apprendre));
+                }
+                
+                let lessons_trier_par_matiere = triDesLessonsParMatiere(lessons);
+                let lessons_trier_par_phase = triDesLessonsParPhase(lessons_trier_par_matiere); 
+
+                return lessons_trier_par_phase;
+
+                function triDesLessonsParMatiere(lessons) {
+                    let tri = [];
+                    for (let i = 0; i < lessons.length; i++) {
+                        for (let j = 0; j < 1; j++) {
+                            if(lessons[i][j] != undefined) {
+                                if(lessons[i][j][2].split("_")[0] == "alphabet") { lessons_d_alphabet = lessons[i]; }
+                                if(lessons[i][j][2].split("_")[0] == "syllabe") { lessons_de_syllabes = lessons[i]; }
+                                if(lessons[i][j][2].split("_")[0] == "tons") { lessons_de_tons = lessons[i]; }
+                                if(lessons[i][j][2].split("_")[0] == "chiffres") { lessons_de_chiffres = lessons[i]; }
+                            }
+                        }
+                    }
+                    tri = [lessons_d_alphabet, lessons_de_syllabes, lessons_de_tons, lessons_de_chiffres];
+                    return tri;
+                }
+                function triDesLessonsParPhase(lessons_trier_par_matiere) {
+                    let tri = [[],[],[],[]];
+
+                    for (let i = 0; i < lessons_trier_par_matiere.length; i++) {
+                        for (let j = 0; j < lessons_trier_par_matiere[i].length; j++) {
+                                if(lessons_trier_par_matiere[i][j] != undefined) {
+                                if(lessons_trier_par_matiere[i][j][2].split("_")[1] == "apprentissage") { tri[i][0] = lessons_trier_par_matiere[i][j]; }
+                                if(lessons_trier_par_matiere[i][j][2].split("_")[1] == "exercice") { tri[i][1] = lessons_trier_par_matiere[i][j]; }
+                                if(lessons_trier_par_matiere[i][j][2].split("_")[1] == "revision") { tri[i][2] = lessons_trier_par_matiere[i][j]; }
+                                if(lessons_trier_par_matiere[i][j][2].split("_")[1] == "evaluation") { tri[i][3] = lessons_trier_par_matiere[i][j]; }
+                            }
+                        }
+                    }
+
+                    return tri;
                 }
             }
-            function chargementDeProfileTesteMenu(){
-                
-                liste_des_matieres_apprises.innerHTML = (matieres_apprises.length === 0) ? '<p class="rien">ߝߏߦߊ߲߫߹</p>' : listeDesMatieresApprisesHtml();
-                liste_des_matieres_a_apprendre.innerHTML = (matieres_a_apprendre.length === 0) ? '<p class="rien">ߝߏߦߊ߲߫߹</p>' : listeDesMatieresAApprendreHtml();
-                profile_teste_btn.onclick = toggleProfileTesteMenu();
-                
-                function listeDesMatieresAApprendreHtml() {
-                    let html = "<ul>";
-                        for (let i = 0; i < matieres_a_apprendre.length; i++) {  
-                            html += "<li>"+matieres_a_apprendre[i]+"</li>";
+            function chargerProfileResultat() {
+                let lessons_etudier = calculDesLessonsEtudiees();
+                let lessons_d_alphabet = lessons_etudier[0];
+                let lessons_de_syllabe = lessons_etudier[1];
+                let lessons_de_tons = lessons_etudier[2];
+                let lessons_de_chiffres = lessons_etudier[3];
+console.log(lessons_de_chiffres);
+                resultatGeneral(lessons_d_alphabet, lessons_de_syllabe, lessons_de_tons, lessons_de_chiffres);
+            }
+            function profileTesteMenu(){
+
+                calculDesMatieresApprisesEtNonApprises();
+                chargementDeProfileTesteMenu();
+                affichageDeProfileTesteMenu();
+                    
+                function calculDesMatieresApprisesEtNonApprises() {
+                    if(datas.length === 0) {
+                        matieres_apprises = [];
+                        for (let i = 0; i < liste_de_matieres.length; i++) { matieres_a_apprendre[i] = liste_de_matieres[i][1]; }
+                        
+                        sessionStorage.setItem('matieres_a_apprendre',JSON.stringify(matieres_a_apprendre));
+                        sessionStorage.setItem('matieres_apprises',JSON.stringify(matieres_apprises));
+                    }
+                    if(datas.length > 0) {
+                        for (let j = 0; j < datas.length; j++) {
+                            if(datas[j].length == 0) 
+                            { matieres_a_apprendre.push(liste_de_matieres[j][1]); }else
+                            { matieres_apprises.push(liste_de_matieres[j][1]); }
                         }
-                        html += "</ul>";
-                        return html;
+                        
+                        sessionStorage.setItem('matieres_apprises',JSON.stringify(matieres_apprises));
+                        sessionStorage.setItem('matieres_a_apprendre',JSON.stringify(matieres_a_apprendre));
+                    }
                 }
-                function listeDesMatieresApprisesHtml() {
-                    let html = "<ul>";
-                        for (let i = 0; i < matieres_apprises.length; i++) {  
-                            html += "<li>"+matieres_apprises[i]+"</li>";
+                function chargementDeProfileTesteMenu() {
+
+                    document.getElementById("liste_des_matieres_apprises").innerHTML = (matieres_apprises.length === 0) ? '<p class="rien">ߝߏߦߊ߲߫߹</p>' : listeDesMatieresApprisesHtml();
+                    document.getElementById("liste_des_matieres_a_apprendre").innerHTML = (matieres_a_apprendre.length === 0) ? '<p class="rien">ߝߏߦߊ߲߫߹</p>' : listeDesMatieresAApprendreHtml();
+    
+                    function listeDesMatieresAApprendreHtml() {
+                        let html = "<ul>";
+                            for (let i = 0; i < matieres_a_apprendre.length; i++) {  
+                                html += "<li>"+matieres_a_apprendre[i]+"</li>";
+                            }
+                            html += "</ul>";
+                            return html;
+                    }
+                    function listeDesMatieresApprisesHtml() {
+                        let html = "<ul>";
+                            for (let i = 0; i < matieres_apprises.length; i++) {  
+                                html += "<li>"+matieres_apprises[i]+"</li>";
+                            }
+                            html += "</ul>";
+                            return html;
+                    }
+                }
+                function affichageDeProfileTesteMenu() {
+                    profile_teste_btn.onclick = toggleProfileTesteMenu();
+
+                    function toggleProfileTesteMenu(){
+                        if(profile_teste_menu.style.height == 'auto'){
+                            profile_teste_menu.style.height = 0;
+                            setTimeout(function() { profile_teste_menu.style.display = 'none'; }, (250));
+                            setTimeout(function() { profile_teste.style.display = 'none'; }, (200));
+                        }else{
+                            profile_teste_menu.style.display = 'block';
+                            setTimeout(function() { profile_teste_menu.style.height = 'auto'; }, (10));
                         }
-                        html += "</ul>";
-                        return html;
-                }
-                function toggleProfileTesteMenu(){
-                    if(profile_teste_menu.style.height == 'auto'){
-                        profile_teste_menu.style.height = 0;
-                        setTimeout(function() { profile_teste_menu.style.display = 'none'; }, (250));
-                        setTimeout(function() { profile_teste.style.display = 'none'; }, (200));
-                    }else{
-                        profile_teste_menu.style.display = 'block';
-                        setTimeout(function() { profile_teste_menu.style.height = 'auto'; }, (10));
                     }
                 }
             }
     	})
     	.catch(error => console.log( error ));
     }
+
     function afficherLogo() { $('#logo').css('display', 'block'); }
+    function profileResulat() {
+
+        chargerLeResulat();
+        fermerLeResulat();
+        afficherLeResulat();
+
+        function chargerLeResulat() {
+
+        }
+        function afficherLeResulat() {
+            $('#afficheur_du_resultat').click(() => {
+                $('#profile_resultat').css('display','block');
+            });
+        }
+        function fermerLeResulat() {
+            $('#fermer_resultat').click(() => {
+                $('#profile_resultat').css('display','none');
+            });
+        }
+    }
 });

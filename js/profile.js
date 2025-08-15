@@ -15,6 +15,8 @@ $(document).ready(function(){
     let datas = [];
     let matieres_a_apprendre = JSON.parse(sessionStorage.getItem("matieres_a_apprendre"));
     let matieres_apprises = JSON.parse(sessionStorage.getItem("matieres_apprises"));
+    matieres_a_apprendre = (matieres_a_apprendre == null) ? [] : matieres_a_apprendre;
+    matieres_apprises = (matieres_apprises == null) ? [] : matieres_apprises;
    
     var nom_de_matiere_a_renseigne = '';
     var matiere_a_renseigne = '';
@@ -284,7 +286,9 @@ $(document).ready(function(){
         profile_menu_container = $('#profile_menu_container');
         client_evaluations_brutes_container = document.getElementById('client_evaluations_brutes_container');
         nbr_teste = document.getElementById('nbr_teste');
-        profile_teste_point = document.getElementById('profile_teste_point');
+        profile_resultat = document.getElementById('profile_resultat');
+        afficheur_du_resultat = document.getElementById('afficheur_du_resultat');
+        profile_resultat = document.getElementById('profile_resultat');
         profile_teste_btn = document.getElementById('profile_teste_btn');
         profile_teste_menu = document.getElementById('profile_teste_menu');
         profile_testes = document.getElementById('profile_testes');

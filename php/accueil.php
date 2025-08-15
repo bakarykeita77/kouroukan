@@ -1,6 +1,6 @@
 <?php
 session_start();
-if($_POST['submit']){
+// if($_POST['submit']){
 /* Reception des donnees envoyes de form de connexion */
     $client_email = isset($_POST['client_email']) ? $_POST['client_email'] : '';
     $client_pass = isset($_POST['client_pass']) ? $_POST['client_pass'] : '';
@@ -36,7 +36,7 @@ if($_POST['submit']){
       /*---------------------------------------------------------------------------------------------------*/
         
     }else{ $warning = "Veuillez remplir tous les champs !"; }  
-}
+// }
 ?>
 
 <!DOCTYPE html>
@@ -48,6 +48,7 @@ if($_POST['submit']){
     
     <link rel="stylesheet" href="../css/tete-de-page.css"/>
 	  <link rel="stylesheet" href="../css/accueil.css"/>
+    <link rel="stylesheet" href="../css/resultat.css"/>
 </head>
 <body>
 

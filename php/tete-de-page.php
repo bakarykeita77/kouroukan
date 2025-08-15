@@ -4,6 +4,7 @@
   <!------------------------------------------------------------------------------------------------------------------>	
     <link rel="stylesheet" href="/kouroukan/css/class.css"/>
     <link rel="stylesheet" href="/kouroukan/css/tete-de-page.css"/>
+    <link rel="stylesheet" href="/kouroukan/css/resultat.css"/>
     
 	<script src="/kouroukan/js/jquery-3.3.1.js"></script>
 	<script src="/kouroukan/fonctions.js"></script>
@@ -53,13 +54,21 @@
 								<div id="liste_des_matieres_a_apprendre"></div>
 							</div>
 						</div>
+
+						<div id="afficheur_du_resultat">ߦߊ߲߬ ߘߌ߲߯ ߞߵߊ߬ ߥߟߊߥߟߊ߫</div>
 					</div>
 					
 					<div class="profile_menu_head"><a href="deconnexion.php">ߌ ߜߊ߲߬ߞߎ߲߬ߣߍ߲߬ ߓߐ߫</a></div>
 				</div>
 			</div>
+
 			<div id="profile_teste"></div>
-			<div id="profile_teste_point"></div>
+
+			<div id="profile_resultat">
+				<div id="profile_resultat_container">
+					<?php include "resultat.php"; ?>
+				</div>
+			</div>
 
 			<div id = "nav">
 				<div id="menu_deroulant">

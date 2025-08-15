@@ -964,6 +964,7 @@ del {
     border: 1px solid transparent;
     border-bottom-color: #fff;
     border-radius: 6px;
+    cursor: pointer;
 }
 .profile_menu_head a { text-decoration: none; }
 .progress_bar_container {

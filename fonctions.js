@@ -1388,15 +1388,13 @@ console.log(total_questions[i]);
         }
         function chargerResultatBody() {
 
-            let table_body_html = resultatTableBodyHTML();
+            let table_body_html = resultatTableBodyHTML(memoire);
             let total_point = totalPoint();
                 
             $('.table_body').html(table_body_html);
             $('#total_question_1').html(parseIntNko(memoire.length));
             $('#total_reponse').html(parseIntNko(memoire.length));
             $('#total_point_1').html(parseIntNko(total_point));
-
-            function resultatTableBodyHTML(memoire);
         }
         function chargerResultatFoot() {
             $('#total_question_2').text(parseIntNko(total_question));

@@ -26,7 +26,6 @@ $('document').ready(function() {
     dataStorage();         /* Récuperation et storage des data recuperés de l'étudiant */
     afficherLogo();
     displayZoom($('#reception'));
-    profileResulat();
     
 
     function userIdentityStorage() {
@@ -55,11 +54,10 @@ $('document').ready(function() {
     	    for(var i=0; i<matiere_collection.length; i++) { datas[i] = (matiere_collection[i].length === 0)  ? [] : matiere_collection[i]; }
     	    sessionStorage.setItem('datas',JSON.stringify(datas));
 
-            console.log();
             profileTesteMenu();
-            chargerProfileResultat();
+            profileResulat();
 
-console.log("Les données des leçons étudiées par l'apprenant est");
+console.log("Les données des leçons étudiées par l'apprenant sont");
 console.log(datas);
 
             if(datas.length === 0) {
@@ -170,68 +168,6 @@ console.log(datas);
                 localStorage.setItem('pratiques', JSON.stringify(pratiques));
                 sessionStorage.setItem('pratiques', JSON.stringify(pratiques));
             }
-
-            function calculDesLessonsEtudiees() {
-                
-                let lessons=[[],[],[],[]];
-                let lessons_d_alphabet=[], lessons_de_syllabes=[], lessons_de_tons=[], lessons_de_chiffres=[];
-
-                for (let i = 0; i < datas.length; i++) {
-                    if(datas[i] != undefined) {
-                        for (let j = 0; j < datas[i].length; j++) {
-                            if(datas[i][j] != undefined) {
-                                lessons[i][j] = [datas[i][j].date, datas[i][j].niveau, datas[i][j].phase, datas[i][j].lesson, datas[i][j].note];
-                            }
-                        }
-                    }
-                }
-                
-                let lessons_trier_par_matiere = triDesLessonsParMatiere(lessons);
-                let lessons_trier_par_phase = triDesLessonsParPhase(lessons_trier_par_matiere); 
-
-                return lessons_trier_par_phase;
-
-                function triDesLessonsParMatiere(lessons) {
-                    let tri = [];
-                    for (let i = 0; i < lessons.length; i++) {
-                        for (let j = 0; j < 1; j++) {
-                            if(lessons[i][j] != undefined) {
-                                if(lessons[i][j][2].split("_")[0] == "alphabet") { lessons_d_alphabet = lessons[i]; }
-                                if(lessons[i][j][2].split("_")[0] == "syllabe") { lessons_de_syllabes = lessons[i]; }
-                                if(lessons[i][j][2].split("_")[0] == "tons") { lessons_de_tons = lessons[i]; }
-                                if(lessons[i][j][2].split("_")[0] == "chiffres") { lessons_de_chiffres = lessons[i]; }
-                            }
-                        }
-                    }
-                    tri = [lessons_d_alphabet, lessons_de_syllabes, lessons_de_tons, lessons_de_chiffres];
-                    return tri;
-                }
-                function triDesLessonsParPhase(lessons_trier_par_matiere) {
-                    let tri = [[],[],[],[]];
-
-                    for (let i = 0; i < lessons_trier_par_matiere.length; i++) {
-                        for (let j = 0; j < lessons_trier_par_matiere[i].length; j++) {
-                                if(lessons_trier_par_matiere[i][j] != undefined) {
-                                if(lessons_trier_par_matiere[i][j][2].split("_")[1] == "apprentissage") { tri[i][0] = lessons_trier_par_matiere[i][j]; }
-                                if(lessons_trier_par_matiere[i][j][2].split("_")[1] == "exercice") { tri[i][1] = lessons_trier_par_matiere[i][j]; }
-                                if(lessons_trier_par_matiere[i][j][2].split("_")[1] == "revision") { tri[i][2] = lessons_trier_par_matiere[i][j]; }
-                                if(lessons_trier_par_matiere[i][j][2].split("_")[1] == "evaluation") { tri[i][3] = lessons_trier_par_matiere[i][j]; }
-                            }
-                        }
-                    }
-
-                    return tri;
-                }
-            }
-            function chargerProfileResultat() {
-                let lessons_etudier = calculDesLessonsEtudiees();
-                let lessons_d_alphabet = lessons_etudier[0];
-                let lessons_de_syllabe = lessons_etudier[1];
-                let lessons_de_tons = lessons_etudier[2];
-                let lessons_de_chiffres = lessons_etudier[3];
-console.log(lessons_de_chiffres);
-                resultatGeneral(lessons_d_alphabet, lessons_de_syllabe, lessons_de_tons, lessons_de_chiffres);
-            }
             function profileTesteMenu(){
 
                 calculDesMatieresApprisesEtNonApprises();
@@ -299,24 +235,4 @@ console.log(lessons_de_chiffres);
     }
 
     function afficherLogo() { $('#logo').css('display', 'block'); }
-    function profileResulat() {
-
-        chargerLeResulat();
-        fermerLeResulat();
-        afficherLeResulat();
-
-        function chargerLeResulat() {
-
-        }
-        function afficherLeResulat() {
-            $('#afficheur_du_resultat').click(() => {
-                $('#profile_resultat').css('display','block');
-            });
-        }
-        function fermerLeResulat() {
-            $('#fermer_resultat').click(() => {
-                $('#profile_resultat').css('display','none');
-            });
-        }
-    }
 });

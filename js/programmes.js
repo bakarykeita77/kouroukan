@@ -38,6 +38,7 @@ $('document').ready(function() {
     /* Détermination du Programme */
     var programme_matieres = '';
 
+    profileResulat();
     selectionDuProgramme();
     chargementDuProgramme();
     styleDuProgramme();

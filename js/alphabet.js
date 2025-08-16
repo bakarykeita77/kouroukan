@@ -1336,7 +1336,7 @@ function alphabet() {
                                                         setTimeout(() => { $('#resultat_btn_container').css({'height':'max-content'}); }, 2000);
 
                                                         $('#afficheur_de_resultat').click(function() {
-                                                            resultatGeneral(data_apprentissage_alphabet, data_exercice_alphabet, data_evaluation_alphabet);
+                                                            resultatDeLaMatiere(data_apprentissage_alphabet, data_exercice_alphabet, data_evaluation_alphabet);
                                                         });
                                                     }}}
                                                 }}}
@@ -1983,7 +1983,7 @@ function alphabet() {
                                                     viderNotification();
                                                     initialiserProgressBar();
                                                     stockerExerciceAlphabet();
-                                                    resultatGeneral(data_exercice_alphabet);
+                                                    resultatDeLaMatiere(data_exercice_alphabet);
                                                     notificationDeFinDExerciceAlphabet();
                                                     afficherExerciceRedirectionBtns(lesson_d_exercice_alphabet);
                                                     reprendreExerciceAlphabet();
@@ -2451,7 +2451,7 @@ function alphabet() {
                                                     $('<span class="resultat_btn" id="alphabet_resultat_btn">ߞߐߝߟߌ ߝߟߍ߫ ߦߊ߲߬</span>').insertAfter($('#evaluation_notification_titre'));
                                                     $('#alphabet_resultat_btn').click(()=>{ 
                                                         $('#alphabet_resultat_btn').css('display','none');
-                                                        resultatGeneral(lesson_d_apprentissage_alphabet, lesson_d_exercice_alphabet, lesson_d_evaluation_alphabet); 
+                                                        resultatDeLaMatiere(lesson_d_apprentissage_alphabet, lesson_d_exercice_alphabet, lesson_d_evaluation_alphabet); 
                                                     });
                                                 }, 4000);
                                             }

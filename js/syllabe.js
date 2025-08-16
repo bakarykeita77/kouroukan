@@ -1854,7 +1854,7 @@ function syllabe() {
                                                             }
                                                         }
 
-                                                        resultatGeneral(apprentissage_pre_syllabe_data, exercice_pre_syllabe_data, revision_pre_syllabe_data, evaluation_pre_syllabe_data);
+                                                        resultatDeLaMatiere(apprentissage_pre_syllabe_data, exercice_pre_syllabe_data, revision_pre_syllabe_data, evaluation_pre_syllabe_data);
                                                     }
                                                 }
                                             }
@@ -2252,7 +2252,7 @@ function syllabe() {
                                             }
                                             function resultatApprentissageSyllabe() {
 
-                                                resultatGeneral(syllabe_apprentissage_clicks_memo);
+                                                resultatDeLaMatiere(syllabe_apprentissage_clicks_memo);
                                                 notificationDeFinDSyllabeApprentissage();
                                                 continuSurExerciceSyllabe();
 

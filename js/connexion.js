@@ -1,2 +1,2 @@
 
-displayZoom($('#connexion_container'));
+afficher($('#connexion_container'));

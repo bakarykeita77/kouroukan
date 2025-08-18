@@ -165,7 +165,7 @@ $('document').ready(function() {
         } 
         indexer($('.actif p'));
     }
-    function afficherProgrammes() { displayZoom($("#programmes_container")); }
+    function afficherProgrammes() { afficher($("#programmes_container")); }
     function alerteDuProgramme() {
         $('#programme_ul li').on('click', function() {
             if($(this).hasClass('a_apprendre')) { 
@@ -301,15 +301,7 @@ $('document').ready(function() {
             });
         }
         function afficherLessonOptions() {
-            afficher($('#lesson_options')); 
-            $('#lesson_options_titre, #lesson_option_1, #lesson_option_2').css({
-                'opacity':0, 
-                'transition':'0.3s', 
-                'transform':'scaleY(0.75)'
-            });
-            setTimeout(() => { displayv($('#lesson_options_titre')); }, 100);
-            setTimeout(() => { displayv($('#lesson_option_1')); }, 300);
-            setTimeout(() => { displayv($('#lesson_option_2')); }, 500);
+            afficher($('#lesson_options'));
         }
         function annulerApprentissageEnCours() {
 

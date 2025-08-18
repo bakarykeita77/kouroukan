@@ -1,11 +1,13 @@
-
 <span id='fermer_resultat'>&times;</span>
 
 <div class="resultat_general">
  <!----------------------------------------------------------------------------------------------------------------------------------------------->
     <div id="resultat_entete">
-        <div id="resultat_titre"></div>
-        <div id="etudiant"></div>
+        <div id="resultat_titre_container">
+            <div id="etudiant"></div>
+            <div id="resultat_titre"></div>
+        </div>
+        <div id="matieres_liste"></div>
     </div>
  <!----------------------------------------------------------------------------------------------------------------------------------------------->
     <div id="resultat_corps">

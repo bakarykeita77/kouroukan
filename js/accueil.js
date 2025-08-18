@@ -25,7 +25,7 @@ $('document').ready(function() {
     userIdentityStorage(); /* Storage des Identités récuperées de l'étudiant */
     dataStorage();         /* Récuperation et storage des data recuperés de l'étudiant */
     afficherLogo();
-    displayZoom($('#reception'));
+    afficher($('#reception'));
     
 
     function userIdentityStorage() {

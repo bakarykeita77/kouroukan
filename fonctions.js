@@ -13,39 +13,6 @@
 			son.attr({src: source_son, autoplay: "on"});
 		});
 	}
-	function affichageListeEnCascade() {
-	    
-	    var liste = $('.liste_affichage_cascade');
-	    var li = $('.liste_affichage_cascade li');
-	    
-	    liste.css('display','block');
-	    $.each(li, function(){
-	        var liste = $(this);
-	        var index = $(this).index();
-	        setTimeout(function(){
-	            liste.css({'display':'block', 'height':'48px'});
-	        }, index*50);
-	    });
-
-	}
-    function affichageAnimeDesTd(td) {
-        td.css({
-            'transform':'scale(0.75)', 
-            'opacity':0,
-            'transition':'0.6s'
-        });
-        setTimeout(() => {
-            $.each(td, function() {
-                let td_index = $(this).index();
-                setTimeout(() => { 
-                    $(this).css({
-                        'transform':'scale(1)', 
-                        'opacity':1,
-                    }); 
-                }, 80*td_index);
-            });
-        }, 600);
-    }
     function affichageAnimeDeTableTd(table) {
         
         let tr = $('tr', table);
@@ -65,7 +32,7 @@
                     let td_index = $(this).index();
                     setTimeout(() => {
                         $(this).css({'opacity':1, 'transform':'scale(1)'});
-                    }, 60*((tr_index*td_length)+td_index));
+                    }, 80*((tr_index*td_length)+td_index));
                 });
             });
         }, 250);
@@ -87,11 +54,11 @@
     }
     function afficher(element) {
         masquer(element);
-        setTimeout(function() { element.css({ 'display':'block' }); }, 50); 
+        element.css({'display':'block'}); 
         setTimeout(function() { element.css({
             'transform':'scale(1)', 
             'opacity':1
-        }); }, 100);
+        }); }, 50);
     }
 	function afficher_en_jailli( element,largeur,hauteur,temps ) {
         element.css({'display':'block', 'width':0, 'height':0});
@@ -126,10 +93,10 @@
 
         masquer($('.course'));
         setTimeout(() => { 
-            displayZoom($('.course'));
+            afficher($('.course'));
 
             masquer($('#apprentissage_container'));
-            displayZoom($('#exercice_container'));
+            afficher($('#exercice_container'));
             masquer($('#revision_container'));
             masquer($('#evaluation_container'));
 
@@ -137,22 +104,22 @@
             afficherCorpsDExercicePreSyllabe();
             afficherFootDExercicePreSyllabe();
             
-            function afficherEnteteDExercicePreSyllabe() { displayZoom($('#exercice_head')); }
+            function afficherEnteteDExercicePreSyllabe() { afficher($('#exercice_head')); }
             function afficherCorpsDExercicePreSyllabe() {
-                displayZoom($('#exercice_body_cadre'));
-                displayZoom($('#exercice_progress_bar'));
+                afficher($('#exercice_body_cadre'));
+                afficher($('#exercice_progress_bar'));
 
-                displayZoom($('#exercice_body'));
+                afficher($('#exercice_body'));
                 setTimeout(() => { affichageAnimeDeTableTd($('#exercice_body table')); }, 400);
             }
             function afficherFootDExercicePreSyllabe() {
                
-                displayZoom($('#exercice_foot')); 
+                afficher($('#exercice_foot')); 
                 masquer($('#exercice_redirection_btns'));
-                displayZoom($('#exercice_dialogue_btns'));
+                afficher($('#exercice_dialogue_btns'));
                 
                 masquer($('#exercice_dialogue_btns > div'));
-                displayZoom($('#exercice_question_btn')); 
+                afficher($('#exercice_question_btn')); 
             }
         }, 200);
     }
@@ -164,29 +131,29 @@
         masquer($('.course'));
         setTimeout(() => { 
 
-            displayZoom($('.course'));
+            afficher($('.course'));
 
-            displayZoom($('#pratique_options'));
+            afficher($('#pratique_options'));
             $('.fermeture').attr('id', 'fermer_revision');
 
             masquer($('#apprentissage_container'));
             masquer($('#exercice_container'));
             masquer($('#revision_container'));
-            displayZoom($('#evaluation_container'));
+            afficher($('#evaluation_container'));
 
             afficherEnteteDEvaluationPreSyllabe();
             afficherCorpsDEvaluationPreSyllabe();
             afficherFootDEvaluationPreSyllabe();
 
-            function afficherEnteteDEvaluationPreSyllabe() { displayZoom($('#evaluation_head')); }
-            function afficherCorpsDEvaluationPreSyllabe() { displayZoom($('#evaluation_body')); }
+            function afficherEnteteDEvaluationPreSyllabe() { afficher($('#evaluation_head')); }
+            function afficherCorpsDEvaluationPreSyllabe() { afficher($('#evaluation_body')); }
             function afficherFootDEvaluationPreSyllabe() {
 
-                    displayZoom($('#evaluation_foot'));
+                    afficher($('#evaluation_foot'));
                     masquer($('#evaluation_redirection_btns'));
-                    displayZoom($('#evaluation_dialogue_btns'));
+                    afficher($('#evaluation_dialogue_btns'));
 
-                    displayZoom($('#evaluation_question_bouton'));
+                    afficher($('#evaluation_question_bouton'));
                     masquer($('#evaluation_repetition_bouton'));
                     masquer($('#evaluation_correction_bouton'));
                     
@@ -207,33 +174,33 @@
     }
     function afficherRevision() {
         masquer($('.direction'));
-        displayZoom($('.salle_de_classe'));
+        afficher($('.salle_de_classe'));
 
         masquer($('.course'));
         setTimeout(() => { 
-            displayZoom($('.course'));
+            afficher($('.course'));
 
             masquer($('#apprentissage_container'));
             masquer($('#exercice_container'));
-            displayZoom($('#revision_container'));
+            afficher($('#revision_container'));
             masquer($('#evaluation_container'));
 
             afficherEnteteDeRevisionPreSyllabe();
             afficherCorpsDeRevisionPreSyllabe();
             afficherFootDeRevisionPreSyllabe();
             
-            function afficherEnteteDeRevisionPreSyllabe() { displayZoom($('#revision_head')); }  
+            function afficherEnteteDeRevisionPreSyllabe() { afficher($('#revision_head')); }  
             function afficherCorpsDeRevisionPreSyllabe() {
-                displayZoom($('#revision_body_cadre'));
-                displayZoom($('#revision_body'));
+                afficher($('#revision_body_cadre'));
+                afficher($('#revision_body'));
                 setTimeout(() => { affichageAnimeDeTableTd($('#revision_body table')); }, 400);
             }
             function afficherFootDeRevisionPreSyllabe() {
-                displayZoom($('#revision_foot')); 
+                afficher($('#revision_foot')); 
                 masquer($('#revision_redirection_btns'));
-                displayZoom($('#revision_dialogue_btns'));
+                afficher($('#revision_dialogue_btns'));
 
-                displayZoom($('#revision_question_btn')); 
+                afficher($('#revision_question_btn')); 
                 masquer($('#revision_repetition_btn')); 
                 masquer($('#revision_correction_btn'));
             }
@@ -536,15 +503,6 @@
             'transition':'0.25s', 
             'transform-origin':'0 0',
             'transform':'scaleY(0.75)'
-        });
-        setTimeout(() => { element.css({'opacity':1, 'transform':'scaleY(1)'}); }, 50);
-    }
-    function displayZoom(element) {
-        element.css({
-            'display':'block',
-            'opacity':0, 
-            'transition':'0.3s', 
-            'transform':'scale(0.75)'
         });
         setTimeout(() => { element.css({'opacity':1, 'transform':'scaleY(1)'}); }, 50);
     }
@@ -1357,7 +1315,6 @@ console.log(total_questions[i]);
         let total_fausse_reponse = total_question - total_bonne_reponse;
         let taux_de_vraie_reponse = Math.floor(total_bonne_reponse*100/total_question);
         let taux_acceptable_de_vraie_reponse = (lesson_active = 'pre_exercice') ? 100 : 92;
-        let reprendre_l_etape_en_cours = '<b id="reprendre">'+lesson_en_cours+' ߞߍ߫ ߕߎ߲߯</b>';
         let continu_sur_l_etape_suivante = '<b id="avance">'+lesson_suivante+'</b>';
 
         if(lesson_suivante == 'ߥߊ߫ '+lesson_en_cours+' ߡߊ߬') { $('.notification_titre').html('ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ'); }
@@ -1369,7 +1326,7 @@ console.log(total_questions[i]);
         chargerDeliberation();
         
         function chargerResultatEntete() {
-            $('#resultat_titre').html('<h3>'+lesson_en_cours+' ߞߐߝߟߌ</h3>'); 
+            $('#resultat_titre').html('<h3>ߒߞߏ߫ ߛߓߍ ߘߋ߰ߟߌ ߝߏ߲߬ߝߏ߲</h3>'); 
             $('#etudiant').html(etudiant+' ߓߟߏ߫');
         }
         function chargerResultatHead() {
@@ -1405,12 +1362,12 @@ console.log(total_questions[i]);
         }
         function chargerDeliberation() {
             if(taux_de_vraie_reponse < taux_acceptable_de_vraie_reponse) {
-                $('#deliberation').html('ߌ ߖߌߖߊ߬ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ '+lesson_en_cours+' ߓߍ߬ߙߍ ߡߊ߫ ߤߊߟߌ߬ ߁߈ ߓߐ߫. ߏ߬ߘߐ߬߸ ߌ ߞߐߛߍ߬ߦߌ߬ ߦߊ߲߬ ߡߊ߫.'+reprendre_l_etape_en_cours);
+                $('#deliberation').html('ߌ ߖߌߖߊ߬ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ '+lesson_en_cours+' ߓߍ߬ߙߍ ߡߊ߫ ߤߊߟߌ߬ ߁߈ ߓߐ߫. ߏ߬ߘߐ߬߸ ߌ ߞߐߛߍ߬ߦߌ߬ ߦߊ߲߬ ߡߊ߫. <b id="reprendre">'+lesson_en_cours+' ߞߍ߫ ߕߎ߲߯</b>');
             }else{
                 $('#deliberation').html(
                     'ߌ ߞߎߟߎ߲ߖߋ߫ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ ߘߐ߬ߖߊ ߟߊ߫ '+lesson_en_cours+' ߟߐ߲ ߠߊ߫ ߤߊ߲߯ '+$('#pourcentage_point').text()+
                     '</b> ߟߊ߫. ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ '+lesson_suivante+'.<br/>'+
-                    'ߣߴߌ ߟߊ߫ ߓߍ߬ߙߍ ߡߴߌ ߥߛߊ߬߸ '+reprendre_l_etape_en_cours+'<br/>'+
+                    'ߣߴߌ ߟߊ߫ ߓߍ߬ߙߍ ߡߴߌ ߥߛߊ߬߸ <b id="reprendre">'+lesson_en_cours+' ߞߍ߫ ߕߎ߲߯</b><br/>'+
                     'ߣߴߌ ߟߊ߫ ߓߍ߬ߙߍ ߞߵߌ ߥߛߊ߬߸ '+continu_sur_l_etape_suivante
                 );
             }
@@ -1435,9 +1392,9 @@ console.log(total_questions[i]);
             return ls;
         }
     }
-    function resultatDeLaMatiere(lessons_de_matiere) {
+    function resultatDeLaMatiere(matiere,matiere_nom) {
 
-        let lesson_1=lessons_de_matiere[0], lesson_2=lessons_de_matiere[1], lesson_3=lessons_de_matiere[2],lesson_4=lessons_de_matiere[3];
+        let lesson_1=matiere[0], lesson_2=matiere[1], lesson_3=matiere[2],lesson_4=matiere[3];
         
         lesson_1 = (lesson_1 == undefined) ? {} : lesson_1;
         lesson_2 = (lesson_2 == undefined) ? {} : lesson_2;
@@ -1446,12 +1403,10 @@ console.log(total_questions[i]);
 
         let nom = JSON.parse(sessionStorage.getItem('nom'));
         let prenom = JSON.parse(sessionStorage.getItem('prenom'));
-        let matiere_nom = JSON.parse(sessionStorage.getItem('matiere_nom'));
         let lesson_en_cours = $('.notification_titre').html();
         let lesson_actuelle = lessonActuelle(lesson_en_cours);
         let total_point = totalPoint(lesson_actuelle);
         let moyenne_d_evaluation = 1;
-        let reprendre_l_etape_en_cours = '<b id="reprendre">'+lesson_en_cours+' ߞߍ߫ ߕߎ߲߯</b>';
         let lesson_suivante = lessonSuivante(lesson_en_cours);
         let continu_sur_l_etape_suivante = '<b id="avance"><a href="/kouroukan/php/programmes.php">'+lesson_suivante+'</a></b>';
 
@@ -1466,8 +1421,9 @@ console.log(total_questions[i]);
 
 
         function chargerResultatGeneralEntete() { 
-            $('#resultat_titre').html('<h3>'+matiere_nom+' ߥߟߊ߬ߘߊ ߞߐߝߟߌ</h3>'); 
-            $('#etudiant').html('<h1>'+prenom+' '+nom+'</h1> <span>ߓߟߏ߫</span>');
+            $('#etudiant').html('<h1>'+prenom+' '+nom+'</h1> <span>ߟߊ߫</span>');
+            $('#resultat_titre').html('<h3>ߒߞߏ߫ ߛߓߍ ߘߋ߰ߟߌ ߝߏ߲߬ߝߏ߲</h3>'); 
+            $("#matieres_liste").html("<ul> <li>ߛߓߍߛߎ߲</li> <li>ߜߋ߲߭</li> <li>ߞߊ߲ߡߊߛߙߋ</li> <li>ߖߊ߰ߕߋ߬ߋ߲</li> </ul>")
         }
         function chargerResultatGeneralCorps() {
 
@@ -1488,21 +1444,19 @@ console.log(total_questions[i]);
                     chargerResultatBody();
 
                     function chargerResultatHead() {
-                        if(Object.keys(lesson_1) != 0) {
 
-                            let d = lesson_1.date;
-                            let an = d.split("-")[0];
-                            let lune = parseInt(d.split("-")[1]);
-                            let date = d.split("-")[2];
-                            let jour = parseInt(date.split(" ")[0]);
-                            let temps = date.split(" ")[1];
-                            let heure = parseInt(temps.split(":")[0]);
-                            let minute = parseInt(temps.split(":")[1]);
-                            
-                            $('#phase_d_apprentissage').text(matiere_nom+' '+liste_de_phases[0][1]);
-                            $('#apprentissage_date').text(mois[parseInt(lune)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
-                            $('#apprentissage_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
-                        }
+                        let d = lesson_1.date;
+                        let an = d.split("-")[0];
+                        let lune = parseInt(d.split("-")[1]);
+                        let date = d.split("-")[2];
+                        let jour = parseInt(date.split(" ")[0]);
+                        let temps = date.split(" ")[1];
+                        let heure = parseInt(temps.split(":")[0]);
+                        let minute = parseInt(temps.split(":")[1]);
+                        
+                        $('#phase_d_apprentissage').text(matiere_nom+' '+liste_de_phases[0][1]);
+                        $('#apprentissage_date').text(mois[parseInt(lune)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
+                        $('#apprentissage_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
                     }
                     function chargerResultatBody() {
 
@@ -1528,21 +1482,19 @@ console.log(total_questions[i]);
                     chargerResultatBody();
 
                     function chargerResultatHead() {
-                        if(Object.keys(lesson_2) != 0) {
 
-                            let d = lesson_2.date;
-                            let an = d.split("-")[0];
-                            let lune = d.split("-")[1];
-                            let date = d.split("-")[2];
-                            let jour = date.split(" ")[0];
-                            let temps = date.split(" ")[1];
-                            let heure = temps.split(":")[0];
-                            let minute = temps.split(":")[1];
-                            
-                            $('#phase_d_exercice').text(matiere_nom+' '+liste_de_phases[1][1]);
-                            $('#exercice_date').text(mois[parseInt(lune)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
-                            $('#exercice_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
-                        }
+                        let d = lesson_2.date;
+                        let an = d.split("-")[0];
+                        let lune = d.split("-")[1];
+                        let date = d.split("-")[2];
+                        let jour = date.split(" ")[0];
+                        let temps = date.split(" ")[1];
+                        let heure = temps.split(":")[0];
+                        let minute = temps.split(":")[1];
+                        
+                        $('#phase_d_exercice').text(matiere_nom+' '+liste_de_phases[1][1]);
+                        $('#exercice_date').text(mois[parseInt(lune)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
+                        $('#exercice_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
                     }
                     function chargerResultatBody() {
 
@@ -1568,22 +1520,19 @@ console.log(total_questions[i]);
                     chargerResultatBody();
 
                     function chargerResultatHead() {
-                        if(Object.keys(lesson_3) != 0) {
 
-                            let d = lesson_3.date;
-
-                            let an = d.split("-")[0];
-                            let lune = d.split("-")[1];
-                            let date = d.split("-")[2];
-                            let jour = date.split(" ")[0];
-                            let temps = date.split(" ")[1];
-                            let heure = temps.split(":")[0];
-                            let minute = temps.split(":")[1];
-                        
-                            $('#phase_de_revision').text(matiere_nom+' '+liste_de_phases[2][1]);
-                            $('#revision_date').text(mois[parseInt(lune)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
-                            $('#revision_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
-                        }
+                        let d = lesson_3.date;
+                        let an = d.split("-")[0];
+                        let lune = d.split("-")[1];
+                        let date = d.split("-")[2];
+                        let jour = date.split(" ")[0];
+                        let temps = date.split(" ")[1];
+                        let heure = temps.split(":")[0];
+                        let minute = temps.split(":")[1];
+                    
+                        $('#phase_de_revision').text(matiere_nom+' '+liste_de_phases[2][1]);
+                        $('#revision_date').text(mois[parseInt(lune)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
+                        $('#revision_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
                     }
                     function chargerResultatBody() {
                         
@@ -1609,21 +1558,19 @@ console.log(total_questions[i]);
                     chargerResultatBody();
 
                     function chargerResultatHead() {
-                        if(Object.keys(lesson_4) != 0) {
 
-                            let d = lesson_4.date;
-                            let an = d.split("-")[0];
-                            let lune = d.split("-")[1];
-                            let date = d.split("-")[2];
-                            let jour = date.split(" ")[0];
-                            let temps = date.split(" ")[1];
-                            let heure = temps.split(":")[0];
-                            let minute = temps.split(":")[1];
-                            
-                            $('#phase_d_evaluation').text(matiere_nom+' '+liste_de_phases[3][1]);
-                            $('#evaluation_date').text(mois[parseInt(lune)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
-                            $('#evaluation_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
-                        }
+                        let d = lesson_4.date;
+                        let an = d.split("-")[0];
+                        let lune = d.split("-")[1];
+                        let date = d.split("-")[2];
+                        let jour = date.split(" ")[0];
+                        let temps = date.split(" ")[1];
+                        let heure = temps.split(":")[0];
+                        let minute = temps.split(":")[1];
+                        
+                        $('#phase_d_evaluation').text(matiere_nom+' '+liste_de_phases[3][1]);
+                        $('#evaluation_date').text(mois[parseInt(lune)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
+                        $('#evaluation_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
                     }
                     function chargerResultatBody() {
                             
@@ -1648,20 +1595,21 @@ console.log(total_questions[i]);
             $('#pourcentage_point').text('%'+parseIntNko(Math.floor(total_des_points*100/total_des_questions)));
         }
         function chargerDeliberation() {
+            matiere_nom = $('#resultat_corps h3').text().split(" ")[0];
             if(total_point < moyenne_d_evaluation) {
-                $('#deliberation').html('ߌ ߖߌߖߊ߬ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ '+lesson_en_cours+' ߓߍ߬ߙߍ ߡߊ߫ ߤߊߟߌ߬ ߁߈ ߓߐ߫. ߏ߬ߘߐ߬߸ ߌ ߞߐߛߍ߬ߦߌ߬ ߦߊ߲߬ ߡߊ߫.'+reprendre_l_etape_en_cours);
+                $('#deliberation').html('ߌ ߖߌߖߊ߬ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ '+matiere_nom+' ߓߍ߬ߙߍ ߡߊ߫ ߤߊߟߌ߬ ߁߈ ߓߐ߫. ߏ߬ߘߐ߬߸ ߌ ߞߐߛߍ߬ߦߌ߬ ߦߊ߲߬ ߡߊ߫. <b id="reprendre">'+matiere_nom+' ߞߍ߫ ߕߎ߲߯</b>');
             }else{
                 $('#deliberation').html(
-                    'ߌ ߞߎߟߎ߲ߖߋ߫ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ ߘߐ߬ߖߊ ߟߊ߫ '+lesson_en_cours+' ߟߐ߲ ߠߊ߫ ߤߊ߲߯ '+$('#pourcentage_point').text()+
+                    'ߌ ߞߎߟߎ߲ߖߋ߫ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ ߘߐ߬ߖߊ ߟߊ߫ '+matiere_nom+' ߟߐ߲ ߠߊ߫ ߤߊ߲߯ '+$('#pourcentage_point').text()+
                     '</b> ߟߊ߫. ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ '+lesson_suivante+'.<br/>'+
-                    'ߣߴߌ ߟߊ߫ ߓߍ߬ߙߍ ߡߴߌ ߥߛߊ߬߸ '+reprendre_l_etape_en_cours+'<br/>'+
+                    'ߣߴߌ ߟߊ߫ ߓߍ߬ߙߍ ߡߴߌ ߥߛߊ߬߸ <b id="reprendre">'+matiere_nom+' ߞߍ߫ ߕߎ߲߯</b><br/>'+
                     'ߣߴߌ ߟߊ߫ ߓߍ߬ߙߍ ߞߵߌ ߥߛߊ߬߸ '+continu_sur_l_etape_suivante
                 );
             }
         }
         function masquerResultat() { masquer($('.resultat_container')); }
         function afficherResultat() { 
-            setTimeout(() => { displayZoom($('.resultat_container')); }, 3000);
+            setTimeout(() => { afficher($('.resultat_container')); }, 3000);
         }
         function reprendreLesson() { $('#reprendre').click(() => { raffraichirLaPage(); }); }
         function lessonSuivante(lesson_en_cours) {
@@ -1706,10 +1654,17 @@ console.log(total_questions[i]);
     }
     function resultatGeneral(datas) {
         let matiere_1=datas[0], matiere_2=datas[1], matiere_3=datas[2],matiere_4=datas[3];
-        resultatDeLaMatiere(matiere_1);
-        resultatDeLaMatiere(matiere_2);
-        resultatDeLaMatiere(matiere_3);
-        resultatDeLaMatiere(matiere_4);
+        let matiere_nom_1 = "", matiere_nom_2 = "", matiere_nom_3 = "", matiere_nom_4 = "";
+
+        matiere_nom_1 = "ߛߓߍߛߎ߲";
+        matiere_nom_2 = "ߜߋ߲߭";
+        matiere_nom_3 = "ߞߊ߲ߡߊߛߙߋ";
+        matiere_nom_4 = "ߖߊ߰ߕߋ߬ߘߋ߲";
+
+        resultatDeLaMatiere(matiere_1, matiere_nom_1);
+        resultatDeLaMatiere(matiere_2, matiere_nom_2);
+        resultatDeLaMatiere(matiere_3, matiere_nom_3);
+        resultatDeLaMatiere(matiere_4, matiere_nom_4);
     }
     function resultatTableBodyHTML(memoire) {
         let html = '';
@@ -1724,21 +1679,15 @@ console.log(total_questions[i]);
             html +=  '</tr>';
 
             html +=  '<tr class="bold">';
-            for(let k=0; k<memoire.length; k++) {
-                html += '<td>'+memoire[k][0]+'</td>';
-            }
+            for(let k=0; k<memoire.length; k++) { html += '<td>'+memoire[k][0]+'</td>'; }
             html +=  '</tr>';
 
             html +=  '<tr class="bold">';
-            for(let l=0; l<memoire.length; l++) {
-                html += '<td>'+memoire[l][1]+'</td>';
-            }
+            for(let l=0; l<memoire.length; l++) { html += '<td>'+memoire[l][1]+'</td>'; }
             html +=  '</tr>';
 
             html +=  '<tr class="bold">';
-            for(let m=0; m<memoire.length; m++) {
-                html += '<td>'+parseIntNko(memoire[m][2])+'</td>';
-            }
+            for(let m=0; m<memoire.length; m++) { html += '<td>'+parseIntNko(memoire[m][2])+'</td>'; }
             html +=  '</tr>';
         }
 

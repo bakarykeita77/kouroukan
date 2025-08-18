@@ -151,7 +151,7 @@
     cursor: pointer;
 }
 #afficheur_du_resultat:hover {
-    background-color: #ddd;
+    text-decoration: underline;
 }
 #profile_resultat {
     display: none;

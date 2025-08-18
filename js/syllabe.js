@@ -445,14 +445,14 @@ function syllabe() {
                             });
                         }
                         function afficherApprentissageContainer() {
-                            displayZoom($("#apprentissage_container"));
+                            afficher($("#apprentissage_container"));
                             masquer($('#exercice_container'));
                             masquer($('#revision_container'));
                             masquer($('#evaluation_container'));
                         }
                         function afficherPreApprentissageBtns() {
-                            displayZoom($('#apprentissage_dialogue_btns'));
-                            displayZoom($('#apprentissage_progress_bar'));
+                            afficher($('#apprentissage_dialogue_btns'));
+                            afficher($('#apprentissage_progress_bar'));
                             masquer($('#apprentissage_redirection_btns'));
                 
                             $('#afficheur_de_panneau').css({ 'opacity': 1, 'transform': 'scale(1)' });
@@ -658,10 +658,10 @@ function syllabe() {
                                                         }
                                                         function affichageDePreExerciceBtn() {
                                                             masquer($('#apprentissage_dialogue_btns'));
-                                                            displayZoom($('#apprentissage_redirection_btns'));
+                                                            afficher($('#apprentissage_redirection_btns'));
 
                                                             masquer($('#pre_apprentissage_bouton'));
-                                                            displayZoom($('#continu_sur_exercice_bouton'));
+                                                            afficher($('#continu_sur_exercice_bouton'));
                                                             masquer($('#evaluation_bouton'));
                                                             rendreActif($('#continu_sur_exercice_bouton'));
                                                             
@@ -2281,7 +2281,7 @@ function syllabe() {
                                                         masquer($('.salle_de_classe'));
                                                         setTimeout(() => {
                                                             $('.container').css('display', 'block');
-                                                            displayZoom($('.salle_de_classe'));
+                                                            afficher($('.salle_de_classe'));
                                                         }, 400);
                                                     });
 

@@ -1322,7 +1322,7 @@ console.log(total_questions[i]);
         chargerResultatEntete();
         chargerResultatHead();
         chargerResultatBody();
-        chargerResultatFoot();
+        // chargerResultatFoot();
         chargerDeliberation();
         
         function chargerResultatEntete() {
@@ -1412,7 +1412,7 @@ console.log(total_questions[i]);
 
         chargerResultatGeneralEntete();
         chargerResultatGeneralCorps();
-        chargerResultatFoot();
+        // chargerResultatFoot();
         chargerDeliberation();
         afficherResultat();
         reprendreLesson();
@@ -1423,7 +1423,6 @@ console.log(total_questions[i]);
         function chargerResultatGeneralEntete() { 
             $('#etudiant').html('<h1>'+prenom+' '+nom+'</h1> <span>ߟߊ߫</span>');
             $('#resultat_titre').html('<h3>ߒߞߏ߫ ߛߓߍ ߘߋ߰ߟߌ ߝߏ߲߬ߝߏ߲</h3>'); 
-            $("#matieres_liste").html("<ul> <li>ߛߓߍߛߎ߲</li> <li>ߜߋ߲߭</li> <li>ߞߊ߲ߡߊߛߙߋ</li> <li>ߖߊ߰ߕߋ߬ߋ߲</li> </ul>")
         }
         function chargerResultatGeneralCorps() {
 
@@ -1431,31 +1430,33 @@ console.log(total_questions[i]);
             chargerResultatDExerciceCorps();
             chargerResultatDeRevivsionCorps();
             chargerResultatDEvaluationCorps();
+                
 
             function chargerResultatDApprentissageCorps() {
-
-                if(Object.keys(lesson_1) === 0) {
+                if(Object.keys(lesson_1).length === 0) {
                     $('#resultat_d_apprentissage_corps').css("display","none"); 
                     return;
                 } 
-                if(Object.keys(lesson_1) != 0) {
+                if(Object.keys(lesson_1).length != 0) {
 
                     chargerResultatHead();
                     chargerResultatBody();
+                    chargerResultatFoott();
+                    $("#resultat_d_apprentissage_corps").css("display","block");
 
                     function chargerResultatHead() {
 
                         let d = lesson_1.date;
                         let an = d.split("-")[0];
-                        let lune = parseInt(d.split("-")[1]);
+                        let lune = d.split("-")[1];
                         let date = d.split("-")[2];
-                        let jour = parseInt(date.split(" ")[0]);
+                        let jour = date.split(" ")[0];
                         let temps = date.split(" ")[1];
-                        let heure = parseInt(temps.split(":")[0]);
-                        let minute = parseInt(temps.split(":")[1]);
-                        
+                        let heure = temps.split(":")[0];
+                        let minute = temps.split(":")[1];
+                      
                         $('#phase_d_apprentissage').text(matiere_nom+' '+liste_de_phases[0][1]);
-                        $('#apprentissage_date').text(mois[parseInt(lune)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
+                        $('#apprentissage_date').text(mois[parseInt(lune-1)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
                         $('#apprentissage_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
                     }
                     function chargerResultatBody() {
@@ -1468,18 +1469,31 @@ console.log(total_questions[i]);
                         $('#total_d_apprentissage_reponse').html(parseIntNko(lesson.length));
                         $('#total_d_apprentissage_point').html(parseIntNko(sommePoint(lesson)));
                     }
+                    function chargerResultatFoott() {
+                        
+                        let lesson = JSON.parse(lesson_1.lesson);
+                        let total_des_questions = lesson.length;
+                        let total_des_points = sommePoint(lesson);
+        console.log(lesson);                
+        console.log(total_des_questions);                
+        console.log(total_des_points);                
+                        $('#total_general_des_questions').text(parseIntNko(total_des_questions));
+                        $('#total_general_des_bonnes_reponses').text(parseIntNko(total_des_points));
+                        $('#pourcentage_point').text('%'+parseIntNko(Math.floor(total_des_points*100/total_des_questions)));
+                    }
                 }
             }
             function chargerResultatDExerciceCorps() {
 
-                if(Object.keys(lesson_2) === 0) {
+                if(Object.keys(lesson_2).length === 0) {
                     $('#resultat_d_exercice_corps').css("display","none"); 
                     return;
                 }
-                if(Object.keys(lesson_2) != 0) {
+                if(Object.keys(lesson_2).length != 0) {
                         
                     chargerResultatHead();
                     chargerResultatBody();
+                    $("#resultat_d_exercice_corps").css("display","block");
 
                     function chargerResultatHead() {
 
@@ -1493,7 +1507,7 @@ console.log(total_questions[i]);
                         let minute = temps.split(":")[1];
                         
                         $('#phase_d_exercice').text(matiere_nom+' '+liste_de_phases[1][1]);
-                        $('#exercice_date').text(mois[parseInt(lune)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
+                        $('#exercice_date').text(mois[parseInt(lune-1)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
                         $('#exercice_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
                     }
                     function chargerResultatBody() {
@@ -1510,14 +1524,15 @@ console.log(total_questions[i]);
             }
             function chargerResultatDeRevivsionCorps() {
 
-                if(Object.keys(lesson_3) === 0) {
+                if(Object.keys(lesson_3).length === 0) {
                     $('#resultat_de_revision_corps').css("display","none"); 
                     return;
                 }
-                if(Object.keys(lesson_3) != 0) {
+                if(Object.keys(lesson_3).length != 0) {
                             
                     chargerResultatHead();
                     chargerResultatBody();
+                    $("#resultat_de_revision_corps").css("display","block");
 
                     function chargerResultatHead() {
 
@@ -1531,7 +1546,7 @@ console.log(total_questions[i]);
                         let minute = temps.split(":")[1];
                     
                         $('#phase_de_revision').text(matiere_nom+' '+liste_de_phases[2][1]);
-                        $('#revision_date').text(mois[parseInt(lune)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
+                        $('#revision_date').text(mois[parseInt(lune-1)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
                         $('#revision_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
                     }
                     function chargerResultatBody() {
@@ -1548,7 +1563,7 @@ console.log(total_questions[i]);
             }
             function chargerResultatDEvaluationCorps() {
 
-                if(Object.keys(lesson_4) === 0) {
+                if(Object.keys(lesson_4).length === 0) {
                     $('#resultat_d_evaluation_corps').css("display","none"); 
                     return;
                 }
@@ -1556,6 +1571,7 @@ console.log(total_questions[i]);
                         
                     chargerResultatHead();
                     chargerResultatBody();
+                    $("#resultat_d_evaluation_corps").css("display","block");
 
                     function chargerResultatHead() {
 
@@ -1569,7 +1585,7 @@ console.log(total_questions[i]);
                         let minute = temps.split(":")[1];
                         
                         $('#phase_d_evaluation').text(matiere_nom+' '+liste_de_phases[3][1]);
-                        $('#evaluation_date').text(mois[parseInt(lune)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
+                        $('#evaluation_date').text(mois[parseInt(lune-1)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
                         $('#evaluation_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
                     }
                     function chargerResultatBody() {
@@ -1661,10 +1677,35 @@ console.log(total_questions[i]);
         matiere_nom_3 = "ߞߊ߲ߡߊߛߙߋ";
         matiere_nom_4 = "ߖߊ߰ߕߋ߬ߘߋ߲";
 
+     /* Affichage par défaut */
         resultatDeLaMatiere(matiere_1, matiere_nom_1);
-        resultatDeLaMatiere(matiere_2, matiere_nom_2);
-        resultatDeLaMatiere(matiere_3, matiere_nom_3);
-        resultatDeLaMatiere(matiere_4, matiere_nom_4);
+        $("#resultat_matieres_liste ul li").removeClass("li_actif");
+        $("#resultat_matieres_liste ul li:nth-child(1)").addClass("li_actif");
+
+     /* Affichage presonnalisé */
+        $("#resultat_matieres_liste ul li:nth-child(1)").click(() => { 
+            resultatDeLaMatiere(matiere_1, matiere_nom_1); 
+            $("#resultat_matieres_liste ul li").removeClass("li_actif");
+            $("#resultat_matieres_liste ul li:nth-child(1)").addClass("li_actif"); 
+        });
+
+        $("#resultat_matieres_liste ul li:nth-child(2)").click(() => { 
+            resultatDeLaMatiere(matiere_2, matiere_nom_2); 
+            $("#resultat_matieres_liste ul li").removeClass("li_actif");
+            $("#resultat_matieres_liste ul li:nth-child(2)").addClass("li_actif"); 
+        });
+
+        $("#resultat_matieres_liste ul li:nth-child(3)").click(() => { 
+            resultatDeLaMatiere(matiere_3, matiere_nom_3); 
+            $("#resultat_matieres_liste ul li").removeClass("li_actif");
+            $("#resultat_matieres_liste ul li:nth-child(3)").addClass("li_actif"); 
+        });
+
+        $("#resultat_matieres_liste ul li:nth-child(4)").click(() => { 
+            resultatDeLaMatiere(matiere_4, matiere_nom_4); 
+            $("#resultat_matieres_liste ul li").removeClass("li_actif");
+            $("#resultat_matieres_liste ul li:nth-child(4)").addClass("li_actif"); 
+        });
     }
     function resultatTableBodyHTML(memoire) {
         let html = '';

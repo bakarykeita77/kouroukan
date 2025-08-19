@@ -9,12 +9,10 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>contact</title>
     
-    <link rel="stylesheet" href="/kouroukan/css/tete-de-page.css"/>
     <link rel="stylesheet" href="/kouroukan/css/contact.css"/>
 </head>
 <body>
     <div class="cover">
-        <div class="page_head" id="entete_contact"><?php include("tete-de-page.php"); ?></div>
         <div class="page_body" id="body_contact">
             
             <h1>ߊ߲ ߠߊߛߐ߬ߘߐ߲߬</h1>

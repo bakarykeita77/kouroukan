@@ -8,7 +8,6 @@ session_start();
         <title>chiffres</title>
         <meta charset = "UTF-8">
         <link rel="stylesheet" href="css/chiffres.css">
-		<link rel="stylesheet" href="/css/class.css"/>
     </head>
     <body>
         
@@ -21,7 +20,6 @@ session_start();
 
         <script src="/kouroukan/js/icones.js"></script>
         <script src="/kouroukan/js/chiffres.js"></script>
-        <script src="/kouroukan/js/class.js"></script> 
    
     </body>
 </html>

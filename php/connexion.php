@@ -44,7 +44,6 @@
 		</div>
 	</div>
 	
-	<script src="/kouroukan/js/jquery-3.3.1.js"></script>
 	<script src="/kouroukan/js/connexion.js"></script>
 </body>
 </html> 

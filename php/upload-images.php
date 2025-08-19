@@ -65,7 +65,6 @@
                 max-width: 90vw;
             }
         </style>
-		<script src="/kouroukan/js/jquery-3.3.1.js"></script>
     </head>
     <body>
         <center>

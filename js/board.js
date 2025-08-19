@@ -690,7 +690,7 @@ Lorsqu'on appuie une touche du clavier, il se passe ce qui suit: */
 	
     /*___________________________________________________________________________________________________________________________
 	1°)- Formation du caractere	*/
-	    if( tableau.hasClass('tableau_active') ) {
+	    if( tableau_noir.hasClass('tableau_active') ) {
 
 			if( caractere == "effacer" ) {
 	            effacer_caractere();
@@ -707,9 +707,9 @@ Lorsqu'on appuie une touche du clavier, il se passe ce qui suit: */
 		syllabe[ syllabe.length ] = caractere;
 		syllabe_input.val( syllabe.join("") );
 		
-		/* Affichage des textes tapées, au tableau noir.  */
+		/* Affichage des textes tapées, au tableau_noir noir.  */
 		tableau_texte = texte_tableau.concat(mot1).concat(syllabe1).concat(syllabe);
-		tableau.val(tableau_texte.join(''));
+		tableau_noir.val(tableau_texte.join(''));
 	/*___________________________________________________________________________________________________________________________
 	4°) - Formation de syllabe lorsqu'on appuie une voyelle	*/
 			if( $.inArray( caractere,voyelles ) != -1 || caractere == 'ߒ' ) {
@@ -771,7 +771,7 @@ Lorsqu'on appuie une touche du clavier, il se passe ce qui suit: */
 
 	}});
 
-    tableau.on('click', function(){
+    tableau_noir.on('click', function(){
 	    lire_texte();
 	    afficherClavier();
 

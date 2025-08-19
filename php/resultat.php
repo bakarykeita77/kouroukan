@@ -7,7 +7,14 @@
             <div id="etudiant"></div>
             <div id="resultat_titre"></div>
         </div>
-        <div id="matieres_liste"></div>
+        <div id="resultat_matieres_liste">
+            <ul>
+                <li>ߛߓߍߛߎ߲</li>
+                <li>ߜߋ߲߭</li>
+                <li>ߞߊ߲ߡߊߛߙߋ</li>
+                <li>ߖߊ߰ߕߋ߬ߘߋ߲</li>
+            </ul>
+        </div>
     </div>
  <!----------------------------------------------------------------------------------------------------------------------------------------------->
     <div id="resultat_corps">

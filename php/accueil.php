@@ -46,9 +46,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
-    <link rel="stylesheet" href="../css/tete-de-page.css"/>
 	  <link rel="stylesheet" href="../css/accueil.css"/>
-    <link rel="stylesheet" href="../css/resultat.css"/>
 </head>
 <body>
 

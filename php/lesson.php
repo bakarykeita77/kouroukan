@@ -324,8 +324,6 @@ if(isset($_SESSION["id_client"])) {
         <audio id="audio"></audio>
 
        <!--Link------------------------------------------------------------------------------------------------------------------------------->
-        <script src="../fonctions.js"></script>
-        <script src="../js/caracteres.js"></script>
         <script src="../js/clavier.js"></script>
 
         <script src="../js/travaux.js"></script>

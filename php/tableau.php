@@ -3,7 +3,6 @@
 <head>
 	<title>tableau</title>
 	<meta charset="utf-8">
-	<link rel="stylesheet" href="/kouroukan/css/class.css"/>
 	<link rel="stylesheet" href="/kouroukan/css/assistant.css"/>
 	<link rel="stylesheet" href="/kouroukan/css/tableau.css"/>
 

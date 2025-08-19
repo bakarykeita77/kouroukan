@@ -3,7 +3,6 @@
     <head>
     	<title>memoire</title>
     	<meta charset = "utf-8">
-    	<link rel="stylesheet" href = "css/memoire.css" >
     </head>
     
     <body>
@@ -16,9 +15,5 @@
 			<textarea id="texte_audible_input" placeholder="texte_audible"></textarea>
 
 		</div>
-
-		
-		<script src = "js/memoire.js"></script>
-		
 	</body>
 </html>

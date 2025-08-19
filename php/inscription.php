@@ -62,7 +62,6 @@
 			</div>
 
     	</div>
-	    <script src="/kouroukan/js/jquery-3.3.1.js"></script>
     	<script src="/kouroukan/note-fonctions.js"></script>
     	<script src="/kouroukan/js/inscription.js"></script>
     	

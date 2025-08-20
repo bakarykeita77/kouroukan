@@ -1288,6 +1288,82 @@ console.log(total_questions[i]);
             text_container.html(texte);
         });
     }
+    function recapitulatifDuResultat1(ligne1_td, ligne2_td, ligne3_td, matiere) {
+
+        let lesson_1 = (matiere[0] == undefined) ? {} : JSON.parse(matiere[0].lesson);
+        let lesson_2 = (matiere[1] == undefined) ? {} : JSON.parse(matiere[1].lesson);
+        let lesson_3 = (matiere[2] == undefined) ? {} : JSON.parse(matiere[2].lesson);
+
+        let question_total_1 = lesson_1.length;
+        let question_total_2 = lesson_2.length;
+        let question_total_3 = lesson_3.length;
+
+        let vrais_reponses_1 = calculerPoint(lesson_1);
+        let vrais_reponses_2 = calculerPoint(lesson_2);
+        let vrais_reponses_3 = calculerPoint(lesson_3);
+
+        let fausses_reponses_1 = question_total_1 - vrais_reponses_1;
+        let fausses_reponses_2 = question_total_1 - vrais_reponses_2;
+        let fausses_reponses_3 = question_total_1 - vrais_reponses_3;
+
+        ligne1_td[2].innerHTML = parseIntNko(question_total_1);
+        ligne1_td[3].innerHTML = parseIntNko(vrais_reponses_1);
+        ligne1_td[4].innerHTML = parseIntNko(fausses_reponses_1);
+        ligne1_td[5].innerHTML = parseIntNko(vrais_reponses_1);
+
+        ligne2_td[1].innerHTML = parseIntNko(question_total_2);
+        ligne2_td[2].innerHTML = parseIntNko(vrais_reponses_2);
+        ligne2_td[3].innerHTML = parseIntNko(fausses_reponses_2);
+        ligne2_td[4].innerHTML = parseIntNko(vrais_reponses_2);
+
+        ligne3_td[1].innerHTML = parseIntNko(question_total_3);
+        ligne3_td[2].innerHTML = parseIntNko(vrais_reponses_3);
+        ligne3_td[3].innerHTML = parseIntNko(fausses_reponses_3);
+        ligne3_td[4].innerHTML = parseIntNko(vrais_reponses_3);
+
+    }
+    function recapitulatifDuResultat2(ligne1_td, ligne2_td, ligne3_td, ligne4_td, matiere) {
+
+        let lesson_1 = (matiere[0] == undefined) ? {} : JSON.parse(matiere[0].lesson);
+        let lesson_2 = (matiere[1] == undefined) ? {} : JSON.parse(matiere[1].lesson);
+        let lesson_3 = (matiere[2] == undefined) ? {} : JSON.parse(matiere[2].lesson);
+        let lesson_4 = (matiere[3] == undefined) ? {} : JSON.parse(matiere[3].lesson);
+
+        let question_total_1 = lesson_1.length;
+        let question_total_2 = lesson_2.length;
+        let question_total_3 = lesson_3.length;
+        let question_total_4 = lesson_4.length;
+
+        let vrais_reponses_1 = calculerPoint(lesson_1);
+        let vrais_reponses_2 = calculerPoint(lesson_2);
+        let vrais_reponses_3 = calculerPoint(lesson_3);
+        let vrais_reponses_4 = calculerPoint(lesson_4);
+
+        let fausses_reponses_1 = question_total_1 - vrais_reponses_1;
+        let fausses_reponses_2 = question_total_2 - vrais_reponses_2;
+        let fausses_reponses_3 = question_total_3 - vrais_reponses_3;
+        let fausses_reponses_4 = question_total_4 - vrais_reponses_4;
+
+        ligne1_td[2].innerHTML = parseIntNko(question_total_1);
+        ligne1_td[3].innerHTML = parseIntNko(vrais_reponses_1);
+        ligne1_td[4].innerHTML = parseIntNko(fausses_reponses_1);
+        ligne1_td[5].innerHTML = parseIntNko(vrais_reponses_1);
+
+        ligne2_td[1].innerHTML = parseIntNko(question_total_2);
+        ligne2_td[2].innerHTML = parseIntNko(vrais_reponses_2);
+        ligne2_td[3].innerHTML = parseIntNko(fausses_reponses_2);
+        ligne2_td[4].innerHTML = parseIntNko(vrais_reponses_2);
+
+        ligne3_td[1].innerHTML = parseIntNko(question_total_3);
+        ligne3_td[2].innerHTML = parseIntNko(vrais_reponses_3);
+        ligne3_td[3].innerHTML = parseIntNko(fausses_reponses_3);
+        ligne3_td[4].innerHTML = parseIntNko(vrais_reponses_3);
+
+        ligne4_td[1].innerHTML = parseIntNko(question_total_4);
+        ligne4_td[2].innerHTML = parseIntNko(vrais_reponses_4);
+        ligne4_td[3].innerHTML = parseIntNko(fausses_reponses_4);
+        ligne4_td[4].innerHTML = parseIntNko(vrais_reponses_4);
+    }
     function refuser(element) {
         
         $(element).addClass('faux');
@@ -1322,7 +1398,7 @@ console.log(total_questions[i]);
         chargerResultatEntete();
         chargerResultatHead();
         chargerResultatBody();
-        // chargerResultatFoot();
+        chargerResultatFoot();
         chargerDeliberation();
         
         function chargerResultatEntete() {
@@ -1412,7 +1488,7 @@ console.log(total_questions[i]);
 
         chargerResultatGeneralEntete();
         chargerResultatGeneralCorps();
-        // chargerResultatFoot();
+        chargerResultatFoot();
         chargerDeliberation();
         afficherResultat();
         reprendreLesson();
@@ -1678,34 +1754,88 @@ console.log(total_questions[i]);
         matiere_nom_4 = "ߖߊ߰ߕߋ߬ߘߋ߲";
 
      /* Affichage par défaut */
+        $("#details_du_resultat").css("display","block"); 
+        $("#recapitulatif_du_resultat").css("display","none"); 
+
         resultatDeLaMatiere(matiere_1, matiere_nom_1);
         $("#resultat_matieres_liste ul li").removeClass("li_actif");
         $("#resultat_matieres_liste ul li:nth-child(1)").addClass("li_actif");
 
      /* Affichage presonnalisé */
         $("#resultat_matieres_liste ul li:nth-child(1)").click(() => { 
+            $("#details_du_resultat").css("display","block"); 
+            $("#recapitulatif_du_resultat").css("display","none"); 
+
             resultatDeLaMatiere(matiere_1, matiere_nom_1); 
             $("#resultat_matieres_liste ul li").removeClass("li_actif");
             $("#resultat_matieres_liste ul li:nth-child(1)").addClass("li_actif"); 
         });
 
         $("#resultat_matieres_liste ul li:nth-child(2)").click(() => { 
+            $("#details_du_resultat").css("display","block"); 
+            $("#recapitulatif_du_resultat").css("display","none"); 
+
             resultatDeLaMatiere(matiere_2, matiere_nom_2); 
             $("#resultat_matieres_liste ul li").removeClass("li_actif");
             $("#resultat_matieres_liste ul li:nth-child(2)").addClass("li_actif"); 
         });
 
         $("#resultat_matieres_liste ul li:nth-child(3)").click(() => { 
+            $("#details_du_resultat").css("display","block"); 
+            $("#recapitulatif_du_resultat").css("display","none"); 
+
             resultatDeLaMatiere(matiere_3, matiere_nom_3); 
             $("#resultat_matieres_liste ul li").removeClass("li_actif");
             $("#resultat_matieres_liste ul li:nth-child(3)").addClass("li_actif"); 
         });
 
         $("#resultat_matieres_liste ul li:nth-child(4)").click(() => { 
+            $("#details_du_resultat").css("display","block"); 
+            $("#recapitulatif_du_resultat").css("display","none"); 
+
             resultatDeLaMatiere(matiere_4, matiere_nom_4); 
             $("#resultat_matieres_liste ul li").removeClass("li_actif");
             $("#resultat_matieres_liste ul li:nth-child(4)").addClass("li_actif"); 
         });
+
+        $("#resultat_matieres_liste ul li:nth-child(5)").click(() => { 
+            chargerRecapitulatifDuResultat();
+            afficherRecapitulatifDuResultat();
+        });
+
+        function chargerRecapitulatifDuResultat() {
+                
+            let tr2_td = $("#recapitulatif_du_resultat tr:nth-child(2) td");
+            let tr3_td = $("#recapitulatif_du_resultat tr:nth-child(3) td");
+            let tr4_td = $("#recapitulatif_du_resultat tr:nth-child(4) td");
+            
+            let tr5_td = $("#recapitulatif_du_resultat tr:nth-child(5) td");
+            let tr6_td = $("#recapitulatif_du_resultat tr:nth-child(6) td");
+            let tr7_td = $("#recapitulatif_du_resultat tr:nth-child(7) td");
+            let tr8_td = $("#recapitulatif_du_resultat tr:nth-child(8) td");
+            
+            let tr9_td = $("#recapitulatif_du_resultat tr:nth-child(9) td");
+            let tr10_td = $("#recapitulatif_du_resultat tr:nth-child(10) td");
+            let tr11_td = $("#recapitulatif_du_resultat tr:nth-child(11) td");
+            let tr12_td = $("#recapitulatif_du_resultat tr:nth-child(12) td");
+            
+            let tr13_td = $("#recapitulatif_du_resultat tr:nth-child(13) td");
+            let tr14_td = $("#recapitulatif_du_resultat tr:nth-child(14) td");
+            let tr15_td = $("#recapitulatif_du_resultat tr:nth-child(15) td");
+            let tr16_td = $("#recapitulatif_du_resultat tr:nth-child(16) td");
+
+            recapitulatifDuResultat1(tr2_td, tr3_td, tr4_td, matiere_1);
+            recapitulatifDuResultat2(tr5_td, tr6_td, tr7_td, tr8_td, matiere_2);
+            recapitulatifDuResultat2(tr9_td, tr10_td, tr11_td, tr12_td, matiere_3);
+            recapitulatifDuResultat2(tr13_td, tr14_td, tr15_td, tr16_td, matiere_4);
+        }
+        function afficherRecapitulatifDuResultat() {
+            $("#details_du_resultat").css("display","none"); 
+            $("#recapitulatif_du_resultat").css("display","block"); 
+
+            $("#resultat_matieres_liste ul li").removeClass("li_actif");
+            $("#resultat_matieres_liste ul li:nth-child(5)").addClass("li_actif"); 
+        }
     }
     function resultatTableBodyHTML(memoire) {
         let html = '';

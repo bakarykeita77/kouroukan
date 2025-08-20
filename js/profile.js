@@ -92,8 +92,6 @@ $(document).ready(function(){
                     
                     document.getElementsByClassName('bouton_afficheur_de_teste')[0].click();
             
-            
-            
                     function triDesTestesParNiveau(){
                     /* Regroupement des testes de meme niveau dans un tableau. */
                         var groupe_de_teste = [];

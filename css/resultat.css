@@ -57,8 +57,9 @@
     max-height: calc(100vh - 21rem);
     overflow-y: auto;
 }
-#resultat_corps > div { 
-    width: calc(100% - 0.5rem); 
+#resultat_corps > div {
+    border-bottom: 1px solid #bbb;
+    width: calc(100% - 2rem);
     padding: 0 1rem;
 }
 #resultat_pied{
@@ -114,11 +115,23 @@
 #deliberation {
     max-width: 100%;
 }
-
-#resultat_corps > div {
-    width: 100%;
-    border-bottom: 1px solid #bbb;
+#recapitulatif_du_resultat {
+    display: none;
+    overflow: auto;
 }
+#recapitulatif_du_resultat table {
+    border-collapse: collapse;
+    margin: 1rem auto;
+}
+#recapitulatif_du_resultat table td {
+    padding: 0.25rem;
+    text-align: center;
+}
+#recapitulatif_du_resultat table tr:first-child td:first-child {
+    border-top-color: white;
+    border-right-color: white;
+}
+
 .bold { font-weight: bold; }
 .thin { font-size: 0.8rem; }
 .registre_des_notes {

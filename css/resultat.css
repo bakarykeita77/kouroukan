@@ -54,7 +54,7 @@
     border-bottom-color: #fff;
 }
 #resultat_corps{
-    max-height: calc(100vh - 21rem);
+    max-height: calc(100vh - 17rem);
     overflow-y: auto;
 }
 #resultat_corps > div {
@@ -62,19 +62,24 @@
     width: calc(100% - 2rem);
     padding: 0 1rem;
 }
-#resultat_pied{
+#resultat_pied {
     position:relative;
-    height: 5rem;
+    width: 100%;
+    background-color: #ccc;
+    border-top: 0.125rem solid #aaa;
 }
 #resultat_pied > div {
     position: relative;
-    width: 100%
+    max-width: 45rem;
+    margin: 0.5rem auto;
+    padding: 0.5rem 0;
 }
 #resultat_pied > div > div {
     border: 1px solid transparent;
     border-bottom-color: #aaa;
     padding: 2px 2px 2px 8px;
     height: 1.3rem;
+    width: calc(100% - 2rem);
 }
 #resultat_pied span { 
     display: inline-block; 
@@ -89,10 +94,10 @@
     padding: 0 0.5rem;
 }
 #resultat_pied span:last-child { 
-    border: 2px solid #aaa; 
-    min-width: 2.5rem; 
+    border: 2px solid #aaa;
+    min-width: 4rem;
     text-align: left;
-    padding: 0 0.5rem; 
+    padding: 0 1rem;
     float: left;
 }
 #resultat_titre, #etudiant, #resultat_entete, #resultat_corps, #resultat_pied, #deliberation {
@@ -109,11 +114,13 @@
 #resultat_titre, #etudiant, #resultat_corps, #resultat_pied, #deliberation {
     margin: 0 auto;
 }
-#resultat_titre, #etudiant, #resultat_corps, #resultat_pied {
+#resultat_titre, #etudiant, #resultat_corps {
     max-width: 45rem;
 }
 #deliberation {
     max-width: 100%;
+    padding: 0.5rem;
+    background-color: #ccc;
 }
 #recapitulatif_du_resultat {
     display: none;
@@ -173,10 +180,6 @@
     border-color: #fff;
     border-radius: 0.5rem;
     background-color: #fff;
-}
-#deliberation {
-    padding: 0.5rem;
-    background-color: #ccc;
 }
 #avance, #reprendre {
     color: cornflowerblue;

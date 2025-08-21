@@ -1488,7 +1488,7 @@ console.log(total_questions[i]);
 
         chargerResultatGeneralEntete();
         chargerResultatGeneralCorps();
-        chargerResultatFoot();
+        chargerResultatPied();
         chargerDeliberation();
         afficherResultat();
         reprendreLesson();
@@ -1517,7 +1517,7 @@ console.log(total_questions[i]);
 
                     chargerResultatHead();
                     chargerResultatBody();
-                    chargerResultatFoott();
+                    chargerResultatFoot();
                     $("#resultat_d_apprentissage_corps").css("display","block");
 
                     function chargerResultatHead() {
@@ -1545,14 +1545,12 @@ console.log(total_questions[i]);
                         $('#total_d_apprentissage_reponse').html(parseIntNko(lesson.length));
                         $('#total_d_apprentissage_point').html(parseIntNko(sommePoint(lesson)));
                     }
-                    function chargerResultatFoott() {
+                    function chargerResultatFoot() {
                         
                         let lesson = JSON.parse(lesson_1.lesson);
                         let total_des_questions = lesson.length;
                         let total_des_points = sommePoint(lesson);
-        console.log(lesson);                
-        console.log(total_des_questions);                
-        console.log(total_des_points);                
+                        
                         $('#total_general_des_questions').text(parseIntNko(total_des_questions));
                         $('#total_general_des_bonnes_reponses').text(parseIntNko(total_des_points));
                         $('#pourcentage_point').text('%'+parseIntNko(Math.floor(total_des_points*100/total_des_questions)));
@@ -1677,14 +1675,32 @@ console.log(total_questions[i]);
                 }
             }
         }
-        function chargerResultatFoot() {
+        function chargerResultatPied() {
 
-            let total_des_questions = lesson_1.length + lesson_2.length + lesson_3.length + lesson_4.length;
-            let total_des_points = sommePoint(lesson_1) + sommePoint(lesson_2) + sommePoint(lesson_3) + sommePoint(lesson_4);
+            lesson_1 = JSON.parse(lesson_1.lesson);
+            lesson_2 = JSON.parse(lesson_2.lesson);
+            lesson_3 = JSON.parse(lesson_3.lesson);
+            lesson_4 = (Object.keys(lesson_4).length != 0) ? JSON.parse(lesson_4.lesson) : undefined;
+            
+            let total_des_questions = totalDesQuestions();
+            let total_des_points = totalDesPoints();
             
             $('#total_general_des_questions').text(parseIntNko(total_des_questions));
             $('#total_general_des_bonnes_reponses').text(parseIntNko(total_des_points));
             $('#pourcentage_point').text('%'+parseIntNko(Math.floor(total_des_points*100/total_des_questions)));
+
+            function totalDesQuestions() {
+                let total_question = 0;     
+                if(lesson_4 == undefined) total_question = lesson_1.length + lesson_2.length + lesson_3.length;
+                if(lesson_4 != undefined) total_question = lesson_1.length + lesson_2.length + lesson_3.length + lesson_4.length;
+                return total_question;
+            }
+            function totalDesPoints() {
+                let total_point = 0;
+                if(lesson_4 == undefined) total_point = sommePoint(lesson_1) + sommePoint(lesson_2) + sommePoint(lesson_3);
+                if(lesson_4 != undefined) total_point = sommePoint(lesson_1) + sommePoint(lesson_2) + sommePoint(lesson_3) + sommePoint(lesson_4); 
+                return total_point;
+            }
         }
         function chargerDeliberation() {
             matiere_nom = $('#resultat_corps h3').text().split(" ")[0];

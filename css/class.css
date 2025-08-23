@@ -220,6 +220,12 @@
     width: 100vw;
     overflow: auto;
 }
+.contenu_vide {
+    font-weight:bold; 
+    font-size:3rem; 
+    text-align:center; 
+    opacity:0.125;
+}
 .correcteur { 
     position: relative;
     margin-left: 0.125rem;
@@ -1036,7 +1042,6 @@ del {
     display: none; 
     cursor: pointer; 
 }
-.right { float: right; }
 .resultat_container {
     position: absolute;
     display: none;
@@ -1074,6 +1079,7 @@ del {
     background-color: #fff;
     cursor: pointer;
 }
+.right { float: right; }
 
 
 /* --------------------------------------------------------------------------------------------------------- */

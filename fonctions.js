@@ -415,6 +415,10 @@
        timestamp = moi+' '+jour+' '+annee; 
        return timestamp;
     }
+    function contenuVide() {
+        let contenu_vide = "<div class='contenu_vide'>ߝߏߦߊ߲߫ ߹</div>";
+        return contenu_vide;
+    }
     function convertirDateEnNko(date){
         
         let annee = 'ߛߊ߲߭ '+parseIntNko(date.split(' ')[0].split('-')[0]);
@@ -565,7 +569,6 @@
             });
 
             $('#exercice_body td').click(function() {
-console.log(total_questions[i]);
                 masquer($('#exercice_question_btn'));
                 masquer($('#exercice_repetition_btn'));
                 rendreActif($('#exercice_correction_btn'));
@@ -1320,7 +1323,6 @@ console.log(total_questions[i]);
         ligne3_td[2].innerHTML = parseIntNko(vrais_reponses_3);
         ligne3_td[3].innerHTML = parseIntNko(fausses_reponses_3);
         ligne3_td[4].innerHTML = parseIntNko(vrais_reponses_3);
-
     }
     function recapitulatifDuResultat2(ligne1_td, ligne2_td, ligne3_td, ligne4_td, matiere) {
 
@@ -1389,7 +1391,7 @@ console.log(total_questions[i]);
         let total_question = memoire.length;
         let total_bonne_reponse = totalPoint();
         let total_fausse_reponse = total_question - total_bonne_reponse;
-        let taux_de_vraie_reponse = Math.floor(total_bonne_reponse*100/total_question);
+        let taux_de_vraie_reponse = '%'+parseIntNko(Math.floor(total_bonne_reponse*100/total_question));
         let taux_acceptable_de_vraie_reponse = (lesson_active = 'pre_exercice') ? 100 : 92;
         let continu_sur_l_etape_suivante = '<b id="avance">'+lesson_suivante+'</b>';
 
@@ -1398,7 +1400,7 @@ console.log(total_questions[i]);
         chargerResultatEntete();
         chargerResultatHead();
         chargerResultatBody();
-        chargerResultatFoot();
+        chargementDuResultatFoot();
         chargerDeliberation();
         
         function chargerResultatEntete() {
@@ -1429,12 +1431,12 @@ console.log(total_questions[i]);
             $('#total_reponse').html(parseIntNko(memoire.length));
             $('#total_point_1').html(parseIntNko(total_point));
         }
-        function chargerResultatFoot() {
+        function chargementDuResultatFoot() {
             $('#total_question_2').text(parseIntNko(total_question));
             $('#total_bonne_reponse').text(parseIntNko(total_bonne_reponse));
             $('#total_fausse_reponse').text(parseIntNko(total_fausse_reponse));
             $('#total_point_2').text(parseIntNko(total_bonne_reponse));
-            $('#pourcentage_point').text('%'+parseIntNko(taux_de_vraie_reponse));
+            $('#pourcentage_point').text(taux_de_vraie_reponse);
         }
         function chargerDeliberation() {
             if(taux_de_vraie_reponse < taux_acceptable_de_vraie_reponse) {
@@ -1489,9 +1491,9 @@ console.log(total_questions[i]);
         chargerResultatGeneralEntete();
         chargerResultatGeneralCorps();
         chargerResultatPied();
-        chargerDeliberation();
+        // chargerDeliberation();
         afficherResultat();
-        reprendreLesson();
+        // reprendreLesson();
     
         $('#fermer_resultat').click(function() { masquerResultat(); });
 
@@ -1507,20 +1509,19 @@ console.log(total_questions[i]);
             chargerResultatDeRevivsionCorps();
             chargerResultatDEvaluationCorps();
                 
-
             function chargerResultatDApprentissageCorps() {
-                if(Object.keys(lesson_1).length === 0) {
-                    $('#resultat_d_apprentissage_corps').css("display","none"); 
-                    return;
-                } 
-                if(Object.keys(lesson_1).length != 0) {
 
-                    chargerResultatHead();
-                    chargerResultatBody();
-                    chargerResultatFoot();
-                    $("#resultat_d_apprentissage_corps").css("display","block");
-
-                    function chargerResultatHead() {
+                chargerResultatHead();
+                chargerResultatBody();
+                chargerResultatFoot();
+            
+                function chargerResultatHead() {
+                    if(Object.keys(lesson_1).length === 0) {
+                        $('#phase_d_apprentissage').text(matiere_nom+' '+liste_de_phases[0][1]);
+                        $('#apprentissage_date').text(" - ");
+                        $('#apprentissage_heure').text(" - ");
+                    }
+                    if(Object.keys(lesson_1).length > 0) {
 
                         let d = lesson_1.date;
                         let an = d.split("-")[0];
@@ -1530,12 +1531,21 @@ console.log(total_questions[i]);
                         let temps = date.split(" ")[1];
                         let heure = temps.split(":")[0];
                         let minute = temps.split(":")[1];
-                      
+                        
                         $('#phase_d_apprentissage').text(matiere_nom+' '+liste_de_phases[0][1]);
                         $('#apprentissage_date').text(mois[parseInt(lune-1)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
                         $('#apprentissage_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
                     }
-                    function chargerResultatBody() {
+                }
+                function chargerResultatBody() {
+                    if(Object.keys(lesson_1).length === 0) {
+                        $('#apprentissage_resultat_body').html(contenuVide()); 
+                        $('#total_d_apprentissage_question').html("");
+                        $('#total_d_apprentissage_reponse').html("");
+                        $('#total_d_apprentissage_point').html("");
+                    } 
+                    if(Object.keys(lesson_1).length > 0) {
+                        $("#resultat_d_apprentissage_corps").css("display","block");
 
                         let lesson = JSON.parse(lesson_1.lesson);
                         let apprentissage_resultat_body_html = resultatTableBodyHTML(lesson);
@@ -1545,31 +1555,38 @@ console.log(total_questions[i]);
                         $('#total_d_apprentissage_reponse').html(parseIntNko(lesson.length));
                         $('#total_d_apprentissage_point').html(parseIntNko(sommePoint(lesson)));
                     }
-                    function chargerResultatFoot() {
-                        
+                }
+                function chargerResultatFoot() {
+                    if(Object.keys(lesson_1).length === 0) {
+                        $('#total_general_des_questions').text("");
+                        $('#total_general_des_bonnes_reponses').text("");
+                        $('#pourcentage_point').text("");
+                    }
+                    if(Object.keys(lesson_1).length > 0) {
+                    
                         let lesson = JSON.parse(lesson_1.lesson);
-                        let total_des_questions = lesson.length;
-                        let total_des_points = sommePoint(lesson);
+                        let total_des_questions = parseIntNko(lesson.length);
+                        let total_des_points = parseIntNko(sommePoint(lesson));
+                        let pourcentage_des_points = '%'+parseIntNko(Math.floor(reverseIntNko(total_des_points)*100/reverseIntNko(total_des_questions)));
                         
-                        $('#total_general_des_questions').text(parseIntNko(total_des_questions));
-                        $('#total_general_des_bonnes_reponses').text(parseIntNko(total_des_points));
-                        $('#pourcentage_point').text('%'+parseIntNko(Math.floor(total_des_points*100/total_des_questions)));
+                        $('#total_general_des_questions').text(total_des_questions);
+                        $('#total_general_des_bonnes_reponses').text(total_des_points);
+                        $('#pourcentage_point').text(pourcentage_des_points);
                     }
                 }
             }
             function chargerResultatDExerciceCorps() {
 
-                if(Object.keys(lesson_2).length === 0) {
-                    $('#resultat_d_exercice_corps').css("display","none"); 
-                    return;
-                }
-                if(Object.keys(lesson_2).length != 0) {
-                        
-                    chargerResultatHead();
-                    chargerResultatBody();
-                    $("#resultat_d_exercice_corps").css("display","block");
+                chargerResultatHead();
+                chargerResultatBody();
 
-                    function chargerResultatHead() {
+                function chargerResultatHead() {
+                    if(Object.keys(lesson_2).length === 0) {
+                        $('#phase_d_exercice').text(matiere_nom+' '+liste_de_phases[1][1]);
+                        $('#exercice_date').text(" - ");
+                        $('#exercice_heure').text(" - ");
+                    }
+                    if(Object.keys(lesson_2).length != 0) {
 
                         let d = lesson_2.date;
                         let an = d.split("-")[0];
@@ -1584,7 +1601,17 @@ console.log(total_questions[i]);
                         $('#exercice_date').text(mois[parseInt(lune-1)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
                         $('#exercice_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
                     }
-                    function chargerResultatBody() {
+                }
+                function chargerResultatBody() {
+                    if(Object.keys(lesson_2).length === 0) {
+                        $('#exercice_resultat_body').html(contenuVide()); 
+                        $('#total_d_exercice_question').html("");
+                        $('#total_d_exercice_reponse').html("");
+                        $('#total_d_exercice_point').html("");
+                    }
+                    if(Object.keys(lesson_2).length != 0) {
+                            
+                        $("#resultat_d_exercice_corps").css("display","block");
 
                         let lesson = JSON.parse(lesson_2.lesson);
                         let exercice_resultat_body_html = resultatTableBodyHTML(lesson);
@@ -1598,17 +1625,16 @@ console.log(total_questions[i]);
             }
             function chargerResultatDeRevivsionCorps() {
 
-                if(Object.keys(lesson_3).length === 0) {
-                    $('#resultat_de_revision_corps').css("display","none"); 
-                    return;
-                }
-                if(Object.keys(lesson_3).length != 0) {
-                            
-                    chargerResultatHead();
-                    chargerResultatBody();
-                    $("#resultat_de_revision_corps").css("display","block");
+                chargerResultatHead();
+                chargerResultatBody();
 
-                    function chargerResultatHead() {
+                function chargerResultatHead() {
+                    if(Object.keys(lesson_3).length === 0) {
+                        $('#phase_de_revision').text(matiere_nom+' '+liste_de_phases[2][1]);
+                        $('#revision_date').text(" - ");
+                        $('#revision_heure').text(" - ");
+                    }
+                    if(Object.keys(lesson_3).length != 0) {
 
                         let d = lesson_3.date;
                         let an = d.split("-")[0];
@@ -1623,8 +1649,19 @@ console.log(total_questions[i]);
                         $('#revision_date').text(mois[parseInt(lune-1)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
                         $('#revision_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
                     }
-                    function chargerResultatBody() {
-                        
+                }
+                function chargerResultatBody() {
+                    
+                    if(Object.keys(lesson_3).length === 0) {
+                        $('#revision_resultat_body').html(contenuVide()); 
+                        $('#total_de_revision_question').html("");
+                        $('#total_de_revision_reponse').html("");
+                        $('#total_de_revision_point').html("");
+                    }
+                    if(Object.keys(lesson_3).length != 0) {
+                            
+                        $("#resultat_de_revision_corps").css("display","block");
+
                         let lesson = JSON.parse(lesson_3.lesson);
                         let revision_resultat_body_html = resultatTableBodyHTML(lesson);
 
@@ -1637,18 +1674,17 @@ console.log(total_questions[i]);
             }
             function chargerResultatDEvaluationCorps() {
 
-                if(Object.keys(lesson_4).length === 0) {
-                    $('#resultat_d_evaluation_corps').css("display","none"); 
-                    return;
-                }
-                if(Object.keys(lesson_4).length != 0) {
-                        
-                    chargerResultatHead();
-                    chargerResultatBody();
-                    $("#resultat_d_evaluation_corps").css("display","block");
+                chargerResultatHead();
+                chargerResultatBody();
 
-                    function chargerResultatHead() {
-
+                function chargerResultatHead() {
+                    if(Object.keys(lesson_4).length === 0) {
+                        $('#phase_d_evaluation').text(matiere_nom+' '+liste_de_phases[3][1]);
+                        $('#evaluation_date').text(" - ");
+                        $('#evaluation_heure').text(" - ");
+                    }
+                    if(Object.keys(lesson_4).length != 0) {
+                       
                         let d = lesson_4.date;
                         let an = d.split("-")[0];
                         let lune = d.split("-")[1];
@@ -1660,10 +1696,21 @@ console.log(total_questions[i]);
                         
                         $('#phase_d_evaluation').text(matiere_nom+' '+liste_de_phases[3][1]);
                         $('#evaluation_date').text(mois[parseInt(lune-1)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
-                        $('#evaluation_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
+                        $('#evaluation_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute)); 
                     }
-                    function chargerResultatBody() {
+                }
+                function chargerResultatBody() {
+                        
+                    if(Object.keys(lesson_4).length === 0) {
+                        $('#evaluation_resultat_body').html(contenuVide());
+                        $('#total_d_evaluation_question').html("");
+                        $('#total_d_evaluation_reponse').html("");
+                        $('#total_d_evaluation_point').html("");
+                    }
+                    if(Object.keys(lesson_4).length != 0) {
                             
+                        $("#resultat_d_evaluation_corps").css("display","block");
+
                         let lesson = JSON.parse(lesson_4.lesson);
                         let evaluation_resultat_body_html = resultatTableBodyHTML(lesson);
                         
@@ -1676,30 +1723,38 @@ console.log(total_questions[i]);
             }
         }
         function chargerResultatPied() {
-
-            lesson_1 = JSON.parse(lesson_1.lesson);
-            lesson_2 = JSON.parse(lesson_2.lesson);
-            lesson_3 = JSON.parse(lesson_3.lesson);
+ 
+            lesson_1 = (Object.keys(lesson_1).length != 0) ? JSON.parse(lesson_1.lesson) : undefined;
+            lesson_2 = (Object.keys(lesson_2).length != 0) ? JSON.parse(lesson_2.lesson) : undefined;
+            lesson_3 = (Object.keys(lesson_3).length != 0) ? JSON.parse(lesson_3.lesson) : undefined;
             lesson_4 = (Object.keys(lesson_4).length != 0) ? JSON.parse(lesson_4.lesson) : undefined;
             
             let total_des_questions = totalDesQuestions();
-            let total_des_points = totalDesPoints();
-            
-            $('#total_general_des_questions').text(parseIntNko(total_des_questions));
-            $('#total_general_des_bonnes_reponses').text(parseIntNko(total_des_points));
-            $('#pourcentage_point').text('%'+parseIntNko(Math.floor(total_des_points*100/total_des_questions)));
+            let total_general_des_points = totalDesPoints();
+            let pourcentage_general_des_points = pourcentagePoint();
+       
+            $('#total_general_des_questions').text(total_des_questions);
+            $('#total_general_des_bonnes_reponses').text(total_general_des_points);
+            $('#pourcentage_general_des_points').text(pourcentage_general_des_points);
 
             function totalDesQuestions() {
-                let total_question = 0;     
-                if(lesson_4 == undefined) total_question = lesson_1.length + lesson_2.length + lesson_3.length;
-                if(lesson_4 != undefined) total_question = lesson_1.length + lesson_2.length + lesson_3.length + lesson_4.length;
+                let total_question = 0;  
+                if(lesson_1 != undefined) if(lesson_2 != undefined) if(lesson_3 != undefined) if(lesson_4 == undefined) total_question = lesson_1.length + lesson_2.length + lesson_3.length;
+                if(lesson_1 != undefined) if(lesson_2 != undefined) if(lesson_3 != undefined) if(lesson_4 != undefined) total_question = lesson_1.length + lesson_2.length + lesson_3.length + lesson_4.length;
+                if(lesson_1 == undefined) if(lesson_2 == undefined) if(lesson_3 == undefined) if(lesson_4 == undefined) 0;
+                total_question = (total_question === 0) ? "" : parseIntNko(total_question);
                 return total_question;
             }
             function totalDesPoints() {
                 let total_point = 0;
                 if(lesson_4 == undefined) total_point = sommePoint(lesson_1) + sommePoint(lesson_2) + sommePoint(lesson_3);
                 if(lesson_4 != undefined) total_point = sommePoint(lesson_1) + sommePoint(lesson_2) + sommePoint(lesson_3) + sommePoint(lesson_4); 
+                total_point = (total_point === 0) ? "" : parseIntNko(total_point);
                 return total_point;
+            }
+            function pourcentagePoint() {
+                let pourcentage_general_des_points = (total_general_des_points == "") ? "" : "%"+parseIntNko(Math.floor(reverseIntNko(total_general_des_points)*100/reverseIntNko(total_des_questions)));
+                return pourcentage_general_des_points;
             }
         }
         function chargerDeliberation() {
@@ -1717,6 +1772,8 @@ console.log(total_questions[i]);
         }
         function masquerResultat() { masquer($('.resultat_container')); }
         function afficherResultat() { 
+            if(matiere_nom == "ߛߓߍߛߎ߲") $("#resultat_d_evaluation_corps").css("display","none");
+            if(matiere_nom != "ߛߓߍߛߎ߲") $("#resultat_d_evaluation_corps").css("display","block");
             setTimeout(() => { afficher($('.resultat_container')); }, 3000);
         }
         function reprendreLesson() { $('#reprendre').click(() => { raffraichirLaPage(); }); }

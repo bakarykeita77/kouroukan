@@ -116,7 +116,7 @@
             <div>
                 <div><span>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߡߎ߬ߡߍ</span> <span id="total_general_des_questions"></span></div>
                 <div><span>ߓߍ߬ߙߍ ߡߎ߬ߡߍ</span> <span id="total_general_des_bonnes_reponses"></span></div>
-                <div><span>ߓߍ߬ߙߍ ߗߡߍ߬ߘߐ߬ߦߊ</span><span id="pourcentage_point"></span></div>
+                <div><span>ߓߍ߬ߙߍ ߗߡߍ߬ߘߐ߬ߦߊ</span><span id="pourcentage_general_des_points"></span></div>
             </div>
         </div>
     </div>

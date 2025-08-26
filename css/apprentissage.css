@@ -79,12 +79,13 @@
     cursor: pointer;
 }
 #cercles_des_partis, #carres_pour_exercices { position: relative; display: inline-block; }
+.titre_de_parti, .cercles_des_partis { display: inline-block; }
 .titre_de_parti { margin: 0; height: 3rem; line-height: 3rem; }
 #table_pre_apprentissage {
+    height: 100%;
     width: calc(100% - 2.25rem);
     max-width: 45rem;
     margin: auto;
-    overflow: hidden;
 }
 .pre_apprentissage_tr {
     display: flex;
@@ -144,7 +145,6 @@
     font-size: 2rem;
     font-weight: bold;
     text-align: center;
-    opacity: 0;
     transition: 0.25s;
     cursor: pointer;
 }

@@ -66,9 +66,9 @@
 
 .body_cadre {
     position: relative;
-    margin: auto;
+    margin: 0 auto 1rem;
     min-height: 17rem;
-    height: 50vh;
+    height: max-content;
     max-width: 40rem;
     overflow: auto;
 }
@@ -134,8 +134,6 @@
     margin: 0.5rem;
     color: #666;
     cursor: pointer;
-    opacity: 0;
-    transform: scale(0.75);
     transition: 0.25s;
 }
 .cercle_a_faire { background-color: #bbb; }
@@ -249,7 +247,6 @@
 }
 .course {    
     position: relative;
-    display: none;
     top: 1.5rem;
     height: calc(100% - 2.5rem); 
     max-height: 45rem;
@@ -273,9 +270,9 @@
 }
 .course_head, .course_foot { width: 100%; }
 .course_body { 
-    height: 44vh;
+    height: 50vh;
     min-height: 15rem;
-    padding-top: 1.5rem;
+    padding-top: 0.5rem;
     color: white;
     background-color: rgba(0,0,0,0.8);
     border-radius: 0.5rem;
@@ -283,7 +280,6 @@
     z-index: 0;
 }
 .salle_de_classe {
-    display: none;
     position: absolute;
     top: 0;
     left: 0;
@@ -298,7 +294,7 @@
 }
 .course_foot { 
     z-index: 1; 
-    height: 10vh;
+    height: 8vh;
     min-height: 3rem;
     border-top: 0.125rem solid #ccc;
 }
@@ -336,14 +332,13 @@
 .dark_backgound { background-color: #aaa; }
 .dialogue_btns {
     position: relative;
-    display: none;
     top: 0.25rem;
     height: 3rem;
     line-height: 3rem;
     width: calc(100% - 2px);
     margin: auto;
     padding: 0;
-    border-radius: 0.5rem;
+    background-color: #ddd;
     font-weight: bold;
     text-align: center;
     transition: 0.25s;
@@ -353,7 +348,6 @@
 .dialogue_btns div {
     position: relative;
     margin: 0 auto;
-    width: 100%;
     height: 3rem;
     line-height: 3rem;
     text-align: center;
@@ -1084,7 +1078,7 @@ del {
 
 /* --------------------------------------------------------------------------------------------------------- */
 
-.shadow { box-shadow: 0 0 8px #aaa; }
+.shadow { box-shadow: 0 0 0.5rem #555; }
 .surbrillance { border: 1px solid yellow; color: yellow; }
 
 

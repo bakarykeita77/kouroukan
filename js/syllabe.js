@@ -1,7 +1,6 @@
 function syllabe() {
     
     var id_client = parseInt(JSON.parse(sessionStorage.getItem('id_client'))); 
-    var mes_datas = [];
     var datas = JSON.parse(sessionStorage.getItem('datas')); 
     var niveaux_etudies = JSON.parse(sessionStorage.getItem('niveaux_etudies')); 
     var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));   // Voir programmes.js fonction storagesDuProgramme()
@@ -419,9 +418,9 @@ function syllabe() {
                     }
                     function afficherApprentissagePreSyllabe() {
 
-                        masquer($('.direction'));
-                        afficher($('.salle_de_classe'));
-                        afficher($('.course'));
+                        // masquer($('.direction'));
+                        // afficher($('.salle_de_classe'));
+                        // afficher($('.course'));
 
                         affichageDeModificateurDeChoix();
                         afficherApprentissageContainer();
@@ -445,13 +444,12 @@ function syllabe() {
                             });
                         }
                         function afficherApprentissageContainer() {
-                            afficher($("#apprentissage_container"));
+                            afficherLentement($("#apprentissage_container"));
                             masquer($('#exercice_container'));
                             masquer($('#revision_container'));
                             masquer($('#evaluation_container'));
                         }
                         function afficherPreApprentissageBtns() {
-                            afficher($('#apprentissage_dialogue_btns'));
                             afficher($('#apprentissage_progress_bar'));
                             masquer($('#apprentissage_redirection_btns'));
                 
@@ -658,10 +656,10 @@ function syllabe() {
                                                         }
                                                         function affichageDePreExerciceBtn() {
                                                             masquer($('#apprentissage_dialogue_btns'));
-                                                            afficher($('#apprentissage_redirection_btns'));
+                                                            afficherRapidement($('#apprentissage_redirection_btns'));
 
                                                             masquer($('#pre_apprentissage_bouton'));
-                                                            afficher($('#continu_sur_exercice_bouton'));
+                                                            afficherRapidement($('#continu_sur_exercice_bouton'));
                                                             masquer($('#evaluation_bouton'));
                                                             rendreActif($('#continu_sur_exercice_bouton'));
                                                             
@@ -1787,9 +1785,6 @@ function syllabe() {
                                                         actualiserLessonPreSyllabe(lesson_d_evaluation_pre_syllabe, lesson_d_evaluation_pre_syllabe_du_jour);
                                                         localStorage.setItem('lesson_d_evaluation_pre_syllabe', JSON.stringify(lesson_d_evaluation_pre_syllabe));
 
-                    console.log(lesson_de_revision_pre_syllabe);
-                    console.log(lesson_d_evaluation_pre_syllabe);
-
                                                         if (lesson_d_apprentissage_pre_syllabe.length === 14) {
                                                             if (lesson_d_exercice_pre_syllabe.length === 14) {
                                                                 if (lesson_de_revision_pre_syllabe.length === 14) {
@@ -1819,7 +1814,7 @@ function syllabe() {
                                                         setTimeout(() => {
                                                             masquer($('#reprendre_evaluation_bouton'));
                                                             masquer($('#continu_sur_apprentissage_bouton'));
-                                                            afficher($('#continu_sur_la_lesson_suivante'));
+                                                            afficherRapidement($('#continu_sur_la_lesson_suivante'));
         
                                                             rendreActif($('#continu_sur_la_lesson_suivante'));
                                                             indexer($('#continu_sur_la_lesson_suivante p'));
@@ -2014,8 +2009,8 @@ function syllabe() {
 
 
                 masquer($('.direction'));
-                afficher($('.salle_de_classe'));
-                afficher($('.course'));
+                // afficher($('.salle_de_classe'));
+                // afficher($('.course'));
 
                 switch (phase_li_id) {
                     case 'syllabes_apprentissage': apprentissageSyllabe(); break;
@@ -2331,17 +2326,17 @@ function syllabe() {
                 let note = calculerNote(data);
 
                 masquer($('#exercice_progress_bar'));
-                afficher($('#exercice_redirection_btns'));
+                afficherRapidement($('#exercice_redirection_btns'));
 
                 if (note < 95) {
-                    afficher($('#reprendre_exercice_bouton'));
+                    afficherRapidement($('#reprendre_exercice_bouton'));
                     masquer($('#continu_sur_revision_bouton'));
                     $('#reprendre_exercice_bouton').html('<p>'+liste_de_matieres[0][1] + ' ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫ ߕߎ߲߯</p>');
                     indexer($('#reprendre_exercice_bouton p'));
                 }
                 if (note >= 95) {
                     masquer($('#reprendre_exercice_bouton'));
-                    afficher($('#continu_sur_revision_bouton'));
+                    afficherRapidement($('#continu_sur_revision_bouton'));
                     $('#continu_sur_revision_bouton').html('<p>'+liste_de_matieres[0][1] + ' ߞߘߐߓߐߟߌ ߞߍ߫</p>')
                     indexer($('#continu_sur_revision_bouton p'));
                 }
@@ -2350,14 +2345,14 @@ function syllabe() {
                 let note = calculerNote(data);
 
                 masquer($('#revision_progress_bar'));
-                afficher($('#revision_redirection_btns'));
+                afficherRapidement($('#revision_redirection_btns'));
 
                 $('#revision_question_btn').text('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߓߘߊ߫ ߓߊ߲߫').off('click');
                 $('#revision_question_btn').removeClass("actif");
 
                 if (note < 95) {
                     masquer($('#continu_sur_apprentissage_bouton'));
-                    afficher($('#reprendre_revision_bouton'));
+                    afficherRapidement($('#reprendre_revision_bouton'));
                     masquer($('#evaluation_bouton'));
                     masquer($('#syllabe_bouton'));
 
@@ -2367,7 +2362,7 @@ function syllabe() {
 
                 if (note >= 95) {
                     if (data.length < 27) {
-                        afficher($('#continu_sur_apprentissage_bouton'));
+                        afficherRapidement($('#continu_sur_apprentissage_bouton'));
                         masquer($('#reprendre_revision_bouton'));
                         masquer($('#evaluation_bouton'));
                         masquer($('#syllabe_bouton'));
@@ -2381,7 +2376,7 @@ function syllabe() {
                         masquer($('#continu_sur_apprentissage_bouton'));
                         masquer($('#reprendre_revision_bouton'));
                         masquer($('#evaluation_bouton'));
-                        afficher($('#syllabe_bouton'));
+                        afficherRapidement($('#syllabe_bouton'));
 
                         indexer($('#syllabe_bouton p'));
                     }
@@ -2393,10 +2388,10 @@ function syllabe() {
                 masquer($('#panneaux'));
                 masquer($('#apprentissage_dialogue_btns'));
                 setTimeout(() => {
-                    afficher($('#apprentissage_redirection_btns'));
+                    afficherRapidement($('#apprentissage_redirection_btns'));
 
                     masquer($('#pre_apprentissage_bouton'));
-                    afficher($('#continu_sur_exercice_bouton'));
+                    afficherRapidement($('#continu_sur_exercice_bouton'));
                     $('#continu_sur_exercice_bouton').html("<p>"+matiere_nom + " ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫</p>");
                     indexer($('#continu_sur_exercice_bouton p'));
                 }, 400);

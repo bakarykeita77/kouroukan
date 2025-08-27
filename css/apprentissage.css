@@ -56,7 +56,7 @@
 }
 .notification h3 { margin: 0; padding: 0; }
 #redirige_sur_exercice { cursor: pointer; }
-#apprentissage_dialogue_btns { z-index: 1; }
+#apprentissage_dialogue_btns { z-index: 1; background-color: #ddd; }
 #apprentissage_dialogue_btns > div { position: initial; }
 
 #pre_exercice_resultat_container {

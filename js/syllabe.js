@@ -418,10 +418,6 @@ function syllabe() {
                     }
                     function afficherApprentissagePreSyllabe() {
 
-                        // masquer($('.direction'));
-                        // afficher($('.salle_de_classe'));
-                        // afficher($('.course'));
-
                         affichageDeModificateurDeChoix();
                         afficherApprentissageContainer();
                         afficherPreApprentissageBtns(); 

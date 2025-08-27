@@ -273,33 +273,36 @@ $('document').ready(function() {
                 function modificationDuChoix() {
                     $('.changer_option_btn').click(() => { 
 
-                        $('.modification_alerte').css('display','block');
-                        console.log("Volonté de changer l'option confirmée !\n\nAttention !\nLa lesson en cours sera annulée de façon irreversible.");
-
-                        datas = [];
-                                    
-                        $('.modification_alerte span:nth-child(1)').click(() => { 
-                                            
-                            data_apprentissage = null;
-                            lesson_d_apprentissage = [];
-
-                            phases_etudiees = [];
-                            localStorage.removeItem("option_retenue");
-                            option_retenue = null;
-
-                            sessionStorage.setItem('datas', JSON.stringify(datas));
-                            sessionStorage.setItem('data_apprentissage', JSON.stringify(data_apprentissage));
-                            sessionStorage.setItem('lesson_d_apprentissage', JSON.stringify(lesson_d_apprentissage));
-                            sessionStorage.setItem('phases_etudiees', JSON.stringify(phases_etudiees));
-                            localStorage.setItem('option_retenue', JSON.stringify(option_retenue));
-
+                        if(datas[0].length === 0) {
                             location.assign('programmes.php?changer=option'); 
-                        });
-                        $('.modification_alerte span:nth-child(2)').click(() => { 
-                            $('.modification_alerte').css('display','none');
-                            console.log("Non ! N'ennuler pas.");
-                        });
-                        
+                        }else{
+                            $('.modification_alerte').css('display','block');
+         
+                            console.log("Volonté de changer l'option confirmée !\n\nAttention !\nLa lesson en cours sera annulée de façon irreversible.");
+                            datas = [];
+                                        
+                            $('.modification_alerte span:nth-child(1)').click(() => { 
+                                                
+                                data_apprentissage = null;
+                                lesson_d_apprentissage = [];
+
+                                phases_etudiees = [];
+                                localStorage.removeItem("option_retenue");
+                                option_retenue = null;
+
+                                sessionStorage.setItem('datas', JSON.stringify(datas));
+                                sessionStorage.setItem('data_apprentissage', JSON.stringify(data_apprentissage));
+                                sessionStorage.setItem('lesson_d_apprentissage', JSON.stringify(lesson_d_apprentissage));
+                                sessionStorage.setItem('phases_etudiees', JSON.stringify(phases_etudiees));
+                                localStorage.setItem('option_retenue', JSON.stringify(option_retenue));
+
+                                location.assign('programmes.php?changer=option'); 
+                            });
+                            $('.modification_alerte span:nth-child(2)').click(() => { 
+                                $('.modification_alerte').css('display','none');
+                                console.log("Non ! N'ennuler pas.");
+                            });
+                        }
                     });
                     $('.pas_changer_option_btn').click(() => { 
                         $('.modification_alerte, .modificateur_de_choix_message').css('display','none');

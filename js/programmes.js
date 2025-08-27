@@ -351,8 +351,9 @@ $('document').ready(function() {
         /* Si datas[matiere_index].length est différent de 0 cela veut dire que la leçon est étudiée par étapes donc option retenue est 2 */
         let option = null;
 
-        if(matiere_index === 0) { option = null; }
-        if(matiere_index === 1) { 
+        if(matiere_index === 0) { 
+            option = null; 
+        }else{ 
             if(datas[matiere_index].length === 0) { option = null; }
             if(datas[matiere_index].length > 0) {
 

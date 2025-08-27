@@ -1,4 +1,3 @@
-    // var total_phase = JSON.parse(sessionStorage.getItem('total_phase'));
 	  
     function accorder(element) {
         $(element).addClass('vrais');
@@ -18,7 +17,7 @@
         let tr = $('tr', table);
 
         tr.css('opacity',0);
-        $('td', table).css({'transition':'0.2s', 'transform':'scale(0.75)', 'opacity':0});
+        $('td', table).css({'transition':'0.2s', 'opacity':0});
         
         setTimeout(() => {
             tr.css('opacity',1);
@@ -31,7 +30,7 @@
                 $.each(td, function() {
                     let td_index = $(this).index();
                     setTimeout(() => {
-                        $(this).css({'opacity':1, 'transform':'scale(1)'});
+                        $(this).css({'opacity':1});
                     }, 80*((tr_index*td_length)+td_index));
                 });
             });
@@ -106,12 +105,14 @@
         masquer($(".course > div"));
         setTimeout(() => {
             afficher($('#exercice_container'));
-
-            rendreActif($('#exercice_dialogue_btns'));
-            afficherRapidement($('#exercice_dialogue_btns'));
-            masquer($('#exercice_redirection_btns'));
-
+            afficherParDefautDuDialogueBtns();
             setTimeout(() => { affichageAnimeDeTableTd($('#exercice_body table')); }, 400);
+            
+            function afficherParDefautDuDialogueBtns() {
+                masquer($('#exercice_dialogue_btns > div'));
+                afficherRapidement($('#exercice_question_btn'));
+                rendreActif($('#exercice_question_btn'));
+            }
         }, 300);
     }
     function afficherEvaluation() {
@@ -468,13 +469,6 @@
     }
     function defilementDuContenuVersLeHaut(container) {
         container.animate({ scrollTop:container[0].scrollHeight }, 1000);
-    }
-    function dialogueBtnsStyle() {
-        $('.dialogue_btns > div').removeClass('actif');
-        $.each($('.dialogue_btns > div'), function(){
-            let btn_actif = $(this);
-            if(btn_actif.css('display') == 'block') btn_actif.addClass('actif');
-        });
     }
     function reagirAuClickDeDialogueBtns() {
         $.each($('.dialogue_btns > div'), function(){
@@ -1004,8 +998,7 @@
         element.css({
             'display':'none',
             'transform':'scale(0.75)', 
-            'opacity':'0',
-            'transition':'0.25s'
+            'opacity':'0'
         });
     }
     function memoriserClicks(table,elements){
@@ -1367,9 +1360,13 @@
             clignoterUneFois(repetition_btn); 
         });
     }
-    function rendreActif(element) { 
-        element.siblings().removeClass("actif").css("display","none");
-        element.addClass('actif'); 
+    function rendreActif(element) {
+        if(element.attr('class') != "cercle shadow") {
+            element.siblings().removeClass("actif").css("display","none");
+            element.addClass('actif'); 
+        }else{
+            element.addClass('actif'); 
+        }
     }
     function resultat(memoire) {
         
@@ -1462,12 +1459,14 @@
     }
     function resultatDeLaMatiere(matiere,matiere_nom) {
 
-        let lesson_1=matiere[0], lesson_2=matiere[1], lesson_3=matiere[2],lesson_4=matiere[3];
+        let lesson_1={}, lesson_2={}, lesson_3={},lesson_4={};
         
-        lesson_1 = (lesson_1 == undefined) ? {} : lesson_1;
-        lesson_2 = (lesson_2 == undefined) ? {} : lesson_2;
-        lesson_3 = (lesson_3 == undefined) ? {} : lesson_3;
-        lesson_4 = (lesson_4 == undefined) ? {} : lesson_4;
+        if(matiere != undefined) {
+            lesson_1 = (matiere[0] == undefined) ? {} : matiere[0];
+            lesson_2 = (matiere[1] == undefined) ? {} : matiere[1];
+            lesson_3 = (matiere[2] == undefined) ? {} : matiere[2];
+            lesson_4 = (matiere[3] == undefined) ? {} : matiere[3];
+        }
 
         let nom = JSON.parse(sessionStorage.getItem('nom'));
         let prenom = JSON.parse(sessionStorage.getItem('prenom'));

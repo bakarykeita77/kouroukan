@@ -58,6 +58,7 @@
 #redirige_sur_exercice { cursor: pointer; }
 #apprentissage_dialogue_btns { z-index: 1; background-color: #ddd; }
 #apprentissage_dialogue_btns > div { position: initial; }
+#apprentissage_dialogue_btns > p { position: relative; }
 
 #pre_exercice_resultat_container {
     position: relative;

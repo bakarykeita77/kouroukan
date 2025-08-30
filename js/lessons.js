@@ -249,7 +249,6 @@ $('document').ready(function() {
                     // }
                 });
             }
-
             switch(niveau_actif) {
                 case 1 : alphabet(); break;
                 case 2 : syllabe();  break;

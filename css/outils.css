@@ -1,5 +1,4 @@
 #outils{
-	direction: rtl;
 	display: none;
 }
 
@@ -189,7 +188,6 @@ hr{
 	position: relative;
 	bottom: 155px;
 	padding: 5px;
-	direction: rtl;
 }
 
 #ecran{
@@ -208,7 +206,6 @@ hr{
 	margin: auto;
 	font-size: 3em;
 	font-weight: bold;
-	direction: rtl;
 }
 
 #lettre, #phonetique{

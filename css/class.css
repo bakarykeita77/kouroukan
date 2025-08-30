@@ -9,15 +9,10 @@
 }
 .a_apprendre:hover { background-color: #bbb; }
 .a_apprendre:hover a { color: black; }
-.actif, .active, .apprises, .a_apprendre {
-    position: relative;
-    font-weight: bold;
-}
 .actif, .active { 
     background-color: rgb(255,255,0); 
     color: #000;
 }
-.actif p { position: relative; }
 .active_2 { box-shadow: 0 0 1rem #222; background-color: #fff; color: black; }
 .actif:active { background-color: #FFF000; box-shadow: none; }
 .active:active { background-color: #FFF000; box-shadow: none; }
@@ -298,12 +293,14 @@
 }
 .course_foot div { border-radius: 0.5rem; }
 .course_foot p {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     top: 0.5rem;
     width: max-content;
     height: 2rem;
     line-height: 2rem;
     margin: auto;
-    padding: 0 1rem;
 }
 .course_head { 
     margin: 0 auto 0.75rem;
@@ -329,27 +326,33 @@
 /* --------------------------------------------------------------------------------------------------------- */
 .dark_backgound { background-color: #aaa; }
 .dialogue_btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
     position: relative;
     top: 0.25rem;
     height: 3rem;
-    line-height: 3rem;
     width: calc(100% - 2px);
     margin: auto;
     padding: 0;
-    font-weight: bold;
-    text-align: center;
     transition: 0.25s;
     z-index: 1;
-    cursor: pointer;
 }
-.dialogue_btns div {
+.dialogue_btns div:not(.titre_de_parti, #cercles_des_partis) {
     position: relative;
-    margin: 0 auto;
+    margin: 0 0.125rem;
+    width: 100%;
     height: 3rem;
     line-height: 3rem;
+    font-weight: bold;
     text-align: center;
     cursor: pointer;
     transition: 0.1s;
+}
+.dialogue_btns div p {
+    font-weight: bold;
 }
 del {
     text-decoration: line-through; 
@@ -1092,15 +1095,19 @@ del {
 }
 .table_parlante td, .table_muette td {
     position: relative;
+    width: 3rem;
     height: 3rem;
+    line-height: 3rem;
     padding: 8px 0;
+    font-size: 2rem;
     font-weight: 900;
     text-align: center;
     border: 1px solid rgb(85,85,85);
     border-radius: 0.5rem;
+    color: #fff;
     cursor: pointer;
     overflow: visible;
-    opacity: 1;
+    opacity: 0;
 }
 .table_parlante td {  
     min-width: 2rem;
@@ -1248,7 +1255,6 @@ del {
     .phases li { width: 80%; }
     .course { width: calc(100vw - 1rem); }
     .course_body { width: 95%; }
-    .table_parlante td, .table_muette td { font-size: 1.8rem; }
     .travaux { display: none; }
 }
 @media(orientation: landscape) {
@@ -1268,6 +1274,5 @@ del {
     }
     .course_body { width: calc(100% - 4rem); }
     .table_parlante, .table_muette { top: 0.25rem; }
-    .table_parlante td, .table_muette td { font-size: 2rem; }
     .travaux { display: block; }
 }

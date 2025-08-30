@@ -56,8 +56,7 @@
 }
 .notification h3 { margin: 0; padding: 0; }
 #redirige_sur_exercice { cursor: pointer; }
-#apprentissage_dialogue_btns { z-index: 1; background-color: #ddd; }
-#apprentissage_dialogue_btns > div { position: initial; }
+#apprentissage_dialogue_btns { font-weight: bold; background-color: #ddd; }
 #apprentissage_dialogue_btns > p { position: relative; }
 
 #pre_exercice_resultat_container {
@@ -73,15 +72,10 @@
 #pre_exercice_resultat_container > div { display: inline-block; }
 #pre_exercice_resultat td { min-width: 1.5rem; height: 2rem; }
 #afficheur_de_panneau {
-    top: 0.25rem;
     width: 100%;
-    height: 100%;
-    border-radius: 0.5rem;
-    cursor: pointer;
 }
-#cercles_des_partis, #carres_pour_exercices { position: relative; display: inline-block; }
-.titre_de_parti, .cercles_des_partis { display: inline-block; }
-.titre_de_parti { margin: 0; height: 3rem; line-height: 3rem; }
+#cercles_des_partis, #carres_pour_exercices { display: inline-block; }
+.titre_de_parti, .cercles_des_partis { display: inline-block; font-weight: bold; }
 #table_pre_apprentissage {
     height: 100%;
     width: calc(100% - 2.25rem);
@@ -187,10 +181,6 @@
 }
 #panneaux > div { font-size: 1.5rem; }
 #submit_panneau { text-align: center; font-size: 1rem; }
-#cercles_des_partis { 
-    height: 3rem; 
-    line-height: 3rem;
-}
 #cercles_des_partis_cadre { position: relative; }
 #cercles_des_partis_cadre span:hover, #pre_revision_btn:hover {
     box-shadow: 0 0 1rem #444;
@@ -271,15 +261,6 @@
 .fermeture_pre:hover {
     background-color: #bbb;
     font-weight: bold;
-}
-#exercice_body td { 
-    width: 3rem;
-    height: 2rem;
-    line-height: 2rem;
-    font-size: 2rem;
-    color: #fff;
-    overflow: visible;
-    opacity: 0;
 }
 #exercice_body td:hover { 
     background-color: #999;

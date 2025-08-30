@@ -3,10 +3,7 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
-    direction: rtl; 
 }
-#clients_table{}
 #clients_table tr{ border-style: none; }
 #clients_table tr:nth-child(odd){ background-color: #ccc; }
 #clients_table tr:hover{ background-color: #aaa; }

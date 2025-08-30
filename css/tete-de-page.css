@@ -5,7 +5,6 @@
     left: 0;
     height: 3rem;
     width: 100%;
-    direction: rtl;
     z-index: 1000;
 }
 
@@ -63,12 +62,10 @@
     background-color: #fff;
     box-sizing: border-box;
     display: none;
-    direction: rtl;
     overflow: auto;
     z-index: 0;
 }
 #profile_entete ul {
-    direction: rtl;
     list-style: none;
 }
 #profile_entete a {
@@ -84,7 +81,6 @@
 #profile_teste {
     position: absolute;
     display: none;
-    direction: rtl;
     width: 94vw;
     top: 80px;
     left: 3vw;

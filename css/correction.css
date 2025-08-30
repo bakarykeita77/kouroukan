@@ -3,8 +3,6 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
-    direction: rtl;
 }
 .table_notes{
     margin: 16px 0;

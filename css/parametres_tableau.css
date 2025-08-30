@@ -2,7 +2,6 @@
 #parametres_tableau  {
     position: absolute;
     display: none;
-    direction: rtl;
     width: 80%;
     height: 15rem;
     max-width: 15rem;

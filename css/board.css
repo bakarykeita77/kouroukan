@@ -1,4 +1,4 @@
-body { direction: rtl }
+
 #board_div {
     position: absolute;
     width: calc(100vw - 2rem);

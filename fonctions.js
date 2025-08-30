@@ -109,6 +109,9 @@
             setTimeout(() => { affichageAnimeDeTableTd($('#exercice_body table')); }, 400);
             
             function afficherParDefautDuDialogueBtns() {
+                masquer($('#exercice_redirection_btns'));
+                afficher($('#exercice_dialogue_btns'));
+
                 masquer($('#exercice_dialogue_btns > div'));
                 afficherRapidement($('#exercice_question_btn'));
                 rendreActif($('#exercice_question_btn'));
@@ -1089,7 +1092,10 @@
     function montrerReponse(question,element_correspondant) {
         $.each(element_correspondant, function () {
             let reponse = $(this);
-            if(question == reponse.text()) secouer(reponse);
+            if(question == reponse.text()) {
+                reponse.css("border-color","orange");
+                setTimeout(() => { reponse.css("border-color","rgb(85,85,85)"); }, 600);
+            }
         });
     }
 

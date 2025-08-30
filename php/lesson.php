@@ -34,7 +34,7 @@ if(isset($_SESSION["id_client"])) {
 
     </head>
 
-    <body style="direction:rtl">
+    <body>
         <div class="container">
             <div class="page_head"><?php require('tete-de-page.php'); ?></div>
             <div class="page_body">
@@ -208,6 +208,7 @@ if(isset($_SESSION["id_client"])) {
                                     <div class='redirection_btn' id='reprendre_revision_bouton'></div>
                                     <div class='redirection_btn' id='continu_sur_apprentissage_bouton'></div> 
                                     <div class='redirection_btn' id='continu_sur_evaluation_bouton'></div> 
+                                    <div class='redirection_btn' id='syllabe_bouton'></div> 
                                 </div>
                             </div>
                         </div>

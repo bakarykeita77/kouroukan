@@ -426,12 +426,12 @@ function syllabe() {
 
                         function affichageDeModificateurDeChoix() {
                             $('.modificateur_de_choix_btn').on('click', function () {
-                                if ($('.modificateur_de_choix_message').css('display') == 'none') {
+                                // if ($('.modificateur_de_choix_message').css('display') == 'none') {
                                     $('.modificateur_de_choix_message').css({ 'display': 'block', 'height': '4rem' });
-                                } else {
-                                    $('.modificateur_de_choix_message').css('height', 0);
-                                    setTimeout(() => { $('.modificateur_de_choix_message').css('display', 'none'); }, 100);
-                                }
+                                // } else {
+                                //     $('.modificateur_de_choix_message').css('height', 0);
+                                //     setTimeout(() => { $('.modificateur_de_choix_message').css('display', 'none'); }, 100);
+                                // }
                             });
 
                             $('.modificateur_de_choix_message button').click(function () {

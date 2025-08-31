@@ -71,9 +71,6 @@
 }
 #pre_exercice_resultat_container > div { display: inline-block; }
 #pre_exercice_resultat td { min-width: 1.5rem; height: 2rem; }
-#afficheur_de_panneau {
-    width: 100%;
-}
 #cercles_des_partis, #carres_pour_exercices { display: inline-block; }
 .titre_de_parti, .cercles_des_partis { display: inline-block; font-weight: bold; }
 #table_pre_apprentissage {
@@ -392,6 +389,11 @@
 .cercle {
     position: relative;
     display: inline-block;
+}
+#resume_de_alphabet_resultat {
+    position: relative;
+    width: 75%;
+    margin: auto;
 }
 
 @media(orientation: portrait) {}

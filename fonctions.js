@@ -175,10 +175,8 @@
         setTimeout(() => { 
             afficher($('.course'));
 
-            masquer($('#apprentissage_container'));
-            masquer($('#exercice_container'));
+            masquer($('.course > div'));
             afficher($('#revision_container'));
-            masquer($('#evaluation_container'));
 
             afficherEnteteDeRevisionPreSyllabe();
             afficherCorpsDeRevisionPreSyllabe();
@@ -195,9 +193,8 @@
                 masquer($('#revision_redirection_btns'));
                 afficher($('#revision_dialogue_btns'));
 
+                masquer($('#revision_dialogue_btns > div')); 
                 afficher($('#revision_question_btn')); 
-                masquer($('#revision_repetition_btn')); 
-                masquer($('#revision_correction_btn'));
             }
         }, 200);
     }
@@ -535,6 +532,12 @@
     }
     function effacerLeTableau() {
         $('.course_body').html("<p id='contenu_par_defaut_du_tableau'>ߥߟߊ߬ߓߊ ߓߘߊ߫ ߖߐ߬ߛߌ߬ ߹</p>");
+    }
+
+/*-------------------------------------------------------------------------------------------------------------------------------------*/
+    
+    function fermerLaPage() {
+        $(".fermeture").click(() => { history.back(); });
     }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/

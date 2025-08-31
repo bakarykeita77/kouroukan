@@ -72,6 +72,7 @@ function alphabet() {
             apprentissagePreAlphabet();
             exercicePreAlphabet();
             evaluationPreAlphabet();
+            fermerLaPage()
             
 
             function apprentissagePreAlphabet() {
@@ -782,7 +783,7 @@ function alphabet() {
                     total_evaluation_questions =  evaluation_pre_questions.length;
 
                     chargerEvaluationPreAlphabet();
-                    afficherEvaluationPreAlphabet();
+                    afficherRevision();
                     evaluerPreAlphabet();
 
 
@@ -813,51 +814,13 @@ function alphabet() {
                             $('#revision_body td').css({'opacity':0});
                         }  
                     }
-                    function afficherEvaluationPreAlphabet() {
-                
-                        afficherRevision();
-                        gestionDePreEvaluationBtns();
-                        
-                        function gestionDePreEvaluationBtns() {
-                            if(total_questions_posees <= total_evaluation_questions) {
-                                
-                                masquer($('#revision_dialogue_btns > div'));
-                                rendreActif($('#revision_question_btn'));
-                                afficherRapidement($('#revision_question_btn'));
-                
-                                $('#revision_question_btn').click(function() { 
-                                    masquer($('#revision_dialogue_btns > div'));
-                                    rendreActif($('#revision_repetition_btn'));
-                                    afficherRapidement($('#revision_repetition_btn')); 
-                                });
-                
-                                $('#revision_body td').click(function() {
-                                
-                                    if(pre_question === '') { return; }
-                                
-                                    masquer($('#revision_dialogue_btns > div'));
-                                    rendreActif($('#revision_correction_btn'));
-                                    afficherRapidement($('#revision_correction_btn')); 
-                                });
-                
-                                $('#revision_correction_btn').click(function() { 
-                                    masquer($('#revision_dialogue_btns > div'));
-                                    rendreActif($('#revision_question_btn'));
-                                    afficherRapidement($('#revision_question_btn')); 
-                                    
-                                    if(total_questions_posees == total_evaluation_questions) {
-                                        masquer($('#revision_dialogue_btns > div'));
-                                    }
-                                });
-                            }
-                        }
-                    }
                     function  evaluerPreAlphabet() {
 
                         let i=0;
                         evaluation_pre_questions = malaxer(evaluation_pre_questions);
 
                         initialiserEvaluationPreAlphabetPartiel();
+                        affichageParDefautDEvaluationPreAlphabet(); 
                         ecouterEvaluationPreQuestion();
                         repeterEvaluationPreQuestion();
                         repondreEvaluationPreQuestion();
@@ -869,24 +832,27 @@ function alphabet() {
                                 pre_evaluation_alphabet_partiel.push([evaluation_pre_questions[i], 0, 0]); 
                             }
                         }
+                        function affichageParDefautDEvaluationPreAlphabet() {
+                            masquer($('#revision_dialogue_btns > div'));
+                            rendreActif($('#revision_question_btn'));
+                            afficherRapidement($('#revision_question_btn'));
+                        }
                         function ecouterEvaluationPreQuestion() {
                             $('#revision_question_btn').click(function(e) {
                                 if(i < total_evaluation_questions) { 
                                     e.stopImmediatePropagation();
 
-                                    if(i < total_evaluation_questions) {  
+                                    pre_question =  evaluation_pre_questions[i];
+                                    montrerReponse(pre_question,$("#revision_body td"));
+                                
+                                    actualiserLeLabelDeRevisionQuestionBtn();
+                                    actualiserLeLabelDeRevisionRepetitionBtn();
+                                    afficherRevisionRepetitionBtn();
+                                    lire('alphabet',pre_question); 
+                                    questions_posees.push(pre_question);
+                                    total_questions_posees = questions_posees.length;
 
-                                        pre_question =  evaluation_pre_questions[i];
-                                        montrerReponse(pre_question,$("#revision_body td"));
-                                    
-                                        actualiserLeLabelDeRevisionQuestionBtn();
-                                        actualiserLeLabelDeRevisionRepetitionBtn();
-                                        lire('alphabet',pre_question); 
-                                        questions_posees.push(pre_question);
-                                        total_questions_posees = questions_posees.length;
 
-                                        i++;
-                                    }
                                     if(i == total_evaluation_questions) { i = 0; }
 
                                     function actualiserLeLabelDeRevisionQuestionBtn() {
@@ -896,6 +862,11 @@ function alphabet() {
                                     function actualiserLeLabelDeRevisionRepetitionBtn() {
                                         let repeter_btn_html = (i === 0) ? 'ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߁߭ ߟߊߡߍ߲߫ ߕߎ߲߯' : 'ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ '+parseIntNko(i+1)+' ߠߊߡߍ߲߫ ߕߎ߲߯';
                                         $('#revision_repetition_btn').html(repeter_btn_html);
+                                    }
+                                    function afficherRevisionRepetitionBtn() {
+                                        masquer($('#revision_dialogue_btns > div'));
+                                        rendreActif($('#revision_repetition_btn'));
+                                        afficherRapidement($('#revision_repetition_btn')); 
                                     }
                                 }
                             });
@@ -915,22 +886,35 @@ function alphabet() {
                                 let td = $(this);
                                 td.click(function(){
                                     element_actif = $(this);
+                                    if(i <= total_evaluation_questions) { 
 
-                                    rappelerRevisionQuestionBtnSiPasDeQuestion();
-                                    repondrePreAlphabetRevision();
-                
-                                    function rappelerRevisionQuestionBtnSiPasDeQuestion() {
-                                        if(pre_question == '') { 
-                                            $('#revision_question_btn').addClass('clignotant'); 
-                                            setTimeout(function() { $('#revision_question_btn').removeClass('clignotant'); }, 1200);
-                                            return;
-                                        } 
-                                    }
-                                    function repondrePreAlphabetRevision() {
-                                        if(pre_question !== '') {
-                                            pre_reponse = element_actif.text();
-                                            $(element_actif).css('background-color','#aaa').siblings().css('background-color','rgba(85,85,85,0.25)');
-                                        } 
+                                        rappelerRevisionQuestionBtnSiPasDeQuestion();
+                                        repondrePreAlphabetRevision();
+                                        afficherRevisionCorrectionBtn();
+                    
+                                        function rappelerRevisionQuestionBtnSiPasDeQuestion() {
+                                            if(pre_question == '') { 
+                                                $('#revision_question_btn').addClass('clignotant'); 
+                                                setTimeout(function() { $('#revision_question_btn').removeClass('clignotant'); }, 1200);
+                                                return;
+                                            } 
+                                        }
+                                        function repondrePreAlphabetRevision() {
+                                            if(pre_question !== '') {
+                                                pre_reponse = element_actif.text();
+                                                $(element_actif).css('background-color','#aaa').siblings().css('background-color','rgba(85,85,85,0.25)');
+                                            } 
+                                        }
+                                        function afficherRevisionCorrectionBtn() {
+                                            if(total_questions_posees <= total_evaluation_questions) {
+                                                
+                                                if(pre_question === '') { return; }
+                                            
+                                                masquer($('#revision_dialogue_btns > div'));
+                                                rendreActif($('#revision_correction_btn'));
+                                                afficherRapidement($('#revision_correction_btn')); 
+                                            }
+                                        }
                                     }
                                 });
                             });
@@ -943,13 +927,14 @@ function alphabet() {
                             $('#revision_correction_btn').click(function(e) { 
                                 e.stopImmediatePropagation();
 
-                                if(total_questions_posees <= total_evaluation_questions) { 
+                                if(i <= total_evaluation_questions) { 
 
                                     $('#revision_container .table_parlante td').css('background-color','rgba(85, 85, 85, 0.25)');
                 
                                     correctionDeEvaluation();
                                     enregistrerEvaluationPreAlphabet();
                                     progressBarrEvaluationPreAlphabet();
+                                    afficherRevisionQuestionBtn();
                                     finDEvaluationPreAlphabet();
                                     i++;
                 
@@ -990,15 +975,15 @@ function alphabet() {
                                         if(point === 0) {
                                             $('.progress_mauvaise_reponse_bar').css('width',pre_question_counter*diagramm_unity+'%');
                                         }
+                                    }
+                                    function afficherRevisionQuestionBtn() {
 
-                                        // Initialiser la barre de progression
-                                        if(pre_question_counter === total_evaluation_questions) { 
-                                            setTimeout(() => { 
-                                                $('#evaluation_progress_bar').css('display','none');
-                                                $('.progress_bonne_reponse_bar, .progress_mauvaise_reponse_bar').css('width', 0);
-                                                pre_question_counter = 0;
-                                                bonne_reponse_counter = 0;
-                                            }, 1000);
+                                        masquer($('#revision_dialogue_btns > div'));
+                                        rendreActif($('#revision_question_btn'));
+                                        afficherRapidement($('#revision_question_btn')); 
+                                        
+                                        if(i == total_evaluation_questions) {
+                                            masquer($('#revision_dialogue_btns > div'));
                                         }
                                     }
                                     function finDEvaluationPreAlphabet() {
@@ -1201,40 +1186,42 @@ function alphabet() {
                                                     if(note_d_evaluation >= 92) {
                                                             
                                                         $('#revision_body_cadre').append('\
-                                                            <p>ߛߓߍߛߎ߲ ߘߋ߰ߟߌ ߢߊ߬ߣߍ߲߬ %/'+parseIntNko(pourcentage_general)+' ߟߊ߫.</p>\
-                                                            <h3>ߒߞߏ ߛߓߍߛߎ߲ ߘߋ߰ߟߌ ߞߐߝߟߌ ߟߊߛߎ߬ߘߎ߲߬ߧߊ߬ߣߍ߲ ߝߟߍ߫ ߕߊ߲߬</h3>\
-                                                            <div id="resultat_table_container">\
-                                                                <table id="resultat_table">\
-                                                                    <tr>\
-                                                                        <th>ߝߐߘߊ</th>\
-                                                                        <th>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</th>\
-                                                                        <th>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ ߢߊ߬ߣߍ߲</th>\
-                                                                        <th>ߓߍ߬ߙߍ</th>\
-                                                                    </tr>\
-                                                                    <tr>\
-                                                                        <td>ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ</td>\
-                                                                        <td>'+parseIntNko(data_apprentissage_alphabet.lesson.length)+'</td>\
-                                                                        <td>'+parseIntNko(point_d_apprentissage)+'</td>\
-                                                                        <td>'+parseIntNko(note_d_apprentissage)+'</td>\
-                                                                    </tr>\
-                                                                    <tr>\
-                                                                        <td>ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ</td>\
-                                                                        <td>'+parseIntNko(data_exercice_alphabet.lesson.length)+'</td>\
-                                                                        <td>'+parseIntNko(point_d_exercice)+'</td>\
-                                                                        <td>'+parseIntNko(note_d_exercice)+'</td>\
-                                                                    </tr>\
-                                                                    <tr>\
-                                                                        <td>ߛߓߍߛߎ߲ ߞߘߐߓߐߟߌ</td>\
-                                                                        <td>'+parseIntNko(data_evaluation_alphabet.lesson.length)+'</td>\
-                                                                        <td>'+parseIntNko(point_d_evaluation)+'</td>\
-                                                                        <td>'+parseIntNko(note_d_evaluation)+'</td>\
-                                                                    </tr>\
-                                                                </table>\
-                                                            </div> \
-                                                                \
-                                                            <div id="resultat_btn_container">\
-                                                                <p>ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ ߜߋ߲߭ ߘߋ߰ߟߌ ߘߊߡߌ߬ߘߊ߬</p>\
-                                                                <p>ߣߴߌ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߝߛߍ߬ߝߛߍ߬ߟߌ ߞߍ߫ ߌ ߟߊ߫ ߛߓߍߛߎ߲ ߘߋ߰ߟߌ ߞߐߝߟߌ ߞߊ߲߬߸ ߞߘߎ߬ ߓߊ߯ߡߊ ߢߌ߲߬ ߘߌ߲߯. <span id="afficheur_de_resultat">ߒߞߏ ߛߓߍߛߎ߲ ߘߋ߰ߟߌ ߞߐߝߟߌ ߕߐ߬ߝߍ߬ߦߊ߬ߣߍ߲</span></p>\
+                                                            <div id="resume_de_alphabet_resultat">\
+                                                                <p>ߛߓߍߛߎ߲ ߘߋ߰ߟߌ ߢߊ߬ߣߍ߲߬ %/'+parseIntNko(pourcentage_general)+' ߟߊ߫.</p>\
+                                                                <h3>ߒߞߏ ߛߓߍߛߎ߲ ߘߋ߰ߟߌ ߞߐߝߟߌ ߟߊߛߎ߬ߘߎ߲߬ߧߊ߬ߣߍ߲ ߝߟߍ߫ ߕߊ߲߬</h3>\
+                                                                <div id="resultat_table_container">\
+                                                                    <table id="resultat_table">\
+                                                                        <tr>\
+                                                                            <th>ߝߐߘߊ</th>\
+                                                                            <th>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</th>\
+                                                                            <th>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ ߢߊ߬ߣߍ߲</th>\
+                                                                            <th>ߓߍ߬ߙߍ</th>\
+                                                                        </tr>\
+                                                                        <tr>\
+                                                                            <td>ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ</td>\
+                                                                            <td>'+parseIntNko(data_apprentissage_alphabet.lesson.length)+'</td>\
+                                                                            <td>'+parseIntNko(point_d_apprentissage)+'</td>\
+                                                                            <td>'+parseIntNko(note_d_apprentissage)+'</td>\
+                                                                        </tr>\
+                                                                        <tr>\
+                                                                            <td>ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ</td>\
+                                                                            <td>'+parseIntNko(data_exercice_alphabet.lesson.length)+'</td>\
+                                                                            <td>'+parseIntNko(point_d_exercice)+'</td>\
+                                                                            <td>'+parseIntNko(note_d_exercice)+'</td>\
+                                                                        </tr>\
+                                                                        <tr>\
+                                                                            <td>ߛߓߍߛߎ߲ ߞߘߐߓߐߟߌ</td>\
+                                                                            <td>'+parseIntNko(data_evaluation_alphabet.lesson.length)+'</td>\
+                                                                            <td>'+parseIntNko(point_d_evaluation)+'</td>\
+                                                                            <td>'+parseIntNko(note_d_evaluation)+'</td>\
+                                                                        </tr>\
+                                                                    </table>\
+                                                                </div> \
+                                                                    \
+                                                                <div id="resultat_btn_container">\
+                                                                    <p>ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ ߜߋ߲߭ ߘߋ߰ߟߌ ߘߊߡߌ߬ߘߊ߬</p>\
+                                                                    <p>ߣߴߌ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߝߛߍ߬ߝߛߍ߬ߟߌ ߞߍ߫ ߌ ߟߊ߫ ߛߓߍߛߎ߲ ߘߋ߰ߟߌ ߞߐߝߟߌ ߞߊ߲߬߸ ߞߘߎ߬ ߓߊ߯ߡߊ ߢߌ߲߬ ߘߌ߲߯. <span id="afficheur_de_resultat">ߒߞߏ ߛߓߍߛߎ߲ ߘߋ߰ߟߌ ߞߐߝߟߌ ߕߐ߬ߝߍ߬ߦߊ߬ߣߍ߲</span></p>\
+                                                                </div> \
                                                             </div> \
                                                         ');
 
@@ -1329,6 +1316,7 @@ function alphabet() {
                     afficherApprentissageAlphabet();
                     apprendreAlphabetNko();
                     raffraichissementDeLaPage();
+                    fermerLaPage()
                     
                     function chargerApprentissageAlphabet() {
                         
@@ -1676,7 +1664,8 @@ function alphabet() {
                     if(lesson_d_exercice_alphabet.length != 0) { 
                         console.log("La leçon d'exercice alphabet n'est pas vide, ce qui veut dire que cette leçon est déjà faite. Voir ci-dessous");
                         console.log(lesson_d_exercice_alphabet);
-                        apprentissageAlphabet(); 
+                        apprentissageAlphabet();
+                        fermerLaPage(); 
                     }
 
                     if(lesson_d_exercice_alphabet.length === 0) {
@@ -1692,6 +1681,7 @@ function alphabet() {
                         chargerExerciceAlphabet();
                         afficherExercice();
                         exercerAlphabetNko();
+                        fermerLaPage(); 
                 
                 
                         function chargerExerciceAlphabet() {
@@ -2022,6 +2012,7 @@ function alphabet() {
                         console.log("La leçon d'evaluation alphabet est déjà faite.  Voir ci-dessous");
                         console.log(lesson_d_exercice_alphabet);
                         apprentissageAlphabet(); 
+                        fermerLaPage(); 
                     }
 
                     if(lesson_d_evaluation_alphabet.length === 0) {
@@ -2042,6 +2033,7 @@ function alphabet() {
                         chargerEvaluationAlphabet();
                         afficherEvaluationAlphabet();
                         evaluerAlphabet();
+                        fermerLaPage(); 
                     
                     
                         function chargerEvaluationAlphabet() {

@@ -146,8 +146,8 @@ function alphabet() {
                         masquer($(".course > div"));
                         afficher($('#apprentissage_container'));
                         
-                        masquer($('.redirection_btns'));
-                        $('#pre_apprentissage_btns').css('display','flex'); 
+                        masquer($('#apprentissage_foot > div'));
+                        $('#apprentissage_dialogue_btns').css('display','flex'); 
                         afficherPreApprendreAlphabetTd();
                 
                         function afficherPreApprendreAlphabetTd() { 
@@ -1174,7 +1174,6 @@ function alphabet() {
                                                 if(data_evaluation_alphabet.lesson != undefined) {
 
                                                     let note_d_apprentissage = pourcentagePoint(lesson_d_apprentissage_pre_alphabet);
-                                                    let note_d_exercice = pourcentagePoint(lesson_d_exercice_pre_alphabet);
                                                     let note_d_evaluation = pourcentagePoint(lesson_d_evaluation_pre_alphabet);
 
                                                     let point_d_apprentissage = calculerPoint(data_apprentissage_alphabet.lesson);
@@ -1241,7 +1240,7 @@ function alphabet() {
                                                         setTimeout(() => { $('#resultat_btn_container').css({'height':'max-content'}); }, 2000);
 
                                                         $('#afficheur_de_resultat').click(function() {
-                                                            resultatDeLaMatiere(data_apprentissage_alphabet, data_exercice_alphabet, data_evaluation_alphabet);
+                                                            resultatDeLaMatiere([data_apprentissage_alphabet, data_exercice_alphabet, data_evaluation_alphabet],"ߛߓߍߛߎ߲");
                                                         });
                                                     }}}
                                                 }}}
@@ -2477,7 +2476,7 @@ function alphabet() {
         function afficherPreRevisionBtn() {
             $('#apprentissage_dialogue_btn').css('display','none');
 
-            $('#pre_apprentissage_btns').css('display','none');
+            $('#apprentissage_dialogue_btns').css('display','none');
             $('.redirection_btns').css('display','block');
     
             $('#exercice_bouton').css('display','none');

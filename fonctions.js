@@ -1486,21 +1486,21 @@
         let lesson_suivante = lessonSuivante(lesson_en_cours);
         let continu_sur_l_etape_suivante = '<b id="avance"><a href="/kouroukan/php/programmes.php">'+lesson_suivante+'</a></b>';
 
-        chargerResultatGeneralEntete();
-        chargerResultatGeneralCorps();
-        chargerResultatPied();
+        chargerResultatDeLaMatiereEntete();
+        chargerResultatDeLaMatiereCorps();
+        chargerResultatDeLaMatierePied();
         // chargerDeliberation();
-        afficherResultat();
+        afficherResultatDeLaMatiere();
         // reprendreLesson();
     
-        $('#fermer_resultat').click(function() { masquerResultat(); });
+        $('#fermer_resultat').click(function() { masquerResultatDeLaMatiere(); });
 
 
-        function chargerResultatGeneralEntete() { 
+        function chargerResultatDeLaMatiereEntete() { 
             $('#etudiant').html('<h1>'+prenom+' '+nom+'</h1> <span>ߟߊ߫</span>');
             $('#resultat_titre').html('<h3>ߒߞߏ߫ ߛߓߍ ߘߋ߰ߟߌ ߝߏ߲߬ߝߏ߲</h3>'); 
         }
-        function chargerResultatGeneralCorps() {
+        function chargerResultatDeLaMatiereCorps() {
 
             chargerResultatDApprentissageCorps();
             chargerResultatDExerciceCorps();
@@ -1720,7 +1720,7 @@
                 }
             }
         }
-        function chargerResultatPied() {
+        function chargerResultatDeLaMatierePied() {
  
             lesson_1 = (Object.keys(lesson_1).length != 0) ? JSON.parse(lesson_1.lesson) : undefined;
             lesson_2 = (Object.keys(lesson_2).length != 0) ? JSON.parse(lesson_2.lesson) : undefined;
@@ -1768,8 +1768,8 @@
                 );
             }
         }
-        function masquerResultat() { masquer($('.resultat_container')); }
-        function afficherResultat() { 
+        function masquerResultatDeLaMatiere() { masquer($('.resultat_container')); }
+        function afficherResultatDeLaMatiere() { 
             if(matiere_nom == "ߛߓߍߛߎ߲") $("#resultat_d_evaluation_corps").css("display","none");
             if(matiere_nom != "ߛߓߍߛߎ߲") $("#resultat_d_evaluation_corps").css("display","block");
             setTimeout(() => { afficher($('.resultat_container')); }, 3000);

@@ -3,25 +3,21 @@
     position: relative;
     display: none;
     top: 5rem;
-    padding: 0 1rem;
+    padding: 0.125rem 0;
     margin: auto;
     font-size: 1rem;
     text-align: justify;
+    width: calc(100% - 4rem);
+    max-width: 40rem;
+    border-top: 4px solid #aaa;
+    border-bottom: 4px solid #aaa;
  }
-@media(max-width: 800px) {
-    #reception {
-        width: calc(100% - 2rem);
-    }
-}
-@media(min-width: 801px) {
-    #reception {
-        width: 60%;
-        max-width: 32rem;
-        border: 1px solid transparent;
-        border-right: 1px solid #bbb;
-        border-left: 1px solid #bbb;
-    }
-}
+ #reception_content {
+    border-top: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
+    background-color: #eee;
+    padding: 1rem 5rem;
+ }
 #nom_d_utilisateur {
     font-size: 1.2rem;
     font-weight: bolder;

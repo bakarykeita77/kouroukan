@@ -47,7 +47,12 @@
 }
 #apprentissage_note p { margin: 0.25rem 0; }
 #pre_texte {
+    position: relative;
     width: calc(100% - 2rem);
+    max-width: 16rem;
+    margin: auto;
+    top: 45%;
+    transform: translateY(-50%);
     padding: 1rem;
     color: #444;
     font-size: 7vh;
@@ -72,7 +77,11 @@
 #pre_exercice_resultat_container > div { display: inline-block; }
 #pre_exercice_resultat td { min-width: 1.5rem; height: 2rem; }
 #cercles_des_partis, #carres_pour_exercices { display: inline-block; }
-.titre_de_parti, .cercles_des_partis { display: inline-block; font-weight: bold; }
+.titre_de_parti, .cercles_des_partis { 
+    display: inline-block; 
+    font-weight: bold; 
+    cursor: pointer;
+}
 #table_pre_apprentissage {
     height: 100%;
     width: calc(100% - 2.25rem);

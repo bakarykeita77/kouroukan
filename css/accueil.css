@@ -7,7 +7,6 @@
     margin: auto;
     font-size: 1rem;
     text-align: justify;
-    width: calc(100% - 4rem);
     max-width: 40rem;
     border-top: 4px solid #aaa;
     border-bottom: 4px solid #aaa;
@@ -16,15 +15,12 @@
     border-top: 1px solid #aaa;
     border-bottom: 1px solid #aaa;
     background-color: #eee;
-    padding: 1rem 5rem;
  }
 #nom_d_utilisateur {
     font-size: 1.2rem;
     font-weight: bolder;
 }
-#message_de_bienvenu {
-    margin-bottom: 2rem;
-}
+#message_de_bienvenu { margin-bottom: 2rem; }
 #affiche_programme {
     position: relative;
     height: 2rem;
@@ -39,6 +35,13 @@
     text-decoration: none;
     width: 100%;
 }
-#affiche_programme:active {
-    background-color: #aaa;
+#affiche_programme:active { background-color: #aaa; }
+
+@media(orientation: portrait) {
+    #reception { width: calc(100% - 1rem); }
+    #reception_content { padding: 4rem 1rem; }
+}
+@media(orientation: landscape) {
+    #reception { width: calc(100% - 4rem); }
+    #reception_content { padding: 4rem 5rem; }
 }

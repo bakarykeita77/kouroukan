@@ -1237,6 +1237,37 @@
             }
         }
     }
+    function progressBarDApprentissage(td,qtite_click) {
+        /*
+        td est les td de la table à cliquer.
+        qtite_click est le nombre de fois qu'un td doit être cliquer.
+        */
+
+        let progress_unity = 100 / [td.length * qtite_click];
+        let good_response_width = 0;
+        let total_des_clicks = 0;
+
+        initialiserProgressBar();
+
+        $.each(td, function () {
+            let compteur_td_click = 0;
+
+            $(this).click(function () {
+                if (compteur_td_click < qtite_click) {
+                    compteur_td_click++;
+                    total_des_clicks++;
+                    good_response_width += progress_unity;
+                    $('.progress_bonne_reponse_bar').css('width', good_response_width + '%');
+                }
+                
+                if (total_des_clicks / qtite_click == td.length) {
+                    compteur_td_click = 0;
+                    good_response_width = 0;
+                    total_des_clicks = 0;
+                }
+            });
+        });
+    }
 	function prononcer(){
 		id=this.id;
 	

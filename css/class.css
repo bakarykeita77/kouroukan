@@ -251,6 +251,7 @@
     overflow: auto;
 }
 .course > div {
+    display: none;
     width: calc(100vw - 1rem);
     max-width: 40rem;
     margin: auto;

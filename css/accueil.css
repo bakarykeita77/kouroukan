@@ -7,7 +7,7 @@
     margin: auto;
     font-size: 1rem;
     text-align: justify;
-    max-width: 40rem;
+    max-width: 45rem;
     border-top: 4px solid #aaa;
     border-bottom: 4px solid #aaa;
  }
@@ -43,5 +43,5 @@
 }
 @media(orientation: landscape) {
     #reception { width: calc(100% - 4rem); }
-    #reception_content { padding: 4rem 5rem; }
+    #reception_content { padding: 3.5rem 8rem 4.5rem; }
 }

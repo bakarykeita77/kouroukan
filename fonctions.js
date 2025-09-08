@@ -1040,6 +1040,8 @@
             });
         }
     }
+    function memoriserEnLocalStorage(data) {localStorage.setItem(data, JSON.stringify(data));}
+    function memoriserEnSessionStorage(data) {sessionStorage.setItem('data', JSON.stringify(data));}
     function mettreEnSurbrillance(element) {
         element.addClass('surbrillance');
         element.siblings().removeClass('surbrillance');
@@ -1386,6 +1388,8 @@
         ligne4_td[3].innerHTML = parseIntNko(fausses_reponses_4);
         ligne4_td[4].innerHTML = parseIntNko(vrais_reponses_4);
     }
+    function recupererDeLocalStorage(data) {return(JSON.parse(localStorage.getItem(data)));}
+    function recupererDeSessionStorage(data) {return(JSON.parse(sessionStorage.getItem(data)));}
     function refuser(element) {
         
         $(element).addClass('faux');

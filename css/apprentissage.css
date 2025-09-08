@@ -179,10 +179,13 @@
 #traducteur .pre_apprentissage_tr { margin: 0; }
 #panneaux { 
     position: absolute;
+    height: 0;
+    width: 100%;
     display: flex;
     justify-content: center;
     overflow: hidden; 
     bottom: 3rem;
+    overflow: visible;
 }
 #panneaux > div { font-size: 1.5rem; }
 #submit_panneau { text-align: center; font-size: 1rem; }
@@ -208,16 +211,26 @@
 }
 #pre_revision_btn:active { box-shadow: none; }
 #consonnes_cadre {
-    position: relative;
+    position: absolute;
+    bottom: 0.5rem;
     height: 10.5rem;
+    width: max-content;
+    padding: 0 0.5rem;
+    border-bottom: 0.5rem solid #aaa;
+    overflow: hidden;
+}
+#consonnes_container {
+    position: relative;
+    top: 100%;
+    height: max-content;
+    width: max-content;
     margin: 0.25rem 0;
     padding: 0.5rem;
     display: block;
     border-radius: 0.5rem 0.5rem 0 0;
-    border-bottom: 8px solid #aaa;
     background-color: #eee;
 }
-#consonnes_cadre span {
+#consonnes_container span {
     position: relative;
     display: inline-block;
     font-size: 1.5rem;
@@ -230,7 +243,7 @@
     box-shadow: 0 0 0.25rem #aaa;
     cursor: pointer;
 }
-#consonnes_cadre span:hover { background-color: #ddd; }
+#consonnes_container span:hover { background-color: #ddd; }
 
 #exercice_container, #revision_container { display: none; height: 100%; }
 #pre_exercice {

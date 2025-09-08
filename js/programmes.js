@@ -151,7 +151,7 @@ $('document').ready(function() {
             $.each(programme_li, function() {
                 
                 let matiere_index = $(this).index();
-                
+               
                 if(niveau_max === 0) {
                     if(matiere_index === 0) $(this).addClass("actif");
                     if(matiere_index  >  0) $(this).addClass("a_apprendre");

@@ -75,7 +75,7 @@ console.log(datas);
               Phases, Notes et Niveaux
              -------------------------------------------------------------------------*/   
                 var note_1 = 0, note_2 = 0, note_3 = 0, note_4 = 0;
-                var moyenne = 1, moyenne_1 = 0, moyenne_2 = 0, moyenne_3 = 0, moyenne_4 = 0;
+                var moyenne = 90, moyenne_1 = 0, moyenne_2 = 0, moyenne_3 = 0, moyenne_4 = 0;
 
                 if(datas[1][0] == undefined) {
                     sessionStorage.setItem("id_apprentissage", JSON.stringify("syllabe_apprentissage"));
@@ -116,7 +116,7 @@ console.log(datas);
             	}}
 
              //Calcul de phases distinctes globale            
-                  
+               
                 if(datas[0] != undefined) moyenne_1 = note_1/3; //Moyenne générale pour syllabe
                 if(datas[1] != undefined) moyenne_2 = note_2/4; //Moyenne générale pour syllabe
                 if(datas[2] != undefined) moyenne_3 = note_3/4; //Moyenne générale pour tons

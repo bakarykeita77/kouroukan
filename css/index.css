@@ -3,35 +3,7 @@ body {
     padding: 0;
     font-family:Courier new, monospace;
  }
-#index_haut_de_page {
-    position: relative;
-    background-color: #002;
-    height: calc(100% - 30rem);
-    max-height: 10rem;
-    min-height: 10rem;
-    width: 100%;
-    /* max-width: 50rem; */
-    margin: 0.25rem auto;
-    padding-top: 2rem;
-    box-sizing: border-box;
-}
-#site_name {
-    top: 50%;
-    transform: translateY(-50%);
-    position: absolute;
-    padding: 1rem;
-    width: calc(100% - 2rem);
-    height: 8rem;
-    color: cornflowerblue;
-    text-align: center;
-}
-#site_name h1 { height: 3rem; line-height: 3rem; font-size: 2.5rem; }
-#site_name h3 { height: 1.5rem; line-height: 1.5rem; }
-#site_name h1, #site_name h3 { 
-    margin: 0.25rem 0; 
-    width: 100%;
-    /* max-width: 50rem;  */
-}
+ #logo { display: none; }
 #asides_container { padding: 0 0.5rem; margin: auto; }
 #asides_container p, #btn_container { padding: 0; }
 .pied_de_page { display: none; }

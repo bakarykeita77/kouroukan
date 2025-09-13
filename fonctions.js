@@ -1970,6 +1970,7 @@
 
         return html;
     }
+   function retourALaPageDAcceuil() { window.location.replace("../kouroukan/index.php"); }
     function reverseIntNko(nombre_a_convertir){
         var nombre_converti = [];
         

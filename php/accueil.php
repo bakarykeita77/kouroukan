@@ -70,6 +70,7 @@ session_start();
       <!----------------------------------------------------------------------------------------------------->  
 
         <div class="page_head"><?php require('tete-de-page.php'); ?></div>
+        <?php require('haut-de-page.php'); ?>
         <div class="page_body">
             <div id="reception">
                 <div id="reception_content">

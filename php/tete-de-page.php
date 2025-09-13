@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/kouroukan/css/tete-de-page.css"/>
     <link rel="stylesheet" href="/kouroukan/css/resultat.css"/>
     
-	<script src="/kouroukan/js/jquery-3.3.1.js"></script>
+	<script src="/kouroukan/jquery-3.3.1.js"></script>
 	<script src="/kouroukan/fonctions.js"></script>
 	<script src="/kouroukan/js/icones.js"></script>
   	<script src="/kouroukan/js/caracteres.js"></script>

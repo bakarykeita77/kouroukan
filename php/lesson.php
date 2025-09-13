@@ -87,12 +87,14 @@ if(isset($_SESSION["id_client"])) {
                          <!--Course head ------------------------------------------------------------------ -->
                             <div class="course_head" id="apprentissage_head">
                                 <div class="notification" id="apprentissage_notification">
-                                    <h2 class="notification_titre" id="apprentissage_notification_titre"></h2> 
-                                    <div class="modificateur_de_choix">
-                                        <p class="modificateur_de_choix_btn">&#8942;</p>
-                                        <div class="modificateur_de_choix_message">
-                                            <p>ߘߋ߲߰ߠߌ ߞߍߢߊ ߡߊߝߊ߬ߟߋ߲߬</p>
-                                            <div><button class="changer_option_btn">ߊ߬ߥߊ߬</button> <button class="pas_changer_option_btn">ߍ߬ߍ߲߫</button></div>
+                                    <div class="notification_entete">
+                                        <h2 class="notification_titre" id="apprentissage_notification_titre"></h2> 
+                                        <div class="modificateur_de_choix">
+                                            <p class="modificateur_de_choix_btn">&#8942;</p>
+                                            <div class="modificateur_de_choix_message">
+                                                <p>ߘߋ߲߰ߠߌ ߞߍߢߊ ߡߊߝߊ߬ߟߋ߲߬</p>
+                                                <div><button class="changer_option_btn">ߊ߬ߥߊ߬</button> <button class="pas_changer_option_btn">ߍ߬ߍ߲߫</button></div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="notification_container">
@@ -126,13 +128,15 @@ if(isset($_SESSION["id_client"])) {
                          <!--Course head ------------------------------------------------------------------ -->
                             <div class="course_head" id="exercice_head">
                                 <div class="notification" id="exercice_notification">
-                                    <h2 class="notification_titre" id="exercice_notification_titre"></h2>
-                                    <div class="modificateur_de_choix">
-                                        <p class="modificateur_de_choix_btn">&#8942;</p>
-                                        
-                                        <div class="modificateur_de_choix_message">
-                                            <p>ߘߋ߲߰ߠߌ ߞߍߢߊ ߡߊߝߊ߬ߟߋ߲߬</p>
-                                            <div><button class="changer_option_btn">ߊ߬ߥߊ߬</button> <button class="pas_changer_option_btn">ߍ߬ߍ߲߫</button></div>
+                                    <div class="notification_entete">
+                                        <h2 class="notification_titre" id="exercice_notification_titre"></h2>
+                                        <div class="modificateur_de_choix">
+                                            <p class="modificateur_de_choix_btn">&#8942;</p>
+                                            
+                                            <div class="modificateur_de_choix_message">
+                                                <p>ߘߋ߲߰ߠߌ ߞߍߢߊ ߡߊߝߊ߬ߟߋ߲߬</p>
+                                                <div><button class="changer_option_btn">ߊ߬ߥߊ߬</button> <button class="pas_changer_option_btn">ߍ߬ߍ߲߫</button></div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="notification_container">
@@ -172,12 +176,14 @@ if(isset($_SESSION["id_client"])) {
                          <!--Course head ------------------------------------------------------------------ -->
                             <div class="course_head" id="revision_head">
                                 <div class="notification" id="revision_notification">
-                                    <h2 class="notification_titre" id="revision_notification_titre"></h2>
-                                    <div class="modificateur_de_choix">
-                                        <p class="modificateur_de_choix_btn">&#8942;</p>
-                                        <div class="modificateur_de_choix_message">
-                                            <p>ߘߋ߲߰ߠߌ ߞߍߢߊ ߡߊߝߊ߬ߟߋ߲߬</p>
-                                            <div><button class="changer_option_btn">ߊ߬ߥߊ߬</button> <button class="pas_changer_option_btn">ߍ߬ߍ߲߫</button></div>
+                                    <div class="notification_entete">
+                                        <h2 class="notification_titre" id="revision_notification_titre"></h2>
+                                        <div class="modificateur_de_choix">
+                                            <p class="modificateur_de_choix_btn">&#8942;</p>
+                                            <div class="modificateur_de_choix_message">
+                                                <p>ߘߋ߲߰ߠߌ ߞߍߢߊ ߡߊߝߊ߬ߟߋ߲߬</p>
+                                                <div><button class="changer_option_btn">ߊ߬ߥߊ߬</button> <button class="pas_changer_option_btn">ߍ߬ߍ߲߫</button></div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="notification_container">
@@ -217,12 +223,14 @@ if(isset($_SESSION["id_client"])) {
                          <!--Course head ------------------------------------------------------------------ -->
                             <div class="course_head" id="evaluation_head">
                                 <div class="notification" id="evaluation_notification">
-                                    <h2 class="notification_titre" id="evaluation_notification_titre"></h2>
-                                    <div class="modificateur_de_choix">
-                                        <p class="modificateur_de_choix_btn">&#8942;</p>
-                                        <div class="modificateur_de_choix_message">
-                                            <p>ߘߋ߲߰ߠߌ ߞߍߢߊ ߡߊߝߊ߬ߟߋ߲߬</p>
-                                            <div><button class="changer_option_btn">ߊ߬ߥߊ߬</button> <button class="pas_changer_option_btn">ߍ߬ߍ߲߫</button></div>
+                                    <div class="notification_entete">
+                                        <h2 class="notification_titre" id="evaluation_notification_titre"></h2>
+                                        <div class="modificateur_de_choix">
+                                            <p class="modificateur_de_choix_btn">&#8942;</p>
+                                            <div class="modificateur_de_choix_message">
+                                                <p>ߘߋ߲߰ߠߌ ߞߍߢߊ ߡߊߝߊ߬ߟߋ߲߬</p>
+                                                <div><button class="changer_option_btn">ߊ߬ߥߊ߬</button> <button class="pas_changer_option_btn">ߍ߬ߍ߲߫</button></div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="notification_container">

@@ -10,12 +10,11 @@ session_start();
     
     <title>board</title>
     
+	<script src="/kouroukan/jquery-3.3.1.js"></script>
     <link rel="stylesheet" href="/kouroukan/css/board.css">
     <link rel="stylesheet" href="/kouroukan/css/parametres_tableau.css">
 	<link rel="stylesheet" href="/kouroukan/css/assistant.css"/>
 	<link rel="stylesheet" href="/kouroukan/css/memoire.css"/>
-
-    <script src="/kouroukan/js/jquery-3.3.1.js"></script>
 </head>
 <body>
     

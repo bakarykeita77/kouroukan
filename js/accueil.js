@@ -2,9 +2,6 @@ $('document').ready(function() {
          
  /* Declaration et initialisation des variables */
     
-    let alphabet = [], syllabe = [], tons = [], chiffres = [];
-    let phase_11 = "";
-
     let niveaux_etudies = [], phases_etudiees = [];
 	let niveau_en_cours = 1, niveau_max = 0;
 	let derniere_phase = '';
@@ -75,7 +72,7 @@ console.log(datas);
               Phases, Notes et Niveaux
              -------------------------------------------------------------------------*/   
                 var note_1 = 0, note_2 = 0, note_3 = 0, note_4 = 0;
-                var moyenne = 90, moyenne_1 = 0, moyenne_2 = 0, moyenne_3 = 0, moyenne_4 = 0;
+                var moyenne = 60, moyenne_1 = 0, moyenne_2 = 0, moyenne_3 = 0, moyenne_4 = 0;
 
                 if(datas[1][0] == undefined) {
                     sessionStorage.setItem("id_apprentissage", JSON.stringify("syllabe_apprentissage"));

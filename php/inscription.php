@@ -46,7 +46,7 @@
 						<label>ߜߎ߲߬ߘߎ߬ߕߐ߮</label>
 					</div>
 					<div id="button_box">
-						<input type="submit" name="submit" id="inscription_btn" value="ߕߐ߯ߛߓߍߟߌ ߞߍ߫"/>
+						<input onclick="retourALaPageDAccueil()" type="submit" name="submit" id="inscription_btn" value="ߕߐ߯ߛߓߍߟߌ ߞߍ߫"/>
 					</div>
 				</form>
 

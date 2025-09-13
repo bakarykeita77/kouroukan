@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 
@@ -15,16 +14,9 @@
     <div class="container" id="index_container">
         
         <div class="page_head"><?php require('php/tete-de-page.php'); ?></div>
-     
-        <div class="direction" id="accueil_body">
+        <?php require('php/haut-de-page.php'); ?>
 
-            <div id="index_haut_de_page">
-                <div id="site_name">
-                    <h1>ߞߙߎ߬ߞߊ߲߬:</h1>
-                    <h3>ߒߞߏ ߛߓߍߛߎ߲߫ ߞߊ߲ߡߊߛߙߋߡߊ ߘߋ߰ߘߊ ߓߟߐߟߐ ߞߊ߲߬</h3>
-                </div>
-                <!-- <div id='image_d_accueil'> <img src="/kouroukan/images/images-de-fond/tablet1.jpg"/> </div> -->
-            </div>
+        <div class="direction" id="accueil_body">
 
             <div id="asides_container">
                 <div id="asides_commentaire_container">
@@ -36,7 +28,7 @@
                 </div>
                 <div id="btn_container">
                     <p class="asides_btn" id="connexion_btn"><a href="php/connexion.php">ߌ ߜߊ߲߬ߞߎ߲߬</a></p>
-                    <p class="asides_btn" id="inscription_btn"><a href="php/inscription.php">ߌ ߕߐ߮ ߛߓߍ߫ </a></p>
+                    <p class="asides_btn"><a href="php/inscription.php">ߌ ߕߐ߮ ߛߓߍ߫ </a></p>
                 </div>
                 <div class="note_container">
                     <p class="note" id="note_inscription_success"></p>
@@ -49,14 +41,5 @@
     </div>
     
     <script src="js/index.js"></script>
-    
-    
-    <!-- <?php
-        if($_SERVER['HTTP_REFERER'] == "/kouroukan/php/inscription.php") {
-            echo "<script> affichageAsides(); notifier(); </script>";
-        }
-    ?> -->
-    
-
 </body>
 </html>

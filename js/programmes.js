@@ -131,7 +131,7 @@ $('document').ready(function() {
     function styleDuProgramme() {
         
         // if(niveau_max > niveau_en_cours) niveau_max = niveau_en_cours;
-
+console.log(matiere_nouvellement_apprise);
         let programme_li = $("#programme_ul li");
 
         if(matiere_nouvellement_apprise != null) {

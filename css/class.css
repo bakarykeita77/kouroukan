@@ -186,7 +186,7 @@
 .clavier_container {
     position: relative;
     height: max-content;
-    min-height: 10.5rem;
+    min-height: 12rem;
     width: 100%;
     margin: 0 auto;
     padding: 0.75rem 1rem;
@@ -306,7 +306,7 @@
     max-height: 16.5rem;
     border-top: 1px solid #555;
 }
-.course_foot div:not(#panneaux, #consonnes_cadre, #consonnes_container, .clavier_container, #evaluation_reponse_container, #evaluation_reponse, #teste_container, .correcteur) { 
+.course_foot div:not(#panneaux, #consonnes_cadre, #consonnes_container, .clavier_container, #evaluation_reponse_container, #evaluation_reponse, #teste_container, .correcteur, #clavier_nko) { 
     border-radius: 0.5rem;
     width: 100%;
     height: 3rem;
@@ -823,7 +823,7 @@ del {
 
 .page_body, .direction {
     position: relative;
-    height: calc(100% - 3rem);
+    min-height: 90%;
     z-index: 0;
     overflow: auto;
 }

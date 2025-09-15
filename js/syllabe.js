@@ -142,7 +142,6 @@ function syllabe() {
 
                 let panneau_status = "masque";
                 let consonnes_choisies = [];
-                let lesson_d_apprentissage_pre_syllabe_du_serveur = lessonDApprentissagePreSyllabeDuServeur();
                 let consonnes_choisies_du_serveur = consonnesChoisiesDuServeur();
                 let memoire_consonnes_choisies = JSON.parse(localStorage.getItem("memoire_consonnes_choisies"));
                 memoire_consonnes_choisies = (memoire_consonnes_choisies == null) ? consonnes_choisies_du_serveur : memoire_consonnes_choisies;
@@ -325,6 +324,8 @@ console.log(memoire_consonnes_choisies);
                             function panneauxStyle() {
 
                                 memoire_consonnes_choisies = memoireConsonnesChoisies();
+console.log("consonnes_choisies_du_serveur");
+console.log(consonnes_choisies_du_serveur);
 console.log("memoire_consonnes_choisies");
 console.log(memoire_consonnes_choisies);
                                 $.each($('#panneaux span'), function () {
@@ -340,8 +341,15 @@ console.log(memoire_consonnes_choisies);
                                 });
 
                                 function memoireConsonnesChoisies() {
-                                    memoire_consonnes_choisies = JSON.parse(localStorage.getItem("memoire_consonnes_choisies"));
-                                    memoire_consonnes_choisies = (memoire_consonnes_choisies == null) ? consonnes_choisies_du_serveur : consonnes_choisies_du_serveur.concat(memoire_consonnes_choisies);
+                                    let memoire_consonnes_choisies = JSON.parse(localStorage.getItem("memoire_consonnes_choisies"));
+                                    memoire_consonnes_choisies = (memoire_consonnes_choisies == null) ? [] : memoire_consonnes_choisies;
+                                    
+                                    if(consonnes_choisies_du_serveur.length != 0) {
+                                        consonnes_choisies_du_serveur.forEach(element => {
+                                            if($.inArray(element,memoire_consonnes_choisies) === -1) memoire_consonnes_choisies.push(element);
+                                        });
+                                    }
+
                                     return memoire_consonnes_choisies;
                                 }
                             }
@@ -608,7 +616,7 @@ console.log(memoire_consonnes_choisies);
 
                         lesson_d_exercice_pre_syllabe = lessonDExercicePreSyllabe();
                         lesson_active = 'pre_exercice';
-                        memoriserEnSessionStorage(lesson_active);
+                        sessionStorage.setItem("lesson_active", JSON.stringify(lesson_active));
                         syllabes_actives = syllabesActives();
 
                         let exercice_pre_syllabe_questions = malaxer(malaxer(syllabes_actives));
@@ -1045,9 +1053,9 @@ console.log(memoire_consonnes_choisies);
                                         }
                                         function syllabesApprises() {
                                             let sa = [];
-                                            for (let i = 0; i < lesson_d_apprentissage_pre_syllabe.length; i++) {
-                                                sa.push(lesson_d_apprentissage_pre_syllabe[i][0]);
-                                            }
+                                            let lesson_d_apprentissage_pre_syllabe = JSON.parse(localStorage.getItem("lesson_d_apprentissage_pre_syllabe"));
+                                            lesson_d_apprentissage_pre_syllabe = (lesson_d_apprentissage_pre_syllabe == null) ? [] : lesson_d_apprentissage_pre_syllabe;
+                                            for (let i = 0; i < lesson_d_apprentissage_pre_syllabe.length; i++) { sa.push(lesson_d_apprentissage_pre_syllabe[i][0]); }
                                             return sa;
                                         }
                                     }
@@ -1258,21 +1266,18 @@ console.log(memoire_consonnes_choisies);
                                                         if (note_d_apprentissage_pre_syllabe === 100) {
 
                                                             actualiserLessonPreSyllabe(lesson_d_apprentissage_pre_syllabe, lesson_d_apprentissage_pre_syllabe_du_jour);
-                                                            localStorage.setItem("memoire_consonnes_choisies", JSON.stringify(lesson_d_apprentissage_pre_syllabe));
+                                        console.log("lesson_d_apprentissage_pre_syllabe");
+                                        console.log(lesson_d_apprentissage_pre_syllabe);
+                                                            localStorage.setItem("lesson_d_apprentissage_pre_syllabe", JSON.stringify(lesson_d_apprentissage_pre_syllabe));
 
                                                             if (lesson_d_apprentissage_pre_syllabe.length === 7) {
-                                        console.log("id_syllabe_lesson_1");
-                                        console.log(id_syllabe_lesson_1);
-                                        console.log(id_syllabe_lesson_2);
                                                                 sendLessonDataToDB('syllabe_apprentissage', lesson_d_apprentissage_pre_syllabe);
                                                                 console.log("Lesson d'apprentissage pre_syllabe est envoyée à la base de donnée.");
                                                             }
                                                             if (lesson_d_apprentissage_pre_syllabe.length > 7) {
                                                                 if (lesson_d_apprentissage_pre_syllabe.length <= 14) {
-                                        console.log("id_syllabe_lesson_1");
-                                        console.log(id_syllabe_lesson_1);
-                                        console.log(id_syllabe_lesson_2);
                                                                     updateLessonData(id_syllabe_lesson_1,lesson_d_apprentissage_pre_syllabe);
+                                                                    console.log("Lesson d'apprentissage pre_syllabe est modifiée à la base de donnée.");
                                                                 }
                                                             }
                                                         }
@@ -1284,7 +1289,9 @@ console.log(memoire_consonnes_choisies);
                                                         if (note_d_exercice_pre_syllabe === 100) {
 
                                                             actualiserLessonPreSyllabe(lesson_d_exercice_pre_syllabe, lesson_d_exercice_pre_syllabe_du_jour);
-                                                            localStorage.setItem("memoire_consonnes_choisies", JSON.stringify(lesson_d_exercice_pre_syllabe));
+                                        console.log("lesson_d_exercice_pre_syllabe");
+                                        console.log(lesson_d_exercice_pre_syllabe);
+                                                            localStorage.setItem("lesson_d_exercice_pre_syllabe", JSON.stringify(lesson_d_exercice_pre_syllabe));
 
                                                             if (lesson_d_exercice_pre_syllabe.length === 7) {
                                                                 sendLessonDataToDB('syllabe_exercice', lesson_d_exercice_pre_syllabe);
@@ -1293,6 +1300,7 @@ console.log(memoire_consonnes_choisies);
                                                             if (lesson_d_exercice_pre_syllabe.length > 7) {
                                                                 if (lesson_d_exercice_pre_syllabe.length <= 14) {
                                                                     updateLessonData(id_syllabe_lesson_2,lesson_d_exercice_pre_syllabe);
+                                                                    console.log("Lesson d'exercice pre_syllabe est modifiée à la base de donnée.");
                                                                 }
                                                             }
                                                         }
@@ -1300,9 +1308,7 @@ console.log(memoire_consonnes_choisies);
                                                     function stockerRevisionPreSyllabe() {
 
                                                         actualiserLessonPreSyllabe(lesson_de_revision_pre_syllabe, lesson_de_revision_pre_syllabe_du_jour);
-
-                                                        localStorage.setItem("memoire_consonnes_choisies", JSON.stringify(lesson_de_revision_pre_syllabe));
-                                                        memoriserEnSessionStorage(lesson_de_revision_pre_syllabe);
+                                                        localStorage.setItem("lesson_de_revision_pre_syllabe", JSON.stringify(lesson_de_revision_pre_syllabe));
 
                                                         console.log("La lesson de revision pre_syllabe fait :");
                                                         console.log(lesson_de_revision_pre_syllabe);
@@ -1395,7 +1401,6 @@ console.log(memoire_consonnes_choisies);
                         lesson_d_evaluation_pre_syllabe = lessonDEvaluationPreSyllabe();
 
                         var evaluation_pre_syllabe_questions = [];
-
                         var question_d_evaluation_pre_syllabe = '', reponse_d_evaluation_pre_syllabe = [];
                         var note_d_evaluation_pre_syllabe = 0;
                         var evaluation_counter = 0;
@@ -1707,10 +1712,10 @@ console.log(memoire_consonnes_choisies);
 
                                                                         sendLessonDataToDB('syllabe_revision', lesson_de_revision_pre_syllabe);
                                                                         sendLessonDataToDB('syllabe_evaluation', lesson_d_evaluation_pre_syllabe);
-                                                        
-                                                                        memoriserEnSessionStorage(matiere_nom);
+
                                                                         niveaux_etudies.push(niveau_en_cours);
-                                                                        memoriserEnSessionStorage(niveaux_etudies);
+                                                                        sessionStorage.setItem('matiere_nom',JSON.stringify(matiere_nom));
+                                                                        sessionStorage.setItem('niveaux_etudies',JSON.stringify(niveaux_etudies));
                                                                         
                                                                         console.log("Lesson de revision pre_syllabe est envoyée à la base de donnée.");
                                                                         console.log("Lesson d'evaluation pre_syllabe est envoyée à la base de donnée.");
@@ -1719,8 +1724,7 @@ console.log(memoire_consonnes_choisies);
                                                             }
                                                         }
 
-                                                        memoriserEnSessionStorage(lesson_d_evaluation_pre_syllabe_du_jour);
-                                                        localStorage.setItem("memoire_consonnes_choisies", JSON.stringify(syllabes_etudiees));
+                                                        localStorage.setItem("syllabes_etudiees", JSON.stringify(syllabes_etudiees));
                                                     }
                                                     function chargerLaLessonSuivanteBtn() {
                                                         $('#continu_sur_la_lesson_suivante a').text('ߞߊ߲ߡߊߛߙߋ ߘߊߡߌ߬ߘߊ߬');
@@ -1788,63 +1792,63 @@ console.log(memoire_consonnes_choisies);
                 }
                 function lessonDApprentissagePreSyllabe() {
 
-                    lesson_d_apprentissage_pre_syllabe_du_serveur = (lesson_d_apprentissage_pre_syllabe_du_serveur == null) ? [] : lesson_d_apprentissage_pre_syllabe_du_serveur;
+                    let lesson_d_apprentissage_pre_syllabe_du_serveur = lessonDApprentissagePreSyllabeDuServeur();
+                    let lesson_d_apprentissage_pre_syllabe = JSON.parse(localStorage.getItem("lesson_d_apprentissage_pre_syllabe"));
+                    
+                    lesson_d_apprentissage_pre_syllabe = (lesson_d_apprentissage_pre_syllabe == null) ? lesson_d_apprentissage_pre_syllabe_du_serveur : lesson_d_apprentissage_pre_syllabe_du_serveur.concat(lesson_d_apprentissage_pre_syllabe);
+                    return lesson_d_apprentissage_pre_syllabe;
 
-                    let lesson_d_apprentissage = JSON.parse(localStorage.getItem("lesson_d_apprentissage"));
-                    lesson_d_apprentissage = (lesson_d_apprentissage == null) ? lesson_d_apprentissage_pre_syllabe_du_serveur : lesson_d_apprentissage;
-                    console.log(lesson_d_apprentissage);
-                    return lesson_d_apprentissage;
-
+                    function lessonDApprentissagePreSyllabeDuServeur() {
+                        let lesson_d_apprentissage_pre_syllabe_du_serveur = [];
+                        datas = JSON.parse(sessionStorage.getItem("datas"));
+                        if (datas != null) if (datas[1].length != 0) lesson_d_apprentissage_pre_syllabe_du_serveur = JSON.parse(datas[1][0].lesson);
+                        return lesson_d_apprentissage_pre_syllabe_du_serveur;
+                    }
                 }
                 function lessonDExercicePreSyllabe() {
 
                     let lesson_d_exercice_pre_syllabe_du_serveur = lessonDExercicePreSyllabeDuServeur();
-                    lesson_d_exercice_pre_syllabe_du_serveur = (lesson_d_exercice_pre_syllabe_du_serveur == null) ? [] : lesson_d_exercice_pre_syllabe_du_serveur;
+                    let lesson_d_exercice_pre_syllabe = JSON.parse(localStorage.getItem("lesson_d_exercice_pre_syllabe"));
 
-                    let lesson_d_exercice_pre_syllabe = JSON.parse(localStorage.getItem('lesson_d_exercice_pre_syllabe'));
-                    lesson_d_exercice_pre_syllabe = (lesson_d_exercice_pre_syllabe == null) ? lesson_d_exercice_pre_syllabe_du_serveur : lesson_d_exercice_pre_syllabe.concat(lesson_d_exercice_pre_syllabe_du_serveur);
-
+                    lesson_d_exercice_pre_syllabe = (lesson_d_exercice_pre_syllabe == null) ? lesson_d_exercice_pre_syllabe_du_serveur : lesson_d_exercice_pre_syllabe_du_serveur.concat(lesson_d_exercice_pre_syllabe);
                     return lesson_d_exercice_pre_syllabe;
 
                     function lessonDExercicePreSyllabeDuServeur() {
+                        let lesson_d_exercice_pre_syllabe_du_serveur = [];
                         datas = JSON.parse(sessionStorage.getItem("datas"));
-                        let lepss = [];
-                        if (datas != null) if (datas[1].length != 0) lepss = JSON.parse(datas[1][1].lesson);
-                        return lepss;
+                        if (datas != null) if (datas[1].length != 0) lesson_d_exercice_pre_syllabe_du_serveur = JSON.parse(datas[1][1].lesson);
+                        return lesson_d_exercice_pre_syllabe_du_serveur;
                     }
                 }
                 function lessonDeRevisionPreSyllabe() {
 
                     let lesson_de_revision_pre_syllabe_du_serveur = lessonDeRevisionPreSyllabeDuServeur();
-                    lesson_de_revision_pre_syllabe_du_serveur = (lesson_de_revision_pre_syllabe_du_serveur == null) ? [] : lesson_de_revision_pre_syllabe_du_serveur;
-
-                    let lesson_de_revision_pre_syllabe = JSON.parse(localStorage.getItem('lesson_de_revision_pre_syllabe'));
-                    lesson_de_revision_pre_syllabe = (lesson_de_revision_pre_syllabe == null) ? lesson_de_revision_pre_syllabe_du_serveur : lesson_de_revision_pre_syllabe.concat(lesson_de_revision_pre_syllabe_du_serveur);
-
+                    let lesson_de_revision_pre_syllabe = JSON.parse(localStorage.getItem("lesson_de_revision_pre_syllabe"));
+                    
+                    lesson_de_revision_pre_syllabe = (lesson_de_revision_pre_syllabe == null) ? lesson_de_revision_pre_syllabe_du_serveur : lesson_de_revision_pre_syllabe_du_serveur.concat(lesson_de_revision_pre_syllabe);
                     return lesson_de_revision_pre_syllabe;
 
                     function lessonDeRevisionPreSyllabeDuServeur() {
+                        let lesson_de_revision_pre_syllabe_du_serveur = [];
                         datas = JSON.parse(sessionStorage.getItem("datas"));
-                        let lrpss = [];
-                        if (datas != null) if (datas[1].length != 0) lrpss = (datas[1][2] == undefined) ? [] : JSON.parse(datas[1][2].lesson);
-                        return lrpss;
+                        if (datas != null) if (datas[1].length != 0) lesson_de_revision_pre_syllabe_du_serveur = JSON.parse(datas[1][2].lesson);
+                        return lesson_de_revision_pre_syllabe_du_serveur;
                     }
                 }
                 function lessonDEvaluationPreSyllabe() {
 
                     let lesson_d_evaluation_pre_syllabe_du_serveur = lessonDEvaluationPreSyllabeDuServeur();
-                    lesson_d_evaluation_pre_syllabe_du_serveur = (lesson_d_evaluation_pre_syllabe_du_serveur == null) ? [] : lesson_d_evaluation_pre_syllabe_du_serveur;
-
                     let lesson_d_evaluation_pre_syllabe = JSON.parse(localStorage.getItem('lesson_d_evaluation_pre_syllabe'));
-                    lesson_d_evaluation_pre_syllabe = (lesson_d_evaluation_pre_syllabe == null) ? lesson_d_evaluation_pre_syllabe_du_serveur : lesson_d_evaluation_pre_syllabe.concat(lesson_d_evaluation_pre_syllabe_du_serveur);
-
+                    
+                    lesson_d_evaluation_pre_syllabe = (lesson_d_evaluation_pre_syllabe == null) ? lesson_d_evaluation_pre_syllabe_du_serveur : lesson_d_evaluation_pre_syllabe_du_serveur.concat(lesson_d_evaluation_pre_syllabe);
                     return lesson_d_evaluation_pre_syllabe;
 
                     function lessonDEvaluationPreSyllabeDuServeur() {
+                        let lesson_d_evaluation_pre_syllabe_du_serveur = [];
                         datas = JSON.parse(sessionStorage.getItem("datas"));
-                        let levpss = [];
-                        if (datas != null) if (datas[1].length != 0) levpss = (datas[1][3] == undefined) ? [] : JSON.parse(datas[1][3].lesson);
-                        return levpss;
+                        if (datas != null) if (datas[1].length != 0) lesson_d_evaluation_pre_syllabe_du_serveur = JSON.parse(datas[1][3].lesson);
+                        return lesson_d_evaluation_pre_syllabe_du_serveur;
+
                     }
                 }
                 function actualiserLessonPreSyllabe(lesson, lesson_du_jour) {
@@ -1867,13 +1871,6 @@ console.log(memoire_consonnes_choisies);
                         lesson.forEach(element => { if (element != null) as.push(element[0]); });
                         return as;
                     }
-                }
-                function lessonDApprentissagePreSyllabeDuServeur() {
-                    datas = JSON.parse(sessionStorage.getItem("datas"));
-                    let lapss = [];
-
-                    if (datas != null) if (datas[1].length != 0) lapss = JSON.parse(datas[1][0].lesson);
-                    return lapss;
                 }
                 function consonnesChoisiesDuServeur() {
         
@@ -1919,10 +1916,10 @@ console.log(memoire_consonnes_choisies);
 
 
                 //Récupération des données, storées depuis lesson.js, sur l'apprenant  
-                memoriserEnSessionStorage(phase_class);
-                memoriserEnSessionStorage(phase_li_id);
-                memoriserEnSessionStorage(phase_nom);
-                memoriserEnSessionStorage(course_id);
+                sessionStorage.setItem("phase_class",JSON.stringify(phase_class));
+                sessionStorage.setItem("phase_li_id",JSON.stringify(phase_li_id));
+                sessionStorage.setItem("phase_nom",JSON.stringify(phase_nom));
+                sessionStorage.setItem("course_id",JSON.stringify(course_id));
 
                 /*--------------------------------------------------------------------*/
 
@@ -2168,7 +2165,7 @@ console.log(memoire_consonnes_choisies);
                                                 if (note >= moyenne_d_apprentissage) {
                                                     lesson_d_apprentissage_syllabe_du_serveur = syllabe_apprentissage_clicks_memo;
                                                     sendLessonDataToDB('syllabe_apprentissage', lesson_d_apprentissage_syllabe_du_serveur);
-                                                    memoriserEnSessionStorage(lesson_d_apprentissage_syllabe_du_serveur);
+                                                    sessionStorage.setItem("lesson_d_apprentissage_syllabe_du_serveur",JSON.stringify(lesson_d_apprentissage_syllabe_du_serveur));
 
                                                     console.log('Les données d\'apprentissage sont envoyées à la base de données');
                                                 }

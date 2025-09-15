@@ -215,7 +215,6 @@ $(document).ready(function(){
                                     var profile_teste_body_content = '';
                                     for(var i=0;i<teste.length;i++){
                                         var data = teste[i].split(',');
-                                       
                                         profile_teste_body_content += '<tr style="border:1px solid #fff"><td>'+data[0]+'</td><td>'+data[1]+'</td><td>'+data[2]+'</td><td>'+data[3]+'</td></tr>\n';
                                     }
                                     return profile_teste_body_content;

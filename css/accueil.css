@@ -2,19 +2,12 @@
 #reception {
     position: relative;
     display: none;
-    top: 1rem;
+    top: 2rem;
     padding: 0.125rem 0;
     margin: auto;
     font-size: 1rem;
     text-align: justify;
     max-width: 45rem;
-    border-top: 4px solid #aaa;
-    border-bottom: 4px solid #aaa;
- }
- #reception_content {
-    border-top: 1px solid #aaa;
-    border-bottom: 1px solid #aaa;
-    background-color: #eee;
  }
 #nom_d_utilisateur {
     font-size: 1.2rem;
@@ -39,9 +32,20 @@
 
 @media(orientation: portrait) {
     #reception { width: calc(100% - 1rem); }
-    #reception_content { padding: 4rem 1rem; }
+    #reception_content { 
+        padding: 4rem 1rem; 
+    }
 }
 @media(orientation: landscape) {
-    #reception { width: calc(100% - 4rem); }
-    #reception_content { padding: 3.5rem 8rem 4.5rem; }
+    #reception {
+        width: calc(100% - 4rem); 
+        border-top: 4px solid #aaa;
+        border-bottom: 4px solid #aaa;
+    }
+    #reception_content { 
+        padding: 3.5rem 8rem 4.5rem; 
+        border-top: 1px solid #aaa;
+        border-bottom: 1px solid #aaa;
+        background-color: #eee;
+    }
 }

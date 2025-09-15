@@ -4,7 +4,18 @@ body {
     font-family:Courier new, monospace;
  }
  #logo { display: none; }
-#asides_container { padding: 0 0.5rem; margin: auto; }
+#asides_container { margin: auto; }
+#asides_commentaire_container {
+    max-width: 60rem;
+    margin: 1rem auto;
+}
+#asides_commentaire {
+    position: relative;
+    width: 100%;
+    max-width: 40rem;
+    margin: auto;
+    box-sizing: border-box;
+}
 #asides_container p, #btn_container { padding: 0; }
 .pied_de_page { display: none; }
 #affiche_de_tableau { display: none; }
@@ -149,32 +160,14 @@ button:active { background-color: #ccc; }
 @media screen and (orientation: portrait) {
     #asides_commentaire_container {
         min-height: 50vh;
-        max-width: 50rem;
-        margin: 0 auto;
-        overflow: auto;
+        border-bottom: 1px solid transparent;
     }
-    #asides_commentaire { 
-        padding: 0 0.5rem; 
-        margin: 0;
-        width: 100%;
-        background-color: transparent;
-        box-sizing: border-box;
-    }
+    #asides_commentaire { padding: 0 2rem; }
 }
 @media screen and (orientation: landscape) {
     #asides_commentaire_container {
-        /* border-top: 1px solid #aaa; */
+        min-height: 55vh;
         border-bottom: 1px solid #aaa;
-        margin: 1rem auto;
-        /* max-width: 50rem; */
     }
-    #asides_commentaire { 
-        padding: 2rem 5rem;
-        margin: 0.25rem auto;
-        min-height: 17.5rem;
-        width: calc(100% - 2rem);
-        max-width: 40rem;
-        /* background-color: #eee; */
-        box-sizing: border-box;
-    }
+    #asides_commentaire { padding: 2rem; }
 }

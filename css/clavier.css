@@ -1,10 +1,10 @@
 
 #clavier_nko {
     position: relative;
-    height: 90%;
-	width: 90%;
-	margin: auto;
-	color: #fff;
+    height: 10rem;
+    width: 90%;
+    margin: auto;
+    color: #fff;
 }
 #clavier_nko table {
 	border-collapse: collapse;

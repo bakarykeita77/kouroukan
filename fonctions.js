@@ -1040,8 +1040,6 @@
             });
         }
     }
-    function memoriserEnLocalStorage(data) {localStorage.setItem(data, JSON.stringify(data));}
-    function memoriserEnSessionStorage(data) {sessionStorage.setItem('data', JSON.stringify(data));}
     function mettreEnSurbrillance(element) {
         element.addClass('surbrillance');
         element.siblings().removeClass('surbrillance');

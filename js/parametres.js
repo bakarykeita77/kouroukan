@@ -25,8 +25,6 @@ function parametrageDeLesson() {
         chargementDesElementsDeParametres();
         affichageDeLessonParametres();
         chargerLesson(); // Chaque fois qu'un checkbox est clické, le cochage doit etre actualisé et le tableau noir rechargé. 
-
-        console.log("Cette chargement du tableau noir est éffectuée par la fonction chargementDeLesson() dans chargerLesson().");
     }
     function affichageDeParametres(){ 
     

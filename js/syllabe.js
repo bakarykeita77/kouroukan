@@ -151,18 +151,12 @@ function syllabe() {
                 let lesson_de_revision_pre_syllabe = lessonDeRevisionPreSyllabe();
                 let lesson_d_evaluation_pre_syllabe = lessonDEvaluationPreSyllabe();
 
-console.log('consonnes_choisies_du_serveur');
-console.log(consonnes_choisies_du_serveur);
-console.log('memoire_consonnes_choisies');
-console.log(memoire_consonnes_choisies);
-
                 let lesson_d_apprentissage_pre_syllabe_du_jour = [];
                 let lesson_d_exercice_pre_syllabe_du_jour = [];
                 let lesson_de_revision_pre_syllabe_du_jour = [];
                 let lesson_d_evaluation_pre_syllabe_du_jour = [];
 
                 let syllabes_etudiees = JSON.parse(localStorage.getItem('syllabes_etudiees'));
-                let texte_5 = "ߘߋ߰ߣߍ߲߬ ߞߎߘߊ ߣߌ߫ ߞߘߐ߬ߡߊ߲ ߘߏ߫ ߟߎ߫ ߟߋ߬ ߢߊ߯ߡߌߣߍ߲߫ ߢߐ߲ ߘߐ߫ ߣߌ߲߬ .ߣߴߌ ߛߋ߫ ߘߊ߫ ߞߵߊ߬ߟߎ߬ ߓߍ߯ ߢߊߓߐ߫ ߗߡߍ߬ߘߐ߬ߦߊ߫ ߗߍ߬ߡߍ ߟߊ߫ ߏ߬ߘߐ߬ ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ .ߓߌ߬ߟߊ߬ ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߞߐ߫";
             
                 apprentissagePreSyllabe();
                 exercicePreSyllabe();
@@ -324,10 +318,7 @@ console.log(memoire_consonnes_choisies);
                             function panneauxStyle() {
 
                                 memoire_consonnes_choisies = memoireConsonnesChoisies();
-console.log("consonnes_choisies_du_serveur");
-console.log(consonnes_choisies_du_serveur);
-console.log("memoire_consonnes_choisies");
-console.log(memoire_consonnes_choisies);
+
                                 $.each($('#panneaux span'), function () {
 
                                     let panneaux_span = $(this);
@@ -1714,8 +1705,8 @@ console.log(memoire_consonnes_choisies);
                                                                         sendLessonDataToDB('syllabe_evaluation', lesson_d_evaluation_pre_syllabe);
 
                                                                         niveaux_etudies.push(niveau_en_cours);
-                                                                        sessionStorage.setItem('matiere_nom',JSON.stringify(matiere_nom));
                                                                         sessionStorage.setItem('niveaux_etudies',JSON.stringify(niveaux_etudies));
+                                                                        sessionStorage.setItem('matiere_nouvellement_apprise',JSON.stringify(matiere_nom));
                                                                         
                                                                         console.log("Lesson de revision pre_syllabe est envoyée à la base de donnée.");
                                                                         console.log("Lesson d'evaluation pre_syllabe est envoyée à la base de donnée.");
@@ -2370,53 +2361,6 @@ console.log(memoire_consonnes_choisies);
 
             $('#total_bonne_reponse').text('');
             $('#total_point_2').text('');
-        }
-        function adapterLeResultatAuFormatDApprentissage(table) {
-
-            $('#table_head tr:nth-child(2) td').text('ߛߓߍߘߋ߲');
-            $('#table_head tr:nth-child(3) td').text('ߘߌ߯ߟߌ');
-
-            $.each($('#table_body tr:nth-child(3) td'), function () {
-                $(this).html(parseIntNko($(this).html()));
-            });
-
-            $('#total_reponse').text(parseIntNko(totalDAppui()));
-            $('#total_point_1').text(parseIntNko(totalApprentissagePoint()));
-
-            $('#resultat_pied > div > div:nth-child(1) span:first-child').text('ߛߓߍߘߋ ߡߎ߬ߡߍ');
-            $('#resultat_pied > div > div:nth-child(2) span:first-child').text('ߘߌ߯ߟߌ ߡߎ߬ߡߍ');
-            $('#resultat_pied > div > div:nth-child(3)').css('display', 'none');
-
-            $('#total_bonne_reponse').text(parseIntNko(totalDAppui()));
-            $('#total_point_2').text(parseIntNko(totalApprentissagePoint()));
-
-
-            function totalDAppui() {
-                let ta = 0;
-                for (let i = 0; i < table.length; i++) {
-                    ta += table[i][1];
-                }
-                return ta;
-            }
-            function totalApprentissagePoint() {
-                let tap = 0;
-                for (let i = 0; i < table.length; i++) {
-                    tap += table[i][2];
-                }
-                return tap;
-            }
-        }
-        function afficherPreRevisionBtn() {
-            $('#pre_apprentissage_dialogue_btn').css('display', 'block');
-            $('#apprentissage_dialogue_btn').css('display', 'none');
-            $('.progress_bar').css('display', 'none');
-
-            $('.progress_bar_integre').css('display', 'block');
-            $('#apprentissage_dialogue_btns').css('display', 'none');
-            // $('#redirection_btns').css('display','block');
-
-            $('#exercice_bouton').css('display', 'none');
-            $('#evaluation_bouton').css('display', 'block');
         }
         function initialiserExerciceResultat() {
 

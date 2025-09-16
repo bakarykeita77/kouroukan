@@ -242,7 +242,7 @@
 }
 .course {    
     position: relative;
-    height: calc(100% - 1.5rem); 
+    height: calc(100% - 0.5rem); 
     max-height: 45rem;
     margin: 0 auto;
     padding: 0.125rem;
@@ -823,8 +823,7 @@ del {
 
 .page_body, .direction {
     position: relative;
-    min-height: 90%;
-    z-index: 0;
+    height: calc(100% - 3.5rem);
     overflow: auto;
 }
 .page_body h4, .direction h4 { padding: 0 2rem 0 0; margin: 1rem 0; }

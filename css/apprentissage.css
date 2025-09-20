@@ -42,7 +42,7 @@
 #apprentissage_note h3 { margin: 0; }
 #apprentissage_container .table_parlante td { 
     border: 1px solid transparent; 
-    opacity: 0;
+    /* opacity: 0; */
     /* min-width: 2.5rem; */
 }
 #apprentissage_note p { margin: 0.25rem 0; }
@@ -79,6 +79,17 @@
 #cercles_des_partis, #carres_pour_exercices { display: inline-block; }
 .titre_de_parti, .cercles_des_partis { 
     display: inline-block; 
+    font-weight: bold; 
+    cursor: pointer;
+}
+.titre_de_parti { 
+    height: 3rem;
+    width: 100%;
+}
+#cercles_des_partis, #carres_pour_exercices { display: inline-block; }
+.titre_de_parti, .cercles_des_partis { 
+    display: inline-block; 
+    height: 3rem;
     font-weight: bold; 
     cursor: pointer;
 }
@@ -210,27 +221,29 @@
     transition: 0.25s;
 }
 #pre_revision_btn:active { box-shadow: none; }
+#caracteres_container { top: 22rem; }
+#caracteres_container span:hover { background-color: #ddd; }
 #consonnes_cadre {
     position: absolute;
     margin: 0;
     bottom: 2px;
-    height: 10.5rem;
+    height: max-content;
     width: max-content;
+    min-width: 16rem;
     padding: 0 0.5rem;
     border-bottom: 0.5rem solid #aaa;
     overflow: hidden;
 }
-#consonnes_container {
+#consonnes_cadre > div {
+    background-color: #eee;
     position: relative;
-    top: 100%;
-    height: 9.5rem;
-    width: max-content;
+    height: 14rem;
     padding: 1rem;
     display: block;
-    border-radius: 0.5rem 0.5rem 0 0;
+    border-radius: 0.5rem;
     background-color: #eee;
 }
-#consonnes_container span {
+#consonnes_cadre span {
     position: relative;
     display: inline-block;
     font-size: 1.5rem;
@@ -241,10 +254,25 @@
     line-height: 2rem;
     background-color: #fff;
     border-radius: 0.5rem;
+    vertical-align: middle;
     box-shadow: 0 0 0.25rem #aaa;
     cursor: pointer;
 }
-#consonnes_container span:hover { background-color: #ddd; }
+#caracteres_submit_btn_container {
+    position: relative;
+    width: max-content;
+    margin: 0 auto 1rem;
+    background-color: #fff;
+    box-shadow: 0 0 0.25rem #aaa;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+#caracteres_submit_btn {
+    padding: 1rem;
+    font-weight: bold;
+    border-style: none;
+    cursor: pointer;
+}
 
 #exercice_container, #revision_container { display: none; height: 100%; }
 #pre_exercice {

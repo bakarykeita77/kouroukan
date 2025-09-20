@@ -8,7 +8,6 @@ function parametrageDeLesson() {
     var voyelles_cochees = [], consonnes_cochees = [], tedos_coches = [], tons_coches = [], nasalisations_cochees = [], caracteres_coches = [],syllabes_coches = [];
 
     let option_retenue = JSON.parse(localStorage.getItem('option_retenue')); // Voir programmes.js : lessonOptions()
-
     
  /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/    
     parametrage();
@@ -32,7 +31,6 @@ function parametrageDeLesson() {
             if($('.notification h3').text() == 'ߟߊ߬ߡߍ߲߬ߠߌ ߞߍ߫') return false;
             afficherParametres(); 
         });
-        $('.parametres_container').on('mouseleave', function(){ masquerParametres(); });
         $('.parametres_container #submit_btn').on('click', function(){ masquerParametres(); });
         
         
@@ -170,16 +168,22 @@ function parametrageDeLesson() {
     }
     function chargerLesson() {
  
+        cochageParDefaut();
         checkbox_parentClick();
-        checkbox_childrenClick();
+        // checkbox_childrenClick();
+
+        $("#submit_btn").click(()=>{
+            viderLesSousTableauxDesCaracteresCoches();
+            collecteDesCaracteresCoches(); 
+            rechargerLesSousTableauxDesCaracteresCoches();
+            chargementDeLesson();
+            affichageDeLesson();
+        });
         
-        $.each($('.checkbox_parent'), function(){ $(this).click(); }); /* Cochage par defaut */
-        $.each($('.check_btn'), function(){ $(this).click(); }); /* Cochage par defaut */
-
-        $('.checkbox_titre').on('click', function(){ $(this).find('.checkbox_parent').click(); });
-        $('.check_btn').on('click', function(){ $(this).children().first().click(); });
-
-            
+        function cochageParDefaut() {
+            $("#tons_checker .check_btn:nth-child(3) input").prop('checked',true);
+            $("#nasalisation_checker .check_btn:nth-child(1) input").prop('checked',true);
+        }
         function checkbox_parentClick() {
             
             $('.checkbox_parent').on('click', function(){
@@ -189,9 +193,9 @@ function parametrageDeLesson() {
                 if($(this).prop('checked')==false){ checkbox_children_actifs.prop('checked',false); }
              
                 viderLesSousTableauxDesCaracteresCoches();
-                collecteDesCaracteresCoches(); 
+                // collecteDesCaracteresCoches(); 
                 rechargerLesSousTableauxDesCaracteresCoches();
-                chargementDeLesson();
+                // chargementDeLesson();
             });
         }
         function checkbox_childrenClick() {
@@ -295,7 +299,7 @@ function parametrageDeLesson() {
                 
                 caracteres_coches = voyelles_cochees.concat(consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees);
             }
-
+console.log(caracteres_coches);
             sessionStorage.setItem('caracteres_coches', JSON.stringify(caracteres_coches));
         }
         function rechargerLesSousTableauxDesCaracteresCoches() {
@@ -314,6 +318,7 @@ function parametrageDeLesson() {
             tons_coches       = $('#tons_coches'      ).html().split('');
             nasalisations_cochees;
             caracteres_coches = voyelles_cochees.concat(consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees);
+           
             var q = questions(niveau_actif);
             sessionStorage.setItem('questions', JSON.stringify(q));
             var apprentissage_html = apprentissageHTML();
@@ -483,6 +488,9 @@ function parametrageDeLesson() {
 
                 return nbr_td;
             }
+        }
+        function affichageDeLesson() {
+            $("#apprentissage_container .table_parante td").css("color","orange");
         }
     } 
 }        

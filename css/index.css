@@ -8,6 +8,7 @@ body {
 #asides_commentaire_container {
     max-width: 60rem;
     margin: 1rem auto;
+    min-height: 50vh;
 }
 #asides_commentaire {
     position: relative;
@@ -158,16 +159,10 @@ a {
 button:active { background-color: #ccc; }
 
 @media screen and (orientation: portrait) {
-    #asides_commentaire_container {
-        min-height: 50vh;
-        border-bottom: 1px solid transparent;
-    }
+    #asides_commentaire_container { border-bottom: 1px solid transparent; }
     #asides_commentaire { padding: 0 2rem; }
 }
 @media screen and (orientation: landscape) {
-    #asides_commentaire_container {
-        min-height: 55vh;
-        border-bottom: 1px solid #aaa;
-    }
+    #asides_commentaire_container { border-bottom: 1px solid #aaa; }
     #asides_commentaire { padding: 2rem; }
 }

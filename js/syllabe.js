@@ -424,22 +424,6 @@ function syllabe() {
                                     decocherLesCaracteresNonConcernes();
                                     cocherLeCaractereAUtiliser();
 
-                                    function decocherLesCaracteresNonConcernes() {
-
-                                        decocherLesConsonnesNonUtilises();
-                                        decocherLaNasalisationNonUtilisee();
-                                        decocherLeTedo();
-
-                                        function decocherLesConsonnesNonUtilises() {
-                                            if ($('#consonnes_checker').find('.checkbox_parent').prop("checked") == true) { $('#consonnes_checker').find('.checkbox_parent').next().click(); }
-                                        }
-                                        function decocherLaNasalisationNonUtilisee() {
-                                            if ($('#nasalisation_checker').find('.check_btn:last-child input').prop("checked") == true) { $('#nasalisation_checker').find('.check_btn:last-child label').click(); }
-                                        }
-                                        function decocherLeTedo() {
-                                            if ($('#tedo_checker').find('.check_btn:last-child input').prop("checked") == true) { $('#tedo_checker').find('.check_btn:last-child label').click(); }
-                                        }
-                                    }
                                     function cocherLeCaractereAUtiliser() {
                                         /*
                                         Cette fonction est liée à la fonction checkbox_childrenClick() dans la fonction chargerLesson() dans parametres.js.
@@ -473,7 +457,6 @@ function syllabe() {
                                 }
                                 function effacerAuTableauNoir() {
                                     if (panneau_consonne_index != '-1') {
-                                        let tr_actif = "";
                                         $.each($('#apprentissage_body tr'), function () {
                                             let consonne_de_la_ligne = $(this).text().split("")[1];
 

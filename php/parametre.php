@@ -16,7 +16,7 @@
         </table>
     </div>
 
-    <div style='display:block'>
+    <div style='display:blockn'>
         <div id='voyelles_cochees'></div>
         <div id='consonnes_cochees'></div>
         <div id='tedos_coches'></div>

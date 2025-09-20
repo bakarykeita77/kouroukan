@@ -392,6 +392,36 @@
         setTimeout((function() { td.addClass('shadow');    }), 1400);
          setTimeout((function() { td.removeClass('shadow'); }), 1800);
     }
+    function cocherLeTedo() {
+        $.each($('#tedo_checker .checkbox_parent'), function(){ 
+            if($(this).prop('checked')==false) $(this).click(); 
+        });
+    }
+    function cocherToutesLesConsonnes() {
+        $.each($('#consonnes_checker .checkbox_parent'), function(){ 
+            if($(this).prop('checked')==false) $(this).click(); 
+        });
+    }
+    function cocherToutesLesNasalisations() {
+        $.each($('#nasalisation_checker .checkbox_parent'), function(){ 
+            if($(this).prop('checked')==false) $(this).click(); 
+        });
+    }
+    function cocherToutesLesVoyelles() {
+        $.each($('#voyelles_checker .checkbox_parent'), function(){ 
+            if($(this).prop('checked')==false) $(this).click(); 
+        });
+    }
+    function cocherTousLesCaracteres() {
+        $.each($('.checkbox_parent'), function(){ 
+            if($(this).prop('checked')==false) $(this).click(); 
+        });
+    }
+    function cocherTousLesTons() {
+        $.each($('#tons_checker .checkbox_parent'), function(){ 
+            if($(this).prop('checked')==false) $(this).click(); 
+        });
+    }
 	function compteur(){
 	    var i=0;
 	    return function(){ return i += 1; };
@@ -466,6 +496,60 @@
         let date_actuelle = temps+' '+lune+' ߕߟߋ߬ '+date+' ߛߊ߲߭ '+an;
 
         return date_actuelle;
+    }
+    function decocherLeTedo() {
+        $.each($('#tedo_checker .checkbox_parent'), function(){ 
+            if($(this).prop('checked')==true) $(this).click(); 
+        });
+    }
+    function decocherLesCaracteresNonConcernes() {
+
+        decocherLesConsonnes();
+        decocherLesVoyelles();
+        decocherLaNasalisation();
+        decocherLeTedo();
+        decocherLesTons();
+
+        function decocherLesConsonnes() {
+            if ($('#consonnes_checker').find('.checkbox_parent').prop("checked") == true) { $('#consonnes_checker').find('.checkbox_parent').next().click(); }
+        }
+        function decocherLesVoyelles() {
+            if ($('#voyelles_checker').find('.checkbox_parent').prop("checked") == true) { $('#voyelles_checker').find('.checkbox_parent').next().click(); }
+        }
+        function decocherLaNasalisation() {
+            if ($('#nasalisation_checker').find('.checkbox_parent').prop("checked") == true) { $('#nasalisation_checker').find('.checkbox_parent').next().click(); }
+        }
+        function decocherLeTedo() {
+            if ($('#tedo_checker').find('.checkbox_parent').prop("checked") == true) { $('#tedo_checker').find('.checkbox_parent').next().click(); }
+        }
+        function decocherLesTons() {
+            if ($('#tons_checker').find('.checkbox_parent').prop("checked") == true) { $('#tons_checker').find('.checkbox_parent').next().click(); }
+        }
+    }
+    function decocherToutesLesConsonnes() {
+        $.each($('#consonnes_checker .checkbox_parent'), function(){ 
+            if($(this).prop('checked')==true) $(this).click(); 
+        });
+    }
+    function decocherToutesLesNasalisations() {
+        $.each($('#nasalisation_checker .checkbox_parent'), function(){ 
+            if($(this).prop('checked')==true) $(this).click(); 
+        });
+    }
+    function decocherToutesLesVoyelles() {
+        $.each($('#voyelles_checker .checkbox_parent'), function(){ 
+            if($(this).prop('checked')==true) $(this).click(); 
+        });
+    }
+    function decocherTousLesTons() {
+        $.each($('#tons_checker .checkbox_parent'), function(){ 
+            if($(this).prop('checked')==true) $(this).click(); 
+        });
+    }
+    function decocherTousLesCaracteres() {
+        $.each($('.checkbox_parent'), function(){ 
+            if($(this).prop('checked')==true) $(this).click(); 
+        });
     }
     function defilementDuContenuVersLeHaut(container) {
         container.animate({ scrollTop:container[0].scrollHeight }, 1000);

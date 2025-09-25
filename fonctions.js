@@ -975,7 +975,7 @@
                 }
                 tons_apprentissage_html += '</tr>\n\n';
             }
-            tons_apprentissage_html += "</table><br><br><hr><br>\n";
+            tons_apprentissage_html += "</table><br><br><br>\n";
         }
                    
         return tons_apprentissage_html;

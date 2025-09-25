@@ -21,7 +21,6 @@ function ton() {
         function apprentissageTon() {
 
             parametrageDeLesson();
-            // decocherLesCaracteresNonConcernes();
             chargerApprentissageTon();
             afficherApprentissageTon();
             apprendreTon();
@@ -59,7 +58,9 @@ function ton() {
                                 html_2 += '<div id="caracteres_container">\n';
         
                                     html_2 += '<div id="caracteres_submit_btn_container">\n';
-                                        html_2 += '<button id="caracteres_submit_btn"></button>\n';
+                                        html_2 += '<button id="caracteres_submit_btn_1"></button>\n';
+                                        html_2 += '<button id="caracteres_submit_btn_2"></button>\n';
+                                        html_2 += '<button id="caracteres_submit_btn_3"></button>\n';
                                     html_2 += '</div>\n';
                                 
                                     html_2 += "<div id='consonnes_container'>\n";
@@ -111,25 +112,9 @@ function ton() {
                 }
                 function chargerCorpsDApprentissageTon() {
                     
-                    selectionDesCaracteres();
                     stylesDesCaracteres();
                     chargementDeLesson();
 
-                    function selectionDesCaracteres() {
-                        $("#caracteres_container span").click((e) => {
-
-                            let caractere_du_panneau = e.target.textContent;
-                           
-                            cocherLeCaractereCorrespondantDeParametre();
-
-                            function cocherLeCaractereCorrespondantDeParametre() {
-                                for (let x = 0; x < $(".parametres_container input").length; x++) {
-                                    let caractere_de_parametre = $(".parametres_container input")[x].value;
-                                    if(caractere_du_panneau == caractere_de_parametre) $(".parametres_container input")[x].click();
-                                }
-                            }
-                        });
-                    }
                     function stylesDesCaracteres() {
                         $.each($("#caracteres_container span"), function() {
                             let caractere_container = $(this);
@@ -137,10 +122,109 @@ function ton() {
                         });
                     }
                     function chargementDeLesson() {
-                        $("#caracteres_submit_btn").click(function() {
-                            let submit_btn_label = $(this).text();
-                            if(submit_btn_label == "ߢߣߊߕߊ߬ߣߍ߲ ߠߎ߬ ߛߓߍ߫ ߥߟߊ߬ߓߊ ߞߊ߲߬") $("#submit_btn").click();
-                        });
+
+                        choixDesCaracteres();
+                        enregistrementDesCaracteresChoisis();
+
+                        function choixDesCaracteres() {
+                            
+                            cocherLesCaracteresDuPanneau();
+                            cocherLeCaractereCorrespondantDeParametre();
+
+                            function cocherLesCaracteresDuPanneau() {
+                                          
+                                cocherLesConsonnes();
+                                cocherLesVoyelles();
+                                cocherLesTons();
+
+                                function cocherLesConsonnes() {
+                                    $("#consonnes_container").click(() => {
+                                        if($("#caracteres_submit_btn_1").html() == "ߌ ߢߣߊߕߊ߬ ߛߌ߬ߙߊ߬ߕߊ ߟߎ߬ ߘߐ߬") {
+                                            masquer($("#caracteres_submit_btn_container > button"));
+                                            $("#caracteres_submit_btn_1").html("ߣߴߌ ߓߊ߲߫ ߘߊ߫߸ ߦߋ߫ ߛߌ߬ߙߊ߬ߟߊ߲ ߠߎ߬ ߦߌ߬ߘߊ߬"); 
+                                            setTimeout(() => { afficher($("#caracteres_submit_btn_1")); }, 100);
+                                        }
+                                    });
+                                    $("#caracteres_submit_btn_1").click(() => {
+                                        if(memoire_des_caracteres_choisis[0].length === 0) {
+                                            alert("ߛߌ߬ߙߕߊ߬ ߞߋߟߋ߲߫ ߥߟߊ ߛߌߦߊߡߊ߲߫ ߛߎߥߊ߲ߘߌ߫ ߝߟߐ߫");
+                                            return;
+                                        }
+                                        masquer($("#caracteres_container > div:not(#caracteres_submit_btn_container)"));
+                                        afficher($("#voyelles_container"));
+
+                                        masquer($("#caracteres_submit_btn_container > button"));
+                                        $("#caracteres_submit_btn_2").html("ߌ ߢߣߊߕߊ߬ ߛߌ߬ߙߊ߬ߟߊ߲ ߠߎ߬ ߘߐ߬");
+                                        setTimeout(() => { afficher($("#caracteres_submit_btn_2")); }, 100);
+                                    });
+                                }
+                                function cocherLesVoyelles() {
+                                    $("#voyelles_container").click(() => {
+                                        masquer($("#caracteres_submit_btn_container > button"));
+                                        $("#caracteres_submit_btn_2").html("ߣߴߌ ߓߊ߲߫ ߘߊ߫߸ ߦߋ߫ ߞߊ߲ߡߊߛߙߋ ߟߎ߬ ߦߌ߬ߘߊ߬");
+                                        setTimeout(() => { afficher($("#caracteres_submit_btn_2")); }, 100);
+                                    });
+                                    $("#caracteres_submit_btn_2").click(() => {
+                                        if(memoire_des_caracteres_choisis[1].length === 0) {
+                                            alert("ߛߌ߬ߙߊ߬ߟߊ߲߬ ߞߋߟߋ߲߫ ߥߟߊ ߛߌߦߊߡߊ߲߫ ߛߎߥߊ߲ߘߌ߫ ߝߟߐ߫");
+                                            return;
+                                        }
+                                        masquer($("#caracteres_container > div:not(#caracteres_submit_btn_container)"));
+                                        afficher($("#tons_container"));  
+
+                                        masquer($("#caracteres_submit_btn_container > button"));
+                                        $("#caracteres_submit_btn_3").html("ߌ ߢߣߊߕߊ߬ ߞߊ߲ߡߊߛߙߋ ߟߎ߬ ߘߐ߬");
+                                        setTimeout(() => { afficher($("#caracteres_submit_btn_3")); }, 100);
+                                    });
+                                }
+                                function cocherLesTons() {
+                                    $("#tons_container").click(() => {
+                                        masquer($("#caracteres_submit_btn_container > button"));
+                                        $("#caracteres_submit_btn_3").html("ߣߴߌ ߓߊ߲߫ ߘߊ߫߸ ߦߋ߫ ߢߣߊߕߊ߬ߣߍ߲ ߠߎ߬ ߛߓߍ߫ ߥߟߊ߬ߓߊ ߞߊ߲߬");
+                                        setTimeout(() => { afficher($("#caracteres_submit_btn_3")); }, 100);
+                                    });
+                                    $("#caracteres_submit_btn_3").click(() => {
+                                        if(memoire_des_caracteres_choisis[2].length === 0) {
+                                            alert("ߞߊ߲ߡߊߛߙߋ߫ ߞߋߟߋ߲߫ ߥߟߊ ߛߌߦߊߡߊ߲߫ ߛߎߥߊ߲ߘߌ߫ ߝߟߐ߫");
+                                            return;
+                                        }
+                                        masquerPanneau();
+                                        masquer($("#caracteres_container > div:not(#caracteres_submit_btn_container)"));
+                                        $(".parametres_popup #submit_btn").click();
+                                    }); 
+                                }
+                            }
+                            function cocherLeCaractereCorrespondantDeParametre() {
+                                $("#caracteres_container").click((e) => {
+                                    let caractere_du_panneau = e.target.textContent;
+                                        for (let x = 0; x < $(".parametres_container input").length; x++) {
+                                            let caractere_de_parametre = $(".parametres_container input")[x].value;
+                                            if(caractere_du_panneau == caractere_de_parametre) $(".parametres_container input")[x].click();
+                                        }
+                                });
+                            }
+                        }
+                        function enregistrementDesCaracteresChoisis() {
+                           $("#caracteres_container span").click((e) => {
+                                let span = e.target;
+                                let caractere = span.textContent;
+                                let container_id = span.parentNode.parentNode.id;
+    
+                                switch (container_id) {
+                                    case "consonnes_container": memoire_des_caracteres_choisis[0].push(caractere); break;
+                                    case "voyelles_container": memoire_des_caracteres_choisis[1].push(caractere); break;
+                                    case "tons_container": memoire_des_caracteres_choisis[2].push(caractere); break;
+                                }
+                            });
+    
+                            return memoire_des_caracteres_choisis;
+                        }
+                        function ecrireAuTableau() {
+                            $("#caracteres_submit_btn").click(function() {
+                                let submit_btn_label = $(this).text();
+                                if(submit_btn_label == "ߢߣߊߕߊ߬ߣߍ߲ ߠߎ߬ ߛߓߍ߫ ߥߟߊ߬ߓߊ ߞߊ߲߬") $(".parametres_popup #submit_btn").click();
+                            });
+                        }
                     }
                 }
             }
@@ -172,20 +256,30 @@ function ton() {
                     function togglePanneauDesConsonnes() {
 
                      /* Par defaut, voyelles_container, nasalisations_container et tons_container sont masqués */
-                        masquer($("#caracteres_container > div"));
-                        afficher($("#caracteres_submit_btn_container"));
+                        masquer($("#caracteres_container > div:not(#caracteres_submit_btn_container)"));
 
                         $('#afficheur_de_panneau').click(function (e) {
                             e.stopImmediatePropagation();
                             $(this).removeClass('indicateur');
                             if (panneau_status == "masque") { afficherPanneau(); } else {  masquerPanneau(); };
-                            memoire_des_caracteres_choisis = [[],[],[]];
                         }); 
                     }
                     function panneauxStyle() {
 
                         memoire_consonnes_choisies = memoireConsonnesChoisies();
 
+                        $.each($(".parametres_container input"), function() {
+                            if($(this).prop("checked") == true) {
+                                let caractere_de_parametre = $(this).prop("value");
+                                
+                                $.each($('#panneaux span'), function () {
+                                    let panneaux_span = $(this);
+                                    let panneaux_consonne = ($(this).text());
+                                    if (caractere_de_parametre == panneaux_consonne) panneaux_span.css("background-color","rgb(170, 170, 170)");
+                                });
+                            }
+                        });
+                            
                         $.each($('#panneaux span'), function () {
 
                             let panneaux_span = $(this);
@@ -249,73 +343,22 @@ function ton() {
                     });
                 }
                 function apprenezTon() {
-
-                    choixDesCaracteres();
-                    enregistrementDesCaracteresChoisis();
-                    ecrireAuTableau();
-                    
-                    
-                    function choixDesCaracteres() {
-                        $("#consonnes_container span").click(() => {
-                            masquer($("#caracteres_container > div:not(#consonnes_container)"));
-                            $("#caracteres_submit_btn").html("ߌ ߢߣߊߕߊ߬ ߛߌ߬ߙߊ߬ߟߊ߲ ߠߎ߬ ߘߐ߬");
-                            afficher($("#caracteres_submit_btn_container"));
-                        });
-                        $("#voyelles_container span").click(() => {
-                            masquer($("#caracteres_container > div:not(#voyelles_container)"));
-                            $("#caracteres_submit_btn").html("ߌ ߢߣߊߕߊ߬ ߞߊ߲ߡߊߛߙߋ ߟߎ߬ ߘߐ߬");
-                            afficher($("#caracteres_submit_btn_container"));
-                        });
-                        $("#tons_container span").click(() => {
-                            masquer($("#caracteres_container > div:not(#tons_container)"));
-                            $("#caracteres_submit_btn").html("ߢߣߊߕߊ߬ߣߍ߲ ߠߎ߬ ߛߓߍ߫ ߥߟߊ߬ߓߊ ߞߊ߲߬");
-                            afficher($("#caracteres_submit_btn_container"));
-                        });
-                        $("#caracteres_submit_btn").click(() => {
-                            masquer($("#caracteres_container > div"));
-                            switch ($("#caracteres_submit_btn").text()) {
-                                case "ߌ ߢߣߊߕߊ߬ ߛߌ߬ߙߊ߬ߕߊ ߟߎ߬ ߘߐ߬": afficher($("#consonnes_container")); afficher($("#caracteres_submit_btn_container")); break;
-                                case "ߌ ߢߣߊߕߊ߬ ߛߌ߬ߙߊ߬ߟߊ߲ ߠߎ߬ ߘߐ߬": afficher($("#voyelles_container")); afficher($("#caracteres_submit_btn_container")); break;
-                                case "ߌ ߢߣߊߕߊ߬ ߞߊ߲ߡߊߛߙߋ ߟߎ߬ ߘߐ߬": afficher($("#tons_container")); afficher($("#caracteres_submit_btn_container")); break;
-                                default: masquerPanneau(); break;
-                            }
-                        });
-                    }
-                    function enregistrementDesCaracteresChoisis() {
-                       $("#caracteres_container span").click((e) => {
-                            let span = e.target;
-                            let caractere = span.textContent;
-                            let container_id = span.parentNode.parentNode.id;
-
-                            switch (container_id) {
-                                case "consonnes_container": memoire_des_caracteres_choisis[0].push(caractere); break;
-                                case "voyelles_container": memoire_des_caracteres_choisis[1].push(caractere); break;
-                                case "tons_container": memoire_des_caracteres_choisis[2].push(caractere); break;
-                            }
-                        });
-
-                        return memoire_des_caracteres_choisis;
-                    }
-                    function ecrireAuTableau() {
-                        $("#caracteres_submit_btn").click(() => {
-                            console.log(memoire_des_caracteres_choisis);
-                        });
-                    }
+                    // 
                 }
             }
             function afficherPanneau() {
 
              /*Par defaut, voyelles_container, nasalisations_container et tons_container sont masqués*/
-                masquer($("#caracteres_container > div"));
-                $("#caracteres_submit_btn").html("ߌ ߢߣߊߕߊ߬ ߛߌ߬ߙߊ߬ߕߊ ߟߎ߬ ߘߐ߬");
                 afficher($("#consonnes_container"));
-                afficher($("#caracteres_submit_btn_container"));
+                masquer($("#caracteres_submit_btn_container > button"));
+                $("#caracteres_submit_btn_1").html("ߌ ߢߣߊߕߊ߬ ߛߌ߬ߙߊ߬ߕߊ ߟߎ߬ ߘߐ߬");
+                setTimeout(() => { afficher($("#caracteres_submit_btn_1")); }, 100);
                 
                 $('#panneaux').css({ 'height':'22rem' });
                 $('#consonnes_cadre').css({ 'height':'max-content' });
                 $('#caracteres_container').animate({ 'top':0 }, 200);
                 panneau_status = "affiche";
-                $(".parametres_container").css({"display":"block", "bottom":"18rem"});
+                // $(".parametres_container").css({"display":"block", "bottom":"18rem"});
 
                 setTimeout(() => {
                     $('#afficheur_de_panneau').html("<p>ߛߓߍߘߋ߲߫ ߥߟߊ ߘߏ߲߰</p>");

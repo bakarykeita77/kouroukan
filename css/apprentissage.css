@@ -260,6 +260,7 @@
 }
 #caracteres_submit_btn_container {
     position: relative;
+    height: 3rem;
     width: max-content;
     margin: 0 auto 1rem;
     background-color: #fff;
@@ -267,7 +268,7 @@
     border-radius: 0.5rem;
     overflow: hidden;
 }
-#caracteres_submit_btn {
+#caracteres_submit_btn_container > button {
     padding: 1rem;
     font-weight: bold;
     border-style: none;

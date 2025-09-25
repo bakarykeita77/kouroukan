@@ -31,7 +31,7 @@ function parametrageDeLesson() {
             if($('.notification h3').text() == 'ߟߊ߬ߡߍ߲߬ߠߌ ߞߍ߫') return false;
             afficherParametres(); 
         });
-        $('.parametres_container #submit_btn').on('click', function(){ masquerParametres(); });
+        // $('.parametres_container #submit_btn').on('click', function(){ masquerParametres(); });
         
         
         function afficherParametres() { 
@@ -47,7 +47,7 @@ function parametrageDeLesson() {
         }
     }
     function selectionDesElementsDeParametres(){
-        submit_btn = $('#submit_btn');
+        submit_btn = $('.parametres_popup #submit_btn');
         lesson_parametres_glissiere = $('#lesson_parametres_glissiere');
         lesson_parametres_container = $('#lesson_parametres_container');
         
@@ -168,20 +168,21 @@ function parametrageDeLesson() {
     }
     function chargerLesson() {
  
-        cochageParDefaut();
         checkbox_parentClick();
-        // checkbox_childrenClick();
+        cochageParDefaut();
 
         $("#submit_btn").click(()=>{
             viderLesSousTableauxDesCaracteresCoches();
             collecteDesCaracteresCoches(); 
-            rechargerLesSousTableauxDesCaracteresCoches();
             chargementDeLesson();
-            affichageDeLesson();
         });
         
         function cochageParDefaut() {
+            // cocherTousLesTons();
+            $("#tons_checker .check_btn:nth-child(1) input").prop('checked',true);
+            $("#tons_checker .check_btn:nth-child(2) input").prop('checked',true);
             $("#tons_checker .check_btn:nth-child(3) input").prop('checked',true);
+            $("#tons_checker .check_btn:nth-child(4) input").prop('checked',true);
             $("#nasalisation_checker .check_btn:nth-child(1) input").prop('checked',true);
         }
         function checkbox_parentClick() {
@@ -194,7 +195,6 @@ function parametrageDeLesson() {
              
                 viderLesSousTableauxDesCaracteresCoches();
                 // collecteDesCaracteresCoches(); 
-                rechargerLesSousTableauxDesCaracteresCoches();
                 // chargementDeLesson();
             });
         }
@@ -202,7 +202,6 @@ function parametrageDeLesson() {
             $('.check_btn').on('click', function() { 
                 viderLesSousTableauxDesCaracteresCoches();
                 collecteDesCaracteresCoches(); 
-                rechargerLesSousTableauxDesCaracteresCoches();
                 chargementDeLesson();
             }); 
         }
@@ -299,24 +298,11 @@ function parametrageDeLesson() {
                 
                 caracteres_coches = voyelles_cochees.concat(consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees);
             }
-console.log(caracteres_coches);
+
             sessionStorage.setItem('caracteres_coches', JSON.stringify(caracteres_coches));
-        }
-        function rechargerLesSousTableauxDesCaracteresCoches() {
-            $('#voyelles_cochees').html(voyelles_cochees);
-            $('#consonnes_cochees').html(consonnes_cochees);
-            $('#tedos_coches').html(tedos_coches);
-            $('#tons_coches').html(tons_coches);
-            $('#nasalisations_cochees').html(nasalisations_cochees);
         }
         function chargementDeLesson() {
         
-         // Récupération des caractères cochés
-            voyelles_cochees  = $('#voyelles_cochees' ).html().split('');
-            consonnes_cochees = $('#consonnes_cochees').html().split('');
-            tedos_coches      = $('#tedos_coches'     ).html().split('');
-            tons_coches       = $('#tons_coches'      ).html().split('');
-            nasalisations_cochees;
             caracteres_coches = voyelles_cochees.concat(consonnes_cochees, tedos_coches, tons_coches, nasalisations_cochees);
            
             var q = questions(niveau_actif);
@@ -488,9 +474,6 @@ console.log(caracteres_coches);
 
                 return nbr_td;
             }
-        }
-        function affichageDeLesson() {
-            $("#apprentissage_container .table_parante td").css("color","orange");
         }
     } 
 }        

@@ -16,14 +16,6 @@
         </table>
     </div>
 
-    <div style='display:blockn'>
-        <div id='voyelles_cochees'></div>
-        <div id='consonnes_cochees'></div>
-        <div id='tedos_coches'></div>
-        <div id='tons_coches'></div>
-        <div id='nasalisations_cochees'></div>
-    </div>
-
   <!------------------------------------------------------------------------------------------------------------------>	 
 
   <script src="/kouroukan/js/parametres.js"></script>

@@ -12,6 +12,7 @@
 .actif, .active { 
     background-color: rgb(255,255,0); 
     color: #000;
+    width: 100%;                          
 }
 .active_2 { box-shadow: 0 0 1rem #222; background-color: #fff; color: black; }
 .actif:active { background-color: #FFF000; box-shadow: none; }
@@ -310,21 +311,10 @@
     line-height: 3rem;
     text-align: center;
 }
-/* .course_foot div:not(#panneaux, #consonnes_cadre, #consonnes_container, .clavier_container, #evaluation_reponse_container, #evaluation_reponse, #teste_container, .correcteur, #clavier_nko) { 
-    border-radius: 0.5rem;
-    width: 100%;
+.course_foot p {
+    width: max-content;
     height: 3rem;
     line-height: 3rem;
-    text-align: center;
-} */
-.course_foot p {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 0.5rem;
-    width: max-content;
-    height: 2rem;
-    line-height: 2rem;
     margin: auto;
     font-weight: bold;
     cursor: pointer;
@@ -855,7 +845,9 @@ del {
 .parametres_container {
     position: absolute;
     display: none;
+    top: -32rem;
     width: max-content;
+    height: max-content;
     left: 50%;
     transform: translateX(-50%);
     bottom: calc(100% + 0.5rem);
@@ -1145,7 +1137,6 @@ del {
     color: #fff;
     cursor: pointer;
     overflow: visible;
-    /* opacity: 0; */
 }
 .table_parlante td {  
     min-width: 2rem;

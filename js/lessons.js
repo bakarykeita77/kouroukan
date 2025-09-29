@@ -221,6 +221,7 @@ $('document').ready(function() {
         function matiere() {
 
             modificationDuChoixDApprentissage();
+            chargerPanneauDesCaracteres();
 
             if(option_retenue == 2) {
                 $('#phases_list li').on('click', function() {

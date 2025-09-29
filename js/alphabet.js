@@ -147,7 +147,11 @@ function alphabet() {
                         afficher($('#apprentissage_container'));
                         
                         masquer($('#apprentissage_foot > div'));
-                        $('#apprentissage_dialogue_btns').css('display','flex'); 
+                        $('#apprentissage_dialogue_btns').css({
+                            "display":"flex",
+                            "transform":"scale(1)",
+                            "opacity":1
+                        }); 
                         afficherPreApprendreAlphabetTd();
                 
                         function afficherPreApprendreAlphabetTd() { 
@@ -1363,7 +1367,11 @@ function alphabet() {
                         function chargerPiedDeApprentissageAlphabet() {
                             $("#apprentissage_dialogue_btns").html("<p>ߒ ߓߘߊ߫ ߛߓߍߛߎ߲ ߟߐ߲߫</p>");
                         }
-                        function chargerCorpsDeApprentissageAlphabet() { parametrageDeLesson(); }
+                        function chargerCorpsDeApprentissageAlphabet() { 
+                            parametrageDeLesson();
+                            cocherTousLesCaracteres();
+                            $(".parametres_popup #submit_btn").click(); 
+                        }
                     }
                     function afficherApprentissageAlphabet() { 
                         masquer($(".direction"));

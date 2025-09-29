@@ -42,8 +42,6 @@
 #apprentissage_note h3 { margin: 0; }
 #apprentissage_container .table_parlante td { 
     border: 1px solid transparent; 
-    /* opacity: 0; */
-    /* min-width: 2.5rem; */
 }
 #apprentissage_note p { margin: 0.25rem 0; }
 #pre_texte {
@@ -77,15 +75,6 @@
 #pre_exercice_resultat_container > div { display: inline-block; }
 #pre_exercice_resultat td { min-width: 1.5rem; height: 2rem; }
 #cercles_des_partis, #carres_pour_exercices { display: inline-block; }
-.titre_de_parti, .cercles_des_partis { 
-    display: inline-block; 
-    font-weight: bold; 
-    cursor: pointer;
-}
-.titre_de_parti { 
-    height: 3rem;
-    width: 100%;
-}
 #cercles_des_partis, #carres_pour_exercices { display: inline-block; }
 .titre_de_parti, .cercles_des_partis { 
     display: inline-block; 
@@ -252,13 +241,13 @@
     min-width: 1.125rem;
     height: 2rem;
     line-height: 2rem;
-    background-color: #fff;
+    background-color: rgb(255, 255, 255);
     border-radius: 0.5rem;
     vertical-align: middle;
     box-shadow: 0 0 0.25rem #aaa;
     cursor: pointer;
 }
-#caracteres_submit_btn_container {
+#panneau_submit_btn_container {
     position: relative;
     height: 3rem;
     width: max-content;
@@ -268,7 +257,7 @@
     border-radius: 0.5rem;
     overflow: hidden;
 }
-#caracteres_submit_btn_container > button {
+#panneau_submit_btn_container > button {
     padding: 1rem;
     font-weight: bold;
     border-style: none;

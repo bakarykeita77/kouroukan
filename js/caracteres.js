@@ -15,7 +15,7 @@
     var chiffres_latins = ['0','1','2','3','4','5','6','7','8','9'];
     var liste_de_matieres = [
         ["alphabet", "ߛߓߍߛߎ߲"],
-        ["syllabes", "ߜߋ߲߭"],
+        ["syllabes", "ߜߋ߲߭"],
         ["tons", "ߞߊ߲ߡߊߛߙߋ"],
         ["chiffres", "ߖߊ߰ߕߋ߬ߘߋ߲"]
      ];

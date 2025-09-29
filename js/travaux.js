@@ -18,7 +18,7 @@
             if(matieres.length == 0) chargerAVideLesFiches();
             if(matieres.length != 0) {
                 if( matiere_nom == "ߛߓߍߛߎ߲" ) chargerTravail(0);
-                if( matiere_nom == "ߜߋ߲߭"    ) chargerTravail(1);
+                if( matiere_nom == "ߜߋ߲߭"    ) chargerTravail(1);
                 if( matiere_nom == "ߞߊ߲ߡߊߛߙߋ") chargerTravail(2);
                 if( matiere_nom == "ߖߊ߰ߕߋ߬ߘߋ߲") chargerTravail(3);
             }

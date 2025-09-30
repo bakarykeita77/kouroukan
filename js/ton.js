@@ -18,7 +18,7 @@ function ton() {
 
             chargerEnteteDApprentissageTon();
             chargerFootDApprentissageTon();
-            chargementDeLesson();
+            chargerLessonDApprentissage();
 
             function chargerEnteteDApprentissageTon() {
                 $('.notification_titre').html('ߞߊ߲ߡߊߛߙߋ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ');

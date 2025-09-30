@@ -356,7 +356,7 @@
             sessionStorage.setItem('phase_active_index',JSON.stringify(phase_active_index));
         }
     }
-    function chargementDeLesson() {
+    function chargerLessonDApprentissage() {
 
         let memoire_des_caracteres_choisis = [[],[],[]];
         $(".table_parlante td, .table_muette td").css("opacity",0);
@@ -439,28 +439,48 @@
                 }
             }
             function cocherLeCaractereCorrespondantDeParametre() {
+                let caracteres_choisis_du_panneau = [];
                 $("#panneaux").click((e) => {
+                    
                     let caractere_du_panneau = e.target.textContent;
-                    e.stopImmediatePropagation();
+
+                    if($.inArray(caractere_du_panneau, caracteres_choisis_du_panneau) == -1) { 
+                        caracteres_choisis_du_panneau.push(caractere_du_panneau); }else{ 
+                        caracteres_choisis_du_panneau.splice(caracteres_choisis_du_panneau.indexOf(caractere_du_panneau),1); 
+                    }
+                    
                     for (let x = 0; x < $(".parametres_container input").length; x++) {
                         let caractere_de_parametre = $(".parametres_container input")[x].value;
 
                         if(caractere_du_panneau == caractere_de_parametre) {
                             $(".parametres_container input")[x].click();
                             if(matiere_nom == "ߛߓߍߛߎ߲") {
-                                $(".parametres_container #submit_btn").click();
-
-                                $.each($(".table_parlante td"), function() {
-                                    let td = $(this);
-                                    let caractere_du_tableau = td.text().split("")[0];
-                                    if(caractere_du_panneau == caractere_du_tableau) {
-                                        td.css("opacity",0);
-                                        setTimeout(() => { td.css("opacity",1); }, 100*td.index());
-                                    }
-                                });
+                                if($.inArray(caractere_du_panneau, caracteres_choisis_du_panneau) == -1) {
+                                    setTimeout(() => { $(".parametres_container #submit_btn").click(); }, 800); }else{
+                                    $(".parametres_container #submit_btn").click();
+                                }
                             }
                         }
                     }
+
+                    $.each($(".table_parlante td"), function(e) {
+
+                        let td = $(this);
+                        let caractere_du_tableau = td.text().split("")[0];
+
+                        if(caracteres_choisis_du_panneau.indexOf(caractere_du_panneau) != -1) {
+                            if(caractere_du_panneau == caractere_du_tableau) {
+                                td.css("opacity",0);
+                                setTimeout(() => { td.css("opacity",1); }, 100*td.index());
+                            }
+                        }
+                        if(caracteres_choisis_du_panneau.indexOf(caractere_du_panneau) == -1) {
+                            if(caractere_du_panneau == caractere_du_tableau) {
+                                td.css("opacity",1);
+                                setTimeout(() => { td.css("opacity",0); }, 100*(7 - td.index()));
+                            }
+                        }
+                    });
                 });
             }
         }

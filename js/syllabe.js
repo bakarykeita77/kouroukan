@@ -224,7 +224,7 @@ function syllabe() {
                         }
                         function chargerCorpsDApprentissagePreSyllabe() {
                             preChargementDuTableauNoir();
-                            chargementDeLesson();
+                            chargerLessonDApprentissage();
 
                             function preChargementDuTableauNoir() {
                                 $('#apprentissage_body').html("<table id='table_syllabe_apprentissage'><div id='pre_texte'>ߜߋ߲߭ ߘߋ߲߰ߕߊ ߟߎ߬ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬</div></table>");
@@ -303,10 +303,6 @@ function syllabe() {
                                     return false;
                                 }
 
-                                choixDeLaConsonneAEtudier();
-                                ecrireAuTableauNoir();
-                                effacerAuTableauNoir();
-                                // stylesDesSyllabes();
                                 memoriserLesConsonnesChoisies();
                                 suivreLApprentissage();
                             

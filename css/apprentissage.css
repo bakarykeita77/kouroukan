@@ -214,7 +214,8 @@
 #caracteres_container span:hover { background-color: #ddd; }
 #consonnes_cadre {
     position: absolute;
-    margin: 0;
+    left: 50%;
+    transform: translateX(-50%);
     bottom: 2px;
     height: max-content;
     width: max-content;

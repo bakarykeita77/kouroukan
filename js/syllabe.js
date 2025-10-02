@@ -140,7 +140,6 @@ function syllabe() {
 
                 let quantite_normale_de_click = 1;
 
-                let panneau_status = "masque";
                 let consonnes_choisies = [];
                 let consonnes_choisies_du_serveur = consonnesChoisiesDuServeur();
                 let memoire_consonnes_choisies = JSON.parse(localStorage.getItem("memoire_consonnes_choisies"));
@@ -178,7 +177,6 @@ function syllabe() {
                         chargerEnteteDApprentissagePreSyllabe();
                         chargerFootDApprentissagePreSyllabe();
                         chargerCorpsDApprentissagePreSyllabe();
-
 
                         function chargerEnteteDApprentissagePreSyllabe() {
                             $('.notification_titre').html('ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ');

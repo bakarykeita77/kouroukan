@@ -72,7 +72,7 @@ console.log(datas);
               Phases, Notes et Niveaux
              -------------------------------------------------------------------------*/   
                 var note_1 = 0, note_2 = 0, note_3 = 0, note_4 = 0;
-                var moyenne = 60, moyenne_1 = 0, moyenne_2 = 0, moyenne_3 = 0, moyenne_4 = 0;
+                var moyenne = 90, moyenne_1 = 0, moyenne_2 = 0, moyenne_3 = 0, moyenne_4 = 0;
 
                 if(datas[1][0] == undefined) {
                     sessionStorage.setItem("id_apprentissage", JSON.stringify("syllabe_apprentissage"));
@@ -88,11 +88,11 @@ console.log(datas);
             	for (var j = datas[i].length; j > 0; j--) {
                  
                     if(i === 0) {
-                     //Phases_etudiees de alphabet
-                        phases_etudiees.push(datas[i][j-1].phase); 
+                     /*Phases_etudiees de alphabet*/
+                     if(JSON.parse(datas[i][j-1].lesson).length === 27) phases_etudiees.push(datas[i][j-1].phase); 
                     } 
                     if(i === 1) {
-                        //Phases_etudiees de syllabe
+                        /*Phases_etudiees de syllabe*/
                         if(JSON.parse(datas[i][j-1].lesson).length === 126) phases_etudiees.push(datas[i][j-1].phase);
                     } 
                     if(i === 2) {
@@ -102,7 +102,7 @@ console.log(datas);
                         //     phases_etudiees.push(datas[i][j-1].phase); 
                         // }
                     } 
-                    
+                   
                     let  nivo = parseInt(datas[i][j-1].niveau);
                     let  phase_note = parseInt(datas[i][j-1].note);
                     
@@ -112,13 +112,14 @@ console.log(datas);
                     if(nivo === 4) note_4 += phase_note;
             	}}
 
-             //Calcul de phases distinctes globale            
-               
-                if(datas[0] != undefined) moyenne_1 = note_1/3; //Moyenne générale pour syllabe
+             /*Calcul de phases distinctes globale*/            
+console.log(note_1);               
+console.log(note_1/3);               
+                if(datas[0] != undefined) moyenne_1 = note_1/3; //Moyenne générale pour alphabet
                 if(datas[1] != undefined) moyenne_2 = note_2/4; //Moyenne générale pour syllabe
                 if(datas[2] != undefined) moyenne_3 = note_3/4; //Moyenne générale pour tons
                 if(datas[3] != undefined) moyenne_4 = note_4/4; //Moyenne générale pour chiffres
-           	
+console.log(moyenne_1);            	
                 if(moyenne_1 >= moyenne) niveaux_etudies.push(1);   	    
                 if(moyenne_2 >= moyenne) niveaux_etudies.push(2);   	    
                 if(moyenne_3 >= moyenne) niveaux_etudies.push(3);   	    
@@ -132,7 +133,7 @@ console.log(datas);
                 sessionStorage.setItem('moyenne_2', JSON.stringify(moyenne_2));
                 sessionStorage.setItem('moyenne_3', JSON.stringify(moyenne_3));
                 sessionStorage.setItem('moyenne_4', JSON.stringify(moyenne_4));
-           
+console.log(niveaux_etudies);           
                 if(niveaux_etudies.length === 0) {
                 	sessionStorage.setItem('niveau_max', JSON.stringify(0));
                 	sessionStorage.setItem('niveau_en_cours', JSON.stringify(1));

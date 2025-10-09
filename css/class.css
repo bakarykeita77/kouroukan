@@ -286,7 +286,7 @@
     background-color: rgba(0,0,0,0.8);
 }
 .salle_de_classe {
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
     margin: 0;
@@ -697,6 +697,7 @@ del {
 .modification_alerte span:nth-child(2) { left: 0; }
 .notification_titre { padding: 0.25rem 1rem 0.25rem 0; }
 .modificateur_de_choix {
+    display: none;
     width: 2rem;
     height: 1rem;
     vertical-align: top;
@@ -707,7 +708,7 @@ del {
     width: 1.5rem;
     text-align: center;
     line-height: 1.5rem;
-    margin: 0;
+    margin: 0.125rem 1rem;
     border: 1px solid #aaa;
     border-radius: 50%;
     font-size: 1.5rem;
@@ -779,9 +780,9 @@ del {
 }
 .notification_entete {
     position: relative;
+    top: 0.125rem;
     width: 100%;
     max-width: 40rem;
-    margin: auto;
 }
 .notification_container {
     padding: 0;

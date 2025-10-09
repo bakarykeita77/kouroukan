@@ -4,6 +4,4 @@
 #niveau_d_etude {
     display: none;
 }
-h4, .lesson_title {
-    display: inline-block;
-}
+h4, .lesson_title { display: inline-block; }

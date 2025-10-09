@@ -380,7 +380,7 @@
     transition: 0.3s;
     z-index: 0;
 }
-#evaluation_fiche { width: 100%; top: 0.5rem; }
+#evaluation_fiche { width: calc(100% - 0.25rem); top: 0.5rem; }
 #evaluation_message_de_fin_container {
     top: calc(100% - 7rem);
     left: 50%;
@@ -403,7 +403,7 @@
 
 @media screen and (orientation: landscape) {
     #evaluation_body { 
-        height: 30vh;
+        height: 32vh;
         min-height: 12rem;
     }
     .evaluation_table {  height: calc(100% - 2rem);  }

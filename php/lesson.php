@@ -295,7 +295,7 @@ if(isset($_SESSION["id_client"])) {
                                 <div class="dialogue_btns" id="evaluation_dialogue_btns">
                                     <div class="question_btn" id="evaluation_question_bouton"></div>
                                     <div class="repetition_btn" id="evaluation_repetition_bouton"></div>
-                                    <div class="correction_btn" id="evaluation_correction_bouton"></div>
+                                    <div class="correction_btn" id="evaluation_correction_bouton">ߏ߬ ߛߊߞߍ߫</div>
                                 </div>
 
                                 <div class="redirection_btns" id="evaluation_redirection_btns">

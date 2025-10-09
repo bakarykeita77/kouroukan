@@ -6,48 +6,19 @@ function parametrageDeLesson() {
     let phase_id = JSON.parse(sessionStorage.getItem('phase_id'));
     var voyelles_checker, consonnes_checker, tedo_checker, tons_checker, nasalisation_checker;
     var voyelles_cochees = [], consonnes_cochees = [], tedos_coches = [], tons_coches = [], nasalisations_cochees = [], caracteres_coches = [],syllabes_coches = [];
-
+    var submit_btn = "";
     let option_retenue = JSON.parse(localStorage.getItem('option_retenue')); // Voir programmes.js : lessonOptions()
     
  /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/    
-    parametrage();
-    affichageDeParametres();
- 
-  /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/    
 
-    function parametrage(){
-     
-        parametres = $('#parametres');
-        lesson_parametres = $('#lesson_parametres');
+    selectionDesElementsDeParametres();
+    chargementDesElementsDeParametres();
+    affichageDeLessonParametres();
+    chargerLesson(); // Chaque fois qu'un checkbox est clické, le cochage doit etre actualisé et le tableau noir rechargé. 
 
-        selectionDesElementsDeParametres();
-        chargementDesElementsDeParametres();
-        affichageDeLessonParametres();
-        chargerLesson(); // Chaque fois qu'un checkbox est clické, le cochage doit etre actualisé et le tableau noir rechargé. 
-    }
-    function affichageDeParametres(){ 
-    
-        $("#parametre_lesson").on('mouseover', function() { 
-            if($('.notification h3').text() == 'ߟߊ߬ߡߍ߲߬ߠߌ ߞߍ߫') return false;
-            afficherParametres(); 
-        });
-        // $('.parametres_container #submit_btn').on('click', function(){ masquerParametres(); });
-        
-        
-        function afficherParametres() { 
-            $(".media_btns").css({"tansform":"scale(0.75)", "opacity":0});
-            setTimeout(() => { $(".media_btns").css({"display":"none"}); }, 300);
-
-            $(".parametres_container").css({"display":"block", "opacity":0}); 
-            setTimeout(() => { $(".parametres_container").css({"transform":"scale(1)", "opacity":1}); }, 10);
-        }
-        function masquerParametres() {
-            $(".parametres_container").css({"transform":"scale(0.75)", "opacity":0});
-            setTimeout(() => { $(".parametres_container").css({'display':'none'}); }, 300);
-        }
-    }
     function selectionDesElementsDeParametres(){
         submit_btn = $('.parametres_popup #submit_btn');
+        panneau_submit_btn_container = $('#panneau_submit_btn_container');
         lesson_parametres_glissiere = $('#lesson_parametres_glissiere');
         lesson_parametres_container = $('#lesson_parametres_container');
         
@@ -161,7 +132,6 @@ function parametrageDeLesson() {
            
         choixDesOptionsNecessaires();
         function choixDesOptionsNecessaires(){
-            
             if(niveau_actif==1){ tons_checker.hide(); nasalisation_checker.hide(); }
             if(niveau_actif==2){ tons_checker.hide(); tedo_checker.hide(); }
         }

@@ -11,7 +11,7 @@ $('document').ready(function() {
     var niveaux_etudies = JSON.parse(sessionStorage.getItem('niveaux_etudies'));
     var niveau_max_du_serveur = niveauMaxDuServeur();
     var niveau_max = JSON.parse(sessionStorage.getItem('niveau_max'));
-    niveau_max = (niveau_max_du_serveur > niveau_max) ? niveau_max_du_serveur : nivau_max;
+    niveau_max = (niveau_max_du_serveur > niveau_max) ? niveau_max_du_serveur : niveau_max;
     var niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
     var matiere_index = niveau_en_cours - 1;
     var matiere_nouvellement_apprise_du_serveur = matiereNouvellementAppriseDuServeur();
@@ -33,7 +33,7 @@ $('document').ready(function() {
 
     // localStorage.clear();
 
-    /*-------------------------------------------------------------------------------------------------------------*/
+ /*-------------------------------------------------------------------------------------------------------------*/
     /* Détermination du Programme */
     var programme_matieres = '';
 

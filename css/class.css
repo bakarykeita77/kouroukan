@@ -239,7 +239,7 @@
     display: none; 
     cursor: pointer; 
 }
-.course {    
+.course {     
     position: relative;
     height: calc(100% - 0.5rem); 
     max-height: 45rem;
@@ -273,8 +273,7 @@
 }
 .course_body { 
     position: relative;
-    height: 50vh;
-    min-height: 15rem;
+    min-height: 50vh;
     padding-top: 0.5rem;
     margin: 0 auto 1rem;
     border-radius: 0.5rem;
@@ -304,7 +303,7 @@
     max-height: 16.5rem;
     border-top: 1px solid #555;
 }
-.course_foot > div:not(.parametres_container, #panneaux) { 
+.course_foot > div:not(.parametres_container, #panneaux, #teste_container) { 
     border-radius: 0.5rem;
     width: 100%;
     height: 3rem;
@@ -312,6 +311,7 @@
     text-align: center;
 }
 .course_foot p {
+    position: relative;
     width: max-content;
     height: 3rem;
     line-height: 3rem;
@@ -731,7 +731,7 @@ del {
 .modificateur_de_choix_message button:last-child { float: left; }
 .modificateur_de_choix_btn, .modificateur_de_choix_message {
     position: absolute;
-    z-index: 1;
+    z-index: 2;
 }
 
 /* --------------------------------------------------------------------------------------------------------- */

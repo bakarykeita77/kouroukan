@@ -228,6 +228,7 @@
             }
         }, 200);
     }
+	function aggrandir_caractere_de(element) { element.css('font-size','+=32px'); }
 	function appetir_caractere_de(element) { element.css('font-size','-=32px'); } 
     function approuver(bonne_reponse) {
         $.each($('.table_parlante td, .table_muette td'), function() {
@@ -556,7 +557,7 @@
     function chargerPanneauDesCaracteres() {
         
         var panneaux_des_caracteres_html = panneauxDesCaracteresHTML();
-console.log(matiere_nom);
+
         $('#panneaux').html(panneaux_des_caracteres_html);
         if(matiere_nom == "ߜߋ߲߭") {
             cocherToutesLesVoyelles();
@@ -748,6 +749,14 @@ console.log(matiere_nom);
 
         return date_actuelle;
     }
+    function dateDApprentissageAlphabetDuServeur() {
+        let datas = JSON.parse(sessionStorage.getItem('datas'));
+        let date = "";
+        if(datas.length != 0) {
+            date = (datas[0][0] == undefined) ? dateAcuelle() : datas[0][0].date;
+        }
+        return date;
+    }
     function dateEnNko(date_a_convertir) {
 
         let d = date_a_convertir;
@@ -833,13 +842,6 @@ console.log(matiere_nom);
     function defilementDuContenuVersLeHaut(container) {
         container.animate({ scrollTop:container[0].scrollHeight }, 1000);
     }
-    function reagirAuClickDeDialogueBtns() {
-        $.each($('.dialogue_btns > div'), function(){
-            $(this).click(function() {
-                $('.dialogue_btns').css('box-shadow','none');
-            });
-        });
-    }
     function display(element) {
         element.css({
             'display':'block',
@@ -898,8 +900,31 @@ console.log(matiere_nom);
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
     
+    function fermer(element) {
+        element.animate({ 'height':0 }, 200);
+        setTimeout((function(){ element.css({ 'display':'none' }) }),180);
+    }
     function fermerLaPage() {
         $(".fermeture").click(() => { history.back(); });
+    }
+    function formatParDefautDuResultat() {
+
+        $('.table_head tr:nth-child(2) td').text('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ');
+        $('.table_head tr:nth-child(3) td').text('ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ');
+
+        $.each($('.table_body tr:nth-child(3) td, .table_body tr:nth-child(4) td'), function() {
+            $(this).html('');
+        });
+
+        $('#total_reponse').text('');
+        $('#total_point_1').text('');
+
+        $('#resultat_pied > div > div:nth-child(1) span:first-child').text('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߡߎ߬ߡߍ');
+        $('#resultat_pied > div > div:nth-child(2) span:first-child').text('ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ߫ ߢߊ߬ߣߍ߲');
+        $('#resultat_pied > div > div:nth-child(3)').css('display','block');
+
+        $('#total_bonne_reponse').text('');
+        $('#total_point_2').text('');
     }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
@@ -1124,32 +1149,6 @@ console.log(matiere_nom);
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
 	
-    function fermer(element) {
-	    element.animate({ 'height':0 }, 200);
-	    setTimeout((function(){ element.css({ 'display':'none' }) }),180);
-	}
-    function formatParDefautDuResultat() {
-
-        $('.table_head tr:nth-child(2) td').text('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ');
-        $('.table_head tr:nth-child(3) td').text('ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ');
-
-        $.each($('.table_body tr:nth-child(3) td, .table_body tr:nth-child(4) td'), function() {
-            $(this).html('');
-        });
-
-        $('#total_reponse').text('');
-        $('#total_point_1').text('');
-
-        $('#resultat_pied > div > div:nth-child(1) span:first-child').text('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߡߎ߬ߡߍ');
-        $('#resultat_pied > div > div:nth-child(2) span:first-child').text('ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ߫ ߢߊ߬ߣߍ߲');
-        $('#resultat_pied > div > div:nth-child(3)').css('display','block');
-
-        $('#total_bonne_reponse').text('');
-        $('#total_point_2').text('');
-    }
-
-/*-------------------------------------------------------------------------------------------------------------------------------------*/
-	
     function lecturePersonnalisee(ton) {
         $('.table_parlante').on('click', function(e) {
             var td_actif = e.target;
@@ -1187,41 +1186,41 @@ console.log(matiere_nom);
                 }
             },600);
          });
-     }
-     function lessonHTML(array, table_id = '#') {
- 
-         var table = "<table class = 'table_parlante' id='"+table_id+"'>\n";
-         for(var i=0;i<array.length-array.length%7;i+=7) {
-             table += "<tr>\n";
-             for(var j=0;j<7;j++) table += "<td>"+array[i+j]+"</td>\n";
-             table += "</tr>\n";
-         }
-         for(var k=array.length-array.length%7;k<array.length;k+=array.length%7){
-             table += "<tr>\n";
-             for(var l=0;l<array.length%7;l++) table += "<td>"+array[k+l]+"</td>\n";
-             table += "</tr>\n";
-         }
-         table += "</table>";
-                 
-         return table;
-     }
-     function lessonHTML3(array, table_id = '#') {
- 
-         var table = "<table class = 'table_parlante' id='"+table_id+"'>\n";
-         for(var i=0;i<array.length-array.length%7;i+=7) {
-             table += "<tr>\n";
-             for(var j=0;j<7;j++) table += "<td>"+array[i+j][0]+"</td>\n";
-             table += "</tr>\n";
-         }
-         for(var k=array.length-array.length%7;k<array.length;k+=array.length%7){
-             table += "<tr>\n";
-             for(var l=0;l<array.length%7;l++) table += "<td>"+array[k+l][0]+"</td>\n";
-             table += "</tr>\n";
-         }
-         table += "</table>";
-                 
-         return table;
-     }
+    }
+    function lessonHTML(array, table_id = '#') {
+
+        var table = "<table class = 'table_parlante' id='"+table_id+"'>\n";
+        for(var i=0;i<array.length-array.length%7;i+=7) {
+            table += "<tr>\n";
+            for(var j=0;j<7;j++) table += "<td>"+array[i+j]+"</td>\n";
+            table += "</tr>\n";
+        }
+        for(var k=array.length-array.length%7;k<array.length;k+=array.length%7){
+            table += "<tr>\n";
+            for(var l=0;l<array.length%7;l++) table += "<td>"+array[k+l]+"</td>\n";
+            table += "</tr>\n";
+        }
+        table += "</table>";
+                
+        return table;
+    }
+    function lessonHTML3(array, table_id = '#') {
+
+        var table = "<table class = 'table_parlante' id='"+table_id+"'>\n";
+        for(var i=0;i<array.length-array.length%7;i+=7) {
+            table += "<tr>\n";
+            for(var j=0;j<7;j++) table += "<td>"+array[i+j][0]+"</td>\n";
+            table += "</tr>\n";
+        }
+        for(var k=array.length-array.length%7;k<array.length;k+=array.length%7){
+            table += "<tr>\n";
+            for(var l=0;l<array.length%7;l++) table += "<td>"+array[k+l][0]+"</td>\n";
+            table += "</tr>\n";
+        }
+        table += "</table>";
+                
+        return table;
+    }
     function lessonDExerciceHTML(array, table_id = '#') {
 
         var table = "<table class = 'table_muette' id='"+table_id+"'>\n";
@@ -1258,7 +1257,6 @@ console.log(matiere_nom);
                    
         return tons_apprentissage_html;
     }
-	function aggrandir_caractere_de(element) { element.css('font-size','+=32px'); }
     function lessonDApprentissagePreAlphabet() {
 
         let datas = JSON.parse(sessionStorage.getItem('datas'));
@@ -1510,6 +1508,19 @@ console.log(matiere_nom);
     }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
+
+    function niveauMaxDuServeur() {
+        let datas = JSON.parse(sessionStorage.getItem('datas'));
+        let niveaux = [];
+        let niveau_max = 0;
+        for (let i = 0; i < datas.length; i++) {
+            if(datas[i].length != 0) {niveaux.push(i);}
+        }
+        niveau_max = Math.max(...niveaux)+1;
+        return niveau_max;
+    }
+
+/*-------------------------------------------------------------------------------------------------------------------------------------*/
     
     function paire(nombre) {
         let test = (nombre%2 === 0) ? true : false;
@@ -1739,6 +1750,13 @@ console.log(matiere_nom);
         setTimeout(() => { button.css('box-shadow','0 0 3rem #000'); }, 800);
         setTimeout(() => { button.css('box-shadow','none'); }, 900);
         setTimeout(() => { button.css('box-shadow','0 0 1rem #666'); }, 1000);
+    }
+    function reagirAuClickDeDialogueBtns() {
+        $.each($('.dialogue_btns > div'), function(){
+            $(this).click(function() {
+                $('.dialogue_btns').css('box-shadow','none');
+            });
+        });
     }
     function rectificationDeReponse(text_container,texte) {
         $('.correcteur').on('click',function() {

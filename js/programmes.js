@@ -9,7 +9,9 @@ $('document').ready(function() {
  /* Récupération du niveau d'avancement des études déterminé depuis accueil.js */
     let datas = JSON.parse(sessionStorage.getItem('datas'));
     var niveaux_etudies = JSON.parse(sessionStorage.getItem('niveaux_etudies'));
+    var niveau_max_du_serveur = niveauMaxDuServeur();
     var niveau_max = JSON.parse(sessionStorage.getItem('niveau_max'));
+    niveau_max = (niveau_max_du_serveur > niveau_max) ? niveau_max_du_serveur : nivau_max;
     var niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
     var matiere_index = niveau_en_cours - 1;
     var matiere_nouvellement_apprise_du_serveur = matiereNouvellementAppriseDuServeur();
@@ -28,12 +30,10 @@ $('document').ready(function() {
     var option_retenue = JSON.parse(localStorage.getItem('option_retenue'));
     option_retenue = (option_retenue == null) ? option_du_serveur : option_retenue;
     localStorage.setItem('option_retenue',JSON.stringify(option_retenue));
-    console.log(option_retenue);
 
     // localStorage.clear();
 
     /*-------------------------------------------------------------------------------------------------------------*/
-
     /* Détermination du Programme */
     var programme_matieres = '';
 
@@ -72,7 +72,7 @@ $('document').ready(function() {
                 var matiere_nom = liste_de_matieres[i][1];
                 var matiere_index = liste_de_matieres.indexOf(liste_de_matieres[i]);
                 var niveau = matiere_index+1;   
-           
+          
                 if(niveau_max === 0) {
                     var phases_lien = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max;
                     

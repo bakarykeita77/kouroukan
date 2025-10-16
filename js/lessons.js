@@ -1,17 +1,16 @@
 $('document').ready(function() {
       
     /* Récupération des données, storées depuis accueil.js, sur l'apprenant */
-        var datas = JSON.parse(sessionStorage.getItem('datas'));     
-        var data_apprentissage = JSON.parse(sessionStorage.getItem('data_apprentissage')); 
-        data_apprentissage = (data_apprentissage == null) ? {} : data_apprentissage; 
+        var datas = JSON.parse(sessionStorage.getItem('datas')); 
+        var data_alphabet_du_serveur = datas[0]; 
+        var data_alphabet = JSON.parse(sessionStorage.getItem('data_alphabet')); 
+        data_alphabet = (data_alphabet == null) ? {} : data_alphabet; 
+        data_alphabet = (Object.keys(data_alphabet).length == 0) ? data_alphabet_du_serveur : data_alphabet; 
         var matiere_index = JSON.parse(sessionStorage.getItem('matiere_index'));
         var niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
         var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));
         var phases_etudiees = JSON.parse(sessionStorage.getItem('phases_etudiees'));
-        let data_apprentissage_alphabet = JSON.parse(sessionStorage.getItem('data_apprentissage_alphabet'));
-        var lesson_d_apprentissage = data_apprentissage.lesson;
-        lesson_d_apprentissage = (lesson_d_apprentissage == null) ? [] : lesson_d_apprentissage;
-
+        let data_alphabet_apprentissage = JSON.parse(sessionStorage.getItem('data_alphabet_apprentissage'));
         var rang = '';
         var phase_li_id = phaseLiId();
         var phase_nom = '';
@@ -22,20 +21,16 @@ $('document').ready(function() {
 
         datas = (datas == null) ? [] : datas; /* Pour éviter les erreurs de null. */
         datas[matiere_index] = (datas[matiere_index] == undefined) ? [] : datas[matiere_index]; /* Pour éviter les erreurs d'undefined. */
-        data_apprentissage = (data_apprentissage == null) ? [] : data_apprentissage;
         phases_etudiees = (phases_etudiees == null) ? [] : phases_etudiees;   
-console.log("data_apprentissage");
-console.log(data_apprentissage);        
  
-    /*-------------------------------------------------------------------------------------------------------------------
+     /*-------------------------------------------------------------------------------------------------------------------
        1)- La situation des études est faite par récupération et traitement des données reçues sur l'apprenant.
        2)- La liste des phases est établie en fonction du niveau d'étude de l'apprenant (selon les phases étudiées ou pas)
        3)- Le paramétrage conséquent est défini pour la leçon future.
        4)- Les phases s'affichent
-   
-    /*-----------------------------------------------------------------------------------------------------------------*/
+     /*-----------------------------------------------------------------------------------------------------------------*/
     
-        datas_length = (data_apprentissage.length != 0) ? data_apprentissage.length : 0;
+        let datas_length = (data_alphabet.length != 0) ? data_alphabet.length : 0;
         if(datas_length === 0) {  matiere_index = 0; niveau_en_cours = 1; }
     
     /*-----------------------------------------------------------------------------------------------------------------*/
@@ -129,9 +124,7 @@ console.log(data_apprentissage);
                 function stylesDesPhases() {
     
                     let lesson_status = lessonStatus();
-    
-                    lesson = (data_apprentissage.length === 0) ? [] : data_apprentissage.lesson;
-    
+           
                     $.each($('#phases_list li'), function() {
                         
                         let n = phases_etudiees.length;
@@ -300,17 +293,15 @@ console.log(data_apprentissage);
                                     sendDataToDeleteLesson(matiere,id_client,action);
                                     console.log('La lesson en cours est annulée');
                         
-                                    datas = [];
-                                    data_apprentissage = null;
-                                    lesson_d_apprentissage = [];
+                                    datas = [[],[],[],[]];
+                                    data_alphabet = null;
                                     lesson_d_apprentissage_alphabet = [];
                                     phases_etudiees = [];
                                     localStorage.removeItem("option_retenue");
                         
                                     sessionStorage.setItem('datas', JSON.stringify(datas));
-                                    sessionStorage.setItem('data_apprentissage', JSON.stringify(data_apprentissage));
-                                    sessionStorage.setItem('data_apprentissage_alphabet', JSON.stringify(data_apprentissage_alphabet));
-                                    sessionStorage.setItem('lesson_d_apprentissage', JSON.stringify(lesson_d_apprentissage));
+                                    sessionStorage.setItem('data_alphabet', JSON.stringify(data_alphabet));
+                                    sessionStorage.setItem('data_alphabet_apprentissage', JSON.stringify(data_alphabet_apprentissage));
                                     sessionStorage.setItem('lesson_d_apprentissage_alphabet', JSON.stringify(lesson_d_apprentissage_alphabet));
                                     sessionStorage.setItem('phases_etudiees', JSON.stringify(phases_etudiees));
                                         

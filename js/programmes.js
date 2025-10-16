@@ -9,16 +9,18 @@ $('document').ready(function() {
  /* Récupération du niveau d'avancement des études déterminé depuis accueil.js */
     let datas = JSON.parse(sessionStorage.getItem('datas'));
     var niveaux_etudies = JSON.parse(sessionStorage.getItem('niveaux_etudies'));
-    var niveau_max_du_serveur = niveauMaxDuServeur();
+    var niveau_max_du_serveur = JSON.parse(sessionStorage.getItem("niveau_max_du_serveur"));
     var niveau_max = JSON.parse(sessionStorage.getItem('niveau_max'));
+    niveau_max = (niveau_max == null) ? 0 : niveau_max;
     niveau_max = (niveau_max_du_serveur > niveau_max) ? niveau_max_du_serveur : niveau_max;
+    var niveau_en_cours_du_serveur = JSON.parse(sessionStorage.getItem("niveau_en_cours_du_serveur"));
     var niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
+    niveau_en_cours = (niveau_en_cours == null) ? niveau_en_cours_du_serveur : niveau_en_cours;
     var matiere_index = niveau_en_cours - 1;
     var matiere_nouvellement_apprise_du_serveur = matiereNouvellementAppriseDuServeur();
     matiere_nouvellement_apprise_du_serveur = (matiere_nouvellement_apprise_du_serveur == undefined) ? "" : matiere_nouvellement_apprise_du_serveur;
     var matiere_nouvellement_apprise = JSON.parse(sessionStorage.getItem('matiere_nouvellement_apprise'));
     matiere_nouvellement_apprise = (matiere_nouvellement_apprise == null) ? matiere_nouvellement_apprise_du_serveur : matiere_nouvellement_apprise;
-    let data_apprentissage_alphabet = JSON.parse(sessionStorage.getItem('data_apprentissage_alphabet'));
     let option_du_serveur = optionDuServeur();       
 
     datas[niveau_max] = (datas[niveau_max] == undefined) ? [] : datas[niveau_max];
@@ -72,28 +74,11 @@ $('document').ready(function() {
                 var matiere_nom = liste_de_matieres[i][1];
                 var matiere_index = liste_de_matieres.indexOf(liste_de_matieres[i]);
                 var niveau = matiere_index+1;   
-          
-                if(niveau_max === 0) {
-                    var phases_lien = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max;
-                    
-                    if(matiere_index === 0) programme_html += '<li id="'+matiere_id+'"><p><a href="'+phases_lien+'">'+matiere_nom+'</a></p></li>\n';
-                    if(matiere_index  >  0) programme_html += '<li id="'+matiere_id+'"><p>'+matiere_nom+'</p></li>\n';
-                }
-                
-                if(niveau_max > 0) {
-                    
-                    var phases_lien = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees;
+                var phases_lien = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees;
 
-                    if (matiere_index < niveau_max) {
-                        programme_html += '<li id="'+matiere_id+'"><p>'+matiere_nom+'</p></li>\n';
-                    }
-                    if (niveau_max == matiere_index) {
-                        programme_html += '<li id="'+matiere_id+'"><p><a href="'+phases_lien+'">'+matiere_nom+'</a></p></li>\n';
-                    }
-                    if (matiere_index > niveau_max) {
-                        programme_html += '<li id="'+matiere_id+'"><p>'+matiere_nom+'</p></li>\n';
-                    }
-                }
+                if (matiere_index < niveau_max)  programme_html += '<li id="'+matiere_id+'"><p>'+matiere_nom+'</p></li>\n';
+                if (matiere_index == niveau_max) programme_html += '<li id="'+matiere_id+'"><p><a href="'+phases_lien+'">'+matiere_nom+'</a></p></li>\n';
+                if (matiere_index > niveau_max)  programme_html += '<li id="'+matiere_id+'"><p>'+matiere_nom+'</p></li>\n';
             }
             programme_html += '\n</ul>';
             
@@ -104,7 +89,7 @@ $('document').ready(function() {
         
         // if(niveau_max > niveau_en_cours) niveau_max = niveau_en_cours;
         let programme_li = $("#programme_ul li");
-        if(matiere_nouvellement_apprise != null) {   
+        if(matiere_nouvellement_apprise != "") {   
             $.each(programme_li, function() {
                 let li_actif = $(this);
             
@@ -119,6 +104,7 @@ $('document').ready(function() {
         if(matiere_nouvellement_apprise == "") {
             $.each(programme_li, function() {
                 let matiere_index = $(this).index();
+
                 if(niveau_max === 0) {
                     if(matiere_index === 0) $(this).addClass("actif");
                     if(matiere_index  >  0) $(this).addClass("a_apprendre");
@@ -147,9 +133,9 @@ $('document').ready(function() {
     }
     function lessonOptions() {
         
-        let matiere_id = (niveau_en_cours == 1) ? liste_de_matieres[0][0] : liste_de_matieres[1][0];
-        let matiere_nom = (niveau_en_cours == 1) ? liste_de_matieres[0][1] : liste_de_matieres[1][1];
-        let niveau = (niveau_en_cours == 1) ? 1 : 2;          
+        let matiere_id = liste_de_matieres[0][0];
+        let matiere_nom = liste_de_matieres[0][1];
+        let niveau = 1;          
 
         let libele_du_choix_11 = "<span>߁߭</span> - "+matiere_nom+" ߘߏߣߍ߲߫ ߘߏߣߍ߲߫ ߘߋ߲߮";
         let libele_du_choix_12 = "<span>߂߲</span> - "+matiere_nom+" ߜߘߏߓߊ߫ ߘߋ߲߮"; 

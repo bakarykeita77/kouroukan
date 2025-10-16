@@ -211,7 +211,11 @@
     transition: 0.25s;
 }
 #pre_revision_btn:active { box-shadow: none; }
-#caracteres_container { top: 22rem; }
+#caracteres_container { 
+    width: max-content;
+    margin: auto;
+    top: 22rem; 
+}
 #caracteres_container span:hover { background-color: #ddd; }
 #consonnes_cadre {
     position: absolute;
@@ -220,7 +224,7 @@
     bottom: 2px;
     height: max-content;
     width: max-content;
-    min-width: 16rem;
+    min-width: 22rem;
     padding: 0 0.5rem;
     border-bottom: 0.5rem solid #aaa;
     overflow: hidden;

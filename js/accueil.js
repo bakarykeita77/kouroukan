@@ -1,13 +1,14 @@
 $('document').ready(function() {
          
  /* Declaration et initialisation des variables */
+    let data_alphabet_du_serveur = [], data_syllabes_du_serveur = [], data_tons_du_serveur = [], data_chiffres_du_serveur = [];
     
-    let niveaux_etudies = [], phases_etudiees = [];
-	let niveau_en_cours = 1, niveau_max = 0;
-	let derniere_phase = '';
+    let niveaux_etudies_du_serveur = [], phases_etudiees_du_serveur = [];
+	let niveau_en_cours_du_serveur = 1, niveau_max_du_serveur = 0;
+	let derniere_phase_du_serveur = '';
 
-    let matieres_a_apprendre = [];
-    let matieres_apprises = [];
+    let matieres_a_apprendre_du_serveur = [];
+    let matieres_apprises_du_serveur = [];
 
  /* 
     Initialisation de sessionStorage et de localStorage.
@@ -18,13 +19,11 @@ $('document').ready(function() {
     let present_id = document.getElementById('id_client').innerHTML;
     if(precedent_id != present_id) { sessionStorage.clear(); localStorage.clear(); }
 
-
     userIdentityStorage(); /* Storage des Identités récuperées de l'étudiant */
     dataStorage();         /* Récuperation et storage des data recuperés de l'étudiant */
     afficherLogo();
     afficher($('#reception'));
     
-
     function userIdentityStorage() {
         sessionStorage.setItem('id_client', JSON.stringify(document.getElementById('id_client').innerHTML));
         sessionStorage.setItem('prenom',    JSON.stringify(document.getElementById('prenom').innerHTML));
@@ -46,124 +45,104 @@ $('document').ready(function() {
          /*-------------------------------------------------------------------------   
           datas
          -------------------------------------------------------------------------*/   
-            let datas = [];
-
-    	    for(var i=0; i<matiere_collection.length; i++) { datas[i] = (matiere_collection[i].length === 0)  ? [] : matiere_collection[i]; }
+            let datas = matiere_collection;
     	    sessionStorage.setItem('datas',JSON.stringify(datas));
 
+            console.log("Les données des leçons étudiées par l'apprenant sont");
+            console.log(datas);
+
+         /* Analyse des données réçues de l'étudiant */
             profileTesteMenu();
             profileResulat();
 
-console.log("Les données des leçons étudiées par l'apprenant sont");
-console.log(datas);
+         /*-------------------------------------------------------------------------   
+           Matieres
+         -------------------------------------------------------------------------*/
+            data_alphabet_du_serveur = datas[0];
+            data_syllabes_du_serveur = datas[1];
+            data_tons_du_serveur = datas[2];
+            data_chiffres_du_serveur = datas[3];
 
-            if(datas.length === 0) {
-                sessionStorage.setItem('niveaux_etudies',JSON.stringify([]));
-                sessionStorage.setItem('niveau_max',JSON.stringify(0));
-                sessionStorage.setItem('niveau_en_cours',JSON.stringify(1));
+            sessionStorage.setItem('data_alphabet_du_serveur',JSON.stringify(data_alphabet_du_serveur));
+            sessionStorage.setItem('data_syllabes_du_serveur',JSON.stringify(data_syllabes_du_serveur));
+            sessionStorage.setItem('data_tons_du_serveur',JSON.stringify(data_tons_du_serveur));
+            sessionStorage.setItem('data_chiffres_du_serveur',JSON.stringify(data_chiffres_du_serveur));
+
+         /*-------------------------------------------------------------------------   
+           Phases, Notes et Niveaux
+         -------------------------------------------------------------------------*/   
+            var note_1 = 0, note_2 = 0, note_3 = 0, note_4 = 0;
+            var moyenne = 90, moyenne_1 = 0, moyenne_2 = 0, moyenne_3 = 0, moyenne_4 = 0;
                 
-                sessionStorage.setItem('phases_etudiees',JSON.stringify([]));
-                sessionStorage.setItem('derniere_phase',JSON.stringify(''));
-                sessionStorage.setItem('phase_active',JSON.stringify('alphabet_apprentissage'));
-            }
-            
-            if(datas.length > 0) {
-             /*-------------------------------------------------------------------------   
-              Phases, Notes et Niveaux
-             -------------------------------------------------------------------------*/   
-                var note_1 = 0, note_2 = 0, note_3 = 0, note_4 = 0;
-                var moyenne = 90, moyenne_1 = 0, moyenne_2 = 0, moyenne_3 = 0, moyenne_4 = 0;
-
-                if(datas[1][0] == undefined) {
-                    sessionStorage.setItem("id_apprentissage", JSON.stringify("syllabe_apprentissage"));
-                    sessionStorage.setItem("id_exercice", JSON.stringify("syllabe_exercice"));
-                    sessionStorage.setItem("id_revision", JSON.stringify("syllabe_revision"));
+            /*Calcul de phases étudiées*/ 
+            for (var i = 0; i < datas.length ; i++) {
+            for (var j = datas[i].length; j > 0; j--) {
+                
+                if(i === 0) {
+                    /*Phases_etudiees de alphabet*/
+                    if(JSON.parse(datas[i][j-1].lesson).length === 27) phases_etudiees_du_serveur.push(datas[i][j-1].phase); 
                 } 
-                if(datas[1][0] != undefined) { sessionStorage.setItem("id_apprentissage", JSON.stringify(datas[1][0].id)); }
-                if(datas[1][1] != undefined) { sessionStorage.setItem("id_exercice", JSON.stringify(datas[1][1].id)); }
-                if(datas[1][2] != undefined) { sessionStorage.setItem("id_revision", JSON.stringify(datas[1][2].id)); }
-                if(datas[1][3] != undefined) { sessionStorage.setItem("id_evaluation", JSON.stringify(datas[1][3].id)); }
-                  
-            	for (var i = 0; i < datas.length ; i++) {
-            	for (var j = datas[i].length; j > 0; j--) {
-                 
-                    if(i === 0) {
-                     /*Phases_etudiees de alphabet*/
-                     if(JSON.parse(datas[i][j-1].lesson).length === 27) phases_etudiees.push(datas[i][j-1].phase); 
-                    } 
-                    if(i === 1) {
-                        /*Phases_etudiees de syllabe*/
-                        if(JSON.parse(datas[i][j-1].lesson).length === 126) phases_etudiees.push(datas[i][j-1].phase);
-                    } 
-                    if(i === 2) {
-                     //Phases_etudiees de tons
-                        console.log("Phases_etudiees pour les tons sont à calculer");
-                        // if(JSON.parse(datas[i][j-1].lesson).length === 126) {
-                        //     phases_etudiees.push(datas[i][j-1].phase); 
-                        // }
-                    } 
-                   
-                    let  nivo = parseInt(datas[i][j-1].niveau);
-                    let  phase_note = parseInt(datas[i][j-1].note);
-                    
-                    if(nivo === 1) note_1 += phase_note;
-                    if(nivo === 2) note_2 += phase_note;
-                    if(nivo === 3) note_3 += phase_note;
-                    if(nivo === 4) note_4 += phase_note;
-            	}}
-
-             /*Calcul de phases distinctes globale*/            
-                if(datas[0] != undefined) moyenne_1 = note_1/3; //Moyenne générale pour alphabet
-                if(datas[1] != undefined) moyenne_2 = note_2/4; //Moyenne générale pour syllabe
-                if(datas[2] != undefined) moyenne_3 = note_3/4; //Moyenne générale pour tons
-                if(datas[3] != undefined) moyenne_4 = note_4/4; //Moyenne générale pour chiffres
-           	
-                if(moyenne_1 >= moyenne) niveaux_etudies.push(1);   	    
-                if(moyenne_2 >= moyenne) niveaux_etudies.push(2);   	    
-                if(moyenne_3 >= moyenne) niveaux_etudies.push(3);   	    
-                if(moyenne_4 >= moyenne) niveaux_etudies.push(4);  
-   
-                sessionStorage.setItem('niveaux_etudies', JSON.stringify(niveaux_etudies));
-                sessionStorage.setItem('phases_etudiees', JSON.stringify(phases_etudiees));
-                sessionStorage.setItem('derniere_phase' , JSON.stringify(derniere_phase ));
+                if(i === 1) {
+                    /*Phases_etudiees de syllabe*/
+                    if(JSON.parse(datas[i][j-1].lesson).length === 126) phases_etudiees_du_serveur.push(datas[i][j-1].phase);
+                } 
+                if(i === 2) {
+                    //Phases_etudiees de tons
+                    console.log("Phases_etudiees pour les tons sont à calculer");
+                } 
                 
-                sessionStorage.setItem('moyenne_1', JSON.stringify(moyenne_1));
-                sessionStorage.setItem('moyenne_2', JSON.stringify(moyenne_2));
-                sessionStorage.setItem('moyenne_3', JSON.stringify(moyenne_3));
-                sessionStorage.setItem('moyenne_4', JSON.stringify(moyenne_4));
-          
-                if(niveaux_etudies.length === 0) {
-                	sessionStorage.setItem('niveau_max', JSON.stringify(0));
-                	sessionStorage.setItem('niveau_en_cours', JSON.stringify(1));
+                let  nivo = parseInt(datas[i][j-1].niveau);
+                let  phase_note = parseInt(datas[i][j-1].note);
+                
+                if(nivo === 1) note_1 += phase_note;
+                if(nivo === 2) note_2 += phase_note;
+                if(nivo === 3) note_3 += phase_note;
+                if(nivo === 4) note_4 += phase_note;
+            }}
+        
+            /*Calcul de niveaux étudiées*/ 
+            if(datas[0] != undefined) moyenne_1 = note_1/3; //Moyenne générale pour alphabet
+            if(datas[1] != undefined) moyenne_2 = note_2/4; //Moyenne générale pour syllabe
+            if(datas[2] != undefined) moyenne_3 = note_3/4; //Moyenne générale pour tons
+            if(datas[3] != undefined) moyenne_4 = note_4/4; //Moyenne générale pour chiffres
+     
+            if(moyenne_1 >= moyenne) niveaux_etudies_du_serveur.push(1);   	    
+            if(moyenne_2 >= moyenne) niveaux_etudies_du_serveur.push(2);   	    
+            if(moyenne_3 >= moyenne) niveaux_etudies_du_serveur.push(3);   	    
+            if(moyenne_4 >= moyenne) niveaux_etudies_du_serveur.push(4);  
+
+         /*Storage des phases et niveaux étudiés*/ 
+            sessionStorage.setItem('phases_etudiees_du_serveur', JSON.stringify(phases_etudiees_du_serveur));
+            sessionStorage.setItem('niveaux_etudies_du_serveur', JSON.stringify(niveaux_etudies_du_serveur));
+            sessionStorage.setItem('derniere_phase_du_serveur' , JSON.stringify(derniere_phase_du_serveur ));
+    
+            niveau_max_du_serveur = (niveaux_etudies_du_serveur.length === 0) ? 0 : Math.max(...niveaux_etudies_du_serveur);
+            niveau_en_cours_du_serveur = niveau_max_du_serveur + 1;
+            
+            sessionStorage.setItem('niveau_max_du_serveur', JSON.stringify(niveau_max_du_serveur));
+            sessionStorage.setItem('niveau_en_cours_du_serveur', JSON.stringify(niveau_en_cours_du_serveur));
+                    
+         /*-------------------------------------------------------------------------   
+           Les pratiques 
+         -------------------------------------------------------------------------*/              
+            let pratiques = [];
+        
+            for (var i = 0; i < datas.length; i++) {
+            for (var j = 0; j < datas[i].length; j++) {
+                if(datas[i][j]['phase'].split('_')[1] == "pratique") {
+                    
+                    let niveau = datas[i][j]['niveau'];
+                    let lesson = datas[i][j]['lesson'];
+                    let note   = datas[i][j]['note'];
+                    
+                    pratiques.push([niveau,lesson,note]);
                 }
-                if(niveaux_etudies.length > 0) {
-                    niveau_max = Math.max(...niveaux_etudies);
-                    niveau_en_cours = niveau_max + 1;
-                   
-                	sessionStorage.setItem('niveau_max', JSON.stringify(niveau_max));
-                	sessionStorage.setItem('niveau_en_cours', JSON.stringify(niveau_en_cours));
-                }
-                        
-             /*-------------------------------------------------------------------------   
-              Les pratiques 
-             -------------------------------------------------------------------------*/              
-            	let pratiques = [];
-           	
-            	for (var i = 0; i < datas.length; i++) {
-            	for (var j = 0; j < datas[i].length; j++) {
-            	    if(datas[i][j]['phase'].split('_')[1] == "pratique") {
-            	        
-            	        let niveau = datas[i][j]['niveau'];
-            	        let lesson = datas[i][j]['lesson'];
-            	        let note   = datas[i][j]['note'];
-            	        
-            	        pratiques.push([niveau,lesson,note]);
-            	    }
-            	}}
-             	
-                localStorage.setItem('pratiques', JSON.stringify(pratiques));
-                sessionStorage.setItem('pratiques', JSON.stringify(pratiques));
-            }
+            }}
+            
+            localStorage.setItem('pratiques', JSON.stringify(pratiques));
+            sessionStorage.setItem('pratiques', JSON.stringify(pratiques));
+     
+
             function profileTesteMenu(){
 
                 calculDesMatieresApprisesEtNonApprises();
@@ -171,44 +150,35 @@ console.log(datas);
                 affichageDeProfileTesteMenu();
                     
                 function calculDesMatieresApprisesEtNonApprises() {
-                    if(datas.length === 0) {
-                        matieres_apprises = [];
-                        for (let i = 0; i < liste_de_matieres.length; i++) { matieres_a_apprendre[i] = liste_de_matieres[i][1]; }
-                        
-                        sessionStorage.setItem('matieres_a_apprendre',JSON.stringify(matieres_a_apprendre));
-                        sessionStorage.setItem('matieres_apprises',JSON.stringify(matieres_apprises));
+                    for (let j = 0; j < datas.length; j++) {
+                        if(datas[j].length == 0) 
+                        { matieres_a_apprendre_du_serveur.push(liste_de_matieres[j][1]); }else
+                        { matieres_apprises_du_serveur.push(liste_de_matieres[j][1]); }
                     }
-                    if(datas.length > 0) {
-                        for (let j = 0; j < datas.length; j++) {
-                            if(datas[j].length == 0) 
-                            { matieres_a_apprendre.push(liste_de_matieres[j][1]); }else
-                            { matieres_apprises.push(liste_de_matieres[j][1]); }
-                        }
-                        
-                        sessionStorage.setItem('matieres_apprises',JSON.stringify(matieres_apprises));
-                        sessionStorage.setItem('matieres_a_apprendre',JSON.stringify(matieres_a_apprendre));
-                    }
+                    
+                    sessionStorage.setItem('matieres_apprises_du_serveur',JSON.stringify(matieres_apprises_du_serveur));
+                    sessionStorage.setItem('matieres_a_apprendre_du_serveur',JSON.stringify(matieres_a_apprendre_du_serveur));
                 }
                 function chargementDeProfileTesteMenu() {
 
-                    document.getElementById("liste_des_matieres_apprises").innerHTML = (matieres_apprises.length === 0) ? '<p class="rien">ߝߏߦߊ߲߫߹</p>' : listeDesMatieresApprisesHtml();
-                    document.getElementById("liste_des_matieres_a_apprendre").innerHTML = (matieres_a_apprendre.length === 0) ? '<p class="rien">ߝߏߦߊ߲߫߹</p>' : listeDesMatieresAApprendreHtml();
+                    document.getElementById("liste_des_matieres_apprises").innerHTML = (matieres_apprises_du_serveur.length === 0) ? '<p class="rien">ߝߏߦߊ߲߫߹</p>' : listeDesMatieresApprisesHtml();
+                    document.getElementById("liste_des_matieres_a_apprendre").innerHTML = (matieres_a_apprendre_du_serveur.length === 0) ? '<p class="rien">ߝߏߦߊ߲߫߹</p>' : listeDesMatieresAApprendreHtml();
     
                     function listeDesMatieresAApprendreHtml() {
                         let html = "<ul>";
-                            for (let i = 0; i < matieres_a_apprendre.length; i++) {  
-                                html += "<li>"+matieres_a_apprendre[i]+"</li>";
-                            }
-                            html += "</ul>";
-                            return html;
+                        for (let i = 0; i < matieres_a_apprendre_du_serveur.length; i++) {  
+                            html += "<li>"+matieres_a_apprendre_du_serveur[i]+"</li>";
+                        }
+                        html += "</ul>";
+                        return html;
                     }
                     function listeDesMatieresApprisesHtml() {
                         let html = "<ul>";
-                            for (let i = 0; i < matieres_apprises.length; i++) {  
-                                html += "<li>"+matieres_apprises[i]+"</li>";
-                            }
-                            html += "</ul>";
-                            return html;
+                        for (let i = 0; i < matieres_apprises_du_serveur.length; i++) {  
+                            html += "<li>"+matieres_apprises_du_serveur[i]+"</li>";
+                        }
+                        html += "</ul>";
+                        return html;
                     }
                 }
                 function affichageDeProfileTesteMenu() {
@@ -229,6 +199,5 @@ console.log(datas);
     	})
     	.catch(error => console.log( error ));
     }
-
     function afficherLogo() { $('#logo').css('display', 'block'); }
 });

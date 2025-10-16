@@ -1513,6 +1513,7 @@
         let datas = JSON.parse(sessionStorage.getItem('datas'));
         let niveaux = [];
         let niveau_max = 0;
+
         for (let i = 0; i < datas.length; i++) {
             if(datas[i].length != 0) {niveaux.push(i);}
         }

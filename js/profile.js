@@ -12,7 +12,6 @@ $(document).ready(function(){
     var profile_teste_content;
     var liste_des_matieres_apprises, liste_des_matieres_a_apprendre;
 
-    let datas = [];
     let matieres_a_apprendre = JSON.parse(sessionStorage.getItem("matieres_a_apprendre"));
     let matieres_apprises = JSON.parse(sessionStorage.getItem("matieres_apprises"));
     matieres_a_apprendre = (matieres_a_apprendre == null) ? [] : matieres_a_apprendre;

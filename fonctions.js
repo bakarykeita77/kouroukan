@@ -80,6 +80,7 @@
         }
         function afficherPanneauDesCaracteres() {
             let memoire_consonnes_choisies = memoireConsonnesChoisies();
+
             togglePanneauDesConsonnes();
             panneauxStyle(memoire_consonnes_choisies);
         }
@@ -390,6 +391,7 @@
             cocherLeCaractereCorrespondantDeParametre();
 
             function cocherLesCaracteresDuPanneau() {
+
                 cocherLesConsonnes();
                 cocherLesVoyelles();
                 cocherLesTons();
@@ -472,13 +474,17 @@
                     togglePanneauDesConsonnes();
                 }
             }
-
             function cocherLeCaractereCorrespondantDeParametre() {
                 $("#consonnes_container span, #voyelles_container span, #tons_container span").click((e) => {
 
                     let span = e.target;
                     let caractere_du_panneau = span.textContent;
                     
+                    if(span.style.color == "orange") {
+                        alert('ߛߌ߬ߙߊ߬ߕߊ ߏ߬ ߜߋ߲߭ ߠߎ߬ ߘߋ߲߰ߣߍ߲߬ ߞߘߐ ߟߋ߬߹');
+                        return false;
+                    }
+
                     if($.inArray(caractere_du_panneau, caracteres_choisis_du_panneau) == -1) { 
                         caracteres_choisis_du_panneau.push(caractere_du_panneau); }else{ 
                         caracteres_choisis_du_panneau.splice(caracteres_choisis_du_panneau.indexOf(caractere_du_panneau),1); 
@@ -706,11 +712,12 @@
     }
     function consonnesChoisiesDuServeur() {
    
+        let niveau_actif = JSON.parse(sessionStorage.getItem("niveau_actif"));
         let datas = JSON.parse(sessionStorage.getItem("datas"));
         let cs = [];
         let lesson = [];
 
-        if (datas != null) lesson = (datas[2][0] == undefined) ? [] : JSON.parse(datas[2][0].lesson);
+        if (datas[niveau_actif-1][0] != undefined)  lesson = JSON.parse(datas[niveau_actif-1][0].lesson);
         lesson.forEach(element => {
             let consonne = element[0].split('')[0];
             if ($.inArray(consonne, cs) === -1) { cs.push(consonne); }
@@ -841,6 +848,9 @@
     }
     function defilementDuContenuVersLeHaut(container) {
         container.animate({ scrollTop:container[0].scrollHeight }, 1000);
+    }
+    function demarquer(element) {
+        element.css('background-color','#aaa').siblings().css('background-color','rgba(85,85,85,0.25)');
     }
     function display(element) {
         element.css({
@@ -1350,9 +1360,11 @@
         return mixted_table;
     }
     function marquerLaConsonneChoisie(clicked_consonne_container) {
-        var bc = clicked_consonne_container.css('background-color');
-        var consonne_background = (bc == 'rgb(170, 170, 170)') ? 'rgb(255, 255, 255)' : 'rgb(170, 170, 170)';
-        clicked_consonne_container.css('background-color',consonne_background);
+        if(clicked_consonne_container.css("color") != "rgb(255, 165, 0)") {
+            var bc = clicked_consonne_container.css('background-color');
+            var consonne_background = (bc == 'rgb(170, 170, 170)') ? 'rgb(255, 255, 255)' : 'rgb(170, 170, 170)';
+            clicked_consonne_container.css('background-color',consonne_background);
+        }
     }
     function marquerReponse(td_actif,question) {
         let reponse = td_actif.text();
@@ -1370,6 +1382,7 @@
     function memoireConsonnesChoisies() {
 
         let consonnes_choisies_du_serveur = consonnesChoisiesDuServeur();
+
         consonnes_choisies_du_serveur = (consonnes_choisies_du_serveur == null) ? [] : consonnes_choisies_du_serveur;
         let memoire_consonnes_choisies = JSON.parse(localStorage.getItem("memoire_consonnes_choisies"));
         memoire_consonnes_choisies = (memoire_consonnes_choisies == null) ? [] : memoire_consonnes_choisies;

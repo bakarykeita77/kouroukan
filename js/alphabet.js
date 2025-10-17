@@ -592,7 +592,7 @@ function alphabet() {
                                     function repondre() {
                                         if(pre_question !== '') {
                                             pre_reponse = element_actif.text();
-                                            $(element_actif).css('background-color','#aaa').siblings().css('background-color','rgba(85,85,85,0.25)');
+                                            demarquer($(element_actif));
                                         }
                                     }
                                     function actualiserLeLabelDeCorrectionBtn() {

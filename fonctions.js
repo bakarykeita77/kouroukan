@@ -12,6 +12,27 @@
 			son.attr({src: source_son, autoplay: "on"});
 		});
 	}
+    function actualiserLessonSyllabe(lesson, lesson_du_jour) {
+
+        let anciennes_syllabes = anciennesSyllabes();
+        let nouvelles_syllabes = nouvellesSyllabes();
+
+        nouvelles_syllabes.forEach(element => {
+            let index = nouvelles_syllabes.indexOf(element);
+            if ($.inArray(element, anciennes_syllabes) === -1) { lesson.push(lesson_du_jour[index]); }
+        });
+
+        function nouvellesSyllabes() {
+            let ns = [];
+            lesson_du_jour.forEach(element => { ns.push(element[0]); });
+            return ns;
+        }
+        function anciennesSyllabes() {
+            let as = [];
+            lesson.forEach(element => { if (element != null) as.push(element[0]); });
+            return as;
+        }
+    }
     function affichageAnimeDeTableTd(table) {
         
         let tr = $('tr', table);

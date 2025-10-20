@@ -44,7 +44,7 @@
     border: 1px solid transparent; 
 }
 #apprentissage_note p { margin: 0.25rem 0; }
-#pre_texte {
+#texte {
     position: absolute;
     width: calc(100% - 2rem);
     max-width: 16rem;

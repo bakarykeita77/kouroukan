@@ -27,6 +27,7 @@ function ton() {
             }
             function chargerFootDApprentissageTon() {
 
+                chargerPanneauDesCaracteres();
                 chargerApprentissageDialoguesBtns();
                 chargerApprentissageRedirectionBtns();
 
@@ -61,7 +62,7 @@ function ton() {
                         }
                     }
 
-                    if(e.target.id == "pre_texte") {
+                    if(e.target.id == "texte") {
                         secouer($("#afficheur_de_panneau"));
                         return;
                     }

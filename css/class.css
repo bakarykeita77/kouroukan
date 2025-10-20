@@ -61,11 +61,8 @@
 /* --------------------------------------------------------------------------------------------------------- */
 
 .body_cadre {
-    position: relative;
-    margin: 0 auto 1rem;
     min-height: 17rem;
     height: max-content;
-    max-width: 40rem;
     z-index: 2;
 }
 .border_blue { border: 0.5rem solid blue; }

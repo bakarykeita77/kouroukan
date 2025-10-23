@@ -208,7 +208,6 @@
     line-height: 2rem;
     text-align: center;
     cursor: pointer;
-    transition: 0.25s;
 }
 #pre_revision_btn:active { box-shadow: none; }
 #caracteres_container { 
@@ -285,7 +284,6 @@
     border-radius: 0.5rem;
     transform: scaleY(0.75);
     opacity: 0;
-    transition: 0.6s;
 }
 .fermeture_pre {
     position: absolute;
@@ -416,7 +414,7 @@
     color: black;
     text-align: center;
 }
-#evaluation_bouton { z-index: 0; }
+#evaluation_btn { z-index: 0; }
 #submit_panneau {
     position: relative;
     width: 12rem;

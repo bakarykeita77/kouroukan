@@ -93,7 +93,7 @@
         function afficherApprentissageContainer() {
             display($("#apprentissage_container"));
             masquer($('#apprentissage_container > div:not(#apprentissage_head)'));
-            setTimeout(() => { afficher($('#apprentissage_container > div:not(#apprentissage_head)')); }, 250);
+            setTimeout(() => { afficher($('#apprentissage_container > div:not(#apprentissage_head)')); }, 400);
         
             rendreActif($('#afficheur_de_panneau'));
             indexer($('#afficheur_de_panneau p'));
@@ -106,6 +106,66 @@
             panneauxStyle(memoire_consonnes_choisies);
         }
     }
+    function afficherBoutonDeCorrection() {
+        display($('.dialogue_btns'));
+        masquer($('.redirection_btns'));
+        masquer($(".dialogue_btns > div"));
+
+        setTimeout(() => { 
+            afficher($(".correction_btn")); 
+            rendreActif($(".correction_btn")); 
+        }, 400);
+    }
+    function afficherBoutonDeQuestion() {
+        display($('.dialogue_btns'));
+        masquer($('.redirection_btns'));
+        masquer($(".dialogue_btns > div"));
+        
+        setTimeout(() => {
+            masquer($('.dialogue_btns > div'));
+            rendreActif($('.question_btn'));
+            afficherRapidement($('.question_btn'));
+        }, 400);
+    }
+    function afficherBoutonDeRepetition() {
+        display($('.dialogue_btns'));
+        masquer($('.redirection_btns'));
+        masquer($(".dialogue_btns > div"));
+
+        setTimeout(() => { 
+            masquer($('.dialogue_btns > div'));
+            rendreActif($('.repetition_btn'));
+            afficher($('.repetition_btn')); 
+        }, 400);
+    }
+    function afficherBoutonPourLaMatiereSuivante() {
+        let matiere = nomDeLaMatiereSuivante();
+
+        masquer($('.dialogue_btns'));
+        display($('.redirection_btns'));
+        masquer($('.redirection_btns > div'));
+        
+        setTimeout(() => {
+            afficher($('.continu_sur_la_lesson_suivante'));
+            rendreActif($('.continu_sur_la_lesson_suivante'));
+            $('.continu_sur_la_lesson_suivante a').text(matiere+' ߘߋ߰ߟߌ ߘߊߡߌ߬ߘߊ߬');
+            indexer($('.continu_sur_la_lesson_suivante p'));
+        }, 400);
+    }
+    function afficherBoutonDeReprise() {
+        let matiere = JSON.parse(sessionStorage.getItem("matiere_nom"));
+        
+        masquer($('.dialogue_btns'));
+        display($('.redirection_btns'));
+        masquer($('.redirection_btns > div'));
+
+        setTimeout(() => { 
+            afficher($('.reprendre_btn'));
+            rendreActif($('.reprendre_btn'));
+            $('.reprendre_btn').html("<p>"+matiere+" ߞߘߐߓߐߟߌ ߞߍ߫ ߕߎ߲߯</p>");
+            indexer($('.reprendre_btn p'));
+        }, 400);
+    }
     function afficherLentement(element) {
         masquer(element);
         element.css({'display':'block','transition':'0.8s'}); 
@@ -113,7 +173,7 @@
     }   
     function afficherRapidement(element) {
         masquer(element);
-        element.css({'display':'block','transition':'0.2s'}); 
+        element.css({'display':'block','transition':'0.1s'}); 
         affichage(element);
     }
 	function afficher_en_jailli( element,largeur,hauteur,temps ) {
@@ -142,10 +202,10 @@
                 afficher($('#evaluation_dialogue_btns'));
 
                 masquer($('#evaluation_dialogue_btns > div'));
-                afficherRapidement($('#evaluation_question_bouton'));
-                rendreActif($('#evaluation_question_bouton'));
+                afficherRapidement($('#evaluation_question_btn'));
+                rendreActif($('#evaluation_question_btn'));
             }
-        }, 250);
+        }, 400);
     }
     function afficherExercice() {
         masquer($(".direction"));
@@ -196,11 +256,11 @@
                 afficher($('#evaluation_dialogue_btns'));
 
                 masquer($('#evaluation_dialogue_btns > div'));
-                afficherRapidement($('#evaluation_question_bouton'));
+                afficherRapidement($('#evaluation_question_btn'));
                 rendreActif($('#evaluation_question_btn'));
                     
-                rendreActif($('#evaluation_question_bouton'));
-                indexer($('#evaluation_question_bouton p'));
+                rendreActif($('#evaluation_question_btn'));
+                indexer($('#evaluation_question_btn p'));
             }
         }, 200);   
     }
@@ -1553,6 +1613,16 @@
         }
         niveau_max = Math.max(...niveaux)+1;
         return niveau_max;
+    }
+    function nomDeLaMatiereSuivante() {
+        let ms = "";
+        let niveau_actif = JSON.parse(sessionStorage.getItem("niveau_actif"));
+
+        if(niveau_actif == 1) ms = "ߜߋ߲߲߭";
+        if(niveau_actif == 2) ms = "ߞߊ߲ߡߊߛߙߋ";
+        if(niveau_actif == 3) ms = "ߖߊ߰ߕߋ߬ߘߋ߲";
+
+        return ms;
     }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/

@@ -35,7 +35,7 @@ function ton() {
                     $('#apprentissage_dialogue_btns').html("<div class='titre_de_parti' id='afficheur_de_panneau'><p>ߛߓߍߘߋ߲߫ ߥߟߊ ߦߌ߬ߘߊ߬</p></div>");
                 }
                 function chargerApprentissageRedirectionBtns() {
-                    $('#continu_sur_exercice_bouton').html("<p>ߜߋ߲߭ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫</p>");
+                    $('#continu_sur_exercice_btn').html("<p>ߜߋ߲߭ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫</p>");
                 }
             }
         }

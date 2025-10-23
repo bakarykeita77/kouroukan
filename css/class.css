@@ -270,7 +270,7 @@
 }
 .course_body { 
     position: relative;
-    min-height: 60vh;
+    min-height: 50vh;
     padding-top: 0.5rem;
     margin: 0 auto 1rem;
     border-radius: 0.5rem;
@@ -345,7 +345,6 @@
     width: calc(100% - 2px);
     margin: auto;
     padding: 0;
-    transition: 0.25s;
     z-index: 1;
 }
 .dialogue_btns div:not(.titre_de_parti, #cercles_des_partis) {
@@ -645,7 +644,7 @@ del {
     border-radius: 0.25rem;
     box-shadow: 0 0 3rem #666;
     opacity: 0;
-    transition: 1s;
+    transition: 3s;
 }
 .media_label {
     height: 2.5rem;

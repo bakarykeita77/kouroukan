@@ -119,7 +119,7 @@ if(isset($_SESSION["id_client"])) {
                                 <div id='panneaux'></div>
                                 <div class="dialogue_btns" id="apprentissage_dialogue_btns"></div>
                                 <div class="redirection_btns" id="apprentissage_redirection_btns">
-                                    <div class='redirection_btn' id='continu_sur_exercice_bouton'></div>
+                                    <div class='redirection_btn' id='continu_sur_exercice_btn'></div>
                                 </div>
                             </div>
                         </div>
@@ -166,8 +166,8 @@ if(isset($_SESSION["id_client"])) {
                                 </div>
 
                                 <div class="redirection_btns" id="exercice_redirection_btns">
-                                    <div class='redirection_btn' id='reprendre_exercice_bouton'></div>
-                                    <div class='redirection_btn' id='continu_sur_revision_bouton'></div> 
+                                    <div class='reprendre_btn' id='reprendre_exercice_btn'></div>
+                                    <div class='redirection_btn' id='continu_sur_revision_btn'></div> 
                                 </div>
                             </div>
                         </div>
@@ -211,10 +211,10 @@ if(isset($_SESSION["id_client"])) {
                                     <div class="correction_btn" id="revision_correction_btn">ߏ߬ ߛߊߞߍ߫</div>
                                 </div>
                                 <div class="redirection_btns" id="revision_redirection_btns">
-                                    <div class='redirection_btn' id='reprendre_revision_bouton'></div>
-                                    <div class='redirection_btn' id='continu_sur_apprentissage_bouton'></div> 
-                                    <div class='redirection_btn' id='continu_sur_evaluation_bouton'></div> 
-                                    <div class='redirection_btn' id='syllabe_bouton'></div> 
+                                    <div class='reprendre_btn' id='reprendre_revision_btn'></div>
+                                    <div class='redirection_btn' id='continu_sur_apprentissage_btn'></div> 
+                                    <div class='redirection_btn' id='continu_sur_evaluation_btn'></div> 
+                                    <div class='redirection_btn' id='syllabe_btn'></div> 
                                 </div>
                             </div>
                         </div>
@@ -293,15 +293,15 @@ if(isset($_SESSION["id_client"])) {
                                 <div class="clavier_container" id="clavier_evaluation"><?php include "clavier.php"; ?></div>
 
                                 <div class="dialogue_btns" id="evaluation_dialogue_btns">
-                                    <div class="question_btn" id="evaluation_question_bouton"></div>
-                                    <div class="repetition_btn" id="evaluation_repetition_bouton"></div>
-                                    <div class="correction_btn" id="evaluation_correction_bouton">ߏ߬ ߛߊߞߍ߫</div>
+                                    <div class="question_btn" id="evaluation_question_btn"></div>
+                                    <div class="repetition_btn" id="evaluation_repetition_btn"></div>
+                                    <div class="correction_btn" id="evaluation_correction_btn">ߏ߬ ߛߊߞߍ߫</div>
                                 </div>
 
                                 <div class="redirection_btns" id="evaluation_redirection_btns">
-                                    <div class="redirection_btn" id="reprendre_evaluation_bouton"></div>
-                                    <div class="redirection_btn" id="continu_sur_apprentissage_bouton"></div>
-                                    <div class='redirection_btn' id='continu_sur_la_lesson_suivante'><p><a href="http://localhost/kouroukan/php/programmes.php"></a></p></div> 
+                                    <div class="reprendre_btn" id="reprendre_evaluation_btn"></div>
+                                    <div class="redirection_btn" id="continu_sur_apprentissage_btn"></div>
+                                    <div class='continu_sur_la_lesson_suivante'><p><a href="http://localhost/kouroukan/php/programmes.php"></a></p></div> 
                                 </div>
 
                             </div>

@@ -119,7 +119,7 @@ if(isset($_SESSION["id_client"])) {
                                 <div id='panneaux'></div>
                                 <div class="dialogue_btns" id="apprentissage_dialogue_btns"></div>
                                 <div class="redirection_btns" id="apprentissage_redirection_btns">
-                                    <div class='redirection_btn' id='continu_sur_exercice_btn'></div>
+                                    <div class='exercice_btn' id='continu_sur_exercice_btn'></div>
                                 </div>
                             </div>
                         </div>
@@ -166,8 +166,8 @@ if(isset($_SESSION["id_client"])) {
                                 </div>
 
                                 <div class="redirection_btns" id="exercice_redirection_btns">
-                                    <div class='reprendre_btn' id='reprendre_exercice_btn'></div>
-                                    <div class='redirection_btn' id='continu_sur_revision_btn'></div> 
+                                    <div class='exercice_btn' id='reprendre_exercice_btn'></div>
+                                    <div class='revision_btn' id='continu_sur_revision_btn'></div> 
                                 </div>
                             </div>
                         </div>
@@ -212,9 +212,9 @@ if(isset($_SESSION["id_client"])) {
                                 </div>
                                 <div class="redirection_btns" id="revision_redirection_btns">
                                     <div class='reprendre_btn' id='reprendre_revision_btn'></div>
-                                    <div class='redirection_btn' id='continu_sur_apprentissage_btn'></div> 
-                                    <div class='redirection_btn' id='continu_sur_evaluation_btn'></div> 
-                                    <div class='redirection_btn' id='syllabe_btn'></div> 
+                                    <div class='apprentissage_btn' id='continu_sur_apprentissage_btn'></div> 
+                                    <div class='evaluation_btn' id='continu_sur_evaluation_btn'></div> 
+                                    <div class='lesson_suivante' id='syllabe_btn'></div> 
                                 </div>
                             </div>
                         </div>
@@ -300,8 +300,8 @@ if(isset($_SESSION["id_client"])) {
 
                                 <div class="redirection_btns" id="evaluation_redirection_btns">
                                     <div class="reprendre_btn" id="reprendre_evaluation_btn"></div>
-                                    <div class="redirection_btn" id="continu_sur_apprentissage_btn"></div>
-                                    <div class='continu_sur_la_lesson_suivante'><p><a href="http://localhost/kouroukan/php/programmes.php"></a></p></div> 
+                                    <div class="apprentissage_btn" id="continu_sur_apprentissage_btn"></div>
+                                    <div class='lesson_suivante'><p><a href="http://localhost/kouroukan/php/programmes.php"></a></p></div> 
                                 </div>
 
                             </div>

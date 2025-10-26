@@ -377,7 +377,7 @@ function alphabet() {
                                                             }, 400);
 
                                                             stockerApprentissagePreAlphabet();
-                                                            afficherAlphabetExerciceBouton();
+                                                            afficherBoutonDExercice();
                                                             exercicePreAlphabet();
 
                                                             function stockerApprentissagePreAlphabet() { 
@@ -1467,7 +1467,7 @@ function alphabet() {
                                                     viderNotification();
                                                     stockerApprentissageAlphabet();
                                                     notificationDeFinDApprentissageAlphabet();
-                                                    afficherAlphabetExerciceBouton();
+                                                    afficherBoutonDExercice();
                                                     transitionVersExerciceAlphabet();
 
 
@@ -1751,7 +1751,7 @@ function alphabet() {
                                 $('#exercice_correction_btn').click(function() {
                                     if(exercice_question != '') {
                                         
-                                        afficherBoutonDExerciceQuestion();
+                                        afficherBoutonDeQuestion();
                 
                                         if(compteur_d_exercice_question-1 < exercice_questions.length) { rendreActif($('#exercice_question_btn')); }
                                         if(compteur_d_exercice_question-1 === exercice_questions.length) { $('#exercice_question_btn').removeClass('actif').html('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߓߘߊ߫ ߓߊ߲߫').off('click'); }
@@ -2282,7 +2282,7 @@ function alphabet() {
             
             setTimeout(() => {
                 masquer($('#exercice_dialogue_btns'));
-                afficherRapidement($('#exercice_redirection_btns'));
+                display($('#exercice_redirection_btns'));
                 masquer($('#exercice_redirection_btns > div'));
 
                 if(note < 100) {

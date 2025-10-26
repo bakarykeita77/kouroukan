@@ -146,10 +146,38 @@
         masquer($('.redirection_btns > div'));
         
         setTimeout(() => {
-            afficher($('.continu_sur_la_lesson_suivante'));
-            rendreActif($('.continu_sur_la_lesson_suivante'));
-            $('.continu_sur_la_lesson_suivante a').text(matiere+' ߘߋ߰ߟߌ ߘߊߡߌ߬ߘߊ߬');
-            indexer($('.continu_sur_la_lesson_suivante p'));
+            afficher($('.lesson_suivante'));
+            rendreActif($('.lesson_suivante'));
+            $('.lesson_suivante a').text(matiere+' ߘߋ߰ߟߌ ߘߊߡߌ߬ߘߊ߬');
+            indexer($('.lesson_suivante p'));
+        }, 400);
+    }
+    function afficherBoutonDExercice() {
+        let matiere = JSON.parse(sessionStorage.getItem("matiere_nom"));
+        
+        masquer($('.dialogue_btns'));
+        display($('.redirection_btns'));
+        masquer($('.redirection_btns > div'));
+
+        setTimeout(() => { 
+            afficher($('.exercice_btn'));
+            rendreActif($('.exercice_btn'));
+            $('.exercice_btn').html("<p>"+matiere+" ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫</p>");
+            indexer($('.exercice_btn p'));
+        }, 400);
+    }
+    function afficherBoutonDeRevision() {
+        let matiere = JSON.parse(sessionStorage.getItem("matiere_nom"));
+        
+        masquer($('.dialogue_btns'));
+        display($('.redirection_btns'));
+        masquer($('.redirection_btns > div'));
+
+        setTimeout(() => { 
+            afficher($('.revision_btn'));
+            rendreActif($('.revision_btn'));
+            $('.revision_btn').html("<p>"+matiere+" ߞߘߐߓߐߟߌ ߞߍ߫</p>");
+            indexer($('.revision_btn p'));
         }, 400);
     }
     function afficherBoutonDeReprise() {
@@ -164,6 +192,34 @@
             rendreActif($('.reprendre_btn'));
             $('.reprendre_btn').html("<p>"+matiere+" ߞߘߐߓߐߟߌ ߞߍ߫ ߕߎ߲߯</p>");
             indexer($('.reprendre_btn p'));
+        }, 400);
+    }
+    function afficherBoutonDeLaLessonSuivante() {
+        let matiere = lessonSuivante();
+        
+        masquer($('.dialogue_btns'));
+        display($('.redirection_btns'));
+        masquer($('.redirection_btns > div'));
+
+        setTimeout(() => { 
+            afficher($('.lesson_suivante'));
+            rendreActif($('.lesson_suivante'));
+            $('.lesson_suivante').html("<p>"+matiere+" ߘߋ߰ߟߌ ߘߊߡߌ߬ߘߊ߬</p>");
+            indexer($('.lesson_suivante p'));
+        }, 400);
+    }
+    function afficherBoutonDApprentissage() {
+        let matiere = JSON.parse(sessionStorage.getItem("matiere_nom"));
+        
+        masquer($('.dialogue_btns'));
+        display($('.redirection_btns'));
+        masquer($('.redirection_btns > div'));
+
+        setTimeout(() => { 
+            afficher($('.apprentissage_btn'));
+            rendreActif($('.apprentissage_btn'));
+            $('.apprentissage_btn').html("<p>ߥߊ߫ "+matiere+"ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߡߊ߬ </p>");
+            indexer($('.apprentissage_btn p'));
         }, 400);
     }
     function afficherLentement(element) {

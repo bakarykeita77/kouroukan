@@ -118,7 +118,8 @@ $('document').ready(function() {
     
             niveau_max_du_serveur = (niveaux_etudies_du_serveur.length === 0) ? 0 : Math.max(...niveaux_etudies_du_serveur);
             niveau_en_cours_du_serveur = niveau_max_du_serveur + 1;
-            
+console.log("niveau_en_cours_du_serveur");            
+console.log(niveau_en_cours_du_serveur);            
             sessionStorage.setItem('niveau_max_du_serveur', JSON.stringify(niveau_max_du_serveur));
             sessionStorage.setItem('niveau_en_cours_du_serveur', JSON.stringify(niveau_en_cours_du_serveur));
                     

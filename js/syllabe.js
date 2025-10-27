@@ -13,7 +13,6 @@ console.log(niveau_en_cours);
         
         function controlSurLesPhasesEtudiees() {
 
-            let datas = JSON.parse(sessionStorage.getItem('datas'));
             let lesson_d_apprentissage_syllabe_du_serveur = lessonDApprentissageSyllabeDuServeur();
             let lesson_d_exercice_syllabe_du_serveur = lessonDExerciceSyllabeDuServeur();
             let lesson_d_evaluation_syllabe_du_serveur = lessonDEvaluationSyllabeDuServeur();

@@ -2,7 +2,6 @@ $('document').ready(function() {
          
  /* Declaration et initialisation des variables */
     let data_alphabet_du_serveur = [], data_syllabes_du_serveur = [], data_tons_du_serveur = [], data_chiffres_du_serveur = [];
-    
     let niveaux_etudies_du_serveur = [], phases_etudiees_du_serveur = [];
 	let niveau_en_cours_du_serveur = 1, niveau_max_du_serveur = 0;
 	let derniere_phase_du_serveur = '';
@@ -63,11 +62,14 @@ $('document').ready(function() {
             data_tons_du_serveur = datas[2];
             data_chiffres_du_serveur = datas[3];
 
+            let matiere_nouvellement_apprise_du_serveur = matiereNouvellementAprise();
+            sessionStorage.setItem('matiere_nouvellement_apprise_du_serveur',JSON.stringify(matiere_nouvellement_apprise_du_serveur));
+
             sessionStorage.setItem('data_alphabet_du_serveur',JSON.stringify(data_alphabet_du_serveur));
             sessionStorage.setItem('data_syllabes_du_serveur',JSON.stringify(data_syllabes_du_serveur));
             sessionStorage.setItem('data_tons_du_serveur',JSON.stringify(data_tons_du_serveur));
             sessionStorage.setItem('data_chiffres_du_serveur',JSON.stringify(data_chiffres_du_serveur));
-
+            
          /*-------------------------------------------------------------------------   
            Phases, Notes et Niveaux
          -------------------------------------------------------------------------*/   
@@ -102,9 +104,9 @@ $('document').ready(function() {
         
             /*Calcul de niveaux étudiées*/ 
             if(datas[0] != undefined) moyenne_1 = note_1/3; //Moyenne générale pour alphabet
-            if(datas[1] != undefined) moyenne_2 = note_2/4; //Moyenne générale pour syllabe
-            if(datas[2] != undefined) moyenne_3 = note_3/4; //Moyenne générale pour tons
-            if(datas[3] != undefined) moyenne_4 = note_4/4; //Moyenne générale pour chiffres
+            if(datas[1] != undefined) moyenne_2 = note_2/3; //Moyenne générale pour syllabe
+            if(datas[2] != undefined) moyenne_3 = note_3/3; //Moyenne générale pour tons
+            if(datas[3] != undefined) moyenne_4 = note_4/3; //Moyenne générale pour chiffres
      
             if(moyenne_1 >= moyenne) niveaux_etudies_du_serveur.push(1);   	    
             if(moyenne_2 >= moyenne) niveaux_etudies_du_serveur.push(2);   	    
@@ -118,8 +120,7 @@ $('document').ready(function() {
     
             niveau_max_du_serveur = (niveaux_etudies_du_serveur.length === 0) ? 0 : Math.max(...niveaux_etudies_du_serveur);
             niveau_en_cours_du_serveur = niveau_max_du_serveur + 1;
-console.log("niveau_en_cours_du_serveur");            
-console.log(niveau_en_cours_du_serveur);            
+           
             sessionStorage.setItem('niveau_max_du_serveur', JSON.stringify(niveau_max_du_serveur));
             sessionStorage.setItem('niveau_en_cours_du_serveur', JSON.stringify(niveau_en_cours_du_serveur));
                     
@@ -144,6 +145,16 @@ console.log(niveau_en_cours_du_serveur);
             sessionStorage.setItem('pratiques', JSON.stringify(pratiques));
      
 
+            function matiereNouvellementAprise() {
+                let derniere_matiere = "";
+                for (let i = 0; i < datas.length; i++) {
+                    if(i === 0)if(datas[i].length === 3) derniere_matiere = "ߛߓߍߛߎ߲";
+                    if(i === 1)if(datas[i].length === 3) derniere_matiere = "ߜߋ߲߭";
+                    if(i === 2)if(datas[i].length === 3) derniere_matiere = "ߞߊ߲ߡߊߛߙߋ";
+                    if(i === 3)if(datas[i].length === 3) derniere_matiere = "ߖߊ߰ߕߋ߬ߘߋ߲";
+                }
+                return derniere_matiere;
+            }
             function profileTesteMenu(){
 
                 calculDesMatieresApprisesEtNonApprises();

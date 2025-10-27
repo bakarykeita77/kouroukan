@@ -21,13 +21,11 @@ $('document').ready(function() {
     niveau_en_cours = (niveau_en_cours == null) ? niveau_en_cours_du_serveur : niveau_en_cours;
     sessionStorage.setItem("niveau_en_cours", JSON.stringify(niveau_en_cours));
     var matiere_index = niveau_en_cours - 1;
-    var matiere_nouvellement_apprise_du_serveur = matiereNouvellementAppriseDuServeur();
-    matiere_nouvellement_apprise_du_serveur = (matiere_nouvellement_apprise_du_serveur == undefined) ? "" : matiere_nouvellement_apprise_du_serveur;
+    var matiere_nouvellement_apprise_du_serveur = JSON.parse(sessionStorage.getItem("matiere_nouvellement_apprise_du_serveur"));
     var matiere_nouvellement_apprise = JSON.parse(sessionStorage.getItem('matiere_nouvellement_apprise'));
     matiere_nouvellement_apprise = (matiere_nouvellement_apprise == null) ? matiere_nouvellement_apprise_du_serveur : matiere_nouvellement_apprise;
     let option_du_serveur = optionDuServeur();       
-console.log(niveaux_etudies);
-console.log(niveau_en_cours);
+
     datas[niveau_max] = (datas[niveau_max] == undefined) ? [] : datas[niveau_max];
 
     var phases_etudiees = (datas[niveau_max].length == 0) ? [] : JSON.parse(sessionStorage.getItem('phases_etudiees'));

@@ -2,6 +2,7 @@ $('document').ready(function() {
       
     /* Récupération des données, storées depuis accueil.js, sur l'apprenant */
         var datas = JSON.parse(sessionStorage.getItem('datas')); 
+        datas = (datas == null) ? [[],[],[],[]] : datas;
         var data_alphabet_du_serveur = datas[0]; 
         var data_alphabet = JSON.parse(sessionStorage.getItem('data_alphabet')); 
         data_alphabet = (data_alphabet == null) ? {} : data_alphabet; 
@@ -19,7 +20,6 @@ $('document').ready(function() {
 
         sessionStorage.setItem('phase_li_id', JSON.stringify(phase_li_id));
 
-        datas = (datas == null) ? [] : datas; /* Pour éviter les erreurs de null. */
         datas[matiere_index] = (datas[matiere_index] == undefined) ? [] : datas[matiere_index]; /* Pour éviter les erreurs d'undefined. */
         phases_etudiees = (phases_etudiees == null) ? [] : phases_etudiees;   
  

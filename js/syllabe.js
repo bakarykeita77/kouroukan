@@ -8,11 +8,6 @@ function syllabe() {
     var niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
     var matiere_nom = JSON.parse(sessionStorage.getItem('matiere_nom'));
 
-console.log(phases_etudiees);
-console.log(niveaux_etudies);
-console.log(niveau_max);
-console.log(niveau_en_cours);
-
     if (niveau_actif === 2) {
 
         controlSurLesPhasesEtudiees();
@@ -115,12 +110,8 @@ console.log(niveau_en_cours);
                         }
                     }
                     function chargerCorpsDApprentissageSyllabe() {
-                        preChargementDuTableauNoir();
+                        chargementParDefautDuTableauNoir();
                         chargerLessonDApprentissage();
-
-                        function preChargementDuTableauNoir() {
-                            $('#apprentissage_body').html("<table id='table_syllabe_apprentissage'><div id='texte'>ߜߋ߲߭ ߘߋ߲߰ߕߊ ߟߎ߬ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬</div></table>");
-                        }
                     }
                 }
                 function apprendreSyllabe() {

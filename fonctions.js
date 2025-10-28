@@ -697,6 +697,17 @@
             return a_html;
         }
     }
+    function chargementParDefautDuTableauNoir() {
+        let matiere_index = JSON.parse(sessionStorage.getItem("matiere_index"));
+        let a_apprendre = "";
+
+        if(matiere_index === 1) a_apprendre = "ߜߋ߲߭";
+        if(matiere_index === 2) a_apprendre = "ߜߋ߲߬ ߞߊ߲ߡߊߛߙߋߡߊ߫";
+        if(matiere_index === 3) a_apprendre = "ߖߊ߰ߕߋ߬ߘߋ߲߫";
+
+        $('#apprentissage_body').html("<table id='table_syllabe_apprentissage'><div id='texte'></div></table>");
+        setTimeout(() => { ecris("texte", a_apprendre+" ߘߋ߲߰ߕߊ ߟߎ߬ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬"); }, 1000);
+    }
     function chargerPanneauDesCaracteres() {
         
         var panneaux_des_caracteres_html = panneauxDesCaracteresHTML();

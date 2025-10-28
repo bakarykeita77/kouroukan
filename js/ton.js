@@ -20,7 +20,7 @@ function ton() {
 
             chargerEnteteDApprentissageTon();
             chargerFootDApprentissageTon();
-            chargerLessonDApprentissage();
+            chargerCorpsDApprentissageTon();
 
             function chargerEnteteDApprentissageTon() {
                 $('.notification_titre').html('ߞߊ߲ߡߊߛߙߋ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ');
@@ -39,6 +39,10 @@ function ton() {
                 function chargerApprentissageRedirectionBtns() {
                     $('#continu_sur_exercice_btn').html("<p>ߜߋ߲߭ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫</p>");
                 }
+            }
+            function chargerCorpsDApprentissageTon() {
+                chargementParDefautDuTableauNoir();
+                chargerLessonDApprentissage();
             }
         }
         function apprendreTon() {

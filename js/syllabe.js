@@ -1,11 +1,18 @@
 function syllabe() {
     
+    var datas = JSON.parse(sessionStorage.getItem('datas'));
+    var niveau_max = JSON.parse(sessionStorage.getItem('niveau_max'));
+    var phases_etudiees = (datas[niveau_max].length == 0) ? [] : JSON.parse(sessionStorage.getItem('phases_etudiees'));
     var niveaux_etudies = JSON.parse(sessionStorage.getItem('niveaux_etudies')); 
     var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));   // Voir programmes.js fonction storagesDuProgramme()
     var niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
     var matiere_nom = JSON.parse(sessionStorage.getItem('matiere_nom'));
+
+console.log(phases_etudiees);
 console.log(niveaux_etudies);
+console.log(niveau_max);
 console.log(niveau_en_cours);
+
     if (niveau_actif === 2) {
 
         controlSurLesPhasesEtudiees();
@@ -1335,12 +1342,17 @@ console.log(niveau_en_cours);
                                                                 sendLessonDataToDB('syllabe_evaluation', lesson_d_evaluation_syllabe);
 
                                                                 niveaux_etudies.push(niveau_en_cours);
-                                                                sessionStorage.setItem('niveaux_etudies',JSON.stringify(niveaux_etudies));
-                                                                sessionStorage.setItem('matiere_nouvellement_apprise',JSON.stringify(matiere_nom));
-
+                                                                phases_etudiees.push("syllabe_evaluation");
+                                                                niveau_max++;
                                                                 niveau_en_cours++;
+
+                                                             /*La récuperation de ces variables stockées, dans programmes.php, permettra d'actualiser le programme*/
+                                                                sessionStorage.setItem('niveaux_etudies',JSON.stringify(niveaux_etudies));
+                                                                sessionStorage.setItem("phases_etudiees", JSON.stringify(phases_etudiees));
+                                                                sessionStorage.setItem("niveau_max", JSON.stringify(niveau_max));
                                                                 sessionStorage.setItem("niveau_en_cours", JSON.stringify(niveau_en_cours));
-                                                                
+                                                                sessionStorage.setItem('matiere_nouvellement_apprise',JSON.stringify(matiere_nom));
+                                                 
                                                                 console.log("Lesson d'evaluation syllabe est envoyée à la base de donnée.");
                                                             }
                                                         }

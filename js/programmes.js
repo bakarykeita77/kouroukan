@@ -16,6 +16,7 @@ $('document').ready(function() {
     var niveau_max = JSON.parse(sessionStorage.getItem('niveau_max'));
     niveau_max = (niveau_max == null) ? 0 : niveau_max;
     niveau_max = (niveau_max_du_serveur > niveau_max) ? niveau_max_du_serveur : niveau_max;
+    sessionStorage.setItem('niveau_max', JSON.stringify(niveau_max)); 
     var niveau_en_cours_du_serveur = JSON.parse(sessionStorage.getItem("niveau_en_cours_du_serveur"));
     var niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));      
     niveau_en_cours = (niveau_en_cours == null) ? niveau_en_cours_du_serveur : niveau_en_cours;
@@ -27,9 +28,8 @@ $('document').ready(function() {
     let option_du_serveur = optionDuServeur();       
 
     datas[niveau_max] = (datas[niveau_max] == undefined) ? [] : datas[niveau_max];
-
     var phases_etudiees = (datas[niveau_max].length == 0) ? [] : JSON.parse(sessionStorage.getItem('phases_etudiees'));
-    var phases_etudiees_du_serveur = (datas[niveau_max].length == 0) ? [] : phasesEtudieesDuServeur(datas[niveau_max]);
+    var phases_etudiees_du_serveur = (datas[niveau_max].length == 0) ? [] : phasesEtudieesDuServeur();
     phases_etudiees = (phases_etudiees == null) ? phases_etudiees_du_serveur : phases_etudiees;
     let phase_index = (phases_etudiees == null) ? 0 : phases_etudiees.length;
     var option_retenue = JSON.parse(localStorage.getItem('option_retenue'));

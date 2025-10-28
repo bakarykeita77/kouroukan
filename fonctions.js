@@ -1741,22 +1741,11 @@
             peds = [];
         }
         if(matiere.length != 0) {
-            if(niveau_max === 0) {
-                for (let i = 0; i < datas[niveau_max].length; i++) {
-                    if(datas[niveau_max][i] != undefined) peds.push(datas[niveau_max][i].phase);
-                }  
-            }
-            if(niveau_max === 1) {
-                
-                let lesson_d_evaluation = (datas[niveau_max][3] == undefined) ? [] : JSON.parse(datas[niveau_max][3].lesson);
-                if(lesson_d_evaluation.length === 126) {
-                    for (let i = 0; i < datas[niveau_max].length; i++) {
-                        if(datas[niveau_max][i] != undefined) peds.push(datas[niveau_max][i].phase);
-                    } 
-                }
-            }
+            for (let i = 0; i < datas[niveau_max].length; i++) {
+                if(datas[niveau_max][i] != undefined) peds.push(datas[niveau_max][i].phase);
+            }  
         }
-
+        
         return peds;
     }
     function pourcentagePoint(memoire) {

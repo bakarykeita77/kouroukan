@@ -1,4 +1,6 @@
 function ton() {
+    
+    let datas = JSON.parse(sessionStorage.getItem('datas'));
   
     apprentissageTon();
     exerciceTon();

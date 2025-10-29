@@ -7,13 +7,26 @@
     opacity: 0;
     transform: scale(0.75);
 }
-#programme_body span {
+#programme_body span:not(#fermeture_de_commentaire) {
     display: inline-block;
     padding: 1px;
     border: 1px solid #ddd;
     border-radius: 0.25rem;
     width: 4rem;
     text-align: center;
+}
+#fermeture_de_commentaire {
+    display: inline-block;
+    position: relative;
+    height: 1rem;
+    width: 1rem;
+    border-radius: 50%;
+    border: 1px solid #aaa;
+    background-color: #aaa;
+    text-align: center;
+    font-weight: bold;
+    padding: 0.25rem;
+    right: 95%;
 }
 #programmes_container h1 {
     position: relative;
@@ -31,7 +44,6 @@
     list-style-type: none;
     border: 2px solid transparent;
     border-top-color: #aaa;
-    border-bottom-color: #aaa;
 }
 #programme_ul li {
     position: relative;
@@ -59,7 +71,13 @@
     margin: auto;
     border: 1px solid transparent;
 }
+#commentaire_btn {
+    background-color: #eee;
+    padding: 0.25rem 2rem;
+    cursor: pointer;
+}
 #programme_commentaire {
+    display: block;
     padding: 0.25rem 1rem;
     margin: 0 0.5rem;
     background-color: #eee;
@@ -121,8 +139,26 @@
     text-align: center;
  }
 
+@media(orientation: portrait) {
+    #commentaire_btn, #fermeture_de_commentaire { display: block; }
+    #programmes_container { width: calc(100% - 1rem); }
+    #programme_commentaire { 
+        position: absolute;
+        display: none; 
+        height: 95%;
+        overflow: auto;
+        box-shadow: 0 0 2rem #666;
+        border-radius: 0.5rem;
+        z-index: 1;
+    }
+    #programmes_fond { box-shadow: none; }
+    #programme_ul { display: block; }
+    #programme_ul li { width: 90%; }
+}
 @media(orientation: landscape) {
+    #commentaire_btn, #fermeture_de_commentaire { display: none; }
     #programmes_container { width: calc(100% - 4rem); }
+    #programme_commentaire { display: block; }
     #programmes_fond { box-shadow: 0 0 1rem #aaa; }
     #programme_ul {
         display: flex;
@@ -131,12 +167,4 @@
         align-items: center;
     }
     #programme_ul li { width: calc(25% - 0.25rem); }
-}
-@media(orientation: portrait) {
-    #programmes_container { width: calc(100% - 1rem); }
-    #programmes_fond { box-shadow: none; }
-    #programme_ul {
-        display: block;
-    }
-    #programme_ul li { width: 90%; }
 }

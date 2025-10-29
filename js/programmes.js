@@ -121,7 +121,19 @@ $('document').ready(function() {
         } 
         indexer($('.actif p'));
     }
-    function afficherProgrammes() { afficher($("#programmes_container")); }
+    function afficherProgrammes() { 
+        afficher($("#programmes_container")); 
+        $("#commentaire_btn").click(() => {
+            $("#programme_commentaire").css("display","block");
+            $("#commentaire_btn").css("display","none");
+
+        });
+        $("#fermeture_de_commentaire").click(() => {
+            $("#programme_commentaire").css("display","none");
+            $("#commentaire_btn").css("display","block");
+
+        });
+    }
     function alerteDuProgramme() {
         $('#programme_ul li').on('click', function(e) {
             if($(this).hasClass('a_apprendre')) { 

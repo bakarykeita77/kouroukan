@@ -534,31 +534,18 @@
                 cocherLesTons();
                 
                 function cocherLesConsonnes() {
-                    $("#consonnes_container span").click((e) => {
+                    // $("#consonnes_container span").click((e) => {
 
-                        let span = e.target;
-                        let caractere = span.textContent;
+                    //     let span = e.target;
+                    //     let caractere = span.textContent;
 
-                        memoire_des_caracteres_choisis[0].push(caractere);
-                        if($("#panneau_submit_btn_1").html() == "ߌ ߢߣߊߕߊ߬ ߛߌ߬ߙߊ߬ߕߊ ߟߎ߬ ߘߐ߬") {
-                            masquer($("#panneau_submit_btn_container > button"));
-                            $("#panneau_submit_btn_1").html("ߣߴߌ ߓߊ߲߫ ߘߊ߫߸ ߦߋ߫ ߛߌ߬ߙߊ߬ߟߊ߲ ߠߎ߬ ߦߌ߬ߘߊ߬"); 
-                            setTimeout(() => { afficher($("#panneau_submit_btn_1")); }, 100);
-                        }
-                    });
-                    $("#panneau_submit_btn_1").click((e) => {
-                        e.stopImmediatePropagation();
-                        if(memoire_des_caracteres_choisis[0].length === 0) {
-                            alert("ߛߌ߬ߙߕߊ߬ ߞߋߟߋ߲߫ ߥߟߊ ߛߌߦߊߡߊ߲߫ ߛߎߥߊ߲ߘߌ߫ ߝߟߐ߫");
-                            return;
-                        }
-                        masquer($("#caracteres_container > div:not(#panneau_submit_btn_container)"));
-                        afficher($("#voyelles_container"));
-
-                        masquer($("#panneau_submit_btn_container > button"));
-                        $("#panneau_submit_btn_2").html("ߌ ߢߣߊߕߊ߬ ߛߌ߬ߙߊ߬ߟߊ߲ ߠߎ߬ ߘߐ߬");
-                        setTimeout(() => { afficher($("#panneau_submit_btn_2")); }, 100);
-                    });
+                    //     memoire_des_caracteres_choisis[0].push(caractere);
+                    //     if($("#panneau_submit").html() == "ߌ ߢߣߊߕߊ߬ ߛߌ߬ߙߊ߬ߕߊ ߟߎ߬ ߘߐ߬") {
+                    //         masquer($("#panneau_submit_btn_container > button"));
+                    //         $("#panneau_submit").html("ߣߴߌ ߓߊ߲߫ ߘߊ߫߸ ߦߋ߫ ߛߌ߬ߙߊ߬ߟߊ߲ ߠߎ߬ ߦߌ߬ߘߊ߬"); 
+                    //         setTimeout(() => { afficher($("#panneau_submit")); }, 100);
+                    //     }
+                    // });
                 }
                 function cocherLesVoyelles() {
                     $("#voyelles_container span").click((e) => {
@@ -567,24 +554,26 @@
                         let caractere = span.textContent;
                         
                         memoire_des_caracteres_choisis[1].push(caractere);
-                        if($("#panneau_submit_btn_2").html() == "ߌ ߢߣߊߕߊ߬ ߛߌ߬ߙߊ߬ߟߊ߲ ߠߎ߬ ߘߐ߬") {
+                        if($("#panneau_submit").html() == "ߌ ߢߣߊߕߊ߬ ߛߌ߬ߙߊ߬ߟߊ߲ ߠߎ߬ ߘߐ߬") {
                             masquer($("#panneau_submit_btn_container > button"));
-                            $("#panneau_submit_btn_2").html("ߣߴߌ ߓߊ߲߫ ߘߊ߫߸ ߦߋ߫ ߞߊ߲ߡߊߛߙߋ ߟߎ߬ ߦߌ߬ߘߊ߬");
-                            setTimeout(() => { afficher($("#panneau_submit_btn_2")); }, 100);
+                            $("#panneau_submit").html("ߣߴߌ ߓߊ߲߫ ߘߊ߫߸ ߦߋ߫ ߢߣߊߕߊ߬ߣߍ߲ ߠߎ߬ ߛߓߍ߫ ߥߟߊ߬ߓߊ ߞߊ߲߬");
+                            setTimeout(() => { afficher($("#panneau_submit")); }, 100);
                         }
                     });
-                    $("#panneau_submit_btn_2").click((e) => {
+                    $("#panneau_submit").click((e) => {
                         e.stopImmediatePropagation();
+                        cacherPanneauDesCaracteres();                 
+                        $(".parametres_popup #submit_btn").click(); 
                         if(memoire_des_caracteres_choisis[1].length === 0) {
                             alert("ߛߌ߬ߙߊ߬ߟߊ߲߬ ߞߋߟߋ߲߫ ߥߟߊ ߛߌߦߊߡߊ߲߫ ߛߎߥߊ߲ߘߌ߫ ߝߟߐ߫");
                             return;
                         }
-                        masquer($("#caracteres_container > div:not(#panneau_submit_btn_container)"));
-                        afficher($("#tons_container"));  
+                        // masquer($("#caracteres_container > div:not(#panneau_submit_btn_container)"));
+                        // afficher($("#tons_container"));  
 
-                        masquer($("#panneau_submit_btn_container > button"));
-                        $("#panneau_submit_btn_3").html("ߌ ߢߣߊߕߊ߬ ߞߊ߲ߡߊߛߙߋ ߟߎ߬ ߘߐ߬");
-                        setTimeout(() => { afficher($("#panneau_submit_btn_3")); }, 100);
+                        // masquer($("#panneau_submit_btn_container > button"));
+                        // $("#panneau_submit").html("ߌ ߢߣߊߕߊ߬ ߞߊ߲ߡߊߛߙߋ ߟߎ߬ ߘߐ߬");
+                        // setTimeout(() => { afficher($("#panneau_submit")); }, 100);
                     });
                 }
                 function cocherLesTons() {
@@ -594,21 +583,21 @@
                         let caractere = span.textContent;
                         
                         memoire_des_caracteres_choisis[2].push(caractere);
-                        if($("#panneau_submit_btn_3").html() == "ߌ ߢߣߊߕߊ߬ ߞߊ߲ߡߊߛߙߋ ߟߎ߬ ߘߐ߬") {
+                        
+                        if($("#panneau_submit").html() == "ߌ ߢߣߊߕߊ߬ ߞߊ߲ߡߊߛߙߋ ߟߎ߬ ߘߐ߬") {
                             masquer($("#panneau_submit_btn_container > button"));
-                            $("#panneau_submit_btn_3").html("ߣߴߌ ߓߊ߲߫ ߘߊ߫߸ ߦߋ߫ ߢߣߊߕߊ߬ߣߍ߲ ߠߎ߬ ߛߓߍ߫ ߥߟߊ߬ߓߊ ߞߊ߲߬");
-                            setTimeout(() => { afficher($("#panneau_submit_btn_3")); }, 100);
+                            $("#panneau_submit").html("ߣߴߌ ߓߊ߲߫ ߘߊ߫߸ ߦߋ߫ ߢߣߊߕߊ߬ߣߍ߲ ߠߎ߬ ߛߓߍ߫ ߥߟߊ߬ߓߊ ߞߊ߲߬");
+                            setTimeout(() => { afficher($("#panneau_submit")); }, 100);
                         }
                     });
                     
-                    $("#panneau_submit_btn_3").click(() => {   
-                        $(".parametres_popup #submit_btn").click();                     
+                    $("#panneau_submit").click(() => {   
+                        $(".parametres_popup #submit_btn").click(); 
                         if(memoire_des_caracteres_choisis[2].length === 0) {
                             alert("ߞߊ߲ߡߊߛߙߋ߫ ߞߋߟߋ߲߫ ߥߟߊ ߛߌߦߊߡߊ߲߫ ߛߎߥߊ߲ߘߌ߫ ߝߟߐ߫");
                             return;
                         }
                     }); 
-                    togglePanneauDesConsonnes();
                 }
             }
             function cocherLeCaractereCorrespondantDeParametre() {
@@ -729,9 +718,7 @@
                 html_2 += '<div id="caracteres_container">\n';
 
                     html_2 += '<div id="panneau_submit_btn_container">\n';
-                        html_2 += '<button id="panneau_submit_btn_1"></button>\n';
-                        html_2 += '<button id="panneau_submit_btn_2"></button>\n';
-                        html_2 += '<button id="panneau_submit_btn_3"></button>\n';
+                        html_2 += '<button id="panneau_submit"></button>\n';
                     html_2 += '</div>\n';
                 
                     html_2 += "<div id='consonnes_container'>\n";
@@ -812,6 +799,12 @@
         setTimeout((function() { td.removeClass('shadow'); }), 1000);
         setTimeout((function() { td.addClass('shadow');    }), 1400);
          setTimeout((function() { td.removeClass('shadow'); }), 1800);
+    }
+    function cocher(element) {
+        $.each($("#caracteres_container span"), function() {
+            let caractere = $(this).text();
+            if(caractere == element) { $(this).click(); }
+        });
     }
     function cocherLeTedo() {
         $.each($('#tedo_checker .checkbox_parent'), function(){ 
@@ -1642,10 +1635,10 @@
         }
         if(matiere_nom == "ߞߊ߲ߡߊߛߙߋ") {
             masquer($("#caracteres_container > div:not(#panneau_submit_btn_container)"));
-            afficher($("#consonnes_container"));
+            afficher($("#voyelles_container"));
             masquer($("#panneau_submit_btn_container > button"));
-            $("#panneau_submit_btn_1").html("ߌ ߢߣߊߕߊ߬ ߛߌ߬ߙߊ߬ߕߊ ߟߎ߬ ߘߐ߬");
-            setTimeout(() => { afficher($("#panneau_submit_btn_1")); }, 100);
+            $("#panneau_submit").html("ߌ ߢߣߊߕߊ߬ ߛߌ߬ߙߊ߬ߟߊ߲ ߠߎ߬ ߘߐ߬");
+            setTimeout(() => { afficher($("#panneau_submit")); }, 100);
 
             setTimeout(() => {
                 $('#afficheur_de_panneau').html("<p>ߛߓߍߘߋ߲߫ ߥߟߊ ߘߏ߲߰</p>");
@@ -2708,7 +2701,7 @@
 
         let panneau_height = $("#panneaux").height();
 
-        $("#afficheur_de_panneau, #panneau_submit_btn_3").click(function (e) {
+        $("#afficheur_de_panneau, #panneau_submit").click(function (e) {
             e.stopImmediatePropagation();
             $(this).removeClass('indicateur');
             if (panneau_height == 0) { montrerPanneauDesCaracteres(); panneau_height = 352; } else { cacherPanneauDesCaracteres(); panneau_height = 0; }

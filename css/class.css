@@ -347,7 +347,7 @@
     padding: 0;
     z-index: 1;
 }
-.dialogue_btns div:not(.titre_de_parti, #cercles_des_partis) {
+.dialogue_btns div:not(.titre_de_parti, #cercles_des_partis, .tons_symboles_container) {
     position: relative;
     margin: 0 0.125rem;
     width: 100%;
@@ -1139,6 +1139,22 @@ del {
 .table_parlante td {  
     min-width: 2rem;
     background-color: rgba(85,85,85,0.25); 
+}
+.tons_symboles_container {
+    height: 2.75rem;
+}
+.tons_symboles_container span {
+    display: inline-block;
+    border: 1px solid #bbb;
+    border-radius: 50%;
+    width: 1.8rem;
+    height: 1.8rem;
+    line-height: 2rem;
+    margin: 0.5rem;
+    color: #666;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: 0.25s;
 }
 .transparent { animation: transperer; }
 .travaux { 

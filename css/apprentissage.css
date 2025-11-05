@@ -216,7 +216,7 @@
     top: 22rem; 
 }
 #caracteres_container span:hover { background-color: #ddd; }
-#consonnes_cadre {
+#caracteres_cadre {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -228,7 +228,7 @@
     border-bottom: 0.5rem solid #aaa;
     overflow: hidden;
 }
-#consonnes_cadre > div {
+#caracteres_cadre > div {
     background-color: #eee;
     position: relative;
     height: 14rem;
@@ -237,7 +237,7 @@
     border-radius: 0.5rem;
     background-color: #eee;
 }
-#consonnes_cadre span {
+#caracteres_cadre span {
     position: relative;
     display: inline-block;
     font-size: 1.5rem;

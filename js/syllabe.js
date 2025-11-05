@@ -123,7 +123,7 @@ function syllabe() {
                     function rappelDesBoutons() {
                         $('#apprentissage_body').click(function (e) {
     
-                            if(e.target.id == "apprentissage_body" && $('#consonnes_cadre').css('top') == '192px') {
+                            if(e.target.id == "apprentissage_body" && $('#caracteres_cadre').css('top') == '192px') {
                                 if($('#table_syllabe_apprentissage').text() == "ߜߋ߲߭ ߘߋ߲߰ߕߊ ߟߎ߬ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬") {
                                     secouer($("#afficheur_de_panneau"));
                                     return;

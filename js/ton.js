@@ -1,7 +1,11 @@
 function ton() {
     
     let datas = JSON.parse(sessionStorage.getItem('datas'));
-    let tons_appris = tonsAppris();
+    let caracteres_selectionnees = caracteresSelectionnees();
+    let voyelles_selectionnees = [];
+    let consonnes_selectionnees = [];
+    let nasalisations_selectionnees = [];
+    let tons_selectionnes = [];
   
     apprentissageTon();
     exerciceTon();
@@ -9,18 +13,18 @@ function ton() {
     evaluationTon();
 
 
-    function tonsAppris() {
-        let tons_appris_du_serveur = tonsApprisDuServeur();
-        let tons_appris = JSON.parse(sessionStorage.getItem("tons_appris"));
-        tons_appris = (tons_appris == null) ? [] : tons_appris;
-        tons_appris = (tons_appris.length == 0) ? tons_appris_du_serveur : tons_appris;
-        return tons_appris;
+    function caracteresSelectionnees() {
+        let caracteres_selectionnees_du_serveur = caracteresSelectionneesDuServeur();
+        let caracteres_selectionnees = JSON.parse(sessionStorage.getItem("caracteres_selectionnees"));
+        caracteres_selectionnees = (caracteres_selectionnees == null) ? [] : caracteres_selectionnees;
+        caracteres_selectionnees = (caracteres_selectionnees.length == 0) ? caracteres_selectionnees_du_serveur : caracteres_selectionnees;
+        return caracteres_selectionnees;
 
-        function tonsApprisDuServeur() {
-            let tons_du_serveur = [];
+        function caracteresSelectionneesDuServeur() {
+            let caracteres_du_serveur = [];
 
 
-            return tons_du_serveur;
+            return caracteres_du_serveur;
         }
     }
     function apprentissageTon() {
@@ -52,7 +56,7 @@ function ton() {
                     $('#apprentissage_dialogue_btns').html(chargerApprentissageDialoguesBtnsHTML());
                 }
                 function chargerApprentissageRedirectionBtns() {
-                    $('#continu_sur_exercice_btn').html("<p>ߜߋ߲߭ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫</p>");
+                    $('#continu_sur_exercice_btn').html("<p>ߞߊ߲ߡߊߛߙߋ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫</p>");
                 }
                 function chargerApprentissageDialoguesBtnsHTML() {
                     let html = "<div class='tons_symboles_container'>\
@@ -75,16 +79,22 @@ function ton() {
         function afficherApprentissageDeTon() {
             
             afficherApprentissage();
+            masquerLesCaracteresNonNecessairesSurLePanneau();
             styleDApprentissageDeDialogueBtns();
 
+            function masquerLesCaracteresNonNecessairesSurLePanneau() {
+                $("#consonnes_container").hide(); 
+                $("#nasalisations_container").hide(); 
+                $("#tons_container").hide(); 
+            }
             function styleDApprentissageDeDialogueBtns() {
 
-                let ton_actif = $(".ton_symbole:nth-child("+tons_appris.length+1+")");
+                let caractere_actif = $(".ton_symbole:nth-child("+caracteres_selectionnees.length+1+")");
 
                 indexer($(".actif")); 
-                ton_actif.prevAll().css("background-color","#fff");
-                ton_actif.addClass('actif shadow'); 
-                ton_actif.nextAll().css("background-color","#bbb");
+                caractere_actif.prevAll().addClass("apprises");
+                caractere_actif.addClass('actif shadow'); 
+                caractere_actif.nextAll().addClass("a_apprendre");
             }
         }
         function apprendreTon() {
@@ -95,7 +105,7 @@ function ton() {
 
 
             function rappelDesBoutons() {
-                $('#apprentissage_body, .ton_symbole:not(.actif)').click(function () {
+                $('#apprentissage_body, .a_apprendre').click(function () {
 
                     if($("#apprentissage_body").text() == "ߜߋ߲߬ ߞߊ߲ߡߊߛߙߋߡߊ߫ ߘߋ߲߰ߕߊ ߟߎ߬ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬") {
                         secouer($(".tons_symboles_container .actif"));
@@ -116,21 +126,74 @@ function ton() {
                 });
             }
             function apprenezTon() {
-                $(".ton_symbole").click((e) => {
+                $(".tons_symboles_container .actif").click((e) => {
 
-                    let ton_actif = e.target.textContent;
-    
+                    let caractere_actif = e.target.textContent;
                     afficherLePanneauDesCaracteres();
-                    enregistrerLeTonActif();
-                    cocher(ton_actif);
-    
-                    function enregistrerLeTonActif() {
-                        if(tons_appris.indexOf(ton_actif) === -1) tons_appris.push(ton_actif);
-                    }
+                    selectionnerLeCaractere(caractere_actif);
+                    enregistrerLeTon(caractere_actif);
+                    enregistrerLeCaractere(caractere_actif);
+                    selectionnerLesVoyelles();
+        
+
                     function afficherLePanneauDesCaracteres() {
                         let panneau_height = $("#panneaux").height();
                         if (panneau_height == 0) { montrerPanneauDesCaracteres(); panneau_height = 352; } 
                         else { cacherPanneauDesCaracteres(); panneau_height = 0; }
+                    }
+                    function selectionnerLesVoyelles() {
+                        $("#voyelles_container span").click(function(e) {
+                            e.stopImmediatePropagation();
+                            let voyelle_active = $(this).text();
+                            let caractere_actif = voyelle_active;
+        
+                            voyelles_selectionnees = enregistrerLaVoyelle(caractere_actif);
+
+                            enregistrerLeCaractere(caractere_actif);
+                            chargerLeTableauNoirPourTons();
+
+                            function enregistrerLaVoyelle(voyelle) {
+                                let voyelle_index = voyelles_selectionnees.indexOf(voyelle);
+                                if(voyelle_index === -1) { voyelles_selectionnees.push(voyelle); }else{ voyelles_selectionnees.splice(voyelle_index,1); }
+                                return voyelles_selectionnees;
+                            }
+                            function chargerLeTableauNoirPourTons() {
+  
+                                let consonnes_a_cocher = consonnesACocher();
+
+                                function consonnesACocher() {
+
+                                    let syllabe_1 = ["ߓߊ","ߛߊ","ߕߊ","ߜߊ"];
+                                    let syllabe_2 = ["ߓߌ","ߛߌ","ߟߌ","ߣߌ"];
+                                    let syllabe_3 = ["ߞߋ"];
+                                    let syllabe_4 = ["ߝߍ","ߣߍ"];
+                                    let syllabe_5 = ["ߝߎ"];
+                                    let syllabe_6 = ["ߓߏ","ߔߏ","ߛߏ","ߝߏ"];
+                                    let syllabe_7 = ["ߣߐ"];
+
+                                    let consonnes_a_cocher = [];
+                                    caracteres_selectionnees.forEach(element => {
+                                        if(element == "ߊ") { for (let i = 0; i < syllabe_1.length; i++) pusher(consonnes_a_cocher,syllabe_1[i].split("")[0]); }
+                                        if(element == "ߋ") { for (let i = 0; i < syllabe_2.length; i++) pusher(consonnes_a_cocher,syllabe_2[i].split("")[0]); }
+                                        if(element == "ߌ") { for (let i = 0; i < syllabe_3.length; i++) pusher(consonnes_a_cocher,syllabe_3[i].split("")[0]); }
+                                        if(element == "ߍ") { for (let i = 0; i < syllabe_4.length; i++) pusher(consonnes_a_cocher,syllabe_4[i].split("")[0]); }
+                                        if(element == "ߎ") { for (let i = 0; i < syllabe_5.length; i++) pusher(consonnes_a_cocher,syllabe_5[i].split("")[0]); }
+                                        if(element == "ߏ") { for (let i = 0; i < syllabe_6.length; i++) pusher(consonnes_a_cocher,syllabe_6[i].split("")[0]); }
+                                        if(element == "ߐ") { for (let i = 0; i < syllabe_7.length; i++) pusher(consonnes_a_cocher,syllabe_7[i].split("")[0]); }
+                                    });
+
+                                    return consonnes_a_cocher;
+                                }
+                            }
+                        });
+                    }
+                    function enregistrerLeCaractere(caractere) {
+                        let caractere_index = caracteres_selectionnees.indexOf(caractere);
+                        if(caractere_index === -1) { caracteres_selectionnees.push(caractere); }else{ caracteres_selectionnees.splice(caractere_index,1); }
+                    }
+                    function enregistrerLeTon(ton) {
+                        let ton_index = tons_selectionnes.indexOf(ton);
+                        if(ton_index === -1) { tons_selectionnes.push(ton); }else{tons_selectionnes.splice(ton_index,1); }
                     }
                 });
             }

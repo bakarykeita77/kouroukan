@@ -1147,10 +1147,9 @@ del {
     display: inline-block;
     border: 1px solid #bbb;
     border-radius: 50%;
-    width: 1.8rem;
-    height: 1.8rem;
+    width: 2rem;
+    height: 2rem;
     line-height: 2rem;
-    margin: 0.5rem;
     color: #666;
     font-size: 1.5rem;
     cursor: pointer;

@@ -148,11 +148,7 @@ function parametrageDeLesson() {
         });
         
         function cochageParDefaut() {
-            // cocherTousLesTons();
             $("#tons_checker .check_btn:nth-child(1) input").prop('checked',true);
-            $("#tons_checker .check_btn:nth-child(2) input").prop('checked',true);
-            $("#tons_checker .check_btn:nth-child(3) input").prop('checked',true);
-            $("#tons_checker .check_btn:nth-child(4) input").prop('checked',true);
             $("#nasalisation_checker .check_btn:nth-child(1) input").prop('checked',true);
         }
         function checkbox_parentClick() {

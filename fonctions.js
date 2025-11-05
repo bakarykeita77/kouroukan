@@ -250,17 +250,8 @@
 
         setTimeout(() => {
             afficher($('#evaluation_container > div:not(#evaluation_head)'));
-            afficherParDefautDuDialogueBtns();
+            afficherParDefautDEvaluationDialogueBtns();
             setTimeout(() => { affichageAnimeDeTableTd($('#evaluation_body table')); }, 400);
-            
-            function afficherParDefautDuDialogueBtns() {
-                masquer($('#evaluation_redirection_btns'));
-                afficher($('#evaluation_dialogue_btns'));
-
-                masquer($('#evaluation_dialogue_btns > div'));
-                afficherRapidement($('#evaluation_question_btn'));
-                rendreActif($('#evaluation_question_btn'));
-            }
         }, 400);
     }
     function afficherExercice() {
@@ -275,10 +266,10 @@
 
         setTimeout(() => {
             afficher($('#exercice_container > div:not(#exercice_head)'));
-            afficherParDefautDuDialogueBtns();
+            afficherParDefautDExerciceDialogueBtns();
             setTimeout(() => { affichageAnimeDeTableTd($('#exercice_body table')); }, 400);
             
-            function afficherParDefautDuDialogueBtns() {
+            function afficherParDefautDExerciceDialogueBtns() {
                 masquer($('#exercice_redirection_btns'));
                 afficher($('#exercice_dialogue_btns'));
 
@@ -298,26 +289,11 @@
         masquer($('#evaluation_container > div:not(#evaluation_head)'));
 
         setTimeout(() => { 
-
             afficher($('#pratique_options'));
             $('.fermeture').attr('id', 'fermer_revision');
 
             afficher($('#evaluation_container > div:not(#evaluation_head)'));
             afficherParDefautDEvaluationDialogueBtns();
-            
-            function afficherParDefautDEvaluationDialogueBtns() {
-
-                afficher($('#evaluation_foot'));
-                masquer($('#evaluation_redirection_btns'));
-                afficher($('#evaluation_dialogue_btns'));
-
-                masquer($('#evaluation_dialogue_btns > div'));
-                afficherRapidement($('#evaluation_question_btn'));
-                rendreActif($('#evaluation_question_btn'));
-                    
-                rendreActif($('#evaluation_question_btn'));
-                indexer($('#evaluation_question_btn p'));
-            }
         }, 200);   
     }
     function afficherList(ul) {
@@ -329,6 +305,18 @@
             
             setTimeout(() => { displayv(li_actif); }, 200*index);
         });
+    }
+    function afficherParDefautDEvaluationDialogueBtns() {
+
+        afficher($('#evaluation_foot'));
+
+        masquer($('#evaluation_redirection_btns'));
+        afficher($('#evaluation_dialogue_btns'));
+
+        masquer($('#evaluation_dialogue_btns > div'));
+        afficherRapidement($('#evaluation_question_btn'));
+        rendreActif($('#evaluation_question_btn'));
+        indexer($('#evaluation_question_btn p'));
     }
     function afficherRevision() {
 
@@ -452,7 +440,7 @@
         
     function cacherPanneauDesCaracteres() {
         $("#caracteres_container").animate({"top":"22rem"}, 250);
-        setTimeout(() => { $("#panneaux, #consonnes_cadre").css({"height":0}); }, 250);
+        setTimeout(() => { $("#panneaux, #caracteres_cadre").css({"height":0}); }, 250);
         
         setTimeout(() => {
             $('#afficheur_de_panneau').text("ߛߓߍߘߋ߲߫ ߥߟߊ ߦߌ߬ߘߊ߬");
@@ -524,6 +512,7 @@
             let caracteres_choisis_du_panneau = [];
             let memoire_des_caracteres_choisis = [[],[],[]];
 
+            $(".tons_symboles_container .actif").click(() => { alert("ok"); });
             cocherLesCaracteresDuPanneau();
             cocherLeCaractereCorrespondantDeParametre();
 
@@ -568,12 +557,6 @@
                             alert("ߛߌ߬ߙߊ߬ߟߊ߲߬ ߞߋߟߋ߲߫ ߥߟߊ ߛߌߦߊߡߊ߲߫ ߛߎߥߊ߲ߘߌ߫ ߝߟߐ߫");
                             return;
                         }
-                        // masquer($("#caracteres_container > div:not(#panneau_submit_btn_container)"));
-                        // afficher($("#tons_container"));  
-
-                        // masquer($("#panneau_submit_btn_container > button"));
-                        // $("#panneau_submit").html("ߌ ߢߣߊߕߊ߬ ߞߊ߲ߡߊߛߙߋ ߟߎ߬ ߘߐ߬");
-                        // setTimeout(() => { afficher($("#panneau_submit")); }, 100);
                     });
                 }
                 function cocherLesTons() {
@@ -714,7 +697,7 @@
             var nasalisations = caracteres[4];
             var tons = caracteres[5];
 
-            var html_2 = '<div id="consonnes_cadre">\n';
+            var html_2 = '<div id="caracteres_cadre">\n';
                 html_2 += '<div id="caracteres_container">\n';
 
                     html_2 += '<div id="panneau_submit_btn_container">\n';
@@ -800,10 +783,10 @@
         setTimeout((function() { td.addClass('shadow');    }), 1400);
          setTimeout((function() { td.removeClass('shadow'); }), 1800);
     }
-    function cocher(element) {
+    function selectionnerLeCaractere(caractere) {
         $.each($("#caracteres_container span"), function() {
-            let caractere = $(this).text();
-            if(caractere == element) { $(this).click(); }
+            let caractere_actif = $(this).text();
+            if(caractere == caractere_actif) { $(this).click(); }
         });
     }
     function cocherLeTedo() {
@@ -1634,20 +1617,11 @@
             }, 400); 
         }
         if(matiere_nom == "ߞߊ߲ߡߊߛߙߋ") {
-            masquer($("#caracteres_container > div:not(#panneau_submit_btn_container)"));
-            afficher($("#voyelles_container"));
-            masquer($("#panneau_submit_btn_container > button"));
             $("#panneau_submit").html("ߌ ߢߣߊߕߊ߬ ߛߌ߬ߙߊ߬ߟߊ߲ ߠߎ߬ ߘߐ߬");
-            setTimeout(() => { afficher($("#panneau_submit")); }, 100);
-
-            setTimeout(() => {
-                $('#afficheur_de_panneau').html("<p>ߛߓߍߘߋ߲߫ ߥߟߊ ߘߏ߲߰</p>");
-                clignoterUneFois($('#afficheur_de_panneau'));
-            }, 400);
         }
         
         $('#panneaux').css({ "height":"22rem" });
-        $('#consonnes_cadre').css({ "height":"max-content" });
+        $('#caracteres_cadre').css({ "height":"max-content" });
         $("#caracteres_container").css("height","max-content");
         $('#caracteres_container').animate({"top":0}, 250);
     }
@@ -1877,6 +1851,10 @@
 		
 		son.play();
 	}
+    function pusher(tableau,element) {
+        let element_index = tableau.indexOf(element);
+        if(element_index === -1) { tableau.push(element); }
+    }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
 

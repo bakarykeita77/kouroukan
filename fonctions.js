@@ -475,6 +475,21 @@
         }
         return point;
     }
+    function caracteresSelectionnees() {
+        let caracteres_selectionnees_du_serveur = caracteresSelectionneesDuServeur();
+        let caracteres_selectionnees = JSON.parse(sessionStorage.getItem("caracteres_selectionnees"));
+
+        caracteres_selectionnees = (caracteres_selectionnees == null) ? [] : caracteres_selectionnees;
+        caracteres_selectionnees = (caracteres_selectionnees.length == 0) ? caracteres_selectionnees_du_serveur : caracteres_selectionnees;
+        return caracteres_selectionnees;
+
+        function caracteresSelectionneesDuServeur() {
+            let caracteres_du_serveur = [];
+
+
+            return caracteres_du_serveur;
+        }
+    }
 	function centrerHorizontalement(element) {
 		var largeur_element = element.width();
 		var largeur_ecran = window.screen.width;
@@ -503,109 +518,52 @@
             sessionStorage.setItem('phase_active_index',JSON.stringify(phase_active_index));
         }
     }
-    function chargerLessonDApprentissage() {
+    function chargerLessonDApprentissage(caracteres_selectionnees=[]) {
+        $("#voyelles_container span").click((e) => {
+            e.stopImmediatePropagation();
 
-        cocherLesCaracteres();
-        stylesDesCaracteres();
+            let span = e.target;
+            let voyelle_active = span.textContent;
 
-        function cocherLesCaracteres() {
-            let caracteres_choisis_du_panneau = [];
-            let memoire_des_caracteres_choisis = [[],[],[]];
+            selectionnerLesVoyellesDuPanneau();
+            selectionnerLesConsonnesDuPanneau();
+            cocherLesVoyellesCorrespondantesDeParametre(voyelle_active);
+            cocherLesConsonnesCorrespondantsDeParametre();
+            chargerLesson();
+            
+            
+            function selectionnerLesVoyellesDuPanneau() {
 
-            $(".tons_symboles_container .actif").click(() => { alert("ok"); });
-            cocherLesCaracteresDuPanneau();
-            cocherLeCaractereCorrespondantDeParametre();
+                let voyelle_index = caracteres_selectionnees.indexOf(voyelle_active);
 
-            function cocherLesCaracteresDuPanneau() {
-
-                cocherLesConsonnes();
-                cocherLesVoyelles();
-                cocherLesTons();
+                if(voyelle_index == -1) enregistrerLeCaractere(caracteres_selectionnees,voyelle_active);
+                if(voyelle_index != -1) caracteres_selectionnees.splice(voyelle_index,1);
                 
-                function cocherLesConsonnes() {
-                    // $("#consonnes_container span").click((e) => {
-
-                    //     let span = e.target;
-                    //     let caractere = span.textContent;
-
-                    //     memoire_des_caracteres_choisis[0].push(caractere);
-                    //     if($("#panneau_submit").html() == "ߌ ߢߣߊߕߊ߬ ߛߌ߬ߙߊ߬ߕߊ ߟߎ߬ ߘߐ߬") {
-                    //         masquer($("#panneau_submit_btn_container > button"));
-                    //         $("#panneau_submit").html("ߣߴߌ ߓߊ߲߫ ߘߊ߫߸ ߦߋ߫ ߛߌ߬ߙߊ߬ߟߊ߲ ߠߎ߬ ߦߌ߬ߘߊ߬"); 
-                    //         setTimeout(() => { afficher($("#panneau_submit")); }, 100);
-                    //     }
-                    // });
-                }
-                function cocherLesVoyelles() {
-                    $("#voyelles_container span").click((e) => {
-
-                        let span = e.target;
-                        let caractere = span.textContent;
-                        
-                        memoire_des_caracteres_choisis[1].push(caractere);
-                        if($("#panneau_submit").html() == "ߌ ߢߣߊߕߊ߬ ߛߌ߬ߙߊ߬ߟߊ߲ ߠߎ߬ ߘߐ߬") {
-                            masquer($("#panneau_submit_btn_container > button"));
-                            $("#panneau_submit").html("ߣߴߌ ߓߊ߲߫ ߘߊ߫߸ ߦߋ߫ ߢߣߊߕߊ߬ߣߍ߲ ߠߎ߬ ߛߓߍ߫ ߥߟߊ߬ߓߊ ߞߊ߲߬");
-                            setTimeout(() => { afficher($("#panneau_submit")); }, 100);
-                        }
-                    });
-                    $("#panneau_submit").click((e) => {
-                        e.stopImmediatePropagation();
-                        cacherPanneauDesCaracteres();                 
-                        $(".parametres_popup #submit_btn").click(); 
-                        if(memoire_des_caracteres_choisis[1].length === 0) {
-                            alert("ߛߌ߬ߙߊ߬ߟߊ߲߬ ߞߋߟߋ߲߫ ߥߟߊ ߛߌߦߊߡߊ߲߫ ߛߎߥߊ߲ߘߌ߫ ߝߟߐ߫");
-                            return;
-                        }
-                    });
-                }
-                function cocherLesTons() {
-                    $("#tons_container span").click((e) => {
-
-                        let span = e.target;
-                        let caractere = span.textContent;
-                        
-                        memoire_des_caracteres_choisis[2].push(caractere);
-                        
-                        if($("#panneau_submit").html() == "ߌ ߢߣߊߕߊ߬ ߞߊ߲ߡߊߛߙߋ ߟߎ߬ ߘߐ߬") {
-                            masquer($("#panneau_submit_btn_container > button"));
-                            $("#panneau_submit").html("ߣߴߌ ߓߊ߲߫ ߘߊ߫߸ ߦߋ߫ ߢߣߊߕߊ߬ߣߍ߲ ߠߎ߬ ߛߓߍ߫ ߥߟߊ߬ߓߊ ߞߊ߲߬");
-                            setTimeout(() => { afficher($("#panneau_submit")); }, 100);
-                        }
-                    });
-                    
-                    $("#panneau_submit").click(() => {   
-                        $(".parametres_popup #submit_btn").click(); 
-                        if(memoire_des_caracteres_choisis[2].length === 0) {
-                            alert("ߞߊ߲ߡߊߛߙߋ߫ ߞߋߟߋ߲߫ ߥߟߊ ߛߌߦߊߡߊ߲߫ ߛߎߥߊ߲ߘߌ߫ ߝߟߐ߫");
-                            return;
-                        }
-                    }); 
+                if($("#panneau_submit").html() == "ߌ ߢߣߊߕߊ߬ ߛߌ߬ߙߊ߬ߟߊ߲ ߠߎ߬ ߘߐ߬") {
+                    masquer($("#panneau_submit_btn_container > button"));
+                    $("#panneau_submit").html("ߣߴߌ ߓߊ߲߫ ߘߊ߫߸ ߦߋ߫ ߢߣߊߕߊ߬ߣߍ߲ ߠߎ߬ ߛߓߍ߫ ߥߟߊ߬ߓߊ ߞߊ߲߬");
+                    setTimeout(() => { afficher($("#panneau_submit")); }, 100);
                 }
             }
-            function cocherLeCaractereCorrespondantDeParametre() {
-                $("#consonnes_container span, #voyelles_container span, #tons_container span").click((e) => {
+            function selectionnerLesConsonnesDuPanneau() {
+                deSelectionnerTous($("#consonnes_container span"));
+                selectionDesConsonnesDuPanneau($("#consonnes_container span"),caracteres_selectionnees);
+            }
+            function cocherLesConsonnesCorrespondantsDeParametre() {
 
-                    let span = e.target;
-                    let caractere_du_panneau = span.textContent;
-                    
-                    if(span.style.color == "orange") {
-                        alert('ߛߌ߬ߙߊ߬ߕߊ ߏ߬ ߜߋ߲߭ ߠߎ߬ ߘߋ߲߰ߣߍ߲߬ ߞߘߐ ߟߋ߬߹');
-                        return false;
-                    }
+                let consonnes_a_selectionner = consonnesASelectionner(caracteres_selectionnees);
 
-                    if($.inArray(caractere_du_panneau, caracteres_choisis_du_panneau) == -1) { 
-                        caracteres_choisis_du_panneau.push(caractere_du_panneau); }else{ 
-                        caracteres_choisis_du_panneau.splice(caracteres_choisis_du_panneau.indexOf(caractere_du_panneau),1); 
-                    }
-                    
-                    for (let x = 0; x < $(".parametres_container input").length; x++) {
-                        let caractere_de_parametre = $(".parametres_container input")[x].value;
-
-                        if(caractere_du_panneau == caractere_de_parametre) {
-                            $(".parametres_container input")[x].click();
+                decocherToutesLesConsonnes($("#consonnes_checker input"));
+                consonnes_a_selectionner.forEach(element => { cocherLaConsonne(element); });
+                
+                function cocherLaConsonne(consonne) {
+                    for (let i = 0; i < $("#consonnes_checker input").length; i++) {
+                        let consonne_de_parametre = $("#consonnes_checker input")[i].value;
+            
+                        if(consonne == consonne_de_parametre) {
+                            $("#consonnes_checker input")[i].click();
                             if(matiere_nom == "ߜߋ߲߭") {
-                                if($.inArray(caractere_du_panneau, caracteres_choisis_du_panneau) == -1) {
+                                if($.inArray(consonne, caracteres_selectionnees) == -1) {
                                     setTimeout(() => { $(".parametres_container #submit_btn").click(); }, 800); }else{
                                     $(".parametres_container #submit_btn").click();
                                 }
@@ -613,22 +571,22 @@
                         }
                     }
                     affichageAnimeDesSyllabes();
-
+            
                     function affichageAnimeDesSyllabes() {
                         $.each($(".table_parlante td"), function(e) {
-    
+            
                             if(matiere_nom == "ߜߋ߲߭") {
                                 let td = $(this);
                                 let caractere_du_tableau = td.text().split("")[0];
-    
-                                if(caracteres_choisis_du_panneau.indexOf(caractere_du_panneau) != -1) {
-                                    if(caractere_du_panneau == caractere_du_tableau) {
+            
+                                if(caracteres_selectionnees.indexOf(caractere) != -1) {
+                                    if(caractere == caractere_du_tableau) {
                                         td.css("opacity",0);
                                         setTimeout(() => { td.css("opacity",1); }, 100*td.index());
                                     }
                                 }
-                                if(caracteres_choisis_du_panneau.indexOf(caractere_du_panneau) == -1) {
-                                    if(caractere_du_panneau == caractere_du_tableau) {
+                                if(caracteres_selectionnees.indexOf(caractere) == -1) {
+                                    if(caractere == caractere_du_tableau) {
                                         td.css("opacity",1);
                                         setTimeout(() => { td.css("opacity",0); }, 100*(7 - td.index()));
                                     }
@@ -636,15 +594,15 @@
                             }
                         });
                     }
+                }
+            }
+            function chargerLesson() {
+                $("#panneau_submit").click(() => {
+                    $(".parametres_popup #submit_btn").click(); 
+                    cacherPanneauDesCaracteres(); 
                 });
             }
-        }
-        function stylesDesCaracteres() {
-            $.each($("#panneaux span"), function() {
-                let caractere_container = $(this);
-                caractere_container.click(function() { marquerLaConsonneChoisie(caractere_container); });
-            });
-        }
+        });
     }
     function chargerCorpsDePreAlphabet() {
         $('#apprentissage_body').html(preApprentissageCorpsHTML());
@@ -783,11 +741,122 @@
         setTimeout((function() { td.addClass('shadow');    }), 1400);
          setTimeout((function() { td.removeClass('shadow'); }), 1800);
     }
-    function selectionnerLeCaractere(caractere) {
-        $.each($("#caracteres_container span"), function() {
-            let caractere_actif = $(this).text();
-            if(caractere == caractere_actif) { $(this).click(); }
-        });
+    function cocherLeCaractereCorrespondantDeParametre(caractere) {
+            for (let i = 0; i < $(".parametres_container input").length; i++) {
+                let caractere_de_parametre = $(".parametres_container input")[i].value;
+
+                if(caractere == caractere_de_parametre) {
+                    $(".parametres_container input")[i].click();
+                    if(matiere_nom == "ߜߋ߲߭") {
+                        if($.inArray(caractere, caracteres_selectionnees) == -1) {
+                            setTimeout(() => { $(".parametres_container #submit_btn").click(); }, 800); }else{
+                            $(".parametres_container #submit_btn").click();
+                        }
+                    }
+                }
+            }
+            affichageAnimeDesSyllabes();
+
+            function affichageAnimeDesSyllabes() {
+                $.each($(".table_parlante td"), function(e) {
+
+                    if(matiere_nom == "ߜߋ߲߭") {
+                        let td = $(this);
+                        let caractere_du_tableau = td.text().split("")[0];
+
+                        if(caracteres_selectionnees.indexOf(caractere) != -1) {
+                            if(caractere == caractere_du_tableau) {
+                                td.css("opacity",0);
+                                setTimeout(() => { td.css("opacity",1); }, 100*td.index());
+                            }
+                        }
+                        if(caracteres_selectionnees.indexOf(caractere) == -1) {
+                            if(caractere == caractere_du_tableau) {
+                                td.css("opacity",1);
+                                setTimeout(() => { td.css("opacity",0); }, 100*(7 - td.index()));
+                            }
+                        }
+                    }
+                });
+            }
+    }
+    function cocherLesTonsCorrespondantsDeParametre(ton) {
+        for (let i = 0; i < $("#tons_checker input").length; i++) {
+            let ton_de_parametre = $("#tons_checker input")[i].value;
+
+            if(ton == ton_de_parametre) {
+                $("#tons_checker input")[i].click();
+                if(matiere_nom == "ߜߋ߲߭") {
+                    if($.inArray(ton, caracteres_selectionnees) == -1) {
+                        setTimeout(() => { $(".parametres_container #submit_btn").click(); }, 800); }else{
+                        $(".parametres_container #submit_btn").click();
+                    }
+                }
+            }
+        }
+        affichageAnimeDesSyllabes();
+
+        function affichageAnimeDesSyllabes() {
+            $.each($(".table_parlante td"), function(e) {
+
+                if(matiere_nom == "ߜߋ߲߭") {
+                    let td = $(this);
+                    let caractere_du_tableau = td.text().split("")[0];
+
+                    if(caracteres_selectionnees.indexOf(caractere) != -1) {
+                        if(caractere == caractere_du_tableau) {
+                            td.css("opacity",0);
+                            setTimeout(() => { td.css("opacity",1); }, 100*td.index());
+                        }
+                    }
+                    if(caracteres_selectionnees.indexOf(caractere) == -1) {
+                        if(caractere == caractere_du_tableau) {
+                            td.css("opacity",1);
+                            setTimeout(() => { td.css("opacity",0); }, 100*(7 - td.index()));
+                        }
+                    }
+                }
+            });
+        }
+    }
+    function cocherLesVoyellesCorrespondantesDeParametre(voyelle) {
+            for (let i = 0; i < $("#voyelles_checker input").length; i++) {
+                let voyelle_de_parametre = $("#voyelles_checker input")[i].value;
+
+                if(voyelle == voyelle_de_parametre) {
+                    $("#voyelles_checker input")[i].click();
+                    if(matiere_nom == "ߜߋ߲߭") {
+                        if($.inArray(voyelle, caracteres_selectionnees) == -1) {
+                            setTimeout(() => { $(".parametres_container #submit_btn").click(); }, 800); }else{
+                            $(".parametres_container #submit_btn").click();
+                        }
+                    }
+                }
+            }
+            affichageAnimeDesSyllabes();
+
+            function affichageAnimeDesSyllabes() {
+                $.each($(".table_parlante td"), function(e) {
+
+                    if(matiere_nom == "ߜߋ߲߭") {
+                        let td = $(this);
+                        let caractere_du_tableau = td.text().split("")[0];
+
+                        if(caracteres_selectionnees.indexOf(caractere) != -1) {
+                            if(caractere == caractere_du_tableau) {
+                                td.css("opacity",0);
+                                setTimeout(() => { td.css("opacity",1); }, 100*td.index());
+                            }
+                        }
+                        if(caracteres_selectionnees.indexOf(caractere) == -1) {
+                            if(caractere == caractere_du_tableau) {
+                                td.css("opacity",1);
+                                setTimeout(() => { td.css("opacity",0); }, 100*(7 - td.index()));
+                            }
+                        }
+                    }
+                });
+            }
     }
     function cocherLeTedo() {
         $.each($('#tedo_checker .checkbox_parent'), function(){ 
@@ -833,6 +902,29 @@
        
        timestamp = moi+' '+jour+' '+annee; 
        return timestamp;
+    }
+    function consonnesASelectionner(caracteres_selectionnees) {
+
+        let syllabe_1 = ["ߓߊ","ߛߊ","ߕߊ","ߜߊ"];
+        let syllabe_2 = ["ߓߌ","ߛߌ","ߟߌ","ߣߌ"];
+        let syllabe_3 = ["ߞߋ"];
+        let syllabe_4 = ["ߝߍ","ߣߍ"];
+        let syllabe_5 = ["ߝߎ"];
+        let syllabe_6 = ["ߓߏ","ߔߏ","ߛߏ","ߝߏ"];
+        let syllabe_7 = ["ߣߐ"];
+
+        let consonnes_a_cocher = [];
+        caracteres_selectionnees.forEach(element => {
+            if(element == "ߊ") { for (let i = 0; i < syllabe_1.length; i++) pusher(consonnes_a_cocher,syllabe_1[i].split("")[0]); }
+            if(element == "ߋ") { for (let i = 0; i < syllabe_2.length; i++) pusher(consonnes_a_cocher,syllabe_2[i].split("")[0]); }
+            if(element == "ߌ") { for (let i = 0; i < syllabe_3.length; i++) pusher(consonnes_a_cocher,syllabe_3[i].split("")[0]); }
+            if(element == "ߍ") { for (let i = 0; i < syllabe_4.length; i++) pusher(consonnes_a_cocher,syllabe_4[i].split("")[0]); }
+            if(element == "ߎ") { for (let i = 0; i < syllabe_5.length; i++) pusher(consonnes_a_cocher,syllabe_5[i].split("")[0]); }
+            if(element == "ߏ") { for (let i = 0; i < syllabe_6.length; i++) pusher(consonnes_a_cocher,syllabe_6[i].split("")[0]); }
+            if(element == "ߐ") { for (let i = 0; i < syllabe_7.length; i++) pusher(consonnes_a_cocher,syllabe_7[i].split("")[0]); }
+        });
+
+        return consonnes_a_cocher;
     }
     function consonnesChoisiesDuServeur() {
    
@@ -923,16 +1015,16 @@
     }
     function decocherLesCaracteresNonConcernes() {
 
-        decocherLesConsonnes();
-        decocherLesVoyelles();
+        deSelectionnerLesConsonnesDuPanneau();
+        deSelectionnerLesVoyellesDuPanneau();
         decocherLaNasalisation();
         decocherLeTedo();
         decocherLesTons();
 
-        function decocherLesConsonnes() {
+        function deSelectionnerLesConsonnesDuPanneau() {
             if ($('#consonnes_checker').find('.checkbox_parent').prop("checked") == true) { $('#consonnes_checker').find('.checkbox_parent').next().click(); }
         }
-        function decocherLesVoyelles() {
+        function deSelectionnerLesVoyellesDuPanneau() {
             if ($('#voyelles_checker').find('.checkbox_parent').prop("checked") == true) { $('#voyelles_checker').find('.checkbox_parent').next().click(); }
         }
         function decocherLaNasalisation() {
@@ -945,8 +1037,8 @@
             if ($('#tons_checker').find('.checkbox_parent').prop("checked") == true) { $('#tons_checker').find('.checkbox_parent').next().click(); }
         }
     }
-    function decocherToutesLesConsonnes() {
-        $.each($('#consonnes_checker .checkbox_parent'), function(){ 
+    function decocherToutesLesConsonnes(consonnes) {
+        $.each(consonnes, function(){ 
             if($(this).prop('checked')==true) $(this).click(); 
         });
     }
@@ -975,6 +1067,12 @@
     }
     function demarquer(element) {
         element.css('background-color','#aaa').siblings().css('background-color','rgba(85,85,85,0.25)');
+    }
+    function deSelectionnerTous(spans) {
+        spans.each(function() {
+            let span = $(this);
+            if(span.css("background-color") == "rgb(170, 170, 170)") span.click();
+        });
     }
     function display(element) {
         element.css({
@@ -1030,6 +1128,10 @@
     }
     function effacerLeTableau() {
         $('.course_body').html("<p id='contenu_par_defaut_du_tableau'>ߥߟߊ߬ߓߊ ߓߘߊ߫ ߖߐ߬ߛߌ߬ ߹</p>");
+    }
+    function enregistrerLeCaractere(caracteres_selectionnees,caractere) {
+        let caractere_index = caracteres_selectionnees.indexOf(caractere);
+        if(caractere_index === -1) { caracteres_selectionnees.push(caractere); }
     }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
@@ -1483,11 +1585,11 @@
     
         return mixted_table;
     }
-    function marquerLaConsonneChoisie(clicked_consonne_container) {
-        if(clicked_consonne_container.css("color") != "rgb(255, 165, 0)") {
-            var bc = clicked_consonne_container.css('background-color');
+    function marquerLeCaractereChoisi(clicked_caractere_container) {
+        if(clicked_caractere_container.css("color") != "rgb(255, 165, 0)") {
+            var bc = clicked_caractere_container.css('background-color');
             var consonne_background = (bc == 'rgb(170, 170, 170)') ? 'rgb(255, 255, 255)' : 'rgb(170, 170, 170)';
-            clicked_consonne_container.css('background-color',consonne_background);
+            clicked_caractere_container.css('background-color',consonne_background);
         }
     }
     function marquerReponse(td_actif,question) {
@@ -2553,6 +2655,10 @@
 
         return html;
     }
+    function retirerLeCaractere(caracteres_selectionnees,caractere) {
+        let caractere_index = caracteres_selectionnees.indexOf(caractere);
+        if(caractere_index != -1) { caracteres_selectionnees.splice(caractere_index,1); }
+    }
     function retourALaPageDAcceuil() { window.location.replace("../kouroukan/index.php"); }
     function reverseIntNko(nombre_a_convertir){
         var nombre_converti = [];
@@ -2580,6 +2686,47 @@
         tr.siblings().unwrap();
         $('#traducteur').remove();
         tr.wrap('<div id="tr_actif"></div>');
+    }
+    function selectionDesConsonnesDuPanneau(consonnes,caracteres_selectionnees) {
+        let consonnes_a_selectionner = consonnesASelectionner(caracteres_selectionnees);
+                     
+        consonnes_a_selectionner.forEach(element => { 
+            $.each(consonnes, function() {
+            let consonne = $(this).text();
+                if(consonne == element) {
+                    $(this).click();
+                    enregistrerLeCaractere(caracteres_selectionnees,consonne);
+                    // if($(this).css("background-color") == "rgb(255, 255, 255)") retirerLeCaractere(caracteres_selectionnees,consonne);
+                }
+            });
+        });
+    }
+    function selectionnerLeCaractere(caractere) {
+        $.each($("#caracteres_container span"), function() {
+            let caractere_actif = $(this).text();
+            if(caractere == caractere_actif) { $(this).click(); }
+        });
+    }
+    function selectionnerLesConsonnes(consonne) {
+        $.each($("#consonnes_container span"), function() {
+            let consonne_actif = $(this).text();
+            if(consonne == consonne_actif) { $(this).click(); }
+        });
+    }
+    function selectionnerLesTons(ton) {
+        $.each($("#tons_container span"), function() {
+            let ton_actif = $(this).text();
+            if(ton == ton_actif) { $(this).click(); }
+        });
+    }
+    function selectionnerLesVoyelles(voyelle) {
+        $.each($("#voyelles_container span"), function() {
+            let voyelle_active = $(this).text();
+            if(voyelle == voyelle_active) { 
+                console.log(caracteres_selectionnees);
+                $(this).click(); 
+            }
+        });
     }
     function sendLessonDataToDB(lesson_phase,lesson_data) {
 
@@ -2621,6 +2768,29 @@
 	    
 	   // alert( elements_secondaires ); 
 	}
+    function stylesDesCaracteres() {
+
+        styleDeTonsSymboles();
+        styleDesCaracteresDuPanneau();
+
+        function styleDeTonsSymboles() {
+
+            let caracteres_selectionnees = caracteresSelectionnees();
+            let n = caracteres_selectionnees.length+1;
+            let caractere_actif = $(".ton_symbole:nth-child("+n+")");
+
+            indexer($(".actif")); 
+            caractere_actif.prevAll().addClass("apprises");
+            caractere_actif.addClass('actif shadow'); 
+            caractere_actif.nextAll().addClass("a_apprendre");
+        }
+        function styleDesCaracteresDuPanneau() {
+            $.each($("#panneaux span"), function() {
+                let caractere_container = $(this);
+                caractere_container.click(function() { marquerLeCaractereChoisi(caractere_container); });
+            });
+        }
+    }
     function syllabesApprentisageDataMemo() {
 
         let datas = JSON.parse(sessionStorage.getItem('datas'));
@@ -2679,7 +2849,7 @@
 
         let panneau_height = $("#panneaux").height();
 
-        $("#afficheur_de_panneau, #panneau_submit").click(function (e) {
+        $("#afficheur_de_panneau").click(function (e) {
             e.stopImmediatePropagation();
             $(this).removeClass('indicateur');
             if (panneau_height == 0) { montrerPanneauDesCaracteres(); panneau_height = 352; } else { cacherPanneauDesCaracteres(); panneau_height = 0; }

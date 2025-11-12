@@ -1112,7 +1112,8 @@ del {
 
 .table_parlante, .table_muette {
     position: relative;
-    width: calc(100% - 2rem);
+    width: max-content;
+    min-width: 10rem;
     max-width: 50rem;
     top: 1rem;
     margin: auto;

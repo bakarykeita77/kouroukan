@@ -13,20 +13,6 @@ function ton() {
     evaluationTon();
 
 
-    function caracteresSelectionnees() {
-        let caracteres_selectionnees_du_serveur = caracteresSelectionneesDuServeur();
-        let caracteres_selectionnees = JSON.parse(sessionStorage.getItem("caracteres_selectionnees"));
-        caracteres_selectionnees = (caracteres_selectionnees == null) ? [] : caracteres_selectionnees;
-        caracteres_selectionnees = (caracteres_selectionnees.length == 0) ? caracteres_selectionnees_du_serveur : caracteres_selectionnees;
-        return caracteres_selectionnees;
-
-        function caracteresSelectionneesDuServeur() {
-            let caracteres_du_serveur = [];
-
-
-            return caracteres_du_serveur;
-        }
-    }
     function apprentissageTon() {
 
         parametrageDeLesson();
@@ -72,37 +58,12 @@ function ton() {
                 }
             }
             function chargerCorpsDApprentissageTon() {
+
                 chargementParDefautDuTableauNoir();
-                chargerLessonDApprentissage();
+                rappelDesBoutons();
+                stylesDesCaracteres();
+
             }
-        }
-        function afficherApprentissageDeTon() {
-            
-            afficherApprentissage();
-            masquerLesCaracteresNonNecessairesSurLePanneau();
-            styleDApprentissageDeDialogueBtns();
-
-            function masquerLesCaracteresNonNecessairesSurLePanneau() {
-                $("#consonnes_container").hide(); 
-                $("#nasalisations_container").hide(); 
-                $("#tons_container").hide(); 
-            }
-            function styleDApprentissageDeDialogueBtns() {
-
-                let caractere_actif = $(".ton_symbole:nth-child("+caracteres_selectionnees.length+1+")");
-
-                indexer($(".actif")); 
-                caractere_actif.prevAll().addClass("apprises");
-                caractere_actif.addClass('actif shadow'); 
-                caractere_actif.nextAll().addClass("a_apprendre");
-            }
-        }
-        function apprendreTon() {
-
-            rappelDesBoutons();
-            initialiserProgressBar();
-            apprenezTon();
-
 
             function rappelDesBoutons() {
                 $('#apprentissage_body, .a_apprendre').click(function () {
@@ -118,85 +79,51 @@ function ton() {
                         }
                     }
                 });
-                $('#panneaux').click(function (e) {
+                $('#panneaux').click(function(e) {
                     if(e.target.id == "panneaux") {
                         secouer($("#afficheur_de_panneau"));
                         return;
                     }
                 });
             }
-            function apprenezTon() {
-                $(".tons_symboles_container .actif").click((e) => {
+        }
+        function afficherApprentissageDeTon() {
+            
+            afficherApprentissage();
+            masquerLesCaracteresNonNecessairesSurLePanneau();
 
-                    let caractere_actif = e.target.textContent;
-                    afficherLePanneauDesCaracteres();
-                    selectionnerLeCaractere(caractere_actif);
-                    enregistrerLeTon(caractere_actif);
-                    enregistrerLeCaractere(caractere_actif);
-                    selectionnerLesVoyelles();
-        
-
-                    function afficherLePanneauDesCaracteres() {
-                        let panneau_height = $("#panneaux").height();
-                        if (panneau_height == 0) { montrerPanneauDesCaracteres(); panneau_height = 352; } 
-                        else { cacherPanneauDesCaracteres(); panneau_height = 0; }
-                    }
-                    function selectionnerLesVoyelles() {
-                        $("#voyelles_container span").click(function(e) {
-                            e.stopImmediatePropagation();
-                            let voyelle_active = $(this).text();
-                            let caractere_actif = voyelle_active;
-        
-                            voyelles_selectionnees = enregistrerLaVoyelle(caractere_actif);
-
-                            enregistrerLeCaractere(caractere_actif);
-                            chargerLeTableauNoirPourTons();
-
-                            function enregistrerLaVoyelle(voyelle) {
-                                let voyelle_index = voyelles_selectionnees.indexOf(voyelle);
-                                if(voyelle_index === -1) { voyelles_selectionnees.push(voyelle); }else{ voyelles_selectionnees.splice(voyelle_index,1); }
-                                return voyelles_selectionnees;
-                            }
-                            function chargerLeTableauNoirPourTons() {
-  
-                                let consonnes_a_cocher = consonnesACocher();
-
-                                function consonnesACocher() {
-
-                                    let syllabe_1 = ["ߓߊ","ߛߊ","ߕߊ","ߜߊ"];
-                                    let syllabe_2 = ["ߓߌ","ߛߌ","ߟߌ","ߣߌ"];
-                                    let syllabe_3 = ["ߞߋ"];
-                                    let syllabe_4 = ["ߝߍ","ߣߍ"];
-                                    let syllabe_5 = ["ߝߎ"];
-                                    let syllabe_6 = ["ߓߏ","ߔߏ","ߛߏ","ߝߏ"];
-                                    let syllabe_7 = ["ߣߐ"];
-
-                                    let consonnes_a_cocher = [];
-                                    caracteres_selectionnees.forEach(element => {
-                                        if(element == "ߊ") { for (let i = 0; i < syllabe_1.length; i++) pusher(consonnes_a_cocher,syllabe_1[i].split("")[0]); }
-                                        if(element == "ߋ") { for (let i = 0; i < syllabe_2.length; i++) pusher(consonnes_a_cocher,syllabe_2[i].split("")[0]); }
-                                        if(element == "ߌ") { for (let i = 0; i < syllabe_3.length; i++) pusher(consonnes_a_cocher,syllabe_3[i].split("")[0]); }
-                                        if(element == "ߍ") { for (let i = 0; i < syllabe_4.length; i++) pusher(consonnes_a_cocher,syllabe_4[i].split("")[0]); }
-                                        if(element == "ߎ") { for (let i = 0; i < syllabe_5.length; i++) pusher(consonnes_a_cocher,syllabe_5[i].split("")[0]); }
-                                        if(element == "ߏ") { for (let i = 0; i < syllabe_6.length; i++) pusher(consonnes_a_cocher,syllabe_6[i].split("")[0]); }
-                                        if(element == "ߐ") { for (let i = 0; i < syllabe_7.length; i++) pusher(consonnes_a_cocher,syllabe_7[i].split("")[0]); }
-                                    });
-
-                                    return consonnes_a_cocher;
-                                }
-                            }
-                        });
-                    }
-                    function enregistrerLeCaractere(caractere) {
-                        let caractere_index = caracteres_selectionnees.indexOf(caractere);
-                        if(caractere_index === -1) { caracteres_selectionnees.push(caractere); }else{ caracteres_selectionnees.splice(caractere_index,1); }
-                    }
-                    function enregistrerLeTon(ton) {
-                        let ton_index = tons_selectionnes.indexOf(ton);
-                        if(ton_index === -1) { tons_selectionnes.push(ton); }else{tons_selectionnes.splice(ton_index,1); }
-                    }
-                });
+            function masquerLesCaracteresNonNecessairesSurLePanneau() {
+                $("#consonnes_container").hide(); 
+                $("#nasalisations_container").hide(); 
+                $("#tons_container").hide(); 
             }
+        }
+        function apprendreTon() {
+            $(".tons_symboles_container .actif").click((e) => {
+
+                let ton_container = e.target;
+                let ton_actif = e.target.textContent;
+
+                afficherLePanneauDesCaracteres();
+                selectionnerLesTons(ton_actif);
+                enregistrerLeTon(ton_actif);
+                enregistrerLeCaractere(caracteres_selectionnees,ton_actif);
+                cocherLesTonsCorrespondantsDeParametre(ton_actif);
+                // sessionStorage.setItem("caracteres_selectionnees", JSON.stringify(caracteres_selectionnees));
+                chargerLessonDApprentissage(caracteres_selectionnees);
+                initialiserProgressBar();
+            
+                function afficherLePanneauDesCaracteres() {
+                    let panneau_height = $("#panneaux").height();
+                    if (panneau_height == 0) { montrerPanneauDesCaracteres(); panneau_height = 352; } 
+                    else { cacherPanneauDesCaracteres(); panneau_height = 0; }
+                }
+                function enregistrerLeTon(ton) {
+                    let ton_index = tons_selectionnes.indexOf(ton);
+                    if(ton_index === -1) { tons_selectionnes.push(ton); }else{tons_selectionnes.splice(ton_index,1); }
+                    sessionStorage.setItem("tons_selectionnes", JSON.stringify(tons_selectionnes));
+                }
+            });
         }
     }
     function exerciceTon() {}

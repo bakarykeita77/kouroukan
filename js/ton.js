@@ -1,7 +1,7 @@
 function ton() {
     
     let datas = JSON.parse(sessionStorage.getItem('datas'));
-    let caracteres_selectionnees = caracteresSelectionnees();
+    let caracteres_selectionnees = [];
     let voyelles_selectionnees = [];
     let consonnes_selectionnees = [];
     let nasalisations_selectionnees = [];
@@ -39,13 +39,8 @@ function ton() {
                 chargerApprentissageRedirectionBtns();
 
                 function chargerApprentissageDialoguesBtns() {
-                    $('#apprentissage_dialogue_btns').html(chargerApprentissageDialoguesBtnsHTML());
-                }
-                function chargerApprentissageRedirectionBtns() {
-                    $('#continu_sur_exercice_btn').html("<p>ߞߊ߲ߡߊߛߙߋ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫</p>");
-                }
-                function chargerApprentissageDialoguesBtnsHTML() {
-                    let html = "<div class='tons_symboles_container'>\
+
+                    let dialogue_btns_html = "<div class='tons_symboles_container'>\
                         <span class='ton_symbole'>߫</span>\
                         <span class='ton_symbole'>߬</span>\
                         <span class='ton_symbole'>߭</span>\
@@ -54,7 +49,11 @@ function ton() {
                         <span class='ton_symbole'>߰</span>\
                         <span class='ton_symbole'>߱</span>\
                     </div>";
-                    return html;
+
+                    $('#apprentissage_dialogue_btns').html(dialogue_btns_html);
+                }
+                function chargerApprentissageRedirectionBtns() {
+                    $('#continu_sur_exercice_btn').html("<p>ߞߊ߲ߡߊߛߙߋ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫</p>");
                 }
             }
             function chargerCorpsDApprentissageTon() {
@@ -99,17 +98,18 @@ function ton() {
             }
         }
         function apprendreTon() {
+            $(".tons_symboles_container .actif").one("click", (e) => { 
+                let ton_actif = e.target.textContent;
+                cocherLesTonsCorrespondantsDeParametre(ton_actif); 
+            });
             $(".tons_symboles_container .actif").click((e) => {
 
-                let ton_container = e.target;
                 let ton_actif = e.target.textContent;
 
                 afficherLePanneauDesCaracteres();
                 selectionnerLesTons(ton_actif);
                 enregistrerLeTon(ton_actif);
-                enregistrerLeCaractere(caracteres_selectionnees,ton_actif);
-                cocherLesTonsCorrespondantsDeParametre(ton_actif);
-                // sessionStorage.setItem("caracteres_selectionnees", JSON.stringify(caracteres_selectionnees));
+                enregistrerLeCaractere(caracteres_selectionnees,ton_actif);                
                 chargerLessonDApprentissage(caracteres_selectionnees);
                 initialiserProgressBar();
             

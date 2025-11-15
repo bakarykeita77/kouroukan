@@ -1116,7 +1116,7 @@ del {
     min-width: 10rem;
     max-width: 50rem;
     top: 1rem;
-    margin: auto;
+    margin: 1rem 0.5rem;
 }
 .table_parlante tr, .table_muette tr { 
     width: 100%; 

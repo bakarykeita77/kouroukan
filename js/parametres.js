@@ -139,7 +139,7 @@ function parametrageDeLesson() {
     function chargerLesson() {
  
         checkbox_parentClick();
-        cochageParDefaut();
+        cochageParDefautDeParametresInputs();
 
         $("#submit_btn").click(()=>{
             viderLesSousTableauxDesCaracteresCoches();
@@ -147,9 +147,9 @@ function parametrageDeLesson() {
             chargementDeLesson();
         });
         
-        function cochageParDefaut() {
-            $("#tons_checker .check_btn:nth-child(1) input").prop('checked',true);
-            $("#nasalisation_checker .check_btn:nth-child(1) input").prop('checked',true);
+        function cochageParDefautDeParametresInputs() {
+            $.each($("#tons_checker input"),         function() { if($(this).val() == "") $(this).prop("checked",true); });
+            $.each($("#nasalisation_checker input"), function() { if($(this).val() == "") $(this).prop("checked",true); });
         }
         function checkbox_parentClick() {
             
@@ -384,7 +384,6 @@ function parametrageDeLesson() {
 
                 return evaluation_html;
             }
-
             function lettresCochees() {
                 let lettres_cochees = voyelles_cochees.concat(consonnes_cochees, tedos_coches);
                 sessionStorage.setItem('lettres_cochees', JSON.stringify(lettres_cochees));

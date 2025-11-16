@@ -597,14 +597,15 @@
             function rechargerPanneauSubmitBtn() {
                 let voyelles_deja_selectionnees = voyellesDejaSelectionnees();
               
-                if(voyelles_deja_selectionnees.length == 0) $("#panneau_submit").html("ߌ ߢߣߊߕߊ߬ ߛߌ߬ߙߊ߬ߟߊ߲ ߠߎ߬ ߘߐ߬").removeClass("actif");
+                if(voyelles_deja_selectionnees.length == 0) {
+                chargementParDefautDuTableauNoir();
+                    $("#panneau_submit").html("ߌ ߢߣߊߕߊ߬ ߛߌ߬ߙߊ߬ߟߊ߲ ߠߎ߬ ߘߐ߬").removeClass("actif");
+                }
                 if(voyelles_deja_selectionnees.length != 0) {
-                    if($("#panneau_submit").html() == "ߌ ߢߣߊߕߊ߬ ߛߌ߬ߙߊ߬ߟߊ߲ ߠߎ߬ ߘߐ߬") {
-                        masquer($("#panneau_submit_btn_container > button"));
-                        $("#panneau_submit").html("ߣߴߌ ߓߊ߲߫ ߘߊ߫߸ ߦߋ߫ ߢߣߊߕߊ߬ߣߍ߲ ߠߎ߬ ߛߓߍ߫ ߥߟߊ߬ߓߊ ߞߊ߲߬");
-                        rendreActif($("#panneau_submit"));
-                        setTimeout(() => { afficher($("#panneau_submit")); }, 100);
-                    }
+                    masquer($("#panneau_submit_btn_container > button"));
+                    $("#panneau_submit").html("ߣߴߌ ߓߊ߲߫ ߘߊ߫߸ ߦߋ߫ ߢߣߊߕߊ߬ߣߍ߲ ߠߎ߬ ߛߓߍ߫ ߥߟߊ߬ߓߊ ߞߊ߲߬");
+                    rendreActif($("#panneau_submit"));
+                    setTimeout(() => { afficher($("#panneau_submit")); }, 100);
                 }
             }
             function chargerLesson() {
@@ -624,9 +625,7 @@
         }
         function chargerPanneauSubmitBtn() {
             let voyelles_deja_selectionnees = voyellesDejaSelectionnees();
-            if(voyelles_deja_selectionnees.length == 0) {
-                $("#panneau_submit").html("ߌ ߢߣߊߕߊ߬ ߛߌ߬ߙߊ߬ߟߊ߲ ߠߎ߬ ߘߐ߬").removeClass("actif");
-            }
+            if(voyelles_deja_selectionnees.length == 0) $("#panneau_submit").html("ߌ ߢߣߊߕߊ߬ ߛߌ߬ߙߊ߬ߟߊ߲ ߠߎ߬ ߘߐ߬").removeClass("actif");
             if(voyelles_deja_selectionnees.length != 0) $("#panneau_submit").html("ߣߴߌ ߓߊ߲߫ ߘߊ߫߸ ߦߋ߫ ߢߣߊߕߊ߬ߣߍ߲ ߠߎ߬ ߛߓߍ߫ ߥߟߊ߬ߓߊ ߞߊ߲߬");
         }
     }
@@ -662,7 +661,7 @@
         if(matiere_index === 3) a_apprendre = "ߖߊ߰ߕߋ߬ߘߋ߲߫";
 
         $('#apprentissage_body').html("<table id='table_syllabe_apprentissage'><div id='texte'></div></table>");
-        setTimeout(() => { ecris("texte", a_apprendre+" ߘߋ߲߰ߕߊ ߟߎ߬ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬"); }, 1000);
+        setTimeout(() => { ecris("texte", a_apprendre+" ߘߋ߲߰ߕߊ ߟߎ߬ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬"); }, 400);
     }
     function chargerPanneauDesCaracteres() {
         
@@ -940,7 +939,7 @@
         let syllabe_7 = ["ߣߐ"];
 
         let consonnes_a_cocher = [];
-        
+
         caracteres_selectionnees.forEach(element => {
             if(element == "ߊ") { for (let i = 0; i < syllabe_1.length; i++) pusher(consonnes_a_cocher,syllabe_1[i].split("")[0]); }
             if(element == "ߋ") { for (let i = 0; i < syllabe_2.length; i++) pusher(consonnes_a_cocher,syllabe_2[i].split("")[0]); }
@@ -1453,6 +1452,7 @@
     function lessonHTML(array, table_id = '#') {
 
         var table = "<table class = 'table_parlante' id='"+table_id+"'>\n";
+
         for(var i=0;i<array.length-array.length%7;i+=7) {
             table += "<tr>\n";
             for(var j=0;j<7;j++) table += "<td>"+array[i+j]+"</td>\n";
@@ -1506,7 +1506,7 @@
         var tons_apprentissage_html = '';
         var m = voyelles_length*tons_length;
                     
-        for(var sous_table_index=0;sous_table_index<syllabes_tonifies_length;sous_table_index+=m){
+        for(var sous_table_index=0; sous_table_index<syllabes_tonifies_length; sous_table_index+=m){
             tons_apprentissage_html += '<table class="table_parlante">\n\n';
             for(var ligne=0;ligne<m;ligne+=tons_length){
                 tons_apprentissage_html += '<tr>\n';

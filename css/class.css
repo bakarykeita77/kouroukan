@@ -1116,7 +1116,10 @@ del {
     min-width: 10rem;
     max-width: 50rem;
     top: 1rem;
-    margin: 1rem 0.5rem;
+    padding: 0.5rem;
+    margin: 0.25rem 1rem;
+    border: 1px solid #666;
+    border-radius: 0.5rem;
 }
 .table_parlante tr, .table_muette tr { 
     width: 100%; 

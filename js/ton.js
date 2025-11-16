@@ -63,7 +63,6 @@ function ton() {
                 stylesDesCaracteres();
 
             }
-
             function rappelDesBoutons() {
                 $('#apprentissage_body, .a_apprendre').click(function () {
 

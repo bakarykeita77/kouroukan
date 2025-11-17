@@ -253,7 +253,7 @@
 }
 .course > div > div:not(.course_head)  {
     width: calc(100vw - 2rem);
-    max-width: 40rem;
+    max-width: 50rem;
     position: relative; 
     margin: 0 auto;
     box-sizing: border-box;
@@ -270,7 +270,7 @@
 .course_body { 
     position: relative;
     height: calc(100vh - 18rem);
-    min-height: 50vh;
+    max-height: 60vh;
     padding-top: 0.5rem;
     margin: 0 auto 1rem;
     border-radius: 0.5rem;
@@ -1143,6 +1143,19 @@ del {
 .table_parlante td {  
     min-width: 2rem;
     background-color: rgba(85,85,85,0.25); 
+}
+.table_titre {
+    text-align: center;
+    font-weight: bold;
+    color: #666;
+}
+.tables_container {
+    width: max-content;
+    margin: auto;
+}
+.tables_litterales, .tables_vocales {
+    width: max-content;
+    display: inline-block;
 }
 .tons_symboles_container {
     height: 2.75rem;

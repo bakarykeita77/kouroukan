@@ -519,7 +519,6 @@
         }
     }
     function chargerLessonDApprentissage(caracteres_selectionnees=[]) {
-        let voyelles_selectionnees = [];
                 
         chargerPanneauSubmitBtn();
 
@@ -610,8 +609,43 @@
             }
             function chargerLesson() {
                 $("#panneau_submit").click(() => {
-                    $(".parametres_popup #submit_btn").click(); 
                     cacherPanneauDesCaracteres(); 
+                    $(".parametres_popup #submit_btn").click(); 
+
+                    let tables_litterales = "<div class='tables_litterales'><div class='table_titre'>ߛߓߍߢߊ</div></div>";
+                    let tables_litterales_html = tablesLitteralesHTML();
+                    console.log($(".table_parlante").length);
+
+                    $(".table_parlante").wrapAll("<div class='tables_vocales'><div class='table_titre'>ߝߐߢߊ</div></div>");
+                    $(".tables_vocales").wrap("<div class='tables_container'></div>");
+                    $(tables_litterales).appendTo($(".tables_container"));
+                    $(tables_litterales_html).appendTo($(".tables_litterales"));
+
+                    function tablesLitteralesHTML() {
+                        let table_html = "";
+                        $.each($(".table_parlante"), function() {
+                            let tr = $("tr", this);
+                            table_html += "\
+                                <table class='table_parlante'>"
+                                $.each(tr, function() {
+                                    table_html += "\
+                                        <tr>"
+                                            let td = $("td", this);
+                                            let td_contents = "";
+                                            $.each(td, function() {
+                                                let td_content = $(this).text();
+                                                td_content = (td_content[2] == "߫") ? td_content[0]+td_content[1] : td_content;
+                                                td_contents += td_content;
+                                            });
+                                            table_html += "<td>"+td_contents+"</td>";
+                                        "</tr>\
+                                    ";
+                                });
+                                "</table>\
+                            ";
+                        });
+                        return table_html;
+                    }
                 });
             }
         });

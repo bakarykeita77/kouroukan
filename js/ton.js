@@ -57,11 +57,9 @@ function ton() {
                 }
             }
             function chargerCorpsDApprentissageTon() {
-
                 chargementParDefautDuTableauNoir();
                 rappelDesBoutons();
                 stylesDesCaracteres();
-
             }
             function rappelDesBoutons() {
                 $('#apprentissage_body, .a_apprendre').click(function () {

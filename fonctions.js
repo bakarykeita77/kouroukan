@@ -612,11 +612,11 @@
                     cacherPanneauDesCaracteres(); 
                     $(".parametres_popup #submit_btn").click(); 
 
-                    let tables_litterales = "<div class='tables_litterales'><div class='table_titre'>ߛߓߍߢߊ</div></div>";
+                    let tables_litterales = "<div class='tables_litterales'> <div class='table_titre'>ߛߓߍߢߊ</div> </div>";
                     let tables_litterales_html = tablesLitteralesHTML();
-                    console.log($(".table_parlante").length);
 
-                    $(".table_parlante").wrapAll("<div class='tables_vocales'><div class='table_titre'>ߝߐߢߊ</div></div>");
+                    $(".table_parlante").wrapAll("<div class='tables_vocales'></div>");
+                    $(".tables_vocales").prepend("<div class='table_titre'>ߝߐߢߊ</div>");
                     $(".tables_vocales").wrap("<div class='tables_container'></div>");
                     $(tables_litterales).appendTo($(".tables_container"));
                     $(tables_litterales_html).appendTo($(".tables_litterales"));
@@ -659,6 +659,7 @@
         }
         function chargerPanneauSubmitBtn() {
             let voyelles_deja_selectionnees = voyellesDejaSelectionnees();
+console.log(voyelles_deja_selectionnees);
             if(voyelles_deja_selectionnees.length == 0) $("#panneau_submit").html("ߌ ߢߣߊߕߊ߬ ߛߌ߬ߙߊ߬ߟߊ߲ ߠߎ߬ ߘߐ߬").removeClass("actif");
             if(voyelles_deja_selectionnees.length != 0) $("#panneau_submit").html("ߣߴߌ ߓߊ߲߫ ߘߊ߫߸ ߦߋ߫ ߢߣߊߕߊ߬ߣߍ߲ ߠߎ߬ ߛߓߍ߫ ߥߟߊ߬ߓߊ ߞߊ߲߬");
         }
@@ -973,6 +974,7 @@
         let syllabe_7 = ["ߣߐ"];
 
         let consonnes_a_cocher = [];
+        let nombre_maximal_de_ligne = 4;
 
         caracteres_selectionnees.forEach(element => {
             if(element == "ߊ") { for (let i = 0; i < syllabe_1.length; i++) pusher(consonnes_a_cocher,syllabe_1[i].split("")[0]); }

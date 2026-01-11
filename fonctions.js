@@ -1167,7 +1167,7 @@ console.log(voyelles_deja_selectionnees);
                 indice++;
                 $('#'+element_id).html(message.substr(0,indice));
                 if(indice<longueur) {
-                    setTimeout(() => { write(); }, 5);
+                    setTimeout(() => { write(); }, 20);
                 }
             }
         }, 100);
@@ -1183,7 +1183,7 @@ console.log(voyelles_deja_selectionnees);
                 indice++;
                 $('.'+element_class).html(message.substr(0,indice));
                 if(indice<longueur) {
-                    setTimeout(() => { write(); }, 5);
+                    setTimeout(() => { write(); }, 20);
                 }
             }
         }, 100);

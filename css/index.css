@@ -1,21 +1,29 @@
+@font-face {
+    font-family: "NotoSansNko";
+    src: url(fonts/NotoSansNko.Regular.ttF)
+    format("truetype");
+}
 body {
     margin: 0;
     padding: 0;
-    font-family:Courier new, monospace;
+    /* font-family:Courier new, monospace; */
+    font-family:'Noto Sans Nko', sans-serif;
  }
- #logo { display: none; }
+#logo { display: none; }
 #asides_container { margin: auto; }
 #asides_commentaire_container {
-    max-width: 60rem;
     margin: 1rem auto;
-    min-height: 50vh;
+    min-height: 56vh;
 }
 #asides_commentaire {
     position: relative;
     width: 100%;
-    max-width: 40rem;
+    max-width: 30rem;
     margin: auto;
     box-sizing: border-box;
+}
+#asides_commentaire p {
+    margin: 2rem 0;
 }
 #asides_container p, #btn_container { padding: 0; }
 .pied_de_page { display: none; }

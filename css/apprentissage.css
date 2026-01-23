@@ -84,10 +84,14 @@
     cursor: pointer;
 }
 #table_pre_apprentissage {
-    height: 100%;
+    position: relative;
+    top: 45%;
+    transform: translateY(-50%);
     width: calc(100% - 2.25rem);
+    max-height: 80%;
     max-width: 45rem;
     margin: auto;
+    overflow: auto;
 }
 .pre_apprentissage_tr {
     display: flex;

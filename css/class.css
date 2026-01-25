@@ -260,7 +260,6 @@
 .course_head { 
     position: relative;
     width: 100%;
-    margin-bottom: 0.5rem;
     height: 8rem;
     background-color: #ddd;
     overflow: visible;
@@ -296,6 +295,7 @@
     height: 8vh;
     min-height: 3rem;
     max-height: 16.5rem;
+    border-top: 1px solid #aaa;
 }
 .course_foot > div:not(.parametres_container, #panneaux, #teste_container) { 
     border-radius: 0.5rem;
@@ -778,15 +778,21 @@ del {
     max-width: 55rem;
     margin: auto;
 }
-.notification_container {
-    padding: 0.25rem;
+.notification_container { 
+    position: relative;
+    height: 5rem;
+    top: 2rem;
+    overflow: hidden;
 }
 .notification_corps {
-    min-height: 4rem;
+    top: 0;
+    height: 5rem;
     padding: 0.25rem 1rem;
     background-color: #eee;
     border-radius: 0.5rem;
+    box-shadow: 0 0 0.5rem #aaa;
     overflow: auto;
+    transition: 0.3s;
 }
 
 /* --------------------------------------------------------------------------------------------------------- */
@@ -990,8 +996,9 @@ del {
 }
 .profile_menu_head a { text-decoration: none; }
 .progress_bar_container {
-    margin-top: 0.125rem;
     height: 0.5rem;
+    margin-top: 1rem;
+    box-shadow: 0 0 0.5rem #666;
 }
 .progress_bar {
     position: relative;
@@ -999,10 +1006,9 @@ del {
     max-width: 55rem;
     height: calc(100% - 2px);
     padding: 0;
-    margin: auto;
+    margin: 0;
     background-color: #fff;
     border: 1px solid #eee;
-    box-shadow: 0 0 0.5rem #666;
 }
 .progress_bar > div {
     position: absolute; 

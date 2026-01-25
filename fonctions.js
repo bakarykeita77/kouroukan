@@ -226,7 +226,8 @@
         masquer(element);
         element.css({'display':'block','transition':'0.8s'}); 
         affichage(element);
-    }   
+    }
+    function afficherNotification() { $('.notification_corps').css("top", 0); }
     function afficherRapidement(element) {
         masquer(element);
         element.css({'display':'block','transition':'0.1s'}); 
@@ -448,7 +449,7 @@
             clignoterUneFois($('#afficheur_de_panneau'));
         }, 400);
 
-        viderNotification();
+        masquerNotification();
         if ($('.table_parlante tr').length == 0) setTimeout(() => { ecris("apprentissage_notification_corps", "ߞߏ߰ߙߌ߫ ߣߘߍ߬ߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬ ߞߊ߬ ߛߌ߬ߙߕߊ߬ ߥߟߊߟߋ߲ ߦߌ߬ߘߊ߬."); }, 800);
         if ($('.table_parlante tr').length != 0) {
             setTimeout(() => { ecris("apprentissage_notification_corps", "ߜߋ߲߭ ߢߌ߲߬ ߠߎ߫ ߞߋ߬ߟߋ߲߬ ߞߋ߬ߟߋ߲߬ ߘߋ߲߯ ߤߊ߲߯ ߊ߬ߟߎ߬ ߦߋ߫ ߕߴߌ ߞߣߐ߫."); }, 800);
@@ -1160,8 +1161,9 @@ console.log(voyelles_deja_selectionnees);
         let longueur = message.length;
         let indice = 0;
 
-        viderNotification();
+        masquerNotification();
         setTimeout(() => { 
+            afficherNotification();
             write();
             function write() {
                 indice++;
@@ -1176,8 +1178,9 @@ console.log(voyelles_deja_selectionnees);
         let longueur = message.length;
         let indice = 0;
 
-        viderNotification();
+        masquerNotification();
         setTimeout(() => { 
+            afficherNotification();
             write();
             function write() {
                 indice++;
@@ -1186,7 +1189,7 @@ console.log(voyelles_deja_selectionnees);
                     setTimeout(() => { write(); }, 20);
                 }
             }
-        }, 100);
+        }, 300);
     }
     function effacerLeTableau() {
         $('.course_body').html("<p id='contenu_par_defaut_du_tableau'>ߥߟߊ߬ߓߊ ߓߘߊ߫ ߖߐ߬ߛߌ߬ ߹</p>");
@@ -1668,6 +1671,10 @@ console.log(voyelles_deja_selectionnees);
             'opacity':'0'
         });
     } 
+    function masquerNotification() {
+        $('.notification_corps').text('');
+        $('.notification_corps').css("top", "5rem");
+    }
     function memoireConsonnesChoisies() {
 
         let consonnes_choisies_du_serveur = consonnesChoisiesDuServeur();
@@ -3022,9 +3029,6 @@ console.log(voyelles_deja_selectionnees);
         setTimeout(function() { td.html(vraie_reponse).removeClass('ombrage'); }, 1200);
     }
     function viderLeTableau(array) { array.splice(0,array.length); }
-    function viderNotification() {
-        $('.notification_corps').text('');
-    }
     
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/

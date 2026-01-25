@@ -101,15 +101,15 @@ if(isset($_SESSION["id_client"])) {
                                         <div class="notification_corps" id="apprentissage_notification_corps"></div>
                                     </div>
                                 </div>
+                            </div>
+                         <!--Course body ------------------------------------------------------------------ -->
+                            <div class="body_cadre" id="apprentissage_body_cadre">
                                 <div class="progress_bar_container">
                                     <div class = 'progress_bar' id="apprentissage_progress_bar">
                                         <div class='progress_bonne_reponse_bar'></div>
                                         <div class='progress_mauvaise_reponse_bar'></div>
                                     </div>
                                 </div>
-                            </div>
-                         <!--Course body ------------------------------------------------------------------ -->
-                            <div class="body_cadre" id="apprentissage_body_cadre">
                                 <div class="course_body" id="apprentissage_body"></div>
                             </div>
                          <!--Course foot ------------------------------------------------------------------ -->
@@ -143,16 +143,16 @@ if(isset($_SESSION["id_client"])) {
                                         <div class="notification_corps" id="exercice_notification_corps"></div>
                                     </div>
                                 </div>
+                            </div>
+
+                         <!--Course body ------------------------------------------------------------------ -->
+                            <div class="body_cadre" id="exercice_body_cadre">
                                 <div class="progress_bar_container">
                                     <div class='progress_bar' id="exercice_progress_bar">
                                         <div class='progress_bonne_reponse_bar'></div>
                                         <div class='progress_mauvaise_reponse_bar'></div>
                                     </div>
                                 </div>
-                            </div>
-
-                         <!--Course body ------------------------------------------------------------------ -->
-                            <div class="body_cadre" id="exercice_body_cadre">
                                 <div class="course_body" id="exercice_body"></div>   <!--Cette division est chargé par la fonction chargerExercice() dans exeercice.js-->
                             </div>
 
@@ -190,15 +190,15 @@ if(isset($_SESSION["id_client"])) {
                                         <div class="notification_corps" id="revision_notification_corps"></div>
                                     </div>
                                 </div>
+                            </div>
+                         <!--Course body ------------------------------------------------------------------ -->
+                            <div class="body_cadre" id="revision_body_cadre">
                                 <div class="progress_bar_container">
                                     <div class='progress_bar' id="revision_progress_bar">
                                         <div class='progress_bonne_reponse_bar'></div>
                                         <div class='progress_mauvaise_reponse_bar'></div>
                                     </div>
                                 </div>
-                            </div>
-                         <!--Course body ------------------------------------------------------------------ -->
-                            <div class="body_cadre" id="revision_body_cadre">
                                 <div class="course_body" id="revision_body"></div>   <!--Cette division est chargé par la fonction chargerExercice() dans exercice.js-->
                             </div>
                         

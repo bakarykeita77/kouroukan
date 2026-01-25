@@ -85,8 +85,8 @@
 }
 #table_pre_apprentissage {
     position: relative;
-    top: 45%;
-    transform: translateY(-50%);
+    top: 20%;
+    transform: translateY(-20%);
     width: calc(100% - 2.25rem);
     max-height: 80%;
     max-width: 45rem;

@@ -94,6 +94,7 @@
     width: 100vw;
     margin: 0 auto;
     border-radius: 0.5rem;
+    background-color: rgba(0, 0, 0, 0.9);
     box-sizing: border-box;
 }
 #lesson_options_content {
@@ -103,6 +104,8 @@
     margin: auto;
     padding: 1rem;
     top: 30%;
+    background-color: #fff;
+    border-radius: 0.5rem;
 }
 #lesson_options_titre { 
     padding: 1rem 2rem; 

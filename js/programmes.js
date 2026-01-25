@@ -162,33 +162,33 @@ $('document').ready(function() {
                 let matiere_index = $(this).index();
                 if(datas[matiere_index] != undefined) {
                     if(option_retenue != null) {
-                        $(".page_body").css("display","none");
+                        // $(".page_body").css("display","none");
                         location.assign(option_lien);
                     }
                     if(option_retenue == null) {
                         if(datas[matiere_index].length === 0) {
                             e.preventDefault();
-                            $('.page_body').css("display","none");
+                            // $('.page_body').css("display","none");
                             chargerLesOptions();
                             stockerLOption();
                             afficherLessonOptions();
                         }
                         if(datas[matiere_index].length != 0) {
                             if(datas[matiere_index][phase_index] == undefined) { 
-                                $(".page_body").css("display","none");
+                                // $(".page_body").css("display","none");
                                 location.assign(option_lien); 
                             }
                             if(datas[matiere_index][phase_index] != undefined) {     
                                 let data_lesson = JSON.parse(datas[matiere_index][phase_index].lesson);
                                 if(tableau2DVide(data_lesson)) {
                                     e.preventDefault();
-                                    $('.page_body').css('display','none');
+                                    // $('.page_body').css('display','none');
                                     chargerLesOptions();
                                     stockerLOption();
                                     afficherLessonOptions();
                                 }
                                 if(!tableau2DVide(data_lesson)) {
-                                    $('.page_body').css('display','none');
+                                    // $('.page_body').css('display','none');
                                     location.assign(option_lien);
                                 }
                             }

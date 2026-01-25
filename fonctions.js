@@ -1673,7 +1673,7 @@ console.log(voyelles_deja_selectionnees);
     } 
     function masquerNotification() {
         $('.notification_corps').text('');
-        $('.notification_corps').css("top", "5rem");
+        $('.notification_corps').css("top", "4.5rem");
     }
     function memoireConsonnesChoisies() {
 

@@ -786,11 +786,10 @@ del {
 }
 .notification_corps {
     top: 0;
-    height: 5rem;
+    height: calc(5rem - 0.25rem);
     padding: 0.25rem 1rem;
     background-color: #eee;
-    border-radius: 0.5rem;
-    box-shadow: 0 0 0.5rem #aaa;
+    border-top: 0.25rem solid #ccc;
     overflow: auto;
     transition: 0.3s;
 }
@@ -996,9 +995,9 @@ del {
 }
 .profile_menu_head a { text-decoration: none; }
 .progress_bar_container {
+    border-top: 1px solid #ccc;
     height: 0.5rem;
     margin-top: 1rem;
-    box-shadow: 0 0 0.5rem #666;
 }
 .progress_bar {
     position: relative;

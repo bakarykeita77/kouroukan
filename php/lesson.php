@@ -111,6 +111,7 @@ if(isset($_SESSION["id_client"])) {
                                     </div>
                                 </div>
                                 <div class="course_body" id="apprentissage_body"></div>
+                                <!-- <div class="parametres_du_tableau">…para</div> -->
                             </div>
                          <!--Course foot ------------------------------------------------------------------ -->
                             <div class="course_foot" id="apprentissage_foot">

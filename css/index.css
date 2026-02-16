@@ -13,14 +13,16 @@ body {
 #asides_container { margin: auto; }
 #asides_commentaire_container {
     margin: 1rem auto;
-    min-height: 56vh;
+    min-height: 54vh;
 }
 #asides_commentaire {
-    position: relative;
-    width: 100%;
-    max-width: 30rem;
-    margin: auto;
-    box-sizing: border-box;
+    position: absolute;
+    width: 80%;
+    max-width: 20rem;
+    top: 50vh;
+    left: 50%;
+    text-align: justify;
+    transform: translate(-50%, -50vh);
 }
 #asides_commentaire p {
     margin: 2rem 0;

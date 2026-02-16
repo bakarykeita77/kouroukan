@@ -325,7 +325,7 @@ function alphabet() {
 
                                             if(clickable_td.includes(clicked_letter)) {
 
-                                                masquerNotification();
+                                                setTimeout(() => { masquerNotification(); }, 500);
                                                 lire('alphabet',clicked_letter);
 
                                                 if(les_lettres_actives.includes(clicked_letter)) {
@@ -1357,7 +1357,6 @@ function alphabet() {
                
                         let td_click_length = nbr_raisonnable_de_click*nbr_td;
                         let barr_unity = 100/td_click_length;
-                        let elements_clickes = [];
                         let click_counter = 0;
 
 

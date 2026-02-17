@@ -70,7 +70,6 @@ function alphabet() {
 
 
             masquer($('.direction'));
-
             apprentissagePreAlphabet();
             exercicePreAlphabet();
             evaluationPreAlphabet();
@@ -191,7 +190,7 @@ function alphabet() {
                 }
                 function apprendrePreAlphabet() {
 
-                    // rappelDuCercleActif();
+                    rappelDuCercleActif();
                     $('#cercles_des_partis_cadre span').click(function() {
                         
                         cercle_actif = $(this);
@@ -210,8 +209,8 @@ function alphabet() {
                                 traductionDeLaLigneActive();
                                 afficherApprentissageProgressBar(); 
 
-                                setTimeout(() => { ecrire('notification_corps','ߛߓߍߘߋ߲߫ ߟߊ߲ߞߣߍߡߊߣߍ߲ ߠߎ߬ ߘߏߣߍ߲߫ ߘߏߣߍ߲߫ ߘߋ߲߯ ߤߊ߲߯ ߊ߬ߟߎ߬ ߦߋ߫ ߕߏ߫ ߌ ߞߣߐ߫. '); }, 200);
-
+                                ecrire('notification_corps','ߛߓߍߘߋ߲߫ ߟߊ߲ߞߣߍߡߊߣߍ߲ ߠߎ߬ ߘߏߣߍ߲߫ ߘߏߣߍ߲߫ ߘߋ߲߯ ߤߊ߲߯ ߊ߬ߟߎ߬ ߦߋ߫ ߕߏ߫ ߌ ߞߣߐ߫. ');
+                                        
                                 les_lettres_actives = lesLettresActives(); 
                                 clickable_td = (lesson_d_apprentissage_pre_alphabet == null) ? les_lettres_actives : lettres_apprises.concat(les_lettres_actives);
 
@@ -325,7 +324,7 @@ function alphabet() {
 
                                             if(clickable_td.includes(clicked_letter)) {
 
-                                                setTimeout(() => { masquerNotification(); }, 500);
+                                                setTimeout(() => { masquerNotification(); }, 300);
                                                 lire('alphabet',clicked_letter);
 
                                                 if(les_lettres_actives.includes(clicked_letter)) {
@@ -369,16 +368,14 @@ function alphabet() {
                                                     function finDePreApprendreAlphabet() {
                                                         if(clicked_td_length === total_yellow_letter*quantite_normale_de_click) {
                                                         
-                                                            masquerNotification();
-                                                            setTimeout(() => {
-                                                                ecris('apprentissage_notification_corps','\
-                                                                    ߣߌ߫ ߟߊ߲ߞߣߍߡߊߣߍ߲ ߠߎ߬ ߓߘߊ߫ ߟߐ߲߫ ߌ ߓߟߏ߫߸ ߢߊ߯ߡߌߟߊ߲ ߞߘߎ ߘߌ߲߯ ߘߎ߭ߡߊ߬ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫߹) ߞߊ߬ ߘߋ߲߬ߣߍ߲߬ ߞߎߘߊ ߟߎ߬ ߢߊ߯ߡߌ߲߫ ߡߊ߬ߞߟߏ߬ߟߌ ߞߊ߲ߡߊ߬.\
-                                                                '); 
-                                                            }, 300);
+                                                            ecris('apprentissage_notification_corps','\
+                                                                ߣߌ߫ ߟߊ߲ߞߣߍߡߊߣߍ߲ ߠߎ߬ ߓߘߊ߫ ߟߐ߲߫ ߌ ߓߟߏ߫߸ ߢߊ߯ߡߌߟߊ߲ ߞߘߎ ߘߌ߲߯ ߘߎ߭ߡߊ߬ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫߹) ߞߊ߬ ߘߋ߲߬ߣߍ߲߬ ߞߎߘߊ ߟߎ߬ ߢߊ߯ߡߌ߲߫ ߡߊ߬ߞߟߏ߬ߟߌ ߞߊ߲ߡߊ߬.\
+                                                            '); 
 
                                                             stockerApprentissagePreAlphabet();
                                                             afficherBoutonDExercice();
                                                             exercicePreAlphabet();
+                                                            rappelDExerciceBtn();
 
                                                             function stockerApprentissagePreAlphabet() { 
 
@@ -388,10 +385,13 @@ function alphabet() {
                                                                 }
                                                                 
                                                                 lesson_d_apprentissage_pre_alphabet = (lesson_d_apprentissage_pre_alphabet.length === 0) ? pre_apprentissage_alphabet_partiel : lesson_d_apprentissage_pre_alphabet.concat(pre_apprentissage_alphabet_partiel);
-                                                                console.log("La leçon d'apprentissage pre_alphabet fait :");
-                                                                console.log(lesson_d_apprentissage_pre_alphabet);
-
+                                                              
                                                                 localStorage.setItem('lesson_d_apprentissage_pre_alphabet', JSON.stringify(lesson_d_apprentissage_pre_alphabet));
+                                                            }
+                                                            function rappelDExerciceBtn() {
+                                                                $("#table_pre_apprentissage > div:not(#tr_actif)").click(function() {
+                                                                    secouer($("#continu_sur_exercice_btn"));
+                                                                });
                                                             }
                                                         }
                                                     }
@@ -406,7 +406,6 @@ function alphabet() {
                     if(lesson_d_apprentissage_pre_alphabet.length === 27) {
                         if(datas.length != 0) {
                             lectureSimpleDeLAlphabet();
-                            masquerNotification();
                             ecrire('notification_corps','ߌ ߕߎ߲߬ ߓߘߊ߫ ߛߓߍߛߎ߲ ߘߋ߲߰ ߞߊ߬ ߢߊ߬߸ ߞߊ߬ߓߌ߯ '+date_d_apprentissage_alphabet_du_serveur+'\
                                 ߛߌߛߊ߲߬ ߌ ߘߌ߫ ߛߋ߫ ߛߓߍߛߎ߲ ߘߋ߲߰ ߠߊ߫ (ߞߵߊ߬ ߟߊߡߍ߲߫ ߘߐߙߐ߲߫ ߞߊ߬ߣߌ߲߬) ߒ߬ߞߊ߬ ߌ ߕߍߣߊ߬ ߖߊ߬ߕߋ߬ߓߐ߬ ߟߊ߫ ߊ߬ ߟߊ߫. ߏ߬ ߘߐ߫߸ ߡߊ߬ߞߟߏ߬ߟߌ߫ ߣߌ߫ ߞߘߐߓߐߟߌ߫ ߛߌ߫ ߕߍ߫ ߦߋ߲߬ ߓߊ ߏ߬ ߟߎ߬ ߞߍߣߍ߲߫ ߞߘߐ ߟߋ߬.\
                             ');
@@ -430,9 +429,10 @@ function alphabet() {
                     }
 
                     function rappelDuCercleActif() {
+
                         if(lesson_d_apprentissage_pre_alphabet.length < 27) {
-                            $('.pre_apprentissage_tr:not(.actif), .cercle:not(.actif)').click(function() { 
-                                secouer($('.cercle:nth-child('+alphabet_tr_index+')')); 
+                            $('.pre_apprentissage_tr:not(.actif), .cercle:not(.actif)').click(function() {
+                                if(pre_apprentissage_alphabet_partiel.length === 0) secouer($('.cercle:nth-child('+alphabet_tr_index+')')); 
                             });
                         }
                     }
@@ -498,14 +498,14 @@ function alphabet() {
                         function chargerEnteteDExercicePreAlphabet() {
                             $('#exercice_notification_titre').html('ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ');
                             masquerNotification();
-                            setTimeout(() => { 
+                            setTimeout(() => {
                                 ecris('exercice_notification_corps','\
                                     ߓߌ߬ߟߊ߬ ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߞߐ߫.\n ߦߋ߫ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߣߌ߫ ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ ߣߌ߫ ߛߊߞߍߟߌ ߟߎ߬ ߞߍ߫ ߦߊ߲߬߸ ߤߊ߲߯ ߞߐߝߟߌ߫ ߥߟߊ ߦߋ߫ ߓߐ߫.\
                                 ');
-                            }, 1000);
+                            }, 1500);
                         }
                         function chargerPiedDExercicePreAlphabet() {
-                            $('#exercice_question_btn').html('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ '+parseIntNko(total_exercice_questions)+' \\ ߁߭ ߟߊߡߍ߲߫');
+                            $('#exercice_question_btn').html('<p>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ '+parseIntNko(total_exercice_questions)+' \\ ߁߭ ߟߊߡߍ߲߫</p>');
                             $('#exercice_correction_btn').html('<p>ߏ߬ ߛߊߞߍ߫</p>');
                             $('#reprendre_exercice_btn').html('<p>ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫ ߕߎ߲߯</p>');
                             $('#revision_btn').html('<p>ߛߓߍߛߎ߲ ߞߘߐߓߐߟߌ ߞߍ߫</p>');
@@ -540,7 +540,7 @@ function alphabet() {
 
                                 pre_question = pre_questions[i];
                                 montrerReponse(pre_question,$("#exercice_body td"));
-                                masquerNotification();
+                                setTimeout(() => { masquerNotification(); }, 250);
                                         
                                 if(i < total_exercice_questions) { 
                                     
@@ -555,11 +555,11 @@ function alphabet() {
                                     
                                     function actualiserLeLabelDeQuestionBtn() {
                                         ordre_de_question = (total_exercice_questions == i+2) ? 'ߟߊߓߊ߲' : parseIntNko(i+2);
-                                        $('#exercice_question_btn').html('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ '+parseIntNko(total_exercice_questions)+' \\ '+ordre_de_question+'߲ ߠߊߡߍ߲߫');
+                                        $('#exercice_question_btn').html('<p>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ '+parseIntNko(total_exercice_questions)+' \\ '+ordre_de_question+'߲ ߠߊߡߍ߲߫</p>');
                                     }
                                     function actualiserLeLabelDeRepetitionBtn() {
                                         let repeter_btn_html = (i === 0) ? 'ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߁߭ ߟߊߡߍ߲߫ ߕߎ߲߯' : 'ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ '+parseIntNko(i+1)+'߲ ߠߊߡߍ߲߫ ߕߎ߲߯';
-                                        $('#exercice_repetition_btn').html(repeter_btn_html);
+                                        $('#exercice_repetition_btn').html("<p>"+repeter_btn_html+"</p>");
                                     }
                                 }
                             });
@@ -681,22 +681,19 @@ function alphabet() {
 
                                             
                                             function notificationDeFinDExercicePreAlphabet() {
-                                                masquerNotification();
-                                                setTimeout(() => { 
-                            
-                                                    if(note_d_exercice_pre_alphabet < 100) {
-                                                        let notification = liste_de_matieres[0][1]+" ߡߊ߬ߞߟߏ߬ߟߌ ߡߊ߫ ߢߊ߬ .ߌ ߓߘߊ߫ ߗߌߙߏ߲߫ ߡߊ߬ߞߟߏ߬ߟߌ ߢߌ߲߬ ߘߐ߫\n .ߘߊߕߎ߲ߠߊ߲߫ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߓߐ߫ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫)";
-                                                        viderLeTableau(pre_exercice_alphabet_partiel);
-                                                        setTimeout(() => { ecris('exercice_notification_corps', notification); }, 600);
-                                                    }
-                                                    if(note_d_exercice_pre_alphabet == 100) { 
-                                                        let notification = liste_de_matieres[0][1]+" ߡߊ߬ߞߟߏ߬ߟߌ ߢߊ߬ߣߍ߲߬ .ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ ߕߊ߯ ߣߐ߰ߡߊ߬ߛߍߦߌ ߦߙߐ. ߞߐߝߟߌ ߝߟߍ߫ \n .<span class='pre_exercice_resultat_affiche'>ߞߐߝߟߌ ߝߟߍ߫ ߦߊ߲߬</span> . ߘߊߕߎ߲ߠߊ߲߫ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߓߐ߫ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫)";
-                                                        setTimeout(() => { ecris('exercice_notification_corps', notification); }, 600);
-                                                    }
+                        
+                                                if(note_d_exercice_pre_alphabet < 100) {
+                                                    let notification = liste_de_matieres[0][1]+" ߡߊ߬ߞߟߏ߬ߟߌ ߡߊ߫ ߢߊ߬ .ߌ ߓߘߊ߫ ߗߌߙߏ߲߫ ߡߊ߬ߞߟߏ߬ߟߌ ߢߌ߲߬ ߘߐ߫\n .ߘߊߕߎ߲ߠߊ߲߫ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߓߐ߫ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫)";
+                                                    viderLeTableau(pre_exercice_alphabet_partiel);
+                                                    ecris('exercice_notification_corps', notification);
+                                                }
+                                                if(note_d_exercice_pre_alphabet == 100) { 
+                                                    let notification = liste_de_matieres[0][1]+" ߡߊ߬ߞߟߏ߬ߟߌ ߢߊ߬ߣߍ߲߬ .ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ ߕߊ߯ ߣߐ߰ߡߊ߬ߛߍߦߌ ߦߙߐ. ߞߐߝߟߌ ߝߟߍ߫ \n .<span class='pre_exercice_resultat_affiche'>ߞߐߝߟߌ ߝߟߍ߫ ߦߊ߲߬</span> . ߘߊߕߎ߲ߠߊ߲߫ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߓߐ߫ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫)";
+                                                    ecris('exercice_notification_corps', notification);
+                                                }
 
-                                                //Initialisation du nombre de mauvaise reponse
-                                                    nbr_mauvaise_reponse = 0;
-                                                }, 600); 
+                                            //Initialisation du nombre de mauvaise reponse
+                                                nbr_mauvaise_reponse = 0;
                                             }
                                             function stockerExercicePreAlphabet() {
                                                 if(note_d_exercice_pre_alphabet < 100) {
@@ -797,8 +794,7 @@ function alphabet() {
                             let notification = "ߘߋ߰ߣߍ߲߬ ߞߎߘߊ ߣߌ߫ ߞߘߐ߬ߡߊ߲ ߠߎ߬ ߟߋ߬ ߓߍ߯ ߢߊ߯ߡߌߣߍ߲߫ ߢߐ߲ ߘߐ߫ ߣߌ߲߬ .ߣߴߌ ߛߋ߫ ߘߊ߫ ߞߵߊ߬ߟߎ߬ ߓߍ߯ ߢߊߓߐ߫ ߗߡߍ߬ߘߐ߬ߦߊ߫ ߗߍ߬ߡߍ ߟߊ߫ ߏ߬ߘߐ߬ ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ .ߓߌ߬ߟߊ߬ ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߞߐ߫";
                             
                             $('#revision_notification_titre').html('ߛߓߍߛߎ߲ ߞߘߐߓߐߟߌ</h3>');
-                            masquerNotification();
-                            setTimeout(() => { ecris('revision_notification_corps',notification); }, 1000);
+                            ecris('revision_notification_corps',notification);
                         }
                         function chargerPiedDePreRevisionAlphabet() {
                             $('#revision_question_btn').html('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ '+parseIntNko(total_evaluation_questions)+' \\ ߁߭ ߟߊߡߍ߲߫');
@@ -1106,7 +1102,6 @@ function alphabet() {
                                                 }
                                             }
                                             function notificationDeFinDEvaluationPreAlphabet() {
-                                                masquerNotification();
                                                 setTimeout(() => { 
                                                     if(note_d_evaluation_pre_alphabet < 92) {
                                                         let notification = liste_de_matieres[1][1]+" ߞߘߐߓߐߟߌ ߡߊ߫ ߢߊ߬ .ߌ ߓߘߊ߫ ߗߌߙߏ߲߫ ߡߊ߬ߞߟߏ߬ߟߌ ߢߌ߲߬ ߘߐ߫\n .ߘߊߕߎ߲ߠߊ߲߫ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߓߐ߫ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫)";
@@ -1291,10 +1286,8 @@ function alphabet() {
 
                             $('.notification_titre').text(liste_de_matieres[0][1]+' ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ');
 
-                            masquerNotification();
                             setTimeout(() => {
                                 if(note_d_apprentissage_alphabet === 0) {
-                                    masquerNotification();
                                     ecris('apprentissage_notification_corps','\
                                         ߛߓߍߘߋ߲ ߠߎ߬ ߓߍ߯ ߘߌ߲߯ ߞߋߟߋ߲߫ ߞߋߟߋ߲߫߸ ߦߴߌ ߕߟߏߡߊߟߐ߬ ߊ߬ ߣߴߌ ߦߴߌ ߖߊ߲߬ߕߏ߬ ߊ߬ߟߎ߬ ߝߐߢߊ ߘߐ߫ ߞߏߛߓߍ߫߹<br>\
                                         ߌ ߣߊ߬ߕߐ߫ ߟߋ߬ ߢߌ߬ߣߌ߲߬ߞߊ߬ ߟߴߊ߬ߟߎ߬ ߓߍ߯ ߡߊ߬.\
@@ -1304,21 +1297,15 @@ function alphabet() {
                                 if(note_d_apprentissage_alphabet != 0) {
                                     if(datas.length === 0) {
                                     if(data_alphabet_apprentissage != null) {
-                                        masquerNotification();
-                                        setTimeout(() => {
-                                            ecris('apprentissage_notification_corps','\
-                                                ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߘߋ߲߰ߣߍ߲߬ ߞߘߐ ߟߴߌ ߓߟߏ߫ ߞߊ߬ߓߌ߫ '+dateEnNko(data_alphabet_apprentissage.date)+'߸ ߏ߬ߘߐ߬ ߌ ߘߌ߫ ߛߴߊ߬ ߡߊߛߍ߬ߦߌ߬ ߟߊ߫߸ ߞߐ߬ߣߌ߲߬ ߊ߬ ߕߍ߫ ߖߊ߰ߕߋ߬ ߟߊ߫.<br>\
-                                            ');
-                                        }, 400);
+                                        ecris('apprentissage_notification_corps','\
+                                            ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߘߋ߲߰ߣߍ߲߬ ߞߘߐ ߟߴߌ ߓߟߏ߫ ߞߊ߬ߓߌ߫ '+dateEnNko(data_alphabet_apprentissage.date)+'߸ ߏ߬ߘߐ߬ ߌ ߘߌ߫ ߛߴߊ߬ ߡߊߛߍ߬ߦߌ߬ ߟߊ߫߸ ߞߐ߬ߣߌ߲߬ ߊ߬ ߕߍ߫ ߖߊ߰ߕߋ߬ ߟߊ߫.<br>\
+                                        ');
                                     }}
                                     if(datas.length != 0) {
                                     if(data_alphabet_apprentissage == null) {
-                                        masquerNotification();
-                                        setTimeout(() => {
-                                            ecris('apprentissage_notification_corps','\
-                                            ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߘߋ߲߰ߣߍ߲߬ ߞߘߐ ߟߴߌ ߓߟߏ߫ ߞߊ߬ߓߌ߫ '+dateEnNko1(date_d_apprentissage_alphabet_du_serveur)+'߸ ߏ߬ߘߐ߬ ߌ ߘߌ߫ ߛߴߊ߬ ߡߊߛߍ߬ߦߌ߬ ߟߊ߫߸ ߞߐ߬ߣߌ߲߬ ߊ߬ ߕߍ߫ ߖߊ߰ߕߋ߬ ߟߊ߫.<br>\
-                                            ');
-                                        }, 400);
+                                        ecris('apprentissage_notification_corps','\
+                                        ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߘߋ߲߰ߣߍ߲߬ ߞߘߐ ߟߴߌ ߓߟߏ߫ ߞߊ߬ߓߌ߫ '+dateEnNko1(date_d_apprentissage_alphabet_du_serveur)+'߸ ߏ߬ߘߐ߬ ߌ ߘߌ߫ ߛߴߊ߬ ߡߊߛߍ߬ߦߌ߬ ߟߊ߫߸ ߞߐ߬ߣߌ߲߬ ߊ߬ ߕߍ߫ ߖߊ߰ߕߋ߬ ߟߊ߫.<br>\
+                                        ');
                                     }}
                                 }
                             }, 3000);
@@ -1460,7 +1447,7 @@ function alphabet() {
 
                                             $('#apprentissage_dialogue_btns').click((e) => {
                                                 e.stopImmediatePropagation();
-                        alert('apprentissage_dialogue_btns clické');
+                        
                                                 if(lettres_cliques.length === 27) {
                                                     
                                                     note_d_apprentissage_alphabet = calculerNote(lesson_d_apprentissage_alphabet);
@@ -1500,14 +1487,11 @@ function alphabet() {
                                                     }
                                                     function notificationDeFinDApprentissageAlphabet() {
                                                         
-                                                        masquerNotification();
-                                                        setTimeout(() => {
-                                                            ecris('apprentissage_notification_corps','\
-                                                                ߌ ߞߎߟߎ߲ߖߋ߫ ߘߐ߬ߖߊ ߟߊ߫ ߛߓߍߘߋ߲ ߠߎ߫ ߘߋ߲߱ ߠߊ߫<br>\
-                                                                ߣߴߌ ߓߘߴߊ߬ߟߎ߬ ߟߐ߲߫߸ ߓߐߟߌ߫ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߓߐ߫ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫ ߛߊ߲ߝߍ߬ ߣߎߡߊ߲߫ ߓߟߏ ߟߊ߫)<br>\
-                                                                ߣߴߌ ߘߏ߲߬ ߡߊ߫ ߓߊ߲߫ ߊ߬ߟߎ߬ ߟߐ߲߫ ߠߊ߫߸ ߒ߬ߓߊ߬ ߥߊ߫ ߘߋ߲߰ߠߌ ߡߊ߫ ߤߊ߲߯ ߌ ߦߴߊ߬ߟߎ߬ ߟߐ߲߫ ߞߊ߬ ߣߊ߬ߕߏ߫ ߓߐ߫ ߟߊ߫.\
-                                                            ');
-                                                        }, 400);
+                                                        ecris('apprentissage_notification_corps','\
+                                                            ߌ ߞߎߟߎ߲ߖߋ߫ ߘߐ߬ߖߊ ߟߊ߫ ߛߓߍߘߋ߲ ߠߎ߫ ߘߋ߲߱ ߠߊ߫<br>\
+                                                            ߣߴߌ ߓߘߴߊ߬ߟߎ߬ ߟߐ߲߫߸ ߓߐߟߌ߫ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߓߐ߫ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫ ߛߊ߲ߝߍ߬ ߣߎߡߊ߲߫ ߓߟߏ ߟߊ߫)<br>\
+                                                            ߣߴߌ ߘߏ߲߬ ߡߊ߫ ߓߊ߲߫ ߊ߬ߟߎ߬ ߟߐ߲߫ ߠߊ߫߸ ߒ߬ߓߊ߬ ߥߊ߫ ߘߋ߲߰ߠߌ ߡߊ߫ ߤߊ߲߯ ߌ ߦߴߊ߬ߟߎ߬ ߟߐ߲߫ ߞߊ߬ ߣߊ߬ߕߏ߫ ߓߐ߫ ߟߊ߫.\
+                                                        ');
 
                                                         setTimeout(() => { indexer($('#fermer_apprentissage')); }, 2000);
                                                     }
@@ -1647,11 +1631,9 @@ function alphabet() {
                             function chargerEnteteDeExerciceAlphabet() {
                                 $('.notification_titre').html('ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ');
                                 masquerNotification();
-                                setTimeout(() => {
-                                    ecrire('notification_corps','\
-                                        ߓߌ߬ߟߊ߬ ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߞߐ߫.\n ߦߋ߫ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߣߌ߫ ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ ߣߌ߫ ߛߊߞߍߟߌ ߟߎ߬ ߞߍ߫ ߦߊ߲߬߸ ߤߊ߲߯ ߞߐߝߟߌ߫ ߥߟߊ ߦߋ߫ ߓߐ߫.\
-                                    ');
-                                }, 3000);
+                                ecrire('notification_corps','\
+                                    ߓߌ߬ߟߊ߬ ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߞߐ߫.\n ߦߋ߫ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߣߌ߫ ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ ߣߌ߫ ߛߊߞߍߟߌ ߟߎ߬ ߞߍ߫ ߦߊ߲߬߸ ߤߊ߲߯ ߞߐߝߟߌ߫ ߥߟߊ ߦߋ߫ ߓߐ߫.\
+                                ');
                             }
                             function chargerCorpsDeExerciceAlphabet() { 
                                 parametrageDeLesson();
@@ -1660,7 +1642,7 @@ function alphabet() {
                                 reductionDesElementsDeExerciceCouranteA49(); // Réduction du nombre de questions à une quantité raisonable
                             }
                             function chargerPiedDeExerciceAlphabet() {
-                                $('#exercice_question_btn').html('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ '+parseIntNko(exercice_questions.length)+' \\ ߁߭ ߟߊߡߍ߲߫');
+                                $('#exercice_question_btn').html('<p>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ '+parseIntNko(exercice_questions.length)+' \\ ߁߭ ߟߊߡߍ߲߫</p>');
                                 $('#exercice_repetition_btn').html('<p>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߊߡߍ߲߫ ߕߎ߲߯</p>');
                                 $('#exercice_correction_btn').html('<p>ߏ߬ ߛߊߞߍ߫</p>');
                             }
@@ -1698,7 +1680,7 @@ function alphabet() {
 
                                     let repeter_btn_html = (compteur_d_exercice_question === 1) ? 'ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߁߭ ߟߊߡߍ߲߫ ߕߎ߲߯' : '߬ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ '+parseIntNko(compteur_d_exercice_question)+'߲ ߠߊߡߍ߲߫ ߕߎ߲߯';
 
-                                    $('#exercice_question_btn').html('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ '+parseIntNko(total_exercice_questions)+' \\ '+ordre_de_question+'߲ ߠߊߡߍ߲߫');
+                                    $('#exercice_question_btn').html('<p>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ '+parseIntNko(total_exercice_questions)+' \\ '+ordre_de_question+'߲ ߠߊߡߍ߲߫</p>');
                                     $('#exercice_repetition_btn').html(repeter_btn_html);
                                     afficherBoutonDeRepetition();
                                     
@@ -1714,7 +1696,7 @@ function alphabet() {
                                     function actualiserExerciceQuestionBtn(){ 
                                         let repeter_btn_html = (compteur_d_exercice_question === 1) ? 'ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߁߭ ߟߊߡߍ߲߫ ߕߎ߲߯' : 'ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ߬ '+parseIntNko(compteur_d_exercice_question)+'߲ ߠߊߡߍ߲߫ ߕߎ߲߯';
                                         // compteur_d_exercice_question = (compteur_d_exercice_question === exercice_questions.length) ? 'ߟߊߓߊ߲' : compteur_d_exercice_question;
-                                        $('#exercice_question_btn').html('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ '+parseIntNko(exercice_questions.length)+' \\ '+parseIntNko(compteur_d_exercice_question + 1)+'߲ ߠߊߡߍ߲߫');
+                                        $('#exercice_question_btn').html('<p>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ '+parseIntNko(exercice_questions.length)+' \\ '+parseIntNko(compteur_d_exercice_question + 1)+'߲ ߠߊߡߍ߲߫</p>');
                                         $('#exercice_repetition_btn').html(repeter_btn_html);
                                     }
                                 });
@@ -1861,7 +1843,6 @@ function alphabet() {
                                                     }
                                                     function notificationDeFinDExerciceAlphabet() {
                                                         if(note_d_exercice_alphabet >= moyenne_d_exercice) {
-                                                            masquerNotification();
                                                             setTimeout(() => {
                                                                 ecris('exercice_notification_corps','\
                                                                 ߌ ߞߎߟߎ߲ߖߋ߫ ߘߐ߬ߖߊ ߟߊ߫ ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ ߟߐ߲ ߠߊ߫ ߤߊ߲߯ %'+parseIntNko(note_d_exercice_alphabet)+' ߟߊ߫. ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ ߛߓߍߛߎ߲ ߞߘߐߟߌ ߞߍ߫.\
@@ -1870,7 +1851,6 @@ function alphabet() {
                                                             }, 400);
                                                         }
                                                         if(note_d_exercice_alphabet < moyenne_d_exercice) {
-                                                            masquerNotification();
                                                             setTimeout(() => {
                                                                 ecris('exercice_notification_corps','\
                                                                     ߌ ߖߌߖߊ߬. ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ ߡߊ߫ ߢߊ߬.ߌ ߟߊ߫ ߓߍ߬ߙߍ߫ ߛߐ߬ߘߐ߲߬ߣߍ߲ ߦߋ߫ %'+parseIntNko(note_d_exercice_alphabet)+' ߟߋ߬ ߘߌ߫. ߊ߬ ߘߏ߲߬ ߡߊߞߊ߲߫ ߞߊ߬ ߖߌ߬ %'+parseIntNko(moyenne_d_exercice)+' ߞߘߐ߫. ߏ߬ߘߐ߬ ߘߌ߬ߢߍ߬ ߞߊ߬ ߛߍ߬ߦߌ߬ ߦߙߐ ߢߌ߲߬ ߡߊ߬.߫.\
@@ -1972,7 +1952,6 @@ function alphabet() {
                     
                             function chargerEnteteDeEvaluatonAlphabet() {
                                 $('.notification_titre').text('ߛߓߍߛߎ߲ ߞߘߐߓߐߟߌ');
-                                masquerNotification();
                                 setTimeout(() => {
                                     ecrire('notification_corps','\
                                         ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ߬ ߞߘߎ ߘߌ߲߯ ߘߎ߭ߡߊ߬߸ ߦߴߌ ߕߟߏߡߊߟߐ߬߸ߦߋ߫ ߛߓߍߘߋ߲߫ ߟߊߡߍ߲ߣߍ߲ ߛߓߍ߫߸ ߤߊ߲߯ ߞߘߐߓߐߟߌ ߦߋ߫ ߓߊ߲߫.\
@@ -2196,7 +2175,6 @@ function alphabet() {
                                             $('#revision_dialogue_btns').html('ߛߓߍߛߎ߲ ߞߘߐߓߐߟߌ ߓߘߊ߫ ߓߊ߲߫. ߌ ߞߎߟߎ߲ߖߋ߫߹').off('click'); 
                                             
                                             if(note_d_evaluation >= moyenne_d_evaluation) {
-                                                masquerNotification();
                                                 setTimeout(() => {
                                                     ecris('evaluation_notification_corps','\
                                                     ߛߓߍߛߎ߲ ߞߘߐߓߐߟߌ ߓߘߊ߫ ߓߊ߲߫. ߏ߬ ߦߋ߫ ߛߓߍߛߎ߲ ߖߍ߬ߘߍ ߘߋ߰ߟߌ ߓߊ߲ߣߍ߲ ߘߌ߫. ߌ ߞߎߟߎ߲ߖߋ߫. \
@@ -2209,7 +2187,6 @@ function alphabet() {
                                                 continuSurSyllabe();
                                             }
                                             if(note_d_evaluation < moyenne_d_evaluation)  {
-                                                masquerNotification();
                                                 setTimeout(() => {
                                                     ecris('evaluation_notification_corps','\
                                                     ߛߓߍߛߎ߲ ߞߘߐߓߐߟߌ ߡߊ߫ ߢߊ߬. ߌ ߖߌߖߊ߬ ߞߊ߬ ߛߍ߬ߦߌ߬ ߦߙߐ ߣߌ߲߬ ߡߊ߬. \

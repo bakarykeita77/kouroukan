@@ -155,16 +155,19 @@
     function afficherBoutonDExercice() {
         let matiere = JSON.parse(sessionStorage.getItem("matiere_nom"));
         
-        masquer($('.dialogue_btns'));
-        display($('.redirection_btns'));
-        masquer($('.redirection_btns > div'));
+        if($(".exercice_btn").html() == "<p>ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫</p>") {
+        
+            masquer($('.dialogue_btns'));
+            display($('.redirection_btns'));
+            masquer($('.redirection_btns > div'));
 
-        setTimeout(() => { 
-            afficher($('.exercice_btn'));
-            rendreActif($('.exercice_btn'));
-            $('.exercice_btn').html("<p>"+matiere+" ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫</p>");
-            indexer($('.exercice_btn p'));
-        }, 400);
+            setTimeout(() => { 
+                afficher($('.exercice_btn'));
+                rendreActif($('.exercice_btn'));
+                $('.exercice_btn').html("<p>"+matiere+" ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫</p>");
+                indexer($('.exercice_btn p'));
+            }, 400);
+        }
     }
     function afficherBoutonDeRevision() {
         let matiere = JSON.parse(sessionStorage.getItem("matiere_nom"));
@@ -1164,7 +1167,7 @@ console.log(voyelles_deja_selectionnees);
         masquerNotification();
         setTimeout(() => { 
             afficherNotification();
-            write();
+            setTimeout(() => { write(); }, 500);
             function write() {
                 indice++;
                 $('#'+element_id).html(message.substr(0,indice));
@@ -1172,7 +1175,7 @@ console.log(voyelles_deja_selectionnees);
                     setTimeout(() => { write(); }, 20);
                 }
             }
-        }, 100);
+        }, 300);
     }
     function ecrire(element_class,message) {
         let longueur = message.length;
@@ -1181,7 +1184,7 @@ console.log(voyelles_deja_selectionnees);
         masquerNotification();
         setTimeout(() => { 
             afficherNotification();
-            write();
+            setTimeout(() => { write(); }, 500);
             function write() {
                 indice++;
                 $('.'+element_class).html(message.substr(0,indice));

@@ -79,7 +79,7 @@ session_start();
                         <p>ߌ ߣߌ߫ ߛߣߍ߫ ߞߙߎ߬ߞߊ߲߫ ߘߋ߰ߘߊ ߟߊ߫߸ ߒߞߏ ߟߐ߲ߠߌ ߛߌߟߊ߫ ߛߎߘߎ߲߸ ߓߟߐߟߐ ߛߌߟߊ ߝߍ߬.</p>
                         <p>ߞߏ߫ ߛߎ ߦߋ߫ ߞߏ߬ ߟߊ߫ ߛߐ߭ ߟߋ߬ ߡߊ߬߸ ߒ߬ߓߊ߬߹ ߌ ߖߌߖߊ߬ ߸ ߌ ߦߋ߫ ߥߟߊ߬ߘߊ ߕߊ߬ ߌߞߘߐ߫߹ ߦߊ߲߬.</p>
                     </div>
-                    <p id="affiche_programme"><a href="/kouroukan/php/programmes.php">ߥߟߊ߬ߘߊ ߟߎ߬</a></p>
+                    <p id="affiche_programme"><a href="/kouroukan/php/programmes.php" id="lien_du_programme" tabindex="0">ߥߟߊ߬ߘߊ ߟߎ߬</a></p>
                 </div>                
             </div>   
         </div>

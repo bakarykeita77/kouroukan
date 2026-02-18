@@ -1898,6 +1898,9 @@ console.log(voyelles_deja_selectionnees);
         
         return peds;
     }
+    function pointerAutomatiquementLeCurseurSur(selecteur) {
+        document.querySelector(selecteur).focus();
+    }
     function pourcentagePoint(memoire) {
         if(memoire != null) {
             let pp = 0;

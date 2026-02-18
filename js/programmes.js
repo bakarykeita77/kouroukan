@@ -50,6 +50,7 @@ $('document').ready(function() {
     afficherProgrammes();
     lessonOptions();
     storagesDuProgramme();
+    pointerAutomatiquementLeCurseurSur("#lien_actif");
 
     function matiereNouvellementAppriseDuServeur() {
         let matieres_apprises = [];
@@ -80,7 +81,7 @@ $('document').ready(function() {
                 var phases_lien = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees;
 
                 if (matiere_index < niveau_max)  programme_html += '<li id="'+matiere_id+'"><p>'+matiere_nom+'</p></li>\n';
-                if (matiere_index == niveau_max) programme_html += '<li id="'+matiere_id+'"><p><a href="'+phases_lien+'">'+matiere_nom+'</a></p></li>\n';
+                if (matiere_index == niveau_max) programme_html += '<li id="'+matiere_id+'"><p><a href="'+phases_lien+'" id="lien_actif">'+matiere_nom+'</a></p></li>\n';
                 if (matiere_index > niveau_max)  programme_html += '<li id="'+matiere_id+'"><p>'+matiere_nom+'</p></li>\n';
             }
             programme_html += '\n</ul>';

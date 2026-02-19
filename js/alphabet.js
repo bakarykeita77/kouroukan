@@ -68,6 +68,9 @@ function alphabet() {
             
             let note_d_exercice_pre_alphabet = 0;
             let note_d_evaluation_pre_alphabet = 0;
+                
+            let pre_apprentissage_alphabet_partiel = [];
+            let total_yellow_letter = 0;
 
 
             masquer($('.direction'));
@@ -78,8 +81,6 @@ function alphabet() {
             
 
             function apprentissagePreAlphabet() {
-                
-                let pre_apprentissage_alphabet_partiel = [];
 
                 alphabet_tr_index = alphabetTrIndex();
 
@@ -307,8 +308,8 @@ function alphabet() {
                                 let clicks_counter = 0;
                                 let clicked_td_length = 0;
                                 let global_clicks_counter = 1;
-                                let total_yellow_letter = ($('#tr_actif').index() === 3) ? 6 : $('#tr_actif span').length;
-
+                                
+                                total_yellow_letter = ($('#tr_actif').index() === 3) ? 6 : $('#tr_actif span').length;
                                 $.each($('.pre_apprentissage_td, .table_parlante td'), function() {
                                     
                                     let td_actif = $(this);
@@ -373,21 +374,10 @@ function alphabet() {
                                                                 ߣߌ߫ ߟߊ߲ߞߣߍߡߊߣߍ߲ ߠߎ߬ ߓߘߊ߫ ߟߐ߲߫ ߌ ߓߟߏ߫߸ ߢߊ߯ߡߌߟߊ߲ ߞߘߎ ߘߌ߲߯ ߘߎ߭ߡߊ߬ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫߹) ߞߊ߬ ߘߋ߲߬ߣߍ߲߬ ߞߎߘߊ ߟߎ߬ ߢߊ߯ߡߌ߲߫ ߡߊ߬ߞߟߏ߬ߟߌ ߞߊ߲ߡߊ߬.\
                                                             '); 
 
-                                                            stockerApprentissagePreAlphabet();
                                                             afficherBoutonDExercice();
                                                             exercicePreAlphabet();
                                                             rappelDExerciceBtn();
 
-                                                            function stockerApprentissagePreAlphabet() { 
-                                                                if((cercle_index+1)*total_yellow_letter === lesson_d_apprentissage_pre_alphabet.length) {
-                                                                    console.log("L'apprentissage pre_alphabet est déjà fait");
-                                                                }
-                                                                if((cercle_index+1)*total_yellow_letter > lesson_d_apprentissage_pre_alphabet.length) {
-                                                                    lesson_d_apprentissage_pre_alphabet = (lesson_d_apprentissage_pre_alphabet.length === 0) ? pre_apprentissage_alphabet_partiel : lesson_d_apprentissage_pre_alphabet.concat(pre_apprentissage_alphabet_partiel);
-                                                                    localStorage.setItem('lesson_d_apprentissage_pre_alphabet', JSON.stringify(lesson_d_apprentissage_pre_alphabet));
-                                                                    console.log("L'apprentissage pre_alphabet est bien enregistré");
-                                                                }
-                                                            }
                                                             function rappelDExerciceBtn() {
                                                                 $("#table_pre_apprentissage > div:not(#tr_actif)").click(function() {
                                                                     secouer($("#continu_sur_exercice_btn"));
@@ -1035,6 +1025,8 @@ function alphabet() {
                                                         
                                                         lettres_apprises = lettresApprises();
                                                         localStorage.setItem('lettres_apprises', JSON.stringify(lettres_apprises));
+                                                        
+                                                        stockerApprentissagePreAlphabet();
 
                                                         function lettresApprises() {
                                                             if(lesson_d_evaluation_pre_alphabet.length != 0) {
@@ -1043,6 +1035,17 @@ function alphabet() {
                                                                     la.push(lesson_d_evaluation_pre_alphabet[i][0]);
                                                                 }
                                                                 return la
+                                                            }
+                                                        }
+                                                        function stockerApprentissagePreAlphabet() { 
+                                                            if((cercle_index+1)*total_yellow_letter === lesson_d_apprentissage_pre_alphabet.length) {
+                                                                console.log("L'apprentissage pre_alphabet est déjà fait");
+                                                            }
+                                                            if((cercle_index+1)*total_yellow_letter > lesson_d_apprentissage_pre_alphabet.length) {
+                                                                lesson_d_apprentissage_pre_alphabet = (lesson_d_apprentissage_pre_alphabet.length === 0) ? pre_apprentissage_alphabet_partiel : lesson_d_apprentissage_pre_alphabet.concat(pre_apprentissage_alphabet_partiel);
+                                                                localStorage.setItem('lesson_d_apprentissage_pre_alphabet', JSON.stringify(lesson_d_apprentissage_pre_alphabet));
+                                                                console.log("L'apprentissage pre_alphabet est bien enregistré");
+                                                                console.log(lesson_d_apprentissage_pre_alphabet);
                                                             }
                                                         }
                                                     }

@@ -294,6 +294,7 @@ a:focus {
     z-index: 0;
 }
 .course_foot { 
+    position: relative;
     z-index: 2; 
     height: 12vh;
     min-height: 3rem;

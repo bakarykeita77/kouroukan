@@ -1,0 +1,1 @@
+pointerAutomatiquementLeCurseurSur("#lien_de_connexion");

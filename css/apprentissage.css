@@ -187,12 +187,13 @@
 #traducteur .pre_apprentissage_tr { margin: 0; }
 #panneaux { 
     position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     height: 0;
     width: 100%;
     display: flex;
     justify-content: center;
     overflow: hidden; 
-    bottom: 3.25rem;
     overflow: visible;
 }
 #panneaux > div { font-size: 1.5rem; }
@@ -229,8 +230,7 @@
     transform: translateX(-50%);
     bottom: 2px;
     height: 0;
-    width: max-content;
-    min-width: 22rem;
+    width: 18rem;
     padding: 0 0.5rem;
     border-bottom: 0.5rem solid #aaa;
     overflow: hidden;
@@ -447,5 +447,9 @@
     margin: auto;
 }
 
-@media(orientation: portrait) {}
-@media(orientation: landscape) {}
+@media(orientation: portrait) {
+    #panneaux { bottom: 4.75rem; }
+}
+@media(orientation: landscape) {
+    #panneaux { bottom: 5.75rem; }
+}

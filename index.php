@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div id="btn_container">
-                    <p class="asides_btn" id="connexion_btn"><a href="php/connexion.php">ߌ ߜߊ߲߬ߞߎ߲߬</a></p>
+                    <p class="asides_btn" id="connexion_btn"><a href="php/connexion.php" id="lien_de_connexion">ߌ ߜߊ߲߬ߞߎ߲߬</a></p>
                     <p class="asides_btn"><a href="php/inscription.php">ߌ ߕߐ߮ ߛߓߍ߫ </a></p>
                 </div>
                 <div class="note_container">

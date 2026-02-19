@@ -663,6 +663,7 @@
         }
         function chargerPanneauSubmitBtn() {
             let voyelles_deja_selectionnees = voyellesDejaSelectionnees();
+console.log("voyelles_deja_selectionnees");
 console.log(voyelles_deja_selectionnees);
             if(voyelles_deja_selectionnees.length == 0) $("#panneau_submit").html("ߌ ߢߣߊߕߊ߬ ߛߌ߬ߙߊ߬ߟߊ߲ ߠߎ߬ ߘߐ߬").removeClass("actif");
             if(voyelles_deja_selectionnees.length != 0) $("#panneau_submit").html("ߣߴߌ ߓߊ߲߫ ߘߊ߫߸ ߦߋ߫ ߢߣߊߕߊ߬ߣߍ߲ ߠߎ߬ ߛߓߍ߫ ߥߟߊ߬ߓߊ ߞߊ߲߬");

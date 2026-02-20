@@ -107,7 +107,7 @@ function ton() {
                 selectionnerLesTons(ton_actif);
                 enregistrerLeTon(ton_actif);
                 enregistrerLeCaractere(caracteres_selectionnees,ton_actif);                
-                chargerLessonDApprentissage(caracteres_selectionnees);
+                chargerLessonDeTonApprentissage(caracteres_selectionnees);
                 initialiserProgressBar();
             
                 function afficherLePanneauDesCaracteres() {

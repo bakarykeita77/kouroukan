@@ -111,7 +111,7 @@ function syllabe() {
                     }
                     function chargerCorpsDApprentissageSyllabe() {
                         chargementParDefautDuTableauNoir();
-                        chargerLessonDApprentissage();
+                        chargerLessonDeSyllabeApprentissage();
                     }
                 }
                 function apprendreSyllabe() {

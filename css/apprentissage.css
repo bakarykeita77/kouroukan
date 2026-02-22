@@ -47,7 +47,7 @@
 #texte {
     position: absolute;
     width: calc(100% - 2rem);
-    max-width: 22rem;
+    max-width: 25rem;
     min-height: 10rem;
     margin: auto;
     top: 45%;
@@ -55,8 +55,9 @@
     transform: translate(-50%,-50%);
     padding: 1rem;
     color: #444;
-    font-size: 7vh;
+    font-size: 5vh;
     font-weight: bold;
+    text-align: right;
 }
 .notification h3 { margin: 0; padding: 0; }
 #redirige_sur_exercice { cursor: pointer; }
@@ -230,7 +231,7 @@
     transform: translateX(-50%);
     bottom: 2px;
     height: 0;
-    width: 18rem;
+    width: 20rem;
     padding: 0 0.5rem;
     border-bottom: 0.5rem solid #aaa;
     overflow: hidden;

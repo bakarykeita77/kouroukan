@@ -192,7 +192,6 @@
 }
 #evaluation_fiche_head span { font-size: 0.8rem; height: 1rem; }
 #evaluation_fiche_body { 
-    min-height: 6.25rem;
     background-color: #fff;
     border: 0.125rem solid transparent;
     border-top-color: #aaa;
@@ -373,14 +372,24 @@
 #evaluation_fiche_foot div:nth-child(2) { display: none; }
 #teste_container { 
     position: absolute;
-    top: 0;
+    top: 0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
     height: 6rem; 
+    width: 90%;
+    max-width: 55rem;
     border-radius: 0.5rem;
     overflow: hidden;
     transition: 0.3s;
     z-index: 0;
 }
-#evaluation_fiche { width: calc(100% - 0.25rem); top: 0.5rem; }
+#evaluation_fiche { 
+    top: 1.5rem; 
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100vw - 1rem);
+    max-width: 30rem;
+}
 #evaluation_message_de_fin_container {
     top: calc(100% - 7rem);
     left: 50%;
@@ -403,12 +412,12 @@
 
 @media screen and (orientation: landscape) {
     #evaluation_body { 
-        height: 32vh;
+        height: 40vh;
         min-height: 12rem;
     }
     .evaluation_table {  height: calc(100% - 2rem);  }
     #evaluation_tbody { height: calc(100% - 4rem); }
-    #evaluation_fiche { height: 82%; }
-    #evaluation_fiche_body { min-height: 6.25rem; }
+    #evaluation_fiche { height: 75%; }
+    #evaluation_fiche_body { min-height: 12rem; }
     #evaluation_message_de_fin_container, #message_de_fin_container { display: block; }
 }

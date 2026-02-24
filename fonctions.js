@@ -137,7 +137,7 @@
             masquer($('.dialogue_btns > div'));
             rendreActif($('.repetition_btn'));
             afficher($('.repetition_btn')); 
-        }, 400);
+        }, 200);
     }
     function afficherBoutonPourLaMatiereSuivante() {
         let matiere = nomDeLaMatiereSuivante();

@@ -38,12 +38,11 @@ a:focus {
     width: 48%;
     height: 3rem;
     line-height: 2rem;
-    background-color: cornflowerblue;
     border-radius: 0.5rem;
     text-align: center;
 }
-.asides_btn:first-child { float: right; }
-.asides_btn:last-child { float: left; }
+.asides_btn:first-child { float: right; background-color: cornflowerblue; }
+.asides_btn:last-child { float: left; border: 1px solid #aaa; }
 .asides_btn a {
     position: relative;
     top: 0.5rem;
@@ -268,7 +267,6 @@ a:focus {
     position: relative;
     height: calc(100vh - 20rem);
     max-height: 60vh;
-    width: 90%;
     max-width: 55rem;
     margin: 0 auto 1rem;
     border-radius: 0.5rem;
@@ -1170,6 +1168,7 @@ del {
 .tons_symboles_container span {
     display: inline-block;
     padding: 0.125rem;
+    margin: 0.125rem;
     border: 1px solid #bbb;
     border-radius: 50%;
     width: 1.75rem;

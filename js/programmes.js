@@ -161,6 +161,7 @@ $('document').ready(function() {
         $("#programme_ul li:nth-child(1)").click(function(e) {
             if(matiere_nom == "ߛߓߍߛߎ߲") {
                 let matiere_index = $(this).index();
+                
                 if(datas[matiere_index] != undefined) {
                     if(option_retenue != null) { location.assign(option_lien); }
                     if(option_retenue == null) {
@@ -184,6 +185,7 @@ $('document').ready(function() {
                             }
                         }
                     }
+                    pointerAutomatiquementLeCurseurSur("#lesson_option_1 a");
                 }
             }
         });

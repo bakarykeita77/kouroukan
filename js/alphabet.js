@@ -1854,14 +1854,14 @@ function alphabet() {
                                                                 ߌ ߞߎߟߎ߲ߖߋ߫ ߘߐ߬ߖߊ ߟߊ߫ ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ ߟߐ߲ ߠߊ߫ ߤߊ߲߯ %'+parseIntNko(note_d_exercice_alphabet)+' ߟߊ߫. ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ ߛߓߍߛߎ߲ ߞߘߐߟߌ ߞߍ߫.\
                                                                 ߞߘߐߓߐߟߌ߫ ߞߘߎ ߘߌ߲߯ ߘߎ߭ߡߊ߬\
                                                                 ');
-                                                            }, 400);
+                                                            }, 200);
                                                         }
                                                         if(note_d_exercice_alphabet < moyenne_d_exercice) {
                                                             setTimeout(() => {
                                                                 ecris('exercice_notification_corps','\
                                                                     ߌ ߖߌߖߊ߬. ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ ߡߊ߫ ߢߊ߬.ߌ ߟߊ߫ ߓߍ߬ߙߍ߫ ߛߐ߬ߘߐ߲߬ߣߍ߲ ߦߋ߫ %'+parseIntNko(note_d_exercice_alphabet)+' ߟߋ߬ ߘߌ߫. ߊ߬ ߘߏ߲߬ ߡߊߞߊ߲߫ ߞߊ߬ ߖߌ߬ %'+parseIntNko(moyenne_d_exercice)+' ߞߘߐ߫. ߏ߬ߘߐ߬ ߘߌ߬ߢߍ߬ ߞߊ߬ ߛߍ߬ߦߌ߬ ߦߙߐ ߢߌ߲߬ ߡߊ߬.߫.\
                                                                 ');
-                                                            }, 400);
+                                                            }, 200);
                                                         }
                                                     }
                                                     function transitionVersEvaluationAlphabet() {
@@ -2185,7 +2185,7 @@ function alphabet() {
                                                     ecris('evaluation_notification_corps','\
                                                     ߛߓߍߛߎ߲ ߞߘߐߓߐߟߌ ߓߘߊ߫ ߓߊ߲߫. ߏ߬ ߦߋ߫ ߛߓߍߛߎ߲ ߖߍ߬ߘߍ ߘߋ߰ߟߌ ߓߊ߲ߣߍ߲ ߘߌ߫. ߌ ߞߎߟߎ߲ߖߋ߫. \
                                                     ');
-                                                }, 400);
+                                                }, 200);
                                                 
                                                 stockerEvaluationAlphabet();
                                                 resultatDAlphabet();
@@ -2197,7 +2197,7 @@ function alphabet() {
                                                     ecris('evaluation_notification_corps','\
                                                     ߛߓߍߛߎ߲ ߞߘߐߓߐߟߌ ߡߊ߫ ߢߊ߬. ߌ ߖߌߖߊ߬ ߞߊ߬ ߛߍ߬ߦߌ߬ ߦߙߐ ߣߌ߲߬ ߡߊ߬. \
                                                     ');
-                                                }, 400);
+                                                }, 200);
                                                 afficherBoutonDeReprise();
                                             }
                                             

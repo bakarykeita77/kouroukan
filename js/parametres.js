@@ -304,7 +304,7 @@ function parametrageDeLesson() {
                 var syllabes_tonifies_length = syllabes_tonifies.length;
 
                 var table_d_apprentissage_alphabet_html = (option_retenue === 1) ? chargerCorpsDePreAlphabet() : lessonHTML(lettres_cochees, 'table_alphabet_apprentissage');
-                var table_d_apprentissage_syllabe_html = (option_retenue === 1) ? chargerApprendrePreSyllabe() : lessonHTML(syllabes_simples_coches, 'table_syllabe_apprentissage');
+                var table_d_apprentissage_syllabe_html = lessonHTML(syllabes_simples_coches, 'table_syllabe_apprentissage');
 
                 
                 if(niveau_actif == 1) apprentissage_html = table_d_apprentissage_alphabet_html;

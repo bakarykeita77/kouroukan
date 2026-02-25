@@ -973,6 +973,7 @@ function alphabet() {
 
                                             setTimeout(() => { fermerPreEvaluer(); }, 200);
                                             resultatGeneralDAlphabet(); 
+
                                             nbr_mauvaise_reponse = 0;
 
 
@@ -1117,17 +1118,36 @@ function alphabet() {
                                                 if(note_d_evaluation_pre_alphabet < 92) {
                                                     let notification = liste_de_matieres[1][1]+" ߞߘߐߓߐߟߌ ߡߊ߫ ߢߊ߬ .ߌ ߓߘߊ߫ ߗߌߙߏ߲߫ ߡߊ߬ߞߟߏ߬ߟߌ ߢߌ߲߬ ߘߐ߫\n .ߘߊߕߎ߲ߠߊ߲߫ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߓߐ߫ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫)";
                                                     ecris('revision_notification_corps', notification);
+
+                                                    rappelDeBoutonDeRepriseDeRevision();
+
+                                                    function rappelDeBoutonDeRepriseDeRevision() {
+                                                        $.each($("#revision_body .table_parlante td"), function() { 
+                                                            let td_actif = $(this);
+                                                            td_actif.click(function() { secouer($("#reprendre_revision_btn")); });
+                                                        });
+                                                    }
                                                 }
                                                 if(note_d_evaluation_pre_alphabet >= 92) {
+                                                    
                                                     let notification_1 = liste_de_matieres[1][1]+" ߞߘߐߓߐߟߌ ߢߊ߬ߣߍ߲߬ .ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ ߕߊ߯ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߦߙߐ. \n .<span class='pre_exercice_resultat_affiche'>ߞߐߝߟߌ ߝߟߍ߫ ߦߊ߲߬</span> .";
                                                     let notification_2 = liste_de_matieres[1][1]+" ߞߘߐߓߐߟߌ ߢߊ߬ߣߍ߲߬ .ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ ߜߋ߲߭ ߘߋ߰ߟߌ ߘߊߡߌ߬ߘߊ߬. \n .<span class='pre_exercice_resultat_affiche'>ߞߐߝߟߌ ߝߟߍ߫ ߦߊ߲߬</span> .";
-                                                    
+
                                                     if(lesson_d_evaluation_pre_alphabet.length < 27) {
                                                         ecris('revision_notification_corps', notification_1);
                                                     }
                                                     if(lesson_d_evaluation_pre_alphabet.length === 27) {
                                                         ecris('revision_notification_corps', notification_2);
                                                         console.log("Fin de la leçon d'alphabet");
+                                                    }
+
+                                                    rappelDeBoutonDApprentissage();
+
+                                                    function rappelDeBoutonDApprentissage() {
+                                                        $.each($("#revision_body .table_parlante td"), function() { 
+                                                            let td_actif = $(this);
+                                                            td_actif.click(function() { secouer($("#continu_sur_apprentissage_btn")); });
+                                                        });
                                                     }
                                                 }
 

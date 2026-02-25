@@ -23,7 +23,7 @@ $('document').ready(function() {
     afficherLogo();
     afficher($('#reception'));
     // document.getElementById("lien_du_programme").focus();
-    pointerAutomatiquementLeCurseurSur("#lien_du_programme");
+    mmettreLeFocusSur("#lien_du_programme");
     
     function userIdentityStorage() {
         sessionStorage.setItem('id_client', JSON.stringify(document.getElementById('id_client').innerHTML));

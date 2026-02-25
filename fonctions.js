@@ -1898,6 +1898,7 @@ console.log(voyelles_deja_selectionnees);
         element.addClass('surbrillance');
         element.siblings().removeClass('surbrillance');
     }
+    function mmettreLeFocusSur(selecteur) { document.querySelector(selecteur).focus(); }
     function mix2D(tableau){
         var mixted_table = [];
         for(var i=0; mixted_table.length<tableau[0].length*tableau[1].length;i++){
@@ -2064,9 +2065,6 @@ console.log(voyelles_deja_selectionnees);
         }
         
         return peds;
-    }
-    function pointerAutomatiquementLeCurseurSur(selecteur) {
-        document.querySelector(selecteur).focus();
     }
     function pourcentagePoint(memoire) {
         if(memoire != null) {

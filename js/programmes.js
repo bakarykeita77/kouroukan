@@ -50,7 +50,7 @@ $('document').ready(function() {
     afficherProgrammes();
     lessonOptions();
     storagesDuProgramme();
-    pointerAutomatiquementLeCurseurSur("#lien_actif");
+    mmettreLeFocusSur("#lien_actif");
 
     function matiereNouvellementAppriseDuServeur() {
         let matieres_apprises = [];
@@ -185,7 +185,7 @@ $('document').ready(function() {
                             }
                         }
                     }
-                    pointerAutomatiquementLeCurseurSur("#lesson_option_1 a");
+                    mmettreLeFocusSur("#lesson_option_1 a");
                 }
             }
         });

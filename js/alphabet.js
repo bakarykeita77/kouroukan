@@ -40,7 +40,6 @@ function alphabet() {
 
         function preAlphabetNko() {
             
-            // localStorage.clear();
             let lesson_d_apprentissage_pre_alphabet = JSON.parse(localStorage.getItem('lesson_d_apprentissage_pre_alphabet'));
             let lesson_d_exercice_pre_alphabet = JSON.parse(localStorage.getItem('lesson_d_exercice_pre_alphabet'));
             let lesson_d_evaluation_pre_alphabet = JSON.parse(localStorage.getItem('lesson_d_evaluation_pre_alphabet'));
@@ -326,7 +325,10 @@ function alphabet() {
 
                                             if(clickable_td.includes(clicked_letter)) {
 
-                                                setTimeout(() => { masquerNotification(); }, 250);
+                                                setTimeout(() => { 
+                                                    if(td_actif.css("background-color") == "rgb(85, 85, 85)") { masquerNotification(); }
+                                                }, 250);
+                                                
                                                 lire('alphabet',clicked_letter);
 
                                                 if(les_lettres_actives.includes(clicked_letter)) {
@@ -348,40 +350,38 @@ function alphabet() {
                                                     }
                                                     function progressBarPreApprendreAlphabet() {
                                                         if(td_click_count <= quantite_normale_de_click) {
+                                                            if(td_actif.css("background-color") == "rgb(85, 85, 85)") {    
+                                                                
+                                                                let clicked_td_length = quantite_normale_de_click*les_lettres_actives.length;
+                                                                let diagramm_unity = 100/clicked_td_length;
+                                                                let global_clicks_count = global_clicks_counter++;
 
-                                                            let clicked_td_length = quantite_normale_de_click*les_lettres_actives.length;
-                                                            let diagramm_unity = 100/clicked_td_length;
-                                                            let global_clicks_count = global_clicks_counter++;
-
-                                                            apprentissage_width = global_clicks_count*diagramm_unity;
-                                                            $('#apprentissage_progress_bar .progress_bonne_reponse_bar').css('width', apprentissage_width+'%');
-                                                        
-                                                        //Initialiser la barre de progression
-                                                            if(global_clicks_count/quantite_normale_de_click == les_lettres_actives.length) { 
-                                                                setTimeout(() => {
-                                                                    td_click_counter = 0;
-                                                                    td_click_count = 0;
-                                                                    apprentissage_width = 0;
-                                                                    global_clicks_counter = 1;
-                                                                }, 400);
+                                                                apprentissage_width = global_clicks_count*diagramm_unity;
+                                                                $('#apprentissage_progress_bar .progress_bonne_reponse_bar').css('width', apprentissage_width+'%');
+                                                            
+                                                            //Initialiser la barre de progression
+                                                                if(global_clicks_count/quantite_normale_de_click == les_lettres_actives.length) { 
+                                                                    setTimeout(() => {
+                                                                        td_click_counter = 0;
+                                                                        td_click_count = 0;
+                                                                        apprentissage_width = 0;
+                                                                        global_clicks_counter = 1;
+                                                                    }, 400);
+                                                                }
                                                             }
                                                         }
                                                     }
                                                     function finDePreApprendreAlphabet() {
                                                         if(clicked_td_length === total_yellow_letter*quantite_normale_de_click) {
-                                                        
-                                                            ecris('apprentissage_notification_corps','\
-                                                                ߣߌ߫ ߟߊ߲ߞߣߍߡߊߣߍ߲ ߠߎ߬ ߓߘߊ߫ ߟߐ߲߫ ߌ ߓߟߏ߫߸ ߢߊ߯ߡߌߟߊ߲ ߞߘߎ ߘߌ߲߯ ߘߎ߭ߡߊ߬ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫߹) ߞߊ߬ ߘߋ߲߬ߣߍ߲߬ ߞߎߘߊ ߟߎ߬ ߢߊ߯ߡߌ߲߫ ߡߊ߬ߞߟߏ߬ߟߌ ߞߊ߲ߡߊ߬.\
-                                                            '); 
+                                                            if(td_actif.css("background-color") == "rgb(85, 85, 85)") {
 
-                                                            afficherBoutonDExercice();
-                                                            exercicePreAlphabet();
-                                                            rappelDExerciceBtn();
+                                                                ecris('apprentissage_notification_corps','\
+                                                                    ߣߌ߫ ߟߊ߲ߞߣߍߡߊߣߍ߲ ߠߎ߬ ߓߘߊ߫ ߟߐ߲߫ ߌ ߓߟߏ߫߸ ߢߊ߯ߡߌߟߊ߲ ߞߘߎ ߘߌ߲߯ ߘߎ߭ߡߊ߬ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫߹) ߞߊ߬ ߘߋ߲߬ߣߍ߲߬ ߞߎߘߊ ߟߎ߬ ߢߊ߯ߡߌ߲߫ ߡߊ߬ߞߟߏ߬ߟߌ ߞߊ߲ߡߊ߬. <br>ߣߵߊ߬ߟߎ߫ ߘߏ߲߬ ߡߊ߫ ߓߊ߲߫ ߟߐ߲߫ ߠߴߌ ߓߟߏ߫߸ ߒ߬ߓ،ߊ߬ߟߎ߫ ߘߋ߰ߟߌ ߥߴߊ߬ ߡߊ߬߸ ߤߊ߲߯ ߊ߬ߟߎ߬ ߦߋ߫ ߕߏ߫ ߌ ߞߣߐ߫.\
+                                                                '); 
 
-                                                            function rappelDExerciceBtn() {
-                                                                $("#table_pre_apprentissage > div:not(#tr_actif)").click(function() {
-                                                                    secouer($("#continu_sur_exercice_btn"));
-                                                                });
+                                                                afficherBoutonDExercice();
+                                                                exercicePreAlphabet();
+
                                                             }
                                                         }
                                                     }
@@ -673,6 +673,10 @@ function alphabet() {
                                             stockerExercicePreAlphabet();
                                             // preExerciceResultat();  
                                             fermerPreExercice();
+
+                                            $("#exercice_body").click(() => {
+                                                secouer($("#continu_sur_revision_btn"));
+                                            });
 
                                             
                                             function notificationDeFinDExercicePreAlphabet() {

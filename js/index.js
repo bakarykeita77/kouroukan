@@ -1,1 +1,1 @@
-pointerAutomatiquementLeCurseurSur("#lien_de_connexion");
+mmettreLeFocusSur("#lien_de_connexion");

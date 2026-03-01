@@ -448,12 +448,21 @@
         setTimeout(() => { $("#panneaux, #caracteres_cadre").css({"height":0}); }, 250);
         
         setTimeout(() => {
-            $('#afficheur_de_panneau').text("ߛߓߍߘߋ߲߫ ߥߟߊ ߦߌ߬ߘߊ߬");
-            if(matiere_nom == "ߜߋ߲߭") { $("#afficheur_de_panneau").html("ߛߌ߬ߙߕߊ߬ ߥߟߊ ߦߌ߬ߘߊ߬"); }
+            $('#afficheur_de_panneau').html("<p>ߛߓߍߘߋ߲߫ ߥߟߊ ߦߌ߬ߘߊ߬</p>");
+            if(matiere_nom == "ߜߋ߲߭") { $("#afficheur_de_panneau").html("<p>ߛߌ߬ߙߕߊ߬ ߥߟߊ ߦߌ߬ߘߊ߬</p>"); }
             clignoterUneFois($('#afficheur_de_panneau'));
         }, 400);
+console.log($('.table_parlante tr').length);
 
-        if ($('.table_parlante tr').length == 0) setTimeout(() => { ecris("apprentissage_notification_corps", "ߞߏ߰ߙߌ߫ ߣߘߍ߬ߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬ ߞߊ߬ ߛߌ߬ߙߕߊ߬ ߥߟߊߟߋ߲ ߦߌ߬ߘߊ߬."); }, 800);
+        if ($('.table_parlante tr').length == 0) {
+            if($('#afficheur_de_panneau').text() == "ߛߌ߬ߙߕߊ߬ ߥߟߊ ߘߏ߲߰") {
+                ecris("apprentissage_notification_corps", "ߞߏ߰ߙߌ߫ ߣߘߍ߬ߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬ ߞߊ߬ ߛߌ߬ߙߕߊ߬ ߥߟߊߟߋ߲ ߦߌ߬ߘߊ߬.");
+            }
+            if($('#afficheur_de_panneau').text() == "ߛߌ߬ߙߕߊ߬ ߥߟߊ ߦߌ߬ߘߊ߬") {
+                ecris("apprentissage_notification_corps", "ߛߌ߬ߙߕߊ߬ ߞߋߟߋ߲߫ ߥߟߊ ߛߌߦߊߡߊ߲߫ ߛߎߥߊ߲ߘߌ߫߸ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߡߍ߲ ߠߎ߬ ߜߋ߲߭ ߠߎ߬ ߘߋ߲߰");
+            }
+    
+        }
         if ($('.table_parlante tr').length != 0) {
             setTimeout(() => { ecris("apprentissage_notification_corps", "ߜߋ߲߭ ߢߌ߲߬ ߠߎ߫ ߞߋ߬ߟߋ߲߬ ߞߋ߬ߟߋ߲߬ ߘߋ߲߯ ߤߊ߲߯ ߊ߬ߟߎ߬ ߦߋ߫ ߕߴߌ ߞߣߐ߫."); }, 800);
         }
@@ -860,7 +869,7 @@ console.log(voyelles_deja_selectionnees);
         if(matiere_index === 3) a_apprendre = "ߖߊ߰ߕߋ߬ߘߋ߲߫";
 
         $('#apprentissage_body').html("<table id='table_syllabe_apprentissage'><div id='texte'></div></table>");
-        setTimeout(() => { ecris("texte", a_apprendre+" ߘߋ߲߰ߕߊ ߟߎ߬ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬"); }, 400);
+        ecris("texte", a_apprendre+" ߘߋ߲߰ߕߊ ߟߎ߬ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬");
     }
     function chargerPanneauDesCaracteres() {
         
@@ -869,7 +878,7 @@ console.log(voyelles_deja_selectionnees);
         $('#panneaux').html(panneaux_des_caracteres_html);
         if(matiere_nom == "ߜߋ߲߭") {
             cocherToutesLesVoyelles();
-            $("#afficheur_de_panneau").html("ߛߌ߬ߙߕߊ߬ ߥߟߊ ߦߌ߬ߘߊ߬");
+            $("#afficheur_de_panneau").html("<p>ߛߌ߬ߙߕߊ߬ ߥߟߊ ߦߌ߬ߘߊ߬</p>");
         }
 
         function panneauxDesCaracteresHTML() {
@@ -1324,7 +1333,7 @@ console.log(voyelles_deja_selectionnees);
         let longueur = message.length;
         let indice = 0;
 
-        masquerNotification();
+        // masquerNotification();
         setTimeout(() => { 
             afficherNotification();
             setTimeout(() => { write(); }, 500);
@@ -1344,7 +1353,7 @@ console.log(voyelles_deja_selectionnees);
         masquerNotification();
         setTimeout(() => { 
             afficherNotification();
-            setTimeout(() => { write(); }, 500);
+            setTimeout(() => { write(); }, 250);
             function write() {
                 indice++;
                 $('.'+element_class).html(message.substr(0,indice));
@@ -1352,7 +1361,7 @@ console.log(voyelles_deja_selectionnees);
                     setTimeout(() => { write(); }, 20);
                 }
             }
-        }, 300);
+        }, 250);
     }
     function effacerLeTableau() {
         $('.course_body').html("<p id='contenu_par_defaut_du_tableau'>ߥߟߊ߬ߓߊ ߓߘߊ߫ ߖߐ߬ߛߌ߬ ߹</p>");
@@ -1841,9 +1850,12 @@ console.log(voyelles_deja_selectionnees);
             clicked_consonne_container.css('background-color',consonne_background);
         }
     }
+    function masquerPanneauDesCaracteres() { $('#caracteres_container').css({"top":"22rem", "height":0}); }
     function masquerNotification() {
-        $('.notification_corps').text('');
-        $('.notification_corps').css("top", "4.5rem");
+        if($('.notification_corps').css("top") == "0px") {
+            $('.notification_corps').text('');
+            $('.notification_corps').css("top", "4.5rem");
+        }
     }
     function memoireConsonnesChoisies() {
 
@@ -3086,7 +3098,16 @@ console.log(voyelles_deja_selectionnees);
         $("#afficheur_de_panneau").click(function (e) {
             e.stopImmediatePropagation();
             $(this).removeClass('indicateur');
-            if (panneau_height == 0) { montrerPanneauDesCaracteres(); panneau_height = 352; } else { cacherPanneauDesCaracteres(); panneau_height = 0; }
+            masquerNotification();
+            if (panneau_height == 0) { 
+                montrerPanneauDesCaracteres(); 
+                ecris("apprentissage_notification_corps", "ߛߌ߬ߙߕߊ߬ ߞߋߟߋ߲߫ ߥߟߊ ߛߌߦߊߡߊ߲߫ ߛߎߥߊ߲ߘߌ߫߸ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߡߍ߲ ߠߎ߬ ߜߋ߲߭ ߠߎ߬ ߘߋ߲߰");
+                panneau_height = 352; 
+
+            } else { 
+                cacherPanneauDesCaracteres(); 
+                panneau_height = 0; 
+            }
         }); 
     }
     function totalPoint(data) {

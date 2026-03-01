@@ -93,7 +93,7 @@ function syllabe() {
 
                     function chargerEnteteDApprentissageSyllabe() {
                         $('.notification_titre').html('ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ');
-                        setTimeout(() => { ecris("apprentissage_notification_corps", "ߞߏ߰ߙߌ߫ ߣߘߍ߬ߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬ ߞߊ߬ ߛߌ߬ߙߕߊ߬ ߥߟߊߟߋ߲ ߦߌ߬ߘߊ߬."); }, 1000);
+                        setTimeout(() => { ecris("apprentissage_notification_corps", "ߞߏ߰ߙߌ߫ ߣߘߍ߬ߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬ ߞߊ߬ ߛߌ߬ߙߕߊ߬ ߥߟߊߟߋ߲ ߦߌ߬ߘߊ߬."); }, 500);
                     }
                     function chargerFootDApprentissageSyllabe() {
 
@@ -109,7 +109,7 @@ function syllabe() {
                         }
                     }
                     function chargerCorpsDApprentissageSyllabe() {
-                        chargementParDefautDuTableauNoir();
+                        setTimeout(() => { chargementParDefautDuTableauNoir(); }, 1600);
                         chargerLessonDeSyllabeApprentissage();
                     }
                 }
@@ -125,25 +125,21 @@ function syllabe() {
                             if(e.target.id == "apprentissage_body" && $('#caracteres_cadre').css('top') == '192px') {
                                 if($('#table_syllabe_apprentissage').text() == "ߜߋ߲߭ ߘߋ߲߰ߕߊ ߟߎ߬ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬") {
                                     secouer($("#afficheur_de_panneau"));
-                                    return;
                                 }
                                 if($('#table_syllabe_apprentissage').text() != "ߜߋ߲߭ ߘߋ߲߰ߕߊ ߟߎ߬ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬") {
                                     if($(".progress_bonne_reponse_bar").width() === 0) {
                                         secouer($('#table_syllabe_apprentissage td'));
-                                        return;
                                     }
                                 }
                             }
     
                             if(e.target.id == "texte") {
                                 secouer($("#afficheur_de_panneau"));
-                                return;
                             }
                         });
                         $('#panneaux').click(function (e) {
                             if(e.target.id == "panneaux") {
                                 secouer($("#afficheur_de_panneau"));
-                                return;
                             }
                         });
                     }
@@ -151,7 +147,7 @@ function syllabe() {
                         $('#panneaux span').click(function () {
 
                             let td = "";
-                            let consonnes_choisie = $(this).text();
+                            let consonne_choisie = $(this).text();
                             let compteur_de_syllabe = 0;
                             let global_clicks_counter = 0;
 
@@ -159,100 +155,127 @@ function syllabe() {
                             suivreLApprentissage();
                         
 
-                            function initialiserApprentissageSyllabe() {
-                                let td_to_click = $('#table_syllabe_apprentissage td');
-                                lesson_d_apprentissage_syllabe_du_jour.splice(0, consonnes.length);
-                                lesson_d_apprentissage_syllabe_du_jour = initialiserData(td_to_click);
-                            }
                             function memoriserLesConsonnesChoisies() {
-                                consonnes_choisies.push(consonnes_choisie);
+
+                                let consonne_index = consonnes_choisies.indexOf(consonne_choisie);
+
+                                if(consonne_index == "-1") consonnes_choisies.push(consonne_choisie);
+                                if(consonne_index != "-1") consonnes_choisies.splice(consonne_index,1);
+                                if(consonnes_choisies.length == 0) { setTimeout(() => { $("#table_syllabe_apprentissage").css("display","none"); }, 800); }
+                                    
                                 $("#afficheur_de_panneau p").click(() => { 
-                                    localStorage.setItem("consonnes_choisies", JSON.stringify(consonnes_choisies)); 
+                                    if($(this).text() == "ߛߌ߬ߙߕߊ߬ ߥߟߊ ߘߏ߲߰") localStorage.setItem("consonnes_choisies", JSON.stringify(consonnes_choisies));
                                 });
+        
                             }
                             function suivreLApprentissage() {
+                                
+                                initialiserApprentissageSyllabe();
                                 setTimeout(() => {
-                                    initialiserApprentissageSyllabe();
+
                                     td = $('#table_syllabe_apprentissage td');
-                                    progressBarDApprentissage(td,quantite_normale_de_click);
+                                    let progress_unity = 100 / [td.length * quantite_normale_de_click];                                    
 
                                     $.each(td, function () {
                                         let compteur_td_click = 0;
                                         $(this).click(function () {
-                                            
-                                            let td_actif = $(this);
-                                            let tr_index = td_actif.parent().index();
-                                            let td_index = td_actif.index() + tr_index * 7;
-                                            let syllabe_clique = td_actif.text();
+                                            if($("#apprentissage_dialogue_btns").css("display") == "flex") {
+                                                if($("#afficheur_de_panneau p").text() == "ߛߌ߬ߙߕߊ߬ ߥߟߊ ߦߌ߬ߘߊ߬") {
+                                                
+                                                    let td_actif = $(this);
+                                                    let tr_index = td_actif.parent().index();
+                                                    let td_index = td_actif.index() + tr_index * 7;
+                                                    let syllabe_clique = td_actif.text();
 
-                                            global_clicks_counter++;
-                                            compteur_td_click++;
+                                                    compteur_td_click++;
 
-                                            rappelDesBoutonsTdEtRedirectionBtns();
-                                            lire('ߊ', syllabe_clique);
-                                            enregistrerApprentissageSyllabe();
-                                            // finDApprentissageSyllabe();
+                                                    
+                                                    rappelDesBoutonsTdEtRedirectionBtns();
+                                                    lire('ߊ', syllabe_clique);
+                                                    enregistrerApprentissageSyllabe();
+                                                    progressBarrApprentissageSyllabe();
+                                                    finDApprentissageSyllabe();
 
-console.log(compteur_de_syllabe +'==='+ td.length);
 
-                                            function rappelDesBoutonsTdEtRedirectionBtns() {
-                                                $('#apprentissage_body').click(function (e) {
-                                                    if(compteur_de_syllabe < td.length) {
-                                                        if(e.target.tagName == "DIV") {
-                                                            secouer($('#table_syllabe_apprentissage td'));
-                                                            return;
-                                                        }
+                                                    function rappelDesBoutonsTdEtRedirectionBtns() {
+                                                        $('#apprentissage_body').click(function (e) {
+                                                            if(compteur_de_syllabe < td.length) {
+                                                                if(e.target.tagName == "DIV") {
+                                                                    secouer($('#table_syllabe_apprentissage td'));
+                                                                    return;
+                                                                }
+                                                            }
+                                                            if(compteur_de_syllabe === td.length) {
+                                                                if(e.target.tagName == "DIV") {
+                                                                    secouer($("#apprentissage_redirection_btns"));
+                                                                    return;
+                                                                }
+                                                            }
+                                                        });
                                                     }
-                                                    if(compteur_de_syllabe === td.length) {
-                                                        if(e.target.tagName == "DIV") {
-                                                            secouer($("#apprentissage_redirection_btns"));
-                                                            return;
-                                                        }
+                                                    function enregistrerApprentissageSyllabe() {
+
+                                                        let mark = (compteur_td_click >= quantite_normale_de_click) ? 1 : 0;
+
+                                                        lesson_d_apprentissage_syllabe_du_jour.splice(td_index, 1, [syllabe_clique, compteur_td_click, mark]);
+                                                        if (compteur_td_click === quantite_normale_de_click) { compteur_de_syllabe++; }
                                                     }
-                                                });
-                                            }
-                                            function enregistrerApprentissageSyllabe() {
+                                                    function progressBarrApprentissageSyllabe() {
+                                                        if(compteur_td_click <= quantite_normale_de_click) {
+                                                            global_clicks_counter++;
+                                                            $('.progress_bonne_reponse_bar').css('width',global_clicks_counter*progress_unity+'%');
+                                                        }
+                                                    } 
+                                                    function finDApprentissageSyllabe() {
+                                                        if (compteur_de_syllabe === td.length) {
 
-                                                let mark = (compteur_td_click >= quantite_normale_de_click) ? 1 : 0;
-
-                                                lesson_d_apprentissage_syllabe_du_jour.splice(td_index, 1, [syllabe_clique, compteur_td_click, mark]);
-                                                if (compteur_td_click === quantite_normale_de_click) { compteur_de_syllabe++; }
-                                            }
-                                            function finDApprentissageSyllabe() {
-                                                if (compteur_de_syllabe === td.length) {
-
-                                                    let note_d_apprentissage_syllabe = calculerNote(lesson_d_apprentissage_syllabe_du_jour);
-            
-                                                    if (note_d_apprentissage_syllabe === 100) {
-                                                        setTimeout(() => {
-                                                        
-                                                            notificationDeFinDApprentissageSyllabe();
-                                                            affichageDeExerciceBtn();
-                                                            exerciceSyllabe();
-                                                            
-                                                            function notificationDeFinDApprentissageSyllabe() {
+                                                            let note_d_apprentissage_syllabe = calculerNote(lesson_d_apprentissage_syllabe_du_jour);
+                    
+                                                            if (note_d_apprentissage_syllabe === 100) {
                                                                 setTimeout(() => {
-                                                                    ecris('apprentissage_notification_corps', "ߌ ߞߎߟߎ߲ߖߋ߫ ߘߐ߬ߖߊ ߟߊ߫ ߞߊ߬ ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߞߍ߫߸ ߛߌߛߊ߲߬ ߡߊ߬ߞߟߏ߬ߟߌ߬ ߞߘߎ ߘߌ߲߯ ߘߎ߭ߡߊ߬ ߞߊ߬ ߜߋ߲߭ ߘߋ߰ߣߍ߲߬ ߞߎߘߊ ߟߎ߬ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫");
-                                                                }, 400); 
-                                                            }
-                                                            function affichageDeExerciceBtn() {
-                                                                masquer($('#apprentissage_dialogue_btns'));
-                                                                afficherRapidement($('#apprentissage_redirection_btns'));
-
-                                                                masquer($('#apprentissage_btn'));
-                                                                afficherRapidement($('#continu_sur_exercice_btn'));
-                                                                masquer($('#evaluation_btn'));
-                                                                rendreActif($('#continu_sur_exercice_btn'));
                                                                 
-                                                                indexer($('#continu_sur_exercice_btn p'));
+                                                                    notificationDeFinDApprentissageSyllabe();
+                                                                    affichageDeExerciceBtn();
+                                                                    $("#table_syllabe_apprentissage td").click(function() { 
+                                                                        secouer($("#continu_sur_exercice_btn")); 
+
+                                                                    });
+                                                                    exerciceSyllabe();
+                                                                    
+                                                                    function notificationDeFinDApprentissageSyllabe() {
+                                                                        setTimeout(() => {
+                                                                            ecris("apprentissage_notification_corps", "ߌ ߞߎߟߎ߲ߖߋ߫ ߘߐ߬ߖߊ ߟߊ߫ ߞߊ߬ ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߞߍ߫߸ ߛߌߛߊ߲߬ ߡߊ߬ߞߟߏ߬ߟߌ߬ ߞߘߎ ߘߌ߲߯ ߘߎ߭ߡߊ߬ ߞߊ߬ ߜߋ߲߭ ߘߋ߰ߣߍ߲߬ ߞߎߘߊ ߟߎ߬ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫");
+                                                                        }, 400); 
+                                                                    }
+                                                                    function affichageDeExerciceBtn() {
+                                                                        masquer($('#apprentissage_dialogue_btns'));
+                                                                        afficherRapidement($('#apprentissage_redirection_btns'));
+
+                                                                        masquer($('#apprentissage_btn'));
+                                                                        afficherRapidement($('#continu_sur_exercice_btn'));
+                                                                        masquer($('#evaluation_btn'));
+                                                                        rendreActif($('#continu_sur_exercice_btn'));
+                                                                        
+                                                                        indexer($('#continu_sur_exercice_btn p'));
+                                                                    }
+                                                                }, 600);
                                                             }
-                                                        }, 600);
+                                                        }
                                                     }
                                                 }
+                                            }
+                                            if($("#apprentissage_dialogue_btns").css("display") == "none") {
+                                                if($("#afficheur_de_panneau p").text() == "ߛߌ߬ߙߕߊ߬ ߥߟߊ ߘߏ߲߰") secouer($("#afficheur_de_panneau"));
                                             }
                                         });
                                     });  
                                 }, 800);
+
+                                function initialiserApprentissageSyllabe() {
+                                    let td_to_click = $('#table_syllabe_apprentissage td');
+                                    lesson_d_apprentissage_syllabe_du_jour.splice(0, consonnes.length);
+                                    lesson_d_apprentissage_syllabe_du_jour = initialiserData(td_to_click);
+                                }
                             }
                         });
                     }

@@ -1132,7 +1132,6 @@ del {
     width: 3rem;
     height: 3rem;
     line-height: 3rem;
-    font-size: 2rem;
     font-weight: 900;
     text-align: center;
     border: 1px solid rgb(85,85,85);
@@ -1321,6 +1320,7 @@ del {
         padding: 1rem 0; 
         max-width: 30rem;
     }
+    .table_parlante td, .table_muette td { font-size: 1.5rem; }
     .phases li { width: 80%; }
     .travaux { display: none; }
 }
@@ -1336,6 +1336,7 @@ del {
         margin-bottom: 2rem;
         border: 1px solid #ccc;
     }
+    .table_parlante td, .table_muette td { font-size: 2rem; }
     .phases li {
         display: inline-block;
         width: 30%;

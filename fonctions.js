@@ -452,7 +452,6 @@
             if(matiere_nom == "ߜߋ߲߭") { $("#afficheur_de_panneau").html("<p>ߛߌ߬ߙߕߊ߬ ߥߟߊ ߦߌ߬ߘߊ߬</p>"); }
             clignoterUneFois($('#afficheur_de_panneau'));
         }, 400);
-console.log($('.table_parlante tr').length);
 
         if ($('.table_parlante tr').length == 0) {
             if($('#afficheur_de_panneau').text() == "ߛߌ߬ߙߕߊ߬ ߥߟߊ ߘߏ߲߰") {
@@ -463,9 +462,7 @@ console.log($('.table_parlante tr').length);
             }
     
         }
-        if ($('.table_parlante tr').length != 0) {
-            setTimeout(() => { ecris("apprentissage_notification_corps", "ߜߋ߲߭ ߢߌ߲߬ ߠߎ߫ ߞߋ߬ߟߋ߲߬ ߞߋ߬ߟߋ߲߬ ߘߋ߲߯ ߤߊ߲߯ ߊ߬ߟߎ߬ ߦߋ߫ ߕߴߌ ߞߣߐ߫."); }, 800);
-        }
+        if ($('.table_parlante tr').length != 0) ecris("apprentissage_notification_corps", "ߜߋ߲߭ ߢߌ߲߬ ߠߎ߫ ߞߋ߬ߟߋ߲߬ ߞߋ߬ߟߋ߲߬ ߘߋ߲߯ ߤߊ߲߯ ߊ߬ߟߎ߬ ߦߋ߫ ߕߴߌ ߞߣߐ߫.");
     }
     function calculerNote(data) {
         var point = 0;

@@ -204,7 +204,6 @@ a:focus {
     left: 0;
     height: 100vh;
     width: 100vw;
-    overflow: auto;
 }
 .contenu_vide {
     font-weight:bold; 
@@ -993,9 +992,11 @@ del {
 .profile_menu_head a { text-decoration: none; }
 .progress_bar_container {
     position: relative;
-    top: 0.8rem;
+    top: 2.125rem;
     border-top: 1px solid #ccc;
     height: 0.5rem;
+    width: 90%;
+    max-width: 55rem;
     margin: 0 auto 1rem;
 }
 .progress_bar {

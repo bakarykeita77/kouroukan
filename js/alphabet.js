@@ -71,6 +71,10 @@ function alphabet() {
             let pre_apprentissage_alphabet_partiel = [];
             let total_yellow_letter = 0;
 
+            let nom = nomDEtudiant();
+            let sexe = sexeDEtudiant();
+
+
 
             masquer($('.direction'));
             apprentissagePreAlphabet();

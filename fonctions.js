@@ -866,7 +866,7 @@ console.log(voyelles_deja_selectionnees);
         if(matiere_index === 3) a_apprendre = "ߖߊ߰ߕߋ߬ߘߋ߲߫";
 
         $('#apprentissage_body').html("<table id='table_syllabe_apprentissage'><div id='texte'></div></table>");
-        ecris("texte", a_apprendre+" ߘߋ߲߰ߕߊ ߟߎ߬ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬");
+        setTimeout(() => { ecris("texte", a_apprendre+" ߘߋ߲߰ߕߊ ߟߎ߬ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬"); }, 800);
     }
     function chargerPanneauDesCaracteres() {
         
@@ -1997,6 +1997,60 @@ console.log(voyelles_deja_selectionnees);
         niveau_max = Math.max(...niveaux)+1;
         return niveau_max;
     }
+    function nomDEtudiant() { 
+
+     /*Recuperation du nom*/
+        let nom = JSON.parse(sessionStorage.getItem("nom")); 
+        let nom_sans_tons = "";
+        let nouveau_nom = "";
+
+     /*Determination de la nature du mot*/
+        let nature_du_mot = "";
+
+        if(consonnes.indexOf(nom[0]) != "-1") {
+        if(voyelles.indexOf(nom[1]) != "-1") {
+        if(consonnes.indexOf(nom[2]) != "-1") {
+            nature_du_mot = "samma_kuma";
+        }}}
+        if(consonnes.indexOf(nom[0]) != "-1") {
+        if(consonnes.indexOf(nom[1]) != "-1") {
+        if(voyelles.indexOf(nom[2]) != "-1") {
+        if(consonnes.indexOf(nom[3]) != "-1") {
+            nature_du_mot = "samma_kuma";
+        }}}}
+
+        if(consonnes.indexOf(nom[0]) != "-1") {
+        if(voyelles.indexOf(nom[1]) != "-1") {
+        if(tons.indexOf(nom[2]) != "-1") {
+            nature_du_mot = "duma_kuma";
+        }}}
+        if(consonnes.indexOf(nom[0]) != "-1") {
+        if(consonnes.indexOf(nom[1]) != "-1") {
+        if(voyelles.indexOf(nom[2]) != "-1") {
+        if(tons.indexOf(nom[3]) != "-1") {
+            nature_du_mot = "duma_kuma";
+        }}}}
+
+     /*Suppression de tous les tons*/
+        for (let i = 0; i < nom.length; i++) {
+            let caractere = nom[i];
+            if(tons.indexOf(caractere) == "-1") nom_sans_tons += caractere;
+        }
+        nom = nom_sans_tons;
+        
+     /*Renomination du nom*/
+        if(nature_du_mot == "samma_kuma") nom = nom+"߫";
+        if(nature_du_mot == "duma_kuma") {
+            for (let i = 0; i < nom.length; i++) {
+                let caractere = nom[i];
+                if(voyelles.indexOf(caractere) != "-1") caractere = caractere+"߬";
+                nouveau_nom += caractere;
+            }
+        }
+        nom = nouveau_nom;
+        
+        return nom;
+    }
     function nomDeLaMatiereSuivante() {
         let ms = "";
         let niveau_actif = JSON.parse(sessionStorage.getItem("niveau_actif"));
@@ -2995,6 +3049,14 @@ console.log(voyelles_deja_selectionnees);
         })
         .then(response => response.text())
         .catch(error => console.log(error));  
+    }
+    function sexeDEtudiant() {
+        let sexe = JSON.parse(sessionStorage.getItem("sexe"));
+        switch(sexe) {
+            case "ߗߍ߭" : sexe = "ߗߍ"; break;
+            case "ߡߎ߬ߛߏ" : sexe = "ߡߎߛߏ"; break;
+        }
+        return sexe;
     }
     function sommePoint(memoire) {
         let html = 0;

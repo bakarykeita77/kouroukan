@@ -46,7 +46,7 @@
 #apprentissage_note p { margin: 0.25rem 0; }
 #texte {
     position: absolute;
-    width: calc(100% - 2rem);
+    width: calc(100% - 4rem);
     max-width: 25rem;
     min-height: 10rem;
     margin: auto;

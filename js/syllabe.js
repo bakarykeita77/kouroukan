@@ -46,8 +46,10 @@ function syllabe() {
 
             if(datas[1].length != 0) {
                 for(let i=0; i<2; i++) {
-                    if(datas[1][i].phase == "syllabe_apprentissage") { id_syllabe_lesson_1 = datas[1][i].id; }
-                    if(datas[1][i].phase == "syllabe_exercice") { id_syllabe_lesson_2 = datas[1][i].id; }
+                    if(datas[1][i] != undefined) {
+                        if(datas[1][i].phase == "syllabe_apprentissage") { id_syllabe_lesson_1 = datas[1][i].id; }
+                        if(datas[1][i].phase == "syllabe_exercice") { id_syllabe_lesson_2 = datas[1][i].id; }
+                    }
                 }
             }
 
@@ -69,7 +71,12 @@ function syllabe() {
             let lesson_de_syllabe_exercice_du_jour = [];
             let lesson_de_syllabe_revision_du_jour = [];
             let lesson_de_syllabe_evaluation_du_jour = [];
-        
+
+            let nom = nomDEtudiant();
+            let sexe = sexeDEtudiant();
+
+ console.log(nom);
+             
             apprentissageSyllabe();
             exerciceSyllabe();
             revisionSyllabe();
@@ -109,7 +116,7 @@ function syllabe() {
                         }
                     }
                     function chargerCorpsDApprentissageSyllabe() {
-                        setTimeout(() => { chargementParDefautDuTableauNoir(); }, 1600);
+                        setTimeout(() => { chargementParDefautDuTableauNoir(); }, 800);
                         chargerLessonDeSyllabeApprentissage();
                     }
                 }
@@ -278,29 +285,30 @@ function syllabe() {
                 }
             }
             function exerciceSyllabe() {
-                $('#exercice_btn, #reprendre_exercice_btn, #continu_sur_exercice_btn').click(function (e) {
+                $("#exercice_btn, #reprendre_exercice_btn, #continu_sur_exercice_btn").click(function (e) {
                     e.stopImmediatePropagation();
 
                     lesson_d_exercice_syllabe = lessonDExerciceSyllabe();
-                    lesson_active = 'exercice';
+    
+                    lesson_active = "exercice";
                     sessionStorage.setItem("lesson_active", JSON.stringify(lesson_active));
                     syllabes_actives = syllabesActives();
 
                     let exercice_syllabe_questions = malaxer(malaxer(syllabes_actives));
-                    let ordre_de_question = '';
+                    let ordre_de_question = "";
                     let total_exercice_syllabe_questions = 0;
                     let exercice_syllabe_questions_posees = [];
-                    let exercice_syllabe_question = '', exercice_syllabe_reponse = '';
+                    let exercice_syllabe_question = "", exercice_syllabe_reponse = "";
                     let point = 0;
                     let i = 0;
-                    let rang = '߭';
+                    let rang = "߭";
                     let action = "ߟߊߡߍ߲߫";
 
                     total_exercice_syllabe_questions = exercice_syllabe_questions.length;
 
-                    $('.fermeture_pre').attr('id', 'fermeture_exercice');
+                    $(".fermeture_pre").attr("id", "fermeture_exercice");
 
-                    masquerNotification();
+                    // masquerNotification();
                     chargerExerciceSyllabe();
                     afficherExercice();
                     exercice();
@@ -313,10 +321,8 @@ function syllabe() {
                         chargerPiedDExerciceSyllabe();
 
                         function chargerEnteteDExerciceSyllabe() {
-                            $('.notification_titre').html('ߜߋ߲߭ ߡߊ߬ߞߟߏ߬ߟߌ');
-                            setTimeout(() => {
-                                ecris('exercice_notification_corps', "ߘߋ߰ߣߍ߲߬ ߞߎߘߊ ߟߎ߫ ߟߋ߬ ߢߊ߯ߡߌߣߍ߲߫ ߢߐ߲ ߘߐ߫ ߣߌ߲߬ .ߣߴߌ ߛߋ߫ ߘߊ߫ ߞߵߊ߬ߟߎ߬ ߓߍ߯ ߢߊߓߐ߫ ߗߡߍ߬ߘߐ߬ߦߊ߫ ߗߍ߬ߡߍ ߟߊ߫ ߏ߬ߘߐ߬ ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ .ߢߌ߬ߣߌ߲߬ߞߊߟߌ߬ ߞߘߎ ߘߌ߯߭ ߘߎ߭ߡߊ߬߸ ߦߴߌ ߕߟߏߡߊߟߐ߬ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߎ߬ ߟߊ߫ ߞߋߟߋ߲߫ ߞߋߟߋ߲߫߸ ߦߵߊ߬ߟߎ߫ ߦߌ߬ߘߊ߬߸ ߦߋ߫ ߓߊ߲߫ ߞߊ߬ ߛߊߞߍߟߌ߫ ߞߘߎ ߘߌ߲߯߸ ߞߵߊ߬ߟߎ߬ ߛߊߞߍ߫.");
-                            }, 800);
+                            $(".notification_titre").html("ߜߋ߲߭ ߡߊ߬ߞߟߏ߬ߟߌ");
+                            ecris("exercice_notification_corps", "ߘߋ߰ߣߍ߲߬ ߞߎߘߊ ߟߎ߫ ߟߋ߬ ߢߊ߯ߡߌߣߍ߲߫ ߢߐ߲ ߘߐ߫ ߣߌ߲߬ .ߣߴߌ ߛߋ߫ ߘߊ߫ ߞߵߊ߬ߟߎ߬ ߓߍ߯ ߢߊߓߐ߫ ߗߡߍ߬ߘߐ߬ߦߊ߫ ߗߍ߬ߡߍ ߟߊ߫ ߏ߬ߘߐ߬ ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ .ߢߌ߬ߣߌ߲߬ߞߊߟߌ߬ ߞߘߎ ߘߌ߯߭ ߘߎ߭ߡߊ߬߸ ߦߴߌ ߕߟߏߡߊߟߐ߬ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߎ߬ ߟߊ߫ ߞߋߟߋ߲߫ ߞߋߟߋ߲߫߸ ߦߵߊ߬ߟߎ߫ ߦߌ߬ߘߊ߬߸ ߦߋ߫ ߓߊ߲߫ ߞߊ߬ ߛߊߞߍߟߌ߫ ߞߘߎ ߘߌ߲߯߸ ߞߵߊ߬ߟߎ߬ ߛߊߞߍ߫.");
                         }
                         function chargerCorpsDExerciceSyllabe() {
                             let exercice_body_html = lessonHTML(malaxer(syllabes_actives), '');
@@ -361,10 +367,11 @@ function syllabe() {
                     
                             $('#exercice_question_btn').click(function (e) {
                                 e.stopImmediatePropagation();
+
                                 let exercice_question_btn = $(this);
                                 exercice_syllabe_question = exercice_syllabe_questions[i];
-
                                 montrerReponse(exercice_syllabe_question,$('#exercice_body td'));
+                                masquerNotification();
 
                                 masquerExerciceQuestionBtn();
                                 lireExerciceSyllabeQuestion();
@@ -782,7 +789,7 @@ function syllabe() {
                                 e.stopImmediatePropagation();
 
                                 let revision_question_btn = $(this);
-                                
+                                masquerNotification();
                                 question_de_revision_syllabe = revision_syllabe_questions[i];
                                 question_status = 'posee';
                                 montrerReponse(question_de_revision_syllabe,$('#revision_body table td'));
@@ -1063,7 +1070,7 @@ function syllabe() {
                 
                 function evaluation() {
                 
-                    lesson_active = 'revision';
+                    lesson_active = "revision";
 
                     chargerEvaluationSyllabe();
                     afficherEvaluation();
@@ -1078,7 +1085,7 @@ function syllabe() {
 
                         function chargerEvaluationSyllabeHead() {
                             $('.notification_titre').text('ߜߋ߲߭ ߞߘߐߓߐߟߌ');
-                            setTimeout(() => { ecris("evaluation_notification_corps", "ߢߌ߬ߣߌ߲߬ߞߊߟߌ߬ ߞߘߎ ߘߌ߯߭ ߘߎ߭ߡߊ߬߸ ߦߴߌ ߕߟߏߡߊߟߐ߬ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߎ߬ ߟߊ߫ ߞߋߟߋ߲߫ ߞߋߟߋ߲߫߸ ߦߴߊߟߎ߬ ߛߓߍ߫߸ ߦߋ߫ ߓߊ߲߫ ߞߊ߬ ߛߊߞߍߟߌ߫ ߞߘߎ ߘߌ߲߯߸ ߞߵߊ߬ߟߎ߬ ߛߊߞߍ߫."); }, 800);
+                            ecris("evaluation_notification_corps", "ߢߌ߬ߣߌ߲߬ߞߊߟߌ߬ ߞߘߎ ߘߌ߯߭ ߘߎ߭ߡߊ߬߸ ߦߴߌ ߕߟߏߡߊߟߐ߬ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߎ߬ ߟߊ߫ ߞߋߟߋ߲߫ ߞߋߟߋ߲߫߸ ߦߴߊߟߎ߬ ߛߓߍ߫߸ ߦߋ߫ ߓߊ߲߫ ߞߊ߬ ߛߊߞߍߟߌ߫ ߞߘߎ ߘߌ߲߯߸ ߞߵߊ߬ߟߎ߬ ߛߊߞߍ߫.");
                         }
                         function chargerEvaluationSyllabeBody() {
                             var evaluation_tbody_default_message = 'ߜߋ߲߭ ߞߘߐߓߐߟߌ ߞߐߝߟߌ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬.';
@@ -1121,6 +1128,7 @@ function syllabe() {
                             $('#evaluation_question_btn').on('click', function (e) {
                                 e.stopImmediatePropagation();
 
+                                masquerNotification();
                                 effacercedenteReponse();
                                 question_d_evaluation_syllabe = evaluation_syllabe_questions[evaluation_counter];
                                 alert(question_d_evaluation_syllabe);
@@ -1327,6 +1335,7 @@ function syllabe() {
                                             if (note_de_fin_d_evaluation_syllabe === 100) {
 
                                                 stockerSyllabe();
+                                                notificationDeFinDEvaluation();
                                                 afficherBoutonPourLaMatiereSuivante();
                                                 resultatDeSyllabe();
 
@@ -1363,6 +1372,9 @@ function syllabe() {
                                                         }
                                                     }
                                                 }
+                                                function notificationDeFinDEvaluation() {
+                                                    ecris("evaluation_notification_corps","<b>ߌ ߞߎߟߎ߲ߖߋ߫ "+nom+" "+sexe+"</b><br>ߞߘߐߓߐߟߌ ߣߌ߲߭ ߢߊ߬ߣߍ߲߬ %"+parseIntNko(note_de_fin_d_evaluation_syllabe)+" ߟߊ߫. ߥߊ߫ ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߡߊ߬");
+                                                }
                                                 function resultatDeSyllabe() {
 
                                                     let apprentissage_syllabe_data = {};
@@ -1391,9 +1403,9 @@ function syllabe() {
                                                 }
                                             }
 
-                                            evaluation_counter = 0;
                                             viderLeTableau(evaluation_syllabe_questions);
-
+                                            setTimeout(() => { evaluation_counter = 0; }, 1500);
+                                            
                                          /* Suppression d'effet des clicks précédents sur les dialogue_btns */
                                             $('#evaluation_question_btn').unbind('click');
                                             $('#evaluation_repetition_btn').unbind('click');
@@ -1500,8 +1512,11 @@ function syllabe() {
         function lessonDExerciceSyllabeDuServeur() {
             let lesson_d_exercice_syllabe_du_serveur = [];
             let datas = JSON.parse(sessionStorage.getItem("datas"));
-            if (datas[1].length != 0) lesson_d_exercice_syllabe_du_serveur = JSON.parse(datas[1][1].lesson);
-            return lesson_d_exercice_syllabe_du_serveur;
+            
+            if(datas[1][1] != undefined) {
+                if (datas[1].length != 0) lesson_d_exercice_syllabe_du_serveur = JSON.parse(datas[1][1].lesson);
+                return lesson_d_exercice_syllabe_du_serveur;
+            }
         }
         function lessonDEvaluationSyllabeDuServeur() {
             let lesson_d_evaluation_syllabe_du_serveur = [];

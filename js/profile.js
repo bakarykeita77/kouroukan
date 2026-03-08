@@ -17,10 +17,10 @@ $(document).ready(function(){
     matieres_a_apprendre = (matieres_a_apprendre == null) ? [] : matieres_a_apprendre;
     matieres_apprises = (matieres_apprises == null) ? [] : matieres_apprises;
    
-    var nom_de_matiere_a_renseigne = '';
-    var matiere_a_renseigne = '';
-    var matiere_index = '';
-    var niveau_teste = '';
+    var nom_de_matiere_a_renseigne = "";
+    var matiere_a_renseigne = "";
+    var matiere_index = "";
+    var niveau_teste = "";
     var testes = [];
 
      
@@ -115,8 +115,8 @@ $(document).ready(function(){
                         { profile_teste.innerHTML = testeNonEffectueHTML(); }
 
                         function testeEffectueHTML(){
-                            var testes_btn = '';
-                            var nth = '';
+                            var testes_btn = "";
+                            var nth = "";
                             function testesBoutons(){
                                 
                                 for(var m=testes_de_meme_niveau.length;m>0;m--){ 
@@ -211,7 +211,7 @@ $(document).ready(function(){
                                 profile_total_points.innerHTML = points+'\\'+parseIntNko(20);
                                 
                                 function profileTesteTbodyContent(){
-                                    var profile_teste_body_content = '';
+                                    var profile_teste_body_content = "";
                                     for(var i=0;i<teste.length;i++){
                                         var data = teste[i].split(',');
                                         profile_teste_body_content += '<tr style="border:1px solid #fff"><td>'+data[0]+'</td><td>'+data[1]+'</td><td>'+data[2]+'</td><td>'+data[3]+'</td></tr>\n';

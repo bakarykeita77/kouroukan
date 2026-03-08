@@ -35,7 +35,7 @@
 
                 function chargerLesFiches() {
 
-                    var fiche_phase  = '';
+                    var fiche_phase  = "";
 
                     var travail_d_apprentissage_corps_html = [];
                     var travail_d_exercice_corps_html = [];
@@ -265,7 +265,7 @@
                                 
                                 var travail_date_container = $(this).next().find('.travail_date');
                                 var date = matieres[0][n-1].date;
-                                var date_en_nko = '', heure_en_nko = '';
+                                var date_en_nko = '', heure_en_nko = "";
                                 var a = parseIntNko(date.split(' ')[0].split('-')[0]);
                                 var m = mois[parseInt(date.split(' ')[0].split('-')[1]) - 1];
                                 var j = parseIntNko(date.split(' ')[0].split('-')[2]);

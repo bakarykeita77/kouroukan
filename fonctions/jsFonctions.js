@@ -17,7 +17,7 @@ function lectureAutomatique() {
     var td = $('.table_parlante td');
 
     var read_events = [];
-    var td_delay = '';
+    var td_delay = "";
     var td_index = -1;
 
     for (i = 0; i < td.length; i++) {

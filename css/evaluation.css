@@ -64,10 +64,11 @@
     top: 20%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 80%;
+    width: 75%;
+    max-width: 15rem;
     font-size: larger;
     font-weight: bold;
-    color: rgba(0, 0, 0, 0.3);
+    color: rgba(0, 0, 0, 0.15);
     text-align: center;
 }
 
@@ -405,7 +406,6 @@
     .evaluation_table {  height: 100%; }
     #evaluation_tbody { height: calc(100% - 2rem); }
     #evaluation_fiche { 
-        top: 0.5rem; 
         padding: 0; 
         height: 95%; 
     }    
@@ -423,7 +423,6 @@
     .evaluation_table {  height: calc(100% - 2rem);  }
     #evaluation_tbody { height: calc(100% - 4rem); }
     #evaluation_fiche { 
-        top: 2rem; 
         padding: 1rem; 
         height: 75%;
     }

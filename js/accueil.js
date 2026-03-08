@@ -4,7 +4,7 @@ $('document').ready(function() {
     let data_alphabet_du_serveur = [], data_syllabes_du_serveur = [], data_tons_du_serveur = [], data_chiffres_du_serveur = [];
     let niveaux_etudies_du_serveur = [], phases_etudiees_du_serveur = [];
 	let niveau_en_cours_du_serveur = 1, niveau_max_du_serveur = 0;
-	let derniere_phase_du_serveur = '';
+	let derniere_phase_du_serveur = "";
 
     let matieres_a_apprendre_du_serveur = [];
     let matieres_apprises_du_serveur = [];

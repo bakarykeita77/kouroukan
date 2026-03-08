@@ -53,7 +53,7 @@ $(document).ready(function(){
     	 }
         function messageDErreur() {
         	
-        	let message_erreur = '';
+        	let message_erreur = "";
         	
         	if($.inArray(c1,voyelles) != -1) {
             	if($.inArray(c2,voyelles) != -1 && $.inArray(c3,voyelles) != -1) { message_erreur = 'ߛߌ߬ߙߊ߬ߟߊ߲߫ ߛߓߊ߬ ߕߍ߫ ߕߎ߲߰ ߠߊ߫ ߢߐ߲߮ ߠߊ߫'; }

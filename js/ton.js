@@ -64,22 +64,13 @@ function ton() {
             function rappelDesBoutons() {
                 $('#apprentissage_body, .a_apprendre').click(function () {
 
-                    if($("#apprentissage_body").text() == "ߜߋ߲߬ ߞߊ߲ߡߊߛߙߋߡߊ߫ ߘߋ߲߰ߕߊ ߟߎ߬ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬") {
-                        secouer($(".tons_symboles_container .actif"));
-                        return;
-                    }
+                    if($("#apprentissage_body").text() == "ߜߋ߲߬ ߞߊ߲ߡߊߛߙߋߡߊ߫ ߘߋ߲߰ߕߊ ߟߎ߬ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬") secouer($(".tons_symboles_container .actif"));
                     if($("#apprentissage_body").text() != "ߜߋ߲߬ ߞߊ߲ߡߊߛߙߋߡߊ߫ ߘߋ߲߰ߕߊ ߟߎ߬ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬") {
-                        if($(".progress_bonne_reponse_bar").width() === 0) {
-                            secouer($('#table_syllabe_apprentissage td'));
-                            return;
-                        }
+                        if($(".progress_bonne_reponse_bar").width() === 0) secouer($('#table_syllabe_apprentissage td'));
                     }
                 });
                 $('#panneaux').click(function(e) {
-                    if(e.target.id == "panneaux") {
-                        secouer($("#afficheur_de_panneau"));
-                        return;
-                    }
+                    if(e.target.id == "panneaux") secouer($("#afficheur_de_panneau"));
                 });
             }
         }

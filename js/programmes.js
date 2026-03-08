@@ -13,6 +13,8 @@ $('document').ready(function() {
     niveaux_etudies = (niveaux_etudies == null) ? niveaux_etudies_du_serveur : niveaux_etudies
     sessionStorage.setItem("niveaux_etudies", JSON.stringify(niveaux_etudies));
     var niveau_max_du_serveur = JSON.parse(sessionStorage.getItem("niveau_max_du_serveur"));
+    niveau_max_du_serveur = (niveau_max_du_serveur == null) ? 0 : niveau_max_du_serveur;
+
     var niveau_max = JSON.parse(sessionStorage.getItem('niveau_max'));
     niveau_max = (niveau_max == null) ? 0 : niveau_max;
     niveau_max = (niveau_max_du_serveur > niveau_max) ? niveau_max_du_serveur : niveau_max;
@@ -40,7 +42,7 @@ $('document').ready(function() {
 
  /*-------------------------------------------------------------------------------------------------------------*/
     /* Détermination du Programme */
-    var programme_matieres = '';
+    var programme_matieres = "";
 
     profileResulat();
     selectionDuProgramme();
@@ -78,11 +80,11 @@ $('document').ready(function() {
                 var matiere_nom = liste_de_matieres[i][1];
                 var matiere_index = liste_de_matieres.indexOf(liste_de_matieres[i]);
                 var niveau = matiere_index+1;   
-                var phases_lien = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees;
+                var phases_lien = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max_du_serveur='+niveau_max_du_serveur+'&phases_etudiees='+phases_etudiees;
 
-                if (matiere_index < niveau_max)  programme_html += '<li id="'+matiere_id+'"><p>'+matiere_nom+'</p></li>\n';
-                if (matiere_index == niveau_max) programme_html += '<li id="'+matiere_id+'"><p><a href="'+phases_lien+'" id="lien_actif">'+matiere_nom+'</a></p></li>\n';
-                if (matiere_index > niveau_max)  programme_html += '<li id="'+matiere_id+'"><p>'+matiere_nom+'</p></li>\n';
+                if (matiere_index < niveau_max_du_serveur)  programme_html += '<li id="'+matiere_id+'"><p>'+matiere_nom+'</p></li>\n';
+                if (matiere_index == niveau_max_du_serveur) programme_html += '<li id="'+matiere_id+'"><p><a href="'+phases_lien+'" id="lien_actif">'+matiere_nom+'</a></p></li>\n';
+                if (matiere_index > niveau_max_du_serveur)  programme_html += '<li id="'+matiere_id+'"><p>'+matiere_nom+'</p></li>\n';
             }
             programme_html += '\n</ul>';
             
@@ -196,12 +198,12 @@ $('document').ready(function() {
         function optionLien() {
             let option_lien_1 = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+0+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max+'&lesson_option='+option_retenue;
             let option_lien_2 = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+1+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees+'&lesson_option='+option_retenue;
-            let pl = '';
+            let pl = "";
             pl = (niveau_max == 0) ? option_lien_1 : option_lien_2;
             return pl;
         }
         function chargerLesOptions() {
-            let option_html = '';
+            let option_html = "";
             if(niveau_max === 0) {
 
                 $('#lesson_options_titre').text('ߌ ߢߣߊߕߊ߬ ߛߓߍߛߎ߲ ߘߋ߲߰ߠߌ ߞߍߢߊ߫ ߝߌ߬ߟߊ ߢߌ߲߬ ߠߎ߬ ߘߐ߫'); 

@@ -14,7 +14,7 @@
     $server = 'localhost';
     $dbname = 'kouroukan';
     $user = 'root';
-    $pass = '';
+    $pass = "";
     
     try {
         $db = new PDO("mysql:host=$server;dbname=$dbname;charset=utf8", $user, $pass);

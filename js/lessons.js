@@ -12,9 +12,9 @@ $('document').ready(function() {
         var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));
         var phases_etudiees = JSON.parse(sessionStorage.getItem('phases_etudiees'));
         let data_alphabet_apprentissage = JSON.parse(sessionStorage.getItem('data_alphabet_apprentissage'));
-        var rang = '';
+        var rang = "";
         var phase_li_id = phaseLiId();
-        var phase_nom = '';
+        var phase_nom = "";
         var phase_index = 0;
         var option_retenue = JSON.parse(localStorage.getItem("option_retenue"));
 
@@ -44,7 +44,7 @@ $('document').ready(function() {
         
         function phaseLiId() {
             
-            let pli = '';
+            let pli = "";
 
             if(matiere_index === 0) {
                 switch(phases_etudiees.length) {
@@ -195,7 +195,7 @@ $('document').ready(function() {
                     }
                 }
                 function phaseActive() {
-                    let phase_active = '';
+                    let phase_active = "";
                     $('#phases_list li').click((e) => {
                         phase_active = e.target;
                         let phase_active_class = phase_active.className;

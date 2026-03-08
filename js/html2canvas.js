@@ -176,7 +176,7 @@
         }
         var codeUnits = [];
         var index = -1;
-        var result = '';
+        var result = "";
         while (++index < length) {
             var codePoint = codePoints[index];
             if (codePoint <= 0xffff) {
@@ -1315,7 +1315,7 @@
         };
         Tokenizer.prototype.consumeStringSlice = function (count) {
             var SLICE_STACK_SIZE = 60000;
-            var value = '';
+            var value = "";
             while (count > 0) {
                 var amount = Math.min(SLICE_STACK_SIZE, count);
                 value += fromCodePoint$1.apply(void 0, this._value.splice(0, amount));
@@ -1325,7 +1325,7 @@
             return value;
         };
         Tokenizer.prototype.consumeStringToken = function (endingCodePoint) {
-            var value = '';
+            var value = "";
             var i = 0;
             do {
                 var codePoint = this._value[i];
@@ -1423,7 +1423,7 @@
             return codePoint;
         };
         Tokenizer.prototype.consumeName = function () {
-            var result = '';
+            var result = "";
             while (true) {
                 var codePoint = this.consumeCodePoint();
                 if (isNameCodePoint(codePoint)) {
@@ -4203,7 +4203,7 @@
         }
         var codeUnits = [];
         var index = -1;
-        var result = '';
+        var result = "";
         while (++index < length) {
             var codePoint = codePoints[index];
             if (codePoint <= 0xffff) {
@@ -4579,7 +4579,7 @@
             if (bk.value) {
                 var value = bk.value.slice();
                 var codePoints = toCodePoints$1(value);
-                var word_1 = '';
+                var word_1 = "";
                 codePoints.forEach(function (codePoint) {
                     if (wordSeparators.indexOf(codePoint) === -1) {
                         word_1 += fromCodePoint$1(codePoint);
@@ -4589,7 +4589,7 @@
                             words.push(word_1);
                         }
                         words.push(fromCodePoint$1(codePoint));
-                        word_1 = '';
+                        word_1 = "";
                     }
                 });
                 if (word_1.length) {
@@ -5134,7 +5134,7 @@
         }, '') + suffix);
     };
     var createCounterStyleWithSymbolResolver = function (value, codePointRangeLength, isNumeric, resolver) {
-        var string = '';
+        var string = "";
         do {
             if (!isNumeric) {
                 value--;
@@ -5388,7 +5388,7 @@
             if (isImageElement(clone)) {
                 if (isImageElement(node) && node.currentSrc && node.currentSrc !== node.src) {
                     clone.src = node.currentSrc;
-                    clone.srcset = '';
+                    clone.srcset = "";
                 }
                 if (clone.loading === 'lazy') {
                     clone.loading = 'eager';
@@ -5677,7 +5677,7 @@
         return target;
     };
     var serializeDoctype = function (doctype) {
-        var str = '';
+        var str = "";
         if (doctype) {
             str += '<!DOCTYPE ';
             if (doctype.name) {
@@ -6808,7 +6808,7 @@
                                             _this.ctx.shadowBlur = textShadow.blur.number;
                                             _this.renderTextWithLetterSpacing(text, styles.letterSpacing, baseline);
                                         });
-                                        _this.ctx.shadowColor = '';
+                                        _this.ctx.shadowColor = "";
                                         _this.ctx.shadowOffsetX = 0;
                                         _this.ctx.shadowOffsetY = 0;
                                         _this.ctx.shadowBlur = 0;
@@ -6842,7 +6842,7 @@
                                         _this.ctx.lineJoin = !!window.chrome ? 'miter' : 'round';
                                         _this.ctx.strokeText(text.text, text.bounds.left, text.bounds.top + baseline);
                                     }
-                                    _this.ctx.strokeStyle = '';
+                                    _this.ctx.strokeStyle = "";
                                     _this.ctx.lineWidth = 0;
                                     _this.ctx.lineJoin = 'miter';
                                     break;

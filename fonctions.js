@@ -13,24 +13,26 @@
 		});
 	}
     function actualiserLessonSyllabe(lesson, lesson_du_jour) {
+        if(lesson != undefined) {
 
-        let anciennes_syllabes = anciennesSyllabes();
-        let nouvelles_syllabes = nouvellesSyllabes();
+            let anciennes_syllabes = anciennesSyllabes();
+            let nouvelles_syllabes = nouvellesSyllabes();
+            
+            nouvelles_syllabes.forEach(element => {
+                let index = nouvelles_syllabes.indexOf(element);
+                if ($.inArray(element, anciennes_syllabes) == "-1") { lesson.push(lesson_du_jour[index]); }
+            });
 
-        nouvelles_syllabes.forEach(element => {
-            let index = nouvelles_syllabes.indexOf(element);
-            if ($.inArray(element, anciennes_syllabes) === -1) { lesson.push(lesson_du_jour[index]); }
-        });
-
-        function nouvellesSyllabes() {
-            let ns = [];
-            lesson_du_jour.forEach(element => { ns.push(element[0]); });
-            return ns;
-        }
-        function anciennesSyllabes() {
-            let as = [];
-            lesson.forEach(element => { if (element != null) as.push(element[0]); });
-            return as;
+            function anciennesSyllabes() {
+                let as = [];
+                lesson.forEach(element => { if (element != null) as.push(element[0]); });
+                return as;
+            }
+            function nouvellesSyllabes() {
+                let ns = [];
+                lesson_du_jour.forEach(element => { ns.push(element[0]); });
+                return ns;
+            }
         }
     }
     function affichageAnimeDeTableTd(table) {
@@ -681,8 +683,14 @@
             }
         }
         function stylesDesCaracteres() {
+            let consonnes_etudiees = memoireConsonnesChoisies();
+
             $.each($("#panneaux span"), function() {
+                let lesson_d_apprentissage_syllabe = JSON.parse(localStorage.getItem("lesson_d_apprentissage_syllabe"));
                 let caractere_container = $(this);
+                let caractere = caractere_container.text();
+
+               if(consonnes_etudiees.indexOf(caractere) != "-1") { caractere_container.css({"color":"orange", "font-weight":"bold"}); }
                 caractere_container.click(function() { marquerLaConsonneChoisie(caractere_container); });
             });
         }
@@ -1133,6 +1141,42 @@ console.log(voyelles_deja_selectionnees);
        timestamp = moi+' '+jour+' '+annee; 
        return timestamp;
     }
+    function consonnesDeSyllabeApprisesDuServeur() {
+
+        let consonnes_apprises = [];
+        let datas = JSON.parse(sessionStorage.getItem("datas"));
+        
+        if (datas[1].length != 0) {
+            for (let i = 0; i < datas[1].length; i++) {
+                if(datas[1][i] != undefined) if(datas[1][i].phase == "syllabe_apprentissage") if(datas[1][i].lesson != undefined) {
+                    JSON.parse(datas[1][i].lesson).forEach(element => {
+                        let consonne = element[0].split('')[0];
+                        if ($.inArray(consonne, consonnes_apprises) === -1) { consonnes_apprises.push(consonne); }
+                    });
+                }
+            }
+        }
+
+        return consonnes_apprises
+    }
+    function consonnesDeSyllabeExerceesDuServeur() {
+
+        let consonnes_exercees = [];
+        let datas = JSON.parse(sessionStorage.getItem("datas"));
+
+        if (datas[1].length != 0) {
+            for (let i = 0; i < datas[1].length; i++) {
+                if(datas[1][i] != undefined) if(datas[1][i].phase == "syllabe_exercice") if(datas[1][i].lesson != undefined) {
+                    JSON.parse(datas[1][i].lesson).forEach(element => {
+                        let consonne = element[0].split('')[0];
+                        if ($.inArray(consonne, consonnes_exercees) === -1) { consonnes_exercees.push(consonne); }
+                    });
+                }
+            }
+        }
+
+        return consonnes_exercees
+    }
     function consonnesASelectionner(caracteres_selectionnees) {
 
         let syllabe_1 = ["ߓߊ","ߛߊ","ߕߊ","ߜߊ"];
@@ -1171,6 +1215,15 @@ console.log(voyelles_deja_selectionnees);
             if ($.inArray(consonne, cs) === -1) { cs.push(consonne); }
         });
         return cs;
+    }
+    function consonnesEtudiees(lesson_d_apprentissage_syllabe) {
+        let consonnes_etudiees = [];
+        if(lesson_d_apprentissage_syllabe != undefined) {
+            lesson_d_apprentissage_syllabe.forEach(element => { 
+                if(consonnes_etudiees.indexOf(element[0].split("")[0]) == "-1") consonnes_etudiees.push(element[0].split("")[0]); 
+            });
+            return consonnes_etudiees;
+        }
     }
     function contenuVide() {
         let contenu_vide = "<div class='contenu_vide'>ߝߏߦߊ߲߫ ߹</div>";
@@ -1330,7 +1383,6 @@ console.log(voyelles_deja_selectionnees);
         let longueur = message.length;
         let indice = 0;
 
-        // masquerNotification();
         setTimeout(() => { 
             afficherNotification();
             setTimeout(() => { write(); }, 500);
@@ -1347,7 +1399,6 @@ console.log(voyelles_deja_selectionnees);
         let longueur = message.length;
         let indice = 0;
 
-        masquerNotification();
         setTimeout(() => { 
             afficherNotification();
             setTimeout(() => { write(); }, 250);
@@ -1362,6 +1413,11 @@ console.log(voyelles_deja_selectionnees);
     }
     function effacerLeTableau() {
         $('.course_body').html("<p id='contenu_par_defaut_du_tableau'>ߥߟߊ߬ߓߊ ߓߘߊ߫ ߖߐ߬ߛߌ߬ ߹</p>");
+    }     
+    function ducourage() {
+        let nom = nomDEtudiant();
+        let sexe = sexeDEtudiant();
+        return "<b>ߌ ߘߐߖߊ߬ "+nom+" "+sexe+"</b><br>";
     }
     function enregistrerLeCaractere(caracteres_selectionnees,caractere) {
         let caractere_index = caracteres_selectionnees.indexOf(caractere);
@@ -1369,7 +1425,12 @@ console.log(voyelles_deja_selectionnees);
     }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
-    
+        
+    function felicitation() {
+        let nom = nomDEtudiant();
+        let sexe = sexeDEtudiant();
+        return "<b>ߌ ߞߎߟߎ߲ߖߋ߫ "+nom+" "+sexe+"</b><br>";
+    }
     function fermer(element) {
         element.animate({ 'height':0 }, 200);
         setTimeout((function(){ element.css({ 'display':'none' }) }),180);
@@ -1587,7 +1648,7 @@ console.log(voyelles_deja_selectionnees);
         let data = [];
         for(let i=0; i<tableau.length; i++) {
             let q = tableau[i];
-            let r = '';
+            let r = "";
             let p = 0;
             data.push([q, r, p]);
         }
@@ -1640,7 +1701,7 @@ console.log(voyelles_deja_selectionnees);
                 var td = $('.table_parlante td');
             
                 var read_events = [];
-                var td_delay = '';
+                var td_delay = "";
                 var td_index = -1;
                 var td_length = td.length;
             
@@ -1711,7 +1772,7 @@ console.log(voyelles_deja_selectionnees);
     }
     function lessonHTML2(voyelles_length,tons_length,syllabes_tonifies_length,syllabes_tonifies) {
            
-        var tons_apprentissage_html = '';
+        var tons_apprentissage_html = "";
         var m = voyelles_length*tons_length;
                     
         for(var sous_table_index=0; sous_table_index<syllabes_tonifies_length; sous_table_index+=m){
@@ -1850,6 +1911,7 @@ console.log(voyelles_deja_selectionnees);
     function masquerPanneauDesCaracteres() { $('#caracteres_container').css({"top":"22rem", "height":0}); }
     function masquerNotification() {
         if($('.notification_corps').css("top") == "0px") {
+            $(".notification_corps").text("");
             $('.notification_corps').text('');
             $('.notification_corps').css("top", "4.5rem");
         }
@@ -1857,7 +1919,6 @@ console.log(voyelles_deja_selectionnees);
     function memoireConsonnesChoisies() {
 
         let consonnes_choisies_du_serveur = consonnesChoisiesDuServeur();
-
         consonnes_choisies_du_serveur = (consonnes_choisies_du_serveur == null) ? [] : consonnes_choisies_du_serveur;
         let memoire_consonnes_choisies = JSON.parse(localStorage.getItem("memoire_consonnes_choisies"));
         memoire_consonnes_choisies = (memoire_consonnes_choisies == null) ? [] : memoire_consonnes_choisies;
@@ -1997,6 +2058,11 @@ console.log(voyelles_deja_selectionnees);
         niveau_max = Math.max(...niveaux)+1;
         return niveau_max;
     }
+    function nomComplet() {
+        let prenom = JSON.parse(sessionStorage.getItem("prenom")); 
+        let nom = JSON.parse(sessionStorage.getItem("nom")); 
+        return prenom+" "+nom;
+    }
     function nomDEtudiant() { 
 
      /*Recuperation du nom*/
@@ -2046,8 +2112,8 @@ console.log(voyelles_deja_selectionnees);
                 if(voyelles.indexOf(caractere) != "-1") caractere = caractere+"߬";
                 nouveau_nom += caractere;
             }
+            nom = nouveau_nom;
         }
-        nom = nouveau_nom;
         
         return nom;
     }
@@ -2473,7 +2539,7 @@ console.log(voyelles_deja_selectionnees);
             return html;
         }
         function lessonSuivante() {
-            let ls = '';
+            let ls = "";
             switch(lesson_en_cours) {
                 case 'ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ' : ls = 'ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫'; break;
                 case 'ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ' : ls = 'ߛߓߍߛߎ߲ ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫'; break;
@@ -2797,7 +2863,7 @@ console.log(voyelles_deja_selectionnees);
         }
         function reprendreLesson() { $('#reprendre').click(() => { raffraichirLaPage(); }); }
         function lessonSuivante(lesson_en_cours) {
-            let ls = '';
+            let ls = "";
             switch(lesson_en_cours) {
                 case 'ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ' : ls = 'ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫'; break;
                 case 'ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ' : ls = 'ߛߓߍߛߎ߲ ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫'; break;
@@ -2930,7 +2996,7 @@ console.log(voyelles_deja_selectionnees);
         }
     }
     function resultatTableBodyHTML(memoire) {
-        let html = '';
+        let html = "";
 
         html +=  '<tr class="thin">';
         if(memoire != undefined) {

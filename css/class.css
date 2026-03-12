@@ -246,7 +246,7 @@ a:focus {
     opacity: 0;
     transform: scale(0.75);
 }
-.body_cadre, .notification_corps, .course_foot > div:not(.parametres_container, #panneaux, #teste_container)  {
+.body_cadre, .course_foot > div:not(.parametres_container, #panneaux, #teste_container)  {
     position: relative; 
     margin: 0.25rem auto;
     width: 90%;
@@ -769,17 +769,22 @@ del {
 }
 .notification_container { 
     position: relative;
-    height: 5rem;
-    top: 2rem;
+    height: 6rem;
+    top: 1rem;
     overflow: hidden;
 }
 .notification_corps {
+    position: relative; 
     top: 0;
-    height: calc(5rem - 0.25rem);
+    height: calc(6rem - 0.5rem);
+    width: 90%;
+    max-width: 55rem;
+    margin: 0.25rem auto;
     padding: 0.25rem 1rem;
     background-color: #eee;
     border-top: 0.25rem solid #ccc;
     overflow: auto;
+    box-sizing: border-box;
     transition: 0.3s;
 }
 
@@ -992,12 +997,12 @@ del {
 .profile_menu_head a { text-decoration: none; }
 .progress_bar_container {
     position: relative;
-    top: 2.125rem;
+    top: 0.85rem;
     border-top: 1px solid #ccc;
     height: 0.5rem;
     width: 90%;
     max-width: 55rem;
-    margin: 0 auto 1rem;
+    margin: 0 auto;
 }
 .progress_bar {
     position: relative;

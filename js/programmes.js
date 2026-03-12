@@ -80,13 +80,14 @@ $('document').ready(function() {
                 var matiere_nom = liste_de_matieres[i][1];
                 var matiere_index = liste_de_matieres.indexOf(liste_de_matieres[i]);
                 var niveau = matiere_index+1;   
-                var phases_lien = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max_du_serveur='+niveau_max_du_serveur+'&phases_etudiees='+phases_etudiees;
+                var phases_lien = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&niveau_max='+niveau_max+'&phases_etudiees='+phases_etudiees;
 
-                if (matiere_index < niveau_max_du_serveur)  programme_html += '<li id="'+matiere_id+'"><p>'+matiere_nom+'</p></li>\n';
-                if (matiere_index == niveau_max_du_serveur) programme_html += '<li id="'+matiere_id+'"><p><a href="'+phases_lien+'" id="lien_actif">'+matiere_nom+'</a></p></li>\n';
-                if (matiere_index > niveau_max_du_serveur)  programme_html += '<li id="'+matiere_id+'"><p>'+matiere_nom+'</p></li>\n';
+                if (matiere_index < niveau_max)  programme_html += '<li id="'+matiere_id+'"><p>'+matiere_nom+'</p></li>\n';
+                if (matiere_index == niveau_max) programme_html += '<li id="'+matiere_id+'"><p><a href="'+phases_lien+'" id="lien_actif">'+matiere_nom+'</a></p></li>\n';
+                if (matiere_index > niveau_max)  programme_html += '<li id="'+matiere_id+'"><p>'+matiere_nom+'</p></li>\n';
             }
             programme_html += '\n</ul>';
+console.log(programme_html);
             
             return programme_html;
         } 

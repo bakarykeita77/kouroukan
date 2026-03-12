@@ -1390,7 +1390,7 @@ console.log(voyelles_deja_selectionnees);
                 indice++;
                 $('#'+element_id).html(message.substr(0,indice));
                 if(indice<longueur) {
-                    setTimeout(() => { write(); }, 20);
+                    setTimeout(() => { write(); }, 15);
                 }
             }
         }, 300);
@@ -1913,14 +1913,15 @@ console.log(voyelles_deja_selectionnees);
         if($('.notification_corps').css("top") == "0px") {
             $(".notification_corps").text("");
             $('.notification_corps').text('');
-            $('.notification_corps').css("top", "4.5rem");
+            $('.notification_corps').css("top", "5.25rem");
         }
     }
     function memoireConsonnesChoisies() {
 
         let consonnes_choisies_du_serveur = consonnesChoisiesDuServeur();
-        consonnes_choisies_du_serveur = (consonnes_choisies_du_serveur == null) ? [] : consonnes_choisies_du_serveur;
         let memoire_consonnes_choisies = JSON.parse(localStorage.getItem("memoire_consonnes_choisies"));
+
+        consonnes_choisies_du_serveur = (consonnes_choisies_du_serveur == null) ? [] : consonnes_choisies_du_serveur;
         memoire_consonnes_choisies = (memoire_consonnes_choisies == null) ? [] : memoire_consonnes_choisies;
         
         if(consonnes_choisies_du_serveur.length != 0) {
@@ -2030,7 +2031,7 @@ console.log(voyelles_deja_selectionnees);
             }, 400); 
         }
         
-        $('#panneaux').css({ "height":"22rem" });
+        $('#panneaux').css({ "height":"calc(100vh - 18rem)" });
         $('#caracteres_cadre').css({ "height":"max-content" });
         $("#caracteres_container").css("height","max-content");
         $('#caracteres_container').animate({"top":0}, 250);

@@ -13,26 +13,30 @@
 		});
 	}
     function actualiserLessonSyllabe(lesson, lesson_du_jour) {
-        if(lesson != undefined) {
 
-            let anciennes_syllabes = anciennesSyllabes();
-            let nouvelles_syllabes = nouvellesSyllabes();
-            
-            nouvelles_syllabes.forEach(element => {
-                let index = nouvelles_syllabes.indexOf(element);
-                if ($.inArray(element, anciennes_syllabes) == "-1") { lesson.push(lesson_du_jour[index]); }
-            });
+        let nouvelles_syllabes = nouvellesSyllabes();
+        let anciennes_syllabes = anciennesSyllabes();
 
-            function anciennesSyllabes() {
-                let as = [];
+        nouvelles_syllabes.forEach(element => {
+            let index = nouvelles_syllabes.indexOf(element);
+            if ($.inArray(element, anciennes_syllabes) == "-1") { lesson.push(lesson_du_jour[index]); }
+        });
+        
+        return lesson;
+
+        function nouvellesSyllabes() {
+            let ns = [];
+            lesson_du_jour.forEach(element => { ns.push(element[0]); });
+            return ns;
+        }
+        function anciennesSyllabes() {
+            let as = [];
+            if(lesson == undefined) {
+                as = [];
+            }else{
                 lesson.forEach(element => { if (element != null) as.push(element[0]); });
-                return as;
             }
-            function nouvellesSyllabes() {
-                let ns = [];
-                lesson_du_jour.forEach(element => { ns.push(element[0]); });
-                return ns;
-            }
+            return as;
         }
     }
     function affichageAnimeDeTableTd(table) {
@@ -686,7 +690,6 @@
             let consonnes_etudiees = memoireConsonnesChoisies();
 
             $.each($("#panneaux span"), function() {
-                let lesson_d_apprentissage_syllabe = JSON.parse(localStorage.getItem("lesson_d_apprentissage_syllabe"));
                 let caractere_container = $(this);
                 let caractere = caractere_container.text();
 
@@ -1390,7 +1393,7 @@ console.log(voyelles_deja_selectionnees);
                 indice++;
                 $('#'+element_id).html(message.substr(0,indice));
                 if(indice<longueur) {
-                    setTimeout(() => { write(); }, 15);
+                    setTimeout(() => { write(); }, 10);
                 }
             }
         }, 300);
@@ -1870,13 +1873,16 @@ console.log(voyelles_deja_selectionnees);
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
     
-    function malaxer(tableau){  
+    function malaxer(tableau,n=tableau.length){  // Le deuxieme parametre est facultatif et precise la longueur du tableau retourné.
         var mixted_table = [];
 
         for(var i=0; mixted_table.length<tableau.length;i++){
-            var nbr_aleatoire = Math.floor(Math.random()*tableau.length);
-            var element_aleatoire = tableau[nbr_aleatoire];
-            if($.inArray(element_aleatoire, mixted_table)==-1) mixted_table[mixted_table.length] = element_aleatoire;
+            tableau.forEach(() => {
+                var nbr_aleatoire = Math.floor(Math.random()*tableau.length);
+                var element_aleatoire = tableau[nbr_aleatoire];
+                if($.inArray(element_aleatoire, mixted_table) == -1) mixted_table.push(element_aleatoire);
+            });
+            if(n>0) if(i==n) break;
         }
     
         return mixted_table;

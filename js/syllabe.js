@@ -3,6 +3,8 @@ function syllabe() {
 // localStorage.clear();
 // sessionStorage.clear();
 
+    extractionDesDatasDuServeur();
+
     var datas = JSON.parse(sessionStorage.getItem("datas"));
     var niveau_max = JSON.parse(sessionStorage.getItem("niveau_max"));
     var phases_etudiees = (datas[niveau_max].length == 0) ? [] : JSON.parse(sessionStorage.getItem("phases_etudiees"));
@@ -48,9 +50,12 @@ function syllabe() {
             memoire_consonnes_choisies = (memoire_consonnes_choisies == null) ? consonnes_choisies_du_serveur : memoire_consonnes_choisies;
             let consonnes_choisies = [];
 
-            let lesson_d_apprentissage_syllabe = lessonDApprentissageSyllabe();
-            let lesson_d_exercice_syllabe = lessonDExerciceSyllabe();
-            let lesson_d_evaluation_syllabe = lessonDEvaluationSyllabe();
+            let lesson_d_apprentissage_syllabe = [];
+            let lesson_d_exercice_syllabe = [];
+
+            let lesson_d_apprentissage_syllabe_du_serveur = lessonDApprentissageSyllabeDuServeur();
+            let lesson_d_exercice_syllabe_du_serveur = lessonDExerciceSyllabeDuServeur();
+            let lesson_d_evaluation_syllabe = lessonDEvaluationSyllabeDuServeur();
 
             let lesson_d_apprentissage_syllabe_du_jour = [];
             let lesson_de_syllabe_exercice_du_jour = [];
@@ -129,7 +134,7 @@ function syllabe() {
 
                             let td = "";
                             let nouvelle_consonne = $(this).text();
-                            let consonnes_etudiees = consonnesEtudiees(lesson_d_apprentissage_syllabe);
+                            let consonnes_etudiees = consonnesEtudiees(lesson_d_apprentissage_syllabe_du_serveur);
                             let compteur_de_syllabe = 0;
                             let global_clicks_counter = 0;
 
@@ -271,7 +276,7 @@ function syllabe() {
                 $("#exercice_btn, #reprendre_exercice_btn, #continu_sur_exercice_btn").click(function (e) {
                     e.stopImmediatePropagation();
 
-                    lesson_d_exercice_syllabe = lessonDExerciceSyllabe();
+                    lesson_d_exercice_syllabe_du_serveur = lessonDExerciceSyllabeDuServeur();
                     lesson_active = "exercice";
                     sessionStorage.setItem("lesson_active", JSON.stringify(lesson_active));
                     syllabes_actives = syllabesActives();
@@ -689,6 +694,10 @@ function syllabe() {
                                     } else {
                                         let nouveaux_syllabes_melanges = malaxer(syllabes_nouvellement_apprises);
                                         let anciens_syllabes_melanges = malaxer(syllabes_anciennement_apprises);
+console.log("nouveaux_syllabes_melanges");
+console.log(nouveaux_syllabes_melanges);
+console.log("anciens_syllabes_melanges");
+console.log(anciens_syllabes_melanges);
 
                                         for (let i = 0; sar.length < (7 + syllabes_nouvellement_apprises.length); i++) {  // 7 est le nombre d'anciens syllabe à mélanger aux nouvelles apprises
                                             if (paire(i) == true) { sar.push(nouveaux_syllabes_melanges.pop()); }
@@ -700,18 +709,13 @@ function syllabe() {
 
                                     function syllabesAnciennementapprises() {
 
-                                        let sa = [];
+                                        let syllabes_apprises_du_serveur = [];
                                         let lesson_d_apprentissage_syllabe_du_serveur = lessonDApprentissageSyllabeDuServeur();
-                                        lesson_d_apprentissage_syllabe_du_serveur = (lesson_d_apprentissage_syllabe_du_serveur == undefined) ? [] : lesson_d_apprentissage_syllabe_du_serveur;
-                                        let lesson_d_apprentissage_syllabe = JSON.parse(localStorage.getItem("lesson_d_apprentissage_syllabe"));
                                         
-                                        lesson_d_apprentissage_syllabe = (lesson_d_apprentissage_syllabe == null) ? [] : lesson_d_apprentissage_syllabe;
-                                        lesson_d_apprentissage_syllabe = lesson_d_apprentissage_syllabe_du_serveur.concat(lesson_d_apprentissage_syllabe);
-        
-                                        for (let i = 0; i < lesson_d_apprentissage_syllabe.length; i++) { 
-                                            if($.inArray(lesson_d_apprentissage_syllabe[i][0].split("")[0], sa)) sa.push(lesson_d_apprentissage_syllabe[i][0]); 
+                                        for (let i = 0; i < lesson_d_apprentissage_syllabe_du_serveur.length; i++) { 
+                                            if($.inArray(lesson_d_apprentissage_syllabe_du_serveur[i][0].split("")[0], syllabes_apprises_du_serveur) == -1) syllabes_apprises_du_serveur.push(lesson_d_apprentissage_syllabe_du_serveur[i][0]); 
                                         }
-                                        return sa;
+                                        return syllabes_apprises_du_serveur;
                                     }
                                     function syllabesNouvellementapprises() {
                                         let nouvelles_syllabes = [];
@@ -922,7 +926,7 @@ function syllabe() {
                                                             datas = matiere_collection;
                                                             datas = (datas == undefined) ? [[],[],[],[]] : datas;
                                                             
-                                                            /* Recupreation des id de syllabe_apprentissage et syllabe_exercice précédents pour leurs modifications ulterieures */
+                                                         /* Recupreation des id de syllabe_apprentissage et syllabe_exercice précédents pour leurs modifications ulterieures */
                                                             let id_syllabe_lesson_1 = null;
                                                             let id_syllabe_lesson_2 = null;
 
@@ -934,8 +938,9 @@ function syllabe() {
                                                                     }
                                                                 }
                                                             }
+                                                         /* Fin de recuperationdes id */
                                                             
-                                                            sessionStorage.setItem('datas',JSON.stringify(datas));
+                                                            sessionStorage.setItem("datas",JSON.stringify(datas));
 
                                                             stockerApprentissageSyllabe();
                                                             stockerExerciceSyllabe();
@@ -949,8 +954,9 @@ function syllabe() {
                                                                 let note_d_apprentissage_syllabe = calculerNote(lesson_d_apprentissage_syllabe_du_jour);
 
                                                                 if (note_d_apprentissage_syllabe === 100) {
-
-                                                                    actualiserLessonSyllabe(lesson_d_apprentissage_syllabe, lesson_d_apprentissage_syllabe_du_jour);
+                                                                    
+                                                                    lesson_d_apprentissage_syllabe_du_serveur = lessonDApprentissageSyllabeDuServeur();
+                                                                    lesson_d_apprentissage_syllabe = actualiserLessonSyllabe(lesson_d_apprentissage_syllabe_du_serveur, lesson_d_apprentissage_syllabe_du_jour);
                                                                     
                                                                     console.log("lesson_d_apprentissage_syllabe actualisée est");
                                                                     console.log(lesson_d_apprentissage_syllabe);
@@ -978,7 +984,8 @@ function syllabe() {
 
                                                                 if (note_d_exercice_syllabe === 100) {
 
-                                                                    actualiserLessonSyllabe(lesson_d_exercice_syllabe, lesson_de_syllabe_exercice_du_jour);
+                                                                    lesson_d_exercice_syllabe_du_serveur = lessonDExerciceSyllabeDuServeur();
+                                                                    lesson_d_exercice_syllabe = actualiserLessonSyllabe(lesson_d_exercice_syllabe_du_serveur, lesson_de_syllabe_exercice_du_jour);
                                                                     
                                                                     console.log("lesson_d_exercice_syllabe actualisée est");
                                                                     console.log(lesson_d_exercice_syllabe);
@@ -1125,9 +1132,7 @@ function syllabe() {
                                 }
                             }
                             function evaluerSyllabe() {
-        
-                                lesson_d_evaluation_syllabe = lessonDEvaluationSyllabe();
-        
+                
                                 let evaluation_syllabe_questions = [];
                                 let question_d_evaluation_syllabe = "", reponse_d_evaluation_syllabe = [];
                                 let note_de_syllabe_evaluation = 0;
@@ -1370,7 +1375,7 @@ function syllabe() {
         
                                                         function stockerSyllabe() {
               
-                                                            actualiserLessonSyllabe(lesson_d_evaluation_syllabe, lesson_de_syllabe_evaluation_du_jour);
+                                                            lesson_d_evaluation_syllabe = lesson_de_syllabe_evaluation_du_jour;
                                                             localStorage.setItem("lesson_d_evaluation_syllabe", JSON.stringify(lesson_d_evaluation_syllabe));
         
                                                             if (lesson_d_apprentissage_syllabe.length === 126) {
@@ -1455,34 +1460,6 @@ function syllabe() {
                     }
                 });
             }
-            function lessonDApprentissageSyllabe() {
-
-                let lesson_d_apprentissage_syllabe_du_serveur = lessonDApprentissageSyllabeDuServeur();
-                let lesson_d_apprentissage_syllabe = JSON.parse(localStorage.getItem("lesson_d_apprentissage_syllabe"));
-                
-                lesson_d_apprentissage_syllabe = (lesson_d_apprentissage_syllabe == null) ? lesson_d_apprentissage_syllabe_du_serveur : lesson_d_apprentissage_syllabe_du_serveur.concat(lesson_d_apprentissage_syllabe);
-                return lesson_d_apprentissage_syllabe;
-            }
-            function lessonDExerciceSyllabe() {
-
-                let lesson_d_exercice_syllabe_du_serveur = lessonDExerciceSyllabeDuServeur();
-                let lesson_d_exercice_syllabe = JSON.parse(localStorage.getItem("lesson_d_exercice_syllabe"));
-
-                lesson_d_exercice_syllabe = (lesson_d_exercice_syllabe == null) ? [] : lesson_d_exercice_syllabe;
-                lesson_d_exercice_syllabe_du_serveur = (lesson_d_exercice_syllabe_du_serveur == undefined) ? [] : lesson_d_exercice_syllabe_du_serveur;
-
-                lesson_d_exercice_syllabe = (lesson_d_exercice_syllabe.length == 0) ? lesson_d_exercice_syllabe_du_serveur : lesson_d_exercice_syllabe_du_serveur.concat(lesson_d_exercice_syllabe);
-
-                return lesson_d_exercice_syllabe;
-            }
-            function lessonDEvaluationSyllabe() {
-
-                let lesson_d_evaluation_syllabe_du_serveur = lessonDEvaluationSyllabeDuServeur();
-                let lesson_d_evaluation_syllabe = JSON.parse(localStorage.getItem("lesson_d_evaluation_syllabe"));
-                
-                lesson_d_evaluation_syllabe = (lesson_d_evaluation_syllabe == null) ? lesson_d_evaluation_syllabe_du_serveur : lesson_d_evaluation_syllabe_du_serveur.concat(lesson_d_evaluation_syllabe);
-                return lesson_d_evaluation_syllabe;
-            }
             function consonnesChoisiesDuServeur() {
     
                 datas = JSON.parse(sessionStorage.getItem("datas"));
@@ -1542,6 +1519,7 @@ function syllabe() {
                     if(datas[1][i] != undefined) if(datas[1][i].phase == "syllabe_apprentissage") lesson_d_apprentissage_syllabe_du_serveur = JSON.parse(datas[1][i].lesson);
                 }
             }
+            lesson_d_apprentissage_syllabe_du_serveur = (lesson_d_apprentissage_syllabe_du_serveur == undefined) ? [] : lesson_d_apprentissage_syllabe_du_serveur;
             return lesson_d_apprentissage_syllabe_du_serveur;
         }
         function lessonDExerciceSyllabeDuServeur() {
@@ -1553,6 +1531,7 @@ function syllabe() {
                     if(datas[1][i] != undefined) if(datas[1][i].phase == "syllabe_exercice") lesson_d_exercice_syllabe_du_serveur = JSON.parse(datas[1][i].lesson);
                 }
             }
+            lesson_d_exercice_syllabe_du_serveur = (lesson_d_exercice_syllabe_du_serveur == undefined) ? [] : lesson_d_exercice_syllabe_du_serveur;
             return lesson_d_exercice_syllabe_du_serveur;
         }
         function lessonDEvaluationSyllabeDuServeur() {
@@ -1561,5 +1540,16 @@ function syllabe() {
             if (datas[1].length != 0) if(datas[1][3] != undefined) if(datas[1][3].phase == "syllabe_evaluation") lesson_d_evaluation_syllabe_du_serveur = JSON.parse(datas[1][3].lesson);
             return lesson_d_evaluation_syllabe_du_serveur;
         }
+    }
+
+    function extractionDesDatasDuServeur() {
+        let id_client = JSON.parse(sessionStorage.getItem("id_client"));
+        fetch("/kouroukan/api/index.php?id_user="+id_client)
+        .then(response => response.json())
+        .then(matiere_collection => {  
+            datas = matiere_collection;
+            datas = (datas == undefined) ? [[],[],[],[]] : datas;
+            sessionStorage.setItem("datas",JSON.stringify(datas));
+        });
     }
 }

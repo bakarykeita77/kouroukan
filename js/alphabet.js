@@ -105,6 +105,29 @@ function alphabet() {
                             }, 4000);
                         }
                     }
+                    function chargerCorpsDePreAlphabet() {
+                        $('#apprentissage_body').html(preApprentissageCorpsHTML());
+                            
+                        function preApprentissageCorpsHTML() {
+                            var c = alphabet_nko[0];
+                            c.push('');
+
+                            var a_html = "<div id = 'table_pre_apprentissage'>\n";
+                                for(var i=0;i<21;i+=7) {
+                                    a_html += "<div class='pre_apprentissage_tr'>\n";
+                                        for(var j=0;j<7;j++) a_html += "<span class='pre_apprentissage_td'>"+c[i+j]+"</span>\n";
+                                    a_html += "</div>\n";
+                                }
+                                for(var k=21;k<28;k+=7){
+                                    a_html += "<div class='pre_apprentissage_tr'>\n";
+                                        for(var l=0;l<7;l++) a_html += "<span class='pre_apprentissage_td'>"+c[k+l]+"</span>\n";
+                                    a_html += "</div>\n";
+                                }
+                            a_html += "</div>";
+                            
+                            return a_html;
+                        }
+                    }
                     function chargerFootDePreAlphabet() {
                         
                         var cercles_html = cerclesHTML();

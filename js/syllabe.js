@@ -54,6 +54,7 @@ function syllabe() {
             let lesson_d_exercice_syllabe = [];
 
             let lesson_d_apprentissage_syllabe_du_serveur = lessonDApprentissageSyllabeDuServeur();
+            localStorage.setItem("lesson_d_apprentissage_syllabe_du_serveur",JSON.stringify(lesson_d_apprentissage_syllabe_du_serveur));
             let lesson_d_exercice_syllabe_du_serveur = lessonDExerciceSyllabeDuServeur();
             let lesson_d_evaluation_syllabe = lessonDEvaluationSyllabeDuServeur();
 
@@ -312,7 +313,7 @@ function syllabe() {
                             $(".notification_titre").html("ߜߋ߲߭ ߡߊ߬ߞߟߏ߬ߟߌ");
                             setTimeout(() => {
                                 ecris("exercice_notification_corps", "ߘߋ߰ߣߍ߲߬ ߞߎߘߊ ߟߎ߫ ߟߋ߬ ߢߊ߯ߡߌߣߍ߲߫ ߢߐ߲ ߘߐ߫ ߣߌ߲߬ .ߣߴߌ ߛߋ߫ ߘߊ߫ ߞߵߊ߬ߟߎ߬ ߓߍ߯ ߢߊߓߐ߫ ߗߡߍ߬ߘߐ߬ߦߊ߫ ߗߍ߬ߡߍ ߟߊ߫ ߏ߬ߘߐ߬ ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ .ߢߌ߬ߣߌ߲߬ߞߊߟߌ߬ ߞߘߎ ߘߌ߯߭ ߘߎ߭ߡߊ߬߸ ߦߴߌ ߕߟߏߡߊߟߐ߬ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߎ߬ ߟߊ߫ ߞߋߟߋ߲߫ ߞߋߟߋ߲߫߸ ߦߵߊ߬ߟߎ߫ ߦߌ߬ߘߊ߬߸ ߦߋ߫ ߓߊ߲߫ ߞߊ߬ ߛߊߞߍߟߌ߫ ߞߘߎ ߘߌ߲߯߸ ߞߵߊ߬ߟߎ߬ ߛߊߞߍ߫.");
-                            }, 1200);
+                            }, 300);
                         }
                         function chargerCorpsDExerciceSyllabe() {
                             let exercice_body_html = lessonHTML(malaxer(syllabes_actives), "");
@@ -669,7 +670,7 @@ function syllabe() {
 
                         function chargerRevisionSyllabeHead() {
                             $(".notification_titre").text("ߜߋ߲߭ ߣߐ߰ߡߊ߬ߛߍߦߌ");
-                            setTimeout(() => { ecris("revision_notification_corps", "ߘߋ߰ߣߍ߲߬ ߞߎߘߊ ߣߌ߫ ߞߘߐ߬ߡߊ߲ ߘߏ߫ ߟߎ߫ ߟߋ߬ ߢߊ߯ߡߌߣߍ߲߫ ߢߐ߲ ߘߐ߫ ߣߌ߲߬ .ߣߴߌ ߛߋ߫ ߘߊ߫ ߞߵߊ߬ߟߎ߬ ߓߍ߯ ߢߊߓߐ߫ ߗߡߍ߬ߘߐ߬ߦߊ߫ ߗߍ߬ߡߍ ߟߊ߫ ߏ߬ߘߐ߬ ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ . ߢߌ߬ߣߌ߲߬ߞߊߟߌ߬ ߞߘߎ ߘߌ߯߭ ߘߎ߭ߡߊ߬߸ ߦߴߌ ߕߟߏߡߊߟߐ߬ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߎ߬ ߟߊ߫ ߞߋߟߋ߲߫ ߞߋߟߋ߲߫߸ ߦߴߊߟߎ߬ ߛߓߍ߫߸ ߦߋ߫ ߓߊ߲߫ ߞߊ߬ ߛߊߞߍߟߌ߫ ߞߘߎ ߘߌ߲߯߸ ߞߵߊ߬ߟߎ߬ ߛߊߞߍ߫."); }, 1200);
+                            setTimeout(() => { ecris("revision_notification_corps", "ߘߋ߰ߣߍ߲߬ ߞߎߘߊ ߣߌ߫ ߞߘߐ߬ߡߊ߲ ߘߏ߫ ߟߎ߫ ߟߋ߬ ߢߊ߯ߡߌߣߍ߲߫ ߢߐ߲ ߘߐ߫ ߣߌ߲߬ .ߣߴߌ ߛߋ߫ ߘߊ߫ ߞߵߊ߬ߟߎ߬ ߓߍ߯ ߢߊߓߐ߫ ߗߡߍ߬ߘߐ߬ߦߊ߫ ߗߍ߬ߡߍ ߟߊ߫ ߏ߬ߘߐ߬ ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ . ߢߌ߬ߣߌ߲߬ߞߊߟߌ߬ ߞߘߎ ߘߌ߯߭ ߘߎ߭ߡߊ߬߸ ߦߴߌ ߕߟߏߡߊߟߐ߬ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߎ߬ ߟߊ߫ ߞߋߟߋ߲߫ ߞߋߟߋ߲߫߸ ߦߴߊߟߎ߬ ߛߓߍ߫߸ ߦߋ߫ ߓߊ߲߫ ߞߊ߬ ߛߊߞߍߟߌ߫ ߞߘߎ ߘߌ߲߯߸ ߞߵߊ߬ߟߎ߬ ߛߊߞߍ߫."); }, 600);
                         }
                         function chargerRevisionSyllabeBody() {
                             var evaluation_body_html = revisionBodyHTML();
@@ -964,12 +965,14 @@ console.log(anciens_syllabes_melanges);
     
                                                                     if(datas[1].length == 0) {
                                                                         sendLessonDataToDB("syllabe_apprentissage", lesson_d_apprentissage_syllabe);
+                                                                        localStorage.setItem("lesson_d_apprentissage_syllabe_du_serveur",JSON.stringify(lesson_d_apprentissage_syllabe));
                                                                         console.log("Lesson d'apprentissage syllabe est envoyée à la base de donnée.");
                                                                     }
                                                                     if(datas[1].length != 0) {
                                                                         for (let i = 0; i < datas[1].length; i++) {
                                                                             if(datas[1][i] != undefined) if(datas[1][i].phase == "syllabe_apprentissage") {
                                                                                 updateLessonData(id_syllabe_lesson_1,lesson_d_apprentissage_syllabe);
+                                                                                localStorage.setItem("lesson_d_apprentissage_syllabe_du_serveur",JSON.stringify(lesson_d_apprentissage_syllabe));
                                                                                 console.log("Lesson d'apprentissage syllabe est modifiée à la base de donnée.");
                                                                             }
                                                                         }
@@ -992,12 +995,14 @@ console.log(anciens_syllabes_melanges);
                                 
                                                                     if(datas[1].length == 0) {
                                                                         sendLessonDataToDB("syllabe_exercice", lesson_d_exercice_syllabe);
+                                                                        localStorage.setItem("lesson_d_exercice_syllabe_du_serveur",JSON.stringify(lesson_d_exercice_syllabe));
                                                                         console.log("Lesson d'exercice syllabe est envoyée à la base de donnée.");
                                                                     }
                                                                     if(datas[1].length != 0) {
                                                                         for (let i = 0; i < datas[1].length; i++) {
                                                                             if(datas[1][i] != undefined) if(datas[1][i].phase == "syllabe_exercice") {
                                                                                 updateLessonData(id_syllabe_lesson_2,lesson_d_exercice_syllabe);
+                                                                                localStorage.setItem("lesson_d_exercice_syllabe_du_serveur",JSON.stringify(lesson_d_exercice_syllabe)); 
                                                                                 console.log("Lesson d'exercice syllabe est modifiée à la base de donnée.");
                                                                             }
                                                                         }
@@ -1087,378 +1092,380 @@ console.log(anciens_syllabes_melanges);
                 });
             }
             function evaluationSyllabe() {
-             /* L'évaluation des syllabes est une étape qui est éffectuée une seule fois, à la fin d'une série de lessons d'apprentissages, d'exercices et de revisions. */  
-                $("#evaluation_btn, #reprendre_evaluation_btn, #continu_sur_evaluation_btn").click(function () {
+             /* L'évaluation des syllabes est une étape qui est éffectuée une seule fois, à la fin d'une série de lessons d'apprentissages, d'exercices et de revisions. */ 
                     
-                 /* Un étudiant qui s'est connecté et qui a fini d'apprendre toutes les syllabes sauf la dernière évaluation,
-                    il est directement redirigé sur la page d'évaluation.*/
-                    if (memoire_consonnes_choisies.length === 2) {
-    
-                        let consonnes_etudiees = consonnesEtudiees(lesson_d_apprentissage_syllabe);
-                        let nouvelles_consonnes = JSON.parse(localStorage.getItem("nouvelles_consonnes"));
-                                            
-                        evaluation();
-                        
-                        function evaluation() {
-                        
-                            lesson_active = "revision";
-        
-                            chargerEvaluationSyllabe();
-                            afficherEvaluation();
-                            evaluerSyllabe();
-        
-        
-                            function chargerEvaluationSyllabe() {
-        
-                                chargerEvaluationSyllabeHead();
-                                chargerEvaluationSyllabeBody();
-                                chargerEvaluationSyllabeFoot();
-        
-                                function chargerEvaluationSyllabeHead() {
-                                    $(".notification_titre").text("ߜߋ߲߭ ߞߘߐߓߐߟߌ");
-                                    ecris("evaluation_notification_corps", "ߢߌ߬ߣߌ߲߬ߞߊߟߌ߬ ߞߘߎ ߘߌ߯߭ ߘߎ߭ߡߊ߬߸ ߦߴߌ ߕߟߏߡߊߟߐ߬ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߎ߬ ߟߊ߫ ߞߋߟߋ߲߫ ߞߋߟߋ߲߫߸ ߦߴߊߟߎ߬ ߛߓߍ߫߸ ߦߋ߫ ߓߊ߲߫ ߞߊ߬ ߛߊߞߍߟߌ߫ ߞߘߎ ߘߌ߲߯߸ ߞߵߊ߬ߟߎ߬ ߛߊߞߍ߫.");
-                                }
-                                function chargerEvaluationSyllabeBody() {
-                                    var evaluation_tbody_default_message = "ߜߋ߲߭ ߞߘߐߓߐߟߌ ߞߐߝߟߌ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬.";
-                                    $("#evaluation_fiche_body").html("<p id='evaluation_tbody_default_content'>" + evaluation_tbody_default_message + "</p>");
-                                }
-                                function chargerEvaluationSyllabeFoot() {
-        
-                                    var q_evaluation_total = parseIntNko(lesson_d_apprentissage_syllabe.length);
-        
-                                    $("#evaluation_question_btn").html("<p>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ߬ "+q_evaluation_total+"\\"+parseIntNko(1)+"߭ ߟߊߡߍ߲߫</p>");
-                                    $("#evaluation_repetition_btn").html("<p>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ߬ "+q_evaluation_total+"\\"+parseIntNko(1)+"߭ ߟߊߡߍ߲߫</p>");
-                                    $("#evaluation_correction_btn").html("<p>ߏ߬ ߛߊߞߍ߫</p>");
-                                }
-                            }
-                            function evaluerSyllabe() {
+             /* Un étudiant qui s'est connecté et qui a fini d'apprendre toutes les syllabes sauf la dernière évaluation,
+                il est directement redirigé sur la page d'évaluation.*/
+                if (memoire_consonnes_choisies.length === 18) evaluation(); 
+
+                $("#evaluation_btn, #reprendre_evaluation_btn, #continu_sur_evaluation_btn").click(function () {
+                    if (memoire_consonnes_choisies.length === 18) evaluation();
+                });
                 
-                                let evaluation_syllabe_questions = [];
-                                let question_d_evaluation_syllabe = "", reponse_d_evaluation_syllabe = [];
-                                let note_de_syllabe_evaluation = 0;
+                function evaluation() {
+            
+                    let consonnes_etudiees = consonnesEtudiees(lesson_d_apprentissage_syllabe);
+                    let nouvelles_consonnes = JSON.parse(localStorage.getItem("nouvelles_consonnes"));
+
+                    lesson_active = "revision";
+
+                    chargerEvaluationSyllabe();
+                    afficherEvaluation();
+                    evaluerSyllabe();
+
+
+                    function chargerEvaluationSyllabe() {
+
+                        chargerEvaluationSyllabeHead();
+                        chargerEvaluationSyllabeBody();
+                        chargerEvaluationSyllabeFoot();
+
+                        function chargerEvaluationSyllabeHead() {
+                            $(".notification_titre").text("ߜߋ߲߭ ߞߘߐߓߐߟߌ");
+                            ecris("evaluation_notification_corps", "ߢߌ߬ߣߌ߲߬ߞߊߟߌ߬ ߞߘߎ ߘߌ߯߭ ߘߎ߭ߡߊ߬߸ ߦߴߌ ߕߟߏߡߊߟߐ߬ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߎ߬ ߟߊ߫ ߞߋߟߋ߲߫ ߞߋߟߋ߲߫߸ ߦߴߊߟߎ߬ ߛߓߍ߫߸ ߦߋ߫ ߓߊ߲߫ ߞߊ߬ ߛߊߞߍߟߌ߫ ߞߘߎ ߘߌ߲߯߸ ߞߵߊ߬ߟߎ߬ ߛߊߞߍ߫.");
+                        }
+                        function chargerEvaluationSyllabeBody() {
+                            var evaluation_tbody_default_message = "ߜߋ߲߭ ߞߘߐߓߐߟߌ ߞߐߝߟߌ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬.";
+                            $("#evaluation_fiche_body").html("<p id='evaluation_tbody_default_content'>" + evaluation_tbody_default_message + "</p>");
+                        }
+                        function chargerEvaluationSyllabeFoot() {
+
+                            var q_evaluation_total = parseIntNko(lesson_d_apprentissage_syllabe.length);
+                            q_evaluation_total = (q_evaluation_total == "߀") ? parseIntNko(28) : q_evaluation_total;
+                            
+
+                            $("#evaluation_question_btn").html("<p>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ߬ "+q_evaluation_total+"\\"+parseIntNko(1)+"߭ ߟߊߡߍ߲߫</p>");
+                            $("#evaluation_repetition_btn").html("<p>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ߬ "+q_evaluation_total+"\\"+parseIntNko(1)+"߭ ߟߊߡߍ߲߫</p>");
+                            $("#evaluation_correction_btn").html("<p>ߏ߬ ߛߊߞߍ߫</p>");
+                        }
+                    }
+                    function evaluerSyllabe() {
+        
+                        let evaluation_syllabe_questions = [];
+                        let question_d_evaluation_syllabe = "", reponse_d_evaluation_syllabe = [];
+                        let note_de_syllabe_evaluation = 0;
+                        
+                        let evaluation_counter = 0;
+                        let good_response_counter = 0;
+                        let rang = "߭";
+                        let action = "ߟߊߡߍ߲߫";
+
+                        lesson_d_apprentissage_syllabe_du_serveur = (lesson_d_apprentissage_syllabe_du_serveur.length == 0) ? JSON.parse(localStorage.getItem("lesson_d_apprentissage_syllabe_du_serveur")) : lesson_d_apprentissage_syllabe_du_serveur;
+                        lesson_d_exercice_syllabe_du_serveur = (lesson_d_exercice_syllabe_du_serveur.length == 0) ? JSON.parse(localStorage.getItem("lesson_d_exercice_syllabe_du_serveur")) : lesson_d_exercice_syllabe_du_serveur;
+                        evaluation_syllabe_questions = questionsDEvaluation();
+
+                        initialiserEvaluationSyllabeAStocker();
+                        initialiserProgressBar();
+                        poserQuestionDEvaluationSyllabe();
+                        repeterQuestionDEvaluationSyllabe();
+                        repondreQuestionDEvaluationSyllabe();
+                        rectificationDeReponseDEvaluationSyllabe();
+                        correctionDEvaluationSyllabe();
+
+                        
+                        function questionsDEvaluation() {
+                            let lesson_d_apprentissage_syllabe_melange = [];
+                            let questions_d_evaluation_syllabe = [];
+                            lesson_d_apprentissage_syllabe_melange = malaxer(lesson_d_apprentissage_syllabe_du_serveur);
+                            for (let j = 0; j < 28; j++) questions_d_evaluation_syllabe.push(lesson_d_apprentissage_syllabe_melange[j][0]);
+                            return questions_d_evaluation_syllabe;
+                        }
+                        function initialiserEvaluationSyllabeAStocker() {
+                            lesson_de_syllabe_evaluation_du_jour = initialiserData(evaluation_syllabe_questions);
+                        }
+                        function poserQuestionDEvaluationSyllabe() {
+                            $("#evaluation_question_btn").on("click", function (e) {
+                                e.stopImmediatePropagation();
+
+                                masquerNotification();
+                                effacercedenteReponse();
+                                question_d_evaluation_syllabe = evaluation_syllabe_questions[evaluation_counter];
+                                alert(question_d_evaluation_syllabe);
+
+
+                                evaluation_counter++;
+
+                                masquerEvaluationQuestionBtn();
+                                lireEvaluationSyllabeQuestion();
+                                enregistrerEvaluationSyllabeQuestion();
+                                rechargerEvaluationQuestionBtn();
+                                rechargerEvaluationRepetitionBtn();
+                                afficherBoutonDeRepetition();
+                            
+                                masquer($("#evaluation_cross"));
+                                $("#evaluation_cross").css("transform", "scale(0.4)");
+                                $("#evaluation_reponse_container").css({ "top": 0 });
+                                afficherTesteContainer();
                                 
-                                let evaluation_counter = 0;
-                                let good_response_counter = 0;
-                                let rang = "߭";
-                                let action = "ߟߊߡߍ߲߫";
-        
-                                evaluation_syllabe_questions = questionsDEvaluation();
-        
-                                initialiserEvaluationSyllabeAStocker();
-                                initialiserProgressBar();
-                                poserQuestionDEvaluationSyllabe();
-                                repeterQuestionDEvaluationSyllabe();
-                                repondreQuestionDEvaluationSyllabe();
-                                rectificationDeReponseDEvaluationSyllabe();
-                                correctionDEvaluationSyllabe();
-        
-        
-                                function poserQuestionDEvaluationSyllabe() {
-                                    $("#evaluation_question_btn").on("click", function (e) {
-                                        e.stopImmediatePropagation();
-        
-                                        masquerNotification();
-                                        effacercedenteReponse();
-                                        question_d_evaluation_syllabe = evaluation_syllabe_questions[evaluation_counter];
-                                        alert(question_d_evaluation_syllabe);
-        
-        
-                                        evaluation_counter++;
-        
-                                        masquerEvaluationQuestionBtn();
-                                        lireEvaluationSyllabeQuestion();
-                                        enregistrerEvaluationSyllabeQuestion();
-                                        rechargerEvaluationQuestionBtn();
-                                        rechargerEvaluationRepetitionBtn();
-                                        afficherBoutonDeRepetition();
+
+                                function masquerEvaluationQuestionBtn() { masquer($("#evaluation_question_btn")); }
+                                function lireEvaluationSyllabeQuestion() { lire("ߊ", question_d_evaluation_syllabe); }
+                                function enregistrerEvaluationSyllabeQuestion() {}
+                                function rechargerEvaluationQuestionBtn() {
+
+                                    action = "ߠߊߡߍ߲߫";
+                                    rang = (evaluation_counter === 0) ? "߭" : "߲";
+                                    question_status = "posee";
+                                    ordre_de_question = (evaluation_syllabe_questions.length == evaluation_counter + 1) ? "ߟߊߓߊ߲" : parseIntNko(evaluation_counter + 1)+rang;
                                     
-                                        masquer($("#evaluation_cross"));
-                                        $("#evaluation_cross").css("transform", "scale(0.4)");
-                                        $("#evaluation_reponse_container").css({ "top": 0 });
-                                        afficherTesteContainer();
-                                        
-        
-                                        function masquerEvaluationQuestionBtn() { masquer($("#evaluation_question_btn")); }
-                                        function lireEvaluationSyllabeQuestion() { lire("ߊ", question_d_evaluation_syllabe); }
-                                        function enregistrerEvaluationSyllabeQuestion() {}
-                                        function rechargerEvaluationQuestionBtn() {
-        
-                                            action = "ߠߊߡߍ߲߫";
-                                            rang = (evaluation_counter === 0) ? "߭" : "߲";
-                                            question_status = "posee";
-                                            ordre_de_question = (evaluation_syllabe_questions.length == evaluation_counter + 1) ? "ߟߊߓߊ߲" : parseIntNko(evaluation_counter + 1)+rang;
-                                            
-                                            $("#evaluation_question_btn").html("ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ "+parseIntNko(evaluation_syllabe_questions.length)+" \\ " + ordre_de_question + " "+action);
-                                            if (evaluation_counter == evaluation_syllabe_questions.length) { masquer($("#evaluation_question_btn")); }
-                                        }
-                                        function rechargerEvaluationRepetitionBtn() {
-                                            rang = (evaluation_counter === 1) ? "߭" : "߲";
-                                            ordre_de_question = (evaluation_syllabe_questions.length == evaluation_counter) ? "ߟߊߓߊ߲" : parseIntNko(evaluation_counter)+rang;
-                                            $("#evaluation_repetition_btn").html("ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ " +ordre_de_question+" ߠߊߡߍ߲߫ ߕߎ߲߯");
-                                        }
-                                        function effacercedenteReponse() {
-                                            reponse_d_evaluation_syllabe.splice(0, reponse_d_evaluation_syllabe.length);
-                                            $("#evaluation_reponse").html(reponse_d_evaluation_syllabe);
-                                        }
-                                        function afficherTesteContainer() { $("#teste_container").css({ "top": "-5.75rem" }); }
-                                    });
+                                    $("#evaluation_question_btn").html("ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ "+parseIntNko(evaluation_syllabe_questions.length)+" \\ " + ordre_de_question + " "+action);
+                                    if (evaluation_counter == evaluation_syllabe_questions.length) { masquer($("#evaluation_question_btn")); }
                                 }
-                                function repeterQuestionDEvaluationSyllabe() {
-                                    $(".repetition_btn").on("click", function () {
-                                        montrerReponse(question_d_evaluation_syllabe);
-                                        alert(question_d_evaluation_syllabe);
-                                        lire("syllabe", question_d_evaluation_syllabe);
-                                        afficherBoutonDeRepetition();
-                                    });
+                                function rechargerEvaluationRepetitionBtn() {
+                                    rang = (evaluation_counter === 1) ? "߭" : "߲";
+                                    ordre_de_question = (evaluation_syllabe_questions.length == evaluation_counter) ? "ߟߊߓߊ߲" : parseIntNko(evaluation_counter)+rang;
+                                    $("#evaluation_repetition_btn").html("ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ " +ordre_de_question+" ߠߊߡߍ߲߫ ߕߎ߲߯");
                                 }
-                                function repondreQuestionDEvaluationSyllabe() {
-                                    $("#clavier_nko td").on("click", function () {
-        
-                                    /* Au cas où on tente de repondre sans qu'une question soit posée, evaluation_dialogue_btn clignote pour rappel */
-                                        if (question_d_evaluation_syllabe == "") rappel($("#evaluation_dialogue_btn"));
-                                        if (question_d_evaluation_syllabe != "") {
-        
-                                            var caractere = $(this).text();
-        
-                                            chargerEvaluationSyllabeReponse();
-                                            if(reponse_d_evaluation_syllabe.length < 2) afficherBoutonDeCorrection();
-        
-                                            function chargerEvaluationSyllabeReponse() {
-                                                reponse_d_evaluation_syllabe.push(caractere);
-                                                $("#evaluation_reponse").html(reponse_d_evaluation_syllabe);
-                                            }
-                                        }
-                                    });
+                                function effacercedenteReponse() {
+                                    reponse_d_evaluation_syllabe.splice(0, reponse_d_evaluation_syllabe.length);
+                                    $("#evaluation_reponse").html(reponse_d_evaluation_syllabe);
                                 }
-                                function rectificationDeReponseDEvaluationSyllabe() {
-                                    $("#correcteur_d_evaluation").on("click", function () {
-                                        reponse_d_evaluation_syllabe.pop();
+                                function afficherTesteContainer() { $("#teste_container").css({ "top": "-5.75rem" }); }
+                            });
+                        }
+                        function repeterQuestionDEvaluationSyllabe() {
+                            $(".repetition_btn").on("click", function () {
+                                montrerReponse(question_d_evaluation_syllabe);
+                                alert(question_d_evaluation_syllabe);
+                                lire("syllabe", question_d_evaluation_syllabe);
+                                afficherBoutonDeRepetition();
+                            });
+                        }
+                        function repondreQuestionDEvaluationSyllabe() {
+                            $("#clavier_nko td").on("click", function () {
+
+                            /* Au cas où on tente de repondre sans qu'une question soit posée, evaluation_dialogue_btn clignote pour rappel */
+                                if (question_d_evaluation_syllabe == "") secouer($("#evaluation_question_btn"));
+                                if (question_d_evaluation_syllabe != "") {
+
+                                    var caractere = $(this).text();
+
+                                    chargerEvaluationSyllabeReponse();
+                                    if(reponse_d_evaluation_syllabe.length < 2) afficherBoutonDeCorrection();
+
+                                    function chargerEvaluationSyllabeReponse() {
+                                        reponse_d_evaluation_syllabe.push(caractere);
                                         $("#evaluation_reponse").html(reponse_d_evaluation_syllabe);
-                                    });
+                                    }
                                 }
-                                function correctionDEvaluationSyllabe() {
-        
-                                    var evaluation_html = "";
-        
-                                    $(".correction_btn").click(function (e) {
-                                        e.stopImmediatePropagation();
-        
-                                        let q = question_d_evaluation_syllabe;
-                                        let r = reponse_d_evaluation_syllabe.join("");
-                                        let p = (q == r) ? 1 : 0;
-                                        let question_reponse = [q, r, p];
-        
-                                        note_de_syllabe_evaluation += p;
-        
-                                        if (evaluation_counter <= evaluation_syllabe_questions.length) {
-        
-                                            marquerReponseDEvaluationSyllabe();
-                                            effacerCheckMark();
-                                            masquerTesteContainer();
-                                            enregistrerEvaluationSyllabe();
-                                            chargerFicheDEvaluation();
-                                            progressBarDEvaluationSyllabe();
-                                            afficherQuestionButton();
-                                            finDEvaluationSyllabe();
-                                                    
-        
-                                            function chargerFicheDEvaluation() {
-                                                setTimeout(() => {
-                                                    chargerInstantannementEvaluationTbody();
-                                                    defilementDuContenuVersLeHaut($("#evaluation_fiche_body"));
-        
-                                                    function chargerInstantannementEvaluationTbody() {
-        
-                                                        var n = parseIntNko(evaluation_counter);
-                                                        n = (n == "߁") ? n + "߭" : n + "߲";
-                                                        r = (q == r) ? r : "<del>" + r + "</del>";
-        
-                                                        evaluation_html += "<div><span>" + n + "</span><span>" + q + "</span><span>" + r + "</span><span>" + parseIntNko(p) + "</span></div>\n";
-                                                        let total_point_d_evaluation = parseIntNko(note_de_syllabe_evaluation);
-                                                        let pourcentage_point_d_evaluation = "%" + parseIntNko(Math.floor(note_de_syllabe_evaluation * 100 / evaluation_syllabe_questions.length));
-        
-                                                        $("#evaluation_fiche_body").html(evaluation_html);
-                                                        $("#total_point_d_evaluation").html(total_point_d_evaluation);
-                                                        $("#pourcentage_point_d_evaluation").html(pourcentage_point_d_evaluation);
-                                                    }
-                                                }, 1400);
+                            });
+                        }
+                        function rectificationDeReponseDEvaluationSyllabe() {
+                            $("#correcteur_d_evaluation").on("click", function () {
+                                reponse_d_evaluation_syllabe.pop();
+                                $("#evaluation_reponse").html(reponse_d_evaluation_syllabe);
+                            });
+                        }
+                        function correctionDEvaluationSyllabe() {
+
+                            var evaluation_html = "";
+
+                            $(".correction_btn").click(function (e) {
+                                e.stopImmediatePropagation();
+
+                                let q = question_d_evaluation_syllabe;
+                                let r = reponse_d_evaluation_syllabe.join("");
+                                let p = (q == r) ? 1 : 0;
+                                let question_reponse = [q, r, p];
+
+                                note_de_syllabe_evaluation += p;
+
+                                if (evaluation_counter <= evaluation_syllabe_questions.length) {
+
+                                    marquerReponseDEvaluationSyllabe();
+                                    effacerCheckMark();
+                                    masquerTesteContainer();
+                                    enregistrerEvaluationSyllabe();
+                                    chargerFicheDEvaluation();
+                                    progressBarDEvaluationSyllabe();
+                                    afficherQuestionButton();
+                                    finDEvaluationSyllabe();
+                                            
+
+                                    function chargerFicheDEvaluation() {
+                                        setTimeout(() => {
+                                            chargerInstantannementEvaluationTbody();
+                                            defilementDuContenuVersLeHaut($("#evaluation_fiche_body"));
+
+                                            function chargerInstantannementEvaluationTbody() {
+
+                                                var n = parseIntNko(evaluation_counter);
+                                                n = (n == "߁") ? n + "߭" : n + "߲";
+                                                r = (q == r) ? r : "<del>" + r + "</del>";
+
+                                                evaluation_html += "<div><span>" + n + "</span><span>" + q + "</span><span>" + r + "</span><span>" + parseIntNko(p) + "</span></div>\n";
+                                                let total_point_d_evaluation = parseIntNko(note_de_syllabe_evaluation);
+                                                let pourcentage_point_d_evaluation = "%" + parseIntNko(Math.floor(note_de_syllabe_evaluation * 100 / evaluation_syllabe_questions.length));
+
+                                                $("#evaluation_fiche_body").html(evaluation_html);
+                                                $("#total_point_d_evaluation").html(total_point_d_evaluation);
+                                                $("#pourcentage_point_d_evaluation").html(pourcentage_point_d_evaluation);
                                             }
-                                            function marquerReponseDEvaluationSyllabe() {
-                                                if (reponse_d_evaluation_syllabe.join("") == question_d_evaluation_syllabe) {
-        
-                                                    $("#evaluation_reponse").html("<p id='bonne_reponse'>" + reponse_d_evaluation_syllabe.join('') + "</p><div id='check_mark_container'> <p id='check_mark'></p> <p id='check_mark_cover'></p> </div>");
-                                                    $("#check_mark_container").css({ "display": "inline-block", "margin-right": "4px" });
-                                                    $("#check_mark_cover").css({ "right": "0.25rem" });
-                                                    $("#check_mark").html("&#10003;");
-                                                    setTimeout(function () { $("#check_mark_cover").css({ "right": "2rem" }); }, 100);
-                                                    setTimeout(function () { $("#check_mark_container").css({ "display": "none" }); }, 1000);
-                                                } else {
-                                                    $("#evaluation_reponse").html("<p id='mauvaise_reponse'>" + reponse_d_evaluation_syllabe.join('') + "</p><p id='evaluation_cross'>&#10060;</p>");
-                                                    $("#evaluation_cross").css({ "display": "block", "right": reponse_d_evaluation_syllabe.join("").length / 2 + "rem", "transform": "scale(0.5)", "opacity": 0 });
-                                                    setTimeout(function () { $("#evaluation_cross").css({ "transform": "scale(1)", "opacity": 0.75 }); }, 100);
-                                                }
-        
-                                                setTimeout(() => {
-                                                    $("#evaluation_reponse p").html("");
-                                                }, 2000);
-                                            }
-                                            function effacerCheckMark() {
-                                                setTimeout(function () {
-                                                    $("#check_mark").empty();
-                                                }, 1000);
-                                            }
-                                            function masquerTesteContainer() {
-                                                setTimeout(() => { $("#teste_container").css({ "top": "0.5rem" }); }, 1000);
-                                            }
-                                            function enregistrerEvaluationSyllabe() {
-                                                lesson_de_syllabe_evaluation_du_jour.splice(evaluation_counter-1, 1, question_reponse);
-                                            }
-                                            function progressBarDEvaluationSyllabe() {
-        
-                                                let progress_unity = 100 / evaluation_syllabe_questions.length;
+                                        }, 1400);
+                                    }
+                                    function marquerReponseDEvaluationSyllabe() {
+                                        if (reponse_d_evaluation_syllabe.join("") == question_d_evaluation_syllabe) {
+
+                                            $("#evaluation_reponse").html("<p id='bonne_reponse'>" + reponse_d_evaluation_syllabe.join('') + "</p><div id='check_mark_container'> <p id='check_mark'></p> <p id='check_mark_cover'></p> </div>");
+                                            $("#check_mark_container").css({ "display": "inline-block", "margin-right": "4px" });
+                                            $("#check_mark_cover").css({ "right": "0.25rem" });
+                                            $("#check_mark").html("&#10003;");
+                                            setTimeout(function () { $("#check_mark_cover").css({ "right": "2rem" }); }, 100);
+                                            setTimeout(function () { $("#check_mark_container").css({ "display": "none" }); }, 1000);
+                                        } else {
+                                            $("#evaluation_reponse").html("<p id='mauvaise_reponse'>" + reponse_d_evaluation_syllabe.join('') + "</p><p id='evaluation_cross'>&#10060;</p>");
+                                            $("#evaluation_cross").css({ "display": "block", "right": reponse_d_evaluation_syllabe.join("").length / 2 + "rem", "transform": "scale(0.5)", "opacity": 0 });
+                                            setTimeout(function () { $("#evaluation_cross").css({ "transform": "scale(1)", "opacity": 0.75 }); }, 100);
+                                        }
+
+                                        setTimeout(() => {
+                                            $("#evaluation_reponse p").html("");
+                                        }, 2000);
+                                    }
+                                    function effacerCheckMark() {
+                                        setTimeout(function () {
+                                            $("#check_mark").empty();
+                                        }, 1000);
+                                    }
+                                    function masquerTesteContainer() {
+                                        setTimeout(() => { $("#teste_container").css({ "top": "0.5rem" }); }, 1000);
+                                    }
+                                    function enregistrerEvaluationSyllabe() {
+                                        lesson_de_syllabe_evaluation_du_jour.splice(evaluation_counter-1, 1, question_reponse);
+                                    }
+                                    function progressBarDEvaluationSyllabe() {
+
+                                        let progress_unity = 100 / evaluation_syllabe_questions.length;
+
+                                        if (question_d_evaluation_syllabe == "") return;
+                                        if (question_d_evaluation_syllabe != "") {
+                                            actualiserEvaluationProgressBar();
+
+                                            function actualiserEvaluationProgressBar() {
         
                                                 if (question_d_evaluation_syllabe == "") return;
                                                 if (question_d_evaluation_syllabe != "") {
-                                                    actualiserEvaluationProgressBar();
         
-                                                    function actualiserEvaluationProgressBar() {
-                
-                                                        if (question_d_evaluation_syllabe == "") return;
-                                                        if (question_d_evaluation_syllabe != "") {
-                
-                                                            let bar_width = evaluation_counter * progress_unity;
-                
-                                                            $(".progress_mauvaise_reponse_bar").css("width", bar_width + "%");
+                                                    let bar_width = evaluation_counter * progress_unity;
         
-                                                            if (question_d_evaluation_syllabe == reponse_d_evaluation_syllabe.join("")) {
-                                                                good_response_counter++;
-                                                                let good_response_width = good_response_counter * progress_unity;
-                                                                $(".progress_bonne_reponse_bar").css("width", good_response_width + "%");
-                                                            }
-                
-                                                            question_d_evaluation_syllabe = ""; //Vider la variable question_d_evaluation_syllabe après son utilisation.
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                            function afficherQuestionButton() {
-                                                if (evaluation_counter < evaluation_syllabe_questions.length) {
-                                                    masquer($("#evaluation_repetition_btn"));
-                                                    masquer($("#evaluation_correction_btn"));
-            
-                                                    setTimeout(() => { 
-                                                        display($("#evaluation_question_btn")); 
-                                                        rendreActif($("#evaluation_question_btn"));
-                                                    }, 100);
-                                                }
-                                            }
-                                            function finDEvaluationSyllabe() {
-                                                if (evaluation_counter === evaluation_syllabe_questions.length) {
-        
-                                                    let note_de_fin_d_evaluation_syllabe = calculerNote(lesson_de_syllabe_evaluation_du_jour);
-        
-                                                    if (note_de_fin_d_evaluation_syllabe < 100) {
-                                                        notificationDEchecDEvaluation();
-                                                        afficherBoutonDeReprise();
-                                                        viderLeTableau(lesson_de_syllabe_evaluation_du_jour);
-        
-                                                        function notificationDEchecDEvaluation() {
-                                                            ecris("evaluation_notification_corps", ducourage()+" "+$("#revision_notification_titre").text()+" ߣߌ߲߬ ߡߊ߫ ߢߊ߬. ߊ߬ ߢߊߦߋߣߴߌ ߓߟߏ߫  %"+parseIntNko(note_de_fin_d_evaluation_syllabe)+" ߟߋ߬ ߟߊ߫. ߘߌ߬ߢߍ߬ ߞߵߌ ߞߐߛߍ߬ߦߌ߬ ߦߙߐ ߢߌ߲߬ ߡߊ߬");
-                                                        }
-                                                    }
-                                                    if (note_de_fin_d_evaluation_syllabe === 100) {
-        
-                                                        stockerSyllabe();
-                                                        notificationDuSuccesDEvaluation();
-                                                        afficherBoutonPourLaMatiereSuivante();
-                                                        resultatDeSyllabe();
-        
-                                                        function stockerSyllabe() {
-              
-                                                            lesson_d_evaluation_syllabe = lesson_de_syllabe_evaluation_du_jour;
-                                                            localStorage.setItem("lesson_d_evaluation_syllabe", JSON.stringify(lesson_d_evaluation_syllabe));
-        
-                                                            if (lesson_d_apprentissage_syllabe.length === 126) {
-                                                                if (lesson_d_exercice_syllabe.length === 126) {
-                                                                    // if (lesson_d_evaluation_syllabe.length === 126) {
-        
-                                                                        sendLessonDataToDB("syllabe_evaluation", lesson_d_evaluation_syllabe);
-        
-                                                                        niveaux_etudies.push(niveau_en_cours);
-                                                                        phases_etudiees.push("syllabe_evaluation");
-                                                                        niveau_max++;
-                                                                        niveau_en_cours++;
-        
-                                                                        /*La récuperation de ces variables stockées, dans programmes.php, permettra d"actualiser le programme*/
-                                                                        sessionStorage.setItem("niveaux_etudies",JSON.stringify(niveaux_etudies));
-                                                                        sessionStorage.setItem("phases_etudiees", JSON.stringify(phases_etudiees));
-                                                                        sessionStorage.setItem("niveau_max", JSON.stringify(niveau_max));
-                                                                        sessionStorage.setItem("niveau_en_cours", JSON.stringify(niveau_en_cours));
-                                                                        sessionStorage.setItem("matiere_nouvellement_apprise",JSON.stringify(matiere_nom));
-                                                            
-                                                                        console.log("Lesson d'evaluation syllabe est envoyée à la base de donnée.");
-                                                                    // }
-                                                                }
-                                                            }
-                                                        }
-                                                        function notificationDuSuccesDEvaluation() {
-                                                            ecris("evaluation_notification_corps", felicitation()+"ߞߘߐߓߐߟߌ ߣߌ߲߭ ߢߊ߬ߣߍ߲߬ %"+parseIntNko(note_de_fin_d_evaluation_syllabe)+" ߟߊ߫. ߥߊ߫ ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߡߊ߬");
-                                                        }
-                                                        function resultatDeSyllabe() {
-        
-                                                            let apprentissage_syllabe_data = {};
-                                                            let exercice_syllabe_data= {};
-                                                            let evaluation_syllabe_data = {};
-                                                        
-                                                            if (lesson_d_apprentissage_syllabe.length === 126) {
-                                                                if (lesson_d_exercice_syllabe.length === 126) {
-                                                                    if (lesson_d_evaluation_syllabe.length === 126) {
-        
-                                                                        var date = dateAcuelle();
-                                                                        var niveau = niveau_en_cours;
-        
-                                                                        let note_d_apprentissage_syllabe = calculerNote(lesson_d_apprentissage_syllabe);
-                                                                        var note_d_exercice_syllabe = calculerNote(lesson_d_exercice_syllabe);
-                                                                        var note_de_syllabe_evaluation = calculerNote(lesson_d_evaluation_syllabe);
-                                                            
-                                                                        apprentissage_syllabe_data = {"date":date, "niveau":niveau, "phase":"syllabe_apprentissage", "lesson":lesson_d_apprentissage_syllabe, "note":note_d_apprentissage_syllabe};
-                                                                        exercice_syllabe_data = {"date":date, "niveau":niveau, "phase":"syllabe_exercice", "lesson":lesson_d_exercice_syllabe, "note":note_d_exercice_syllabe};
-                                                                        evaluation_syllabe_data = {"date":date, "niveau":niveau, "phase":"syllabe_evaluation", "lesson":lesson_d_evaluation_syllabe, "note":note_de_syllabe_evaluation};
-                                                                    }
-                                                                }
-                                                            }
-        
-                                                            resultatDeLaMatiere(apprentissage_syllabe_data, exercice_syllabe_data, evaluation_syllabe_data);
-                                                        }
+                                                    $(".progress_mauvaise_reponse_bar").css("width", bar_width + "%");
+
+                                                    if (question_d_evaluation_syllabe == reponse_d_evaluation_syllabe.join("")) {
+                                                        good_response_counter++;
+                                                        let good_response_width = good_response_counter * progress_unity;
+                                                        $(".progress_bonne_reponse_bar").css("width", good_response_width + "%");
                                                     }
         
-                                                    viderLeTableau(evaluation_syllabe_questions);
-                                                    setTimeout(() => { evaluation_counter = 0; }, 1500);
-                                                    
-                                                 /* Suppression d'effet des clicks précédents sur les dialogue_btns */
-                                                    $("#evaluation_question_btn").unbind("click");
-                                                    $("#evaluation_repetition_btn").unbind("click");
-                                                    $("#evaluation_correction_btn").unbind("click");
+                                                    question_d_evaluation_syllabe = ""; //Vider la variable question_d_evaluation_syllabe après son utilisation.
                                                 }
                                             }
                                         }
-                                    });
-                                }
-                                function questionsDEvaluation() {
-                                    let qe = [];
-                                    for (let j = 0; j < lesson_d_apprentissage_syllabe.length; j++) {
-                                        qe.push(lesson_d_apprentissage_syllabe[j][0]);
                                     }
-                                    qe = malaxer(qe);
-                                    return qe;
+                                    function afficherQuestionButton() {
+                                        if (evaluation_counter < evaluation_syllabe_questions.length) {
+                                            masquer($("#evaluation_repetition_btn"));
+                                            masquer($("#evaluation_correction_btn"));
+    
+                                            setTimeout(() => { 
+                                                display($("#evaluation_question_btn")); 
+                                                rendreActif($("#evaluation_question_btn"));
+                                            }, 100);
+                                        }
+                                    }
+                                    function finDEvaluationSyllabe() {
+                                        if (evaluation_counter === evaluation_syllabe_questions.length) {
+
+                                            let note_de_fin_d_evaluation_syllabe = calculerNote(lesson_de_syllabe_evaluation_du_jour);
+
+                                            if (note_de_fin_d_evaluation_syllabe < 100) {
+                                                notificationDEchecDEvaluation();
+                                                afficherBoutonDeReprise();
+                                                viderLeTableau(lesson_de_syllabe_evaluation_du_jour);
+
+                                                function notificationDEchecDEvaluation() {
+                                                    ecris("evaluation_notification_corps", ducourage()+" "+$("#revision_notification_titre").text()+" ߣߌ߲߬ ߡߊ߫ ߢߊ߬. ߊ߬ ߢߊߦߋߣߴߌ ߓߟߏ߫  %"+parseIntNko(note_de_fin_d_evaluation_syllabe)+" ߟߋ߬ ߟߊ߫. ߘߌ߬ߢߍ߬ ߞߵߌ ߞߐߛߍ߬ߦߌ߬ ߦߙߐ ߢߌ߲߬ ߡߊ߬");
+                                                }
+                                            }
+                                            if (note_de_fin_d_evaluation_syllabe === 100) {
+
+                                                stockerSyllabe();
+                                                notificationDuSuccesDEvaluation();
+                                                afficherBoutonPourLaMatiereSuivante();
+                                                resultatDeSyllabe();
+
+                                                function stockerSyllabe() {
+        
+                                                    lesson_d_evaluation_syllabe = lesson_de_syllabe_evaluation_du_jour;
+                                                    localStorage.setItem("lesson_d_evaluation_syllabe", JSON.stringify(lesson_d_evaluation_syllabe));
+
+                                                    if (lesson_d_apprentissage_syllabe_du_serveur.length === 126) {
+                                                        if (lesson_d_exercice_syllabe_du_serveur.length === 126) {
+                                                            if (lesson_d_evaluation_syllabe.length === 28) {
+
+                                                                sendLessonDataToDB("syllabe_evaluation", lesson_d_evaluation_syllabe);
+
+                                                                niveaux_etudies.push(niveau_en_cours);
+                                                                phases_etudiees.push("syllabe_evaluation");
+                                                                niveau_max++;
+                                                                niveau_en_cours++;
+
+                                                             /*La récuperation de ces variables stockées, dans programmes.php, permettra d"actualiser le programme*/
+                                                                sessionStorage.setItem("niveaux_etudies",JSON.stringify(niveaux_etudies));
+                                                                sessionStorage.setItem("phases_etudiees", JSON.stringify(phases_etudiees));
+                                                                sessionStorage.setItem("niveau_max", JSON.stringify(niveau_max));
+                                                                sessionStorage.setItem("niveau_en_cours", JSON.stringify(niveau_en_cours));
+                                                                sessionStorage.setItem("matiere_nouvellement_apprise",JSON.stringify(matiere_nom));
+                                                    
+                                                                console.log("Lesson d'evaluation syllabe est envoyée à la base de donnée.");
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                                function notificationDuSuccesDEvaluation() {
+                                                    ecris("evaluation_notification_corps", felicitation()+"ߞߘߐߓߐߟߌ ߣߌ߲߭ ߢߊ߬ߣߍ߲߬ %"+parseIntNko(note_de_fin_d_evaluation_syllabe)+" ߟߊ߫. ߛߌߛߊ߲߬߸ ߌ ߘߌ߫ ߛߋ߫ ߞߊ߬ ߞߊ߲ߡߊߛߙߋ ߘߋ߰ߟߌ ߘߊߡߌ߬ߘߊ߬.");
+                                                }
+                                                function resultatDeSyllabe() {
+
+                                                    let apprentissage_syllabe_data = {};
+                                                    let exercice_syllabe_data= {};
+                                                    let evaluation_syllabe_data = {};
+                                                
+                                                    if (lesson_d_apprentissage_syllabe.length === 126) {
+                                                        if (lesson_d_exercice_syllabe.length === 126) {
+                                                            if (lesson_d_evaluation_syllabe.length === 28) {
+
+                                                                var date = dateAcuelle();
+                                                                var niveau = niveau_en_cours;
+
+                                                                let note_d_apprentissage_syllabe = calculerNote(lesson_d_apprentissage_syllabe);
+                                                                var note_d_exercice_syllabe = calculerNote(lesson_d_exercice_syllabe);
+                                                                var note_de_syllabe_evaluation = calculerNote(lesson_d_evaluation_syllabe);
+                                                    
+                                                                apprentissage_syllabe_data = {"date":date, "niveau":niveau, "phase":"syllabe_apprentissage", "lesson":lesson_d_apprentissage_syllabe, "note":note_d_apprentissage_syllabe};
+                                                                exercice_syllabe_data = {"date":date, "niveau":niveau, "phase":"syllabe_exercice", "lesson":lesson_d_exercice_syllabe, "note":note_d_exercice_syllabe};
+                                                                evaluation_syllabe_data = {"date":date, "niveau":niveau, "phase":"syllabe_evaluation", "lesson":lesson_d_evaluation_syllabe, "note":note_de_syllabe_evaluation};
+                                                            }
+                                                        }
+                                                    }
+
+                                                    resultatDeLaMatiere(apprentissage_syllabe_data, exercice_syllabe_data, evaluation_syllabe_data);
+                                                }
+                                            }
+
+                                            viderLeTableau(evaluation_syllabe_questions);
+                                            setTimeout(() => { evaluation_counter = 0; }, 1500);
+                                            
+                                            /* Suppression d'effet des clicks précédents sur les dialogue_btns */
+                                            $("#evaluation_question_btn").unbind("click");
+                                            $("#evaluation_repetition_btn").unbind("click");
+                                            $("#evaluation_correction_btn").unbind("click");
+                                        }
+                                    }
                                 }
-                                function initialiserEvaluationSyllabeAStocker() {
-                                    lesson_de_syllabe_evaluation_du_jour = initialiserData(evaluation_syllabe_questions);
-                                }
-                            }
+                            });
                         }
                     }
-                });
+                }
             }
             function consonnesChoisiesDuServeur() {
     

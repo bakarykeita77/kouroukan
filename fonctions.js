@@ -845,29 +845,6 @@ console.log(voyelles_deja_selectionnees);
             if(voyelles_deja_selectionnees.length != 0) $("#panneau_submit").html("ߣߴߌ ߓߊ߲߫ ߘߊ߫߸ ߦߋ߫ ߢߣߊߕߊ߬ߣߍ߲ ߠߎ߬ ߛߓߍ߫ ߥߟߊ߬ߓߊ ߞߊ߲߬");
         }
     }
-    function chargerCorpsDePreAlphabet() {
-        $('#apprentissage_body').html(preApprentissageCorpsHTML());
-               
-        function preApprentissageCorpsHTML() {
-            var c = alphabet_nko[0];
-            c.push('');
-
-            var a_html = "<div id = 'table_pre_apprentissage'>\n";
-                for(var i=0;i<21;i+=7) {
-                    a_html += "<div class='pre_apprentissage_tr'>\n";
-                        for(var j=0;j<7;j++) a_html += "<span class='pre_apprentissage_td'>"+c[i+j]+"</span>\n";
-                    a_html += "</div>\n";
-                }
-                for(var k=21;k<28;k+=7){
-                    a_html += "<div class='pre_apprentissage_tr'>\n";
-                        for(var l=0;l<7;l++) a_html += "<span class='pre_apprentissage_td'>"+c[k+l]+"</span>\n";
-                    a_html += "</div>\n";
-                }
-            a_html += "</div>";
-              
-            return a_html;
-        }
-    }
     function chargementParDefautDuTableauNoir() {
         let matiere_index = JSON.parse(sessionStorage.getItem("matiere_index"));
         let a_apprendre = "";
@@ -877,7 +854,7 @@ console.log(voyelles_deja_selectionnees);
         if(matiere_index === 3) a_apprendre = "ߖߊ߰ߕߋ߬ߘߋ߲߫";
 
         $('#apprentissage_body').html("<table id='table_syllabe_apprentissage'><div id='texte'></div></table>");
-        setTimeout(() => { ecris("texte", a_apprendre+" ߘߋ߲߰ߕߊ ߟߎ߬ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬"); }, 800);
+        setTimeout(() => { ecris("texte", a_apprendre+" ߘߋ߲߰ߕߊ ߟߎ߬ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬"); }, 300);
     }
     function chargerPanneauDesCaracteres() {
         
@@ -1388,7 +1365,7 @@ console.log(voyelles_deja_selectionnees);
 
         setTimeout(() => { 
             afficherNotification();
-            setTimeout(() => { write(); }, 500);
+            setTimeout(() => { write(); }, 300);
             function write() {
                 indice++;
                 $('#'+element_id).html(message.substr(0,indice));

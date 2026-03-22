@@ -685,7 +685,7 @@
                 let caractere_container = $(this);
                 let caractere = caractere_container.text();
 
-               if(consonnes_etudiees.indexOf(caractere) != "-1") { caractere_container.css({"color":"orange", "font-weight":"bold"}); }
+                if(consonnes_etudiees.indexOf(caractere) != "-1") { caractere_container.css({"color":"orange", "font-weight":"bold"}); }
                 caractere_container.click(function() { marquerLaConsonneChoisie(caractere_container); });
             });
         }
@@ -1193,12 +1193,12 @@ console.log(voyelles_deja_selectionnees);
     }
     function consonnesChoisiesDuServeur() {
    
-        let niveau_actif = JSON.parse(sessionStorage.getItem("niveau_actif"));
+        let niveau = JSON.parse(sessionStorage.getItem("niveau"));
         let datas = JSON.parse(sessionStorage.getItem("datas"));
         let cs = [];
         let lesson = [];
 
-        if (datas[niveau_actif-1][0] != undefined)  lesson = JSON.parse(datas[niveau_actif-1][0].lesson);
+        if (datas[niveau-1][0] != undefined)  lesson = JSON.parse(datas[niveau-1][0].lesson);
         lesson.forEach(element => {
             let consonne = element[0].split('')[0];
             if ($.inArray(consonne, cs) === -1) { cs.push(consonne); }
@@ -1249,7 +1249,7 @@ console.log(voyelles_deja_selectionnees);
     function dateDApprentissageAlphabetDuServeur() {
         let datas = JSON.parse(sessionStorage.getItem('datas'));
         let date = "";
-        if(datas.length != 0) {
+        if(datas != null) if(datas.length != 0) {
             date = (datas[0][0] == undefined) ? dateAcuelle() : datas[0][0].date;
         }
         return date;
@@ -1885,13 +1885,6 @@ console.log(voyelles_deja_selectionnees);
         $('.table_parlante td').css('background-color','rgba(85,85,85,0.25)');
         if(question == reponse) { valider(td_actif); }
         if(question != reponse) { barrer(td_actif); }
-    }
-    function masquer(element) {
-        element.css({
-            'display':'none',
-            'transform':'scale(0.75)', 
-            'opacity':'0'
-        });
     } 
     function marquerLaConsonneChoisie(clicked_consonne_container) {
         if(clicked_consonne_container.css("color") != "rgb(255, 165, 0)") {
@@ -1900,6 +1893,13 @@ console.log(voyelles_deja_selectionnees);
             clicked_consonne_container.css('background-color',consonne_background);
         }
     }
+    function masquer(element) {
+        element.css({
+            'display':'none',
+            'transform':'scale(0.75)', 
+            'opacity':'0'
+        });
+    }
     function masquerPanneauDesCaracteres() { $('#caracteres_container').css({"top":"22rem", "height":0}); }
     function masquerNotification() {
         if($('.notification_corps').css("top") == "0px") {
@@ -1907,6 +1907,18 @@ console.log(voyelles_deja_selectionnees);
             $('.notification_corps').text('');
             $('.notification_corps').css("top", "5.25rem");
         }
+    }
+    function matiereNom() {
+        let matiere = "";
+        
+        switch(niveau) {
+            case "1" : matiere = "alphabet"; break;
+            case "2" : matiere = "syllabes"; break;
+            case "3" : matiere = "tons"; break;
+            case "4" : matiere = "chiffres"; break;
+        }
+
+        return matiere;
     }
     function masquerTesteContainer() { setTimeout(() => { $("#teste_container").css({"top":"0.5rem"}); }, 800); }
     function memoireConsonnesChoisies() {
@@ -2113,11 +2125,11 @@ console.log(voyelles_deja_selectionnees);
     }
     function nomDeLaMatiereSuivante() {
         let ms = "";
-        let niveau_actif = JSON.parse(sessionStorage.getItem("niveau_actif"));
+        let niveau = JSON.parse(sessionStorage.getItem("niveau"));
 
-        if(niveau_actif == 1) ms = "ߜߋ߲߲߭";
-        if(niveau_actif == 2) ms = "ߞߊ߲ߡߊߛߙߋ";
-        if(niveau_actif == 3) ms = "ߖߊ߰ߕߋ߬ߘߋ߲";
+        if(niveau == 1) ms = "ߜߋ߲߲߭";
+        if(niveau == 2) ms = "ߞߊ߲ߡߊߛߙߋ";
+        if(niveau == 3) ms = "ߖߊ߰ߕߋ߬ߘߋ߲";
 
         return ms;
     }
@@ -3088,16 +3100,23 @@ console.log(voyelles_deja_selectionnees);
     function sendLessonDataToDB(lesson_phase,lesson_data) {
 
         var id_client = JSON.parse(sessionStorage.getItem('id_client'));
-        var matiere = JSON.parse(sessionStorage.getItem('matiere_active')); // Voir programmes.js fonction storagesDuProgramme()
-        var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));
+        var matiere = JSON.parse(sessionStorage.getItem('matiere'));
+        var niveau = JSON.parse(sessionStorage.getItem('niveau'));
         var phase   = lesson_phase;
         var lesson  = JSON.stringify(lesson_data);
         var note = totalPoint(lesson_data);
-    
+
+console.log(id_client);
+console.log(matiere);
+console.log(niveau);
+console.log(phase);
+console.log(lesson);
+console.log(note);
+
         const data_to_send = new URLSearchParams({
             id_client : id_client,
             matiere : matiere,
-            niveau : niveau_actif,
+            niveau : niveau,
             phase : phase,
             lesson : lesson,
             note : note

@@ -5,11 +5,13 @@ function syllabe() {
 
     extractionDesDatasDuServeur();
 
+    var matiere = matiereNom();
+    sessionStorage.setItem("matiere",JSON.stringify(matiere));
     var datas = JSON.parse(sessionStorage.getItem("datas"));
     var niveau_max = JSON.parse(sessionStorage.getItem("niveau_max"));
     var phases_etudiees = (datas[niveau_max].length == 0) ? [] : JSON.parse(sessionStorage.getItem("phases_etudiees"));
     var niveaux_etudies = JSON.parse(sessionStorage.getItem("niveaux_etudies")); 
-    var niveau_actif = JSON.parse(sessionStorage.getItem("niveau_actif"));   // Voir programmes.js fonction storagesDuProgramme()
+    var niveau = JSON.parse(sessionStorage.getItem("niveau"));   // Voir programmes.js fonction storagesDuProgramme()
     var niveau_en_cours = JSON.parse(sessionStorage.getItem("niveau_en_cours"));
     var matiere_nom = JSON.parse(sessionStorage.getItem("matiere_nom"));
 
@@ -17,7 +19,7 @@ function syllabe() {
     let consonnes_exercees_du_serveur = consonnesDeSyllabeExerceesDuServeur();
 
 
-    if (niveau_actif === 2) {
+    if (niveau === 2) {
 
         controlSurLesPhasesEtudiees();
         syllabeNko();
@@ -62,6 +64,7 @@ function syllabe() {
             let lesson_de_syllabe_exercice_du_jour = [];
             let lesson_de_syllabe_revision_du_jour = [];
             let lesson_de_syllabe_evaluation_du_jour = [];
+            
        
             apprentissageSyllabe();
             exerciceSyllabe();
@@ -72,6 +75,9 @@ function syllabe() {
 
 
             function apprentissageSyllabe() {
+
+                let phase_id = "syllabe_apprentissage";
+                sessionStorage.setItem("phase_id", JSON.stringify(phase_id));
 
                 parametrageDeLesson();
                 chargerApprentissageSyllabe();
@@ -140,7 +146,6 @@ function syllabe() {
                             let global_clicks_counter = 0;
 
                             if(nouvelles_consonnes.indexOf(nouvelle_consonne) != -1) {
-                                console.log("Cette '"+nouvelle_consonne+"' est déjà étudiée.");
                                 console.log("Voici les consonnes étudiées:");
                                 console.log(consonnes_etudiees);
                             };
@@ -276,6 +281,9 @@ function syllabe() {
             function exerciceSyllabe() {
                 $("#exercice_btn, #reprendre_exercice_btn, #continu_sur_exercice_btn").click(function (e) {
                     e.stopImmediatePropagation();
+
+                    let phase_id = "syllabe_exercice";
+                    sessionStorage.setItem("phase_id", JSON.stringify(phase_id));
 
                     lesson_d_exercice_syllabe_du_serveur = lessonDExerciceSyllabeDuServeur();
                     lesson_active = "exercice";
@@ -641,6 +649,9 @@ function syllabe() {
              */
                 $("#revision_btn, #reprendre_revision_btn, #continu_sur_revision_btn").click(function (e) {
                     e.stopImmediatePropagation();
+                    
+                    let phase_id = "syllabe_revision";
+                    sessionStorage.setItem("phase_id", JSON.stringify(phase_id));
 
                     let syllabes_nouvellement_apprises = [];
                     let syllabes_anciennement_apprises = [];
@@ -1098,6 +1109,9 @@ console.log(anciens_syllabes_melanges);
                 il est directement redirigé sur la page d'évaluation.*/
                 if (memoire_consonnes_choisies.length === 18) evaluation(); 
 
+                    let phase_id = "syllabe_evaluation";
+                    sessionStorage.setItem("phase_id", JSON.stringify(phase_id));
+
                 $("#evaluation_btn, #reprendre_evaluation_btn, #continu_sur_evaluation_btn").click(function () {
                     if (memoire_consonnes_choisies.length === 18) evaluation();
                 });
@@ -1410,6 +1424,7 @@ console.log(anciens_syllabes_melanges);
                                                                 sessionStorage.setItem("matiere_nouvellement_apprise",JSON.stringify(matiere_nom));
                                                     
                                                                 console.log("Lesson d'evaluation syllabe est envoyée à la base de donnée.");
+                                                                sessionStorage.removeItem("phase_id");
                                                             }
                                                         }
                                                     }

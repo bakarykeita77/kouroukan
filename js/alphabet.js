@@ -10,6 +10,8 @@ function alphabet() {
     let data_alphabet_evaluation = {};
 
     let element_actif = "";
+    let matiere = matiereNom();
+    sessionStorage.setItem("matiere",JSON.stringify(matiere));
     let matiere_nom = JSON.parse(sessionStorage.getItem('matiere_nom'));
     let phases_etudiees = JSON.parse(sessionStorage.getItem('phases_etudiees'));
     let ordre_de_question = "";
@@ -1936,10 +1938,10 @@ console.log(lesson_d_apprentissage_alphabet_du_serveur);
                 
                     console.log("Début d'Evaluation d'alphabet");
                     
-                    let total_phase = $('.phases li').length;
-                    let index_phase_active = $('#alphabet_evaluation').index();
                     let phase_id = "alphabet_evaluation";
                     sessionStorage.setItem("phase_id", JSON.stringify(phase_id));
+                    let total_phase = $('.phases li').length;
+                    let index_phase_active = $('#alphabet_evaluation').index();
                     let evaluation_alphabet_stocker_au_serveur = {}
                                                 
                     $('#fermer_evaluation').on('click', function() { raffraichirLaPage(); });
@@ -1984,7 +1986,7 @@ console.log(lesson_d_apprentissage_alphabet_du_serveur);
                     if(lesson_d_evaluation_alphabet.length === 0) {
 
                         var evaluation_questions = [];
-                        var nbr_max_de_questions_a_poser = 20;
+                        var nbr_max_de_questions_a_poser = 27;
                         var q_total = parseIntNko(nbr_max_de_questions_a_poser);
                         var question_evaluation = '', reponse_evaluation = [];
                         var moyenne_d_evaluation = 1;
@@ -2257,6 +2259,7 @@ console.log(lesson_d_apprentissage_alphabet_du_serveur);
                                                 phases_etudiees.push(phase_li_id);
                                                 data_alphabet_evaluation = {"date":date_d_evaluation, "niveau":niveau_d_evaluation, "phase":phase_d_evaluation, "lesson":lesson_d_evaluation_alphabet, "note":note_d_evaluation};
 
+                                                sessionStorage.removeItem("phase_id");
                                                 let phase_nbr = phases_etudiees.length;
 
                                                 sessionStorage.setItem('lesson_d_evaluation_alphabet', JSON.stringify(lesson_d_evaluation_alphabet));
@@ -2290,7 +2293,7 @@ console.log(lesson_d_apprentissage_alphabet_du_serveur);
                                                 }, 4000);
                                             }
                                             function continuSurSyllabe() {
-                                                $('#continu_sur_apprentissage_btn').html("<a id='redirection_sur_syllabe' href='http://localhost/kouroukan/php/programmes.php'>ߜߋ߲߭ ߥߟߊ߬ߘߊ ߕߊ߬ ߦߊ߲߬</a>");
+                                                $('#continu_sur_apprentissage_btn').html("<a id='redirection_sur_syllabe' href='http://localhost/kouroukan/php/programmes.php'>ߜߋ߲߭ ߥߟߊ߬ߘߊ ߘߊߡߌ߬ߘߊ߫ ߦߊ߲߬</a>");
                                             }
                                         }
                                     }

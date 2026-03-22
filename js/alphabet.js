@@ -1,5 +1,8 @@
 function alphabet() {
     
+    // localStorage.clear();
+    // sessionStorage.clear();
+    
     let datas = JSON.parse(sessionStorage.getItem('datas'));
     let date_d_apprentissage_alphabet_du_serveur = dateDApprentissageAlphabetDuServeur();
     let data_alphabet_apprentissage = {};
@@ -24,10 +27,10 @@ function alphabet() {
     var niveaux_etudies = JSON.parse(sessionStorage.getItem('niveaux_etudies')); 
     var niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
     var niveau_max = JSON.parse(sessionStorage.getItem('niveau_max'));   // Voir programmes.js fonction storagesDuProgramme()
-    var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));   // Voir programmes.js fonction storagesDuProgramme()
+    var niveau = JSON.parse(sessionStorage.getItem('niveau'));   // Voir programmes.js fonction storagesDuProgramme()
     var option_retenue = JSON.parse(localStorage.getItem('option_retenue')); // Voir programmes.js : lessonOptions()
   
-    if(niveau_actif === 1) {
+    if(niveau === 1) {
 
         phases_etudiees = (phases_etudiees == null) ? [] : phases_etudiees;
                     
@@ -1289,7 +1292,8 @@ function alphabet() {
                     sessionStorage.setItem("phase_id", JSON.stringify(phase_id));
                     let niveau_d_apprentissage_alphabet_du_serveur = 1, phase_d_apprentissage_alphabet_du_serveur = phase_li_id, lesson_d_apprentissage_alphabet_du_serveur = [], note_d_apprentissage_alphabet_du_serveur = 0;
                     
-                    lesson_d_apprentissage_alphabet_du_serveur = lessonDApprentissagePreAlphabet();
+                    lesson_d_apprentissage_alphabet_du_serveur = lessonDApprentissagePreAlphabetDuServeur();
+console.log(lesson_d_apprentissage_alphabet_du_serveur);
 
                     if(datas.length != 0) {
                         date_d_apprentissage_alphabet_du_serveur = (datas[0][0] == undefined) ? dateAcuelle() : datas[0][0].date;
@@ -1301,10 +1305,7 @@ function alphabet() {
                         apprentissage_alphabet_stocker_au_serveur = {"date":date_d_apprentissage_alphabet_du_serveur, "niveau":niveau_d_apprentissage_alphabet_du_serveur, "phase":phase_d_apprentissage_alphabet_du_serveur, "lesson":lesson_d_apprentissage_alphabet_du_serveur, "note":note_d_apprentissage_alphabet_du_serveur}
                     }
 
-                    if(lesson_d_apprentissage_alphabet_du_serveur.length != 0) {
-                        console.log("La leçon d'apprentissage alphabet est déjà faite.");
-                        return;
-                    }
+                    if(lesson_d_apprentissage_alphabet_du_serveur.length != 0) console.log("La leçon d'apprentissage alphabet est déjà faite.");
         
                     lesson_d_apprentissage_alphabet = JSON.parse(sessionStorage.getItem('lesson_d_apprentissage_alphabet'));
                     let data_alphabet_apprentissage = JSON.parse(sessionStorage.getItem('data_alphabet_apprentissage'));
@@ -1320,12 +1321,12 @@ function alphabet() {
                     if(lesson_d_apprentissage_alphabet.length === 0) { note_d_apprentissage_alphabet = 0; }
                         
                         
-                    initialiserProgressBar();
-                    chargerApprentissageAlphabet();
-                    afficherApprentissageAlphabet();
-                    apprendreAlphabetNko();
-                    raffraichissementDeLaPage();
-                    fermerLaPage()
+                    // initialiserProgressBar();
+                    // chargerApprentissageAlphabet();
+                    // afficherApprentissageAlphabet();
+                    // apprendreAlphabetNko();
+                    // raffraichissementDeLaPage();
+                    // fermerLaPage()
                     
                     function chargerApprentissageAlphabet() {
                         
@@ -1494,71 +1495,73 @@ function alphabet() {
                                     function finDApprentissageAlphabet() {
                                         if(stocker_apprentissage_status == 'non_stocker') {
 
-                                            if(clicked_elements_quantity >= lesson_d_apprentissage_alphabet.length) {
-                                                $('#apprentissage_dialogue_btns').css("background-color","yellow");
-                                            } 
+                                            if(clicked_elements_quantity >= lesson_d_apprentissage_alphabet.length) $('#apprentissage_dialogue_btns').css("background-color","yellow");
 
                                             $('#apprentissage_dialogue_btns').click((e) => {
                                                 e.stopImmediatePropagation();
                         
                                                 if(lettres_cliques.length === 27) {
-                                                    
-                                                    note_d_apprentissage_alphabet = calculerNote(lesson_d_apprentissage_alphabet);
-                                                    
-                                                    masquerNotification();
-                                                    stockerApprentissageAlphabet();
-                                                    notificationDeFinDApprentissageAlphabet();
-                                                    afficherBoutonDExercice();
-                                                    transitionVersExerciceAlphabet();
-
-
-                                                    function stockerApprentissageAlphabet() {
-
-                                                        let date_d_apprentissage = dateAcuelle();
-                                                        let niveau_d_apprentissage = niveau_en_cours;
-                                                        let phase_d_apprentissage = phase_li_id;
-                                                        let moyenne_d_apprentissage = 100; 
-
-                                                        if(note_d_apprentissage_alphabet <  moyenne_d_apprentissage) alert("ߌ ߡߊ߫ ߛߓߍߘߋ߲ ߥߟߊ ߜߋ߭ ߠߎ߬ ߓߍ߯ ߟߊߡߍ߲߫");
-                                                        if(note_d_apprentissage_alphabet >= moyenne_d_apprentissage) {
+                                                    if(stocker_apprentissage_status == "non_stocker") {
                                                         
-                                                            sendLessonDataToDB('alphabet_apprentissage',lesson_d_apprentissage_alphabet);
-
-                                                            phases_etudiees.push(phase_d_apprentissage);     
-                                                            data_alphabet_apprentissage = {"date":date_d_apprentissage, "niveau":niveau_d_apprentissage, "phase":phase_d_apprentissage, "lesson":lesson_d_apprentissage_alphabet, "note":note_d_apprentissage_alphabet};
-
-                                                            sessionStorage.setItem('lesson_d_apprentissage_alphabet', JSON.stringify(lesson_d_apprentissage_alphabet));
-                                                            sessionStorage.setItem('phases_etudiees', JSON.stringify(phases_etudiees));
-                                                            sessionStorage.setItem('data_alphabet_apprentissage', JSON.stringify(data_alphabet_apprentissage));
-                                                            sessionStorage.setItem("data_alphabet_apprentissage", JSON.stringify(data_alphabet_apprentissage));
-
-                                                            stocker_apprentissage_status = 'stocker';
-
-                                                            console.log('Les données d\'apprentissage sont envoyées à la base de données');
-                                                            console.log("Les phases étudiées sont : "+phases_etudiees); 
-                                                        }
-                                                    }
-                                                    function notificationDeFinDApprentissageAlphabet() {
+                                                        note_d_apprentissage_alphabet = calculerNote(lesson_d_apprentissage_alphabet);
                                                         
-                                                        ecris('apprentissage_notification_corps','\
-                                                            ߌ ߞߎߟߎ߲ߖߋ߫ ߘߐ߬ߖߊ ߟߊ߫ ߛߓߍߘߋ߲ ߠߎ߫ ߘߋ߲߱ ߠߊ߫<br>\
-                                                            ߣߴߌ ߓߘߴߊ߬ߟߎ߬ ߟߐ߲߫߸ ߓߐߟߌ߫ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߓߐ߫ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫ ߛߊ߲ߝߍ߬ ߣߎߡߊ߲߫ ߓߟߏ ߟߊ߫)<br>\
-                                                            ߣߴߌ ߘߏ߲߬ ߡߊ߫ ߓߊ߲߫ ߊ߬ߟߎ߬ ߟߐ߲߫ ߠߊ߫߸ ߒ߬ߓߊ߬ ߥߊ߫ ߘߋ߲߰ߠߌ ߡߊ߫ ߤߊ߲߯ ߌ ߦߴߊ߬ߟߎ߬ ߟߐ߲߫ ߞߊ߬ ߣߊ߬ߕߏ߫ ߓߐ߫ ߟߊ߫.\
-                                                        ');
-
-                                                        setTimeout(() => { indexer($('#fermer_apprentissage')); }, 2000);
-                                                    }
-                                                    function transitionVersExerciceAlphabet() {
-                                                        let index_phase_active = $('.phases_container ul .active').index();
-
-                                                        if(note_d_apprentissage_alphabet < 100) 
-                                                        {console.log('La note d\'apprentissage est inférieure à 100. Cela bloque la transition vers Exercice Alphabet');}else
-                                                        {console.log('La note d\'apprentissage est égale à 100. Félicitation, la transition vers Exercice Alphabet doit se passer avec succès! Cliquer sur la phase active "alphabet_exercice -> ߡߊ߬ߞߟߏ߬ߟߌ"');}
-
-                                                        if(note_d_apprentissage_alphabet == 100) {
-                                                            $('#continu_sur_exercice_btn').click(() => { raffraichirLaPage(); });
-                                                            changerPhaseActive(index_phase_active);
+                                                        masquerNotification();
+                                                        stockerApprentissageAlphabet();
+                                                        notificationDeFinDApprentissageAlphabet();
+                                                        afficherBoutonDExercice();
+                                                        transitionVersExerciceAlphabet();
+    
+    
+                                                        function stockerApprentissageAlphabet() {
+    
+                                                            let date_d_apprentissage = dateAcuelle();
+                                                            let niveau_d_apprentissage = niveau_en_cours;
+                                                            let phase_d_apprentissage = phase_li_id;
+                                                            let moyenne_d_apprentissage = 100; 
+    
+                                                            if(note_d_apprentissage_alphabet <  moyenne_d_apprentissage) alert("ߌ ߡߊ߫ ߛߓߍߘߋ߲ ߥߟߊ ߜߋ߭ ߠߎ߬ ߓߍ߯ ߟߊߡߍ߲߫");
+                                                            if(note_d_apprentissage_alphabet >= moyenne_d_apprentissage) {
+                                                            
+                                                                sendLessonDataToDB('alphabet_apprentissage',lesson_d_apprentissage_alphabet);
+    
+                                                                phases_etudiees.push(phase_d_apprentissage);     
+                                                                data_alphabet_apprentissage = {"date":date_d_apprentissage, "niveau":niveau_d_apprentissage, "phase":phase_d_apprentissage, "lesson":lesson_d_apprentissage_alphabet, "note":note_d_apprentissage_alphabet};
+    
+                                                                sessionStorage.setItem('lesson_d_apprentissage_alphabet', JSON.stringify(lesson_d_apprentissage_alphabet));
+                                                                sessionStorage.setItem('phases_etudiees', JSON.stringify(phases_etudiees));
+                                                                sessionStorage.setItem('data_alphabet_apprentissage', JSON.stringify(data_alphabet_apprentissage));
+                                                                sessionStorage.setItem("data_alphabet_apprentissage", JSON.stringify(data_alphabet_apprentissage));
+    
+                                                                stocker_apprentissage_status = 'stocker';
+    
+                                                                console.log('Les données d\'apprentissage sont envoyées à la base de données');
+                                                                console.log("Les phases étudiées sont : "+phases_etudiees); 
+                                                            }
                                                         }
+                                                        function notificationDeFinDApprentissageAlphabet() {
+                                                            
+                                                            ecris('apprentissage_notification_corps','\
+                                                                ߌ ߞߎߟߎ߲ߖߋ߫ ߘߐ߬ߖߊ ߟߊ߫ ߛߓߍߘߋ߲ ߠߎ߫ ߘߋ߲߱ ߠߊ߫<br>\
+                                                                ߣߴߌ ߓߘߴߊ߬ߟߎ߬ ߟߐ߲߫߸ ߓߐߟߌ߫ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߓߐ߫ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫ ߛߊ߲ߝߍ߬ ߣߎߡߊ߲߫ ߓߟߏ ߟߊ߫)<br>\
+                                                                ߣߴߌ ߘߏ߲߬ ߡߊ߫ ߓߊ߲߫ ߊ߬ߟߎ߬ ߟߐ߲߫ ߠߊ߫߸ ߒ߬ߓߊ߬ ߥߊ߫ ߘߋ߲߰ߠߌ ߡߊ߫ ߤߊ߲߯ ߌ ߦߴߊ߬ߟߎ߬ ߟߐ߲߫ ߞߊ߬ ߣߊ߬ߕߏ߫ ߓߐ߫ ߟߊ߫.\
+                                                            ');
+    
+                                                            setTimeout(() => { indexer($('#fermer_apprentissage')); }, 2000);
+                                                        }
+                                                        function transitionVersExerciceAlphabet() {
+                                                            let index_phase_active = $('.phases_container ul .active').index();
+    
+                                                            if(note_d_apprentissage_alphabet < 100) 
+                                                            {console.log('La note d\'apprentissage est inférieure à 100. Cela bloque la transition vers Exercice Alphabet');}else
+                                                            {console.log('La note d\'apprentissage est égale à 100. Félicitation, la transition vers Exercice Alphabet doit se passer avec succès! Cliquer sur la phase active "alphabet_exercice -> ߡߊ߬ߞߟߏ߬ߟߌ"');}
+    
+                                                            if(note_d_apprentissage_alphabet == 100) {
+                                                                $('#continu_sur_exercice_btn').click(() => { raffraichirLaPage(); });
+                                                                changerPhaseActive(index_phase_active);
+                                                            }
+                                                        }
+                                                    }else{
+                                                        alert("ߛߓߍߘߋ߲ ߠߎ߬ ߘߋ߰ߣߍ߲߬ ߞߘߐ ߟߋ߬.");
                                                     }
                                                 }else{
                                                     alert("ߛߓߍߘߋ߲ ߠߎ߬ ߓߍ߯ ߡߊ߫ ߘߋ߲߰ ߌ ߓߟߏ߫.");
@@ -1684,9 +1687,11 @@ function alphabet() {
                             function chargerEnteteDeExerciceAlphabet() {
                                 $('.notification_titre').html('ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ');
                                 masquerNotification();
-                                ecrire('notification_corps','\
-                                    ߓߌ߬ߟߊ߬ ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߞߐ߫.\n ߦߋ߫ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߣߌ߫ ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ ߣߌ߫ ߛߊߞߍߟߌ ߟߎ߬ ߞߍ߫ ߦߊ߲߬߸ ߤߊ߲߯ ߞߐߝߟߌ߫ ߥߟߊ ߦߋ߫ ߓߐ߫.\
-                                ');
+                                setTimeout(() => {
+                                    ecris('exercice_notification_corps','\
+                                        ߓߌ߬ߟߊ߬ ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߞߐ߫.\n ߦߋ߫ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߣߌ߫ ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ ߣߌ߫ ߛߊߞߍߟߌ ߟߎ߬ ߞߍ߫ ߦߊ߲߬߸ ߤߊ߲߯ ߞߐߝߟߌ߫ ߥߟߊ ߦߋ߫ ߓߐ߫.\
+                                    ');
+                                }, 2500);
                             }
                             function chargerCorpsDeExerciceAlphabet() { 
                                 parametrageDeLesson();
@@ -1971,7 +1976,7 @@ function alphabet() {
 
                     if(lesson_d_evaluation_alphabet.length != 0) { 
                         console.log("La leçon d'evaluation alphabet est déjà faite.  Voir ci-dessous");
-                        console.log(lesson_d_alphabet_exercice);
+                        console.log(lesson_d_evaluation_alphabet);
                         apprentissageAlphabet(); 
                         fermerLaPage(); 
                     }
@@ -2005,18 +2010,15 @@ function alphabet() {
                     
                             function chargerEnteteDeEvaluatonAlphabet() {
                                 $('.notification_titre').text('ߛߓߍߛߎ߲ ߞߘߐߓߐߟߌ');
-                                setTimeout(() => {
-                                    ecrire('notification_corps','\
-                                        ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ߬ ߞߘߎ ߘߌ߲߯ ߘߎ߭ߡߊ߬߸ ߦߴߌ ߕߟߏߡߊߟߐ߬߸ߦߋ߫ ߛߓߍߘߋ߲߫ ߟߊߡߍ߲ߣߍ߲ ߛߓߍ߫߸ ߤߊ߲߯ ߞߘߐߓߐߟߌ ߦߋ߫ ߓߊ߲߫.\
-                                    ');
-                                }, 1600);
+                                ecris('evaluation_notification_corps','\
+                                    ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ߬ ߞߘߎ ߘߌ߲߯ ߘߎ߭ߡߊ߬߸ ߦߴߌ ߕߟߏߡߊߟߐ߬߸ߦߋ߫ ߛߓߍߘߋ߲߫ ߟߊߡߍ߲ߣߍ߲ ߛߓߍ߫߸ ߤߊ߲߯ ߞߘߐߓߐߟߌ ߦߋ߫ ߓߊ߲߫.\
+                                ');
                             }
                             function chargerPiedDeEvaluatonAlphabet() {
                                 $('#evaluation_question_btn').html("<p>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ߫ "+q_total+" \\ ߁߭ ߟߊߡߍ߲߫</p>");
                             }
                             function chargerCorpsDeEvaluatonAlphabet() {
-                                var evaluation_tbody_default_message = 'ߞߘߐߓߐߟߌ ߞߐߝߟߌ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬.';
-                                $('#evaluation_tbody').html("<p id='evaluation_tbody_default_content'>"+evaluation_tbody_default_message+"</p>");
+                                chargementParDefautDEvaluationFicheBody();
                             }
                         }
                         function evaluerAlphabet() {
@@ -2048,7 +2050,8 @@ function alphabet() {
 
                                     effacerPrecedenteReponse();       
                                     effacerLeTableauDEvaluation();
-                                    question_evaluation = evaluation_questions[q_index]; 
+                                    question_evaluation = evaluation_questions[q_index];
+                console.log(question_evaluation); 
                                    
                                     dicterLaQuestion();
                                     $('#evaluation_cross').css('display','none');
@@ -2077,11 +2080,11 @@ function alphabet() {
                                     function dicterLaQuestion(){
                                         lire('alphabet',question_evaluation);
                                     }
-                                    function afficherTesteContainer() { $('#teste_container').css({'top':'-6rem'}); }
                                 });
                             }
                             function repeterQuestionDEvaluationAlphabet() {
                                 $('.repetition_btn').on('click', function(){
+                console.log(question_evaluation); 
                                     lire('alphabet',question_evaluation);
                                     reAfficherEvaluationRepetitionBtn();
 
@@ -2145,7 +2148,7 @@ function alphabet() {
                                         setTimeout(() => { 
                                             chargerInstantannementEvaluationTbody();
                                             defilementDuContenuVersLeHaut($('#evaluation_fiche_body')); 
-                                        }, 1400);
+                                        }, 1000);
                     
                                         evaluation_counter++;
                                         
@@ -2187,9 +2190,6 @@ function alphabet() {
                                             setTimeout(function(){
                                                 $('#check_mark').empty();
                                             }, 1000);
-                                        }
-                                        function masquerTesteContainer() { 
-                                            setTimeout(() => { $('#teste_container').css({'top':0}); }, 1000); 
                                         }
                                     }
                                     function progressBarrEvaluationAlphabet() {
@@ -2251,7 +2251,6 @@ function alphabet() {
                                                                             
                                             function stockerEvaluationAlphabet() {
                                                     
-                                                lesson_d_evaluation_alphabet = lesson_d_evaluation_alphabet;
                                                 sendLessonDataToDB('alphabet_evaluation',lesson_d_evaluation_alphabet);
                                                 sessionStorage.setItem('lesson_d_evaluation_alphabet', JSON.stringify(lesson_d_evaluation_alphabet));
 
@@ -2271,8 +2270,9 @@ function alphabet() {
                          
                                                 if(index_phase_active+1 === total_phase) {
                                                     sessionStorage.setItem('matiere_nouvellement_apprise',JSON.stringify(matiere_nom));
+                                                    sessionStorage.setItem('niveau_en_cours',JSON.stringify(niveau_en_cours+1));                                        
                                                     sessionStorage.setItem('niveau_max',JSON.stringify(niveau_max+1));                                        
-                                                    sessionStorage.setItem('niveau_actif',JSON.stringify(niveau_max+2));
+                                                    sessionStorage.setItem('niveau',JSON.stringify(niveau_max+2));
                                                     sessionStorage.setItem('phase_nbr',JSON.stringify(0));
                                                 }
 

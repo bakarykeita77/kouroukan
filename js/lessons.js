@@ -7,10 +7,22 @@ $('document').ready(function() {
         var data_alphabet = JSON.parse(sessionStorage.getItem('data_alphabet')); 
         data_alphabet = (data_alphabet == null) ? {} : data_alphabet; 
         data_alphabet = (Object.keys(data_alphabet).length == 0) ? data_alphabet_du_serveur : data_alphabet; 
-        var matiere_index = JSON.parse(sessionStorage.getItem('matiere_index'));
-        var niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
-        var niveau_actif = JSON.parse(sessionStorage.getItem('niveau_actif'));
-        var phases_etudiees = JSON.parse(sessionStorage.getItem('phases_etudiees'));
+
+        var matiere_id = $("#matiere_id_container").text();
+        var matiere_index = parseInt($("#matiere_index_container").text());
+        var matiere_nom = $("#matiere_nom_container").text();
+        var niveau = parseInt($("#niveau_container").text());
+        var niveau_max = parseInt($("#niveau_max_container").text());
+        var phases_etudiees = $("#phases_etudiees_container").text().split(",");
+        
+        sessionStorage.setItem('matiere_id', JSON.stringify(matiere_id)); 
+        sessionStorage.setItem('matiere_index', JSON.stringify(matiere_index)); 
+        sessionStorage.setItem('matiere_nom', JSON.stringify(matiere_nom)); 
+        sessionStorage.setItem('niveau', JSON.stringify(niveau)); 
+        sessionStorage.setItem('niveau_max', JSON.stringify(niveau_max)); 
+        sessionStorage.setItem('phases_etudiees', JSON.stringify(phases_etudiees));
+
+        let niveau_en_cours = JSON.parse(sessionStorage.getItem('niveau_en_cours'));
         let data_alphabet_apprentissage = JSON.parse(sessionStorage.getItem('data_alphabet_apprentissage'));
         var rang = "";
         var phase_li_id = phaseLiId();
@@ -21,9 +33,8 @@ $('document').ready(function() {
         sessionStorage.setItem('phase_li_id', JSON.stringify(phase_li_id));
 
         datas[matiere_index] = (datas[matiere_index] == undefined) ? [] : datas[matiere_index]; /* Pour éviter les erreurs d'undefined. */
-        phases_etudiees = (phases_etudiees == null) ? [] : phases_etudiees;   
  
-     /*-------------------------------------------------------------------------------------------------------------------
+    /*-------------------------------------------------------------------------------------------------------------------
        1)- La situation des études est faite par récupération et traitement des données reçues sur l'apprenant.
        2)- La liste des phases est établie en fonction du niveau d'étude de l'apprenant (selon les phases étudiées ou pas)
        3)- Le paramétrage conséquent est défini pour la leçon future.
@@ -50,8 +61,8 @@ $('document').ready(function() {
                 switch(phases_etudiees.length) {
                     case 0 : pli = "alphabet_apprentissage"; break;
                     case 1 : pli = "alphabet_exercice"; break;
-                    case 2 : pli = "alphabet_evaluation"; break;
-                }  
+                    case 2 : pli = "alphabet_evaluation"; break; 
+                } 
             }
             if(matiere_index === 1) {
                 switch(phases_etudiees.length) {
@@ -74,19 +85,18 @@ $('document').ready(function() {
                 actualiserTitre();
                 stylesDesPhases();
                 afficherLesPhases();
-                phaseActive();
                 
                     
                 function chargerPhases() { 
     
-                    $('.phases_container').html(phasesHTML()); 
+                    $('.phases_container').html(phasesHTML());
     
                     function phasesHTML() {
                     
                         var lesson_id = $('.lesson_title').attr('id');
                         lesson_id = $.trim(lesson_id);       
                         
-                    /* Liste des phases */
+                     /* Liste des phases */
                         var content = '<ul class="phases" id="phases_list">';
                         let phase_id = "";
     
@@ -141,7 +151,7 @@ $('document').ready(function() {
                         }
                         if(lesson_status == "lesson_etudie") $(this).addClass('apprises');
                         
-                     //Cas specifique de pratiques                    
+                     /*Cas specifique de pratiques */                   
                         if(localOptionsLength === 4) {
                             $('#syllabes_pratique, #tons_pratique, #chiffres_pratique').removeClass('active').addClass('apprises');
                         }
@@ -194,23 +204,6 @@ $('document').ready(function() {
                         }
                     }
                 }
-                function phaseActive() {
-                    let phase_active = "";
-                    $('#phases_list li').click((e) => {
-                        phase_active = e.target;
-                        let phase_active_class = phase_active.className;
-                        
-                        switch(phase_active_class) {
-                            case 'apprises' : phaseApprise(); break;
-                            case 'active' : phaseEnCours(); break;
-                            case 'a_apprendre' : phaseAApprendre(); break;
-                        }
-    
-                        function phaseApprise() { console.log('apprise'); }
-                        function phaseEnCours() { console.log('en cours'); }
-                        function phaseAApprendre() { console.log('à apprendre'); }
-                    });
-                } 
             }
         }
         function matiere() {
@@ -237,7 +230,7 @@ $('document').ready(function() {
             modificationDuChoixDApprentissage();
             
             function etudeDesMatieres() {
-                switch(niveau_actif) {
+                switch(niveau) {
                     case 1 : alphabet(); break;
                     case 2 : syllabe();  break;
                     case 3 : ton();      break;

@@ -88,7 +88,7 @@
     }
     function afficher(element) {
         masquer(element);
-        element.css({'display':'block','transition':'0.4s'}); 
+        element.css({'display':'block','transition':'0.2s'}); 
         affichage(element);
     }
     function afficherApprentissage() {
@@ -118,32 +118,26 @@
         masquer($('.redirection_btns'));
         masquer($(".dialogue_btns > div"));
 
-        setTimeout(() => { 
-            afficher($(".correction_btn")); 
-            rendreActif($(".correction_btn")); 
-        }, 400);
+        afficher($(".correction_btn")); 
+        rendreActif($(".correction_btn")); 
     }
     function afficherBoutonDeQuestion() {
         display($('.dialogue_btns'));
         masquer($('.redirection_btns'));
         masquer($(".dialogue_btns > div"));
         
-        setTimeout(() => {
-            masquer($('.dialogue_btns > div'));
-            rendreActif($('.question_btn'));
-            afficherRapidement($('.question_btn'));
-        }, 400);
+        masquer($('.dialogue_btns > div'));
+        rendreActif($('.question_btn'));
+        afficherRapidement($('.question_btn'));
     }
     function afficherBoutonDeRepetition() {
         display($('.dialogue_btns'));
         masquer($('.redirection_btns'));
         masquer($(".dialogue_btns > div"));
 
-        setTimeout(() => { 
-            masquer($('.dialogue_btns > div'));
-            rendreActif($('.repetition_btn'));
-            afficher($('.repetition_btn')); 
-        }, 200);
+        masquer($('.dialogue_btns > div'));
+        rendreActif($('.repetition_btn'));
+        afficher($('.repetition_btn')); 
     }
     function afficherBoutonPourLaMatiereSuivante() {
         let matiere = nomDeLaMatiereSuivante();
@@ -161,20 +155,17 @@
     }
     function afficherBoutonDExercice() {
         let matiere = JSON.parse(sessionStorage.getItem("matiere_nom"));
-        
-        if($(".exercice_btn").html() == "<p>ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫</p>") {
-        
-            masquer($('.dialogue_btns'));
-            display($('.redirection_btns'));
-            masquer($('.redirection_btns > div'));
+                
+        masquer($(".dialogue_btns"));
+        display($(".redirection_btns"));
+        masquer($(".redirection_btns > div"));
 
-            setTimeout(() => { 
-                afficher($('.exercice_btn'));
-                rendreActif($('.exercice_btn'));
-                $('.exercice_btn').html("<p>"+matiere+" ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫</p>");
-                indexer($('.exercice_btn p'));
-            }, 400);
-        }
+        setTimeout(() => { 
+            afficher($(".exercice_btn"));
+            rendreActif($(".exercice_btn"));
+            $(".exercice_btn").html("<p>"+matiere+" ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫</p>");
+            indexer($(".exercice_btn p"));
+        }, 400);
     }
     function afficherBoutonDeRevision() {
         let matiere = JSON.parse(sessionStorage.getItem("matiere_nom"));
@@ -365,6 +356,7 @@
             }
         }, 200);
     }
+    function afficherTesteContainer() { $('#teste_container').css({'top':'-6.25rem'}); }
 	function aggrandir_caractere_de(element) { element.css('font-size','+=32px'); }
 	function appetir_caractere_de(element) { element.css('font-size','-=32px'); } 
     function approuver(bonne_reponse) {
@@ -849,12 +841,29 @@ console.log(voyelles_deja_selectionnees);
         let matiere_index = JSON.parse(sessionStorage.getItem("matiere_index"));
         let a_apprendre = "";
 
+        if(matiere_index === 0) a_apprendre = "ߛߓߍߛߎ߲߫ ";
         if(matiere_index === 1) a_apprendre = "ߜߋ߲߭";
         if(matiere_index === 2) a_apprendre = "ߜߋ߲߬ ߞߊ߲ߡߊߛߙߋߡߊ߫";
         if(matiere_index === 3) a_apprendre = "ߖߊ߰ߕߋ߬ߘߋ߲߫";
 
         $('#apprentissage_body').html("<table id='table_syllabe_apprentissage'><div id='texte'></div></table>");
-        setTimeout(() => { ecris("texte", a_apprendre+" ߘߋ߲߰ߕߊ ߟߎ߬ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬"); }, 300);
+        setTimeout(() => {
+            ecris("texte", a_apprendre+" ߘߋ߲߰ߕߊ ߟߎ߬ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬");
+        }, 1500);
+    }
+    function chargementParDefautDEvaluationFicheBody() {
+        let matiere_index = JSON.parse(sessionStorage.getItem("matiere_index"));
+        let a_apprendre = "";
+
+        if(matiere_index === 0) a_apprendre = "ߛߓߍߛߎ߲ ";
+        if(matiere_index === 1) a_apprendre = "ߜߋ߲߭ ߠߎ߬ ";
+        if(matiere_index === 2) a_apprendre = "ߜߋ߲߬ ߞߊ߲ߡߊߛߙߋߡߊ ߟߎ߬ ";
+        if(matiere_index === 3) a_apprendre = "ߖߊ߰ߕߋ߬ߘߋ߲߫ ߠߎ߬ ";
+
+        $('#evaluation_fiche_body').html("<p id='evaluation_tbody_default_content'></div>");
+        setTimeout(() => {
+            ecris("evaluation_tbody_default_content", a_apprendre+" ߞߘߐߓߐߟߌ ߞߐߝߟߌ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬");
+        }, 1500);
     }
     function chargerPanneauDesCaracteres() {
         
@@ -1769,7 +1778,7 @@ console.log(voyelles_deja_selectionnees);
                    
         return tons_apprentissage_html;
     }
-    function lessonDApprentissagePreAlphabet() {
+    function lessonDApprentissagePreAlphabetDuServeur() {
 
         let datas = JSON.parse(sessionStorage.getItem('datas'));
         let ldap = [];
@@ -1899,6 +1908,7 @@ console.log(voyelles_deja_selectionnees);
             $('.notification_corps').css("top", "5.25rem");
         }
     }
+    function masquerTesteContainer() { setTimeout(() => { $("#teste_container").css({"top":"0.5rem"}); }, 800); }
     function memoireConsonnesChoisies() {
 
         let consonnes_choisies_du_serveur = consonnesChoisiesDuServeur();

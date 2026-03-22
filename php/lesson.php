@@ -8,7 +8,8 @@ if(isset($_SESSION["id_client"])) {
     $matiere_nom = $_GET['matiere_nom'];
     $niveau = $_GET['niveau'];
     $niveau_max = $_GET['niveau_max'];
-    $phases_etudiees = ((integer)$matiere_index > 0) ? $_GET['phases_etudiees'] : "";
+    $phases_etudiees = $_GET['phases_etudiees'];
+    // $phases_etudiees = ((integer)$matiere_index > 0) ? $_GET['phases_etudiees'] : "";
     if(isset($_GET['lesson_option'])) {
         $lesson_option   = ((integer)$niveau <= 2) ? $_GET['lesson_option'] : 0;
     }
@@ -43,12 +44,12 @@ if(isset($_SESSION["id_client"])) {
                  <!--donnees_recues_de_programmes------------------------------------------------------------------------------------------------
                     Pour rendre les données de l'url  disponibles dans lesson.js, placons les dans des elements html avec id déterminé-->  
                     <div id="donnees_recues_de_programmes" style="display:none">
-                        <p id='matiere_id_container'    ><?= $matiere_id; ?></p>
-                        <p id='matiere_index_container' ><?= $matiere_index; ?></p>
-                        <p id='matiere_nom_container'   ><?= $matiere_nom; ?></p>
-                        <p id='niveau_container'        ><?= $niveau; ?></p>
-                        <p id='niveau_max_container'    ><?= $niveau_max; ?></p>
-                        <p id='lesson_option'           ><?= $lesson_option; ?></p>
+                        <p id='matiere_id_container'     ><?= $matiere_id; ?></p>
+                        <p id='matiere_index_container'  ><?= $matiere_index; ?></p>
+                        <p id='matiere_nom_container'    ><?= $matiere_nom; ?></p>
+                        <p id='niveau_container'         ><?= $niveau; ?></p>
+                        <p id='niveau_max_container'     ><?= $niveau_max; ?></p>
+                        <p id='phases_etudiees_container'><?= $phases_etudiees; ?></p>
                     </div>
 
                  <!--titre de la page de lessons------------------------------------------------------------------------------------------------->

@@ -38,8 +38,6 @@ $('document').ready(function() {
     option_retenue = (option_retenue == null) ? option_du_serveur : option_retenue;
     localStorage.setItem('option_retenue',JSON.stringify(option_retenue));
 
-    // localStorage.clear();
-
  /*-------------------------------------------------------------------------------------------------------------*/
     /* Détermination du Programme */
     var programme_matieres = "";
@@ -51,19 +49,9 @@ $('document').ready(function() {
     alerteDuProgramme();
     afficherProgrammes();
     lessonOptions();
-    storagesDuProgramme();
     mmettreLeFocusSur("#lien_actif");
 
-    function matiereNouvellementAppriseDuServeur() {
-        let matieres_apprises = [];
 
-        if(datas[0] != undefined) if(datas[0].length === 3) if(datas[0][0] != undefined) if(datas[0][0].phase.split("_")[0] == "alphabet") matieres_apprises.push("ߛߓߍߛߎ߲");
-        if(datas[1] != undefined) if(datas[1].length === 4) if(datas[1][0] != undefined) if(datas[1][0].phase.split("_")[0] == "syllabe") matieres_apprises.push("ߜߋ߲߭");
-        if(datas[2] != undefined) if(datas[2].length === 4) if(datas[2][0] != undefined) if(datas[2][0].phase.split("_")[0] == "ton") matieres_apprises.push("ߞߊ߲ߡߊߛߙߋ");
-        if(datas[3] != undefined) if(datas[3].length === 4) if(datas[3][0] != undefined) if(datas[3][0].phase.split("_")[0] == "chiffre") matieres_apprises.push("ߖߊ߰ߕߋ߬ߘߋ߲");
-
-        return matieres_apprises[matieres_apprises.length - 1];
-    }
     function selectionDuProgramme() { 
         programme_matieres = document.getElementById('programme_matieres'); 
     }
@@ -74,7 +62,7 @@ $('document').ready(function() {
         function programmeHTML() {
             var programme_html = '<ul id="programme_ul">\n\n';
 
-            for (var i = 0; i < liste_de_matieres.length; i++) {    // Pour liste_de_matieres, voir caracteres.js
+            for (var i = 0; i < liste_de_matieres.length; i++) {   // Pour liste_de_matieres, voir caracteres.js
 
                 var matiere_id = liste_de_matieres[i][0];
                 var matiere_nom = liste_de_matieres[i][1];
@@ -87,7 +75,6 @@ $('document').ready(function() {
                 if (matiere_index > niveau_max)  programme_html += '<li id="'+matiere_id+'"><p>'+matiere_nom+'</p></li>\n';
             }
             programme_html += '\n</ul>';
-console.log(programme_html);
             
             return programme_html;
         } 
@@ -96,11 +83,11 @@ console.log(programme_html);
         
         // if(niveau_max > niveau_en_cours) niveau_max = niveau_en_cours;
         let programme_li = $("#programme_ul li");
-        if(matiere_nouvellement_apprise != "") {   
+        if(matiere_nouvellement_apprise_du_serveur != "") {   
             $.each(programme_li, function() {
                 let li_actif = $(this);
             
-                if(li_actif.text() == matiere_nouvellement_apprise) {
+                if(li_actif.text() == matiere_nouvellement_apprise_du_serveur) {
                     $('#programme_ul li').removeClass('apprises actif').addClass('a_apprendre');
                     li_actif.prev().removeClass('a_apprendre').addClass('apprises');
                     li_actif.removeClass('a_apprendre').addClass('apprises');
@@ -108,7 +95,7 @@ console.log(programme_html);
                 }
             });
         } 
-        if(matiere_nouvellement_apprise == "") {
+        if(matiere_nouvellement_apprise_du_serveur == "") {
             $.each(programme_li, function() {
                 let matiere_index = $(this).index();
 
@@ -245,14 +232,5 @@ console.log(programme_html);
             }
         }
         return option;
-    }
-    function storagesDuProgramme() {
-        $('#programme_ul li').on('click', function(){
-            sessionStorage.setItem('matiere_active', JSON.stringify($(this).attr('id'))); 
-            sessionStorage.setItem('matiere_nom', JSON.stringify($(this).text())); 
-            sessionStorage.setItem('matiere_index', JSON.stringify($(this).index())); 
-            sessionStorage.setItem('niveau_actif', JSON.stringify($(this).index()+1)); 
-            sessionStorage.setItem('phases_etudiees', JSON.stringify(phases_etudiees)); 
-        });
     }
 });

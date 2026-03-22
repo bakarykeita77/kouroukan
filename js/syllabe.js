@@ -1124,10 +1124,7 @@ console.log(anciens_syllabes_melanges);
                             $(".notification_titre").text("ߜߋ߲߭ ߞߘߐߓߐߟߌ");
                             ecris("evaluation_notification_corps", "ߢߌ߬ߣߌ߲߬ߞߊߟߌ߬ ߞߘߎ ߘߌ߯߭ ߘߎ߭ߡߊ߬߸ ߦߴߌ ߕߟߏߡߊߟߐ߬ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߎ߬ ߟߊ߫ ߞߋߟߋ߲߫ ߞߋߟߋ߲߫߸ ߦߴߊߟߎ߬ ߛߓߍ߫߸ ߦߋ߫ ߓߊ߲߫ ߞߊ߬ ߛߊߞߍߟߌ߫ ߞߘߎ ߘߌ߲߯߸ ߞߵߊ߬ߟߎ߬ ߛߊߞߍ߫.");
                         }
-                        function chargerEvaluationSyllabeBody() {
-                            var evaluation_tbody_default_message = "ߜߋ߲߭ ߞߘߐߓߐߟߌ ߞߐߝߟߌ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬.";
-                            $("#evaluation_fiche_body").html("<p id='evaluation_tbody_default_content'>" + evaluation_tbody_default_message + "</p>");
-                        }
+                        function chargerEvaluationSyllabeBody() { chargementParDefautDEvaluationFicheBody(); }
                         function chargerEvaluationSyllabeFoot() {
 
                             var q_evaluation_total = parseIntNko(lesson_d_apprentissage_syllabe.length);
@@ -1220,7 +1217,6 @@ console.log(anciens_syllabes_melanges);
                                     reponse_d_evaluation_syllabe.splice(0, reponse_d_evaluation_syllabe.length);
                                     $("#evaluation_reponse").html(reponse_d_evaluation_syllabe);
                                 }
-                                function afficherTesteContainer() { $("#teste_container").css({ "top": "-5.75rem" }); }
                             });
                         }
                         function repeterQuestionDEvaluationSyllabe() {
@@ -1326,9 +1322,6 @@ console.log(anciens_syllabes_melanges);
                                         setTimeout(function () {
                                             $("#check_mark").empty();
                                         }, 1000);
-                                    }
-                                    function masquerTesteContainer() {
-                                        setTimeout(() => { $("#teste_container").css({ "top": "0.5rem" }); }, 1000);
                                     }
                                     function enregistrerEvaluationSyllabe() {
                                         lesson_de_syllabe_evaluation_du_jour.splice(evaluation_counter-1, 1, question_reponse);

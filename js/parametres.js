@@ -284,7 +284,7 @@ function parametrageDeLesson() {
 
          /* Rechargement du tableau noir avec les caractères cochés */
             switch(phase) {
-                case 'apprentissage' : $('#apprentissage_body').html(apprentissage_html); break;
+                case 'apprentissage' : $('#apprentissage_body').html("<div class='table_parlante_container'>"+apprentissage_html+"</div>"); break;
                 case 'exercice' : $('#exercice_body' ).html(exercice_html); break;
                 case 'revision' : $('#pratique_body' ).html(pratique_html); break;
                 case 'evaluation' : $('#evaluation_body' ).html(evaluation_html); break;

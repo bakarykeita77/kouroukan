@@ -84,6 +84,7 @@ function syllabe() {
                 afficherApprentissage();
                 apprendreSyllabe();
 
+                        
                 function chargerApprentissageSyllabe() {
 
                     chargerEnteteDApprentissageSyllabe();
@@ -144,14 +145,16 @@ function syllabe() {
                             let consonnes_etudiees = consonnesEtudiees(lesson_d_apprentissage_syllabe_du_serveur);
                             let compteur_de_syllabe = 0;
                             let global_clicks_counter = 0;
-
+                        
                             if(nouvelles_consonnes.indexOf(nouvelle_consonne) != -1) {
                                 console.log("Voici les consonnes étudiées:");
                                 console.log(consonnes_etudiees);
                             };
 
+                        
                             memoriserLesNouvellesConsonnes();
                             memoriserLesConsonnesChoisies();
+                            styleResponsiveDuTableauParlante();
                             suivreLApprentissage();
                         
 
@@ -162,7 +165,7 @@ function syllabe() {
                                 if(nouvelle_consonne_index != "-1")  nouvelles_consonnes.splice(nouvelle_consonne_index,1);
                                 consonnes_choisies = consonnes_etudiees.concat(nouvelles_consonnes);
         
-                                if(consonnes_choisies.length == 0) { setTimeout(() => { $("#table_syllabe_apprentissage").css("display","none"); }, 800); }
+                                if(nouvelles_consonnes.length == 0) { setTimeout(() => { $("#table_syllabe_apprentissage").css("display","none"); }, 800); }
                                     
                                 $("#afficheur_de_panneau p").click(() => { 
                                     if($(this).text() == "ߛߌ߬ߙߕߊ߬ ߥߟߊ ߘߏ߲߰") {
@@ -172,6 +175,12 @@ function syllabe() {
                                 });
                             }
                             function memoriserLesConsonnesChoisies() {
+                            }
+                            function styleResponsiveDuTableauParlante() {
+                                if($(".table_parlante").height() < 272) {
+                                    let m = 164 - ($(".table_parlante").height())/2;
+                                    $(".table_parlante").css({"margin":m+"px auto"});
+                                }
                             }
                             function suivreLApprentissage() {
 

@@ -266,7 +266,7 @@ body{
     overflow: auto;
     transition: 1s;
 }
-.table_parlante_container{
+.table_container{
     border: 1px solid transparent;
     border-bottom: 4px solid #eee;
     height: 3;

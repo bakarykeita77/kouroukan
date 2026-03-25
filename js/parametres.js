@@ -284,11 +284,12 @@ function parametrageDeLesson() {
 
          /* Rechargement du tableau noir avec les caractères cochés */
             switch(phase) {
-                case 'apprentissage' : $('#apprentissage_body').html("<div class='table_parlante_container'>"+apprentissage_html+"</div>"); break;
-                case 'exercice' : $('#exercice_body' ).html(exercice_html); break;
-                case 'revision' : $('#pratique_body' ).html(pratique_html); break;
+                case 'apprentissage' : $('#apprentissage_body').html("<div class='table_container'>"+apprentissage_html+"</div>"); break;
+                case 'exercice' : $('#exercice_body' ).html("<div class='table_container'>"+exercice_html+"</div>"); break;
+                case 'revision' : $('#pratique_body' ).html("<div class='table_container'>"+pratique_html+"</div>"); break;
                 case 'evaluation' : $('#evaluation_body' ).html(evaluation_html); break;
             }
+            styleResponsiveDuTableauParlante();
 
             sessionStorage.setItem('nbr_td', JSON.stringify(nombreDeTdDeLaTableParlante()));
 

@@ -1,5 +1,6 @@
 
 ::-webkit-scrollbar { display: none; }
+body { scrollbar-width: none; }
 html { direction: rtl; font-size: 16px; padding: 0; margin: 0; }
 
 /* --------------------------------------------------------------------------------------------------------- */
@@ -778,7 +779,7 @@ del {
 .notification_corps {
     position: relative; 
     top: 0;
-    height: calc(6rem - 0.5rem);
+    height: 5.5rem;
     width: 90%;
     max-width: 55rem;
     margin: 0.25rem auto;
@@ -1117,7 +1118,7 @@ del {
 
 /* --------------------------------------------------------------------------------------------------------- */
 
-.table_parlante_container {
+.table_container {
     position: relative;
     top: 5%;
     height: 90%;

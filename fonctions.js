@@ -93,7 +93,6 @@
     }
     function afficherApprentissage() {
 
-        masquerNotification();
         afficherApprentissageContainer();
         afficherPanneauDesCaracteres();
 
@@ -107,10 +106,9 @@
             masquer($('#apprentissage_redirection_btns'));
         }
         function afficherPanneauDesCaracteres() {
-            let memoire_consonnes_choisies = memoireConsonnesChoisies();
-
+            let consonnes_apprises_du_serveur = consonnesDeSyllabeApprisesDuServeur();
             togglePanneauDesConsonnes();
-            panneauxStyle(memoire_consonnes_choisies);
+            panneauxStyle(consonnes_apprises_du_serveur);
         }
     }
     function afficherBoutonDeCorrection() {
@@ -223,20 +221,24 @@
             indexer($('.apprentissage_btn p'));
         }, 400);
     }
-    function afficherLentement(element) {
-        masquer(element);
-        element.css({'display':'block','transition':'0.8s'}); 
-        affichage(element);
-    }
-    function afficherNotification() { $('.notification_corps').css("top", 0); }
-    function afficherRapidement(element) {
-        masquer(element);
-        element.css({'display':'block','transition':'0.1s'}); 
-        affichage(element);
-    }
-	function afficher_en_jailli( element,largeur,hauteur,temps ) {
-        element.css({'display':'block', 'width':0, 'height':0});
-        element.animate({'width':largeur, 'height':hauteur}, temps);
+    function afficherEvaluation() {
+
+        masquer($(".direction"));
+        display($(".salle_de_classe"));
+        display($(".course"));
+        masquer($(".course > div:not(#evaluation_container)"));
+        display($("#evaluation_container"));
+        masquer($('#evaluation_container > div:not(#evaluation_head)'));
+
+        setTimeout(() => { 
+            afficher($('#pratique_options'));
+            $('.fermeture').attr('id', 'fermer_revision');
+
+            afficher($('#evaluation_container > div:not(#evaluation_head)'));
+            afficherParDefautDEvaluationDialogueBtns();
+            
+            styleResponsiveDuTableauParlante();
+        }, 200);   
     }
     function afficherEvaluationAlphabet() {
 
@@ -271,6 +273,8 @@
             afficherParDefautDExerciceDialogueBtns();
             setTimeout(() => { affichageAnimeDeTableTd($('#exercice_body table')); }, 400);
             
+            styleResponsiveDuTableauParlante();
+
             function afficherParDefautDExerciceDialogueBtns() {
                 masquer($('#exercice_redirection_btns'));
                 afficher($('#exercice_dialogue_btns'));
@@ -281,22 +285,22 @@
             }
         }, 200);
     }
-    function afficherEvaluation() {
-
-        masquer($(".direction"));
-        display($(".salle_de_classe"));
-        display($(".course"));
-        masquer($(".course > div:not(#evaluation_container)"));
-        display($("#evaluation_container"));
-        masquer($('#evaluation_container > div:not(#evaluation_head)'));
-
-        setTimeout(() => { 
-            afficher($('#pratique_options'));
-            $('.fermeture').attr('id', 'fermer_revision');
-
-            afficher($('#evaluation_container > div:not(#evaluation_head)'));
-            afficherParDefautDEvaluationDialogueBtns();
-        }, 200);   
+    function afficherLentement(element) {
+        masquer(element);
+        element.css({'display':'block','transition':'0.8s'}); 
+        affichage(element);
+    }
+    function afficherNotification() { 
+        $('.notification_corps').css({"top":0}); 
+    }
+    function afficherRapidement(element) {
+        masquer(element);
+        element.css({'display':'block','transition':'0.1s'}); 
+        affichage(element);
+    }
+	function afficher_en_jailli( element,largeur,hauteur,temps ) {
+        element.css({'display':'block', 'width':0, 'height':0});
+        element.animate({'width':largeur, 'height':hauteur}, temps);
     }
     function afficherList(ul) {
         let li = $('li', ul);
@@ -339,6 +343,8 @@
             afficher($('#pratique_options'));
             afficher($('#revision_container > div:not(#revision_head)'));
             afficherParDefautDeRevisionDialogueBtns();
+            
+            styleResponsiveDuTableauParlante();
             setTimeout(() => { affichageAnimeDeTableTd($('#revision_body table')); }, 400);
             
             function afficherParDefautDeRevisionDialogueBtns() {
@@ -684,7 +690,6 @@
             $.each($("#panneaux span"), function() {
                 let caractere_container = $(this);
                 let caractere = caractere_container.text();
-
                 if(consonnes_etudiees.indexOf(caractere) != "-1") { caractere_container.css({"color":"orange", "font-weight":"bold"}); }
                 caractere_container.click(function() { marquerLaConsonneChoisie(caractere_container); });
             });
@@ -708,9 +713,7 @@
             chargerLesson();
             
             function selectionnerLesVoyellesDuPanneau() {
-
                 let voyelle_index = caracteres_selectionnees.indexOf(voyelle_active);
-
                 if(voyelle_index == -1) enregistrerLeCaractere(caracteres_selectionnees,voyelle_active);
                 if(voyelle_index != -1) caracteres_selectionnees.splice(voyelle_index,1);
             }
@@ -769,7 +772,7 @@
                 let voyelles_deja_selectionnees = voyellesDejaSelectionnees();
               
                 if(voyelles_deja_selectionnees.length == 0) {
-                chargementParDefautDuTableauNoir();
+                    chargementParDefautDuTableauNoir();
                     $("#panneau_submit").html("ߌ ߢߣߊߕߊ߬ ߛߌ߬ߙߊ߬ߟߊ߲ ߠߎ߬ ߘߐ߬").removeClass("actif");
                 }
                 if(voyelles_deja_selectionnees.length != 0) {
@@ -831,13 +834,12 @@
         }
         function chargerPanneauSubmitBtn() {
             let voyelles_deja_selectionnees = voyellesDejaSelectionnees();
-console.log("voyelles_deja_selectionnees");
-console.log(voyelles_deja_selectionnees);
             if(voyelles_deja_selectionnees.length == 0) $("#panneau_submit").html("ߌ ߢߣߊߕߊ߬ ߛߌ߬ߙߊ߬ߟߊ߲ ߠߎ߬ ߘߐ߬").removeClass("actif");
             if(voyelles_deja_selectionnees.length != 0) $("#panneau_submit").html("ߣߴߌ ߓߊ߲߫ ߘߊ߫߸ ߦߋ߫ ߢߣߊߕߊ߬ߣߍ߲ ߠߎ߬ ߛߓߍ߫ ߥߟߊ߬ߓߊ ߞߊ߲߬");
         }
     }
     function chargementParDefautDuTableauNoir() {
+        
         let matiere_index = JSON.parse(sessionStorage.getItem("matiere_index"));
         let a_apprendre = "";
 
@@ -849,7 +851,7 @@ console.log(voyelles_deja_selectionnees);
         $('#apprentissage_body').html("<table id='table_syllabe_apprentissage'><div id='texte'></div></table>");
         setTimeout(() => {
             ecris("texte", a_apprendre+" ߘߋ߲߰ߕߊ ߟߎ߬ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬");
-        }, 1500);
+        }, 200);
     }
     function chargementParDefautDEvaluationFicheBody() {
         let matiere_index = JSON.parse(sessionStorage.getItem("matiere_index"));
@@ -1372,33 +1374,25 @@ console.log(voyelles_deja_selectionnees);
         let longueur = message.length;
         let indice = 0;
 
-        setTimeout(() => { 
-            afficherNotification();
-            setTimeout(() => { write(); }, 300);
-            function write() {
-                indice++;
-                $('#'+element_id).html(message.substr(0,indice));
-                if(indice<longueur) {
-                    setTimeout(() => { write(); }, 10);
-                }
-            }
-        }, 300);
+        afficherNotification();
+        setTimeout(() => { write(); }, 300);
+        function write() {
+            indice++;
+            $('#'+element_id).html(message.substr(0,indice));
+            if(indice<longueur) setTimeout(() => { write(); }, 10);
+        }
     }
     function ecrire(element_class,message) {
         let longueur = message.length;
         let indice = 0;
 
-        setTimeout(() => { 
-            afficherNotification();
-            setTimeout(() => { write(); }, 250);
-            function write() {
-                indice++;
-                $('.'+element_class).html(message.substr(0,indice));
-                if(indice<longueur) {
-                    setTimeout(() => { write(); }, 20);
-                }
-            }
-        }, 250);
+        afficherNotification();
+        setTimeout(() => { write(); }, 300);
+        function write() {
+            indice++;
+            $('.'+element_class).html(message.substr(0,indice));
+            if(indice<longueur) setTimeout(() => { write(); }, 10);
+        }
     }
     function effacerLeTableau() {
         $('.course_body').html("<p id='contenu_par_defaut_du_tableau'>ߥߟߊ߬ߓߊ ߓߘߊ߫ ߖߐ߬ߛߌ߬ ߹</p>");
@@ -1902,20 +1896,18 @@ console.log(voyelles_deja_selectionnees);
     }
     function masquerPanneauDesCaracteres() { $('#caracteres_container').css({"top":"22rem", "height":0}); }
     function masquerNotification() {
-        if($('.notification_corps').css("top") == "0px") {
-            $(".notification_corps").text("");
-            $('.notification_corps').text('');
-            $('.notification_corps').css("top", "5.25rem");
-        }
+        $(".notification_corps").text("");
+        $('.notification_corps').css({"top":"5.25rem"}); 
     }
     function matiereNom() {
         let matiere = "";
+        let niveau = JSON.parse(sessionStorage.getItem("niveau"));
         
         switch(niveau) {
-            case "1" : matiere = "alphabet"; break;
-            case "2" : matiere = "syllabes"; break;
-            case "3" : matiere = "tons"; break;
-            case "4" : matiere = "chiffres"; break;
+            case 1 : matiere = "alphabet"; break;
+            case 2 : matiere = "syllabes"; break;
+            case 3 : matiere = "tons"; break;
+            case 4 : matiere = "chiffres"; break;
         }
 
         return matiere;
@@ -2140,9 +2132,7 @@ console.log(voyelles_deja_selectionnees);
         let test = (nombre%2 === 0) ? true : false;
         return test;
     }
-    function panneauxStyle(memoire_consonnes_choisies) {
-
-        memoire_consonnes_choisies = memoireConsonnesChoisies();
+    function panneauxStyle(consonnes) {
 
         $.each($(".parametres_container input"), function() {
             if($(this).prop("checked") == true) {
@@ -2161,9 +2151,9 @@ console.log(voyelles_deja_selectionnees);
             let panneaux_span = $(this);
             let panneaux_consonne = ($(this).text());
 
-            if (memoire_consonnes_choisies.length > 0) {
-                memoire_consonnes_choisies.forEach(element => {
-                    if (element == panneaux_consonne) { panneaux_span.css({ 'color':'orange', 'font-weight':'bold', 'box-shadow':'none' }); }
+            if (consonnes.length > 0) {
+                consonnes.forEach(element => {
+                    if (element == panneaux_consonne)  panneaux_span.css({ 'color':'orange', 'font-weight':'bold', 'box-shadow':'none' }); 
                 });
             }
         });
@@ -3105,7 +3095,7 @@ console.log(voyelles_deja_selectionnees);
         var phase   = lesson_phase;
         var lesson  = JSON.stringify(lesson_data);
         var note = totalPoint(lesson_data);
-
+        
 console.log(id_client);
 console.log(matiere);
 console.log(niveau);
@@ -3152,6 +3142,12 @@ console.log(note);
 	    
 	   // alert( elements_secondaires ); 
 	}
+    function styleResponsiveDuTableauParlante() {
+        if($(".table_parlante").height() < 112) {
+            let m = 112 - ($(".table_parlante").height())/2;
+            $(".table_parlante").css({"margin":m+"px auto"});
+        }
+    }
     function stylesDesCaracteres() {
 
         styleDeTonsSymboles();
@@ -3275,9 +3271,16 @@ console.log(note);
     function updateLessonData(id,lesson) {
 
         var action = "modifier_matiere_en_cours";
-        var matiere = JSON.parse(sessionStorage.getItem('matiere_active')); // Voir programmes.js fonction storagesDuProgramme()
+        var matiere = JSON.parse(sessionStorage.getItem('matiere')); 
         var note = calculerNote(lesson);
         var lesson = JSON.stringify(lesson);
+        
+console.log(id);
+console.log(action);
+console.log(matiere);
+console.log(lesson);
+console.log(note);
+console.log(lesson);
 
         const data_to_send = new URLSearchParams({
             id : id,

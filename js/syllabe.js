@@ -6,7 +6,6 @@ function syllabe() {
 // localStorage.clear();
 // sessionStorage.clear();
 
-
     extractionDesDatasDuServeur();
 
     var matiere = matiereNom();
@@ -1566,16 +1565,5 @@ function syllabe() {
             if (datas[1].length != 0) if(datas[1][3] != undefined) if(datas[1][3].phase == "syllabe_evaluation") lesson_d_evaluation_syllabe_du_serveur = JSON.parse(datas[1][3].lesson);
             return lesson_d_evaluation_syllabe_du_serveur;
         }
-    }
-
-    function extractionDesDatasDuServeur() {
-        let id_client = JSON.parse(sessionStorage.getItem("id_client"));
-        fetch("/kouroukan/api/index.php?id_user="+id_client)
-        .then(response => response.json())
-        .then(matiere_collection => {  
-            datas = matiere_collection;
-            datas = (datas == undefined) ? [[],[],[],[]] : datas;
-            sessionStorage.setItem("datas",JSON.stringify(datas));
-        });
     }
 }

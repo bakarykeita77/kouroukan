@@ -1366,6 +1366,11 @@
             'transform':'scaleY(0.75)'
         });
         setTimeout(() => { element.css({'opacity':1, 'transform':'scaleY(1)'}); }, 50);
+    }   
+    function ducourage() {
+        let nom = nomDEtudiant();
+        let sexe = sexeDEtudiant();
+        return "<b>ߌ ߘߐߖߊ߬ "+nom+" "+sexe+"</b><br>";
     }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
@@ -1396,15 +1401,20 @@
     }
     function effacerLeTableau() {
         $('.course_body').html("<p id='contenu_par_defaut_du_tableau'>ߥߟߊ߬ߓߊ ߓߘߊ߫ ߖߐ߬ߛߌ߬ ߹</p>");
-    }     
-    function ducourage() {
-        let nom = nomDEtudiant();
-        let sexe = sexeDEtudiant();
-        return "<b>ߌ ߘߐߖߊ߬ "+nom+" "+sexe+"</b><br>";
-    }
+    }  
     function enregistrerLeCaractere(caracteres_selectionnees,caractere) {
         let caractere_index = caracteres_selectionnees.indexOf(caractere);
         if(caractere_index === -1) { caracteres_selectionnees.push(caractere); }
+    }
+    function extractionDesDatasDuServeur() {
+        let id_client = JSON.parse(sessionStorage.getItem("id_client"));
+        fetch("/kouroukan/api/index.php?id_user="+id_client)
+        .then(response => response.json())
+        .then(matiere_collection => {  
+            datas = matiere_collection;
+            datas = (datas == undefined) ? [[],[],[],[]] : datas;
+            sessionStorage.setItem("datas",JSON.stringify(datas));
+        });
     }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
@@ -3092,8 +3102,8 @@
         var id_client = JSON.parse(sessionStorage.getItem('id_client'));
         var matiere = JSON.parse(sessionStorage.getItem('matiere'));
         var niveau = JSON.parse(sessionStorage.getItem('niveau'));
-        var phase   = lesson_phase;
-        var lesson  = JSON.stringify(lesson_data);
+        var phase = lesson_phase;
+        var lesson = JSON.stringify(lesson_data);
         var note = totalPoint(lesson_data);
         
 console.log(id_client);

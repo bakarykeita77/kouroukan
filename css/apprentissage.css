@@ -106,7 +106,7 @@
     padding: 0.125rem;
     background-color: transparent;
     border-radius: 0.5rem 0.5rem 0 0;
-    color: #666;
+    color: #444;
     box-sizing: border-box;
 }
 .traducteur_tr {
@@ -437,6 +437,8 @@
 
 #revision_dialogue_btn { width: 12rem; }
 #submit_panneau:hover { background-color: #aaa; }
+#resultat_table { width: 100%; }
+#resultat_table td:not(nth-child(1)) { text-align: center; }
 
 .cercle {
     position: relative;
@@ -444,8 +446,8 @@
 }
 #resume_de_alphabet_resultat {
     position: relative;
-    width: 75%;
-    margin: auto;
+    max-width: 30rem;
+    margin: 3rem auto;
 }
 
 @media(orientation: portrait) {

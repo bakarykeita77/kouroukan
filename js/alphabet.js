@@ -3,6 +3,9 @@ function alphabet() {
     // localStorage.clear();
     // sessionStorage.clear();
     
+    extractionDesDatasDuServeur();
+
+    let matiere = matiereNom();
     let datas = JSON.parse(sessionStorage.getItem('datas'));
     let date_d_apprentissage_alphabet_du_serveur = dateDApprentissageAlphabetDuServeur();
     let data_alphabet_apprentissage = {};
@@ -10,7 +13,6 @@ function alphabet() {
     let data_alphabet_evaluation = {};
 
     let element_actif = "";
-    let matiere = matiereNom();
     sessionStorage.setItem("matiere",JSON.stringify(matiere));
     let matiere_nom = JSON.parse(sessionStorage.getItem('matiere_nom'));
     let phases_etudiees = JSON.parse(sessionStorage.getItem('phases_etudiees'));
@@ -1202,7 +1204,6 @@ function alphabet() {
                                                             
                                                         $('#revision_body_cadre').append('\
                                                             <div id="resume_de_alphabet_resultat">\
-                                                                <p>ߛߓߍߛߎ߲ ߘߋ߰ߟߌ ߢߊ߬ߣߍ߲߬ %/'+parseIntNko(pourcentage_general)+' ߟߊ߫.</p>\
                                                                 <h3>ߒߞߏ ߛߓߍߛߎ߲ ߘߋ߰ߟߌ ߞߐߝߟߌ ߟߊߛߎ߬ߘߎ߲߬ߧߊ߬ߣߍ߲ ߝߟߍ߫ ߕߊ߲߬</h3>\
                                                                 <div id="resultat_table_container">\
                                                                     <table id="resultat_table">\
@@ -1234,7 +1235,7 @@ function alphabet() {
                                                                 </div> \
                                                                     \
                                                                 <div id="resultat_btn_container">\
-                                                                    <p>ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ ߜߋ߲߭ ߘߋ߰ߟߌ ߘߊߡߌ߬ߘߊ߬</p>\
+                                                                    <p>ߛߓߍߛߎ߲ ߘߋ߰ߟߌ ߢߊ߬ߣߍ߲߬ %/'+parseIntNko(pourcentage_general)+' ߟߊ߫. ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ ߜߋ߲߭ ߘߋ߰ߟߌ ߘߊߡߌ߬ߘߊ߬</p>\
                                                                     <p>ߣߴߌ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߝߛߍ߬ߝߛߍ߬ߟߌ ߞߍ߫ ߌ ߟߊ߫ ߛߓߍߛߎ߲ ߘߋ߰ߟߌ ߞߐߝߟߌ ߞߊ߲߬߸ ߞߘߎ߬ ߓߊ߯ߡߊ ߢߌ߲߬ ߘߌ߲߯. <span id="afficheur_de_resultat">ߒߞߏ ߛߓߍߛߎ߲ ߘߋ߰ߟߌ ߞߐߝߟߌ ߕߐ߬ߝߍ߬ߦߊ߬ߣߍ߲</span></p>\
                                                                 </div> \
                                                             </div> \
@@ -1246,7 +1247,6 @@ function alphabet() {
                                                         });
                                                         $('#resultat_table td').css({
                                                             'border':'1px solid #aaa', 
-                                                            'padding':'0.5rem'
                                                         });
                                                         $('#resultat_btn_container').css({'height':0, 'transition':'0.25s'});
 

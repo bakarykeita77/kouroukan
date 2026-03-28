@@ -521,11 +521,11 @@
                 var phase_index = $(this).index();
                 if(total_phase > phase_active_index) {  
                     if(phase_index <= phase_active_index-1) $(this).removeClass('active').addClass('apprises');
-                    if(phase_index == phase_active_index  ) {
+                    if(phase_index == phase_active_index ) {
                         $(this).removeClass('a_apprendre').addClass('active');
                         indexer($(this));
                     }
-                    if(phase_index >= phase_active_index+1) $(this).addClass('a_apprendre');
+                    if(phase_index > phase_active_index) $(this).addClass('a_apprendre');
                 }       	    
                 if(total_phase == phase_active_index) $(this).removeClass('active a_apprendre').addClass('apprises');
             });
@@ -1406,16 +1406,6 @@
         let caractere_index = caracteres_selectionnees.indexOf(caractere);
         if(caractere_index === -1) { caracteres_selectionnees.push(caractere); }
     }
-    function extractionDesDatasDuServeur() {
-        let id_client = JSON.parse(sessionStorage.getItem("id_client"));
-        fetch("/kouroukan/api/index.php?id_user="+id_client)
-        .then(response => response.json())
-        .then(matiere_collection => {  
-            datas = matiere_collection;
-            datas = (datas == undefined) ? [[],[],[],[]] : datas;
-            sessionStorage.setItem("datas",JSON.stringify(datas));
-        });
-    }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
         
@@ -1827,6 +1817,15 @@
         
         return ldev;
     }
+    function lettresEtudiees(lesson_d_apprentissage_alphabet) {
+        let lettres_etudiees = [];
+        if(lesson_d_apprentissage_alphabet != undefined) {
+            lesson_d_apprentissage_alphabet.forEach(element => { 
+                if(lettres_etudiees.indexOf(element[0]) == "-1") lettres_etudiees.push(element[0]); 
+            });
+            return lettres_etudiees;
+        }
+    }
     function lire_mot() {
 	   for(var i=0; i<texte_memoire.length; i++) {
            
@@ -2055,17 +2054,6 @@
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
 
-    function niveauMaxDuServeur() {
-        let datas = JSON.parse(sessionStorage.getItem('datas'));
-        let niveaux = [];
-        let niveau_max = 0;
-
-        for (let i = 0; i < datas.length; i++) {
-            if(datas[i].length != 0) {niveaux.push(i);}
-        }
-        niveau_max = Math.max(...niveaux)+1;
-        return niveau_max;
-    }
     function nomComplet() {
         let prenom = JSON.parse(sessionStorage.getItem("prenom")); 
         let nom = JSON.parse(sessionStorage.getItem("nom")); 
@@ -2179,24 +2167,25 @@
         
         return nombre_converti.join('');
     }
-    function phasesEtudieesDuServeur() {
+    function phasesEtudieesDuServeur(datas) {
 
-        let datas = JSON.parse(sessionStorage.getItem('datas'));
-        let niveau_max = JSON.parse(sessionStorage.getItem('niveau_max'));
-        niveau_max = (niveau_max == undefined) ? 0 : niveau_max;
+        datas = (datas == undefined) ? [[],[],[],[]] : datas;
+        let niveau = JSON.parse(sessionStorage.getItem('niveau'));
+        niveau = (niveau == null) ? 1 : niveau;
         let peds = [];
+        
+        let matiere = datas[niveau-1];
 
-        let matiere = datas[niveau_max];
-        matiere = (matiere == undefined) ? [] : matiere;
-
-        if(matiere.length == 0) {
-            console.log("Cette matiere est vide !");
-            peds = [];
-        }
-        if(matiere.length != 0) {
-            for (let i = 0; i < datas[niveau_max].length; i++) {
-                if(datas[niveau_max][i] != undefined) peds.push(datas[niveau_max][i].phase);
-            }  
+        if(matiere != undefined) {
+            if(matiere.length == 0) {
+                console.log("Cette matiere est vide !");
+                peds = [];
+            }
+            if(matiere.length != 0) {
+                for (let i = 0; i < datas[niveau-1].length; i++) {
+                    if(datas[niveau-1][i] != undefined) peds.push(datas[niveau-1][i].phase);
+                }  
+            }
         }
         
         return peds;
@@ -3105,13 +3094,6 @@
         var phase = lesson_phase;
         var lesson = JSON.stringify(lesson_data);
         var note = totalPoint(lesson_data);
-        
-console.log(id_client);
-console.log(matiere);
-console.log(niveau);
-console.log(phase);
-console.log(lesson);
-console.log(note);
 
         const data_to_send = new URLSearchParams({
             id_client : id_client,
@@ -3153,9 +3135,18 @@ console.log(note);
 	   // alert( elements_secondaires ); 
 	}
     function styleResponsiveDuTableauParlante() {
-        if($(".table_parlante").height() < 112) {
-            let m = 112 - ($(".table_parlante").height())/2;
-            $(".table_parlante").css({"margin":m+"px auto"});
+        let niveau = JSON.parse(sessionStorage.getItem("niveau"));
+        if(niveau == 1) {
+                $(".table_parlante, .table_muette").css({
+                    "top":"40%",
+                    "transform":"translateY(-50%)"
+                });
+        }
+        if(niveau == 2) {
+            if($(".table_parlante").height() < 112) {
+                let m = 112 - ($(".table_parlante").height())/2;
+                $(".table_parlante").css({"margin":m+"px auto"});
+            }
         }
     }
     function stylesDesCaracteres() {

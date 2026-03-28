@@ -4,7 +4,7 @@ function parametrageDeLesson() {
     var datas = JSON.parse(sessionStorage.getItem('datas'));     
     var niveau = JSON.parse(sessionStorage.getItem('niveau'));   // Voir programmes.js fonction storagesDuProgramme()
 
-    let phase_id = (datas[niveau-1].length == 0) ? null : JSON.parse(sessionStorage.getItem('phase_id'));
+    let phase_id = (datas[niveau-1].length == 0) ? "alphabet_apprentissage" : JSON.parse(sessionStorage.getItem('phase_id'));
     var voyelles_checker, consonnes_checker, tedo_checker, tons_checker, nasalisation_checker;
     var voyelles_cochees = [], consonnes_cochees = [], tedos_coches = [], tons_coches = [], nasalisations_cochees = [], caracteres_coches = [],syllabes_coches = [];
     var submit_btn = "";

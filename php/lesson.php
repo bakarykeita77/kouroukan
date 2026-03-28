@@ -7,9 +7,8 @@ if(isset($_SESSION["id_client"])) {
     $matiere_index = $_GET['matiere_index'];
     $matiere_nom = $_GET['matiere_nom'];
     $niveau = $_GET['niveau'];
-    $niveau_max = $_GET['niveau_max'];
     $phases_etudiees = $_GET['phases_etudiees'];
-    // $phases_etudiees = ((integer)$matiere_index > 0) ? $_GET['phases_etudiees'] : "";
+    $phases_etudiees = ((integer)$matiere_index > 0) ? $_GET['phases_etudiees'] : "";
     if(isset($_GET['lesson_option'])) {
         $lesson_option   = ((integer)$niveau <= 2) ? $_GET['lesson_option'] : 0;
     }
@@ -48,7 +47,6 @@ if(isset($_SESSION["id_client"])) {
                         <p id='matiere_index_container'  ><?= $matiere_index; ?></p>
                         <p id='matiere_nom_container'    ><?= $matiere_nom; ?></p>
                         <p id='niveau_container'         ><?= $niveau; ?></p>
-                        <p id='niveau_max_container'     ><?= $niveau_max; ?></p>
                         <p id='phases_etudiees_container'><?= $phases_etudiees; ?></p>
                     </div>
 

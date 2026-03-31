@@ -67,7 +67,7 @@ if(isset($_SESSION["id_client"])) {
                 <div class="salle_de_classe">
                     
                  <!--Fermetre du cours--------------------------------------------------------------------------------------------------------------->
-                 <span class="fermeture" id="">&times;</span>
+                    <span class="fermeture" id="">&times;</span>
                  
                  <!--Modification alerte------------------------------------------------------------------------------------------------------------->
                     <div class="modification_alerte">

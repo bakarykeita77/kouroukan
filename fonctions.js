@@ -1248,12 +1248,9 @@
 
         return date_actuelle;
     }
-    function dateDApprentissageAlphabetDuServeur() {
-        let datas = JSON.parse(sessionStorage.getItem('datas'));
+    function dateDApprentissageAlphabetDuServeur(datas) {
         let date = "";
-        if(datas != null) if(datas.length != 0) {
-            date = (datas[0][0] == undefined) ? dateAcuelle() : datas[0][0].date;
-        }
+        if(datas != null) if(datas.length != 0) date = (datas[0][0] == undefined) ? dateAcuelle() : datas[0][0].date;
         return date;
     }
     function dateEnNko(date_a_convertir) {
@@ -1908,18 +1905,20 @@
         $(".notification_corps").text("");
         $('.notification_corps').css({"top":"5.25rem"}); 
     }
-    function matiereNom() {
-        let matiere = "";
-        let niveau = JSON.parse(sessionStorage.getItem("niveau"));
+    function matiereNom(matiere) { 
+        let matiere_nom = "";
+        if(matiere[0] != undefined) matiere_nom = matiere[0].phase.split("_")[0];
+        return matiere_nom;
+    }
+    function matiereNomEnNko(matiere) { 
+        let matiere_nom = "";
         
-        switch(niveau) {
-            case 1 : matiere = "alphabet"; break;
-            case 2 : matiere = "syllabes"; break;
-            case 3 : matiere = "tons"; break;
-            case 4 : matiere = "chiffres"; break;
-        }
-
-        return matiere;
+        if(matiere[0] != undefined) if( matiere[0].phase.split("_")[0] == "alphabet")  matiere_nom = "ߛߓߍߛߎ߲";
+        if(matiere[1] != undefined) if( matiere[1].phase.split("_")[0] == "syllabe")  matiere_nom = "ߜߋ߲߭";
+        if(matiere[2] != undefined) if( matiere[2].phase.split("_")[0] == "tons")  matiere_nom = "ߞߊ߲ߡߊߛߙߋ";
+        if(matiere[3] != undefined) if( matiere[3].phase.split("_")[0] == "chiffres")  matiere_nom = "ߖߊ߰ߕߋ߬ߘߋ߲";
+        
+        return matiere_nom;
     }
     function masquerTesteContainer() { setTimeout(() => { $("#teste_container").css({"top":"0.5rem"}); }, 800); }
     function memoireConsonnesChoisies() {
@@ -2177,14 +2176,9 @@
         let matiere = datas[niveau-1];
 
         if(matiere != undefined) {
-            if(matiere.length == 0) {
-                console.log("Cette matiere est vide !");
-                peds = [];
-            }
+            if(matiere.length == 0) peds = [];
             if(matiere.length != 0) {
-                for (let i = 0; i < datas[niveau-1].length; i++) {
-                    if(datas[niveau-1][i] != undefined) peds.push(datas[niveau-1][i].phase);
-                }  
+                for (let i = 0; i < datas[niveau-1].length; i++) if(datas[niveau-1][i] != undefined) peds.push(datas[niveau-1][i].phase);
             }
         }
         
@@ -2199,19 +2193,12 @@
             return pp;
         }
     }
-    function profileResulat() {
-
-        chargerLeResulat();
+    function profileResulat(datas) {
+        
+        resultatGeneral(datas);
         afficherLeResulat();
         fermerLeResulat();
 
-        function chargerLeResulat() {
-
-            let datas = JSON.parse(sessionStorage.getItem('datas'));
-            // let lessons_etudier = calculDesLessonsEtudiees();
-
-            resultatGeneral(datas);
-        }
         function afficherLeResulat() {
             $('#afficheur_du_resultat').click(() => {
                 $('#profile_resultat').css('display','block');
@@ -2548,16 +2535,24 @@
             return ls;
         }
     }
-    function resultatDeLaMatiere(matiere,matiere_nom) {
+    function resultatDeLaMatiere(matiere) {
 
-        let lesson_1={}, lesson_2={}, lesson_3={},lesson_4={};
+        let matiere_nom = matiereNomEnNko(matiere);
+        let lesson_1={}, lesson_2={}, lesson_3={}, lesson_4={};
         
-        if(matiere != undefined) {
-            lesson_1 = (matiere[0] == undefined) ? {} : matiere[0];
-            lesson_2 = (matiere[1] == undefined) ? {} : matiere[1];
-            lesson_3 = (matiere[2] == undefined) ? {} : matiere[2];
-            lesson_4 = (matiere[3] == undefined) ? {} : matiere[3];
+        if(matiere.length > 0) {
+            matiere.forEach(element => {
+                if(element != undefined) {
+                    let element_index = matiere.indexOf(element);
+
+                    if(element.phase.split("_")[1] == "apprentissage") lesson_1 = matiere[element_index];
+                    if(element.phase.split("_")[1] == "exercice") lesson_2 = matiere[element_index];
+                    if(element.phase.split("_")[1] == "revision") lesson_3 = matiere[element_index];
+                    if(element.phase.split("_")[1] == "evaluation") lesson_4 = matiere[element_index];
+                }
+            });
         }
+
 
         let nom = JSON.parse(sessionStorage.getItem('nom'));
         let prenom = JSON.parse(sessionStorage.getItem('prenom'));
@@ -2567,6 +2562,7 @@
         let moyenne_d_evaluation = 1;
         let lesson_suivante = lessonSuivante(lesson_en_cours);
         let continu_sur_l_etape_suivante = '<b id="avance"><a href="/kouroukan/php/programmes.php">'+lesson_suivante+'</a></b>';
+
 
         chargerResultatDeLaMatiereEntete();
         chargerResultatDeLaMatiereCorps();
@@ -2590,224 +2586,233 @@
             chargerResultatDEvaluationCorps();
                 
             function chargerResultatDApprentissageCorps() {
+                if(lesson_1 != undefined) {
 
-                chargerResultatHead();
-                chargerResultatBody();
-                chargerResultatFoot();
+                    chargerResultatHead();
+                    chargerResultatBody();
+                    chargerResultatFoot();
+                
+                    function chargerResultatHead() {
+                        if(Object.keys(lesson_1).length === 0) {
+                            $('#phase_d_apprentissage').text(matiere_nom+' '+liste_de_phases[0][1]);
+                            $('#apprentissage_date').text(" - ");
+                            $('#apprentissage_heure').text(" - ");
+                        }
+                        if(Object.keys(lesson_1).length > 0) {
+
+                            let d = lesson_1.date;
+                            let an = d.split("-")[0];
+                            let lune = d.split("-")[1];
+                            let date = d.split("-")[2];
+                            let jour = date.split(" ")[0];
+                            let temps = date.split(" ")[1];
+                            let heure = temps.split(":")[0];
+                            let minute = temps.split(":")[1];
+                            
+                            $('#phase_d_apprentissage').text(matiere_nom+' '+liste_de_phases[0][1]);
+                            $('#apprentissage_date').text(mois[parseInt(lune-1)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
+                            $('#apprentissage_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
+                        }
+                    }
+                    function chargerResultatBody() {
+
+                        if(Object.keys(lesson_1).length === 0) {
+                            $('#apprentissage_resultat_body').html(contenuVide()); 
+                            $('#total_d_apprentissage_question').html("");
+                            $('#total_d_apprentissage_reponse').html("");
+                            $('#total_d_apprentissage_point').html("");
+                        } 
+                        if(Object.keys(lesson_1).length > 0) {
+                            $("#resultat_d_apprentissage_corps").css("display","block");
+
+                            let lesson = JSON.parse(lesson_1.lesson);
+                            let apprentissage_resultat_body_html = resultatTableBodyHTML(lesson);
+
+                            $('#apprentissage_resultat_body').html(apprentissage_resultat_body_html);
+                            $('#total_d_apprentissage_question').html(parseIntNko(lesson.length));
+                            $('#total_d_apprentissage_reponse').html(parseIntNko(lesson.length));
+                            $('#total_d_apprentissage_point').html(parseIntNko(sommePoint(lesson)));
+                        }
+                    }
+                    function chargerResultatFoot() {
+                        if(Object.keys(lesson_1).length === 0) {
+                            $('#total_general_des_questions').text("");
+                            $('#total_general_des_bonnes_reponses').text("");
+                            $('#pourcentage_point').text("");
+                        }
+                        if(Object.keys(lesson_1).length > 0) {
+                        
+                            let lesson = JSON.parse(lesson_1.lesson);
             
-                function chargerResultatHead() {
-                    if(Object.keys(lesson_1).length === 0) {
-                        $('#phase_d_apprentissage').text(matiere_nom+' '+liste_de_phases[0][1]);
-                        $('#apprentissage_date').text(" - ");
-                        $('#apprentissage_heure').text(" - ");
-                    }
-                    if(Object.keys(lesson_1).length > 0) {
-
-                        let d = lesson_1.date;
-                        let an = d.split("-")[0];
-                        let lune = d.split("-")[1];
-                        let date = d.split("-")[2];
-                        let jour = date.split(" ")[0];
-                        let temps = date.split(" ")[1];
-                        let heure = temps.split(":")[0];
-                        let minute = temps.split(":")[1];
-                        
-                        $('#phase_d_apprentissage').text(matiere_nom+' '+liste_de_phases[0][1]);
-                        $('#apprentissage_date').text(mois[parseInt(lune-1)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
-                        $('#apprentissage_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
-                    }
-                }
-                function chargerResultatBody() {
-                    if(Object.keys(lesson_1).length === 0) {
-                        $('#apprentissage_resultat_body').html(contenuVide()); 
-                        $('#total_d_apprentissage_question').html("");
-                        $('#total_d_apprentissage_reponse').html("");
-                        $('#total_d_apprentissage_point').html("");
-                    } 
-                    if(Object.keys(lesson_1).length > 0) {
-                        $("#resultat_d_apprentissage_corps").css("display","block");
-
-                        let lesson = JSON.parse(lesson_1.lesson);
-                        let apprentissage_resultat_body_html = resultatTableBodyHTML(lesson);
-
-                        $('#apprentissage_resultat_body').html(apprentissage_resultat_body_html);
-                        $('#total_d_apprentissage_question').html(parseIntNko(lesson.length));
-                        $('#total_d_apprentissage_reponse').html(parseIntNko(lesson.length));
-                        $('#total_d_apprentissage_point').html(parseIntNko(sommePoint(lesson)));
-                    }
-                }
-                function chargerResultatFoot() {
-                    if(Object.keys(lesson_1).length === 0) {
-                        $('#total_general_des_questions').text("");
-                        $('#total_general_des_bonnes_reponses').text("");
-                        $('#pourcentage_point').text("");
-                    }
-                    if(Object.keys(lesson_1).length > 0) {
-                    
-                        let lesson = JSON.parse(lesson_1.lesson);
-                        let total_des_questions = parseIntNko(lesson.length);
-                        let total_des_points = parseIntNko(sommePoint(lesson));
-                        let pourcentage_des_points = '%'+parseIntNko(Math.floor(reverseIntNko(total_des_points)*100/reverseIntNko(total_des_questions)));
-                        
-                        $('#total_general_des_questions').text(total_des_questions);
-                        $('#total_general_des_bonnes_reponses').text(total_des_points);
-                        $('#pourcentage_point').text(pourcentage_des_points);
+                            let total_des_questions = parseIntNko(lesson.length);
+                            let total_des_points = parseIntNko(sommePoint(lesson));
+                            let pourcentage_des_points = '%'+parseIntNko(Math.floor(reverseIntNko(total_des_points)*100/reverseIntNko(total_des_questions)));
+                            
+                            $('#total_general_des_questions').text(total_des_questions);
+                            $('#total_general_des_bonnes_reponses').text(total_des_points);
+                            $('#pourcentage_point').text(pourcentage_des_points);
+                        }
                     }
                 }
             }
             function chargerResultatDExerciceCorps() {
+                if(lesson_2 != undefined) {
 
-                chargerResultatHead();
-                chargerResultatBody();
+                    chargerResultatHead();
+                    chargerResultatBody();
 
-                function chargerResultatHead() {
-                    if(Object.keys(lesson_2).length === 0) {
-                        $('#phase_d_exercice').text(matiere_nom+' '+liste_de_phases[1][1]);
-                        $('#exercice_date').text(" - ");
-                        $('#exercice_heure').text(" - ");
-                    }
-                    if(Object.keys(lesson_2).length != 0) {
+                    function chargerResultatHead() {
+                        if(Object.keys(lesson_2).length === 0) {
+                            $('#phase_d_exercice').text(matiere_nom+' '+liste_de_phases[1][1]);
+                            $('#exercice_date').text(" - ");
+                            $('#exercice_heure').text(" - ");
+                        }
+                        if(Object.keys(lesson_2).length != 0) {
 
-                        let d = lesson_2.date;
-                        let an = d.split("-")[0];
-                        let lune = d.split("-")[1];
-                        let date = d.split("-")[2];
-                        let jour = date.split(" ")[0];
-                        let temps = date.split(" ")[1];
-                        let heure = temps.split(":")[0];
-                        let minute = temps.split(":")[1];
-                        
-                        $('#phase_d_exercice').text(matiere_nom+' '+liste_de_phases[1][1]);
-                        $('#exercice_date').text(mois[parseInt(lune-1)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
-                        $('#exercice_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
-                    }
-                }
-                function chargerResultatBody() {
-                    if(Object.keys(lesson_2).length === 0) {
-                        $('#exercice_resultat_body').html(contenuVide()); 
-                        $('#total_d_exercice_question').html("");
-                        $('#total_d_exercice_reponse').html("");
-                        $('#total_d_exercice_point').html("");
-                    }
-                    if(Object.keys(lesson_2).length != 0) {
+                            let d = lesson_2.date;
+                            let an = d.split("-")[0];
+                            let lune = d.split("-")[1];
+                            let date = d.split("-")[2];
+                            let jour = date.split(" ")[0];
+                            let temps = date.split(" ")[1];
+                            let heure = temps.split(":")[0];
+                            let minute = temps.split(":")[1];
                             
-                        $("#resultat_d_exercice_corps").css("display","block");
+                            $('#phase_d_exercice').text(matiere_nom+' '+liste_de_phases[1][1]);
+                            $('#exercice_date').text(mois[parseInt(lune-1)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
+                            $('#exercice_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
+                        }
+                    }
+                    function chargerResultatBody() {
+                        if(Object.keys(lesson_2).length === 0) {
+                            $('#exercice_resultat_body').html(contenuVide()); 
+                            $('#total_d_exercice_question').html("");
+                            $('#total_d_exercice_reponse').html("");
+                            $('#total_d_exercice_point').html("");
+                        }
+                        if(Object.keys(lesson_2).length != 0) {
+                                
+                            $("#resultat_d_exercice_corps").css("display","block");
 
-                        let lesson = JSON.parse(lesson_2.lesson);
-                        let exercice_resultat_body_html = resultatTableBodyHTML(lesson);
+                            let lesson = JSON.parse(lesson_2.lesson);
+                            let exercice_resultat_body_html = resultatTableBodyHTML(lesson);
 
-                        $('#exercice_resultat_body').html(exercice_resultat_body_html);
-                        $('#total_d_exercice_question').html(parseIntNko(lesson.length));
-                        $('#total_d_exercice_reponse').html(parseIntNko(lesson.length));
-                        $('#total_d_exercice_point').html(parseIntNko(sommePoint(lesson)));
+                            $('#exercice_resultat_body').html(exercice_resultat_body_html);
+                            $('#total_d_exercice_question').html(parseIntNko(lesson.length));
+                            $('#total_d_exercice_reponse').html(parseIntNko(lesson.length));
+                            $('#total_d_exercice_point').html(parseIntNko(sommePoint(lesson)));
+                        }
                     }
                 }
             }
             function chargerResultatDeRevivsionCorps() {
+                if(lesson_3 != undefined) {
 
-                chargerResultatHead();
-                chargerResultatBody();
+                    chargerResultatHead();
+                    chargerResultatBody();
 
-                function chargerResultatHead() {
-                    if(Object.keys(lesson_3).length === 0) {
-                        $('#phase_de_revision').text(matiere_nom+' '+liste_de_phases[2][1]);
-                        $('#revision_date').text(" - ");
-                        $('#revision_heure').text(" - ");
+                    function chargerResultatHead() {
+                        if(Object.keys(lesson_3).length === 0) {
+                            $('#phase_de_revision').text(matiere_nom+' '+liste_de_phases[2][1]);
+                            $('#revision_date').text(" - ");
+                            $('#revision_heure').text(" - ");
+                        }
+                        if(Object.keys(lesson_3).length != 0) {
+
+                            let d = lesson_3.date;
+                            let an = d.split("-")[0];
+                            let lune = d.split("-")[1];
+                            let date = d.split("-")[2];
+                            let jour = date.split(" ")[0];
+                            let temps = date.split(" ")[1];
+                            let heure = temps.split(":")[0];
+                            let minute = temps.split(":")[1];
+                        
+                            $('#phase_de_revision').text(matiere_nom+' '+liste_de_phases[2][1]);
+                            $('#revision_date').text(mois[parseInt(lune-1)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
+                            $('#revision_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
+                        }
                     }
-                    if(Object.keys(lesson_3).length != 0) {
+                    function chargerResultatBody() {
+                        
+                        if(Object.keys(lesson_3).length === 0) {
+                            $('#revision_resultat_body').html(contenuVide()); 
+                            $('#total_de_revision_question').html("");
+                            $('#total_de_revision_reponse').html("");
+                            $('#total_de_revision_point').html("");
+                        }
+                        if(Object.keys(lesson_3).length != 0) {
+                                
+                            $("#resultat_de_revision_corps").css("display","block");
 
-                        let d = lesson_3.date;
-                        let an = d.split("-")[0];
-                        let lune = d.split("-")[1];
-                        let date = d.split("-")[2];
-                        let jour = date.split(" ")[0];
-                        let temps = date.split(" ")[1];
-                        let heure = temps.split(":")[0];
-                        let minute = temps.split(":")[1];
-                    
-                        $('#phase_de_revision').text(matiere_nom+' '+liste_de_phases[2][1]);
-                        $('#revision_date').text(mois[parseInt(lune-1)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
-                        $('#revision_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
-                    }
-                }
-                function chargerResultatBody() {
-                    
-                    if(Object.keys(lesson_3).length === 0) {
-                        $('#revision_resultat_body').html(contenuVide()); 
-                        $('#total_de_revision_question').html("");
-                        $('#total_de_revision_reponse').html("");
-                        $('#total_de_revision_point').html("");
-                    }
-                    if(Object.keys(lesson_3).length != 0) {
-                            
-                        $("#resultat_de_revision_corps").css("display","block");
+                            let lesson = JSON.parse(lesson_3.lesson);
+                            let revision_resultat_body_html = resultatTableBodyHTML(lesson);
 
-                        let lesson = JSON.parse(lesson_3.lesson);
-                        let revision_resultat_body_html = resultatTableBodyHTML(lesson);
-
-                        $('#revision_resultat_body').html(revision_resultat_body_html);
-                        $('#total_de_revision_question').html(parseIntNko(lesson.length));
-                        $('#total_de_revision_reponse').html(parseIntNko(lesson.length));
-                        $('#total_de_revision_point').html(parseIntNko(sommePoint(lesson))); 
+                            $('#revision_resultat_body').html(revision_resultat_body_html);
+                            $('#total_de_revision_question').html(parseIntNko(lesson.length));
+                            $('#total_de_revision_reponse').html(parseIntNko(lesson.length));
+                            $('#total_de_revision_point').html(parseIntNko(sommePoint(lesson))); 
+                        }
                     }
                 }
             }
             function chargerResultatDEvaluationCorps() {
+                if(lesson_4 != undefined) {
 
-                chargerResultatHead();
-                chargerResultatBody();
+                    chargerResultatHead();
+                    chargerResultatBody();
 
-                function chargerResultatHead() {
-                    if(Object.keys(lesson_4).length === 0) {
-                        $('#phase_d_evaluation').text(matiere_nom+' '+liste_de_phases[3][1]);
-                        $('#evaluation_date').text(" - ");
-                        $('#evaluation_heure').text(" - ");
-                    }
-                    if(Object.keys(lesson_4).length != 0) {
-                       
-                        let d = lesson_4.date;
-                        let an = d.split("-")[0];
-                        let lune = d.split("-")[1];
-                        let date = d.split("-")[2];
-                        let jour = date.split(" ")[0];
-                        let temps = date.split(" ")[1];
-                        let heure = temps.split(":")[0];
-                        let minute = temps.split(":")[1];
+                    function chargerResultatHead() {
+                        if(Object.keys(lesson_4).length === 0) {
+                            $('#phase_d_evaluation').text(matiere_nom+' '+liste_de_phases[3][1]);
+                            $('#evaluation_date').text(" - ");
+                            $('#evaluation_heure').text(" - ");
+                        }
+                        if(Object.keys(lesson_4).length != 0) {
                         
-                        $('#phase_d_evaluation').text(matiere_nom+' '+liste_de_phases[3][1]);
-                        $('#evaluation_date').text(mois[parseInt(lune-1)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
-                        $('#evaluation_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute)); 
-                    }
-                }
-                function chargerResultatBody() {
-                        
-                    if(Object.keys(lesson_4).length === 0) {
-                        $('#evaluation_resultat_body').html(contenuVide());
-                        $('#total_d_evaluation_question').html("");
-                        $('#total_d_evaluation_reponse').html("");
-                        $('#total_d_evaluation_point').html("");
-                    }
-                    if(Object.keys(lesson_4).length != 0) {
+                            let d = lesson_4.date;
+                            let an = d.split("-")[0];
+                            let lune = d.split("-")[1];
+                            let date = d.split("-")[2];
+                            let jour = date.split(" ")[0];
+                            let temps = date.split(" ")[1];
+                            let heure = temps.split(":")[0];
+                            let minute = temps.split(":")[1];
                             
-                        $("#resultat_d_evaluation_corps").css("display","block");
+                            $('#phase_d_evaluation').text(matiere_nom+' '+liste_de_phases[3][1]);
+                            $('#evaluation_date').text(mois[parseInt(lune-1)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
+                            $('#evaluation_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute)); 
+                        }
+                    }
+                    function chargerResultatBody() {
+                        if(Object.keys(lesson_4).length === 0) {
+                            $('#evaluation_resultat_body').html(contenuVide());
+                            $('#total_d_evaluation_question').html("");
+                            $('#total_d_evaluation_reponse').html("");
+                            $('#total_d_evaluation_point').html("");
+                        }
+                        if(Object.keys(lesson_4).length != 0) {
+                                
+                            $("#resultat_d_evaluation_corps").css("display","block");
 
-                        let lesson = JSON.parse(lesson_4.lesson);
-                        let evaluation_resultat_body_html = resultatTableBodyHTML(lesson);
-                        
-                        $('#evaluation_resultat_body').html(evaluation_resultat_body_html);
-                        $('#total_d_evaluation_question').html(parseIntNko(lesson.length));
-                        $('#total_d_evaluation_reponse').html(parseIntNko(lesson.length));
-                        $('#total_d_evaluation_point').html(parseIntNko(sommePoint(lesson))); 
+                            let lesson = JSON.parse(lesson_4.lesson);
+                            let evaluation_resultat_body_html = resultatTableBodyHTML(lesson);
+                            
+                            $('#evaluation_resultat_body').html(evaluation_resultat_body_html);
+                            $('#total_d_evaluation_question').html(parseIntNko(lesson.length));
+                            $('#total_d_evaluation_reponse').html(parseIntNko(lesson.length));
+                            $('#total_d_evaluation_point').html(parseIntNko(sommePoint(lesson))); 
+                        }
                     }
                 }
             }
         }
         function chargerResultatDeLaMatierePied() {
  
-            lesson_1 = (Object.keys(lesson_1).length != 0) ? JSON.parse(lesson_1.lesson) : undefined;
-            lesson_2 = (Object.keys(lesson_2).length != 0) ? JSON.parse(lesson_2.lesson) : undefined;
-            lesson_3 = (Object.keys(lesson_3).length != 0) ? JSON.parse(lesson_3.lesson) : undefined;
-            lesson_4 = (Object.keys(lesson_4).length != 0) ? JSON.parse(lesson_4.lesson) : undefined;
+            if(lesson_1 != undefined) lesson_1 = (Object.keys(lesson_1).length != 0) ? JSON.parse(lesson_1.lesson) : {};
+            if(lesson_2 != undefined) lesson_2 = (Object.keys(lesson_2).length != 0) ? JSON.parse(lesson_2.lesson) : {};
+            if(lesson_3 != undefined) lesson_3 = (Object.keys(lesson_3).length != 0) ? JSON.parse(lesson_3.lesson) : {};
+            if(lesson_4 != undefined) lesson_4 = (Object.keys(lesson_4).length != 0) ? JSON.parse(lesson_4.lesson) : {};
             
             let total_des_questions = totalDesQuestions();
             let total_general_des_points = totalDesPoints();
@@ -2898,19 +2903,15 @@
         }
     }
     function resultatGeneral(datas) {
-        let matiere_1=datas[0], matiere_2=datas[1], matiere_3=datas[2],matiere_4=datas[3];
-        let matiere_nom_1 = "", matiere_nom_2 = "", matiere_nom_3 = "", matiere_nom_4 = "";
 
-        matiere_nom_1 = "ߛߓߍߛߎ߲";
-        matiere_nom_2 = "ߜߋ߲߭";
-        matiere_nom_3 = "ߞߊ߲ߡߊߛߙߋ";
-        matiere_nom_4 = "ߖߊ߰ߕߋ߬ߘߋ߲";
+        let matiere_1=datas[0], matiere_2=datas[1], matiere_3=datas[2], matiere_4=datas[3];
 
      /* Affichage par défaut */
         $("#details_du_resultat").css("display","block"); 
         $("#recapitulatif_du_resultat").css("display","none"); 
-
-        resultatDeLaMatiere(matiere_1, matiere_nom_1);
+        
+     /* Affichage par défaut */
+        resultatDeLaMatiere(matiere_1);
         $("#resultat_matieres_liste ul li").removeClass("li_actif");
         $("#resultat_matieres_liste ul li:nth-child(1)").addClass("li_actif");
 
@@ -2919,7 +2920,7 @@
             $("#details_du_resultat").css("display","block"); 
             $("#recapitulatif_du_resultat").css("display","none"); 
 
-            resultatDeLaMatiere(matiere_1, matiere_nom_1); 
+            resultatDeLaMatiere(matiere_1); 
             $("#resultat_matieres_liste ul li").removeClass("li_actif");
             $("#resultat_matieres_liste ul li:nth-child(1)").addClass("li_actif"); 
         });
@@ -2928,7 +2929,7 @@
             $("#details_du_resultat").css("display","block"); 
             $("#recapitulatif_du_resultat").css("display","none"); 
 
-            resultatDeLaMatiere(matiere_2, matiere_nom_2); 
+            resultatDeLaMatiere(matiere_2); 
             $("#resultat_matieres_liste ul li").removeClass("li_actif");
             $("#resultat_matieres_liste ul li:nth-child(2)").addClass("li_actif"); 
         });
@@ -2937,7 +2938,7 @@
             $("#details_du_resultat").css("display","block"); 
             $("#recapitulatif_du_resultat").css("display","none"); 
 
-            resultatDeLaMatiere(matiere_3, matiere_nom_3); 
+            resultatDeLaMatiere(matiere_3); 
             $("#resultat_matieres_liste ul li").removeClass("li_actif");
             $("#resultat_matieres_liste ul li:nth-child(3)").addClass("li_actif"); 
         });
@@ -2946,7 +2947,7 @@
             $("#details_du_resultat").css("display","block"); 
             $("#recapitulatif_du_resultat").css("display","none"); 
 
-            resultatDeLaMatiere(matiere_4, matiere_nom_4); 
+            resultatDeLaMatiere(matiere_4); 
             $("#resultat_matieres_liste ul li").removeClass("li_actif");
             $("#resultat_matieres_liste ul li:nth-child(4)").addClass("li_actif"); 
         });
@@ -3003,11 +3004,15 @@
             html +=  '</tr>';
 
             html +=  '<tr class="bold">';
+
             for(let k=0; k<memoire.length; k++) { html += '<td>'+memoire[k][0]+'</td>'; }
             html +=  '</tr>';
 
             html +=  '<tr class="bold">';
-            for(let l=0; l<memoire.length; l++) { html += '<td>'+memoire[l][1]+'</td>'; }
+            for(let l=0; l<memoire.length; l++) { 
+                memoire[l][1] = (typeof(memoire[l][1]) == "number") ? parseIntNko(memoire[l][1]) : memoire[l][1];
+                html += '<td>'+memoire[l][1]+'</td>'; 
+            }
             html +=  '</tr>';
 
             html +=  '<tr class="bold">';
@@ -3276,13 +3281,6 @@
         var note = calculerNote(lesson);
         var lesson = JSON.stringify(lesson);
         
-console.log(id);
-console.log(action);
-console.log(matiere);
-console.log(lesson);
-console.log(note);
-console.log(lesson);
-
         const data_to_send = new URLSearchParams({
             id : id,
             action : action,

@@ -1,12 +1,14 @@
 $('document').ready(function() {
 
+    
+console.log(localStorage);
+console.log(sessionStorage);
     /*Au click sur l'afficheur du programme 
         1)- On obtient le niveau d'étude de l'apprenant par analyse de sa situation.
         2)- On determine le programme en fonction de ce niveau d'étude.
 
     -------------------------------------------------------------------------------------------------------------------------*/   
 
- /* Récupération du niveau d'avancement des études déterminé depuis accueil.js */
     let id_client = JSON.parse(sessionStorage.getItem("id_client"));
     fetch("/kouroukan/api/index.php?id_user="+id_client)
     .then(response => response.json())
@@ -14,7 +16,6 @@ $('document').ready(function() {
 
         datas = matiere_collection;
         datas = (datas == undefined) ? [[],[],[],[]] : datas;
-        sessionStorage.setItem("datas",JSON.stringify(datas));
 
         let matieres_etudiees = matieresEtudiees(datas);
         let matiere_index = 0;
@@ -27,18 +28,10 @@ $('document').ready(function() {
         var phases_etudiees = phasesEtudieesDuServeur(datas);
         let phase_index = (phases_etudiees == null) ? 0 : phases_etudiees.length;
     
-console.log("datas");
-console.log(datas);
-console.log("matieres_etudiees");
-console.log(matieres_etudiees);
-console.log("Les phases étudiées sont : ");
-console.log(phases_etudiees);
-
     /*-------------------------------------------------------------------------------------------------------------*/
         /* Détermination du Programme */
         var programme_matieres = "";
 
-        profileResulat();
         selectionDuProgramme();
         chargementDuProgramme();
         styleDuProgramme();
@@ -50,9 +43,7 @@ console.log(phases_etudiees);
 
         function matieresEtudiees(datas) {
             let matieres = [];
-            for (let i = 0; i < datas.length; i++) {
-                if(datas[i].length === 3) matieres.push(datas[i][0].phase.split("_")[0]);
-            }
+            for (let i = 0; i < datas.length; i++) if(datas[i].length === 3) matieres.push(datas[i][0].phase.split("_")[0]);
             return matieres;
         }
         function selectionDuProgramme() { 
@@ -221,6 +212,5 @@ console.log(phases_etudiees);
             }
             return option;
         }
-
     });
 });

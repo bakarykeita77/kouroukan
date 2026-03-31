@@ -2,9 +2,6 @@ $('document').ready(function() {
          
  /* Declaration et initialisation des variables */
     let data_alphabet_du_serveur = [], data_syllabes_du_serveur = [], data_tons_du_serveur = [], data_chiffres_du_serveur = [];
-    let phases_etudiees_du_serveur = [];
-	let derniere_phase_du_serveur = "";
-
     let matieres_a_apprendre_du_serveur = [];
     let matieres_apprises_du_serveur = [];
 
@@ -21,7 +18,6 @@ $('document').ready(function() {
     dataStorage();         /* Récuperation et storage des data recuperés de l'étudiant */
     afficherLogo();
     afficher($('#reception'));
-    // document.getElementById("lien_du_programme").focus();
     mmettreLeFocusSur("#lien_du_programme");
     
     function userIdentityStorage() {
@@ -46,43 +42,13 @@ $('document').ready(function() {
           datas
          -------------------------------------------------------------------------*/   
             let datas = matiere_collection;
-    	    sessionStorage.setItem('datas',JSON.stringify(datas));
 
             console.log("Les données des leçons étudiées par l'apprenant sont");
             console.log(datas);
 
          /* Analyse des données réçues de l'étudiant */
-            profileTesteMenu();
-            profileResulat();
-
-         /*-------------------------------------------------------------------------   
-           Matieres
-         -------------------------------------------------------------------------*/
-            data_alphabet_du_serveur = datas[0];
-            data_syllabes_du_serveur = datas[1];
-            data_tons_du_serveur = datas[2];
-            data_chiffres_du_serveur = datas[3];
-
-            sessionStorage.setItem('data_alphabet_du_serveur',JSON.stringify(data_alphabet_du_serveur));
-            sessionStorage.setItem('data_syllabes_du_serveur',JSON.stringify(data_syllabes_du_serveur));
-            sessionStorage.setItem('data_tons_du_serveur',JSON.stringify(data_tons_du_serveur));
-            sessionStorage.setItem('data_chiffres_du_serveur',JSON.stringify(data_chiffres_du_serveur));
-                    
-         /*-------------------------------------------------------------------------   
-           Les pratiques 
-         -------------------------------------------------------------------------*/              
-            let pratiques = [];
-        
-            for (var i = 0; i < datas.length; i++) {
-            for (var j = 0; j < datas[i].length; j++) {
-                if(datas[i][j]['phase'].split('_')[1] == "pratique") {
-                    
-                }
-            }}
-            
-            localStorage.setItem('pratiques', JSON.stringify(pratiques));
-            sessionStorage.setItem('pratiques', JSON.stringify(pratiques));
-     
+            profileTesteMenu(datas);
+            profileResulat(datas);
 
             function profileTesteMenu(){
 

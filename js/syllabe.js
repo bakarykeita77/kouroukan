@@ -1,7 +1,4 @@
 function syllabe() {
-    
-// console.log(localStorage);
-// console.log(sessionStorage);
 
 // localStorage.clear();
 // sessionStorage.clear();
@@ -15,19 +12,16 @@ function syllabe() {
         datas = (datas == undefined) ? [[],[],[],[]] : datas;
         sessionStorage.setItem("datas",JSON.stringify(datas));
     
-        var matiere = matiereNom();
+        var matiere = matiereNom(datas[1]);
         sessionStorage.setItem("matiere",JSON.stringify(matiere));
         let phases_etudiees = phasesEtudieesDuServeur(datas);
         var niveau = JSON.parse(sessionStorage.getItem("niveau"));   // Voir programmes.js fonction storagesDuProgramme().
     
         let consonnes_apprises_du_serveur = consonnesDeSyllabeApprisesDuServeur();
         let consonnes_exercees_du_serveur = consonnesDeSyllabeExerceesDuServeur();
-    
-console.log("datas");
-console.log(datas);
-console.log("Les phases étudiées sont : ");
-console.log(phases_etudiees);
 
+        resultatGeneral(datas);
+    
         if (niveau === 2) {
     
             controlSurLesPhasesEtudiees();

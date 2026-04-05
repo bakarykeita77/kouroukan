@@ -10,13 +10,13 @@ $(document).ready(function(){
 		var clavier = $('#clavier_nko');
 		
 		var memoire_tableau = $('#memoire_tableau');
-		var syllabe_visible_input = $('#syllabe_visible_input');
-		var syllabe_audible_input = $('#syllabe_audible_input');
+		var syllabes_visible_input = $('#syllabes_visible_input');
+		var syllabes_audible_input = $('#syllabes_audible_input');
 		var mot_audible_input = $('#mot_audible_input');
 		var texte_audible_input = $('#texte_audible_input');
 		
-		var syllabe_visible = [];
-		var syllabe_audible = [];
+		var syllabes_visible = [];
+		var syllabes_audible = [];
 		var mot_audible = [];
 		var texte_audible = [];
 		
@@ -70,7 +70,7 @@ $(document).ready(function(){
 Les fonctions */
 	function initialiser() { effacerTableau(); effacerMemoire(); }
     function controle_caractere() {
-		c  = syllabe;
+		c  = syllabes;
 		ch1 = c[c.length-1];
 		ch2 = c[c.length-2];
 		ch3 = c[c.length-3];
@@ -253,7 +253,7 @@ Les fonctions */
 
 	function afficher_erreur() {
 		$('#ecrit_errone').text( caractere );
-		$('#ecrit_correcte').text( mot1.join("") + syllabe.join("") );
+		$('#ecrit_correcte').text( mot1.join("") + syllabes.join("") );
 		$('#assistant').css({ 'transform':'scale(1)' });
 		die();
 	 }
@@ -289,7 +289,7 @@ Les fonctions */
         for(var i=0; i<texte.length; i++) {
             
             let caractere_suivante = texte[i];  
-            let caractere_precedante = syllabe_visible[syllabe_visible.length-1]; 
+            let caractere_precedante = syllabes_visible[syllabes_visible.length-1]; 
 
          /*---------------------------------------------------------------------------------------*/   
         
@@ -316,7 +316,7 @@ Les fonctions */
 
             chargerSyllabeVisible();
             
-            if($.inArray(syllabe_visible_input.val(),espace.concat(ponctuations)) != -1) {
+            if($.inArray(syllabes_visible_input.val(),espace.concat(ponctuations)) != -1) {
                 
                 chargerSyllabeAudible1();
                 chargerMotAudible();
@@ -330,29 +330,29 @@ Les fonctions */
          /*---------------------------------------------------------------------------------------*/   
     
             function chargerSyllabeVisible() {
-                syllabe_visible.push(caractere_suivante);
-                syllabe_visible_input.val(syllabe_visible);
+                syllabes_visible.push(caractere_suivante);
+                syllabes_visible_input.val(syllabes_visible);
             }
             function chargerSyllabeAudible1() {
                 
-                syllabe_audible[syllabe_audible.length] = syllabeVisibleConvertiEnAudible1();
-                syllabe_audible_input.val(syllabe_audible);
+                syllabes_audible[syllabes_audible.length] = syllabesVisibleConvertiEnAudible1();
+                syllabes_audible_input.val(syllabes_audible);
 
                 
-                function syllabeVisibleConvertiEnAudible1() {
+                function syllabesVisibleConvertiEnAudible1() {
                     
-                    let syllabe_a_convertir = syllabe_visible_input.val().split(',');
-                    let sa1 = []; // Comme syllabe audible
+                    let syllabes_a_convertir = syllabes_visible_input.val().split(',');
+                    let sa1 = []; // Comme syllabes audible
              
-                    c1 = syllabe_a_convertir[syllabe_a_convertir.length-1];
-                    c2 = syllabe_a_convertir[syllabe_a_convertir.length-2];
-                    c3 = syllabe_a_convertir[syllabe_a_convertir.length-3];
-                    c4 = syllabe_a_convertir[syllabe_a_convertir.length-4];
-                    c5 = syllabe_a_convertir[syllabe_a_convertir.length-5];
+                    c1 = syllabes_a_convertir[syllabes_a_convertir.length-1];
+                    c2 = syllabes_a_convertir[syllabes_a_convertir.length-2];
+                    c3 = syllabes_a_convertir[syllabes_a_convertir.length-3];
+                    c4 = syllabes_a_convertir[syllabes_a_convertir.length-4];
+                    c5 = syllabes_a_convertir[syllabes_a_convertir.length-5];
         
 
                  /*-------------------------------------------------------------*/  
-                    if($.inArray(syllabe_visible_input.val(),espace.concat(ponctuations)) != -1) {
+                    if($.inArray(syllabes_visible_input.val(),espace.concat(ponctuations)) != -1) {
                         sa1[sa1.length] = caractere_suivante;
                     }
                  /*-------------------------------------------------------------*/  
@@ -529,20 +529,20 @@ Les fonctions */
             }
             function chargerSyllabeAudible2() {
                 
-                syllabe_audible[syllabe_audible.length] = syllabeVisibleConvertiEnAudible2();
-                syllabe_audible_input.val(syllabe_audible);
+                syllabes_audible[syllabes_audible.length] = syllabesVisibleConvertiEnAudible2();
+                syllabes_audible_input.val(syllabes_audible);
                 
 
-                function syllabeVisibleConvertiEnAudible2() {
+                function syllabesVisibleConvertiEnAudible2() {
                     
-                    let syllabe_a_convertir = syllabe_visible_input.val().split(',');
-                    let sa2 = []; // Comme syllabe audible
+                    let syllabes_a_convertir = syllabes_visible_input.val().split(',');
+                    let sa2 = []; // Comme syllabes audible
           
-                    c1 = syllabe_a_convertir[syllabe_a_convertir.length-1];
-                    c2 = syllabe_a_convertir[syllabe_a_convertir.length-2];
-                    c3 = syllabe_a_convertir[syllabe_a_convertir.length-3];
-                    c4 = syllabe_a_convertir[syllabe_a_convertir.length-4];
-                    c5 = syllabe_a_convertir[syllabe_a_convertir.length-5];
+                    c1 = syllabes_a_convertir[syllabes_a_convertir.length-1];
+                    c2 = syllabes_a_convertir[syllabes_a_convertir.length-2];
+                    c3 = syllabes_a_convertir[syllabes_a_convertir.length-3];
+                    c4 = syllabes_a_convertir[syllabes_a_convertir.length-4];
+                    c5 = syllabes_a_convertir[syllabes_a_convertir.length-5];
              
                  /*-------------------------------------------------------------*/  
                     if(c1 == nasalisation) {
@@ -638,7 +638,7 @@ Les fonctions */
                 }    
             }
             function chargerMotAudible() {
-                mot_audible[mot_audible.length] = syllabe_audible_input.val().split(',');
+                mot_audible[mot_audible.length] = syllabes_audible_input.val().split(',');
                 mot_audible_input.val(mot_audible);
                 
                 let maiv = mot_audible_input.val().split(',');
@@ -653,12 +653,12 @@ Les fonctions */
             }
             
             function effacerSyllabeVisible() {
-                syllabe_visible.splice(0,syllabe_visible.length);
-                syllabe_visible_input.val(syllabe_visible);
+                syllabes_visible.splice(0,syllabes_visible.length);
+                syllabes_visible_input.val(syllabes_visible);
             }
             function effacerSyllabeAudible() {
-                syllabe_audible.splice(0,syllabe_audible.length);
-                syllabe_audible_input.val(syllabe_audible);
+                syllabes_audible.splice(0,syllabes_audible.length);
+                syllabes_audible_input.val(syllabes_audible);
             }
             function effacerMotAudible() {
                 mot_audible.splice(0,mot_audible.length);
@@ -670,13 +670,13 @@ Les fonctions */
     function effacerTableau() { tableau_noir.val(''); }
     function effacerMemoire() {
                 
-                syllabe_visible.splice(0,syllabe_visible.length);
-                syllabe_audible.splice(0,syllabe_audible.length);
+                syllabes_visible.splice(0,syllabes_visible.length);
+                syllabes_audible.splice(0,syllabes_audible.length);
                 mot_audible.splice(0,mot_audible.length);
                 texte_audible.splice(0,texte_audible.length);
                     
-                $('#syllabe_visible_input').val(syllabe_visible);
-                $('#syllabe_audible_input').val(syllabe_audible);
+                $('#syllabes_visible_input').val(syllabes_visible);
+                $('#syllabes_audible_input').val(syllabes_audible);
                 $('#mot_audible_input').val(mot_audible);
                 $('#texte_audible_input').val(texte_audible);
     }
@@ -702,19 +702,19 @@ Lorsqu'on appuie une touche du clavier, il se passe ce qui suit: */
             controle_caractere(); // voir ligne 64.
 	/*___________________________________________________________________________________________________________________________
 	3°)- Formation des caracteres	
-	* Les caractères s'accumulent dans la variable nommée "syllabe" pour former une syllabe.	*/		
+	* Les caractères s'accumulent dans la variable nommée "syllabes" pour former une syllabes.	*/		
 	
-		syllabe[ syllabe.length ] = caractere;
-		syllabe_input.val( syllabe.join("") );
+		syllabes[ syllabes.length ] = caractere;
+		syllabes_input.val( syllabes.join("") );
 		
 		/* Affichage des textes tapées, au tableau_noir noir.  */
-		tableau_texte = texte_tableau.concat(mot1).concat(syllabe1).concat(syllabe);
+		tableau_texte = texte_tableau.concat(mot1).concat(syllabes1).concat(syllabes);
 		tableau_noir.val(tableau_texte.join(''));
 	/*___________________________________________________________________________________________________________________________
-	4°) - Formation de syllabe lorsqu'on appuie une voyelle	*/
+	4°) - Formation de syllabes lorsqu'on appuie une voyelle	*/
 			if( $.inArray( caractere,voyelles ) != -1 || caractere == 'ߒ' ) {
 		
-				c  = syllabe;
+				c  = syllabes;
 				ch1 = c[c.length-1];
 				ch2 = c[c.length-2];
 				ch3 = c[c.length-3];

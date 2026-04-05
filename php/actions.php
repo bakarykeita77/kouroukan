@@ -29,7 +29,7 @@
     $note = isset($_POST['note']) ? $_POST['note'] : null;
     $action = isset($_POST['action']) ? $_POST['action'] : null;
 
-    $syllabe_categorie = isset($_POST['syllabe_categorie']) ? $_POST['syllabe_categorie'] : null;
+    $syllabes_categorie = isset($_POST['syllabes_categorie']) ? $_POST['syllabes_categorie'] : null;
     $image_name = isset($_FILES['image']['name']) ? $_FILES['image']['name'] : null;
     $taille = isset($_FILES['image']['size']) ? $_FILES['image']['size'] : null;
     $type = isset($_FILES['image']['type']) ? $_FILES['image']['type'] : null;
@@ -60,7 +60,7 @@
     $not = (int) $note;
     $action = securiser($action);
 
-    $syllabe_categorie = securiser($syllabe_categorie);
+    $syllabes_categorie = securiser($syllabes_categorie);
     $image_name = securiser($image_name);
     $name = explode('.',$image_name)[0];
    // $extension = explode('.',$image_name)[1];
@@ -68,7 +68,7 @@
     $taille = (int) $taille;
     $type = securiser($type);
 
-    $table_name = $syllabe_categorie;
+    $table_name = $syllabes_categorie;
 
   /*----------------------------------------------------------------------------------------------
     Gestion des données dans la base de données.

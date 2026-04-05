@@ -419,13 +419,13 @@
     var CJ = 31; //  Treat as NS or ID for strict or normal breaking.
     var EB = 32; //  Do not break from following Emoji Modifier
     var EM = 33; //  Do not break from preceding Emoji Base
-    var H2 = 34; //  Form Korean syllable blocks
-    var H3 = 35; //  Form Korean syllable blocks
+    var H2 = 34; //  Form Korean syllabesle blocks
+    var H3 = 35; //  Form Korean syllabesle blocks
     var HL = 36; //  Do not break around a following hyphen; otherwise act as Alphabetic
     var ID = 37; //  Break before or after; except in some numeric context
-    var JL = 38; //  Form Korean syllable blocks
-    var JV = 39; //  Form Korean syllable blocks
-    var JT = 40; //  Form Korean syllable blocks
+    var JL = 38; //  Form Korean syllabesle blocks
+    var JV = 39; //  Form Korean syllabesle blocks
+    var JT = 40; //  Form Korean syllabesle blocks
     var RI$1 = 41; //  Keep pairs together. For pairs; break before and after other classes
     var SA = 42; //  Provide a line break opportunity contingent on additional, language-specific context analysis
     var XX = 43; //  Have as yet unknown line breaking behavior or unassigned code positions
@@ -714,7 +714,7 @@
                 }
             }
         }
-        // LB26 Do not break a Korean syllable.
+        // LB26 Do not break a Korean syllabesle.
         if ((JL === current && [JL, JV, H2, H3].indexOf(next) !== -1) ||
             ([JV, H2].indexOf(current) !== -1 && [JV, JT].indexOf(next) !== -1) ||
             ([JT, H3].indexOf(current) !== -1 && next === JT)) {
@@ -4241,7 +4241,7 @@
         if (next === CR || next === LF || next === Control) {
             return BREAK_ALLOWED;
         }
-        // Do not break Hangul syllable sequences.
+        // Do not break Hangul syllabesle sequences.
         // GB6
         if (current === L && [L, V, LV, LVT].indexOf(next) !== -1) {
             return BREAK_NOT_ALLOWED;

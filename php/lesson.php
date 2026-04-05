@@ -214,7 +214,7 @@ if(isset($_SESSION["id_client"])) {
                                     <div class='reprendre_btn' id='reprendre_revision_btn'></div>
                                     <div class='apprentissage_btn' id='continu_sur_apprentissage_btn'></div> 
                                     <div class='evaluation_btn' id='continu_sur_evaluation_btn'></div> 
-                                    <div class='lesson_suivante' id='syllabe_btn'></div> 
+                                    <div class='lesson_suivante' id='syllabes_btn'></div> 
                                 </div>
                             </div>
                         </div>
@@ -330,6 +330,16 @@ if(isset($_SESSION["id_client"])) {
 
        <!--Audio pour la lecture audible------------------------------------------------------------------------------------------------------>
         <audio id="audio"></audio>
+        <audio id="audio_0"></audio>
+        <audio id="audio_1"></audio>
+        <audio id="audio_2"></audio>
+        <audio id="audio_3"></audio>
+        <audio id="audio_4"></audio>
+        <audio id="audio_5"></audio>
+        <audio id="audio_6"></audio>
+        <audio id="audio_7"></audio>
+        <audio id="audio_8"></audio>
+        <audio id="audio_9"></audio>
 
        <!--Link------------------------------------------------------------------------------------------------------------------------------->
         <script src="../js/clavier.js"></script>
@@ -338,7 +348,7 @@ if(isset($_SESSION["id_client"])) {
         <script src="../js/lessons.js"></script>
         
         <script src="../js/alphabet.js"></script>
-        <script src="../js/syllabe.js"></script>
+        <script src="../js/syllabes.js"></script>
         <script src="../js/ton.js"></script>
         <script src="../js/chiffre.js"></script>
 

@@ -1,5 +1,7 @@
 $('document').ready(function() {
 
+    // localStorage.clear();
+    // sessionStorage.clear();
     
 console.log(localStorage);
 console.log(sessionStorage);
@@ -43,7 +45,9 @@ console.log(sessionStorage);
 
         function matieresEtudiees(datas) {
             let matieres = [];
-            for (let i = 0; i < datas.length; i++) if(datas[i].length === 3) matieres.push(datas[i][0].phase.split("_")[0]);
+            for (let i = 0; i < datas.length; i++) {
+                if(datas[i].length === 3) matieres.push(datas[i][0].phase.split("_")[0]);
+            }
             return matieres;
         }
         function selectionDuProgramme() { 

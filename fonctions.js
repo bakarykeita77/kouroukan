@@ -91,10 +91,10 @@
         element.css({'display':'block','transition':'0.2s'}); 
         affichage(element);
     }
-    function afficherApprentissage() {
+    function afficherApprentissage(datas) {
 
         afficherApprentissageContainer();
-        afficherPanneauDesCaracteres();
+        afficherPanneauDesCaracteres(datas);
 
         function afficherApprentissageContainer() {
             display($("#apprentissage_container"));
@@ -105,8 +105,8 @@
             indexer($('#afficheur_de_panneau p'));
             masquer($('#apprentissage_redirection_btns'));
         }
-        function afficherPanneauDesCaracteres() {
-            let consonnes_apprises_du_serveur = consonnesDeSyllabeApprisesDuServeur();
+        function afficherPanneauDesCaracteres(datas) {
+            let consonnes_apprises_du_serveur = consonnesDeSyllabeApprisesDuServeur(datas);
             togglePanneauDesConsonnes();
             panneauxStyle(consonnes_apprises_du_serveur);
         }
@@ -711,6 +711,8 @@
             cocherLesConsonnesCorrespondantsDeParametre();
             rechargerPanneauSubmitBtn();
             chargerLesson();
+            lectureDuTon();
+            lectureDesTons();
             
             function selectionnerLesVoyellesDuPanneau() {
                 let voyelle_index = caracteres_selectionnees.indexOf(voyelle_active);
@@ -823,6 +825,66 @@
                     }
                 });
             }
+            function lectureDuTon() {
+                $("#panneau_submit").click(() => {
+
+                    let td = $(".tables_vocales td");
+                    $.each(td, function() {
+                        $(this).click(() => {
+
+                            let td_actif = $(this);
+                            let syllabe_tonifiee = td_actif.text();
+                            let terminaison = terminaisonDeSyllabe(syllabe_tonifiee);
+
+                            $('#audio').attr({ src: "../son/mp3/tons/"+terminaison+"/"+syllabe_tonifiee+".mp3", autoplay:"on" });
+                        });
+                    });
+                });
+            }
+            function lectureDesTons() {
+                $("#panneau_submit").click(() => {
+                    let td = $(".tables_litterales td");
+
+                    $.each(td, function() {
+                        $(this).click(() => {
+
+                            let td_actif = $(this);
+                            let syllabes = td_actif.text();
+                            let syllabe_active = "";
+                            let syllabes_pour_lecture = syllabesPourLecture();
+                            let terminaison_0 = terminaisonDeSyllabe(syllabes_pour_lecture[0]);
+                            let terminaison_1 = terminaisonDeSyllabe(syllabes_pour_lecture[1]);
+
+                            setTimeout(() => { $('#audio_0').attr({ src: "../son/mp3/tons/"+terminaison_0+"/"+syllabes_pour_lecture[0]+".mp3", autoplay:"on" }); }, 100);
+                            setTimeout(() => { $('#audio_1').attr({ src: "../son/mp3/tons/"+terminaison_1+"/"+syllabes_pour_lecture[1]+".mp3", autoplay:"on" }); }, 300);
+                                        
+                            function syllabesPourLecture() {
+                                let syllabes_pour_lecture = [];
+                                let syllabes_pour_lecture_tonifiees = [];
+                                
+                                for (let i = 0; i < syllabes.length; i++) {
+                                    let caractere = syllabes[i];
+                                    
+                                    if(consonnes.indexOf(caractere) != -1) {
+                                        if(syllabe_active != "") syllabes_pour_lecture.push(syllabe_active);
+                                        syllabe_active = "";
+                                    }
+                                    syllabe_active += caractere;
+                                    if(i == syllabes_length-1) syllabes_pour_lecture.push(syllabe_active);
+                                }
+                                for (let j = 0; j < syllabes_pour_lecture.length; j++) {
+                                    let caracter = syllabes_pour_lecture[j];
+
+                                    if(j<syllabes_pour_lecture.length-1) if(voyelles.indexOf(caracter[caracter.length-1]) != -1) caracter += "߫";
+                                    syllabes_pour_lecture_tonifiees.push(caracter);
+                                }
+                                
+                                return syllabes_pour_lecture_tonifiees;
+                            }
+                        });
+                    });
+                });
+            }
         });
         
         function voyellesDejaSelectionnees() {
@@ -848,7 +910,7 @@
         if(matiere_index === 2) a_apprendre = "ߜߋ߲߬ ߞߊ߲ߡߊߛߙߋߡߊ߫";
         if(matiere_index === 3) a_apprendre = "ߖߊ߰ߕߋ߬ߘߋ߲߫";
 
-        $('#apprentissage_body').html("<table id='table_syllabe_apprentissage'><div id='texte'></div></table>");
+        $('#apprentissage_body').html("<table id='table_syllabes_apprentissage'><div id='texte'></div></table>");
         setTimeout(() => {
             ecris("texte", a_apprendre+" ߘߋ߲߰ߕߊ ߟߎ߬ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬");
         }, 200);
@@ -1132,14 +1194,11 @@
        timestamp = moi+' '+jour+' '+annee; 
        return timestamp;
     }
-    function consonnesDeSyllabeApprisesDuServeur() {
-
+    function consonnesDeSyllabeApprisesDuServeur(datas) {
         let consonnes_apprises = [];
-        let datas = JSON.parse(sessionStorage.getItem("datas"));
-        
         if (datas[1].length != 0) {
             for (let i = 0; i < datas[1].length; i++) {
-                if(datas[1][i] != undefined) if(datas[1][i].phase == "syllabe_apprentissage") if(datas[1][i].lesson != undefined) {
+                if(datas[1][i] != undefined) if(datas[1][i].phase == "syllabes_apprentissage") if(datas[1][i].lesson != undefined) {
                     JSON.parse(datas[1][i].lesson).forEach(element => {
                         let consonne = element[0].split('')[0];
                         if ($.inArray(consonne, consonnes_apprises) === -1) { consonnes_apprises.push(consonne); }
@@ -1147,7 +1206,6 @@
                 }
             }
         }
-
         return consonnes_apprises
     }
     function consonnesDeSyllabeExerceesDuServeur() {
@@ -1157,7 +1215,7 @@
 
         if (datas[1].length != 0) {
             for (let i = 0; i < datas[1].length; i++) {
-                if(datas[1][i] != undefined) if(datas[1][i].phase == "syllabe_exercice") if(datas[1][i].lesson != undefined) {
+                if(datas[1][i] != undefined) if(datas[1][i].phase == "syllabes_exercice") if(datas[1][i].lesson != undefined) {
                     JSON.parse(datas[1][i].lesson).forEach(element => {
                         let consonne = element[0].split('')[0];
                         if ($.inArray(consonne, consonnes_exercees) === -1) { consonnes_exercees.push(consonne); }
@@ -1170,25 +1228,25 @@
     }
     function consonnesASelectionner(caracteres_selectionnees) {
 
-        let syllabe_1 = ["ߓߊ","ߛߊ","ߕߊ","ߜߊ"];
-        let syllabe_2 = ["ߞߋ"];
-        let syllabe_3 = ["ߓߌ","ߛߌ","ߟߌ","ߣߌ"];
-        let syllabe_4 = ["ߝߍ","ߣߍ"];
-        let syllabe_5 = ["ߝߎ"];
-        let syllabe_6 = ["ߓߏ","ߔߏ","ߛߏ","ߝߏ"];
-        let syllabe_7 = ["ߣߐ"];
+        let syllabes_1 = ["ߓߊ","ߛߊ","ߕߊ","ߜߊ"];
+        let syllabes_2 = ["ߞߋ"];
+        let syllabes_3 = ["ߓߌ","ߛߌ","ߟߌ","ߣߌ"];
+        let syllabes_4 = ["ߝߍ","ߣߍ"];
+        let syllabes_5 = ["ߝߎ"];
+        let syllabes_6 = ["ߓߏ","ߔߏ","ߛߏ","ߝߏ"];
+        let syllabes_7 = ["ߣߐ"];
 
         let consonnes_a_cocher = [];
         let nombre_maximal_de_ligne = 4;
 
         caracteres_selectionnees.forEach(element => {
-            if(element == "ߊ") { for (let i = 0; i < syllabe_1.length; i++) pusher(consonnes_a_cocher,syllabe_1[i].split("")[0]); }
-            if(element == "ߋ") { for (let i = 0; i < syllabe_2.length; i++) pusher(consonnes_a_cocher,syllabe_2[i].split("")[0]); }
-            if(element == "ߌ") { for (let i = 0; i < syllabe_3.length; i++) pusher(consonnes_a_cocher,syllabe_3[i].split("")[0]); }
-            if(element == "ߍ") { for (let i = 0; i < syllabe_4.length; i++) pusher(consonnes_a_cocher,syllabe_4[i].split("")[0]); }
-            if(element == "ߎ") { for (let i = 0; i < syllabe_5.length; i++) pusher(consonnes_a_cocher,syllabe_5[i].split("")[0]); }
-            if(element == "ߏ") { for (let i = 0; i < syllabe_6.length; i++) pusher(consonnes_a_cocher,syllabe_6[i].split("")[0]); }
-            if(element == "ߐ") { for (let i = 0; i < syllabe_7.length; i++) pusher(consonnes_a_cocher,syllabe_7[i].split("")[0]); }
+            if(element == "ߊ") { for (let i = 0; i < syllabes_1.length; i++) pusher(consonnes_a_cocher,syllabes_1[i].split("")[0]); }
+            if(element == "ߋ") { for (let i = 0; i < syllabes_2.length; i++) pusher(consonnes_a_cocher,syllabes_2[i].split("")[0]); }
+            if(element == "ߌ") { for (let i = 0; i < syllabes_3.length; i++) pusher(consonnes_a_cocher,syllabes_3[i].split("")[0]); }
+            if(element == "ߍ") { for (let i = 0; i < syllabes_4.length; i++) pusher(consonnes_a_cocher,syllabes_4[i].split("")[0]); }
+            if(element == "ߎ") { for (let i = 0; i < syllabes_5.length; i++) pusher(consonnes_a_cocher,syllabes_5[i].split("")[0]); }
+            if(element == "ߏ") { for (let i = 0; i < syllabes_6.length; i++) pusher(consonnes_a_cocher,syllabes_6[i].split("")[0]); }
+            if(element == "ߐ") { for (let i = 0; i < syllabes_7.length; i++) pusher(consonnes_a_cocher,syllabes_7[i].split("")[0]); }
         });
 
         return consonnes_a_cocher;
@@ -1207,10 +1265,10 @@
         });
         return cs;
     }
-    function consonnesEtudiees(lesson_d_apprentissage_syllabe) {
+    function consonnesEtudiees(lesson_d_apprentissage_syllabes) {
         let consonnes_etudiees = [];
-        if(lesson_d_apprentissage_syllabe != undefined) {
-            lesson_d_apprentissage_syllabe.forEach(element => { 
+        if(lesson_d_apprentissage_syllabes != undefined) {
+            lesson_d_apprentissage_syllabes.forEach(element => { 
                 if(consonnes_etudiees.indexOf(element[0].split("")[0]) == "-1") consonnes_etudiees.push(element[0].split("")[0]); 
             });
             return consonnes_etudiees;
@@ -1799,9 +1857,8 @@
 
         return ldex;
     }
-    function lessonDEvaluationPreAlphabet() {
+    function lessonDEvaluationPreAlphabet(datas) {
         
-        let datas = JSON.parse(sessionStorage.getItem('datas'));
         let ldev = [];
 
         if(datas.length === 0) { console.log("La variable datas est vide !"); }
@@ -1914,7 +1971,7 @@
         let matiere_nom = "";
         
         if(matiere[0] != undefined) if( matiere[0].phase.split("_")[0] == "alphabet")  matiere_nom = "ߛߓߍߛߎ߲";
-        if(matiere[1] != undefined) if( matiere[1].phase.split("_")[0] == "syllabe")  matiere_nom = "ߜߋ߲߭";
+        if(matiere[1] != undefined) if( matiere[1].phase.split("_")[0] == "syllabes")  matiere_nom = "ߜߋ߲߭";
         if(matiere[2] != undefined) if( matiere[2].phase.split("_")[0] == "tons")  matiere_nom = "ߞߊ߲ߡߊߛߙߋ";
         if(matiere[3] != undefined) if( matiere[3].phase.split("_")[0] == "chiffres")  matiere_nom = "ߖߊ߰ߕߋ߬ߘߋ߲";
         
@@ -1951,20 +2008,20 @@
         
         function initialiserMemoire() {
             for(i=0; i<td.length; i++) { 
-                let clicked_syllabe = td[i].textContent;
-                elements.push([clicked_syllabe,0]); 
+                let clicked_syllabes = td[i].textContent;
+                elements.push([clicked_syllabes,0]); 
             }
         }
         function memorisation() {
             $.each(td, function(){
 
                 let compteur = 1;
-                let syllabe_clique = $(this).text();
+                let syllabes_clique = $(this).text();
                 let td_index = $(this).index();
                 
                 $(this).click(function(){
                     let n = compteur++;
-                    elements.splice(td_index,1,[syllabe_clique,n]);
+                    elements.splice(td_index,1,[syllabes_clique,n]);
                     console.log(elements);
                 });
             });
@@ -1974,7 +2031,10 @@
         element.addClass('surbrillance');
         element.siblings().removeClass('surbrillance');
     }
-    function mmettreLeFocusSur(selecteur) { document.querySelector(selecteur).focus(); }
+    function mmettreLeFocusSur(selecteur) { 
+        if(document.querySelector(selecteur) != null) document.querySelector(selecteur).focus(); 
+
+    }
     function mix2D(tableau){
         var mixted_table = [];
         for(var i=0; mixted_table.length<tableau[0].length*tableau[1].length;i++){
@@ -2053,6 +2113,11 @@
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
 
+    function nombreDeSyllabe(syllabe) {
+        nombre = 0;
+        for(i=0; i<syllabe.length; i++) if(consonnes.indexOf(syllabe[i]) != -1) nombre++;
+        return nombre;
+    }
     function nomComplet() {
         let prenom = JSON.parse(sessionStorage.getItem("prenom")); 
         let nom = JSON.parse(sessionStorage.getItem("nom")); 
@@ -2235,7 +2300,7 @@
                     for (let j = 0; j < 1; j++) {
                         if(lessons[i][j] != undefined) {
                             if(lessons[i][j][2].split("_")[0] == "alphabet") { lessons_d_alphabet = lessons[i]; }
-                            if(lessons[i][j][2].split("_")[0] == "syllabe") { lessons_de_syllabes = lessons[i]; }
+                            if(lessons[i][j][2].split("_")[0] == "syllabes") { lessons_de_syllabes = lessons[i]; }
                             if(lessons[i][j][2].split("_")[0] == "tons") { lessons_de_tons = lessons[i]; }
                             if(lessons[i][j][2].split("_")[0] == "chiffres") { lessons_de_chiffres = lessons[i]; }
                         }
@@ -3230,6 +3295,24 @@
             if(element != undefined) element_ln += element.length;
         });
         if(element_ln === 0) { return true; }else{ return false; }
+    }
+    function terminaisonDeSyllabe(syllabe) {
+        let terminaison = "";
+
+        if(tons.indexOf(syllabe[syllabe.length-1]) != -1) if(voyelles.indexOf(syllabe[syllabe.length-2]) != -1) {
+            terminaison = syllabe[syllabe.length-2]+syllabe[syllabe.length-1]
+        }
+        if(voyelles.indexOf(syllabe[syllabe.length-1]) != -1) if(consonnes.indexOf(syllabe[syllabe.length-2]) != -1) {
+            terminaison = syllabe[syllabe.length-1]
+        }
+        if(nasalisations.indexOf(syllabe[syllabe.length-1]) != -1) if(voyelles.indexOf(syllabe[syllabe.length-2]) != -2) if(consonnes.indexOf(syllabe[syllabe.length-3]) != -1) {
+            terminaison = syllabe[syllabe.length-2]+syllabe[syllabe.length-1]
+        }
+        if(nasalisations.indexOf(syllabe[syllabe.length-1]) != -1) if(tons.indexOf(syllabe[syllabe.length-2]) != -2) if(voyelles.indexOf(syllabe[syllabe.length-3]) != -1) {
+            terminaison = syllabe[syllabe.length-3]+syllabe[syllabe.length-2]+syllabe[syllabe.length-1]
+        }
+
+        return terminaison;
     }
     function togglePanneauDesConsonnes() {
 

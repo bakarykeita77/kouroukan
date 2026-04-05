@@ -1,9 +1,13 @@
 $('document').ready(function() {
+// localStorage.clear();
+// sessionStorage.clear();
          
  /* Declaration et initialisation des variables */
-    let data_alphabet_du_serveur = [], data_syllabes_du_serveur = [], data_tons_du_serveur = [], data_chiffres_du_serveur = [];
     let matieres_a_apprendre_du_serveur = [];
     let matieres_apprises_du_serveur = [];
+
+console.log(localStorage);
+console.log(sessionStorage);
 
  /* 
     Initialisation de sessionStorage et de localStorage.
@@ -16,7 +20,6 @@ $('document').ready(function() {
 
     userIdentityStorage(); /* Storage des Identités récuperées de l'étudiant */
     dataStorage();         /* Récuperation et storage des data recuperés de l'étudiant */
-    afficherLogo();
     afficher($('#reception'));
     mmettreLeFocusSur("#lien_du_programme");
     
@@ -30,12 +33,9 @@ $('document').ready(function() {
         sessionStorage.setItem('email',     JSON.stringify(document.getElementById('email').innerHTML));
     }
     function dataStorage() {
-
-     /* Identifiant id de l'apprenant. */
-        let user_id = parseInt(JSON.parse(sessionStorage.getItem('id_client'))); 
      
      /* Recuperation de toutes les matières étdiées par l'apprenant par envoi de son id à api de kouroukan. */
-    	fetch("/kouroukan/api/index.php?id_user="+user_id)
+    	fetch("/kouroukan/api/index.php?id_user="+present_id)
     	.then(response => response.json())
     	.then(matiere_collection => {
          /*-------------------------------------------------------------------------   
@@ -50,7 +50,7 @@ $('document').ready(function() {
             profileTesteMenu(datas);
             profileResulat(datas);
 
-            function profileTesteMenu(){
+            function profileTesteMenu(datas){
 
                 calculDesMatieresApprisesEtNonApprises();
                 chargementDeProfileTesteMenu();
@@ -62,9 +62,6 @@ $('document').ready(function() {
                         { matieres_a_apprendre_du_serveur.push(liste_de_matieres[j][1]); }else
                         { matieres_apprises_du_serveur.push(liste_de_matieres[j][1]); }
                     }
-                    
-                    sessionStorage.setItem('matieres_apprises_du_serveur',JSON.stringify(matieres_apprises_du_serveur));
-                    sessionStorage.setItem('matieres_a_apprendre_du_serveur',JSON.stringify(matieres_a_apprendre_du_serveur));
                 }
                 function chargementDeProfileTesteMenu() {
 
@@ -106,5 +103,4 @@ $('document').ready(function() {
     	})
     	.catch(error => console.log( error ));
     }
-    function afficherLogo() { $('#logo').css('display', 'block'); }
 });

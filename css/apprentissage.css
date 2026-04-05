@@ -416,7 +416,7 @@
 }
 #pre_exercice_resultat_foot { width: 1.5rem; }
 #pre_exercice_resultat h3 { position: absolute; width: 100%; }
-#table_syllabe_apprentissage td:hover {background-color: rgba(85,85,85);}
+#table_syllabes_apprentissage td:hover {background-color: rgba(85,85,85);}
 #apprentissage_dialogue_btn { 
     font-weight: bold;
     color: black;

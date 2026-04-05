@@ -8,7 +8,7 @@
 
  /*---------------------------------------------------------------------------------------------------------*/
     //Extraction de noms des images déja téléchargées
-   /* fetch("http://localhost:8080/kouroukan/api/image-syllabe.php?image_categorie=image2syllabe&id=4")
+   /* fetch("http://localhost:8080/kouroukan/api/image-syllabes.php?image_categorie=image2syllabes&id=4")
     .then(response => response.text())
     .then(data => alert(JSON.parse(data)))
     .catch(error => alert(error));
@@ -46,14 +46,14 @@
                 if($.inArray(image_nom[i], voyelles) !== -1) voyelles_nbr.push(image_nom[i]);
             }
             
-            let syllabe_nbr = Math.max(...[consonnes_nbr.length, voyelles_nbr.length]);
+            let syllabes_nbr = Math.max(...[consonnes_nbr.length, voyelles_nbr.length]);
             let image_categorie = "";
             
-            switch (syllabe_nbr) {
-                case 1: image_categorie = "image1syllabe"; break;
-                case 2: image_categorie = "image2syllabe"; break;
-                case 3: image_categorie = "image3syllabe"; break;
-                case 4: image_categorie = "image4syllabe"; break;
+            switch (syllabes_nbr) {
+                case 1: image_categorie = "image1syllabes"; break;
+                case 2: image_categorie = "image2syllabes"; break;
+                case 3: image_categorie = "image3syllabes"; break;
+                case 4: image_categorie = "image4syllabes"; break;
             }
             
             return image_categorie;

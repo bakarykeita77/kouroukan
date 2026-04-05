@@ -1,7 +1,6 @@
-function parametrageDeLesson() {
+function parametrageDeLesson(datas) {
 
  /* Declaration des variables */  
-    var datas = JSON.parse(sessionStorage.getItem('datas'));     
     var niveau = JSON.parse(sessionStorage.getItem('niveau'));   // Voir programmes.js fonction storagesDuProgramme()
 
     let phase_id = (datas[niveau-1].length == 0) ? "alphabet_apprentissage" : JSON.parse(sessionStorage.getItem('phase_id'));
@@ -307,11 +306,11 @@ function parametrageDeLesson() {
                 var syllabes_tonifies_length = syllabes_tonifies.length;
 
                 var table_d_apprentissage_alphabet_html = (option_retenue === 1) ? chargerCorpsDePreAlphabet() : lessonHTML(lettres_cochees, 'table_alphabet_apprentissage');
-                var table_d_apprentissage_syllabe_html = lessonHTML(syllabes_simples_coches, 'table_syllabe_apprentissage');
+                var table_d_apprentissage_syllabes_html = lessonHTML(syllabes_simples_coches, 'table_syllabes_apprentissage');
 
                 
                 if(niveau == 1) apprentissage_html = table_d_apprentissage_alphabet_html;
-                if(niveau == 2) apprentissage_html = table_d_apprentissage_syllabe_html;
+                if(niveau == 2) apprentissage_html = table_d_apprentissage_syllabes_html;
                 if(niveau == 3) apprentissage_html = lessonHTML2(voyelles_length,tons_length,syllabes_tonifies_length,syllabes_tonifies);
                 if(niveau == 4) apprentissage_html = lessonHTML(chiffres, 'table_chiffre_apprentissage');
 
@@ -326,7 +325,7 @@ function parametrageDeLesson() {
                 var chiffres_melanges          = malaxer(syllabesTonifieesActualisees())
 
                 if(niveau == 1) exercice_html = lessonDExerciceHTML(lettres_melangees, 'table_alphabet_exercice');
-                if(niveau == 2) exercice_html = lessonDExerciceHTML(syllabes_simples_melanges, 'table_syllabe_exercice');
+                if(niveau == 2) exercice_html = lessonDExerciceHTML(syllabes_simples_melanges, 'table_syllabes_exercice');
                 if(niveau == 3) exercice_html = lessonDExerciceHTML(syllabes_tonifies_melanges, 'table_tons_exercice');
                 if(niveau == 4) exercice_html = lessonDExerciceHTML(chiffres_melanges, 'table_chiffre_exercice');
 

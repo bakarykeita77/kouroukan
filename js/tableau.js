@@ -23,7 +23,7 @@ $(document).ready(function(){
 		var audio9 = $('#audio9');
 
 		var caractere_input = $('#caractere_input');
-		var syllabe_input = $('#syllabe_input');
+		var syllabes_input = $('#syllabes_input');
 		var mot1_input = $('#mot1_input');
 		var mot2_input = $('#mot2_input');
 		var textarea1 = $('#textarea1');
@@ -32,10 +32,10 @@ $(document).ready(function(){
 		var s = [], s1 = [], s2 = [], s3 = [], s4 = [], s5 = [];
 		var cs = "";
 		var caracteres = []; 
-		var syllabe = [];
 		var syllabes = [];
-		var syllabe1 = [];
-		var syllabe2 = [];
+		var syllabes = [];
+		var syllabes1 = [];
+		var syllabes2 = [];
 		var mots_visible = [];
 		var mots_audible = [];
 		var texte_vu = [];
@@ -71,10 +71,10 @@ $(document).ready(function(){
 /*___________________________________________________________________________________________________________________________________
 Les fonctions */
 	function initialiser() { 
-		syllabe_input.val(""); mot1_input.val(""); mot2_input.val(""); textarea1.val(""); textarea2.val("");
+		syllabes_input.val(""); mot1_input.val(""); mot2_input.val(""); textarea1.val(""); textarea2.val("");
 	 }
     function controle_caractere() {
-		c  = syllabe;
+		c  = syllabes;
 		ch1 = c[c.length-1];
 		ch2 = c[c.length-2];
 		ch3 = c[c.length-3];
@@ -189,8 +189,8 @@ Les fonctions */
 	 }
 	function effacer_caractere() {
 
-	    if( syllabe.length > 0 ) {       
-	        syllabe.splice(syllabe.length-1,1);
+	    if( syllabes.length > 0 ) {       
+	        syllabes.splice(syllabes.length-1,1);
 	    }else if( mot1.length > 0 ) {
 		    
 		    s = mot1[mot1.length-1];
@@ -209,16 +209,16 @@ Les fonctions */
 	
 		    mot1.splice(mot1.length-1,1);
 	 	    mot2.splice(mot2.length-1,1);
-	    }else if( syllabe.length == "" && mot1.length == "" && texte_tableau.length > 0 ) {
+	    }else if( syllabes.length == "" && mot1.length == "" && texte_tableau.length > 0 ) {
 		    texte_tableau.splice(texte_tableau.length-1,1);
 		    texte_memoire.splice(texte_memoire.length-1,1);
 	    }else {
 	        die();
 	    }
 	
-	    tableau_texte = texte_tableau.concat(mot1).concat(syllabe);
+	    tableau_texte = texte_tableau.concat(mot1).concat(syllabes);
 	    
-	    syllabe_input.val( syllabe.join("") );
+	    syllabes_input.val( syllabes.join("") );
 	    
 	    mot1_input.val( mot1.join("") );
 	    mots_visible = mot1_input.val();
@@ -268,20 +268,20 @@ Les fonctions */
 		mots_visible = mot1_input.val();
 
 		
-		if( syllabe.length <= 2 ) {
+		if( syllabes.length <= 2 ) {
 			mot2[mot2.length] = s1;
 		}
-		if( syllabe.length == 3 && $.inArray(ch2,apostrophes) != -1 ) {
+		if( syllabes.length == 3 && $.inArray(ch2,apostrophes) != -1 ) {
 			mot2[mot2.length] = s1;
 		}
-		if( syllabe.length == 4 || syllabe.length == 3 && $.inArray(ch2,consonnes) != -1 ) {
+		if( syllabes.length == 4 || syllabes.length == 3 && $.inArray(ch2,consonnes) != -1 ) {
 			mot2[mot2.length] = s2;
 			mot2[mot2.length] = s3;
 		}
 		mot2_input.val( mot2 );
 		mots_audible = mot2_input.val();    
 
-		vider_syllabe();
+		vider_syllabes();
 	}
 	function charge_texte() {
 		texte_vu =  texte_vu.concat( mot1.join("") );
@@ -294,7 +294,7 @@ Les fonctions */
 		textarea2.val( texte_memoire );
 		espacer();
 
-		vider_syllabe();
+		vider_syllabes();
 		//vider_syllabes();
 		vider_mots();
 		vider_assistant();
@@ -454,7 +454,7 @@ Les fonctions */
 		mot2_input.val( mot2 );
 		mots_audible = mot2_input.val();    
 
-		vider_syllabe();	
+		vider_syllabes();	
  	 }
 	function tonification_automatique() {
 
@@ -592,11 +592,11 @@ Les fonctions */
 		 	} 
 	 	}	
 	 		
-	 	vider_syllabe();
+	 	vider_syllabes();
  	 }
-	function vider_syllabe() {
- 	 	syllabe.splice( 0,syllabe.length );
-		syllabe_input.val( syllabe );
+	function vider_syllabes() {
+ 	 	syllabes.splice( 0,syllabes.length );
+		syllabes_input.val( syllabes );
 	 }	
 	function vider_mots() {
 	  // Suppression du contenu de la variable "syllabes" pour eviter sa repetition.
@@ -615,7 +615,7 @@ Les fonctions */
 	 }
 	function afficher_erreur() {
 		$('#ecrit_errone').text( caractere );
-		$('#ecrit_correcte').text( mot1.join("") + syllabe.join("") );
+		$('#ecrit_correcte').text( mot1.join("") + syllabes.join("") );
 		$('#assistant').css({ 'transform':'scale(1)' });
 		die();
 	 }
@@ -683,19 +683,19 @@ Lorsqu'on appuie une touche du clavier, il se passe ce qui suit: */
             controle_caractere(); // voir ligne 64.
 	/*___________________________________________________________________________________________________________________________
 	3°)- Formation des caracteres	
-	* Les caractères s'accumulent dans la variable nommée "syllabe" pour former une syllabe.	*/		
+	* Les caractères s'accumulent dans la variable nommée "syllabes" pour former une syllabes.	*/		
 	
-		syllabe[ syllabe.length ] = caractere;
-		syllabe_input.val( syllabe.join("") );
+		syllabes[ syllabes.length ] = caractere;
+		syllabes_input.val( syllabes.join("") );
 		
 		/* Affichage des textes tapées, au tableau noir.  */
-		tableau_texte = texte_tableau.concat(mot1).concat(syllabe1).concat(syllabe);
+		tableau_texte = texte_tableau.concat(mot1).concat(syllabes1).concat(syllabes);
 		tableau.val(tableau_texte.join(''));
 	/*___________________________________________________________________________________________________________________________
-	4°) - Formation de syllabe lorsqu'on appuie une voyelle	*/
+	4°) - Formation de syllabes lorsqu'on appuie une voyelle	*/
 			if( $.inArray( caractere,voyelles ) != -1 || caractere == 'ߒ' ) {
 		
-				c  = syllabe;
+				c  = syllabes;
 				ch1 = c[c.length-1];
 				ch2 = c[c.length-2];
 				ch3 = c[c.length-3];

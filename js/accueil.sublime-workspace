@@ -41,7 +41,7 @@
 			],
 			[
 				"sy",
-				"syllabe"
+				"syllabes"
 			],
 			[
 				"syllabes",
@@ -49,7 +49,7 @@
 			],
 			[
 				"syl",
-				"syllabe2"
+				"syllabes2"
 			],
 			[
 				"po",
@@ -85,7 +85,7 @@
 			],
 			[
 				"syll",
-				"syllabe2"
+				"syllabes2"
 			],
 			[
 				"to",
@@ -161,7 +161,7 @@
 			],
 			[
 				"for",
-				"former_syllabe"
+				"former_syllabes"
 			],
 			[
 				"les",
@@ -301,7 +301,7 @@
 			],
 			[
 				"form",
-				"formation_syllabe"
+				"formation_syllabes"
 			],
 			[
 				"co",
@@ -357,7 +357,7 @@
 			],
 			[
 				"der",
-				"dernier_syllabe"
+				"dernier_syllabes"
 			],
 			[
 				"zone3",
@@ -377,11 +377,11 @@
 			],
 			[
 				"dern",
-				"dernier_syllabe"
+				"dernier_syllabes"
 			],
 			[
 				"derni",
-				"dernier_syllabe"
+				"dernier_syllabes"
 			],
 			[
 				"zone1",
@@ -393,7 +393,7 @@
 			],
 			[
 				"dernier",
-				"dernier_syllabe"
+				"dernier_syllabes"
 			],
 			[
 				"inline",
@@ -405,7 +405,7 @@
 			],
 			[
 				"den",
-				"dernier_syllabe"
+				"dernier_syllabes"
 			],
 			[
 				"dr",

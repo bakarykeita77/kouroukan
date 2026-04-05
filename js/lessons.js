@@ -9,19 +9,15 @@ $('document').ready(function() {
         datas = (datas == undefined) ? [[],[],[],[]] : datas;
         
         var data_alphabet = datas[0];         
-        var matiere_id = $("#matiere_id_container").text();
         var matiere_index = parseInt($("#matiere_index_container").text());
         var matiere_nom = $("#matiere_nom_container").text();
         var niveau = parseInt($("#niveau_container").text());
         var phases_etudiees = phasesEtudieesDuServeur(datas);
-        
-        sessionStorage.setItem('matiere_id', JSON.stringify(matiere_id)); 
-        sessionStorage.setItem('matiere_index', JSON.stringify(matiere_index)); 
+         
         sessionStorage.setItem('matiere_nom', JSON.stringify(matiere_nom)); 
         sessionStorage.setItem('niveau', JSON.stringify(niveau)); 
         sessionStorage.setItem('phases_etudiees', JSON.stringify(phases_etudiees));
         
-        let data_alphabet_apprentissage = JSON.parse(sessionStorage.getItem('data_alphabet_apprentissage'));
         var rang = "";
         var phase_li_id = phaseLiId();
         var phase_nom = "";
@@ -31,7 +27,7 @@ $('document').ready(function() {
         
         datas[matiere_index] = (datas[matiere_index] == undefined) ? [] : datas[matiere_index]; /* Pour éviter les erreurs d'undefined. */
         
-        /*-------------------------------------------------------------------------------------------------------------------
+     /*-------------------------------------------------------------------------------------------------------------------
         1)- La situation des études est faite par récupération et traitement des données reçues sur l'apprenant.
         2)- La liste des phases est établie en fonction du niveau d'étude de l'apprenant (selon les phases étudiées ou pas)
         3)- Le paramétrage conséquent est défini pour la leçon future.
@@ -41,14 +37,14 @@ $('document').ready(function() {
         let datas_length = (data_alphabet.length != 0) ? data_alphabet.length : 0;
         if(datas_length === 0) matiere_index = 0;
         
-        /*-----------------------------------------------------------------------------------------------------------------*/
+     /*-----------------------------------------------------------------------------------------------------------------*/
         
         phases();
         matiere();
             
         // localStorage.clear();
         
-        /*-----------------------------------------------------------------------------------------------------------------*/
+     /*-----------------------------------------------------------------------------------------------------------------*/
         
         function phaseLiId() {
             let pli = "";
@@ -70,7 +66,6 @@ $('document').ready(function() {
                 let localOptionsLength = (all_options == null) ? 0 : all_options.length;
             
                 chargerPhases();
-                sessionStorage.setItem('total_phase', JSON.stringify($('#phases_list li').length));
                 actualiserTitre();
                 stylesDesPhases();
                 afficherLesPhases();
@@ -197,33 +192,15 @@ $('document').ready(function() {
         }
         function matiere() {
         
-            if(option_retenue == 2) {
-                $('#phases_list li').on('click', function() {
-        
-                    phase_li_id = $(this).attr('id');
-                    phase_nom = $(this).html();
-                    phase_index = $(this).index();
-        
-                    var phase_class = $(this).attr('class');
-                    var course_id = phase_li_id.split('_')[1];
-                
-                    sessionStorage.setItem('phase_class', JSON.stringify(phase_class));
-                    sessionStorage.setItem('phase_li_id', JSON.stringify(phase_li_id));
-                    sessionStorage.setItem('phase_nom', JSON.stringify(phase_nom));
-                    sessionStorage.setItem('phase_index', JSON.stringify(phase_index));
-                    sessionStorage.setItem("course_id", JSON.stringify(course_id));
-                });
-            }
-            
             etudeDesMatieres();
             modificationDuChoixDApprentissage();
             
             function etudeDesMatieres() {
                 switch(niveau) {
-                    case 1 : alphabet(); break;
-                    case 2 : syllabe();  break;
-                    case 3 : ton();      break;
-                    case 4 : chiffre();  break;
+                    case 1 : if(datas[0].length < 3) alphabet(); break;
+                    case 2 : if(datas[1].length < 3) syllabes();  break;
+                    case 3 : if(datas[2].length < 3) ton();      break;
+                    case 4 : if(datas[3].length < 3) chiffre();  break;
                 }
             }
             function modificationDuChoixDApprentissage() {
@@ -275,18 +252,6 @@ $('document').ready(function() {
                                     sendDataToDeleteLesson(matiere,id_client,action);
                                     console.log('La lesson en cours est annulée');
                         
-                                    datas = [[],[],[],[]];
-                                    data_alphabet = null;
-                                    lesson_d_apprentissage_alphabet = [];
-                                    phases_etudiees = [];
-                                    localStorage.removeItem("option_retenue");
-                        
-                                    sessionStorage.setItem('datas', JSON.stringify(datas));
-                                    sessionStorage.setItem('data_alphabet', JSON.stringify(data_alphabet));
-                                    sessionStorage.setItem('data_alphabet_apprentissage', JSON.stringify(data_alphabet_apprentissage));
-                                    sessionStorage.setItem('lesson_d_apprentissage_alphabet', JSON.stringify(lesson_d_apprentissage_alphabet));
-                                    sessionStorage.setItem('phases_etudiees', JSON.stringify(phases_etudiees));
-                                        
                                     function sendDataToDeleteLesson(matiere,id_client,action) {
                         
                                         const data_to_send = new URLSearchParams({

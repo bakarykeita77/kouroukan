@@ -1,5 +1,5 @@
 
-    fetch("http://localhost:8080//kouroukan/api/image-syllabe.php?id=1")
+    fetch("http://localhost:8080//kouroukan/api/image-syllabes.php?id=1")
     .then(response => response.text())
     .then(data => {
         

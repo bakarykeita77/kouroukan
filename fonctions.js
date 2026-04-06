@@ -859,8 +859,10 @@
                             setTimeout(() => { $('#audio_1').attr({ src: "../son/mp3/tons/"+terminaison_1+"/"+syllabes_pour_lecture[1]+".mp3", autoplay:"on" }); }, 300);
                                         
                             function syllabesPourLecture() {
+
                                 let syllabes_pour_lecture = [];
                                 let syllabes_pour_lecture_tonifiees = [];
+                                let syllabes_length = nombreDeSyllabe(syllabes);
                                 
                                 for (let i = 0; i < syllabes.length; i++) {
                                     let caractere = syllabes[i];

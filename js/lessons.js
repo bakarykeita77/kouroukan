@@ -14,6 +14,7 @@ $('document').ready(function() {
         var niveau = parseInt($("#niveau_container").text());
         var phases_etudiees = phasesEtudieesDuServeur(datas);
          
+        sessionStorage.setItem('matiere_index', JSON.stringify(matiere_index)); 
         sessionStorage.setItem('matiere_nom', JSON.stringify(matiere_nom)); 
         sessionStorage.setItem('niveau', JSON.stringify(niveau)); 
         sessionStorage.setItem('phases_etudiees', JSON.stringify(phases_etudiees));

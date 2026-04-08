@@ -4,11 +4,12 @@ function ton() {
     fetch("/kouroukan/api/index.php?id_user="+id_client)
     .then(response => response.json())
     .then(matiere_collection => { 
-        
-console.log(datas);
 
         datas = matiere_collection;
         datas = (datas == undefined) ? [[],[],[],[]] : datas;
+        
+        profileTesteMenu(datas);
+        profileResulat(datas);
     
         if(datas[0].length === 3) {
             if(datas[1].length === 3) {

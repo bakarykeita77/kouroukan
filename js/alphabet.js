@@ -33,6 +33,8 @@ function alphabet() {
         var niveau = JSON.parse(sessionStorage.getItem('niveau'));   // Voir programmes.js fonction storagesDuProgramme()
         var option_retenue = JSON.parse(localStorage.getItem('option_retenue')); // Voir programmes.js : lessonOptions()
     
+        profileTesteMenu(datas);
+        profileResulat(datas);
 
         if(niveau === 1) {
                         
@@ -913,7 +915,7 @@ function alphabet() {
 
                                         $('#revision_container .table_parlante td').css('background-color','rgba(85, 85, 85, 0.25)');
                     
-                                        correctionDeEvaluation();
+                                        correctionDeEvaluationPreAlphabet();
                                         enregistrerEvaluationPreAlphabet();
                                         progressBarrEvaluationPreAlphabet();
                                         afficherBoutonDeQuestion();
@@ -921,7 +923,7 @@ function alphabet() {
                                         i++;
                     
                                         
-                                        function correctionDeEvaluation() {
+                                        function correctionDeEvaluationPreAlphabet() {
                                             if(pre_question == '') { return false; }
                                             if(pre_question == pre_reponse) { valider(element_actif); }
                                             if(pre_question != pre_reponse) { barrer(element_actif); }
@@ -1163,29 +1165,13 @@ function alphabet() {
                                                             if(pourcentagePoint(lesson_d_exercice_pre_alphabet) === 100) {
                                                             if(pourcentagePoint(lesson_d_evaluation_pre_alphabet) >= 92) {
                                                                 
-                                                                sendLessonDataToDB('alphabet_apprentissage',lesson_d_apprentissage_pre_alphabet);
-                                                                sendLessonDataToDB('alphabet_exercice',lesson_d_exercice_pre_alphabet);
-                                                                sendLessonDataToDB('alphabet_evaluation',lesson_d_evaluation_pre_alphabet);
-                        
-                                                                let date = dateAcuelle();
-                                                                
-                                                                let note_finale_d_apprentissage_pre_alphabet = calculerNote(lesson_d_apprentissage_pre_alphabet);
-                                                                let note_finale_d_exercice_pre_alphabet = calculerNote(lesson_d_exercice_pre_alphabet);
-                                                                let note_finale_d_evaluation_pre_alphabet = calculerNote(lesson_d_evaluation_pre_alphabet);
-
                                                                 pourcentage_general = Math.floor([pourcentagePoint(lesson_d_apprentissage_pre_alphabet) + pourcentagePoint(lesson_d_exercice_pre_alphabet) + pourcentagePoint(lesson_d_evaluation_pre_alphabet)]/3);
-                
                                                                 niveau++; 
+                                                                afficherBoutonDeLaLessonSuivante();
                 
                                                                 console.log('Lesson de pre_apprentissage envoyée à la base de donnée.');
                                                                 console.log('Lesson de pre_exercice envoyée à la base de donnée.');
                                                                 console.log('Lesson de pre_evaluation envoyée à la base de donnée.');
-                    
-                                                                setTimeout(() => {
-                                                                    localStorage.removeItem('lesson_d_apprentissage_pre_alphabet');
-                                                                    localStorage.removeItem('lesson_d_exercice_pre_alphabet');
-                                                                    localStorage.removeItem('lesson_d_evaluation_pre_alphabet');
-                                                                }, 86400000);
                                                             }}}
                                                         }
                                                     }

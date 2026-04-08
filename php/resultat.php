@@ -1,4 +1,4 @@
-<span id='fermer_resultat'>&times;</span>
+<span class="fermeture" id='fermer_resultat'>&times;</span>
 
 <div class="resultat_general">
  <!----------------------------------------------------------------------------------------------------------------------------------------------->
@@ -127,10 +127,9 @@
             <tr> <td></td>                 <td>ߥߟߊ߬ߘߊ</td>    <td>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ</td> <td>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ ߢߊ߬ߣߍ߲</td> <td>ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ߬ ߝߏߣߍ߲</td> <td>ߓߍ߬ߙߍ</td> </tr>
             <tr> <td rowspan=3>ߛߓߍߛߎ߲</td> <td>ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ</td>  <td></td>        <td></td>            <td></td>              <td></td> </tr>
             <tr>                           <td>ߡߊ߬ߞߟߏ߬ߟߌ</td>   <td></td>      <td></td>             <td></td>              <td></td> </tr>
-            <tr>                           <td>ߣߐ߰ߡߊ߬ߛߍߦߌ</td>  <td></td>       <td></td>           <td></td>              <td></td> </tr>
-            <tr> <td rowspan=4>ߜߋ߲߭</td>    <td>ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ</td>   <td></td>       <td></td>             <td></td>              <td></td> </tr>
+            <tr>                           <td>ߞߘߐߓߐߟߌ</td>  <td></td>       <td></td>           <td></td>              <td></td> </tr>
+            <tr> <td rowspan=3>ߜߋ߲߭</td>    <td>ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ</td>   <td></td>       <td></td>             <td></td>              <td></td> </tr>
             <tr>                           <td>ߡߊ߬ߞߟߏ߬ߟߌ</td>   <td></td>       <td></td>           <td></td>              <td></td> </tr>
-            <tr>                           <td>ߣߐ߰ߡߊ߬ߛߍߦߌ</td>  <td></td>       <td></td>           <td></td>              <td></td> </tr>
             <tr>                           <td>ߞߘߐߓߐߟߌ</td>  <td></td>       <td></td>           <td></td>              <td></td> </tr>
             <tr> <td rowspan=4>ߞߊ߲ߡߊߛߙߋ</td> <td>ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ</td>  <td></td>       <td></td>            <td></td>              <td></td> </tr>
             <tr>                           <td>ߡߊ߬ߞߟߏ߬ߟߌ</td>   <td></td>       <td></td>           <td></td>              <td></td> </tr>

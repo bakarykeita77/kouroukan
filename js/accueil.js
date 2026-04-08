@@ -1,10 +1,6 @@
 $('document').ready(function() {
 // localStorage.clear();
 // sessionStorage.clear();
-         
- /* Declaration et initialisation des variables */
-    let matieres_a_apprendre_du_serveur = [];
-    let matieres_apprises_du_serveur = [];
 
 console.log(localStorage);
 console.log(sessionStorage);
@@ -49,57 +45,6 @@ console.log(sessionStorage);
          /* Analyse des données réçues de l'étudiant */
             profileTesteMenu(datas);
             profileResulat(datas);
-
-            function profileTesteMenu(datas){
-
-                calculDesMatieresApprisesEtNonApprises();
-                chargementDeProfileTesteMenu();
-                affichageDeProfileTesteMenu();
-                    
-                function calculDesMatieresApprisesEtNonApprises() {
-                    for (let j = 0; j < datas.length; j++) {
-                        if(datas[j].length == 0) 
-                        { matieres_a_apprendre_du_serveur.push(liste_de_matieres[j][1]); }else
-                        { matieres_apprises_du_serveur.push(liste_de_matieres[j][1]); }
-                    }
-                }
-                function chargementDeProfileTesteMenu() {
-
-                    document.getElementById("liste_des_matieres_apprises").innerHTML = (matieres_apprises_du_serveur.length === 0) ? '<p class="rien">ߝߏߦߊ߲߫߹</p>' : listeDesMatieresApprisesHtml();
-                    document.getElementById("liste_des_matieres_a_apprendre").innerHTML = (matieres_a_apprendre_du_serveur.length === 0) ? '<p class="rien">ߝߏߦߊ߲߫߹</p>' : listeDesMatieresAApprendreHtml();
-    
-                    function listeDesMatieresAApprendreHtml() {
-                        let html = "<ul>";
-                        for (let i = 0; i < matieres_a_apprendre_du_serveur.length; i++) {  
-                            html += "<li>"+matieres_a_apprendre_du_serveur[i]+"</li>";
-                        }
-                        html += "</ul>";
-                        return html;
-                    }
-                    function listeDesMatieresApprisesHtml() {
-                        let html = "<ul>";
-                        for (let i = 0; i < matieres_apprises_du_serveur.length; i++) {  
-                            html += "<li>"+matieres_apprises_du_serveur[i]+"</li>";
-                        }
-                        html += "</ul>";
-                        return html;
-                    }
-                }
-                function affichageDeProfileTesteMenu() {
-                    profile_teste_btn.onclick = toggleProfileTesteMenu();
-
-                    function toggleProfileTesteMenu(){
-                        if(profile_teste_menu.style.height == 'auto'){
-                            profile_teste_menu.style.height = 0;
-                            setTimeout(function() { profile_teste_menu.style.display = 'none'; }, (250));
-                            setTimeout(function() { profile_teste.style.display = 'none'; }, (200));
-                        }else{
-                            profile_teste_menu.style.display = 'block';
-                            setTimeout(function() { profile_teste_menu.style.height = 'auto'; }, (10));
-                        }
-                    }
-                }
-            }
     	})
     	.catch(error => console.log( error ));
     }

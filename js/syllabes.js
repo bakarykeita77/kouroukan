@@ -7,8 +7,10 @@ function syllabes() {
 
         datas = matiere_collection;
         datas = (datas == undefined) ? [[],[],[],[]] : datas;
-console.log(datas[0].length);
-    
+
+        profileTesteMenu(datas);
+        profileResulat(datas);
+        
         if(datas[0].length === 3) {
 
             var matiere = matiereNom(datas[1]);

@@ -2329,6 +2329,52 @@
             }
         }
     }
+    function profileTesteMenu(datas){
+        
+        /* Declaration et initialisation des variables */
+        let matieres_a_apprendre_du_serveur = [];
+        let matieres_apprises_du_serveur = [];
+
+        calculDesMatieresApprisesEtNonApprises();
+        chargementDeProfileTesteMenu();
+        affichageDeProfileTesteMenu();
+            
+        function calculDesMatieresApprisesEtNonApprises() {
+            for (let j = 0; j < datas.length; j++) {
+                if(datas[j].length == 0) 
+                { matieres_a_apprendre_du_serveur.push(liste_de_matieres[j][1]); }else
+                { matieres_apprises_du_serveur.push(liste_de_matieres[j][1]); }
+            }
+        }
+        function chargementDeProfileTesteMenu() {
+
+            document.getElementById("liste_des_matieres_apprises").innerHTML = (matieres_apprises_du_serveur.length === 0) ? '<p class="rien">ߝߏߦߊ߲߫߹</p>' : listeDesMatieresApprisesHtml();
+            document.getElementById("liste_des_matieres_a_apprendre").innerHTML = (matieres_a_apprendre_du_serveur.length === 0) ? '<p class="rien">ߝߏߦߊ߲߫߹</p>' : listeDesMatieresAApprendreHtml();
+            
+            function listeDesMatieresAApprendreHtml() {
+                let html = "<ul>";
+                for (let i = 0; i < matieres_a_apprendre_du_serveur.length; i++) html += "<li>"+matieres_a_apprendre_du_serveur[i]+"</li>";
+                html += "</ul>";
+                return html;
+            }
+            function listeDesMatieresApprisesHtml() {
+                let html = "<ul>";
+                for (let i = 0; i < matieres_apprises_du_serveur.length; i++) html += "<li>"+matieres_apprises_du_serveur[i]+"</li>";
+                html += "</ul>";
+                return html;
+            }
+        }
+        function affichageDeProfileTesteMenu() {
+
+            profile_teste_menu.style.display = 'none';
+            profile_testes.style.display = 'none';
+
+            $("#profile_teste_btn").click(() => {
+console.log("ok");
+                toggleProfileTesteMenu();
+            });
+        }
+    }
     function progressBarDApprentissage(td,qtite_click) {
         /*
         td est les td de la table à cliquer.
@@ -2604,17 +2650,20 @@
     }
     function resultatDeLaMatiere(matiere) {
 
-        let matiere_nom = matiereNomEnNko(matiere);
+        let matieres = ["alphabet","syllabes","tons","chiffres"];
+        let matiere_nom_en_nko = matiereNomEnNko(matiere);
+        let matiere_nom = matiereNom(matiere);
+        let niveau = matieres.indexOf(matiere_nom)+1;
         let lesson_1={}, lesson_2={}, lesson_3={}, lesson_4={};
         
         if(matiere.length > 0) {
             matiere.forEach(element => {
                 if(element != undefined) {
                     let element_index = matiere.indexOf(element);
-
+                    
                     if(element.phase.split("_")[1] == "apprentissage") lesson_1 = matiere[element_index];
                     if(element.phase.split("_")[1] == "exercice") lesson_2 = matiere[element_index];
-                    if(element.phase.split("_")[1] == "revision") lesson_3 = matiere[element_index];
+                    if(element.phase.split("_")[1] == "pratique") lesson_3 = matiere[element_index];
                     if(element.phase.split("_")[1] == "evaluation") lesson_4 = matiere[element_index];
                 }
             });
@@ -2649,7 +2698,7 @@
 
             chargerResultatDApprentissageCorps();
             chargerResultatDExerciceCorps();
-            chargerResultatDeRevivsionCorps();
+            chargerResultatDePratiqueCorps();
             chargerResultatDEvaluationCorps();
                 
             function chargerResultatDApprentissageCorps() {
@@ -2661,7 +2710,7 @@
                 
                     function chargerResultatHead() {
                         if(Object.keys(lesson_1).length === 0) {
-                            $('#phase_d_apprentissage').text(matiere_nom+' '+liste_de_phases[0][1]);
+                            $('#phase_d_apprentissage').text(matiere_nom_en_nko+' '+liste_de_phases[0][1]);
                             $('#apprentissage_date').text(" - ");
                             $('#apprentissage_heure').text(" - ");
                         }
@@ -2676,7 +2725,7 @@
                             let heure = temps.split(":")[0];
                             let minute = temps.split(":")[1];
                             
-                            $('#phase_d_apprentissage').text(matiere_nom+' '+liste_de_phases[0][1]);
+                            $('#phase_d_apprentissage').text(matiere_nom_en_nko+' '+liste_de_phases[0][1]);
                             $('#apprentissage_date').text(mois[parseInt(lune-1)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
                             $('#apprentissage_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
                         }
@@ -2730,7 +2779,7 @@
 
                     function chargerResultatHead() {
                         if(Object.keys(lesson_2).length === 0) {
-                            $('#phase_d_exercice').text(matiere_nom+' '+liste_de_phases[1][1]);
+                            $('#phase_d_exercice').text(matiere_nom_en_nko+' '+liste_de_phases[1][1]);
                             $('#exercice_date').text(" - ");
                             $('#exercice_heure').text(" - ");
                         }
@@ -2745,7 +2794,7 @@
                             let heure = temps.split(":")[0];
                             let minute = temps.split(":")[1];
                             
-                            $('#phase_d_exercice').text(matiere_nom+' '+liste_de_phases[1][1]);
+                            $('#phase_d_exercice').text(matiere_nom_en_nko+' '+liste_de_phases[1][1]);
                             $('#exercice_date').text(mois[parseInt(lune-1)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
                             $('#exercice_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
                         }
@@ -2772,7 +2821,7 @@
                     }
                 }
             }
-            function chargerResultatDeRevivsionCorps() {
+            function chargerResultatDePratiqueCorps() {
                 if(lesson_3 != undefined) {
 
                     chargerResultatHead();
@@ -2780,7 +2829,7 @@
 
                     function chargerResultatHead() {
                         if(Object.keys(lesson_3).length === 0) {
-                            $('#phase_de_revision').text(matiere_nom+' '+liste_de_phases[2][1]);
+                            $('#phase_de_revision').text(matiere_nom_en_nko+' '+liste_de_phases[2][1]);
                             $('#revision_date').text(" - ");
                             $('#revision_heure').text(" - ");
                         }
@@ -2795,7 +2844,7 @@
                             let heure = temps.split(":")[0];
                             let minute = temps.split(":")[1];
                         
-                            $('#phase_de_revision').text(matiere_nom+' '+liste_de_phases[2][1]);
+                            $('#phase_de_revision').text(matiere_nom_en_nko+' '+liste_de_phases[2][1]);
                             $('#revision_date').text(mois[parseInt(lune-1)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
                             $('#revision_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
                         }
@@ -2831,7 +2880,7 @@
 
                     function chargerResultatHead() {
                         if(Object.keys(lesson_4).length === 0) {
-                            $('#phase_d_evaluation').text(matiere_nom+' '+liste_de_phases[3][1]);
+                            $('#phase_d_evaluation').text(matiere_nom_en_nko+' '+liste_de_phases[3][1]);
                             $('#evaluation_date').text(" - ");
                             $('#evaluation_heure').text(" - ");
                         }
@@ -2846,7 +2895,7 @@
                             let heure = temps.split(":")[0];
                             let minute = temps.split(":")[1];
                             
-                            $('#phase_d_evaluation').text(matiere_nom+' '+liste_de_phases[3][1]);
+                            $('#phase_d_evaluation').text(matiere_nom_en_nko+' '+liste_de_phases[3][1]);
                             $('#evaluation_date').text(mois[parseInt(lune-1)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
                             $('#evaluation_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute)); 
                         }
@@ -2891,9 +2940,12 @@
 
             function totalDesQuestions() {
                 let total_question = 0;  
-                if(lesson_1 != undefined) if(lesson_2 != undefined) if(lesson_3 != undefined) if(lesson_4 == undefined) total_question = lesson_1.length + lesson_2.length + lesson_3.length;
-                if(lesson_1 != undefined) if(lesson_2 != undefined) if(lesson_3 != undefined) if(lesson_4 != undefined) total_question = lesson_1.length + lesson_2.length + lesson_3.length + lesson_4.length;
-                if(lesson_1 == undefined) if(lesson_2 == undefined) if(lesson_3 == undefined) if(lesson_4 == undefined) 0;
+                let total_1 = (lesson_1.length == undefined) ? 0 : lesson_1.length;
+                let total_2 = (lesson_2.length == undefined) ? 0 : lesson_2.length;
+                let total_3 = (lesson_3.length == undefined) ? 0 : lesson_3.length;
+                let total_4 = (lesson_4.length == undefined) ? 0 : lesson_4.length;
+
+                total_question = total_1 + total_2 + total_3 + total_4;
                 total_question = (total_question === 0) ? "" : parseIntNko(total_question);
                 return total_question;
             }
@@ -2910,22 +2962,22 @@
             }
         }
         function chargerDeliberation() {
-            matiere_nom = $('#resultat_corps h3').text().split(" ")[0];
+            matiere_nom_en_nko = $('#resultat_corps h3').text().split(" ")[0];
             if(total_point < moyenne_d_evaluation) {
-                $('#deliberation').html('ߌ ߖߌߖߊ߬ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ '+matiere_nom+' ߓߍ߬ߙߍ ߡߊ߫ ߤߊߟߌ߬ ߁߈ ߓߐ߫. ߏ߬ߘߐ߬߸ ߌ ߞߐߛߍ߬ߦߌ߬ ߦߊ߲߬ ߡߊ߫. <b id="reprendre">'+matiere_nom+' ߞߍ߫ ߕߎ߲߯</b>');
+                $('#deliberation').html('ߌ ߖߌߖߊ߬ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ '+matiere_nom_en_nko+' ߓߍ߬ߙߍ ߡߊ߫ ߤߊߟߌ߬ ߁߈ ߓߐ߫. ߏ߬ߘߐ߬߸ ߌ ߞߐߛߍ߬ߦߌ߬ ߦߊ߲߬ ߡߊ߫. <b id="reprendre">'+matiere_nom_en_nko+' ߞߍ߫ ߕߎ߲߯</b>');
             }else{
                 $('#deliberation').html(
-                    'ߌ ߞߎߟߎ߲ߖߋ߫ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ ߘߐ߬ߖߊ ߟߊ߫ '+matiere_nom+' ߟߐ߲ ߠߊ߫ ߤߊ߲߯ '+$('#pourcentage_point').text()+
+                    'ߌ ߞߎߟߎ߲ߖߋ߫ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ ߘߐ߬ߖߊ ߟߊ߫ '+matiere_nom_en_nko+' ߟߐ߲ ߠߊ߫ ߤߊ߲߯ '+$('#pourcentage_point').text()+
                     '</b> ߟߊ߫. ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ '+lesson_suivante+'.<br/>'+
-                    'ߣߴߌ ߟߊ߫ ߓߍ߬ߙߍ ߡߴߌ ߥߛߊ߬߸ <b id="reprendre">'+matiere_nom+' ߞߍ߫ ߕߎ߲߯</b><br/>'+
+                    'ߣߴߌ ߟߊ߫ ߓߍ߬ߙߍ ߡߴߌ ߥߛߊ߬߸ <b id="reprendre">'+matiere_nom_en_nko+' ߞߍ߫ ߕߎ߲߯</b><br/>'+
                     'ߣߴߌ ߟߊ߫ ߓߍ߬ߙߍ ߞߵߌ ߥߛߊ߬߸ '+continu_sur_l_etape_suivante
                 );
             }
         }
         function masquerResultatDeLaMatiere() { masquer($('.resultat_container')); }
         function afficherResultatDeLaMatiere() { 
-            if(matiere_nom == "ߛߓߍߛߎ߲") $("#resultat_d_evaluation_corps").css("display","none");
-            if(matiere_nom != "ߛߓߍߛߎ߲") $("#resultat_d_evaluation_corps").css("display","block");
+            if(niveau < 3) $("#resultat_de_revision_corps").css("display","none");
+            else $("#resultat_de_revision_corps").css("display","block");
             setTimeout(() => { afficher($('.resultat_container')); }, 3000);
         }
         function reprendreLesson() { $('#reprendre').click(() => { raffraichirLaPage(); }); }
@@ -3046,9 +3098,9 @@
             let tr16_td = $("#recapitulatif_du_resultat tr:nth-child(16) td");
 
             recapitulatifDuResultat1(tr2_td, tr3_td, tr4_td, matiere_1);
-            recapitulatifDuResultat2(tr5_td, tr6_td, tr7_td, tr8_td, matiere_2);
-            recapitulatifDuResultat2(tr9_td, tr10_td, tr11_td, tr12_td, matiere_3);
-            recapitulatifDuResultat2(tr13_td, tr14_td, tr15_td, tr16_td, matiere_4);
+            recapitulatifDuResultat1(tr5_td, tr6_td, tr7_td, matiere_2);
+            recapitulatifDuResultat2(tr8_td, tr9_td, tr10_td, tr11_td, matiere_3);
+            recapitulatifDuResultat2(tr12_td, tr13_td, tr14_td, tr15_td, matiere_4);
         }
         function afficherRecapitulatifDuResultat() {
             $("#details_du_resultat").css("display","none"); 
@@ -3161,11 +3213,24 @@
     function sendLessonDataToDB(lesson_phase,lesson_data) {
 
         var id_client = JSON.parse(sessionStorage.getItem('id_client'));
-        var matiere = JSON.parse(sessionStorage.getItem('matiere'));
+        var matiere = lesson_phase.split("_")[0];
         var niveau = JSON.parse(sessionStorage.getItem('niveau'));
         var phase = lesson_phase;
         var lesson = JSON.stringify(lesson_data);
         var note = totalPoint(lesson_data);
+
+console.log("id_client");
+console.log(id_client);
+console.log("matiere");
+console.log(matiere);
+console.log("niveau");
+console.log(niveau);
+console.log("phase");
+console.log(phase);
+console.log("lesson");
+console.log(lesson);
+console.log("note");
+console.log(note);
 
         const data_to_send = new URLSearchParams({
             id_client : id_client,
@@ -3335,6 +3400,21 @@
             }
         }); 
     }
+    function toggleProfileTesteMenu(){
+        console.log("yes");
+
+        let profile_teste_menu = document.getElementById('profile_teste_menu');
+        let profile_teste = document.getElementById('profile_teste');
+        
+        if(profile_teste_menu.style.height == 'auto'){
+            profile_teste_menu.style.height = 0;
+            setTimeout(function() { profile_teste_menu.style.display = 'none'; }, (250));
+            setTimeout(function() { profile_teste.style.display = 'none'; }, (200));
+        }else{
+            profile_teste_menu.style.display = 'block';
+            setTimeout(function() { profile_teste_menu.style.height = 'auto'; }, (10));
+        }
+    }
     function totalPoint(data) {
         if(data != null) {
             let tp = 0;
@@ -3366,6 +3446,9 @@
         var note = calculerNote(lesson);
         var lesson = JSON.stringify(lesson);
         
+console.log("matiere");
+console.log(matiere);
+
         const data_to_send = new URLSearchParams({
             id : id,
             action : action,

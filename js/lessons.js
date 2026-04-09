@@ -28,6 +28,9 @@ $('document').ready(function() {
         
         datas[matiere_index] = (datas[matiere_index] == undefined) ? [] : datas[matiere_index]; /* Pour éviter les erreurs d'undefined. */
         
+        profileTesteMenu(datas);
+        profileResulat(datas);
+        
      /*-------------------------------------------------------------------------------------------------------------------
         1)- La situation des études est faite par récupération et traitement des données reçues sur l'apprenant.
         2)- La liste des phases est établie en fonction du niveau d'étude de l'apprenant (selon les phases étudiées ou pas)
@@ -251,6 +254,7 @@ $('document').ready(function() {
                                     let action = 'supprimer_matiere_en_cours';
                     
                                     sendDataToDeleteLesson(matiere,id_client,action);
+                                    localStorage.clear();
                                     console.log('La lesson en cours est annulée');
                         
                                     function sendDataToDeleteLesson(matiere,id_client,action) {

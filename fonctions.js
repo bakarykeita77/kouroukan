@@ -12,7 +12,7 @@
 			son.attr({src: source_son, autoplay: "on"});
 		});
 	}
-    function actualiserLessonSyllabe(lesson, lesson_du_jour) {
+    function actualiserLesson(lesson, lesson_du_jour) {
 
         let nouvelles_syllabes = nouvellesSyllabes();
         let anciennes_syllabes = anciennesSyllabes();
@@ -193,8 +193,8 @@
             indexer($('.reprendre_btn p'));
         }, 400);
     }
-    function afficherBoutonDeLaLessonSuivante() {
-        let matiere = lessonSuivante();
+    function afficherBoutonDeLaLessonSuivante(lesson_en_cours) {
+        let matiere = lessonSuivante(lesson_en_cours);
         
         masquer($('.dialogue_btns'));
         display($('.redirection_btns'));
@@ -1210,10 +1210,9 @@
         }
         return consonnes_apprises
     }
-    function consonnesDeSyllabeExerceesDuServeur() {
+    function consonnesDeSyllabeExerceesDuServeur(datas) {
 
         let consonnes_exercees = [];
-        let datas = JSON.parse(sessionStorage.getItem("datas"));
 
         if (datas[1].length != 0) {
             for (let i = 0; i < datas[1].length; i++) {
@@ -1253,10 +1252,9 @@
 
         return consonnes_a_cocher;
     }
-    function consonnesChoisiesDuServeur() {
+    function consonnesChoisiesDuServeur(datas) {
    
         let niveau = JSON.parse(sessionStorage.getItem("niveau"));
-        let datas = JSON.parse(sessionStorage.getItem("datas"));
         let cs = [];
         let lesson = [];
 
@@ -1730,7 +1728,7 @@
             // $(td_actif).addClass('ombrage');
             // setTimeout(function() { $(td_actif).removeClass('ombrage'); }, 600);
         });
-     }
+    }
     function lectureSemiAutomatique() {
         let play = false;
         $(".play_icon").parent().on('click',function(){
@@ -1829,9 +1827,48 @@
                    
         return tons_apprentissage_html;
     }
-    function lessonDApprentissagePreAlphabetDuServeur() {
+    function lessonSuivante(lesson_en_cours) {
+        let ls = "";
+        switch(lesson_en_cours) {
+            case 'ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ' : ls = 'ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫'; break;
+            case 'ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ' : ls = 'ߛߓߍߛߎ߲ ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫'; break;
+            case 'ߛߓߍߛߎ߲ ߣߐ߰ߡߊ߬ߛߍߦߌ' : ls = 'ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߥߴߊ߬ ߡߊ߬'; break;
+            case 'ߛߓߍߛߎ߲ ߞߘߐߓߐߟߌ' : ls = 'ߜߋ߲߭ ߘߋ߰ߟߌ ߘߊߡߌ߬ߘߊ߬'; break;
 
-        let datas = JSON.parse(sessionStorage.getItem('datas'));
+            case 'ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ' : ls = 'ߜߋ߲߭ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫'; break;
+            case 'ߜߋ߲߭ ߡߊ߬ߞߟߏ߬ߟߌ' : ls = 'ߜߋ߲߭ ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫'; break;
+            case 'ߜߋ߲߭ ߣߐ߰ߡߊ߬ߛߍߦߌ' : ls = 'ߜߋ߲߭ ߞߘߐߓߐߟߌ ߞߍ߫'; break;
+            case 'ߜߋ߲߭ ߞߘߐߓߐߟߌ' : ls = 'ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߥߴߊ߬ ߡߊ߬'; break;
+        }
+        return ls;
+    }
+    function lessonActuelle(lesson_en_cours) {
+        
+        let l = [];
+        let m = (lesson_en_cours != undefined) ? lesson_en_cours.split(' ')[0] : '';
+        let p = (lesson_en_cours != undefined) ? lesson_en_cours.split(' ')[1] : '';
+        let lesson_1 = {}, lesson_2 = {}, lesson_3 = {}, lesson_4 = {};
+
+        if(m == 'ߛߓߍߛߎ߲') {
+            switch(p) {
+                case 'ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ'  : l = (lesson_1 != "") ? datas[0][0].lesson : []; break;
+                case 'ߡߊ߬ߞߟߏ߬ߟߌ'  : l = (lesson_2 != "") ? datas[0][1].lesson : []; break;
+                case 'ߞߘߐߓߐߟߌ' : l = (lesson_3 != "") ? datas[0][2].lesson : []; break;
+            }
+        }
+        if(m == 'ߜߋ߲߭') {
+            switch(p) {
+                case 'ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ'  : l = (lesson_1 != "") ? datas[1][0].lesson : []; break;
+                case 'ߡߊ߬ߞߟߏ߬ߟߌ'  : l = (lesson_2 != "") ? datas[1][1].lesson : []; break;
+                case 'ߣߐ߰ߡߊ߬ߛߍߦߌ' : l = (lesson_3 != "") ? datas[1][2].lesson : []; break;
+                case 'ߞߘߐߓߐߟߌ' : l = (lesson_4 != "") ? datas[1][3].lesson : []; break;
+            }
+        }
+
+        return l;
+    }
+    function lessonDApprentissagePreAlphabetDuServeur(datas) {
+
         let ldap = [];
 
         if(datas.length === 0) { console.log("La variable datas est vide !"); }
@@ -1844,9 +1881,8 @@
 
         return ldap;
     }
-    function lessonDExercicePreAlphabet() {
+    function lessonDExercicePreAlphabet(datas) {
         
-        let datas = JSON.parse(sessionStorage.getItem('datas'));
         let ldex = [];
 
         if(datas.length === 0) { console.log("La variable datas est vide !"); }
@@ -1915,6 +1951,10 @@
         // $('#audio').attr({ src:'../son/m4a/'+'+parent_direct+'/'lettre+'.m4a', autoplay:'on' }); 
         $('#audio').attr({ src:'../son/mp3/'+parent_direct+'/'+son+'.mp3', autoplay:'on' });  
     }
+    function lectureSyllabe(syllabe) {
+        let terminaison = terminaisonDeSyllabe(syllabe);
+        $('#audio').attr({ src: "../son/mp3/tons/"+terminaison+"/"+syllabe+".mp3", autoplay:"on" });
+    }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
     
@@ -1982,7 +2022,7 @@
     function masquerTesteContainer() { setTimeout(() => { $("#teste_container").css({"top":"0.5rem"}); }, 800); }
     function memoireConsonnesChoisies() {
 
-        let consonnes_choisies_du_serveur = consonnesChoisiesDuServeur();
+        let consonnes_choisies_du_serveur = consonnesChoisiesDuServeur(datas);
         let memoire_consonnes_choisies = JSON.parse(localStorage.getItem("memoire_consonnes_choisies"));
 
         consonnes_choisies_du_serveur = (consonnes_choisies_du_serveur == null) ? [] : consonnes_choisies_du_serveur;
@@ -2366,13 +2406,10 @@
         }
         function affichageDeProfileTesteMenu() {
 
-            profile_teste_menu.style.display = 'none';
-            profile_testes.style.display = 'none';
+            document.getElementById('profile_teste_menu').style.display = "none";
+            document.getElementById('profile_teste').style.display = "none";
 
-            $("#profile_teste_btn").click(() => {
-console.log("ok");
-                toggleProfileTesteMenu();
-            });
+            $("#profile_teste_btn").click(() => { toggleProfileTesteMenu(); });
         }
     }
     function progressBarDApprentissage(td,qtite_click) {
@@ -2565,7 +2602,7 @@ console.log("ok");
         let prenom = JSON.parse(sessionStorage.getItem('prenom'));
         let etudiant = '<h1>'+prenom+' '+nom+'<h1>';
         let lesson_en_cours = $('.notification_titre').html();
-        let lesson_suivante = lessonSuivante();
+        let lesson_suivante = lessonSuivante(lesson_en_cours);
         let total_question = memoire.length;
         let total_bonne_reponse = totalPoint();
         let total_fausse_reponse = total_question - total_bonne_reponse;
@@ -2632,20 +2669,6 @@ console.log("ok");
             let html = 0;
             for(let i=0; i<memoire.length; i++) { html += memoire[i][2]; }
             return html;
-        }
-        function lessonSuivante() {
-            let ls = "";
-            switch(lesson_en_cours) {
-                case 'ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ' : ls = 'ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫'; break;
-                case 'ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ' : ls = 'ߛߓߍߛߎ߲ ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫'; break;
-                case 'ߛߓߍߛߎ߲ ߣߐ߰ߡߊ߬ߛߍߦߌ' : ls = 'ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߥߴߊ߬ ߡߊ߬'; break;
-
-                case 'ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ' : ls = 'ߜߋ߲߭ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫'; break;
-                case 'ߜߋ߲߭ ߡߊ߬ߞߟߏ߬ߟߌ' : ls = 'ߜߋ߲߭ ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫'; break;
-                case 'ߜߋ߲߭ ߣߐ߰ߡߊ߬ߛߍߦߌ' : ls = 'ߜߋ߲߭ ߞߘߐߓߐߟߌ ߞߍ߫'; break;
-                case 'ߜߋ߲߭ ߞߘߐߓߐߟߌ' : ls = 'ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߥߴߊ߬ ߡߊ߬'; break;
-            }
-            return ls;
         }
     }
     function resultatDeLaMatiere(matiere) {
@@ -2981,45 +3004,6 @@ console.log("ok");
             setTimeout(() => { afficher($('.resultat_container')); }, 3000);
         }
         function reprendreLesson() { $('#reprendre').click(() => { raffraichirLaPage(); }); }
-        function lessonSuivante(lesson_en_cours) {
-            let ls = "";
-            switch(lesson_en_cours) {
-                case 'ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ' : ls = 'ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫'; break;
-                case 'ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ' : ls = 'ߛߓߍߛߎ߲ ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫'; break;
-                case 'ߛߓߍߛߎ߲ ߣߐ߰ߡߊ߬ߛߍߦߌ' : ls = 'ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߥߴߊ߬ ߡߊ߬'; break;
-                case 'ߛߓߍߛߎ߲ ߞߘߐߓߐߟߌ' : ls = 'ߜߋ߲߭ ߘߋ߰ߟߌ ߘߊߡߌ߬ߘߊ߬'; break;
-
-                case 'ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ' : ls = 'ߜߋ߲߭ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫'; break;
-                case 'ߜߋ߲߭ ߡߊ߬ߞߟߏ߬ߟߌ' : ls = 'ߜߋ߲߭ ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫'; break;
-                case 'ߜߋ߲߭ ߣߐ߰ߡߊ߬ߛߍߦߌ' : ls = 'ߜߋ߲߭ ߞߘߐߓߐߟߌ ߞߍ߫'; break;
-                case 'ߜߋ߲߭ ߞߘߐߓߐߟߌ' : ls = 'ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߥߴߊ߬ ߡߊ߬'; break;
-            }
-            return ls;
-        }
-        function lessonActuelle(lesson_en_cours) {
-            
-            let l = [];
-            let m = (lesson_en_cours != undefined) ? lesson_en_cours.split(' ')[0] : '';
-            let p = (lesson_en_cours != undefined) ? lesson_en_cours.split(' ')[1] : '';
-
-            if(m == 'ߛߓߍߛߎ߲') {
-                switch(p) {
-                    case 'ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ'  : l = (lesson_1 != "") ? lesson_1.lesson : []; break;
-                    case 'ߡߊ߬ߞߟߏ߬ߟߌ'  : l = (lesson_2 != "") ? lesson_2.lesson : []; break;
-                    case 'ߞߘߐߓߐߟߌ' : l = (lesson_3 != "") ? lesson_3.lesson : []; break;
-                }
-            }
-            if(m == 'ߜߋ߲߭') {
-                switch(p) {
-                    case 'ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ'  : l = (lesson_1 != "") ? lesson_1.lesson : []; break;
-                    case 'ߡߊ߬ߞߟߏ߬ߟߌ'  : l = (lesson_2 != "") ? lesson_2.lesson : []; break;
-                    case 'ߣߐ߰ߡߊ߬ߛߍߦߌ' : l = (lesson_3 != "") ? lesson_3.lesson : []; break;
-                    case 'ߞߘߐߓߐߟߌ' : l = (lesson_4 != "") ? lesson_4.lesson : []; break;
-                }
-            }
-    
-            return l;
-        }
     }
     function resultatGeneral(datas) {
 
@@ -3219,19 +3203,6 @@ console.log("ok");
         var lesson = JSON.stringify(lesson_data);
         var note = totalPoint(lesson_data);
 
-console.log("id_client");
-console.log(id_client);
-console.log("matiere");
-console.log(matiere);
-console.log("niveau");
-console.log(niveau);
-console.log("phase");
-console.log(phase);
-console.log("lesson");
-console.log(lesson);
-console.log("note");
-console.log(note);
-
         const data_to_send = new URLSearchParams({
             id_client : id_client,
             matiere : matiere,
@@ -3309,9 +3280,7 @@ console.log(note);
             });
         }
     }
-    function syllabesApprentisageDataMemo() {
-
-        let datas = JSON.parse(sessionStorage.getItem('datas'));
+    function syllabesApprentisageDataMemo(datas) {
 
         if(datas.length === 0) return;
         let sad = [];
@@ -3323,10 +3292,8 @@ console.log(note);
 
         return sad;
     }
-    function syllabesExerciceDataMemo() {
+    function syllabesExerciceDataMemo(datas) {
         
-        let datas = JSON.parse(sessionStorage.getItem('datas'));
-
         if(datas.length === 0) return;
         let sed = [];
 
@@ -3337,10 +3304,8 @@ console.log(note);
 
         return sed;
     }
-    function syllabesEvaluationDataMemo() {
+    function syllabesEvaluationDataMemo(datas) {
         
-        let datas = JSON.parse(sessionStorage.getItem('datas'));
-
         if(datas.length === 0) return;
         let s_e_d = [];
 
@@ -3401,7 +3366,6 @@ console.log(note);
         }); 
     }
     function toggleProfileTesteMenu(){
-        console.log("yes");
 
         let profile_teste_menu = document.getElementById('profile_teste_menu');
         let profile_teste = document.getElementById('profile_teste');
@@ -3446,9 +3410,6 @@ console.log(note);
         var note = calculerNote(lesson);
         var lesson = JSON.stringify(lesson);
         
-console.log("matiere");
-console.log(matiere);
-
         const data_to_send = new URLSearchParams({
             id : id,
             action : action,

@@ -1,8 +1,5 @@
 $('document').ready(function() {
 
-    // localStorage.clear();
-    // sessionStorage.clear();
-    
 console.log(localStorage);
 console.log(sessionStorage);
     /*Au click sur l'afficheur du programme 
@@ -29,8 +26,11 @@ console.log(sessionStorage);
 
         var phases_etudiees = phasesEtudieesDuServeur(datas);
         let phase_index = (phases_etudiees == null) ? 0 : phases_etudiees.length;
+        
+        profileTesteMenu(datas);
+        profileResulat(datas);
     
-    /*-------------------------------------------------------------------------------------------------------------*/
+     /*-------------------------------------------------------------------------------------------------------------*/
         /* Détermination du Programme */
         var programme_matieres = "";
 
@@ -129,28 +129,26 @@ console.log(sessionStorage);
             let matiere_nom = liste_de_matieres[0][1];
             let niveau = 1;          
 
-            let libele_du_choix_11 = "<span>߁߭</span> - "+matiere_nom+" ߘߏߣߍ߲߫ ߘߏߣߍ߲߫ ߘߋ߲߮";
-            let libele_du_choix_12 = "<span>߂߲</span> - "+matiere_nom+" ߜߘߏߓߊ߫ ߘߋ߲߮"; 
+            let libele_du_choix_11 = "<span>߁߭</span> - ߛߓߍߛߎ߲ ߘߏߣߍ߲߫ ߘߏߣߍ߲߫ ߘߋ߲߮";
+            let libele_du_choix_12 = "<span>߂߲</span> - ߛߓߍߛߎ߲ ߜߘߏߓߊ߫ ߘߋ߲߮"; 
             let option_lien = optionLien();
 
                 
             $("#programme_ul li:nth-child(1)").click(function(e) {
-                if(matiere_nom == "ߛߓߍߛߎ߲") {
-                    let matiere_index = $(this).index();
-                    
-                    if(datas[matiere_index] != undefined) {
+                if(matiere_nom == "ߛߓߍߛߎ߲") {                    
+                    if(datas[0].length != 0) {
                         if(option_retenue != null) { location.assign(option_lien); }
                         if(option_retenue == null) {
-                            if(datas[matiere_index].length === 0) {
+                            if(datas[0].length === 0) {
                                 e.preventDefault();
                                 chargerLesOptions();
                                 stockerLOption();
                                 afficherLessonOptions();
                             }
-                            if(datas[matiere_index].length != 0) {
-                                if(datas[matiere_index][phase_index] == undefined) { location.assign(option_lien); }
-                                if(datas[matiere_index][phase_index] != undefined) {     
-                                    let data_lesson = JSON.parse(datas[matiere_index][phase_index].lesson);
+                            if(datas[0].length != 0) {
+                                if(datas[0][phase_index] == undefined) { location.assign(option_lien); }
+                                if(datas[0][phase_index] != undefined) {     
+                                    let data_lesson = JSON.parse(datas[0][phase_index].lesson);
                                     if(tableau2DVide(data_lesson)) {
                                         e.preventDefault();
                                         chargerLesOptions();
@@ -170,11 +168,8 @@ console.log(sessionStorage);
             
 
             function optionLien() {
-                let option_lien_1 = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+0+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&phases_etudiees='+phases_etudiees+'&lesson_option='+option_retenue;
-                let option_lien_2 = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+1+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&phases_etudiees='+phases_etudiees+'&lesson_option='+option_retenue;
-                let pl = "";
-                pl = (niveau == 1) ? option_lien_1 : option_lien_2;
-                return pl;
+                let option_lien = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+0+'&matiere_nom=ߛߓߍߛߎ߲&niveau=1&phases_etudiees='+phases_etudiees+'&lesson_option='+option_retenue;
+                return option_lien;
             }
             function chargerLesOptions() {
                 let option_html = "";
@@ -195,16 +190,18 @@ console.log(sessionStorage);
                 }
             }
             function stockerLOption() {
-                $('#lesson_option_1').click(function() {
-                    localStorage.removeItem("option_retenue");
-                    option_retenue = 1;
-                    localStorage.setItem('option_retenue', JSON.stringify(option_retenue));
-                });
-                $('#lesson_option_2').click(function() {
-                    localStorage.removeItem("option_retenue");
-                    option_retenue = 2;
-                    localStorage.setItem('option_retenue', JSON.stringify(option_retenue));
-                });
+                if(niveau == 1) {
+                    $('#lesson_option_1').click(function() {
+                        localStorage.removeItem("option_retenue");
+                        option_retenue = 1;
+                        localStorage.setItem('option_retenue', JSON.stringify(option_retenue));
+                    });
+                    $('#lesson_option_2').click(function() {
+                        localStorage.removeItem("option_retenue");
+                        option_retenue = 2;
+                        localStorage.setItem('option_retenue', JSON.stringify(option_retenue));
+                    });
+                }
             }
             function afficherLessonOptions() { afficher($('#lesson_options')); }
         }

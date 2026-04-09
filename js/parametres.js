@@ -2,7 +2,6 @@ function parametrageDeLesson(datas) {
 
  /* Declaration des variables */  
     var niveau = JSON.parse(sessionStorage.getItem('niveau'));   // Voir programmes.js fonction storagesDuProgramme()
-
     let phase_id = (datas[niveau-1].length == 0) ? "alphabet_apprentissage" : JSON.parse(sessionStorage.getItem('phase_id'));
     var voyelles_checker, consonnes_checker, tedo_checker, tons_checker, nasalisation_checker;
     var voyelles_cochees = [], consonnes_cochees = [], tedos_coches = [], tons_coches = [], nasalisations_cochees = [], caracteres_coches = [],syllabes_coches = [];
@@ -304,9 +303,11 @@ function parametrageDeLesson(datas) {
                 var voyelles_length = voyelles_cochees.length;
                 var tons_length = tons_coches.length;
                 var syllabes_tonifies_length = syllabes_tonifies.length;
+                var table_d_apprentissage_alphabet_html = "";
+                var table_d_apprentissage_syllabes_html = "";
 
-                var table_d_apprentissage_alphabet_html = (option_retenue === 1) ? chargerCorpsDePreAlphabet() : lessonHTML(lettres_cochees, 'table_alphabet_apprentissage');
-                var table_d_apprentissage_syllabes_html = lessonHTML(syllabes_simples_coches, 'table_syllabes_apprentissage');
+                if(niveau == 1) table_d_apprentissage_alphabet_html = (option_retenue === 1) ? chargerCorpsDePreAlphabet() : lessonHTML(lettres_cochees, 'table_alphabet_apprentissage');
+                if(niveau == 2) table_d_apprentissage_syllabes_html = lessonHTML(syllabes_simples_coches, 'table_syllabes_apprentissage');
 
                 
                 if(niveau == 1) apprentissage_html = table_d_apprentissage_alphabet_html;

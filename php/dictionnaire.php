@@ -3,7 +3,7 @@
 <head>
 	<title>dictionnaire</title>
 	<meta charset="utf-8"/>
-	<link rel="stylesheet" type="text/css" href="css/dictionnaire.css"/>
+	<link rel="stylesheet" type="text/css" href="/css/dictionnaire.css"/>
 </head>
 <body>
     <?php
@@ -84,6 +84,6 @@
 	    <?php endforeach; ?>
 	</table>
 
-	<script src="js/dictionnaire.js" type="text/javascript"></script>
+	<script src="/js/dictionnaire.js" type="text/javascript"></script>
 </body>
 </html>

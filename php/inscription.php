@@ -4,7 +4,7 @@
 	<title>inscriptions</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel = "stylesheet" href = "/kouroukan/css/inscription.css"/>
+	<link rel = "stylesheet" href = "/css/inscription.css"/>
 </head>
 <body>
 	<div><?php include("tete-de-page.php"); ?></div>    
@@ -15,7 +15,7 @@
 				
 				<h2>ߕߐ߯ߛߓߍ߫ ߥߟߊ</h2>
 				
-				<form action="/kouroukan/php/actions.php" method="POST" id="formulaire_de_connexion">
+				<form action="/php/actions.php" method="POST" id="formulaire_de_connexion">
 					
 					<div class="input_box">
 						<input type="text" autocomplete="off" name="prenom" class="inscription_input" id="prenom" required />
@@ -62,11 +62,11 @@
 			</div>
 
     	</div>
-    	<script src="/kouroukan/note-fonctions.js"></script>
-    	<script src="/kouroukan/js/inscription.js"></script>
+    	<script src="/note-fonctions.js"></script>
+    	<script src="/js/inscription.js"></script>
     	
     	<?php
-            if($_SERVER['HTTP_REFERER'] == "/kouroukan/php/inscription.php") {
+            if($_SERVER['HTTP_REFERER'] == "/php/inscription.php") {
                 echo('<script> notifier(); </script>'); 
             }
         ?>

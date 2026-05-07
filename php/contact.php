@@ -9,7 +9,7 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>contact</title>
     
-    <link rel="stylesheet" href="/kouroukan/css/contact.css"/>
+    <link rel="stylesheet" href="/css/contact.css"/>
 </head>
 <body>
     <div class="cover">
@@ -107,6 +107,6 @@ session_start();
         </div>
     </div>
     
-    <script src="/kouroukan/js/contact.js"></script>
+    <script src="/js/contact.js"></script>
 </body>
 </html>

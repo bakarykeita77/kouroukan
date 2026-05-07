@@ -3,8 +3,8 @@
 <head>
 	<title>tableau</title>
 	<meta charset="utf-8">
-	<link rel="stylesheet" href="/kouroukan/css/assistant.css"/>
-	<link rel="stylesheet" href="/kouroukan/css/tableau.css"/>
+	<link rel="stylesheet" href="/css/assistant.css"/>
+	<link rel="stylesheet" href="/css/tableau.css"/>
 
 </head>
 <body>
@@ -61,11 +61,11 @@
 	<div class = "outils" id = "cadre_memoire"  > <?php include "/kouroukan/php/memoire.php";   ?> </div>
 	<div class = "outils" id = "clavier_tableau"> 
 		<span id="fermer_clavier">&times;</span>		     
-		<?php include "/kouroukan/php/clavier.php";   ?>
+		<?php include "/php/clavier.php";   ?>
 	</div>
 	<div class = "outils" id = "cadre_smartboard"> <?php include "/kouroukan/php/smartboard.php";?> </div>
 
-	<?php include "/kouroukan/fonctions/fonctions_tableau.php"; ?>
+	<?php include "/fonctions/fonctions_tableau.php"; ?>
 	<script src="jquery-3.3.1.js" type="text/javascript"></script>
 	<script src="js/tableau.js" type="text/javascript"></script>
 	<script src="js/assistant.js" type="text/javascript"></script>

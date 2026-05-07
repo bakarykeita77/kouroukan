@@ -1,4 +1,4 @@
-	<link rel="stylesheet" href="/kouroukan/css/travaux.css"/>
+	<link rel="stylesheet" href="/css/travaux.css"/>
 
     <div class="travaux">
         <div class="travaux_cadre">
@@ -210,4 +210,4 @@
         </div>
     </div>
     
-    <script src="/kouroukan/js/travaux.js"></script>
+    <script src="/js/travaux.js"></script>

@@ -31,7 +31,7 @@ console.log(sessionStorage);
     function dataStorage() {
      
      /* Recuperation de toutes les matières étdiées par l'apprenant par envoi de son id à api de kouroukan. */
-    	fetch("/kouroukan/api/index.php?id_user="+present_id)
+    	fetch("/api/index.php?id_user="+present_id)
     	.then(response => response.json())
     	.then(matiere_collection => {
          /*-------------------------------------------------------------------------   

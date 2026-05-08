@@ -66,10 +66,10 @@
 	<div class = "outils" id = "cadre_smartboard"> <?php include "/kouroukan/php/smartboard.php";?> </div>
 
 	<?php include "/fonctions/fonctions_tableau.php"; ?>
-	<script src="jquery-3.3.1.js" type="text/javascript"></script>
-	<script src="js/tableau.js" type="text/javascript"></script>
-	<script src="js/assistant.js" type="text/javascript"></script>
- 	<script type="text/javascript" src="js/clavier.js"></script>
+	<script src="/jquery-3.3.1.js" type="text/javascript"></script>
+	<script src="/js/tableau.js" type="text/javascript"></script>
+	<script src="/js/assistant.js" type="text/javascript"></script>
+ 	<script type="text/javascript" src="/js/clavier.js"></script>
 
 </body>
 </html>

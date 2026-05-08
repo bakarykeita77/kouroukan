@@ -2700,7 +2700,7 @@
         let total_point = totalPoint(lesson_actuelle);
         let moyenne_d_evaluation = 1;
         let lesson_suivante = lessonSuivante(lesson_en_cours);
-        let continu_sur_l_etape_suivante = '<b id="avance"><a href="/kouroukan/php/programmes.php">'+lesson_suivante+'</a></b>';
+        let continu_sur_l_etape_suivante = '<b id="avance"><a href="/php/programmes.php">'+lesson_suivante+'</a></b>';
 
 
         chargerResultatDeLaMatiereEntete();
@@ -3129,7 +3129,7 @@
         let caractere_index = caracteres_selectionnees.indexOf(caractere);
         if(caractere_index != -1) { caracteres_selectionnees.splice(caractere_index,1); }
     }
-    function retourALaPageDAcceuil() { window.location.replace("../kouroukan/index.php"); }
+    function retourALaPageDAcceuil() { window.location.replace("/index.php"); }
     function reverseIntNko(nombre_a_convertir){
         var nombre_converti = [];
         
@@ -3212,7 +3212,7 @@
             note : note
         }); 
 
-        fetch("/kouroukan/php/actions.php", {
+        fetch("/php/actions.php", {
             method: "POST",
             body: data_to_send
         })
@@ -3418,7 +3418,7 @@
             note : note
         }); 
 
-        fetch("/kouroukan/php/actions.php", {
+        fetch("/php/actions.php", {
             method: "POST",
             body: data_to_send
         })

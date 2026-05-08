@@ -4,7 +4,7 @@ function alphabet() {
     // sessionStorage.clear();
     
     let id_client = JSON.parse(sessionStorage.getItem("id_client"));
-    fetch("/kouroukan/api/index.php?id_user="+id_client)
+    fetch("/api/index.php?id_user="+id_client)
     .then(response => response.json())
     .then(matiere_collection => {  
 
@@ -2272,7 +2272,7 @@ function alphabet() {
                                                     }, 4000);
                                                 }
                                                 function continuSurSyllabe() {
-                                                    $('#continu_sur_apprentissage_btn').html("<a id='redirection_sur_syllabes' href='http://localhost/kouroukan/php/programmes.php'>ߜߋ߲߭ ߥߟߊ߬ߘߊ ߘߊߡߌ߬ߘߊ߫ ߦߊ߲߬</a>");
+                                                    $('#continu_sur_apprentissage_btn').html("<a id='redirection_sur_syllabes' href='http://localhost/php/programmes.php'>ߜߋ߲߭ ߥߟߊ߬ߘߊ ߘߊߡߌ߬ߘߊ߫ ߦߊ߲߬</a>");
                                                 }
                                             }
                                         }

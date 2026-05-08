@@ -3,7 +3,7 @@
 <head>
 	<title>smartboard</title>
 	<meta charset="utf-8"/>
-	<link rel="stylesheet" type="text/css" href="css/smartboard.css"/>
+	<link rel="stylesheet" type="text/css" href="/css/smartboard.css"/>
 </head>
 <body>
 
@@ -46,6 +46,6 @@
 
 	</div>
 
-	<script src="js/smartboard.js" type="text/javascript"></script>
+	<script src="/js/smartboard.js" type="text/javascript"></script>
 </body>
 </html>

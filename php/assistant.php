@@ -4,7 +4,7 @@
     	<title>assistant</title>
     	<meta charset = "utf-8">
     	<style>
-    	<?php include "css/assistant.css"; ?>
+    	<?php include "/css/assistant.css"; ?>
     	</style>
     </head>
     

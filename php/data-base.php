@@ -1,5 +1,5 @@
  <?php
-   header("location:http://localhost/phpmyadmin/"); 
+   // header("location:http://localhost/phpmyadmin/"); 
 
   //  $sql_database = "CREATE DATABASE IF NOT EXISTS `kouroukan`";
    require("connexionToDB.php");
@@ -131,18 +131,5 @@
     $db->exec($sql_table_image4syllabes);
     $db->exec($sql_table_images);
     
-   // header("location:http://localhost:8002/?username=root&db=kouroukan"); 
+   header("location:http://localhost:8002/?username=root&db=kouroukan"); 
 ?>
-
-<html>
-   <head>
-      <title>ߞߙߎ߬ߞߊ߲߬</title>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <link rel="stylesheet" href="css/data-base.css"/>
-   </head>
-   <body>
-      <h1>Les tables sont crées !</h1>
-   </body>
-</html>

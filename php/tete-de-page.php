@@ -73,10 +73,10 @@
 			<div id = "nav">
 				<div id="menu_deroulant">
 					<ul>
-						<li class="hover_anim" id="home"     ><a href = "/kouroukan/index.php">ߝߊ߲ߓߊ </a></li>
-						<li class="hover_anim" id="programme"><a href = "/kouroukan/php/programmes.php"> ߢߍߥߟߊ </a></li>
-						<li class="hover_anim" id="blog"     ><a href = "/kouroukan/php/blog.php"> ߞߊ߬ߙߊ߲߬ߜߍ </a></li>
-						<li class="hover_anim" id="contact"  ><a href = "/kouroukan/php/contact.php">ߛߊ߲߬ߓߊ߬ߕߐ߮ </a></li>
+						<li class="hover_anim" id="home"     ><a href = "/index.php">ߝߊ߲ߓߊ </a></li>
+						<li class="hover_anim" id="programme"><a href = "/php/programmes.php"> ߢߍߥߟߊ </a></li>
+						<li class="hover_anim" id="blog"     ><a href = "/php/blog.php"> ߞߊ߬ߙߊ߲߬ߜߍ </a></li>
+						<li class="hover_anim" id="contact"  ><a href = "/php/contact.php">ߛߊ߲߬ߓߊ߬ߕߐ߮ </a></li>
 					</ul>
 				</div>
 				

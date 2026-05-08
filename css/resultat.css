@@ -22,7 +22,7 @@
     position: relative;
     background-color: #ccc;
     padding: 0.5rem;
-    border-bottom: 0.125rem solid #aaa;
+    border-bottom: 0.25rem solid #aaa;
     z-index: 0;
 }
 #resultat_entete table { width: 100%; }
@@ -42,12 +42,12 @@
     margin: 0;
     list-style: none;
     width: max-content;
+    background-color: #fff;
     cursor: pointer;
 }
 .li_actif { 
-    background-color: #fff;
     border-radius: 0.5rem 0.5rem 0 0;
-    border: 0.125rem solid #aaa;
+    border: 0.25rem solid #aaa;
     border-bottom-color: #fff;
 }
 #resultat_corps{

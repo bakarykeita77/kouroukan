@@ -12,6 +12,9 @@ session_start();
     <link rel="stylesheet" href="/css/contact.css"/>
 </head>
 <body>
+            
+    <div class="page_head"><?php require('tete-de-page.php'); ?></div>
+    <?php require('haut-de-page.php'); ?>
     <div class="cover">
         <div class="page_body" id="body_contact">
             

@@ -7,6 +7,10 @@
     <title>blog</title>
 </head>
 <body>
+            
+    <div class="page_head"><?php require('tete-de-page.php'); ?></div>
+    <?php require('haut-de-page.php'); ?>
     <h1>ߞߊ߬ߙߊ߲߬ߜߍ</h1>
+    
 </body>
 </html>

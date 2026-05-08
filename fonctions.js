@@ -2002,7 +2002,7 @@
     function masquerPanneauDesCaracteres() { $('#caracteres_container').css({"top":"22rem", "height":0}); }
     function masquerNotification() {
         $(".notification_corps").text("");
-        $('.notification_corps').css({"top":"5.25rem"}); 
+        $('.notification_corps').css({"top":"5.25rem"});
     }
     function matiereNom(matiere) { 
         let matiere_nom = "";
@@ -2732,6 +2732,7 @@
                     chargerResultatFoot();
                 
                     function chargerResultatHead() {
+console.log(matiere_nom_en_nko);
                         if(Object.keys(lesson_1).length === 0) {
                             $('#phase_d_apprentissage').text(matiere_nom_en_nko+' '+liste_de_phases[0][1]);
                             $('#apprentissage_date').text(" - ");

@@ -28,6 +28,7 @@
     height: 5rem;
     font-size: 0.75rem;
     overflow: auto;
+    text-align: right;
 }
 .contact_btn {
     background-color: #aaa;

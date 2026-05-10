@@ -9,7 +9,7 @@ console.log(sessionStorage);
     -------------------------------------------------------------------------------------------------------------------------*/   
 
     let id_client = JSON.parse(sessionStorage.getItem("id_client"));
-    fetch("/api/index.php?id_user="+id_client)
+    fetch("/kouroukan/api/index.php?id_user="+id_client)
     .then(response => response.json())
     .then(matiere_collection => {  
 
@@ -66,7 +66,7 @@ console.log(sessionStorage);
                     var matiere_id = liste_de_matieres[i][0];
                     var matiere_nom = liste_de_matieres[i][1];
                     var matiere_index = liste_de_matieres.indexOf(liste_de_matieres[i]);
-                    var phases_lien = 'lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&phases_etudiees='+phases_etudiees;
+                    var phases_lien = '/kouroukan/php/lesson.php?matiere_id='+matiere_id+'&matiere_index='+matiere_index+'&matiere_nom='+matiere_nom+'&niveau='+niveau+'&phases_etudiees='+phases_etudiees;
 
                     if (matiere_index+1 < niveau)  programme_html += '<li id="'+matiere_id+'"><p>'+matiere_nom+'</p></li>\n';
                     if (matiere_index+1 == niveau) programme_html += '<li id="'+matiere_id+'"><p><a href="'+phases_lien+'" id="lien_actif">'+matiere_nom+'</a></p></li>\n';

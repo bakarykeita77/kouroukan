@@ -4,7 +4,7 @@ function alphabet() {
     // sessionStorage.clear();
     
     let id_client = JSON.parse(sessionStorage.getItem("id_client"));
-    fetch("/api/index.php?id_user="+id_client)
+    fetch("/kouroukan/api/index.php?id_user="+id_client)
     .then(response => response.json())
     .then(matiere_collection => {  
 

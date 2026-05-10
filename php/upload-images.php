@@ -87,6 +87,6 @@
     
         </center>
         
-        <script src="/js/upload-images.js"></script>
+        <script src="../js/upload-images.js"></script>
     </body>
 </html>

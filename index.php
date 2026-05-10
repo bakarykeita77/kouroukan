@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
-  	<link rel="stylesheet" href="/css/index.css"/>
+  	<link rel="stylesheet" href="css/index.css"/>
 </head>
 
 <body>
@@ -27,8 +27,8 @@
                     </div>
                 </div>
                 <div id="btn_container">
-                    <p class="asides_btn" id="connexion_btn"><a href="/php/connexion.php" id="lien_de_connexion">ߌ ߜߊ߲߬ߞߎ߲߬</a></p>
-                    <p class="asides_btn"><a href="/php/inscription.php">ߌ ߕߐ߮ ߛߓߍ߫ </a></p>
+                    <p class="asides_btn" id="connexion_btn"><a href="php/connexion.php" id="lien_de_connexion">ߌ ߜߊ߲߬ߞߎ߲߬</a></p>
+                    <p class="asides_btn"><a href="php/inscription.php">ߌ ߕߐ߮ ߛߓߍ߫ </a></p>
                 </div>
                 <div class="note_container">
                     <p class="note" id="note_inscription_success"></p>
@@ -40,6 +40,6 @@
         <div class="page_foot"></div> 
     </div>
     
-    <script src="/js/index.js"></script>
+    <script src="js/index.js"></script>
 </body>
 </html>

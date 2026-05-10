@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<style>
 	    <?php
-	        include "/css/footer.css";
+	        include "../css/footer.css";
 	    ?>
 	</style>
 </head>

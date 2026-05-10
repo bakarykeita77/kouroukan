@@ -23,14 +23,14 @@ if(isset($_SESSION["id_client"])) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         
-        <link rel="stylesheet" href="/css/tete-de-page.css"/>
-        <link rel="stylesheet" href="/css/clavier.css"/>
-        <link rel="stylesheet" href="/css/lesson.css"/>
+        <link rel="stylesheet" href="/kouroukan/css/tete-de-page.css"/>
+        <link rel="stylesheet" href="/kouroukan/css/clavier.css"/>
+        <link rel="stylesheet" href="/kouroukan/css/lesson.css"/>
                       
-        <link rel="stylesheet" href="/css/alphabet.css"/>
-        <link rel="stylesheet" href="/css/apprentissage.css"/>
-        <link rel="stylesheet" href="/css/exercice.css"/>
-        <link rel="stylesheet" href="/css/evaluation.css"/>
+        <link rel="stylesheet" href="/kouroukan/css/alphabet.css"/>
+        <link rel="stylesheet" href="/kouroukan/css/apprentissage.css"/>
+        <link rel="stylesheet" href="/kouroukan/css/exercice.css"/>
+        <link rel="stylesheet" href="/kouroukan/css/evaluation.css"/>
 
     </head>
 
@@ -301,7 +301,7 @@ if(isset($_SESSION["id_client"])) {
                                 <div class="redirection_btns" id="evaluation_redirection_btns">
                                     <div class="reprendre_btn" id="reprendre_evaluation_btn"></div>
                                     <div class="apprentissage_btn" id="continu_sur_apprentissage_btn"></div>
-                                    <div class='lesson_suivante'><p><a href="http://localhost/kouroukan/php/programmes.php"></a></p></div> 
+                                    <div class='lesson_suivante'><p><a href="programmes.php"></a></p></div> 
                                 </div>
 
                             </div>
@@ -342,15 +342,15 @@ if(isset($_SESSION["id_client"])) {
         <audio id="audio_9"></audio>
 
        <!--Link------------------------------------------------------------------------------------------------------------------------------->
-        <script src="/js/clavier.js"></script>
+        <script src="/kouroukan/js/clavier.js"></script>
 
-        <script src="/js/travaux.js"></script>
-        <script src="/js/lessons.js"></script>
+        <script src="/kouroukan/js/travaux.js"></script>
+        <script src="/kouroukan/js/lessons.js"></script>
         
-        <script src="/js/alphabet.js"></script>
-        <script src="/js/syllabes.js"></script>
-        <script src="/js/ton.js"></script>
-        <script src="/js/chiffre.js"></script>
+        <script src="/kouroukan/js/alphabet.js"></script>
+        <script src="/kouroukan/js/syllabes.js"></script>
+        <script src="/kouroukan/js/ton.js"></script>
+        <script src="/kouroukan/js/chiffre.js"></script>
 
         <script>
           document.write(

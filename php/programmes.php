@@ -9,7 +9,7 @@ if(isset($_SESSION["id_client"])) {
         <title>programmes</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    	<link rel="stylesheet" href="../css/programmes.css"/>
+    	<link rel="stylesheet" href="/kouroukan/css/programmes.css"/>
     </head>
     <body>
       
@@ -63,12 +63,12 @@ if(isset($_SESSION["id_client"])) {
         
         </div>
         
-        <script src = "/js/programmes.js"></script>
+        <script src = "/kouroukan/js/programmes.js"></script>
         
     </body>
     </html>
 <?php
 }else{
-    header("location:/index.php");
+    header("location:/kouroukan/index.php");
 }
 ?>

@@ -46,7 +46,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
-	  <link rel="stylesheet" href="/kouroukan/css/accueil.css"/>
+	  <link rel="stylesheet" href="../css/accueil.css"/>
 </head>
 <body>
 
@@ -85,7 +85,7 @@ session_start();
         </div>
     </div>
 
-    <script src="/kouroukan/js/accueil.js"></script>
+    <script src="../js/accueil.js"></script>
 
 </body>
 </html>

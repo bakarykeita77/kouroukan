@@ -12,8 +12,7 @@
 }
 #inscription_form {
 	left: 0;
-	border: 1px solid 1px solid #aaa;
-	background-color: #fff;
+	background-color: #ccc;
 	border-radius: 0.5rem;
 	box-sizing: border-box;
 }
@@ -28,8 +27,6 @@
 	height: 2.5rem;
 }
 .input_box {
-    border: 1px solid transparent;
-	border-bottom-color: #aaa;
 	margin: 0.5rem 0;
 }
 .input_box input, 
@@ -53,7 +50,7 @@
 .input_box input { 
 	border-style: none;
 	width: 100%;
-	background-color: #eee;
+	background-color: #fff;
 	font-size: 1.25rem;
 	z-index: 1; 
 }

@@ -256,6 +256,9 @@
     transition: 0.25s;
     z-index: 1005;
 }
+#profile_utilisateur_renseignements, #profile_utilisateur_image_container{
+    position: relative;
+}
 #profile_utilisateur_renseignements div span:first-child{
     display: inline-block;
     width: 48px;
@@ -402,7 +405,6 @@
 @media screen and (orientation: landscape) {
     
     #profile_utilisateur_renseignements, #profile_utilisateur_image_container{
-        position: relative;
         display: inline-block;
         margin: 0.25rem;
         height: 172px;
@@ -431,7 +433,6 @@
 @media screen and (orientation: portrait) {
     
     #profile_utilisateur_renseignements, #profile_utilisateur_image_container{
-        position: relative;
         width: 100%;
         display: block;
         margin: 0.25rem;

@@ -31,14 +31,12 @@
 							<div id='modifier_avatar'>ߖߌ߬ߦߊ߬ߓߍ ߡߊߝߊ߬ߟߋ߲߬</div>  <!--Voir la fonction profileUtilisateurModificationAvatar() dans js/profile.js-->
 						</div>
 						<div id="profile_utilisateur_renseignements">
-							<!-- 						
 							<div> <span>ߕߐ߮ </span>    <span id="profile_prenom"   ><?=$_SESSION['prenom'];?></span></div>
 							<div> <span>ߖߊ߬ߡߎ߲ </span>   <span id="profile_nom"      ><?=$_SESSION['nom'];?></span></div>
 							<div> <span>ߡߐߦߌߛߊ߲ </span> <span id="profile_naissance"><?=$_SESSION['naissance'];?></span></div>
 							<div> <span>ߖߊ߲߭ </span>     <span id="profile_sexe"     ><?=$_SESSION['sexe'];?></span></div>
 							<div> <span>ߛߊ߲߬ߓߊ߬ߕߐ߮ </span> <span id="profile_adresse"  ><?=$_SESSION['adresse'];?></span></div>
 							<div> <table><tr><td><span>Mail</span></td><td><span id="profile_mail"><?=$_SESSION['email'];?></span></td></tr></table></div>
-							-->
 						</div>
 					</div>
 					
@@ -58,7 +56,7 @@
 						<div id="afficheur_du_resultat">ߦߊ߲߬ ߘߌ߲߯ ߞߵߊ߬ ߥߟߊߥߟߊ߫</div>
 					</div>
 					
-					<div class="profile_menu_head"><a href="deconnexion.php">ߌ ߜߊ߲߬ߞߎ߲߬ߣߍ߲߬ ߓߐ߫</a></div>
+					<div class="profile_menu_head"><a href="/kouroukan/php/deconnexion.php">ߌ ߜߊ߲߬ߞߎ߲߬ߣߍ߲߬ ߓߐ߫</a></div>
 				</div>
 			</div>
 
@@ -73,17 +71,17 @@
 			<div id = "nav">
 				<div id="menu_deroulant">
 					<ul>
-						<li class="hover_anim" id="home"     ><a href = "../index.php">ߝߊ߲ߓߊ </a></li>
-						<li class="hover_anim" id="programme"><a href = "programmes.php"> ߢߍߥߟߊ </a></li>
-						<li class="hover_anim" id="blog"     ><a href = "blog.php"> ߞߊ߬ߙߊ߲߬ߜߍ </a></li>
-						<li class="hover_anim" id="contact"  ><a href = "contact.php">ߛߊ߲߬ߓߊ߬ߕߐ߮ </a></li>
+						<li class="hover_anim" id="home"     ><a href = "/kouroukan/index.php">ߝߊ߲ߓߊ </a></li>
+						<li class="hover_anim" id="programme"><a href = "/kouroukan/programmes.php"> ߢߍߥߟߊ </a></li>
+						<li class="hover_anim" id="blog"     ><a href = "/kouroukan/blog.php"> ߞߊ߬ߙߊ߲߬ߜߍ </a></li>
+						<li class="hover_anim" id="contact"  ><a href = "/kouroukan/contact.php">ߛߊ߲߬ߓߊ߬ߕߐ߮ </a></li>
 					</ul>
 				</div>
 				
 				<div id="menu_non_deroulant">
 					<ul>
 						<li id="menu_menu">Menu</li>
-						<li id="menu_board"><a href="../board.php">ߥߟߊ߬ߓߊ</a></li>
+						<li id="menu_board"><a href="/kouroukan//board.php">ߥߟߊ߬ߓߊ</a></li>
 					</ul>
 				</div>
 			</div>

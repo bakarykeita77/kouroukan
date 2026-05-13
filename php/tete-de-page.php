@@ -2,14 +2,14 @@
 	<?php $avatar_id = isset($_SESSION["id_client"]) ? $_SESSION["id_client"] : 1; ?>
 	
   <!------------------------------------------------------------------------------------------------------------------>	
-    <link rel="stylesheet" href="../css/class.css"/>
-    <link rel="stylesheet" href="../css/tete-de-page.css"/>
-    <link rel="stylesheet" href="../css/resultat.css"/>
+    <link rel="stylesheet" href="/kouroukan/css/class.css"/>
+    <link rel="stylesheet" href="/kouroukan/css/tete-de-page.css"/>
+    <link rel="stylesheet" href="/kouroukan/css/resultat.css"/>
     
-	<script src="../jquery-3.3.1.js"></script>
-	<script src="../fonctions.js"></script>
-	<script src="../js/icones.js"></script>
-  	<script src="../js/caracteres.js"></script>
+	<script src="/kouroukan/jquery-3.3.1.js"></script>
+	<script src="/kouroukan/fonctions.js"></script>
+	<script src="/kouroukan/js/icones.js"></script>
+  	<script src="/kouroukan/js/caracteres.js"></script>
 	
   <!------------------------------------------------------------------------------------------------------------------>	
 	<div id="tete_de_page_container">
@@ -92,6 +92,6 @@
 	
   <!------------------------------------------------------------------------------------------------------------------>	
 
-  	<script src="../js/profile.js"></script>
+  	<script src="/kouroukan/js/profile.js"></script>
 
 <!-- Fin de l'entete de la page ------------------------------------------------------------------------------------->

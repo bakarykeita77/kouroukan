@@ -10,11 +10,12 @@ session_start();
     
     <title>board</title>
     
-	<script src="/kouroukan/jquery-3.3.1.js"></script>
-    <link rel="stylesheet" href="/kouroukan/css/board.css">
-    <link rel="stylesheet" href="/kouroukan/css/parametres_tableau.css">
-	<link rel="stylesheet" href="/kouroukan/css/assistant.css"/>
-	<link rel="stylesheet" href="/kouroukan/css/memoire.css"/>
+	<script src="jquery-3.3.1.js"></script>
+
+    <link rel="stylesheet" href="css/board.css">
+    <link rel="stylesheet" href="css/parametres_tableau.css">
+	<link rel="stylesheet" href="css/assistant.css"/>
+	<link rel="stylesheet" href="css/memoire.css"/>
 </head>
 <body>
     
@@ -43,8 +44,8 @@ session_start();
     </div>
     <?php include "fonctions/fonctions_tableau.php"; ?>
     
-    <script src="/kouroukan/js/parametres_tableau.js"></script>
-    <script src="/kouroukan/js/assistant.js"></script>
-    <script src="/kouroukan/js/board.js"></script>
+    <script src="js/parametres_tableau.js"></script>
+    <script src="js/assistant.js"></script>
+    <script src="js/board.js"></script>
 </body>
 </html>

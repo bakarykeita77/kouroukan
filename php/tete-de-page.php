@@ -2,6 +2,7 @@
 	<?php $avatar_id = isset($_SESSION["id_client"]) ? $_SESSION["id_client"] : 1; ?>
 	
   <!------------------------------------------------------------------------------------------------------------------>	
+    <link rel="stylesheet" href="/kouroukan/css_fa/all.css"/>
     <link rel="stylesheet" href="/kouroukan/css/class.css"/>
     <link rel="stylesheet" href="/kouroukan/css/tete-de-page.css"/>
     <link rel="stylesheet" href="/kouroukan/css/resultat.css"/>
@@ -71,17 +72,16 @@
 			<div id = "nav">
 				<div id="menu_deroulant">
 					<ul>
-						<li class="hover_anim" id="home"     ><a href = "/kouroukan/index.php">ߝߊ߲ߓߊ </a></li>
-						<li class="hover_anim" id="programme"><a href = "/kouroukan/programmes.php"> ߢߍߥߟߊ </a></li>
-						<li class="hover_anim" id="blog"     ><a href = "/kouroukan/blog.php"> ߞߊ߬ߙߊ߲߬ߜߍ </a></li>
-						<li class="hover_anim" id="contact"  ><a href = "/kouroukan/contact.php">ߛߊ߲߬ߓߊ߬ߕߐ߮ </a></li>
+						<li class="hover_anim" id="home"     ><a href = "/kouroukan/index.php"><i class="fa-regular fa-house"></i>ߝߊ߲ߓߊ</a></li>
+						<li class="hover_anim" id="blog"     ><a href = "/kouroukan/php/blog.php"><i class="fa-regular fa-file-lines"></i>ߞߊ߬ߙߊ߲߬ߜߍ</a></li>
+						<li class="hover_anim" id="contact"  ><a href = "/kouroukan/php/contact.php"><i class="fa-regular fa-address-card"></i> ߛߊ߲߬ߓߊ߬ߕߐ߮</a></li>
 					</ul>
 				</div>
 				
 				<div id="menu_non_deroulant">
 					<ul>
-						<li id="menu_menu">Menu</li>
-						<li id="menu_board"><a href="/kouroukan//board.php">ߥߟߊ߬ߓߊ</a></li>
+						<li id="menu_menu"><i class="fa-regular fa-house"></i></li>
+						<li id="menu_board"><a href="/kouroukan/php/board.php"><i class="fa-sharp fa-regular fa-keyboard"></i> ߥߟߊ߬ߓߊ</a></li>
 					</ul>
 				</div>
 			</div>

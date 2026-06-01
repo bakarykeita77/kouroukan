@@ -1,5 +1,6 @@
 
 #assistant {
+	direction: rtl;
 	position: absolute;
 	top: 6rem;
 	left: 20vw;

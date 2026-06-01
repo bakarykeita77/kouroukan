@@ -1926,7 +1926,7 @@
             var r = 0;
             
             function lire() {
-                $('#audio').attr({ src:'../son/m4a/'+tons+'/'+lettre+'.m4a', autoplay:'on' }); 
+                $('#audio').attr({ src:'son/m4a/'+tons+'/'+lettre+'.m4a', autoplay:'on' }); 
 
                 // $('#audio').attr({ src:'../son/aac/'+lettre+'.aac', autoplay:'on' }); 
                 // $('#audio').attr({ src:'../son/amr/'+lettre+'.amr', autoplay:'on' }); 
@@ -1949,11 +1949,11 @@
         // $('#audio').attr({ src:'../son/ogg/'+'+parent_direct+'/'lettre+'.ogg', autoplay:'on' }); 
         // $('#audio').attr({ src:'../son/wav/'+'+parent_direct+'/'lettre+'.wav', autoplay:'on' }); 
         // $('#audio').attr({ src:'../son/m4a/'+'+parent_direct+'/'lettre+'.m4a', autoplay:'on' }); 
-        $('#audio').attr({ src:'../son/mp3/'+parent_direct+'/'+son+'.mp3', autoplay:'on' });  
+        $('#audio').attr({ src:'son/mp3/'+parent_direct+'/'+son+'.mp3', autoplay:'on' });  
     }
     function lectureSyllabe(syllabe) {
         let terminaison = terminaisonDeSyllabe(syllabe);
-        $('#audio').attr({ src: "../son/mp3/tons/"+terminaison+"/"+syllabe+".mp3", autoplay:"on" });
+        $('#audio').attr({ src: "son/mp3/tons/"+terminaison+"/"+syllabe+".mp3", autoplay:"on" });
     }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
@@ -3213,7 +3213,7 @@ console.log(matiere_nom_en_nko);
             note : note
         }); 
 
-        fetch("/php/actions.php", {
+        fetch("/kouroukan/php/actions.php", {
             method: "POST",
             body: data_to_send
         })
@@ -3419,7 +3419,7 @@ console.log(matiere_nom_en_nko);
             note : note
         }); 
 
-        fetch("/php/actions.php", {
+        fetch("/kouroukan/php/actions.php", {
             method: "POST",
             body: data_to_send
         })

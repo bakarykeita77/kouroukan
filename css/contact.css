@@ -1,11 +1,11 @@
 
-.page_body {
-    
-}
-.cover h1 {
+.cover h1, .cover i {
+    display: inline-block;
     position: relative;
     color: white;
     text-align: center;
+    vertical-align: middle;
+    margin: 0 1rem;
 }
 .contact_card {   
     position: relative;
@@ -45,6 +45,13 @@
     top: 0;
     left: 0;
     z-index: 2000;
+}
+#menu_title {
+    max-width: 20rem;
+    margin: 1rem auto;
+}
+#body_contact i {
+    font-size: 3rem;
 }
 #menu_contact {
     position: relative;

@@ -12,13 +12,14 @@ session_start();
     
 	<script src="jquery-3.3.1.js"></script>
 
-    <link rel="stylesheet" href="css/board.css">
-    <link rel="stylesheet" href="css/parametres_tableau.css">
-	<link rel="stylesheet" href="css/assistant.css"/>
-	<link rel="stylesheet" href="css/memoire.css"/>
+    <link rel="stylesheet" href="../css/board.css">
+    <link rel="stylesheet" href="../css/parametres_tableau.css">
+	<link rel="stylesheet" href="../css/assistant.css"/>
+	<link rel="stylesheet" href="../css/memoire.css"/>
 </head>
 <body>
-    
+    <div class="page_head"><?php require('tete-de-page.php'); ?></div>
+
     <div id="board_div">
         <div id="board_entete">
             <div id="entete_menu">
@@ -37,15 +38,15 @@ session_start();
         <form action="#" id="tableau_form"> <textarea name="" id="tableau_noir" cols="30" rows="10"></textarea> </form>
     </div>
     <div class="outils">
-    	<?php include "php/parametres_tableau.php"; ?>
-    	<?php include "php/assistant.php"; ?>
-    	<?php include "php/memoire.php"; ?>
-    	<?php include "php/smartboard.php";?>
+    	<?php include "parametres_tableau.php"; ?>
+    	<?php include "assistant.php"; ?>
+    	<?php include "memoire.php"; ?>
+    	<?php include "smartboard.php";?>
     </div>
-    <?php include "fonctions/fonctions_tableau.php"; ?>
+    <?php include "../fonctions/fonctions_tableau.php"; ?>
     
-    <script src="js/parametres_tableau.js"></script>
-    <script src="js/assistant.js"></script>
-    <script src="js/board.js"></script>
+    <script src="../js/parametres_tableau.js"></script>
+    <script src="../js/assistant.js"></script>
+    <script src="../js/board.js"></script>
 </body>
 </html>

@@ -3,7 +3,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    height: 3rem;
+    height: 4rem;
     width: 100%;
     z-index: 1000;
 }
@@ -31,6 +31,9 @@
     margin: 0;
 	background-color: cornflowerblue;
 	z-index: 0;
+}
+#nav i {
+    font-size: 1.5rem;
 }
 #modifier_avatar {
     position:absolute; 
@@ -305,6 +308,8 @@
         justify-content: space-between;
         align-items: center;
 
+        position: relative;
+        left: 2rem;
 	    height: 100%;
         max-width: 20rem;
     }

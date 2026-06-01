@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'Noto Sans NKo';
+    src: url('NotoSansNKo-Regular.eot');
+    src: local('Noto Sans NKo Regular'), local('NotoSansNKo-Regular'),
+        url('NotoSansNKo-Regular.eot?#iefix') format('embedded-opentype'),
+        url('NotoSansNKo-Regular.woff2') format('woff2'),
+        url('NotoSansNKo-Regular.woff') format('woff'),
+        url('NotoSansNKo-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

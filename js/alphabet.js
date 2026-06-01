@@ -4,6 +4,7 @@ function alphabet() {
     // sessionStorage.clear();
     
     let id_client = JSON.parse(sessionStorage.getItem("id_client"));
+
     fetch("/kouroukan/api/index.php?id_user="+id_client)
     .then(response => response.json())
     .then(matiere_collection => {  
@@ -2403,7 +2404,6 @@ function alphabet() {
             }
         }
 
-        
         function lessonDAlphabetDuServeur(datas,phase) {
             let lesson_d_alphabet_du_serveur = [];
             if (datas[0].length != 0) {

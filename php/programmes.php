@@ -63,7 +63,7 @@ if(isset($_SESSION["id_client"])) {
         
         </div>
         
-        <script src = "/kouroukan/js/programmes.js"></script>
+        <script src = "../js/programmes.js"></script>
         
     </body>
     </html>

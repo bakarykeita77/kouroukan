@@ -2,15 +2,15 @@
 	<?php $avatar_id = isset($_SESSION["id_client"]) ? $_SESSION["id_client"] : 1; ?>
 	
   <!------------------------------------------------------------------------------------------------------------------>	
-    <link rel="stylesheet" href="/kouroukan/css_fa/all.css"/>
-    <link rel="stylesheet" href="/kouroukan/css/class.css"/>
-    <link rel="stylesheet" href="/kouroukan/css/tete-de-page.css"/>
-    <link rel="stylesheet" href="/kouroukan/css/resultat.css"/>
+    <link rel="stylesheet" href="../css_fa/all.css"/>
+    <link rel="stylesheet" href="../css/class.css"/>
+    <link rel="stylesheet" href="../css/tete-de-page.css"/>
+    <link rel="stylesheet" href="../css/resultat.css"/>
     
-	<script src="/kouroukan/jquery-3.3.1.js"></script>
-	<script src="/kouroukan/fonctions.js"></script>
-	<script src="/kouroukan/js/icones.js"></script>
-  	<script src="/kouroukan/js/caracteres.js"></script>
+	<script src="../jquery-3.3.1.js"></script>
+	<script src="../fonctions.js"></script>
+	<script src="../js/icones.js"></script>
+  	<script src="../js/caracteres.js"></script>
 	
   <!------------------------------------------------------------------------------------------------------------------>	
 	<div id="tete_de_page_container">
@@ -57,7 +57,7 @@
 						<div id="afficheur_du_resultat">ߦߊ߲߬ ߘߌ߲߯ ߞߵߊ߬ ߥߟߊߥߟߊ߫</div>
 					</div>
 					
-					<div class="profile_menu_head"><a href="/kouroukan/php/deconnexion.php">ߌ ߜߊ߲߬ߞߎ߲߬ߣߍ߲߬ ߓߐ߫</a></div>
+					<div class="profile_menu_head"><a href="../php/deconnexion.php">ߌ ߜߊ߲߬ߞߎ߲߬ߣߍ߲߬ ߓߐ߫</a></div>
 				</div>
 			</div>
 
@@ -72,9 +72,9 @@
 			<div id = "nav">
 				<div id="menu_deroulant">
 					<ul>
-						<li class="hover_anim" id="home"     ><a href = "/kouroukan/index.php"><i class="fa-regular fa-house"></i>ߝߊ߲ߓߊ</a></li>
-						<li class="hover_anim" id="blog"     ><a href = "/kouroukan/php/blog.php"><i class="fa-regular fa-file-lines"></i>ߞߊ߬ߙߊ߲߬ߜߍ</a></li>
-						<li class="hover_anim" id="contact"  ><a href = "/kouroukan/php/contact.php"><i class="fa-regular fa-address-card"></i> ߛߊ߲߬ߓߊ߬ߕߐ߮</a></li>
+						<li class="hover_anim" id="home"     ><a href = "../index.php"><i class="fa-regular fa-house"></i>ߝߊ߲ߓߊ</a></li>
+						<li class="hover_anim" id="blog"     ><a href = "../php/blog.php"><i class="fa-regular fa-file-lines"></i>ߞߊ߬ߙߊ߲߬ߜߍ</a></li>
+						<li class="hover_anim" id="contact"  ><a href = "../php/contact.php"><i class="fa-regular fa-address-card"></i> ߛߊ߲߬ߓߊ߬ߕߐ߮</a></li>
 					</ul>
 				</div>
 				
@@ -90,6 +90,6 @@
 	
   <!------------------------------------------------------------------------------------------------------------------>	
 
-  	<script src="/kouroukan/js/profile.js"></script>
+  	<script src="../js/profile.js"></script>
 
 <!-- Fin de l'entete de la page ------------------------------------------------------------------------------------->

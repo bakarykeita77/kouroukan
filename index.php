@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="nqo">
 
@@ -7,6 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
+  	<link rel="stylesheet" href="css_fa/all.css"/>
+    <link rel="stylesheet" href="css/class.css"/>
+    <link rel="stylesheet" href="css/tete-de-page.css"/>
+    <link rel="stylesheet" href="css/resultat.css"/>
+    
+	<script src="jquery-3.3.1.js"></script>
+	<script src="fonctions.js"></script>
+	<script src="js/icones.js"></script>
+  	<script src="js/caracteres.js"></script>
+	
   	<link rel="stylesheet" href="css/index.css"/>
 </head>
 

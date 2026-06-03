@@ -32,6 +32,19 @@
 	background-color: cornflowerblue;
 	z-index: 0;
 }
+#nav ul {
+    position: relative;
+    max-width: max-content;
+    height: 100%;
+    line-height: 4rem;
+    margin: 0;
+    padding: 0 2rem;
+}
+#nav a {
+    text-decoration: none;
+    color: rgba(0,0,0,0.75);
+    font-size: 0.8rem;
+}
 #nav i {
     font-size: 1.5rem;
 }
@@ -278,62 +291,36 @@
 
 
 @media (min-width: 801px) {
-    #nav {
-        display: flex;
-        flex-direction: row;
-    }
     #menu_deroulant, #menu_non_deroulant {
         display: inline-block;
     }
     
 	#nav li {
-	    position: relative;
-	    display: inline;
-		overflow: auto;
-		cursor: pointer;
-		border-radius: 0.25rem;
-		padding: 0.25rem;
-		margin: 0 0.25rem;
+        position: relative;
+        display: inline;
+        min-width: 3rem;
+        overflow: auto;
+        cursor: pointer;
+        padding: 0.5rem;
+        margin: 0 0.5rem;
+        border-bottom: 1px solid #666;
 	}
-	
+	#nav li:hover {
+        border-top: 1px solid #666;
+        border-top-width: 0.5rem;
+        border-bottom-width: 0.5rem;
+	}
     #menu_deroulant {
         margin: 0;
         height: 100%;
-        width: 75%;
+        width: 60%;
         float: right;
     }
-    #nav ul {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-
-        position: relative;
-        left: 2rem;
-	    height: 100%;
-        max-width: 20rem;
-    }
-	#nav a {
-		text-decoration: none;
-		color: rgba(0,0,0,0.75);
-		font-size: 0.8rem;
-	}
-	
 	#menu_non_deroulant {
         flex-grow: 1;
 	    padding: 0;
 	    height: 100%;
-	    line-height: 3rem;
-	    margin-left: 0.25rem*10;
 	}
-    #menu_deroulant ul {
-        width: 100%;
-        margin: 0.25rem;
-    }
-    #menu_non_deroulant ul {
-        margin: 0;
-    }
-
 	#menu_non_deroulant ul #menu_menu { display: none; }
 }
 @media (max-width: 800px) {
@@ -355,7 +342,7 @@
 	#menu_deroulant ul {
 	    list-style: none;
 	    margin: 0;
-	    padding: 0;
+        padding: 0 2rem;
 	}
 	#menu_deroulant li {
 	    padding: 0 1rem;
@@ -364,7 +351,7 @@
 		line-height: 2rem;
 		background-color:#fff;
 	}
-	#menu_deroulant li:active { background-color: #888; }
+	#menu_deroulant li:active { box-shadow: 0 0 0.5 #aaa; }
 	#menu_deroulant li a { 
 	    color: #444; 
 	    text-decoration: none;
@@ -431,7 +418,6 @@
     }
     #profile_menu_container {
         height: auto;
-
     }
     #profile_menu_body_content div { display: inline-block; width: 48%; }
 }

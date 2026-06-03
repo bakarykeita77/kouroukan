@@ -9,7 +9,6 @@ body {
     /* font-family:Courier new, monospace; */
     font-family:'Noto Sans Nko', sans-serif;
  }
-#logo { display: none; }
 #asides_container { margin: auto; }
 #asides_commentaire_container {
     margin: 1rem auto;

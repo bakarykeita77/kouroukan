@@ -1,6 +1,4 @@
-<?php
-session_start();
-?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,12 +8,15 @@ session_start();
     
     <title>board</title>
     
-	<script src="jquery-3.3.1.js"></script>
-
-    <link rel="stylesheet" href="../css/board.css">
-    <link rel="stylesheet" href="../css/parametres_tableau.css">
-	<link rel="stylesheet" href="../css/assistant.css"/>
-	<link rel="stylesheet" href="../css/memoire.css"/>
+	<link rel = "stylesheet" href = "../css_fa/all.css"/>
+    <link rel = "stylesheet" href = "../css/class.css"/>
+    <link rel = "stylesheet" href = "../css/tete-de-page.css"/>
+    <link rel = "stylesheet" href = "../css/parametres_tableau.css">
+	<link rel = "stylesheet" href = "../css/assistant.css"/>
+	<link rel = "stylesheet" href = "../css/board.css"/>
+    
+	<script src="../jquery-3.3.1.js"></script>
+	<script src="../fonctions.js"></script>
 </head>
 <body>
     <div class="page_head"><?php require('tete-de-page.php'); ?></div>

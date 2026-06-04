@@ -69,19 +69,20 @@
 				</div>
 
 				<div id = "nav">
+					<div id="menu_menu"><i class="fa-solid fa-bars"></i><span>ߝߊ߲ߓߊ</span></div>
+					
 					<div id="menu_deroulant">
 						<ul>
-							<li id="home"     ><a href = "../index.php"         ><i class="fa-regular fa-house"       ></i>ߝߊ߲ߓߊ  </a></li>
-							<li id="home"     ><a href = "../php/programmes.php"><i class="fa-solid fa-book-open"     ></i>ߥߟߊ߬ߘߊ </a></li>
-							<li id="blog"     ><a href = "../php/blog.php"      ><i class="fa-regular fa-file-lines"  ></i>ߞߊ߬ߙߊ߲߬ߜߍ </a></li>
-							<li id="contact"  ><a href = "../php/contact.php"   ><i class="fa-regular fa-address-card"></i> ߛߊ߲߬ߓߊ߬ߕߐ߮</a></li>
+							<li id="home"   ><a href = "../index.php"         ><i class="fa-regular fa-house"       ></i><span>ߝߊ߲ߓߊ  </span></a></li>
+							<li id="home"   ><a href = "../php/programmes.php"><i class="fa-solid fa-book-open"     ></i><span>ߥߟߊ߬ߘߊ </span></a></li>
+							<li id="blog"   ><a href = "../php/blog.php"      ><i class="fa-regular fa-file-lines"  ></i><span>ߞߊ߬ߙߊ߲߬ߜߍ</span></a></li>
+							<li id="contact"><a href = "../php/contact.php"   ><i class="fa-regular fa-address-card"></i><span>ߛߊ߲߬ߓߊ߬ߕߐ߮</span></a></li>
 						</ul>
 					</div>
 					
 					<div id="menu_non_deroulant">
 						<ul>
-							<li id="menu_menu"><i class="fa-regular fa-house"></i></li>
-							<li id="menu_board"><a href="/kouroukan/php/board.php"><i class="fa-sharp fa-regular fa-keyboard"></i> ߥߟߊ߬ߓߊ</a></li>
+							<li id="menu_board"><a href="/kouroukan/php/board.php"><i class="fa-sharp fa-regular fa-keyboard"></i><span>ߥߟߊ߬ߓߊ</span></a></li>
 						</ul>
 					</div>
 				</div>
@@ -93,7 +94,7 @@
 				<div id = "nav">
 					<div id="menu_deroulant">
 						<ul>
-							<li id="contact"  ><a href = "../php/contact.php"><i class="fa-regular fa-address-card"></i> ߛߊ߲߬ߓߊ߬ߕߐ߮</a></li>
+							<li id="contact"  ><a href = "../php/contact.php"><i class="fa-regular fa-address-card"></i><span>ߛߊ߲߬ߓߊ߬ߕߐ߮</span></a></li>
 						</ul>
 					</div>
 				</div>
@@ -101,6 +102,7 @@
 		</div>
 	<?php }; ?>
 	
+	<script src="../js/tete-de-page.js"></script>
 	<script src="../js/profile.js"></script>
 <?php
 	}else{
@@ -172,32 +174,32 @@
 				</div>
 
 				<div id = "nav">
+					<div id="menu_menu"><i class="fa-solid fa-bars"></i><span>ߝߊ߲ߓߊ</span></div>
+					
 					<div id="menu_deroulant">
 						<ul>
-							<li id="home"   ><a href = "/kouroukan/index.php"         ><i class="fa-regular fa-house"       ></i>ߝߊ߲ߓߊ  </a></li>
-							<li id="home"   ><a href = "/kouroukan/php/programmes.php"><i class="fa-solid fa-book-open"     ></i>ߥߟߊ߬ߘߊ</a></li>
-							<li id="blog"   ><a href = "/kouroukan/php/blog.php"      ><i class="fa-regular fa-file-lines"  ></i>ߞߊ߬ߙߊ߲߬ߜߍ</a></li>
-							<li id="contact"><a href = "/kouroukan/php/contact.php"   ><i class="fa-regular fa-address-card"></i>ߛߊ߲߬ߓߊ߬ߕߐ߮</a></li>
+							<li id="home"   ><a href = "/kouroukan/index.php"         ><i class="fa-regular fa-house"       ></i><span>ߝߊ߲ߓߊ  </span></a></li>
+							<li id="home"   ><a href = "/kouroukan/php/programmes.php"><i class="fa-solid fa-book-open"     ></i><span>ߥߟߊ߬ߘߊ </span></a></li>
+							<li id="blog"   ><a href = "/kouroukan/php/blog.php"      ><i class="fa-regular fa-file-lines"  ></i><span>ߞߊ߬ߙߊ߲߬ߜߍ</span></a></li>
+							<li id="contact"><a href = "/kouroukan/php/contact.php"   ><i class="fa-regular fa-address-card"></i><span>ߛߊ߲߬ߓߊ߬ߕߐ߮</span></a></li>
 						</ul>
 					</div>
 					
 					<div id="menu_non_deroulant">
 						<ul>
-							<li id="menu_menu"><i class="fa-regular fa-house"></i></li>
-							<li id="menu_board"><a href="/kouroukan/php/board.php"><i class="fa-sharp fa-regular fa-keyboard"></i>ߥߟߊ߬ߓߊ</a></li>
+							<li id="menu_board"><a href="/kouroukan/php/board.php"><i class="fa-sharp fa-regular fa-keyboard"></i><span>ߥߟߊ߬ߓߊ</span></a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
 		</div>
-		<script src="js/profile.js"></script>
 	<?php }else{ ?>	
 		<div id="tete_de_page_container">
 			<div id="topbar">
 				<div id = "nav">
 					<div id="menu_deroulant">
 						<ul>
-							<li id="contact"><a href = "/kouroukan/php/contact.php"><i class="fa-regular fa-address-card"></i>ߛߊ߲߬ߓߊ߬ߕߐ߮</a></li>
+							<li id="contact"><a href = "/kouroukan/php/contact.php"><i class="fa-regular fa-address-card"></i><span>ߛߊ߲߬ߓߊ߬ߕߐ߮</span></a></li>
 						</ul>
 					</div>
 				</div>
@@ -205,6 +207,7 @@
 		</div>
 	<?php }; ?>
 
+	<script src="js/tete-de-page.js"></script>
 	<script src="js/profile.js"></script>
 <?php
 	}

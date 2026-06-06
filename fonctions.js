@@ -1949,7 +1949,7 @@
         // $('#audio').attr({ src:'../son/ogg/'+'+parent_direct+'/'lettre+'.ogg', autoplay:'on' }); 
         // $('#audio').attr({ src:'../son/wav/'+'+parent_direct+'/'lettre+'.wav', autoplay:'on' }); 
         // $('#audio').attr({ src:'../son/m4a/'+'+parent_direct+'/'lettre+'.m4a', autoplay:'on' }); 
-        $('#audio').attr({ src:'son/mp3/'+parent_direct+'/'+son+'.mp3', autoplay:'on' });  
+        $('#audio').attr({ src:'../son/mp3/'+parent_direct+'/'+son+'.mp3', autoplay:'on' });  
     }
     function lectureSyllabe(syllabe) {
         let terminaison = terminaisonDeSyllabe(syllabe);
@@ -2002,7 +2002,7 @@
     function masquerPanneauDesCaracteres() { $('#caracteres_container').css({"top":"22rem", "height":0}); }
     function masquerNotification() {
         $(".notification_corps").text("");
-        $('.notification_corps').css({"top":"5.25rem"});
+        $(".notification_corps").css({"top":"5.25rem"});
     }
     function matiereNom(matiere) { 
         let matiere_nom = "";
@@ -2014,7 +2014,7 @@
         
         if(matiere[0] != undefined) if( matiere[0].phase.split("_")[0] == "alphabet")  matiere_nom = "ߛߓߍߛߎ߲";
         if(matiere[1] != undefined) if( matiere[1].phase.split("_")[0] == "syllabes")  matiere_nom = "ߜߋ߲߭";
-        if(matiere[2] != undefined) if( matiere[2].phase.split("_")[0] == "tons")  matiere_nom = "ߞߊ߲ߡߊߛߙߋ";
+        if(matiere[2] != undefined) if( matiere[2].phase.split("_")[0] == "tons"    )  matiere_nom = "ߞߊ߲ߡߊߛߙߋ";
         if(matiere[3] != undefined) if( matiere[3].phase.split("_")[0] == "chiffres")  matiere_nom = "ߖߊ߰ߕߋ߬ߘߋ߲";
         
         return matiere_nom;
@@ -2064,7 +2064,6 @@
                 $(this).click(function(){
                     let n = compteur++;
                     elements.splice(td_index,1,[syllabes_clique,n]);
-                    console.log(elements);
                 });
             });
         }
@@ -2732,7 +2731,6 @@
                     chargerResultatFoot();
                 
                     function chargerResultatHead() {
-console.log(matiere_nom_en_nko);
                         if(Object.keys(lesson_1).length === 0) {
                             $('#phase_d_apprentissage').text(matiere_nom_en_nko+' '+liste_de_phases[0][1]);
                             $('#apprentissage_date').text(" - ");
@@ -3130,7 +3128,7 @@ console.log(matiere_nom_en_nko);
         let caractere_index = caracteres_selectionnees.indexOf(caractere);
         if(caractere_index != -1) { caracteres_selectionnees.splice(caractere_index,1); }
     }
-    function retourALaPageDAcceuil() { window.location.replace("/index.php"); }
+    function retourALaPageDAccueil() { window.location.replace("/kouroukan/index.php"); }
     function reverseIntNko(nombre_a_convertir){
         var nombre_converti = [];
         

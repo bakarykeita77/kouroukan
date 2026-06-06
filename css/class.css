@@ -777,14 +777,13 @@ del {
 }
 .notification_corps {
     position: relative; 
-    top: 0;
     height: 5.5rem;
     width: 90%;
     max-width: 55rem;
     margin: 0.25rem auto;
     padding: 0.25rem 1rem;
-    background-color: #eee;
-    border-top: 0.25rem solid #ccc;
+    background-color: #fff;
+    border-top: 0.25rem solid #bbb;
     overflow: auto;
     box-sizing: border-box;
     transition: 0.3s;

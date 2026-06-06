@@ -67,7 +67,7 @@
     	
     	<?php
             if($_SERVER['HTTP_REFERER'] == "inscription.php") {
-                echo('<script> notifier(); </script>'); 
+                echo('<script> alert("ߌ ߞߎߟߎ߲ߖߋ߫. ߌ ߕߐ߮ ߓߘߊ߫ ߛߓߍ߫ ߘߋ߰ߘߋ߲ ߠߎ߬ ߛߙߍߘߍ ߘߐ߬."); </script>'); 
             }
         ?>
 	</div>

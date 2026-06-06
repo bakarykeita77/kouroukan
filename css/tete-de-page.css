@@ -319,14 +319,22 @@
         min-width: 3rem;
         overflow: auto;
         cursor: pointer;
-        padding: 0.5rem;
+        padding: 0.75rem 0.5rem 0.25rem;
         margin: 0 0.5rem;
         border-bottom: 1px solid #666;
+        transition: 0.2s;
 	}
 	#nav li:hover {
-        border-top: 1px solid #666;
-        border-top-width: 0.5rem;
         border-bottom-width: 0.5rem;
+        background-color: aqua;
+        box-shadow: 0 0 1rem #444;
+        border-radius: 0.25rem 0.25rem 0 0;
+	}
+	#nav li:active {
+        border-bottom-width: 1px;
+        background-color: transparent;
+        box-shadow: none;
+        border-radius: 0.25rem 0.25rem 0 0;
 	}
 }
 @media (max-width: 800px) {

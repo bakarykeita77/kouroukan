@@ -24,7 +24,7 @@ body {
     transform: translate(-50%, -50vh);
 }
 #asides_commentaire p {
-    margin: 2rem 0;
+    margin: 1rem 0;
 }
 #asides_container p, #btn_container { padding: 0; }
 .pied_de_page { display: none; }

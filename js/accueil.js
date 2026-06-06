@@ -20,13 +20,13 @@ console.log(sessionStorage);
     mmettreLeFocusSur("#lien_du_programme");
     
     function userIdentityStorage() {
-        sessionStorage.setItem('id_client', JSON.stringify(document.getElementById('id_client').innerHTML));
-        sessionStorage.setItem('prenom',    JSON.stringify(document.getElementById('prenom').innerHTML));
-        sessionStorage.setItem('nom',       JSON.stringify(document.getElementById('nom').innerHTML));
-        sessionStorage.setItem('naissance', JSON.stringify(document.getElementById('naissance').innerHTML));
-        sessionStorage.setItem('sexe',      JSON.stringify(document.getElementById('sexe').innerHTML));
-        sessionStorage.setItem('adresse',   JSON.stringify(document.getElementById('adresse').innerHTML));
-        sessionStorage.setItem('email',     JSON.stringify(document.getElementById('email').innerHTML));
+        sessionStorage.setItem("id_client", JSON.stringify(document.getElementById("id_client").innerHTML));
+        sessionStorage.setItem("prenom",    JSON.stringify(document.getElementById("prenom").innerHTML));
+        sessionStorage.setItem("nom",       JSON.stringify(document.getElementById("nom").innerHTML));
+        sessionStorage.setItem("naissance", JSON.stringify(document.getElementById("naissance").innerHTML));
+        sessionStorage.setItem("sexe",      JSON.stringify(document.getElementById("sexe").innerHTML));
+        sessionStorage.setItem("adresse",   JSON.stringify(document.getElementById("adresse").innerHTML));
+        sessionStorage.setItem("email",     JSON.stringify(document.getElementById("email").innerHTML));
     }
     function dataStorage() {
      

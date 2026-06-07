@@ -15,12 +15,12 @@
 	<?php if(isset($_SESSION["id_client"])) { ?>
 		<div id="tete_de_page_container">
 			<div id="topbar">
-				<div id="logo"> <img src="get-avatar.php?client_id=<?= $_SESSION["id_client"] ?>" alt="avatar"/></div>
+				<div id="logo"> <img src="get-avatar.php?client_id=<?= $_SESSION["id_client"]; ?>" alt=<?= $_SESSION["prenom"]; ?>/></div>
 				
 				<div id='profile_menu_container'>
 
-					<div id="client_name" style="display: none"><h2><?=$_SESSION['prenom'].' '.$_SESSION['nom'] ?> ߹</h2></div>
-					<div id="profile_client_id" style="display: none"><?=$_SESSION["id_client"]; ?></div>
+					<div id="client_name" style="display: none"><h2><?= $_SESSION['prenom'].' '.$_SESSION['nom']; ?> ߹</h2></div>
+					<div id="profile_client_id" style="display: none"><?= $_SESSION["id_client"]; ?></div>
 				
 					<div class="profile_menu">
 						
@@ -59,8 +59,6 @@
 						<div class="profile_menu_head"><a href="../php/deconnexion.php">ߌ ߜߊ߲߬ߞߎ߲߬ߣߍ߲߬ ߓߐ߫</a></div>
 					</div>
 				</div>
-
-				<div id="profile_teste"></div>
 
 				<div id="profile_resultat">
 					<div id="profile_resultat_container">
@@ -120,12 +118,12 @@
 	<?php if(isset($_SESSION["id_client"])) { ?>
 		<div id="tete_de_page_container">
 			<div id="topbar">
-				<div id="logo"> <img src="php/get-avatar.php?client_id=<?= $_SESSION["id_client"]; ?>" alt="avatar"/></div>
+				<div id="logo"> <img src="php/get-avatar.php?client_id=<?= $_SESSION["id_client"]; ?>" alt=<?= $_SESSION["prenom"]; ?>/></div>
 				
 				<div id='profile_menu_container'>
 
-					<div id="client_name" style="display: none"><h2><?=$_SESSION['prenom'].' '.$_SESSION['nom'] ?> ߹</h2></div>
-					<div id="profile_client_id" style="display: none"><?=$_SESSION["id_client"]; ?></div>
+					<div id="client_name"><h2><? =$_SESSION['prenom'].' '.$_SESSION['nom']; ?> ߹</h2></div>
+					<div id="profile_client_id" style="display: none"><? =$_SESSION["id_client"]; ?></div>
 				
 					<div class="profile_menu">
 						
@@ -164,8 +162,6 @@
 						<div class="profile_menu_head"><a href="php/deconnexion.php">ߌ ߜߊ߲߬ߞߎ߲߬ߣߍ߲߬ ߓߐ߫</a></div>
 					</div>
 				</div>
-
-				<div id="profile_teste"></div>
 
 				<div id="profile_resultat">
 					<div id="profile_resultat_container">

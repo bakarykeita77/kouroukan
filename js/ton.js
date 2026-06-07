@@ -8,9 +8,6 @@ function ton() {
         datas = matiere_collection;
         datas = (datas == undefined) ? [[],[],[],[]] : datas;
         
-        profileTesteMenu(datas);
-        profileResulat(datas);
-    
         if(datas[0].length === 3) {
             if(datas[1].length === 3) {
 

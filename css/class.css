@@ -978,7 +978,6 @@ del {
     justify-content: center;
     align-items: center;
 
-    display: none;
     position: relative;
     margin: 0;
 }
@@ -996,6 +995,9 @@ del {
     cursor: pointer;
 }
 .profile_menu_head a { text-decoration: none; }
+.profile_menu_body {
+    overflow: hidden;
+}
 .progress_bar_container {
     position: absolute;
     bottom: -0.5rem;

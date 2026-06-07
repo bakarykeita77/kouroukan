@@ -1869,45 +1869,51 @@
     }
     function lessonDApprentissagePreAlphabetDuServeur(datas) {
 
-        let ldap = [];
+        let lesson_d_apprentissage = [];
 
         if(datas.length === 0) { console.log("La variable datas est vide !"); }
         if(datas.length != 0) {
             for (let i = 0; i < datas[0].length; i++) {
-                let phase = datas[0][i].phase;
-                if(phase == "alphabet_apprentissage") { ldap = JSON.parse(datas[0][i].lesson); }
+                if(datas[0][i] != undefined) {
+                    let phase = datas[0][i].phase;
+                    if(phase == "alphabet_apprentissage") { lesson_d_apprentissage = JSON.parse(datas[0][i].lesson); }
+                }
             }
         }
 
-        return ldap;
+        return lesson_d_apprentissage;
     }
-    function lessonDExercicePreAlphabet(datas) {
+    function lessonDExercicePreAlphabetDuServeur(datas) {
         
-        let ldex = [];
+        let lesson_d_exercice = [];
 
         if(datas.length === 0) { console.log("La variable datas est vide !"); }
         if(datas.length != 0) {
             for (let j = 0; j < datas[0].length; j++) {
-                let phase = datas[0][j].phase;
-                if(phase == "alphabet_exercice") { ldex = JSON.parse(datas[0][j].lesson); }
+                if(datas[0][j] != undefined) {
+                    let phase = datas[0][j].phase;
+                    if(phase == "alphabet_exercice") { lesson_d_exercice = JSON.parse(datas[0][j].lesson); }
+                } 
             }
         }
 
-        return ldex;
+        return lesson_d_exercice;
     }
-    function lessonDEvaluationPreAlphabet(datas) {
+    function lessonDEvaluationPreAlphabetDuServeur(datas) {
         
-        let ldev = [];
+        let lesson_d_evaluation = [];
 
         if(datas.length === 0) { console.log("La variable datas est vide !"); }
         if(datas.length != 0) {
             for (let k = 0; k < datas[0].length; k++) {
-                let phase = datas[0][k].phase;
-                if(phase == "alphabet_evaluation") { ldev = JSON.parse(datas[0][k].lesson); }
+                if(datas[0][k] != undefined) {
+                    let phase = datas[0][k].phase;
+                    if(phase == "alphabet_evaluation") { lesson_d_evaluation = JSON.parse(datas[0][k].lesson); }
+                }
             }
         }
         
-        return ldev;
+        return lesson_d_evaluation;
     }
     function lettresEtudiees(lesson_d_apprentissage_alphabet) {
         let lettres_etudiees = [];
@@ -2289,127 +2295,6 @@
         }
         
         return peds;
-    }
-    function pourcentagePoint(memoire) {
-        if(memoire != null) {
-            let pp = 0;
-            let tp = 0;
-            for(let i=0; i<memoire.length; i++) { tp += memoire[i][2]; }
-            pp = Math.floor(tp*100/memoire.length);
-            return pp;
-        }
-    }
-    function profileResulat(datas) {
-        
-        resultatGeneral(datas);
-        afficherLeResulat();
-        fermerLeResulat();
-
-        function afficherLeResulat() {
-            $('#afficheur_du_resultat').click(() => {
-                $('#profile_resultat').css('display','block');
-            });
-        }
-        function fermerLeResulat() {
-            $('#fermer_resultat').click(() => {
-                $('#profile_resultat').css('display','none');
-            });
-        }
-        function calculDesLessonsEtudiees() {
-            
-            let lessons=[[],[],[],[]];
-            let lessons_d_alphabet=[], lessons_de_syllabes=[], lessons_de_tons=[], lessons_de_chiffres=[];
-
-            for (let i = 0; i < datas.length; i++) {
-                if(datas[i] != undefined) {
-                    for (let j = 0; j < datas[i].length; j++) {
-                        if(datas[i][j] != undefined) {
-                            lessons[i][j] = [datas[i][j].date, datas[i][j].niveau, datas[i][j].phase, datas[i][j].lesson, datas[i][j].note];
-                        }
-                    }
-                }
-            }
-            
-            let lessons_trier_par_matiere = triDesLessonsParMatiere(lessons);
-            let lessons_trier_par_phase = triDesLessonsParPhase(lessons_trier_par_matiere); 
-
-            return lessons_trier_par_phase;
-
-            function triDesLessonsParMatiere(lessons) {
-                let tri = [];
-                for (let i = 0; i < lessons.length; i++) {
-                    for (let j = 0; j < 1; j++) {
-                        if(lessons[i][j] != undefined) {
-                            if(lessons[i][j][2].split("_")[0] == "alphabet") { lessons_d_alphabet = lessons[i]; }
-                            if(lessons[i][j][2].split("_")[0] == "syllabes") { lessons_de_syllabes = lessons[i]; }
-                            if(lessons[i][j][2].split("_")[0] == "tons") { lessons_de_tons = lessons[i]; }
-                            if(lessons[i][j][2].split("_")[0] == "chiffres") { lessons_de_chiffres = lessons[i]; }
-                        }
-                    }
-                }
-                tri = [lessons_d_alphabet, lessons_de_syllabes, lessons_de_tons, lessons_de_chiffres];
-                return tri;
-            }
-            function triDesLessonsParPhase(lessons_trier_par_matiere) {
-                let tri = [[],[],[],[]];
-
-                for (let i = 0; i < lessons_trier_par_matiere.length; i++) {
-                    for (let j = 0; j < lessons_trier_par_matiere[i].length; j++) {
-                            if(lessons_trier_par_matiere[i][j] != undefined) {
-                            if(lessons_trier_par_matiere[i][j][2].split("_")[1] == "apprentissage") { tri[i][0] = lessons_trier_par_matiere[i][j]; }
-                            if(lessons_trier_par_matiere[i][j][2].split("_")[1] == "exercice") { tri[i][1] = lessons_trier_par_matiere[i][j]; }
-                            if(lessons_trier_par_matiere[i][j][2].split("_")[1] == "revision") { tri[i][2] = lessons_trier_par_matiere[i][j]; }
-                            if(lessons_trier_par_matiere[i][j][2].split("_")[1] == "evaluation") { tri[i][3] = lessons_trier_par_matiere[i][j]; }
-                        }
-                    }
-                }
-
-                return tri;
-            }
-        }
-    }
-    function profileTesteMenu(datas){
-        
-        /* Declaration et initialisation des variables */
-        let matieres_a_apprendre_du_serveur = [];
-        let matieres_apprises_du_serveur = [];
-
-        calculDesMatieresApprisesEtNonApprises();
-        chargementDeProfileTesteMenu();
-        affichageDeProfileTesteMenu();
-            
-        function calculDesMatieresApprisesEtNonApprises() {
-            for (let j = 0; j < datas.length; j++) {
-                if(datas[j].length == 0) 
-                { matieres_a_apprendre_du_serveur.push(liste_de_matieres[j][1]); }else
-                { matieres_apprises_du_serveur.push(liste_de_matieres[j][1]); }
-            }
-        }
-        function chargementDeProfileTesteMenu() {
-
-            document.getElementById("liste_des_matieres_apprises").innerHTML = (matieres_apprises_du_serveur.length === 0) ? '<p class="rien">ߝߏߦߊ߲߫߹</p>' : listeDesMatieresApprisesHtml();
-            document.getElementById("liste_des_matieres_a_apprendre").innerHTML = (matieres_a_apprendre_du_serveur.length === 0) ? '<p class="rien">ߝߏߦߊ߲߫߹</p>' : listeDesMatieresAApprendreHtml();
-            
-            function listeDesMatieresAApprendreHtml() {
-                let html = "<ul>";
-                for (let i = 0; i < matieres_a_apprendre_du_serveur.length; i++) html += "<li>"+matieres_a_apprendre_du_serveur[i]+"</li>";
-                html += "</ul>";
-                return html;
-            }
-            function listeDesMatieresApprisesHtml() {
-                let html = "<ul>";
-                for (let i = 0; i < matieres_apprises_du_serveur.length; i++) html += "<li>"+matieres_apprises_du_serveur[i]+"</li>";
-                html += "</ul>";
-                return html;
-            }
-        }
-        function affichageDeProfileTesteMenu() {
-
-            document.getElementById('profile_teste_menu').style.display = "none";
-            document.getElementById('profile_teste').style.display = "none";
-
-            $("#profile_teste_btn").click(() => { toggleProfileTesteMenu(); });
-        }
     }
     function progressBarDApprentissage(td,qtite_click) {
         /*
@@ -3364,19 +3249,8 @@
             }
         }); 
     }
-    function toggleProfileTesteMenu(){
-
-        let profile_teste_menu = document.getElementById('profile_teste_menu');
-        let profile_teste = document.getElementById('profile_teste');
-        
-        if(profile_teste_menu.style.height == 'auto'){
-            profile_teste_menu.style.height = 0;
-            setTimeout(function() { profile_teste_menu.style.display = 'none'; }, (250));
-            setTimeout(function() { profile_teste.style.display = 'none'; }, (200));
-        }else{
-            profile_teste_menu.style.display = 'block';
-            setTimeout(function() { profile_teste_menu.style.height = 'auto'; }, (10));
-        }
+    function toggleElement(btn,container) {
+        btn.click(() => { container.slideToggle("fast"); });
     }
     function totalPoint(data) {
         if(data != null) {

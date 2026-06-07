@@ -27,9 +27,6 @@ console.log(sessionStorage);
         var phases_etudiees = phasesEtudieesDuServeur(datas);
         let phase_index = (phases_etudiees == null) ? 0 : phases_etudiees.length;
         
-        profileTesteMenu(datas);
-        profileResulat(datas);
-    
      /*-------------------------------------------------------------------------------------------------------------*/
         /* Détermination du Programme */
         var programme_matieres = "";

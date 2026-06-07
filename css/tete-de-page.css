@@ -16,9 +16,11 @@
     left: 2rem;
 	width: 5rem;
 	height: 5rem;
+    line-height: 5rem;
+    font-weight: bold;
 	border-radius: 50%;
 	box-sizing: border-box;
-	box-shadow: 0 0 1rem #aaa;
+	box-shadow: 0 0 1rem #666;
 	overflow: hidden;
 	background-color: #fff;
 	z-index: 1;
@@ -82,7 +84,7 @@
     width: 100%;
     max-width: 400px;
     margin: 0 0.25rem;
-    padding: 2.5rem 0.5rem 0.5rem;
+    padding: 4rem 0.5rem 0.5rem;
     top: 3rem;
     left: 0;
     background-color: #fff;
@@ -90,6 +92,9 @@
     display: none;
     overflow: auto;
     z-index: 0;
+}
+#profile_menu_body_content ul {
+    list-style: none;
 }
 #profile_entete ul {
     list-style: none;
@@ -99,25 +104,10 @@
 }
 #profile_teste_menu {
     display: none;
-    height: 0;
+    position: relative;
     width: 100%;
     overflow: auto;
-    transition: height 0.25s;
-}
-#profile_teste {
-    position: absolute;
-    display: none;
-    width: 94vw;
-    top: 80px;
-    left: 3vw;
-    border: 1px solid transparent;
-    overflow: hidden;
-    border-radius: 0.25rem;
-    box-sizing: border-box;
-    box-shadow: 0 0 16px #666;
-    transform: scale(0.6);
-    z-index: 1010;
-    transition: 0.3s;
+    transition: 0.25s;
 }
 #profile_email {
     display:inline-block; 
@@ -275,12 +265,11 @@
 }
 
 #profile_utilisateur_container{
-    position: relative;
     display: none;
+    position: relative;
     width: 100%;
-    box-sizing: border-box;
+    overflow: auto;
     transition: 0.25s;
-    z-index: 1005;
 }
 #profile_utilisateur_renseignements, #profile_utilisateur_image_container{
     position: relative;
@@ -354,7 +343,7 @@
 	    background-color:#eee;
 		list-style-type:none;
 		font-size: 0.8rem;
-		box-shadow: 0 0 2rem #aaa;
+		box-shadow: 0 0 2rem #666;
 		overflow: hidden;
 	}
 	#menu_deroulant ul {

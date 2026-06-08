@@ -15,28 +15,28 @@
 	<?php if(isset($_SESSION["id_client"])) { ?>
 		<div id="tete_de_page_container">
 			<div id="topbar">
-				<div id="logo"> <img src="get-avatar.php?client_id=<?= $_SESSION["id_client"]; ?>" alt=<?= $_SESSION["prenom"]; ?>/></div>
+				<div id="logo"> <img src="get-avatar.php?id_client=<?= $_SESSION["id_client"]; ?>" alt=<?= $_SESSION["prenom"]; ?>/></div>
 				
 				<div id='profile_menu_container'>
 
-					<div id="client_name" style="display: none"><h2><?= $_SESSION['prenom'].' '.$_SESSION['nom']; ?> ߹</h2></div>
-					<div id="profile_client_id" style="display: none"><?= $_SESSION["id_client"]; ?></div>
+					<div id="client_name" style="display: none"><h2><?= $_SESSION['prenom'].' '.$_SESSION['nom']; ?></h2></div>
+					<div id="id_client" style="display: none"><?= $_SESSION["id_client"]; ?></div>
 				
 					<div class="profile_menu">
 						
 						<div class="profile_menu_head" id="profile_utilisateur_btn">Profile</div>
 						<div class="profile_menu_body" id='profile_utilisateur_container'>
 							<div id="profile_utilisateur_image_container">
-								<img src="get-avatar.php?client_id=<?= $_SESSION["id_client"] ?>" alt="logo"/>
-								<div id='modifier_avatar'>ߖߌ߬ߦߊ߬ߓߍ ߡߊߝߊ߬ߟߋ߲߬</div>  <!--Voir la fonction profileUtilisateurModificationAvatar() dans js/profile.js-->
+								<img src="get-avatar.php?id_client=<?= $_SESSION["id_client"] ?>" alt="logo"/>
+								<div id="modifier_avatar"><a href="../php/upload-avatar.php">ߖߌ߬ߦߊ߬ߓߍ ߡߊߝߊ߬ߟߋ߲߬</a></div>
 							</div>
 							<div id="profile_utilisateur_renseignements">
-								<div> <span>ߕߐ߮ </span>    <span id="profile_prenom"   ><?=$_SESSION['prenom'];?></span></div>
-								<div> <span>ߖߊ߬ߡߎ߲ </span>   <span id="profile_nom"      ><?=$_SESSION['nom'];?></span></div>
-								<div> <span>ߡߐߦߌߛߊ߲ </span> <span id="profile_naissance"><?=$_SESSION['naissance'];?></span></div>
-								<div> <span>ߖߊ߲߭ </span>     <span id="profile_sexe"     ><?=$_SESSION['sexe'];?></span></div>
-								<div> <span>ߛߊ߲߬ߓߊ߬ߕߐ߮ </span> <span id="profile_adresse"  ><?=$_SESSION['adresse'];?></span></div>
-								<div> <table><tr><td><span>Mail</span></td><td><span id="profile_mail"><?=$_SESSION['email'];?></span></td></tr></table></div>
+								<div> <span>ߕߐ߮ </span>    <span id="prenom"   ><?=$_SESSION['prenom'];?></span></div>
+								<div> <span>ߖߊ߬ߡߎ߲ </span>   <span id="nom"      ><?=$_SESSION['nom'];?></span></div>
+								<div> <span>ߡߐߦߌߛߊ߲ </span> <span id="naissance"><?=$_SESSION['naissance'];?></span></div>
+								<div> <span>ߖߊ߲߭ </span>     <span id="sexe"     ><?=$_SESSION['sexe'];?></span></div>
+								<div> <span>ߛߊ߲߬ߓߊ߬ߕߐ߮ </span> <span id="adresse"  ><?=$_SESSION['adresse'];?></span></div>
+								<div> <table><tr><td><span>Mail</span></td><td><span id="email"><?=$_SESSION['email'];?></span></td></tr></table></div>
 							</div>
 						</div>
 						
@@ -101,7 +101,6 @@
 	<?php }; ?>
 	
 	<script src="../js/tete-de-page.js"></script>
-	<script src="../js/profile.js"></script>
 <?php
 	}else{
 ?>	
@@ -118,28 +117,28 @@
 	<?php if(isset($_SESSION["id_client"])) { ?>
 		<div id="tete_de_page_container">
 			<div id="topbar">
-				<div id="logo"> <img src="php/get-avatar.php?client_id=<?= $_SESSION["id_client"]; ?>" alt=<?= $_SESSION["prenom"]; ?>/></div>
+				<div id="logo"> <img src="php/get-avatar.php?id_client=<?= $_SESSION["id_client"]; ?>" alt=<?= $_SESSION["prenom"]; ?>/></div>
 				
 				<div id='profile_menu_container'>
 
-					<div id="client_name"><h2><? =$_SESSION['prenom'].' '.$_SESSION['nom']; ?> ߹</h2></div>
-					<div id="profile_client_id" style="display: none"><? =$_SESSION["id_client"]; ?></div>
+					<div id="client_name"><h2><? =$_SESSION['prenom'].' '.$_SESSION['nom']; ?></h2></div>
+					<div id="id_client" style="display: none"><? =$_SESSION["id_client"]; ?></div>
 				
 					<div class="profile_menu">
 						
 						<div class="profile_menu_head" id="profile_utilisateur_btn">Profile</div>
 						<div class="profile_menu_body" id='profile_utilisateur_container'>
 							<div id="profile_utilisateur_image_container">
-								<img src="php/get-avatar.php?client_id=<?= $_SESSION["id_client"] ?>" alt="logo"/>
-								<div id='modifier_avatar'>ߖߌ߬ߦߊ߬ߓߍ ߡߊߝߊ߬ߟߋ߲߬</div>  <!--Voir la fonction profileUtilisateurModificationAvatar() dans js/profile.js-->
+								<img src="php/get-avatar.php?id_client=<?= $_SESSION["id_client"] ?>" alt="logo"/>
+								<div id="modifier_avatar"><a href="/kouroukan/php/upload-avatar.php">ߖߌ߬ߦߊ߬ߓߍ ߡߊߝߊ߬ߟߋ߲߬</a></div>
 							</div>
 							<div id="profile_utilisateur_renseignements">
-								<div> <span>ߕߐ߮ </span>    <span id="profile_prenom"   ><?=$_SESSION['prenom'];?></span></div>
-								<div> <span>ߖߊ߬ߡߎ߲ </span>   <span id="profile_nom"      ><?=$_SESSION['nom'];?></span></div>
-								<div> <span>ߡߐߦߌߛߊ߲ </span> <span id="profile_naissance"><?=$_SESSION['naissance'];?></span></div>
-								<div> <span>ߖߊ߲߭ </span>     <span id="profile_sexe"     ><?=$_SESSION['sexe'];?></span></div>
-								<div> <span>ߛߊ߲߬ߓߊ߬ߕߐ߮ </span> <span id="profile_adresse"  ><?=$_SESSION['adresse'];?></span></div>
-								<div> <table><tr><td><span>Mail</span></td><td><span id="profile_mail"><?=$_SESSION['email'];?></span></td></tr></table></div>
+								<div> <span>ߕߐ߮ </span>    <span id="prenom"   ><?=$_SESSION['prenom'];?></span></div>
+								<div> <span>ߖߊ߬ߡߎ߲ </span>   <span id="nom"      ><?=$_SESSION['nom'];?></span></div>
+								<div> <span>ߡߐߦߌߛߊ߲ </span> <span id="naissance"><?=$_SESSION['naissance'];?></span></div>
+								<div> <span>ߖߊ߲߭ </span>     <span id="sexe"     ><?=$_SESSION['sexe'];?></span></div>
+								<div> <span>ߛߊ߲߬ߓߊ߬ߕߐ߮ </span> <span id="adresse"  ><?=$_SESSION['adresse'];?></span></div>
+								<div> <table><tr><td><span>Mail</span></td><td><span id="email"><?=$_SESSION['email'];?></span></td></tr></table></div>
 							</div>
 						</div>
 						
@@ -204,7 +203,6 @@
 	<?php }; ?>
 
 	<script src="js/tete-de-page.js"></script>
-	<script src="js/profile.js"></script>
 <?php
 	}
 ?>

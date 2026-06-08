@@ -1,8 +1,8 @@
 <?php
     session_start();
     
-    $client_id = isset($_SESSION["id_client"])? $_SESSION["id_client"]:'';
-    if($client_id){
+    $id_client = isset($_SESSION["id_client"])? $_SESSION["id_client"]:'';
+    if($id_client){
         if($_SESSION["id_client"]){
             
             include('connexionToDB.php');
@@ -15,9 +15,9 @@
                 $type = $_FILES['image']['type'];
                 $image = file_get_contents($_FILES['image']['tmp_name']);
                 
-                $requette = $db->prepare("INSERT INTO avatar(client_id,nom,taille,type,image) VALUES(:client_id,:nom,:taille,:type,:image)");
+                $requette = $db->prepare("INSERT INTO avatar(id_client,nom,taille,type,image) VALUES(:id_client,:nom,:taille,:type,:image)");
                 
-                $requette->bindValue(':client_id',$client_id,PDO::PARAM_INT);
+                $requette->bindValue(':id_client',$id_client,PDO::PARAM_INT);
                 $requette->bindValue(':nom',$nom,PDO::PARAM_STR);
                 $requette->bindValue(':taille',$taille,PDO::PARAM_INT);
                 $requette->bindValue(':type',$type,PDO::PARAM_STR);

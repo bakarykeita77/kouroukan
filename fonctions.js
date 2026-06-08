@@ -2296,6 +2296,15 @@
         
         return peds;
     }
+    function pourcentagePoint(memoire) {
+        if(memoire != null) {
+            let pp = 0;
+            let tp = 0;
+            for(let i=0; i<memoire.length; i++) { tp += memoire[i][2]; }
+            pp = Math.floor(tp*100/memoire.length);
+            return pp;
+        }
+    }
     function progressBarDApprentissage(td,qtite_click) {
         /*
         td est les td de la table à cliquer.

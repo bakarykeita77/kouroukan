@@ -27,7 +27,7 @@
              ) ENGINE = MyISAM CHARSET = utf8 COLLATE utf8_general_ci";
             $sql_table_avatar   = "CREATE TABLE IF NOT EXISTS `kouroukan`.`avatar`(
                 `id` int(255) not null auto_increment,
-                `client_id` int(255) not null,
+                `id_client` int(255) not null,
                 `nom` varchar(100) character set utf8 collate utf8_general_ci,
                 `taille` varchar(100) character set utf8 collate utf8_general_ci,
                 `type` varchar(100) character set utf8 collate utf8_general_ci,
@@ -123,7 +123,7 @@
 			$utilisateurs =  $requette->execute();
 			return $utilisateurs;
 		 }
-		function archiverLesson($client_id,$niveau,$course){}
+		function archiverLesson($id_client,$niveau,$course){}
 		function archiverNotes($numero, $question, $reponse, $points){
 			global $db;
 

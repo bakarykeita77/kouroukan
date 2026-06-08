@@ -2329,36 +2329,15 @@ function alphabet() {
                             indexer($('#continu_sur_apprentissage_btn p'));
 
                             $('#continu_sur_apprentissage_btn').click(() => { raffraichirLaPage(); });
-                        }
-                        if(data.length === 27) {
+                        }else{
                             masquer($('#revision_redirection_btns > div'));
                             afficherRapidement($('#syllabes_btn'));
 
-                            $('#syllabes_btn').html('<p>'+liste_de_matieres[1][1]+' ߘߋ߰ߟߌ ߘߊߡߌ߬ߘߊ߬</p>');
+                            $('#syllabes_btn').html('<p><a href="../php/programmes.php">'+liste_de_matieres[1][1]+' ߘߋ߰ߟߌ ߘߊߡߌ߬ߘߊ߬</a></>');
                             rendreActif($('#syllabes_btn'));
                             indexer($('#syllabes_btn p'));
-                            $("#syllabes_btn").click(() => {
-                                location.assign('../php/programmes.php'); 
-                            });
                         }
                     }
-                }, 1500);
-            }
-            function afficherAlphabetExerciceBouton() {
-
-                masquer($('#parametre_lesson_container'));
-                masquer($('#panneaux'));
-                $('#apprentissage_dialogue_btns').text('ߌ ߞߎߟߎ߲ߖߋ߫ ߹').off('click');
-                
-                setTimeout(() => { 
-                    masquer($('#apprentissage_dialogue_btns'));
-                    afficherRapidement($('#apprentissage_redirection_btns')); 
-        
-                    masquer($('#apprentissage_redirection_btns > div'));
-                    afficherRapidement($('#continu_sur_exercice_btn'));
-                    $('#continu_sur_exercice_btn').html('<p>'+matiere_nom+" ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫</p>");
-                    rendreActif($('#continu_sur_exercice_btn'));
-                    indexer($('#continu_sur_exercice_btn p'));
                 }, 1500);
             }
             function afficherPreRevisionBtn() {

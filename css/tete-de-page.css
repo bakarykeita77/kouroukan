@@ -78,11 +78,10 @@
 
 #profile_menu_container {
     position: absolute;
-    border: 1px solid transparent; 
     border-radius: 0.25rem;
     box-shadow: 0 0 1rem #aaa;
     width: 100%;
-    max-width: 400px;
+    max-width: 450px;
     margin: 0 0.25rem;
     padding: 4rem 0.5rem 0.5rem;
     top: 3rem;

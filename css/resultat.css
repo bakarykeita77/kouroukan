@@ -42,13 +42,29 @@
     margin: 0;
     list-style: none;
     width: max-content;
-    background-color: #fff;
     cursor: pointer;
+    transition: 0.2s;
+}
+#resultat_matieres_liste li:not(.li_actif) {
+    border-radius: 0.25rem;
+    background-color: #ddd;
+    box-shadow: 0 0 0.5rem #888;
+    transition: 0.2s;
+}
+#resultat_matieres_liste li:not(.li_actif):hover {
+    background-color: #ccc;
+}
+#resultat_matieres_liste li:not(.li_actif):active {
+    background-color: #eee;
+    box-shadow: none;
 }
 .li_actif { 
+    position: relative;
+    top: 0.125rem;
     border-radius: 0.5rem 0.5rem 0 0;
     border: 0.25rem solid #aaa;
     border-bottom-color: #fff;
+    background-color: #fff      ;
 }
 #resultat_corps{
     max-height: calc(100vh - 18rem);

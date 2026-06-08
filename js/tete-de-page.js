@@ -12,7 +12,7 @@ $('document').ready(function() {
     if(precedent_id != present_id) { sessionStorage.clear(); localStorage.clear(); }
 
     userIdentityStorage(); /* Storage des Identités récuperées de l'étudiant */
-    datasDuServeur();         /* Récuperation et storage des data recuperés de l'étudiant */
+    datasDuServeur();      /* Récuperation et storage des data recuperés de l'étudiant */
     
     function userIdentityStorage() {
         sessionStorage.setItem("id_client", JSON.stringify(document.getElementById("id_client").innerHTML));
@@ -29,15 +29,9 @@ $('document').ready(function() {
         fetch("/kouroukan/api/index.php?id_user="+present_id)
         .then(response => response.json())
         .then(matiere_collection => {
-         /*-------------------------------------------------------------------------   
-            datas
-         -------------------------------------------------------------------------*/   
+         
             let datas = matiere_collection;
 
-            console.log("Les données des leçons étudiées par l'apprenant sont");
-            console.log(datas);
-
-         /* Analyse des données réçues de l'étudiant */
             afficherProfile();
             profileUtilisateur();
             profileTeste(datas);
@@ -47,40 +41,23 @@ $('document').ready(function() {
     }
 });
 
-
 $(".fermeture").click(() => { $(this).parent().css("display","none"); });
-$("#menu_menu").click(() => { $("#menu_deroulant").slideToggle("fast");          });
+$("#menu_menu").click(() => { $("#menu_deroulant").slideToggle("fast"); });
 
-function pourcentagePoint(memoire) {
-    if(memoire != null) {
-        let pp = 0;
-        let tp = 0;
-        for(let i=0; i<memoire.length; i++) { tp += memoire[i][2]; }
-        pp = Math.floor(tp*100/memoire.length);
-        return pp;
-    }
-}
+
 function afficherProfile() {
     toggleElement($("#logo"),$("#profile_menu_container"));
 }
 function profileUtilisateur() {
-    toggleElement($("#profile_utilisateur_btn"),$("#profile_utilisateur_container"));
-}
-function profileResulat(datas) {
-    
-    resultatGeneral(datas);
-    afficherLeResulat();
-    fermerLeResulat();
 
-    function afficherLeResulat() {
-        $('#afficheur_du_resultat').click(() => {
-            $('#profile_resultat').css('display','block');
-        });
+    afficherProfileUtilisateur();
+    modificationProfileUtilisateurPhoto();
+
+    function modificationProfileUtilisateurPhoto(){
+         $("#modifier_avatar").click(function(){ document.location.href = "../php/upload-avatar.php"; });
     }
-    function fermerLeResulat() {
-        $('#fermer_resultat').click(() => {
-            $('#profile_resultat').css('display','none');
-        });
+    function afficherProfileUtilisateur() {
+        toggleElement($("#profile_utilisateur_btn"),$("#profile_utilisateur_container"));
     }
 }
 function profileTeste(datas) {
@@ -120,5 +97,22 @@ function profileTeste(datas) {
     }
     function affichageDeProfileTesteMenu() {
         toggleElement($("#profile_teste_btn"),$("#profile_teste_menu"));
+    }
+}
+function profileResulat(datas) {
+    
+    resultatGeneral(datas);
+    afficherLeResulat();
+    fermerLeResulat();
+
+    function afficherLeResulat() {
+        $('#afficheur_du_resultat').click(() => {
+            $('#profile_resultat').css('display','block');
+        });
+    }
+    function fermerLeResulat() {
+        $('#fermer_resultat').click(() => {
+            $('#profile_resultat').css('display','none');
+        });
     }
 }

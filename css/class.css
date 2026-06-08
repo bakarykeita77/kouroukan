@@ -1133,7 +1133,7 @@ del {
     max-width: 45rem;
     min-width: 8rem;
     margin: 1rem auto;
-    border: 1px solid #666;
+    /* border: 1px solid #666; */
     border-radius: 0.5rem;
     padding: 0.5rem;
     overflow: auto;

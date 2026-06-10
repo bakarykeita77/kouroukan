@@ -22,7 +22,6 @@ $('document').ready(function() {
         var rang = "";
         var phase_li_id = phaseLiId();
         var phase_nom = "";
-        var phase_index = 0;
         var option_retenue = JSON.parse(localStorage.getItem("option_retenue"));
         
         
@@ -182,10 +181,10 @@ $('document').ready(function() {
                             $('.direction').css('display','block');
                             $('.salle_de_classe').css('display','none');
         
-                            setTimeout(() => { displayv($('#niveau_d_etude')); }, 100);
-                            setTimeout(() => { displayv($('.lesson_title')); }, 300);
-                            setTimeout(() => { displayv($('.phases_container')); }, 500);
-                            setTimeout(() => { displayv($('#travaux_container')); }, 700);
+                            displayv($('#niveau_d_etude'));
+                            displayv($('.lesson_title'));
+                            displayv($('.phases_container'));
+                            displayv($('#travaux_container'));
                         }
                     }
                 }
@@ -231,9 +230,6 @@ $('document').ready(function() {
                                     location.assign('programmes.php'); 
                                 }else{
                                     $('.modification_alerte').css('display','block');
-                    
-                                    console.log("Volonté de changer l'option confirmée !\n\nAttention !\nLa lesson en cours sera annulée de façon irreversible.");
-                                                
                                     $('.modification_alerte span:nth-child(1)').click(() => { 
                                         annulerApprentissageEnCours();
                                         location.assign('programmes.php'); 
@@ -248,7 +244,7 @@ $('document').ready(function() {
         
                                     let matiere = "alphabet";
                                     let id_client =  parseInt(JSON.parse(sessionStorage.getItem('id_client')));
-                                    let action = 'supprimer_matiere_en_cours';
+                                    let action = "supprimer_matiere_en_cours";
                     
                                     sendDataToDeleteLesson(matiere,id_client,action);
                                     localStorage.clear();
@@ -262,7 +258,7 @@ $('document').ready(function() {
                                             action : action
                                         }); 
             
-                                        fetch("/php/actions.php", {
+                                        fetch("../php/actions.php", {
                                             method: "POST",
                                             body: data_to_send
                                         })

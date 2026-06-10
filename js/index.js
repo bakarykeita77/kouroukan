@@ -1,1 +1,0 @@
-mmettreLeFocusSur("#lien_de_connexion");

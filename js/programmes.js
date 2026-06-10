@@ -1,7 +1,5 @@
 $('document').ready(function() {
 
-console.log(localStorage);
-console.log(sessionStorage);
     /*Au click sur l'afficheur du programme 
         1)- On obtient le niveau d'étude de l'apprenant par analyse de sa situation.
         2)- On determine le programme en fonction de ce niveau d'étude.

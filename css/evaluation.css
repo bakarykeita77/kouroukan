@@ -432,7 +432,7 @@
 @media screen and (orientation: landscape) {
     #evaluation_body { 
         top: 0;
-        height: 40vh; 
+        height: 30vh; 
         min-height: 12rem; 
     }
     .evaluation_table {  height: calc(100% - 2rem);  }
@@ -445,6 +445,6 @@
     #total_point_d_evaluation, #pourcentage_point_d_evaluation { 
         width: 6rem;
     } 
-    #evaluation_fiche_body { min-height: 12.25rem; }
+    #evaluation_fiche_body { min-height: 5rem; }
     #evaluation_message_de_fin_container, #message_de_fin_container { display: block; }
 }

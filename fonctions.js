@@ -226,37 +226,12 @@
         masquer($(".direction"));
         display($(".salle_de_classe"));
         display($(".course"));
-        masquer($(".course > div:not(#evaluation_container)"));
+        masquer($(".course > div"));
         display($("#evaluation_container"));
         masquer($('#evaluation_container > div:not(#evaluation_head)'));
 
-        setTimeout(() => { 
-            afficher($('#pratique_options'));
-            $('.fermeture').attr('id', 'fermer_revision');
-
-            afficher($('#evaluation_container > div:not(#evaluation_head)'));
-            afficherParDefautDEvaluationDialogueBtns();
-            
-            styleResponsiveDuTableauParlante();
-        }, 200);   
-    }
-    function afficherEvaluationAlphabet() {
-
-        $('.fermeture').attr('id', 'fermer_evaluation'); 
-
-        masquer($(".direction"));
-        display($(".salle_de_classe"));
-        display($(".course"));
-        display($("#evaluation_container"));
-        masquer($('#evaluation_container > div:not(#evaluation_head)'));
-
-        $('#evaluation_body table td').css("opacity",0);
-
-        setTimeout(() => {
-            afficher($('#evaluation_container > div:not(#evaluation_head)'));
-            afficherParDefautDEvaluationDialogueBtns();
-            setTimeout(() => { affichageAnimeDeTableTd($('#evaluation_body table')); }, 400);
-        }, 400);
+        afficher($('#evaluation_container > div:not(#evaluation_head)'));
+        afficherParDefautDEvaluationDialogueBtns();
     }
     function afficherExercice() {
         masquer($(".direction"));
@@ -1842,31 +1817,6 @@
         }
         return ls;
     }
-    function lessonActuelle(lesson_en_cours) {
-        
-        let l = [];
-        let m = (lesson_en_cours != undefined) ? lesson_en_cours.split(' ')[0] : '';
-        let p = (lesson_en_cours != undefined) ? lesson_en_cours.split(' ')[1] : '';
-        let lesson_1 = {}, lesson_2 = {}, lesson_3 = {}, lesson_4 = {};
-
-        if(m == 'ߛߓߍߛߎ߲') {
-            switch(p) {
-                case 'ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ'  : l = (lesson_1 != "") ? datas[0][0].lesson : []; break;
-                case 'ߡߊ߬ߞߟߏ߬ߟߌ'  : l = (lesson_2 != "") ? datas[0][1].lesson : []; break;
-                case 'ߞߘߐߓߐߟߌ' : l = (lesson_3 != "") ? datas[0][2].lesson : []; break;
-            }
-        }
-        if(m == 'ߜߋ߲߭') {
-            switch(p) {
-                case 'ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ'  : l = (lesson_1 != "") ? datas[1][0].lesson : []; break;
-                case 'ߡߊ߬ߞߟߏ߬ߟߌ'  : l = (lesson_2 != "") ? datas[1][1].lesson : []; break;
-                case 'ߣߐ߰ߡߊ߬ߛߍߦߌ' : l = (lesson_3 != "") ? datas[1][2].lesson : []; break;
-                case 'ߞߘߐߓߐߟߌ' : l = (lesson_4 != "") ? datas[1][3].lesson : []; break;
-            }
-        }
-
-        return l;
-    }
     function lessonDApprentissagePreAlphabetDuServeur(datas) {
 
         let lesson_d_apprentissage = [];
@@ -2079,8 +2029,8 @@
         element.siblings().removeClass('surbrillance');
     }
     function mmettreLeFocusSur(selecteur) { 
-        if(document.querySelector(selecteur) != null) document.querySelector(selecteur).focus(); 
-
+        let selection = document.querySelector(selecteur);
+        if(selection != null) selection.focus(); 
     }
     function mix2D(tableau){
         var mixted_table = [];
@@ -2296,13 +2246,11 @@
         
         return peds;
     }
-    function pourcentagePoint(memoire) {
-        if(memoire != null) {
-            let pp = 0;
+    function pourcentagePoint(data) {
+        if(data != null) {
             let tp = 0;
-            for(let i=0; i<memoire.length; i++) { tp += memoire[i][2]; }
-            pp = Math.floor(tp*100/memoire.length);
-            return pp;
+            for(let i=0; i<data.length; i++) {  tp += data[i][2]; }
+            return  Math.floor(tp*100/data.length); 
         }
     }
     function progressBarDApprentissage(td,qtite_click) {
@@ -2497,7 +2445,7 @@
         let lesson_en_cours = $('.notification_titre').html();
         let lesson_suivante = lessonSuivante(lesson_en_cours);
         let total_question = memoire.length;
-        let total_bonne_reponse = totalPoint();
+        let total_bonne_reponse = totalPoint(memoire);
         let total_fausse_reponse = total_question - total_bonne_reponse;
         let taux_de_vraie_reponse = '%'+parseIntNko(Math.floor(total_bonne_reponse*100/total_question));
         let taux_acceptable_de_vraie_reponse = (lesson_active = 'pre_exercice') ? 100 : 92;
@@ -2532,7 +2480,7 @@
         function chargerResultatBody() {
 
             let table_body_html = resultatTableBodyHTML(memoire);
-            let total_point = totalPoint();
+            let total_point = totalPoint(memoire);
                 
             $('.table_body').html(table_body_html);
             $('#total_question_1').html(parseIntNko(memoire.length));
@@ -2558,11 +2506,6 @@
                 );
             }
         }
-        function totalPoint() {
-            let html = 0;
-            for(let i=0; i<memoire.length; i++) { html += memoire[i][2]; }
-            return html;
-        }
     }
     function resultatDeLaMatiere(matiere) {
 
@@ -2578,9 +2521,9 @@
                     let element_index = matiere.indexOf(element);
                     
                     if(element.phase.split("_")[1] == "apprentissage") lesson_1 = matiere[element_index];
-                    if(element.phase.split("_")[1] == "exercice") lesson_2 = matiere[element_index];
-                    if(element.phase.split("_")[1] == "pratique") lesson_3 = matiere[element_index];
-                    if(element.phase.split("_")[1] == "evaluation") lesson_4 = matiere[element_index];
+                    if(element.phase.split("_")[1] == "exercice"     ) lesson_2 = matiere[element_index];
+                    if(element.phase.split("_")[1] == "pratique"     ) lesson_3 = matiere[element_index];
+                    if(element.phase.split("_")[1] == "evaluation"   ) lesson_4 = matiere[element_index];
                 }
             });
         }
@@ -2589,8 +2532,6 @@
         let nom = JSON.parse(sessionStorage.getItem('nom'));
         let prenom = JSON.parse(sessionStorage.getItem('prenom'));
         let lesson_en_cours = $('.notification_titre').html();
-        let lesson_actuelle = lessonActuelle(lesson_en_cours);
-        let total_point = totalPoint(lesson_actuelle);
         let moyenne_d_evaluation = 1;
         let lesson_suivante = lessonSuivante(lesson_en_cours);
         let continu_sur_l_etape_suivante = '<b id="avance"><a href="/php/programmes.php">'+lesson_suivante+'</a></b>';
@@ -3094,7 +3035,7 @@
         var niveau = JSON.parse(sessionStorage.getItem('niveau'));
         var phase = lesson_phase;
         var lesson = JSON.stringify(lesson_data);
-        var note = totalPoint(lesson_data);
+        var note = pourcentagePoint(lesson_data);
 
         const data_to_send = new URLSearchParams({
             id_client : id_client,
@@ -3262,13 +3203,9 @@
         btn.click(() => { container.slideToggle("fast"); });
     }
     function totalPoint(data) {
-        if(data != null) {
-            let tp = 0;
-            for(let i=0; i<data.length; i++) {
-                tp += data[i][2];
-            }
-            return  Math.floor(tp*100/data.length); 
-        }
+        let point = 0;
+        for(let i=0; i<data.length; i++) { point += data[i][2]; }
+        return point;
     }
     function triDuTableauParOrdreAlphabetique(table) {
         let elements_tries = [];

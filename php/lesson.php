@@ -23,7 +23,6 @@ if(isset($_SESSION["id_client"])) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         
-        <link rel="stylesheet" href="/kouroukan/css/tete-de-page.css"/>
         <link rel="stylesheet" href="/kouroukan/css/clavier.css"/>
         <link rel="stylesheet" href="/kouroukan/css/lesson.css"/>
                       
@@ -168,6 +167,7 @@ if(isset($_SESSION["id_client"])) {
                                 <div class="redirection_btns" id="exercice_redirection_btns">
                                     <div class='exercice_btn' id='reprendre_exercice_btn'></div>
                                     <div class='revision_btn' id='continu_sur_revision_btn'></div> 
+                                    <div class='evaluation_btn' id='continu_sur_evaluation_btn'></div> 
                                 </div>
                             </div>
                         </div>
@@ -351,15 +351,6 @@ if(isset($_SESSION["id_client"])) {
         <script src="/kouroukan/js/syllabes.js"></script>
         <script src="/kouroukan/js/ton.js"></script>
         <script src="/kouroukan/js/chiffre.js"></script>
-
-        <script>
-          document.write(
-            '<script src="http://' +
-              (location.host || '${1:localhost}').split(':')[0] +
-              ':${2:8080}/livereload.js?snipver=1"></' +
-              'script>'
-          );
-        </script>
     </body>
 </html>
 

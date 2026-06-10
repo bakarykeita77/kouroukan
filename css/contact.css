@@ -46,6 +46,7 @@
     left: 0;
     z-index: 2000;
 }
+#body_contact { top: 8rem; }
 #menu_title {
     max-width: 20rem;
     margin: 1rem auto;

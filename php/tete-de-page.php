@@ -92,7 +92,9 @@
 				<div id = "nav">
 					<div id="menu_deroulant">
 						<ul>
-							<li id="contact"  ><a href = "../php/contact.php"><i class="fa-regular fa-address-card"></i><span>ߛߊ߲߬ߓߊ߬ߕߐ߮</span></a></li>
+							<li id="connexion"><a href = "/kouroukan/php/connexion.php"><i class="fa-solid fa-globe"></i><span>ߌ ߜߊ߲߬ߞߎ߲߬</span></a></li>
+							<li id="inscription"><a href = "/kouroukan/php/inscription.php"><i class="fa-solid fa-user-plus"></i><span>ߌ ߕߐ߮ ߛߓߍ߫</span></a></li>
+							<li id="contact"><a href = "/kouroukan/php/contact.php"><i class="fa-regular fa-address-card"></i><span>ߊ߲ ߠߊߛߐ߬ߘߐ߲߬</span></a></li>
 						</ul>
 					</div>
 				</div>
@@ -133,11 +135,11 @@
 								<div id="modifier_avatar"><a href="/kouroukan/php/upload-avatar.php">ߖߌ߬ߦߊ߬ߓߍ ߡߊߝߊ߬ߟߋ߲߬</a></div>
 							</div>
 							<div id="profile_utilisateur_renseignements">
-								<div> <span>ߕߐ߮ </span>    <span id="prenom"   ><?=$_SESSION['prenom'];?></span></div>
-								<div> <span>ߖߊ߬ߡߎ߲ </span>   <span id="nom"      ><?=$_SESSION['nom'];?></span></div>
-								<div> <span>ߡߐߦߌߛߊ߲ </span> <span id="naissance"><?=$_SESSION['naissance'];?></span></div>
-								<div> <span>ߖߊ߲߭ </span>     <span id="sexe"     ><?=$_SESSION['sexe'];?></span></div>
-								<div> <span>ߛߊ߲߬ߓߊ߬ߕߐ߮ </span> <span id="adresse"  ><?=$_SESSION['adresse'];?></span></div>
+								<div> <span>ߕߐ߮      </span><span id="prenom"   ><?=$_SESSION['prenom'];   ?></span></div>
+								<div> <span>ߖߊ߬ߡߎ߲     </span><span id="nom"      ><?=$_SESSION['nom'];      ?></span></div>
+								<div> <span>ߡߐߦߌߛߊ߲   </span><span id="naissance"><?=$_SESSION['naissance'];?></span></div>
+								<div> <span>ߖߊ߲߭       </span><span id="sexe"     ><?=$_SESSION['sexe'];     ?></span></div>
+								<div> <span>ߊ߲ ߠߊߛߐ߬ߘߐ߲߬</span><span id="adresse"  ><?=$_SESSION['adresse'];   ?></span></div>
 								<div> <table><tr><td><span>Mail</span></td><td><span id="email"><?=$_SESSION['email'];?></span></td></tr></table></div>
 							</div>
 						</div>
@@ -194,7 +196,9 @@
 				<div id = "nav">
 					<div id="menu_deroulant">
 						<ul>
-							<li id="contact"><a href = "/kouroukan/php/contact.php"><i class="fa-regular fa-address-card"></i><span>ߛߊ߲߬ߓߊ߬ߕߐ߮</span></a></li>
+							<li id="connexion"><a href = "/kouroukan/php/connexion.php"><i class="fa-solid fa-globe"></i><span>ߌ ߜߊ߲߬ߞߎ߲߬</span></a></li>
+							<li id="inscription"><a href = "/kouroukan/php/inscription.php"><i class="fa-solid fa-user-plus"></i><span>ߌ ߕߐ߮ ߛߓߍ߫</span></a></li>
+							<li id="contact"><a href = "/kouroukan/php/contact.php"><i class="fa-regular fa-address-card"></i><span>ߊ߲ ߠߊߛߐ߬ߘߐ߲߬</span></a></li>
 						</ul>
 					</div>
 				</div>

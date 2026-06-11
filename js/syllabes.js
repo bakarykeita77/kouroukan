@@ -1,7 +1,7 @@
 function syllabes() {
 
     let id_client = JSON.parse(sessionStorage.getItem("id_client"));
-    fetch("/kouroukan/api/index.php?id_user="+id_client)
+    fetch("../api/index.php?id_user="+id_client)
     .then(response => response.json())
     .then(matiere_collection => {
 
@@ -76,7 +76,7 @@ function syllabes() {
         
                         parametrageDeLesson(datas);
                         chargerApprentissageSyllabe();
-                        afficherApprentissage(datas);
+                        afficherApprentissageSyllabe();
                         apprendreSyllabe();
         
                                 
@@ -88,7 +88,6 @@ function syllabes() {
         
                             function chargerEnteteDApprentissageSyllabe() {
                                 $(".notification_titre").html("ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ");
-                                setTimeout(() => { ecris("apprentissage_notification_corps", "ߞߏ߰ߙߌ߫ ߣߘߍ߬ߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬ ߞߊ߬ ߛߌ߬ߙߕߊ߬ ߥߟߊߟߋ߲ ߦߌ߬ߘߊ߬."); }, 500);
                             }
                             function chargerFootDApprentissageSyllabe() {
         
@@ -107,6 +106,10 @@ function syllabes() {
                                 setTimeout(() => { chargementParDefautDuTableauNoir(); }, 800);
                                 chargerLessonDeSyllabeApprentissage();
                             }
+                        }
+                        function afficherApprentissageSyllabe() {
+                            afficherApprentissage(datas);
+                            setTimeout(() => { ecris("apprentissage_notification_corps", "ߞߏ߰ߙߌ߫ ߣߘߍ߬ߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬ ߞߊ߬ ߛߌ߬ߙߕߊ߬ ߥߟߊߟߋ߲ ߦߌ߬ߘߊ߬."); }, 500);
                         }
                         function apprendreSyllabe() {
         
@@ -934,7 +937,7 @@ function syllabes() {
                                                             if (note_de_syllabes_revision === 100) {
                                                         
                                                                 let id_client = JSON.parse(sessionStorage.getItem("id_client"));
-                                                                fetch("/api/index.php?id_user="+id_client)
+                                                                fetch("../api/index.php?id_user="+id_client)
                                                                 .then(response => response.json())
                                                                 .then(matiere_collection => {  
                                                                     datas = matiere_collection;

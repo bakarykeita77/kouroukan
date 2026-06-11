@@ -193,20 +193,6 @@
             indexer($('.reprendre_btn p'));
         }, 400);
     }
-    function afficherBoutonDeLaLessonSuivante(lesson_en_cours) {
-        let matiere = lessonSuivante(lesson_en_cours);
-        
-        masquer($('.dialogue_btns'));
-        display($('.redirection_btns'));
-        masquer($('.redirection_btns > div'));
-
-        setTimeout(() => { 
-            afficher($('.lesson_suivante'));
-            rendreActif($('.lesson_suivante'));
-            $('.lesson_suivante').html("<p>"+matiere+" ߘߋ߰ߟߌ ߘߊߡߌ߬ߘߊ߬</p>");
-            indexer($('.lesson_suivante p'));
-        }, 400);
-    }
     function afficherBoutonDApprentissage() {
         let matiere = JSON.parse(sessionStorage.getItem("matiere_nom"));
         
@@ -811,7 +797,7 @@
                             let syllabe_tonifiee = td_actif.text();
                             let terminaison = terminaisonDeSyllabe(syllabe_tonifiee);
 
-                            $('#audio').attr({ src: "../son/mp3/tons/"+terminaison+"/"+syllabe_tonifiee+".mp3", autoplay:"on" });
+                            $('#audio').attr({ src: "../../son/mp3/tons/"+terminaison+"/"+syllabe_tonifiee+".mp3", autoplay:"on" });
                         });
                     });
                 });
@@ -830,8 +816,8 @@
                             let terminaison_0 = terminaisonDeSyllabe(syllabes_pour_lecture[0]);
                             let terminaison_1 = terminaisonDeSyllabe(syllabes_pour_lecture[1]);
 
-                            setTimeout(() => { $('#audio_0').attr({ src: "../son/mp3/tons/"+terminaison_0+"/"+syllabes_pour_lecture[0]+".mp3", autoplay:"on" }); }, 100);
-                            setTimeout(() => { $('#audio_1').attr({ src: "../son/mp3/tons/"+terminaison_1+"/"+syllabes_pour_lecture[1]+".mp3", autoplay:"on" }); }, 300);
+                            setTimeout(() => { $('#audio_0').attr({ src: "../../son/mp3/tons/"+terminaison_0+"/"+syllabes_pour_lecture[0]+".mp3", autoplay:"on" }); }, 100);
+                            setTimeout(() => { $('#audio_1').attr({ src: "../../son/mp3/tons/"+terminaison_1+"/"+syllabes_pour_lecture[1]+".mp3", autoplay:"on" }); }, 300);
                                         
                             function syllabesPourLecture() {
 
@@ -1909,7 +1895,7 @@
     }
     function lectureSyllabe(syllabe) {
         let terminaison = terminaisonDeSyllabe(syllabe);
-        $('#audio').attr({ src: "son/mp3/tons/"+terminaison+"/"+syllabe+".mp3", autoplay:"on" });
+        $("#audio").attr({ src: "../son/mp3/tons/"+terminaison+"/"+syllabe+".mp3", autoplay:"on" });
     }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/

@@ -145,11 +145,6 @@ body{
     top: 4px;
     transition: 0.3s;
 }
-#lesson_container{
-    position: relative;
-    height: 80vh;
-    background-color: #eee;
-}
 
 
 #lesson_entete {

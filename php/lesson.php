@@ -26,7 +26,6 @@ if(isset($_SESSION["id_client"])) {
         <link rel="stylesheet" href="/kouroukan/css/clavier.css"/>
         <link rel="stylesheet" href="/kouroukan/css/lesson.css"/>
                       
-        <link rel="stylesheet" href="/kouroukan/css/alphabet.css"/>
         <link rel="stylesheet" href="/kouroukan/css/apprentissage.css"/>
         <link rel="stylesheet" href="/kouroukan/css/exercice.css"/>
         <link rel="stylesheet" href="/kouroukan/css/evaluation.css"/>
@@ -167,7 +166,7 @@ if(isset($_SESSION["id_client"])) {
                                 <div class="redirection_btns" id="exercice_redirection_btns">
                                     <div class='exercice_btn' id='reprendre_exercice_btn'></div>
                                     <div class='revision_btn' id='continu_sur_revision_btn'></div> 
-                                    <div class='evaluation_btn' id='continu_sur_evaluation_btn'></div> 
+                                    <div class='evaluation_btn' id='continu_sur_alphabet_evaluation_btn'></div> 
                                 </div>
                             </div>
                         </div>

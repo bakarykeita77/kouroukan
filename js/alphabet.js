@@ -540,8 +540,9 @@ function alphabet() {
                             function chargerPiedDExercicePreAlphabet() {
                                 $('#exercice_question_btn').html('<p>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ '+parseIntNko(total_exercice_questions)+' \\ ߁߭ ߟߊߡߍ߲߫</p>');
                                 $('#exercice_correction_btn').html('<p>ߏ߬ ߛߊߞߍ߫</p>');
+
                                 $('#reprendre_exercice_btn').html('<p>ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫ ߕߎ߲߯</p>');
-                                $('#evaluation_btn').html('<p>ߛߓߍߛߎ߲ ߞߘߐߓߐߟߌ ߞߍ߫</p>');
+                                $('#continu_sur_alphabet_evaluation_btn').html('<p>ߛߓߍߛߎ߲ ߞߘߐߓߐߟߌ ߞߍ߫</p>');
                             }
                             function chargerCorpsDExercicePreAlphabet() {
                                 var exercice_body_html = lessonHTML(exercice_pre_questions, '');
@@ -731,7 +732,7 @@ function alphabet() {
                                                 console.log("Fin de pre_exercice");
 
                                                 $("#exercice_body").click(() => {
-                                                    secouer($("#continu_sur_evaluation_btn"));
+                                                    secouer($("#continu_sur_alphabet_evaluation_btn"));
                                                 });
 
                                                 
@@ -795,7 +796,7 @@ function alphabet() {
                     });
                 }
                 function evaluationPreAlphabet() {
-                    $('#evaluation_btn, #reprendre_evaluation_btn, #continu_sur_evaluation_btn').click(function(e) {
+                    $('#reprendre_evaluation_btn, #continu_sur_alphabet_evaluation_btn').click(function(e) {
                         e.stopImmediatePropagation();    
 
                         if((cercle_index+1)*les_lettres_actives.length === lesson_d_evaluation_alphabet_du_serveur.length) console.log("L'evaluation pre_alphabet est déjà fait");
@@ -831,7 +832,7 @@ function alphabet() {
                             function chargerPiedDePreRevisionAlphabet() {
                                 $('#revision_question_btn').html('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ '+parseIntNko(total_evaluation_questions)+' \\ ߁߭ ߟߊߡߍ߲߫');
                                 $('#reprendre_evaluation_btn').html(matiere_nom+' ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫ ߕߎ߲߯');
-                                $('#evaluation_btn').html(matiere_nom+'  ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߥߴߊ߬ ߡߊ߬');
+                                $('#continu_sur_alphabet_evaluation_btn').html(matiere_nom+'  ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߥߴߊ߬ ߡߊ߬');
                             }
                             function chargerCorpsDePreRevisionAlphabet() {
                                 var revision_body_html =  lessonHTML(evaluation_pre_questions, '');
@@ -1026,7 +1027,7 @@ function alphabet() {
                                                                 
                                                             if(note_d_evaluation_pre_alphabet < 100) {
                                                                 afficherPreEvaluationBtn();
-                                                                $('#evaluation_btn').html('<p>ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫ ߕߎ߲߯</p>');
+                                                                $('#continu_sur_alphabet_evaluation_btn').html('<p>ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫ ߕߎ߲߯</p>');
                                                             }
                                                             if(note_d_evaluation_pre_alphabet == 100) {
                                                                 $('#'+cercle_id).removeClass('apprentissage_en_cours').addClass('cercle_depasse');
@@ -1867,7 +1868,7 @@ function alphabet() {
                                                     }
                                                     function transitionVersEvaluationAlphabet() {
                                                         if(note_d_exercice_alphabet >= moyenne_d_exercice) { 
-                                                            $('#continu_sur_evaluation_btn').click(() => { raffraichirLaPage(); });
+                                                            $('#continu_sur_alphabet_evaluation_btn').click(() => { raffraichirLaPage(); });
                                                         }
                                                     }
                                                 }
@@ -1880,7 +1881,7 @@ function alphabet() {
                     });
                 }
                 function evaluationAlphabet() {
-                    $('#alphabet_evaluation, #continu_sur_evaluation_btn').click(() => {
+                    $('#alphabet_evaluation, #reprendre_evaluation_btn, #continu_sur_alphabet_evaluation_btn').click(() => {
                     
                         console.log("Début d'Evaluation");
                         
@@ -2219,10 +2220,10 @@ function alphabet() {
                         indexer($('#reprendre_exercice_btn p'));
                     }
                     if(note === 100) {
-                        afficherRapidement($('#continu_sur_evaluation_btn'));
-                        $('#continu_sur_evaluation_btn').html('<p>'+liste_de_matieres[0][1]+' ߞߘߐߓߐߟߌ ߞߍ߫</p>');
-                        rendreActif($('#continu_sur_evaluation_btn'));
-                        indexer($('#continu_sur_evaluation_btn p'));
+                        afficherRapidement($('#continu_sur_alphabet_evaluation_btn'));
+                        $('#continu_sur_alphabet_evaluation_btn').html('<p>'+liste_de_matieres[0][1]+' ߞߘߐߓߐߟߌ ߞߍ߫</p>');
+                        rendreActif($('#continu_sur_alphabet_evaluation_btn'));
+                        indexer($('#continu_sur_alphabet_evaluation_btn p'));
                     }
                 }, 1500);
             }
@@ -2285,7 +2286,7 @@ console.log(liste_de_matieres[1][1]);
                 $('.redirection_btns').css('display','block');
         
                 $('#exercice_btn').css('display','none');
-                $('#evaluation_btn').css('display','block');
+                $('#continu_sur_alphabet_evaluation_btn').css('display','block');
 
                 zoomUp($('.dialogue_btns'));
             }

@@ -78,18 +78,14 @@
         }, 200);
         
     }
-    function affichage(element) {
-        setTimeout(function() { 
-            element.css({
-                'transform':'scale(1)', 
-                'opacity':1
-            }); 
-        }, 50);
-    }
     function afficher(element) {
         masquer(element);
-        element.css({'display':'block','transition':'0.2s'}); 
-        affichage(element);
+        element.css({
+            'display':'block',
+            'transform':'scale(1)', 
+            'opacity':1,
+            'transition':'0.2s'
+        }); 
     }
     function afficherApprentissage(datas) {
 
@@ -248,16 +244,24 @@
     }
     function afficherLentement(element) {
         masquer(element);
-        element.css({'display':'block','transition':'0.8s'}); 
-        affichage(element);
+        element.css({
+            'display':'block',
+            'transform':'scale(1)', 
+            'opacity':1,
+            'transition':'0.8s'
+        }); 
     }
     function afficherNotification() { 
         $('.notification_corps').css({"top":0}); 
     }
     function afficherRapidement(element) {
         masquer(element);
-        element.css({'display':'block','transition':'0.1s'}); 
-        affichage(element);
+        element.css({
+            'display':'block',
+            'transform':'scale(1)', 
+            'opacity':1,
+            'transition':'0.1s'
+        }); 
     }
 	function afficher_en_jailli( element,largeur,hauteur,temps ) {
         element.css({'display':'block', 'width':0, 'height':0});
@@ -873,10 +877,22 @@
         if(matiere_index === 2) a_apprendre = "ߜߋ߲߬ ߞߊ߲ߡߊߛߙߋߡߊ߫";
         if(matiere_index === 3) a_apprendre = "ߖߊ߰ߕߋ߬ߘߋ߲߫";
 
+        let message = a_apprendre+" ߘߋ߲߰ߕߊ ߟߎ߬ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬";
+
         $('#apprentissage_body').html("<table id='table_syllabes_apprentissage'><div id='texte'></div></table>");
+        
         setTimeout(() => {
-            ecris("texte", a_apprendre+" ߘߋ߲߰ߕߊ ߟߎ߬ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬");
-        }, 200);
+
+            let longueur = message.length;
+            let indice = 0;
+
+            setTimeout(() => { write(); }, 10);
+            function write() {
+                indice++;
+                $('#texte').html(message.substr(0,indice));
+                if(indice<longueur) setTimeout(() => { write(); }, 5);
+            }
+        }, 10);
     }
     function chargementParDefautDEvaluationFicheBody() {
         let matiere_index = JSON.parse(sessionStorage.getItem("matiere_index"));
@@ -887,10 +903,22 @@
         if(matiere_index === 2) a_apprendre = "ߜߋ߲߬ ߞߊ߲ߡߊߛߙߋߡߊ ߟߎ߬ ";
         if(matiere_index === 3) a_apprendre = "ߖߊ߰ߕߋ߬ߘߋ߲߫ ߠߎ߬ ";
 
+        let message = a_apprendre+" ߞߘߐߓߐߟߌ ߞߐߝߟߌ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬";
+
         $('#evaluation_fiche_body').html("<p id='evaluation_tbody_default_content'></div>");
+        
         setTimeout(() => {
-            ecris("evaluation_tbody_default_content", a_apprendre+" ߞߘߐߓߐߟߌ ߞߐߝߟߌ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬");
-        }, 1500);
+
+            let longueur = message.length;
+            let indice = 0;
+
+            setTimeout(() => { write(); }, 10);
+            function write() {
+                indice++;
+                $('#evaluation_tbody_default_content').html(message.substr(0,indice));
+                if(indice<longueur) setTimeout(() => { write(); }, 10);
+            }
+        }, 10);
     }
     function chargerPanneauDesCaracteres() {
         
@@ -1396,11 +1424,11 @@
         let indice = 0;
 
         afficherNotification();
-        setTimeout(() => { write(); }, 300);
+        setTimeout(() => { write(); }, 400);
         function write() {
             indice++;
             $('#'+element_id).html(message.substr(0,indice));
-            if(indice<longueur) setTimeout(() => { write(); }, 10);
+            if(indice<longueur) setTimeout(() => { write(); }, 5);
         }
     }
     function ecrire(element_class,message) {
@@ -1408,7 +1436,7 @@
         let indice = 0;
 
         afficherNotification();
-        setTimeout(() => { write(); }, 300);
+        setTimeout(() => { write(); }, 400);
         function write() {
             indice++;
             $('.'+element_class).html(message.substr(0,indice));
@@ -1640,7 +1668,7 @@
     function indexer(element) { 
         let r = setInterval(function(){
             element.addClass('indicateur'); 
-        },1000);
+        },400);
         element.click(function() { clearInterval(r); $(this).removeClass('indicateur'); });
     }
     function initialiserData(tableau) {
@@ -1941,11 +1969,11 @@
             'opacity':'0'
         });
     }
-    function masquerPanneauDesCaracteres() { $('#caracteres_container').css({"top":"22rem", "height":0}); }
     function masquerNotification() {
         $(".notification_corps").text("");
         $(".notification_corps").css({"top":"5.25rem"});
     }
+    function masquerPanneauDesCaracteres() { $('#caracteres_container').css({"top":"22rem", "height":0}); }
     function matiereNom(matiere) { 
         let matiere_nom = "";
         if(matiere[0] != undefined) matiere_nom = matiere[0].phase.split("_")[0];
@@ -3072,7 +3100,7 @@
         }
         if(niveau == 2) {
             if($(".table_parlante").height() < 112) {
-                let m = 112 - ($(".table_parlante").height())/2;
+                let m = 96 - ($(".table_parlante").height())/2;
                 $(".table_parlante").css({"margin":m+"px auto"});
             }
         }

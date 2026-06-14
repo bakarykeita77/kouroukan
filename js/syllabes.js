@@ -4,9 +4,24 @@ function syllabes() {
     fetch("../api/index.php?id_user="+id_client)
     .then(response => response.json())
     .then(matiere_collection => {
-
+        
         datas = matiere_collection;
         datas = (datas == undefined) ? [[],[],[],[]] : datas;
+
+        /* Recupreation des id de syllabes_apprentissage et syllabes_exercice précédents pour leurs modifications ulterieures */
+        let id_syllabes_lesson_1 = null;
+        let id_syllabes_lesson_2 = null;
+        
+        if(datas[1].length != 0) {
+            for(let i=0; i<2; i++) {
+                if(datas[1][i] != undefined) {
+                    if(datas[1][i].phase == "syllabes_apprentissage") { id_syllabes_lesson_1 = datas[1][i].id; }
+                    if(datas[1][i].phase == "syllabes_exercice") { id_syllabes_lesson_2 = datas[1][i].id; }
+                }
+            }
+        }
+        /* Fin de recuperationdes id */
+        
 
         if(datas[0].length === 3) {
 
@@ -37,15 +52,13 @@ function syllabes() {
                     if (lesson_d_evaluation_syllabes_du_serveur.length === 126) console.log("La leçon d'evaluation syllabes est déjà faite.");
                 }
                 function syllabesNko() {
-                        
+                    
                     let lesson_active = "";
                     let element_actif = "";
         
                     let quantite_normale_de_click = 1;
-        
-                    let consonnes_choisies_du_serveur = consonnesChoisiesDuServeur(datas);
-                    let memoire_consonnes_choisies = JSON.parse(localStorage.getItem("memoire_consonnes_choisies"));
-                    memoire_consonnes_choisies = (memoire_consonnes_choisies == null) ? consonnes_choisies_du_serveur : memoire_consonnes_choisies;
+       
+                    let memoire_consonnes_etudiees = consonnesEtudieesDuServeur(datas);
                     let consonnes_choisies = [];
         
                     let lesson_d_apprentissage_syllabes = [];
@@ -54,7 +67,6 @@ function syllabes() {
                     let lesson_d_apprentissage_syllabes_du_serveur = lessonDApprentissageSyllabeDuServeur(datas);
                     let lesson_d_exercice_syllabes_du_serveur = lessonDExerciceSyllabeDuServeur(datas);
                     let lesson_d_evaluation_syllabes = lessonDEvaluationSyllabeDuServeur(datas);
-        
                     let lesson_d_apprentissage_syllabes_du_jour = [];
                     let lesson_de_syllabes_exercice_du_jour = [];
                     let lesson_de_syllabes_revision_du_jour = [];
@@ -109,7 +121,8 @@ function syllabes() {
                         }
                         function afficherApprentissageSyllabe() {
                             afficherApprentissage(datas);
-                            setTimeout(() => { ecris("apprentissage_notification_corps", "ߞߏ߰ߙߌ߫ ߣߘߍ߬ߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬ ߞߊ߬ ߛߌ߬ߙߕߊ߬ ߥߟߊߟߋ߲ ߦߌ߬ߘߊ߬."); }, 500);
+                            masquerNotification();
+                            setTimeout(() => { ecris("apprentissage_notification_corps", "ߞߎ߬ߘߎ߫ ߣߘߍ߬ߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬ ߞߊ߬ ߛߌ߬ߙߕߊ߬ ߥߟߊߟߋ߲ ߦߌ߬ߘߊ߬."); }, 1600);
                         }
                         function apprendreSyllabe() {
         
@@ -252,7 +265,7 @@ function syllabes() {
         
                                                                             masquer($("#apprentissage_btn"));
                                                                             afficherRapidement($("#continu_sur_exercice_btn"));
-                                                                            masquer($("#evaluation_btn"));
+                                                                            masquer($("#continu_sur_evaluation_btn"));
                                                                             rendreActif($("#continu_sur_exercice_btn"));
                                                                             
                                                                             indexer($("#continu_sur_exercice_btn p"));
@@ -303,12 +316,12 @@ function syllabes() {
         
                             total_exercice_syllabe_questions = exercice_syllabe_questions.length;
                             
-                            console.log("Début d'exercice syllabes");
+                            console.log("Début d'exercice");
                             $(".fermeture_pre").attr("id", "fermeture_exercice");
         
                             masquerNotification();
                             chargerExerciceSyllabe();
-                            afficherExercice();
+                            afficherExerciceSyllabe();
                             exercice();
         
         
@@ -320,12 +333,6 @@ function syllabes() {
         
                                 function chargerEnteteDExerciceSyllabe() {
                                     $(".notification_titre").html("ߜߋ߲߭ ߡߊ߬ߞߟߏ߬ߟߌ");
-                                    setTimeout(() => {
-                                        let delay = 650+80*$("#exercice_body .table_parlante td").length;   // 650 est la somme des delay de setTimeout des fonctions afficherApprentissageContainer() et affichageAnimeDeTableTd()                            
-                                        setTimeout(() => {
-                                            ecris("exercice_notification_corps", "ߘߋ߰ߣߍ߲߬ ߞߎߘߊ ߟߎ߫ ߟߋ߬ ߢߊ߯ߡߌߣߍ߲߫ ߢߐ߲ ߘߐ߫ ߣߌ߲߬ .ߣߴߌ ߛߋ߫ ߘߊ߫ ߞߵߊ߬ߟߎ߬ ߓߍ߯ ߢߊߓߐ߫ ߗߡߍ߬ߘߐ߬ߦߊ߫ ߗߍ߬ߡߍ ߟߊ߫ ߏ߬ߘߐ߬ ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ .ߢߌ߬ߣߌ߲߬ߞߊߟߌ߬ ߞߘߎ ߘߌ߯߭ ߘߎ߭ߡߊ߬߸ ߦߴߌ ߕߟߏߡߊߟߐ߬ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߎ߬ ߟߊ߫ ߞߋߟߋ߲߫ ߞߋߟߋ߲߫߸ ߦߵߊ߬ߟߎ߫ ߦߌ߬ߘߊ߬߸ ߦߋ߫ ߓߊ߲߫ ߞߊ߬ ߛߊߞߍߟߌ߫ ߞߘߎ ߘߌ߲߯߸ ߞߵߊ߬ߟߎ߬ ߛߊߞߍ߫.");
-                                        }, delay);
-                                    }, 100);
                                 }
                                 function chargerCorpsDExerciceSyllabe() {
                                     let exercice_body_html = lessonHTML(malaxer(syllabes_actives), "");
@@ -347,6 +354,16 @@ function syllabes() {
                                         $("#continu_sur_revision_btn").html("<p>ߜߋ߲߭ ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫</p>");
                                     }
                                 }
+                            }
+                            function afficherExerciceSyllabe() {
+                                afficherExercice();
+                                masquerNotification();
+                                setTimeout(() => {
+                                    let delay = 650+80*$("#exercice_body .table_parlante td").length;   // 650 est la somme des delay de setTimeout des fonctions afficherApprentissageContainer() et affichageAnimeDeTableTd()                            
+                                    setTimeout(() => {
+                                        ecris("exercice_notification_corps", "ߘߋ߰ߣߍ߲߬ ߞߎߘߊ ߟߎ߫ ߟߋ߬ ߢߊ߯ߡߌߣߍ߲߫ ߢߐ߲ ߘߐ߫ ߣߌ߲߬ .ߣߴߌ ߛߋ߫ ߘߊ߫ ߞߵߊ߬ߟߎ߬ ߓߍ߯ ߢߊߓߐ߫ ߗߡߍ߬ߘߐ߬ߦߊ߫ ߗߍ߬ߡߍ ߟߊ߫ ߏ߬ߘߐ߬ ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ .ߢߌ߬ߣߌ߲߬ߞߊߟߌ߬ ߞߘߎ ߘߌ߯߭ ߘߎ߭ߡߊ߬߸ ߦߴߌ ߕߟߏߡߊߟߐ߬ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߎ߬ ߟߊ߫ ߞߋߟߋ߲߫ ߞߋߟߋ߲߫߸ ߦߵߊ߬ߟߎ߫ ߦߌ߬ߘߊ߬߸ ߦߋ߫ ߓߊ߲߫ ߞߊ߬ ߛߊߞߍߟߌ߫ ߞߘߎ ߘߌ߲߯߸ ߞߵߊ߬ߟߎ߬ ߛߊߞߍ߫.");
+                                    }, delay);
+                                }, 100);
                             }
                             function exercice() {
         
@@ -572,7 +589,7 @@ function syllabes() {
                                                                 rendreActif($("#reprendre_exercice_btn"));
                                                                 indexer($("#reprendre_exercice_btn p"));   //L'évenement click est attaché à ce bouton dès le début de la fonction  exerciceSyllabe().
                                                                 
-                                                                console.log("Echec de exercice de syllabes");
+                                                                console.log("Echec d'exercice");
                                                             }, 2000);
                                                         }
                                                     }
@@ -597,7 +614,7 @@ function syllabes() {
                                                                 rendreActif($("#continu_sur_revision_btn"));
                                                                 indexer($("#continu_sur_revision_btn p"));   //L'évenement click est attaché à ce bouton dès le début de la fonction  exerciceSyllabe().
                                                                 
-                                                                console.log("Fin de exercice de syllabes");
+                                                                console.log("Fin d'exercice");
                                                             }, 2000);
                                                         }
                                                     }
@@ -648,7 +665,7 @@ function syllabes() {
                     }
                     function revisionSyllabe() {
                         /*
-                        La revision est une étape qui n'est pas stockée mais qui, s'elle est effectuée avec succès, rassure la bonne comprehension des précédentes lessons d'apprentissages et d'exercices.
+                        La revision est une étape qui n'est pas stockée mais qui, si elle est effectuée avec succès, rassure la bonne comprehension des précédentes lessons d'apprentissages et d'exercices.
                         Et c'est donc à cette étape que ces dernières sont stockées.
                         */
                         $("#revision_btn, #reprendre_revision_btn, #continu_sur_revision_btn").click(function (e) {
@@ -666,13 +683,13 @@ function syllabes() {
                             let good_response_counter = 0;
                             var q_revision_total = parseIntNko(lesson_d_apprentissage_syllabes.length);
         
-                            console.log("Début de revision syllabes");
+                            console.log("Début de revision");
         
                             lesson_active = "revision";
         
                             masquerNotification();
                             chargerRevisionSyllabe();
-                            afficherRevision();
+                            afficherRevisionSyllabe();
                             reviserSyllabe();
         
         
@@ -685,12 +702,6 @@ function syllabes() {
         
                                 function chargerRevisionSyllabeHead() {
                                     $(".notification_titre").text("ߜߋ߲߭ ߣߐ߰ߡߊ߬ߛߍߦߌ");
-                                    setTimeout(() => {
-                                        let delay = 650+80*$("#revision_body .table_parlante td").length;   // 650 est la somme des delay de setTimeout des fonctions afficherApprentissageContainer() et affichageAnimeDeTableTd()                            
-                                        setTimeout(() => {
-                                            ecris("revision_notification_corps", "ߘߋ߰ߣߍ߲߬ ߞߎߘߊ ߣߌ߫ ߞߘߐ߬ߡߊ߲ ߘߏ߫ ߟߎ߫ ߟߋ߬ ߢߊ߯ߡߌߣߍ߲߫ ߢߐ߲ ߘߐ߫ ߣߌ߲߬ .ߣߴߌ ߛߋ߫ ߘߊ߫ ߞߵߊ߬ߟߎ߬ ߓߍ߯ ߢߊߓߐ߫ ߗߡߍ߬ߘߐ߬ߦߊ߫ ߗߍ߬ߡߍ ߟߊ߫ ߏ߬ߘߐ߬ ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ . ߢߌ߬ߣߌ߲߬ߞߊߟߌ߬ ߞߘߎ ߘߌ߯߭ ߘߎ߭ߡߊ߬߸ ߦߴߌ ߕߟߏߡߊߟߐ߬ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߎ߬ ߟߊ߫ ߞߋߟߋ߲߫ ߞߋߟߋ߲߫߸ ߦߴߊߟߎ߬ ߛߓߍ߫߸ ߦߋ߫ ߓߊ߲߫ ߞߊ߬ ߛߊߞߍߟߌ߫ ߞߘߎ ߘߌ߲߯߸ ߞߵߊ߬ߟߎ߬ ߛߊߞߍ߫.");
-                                        }, delay);
-                                    }, 100);
                                 }
                                 function chargerRevisionSyllabeBody() {
                                     var evaluation_body_html = revisionBodyHTML();
@@ -763,6 +774,16 @@ function syllabes() {
                                         $("#revision_correction_btn").html("ߏ߬ ߛߊߞߍ߫");
                                     }
                                 }
+                            }
+                            function afficherRevisionSyllabe() {
+                                afficherRevision();
+                                masquerNotification();
+                                setTimeout(() => {
+                                    let delay = 650+80*$("#revision_body .table_parlante td").length;   // 650 est la somme des delay de setTimeout des fonctions afficherApprentissageContainer() et affichageAnimeDeTableTd()                            
+                                    setTimeout(() => {
+                                        ecris("revision_notification_corps", "ߘߋ߰ߣߍ߲߬ ߞߎߘߊ ߣߌ߫ ߞߘߐ߬ߡߊ߲ ߘߏ߫ ߟߎ߫ ߟߋ߬ ߢߊ߯ߡߌߣߍ߲߫ ߢߐ߲ ߘߐ߫ ߣߌ߲߬ .ߣߴߌ ߛߋ߫ ߘߊ߫ ߞߵߊ߬ߟߎ߬ ߓߍ߯ ߢߊߓߐ߫ ߗߡߍ߬ߘߐ߬ߦߊ߫ ߗߍ߬ߡߍ ߟߊ߫ ߏ߬ߘߐ߬ ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ . ߢߌ߬ߣߌ߲߬ߞߊߟߌ߬ ߞߘߎ ߘߌ߯߭ ߘߎ߭ߡߊ߬߸ ߦߴߌ ߕߟߏߡߊߟߐ߬ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߎ߬ ߟߊ߫ ߞߋߟߋ߲߫ ߞߋߟߋ߲߫߸ ߦߴߊߟߎ߬ ߛߓߍ߫߸ ߦߋ߫ ߓߊ߲߫ ߞߊ߬ ߛߊߞߍߟߌ߫ ߞߘߎ ߘߌ߲߯߸ ߞߵߊ߬ߟߎ߬ ߛߊߞߍ߫.");
+                                    }, delay);
+                                }, 100);
                             }
                             function reviserSyllabe() {
         
@@ -913,160 +934,141 @@ function syllabes() {
         
                                                         let note_de_syllabes_revision = calculerNote(lesson_de_syllabes_revision_du_jour);
         
-                                                        rechargerRevisionDialogueBtns();
-                                                        masquerRevisionFootBtns();
+                                                        notificationDuSuccesDeRevision();
+                                                        notificationDeRepriseDeRevision();
+                                                        afficherBoutonDeRepriseDeRevision();
+                                                        afficherRedirectionBtns();
                                                         stockerLesLessonsDApprentissageEtExerciceSyllabe();
                         
                                                         
-                                                        function rechargerRevisionDialogueBtns() { $("#revision_question_btn").html("ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߓߘߊ߫ ߓߊ߲߫"); }
-                                                        function masquerRevisionFootBtns() { setTimeout(() => { masquer($("#revision_foot > div")); }, 1800); }
+                                                        function notificationDuSuccesDeRevision() {
+                                                            if (note_de_syllabes_revision === 100) {
+                                                                ecris("revision_notification_corps","\
+                                                                    "+felicitation() + $("#revision_notification_titre").text() + " ߢߊ߬ߣߍ߲߬ "+note_de_syllabes_revision+"% ߟߊ߫. ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߥߴߊ߬ ߡߊ߬.\
+                                                                ");
+                                                            }
+                                                        }
+                                                        function notificationDeRepriseDeRevision() {
+                                                            if (note_de_syllabes_revision < 100) {
+                                                                ecris("revision_notification_corps","\
+                                                                    "+ducourage() + $("#revision_notification_titre").text() + " ߡߊ߫ ߢߊ߬. ߓߍ߬ߙߍ ߓߍ߲߬ߣߍ߲߫  "+note_de_syllabes_revision+"% ߘߐߙߐ߲߫ ߠߋ߬ ߡߊ߬. ߏ߬ߘߐ߬߸ ߘߌ߬ߢߍ߬ ߞߵߌ ߞߐߛߍ߬ߦߌ߬ ߦߙߐ ߢߌ߲߬ ߡߊ߬.\
+                                                                ");
+                                                                console.log("Echec de revision");
+                                                            }
+                                                        }
+                                                        function afficherBoutonDeRepriseDeRevision() {
+                                                            if (note_de_syllabes_revision < 100) { afficherBoutonDeReprise(); }
+                                                        }
+                                                        function afficherRedirectionBtns() {
+                                                            if (note_de_syllabes_revision === 100) {
+                                                                setTimeout(() => {
+                                                                    masquer($("#revision_dialogue_btns"));
+                                                                    display($("#revision_redirection_btns"));
+                                                                    masquer($("#revision_redirection_btns > div"));
+                                                                                             
+                                                                    afficherRedirectionSurApprentissageSyllabeBtn();
+                                                                    afficherRedirectionSurEvaluationSyllabeBtn();
+                                                                    continuSurApprentissageSyllabe();
+                                                                    console.log("Fin de revision");
+
+                                                                    function afficherRedirectionSurApprentissageSyllabeBtn() {
+                                                                        if (lesson_d_apprentissage_syllabes.length < 126) {
+                                                                            afficher($("#continu_sur_apprentissage_btn"));
+                                                                            rendreActif($("#continu_sur_apprentissage_btn"));
+                                                                            indexer($("#continu_sur_apprentissage_btn p"));
+                                                                        }
+                                                                    }
+                                                                    function afficherRedirectionSurEvaluationSyllabeBtn() {
+                                                                        if (lesson_d_apprentissage_syllabes.length === 126) {
+                                                                            afficher($("#continu_sur_evaluation_btn"));
+                                                                            rendreActif($("#continu_sur_evaluation_btn"));
+                                                                            indexer($("#continu_sur_evaluation_btn p"));
+                                                                        }
+                                                                    }
+                                                                    function continuSurApprentissageSyllabe() {
+                                                                        $("#continu_sur_apprentissage_btn").click(() => { raffraichirLaPage(); });
+                                                                    }
+                                                                }, 400);
+                                                            }
+                                                        }
                                                         function stockerLesLessonsDApprentissageEtExerciceSyllabe() {
                                                             if (note_de_syllabes_revision < 100) {
-        
-                                                                notificationDeRepriseDeRevision();
-                                                                afficherBoutonDeReprise();
                                                                 viderLeTableau(lesson_de_syllabes_revision_du_jour);
-                                                                
-                                                                function notificationDeRepriseDeRevision() {
-                                                                    ecris("revision_notification_corps","\
-                                                                        "+ducourage() + $("#revision_notification_titre").text() + " ߡߊ߫ ߢߊ߬. ߓߍ߬ߙߍ ߓߍ߲߬ߣߍ߲߫  "+note_de_syllabes_revision+"% ߘߐߙߐ߲߫ ߠߋ߬ ߡߊ߬. ߏ߬ߘߐ߬߸ ߘߌ߬ߢߍ߬ ߞߵߌ ߞߐߛߍ߬ߦߌ߬ ߦߙߐ ߢߌ߲߬ ߡߊ߬.\
-                                                                    ");
-                                                                    console.log("Echec de revision syllabes");
-                                                                }
                                                             }
                                                             if (note_de_syllabes_revision === 100) {
                                                         
-                                                                let id_client = JSON.parse(sessionStorage.getItem("id_client"));
-                                                                fetch("../api/index.php?id_user="+id_client)
-                                                                .then(response => response.json())
-                                                                .then(matiere_collection => {  
-                                                                    datas = matiere_collection;
-                                                                    datas = (datas == undefined) ? [[],[],[],[]] : datas;
-                                                                    
-                                                                    /* Recupreation des id de syllabes_apprentissage et syllabes_exercice précédents pour leurs modifications ulterieures */
-                                                                    let id_syllabes_lesson_1 = null;
-                                                                    let id_syllabes_lesson_2 = null;
+                                                                stockerApprentissageSyllabe();
+                                                                stockerExerciceSyllabe();
+                                                                actualiserConsonnesChoisies();
+                                                                        
+    
+                                                                function stockerApprentissageSyllabe() {
+
+                                                                    let note_d_apprentissage_syllabes = calculerNote(lesson_d_apprentissage_syllabes_du_jour);
+    
+                                                                    if (note_d_apprentissage_syllabes === 100) {
+                                                                        
+                                                                        lesson_d_apprentissage_syllabes_du_serveur = lessonDApprentissageSyllabeDuServeur(datas);
+                                                                        lesson_d_apprentissage_syllabes = actualiserLesson(lesson_d_apprentissage_syllabes_du_serveur, lesson_d_apprentissage_syllabes_du_jour);
+                                                                        
+                                                                        console.log("lesson_d_apprentissage_syllabes actualisée est");
+                                                                        console.log(lesson_d_apprentissage_syllabes);
+    
         
-                                                                    if(datas[1].length != 0) {
-                                                                        for(let i=0; i<2; i++) {
-                                                                            if(datas[1][i] != undefined) {
-                                                                                if(datas[1][i].phase == "syllabes_apprentissage") { id_syllabes_lesson_1 = datas[1][i].id; }
-                                                                                if(datas[1][i].phase == "syllabes_exercice") { id_syllabes_lesson_2 = datas[1][i].id; }
-                                                                            }
+                                                                        if(datas[1].length == 0) {
+                                                                            sendLessonDataToDB("syllabes_apprentissage", lesson_d_apprentissage_syllabes);
+                                                                            console.log("Lesson d'apprentissage syllabes est envoyée à la base de donnée.");
                                                                         }
-                                                                    }
-                                                                    /* Fin de recuperationdes id */
-        
-                                                                    stockerApprentissageSyllabe();
-                                                                    stockerExerciceSyllabe();
-        
-                                                                    actualiserConsonnesChoisies();
-                                                                    notificationDuSuccesDeRevision();
-                                                                    afficherRedirectionBtns();
-                                                                            
-        
-                                                                    function stockerApprentissageSyllabe() {
-                                                                        let note_d_apprentissage_syllabes = calculerNote(lesson_d_apprentissage_syllabes_du_jour);
-        
-                                                                        if (note_d_apprentissage_syllabes === 100) {
-                                                                            
-                                                                            lesson_d_apprentissage_syllabes_du_serveur = lessonDApprentissageSyllabeDuServeur(datas);
-                                                                            lesson_d_apprentissage_syllabes = actualiserLesson(lesson_d_apprentissage_syllabes_du_serveur, lesson_d_apprentissage_syllabes_du_jour);
-                                                                            
-                                                                            console.log("lesson_d_apprentissage_syllabes actualisée est");
-                                                                            console.log(lesson_d_apprentissage_syllabes);
-        
-            
-                                                                            if(datas[1].length == 0) {
-                                                                                sendLessonDataToDB("syllabes_apprentissage", lesson_d_apprentissage_syllabes);
-                                                                                console.log("Lesson d'apprentissage syllabes est envoyée à la base de donnée.");
-                                                                            }
-                                                                            if(datas[1].length != 0) {
-                                                                                for (let i = 0; i < datas[1].length; i++) {
-                                                                                    if(datas[1][i] != undefined) if(datas[1][i].phase == "syllabes_apprentissage") {
-                                                                                        updateLessonData(id_syllabes_lesson_1,lesson_d_apprentissage_syllabes);
-                                                                                        console.log("Lesson d'apprentissage syllabes est modifiée à la base de donnée.");
-                                                                                    }
+                                                                        if(datas[1].length != 0) {
+                                                                            for (let i = 0; i < datas[1].length; i++) {
+                                                                                if(datas[1][i] != undefined) if(datas[1][i].phase == "syllabes_apprentissage") {
+                                                                                    updateLessonData(id_syllabes_lesson_1,lesson_d_apprentissage_syllabes);
+                                                                                    console.log("Lesson d'apprentissage syllabes est modifiée à la base de donnée.");
                                                                                 }
                                                                             }
-        
                                                                         }
+    
                                                                     }
-                                                                    function stockerExerciceSyllabe() {
-        
-                                                                        let note_d_exercice_syllabes = calculerNote(lesson_de_syllabes_exercice_du_jour);
-        
-                                                                        if (note_d_exercice_syllabes === 100) {
-        
-                                                                            lesson_d_exercice_syllabes_du_serveur = lessonDExerciceSyllabeDuServeur(datas);
-                                                                            lesson_d_exercice_syllabes = actualiserLesson(lesson_d_exercice_syllabes_du_serveur, lesson_de_syllabes_exercice_du_jour);
-                                                                            
-                                                                            console.log("lesson_d_exercice_syllabes actualisée est");
-                                                                            console.log(lesson_d_exercice_syllabes);
-                                        
-                                                                            if(datas[1].length == 0) {
-                                                                                sendLessonDataToDB("syllabes_exercice", lesson_d_exercice_syllabes);
-                                                                                console.log("Lesson d'exercice syllabes est envoyée à la base de donnée.");
-                                                                            }
-                                                                            if(datas[1].length != 0) {
-                                                                                for (let i = 0; i < datas[1].length; i++) {
-                                                                                    if(datas[1][i] != undefined) if(datas[1][i].phase == "syllabes_exercice") {
-                                                                                        updateLessonData(id_syllabes_lesson_2,lesson_d_exercice_syllabes);
-                                                                                        console.log("Lesson d'exercice syllabes est modifiée à la base de donnée.");
-                                                                                    }
+                                                                }
+                                                                function stockerExerciceSyllabe() {
+    
+                                                                    let note_d_exercice_syllabes = calculerNote(lesson_de_syllabes_exercice_du_jour);
+    
+                                                                    if (note_d_exercice_syllabes === 100) {
+    
+                                                                        lesson_d_exercice_syllabes_du_serveur = lessonDExerciceSyllabeDuServeur(datas);
+                                                                        lesson_d_exercice_syllabes = actualiserLesson(lesson_d_exercice_syllabes_du_serveur, lesson_de_syllabes_exercice_du_jour);
+                                                                        
+                                                                        console.log("lesson_d_exercice_syllabes actualisée est");
+                                                                        console.log(lesson_d_exercice_syllabes);
+                                    
+                                                                        if(datas[1].length == 0) {
+                                                                            sendLessonDataToDB("syllabes_exercice", lesson_d_exercice_syllabes);
+                                                                            console.log("Lesson d'exercice syllabes est envoyée à la base de donnée.");
+                                                                        }
+                                                                        if(datas[1].length != 0) {
+                                                                            for (let i = 0; i < datas[1].length; i++) {
+                                                                                if(datas[1][i] != undefined) if(datas[1][i].phase == "syllabes_exercice") {
+                                                                                    updateLessonData(id_syllabes_lesson_2,lesson_d_exercice_syllabes);
+                                                                                    console.log("Lesson d'exercice syllabes est modifiée à la base de donnée.");
                                                                                 }
                                                                             }
                                                                         }
                                                                     }
-                                                                    function actualiserConsonnesChoisies() {
-        
-                                                                        consonnes_choisies = consonnesEtudiees(lesson_d_apprentissage_syllabes);
-                                                                        consonnes_choisies = (consonnes_choisies == null) ? [] : consonnes_choisies;
-                                                                
-                                                                        consonnes_choisies.forEach(element => {
-                                                                            if($.inArray(element, memoire_consonnes_choisies) === -1) {
-                                                                                memoire_consonnes_choisies.push(element);
-                                                                            }
-                                                                        });
-        
-                                                                        localStorage.setItem("memoire_consonnes_choisies", JSON.stringify(memoire_consonnes_choisies));
-                                                                    }
-                                                                    function notificationDuSuccesDeRevision() {
-                                                                        ecris("revision_notification_corps","\
-                                                                            "+felicitation() + $("#revision_notification_titre").text() + " ߢߊ߬ߣߍ߲߬ "+note_de_syllabes_revision+"% ߟߊ߫. ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߥߴߊ߬ ߡߊ߬.\
-                                                                        ");
-                                                                    }
-                                                                    function afficherRedirectionBtns() {
-                                                                        setTimeout(() => {
-                                                                            masquer($("#revision_dialogue_btns"));
-                                                                            display($("#revision_redirection_btns"));
-                                                                            masquer($("#revision_redirection_btns > div"));
-                                                                                                        
-                                                                            afficherRedirectionSurApprentissageSyllabeBtn();
-                                                                            afficherRedirectionSurEvaluationSyllabeBtn();
-                                                                            continuSurApprentissageSyllabe();
-                                                                            console.log("Fin de revision syllabes");
-        
-                                                                            function afficherRedirectionSurApprentissageSyllabeBtn() {
-                                                                                if (lesson_d_apprentissage_syllabes.length < 126) {
-                                                                                    afficher($("#continu_sur_apprentissage_btn"));
-                                                                                    rendreActif($("#continu_sur_apprentissage_btn"));
-                                                                                    indexer($("#continu_sur_apprentissage_btn p"));
-                                                                                }
-                                                                            }
-                                                                            function afficherRedirectionSurEvaluationSyllabeBtn() {
-                                                                                if (lesson_d_apprentissage_syllabes.length === 126) {
-                                                                                    afficher($("#continu_sur_evaluation_btn"));
-                                                                                    rendreActif($("#continu_sur_evaluation_btn"));
-                                                                                    indexer($("#continu_sur_evaluation_btn p"));
-                                                                                }
-                                                                            }
-                                                                            function continuSurApprentissageSyllabe() {
-                                                                                $("#continu_sur_apprentissage_btn").click(() => { raffraichirLaPage(); });
-                                                                            }
-                                                                        }, 1800);
-                                                                    }
-                                                                });
+                                                                }
+                                                                function actualiserConsonnesChoisies() {
+    
+                                                                    consonnes_choisies = consonnesEtudiees(lesson_d_apprentissage_syllabes);
+                                                                    consonnes_choisies = (consonnes_choisies == null) ? [] : consonnes_choisies;
+                                                            
+                                                                    consonnes_choisies.forEach(element => {
+                                                                        if($.inArray(element, memoire_consonnes_etudiees) === -1) {
+                                                                            memoire_consonnes_etudiees.push(element);
+                                                                        }
+                                                                    });
+    
+                                                                    localStorage.setItem("memoire_consonnes_etudiees", JSON.stringify(memoire_consonnes_etudiees));
+                                                                }
                                                             }
                                                         }
                                                     }
@@ -1098,28 +1100,28 @@ function syllabes() {
                         });
                     }
                     function evaluationSyllabe() {
-                        /* L'évaluation des syllabes est une étape qui est éffectuée une seule fois, à la fin d'une série de lessons d'apprentissages, d'exercices et de revisions. */ 
-                            
-                         /* Un étudiant qui s'est connecté et qui a fini d'apprendre toutes les syllabes sauf la dernière évaluation,
-                         il est directement redirigé sur la page d'évaluation.*/
-                        if (memoire_consonnes_choisies.length === 18) evaluation(); 
+                        /* 
+                        L'évaluation des syllabes est une étape qui est éffectuée une seule fois, à la fin d'une série de lessons d'apprentissages, d'exercices et de revisions. 
+                        */ 
+                        /*
+                        Un étudiant qui s'est connecté et qui a fini d'apprendre toutes les syllabes sauf la dernière évaluation,
+                        il est directement redirigé sur la page d'évaluation.
+                        */
         
-                            let phase_id = "syllabes_evaluation";
-                            sessionStorage.setItem("phase_id", JSON.stringify(phase_id));
+                        let phase_id = "syllabes_evaluation";
+                        sessionStorage.setItem("phase_id", JSON.stringify(phase_id));
         
-                        $("#evaluation_btn, #reprendre_evaluation_btn, #continu_sur_evaluation_btn").click(function () {
-                            if (memoire_consonnes_choisies.length === 18) evaluation();
+                        $("#reprendre_evaluation_btn, #continu_sur_evaluation_btn").click(function () {
+                            // if (memoire_consonnes_etudiees.length === 18) evaluation();
+                            if (memoire_consonnes_etudiees.length === 2) evaluation();
                         });
                         
                         function evaluation() {
                     
-                            let consonnes_etudiees = consonnesEtudiees(lesson_d_apprentissage_syllabes);
-                            let nouvelles_consonnes = JSON.parse(localStorage.getItem("nouvelles_consonnes"));
-        
-                            lesson_active = "revision";
+                            lesson_active = "evaluation";
         
                             chargerEvaluationSyllabe();
-                            afficherEvaluation();
+                            afficherEvaluationSyllabe()
                             evaluerSyllabe();
         
         
@@ -1131,7 +1133,6 @@ function syllabes() {
         
                                 function chargerEvaluationSyllabeHead() {
                                     $(".notification_titre").text("ߜߋ߲߭ ߞߘߐߓߐߟߌ");
-                                    ecris("evaluation_notification_corps", "ߢߌ߬ߣߌ߲߬ߞߊߟߌ߬ ߞߘߎ ߘߌ߯߭ ߘߎ߭ߡߊ߬߸ ߦߴߌ ߕߟߏߡߊߟߐ߬ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߎ߬ ߟߊ߫ ߞߋߟߋ߲߫ ߞߋߟߋ߲߫߸ ߦߴߊߟߎ߬ ߛߓߍ߫߸ ߦߋ߫ ߓߊ߲߫ ߞߊ߬ ߛߊߞߍߟߌ߫ ߞߘߎ ߘߌ߲߯߸ ߞߵߊ߬ߟߎ߬ ߛߊߞߍ߫.");
                                 }
                                 function chargerEvaluationSyllabeBody() { chargementParDefautDEvaluationFicheBody(); }
                                 function chargerEvaluationSyllabeFoot() {
@@ -1144,6 +1145,11 @@ function syllabes() {
                                     $("#evaluation_repetition_btn").html("<p>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ߬ "+q_evaluation_total+"\\"+parseIntNko(1)+"߭ ߟߊߡߍ߲߫</p>");
                                     $("#evaluation_correction_btn").html("<p>ߏ߬ ߛߊߞߍ߫</p>");
                                 }
+                            }
+                            function afficherEvaluationSyllabe() {
+                                afficherEvaluation();
+                                masquerNotification();
+                                ecris("evaluation_notification_corps", "ߢߌ߬ߣߌ߲߬ߞߊߟߌ߬ ߞߘߎ ߘߌ߯߭ ߘߎ߭ߡߊ߬߸ ߦߴߌ ߕߟߏߡߊߟߐ߬ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߎ߬ ߟߊ߫ ߞߋߟߋ߲߫ ߞߋߟߋ߲߫߸ ߦߴߊߟߎ߬ ߛߓߍ߫߸ ߦߋ߫ ߓߊ߲߫ ߞߊ߬ ߛߊߞߍߟߌ߫ ߞߘߎ ߘߌ߲߯߸ ߞߵߊ߬ߟߎ߬ ߛߊߞߍ߫.");
                             }
                             function evaluerSyllabe() {
                 
@@ -1168,9 +1174,9 @@ function syllabes() {
         
                                 
                                 function questionsDEvaluation() {
-                                    let lesson_d_apprentissage_syllabes_melange = [];
+                                    let lesson_d_apprentissage_syllabes_melange = malaxer(lesson_d_apprentissage_syllabes_du_serveur);
                                     let questions_d_evaluation_syllabes = [];
-                                    lesson_d_apprentissage_syllabes_melange = malaxer(lesson_d_apprentissage_syllabes_du_serveur);
+                                          
                                     for (let j = 0; j < 28; j++) questions_d_evaluation_syllabes.push(lesson_d_apprentissage_syllabes_melange[j][0]);
                                     return questions_d_evaluation_syllabes;
                                 }
@@ -1400,13 +1406,13 @@ function syllabes() {
                                                             if (lesson_d_apprentissage_syllabes_du_serveur.length === 126) {
                                                                 if (lesson_d_exercice_syllabes_du_serveur.length === 126) {
                                                                     if (lesson_d_evaluation_syllabes.length === 28) {
-        
+                                            console.log("Fin de syllabes");
                                                                         sendLessonDataToDB("syllabes_evaluation", lesson_d_evaluation_syllabes);
         
                                                                         phases_etudiees.push("syllabes_evaluation");
                                                                         niveau++;
         
-                                                                        /*La récuperation de ces variables stockées, dans programmes.php, permettra d"actualiser le programme*/
+                                                                     /*La récuperation de ces variables stockées, dans programmes.php, permettra d"actualiser le programme*/
                                                                         sessionStorage.setItem("phases_etudiees", JSON.stringify(phases_etudiees));
                                                             
                                                                         console.log("Lesson d'evaluation syllabes est envoyée à la base de donnée.");
@@ -1460,7 +1466,7 @@ function syllabes() {
                             }
                         }
                     }
-                    function consonnesChoisiesDuServeur(datas) {
+                    function consonnesEtudieesDuServeur(datas) {
                 
                         let cs = [];
                         let lesson = [];

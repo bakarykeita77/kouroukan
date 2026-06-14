@@ -422,7 +422,6 @@
     color: black;
     text-align: center;
 }
-#evaluation_btn { z-index: 0; }
 #submit_panneau {
     position: relative;
     width: 12rem;

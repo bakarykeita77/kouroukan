@@ -172,7 +172,6 @@
     height: calc(100vh - 3rem);
     width: 100vw;
     background-color: #fff;
-    overflow: auto;
 }
 #profile_resultat .resultat_general {
     top: 5rem;

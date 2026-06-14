@@ -361,13 +361,24 @@
     z-index: 1;
 }
 #reponse, #check_mark_container { vertical-align: top; }
+#teste_input_container, #teste_annexes_container{
+    display: inline-block;
+    vertical-align: top;
+    height: 100%;
+}
+#teste_input_container{
+    width: 70%;
+    right: 0;
+}
+#teste_input{
+    width: 100%;
+}
 #teste_annexes_container {
     position: absolute;
     top: 0.25rem;
     padding: 0;
     margin: 0;
     vertical-align: top;
-    height: 100%;
     width: 20%;
     left: 0;
 }

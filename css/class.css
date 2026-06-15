@@ -420,8 +420,9 @@ del {
     border: 1px solid #ccc;
     border-radius: 50%;
     cursor: pointer;
+    z-index: 1000;
 }
-.fermeture:hover { background-color: #aaa; font-weight: bold; }
+.fermeture:hover { background-color: #888; font-weight: bold; }
 .fermeture_de_parent:hover { background-color: #aaa; font-weight: bold; }
 .fermeture:active { background-color: #aaa; }
 .fermeture_de_parent:active { background-color: #aaa; }

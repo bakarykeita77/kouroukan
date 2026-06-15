@@ -1,29 +1,16 @@
 #fermer_resultat {
-    position: absolute;
     top: 3.5rem;
-    left: 0;
-    width: 1.5rem;
-    height: 1.5rem;
-    line-height: 1.5rem;
-    margin: 0.5rem;
-    font-size: 1.25rem;
-    text-align: center;
-    background-color: #fff;
-    border: 1px solid #aaa;
-    border-radius: 50%;
-    cursor: pointer;
-    overflow: auto;
-    z-index: 1;
+    z-index: 2;
+    transform: scale(1.5);
 }
 .resultat_general h3 { margin: 1rem 0 0; }
 #etudiant h1, #etudiant span { display:inline-block; margin: 0.25rem; }
 #resultat_titre h3, #etudiant { margin: 0.125rem 0.5rem; }
 #resultat_entete { 
     position: relative;
-    background-color: #ccc;
-    padding: 0.5rem;
-    border-bottom: 0.25rem solid #aaa;
-    z-index: 0;
+    border-bottom: 0.25rem solid #fff;
+    box-shadow: 0 0.25rem 0.5rem #aaa;
+    z-index: 1;
 }
 #resultat_entete table { width: 100%; }
 #resultat_entete table h3 { border: 1px solid #aaa; border-bottom-width: 4px; padding: 0.25rem; }
@@ -33,23 +20,20 @@
     padding: 0;
     margin: 0 auto;
     z-index: 1;
-    top: 0.125rem;
+    top: 0.5rem;
 }
 #resultat_matieres_liste ul { padding: 0; margin: 0; }
 #resultat_matieres_liste li { 
     display: inline-block; 
+    margin: 0 0.25rem;
     padding: 0.5rem 0.25rem;
-    margin: 0;
     list-style: none;
     width: max-content;
     cursor: pointer;
-    transition: 0.2s;
 }
-#resultat_matieres_liste li:not(.li_actif) {
-    border-radius: 0.25rem;
-    background-color: #ddd;
-    box-shadow: 0 0 0.5rem #888;
-    transition: 0.2s;
+#resultat_matieres_liste li:not(.li_actif) { 
+    background-color: #eee;
+    border-bottom: 0.125rem solid #aaa;
 }
 #resultat_matieres_liste li:not(.li_actif):hover {
     background-color: #ccc;
@@ -60,23 +44,28 @@
 }
 .li_actif { 
     position: relative;
-    top: 0.125rem;
-    border-radius: 0.5rem 0.5rem 0 0;
-    border: 0.25rem solid #aaa;
-    border-bottom-color: #fff;
-    background-color: #fff      ;
+    background-color: #bbb;
+    border-bottom: 0.125rem solid #888;
+    font-weight: bold;
+}
+#resultat_matieres_liste .li_actif::after {
+    position: absolute;
+    content: "\25B6";
+    transform: rotate(90deg) scale(3);
+    top: 2.75rem;
+    left: 40%;
+    color: #888;
 }
 #resultat_corps{
-    max-height: calc(100vh - 18rem);
+    max-height: calc(100vh - 20rem);
     overflow-y: auto;
-    min-height: 24rem;
+    z-index: 0;
 }
 #resultat_corps > div { border-bottom: 1px solid #bbb; }
 #resultat_pied {
-    position:relative;
     width: 100%;
-    background-color: #ccc;
-    border-top: 0.125rem solid #aaa;
+    border-top: 0.25rem solid #fff;
+    box-shadow: 0 -0.25rem 0.5rem #aaa;
 }
 #resultat_pied > div {
     position: relative;
@@ -110,11 +99,10 @@
     float: left;
 }
 #resultat_titre, #etudiant, #resultat_entete, #resultat_corps, #resultat_pied, #deliberation { padding: 0; }
-#resultat_entete { width: 100%; margin: 0; }
-#resultat_titre_container { width: max-content; margin: 0 auto 1rem; }
+#resultat_entete { width: 100%; margin: 0; z-index: 1; }
+#resultat_titre_container { width: max-content; margin: auto; }
 #resultat_titre, #etudiant, #resultat_corps, #resultat_pied, #deliberation { 
     position: relative;
-    top: 1rem;
     margin: 0 auto; 
 }
 #resultat_titre, #etudiant, #resultat_corps { max-width: 45rem; }
@@ -172,9 +160,10 @@
     #etudiant, #resultat_titre { display: block; }
     #resultat_matieres_liste ul li { top: 0; }
     #resultat_corps > div { width: 100%; padding: 0 0.5rem; }
+    #resultat_entete { height: 10rem; }
 }
 @media(orientation: landscape) {
     #etudiant, #resultat_titre { display: inline-block; }
-    #resultat_matieres_liste { top: 0.125rem; }
     #resultat_corps > div {  width: calc(100% - 4rem); padding: 0 2rem; }
+    #resultat_entete { height: 8rem; }
 }

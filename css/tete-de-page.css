@@ -174,7 +174,8 @@
     background-color: #fff;
 }
 #profile_resultat .resultat_general {
-    top: 5rem;
+    position: relative;
+    top: 1rem;
 }
 #profile_teste_content{
     background-color: #fff;

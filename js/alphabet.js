@@ -2153,7 +2153,7 @@ function alphabet() {
                                                     afficherBoutonPourLaMatiereSuivante();
                                                     continuSurSyllabe();
                                                 }
-                                                if(note_d_evaluation_alphabet < note_d_evaluation_alphabet)  {
+                                                if(note_d_evaluation_alphabet < note_d_evaluation_alphabet) {
                                                     setTimeout(() => {
                                                         ecris('evaluation_notification_corps','\
                                                         ߛߓߍߛߎ߲ ߞߘߐߓߐߟߌ ߡߊ߫ ߢߊ߬. ߌ ߖߌߖߊ߬ ߞߊ߬ ߛߍ߬ߦߌ߬ ߦߙߐ ߣߌ߲߬ ߡߊ߬. \
@@ -2178,7 +2178,7 @@ function alphabet() {
                                                     }, 4000);
                                                 }
                                                 function continuSurSyllabe() {
-                                                    $('#continu_sur_apprentissage_btn').html("<a id='redirection_sur_syllabes' href='http://localhost/php/programmes.php'>ߜߋ߲߭ ߥߟߊ߬ߘߊ ߘߊߡߌ߬ߘߊ߫ ߦߊ߲߬</a>");
+                                                    $('#continu_sur_apprentissage_btn').html("<a id='redirection_sur_syllabes' href='../php/programmes.php'>ߜߋ߲߭ ߥߟߊ߬ߘߊ ߘߊߡߌ߬ߘߊ߫ ߦߊ߲߬</a>");
                                                 }
                                             }
                                         }

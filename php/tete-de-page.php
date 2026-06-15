@@ -123,8 +123,8 @@
 				
 				<div id='profile_menu_container'>
 
-					<div id="client_name"><h2><? =$_SESSION['prenom'].' '.$_SESSION['nom']; ?></h2></div>
-					<div id="id_client" style="display: none"><? =$_SESSION["id_client"]; ?></div>
+					<div id="client_name"><h2><?= $_SESSION['prenom'].' '.$_SESSION['nom']; ?></h2></div>
+					<div id="id_client" style="display: none"><?= $_SESSION["id_client"]; ?></div>
 				
 					<div class="profile_menu">
 						

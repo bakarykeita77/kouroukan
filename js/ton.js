@@ -28,14 +28,14 @@ function ton() {
 
                 var matiere = matiereNom(datas[2]);
                 sessionStorage.setItem("matiere",JSON.stringify(matiere));
-                let phases_etudiees = phasesEtudieesDuServeur(datas);
+                let matiere_nom = JSON.parse(sessionStorage.getItem('matiere_nom'));
                 var niveau = JSON.parse(sessionStorage.getItem("niveau"));   // Voir programmes.js fonction storagesDuProgramme().
     
                 resultatGeneral(datas);
         
                 if (niveau === 3) {
                 
-                    let caracteres_selectionnees = [];
+                    let caracteres_selectionnees_du_panneau = [];
                     let tons_selectionnes = [];
                 
                     let lesson_d_apprentissage_tons_du_serveur = lessonDApprentissageDuServeur(datas);
@@ -136,12 +136,10 @@ function ton() {
                                 afficherLePanneauDesCaracteres();
                                 selectionnerLesTons(ton_actif);
                                 enregistrerLeTon(ton_actif);
-                                enregistrerLeCaractere(caracteres_selectionnees,ton_actif); 
-
-                                etudierLessonDeTonApprentissage(caracteres_selectionnees);
-
+                                enregistrerLeCaractere(caracteres_selectionnees_du_panneau,ton_actif); 
+                                etudierLessonDeTonApprentissage(caracteres_selectionnees_du_panneau);
                             
-                                function etudierLessonDeTonApprentissage(caracteres_selectionnees=[]) {
+                                function etudierLessonDeTonApprentissage(caracteres_selectionnees_du_panneau=[]) {
                                             
                                     chargerPanneauSubmitBtn();
 
@@ -152,8 +150,8 @@ function ton() {
                                         let voyelle_active = span.textContent;
                                         
                                         selectionnerLesVoyellesDuPanneau();
-                                        selectionnerLesConsonnesDuPanneau();
                                         cocherLesVoyellesCorrespondantesDeParametre(voyelle_active);
+                                        selectionnerLesConsonnesDuPanneau();
                                         cocherLesConsonnesCorrespondantsDeParametre();
                                         rechargerPanneauSubmitBtn();
                                         initialiserProgressBar();
@@ -161,22 +159,22 @@ function ton() {
                                         chargerLesson();
                                         lectureDuTon();
                                         lectureDesTons();
-                                        //enregistrerLessonDeTonApprentissage();
+                                        enregistrerLessonDeTonApprentissage();
                                         //progressBarrDeLessonDeTonApprentissage();
                                         //finDeLessonDeTonApprentissage();
                                         
                                         function selectionnerLesVoyellesDuPanneau() {
-                                            let voyelle_index = caracteres_selectionnees.indexOf(voyelle_active);
-                                            if(voyelle_index == -1) enregistrerLeCaractere(caracteres_selectionnees,voyelle_active);
-                                            if(voyelle_index != -1) caracteres_selectionnees.splice(voyelle_index,1);
+                                            let voyelle_index = caracteres_selectionnees_du_panneau.indexOf(voyelle_active);
+                                            if(voyelle_index == -1) enregistrerLeCaractere(caracteres_selectionnees_du_panneau,voyelle_active);
+                                            if(voyelle_index != -1) caracteres_selectionnees_du_panneau.splice(voyelle_index,1);
                                         }
                                         function selectionnerLesConsonnesDuPanneau() {
                                             deSelectionnerTous($("#consonnes_container span"));
-                                            selectionDesConsonnesDuPanneau($("#consonnes_container span"),caracteres_selectionnees);
+                                            selectionDesConsonnesDuPanneau($("#consonnes_container span"),caracteres_selectionnees_du_panneau);
                                         }
                                         function cocherLesConsonnesCorrespondantsDeParametre() {
 
-                                            let consonnes_a_selectionner = consonnesASelectionner(caracteres_selectionnees);
+                                            let consonnes_a_selectionner = consonnesASelectionner(caracteres_selectionnees_du_panneau);
 
                                             decocherToutesLesConsonnes($("#consonnes_checker input"));
                                             consonnes_a_selectionner.forEach(element => { cocherLaConsonne(element); });
@@ -188,7 +186,7 @@ function ton() {
                                                     if(consonne == consonne_de_parametre) {
                                                         $("#consonnes_checker input")[i].click();
                                                         if(matiere_nom == "ߜߋ߲߭") {
-                                                            if($.inArray(consonne, caracteres_selectionnees) == -1) {
+                                                            if($.inArray(consonne, caracteres_selectionnees_du_panneau) == -1) {
                                                                 setTimeout(() => { $(".parametres_container #submit_btn").click(); }, 800); }else{
                                                                 $(".parametres_container #submit_btn").click();
                                                             }
@@ -204,13 +202,13 @@ function ton() {
                                                             let td = $(this);
                                                             let caractere_du_tableau = td.text().split("")[0];
                                         
-                                                            if(caracteres_selectionnees.indexOf(caractere) != -1) {
+                                                            if(caracteres_selectionnees_du_panneau.indexOf(caractere) != -1) {
                                                                 if(caractere == caractere_du_tableau) {
                                                                     td.css("opacity",0);
                                                                     setTimeout(() => { td.css("opacity",1); }, 100*td.index());
                                                                 }
                                                             }
-                                                            if(caracteres_selectionnees.indexOf(caractere) == -1) {
+                                                            if(caracteres_selectionnees_du_panneau.indexOf(caractere) == -1) {
                                                                 if(caractere == caractere_du_tableau) {
                                                                     td.css("opacity",1);
                                                                     setTimeout(() => { td.css("opacity",0); }, 100*(7 - td.index()));
@@ -220,6 +218,44 @@ function ton() {
                                                     });
                                                 }
                                             }
+                                        }
+                                        function selectionDesConsonnesDuPanneau(consonnes,caracteres_selectionnees) {
+                                            let consonnes_a_selectionner = consonnesASelectionner(caracteres_selectionnees);
+                                                         
+                                            consonnes_a_selectionner.forEach(element => { 
+                                                $.each(consonnes, function() {
+                                                let consonne = $(this).text();
+                                                    if(consonne == element) {
+                                                        $(this).click();
+                                                        enregistrerLeCaractere(caracteres_selectionnees,consonne);
+                                                    }
+                                                });
+                                            });
+                                        }
+                                        function consonnesASelectionner(caracteres_selectionnees) {
+                                    
+                                            let syllabes_1 = ["ߓߊ","ߛߊ","ߕߊ","ߜߊ"];
+                                            let syllabes_2 = ["ߞߋ"];
+                                            let syllabes_3 = ["ߓߌ","ߛߌ","ߟߌ","ߣߌ"];
+                                            let syllabes_4 = ["ߝߍ","ߣߍ"];
+                                            let syllabes_5 = ["ߝߎ"];
+                                            let syllabes_6 = ["ߓߏ","ߔߏ","ߛߏ","ߝߏ"];
+                                            let syllabes_7 = ["ߣߐ"];
+                                    
+                                            let consonnes_a_cocher = [];
+                                            let nombre_maximal_de_ligne = 4;
+                                    
+                                            caracteres_selectionnees.forEach(element => {
+                                                if(element == "ߊ") { for (let i = 0; i < syllabes_1.length; i++) pusher(consonnes_a_cocher,syllabes_1[i].split("")[0]); }
+                                                if(element == "ߋ") { for (let i = 0; i < syllabes_2.length; i++) pusher(consonnes_a_cocher,syllabes_2[i].split("")[0]); }
+                                                if(element == "ߌ") { for (let i = 0; i < syllabes_3.length; i++) pusher(consonnes_a_cocher,syllabes_3[i].split("")[0]); }
+                                                if(element == "ߍ") { for (let i = 0; i < syllabes_4.length; i++) pusher(consonnes_a_cocher,syllabes_4[i].split("")[0]); }
+                                                if(element == "ߎ") { for (let i = 0; i < syllabes_5.length; i++) pusher(consonnes_a_cocher,syllabes_5[i].split("")[0]); }
+                                                if(element == "ߏ") { for (let i = 0; i < syllabes_6.length; i++) pusher(consonnes_a_cocher,syllabes_6[i].split("")[0]); }
+                                                if(element == "ߐ") { for (let i = 0; i < syllabes_7.length; i++) pusher(consonnes_a_cocher,syllabes_7[i].split("")[0]); }
+                                            });
+                                    
+                                            return consonnes_a_cocher;
                                         }
                                         function rechargerPanneauSubmitBtn() {
                                             let voyelles_deja_selectionnees = voyellesDejaSelectionnees();
@@ -338,7 +374,16 @@ function ton() {
                                                 });
                                             });
                                         }
-                                        function enregistrerLessonDeTonApprentissage() {}
+                                        function enregistrerLessonDeTonApprentissage() {
+
+                                            let lesson_intitiale = initialiserLaLessonDApprentissage();
+                                            function initialiserLaLessonDApprentissage() {
+                                                let lesson_intitiale = [];
+
+
+                                                return lesson_intitiale;
+                                            }
+                                        }
                                         function progressBarrDeLessonDeTonApprentissage() {}
                                         function finDeLessonDeTonApprentissage() {}
                                     });

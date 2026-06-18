@@ -1,4 +1,4 @@
- <!--Les éléments de paramètres sont chargés depuis js/parametres.js-->
+<!--Les éléments de paramètres sont chargés depuis js/parametres.js-->
     <div class='parametres_popup'>
         <table id='table1'>
             <tr id='tr11'>

@@ -845,7 +845,7 @@ del {
 }
 .parametres_container {
     position: absolute;
-    display: none;
+    /* display: none; */
     top: -32rem;
     width: max-content;
     height: max-content;
@@ -876,6 +876,8 @@ del {
     overflow: auto;
     z-index: 1000;
 }
+.parametres_popup #table2 {width: 100%; text-align: center; }
+.parametres_popup #table2 input {width: 50%; }
 .parentgrid { display: grid; }
 .parentcell { display: table-cell; vertical-align: middle; }
 .diagram_circulaire {

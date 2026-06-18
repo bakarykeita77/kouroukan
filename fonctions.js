@@ -817,45 +817,53 @@
          setTimeout((function() { td.removeClass('shadow'); }), 1800);
     }
     function cocherLeCaractereCorrespondantDeParametre(caractere) {
-            for (let i = 0; i < $(".parametres_container input").length; i++) {
-                let caractere_de_parametre = $(".parametres_container input")[i].value;
 
-                if(caractere == caractere_de_parametre) {
-                    $(".parametres_container input")[i].click();
-                    if(matiere_nom == "ߜߋ߲߭") {
-                        if($.inArray(caractere, caracteres_selectionnees) == -1) {
-                            setTimeout(() => { $(".parametres_container #submit_btn").click(); }, 800); }else{
-                            $(".parametres_container #submit_btn").click();
-                        }
+        let caracteres_selectionnees = JSON.parse(sessionStorage.getItem("caracteres_selectionnees"));
+
+        for (let i = 0; i < $(".parametres_container input").length; i++) {
+            let caractere_de_parametre = $(".parametres_container input")[i].value;
+
+console.log("matiere_nom");
+console.log(matiere_nom);
+            if(caractere == caractere_de_parametre) {
+                $(".parametres_container input")[i].click();
+                if(matiere_nom == "ߜߋ߲߭") {
+                    if($.inArray(caractere, caracteres_selectionnees) == -1) {
+                        setTimeout(() => { $(".parametres_container #submit_btn").click(); }, 800); }else{
+                        $(".parametres_container #submit_btn").click();
                     }
                 }
             }
-            affichageAnimeDesSyllabes();
+        }
+        affichageAnimeDesSyllabes();
 
-            function affichageAnimeDesSyllabes() {
-                $.each($(".table_parlante td"), function(e) {
+        function affichageAnimeDesSyllabes() {
+            $.each($(".table_parlante td"), function(e) {
 
-                    if(matiere_nom == "ߜߋ߲߭") {
-                        let td = $(this);
-                        let caractere_du_tableau = td.text().split("")[0];
+                if(matiere_nom == "ߜߋ߲߭") {
+                    let td = $(this);
+                    let caractere_du_tableau = td.text().split("")[0];
 
-                        if(caracteres_selectionnees.indexOf(caractere) != -1) {
-                            if(caractere == caractere_du_tableau) {
-                                td.css("opacity",0);
-                                setTimeout(() => { td.css("opacity",1); }, 100*td.index());
-                            }
-                        }
-                        if(caracteres_selectionnees.indexOf(caractere) == -1) {
-                            if(caractere == caractere_du_tableau) {
-                                td.css("opacity",1);
-                                setTimeout(() => { td.css("opacity",0); }, 100*(7 - td.index()));
-                            }
+                    if(caracteres_selectionnees.indexOf(caractere) != -1) {
+                        if(caractere == caractere_du_tableau) {
+                            td.css("opacity",0);
+                            setTimeout(() => { td.css("opacity",1); }, 100*td.index());
                         }
                     }
-                });
-            }
+                    if(caracteres_selectionnees.indexOf(caractere) == -1) {
+                        if(caractere == caractere_du_tableau) {
+                            td.css("opacity",1);
+                            setTimeout(() => { td.css("opacity",0); }, 100*(7 - td.index()));
+                        }
+                    }
+                }
+            });
+        }
     }
     function cocherLesTonsCorrespondantsDeParametre(ton) {
+
+        let caracteres_selectionnees = JSON.parse(sessionStorage.getItem("caracteres_selectionnees"));
+
         for (let i = 0; i < $("#tons_checker input").length; i++) {
             let ton_de_parametre = $("#tons_checker input")[i].value;
 
@@ -895,6 +903,9 @@
         }
     }
     function cocherLesVoyellesCorrespondantesDeParametre(voyelle) {
+
+            let caracteres_selectionnees = JSON.parse(sessionStorage.getItem("caracteres_selectionnees"));                               
+ 
             for (let i = 0; i < $("#voyelles_checker input").length; i++) {
                 let voyelle_de_parametre = $("#voyelles_checker input")[i].value;
 
@@ -1008,31 +1019,6 @@
         }
 
         return consonnes_exercees
-    }
-    function consonnesASelectionner(caracteres_selectionnees) {
-
-        let syllabes_1 = ["ߓߊ","ߛߊ","ߕߊ","ߜߊ"];
-        let syllabes_2 = ["ߞߋ"];
-        let syllabes_3 = ["ߓߌ","ߛߌ","ߟߌ","ߣߌ"];
-        let syllabes_4 = ["ߝߍ","ߣߍ"];
-        let syllabes_5 = ["ߝߎ"];
-        let syllabes_6 = ["ߓߏ","ߔߏ","ߛߏ","ߝߏ"];
-        let syllabes_7 = ["ߣߐ"];
-
-        let consonnes_a_cocher = [];
-        let nombre_maximal_de_ligne = 4;
-
-        caracteres_selectionnees.forEach(element => {
-            if(element == "ߊ") { for (let i = 0; i < syllabes_1.length; i++) pusher(consonnes_a_cocher,syllabes_1[i].split("")[0]); }
-            if(element == "ߋ") { for (let i = 0; i < syllabes_2.length; i++) pusher(consonnes_a_cocher,syllabes_2[i].split("")[0]); }
-            if(element == "ߌ") { for (let i = 0; i < syllabes_3.length; i++) pusher(consonnes_a_cocher,syllabes_3[i].split("")[0]); }
-            if(element == "ߍ") { for (let i = 0; i < syllabes_4.length; i++) pusher(consonnes_a_cocher,syllabes_4[i].split("")[0]); }
-            if(element == "ߎ") { for (let i = 0; i < syllabes_5.length; i++) pusher(consonnes_a_cocher,syllabes_5[i].split("")[0]); }
-            if(element == "ߏ") { for (let i = 0; i < syllabes_6.length; i++) pusher(consonnes_a_cocher,syllabes_6[i].split("")[0]); }
-            if(element == "ߐ") { for (let i = 0; i < syllabes_7.length; i++) pusher(consonnes_a_cocher,syllabes_7[i].split("")[0]); }
-        });
-
-        return consonnes_a_cocher;
     }
     function consonnesChoisiesDuServeur(datas) {
    
@@ -2833,19 +2819,6 @@
         tr.siblings().unwrap();
         $('#traducteur').remove();
         tr.wrap('<div id="tr_actif"></div>');
-    }
-    function selectionDesConsonnesDuPanneau(consonnes,caracteres_selectionnees) {
-        let consonnes_a_selectionner = consonnesASelectionner(caracteres_selectionnees);
-                     
-        consonnes_a_selectionner.forEach(element => { 
-            $.each(consonnes, function() {
-            let consonne = $(this).text();
-                if(consonne == element) {
-                    $(this).click();
-                    enregistrerLeCaractere(caracteres_selectionnees,consonne);
-                }
-            });
-        });
     }
     function selectionnerLeCaractere(caractere) {
         $.each($("#caracteres_container span"), function() {

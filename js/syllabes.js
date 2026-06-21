@@ -317,7 +317,7 @@ function syllabes() {
                                 $(".notification_titre").html("ߜߋ߲߭ ߡߊ߬ߞߟߏ߬ߟߌ");
                             }
                             function chargerCorpsDExerciceSyllabe() {
-                                let exercice_body_html = lessonHTML(malaxer(syllabes_actives), "");
+                                let exercice_body_html = lessonHTML1(malaxer(syllabes_actives), "");
                                 $("#exercice_body").html(exercice_body_html);
                             }
                             function chargerPiedDExerciceSyllabe() {
@@ -692,7 +692,7 @@ function syllabes() {
                                 function revisionBodyHTML() {
     
                                     syllabes_a_reviser = syllabesAReviser();
-                                    let rbh = lessonHTML(syllabes_a_reviser, "");
+                                    let rbh = lessonHTML1(syllabes_a_reviser, "");
                                     return rbh;
     
                                     function syllabesAReviser() {

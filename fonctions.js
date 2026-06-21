@@ -39,6 +39,29 @@
             return as;
         }
     }
+    function affichageAnimeDesSyllabes(caracteres_selectionnees=[],caractere="") {
+        $.each($(".table_parlante td"), function(e) {
+            let matiere_nom = JSON.parse(sessionStorage.getItem("matiere_nom"));
+
+            if(matiere_nom == "ߜߋ߲߭") {
+                let td = $(this);
+                let caractere_du_tableau = td.text().split("")[0];
+
+                if(caracteres_selectionnees.indexOf(caractere) != -1) {
+                    if(caractere == caractere_du_tableau) {
+                        td.css("opacity",0);
+                        setTimeout(() => { td.css("opacity",1); }, 100*td.index());
+                    }
+                }
+                if(caracteres_selectionnees.indexOf(caractere) == -1) {
+                    if(caractere == caractere_du_tableau) {
+                        td.css("opacity",1);
+                        setTimeout(() => { td.css("opacity",0); }, 100*(7 - td.index()));
+                    }
+                }
+            }
+        });
+    }
     function affichageAnimeDeTableTd(table) {
         
         let tr = $('tr', table);
@@ -429,7 +452,6 @@
             if($('#afficheur_de_panneau').text() == "ߛߌ߬ߙߕߊ߬ ߥߟߊ ߦߌ߬ߘߊ߬") {
                 ecris("apprentissage_notification_corps", "ߛߌ߬ߙߕߊ߬ ߞߋߟߋ߲߫ ߥߟߊ ߛߌߦߊߡߊ߲߫ ߛߎߥߊ߲ߘߌ߫߸ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߡߍ߲ ߠߎ߬ ߜߋ߲߭ ߠߎ߬ ߘߋ߲߰");
             }
-    
         }
         if ($('.table_parlante tr').length != 0) ecris("apprentissage_notification_corps", "ߜߋ߲߭ ߢߌ߲߬ ߠߎ߫ ߞߋ߬ߟߋ߲߬ ߞߋ߬ߟߋ߲߬ ߘߋ߲߯ ߤߊ߲߯ ߊ߬ߟߎ߬ ߦߋ߫ ߕߴߌ ߞߣߐ߫.");
     }
@@ -623,29 +645,6 @@
                         }
                     }
                     affichageAnimeDesSyllabes();
-
-                    function affichageAnimeDesSyllabes() {
-                        $.each($(".table_parlante td"), function(e) {
-    
-                            if(matiere_nom == "ߜߋ߲߭") {
-                                let td = $(this);
-                                let caractere_du_tableau = td.text().split("")[0];
-    
-                                if(caracteres_choisis_du_panneau.indexOf(caractere_du_panneau) != -1) {
-                                    if(caractere_du_panneau == caractere_du_tableau) {
-                                        td.css("opacity",0);
-                                        setTimeout(() => { td.css("opacity",1); }, 100*td.index());
-                                    }
-                                }
-                                if(caracteres_choisis_du_panneau.indexOf(caractere_du_panneau) == -1) {
-                                    if(caractere_du_panneau == caractere_du_tableau) {
-                                        td.css("opacity",1);
-                                        setTimeout(() => { td.css("opacity",0); }, 100*(7 - td.index()));
-                                    }
-                                }
-                            }
-                        });
-                    }
                 });
             }
         }
@@ -733,9 +732,9 @@
             var html_2 = '<div id="caracteres_cadre">\n';
                 html_2 += '<div id="caracteres_container">\n';
 
-                    html_2 += '<div id="panneau_submit_btn_container">\n';
-                        html_2 += '<button id="panneau_submit"></button>\n';
-                    html_2 += '</div>\n';
+                    // html_2 += '<div id="panneau_submit_btn_container">\n';
+                    //     html_2 += '<button id="panneau_submit"></button>\n';
+                    // html_2 += '</div>\n';
                 
                     html_2 += "<div id='consonnes_container'>\n";
                     for (var i = 0; i < 18; i += 6) {
@@ -823,8 +822,6 @@
         for (let i = 0; i < $(".parametres_container input").length; i++) {
             let caractere_de_parametre = $(".parametres_container input")[i].value;
 
-console.log("matiere_nom");
-console.log(matiere_nom);
             if(caractere == caractere_de_parametre) {
                 $(".parametres_container input")[i].click();
                 if(matiere_nom == "ߜߋ߲߭") {
@@ -835,30 +832,7 @@ console.log(matiere_nom);
                 }
             }
         }
-        affichageAnimeDesSyllabes();
-
-        function affichageAnimeDesSyllabes() {
-            $.each($(".table_parlante td"), function(e) {
-
-                if(matiere_nom == "ߜߋ߲߭") {
-                    let td = $(this);
-                    let caractere_du_tableau = td.text().split("")[0];
-
-                    if(caracteres_selectionnees.indexOf(caractere) != -1) {
-                        if(caractere == caractere_du_tableau) {
-                            td.css("opacity",0);
-                            setTimeout(() => { td.css("opacity",1); }, 100*td.index());
-                        }
-                    }
-                    if(caracteres_selectionnees.indexOf(caractere) == -1) {
-                        if(caractere == caractere_du_tableau) {
-                            td.css("opacity",1);
-                            setTimeout(() => { td.css("opacity",0); }, 100*(7 - td.index()));
-                        }
-                    }
-                }
-            });
-        }
+        affichageAnimeDesSyllabes(caracteres_selectionnees,caractere);
     }
     function cocherLesTonsCorrespondantsDeParametre(ton) {
 
@@ -877,72 +851,26 @@ console.log(matiere_nom);
                 }
             }
         }
-        affichageAnimeDesSyllabes();
-
-        function affichageAnimeDesSyllabes() {
-            $.each($(".table_parlante td"), function(e) {
-
-                if(matiere_nom == "ߜߋ߲߭") {
-                    let td = $(this);
-                    let caractere_du_tableau = td.text().split("")[0];
-
-                    if(caracteres_selectionnees.indexOf(caractere) != -1) {
-                        if(caractere == caractere_du_tableau) {
-                            td.css("opacity",0);
-                            setTimeout(() => { td.css("opacity",1); }, 100*td.index());
-                        }
-                    }
-                    if(caracteres_selectionnees.indexOf(caractere) == -1) {
-                        if(caractere == caractere_du_tableau) {
-                            td.css("opacity",1);
-                            setTimeout(() => { td.css("opacity",0); }, 100*(7 - td.index()));
-                        }
-                    }
-                }
-            });
-        }
+        affichageAnimeDesSyllabes(caracteres_selectionnees,ton);
     }
     function cocherLesVoyellesCorrespondantesDeParametre(voyelle) {
 
-            let caracteres_selectionnees = JSON.parse(sessionStorage.getItem("caracteres_selectionnees"));                               
- 
-            for (let i = 0; i < $("#voyelles_checker input").length; i++) {
-                let voyelle_de_parametre = $("#voyelles_checker input")[i].value;
+        let caracteres_selectionnees = JSON.parse(sessionStorage.getItem("caracteres_selectionnees"));                               
 
-                if(voyelle == voyelle_de_parametre) {
-                    $("#voyelles_checker input")[i].click();
-                    if(matiere_nom == "ߜߋ߲߭") {
-                        if($.inArray(voyelle, caracteres_selectionnees) == -1) {
-                            setTimeout(() => { $(".parametres_container #submit_btn").click(); }, 800); }else{
-                            $(".parametres_container #submit_btn").click();
-                        }
+        for (let i = 0; i < $("#voyelles_checker input").length; i++) {
+            let voyelle_de_parametre = $("#voyelles_checker input")[i].value;
+
+            if(voyelle == voyelle_de_parametre) {
+                $("#voyelles_checker input")[i].click();
+                if(matiere_nom == "ߜߋ߲߭") {
+                    if($.inArray(voyelle, caracteres_selectionnees) == -1) {
+                        setTimeout(() => { $(".parametres_container #submit_btn").click(); }, 800); }else{
+                        $(".parametres_container #submit_btn").click();
                     }
                 }
             }
-            affichageAnimeDesSyllabes();
-
-            function affichageAnimeDesSyllabes() {
-                $.each($(".table_parlante td"), function(e) {
-
-                    if(matiere_nom == "ߜߋ߲߭") {
-                        let td = $(this);
-                        let caractere_du_tableau = td.text().split("")[0];
-
-                        if(caracteres_selectionnees.indexOf(caractere) != -1) {
-                            if(caractere == caractere_du_tableau) {
-                                td.css("opacity",0);
-                                setTimeout(() => { td.css("opacity",1); }, 100*td.index());
-                            }
-                        }
-                        if(caracteres_selectionnees.indexOf(caractere) == -1) {
-                            if(caractere == caractere_du_tableau) {
-                                td.css("opacity",1);
-                                setTimeout(() => { td.css("opacity",0); }, 100*(7 - td.index()));
-                            }
-                        }
-                    }
-                });
-            }
+        }
+        affichageAnimeDesSyllabes(caracteres_selectionnees,voyelle);
     }
     function cocherLeTedo() {
         $.each($('#tedo_checker .checkbox_parent'), function(){ 
@@ -1224,10 +1152,55 @@ console.log(matiere_nom);
     }
     function effacerLeTableau() {
         $('.course_body').html("<p id='contenu_par_defaut_du_tableau'>ߥߟߊ߬ߓߊ ߓߘߊ߫ ߖߐ߬ߛߌ߬ ߹</p>");
-    }  
+    } 
     function enregistrerLeCaractere(caracteres_selectionnees,caractere) {
         let caractere_index = caracteres_selectionnees.indexOf(caractere);
         if(caractere_index === -1) { caracteres_selectionnees.push(caractere); }
+    } 
+    function enregistrerLesConsonnes(caracteres_selectionnees,caractere) {
+        if(caracteres_selectionnees[0].indexOf(caractere) === -1) {
+            if(caracteres[1].indexOf(caractere) !== -1) { caracteres_selectionnees[0].push(caractere); }
+        }else{ 
+            let consonne_index = caracteres_selectionnees[0].indexOf(caractere);
+            caracteres_selectionnees[0].splice(consonne_index,1); 
+        }
+        sessionStorage.setItem("tons_selectionnes", JSON.stringify(caracteres_selectionnees));
+    }
+    function enregistrerLesVoyelles(caracteres_selectionnees,caractere) {
+        if(caracteres_selectionnees[1].indexOf(caractere) === -1) {
+            if(caracteres[0].indexOf(caractere) !== -1) { caracteres_selectionnees[1].push(caractere); }
+        }else{ 
+            let voyelle_index = caracteres_selectionnees[1].indexOf(caractere);
+            caracteres_selectionnees[1].splice(voyelle_index,1); 
+        }
+        sessionStorage.setItem("tons_selectionnes", JSON.stringify(caracteres_selectionnees));
+    }
+    function enregistrerLesTons(caracteres_selectionnees,caractere) {
+        if(caracteres_selectionnees[2].indexOf(caractere) === -1) {
+            if(caracteres[5].indexOf(caractere) !== -1) { caracteres_selectionnees[2].push(caractere); }
+        }else{ 
+            let ton_index = caracteres_selectionnees[2].indexOf(caractere);
+            caracteres_selectionnees[2].splice(ton_index,1); 
+        }
+        sessionStorage.setItem("tons_selectionnes", JSON.stringify(caracteres_selectionnees));
+    }
+    function enregistrerLaNasalisation(caracteres_selectionnees,caractere) {
+        if(caracteres_selectionnees[3].indexOf(caractere) === -1) {
+            if(caracteres[4].indexOf(caractere) !== -1) { caracteres_selectionnees[3].push(caractere); }
+        }else{ 
+            let nasalisation_index = caracteres_selectionnees[3].indexOf(caractere);
+            caracteres_selectionnees[3].splice(nasalisation_index,1); 
+        }
+        sessionStorage.setItem("tons_selectionnes", JSON.stringify(caracteres_selectionnees));
+    }
+    function enregistrerLeTedo(caracteres_selectionnees,caractere) {
+        if(caracteres_selectionnees[4].indexOf(caractere) === -1) {
+            if(caracteres[3].indexOf(caractere) !== -1) { caracteres_selectionnees[4].push(caractere); }
+        }else{ 
+            let tedo_index = caracteres_selectionnees[4].indexOf(caractere);
+            caracteres_selectionnees[4].splice(tedo_index,1); 
+        }
+        sessionStorage.setItem("tons_selectionnes", JSON.stringify(caracteres_selectionnees));
     }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
@@ -1524,7 +1497,7 @@ console.log(matiere_nom);
             },600);
          });
     }
-    function lessonHTML(array, table_id = '#') {
+    function lessonHTML1(array, table_id = '#') {
 
         var table = "<table class = 'table_parlante' id='"+table_id+"'>\n";
 
@@ -1541,6 +1514,62 @@ console.log(matiere_nom);
         table += "</table>";
                 
         return table;
+    }
+    function lessonHTML2() {
+
+        let tons_apprentissage_html = "";
+        let caracteres_actifs = JSON.parse(sessionStorage.getItem("caracteres_coches"));
+        let caracteres_coches = caracteresCoches(caracteres_actifs);
+
+        let voyelle_aleatoire      = Math.floor(Math.random()*caracteres_coches[0].length);
+        let consonne_aleatoire     = Math.floor(Math.random()*caracteres_coches[1].length);
+        let nasalisation_aleatoire = Math.floor(Math.random()*caracteres_coches[4].length);
+        let ton_aleatoire          = Math.floor(Math.random()*caracteres_coches[5].length);
+     
+        if(caracteres_coches[0].length != 0) {
+
+            tons_apprentissage_html += " \
+                <div class='tables_de_tons' id='table_vocale'> \
+                    <div class='table_titre'>ߝߐߢߊ</div> \
+                    <div>"+tableLitteraleHTML()+"</div> \
+                </div>\
+                <div id='fleche'><i class='fa-solid fa-arrow-right-long'></i></div>\
+                <div class='tables_de_tons' id='table_litterale'> \
+                    <div class='table_titre'>ߛߓߍߢߊ</div> \
+                    <div>"+tableVocaleHTML()+"</div> \
+                </div>\
+            ";
+
+            function tableLitteraleHTML() {
+                let table_html = "";
+
+                table_html += "<p>"+caracteres_coches[1][consonne_aleatoire]+caracteres_coches[0][voyelle_aleatoire]+caracteres_coches[5][0]+"</p>";
+                table_html += "<p id='plus'><i class='fa-solid fa-plus'></i></p>";
+                table_html += "<p>"+caracteres_coches[1][consonne_aleatoire]+caracteres_coches[0][voyelle_aleatoire]+"</p>";
+                
+                return table_html;
+            }
+            function tableVocaleHTML() {
+                return "<p>"+caracteres_coches[1][consonne_aleatoire]+caracteres_coches[0][voyelle_aleatoire]+caracteres_coches[1][consonne_aleatoire]+caracteres_coches[0][voyelle_aleatoire]+"</p>";
+            }
+        }else{
+            tons_apprentissage_html += "";                
+        }
+                  
+        return tons_apprentissage_html;
+    }
+    function caracteresCoches(caracteres_actifs) {
+        let caracteres_coches = [[],[],[],[],[],[]];
+        
+        for (let i = 0; i < caracteres_actifs.length; i++) {
+            let element = caracteres_actifs[i];
+            for (let j = 0; j < caracteres_coches.length; j++) {
+                let index = caracteres_coches[j].indexOf(element);
+                if(caracteres[j].indexOf(element) != -1) if(index === -1) caracteres_coches[j].push(element);
+            }
+        }
+
+        return caracteres_coches;
     }
     function lessonHTML3(array, table_id = '#') {
 
@@ -1575,25 +1604,6 @@ console.log(matiere_nom);
         table += "</table>";
                 
         return table;
-    }
-    function lessonHTML2(voyelles_length,tons_length,syllabes_tonifies_length,syllabes_tonifies) {
-           
-        var tons_apprentissage_html = "";
-        var m = voyelles_length*tons_length;
-                    
-        for(var sous_table_index=0; sous_table_index<syllabes_tonifies_length; sous_table_index+=m){
-            tons_apprentissage_html += '<table class="table_parlante">\n\n';
-            for(var ligne=0;ligne<m;ligne+=tons_length){
-                tons_apprentissage_html += '<tr>\n';
-                for(var colonne=0;colonne<tons_length;colonne++){
-                    tons_apprentissage_html += '<td>'+syllabes_tonifies[sous_table_index+ligne+colonne]+'</td>\n';
-                }
-                tons_apprentissage_html += '</tr>\n\n';
-            }
-            tons_apprentissage_html += "</table>\n";
-        }
-                   
-        return tons_apprentissage_html;
     }
     function lessonSuivante(lesson_en_cours) {
         let ls = "";
@@ -2122,10 +2132,6 @@ console.log(matiere_nom);
 		
 		son.play();
 	}
-    function pusher(tableau,element) {
-        let element_index = tableau.indexOf(element);
-        if(element_index === -1) { tableau.push(element); }
-    }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
 

@@ -306,15 +306,12 @@ function parametrageDeLesson(datas) {
                 var table_d_apprentissage_alphabet_html = "";
                 var table_d_apprentissage_syllabes_html = "";
 
-                if(niveau == 1) table_d_apprentissage_alphabet_html = (option_retenue === 1) ? chargerCorpsDePreAlphabet() : lessonHTML(lettres_cochees, 'table_alphabet_apprentissage');
-                if(niveau == 2) table_d_apprentissage_syllabes_html = lessonHTML(syllabes_simples_coches, 'table_syllabes_apprentissage');
-
+                if(niveau == 1) apprentissage_html = (option_retenue === 1) ? chargerCorpsDePreAlphabet() : lessonHTML1(lettres_cochees, 'table_alphabet_apprentissage');
+                if(niveau == 2) apprentissage_html = lessonHTML1(syllabes_simples_coches, 'table_syllabes_apprentissage');
+                // if(niveau == 3) apprentissage_html = lessonHTML2(voyelles_length,tons_length,syllabes_tonifies_length,syllabes_tonifies);
+                if(niveau == 3) apprentissage_html = lessonHTML2();
+                if(niveau == 4) apprentissage_html = lessonHTML1(chiffres, 'table_chiffre_apprentissage');
                 
-                if(niveau == 1) apprentissage_html = table_d_apprentissage_alphabet_html;
-                if(niveau == 2) apprentissage_html = table_d_apprentissage_syllabes_html;
-                if(niveau == 3) apprentissage_html = lessonHTML2(voyelles_length,tons_length,syllabes_tonifies_length,syllabes_tonifies);
-                if(niveau == 4) apprentissage_html = lessonHTML(chiffres, 'table_chiffre_apprentissage');
-
                 return apprentissage_html;
             }
             function exerciceHTML() {

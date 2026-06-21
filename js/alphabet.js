@@ -545,7 +545,7 @@ function alphabet() {
                                 $('#continu_sur_alphabet_evaluation_btn').html('<p>ߛߓߍߛߎ߲ ߞߘߐߓߐߟߌ ߞߍ߫</p>');
                             }
                             function chargerCorpsDExercicePreAlphabet() {
-                                var exercice_body_html = lessonHTML(exercice_pre_questions, '');
+                                var exercice_body_html = lessonHTML1(exercice_pre_questions, '');
                                 $('#exercice_body').html(exercice_body_html);
 
                             /*revision body est chargé mais doit etre invisible jusqu'à l'éxécution de la fonction afficherRevisionAlphabet()*/
@@ -835,7 +835,7 @@ function alphabet() {
                                 $('#continu_sur_alphabet_evaluation_btn').html(matiere_nom+'  ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߥߴߊ߬ ߡߊ߬');
                             }
                             function chargerCorpsDePreRevisionAlphabet() {
-                                var revision_body_html =  lessonHTML(evaluation_pre_questions, '');
+                                var revision_body_html =  lessonHTML1(evaluation_pre_questions, '');
                                 $('#revision_body').html(revision_body_html);
 
                             /*revision body est chargé mais doit etre invisible jusqu'à l'éxécution de la fonction afficherEvaluationPreAlphabet()*/

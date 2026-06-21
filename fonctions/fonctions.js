@@ -10,7 +10,7 @@
 	function appetir_caractere_de(element) { element.css( 'font-size','-=32px' ); }
     function arreterLecture(lessonHTML){
         $('.stop_icon').parent().on('click',function(){ 
-             $('#lesson_corps').html(lessonHTML());
+             $('#lesson_corps').html(lessonHTML1());
              lecturePersonnalisee();
         });
     }

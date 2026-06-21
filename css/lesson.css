@@ -5,3 +5,26 @@
     display: none;
 }
 h4, .lesson_title { display: inline-block; }
+#plus { 
+    color: #555; 
+    font-size: 2rem;
+    font-weight: bold; 
+}
+#fleche i {
+    font-size: 3rem;
+    color: #555;
+}
+
+
+@media(orientation: portrait) {
+    .table_titre { display: none; }
+    #fleche i {
+        transform: rotate(90deg);
+    }
+}
+@media(orientation: landscape) {
+    .table_titre { display: block; }
+    #fleche i {
+        transform: rotate(180deg);
+    }
+}

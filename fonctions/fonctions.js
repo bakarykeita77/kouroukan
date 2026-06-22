@@ -2,7 +2,7 @@
 	function activerSonDuClavier() {
 		$('#clavier_nko td').on('click',function(){
 			lettre = $(this).attr('id');
-			source_son = 'son/mp3/'+lettre+'.mp3';
+			source_son = '../son/mp3/tons/ߊ/'+lettre+'.mp3';
 			son.attr({src: source_son, autoplay: "on"});
 		});
 	}
@@ -102,7 +102,7 @@
             var td_actif = e.target;
             var td_actif_value = td_actif.textContent;
     
-            $('#audio').attr({ src: 'http://localhost:8080/kouroukan/son/mp3/'+td_actif_value+'.mp3', autoplay: 'on' });
+            $('#audio').attr({ src: '../son/mp3/tons/ߊ/'+td_actif_value+'.mp3', autoplay: 'on' });
     
             /*Animation de td lors de lecture*/
             $(td_actif).addClass('ombrage');
@@ -135,7 +135,7 @@
 	   	        var lecture = setInterval(lire, 800);
 	   	        var r = 0;
 	   	        function lire() {
-	   	            audio.attr({ src:'son/mp3/'+mot[r]+'.mp3', autoplay:'on' });
+	   	            audio.attr({ src:'../son/mp3/tons/ߊ/'+mot[r]+'.mp3', autoplay:'on' });
 	   	            r++;
 	   	            if( r>mot.length ) { clearInterval( lecture ); }
 	       }
@@ -226,9 +226,9 @@
 	function prononcer(){
 		id=this.id;
 	
-		son.src = "son/mp3"+id+".mp3";
-		son.src = "son/ogg"+id+".ogg";
-		son.src = "son/mp4"+id+".mp4";
+		son.src = "../son/mp3/tons/ߊ/"+id+".mp3";
+		son.src = "../son/ogg/tons/ߊ/"+id+".ogg";
+		son.src = "../son/mp4/tons/ߊ/"+id+".mp4";
 		
 		son.play();
 	}

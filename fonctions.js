@@ -1521,10 +1521,10 @@
         let caracteres_actifs = JSON.parse(sessionStorage.getItem("caracteres_coches"));
         let caracteres_coches = caracteresCoches(caracteres_actifs);
 
-        let voyelle_aleatoire      = Math.floor(Math.random()*caracteres_coches[0].length);
-        let consonne_aleatoire     = Math.floor(Math.random()*caracteres_coches[1].length);
-        let nasalisation_aleatoire = Math.floor(Math.random()*caracteres_coches[4].length);
-        let ton_aleatoire          = Math.floor(Math.random()*caracteres_coches[5].length);
+        let nbr_aleatoire_0 = Math.floor(Math.random()*caracteres_coches[0].length);
+        let nbr_aleatoire_1 = Math.floor(Math.random()*caracteres_coches[1].length);
+        let nbr_aleatoire_4 = Math.floor(Math.random()*caracteres_coches[4].length);
+        let nbr_aleatoire_5 = Math.floor(Math.random()*caracteres_coches[5].length);
      
         if(caracteres_coches[0].length != 0) {
 
@@ -1543,14 +1543,13 @@
             function tableLitteraleHTML() {
                 let table_html = "";
 
-                table_html += "<p>"+caracteres_coches[1][consonne_aleatoire]+caracteres_coches[0][voyelle_aleatoire]+caracteres_coches[5][0]+"</p>";
-                table_html += "<p id='plus'><i class='fa-solid fa-plus'></i></p>";
-                table_html += "<p>"+caracteres_coches[1][consonne_aleatoire]+caracteres_coches[0][voyelle_aleatoire]+"</p>";
+                table_html += "<p class='syllabe_container' id='syllabe_container_1'>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0]+caracteres_coches[5][0]+"</p>";
+                table_html += "<p class='syllabe_container' id='syllabe_container_2'>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0]+"</p>";
                 
                 return table_html;
             }
             function tableVocaleHTML() {
-                return "<p>"+caracteres_coches[1][consonne_aleatoire]+caracteres_coches[0][voyelle_aleatoire]+caracteres_coches[1][consonne_aleatoire]+caracteres_coches[0][voyelle_aleatoire]+"</p>";
+                return "<p>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0]+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0]+"</p>";
             }
         }else{
             tons_apprentissage_html += "";                
@@ -2114,12 +2113,14 @@
                     good_response_width += progress_unity;
                     $('.progress_bonne_reponse_bar').css('width', good_response_width + '%');
                 }
-                
-                if (total_des_clicks / qtite_click == td.length) {
-                    compteur_td_click = 0;
-                    good_response_width = 0;
-                    total_des_clicks = 0;
-                }
+
+                if (total_des_clicks / qtite_click == td.length) return false;
+             
+                // if (total_des_clicks / qtite_click == td.length) {
+                //     compteur_td_click = 0;
+                //     good_response_width = 0;
+                //     total_des_clicks = 0;
+                // }
             });
         });
     }
@@ -2985,6 +2986,8 @@
         if(element_ln === 0) { return true; }else{ return false; }
     }
     function terminaisonDeSyllabe(syllabe) {
+
+        if(syllabe == undefined) return false;
         let terminaison = "";
 
         if(tons.indexOf(syllabe[syllabe.length-1]) != -1) if(voyelles.indexOf(syllabe[syllabe.length-2]) != -1) {

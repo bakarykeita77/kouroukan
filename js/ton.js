@@ -138,26 +138,28 @@ function ton() {
 
                                     afficherLePanneauDesCaracteres();
                                     selectionnerLesTons(ton_actif);
-                                    // enregistrerLeTon(ton_actif);
                                     enregistrerLeCaractere(caracteres_selectionnees_du_panneau, ton_actif);
                                     etudierLessonDeTonApprentissage(caracteres_selectionnees_du_panneau);
 
                                     function etudierLessonDeTonApprentissage(caracteres_selectionnees_du_panneau = []) {
-                                        // chargerPanneauSubmitBtn();
+                                        
+                                        let lesson_initiale = [];
+                                        let lesson_actualisee = [];
+                                        
                                         $("#voyelles_container span").click((e) => {
                                             e.stopImmediatePropagation();
 
                                             let span = e.target;
                                             let voyelle_active = span.textContent;
-                                            let consonnes_a_selectionner = [];
+                                            let nbr_normal_de_click = 3;
 
                                             decocherToutesLesConsonnes($("#voyelles_checker input"));
                                             chargerLesson();
                                             lectureDuTon();
                                             lectureDesTons();
-                                            enregistrerLessonDeTonApprentissage();
-                                            //progressBarrDeLessonDeTonApprentissage();
-                                            //finDeLessonDeTonApprentissage();
+                                            enregistrerLessonDeTonApprentissage(lesson_initiale);
+                                            progressBarDApprentissage($(".syllabe_container"),nbr_normal_de_click);
+                                            finDeLessonDeTonApprentissage();
 
                                             function chargerLesson() {
 
@@ -256,9 +258,8 @@ function ton() {
                                                 }
                                             }
                                             function lectureDuTon() {
-                                                // $("#panneau_submit").click(() => {
-
                                                 let p = $(".tables_de_tons p");
+
                                                 $.each(p, function () {
                                                     $(this).click(() => {
                               
@@ -269,33 +270,32 @@ function ton() {
                                                         $('#audio').attr({ src: "../son/mp3/tons/" + terminaison + "/" + syllabe_tonifiee + ".mp3", autoplay: "on" });
                                                     });
                                                 });
-                                                // });
                                             }
                                             function lectureDesTons() {
-                                                // $("#panneau_submit").click(() => {
                                                 let p = $(".tables_de_tons p");
 
                                                 $.each(p, function () {
                                                     $(this).click(() => {
 
                                                         let p_actif = $(this);
-                                                        let syllabes = p_actif.text();
+                                                        let syllabes_brutes = p_actif.text();
                                                         let syllabe_active = "";
-                                                        let syllabes_pour_lecture = syllabesPourLecture();
+                                                        let syllabes_pour_lecture = syllabesPourLecture(syllabes_brutes);
                                                         let terminaison_0 = terminaisonDeSyllabe(syllabes_pour_lecture[0]);
                                                         let terminaison_1 = terminaisonDeSyllabe(syllabes_pour_lecture[1]);
-
+                                        
                                                         setTimeout(() => { $('#audio_0').attr({ src: "../son/mp3/tons/" + terminaison_0 + "/" + syllabes_pour_lecture[0] + ".mp3", autoplay: "on" }); }, 100);
-                                                        setTimeout(() => { $('#audio_1').attr({ src: "../son/mp3/tons/" + terminaison_1 + "/" + syllabes_pour_lecture[1] + ".mp3", autoplay: "on" }); }, 300);
+                                                        setTimeout(() => { $('#audio_1').attr({ src: "../son/mp3/tons/" + terminaison_1 + "/" + syllabes_pour_lecture[1] + ".mp3", autoplay: "on" }); }, 400);
 
-                                                        function syllabesPourLecture() {
+                                                        function syllabesPourLecture(syllabes_brutes) {
 
                                                             let syllabes_pour_lecture = [];
                                                             let syllabes_pour_lecture_tonifiees = [];
-                                                            let syllabes_length = nombreDeSyllabe(syllabes);
+                                                            let syllabes_length = nombreDeSyllabe(syllabes_brutes);
 
-                                                            for (let i = 0; i < syllabes.length; i++) {
-                                                                let caractere = syllabes[i];
+                                                         /*Former les syllabes */
+                                                            for (let i = 0; i < syllabes_brutes.length; i++) {
+                                                                let caractere = syllabes_brutes[i];
 
                                                                 if (consonnes.indexOf(caractere) != -1) {
                                                                     if (syllabe_active != "") syllabes_pour_lecture.push(syllabe_active);
@@ -304,33 +304,61 @@ function ton() {
                                                                 syllabe_active += caractere;
                                                                 if (i == syllabes_length - 1) syllabes_pour_lecture.push(syllabe_active);
                                                             }
+
+                                                         /*Tonifier les syllabes */
                                                             for (let j = 0; j < syllabes_pour_lecture.length; j++) {
                                                                 let caracter = syllabes_pour_lecture[j];
 
                                                                 if (j < syllabes_pour_lecture.length - 1) if (voyelles.indexOf(caracter[caracter.length - 1]) != -1) caracter += "߫";
                                                                 syllabes_pour_lecture_tonifiees.push(caracter);
                                                             }
-console.log(syllabes_pour_lecture);
+                                                            
                                                             return syllabes_pour_lecture_tonifiees;
                                                         }
                                                     });
                                                 });
-                                                // });
                                             }
-                                            function enregistrerLessonDeTonApprentissage() {
+                                            function enregistrerLessonDeTonApprentissage(lesson_initiale) {
 
-                                                let lesson_intitiale = initialiserLaLessonDApprentissage();
-                                                function initialiserLaLessonDApprentissage() {
-                                                    let lesson_intitiale = [];
+                                                lesson_initiale = lessonInitiale();
+                                                
+                                                $.each($(".syllabe_container"), function() {
 
+                                                    let syllabe_container_clickee = $(this);
+                                                    let syllabe_clickee = $(this).text();
+                                                    let nbr_de_click = 0;
+                                                    
+                                                    syllabe_container_clickee.click(() => {
 
-                                                    return lesson_intitiale;
-                                                }
+                                                        let syllabe_index = $(this).index();
+                                                        let point = 0;
+                                                        
+                                                        if(nbr_de_click < nbr_normal_de_click) nbr_de_click++;
+                                                        if(nbr_de_click === nbr_normal_de_click) {
+                                                            point = 1;
+                                                            lesson_initiale.splice(syllabe_index,1,[syllabe_clickee,nbr_de_click,point]);
+                                                            lesson_actualisee = lesson_initiale;
+                                                        }
+                                                    });
+                                                });
                                             }
-                                            function progressBarrDeLessonDeTonApprentissage() { }
-                                            function finDeLessonDeTonApprentissage() { }
+                                            function finDeLessonDeTonApprentissage() {
+                                                $.each($(".syllabe_container"), function() {
+                                                    $(this).click(() => {
+                                                        // if(nbr_de_click === total_general_de_click) {
+                                                            
+                                                            console.log(lesson_actualisee);
+                                                        // }
+                                                    });
+                                                });
+                                            }
                                         });
 
+                                        function lessonInitiale() {
+                                            let lesson = [];
+                                            $.each($(".syllabe_container"), function() { lesson.push([$(this).text(),0,0]); });
+                                            return lesson;
+                                        }
                                         function voyellesDejaSelectionnees() {
                                             let selection = [];
                                             $.each($("#voyelles_container span"), function () {
@@ -356,11 +384,6 @@ console.log(syllabes_pour_lecture);
                                             $("#nasalisations_container").hide();
                                             $("#tons_container").hide();
                                         }
-                                    }
-                                    function enregistrerLeTon(ton) {
-                                        let ton_index = tons_selectionnes.indexOf(ton);
-                                        if (ton_index === -1) { tons_selectionnes.push(ton); } else { tons_selectionnes.splice(ton_index, 1); }
-                                        sessionStorage.setItem("tons_selectionnes", JSON.stringify(tons_selectionnes));
                                     }
                                 });
                             }

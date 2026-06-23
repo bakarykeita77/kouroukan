@@ -1138,6 +1138,18 @@
             if(indice<longueur) setTimeout(() => { write(); }, 5);
         }
     }
+    function ecris(element_id,message) {
+        let longueur = message.length;
+        let indice = 0;
+
+        afficherNotification();
+        setTimeout(() => { write(); }, 400);
+        function write() {
+            indice++;
+            $('#'+element_id).html(message.substr(0,indice));
+            if(indice<longueur) setTimeout(() => { write(); }, 5);
+        }
+    }
     function ecrire(element_class,message) {
         let longueur = message.length;
         let indice = 0;

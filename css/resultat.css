@@ -54,7 +54,7 @@
     transform: rotate(90deg) scale(3);
     top: 2.75rem;
     left: 40%;
-    color: #888;
+    color: #bbb;
 }
 #resultat_corps{
     max-height: calc(100vh - 20rem);

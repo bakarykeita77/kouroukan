@@ -279,18 +279,6 @@ a:focus {
     color: white;
     background-color: rgba(0,0,0,0.8);
 }
-.salle_de_classe {
-    position: relative;
-    top: 0;
-    left: 0;
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-    background-color: #fff;
-    box-sizing: border-box;
-    z-index: 0;
-}
 .course_foot { 
     position: relative;
     z-index: 2; 
@@ -1116,6 +1104,18 @@ del {
 
 /* --------------------------------------------------------------------------------------------------------- */
 
+.salle_de_classe {
+    position: relative;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+    box-sizing: border-box;
+    z-index: 0;
+}
 .shadow { box-shadow: 0 0 0.5rem #555; }
 .surbrillance { border: 1px solid yellow; color: yellow; }
 

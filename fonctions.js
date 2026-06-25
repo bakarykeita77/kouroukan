@@ -226,6 +226,10 @@
             indexer($('.apprentissage_btn p'));
         }, 400);
     }
+    function afficherElement(element_jAuery) {        
+        element_jAuery.css({"transform":"translateY(-50%) scale(0.8)","opacity":0});
+        setTimeout(() => { element_jAuery.css({"transition":"1s","transform":"translateY(-50%) scale(1)","opacity":1}); }, 50);
+    }
     function afficherEvaluation() {
 
         masquer($(".direction"));
@@ -455,6 +459,25 @@
         }
         if ($('.table_parlante tr').length != 0) ecris("apprentissage_notification_corps", "ߜߋ߲߭ ߢߌ߲߬ ߠߎ߫ ߞߋ߬ߟߋ߲߬ ߞߋ߬ߟߋ߲߬ ߘߋ߲߯ ߤߊ߲߯ ߊ߬ߟߎ߬ ߦߋ߫ ߕߴߌ ߞߣߐ߫.");
     }
+    function calculDeNotes(lesson) {
+        let note = 0;
+        let n_questionnaire = 0;
+        for (let i = 0; i < lesson.length; i++) {
+        for (let j = 0; j < lesson[i].length; j++) {
+            note += lesson[i][j][2];
+            n_questionnaire++;
+        }}
+
+        return note*100/n_questionnaire;
+    }
+    function calculDePoints(lesson) {
+        let point = 0;
+        for (let i = 0; i < lesson.length; i++) {
+        for (let j = 0; j < lesson[i].length; j++) {
+            point += lesson[i][j][2];
+        }}
+        return point;
+    }
     function calculerNote(data) {
         var point = 0;
         for (var i = 0; i < data.length; i++) {
@@ -475,6 +498,19 @@
             }
         }
         return point;
+    }
+    function caracteresCoches(caracteres_actifs) {
+        let caracteres_coches = [[],[],[],[],[],[]];
+        
+        for (let i = 0; i < caracteres_actifs.length; i++) {
+            let element = caracteres_actifs[i];
+            for (let j = 0; j < caracteres_coches.length; j++) {
+                let index = caracteres_coches[j].indexOf(element);
+                if(caracteres[j].indexOf(element) != -1) if(index === -1) caracteres_coches[j].push(element);
+            }
+        }
+
+        return caracteres_coches;
     }
     function caracteresSelectionnees() {
         let caracteres_selectionnees_du_serveur = caracteresSelectionneesDuServeur();
@@ -807,13 +843,9 @@
             }  
         });
     }
-    function clignoter(element) {
-        element.addClass('shadow');
-        setTimeout((function() { td.removeClass('shadow'); }), 200);
-        setTimeout((function() { td.addClass('shadow');    }), 600);
-        setTimeout((function() { td.removeClass('shadow'); }), 1000);
-        setTimeout((function() { td.addClass('shadow');    }), 1400);
-         setTimeout((function() { td.removeClass('shadow'); }), 1800);
+    function clignoter(element) { 
+        element.addClass('clignotant'); 
+        setTimeout(function() { element.removeClass('clignotant'); }, 1200);
     }
     function cocherLeCaractereCorrespondantDeParametre(caractere) {
 
@@ -1568,19 +1600,6 @@
         }
                   
         return tons_apprentissage_html;
-    }
-    function caracteresCoches(caracteres_actifs) {
-        let caracteres_coches = [[],[],[],[],[],[]];
-        
-        for (let i = 0; i < caracteres_actifs.length; i++) {
-            let element = caracteres_actifs[i];
-            for (let j = 0; j < caracteres_coches.length; j++) {
-                let index = caracteres_coches[j].indexOf(element);
-                if(caracteres[j].indexOf(element) != -1) if(index === -1) caracteres_coches[j].push(element);
-            }
-        }
-
-        return caracteres_coches;
     }
     function lessonHTML3(array, table_id = '#') {
 
@@ -2831,7 +2850,7 @@
         element.addClass('clignotant'); 
         setTimeout(function() { 
             element.removeClass('clignotant');
-            indexer($('p',element));
+            indexer($('p:nth-child(1)',element));
         }, 1200);
     }
     function selectionDeTr(tr) {

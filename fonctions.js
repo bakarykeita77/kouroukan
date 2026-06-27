@@ -1847,6 +1847,7 @@
     function masquerTesteContainer() { setTimeout(() => { $("#teste_container").css({"top":"0.5rem"}); }, 800); }
     function memoireConsonnesChoisies() {
 
+        let datas = JSON.parse(sessionStorage.getItem("datas"));
         let consonnes_choisies_du_serveur = consonnesChoisiesDuServeur(datas);
         let memoire_consonnes_choisies = JSON.parse(localStorage.getItem("memoire_consonnes_choisies"));
 
@@ -2115,11 +2116,33 @@
         
         return peds;
     }
-    function pourcentagePoint(data) {
-        if(data != null) {
+    function pourcentagePoint(lesson_data) {
+
+        var niveau = JSON.parse(sessionStorage.getItem("niveau"));          
+        if(typeof(lesson_data) == "string") lesson_data = JSON.parse(lesson_data);  
+  
+        if(lesson_data != null) {
             let tp = 0;
-            for(let i=0; i<data.length; i++) {  tp += data[i][2]; }
-            return  Math.floor(tp*100/data.length); 
+            let pourcentage = 0;
+            let data_length = 0;
+            
+            if(niveau === 3) {
+                for (let i = 0; i < lesson_data.length; i++) {
+                for (let j = 0; j < lesson_data[i].length; j++) {
+                    tp += lesson_data[i][j][2];
+                    data_length++;
+                }}                 
+                pourcentage = Math.floor(tp*100/data_length);
+            }
+            if(niveau !== 3) {
+                for(let i=0; i<lesson_data.length; i++) { 
+                    tp += lesson_data[i][2];
+                    data_length++; 
+                }
+                pourcentage = Math.floor(tp*100/data_length);
+            }
+  
+            return pourcentage;
         }
     }
     function progressBarDApprentissage(td,qtite_click) {
@@ -3082,8 +3105,8 @@
 
         var action = "modifier_matiere_en_cours";
         var matiere = JSON.parse(sessionStorage.getItem('matiere')); 
-        var note = calculerNote(lesson);
         var lesson = JSON.stringify(lesson);
+        var note = pourcentagePoint(lesson);
         
         const data_to_send = new URLSearchParams({
             id : id,

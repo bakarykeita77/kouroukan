@@ -1268,6 +1268,7 @@ del {
 
 /* --------------------------------------------------------------------------------------------------------- */
 
+.voyelle_etudiee { background-color: rgb(170,170,170); }
 .vrais {
     background-color: #fff;
     box-shadow: 0 0 1rem #aaa;

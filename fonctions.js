@@ -2958,12 +2958,6 @@
 	}
     function styleResponsiveDuTableauParlante() {
         let niveau = JSON.parse(sessionStorage.getItem("niveau"));
-        if(niveau == 1) {
-                $(".table_parlante, .table_muette").css({
-                    "top":"40%",
-                    "transform":"translateY(-50%)"
-                });
-        }
         if(niveau == 2) {
             if($(".table_parlante").height() < 112) {
                 let m = 96 - ($(".table_parlante").height())/2;

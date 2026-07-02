@@ -267,7 +267,7 @@ a:focus {
 }
 .course_body { 
     position: relative;
-    height: calc(100vh - 16rem);
+    height: calc(100vh - 18rem);
     max-height: 55vh;
     max-width: 45rem;
     margin: 1rem auto;

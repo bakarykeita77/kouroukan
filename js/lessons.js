@@ -5,7 +5,7 @@ $('document').ready(function() {
     let datas = JSON.parse(sessionStorage.getItem("datas"));
     
     datas = (datas == undefined) ? [[],[],[],[]] : datas;
-    
+   
     var data_alphabet = datas[0];         
     var matiere_index = parseInt($("#matiere_index_container").text());
     var matiere_nom = $("#matiere_nom_container").text();

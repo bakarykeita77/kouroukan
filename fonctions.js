@@ -459,7 +459,7 @@
         }
         if ($('.table_parlante tr').length != 0) ecris("apprentissage_notification_corps", "ߜߋ߲߭ ߢߌ߲߬ ߠߎ߫ ߞߋ߬ߟߋ߲߬ ߞߋ߬ߟߋ߲߬ ߘߋ߲߯ ߤߊ߲߯ ߊ߬ߟߎ߬ ߦߋ߫ ߕߴߌ ߞߣߐ߫.");
     }
-    function calculDeNotes(lesson) {
+    function calculDeNote(lesson) {
         let note = 0;
         let n_questionnaire = 0;
         for (let i = 0; i < lesson.length; i++) {
@@ -470,7 +470,7 @@
 
         return note*100/n_questionnaire;
     }
-    function calculDePoints(lesson) {
+    function calculDePoint(lesson) {
         let point = 0;
         for (let i = 0; i < lesson.length; i++) {
         for (let j = 0; j < lesson[i].length; j++) {
@@ -1656,7 +1656,10 @@
 
         if (datas[niveau].length != 0) {
             for (let i = 0; i < datas[niveau].length; i++) {
-                if(datas[niveau][i] != undefined) if(datas[niveau][i].phase != undefined) if(datas[niveau][i].phase.split("_")[1] == "apprentissage") lesson_d_apprentissage_du_serveur = JSON.parse(datas[niveau][i].lesson);
+                if(datas[niveau][i] != undefined) 
+                if(datas[niveau][i].phase != undefined) 
+                if(datas[niveau][i].phase.split("_")[1] == "apprentissage") 
+                lesson_d_apprentissage_du_serveur = JSON.parse(datas[niveau][i].lesson);
             }
         }
         lesson_d_apprentissage_du_serveur = (lesson_d_apprentissage_du_serveur == undefined) ? [] : lesson_d_apprentissage_du_serveur;
@@ -2968,29 +2971,6 @@
             }
         }
     }
-    function stylesDesCaracteres() {
-
-        styleDeTonsSymboles();
-        styleDesCaracteresDuPanneau();
-
-        function styleDeTonsSymboles() {
-
-            let caracteres_selectionnees = caracteresSelectionnees();
-            let n = caracteres_selectionnees.length+1;
-            let caractere_actif = $(".ton_symbole:nth-child("+n+")");
-
-            indexer($(".actif")); 
-            caractere_actif.prevAll().addClass("apprises");
-            caractere_actif.addClass('actif shadow'); 
-            caractere_actif.nextAll().addClass("a_apprendre");
-        }
-        function styleDesCaracteresDuPanneau() {
-            $.each($("#panneaux span"), function() {
-                let caractere_container = $(this);
-                caractere_container.click(function() { marquerLeCaractereChoisi(caractere_container); });
-            });
-        }
-    }
     function syllabesApprentisageDataMemo(datas) {
 
         if(datas.length === 0) return;
@@ -3102,7 +3082,8 @@
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
 
     function updateLessonData(id,lesson) {
-
+console.log(id);
+console.log(lesson);
         var action = "modifier_matiere_en_cours";
         var matiere = JSON.parse(sessionStorage.getItem('matiere')); 
         var lesson = JSON.stringify(lesson);

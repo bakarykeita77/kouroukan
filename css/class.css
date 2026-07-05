@@ -1123,8 +1123,6 @@ del {
 
 .table_container {
     position: relative;
-    top: 45%;
-    transform: translateY(-50%);
     height: max-content;
     width: 98%;
     margin: auto;
@@ -1349,7 +1347,7 @@ del {
 
 
 @media(orientation: portrait) {
-    .course_body { width: 100%; height: calc(100vh - 22rem); }
+    .course_body { width: 100%; height: calc(100vh - 20rem); }
     .tables_de_tons {  margin: 0 0.25rem; }
     .cover { background-color: none; }
     .lesson_title { width: 96vw; margin: auto; }
@@ -1383,7 +1381,7 @@ del {
     .table_container > div {
         display: inline-block;
     }
-    .table_parlante td, .table_muette td { font-size: 2rem; }
+    .table_parlante td, .table_muette td { font-size: 2rem; padding: 1rem; }
     .phases li {
         display: inline-block;
         width: 30%;

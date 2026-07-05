@@ -2822,11 +2822,10 @@
         }
     }
     function resultatTableBodyHTML(memoire) {
-        let html = "";
 
-        html +=  '<tr class="thin">';
+        let html = "";
         if(memoire != undefined) {
-            
+            html +=  '<tr class="thin">';
             for(let j=0; j<memoire.length; j++) {
                 let ordre = (j === 0) ? parseIntNko(j+1)+'߭' : parseIntNko(j+1)+'߲';
                 html += '<td>'+ordre+'</td>';
@@ -2834,19 +2833,30 @@
             html +=  '</tr>';
 
             html +=  '<tr class="bold">';
-
-            for(let k=0; k<memoire.length; k++) { html += '<td>'+memoire[k][0]+'</td>'; }
-            html +=  '</tr>';
-
-            html +=  '<tr class="bold">';
-            for(let l=0; l<memoire.length; l++) { 
-                memoire[l][1] = (typeof(memoire[l][1]) == "number") ? parseIntNko(memoire[l][1]) : memoire[l][1];
-                html += '<td>'+memoire[l][1]+'</td>'; 
+            for(let k=0; k<memoire.length; k++) { 
+                if(memoire[k][0][0].length >= 3) html += '<td>'+memoire[k][0][0]+'</td>';
+                if(memoire[k][0][0].length == 1) html += '<td>'+memoire[k][0]+'</td>';
             }
             html +=  '</tr>';
 
             html +=  '<tr class="bold">';
-            for(let m=0; m<memoire.length; m++) { html += '<td>'+parseIntNko(memoire[m][2])+'</td>'; }
+            for(let l=0; l<memoire.length; l++) { 
+                if(memoire[l][0][0].length >= 2) {
+                    let td_1_value = (typeof(memoire[l][1][1]) == "number") ? parseIntNko(memoire[l][1][1]) : memoire[l][1][1];
+                    html += '<td>'+td_1_value+'</td>'; 
+                }
+                if(memoire[l][0][0].length == 1) {
+                    let td_2_value = (typeof(memoire[l][1]) == "number") ? parseIntNko(memoire[l][1]) : memoire[l][1];
+                    html += '<td>'+td_2_value+'</td>'; 
+                }
+            }
+            html +=  '</tr>';
+
+            html +=  '<tr class="bold">';
+            for(let m=0; m<memoire.length; m++) { 
+                if(memoire[m][0][0].length >= 2) { html += '<td>'+parseIntNko(memoire[m][1][2])+'</td>'; }
+                if(memoire[m][0][0].length == 1) { html += '<td>'+parseIntNko(memoire[m][2])+'</td>'; }
+            }
             html +=  '</tr>';
         }
 
@@ -2944,8 +2954,9 @@
     function sommePoint(memoire) {
         let html = 0;
         if(memoire != undefined) {
-            for(let i=0; i<memoire.length; i++) { 
-                html += memoire[i][2];
+            for(let i=0; i<memoire.length; i++) {
+                if(memoire[i][0][0].length == 1) html += memoire[i][2];
+                if(memoire[i][0][0].length >= 2) html += memoire[i][1][2];
             }
         } 
         return html;

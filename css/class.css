@@ -1124,22 +1124,55 @@ del {
 .table_container {
     position: relative;
     height: max-content;
-    width: 98%;
-    margin: auto;
+    width: max-content;
+    margin: 2rem auto;
     text-align: center;
 }
-.table_container > div:not(#fleche) {
+.table_titre_container {
+    position: sticky;
+    top: 0;
+    background-color: #444;
+    border-bottom: 1px solid #555;
+    box-shadow: 0 0.5rem 1rem #222;
+}
+.table_titre_container > div {
+    display: inline-block;
+    width: 45%;
     text-align: center;
-    margin: 0;
+}
+.table_titre {
+    position: relative;
+    padding: 0.5rem;
+    margin: 0 2rem;
+    text-align: center;
+    font-weight: bold;
+    color: #aaa;
+}
+.table_ligne {
+    border: 1px solid transparent;
+    border-top-color: #555;
+    border-bottom-color: #555;
+    padding: 1rem;
+}
+.table_ligne > div {
+    display: inline-block;
+    border: 1px solid #555;
+    border-radius: 0.5rem;
+    margin: 0 1rem;
     padding: 0.5rem 1rem;
+    width: max-content;
+    text-align: center;
 }
-.tables_de_tons p {
+.table_ligne > div > div {
+    display: inline-block;
+}
+.tables_de_tons p:not(.table_titre) {
     display: inline-block;
     padding: 0.5rem;
     margin: 0 0.5rem;
     background-color: #555;
     box-shadow: 0 0 0.5rem #222;
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: bold;
     border-radius: 0.5rem;
     cursor: pointer;
@@ -1180,23 +1213,11 @@ del {
     min-width: 2rem;
     background-color: rgba(85,85,85,0.25); 
 }
-.table_titre {
-    position: relative;
-    margin-bottom: 1rem;
-    text-align: center;
-    font-weight: bold;
-    color: #aaa;
-}
 .tables_container {
     position: relative;
     top: 2rem;
     width: max-content;
     margin: auto;
-}
-.tables_de_tons {
-    width: max-content;
-    border-radius: 0.5rem;
-    border: 1px solid #444;
 }
 .tons_symboles_container {
     height: 2.75rem;
@@ -1358,10 +1379,6 @@ del {
         padding: 1rem 0; 
         max-width: 30rem;
     }
-    .table_container > div {
-        display: block;
-        width: calc(100% - 1rem);
-    }
     .table_parlante td, .table_muette td { font-size: 1.5rem; }
     .phases li { width: 80%; }
     .travaux { display: none; }
@@ -1377,9 +1394,6 @@ del {
         padding: 1rem; 
         margin-bottom: 2rem;
         border: 1px solid #ccc;
-    }
-    .table_container > div {
-        display: inline-block;
     }
     .table_parlante td, .table_muette td { font-size: 2rem; padding: 1rem; }
     .phases li {

@@ -227,8 +227,8 @@
         }, 400);
     }
     function afficherElement(element_jAuery) {        
-        element_jAuery.css({"transform":"translateY(-50%) scale(0.8)","opacity":0});
-        setTimeout(() => { element_jAuery.css({"transition":"1s","transform":"translateY(-50%) scale(1)","opacity":1}); }, 50);
+        element_jAuery.css({"transform":"scale(0.8)","opacity":0});
+        setTimeout(() => { element_jAuery.css({"transition":"1s","transform":"scale(1)","opacity":1}); }, 50);
     }
     function afficherEvaluation() {
 
@@ -866,7 +866,7 @@
         }
         affichageAnimeDesSyllabes(caracteres_selectionnees,caractere);
     }
-    function cocherLesTonsCorrespondantsDeParametre(ton) {
+    function cocherLeTonCorrespondantDeParametre(ton) {
 
         let caracteres_selectionnees = JSON.parse(sessionStorage.getItem("caracteres_selectionnees"));
 
@@ -884,6 +884,12 @@
             }
         }
         affichageAnimeDesSyllabes(caracteres_selectionnees,ton);
+    }
+    function cocherLesTonsCorrespondantsDeParametre(tons) {
+        for (let i = 0; i < $("#tons_checker input").length; i++) {
+            let ton_de_parametre = $("#tons_checker input")[i].value;
+            if(tons.indexOf(ton_de_parametre) != -1) $("#tons_checker input")[i].click();
+        }
     }
     function cocherLesVoyellesCorrespondantesDeParametre(voyelle) {
 
@@ -1096,8 +1102,13 @@
             if ($('#tons_checker').find('.checkbox_parent').prop("checked") == true) { $('#tons_checker').find('.checkbox_parent').next().click(); }
         }
     }
-    function decocherToutesLesConsonnes(consonnes) {
-        $.each(consonnes, function(){ 
+    function decocherLesCaracteres(caracteres) {
+        $.each(caracteres, function(){ 
+            if($(this).prop('checked')==true) $(this).click(); 
+        });
+    }
+    function decocherToutesLesConsonnes() {
+        $.each($("#consonnes_checker input"), function(){ 
             if($(this).prop('checked')==true) $(this).click(); 
         });
     }
@@ -1200,6 +1211,11 @@
     function enregistrerLeCaractere(caracteres_selectionnees,caractere) {
         let caractere_index = caracteres_selectionnees.indexOf(caractere);
         if(caractere_index === -1) { caracteres_selectionnees.push(caractere); }
+    } 
+    function enregistrerLesCaracteres(caracteres_selectionnees,caracteres) {
+        caracteres.forEach(element => {
+            if(caracteres_selectionnees.indexOf(element) === -1) caracteres_selectionnees.push(element);
+        });
     } 
     function enregistrerLesConsonnes(caracteres_selectionnees,caractere) {
         if(caracteres_selectionnees[0].indexOf(caractere) === -1) {
@@ -1564,36 +1580,138 @@
         let tons_apprentissage_html = "";
         let caracteres_actifs = JSON.parse(sessionStorage.getItem("caracteres_coches"));
         let caracteres_coches = caracteresCoches(caracteres_actifs);
-
         let nbr_aleatoire_0 = Math.floor(Math.random()*caracteres_coches[0].length);
         let nbr_aleatoire_1 = Math.floor(Math.random()*caracteres_coches[1].length);
         let nbr_aleatoire_4 = Math.floor(Math.random()*caracteres_coches[4].length);
         let nbr_aleatoire_5 = Math.floor(Math.random()*caracteres_coches[5].length);
+
+        let tons_coches = caracteres_coches[5];
      
         if(caracteres_coches[0].length != 0) {
 
             tons_apprentissage_html += " \
-                <div class='tables_de_tons' id='table_vocale'> \
-                    <div class='table_titre'>ߝߐߢߊ</div> \
-                    <div>"+tableLitteraleHTML()+"</div> \
-                </div>\
-                <div id='fleche'><i class='fa-solid fa-arrow-right-long'></i></div>\
-                <div class='tables_de_tons' id='table_litterale'> \
-                    <div class='table_titre'>ߛߓߍߢߊ</div> \
-                    <div>"+tableVocaleHTML()+"</div> \
+                <div class='tables_de_tons'> \
+                    <div class='table_titre_container'> \
+                        <div><p class='table_titre'>ߝߐߢߊ</p></div>\
+                        <div><p class='table_titre'>ߛߓߍߢߊ</p></div>\
+                    </div>\
+                    <div class='table_tons_container'> \
+                        <div class='table_ligne'>"+tableDeTonsHTML1()+"</div>\
+                        <div class='table_ligne'>"+tableDeTonsHTML2()+"</div>\
+                        <div class='table_ligne'>"+tableDeTonsHTML3()+"</div> \
+                        <div class='table_ligne'>"+tableDeTonsHTML4()+"</div>\
+                    </div>\
                 </div>\
             ";
 
-            function tableLitteraleHTML() {
+            function tableDeTonsHTML1() {
                 let table_html = "";
+                
+                if(tons_coches.length === 2) {
+                    table_html += "<div>";
+                    table_html += "<p class='syllabe_container'>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][0]+"</p>";
+                    table_html += "<p class='syllabe_container'>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0] + "</p>";
+                    table_html += "</div>";
+                    
+                    table_html += "<div>";
+                    table_html += "<p>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0]+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0]+"</p>";
+                    table_html += "</div>";
+                }
 
-                table_html += "<p class='syllabe_container' id='syllabe_container_1'>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0]+caracteres_coches[5][0]+"</p>";
-                table_html += "<p class='syllabe_container' id='syllabe_container_2'>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0]+"</p>";
+                if(tons_coches.length === 3) {
+                    table_html += "<div>";
+                    table_html += "<p class='syllabe_container'>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][1]+"</p>";
+                    table_html += "<p class='syllabe_container'>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0] + "</p>";
+                    table_html += "</div>";
+                    
+                    table_html += "<div>";
+                    table_html += "<p>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0]+caracteres_coches[5][1] + caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0]+"</p>";
+                    table_html += "</div>";
+                }
+                if(tons_coches.length === 4) {}
                 
                 return table_html;
             }
-            function tableVocaleHTML() {
-                return "<p>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0]+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0]+"</p>";
+            function tableDeTonsHTML2() {
+                let table_html = "";
+                
+                if(tons_coches.length === 2) {
+                    table_html += "<div>";
+                    table_html += "<p class='syllabe_container'>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][0]+"</p>";
+                    table_html += "<p class='syllabe_container'>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][0]+"</p>";
+                    table_html += "</div>";
+
+                    table_html += "<div>";
+                    table_html += "<p>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0]+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0]+caracteres_coches[5][1]+"</p>";
+                    table_html += "</div>";
+                }
+                if(tons_coches.length === 3) {
+                    table_html += "<div>";
+                    table_html += "<p class='syllabe_container'>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][1]+"</p>";
+                    table_html += "<p class='syllabe_container'>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][0]+"</p>";
+                    table_html += "</div>";
+
+                    table_html += "<div>";
+                    table_html += "<p>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0]+caracteres_coches[5][1] + caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0]+caracteres_coches[5][0]+"</p>";
+                    table_html += "</div>";
+                }
+                if(tons_coches.length === 4) {}
+                
+                return table_html;
+            }
+            function tableDeTonsHTML3() {
+                let table_html = "";
+                
+                if(tons_coches.length === 2) {
+                    table_html += "<div>";
+                    table_html += "<p class='syllabe_container'>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][0]+"</p>";
+                    table_html += "<p class='syllabe_container'>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][0]+"</p>";
+                    table_html += "</div>";
+
+                    table_html += "<div>";
+                    table_html += "<p>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0]+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0]+caracteres_coches[5][1]+"</p>";
+                    table_html += "</div>";
+                }
+                if(tons_coches.length === 3) {
+                    table_html += "<div>";
+                    table_html += "<p class='syllabe_container'>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][0]+"</p>";
+                    table_html += "<p class='syllabe_container'>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][1]+"</p>";
+                    table_html += "</div>";
+
+                    table_html += "<div>";
+                    table_html += "<p>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0]+caracteres_coches[5][1]+"</p>";
+                    table_html += "</div>";
+                }
+                if(tons_coches.length === 4) {}
+                
+                return table_html;
+            }
+            function tableDeTonsHTML4() {
+                let table_html = "";
+                
+                if(tons_coches.length === 2) {
+                    table_html += "<div>";
+                    table_html += "<p class='syllabe_container'>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][0]+"</p>";
+                    table_html += "<p class='syllabe_container'>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][0]+"</p>";
+                    table_html += "</div>";
+
+                    table_html += "<div>";
+                    table_html += "<p>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0]+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0]+caracteres_coches[5][1]+"</p>";
+                    table_html += "</div>";
+                }
+                if(tons_coches.length === 3) {
+                    table_html += "<div>";
+                    table_html += "<p class='syllabe_container'>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][1]+"</p>";
+                    table_html += "<p class='syllabe_container'>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][1]+"</p>";
+                    table_html += "</div>";
+
+                    table_html += "<div>";
+                    table_html += "<p>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0]+caracteres_coches[5][1] + caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0]+caracteres_coches[5][1]+"</p>";
+                    table_html += "</div>";
+                }
+                if(tons_coches.length === 4) {}
+                
+                return table_html;
             }
         }else{
             tons_apprentissage_html += "";                
@@ -3087,8 +3205,7 @@
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
 
     function updateLessonData(id,lesson) {
-console.log(id);
-console.log(lesson);
+        
         var action = "modifier_matiere_en_cours";
         var matiere = JSON.parse(sessionStorage.getItem('matiere')); 
         var lesson = JSON.stringify(lesson);

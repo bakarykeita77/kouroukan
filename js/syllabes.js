@@ -644,7 +644,7 @@ function syllabes() {
             }
             function revisionSyllabe() {
                 /*
-                La revision est une étape qui n'est pas stockée mais qui, si elle est effectuée avec succès, rassure la bonne comprehension des précédentes lessons d'apprentissages et d'exercices.
+                La revision est une étape qui n'est pas elle même stockée mais qui, si elle est effectuée avec succès, rassure la bonne comprehension des précédentes lessons d'apprentissages et d'exercices.
                 Et c'est donc à cette étape que ces dernières sont stockées.
                 */
                 $("#revision_btn, #reprendre_revision_btn, #continu_sur_revision_btn").click(function (e) {

@@ -1132,6 +1132,7 @@ del {
     position: sticky;
     top: 0;
     background-color: #444;
+    border-top: 0.5rem solid #333;
     border-bottom: 1px solid #555;
     box-shadow: 0 0.5rem 1rem #222;
 }
@@ -1150,7 +1151,6 @@ del {
 }
 .table_ligne {
     border: 1px solid transparent;
-    border-top-color: #555;
     border-bottom-color: #555;
     padding: 1rem;
 }

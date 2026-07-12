@@ -118,8 +118,10 @@ function syllabes() {
                                     }
                                 }
                             }
+                            
                             if(e.target.id == "texte") secouer($("#afficheur_de_panneau"));
                         });
+
                         $("#panneaux").click(function (e) {
                             if(e.target.id == "panneaux") {
                                 secouer($("#afficheur_de_panneau"));
@@ -258,7 +260,6 @@ function syllabes() {
                                     });  
                                 }, 800);
                             }
-
                             function initialiserApprentissageSyllabe() {
                                 let td_to_click = $("#table_syllabes_apprentissage td");
                                 lesson_d_apprentissage_syllabes_du_jour.splice(0, lesson_d_apprentissage_syllabes_du_jour.length);

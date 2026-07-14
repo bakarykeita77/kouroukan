@@ -1151,9 +1151,9 @@ function ton() {
                         });
 
                      /* Si tons apprentissage est terminé, l'étudiant est dirigé directement sur Exercce de tons */
-                        if(statut_d_apprentissage = "effectue") 
-                        if(statut_d_exercice = "non_effectue") 
-                        if(statut_d_evaluaton = "non_effectue") 
+                        if(statut_d_apprentissage == "effectue") 
+                        if(statut_d_exercice =="non_effectue") 
+                        if(statut_d_evaluaton == "non_effectue") 
                         $("#continu_sur_exercice_btn").click();
 
                         function syllabesDeLesson(lesson) {
@@ -1173,12 +1173,12 @@ function ton() {
 
                         });
 
-                        /* Si tons apprentissage est terminé, l'étudiant est dirigé directement sur Exercce de tons */
-                           if(statut_d_apprentissage = "effectue") 
-                           if(statut_d_exercice = "effectue") 
-                           if(statut_d_evaluaton = "non_effectue") 
-                           $("#continu_sur_revision_btn").click();
-   
+                     /* Si tons apprentissage est terminé, l'étudiant est dirigé directement sur Exercce de tons */
+                        if(statut_d_apprentissage == "effectue") 
+                        if(statut_d_exercice == "effectue") 
+                        if(statut_d_evaluaton == "non_effectue") 
+                        $("#continu_sur_revision_btn").click();
+
                     }
 
                     function evaluationTon() {}

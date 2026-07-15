@@ -826,10 +826,67 @@ function ton() {
                                     $("#exercice_body").html(exercice_body_html);
                                         
                                     function exerciceBodyHTML() {
+
                                         let html = "";
                                         let syllabes = syllabesDeLesson(lesson_d_apprentissage_tons_partiel);
-                                        html = lessonHTML1(malaxer(syllabes), "");
+                                        let syllabes_melanges = syllabesMelanges(syllabes);
+                                        let mots_melanges = tonsMotsMelanges(syllabes);
+                   
+                                        // html = lessonHTML1(mots_melanges, "");
+                                        html = lessonHTML1(syllabes_melanges, "");
                                         return html;
+
+                                        function syllabesMelanges(syllabes) {
+                                            let melange = [];
+                                            syllabes.forEach(element => {
+                                                let syllabe_tonifie = element;
+                                                let syllabe_non_tonifie = element[0]+element[1];
+                                                melange.push(syllabe_tonifie);
+                                                melange.push(syllabe_non_tonifie);
+                                            });
+                                            melange = malaxer(melange);
+                                            return melange;
+                                        }
+                                        function tonsMotsMelanges(array,nbr=0) {
+                                            let a_melanger = [];
+                                            let melange_2 = [];
+                                            array.forEach(element => { a_melanger = a_melanger.concat(tonsMots(element,3)); });
+                                            
+                                            let melange = malaxer(a_melanger);
+                                            let ln = (nbr === 0) ? melange.length : nbr;
+                                            for (let i = 0; i < ln; i++) melange_2.push(melange[i]);
+                                            
+                                            return melange_2;
+                                        }
+                                        function tonsMots(syllabe,nbr=0) {
+
+                                            let consonne = syllabe[0];
+                                            let ton = syllabe[2];
+                                            let consonne_index = caracteres[1].indexOf(consonne);
+                                            let ton_index = caracteres[5].indexOf(ton);
+                                            let tons_syllab = [];
+                                            let tons_mots = [];
+                                            let tons_mots_2 = [];
+                                            let melange = [];
+                                            let melange_2 = [];
+
+                                            tons_syllabes[consonne_index][ton_index].forEach(element => {
+                                                if(element[0] == syllabe) element.forEach(element => { tons_syllab.push(element); });
+                                            }); 
+                                                     
+                                            for (let i = 0; i < tons_syllab.length; i++) {                     
+                                                if(tons_syllab[i].split("")[2] == caracteres[5][1]) continue;
+                                                if(tons_syllab[0] != tons_syllab[i]) 
+                                                tons_mots.push(tons_syllab[0]+tons_syllab[i]);
+                                            }
+                                            melange = malaxer(tons_mots);
+
+                                            let ln = (nbr === 0) ? melange.length : nbr;
+                                            if(ln <= tons_mots.length) for (let i = 0; i < ln; i++) melange_2.push(tons_mots[i]);
+                                            if(ln > tons_mots.length) for (let i = 0; i < tons_mots.length; i++) melange_2.push(tons_mots[i]);
+
+                                            return melange_2;
+                                        }
                                     }
                                 }
                                 function chargerPiedDExerciceDeTons() {

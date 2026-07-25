@@ -1,3305 +1,3422 @@
-	  
-    function accorder(element) {
-        $(element).addClass('vrais');
-        setTimeout(function(){ $('.vrais').addClass('coche'); }, 100);
-        setTimeout(function(){ $('.vrais').removeClass('coche'); }, 600);
-        setTimeout(function(){ $(element).removeClass('vrais'); }, 600);
+
+function accorder(element) {
+    $(element).addClass('vrais');
+    setTimeout(function () { $('.vrais').addClass('coche'); }, 100);
+    setTimeout(function () { $('.vrais').removeClass('coche'); }, 600);
+    setTimeout(function () { $(element).removeClass('vrais'); }, 600);
+}
+function activerSonDuClavier() {
+    $('#clavier_nko td').on('click', function () {
+        lettre = $(this).attr('id');
+        source_son = 'son/mp3/' + lettre + '.mp3';
+        son.attr({ src: source_son, autoplay: "on" });
+    });
+}
+function actualiserLesson(lesson, lesson_du_jour) {
+
+    let nouvelles_syllabes = nouvellesSyllabes();
+    let anciennes_syllabes = anciennesSyllabes();
+
+    nouvelles_syllabes.forEach(element => {
+        let index = nouvelles_syllabes.indexOf(element);
+        if ($.inArray(element, anciennes_syllabes) == "-1") { lesson.push(lesson_du_jour[index]); }
+    });
+
+    return lesson;
+
+    function nouvellesSyllabes() {
+        let ns = [];
+        lesson_du_jour.forEach(element => { ns.push(element[0]); });
+        return ns;
     }
-    function activerSonDuClavier() {
-		$('#clavier_nko td').on('click',function(){
-			lettre = $(this).attr('id');
-			source_son = 'son/mp3/'+lettre+'.mp3';
-			son.attr({src: source_son, autoplay: "on"});
-		});
-	}
-    function actualiserLesson(lesson, lesson_du_jour) {
-
-        let nouvelles_syllabes = nouvellesSyllabes();
-        let anciennes_syllabes = anciennesSyllabes();
-
-        nouvelles_syllabes.forEach(element => {
-            let index = nouvelles_syllabes.indexOf(element);
-            if ($.inArray(element, anciennes_syllabes) == "-1") { lesson.push(lesson_du_jour[index]); }
-        });
-        
-        return lesson;
-
-        function nouvellesSyllabes() {
-            let ns = [];
-            lesson_du_jour.forEach(element => { ns.push(element[0]); });
-            return ns;
+    function anciennesSyllabes() {
+        let as = [];
+        if (lesson == undefined) {
+            as = [];
+        } else {
+            lesson.forEach(element => { if (element != null) as.push(element[0]); });
         }
-        function anciennesSyllabes() {
-            let as = [];
-            if(lesson == undefined) {
-                as = [];
-            }else{
-                lesson.forEach(element => { if (element != null) as.push(element[0]); });
-            }
-            return as;
-        }
+        return as;
     }
-    function affichageAnimeDesSyllabes(caracteres_selectionnees=[],caractere="") {
-        $.each($(".table_parlante td"), function(e) {
-            let matiere_nom = JSON.parse(sessionStorage.getItem("matiere_nom"));
-
-            if(matiere_nom == "ߜߋ߲߭") {
-                let td = $(this);
-                let caractere_du_tableau = td.text().split("")[0];
-
-                if(caracteres_selectionnees.indexOf(caractere) != -1) {
-                    if(caractere == caractere_du_tableau) {
-                        td.css("opacity",0);
-                        setTimeout(() => { td.css("opacity",1); }, 100*td.index());
-                    }
-                }
-                if(caracteres_selectionnees.indexOf(caractere) == -1) {
-                    if(caractere == caractere_du_tableau) {
-                        td.css("opacity",1);
-                        setTimeout(() => { td.css("opacity",0); }, 100*(7 - td.index()));
-                    }
-                }
-            }
-        });
-    }
-    function affichageAnimeDeTableTd(table) {
-        
-        let tr = $('tr', table);
-
-        tr.css('opacity',0);
-        $('td', table).css({'transition':'0.2s', 'opacity':0});
-        
-        setTimeout(() => {
-            tr.css('opacity',1);
-            $.each(tr, function(){
-
-                let tr_index = $(this).index();
-                let td = $('td', this);
-                let td_length = td.length;
-
-                $.each(td, function() {
-                    let td_index = $(this).index();
-                    setTimeout(() => {
-                        $(this).css({'opacity':1});
-                    }, 80*((tr_index*td_length)+td_index));
-                });
-            });
-        }, 250);
-        
-    }
-    function affichageAnimeDeTableTr(table) {
-
-        $('td', table).css({'opacity':1, 'transform':'scale(1)'});
-        let tr = $('tr', table);
-        tr.css('opacity',0);
-
-        setTimeout(() => {
-            $.each(tr, function(){
-                let tr_index = $(this).index();
-                setTimeout(() => { $(this).css({'opacity':1}); }, 200*tr_index);
-            });
-        }, 200);
-        
-    }
-    function afficher(element) {
-        masquer(element);
-        element.css({
-            'display':'block',
-            'transform':'scale(1)', 
-            'opacity':1,
-            'transition':'0.2s'
-        }); 
-    }
-    function afficherApprentissage(datas) {
-
-        afficherApprentissageContainer();
-        afficherPanneauDesCaracteres(datas);
-
-        function afficherApprentissageContainer() {
-            display($("#apprentissage_container"));
-            masquer($('#apprentissage_container > div:not(#apprentissage_head)'));
-            setTimeout(() => { afficher($('#apprentissage_container > div:not(#apprentissage_head)')); }, 400);
-        
-            rendreActif($('#afficheur_de_panneau'));
-            indexer($('#afficheur_de_panneau p'));
-            masquer($('#apprentissage_redirection_btns'));
-        }
-        function afficherPanneauDesCaracteres(datas) {
-            let consonnes_apprises_du_serveur = consonnesDeSyllabeApprisesDuServeur(datas);
-            togglePanneauDesConsonnes();
-            panneauxStyle(consonnes_apprises_du_serveur);
-        }
-    }
-    function afficherBoutonDeCorrection() {
-        display($('.dialogue_btns'));
-        masquer($('.redirection_btns'));
-        masquer($(".dialogue_btns > div"));
-
-        afficher($(".correction_btn")); 
-        rendreActif($(".correction_btn")); 
-    }
-    function afficherBoutonDeQuestion() {
-        display($('.dialogue_btns'));
-        masquer($('.redirection_btns'));
-        masquer($(".dialogue_btns > div"));
-        
-        masquer($('.dialogue_btns > div'));
-        rendreActif($('.question_btn'));
-        afficherRapidement($('.question_btn'));
-    }
-    function afficherBoutonDeRepetition() {
-        display($('.dialogue_btns'));
-        masquer($('.redirection_btns'));
-        masquer($(".dialogue_btns > div"));
-
-        masquer($('.dialogue_btns > div'));
-        rendreActif($('.repetition_btn'));
-        afficher($('.repetition_btn')); 
-    }
-    function afficherBoutonPourLaMatiereSuivante() {
-        let matiere = nomDeLaMatiereSuivante();
-
-        masquer($('.dialogue_btns'));
-        display($('.redirection_btns'));
-        masquer($('.redirection_btns > div'));
-        
-        setTimeout(() => {
-            afficher($('.lesson_suivante'));
-            rendreActif($('.lesson_suivante'));
-            $('.lesson_suivante a').text(matiere+' ߘߋ߰ߟߌ ߘߊߡߌ߬ߘߊ߬');
-            indexer($('.lesson_suivante p'));
-        }, 400);
-    }
-    function afficherBoutonDExercice() {
-        let matiere = JSON.parse(sessionStorage.getItem("matiere_nom"));
-                
-        masquer($(".dialogue_btns"));
-        display($(".redirection_btns"));
-        masquer($(".redirection_btns > div"));
-
-        setTimeout(() => { 
-            afficher($(".exercice_btn"));
-            rendreActif($(".exercice_btn"));
-            $(".exercice_btn").html("<p>"+matiere+" ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫</p>");
-            indexer($(".exercice_btn p"));
-        }, 400);
-    }
-    function afficherBoutonDeRevision() {
-        let matiere = JSON.parse(sessionStorage.getItem("matiere_nom"));
-        
-        masquer($('.dialogue_btns'));
-        display($('.redirection_btns'));
-        masquer($('.redirection_btns > div'));
-
-        setTimeout(() => { 
-            afficher($('.revision_btn'));
-            rendreActif($('.revision_btn'));
-            $('.revision_btn').html("<p>"+matiere+" ߞߘߐߓߐߟߌ ߞߍ߫</p>");
-            indexer($('.revision_btn p'));
-        }, 400);
-    }
-    function afficherBoutonDeReprise() {
-        let matiere = JSON.parse(sessionStorage.getItem("matiere_nom"));
-        
-        masquer($('.dialogue_btns'));
-        display($('.redirection_btns'));
-        masquer($('.redirection_btns > div'));
-
-        setTimeout(() => { 
-            afficher($('.reprendre_btn'));
-            rendreActif($('.reprendre_btn'));
-            $('.reprendre_btn').html("<p>"+matiere+" ߞߘߐߓߐߟߌ ߞߍ߫ ߕߎ߲߯</p>");
-            indexer($('.reprendre_btn p'));
-        }, 400);
-    }
-    function afficherBoutonDApprentissage() {
-        let matiere = JSON.parse(sessionStorage.getItem("matiere_nom"));
-        
-        masquer($('.dialogue_btns'));
-        display($('.redirection_btns'));
-        masquer($('.redirection_btns > div'));
-
-        setTimeout(() => { 
-            afficher($('.apprentissage_btn'));
-            rendreActif($('.apprentissage_btn'));
-            $('.apprentissage_btn').html("<p>ߥߊ߫ "+matiere+"ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߡߊ߬ </p>");
-            indexer($('.apprentissage_btn p'));
-        }, 400);
-    }
-    function afficherElement(element_jAuery) {        
-        element_jAuery.css({"transform":"scale(0.8)","opacity":0});
-        setTimeout(() => { element_jAuery.css({"transition":"1s","transform":"scale(1)","opacity":1}); }, 50);
-    }
-    function afficherEvaluation() {
-
-        masquer($(".direction"));
-        display($(".salle_de_classe"));
-        display($(".course"));
-        masquer($(".course > div"));
-        display($("#evaluation_container"));
-        masquer($('#evaluation_container > div:not(#evaluation_head)'));
-
-        afficher($('#evaluation_container > div:not(#evaluation_head)'));
-        afficherParDefautDEvaluationDialogueBtns();
-    }
-    function afficherExercice() {
-        masquer($(".direction"));
-        display($(".salle_de_classe"));
-        display($(".course"));
-        masquer($(".course > div:not(#exercice_container)"));
-        display($("#exercice_container"));
-        masquer($('#exercice_container > div:not(#exercice_head)'));
-
-        $('#exercice_body table td').css("opacity",0);
-
-        setTimeout(() => {
-            afficher($('#exercice_container > div:not(#exercice_head)'));
-            afficherParDefautDExerciceDialogueBtns();
-            setTimeout(() => { affichageAnimeDeTableTd($('#exercice_body table')); }, 400);
-            
-            styleResponsiveDuTableauParlante();
-
-            function afficherParDefautDExerciceDialogueBtns() {
-                masquer($('#exercice_redirection_btns'));
-                afficher($('#exercice_dialogue_btns'));
-
-                masquer($('#exercice_dialogue_btns > div'));
-                afficherRapidement($('#exercice_question_btn'));
-                rendreActif($('#exercice_question_btn'));
-            }
-        }, 200);
-    }
-    function afficherLentement(element) {
-        masquer(element);
-        element.css({
-            'display':'block',
-            'transform':'scale(1)', 
-            'opacity':1,
-            'transition':'0.8s'
-        }); 
-    }
-    function afficherNotification() { 
-        $('.notification_corps').css({"top":0}); 
-    }
-    function afficherRapidement(element) {
-        masquer(element);
-        element.css({
-            'display':'block',
-            'transform':'scale(1)', 
-            'opacity':1,
-            'transition':'0.1s'
-        }); 
-    }
-	function afficher_en_jailli( element,largeur,hauteur,temps ) {
-        element.css({'display':'block', 'width':0, 'height':0});
-        element.animate({'width':largeur, 'height':hauteur}, temps);
-    }
-    function afficherList(ul) {
-        let li = $('li', ul);
-        li.css({'opacity':0, 'transform':'scale(0.75)'});
-        $.each(li, function(){
-            let li_actif = $(this);
-            let index = li_actif.index();
-            
-            setTimeout(() => { displayv(li_actif); }, 200*index);
-        });
-    }
-    function afficherParDefautDEvaluationDialogueBtns() {
-
-        afficher($('#evaluation_foot'));
-
-        masquer($('#evaluation_redirection_btns'));
-        afficher($('#evaluation_dialogue_btns'));
-
-        masquer($('#evaluation_dialogue_btns > div'));
-        afficherRapidement($('#evaluation_question_btn'));
-        rendreActif($('#evaluation_question_btn'));
-        indexer($('#evaluation_question_btn p'));
-    }
-    function afficherRevision() {
-
-        masquer($(".direction"));
-        display($(".salle_de_classe"));
-        masquer($('.course'));
-        display($(".course"));
-        masquer($(".course > div"));
-        display($("#revision_container"));
-        masquer($('#revision_container > div:not(#revision_head)'));
-
-        $('#revision_body table td').css("opacity",0);
-
-        setTimeout(() => { 
-
-            $('.fermeture').attr('id', 'fermer_revision');
-            
-            afficher($('#pratique_options'));
-            afficher($('#revision_container > div:not(#revision_head)'));
-            afficherParDefautDeRevisionDialogueBtns();
-            
-            styleResponsiveDuTableauParlante();
-            setTimeout(() => { affichageAnimeDeTableTd($('#revision_body table')); }, 400);
-            
-            function afficherParDefautDeRevisionDialogueBtns() {
-
-                afficher($('#revision_foot'));
-                masquer($('#revision_redirection_btns'));
-                afficher($('#revision_dialogue_btns'));
-
-                masquer($('#revision_dialogue_btns > div'));
-                afficherRapidement($('#revision_question_btn'));
-                rendreActif($('#revision_question_btn'));
-                    
-                rendreActif($('#revision_question_btn'));
-                indexer($('#revision_question_btn p'));
-            }
-        }, 200);
-    }
-    function afficherTesteContainer() { $('#teste_container').css({'top':'-6.25rem'}); }
-	function aggrandir_caractere_de(element) { element.css('font-size','+=32px'); }
-	function appetir_caractere_de(element) { element.css('font-size','-=32px'); } 
-    function approuver(bonne_reponse) {
-        $.each($('.table_parlante td, .table_muette td'), function() {
-            var td = $(this);
-            if(td.text() == bonne_reponse) {
-
-                td.html(bonne_reponse+"<p id='coche'>✓</p><p id='coche_couvercle'></p>");
-                td.addClass('ombrage');
-            
-                $('#coche').css({
-                    'position':'absolute', 
-                    'display':'block',
-                    'margin':0,
-                    'padding':0,
-                    'width':'40%', 
-                    'height':'40%', 
-                    'line-height':'100%', 
-                    'top':0,
-                    'left':0,
-                    'font-size':'1.5rem',
-                    'textAlign':'center', 
-                    'boxSizing':'border-box',
-                    'color':'blue',
-                    'rotate':'y 180deg',
-                    'z-index':0,
-                    'transition':'transform 0.6s'
-                });
-                $('#coche_couvercle').css({
-                    'position':'absolute', 
-                    'display':'block',
-                    'background-color':'#fff',
-                    'margin':0,
-                    'padding':0,
-                    'width':'40%', 
-                    'height':'40%',  
-                    'top':0,
-                    'left':0,
-                    'border-radius':'0.5rem',
-                    'z-index':1,
-                    'transition':'1200ms'
-                });
-            }
-        });
-        
-        setTimeout(function() { $('#coche_couvercle').css({'left':'-40%' }); }, 10);
-        setTimeout(function() { td.html(bonne_reponse).removeClass('ombrage'); }, 1200);
-    }
-    function arreterLecture() {
-        $('.stop_icon').parent().on('click',function(){ 
-             return;
-        });
-    }
-
-/*-------------------------------------------------------------------------------------------------------------------------------------*/ 
-    
-    function barrer(td) {
-
-        var fausse_reponse = td.html();
-        td.html(fausse_reponse+"<p id='croix'>&#10060;</p>");
-       
-        $('#croix').css({
-            'position':'absolute', 
-            'display':'block',
-            'margin':0,
-            'padding':'8px 0',
-            'width':'100%', 
-            'height':'100%', 
-            'top':'5%',
-            'left':0,
-            'font-size':'32px',
-            'textAlign':'center', 
-            'boxSizing':'border-box',
-            'transform':'scale(0)',
-            'opacity':0,
-            'transition':'transform 0.6s'
-        });
-        
-        setTimeout(function() { $('#croix').css({'transform':'scale(1.5)', 'opacity':0.5, 'color':'red' }); }, 50);
-        setTimeout(function() { td.html(fausse_reponse); }, 2000);
-    }
-
-/*-------------------------------------------------------------------------------------------------------------------------------------*/	
-        
-    function cacherPanneauDesCaracteres() {
-        $("#caracteres_container").animate({"top":"22rem"}, 250);
-        setTimeout(() => { $("#panneaux, #caracteres_cadre").css({"height":0}); }, 250);
-        
-        setTimeout(() => {
-            $('#afficheur_de_panneau').html("<p>ߛߓߍߘߋ߲߫ ߥߟߊ ߦߌ߬ߘߊ߬</p>");
-            if(matiere_nom == "ߜߋ߲߭") { $("#afficheur_de_panneau").html("<p>ߛߌ߬ߙߕߊ߬ ߥߟߊ ߦߌ߬ߘߊ߬</p>"); }
-            clignoterUneFois($('#afficheur_de_panneau'));
-        }, 400);
-
-        if ($('.table_parlante tr').length == 0) {
-            if($('#afficheur_de_panneau').text() == "ߛߌ߬ߙߕߊ߬ ߥߟߊ ߘߏ߲߰") {
-                ecris("apprentissage_notification_corps", "ߞߏ߰ߙߌ߫ ߣߘߍ߬ߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬ ߞߊ߬ ߛߌ߬ߙߕߊ߬ ߥߟߊߟߋ߲ ߦߌ߬ߘߊ߬.");
-            }
-            if($('#afficheur_de_panneau').text() == "ߛߌ߬ߙߕߊ߬ ߥߟߊ ߦߌ߬ߘߊ߬") {
-                ecris("apprentissage_notification_corps", "ߛߌ߬ߙߕߊ߬ ߞߋߟߋ߲߫ ߥߟߊ ߛߌߦߊߡߊ߲߫ ߛߎߥߊ߲ߘߌ߫߸ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߡߍ߲ ߠߎ߬ ߜߋ߲߭ ߠߎ߬ ߘߋ߲߰");
-            }
-        }
-        if ($('.table_parlante tr').length != 0) ecris("apprentissage_notification_corps", "ߜߋ߲߭ ߢߌ߲߬ ߠߎ߫ ߞߋ߬ߟߋ߲߬ ߞߋ߬ߟߋ߲߬ ߘߋ߲߯ ߤߊ߲߯ ߊ߬ߟߎ߬ ߦߋ߫ ߕߴߌ ߞߣߐ߫.");
-    }
-    function calculDeNote(lesson) {
-        let note = 0;
-        let n_questionnaire = 0;
-        for (let i = 0; i < lesson.length; i++) {
-        for (let j = 0; j < lesson[i].length; j++) {
-            note += lesson[i][j][2];
-            n_questionnaire++;
-        }}
-
-        return note*100/n_questionnaire;
-    }
-    function calculDePoint(lesson) {
-        let point = 0;
-        for (let i = 0; i < lesson.length; i++) {
-        for (let j = 0; j < lesson[i].length; j++) {
-            point += lesson[i][j][2];
-        }}
-        return point;
-    }
-    function calculerNote(data) {
-        var point = 0;
-        for (var i = 0; i < data.length; i++) {
-            if(data[i] != undefined) {
-                if(data[i][2] == 1) {  point ++; }
-            }
-        }
-        var note = Math.floor((point*100)/data.length);
-        return note;
-    }
-    function calculerPoint(data) {
-        var point = 0;
-        if(data != undefined) {
-            for (var i = 0; i < data.length; i++) {
-                if(data[i] != undefined) {
-                    if(data[i][2] == 1) {  point ++; }
-                }
-            }
-        }
-        return point;
-    }
-    function caracteresCoches(caracteres_actifs) {
-        let caracteres_coches = [[],[],[],[],[],[]];
-        
-        for (let i = 0; i < caracteres_actifs.length; i++) {
-            let element = caracteres_actifs[i];
-            for (let j = 0; j < caracteres_coches.length; j++) {
-                let index = caracteres_coches[j].indexOf(element);
-                if(caracteres[j].indexOf(element) != -1) if(index === -1) caracteres_coches[j].push(element);
-            }
-        }
-
-        return caracteres_coches;
-    }
-    function caracteresSelectionnees() {
-        let caracteres_selectionnees_du_serveur = caracteresSelectionneesDuServeur();
-        let caracteres_selectionnees = JSON.parse(sessionStorage.getItem("caracteres_selectionnees"));
-
-        caracteres_selectionnees = (caracteres_selectionnees == null) ? [] : caracteres_selectionnees;
-        caracteres_selectionnees = (caracteres_selectionnees.length == 0) ? caracteres_selectionnees_du_serveur : caracteres_selectionnees;
-        return caracteres_selectionnees;
-
-        function caracteresSelectionneesDuServeur() {
-            let caracteres_du_serveur = [];
-
-
-            return caracteres_du_serveur;
-        }
-    }
-	function centrerHorizontalement(element) {
-		var largeur_element = element.width();
-		var largeur_ecran = window.screen.width;
-
-		element.css({ 'right':(largeur_ecran-largeur_element)/2+'px' });
-	}
-    function changerPhaseActive(phase_active_index) {
-        if(phase_active_index != -1) {
-            let total_phase = $('#phases_list li').length;
-
-            phase_active_index++;
-
-            $.each($('#phases_list li'), function() {
-                
-                var phase_index = $(this).index();
-                if(total_phase > phase_active_index) {  
-                    if(phase_index <= phase_active_index-1) $(this).removeClass('active').addClass('apprises');
-                    if(phase_index == phase_active_index ) {
-                        $(this).removeClass('a_apprendre').addClass('active');
-                        indexer($(this));
-                    }
-                    if(phase_index > phase_active_index) $(this).addClass('a_apprendre');
-                }       	    
-                if(total_phase == phase_active_index) $(this).removeClass('active a_apprendre').addClass('apprises');
-            });
-            sessionStorage.setItem('phase_active_index',JSON.stringify(phase_active_index));
-        }
-    }
-    function chargerLessonDeSyllabeApprentissage() {
-
-        cocherLesCaracteres();
-        stylesDesCaracteres();
-
-        function cocherLesCaracteres() {
-            let caracteres_choisis_du_panneau = [];
-            let memoire_des_caracteres_choisis = [[],[],[]];
-
-            cocherLesCaracteresDuPanneau();
-            cocherLeCaractereCorrespondantDeParametre();
-
-            function cocherLesCaracteresDuPanneau() {
-
-                cocherLesConsonnes();
-                cocherLesVoyelles();
-                cocherLesTons();
-                
-                function cocherLesConsonnes() {
-                    $("#consonnes_container span").click((e) => {
-
-                        let span = e.target;
-                        let caractere = span.textContent;
-
-                        memoire_des_caracteres_choisis[0].push(caractere);
-                        if($("#panneau_submit_btn_1").html() == "ߌ ߢߣߊߕߊ߬ ߛߌ߬ߙߊ߬ߕߊ ߟߎ߬ ߘߐ߬") {
-                            masquer($("#panneau_submit_btn_container > button"));
-                            $("#panneau_submit_btn_1").html("ߣߴߌ ߓߊ߲߫ ߘߊ߫߸ ߦߋ߫ ߛߌ߬ߙߊ߬ߟߊ߲ ߠߎ߬ ߦߌ߬ߘߊ߬"); 
-                            setTimeout(() => { afficher($("#panneau_submit_btn_1")); }, 100);
-                        }
-                    });
-                    $("#panneau_submit_btn_1").click((e) => {
-                        e.stopImmediatePropagation();
-                        if(memoire_des_caracteres_choisis[0].length === 0) {
-                            alert("ߛߌ߬ߙߕߊ߬ ߞߋߟߋ߲߫ ߥߟߊ ߛߌߦߊߡߊ߲߫ ߛߎߥߊ߲ߘߌ߫ ߝߟߐ߫");
-                            return;
-                        }
-                        masquer($("#caracteres_container > div:not(#panneau_submit_btn_container)"));
-                        afficher($("#voyelles_container"));
-
-                        masquer($("#panneau_submit_btn_container > button"));
-                        $("#panneau_submit_btn_2").html("ߌ ߢߣߊߕߊ߬ ߛߌ߬ߙߊ߬ߟߊ߲ ߠߎ߬ ߘߐ߬");
-                        setTimeout(() => { afficher($("#panneau_submit_btn_2")); }, 100);
-                    });
-                }
-                function cocherLesVoyelles() {
-                    $("#voyelles_container span").click((e) => {
-
-                        let span = e.target;
-                        let caractere = span.textContent;
-                        
-                        memoire_des_caracteres_choisis[1].push(caractere);
-                        if($("#panneau_submit_btn_2").html() == "ߌ ߢߣߊߕߊ߬ ߛߌ߬ߙߊ߬ߟߊ߲ ߠߎ߬ ߘߐ߬") {
-                            masquer($("#panneau_submit_btn_container > button"));
-                            $("#panneau_submit_btn_2").html("ߣߴߌ ߓߊ߲߫ ߘߊ߫߸ ߦߋ߫ ߞߊ߲ߡߊߛߙߋ ߟߎ߬ ߦߌ߬ߘߊ߬");
-                            setTimeout(() => { afficher($("#panneau_submit_btn_2")); }, 100);
-                        }
-                    });
-                    $("#panneau_submit_btn_2").click((e) => {
-                        e.stopImmediatePropagation();
-                        if(memoire_des_caracteres_choisis[1].length === 0) {
-                            alert("ߛߌ߬ߙߊ߬ߟߊ߲߬ ߞߋߟߋ߲߫ ߥߟߊ ߛߌߦߊߡߊ߲߫ ߛߎߥߊ߲ߘߌ߫ ߝߟߐ߫");
-                            return;
-                        }
-                        masquer($("#caracteres_container > div:not(#panneau_submit_btn_container)"));
-                        afficher($("#tons_container"));  
-
-                        masquer($("#panneau_submit_btn_container > button"));
-                        $("#panneau_submit_btn_3").html("ߌ ߢߣߊߕߊ߬ ߞߊ߲ߡߊߛߙߋ ߟߎ߬ ߘߐ߬");
-                        setTimeout(() => { afficher($("#panneau_submit_btn_3")); }, 100);
-                    });
-                }
-                function cocherLesTons() {
-                    $("#tons_container span").click((e) => {
-
-                        let span = e.target;
-                        let caractere = span.textContent;
-                        
-                        memoire_des_caracteres_choisis[2].push(caractere);
-                        if($("#panneau_submit_btn_3").html() == "ߌ ߢߣߊߕߊ߬ ߞߊ߲ߡߊߛߙߋ ߟߎ߬ ߘߐ߬") {
-                            masquer($("#panneau_submit_btn_container > button"));
-                            $("#panneau_submit_btn_3").html("ߣߴߌ ߓߊ߲߫ ߘߊ߫߸ ߦߋ߫ ߢߣߊߕߊ߬ߣߍ߲ ߠߎ߬ ߛߓߍ߫ ߥߟߊ߬ߓߊ ߞߊ߲߬");
-                            setTimeout(() => { afficher($("#panneau_submit_btn_3")); }, 100);
-                        }
-                    });
-                    
-                    $("#panneau_submit_btn_3").click(() => {   
-                        $(".parametres_popup #submit_btn").click();                     
-                        if(memoire_des_caracteres_choisis[2].length === 0) {
-                            alert("ߞߊ߲ߡߊߛߙߋ߫ ߞߋߟߋ߲߫ ߥߟߊ ߛߌߦߊߡߊ߲߫ ߛߎߥߊ߲ߘߌ߫ ߝߟߐ߫");
-                            return;
-                        }
-                    }); 
-                    togglePanneauDesConsonnes();
-                }
-            }
-            function cocherLeCaractereCorrespondantDeParametre() {
-                $("#consonnes_container span, #voyelles_container span, #tons_container span").click((e) => {
-
-                    let span = e.target;
-                    let caractere_du_panneau = span.textContent;
-                    
-                    if(span.style.color == "orange") {
-                        alert('ߛߌ߬ߙߊ߬ߕߊ ߏ߬ ߜߋ߲߭ ߠߎ߬ ߘߋ߲߰ߣߍ߲߬ ߞߘߐ ߟߋ߬߹');
-                        return false;
-                    }
-
-                    if($.inArray(caractere_du_panneau, caracteres_choisis_du_panneau) == -1) { 
-                        caracteres_choisis_du_panneau.push(caractere_du_panneau); }else{ 
-                        caracteres_choisis_du_panneau.splice(caracteres_choisis_du_panneau.indexOf(caractere_du_panneau),1); 
-                    }
-                    
-                    for (let x = 0; x < $(".parametres_container input").length; x++) {
-                        let caractere_de_parametre = $(".parametres_container input")[x].value;
-
-                        if(caractere_du_panneau == caractere_de_parametre) {
-                            $(".parametres_container input")[x].click();
-                            if(matiere_nom == "ߜߋ߲߭") {
-                                if($.inArray(caractere_du_panneau, caracteres_choisis_du_panneau) == -1) {
-                                    setTimeout(() => { $(".parametres_container #submit_btn").click(); }, 800); }else{
-                                    $(".parametres_container #submit_btn").click();
-                                }
-                            }
-                        }
-                    }
-                    affichageAnimeDesSyllabes();
-                });
-            }
-        }
-        function stylesDesCaracteres() {
-            let consonnes_etudiees = memoireConsonnesChoisies();
-
-            $.each($("#panneaux span"), function() {
-                let caractere_container = $(this);
-                let caractere = caractere_container.text();
-                if(consonnes_etudiees.indexOf(caractere) != "-1") { caractere_container.css({"color":"orange", "font-weight":"bold"}); }
-                caractere_container.click(function() { marquerLaConsonneChoisie(caractere_container); });
-            });
-        }
-    }
-    function chargementParDefautDuTableauNoir() {
-        
-        let matiere_index = JSON.parse(sessionStorage.getItem("matiere_index"));
-        let a_apprendre = "";
-
-        if(matiere_index === 0) a_apprendre = "ߛߓߍߛߎ߲߫ ";
-        if(matiere_index === 1) a_apprendre = "ߜߋ߲߭";
-        if(matiere_index === 2) a_apprendre = "ߜߋ߲߬ ߞߊ߲ߡߊߛߙߋߡߊ߫";
-        if(matiere_index === 3) a_apprendre = "ߖߊ߰ߕߋ߬ߘߋ߲߫";
-
-        let message = a_apprendre+" ߘߋ߲߰ߕߊ ߟߎ߬ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬";
-
-        $('#apprentissage_body').html("<table id='table_syllabes_apprentissage'><div id='texte'></div></table>");
-        
-        setTimeout(() => {
-
-            let longueur = message.length;
-            let indice = 0;
-
-            setTimeout(() => { write(); }, 10);
-            function write() {
-                indice++;
-                $('#texte').html(message.substr(0,indice));
-                if(indice<longueur) setTimeout(() => { write(); }, 5);
-            }
-        }, 10);
-    }
-    function chargementParDefautDEvaluationFicheBody() {
-        let matiere_index = JSON.parse(sessionStorage.getItem("matiere_index"));
-        let a_apprendre = "";
-
-        if(matiere_index === 0) a_apprendre = "ߛߓߍߛߎ߲ ";
-        if(matiere_index === 1) a_apprendre = "ߜߋ߲߭ ߠߎ߬ ";
-        if(matiere_index === 2) a_apprendre = "ߜߋ߲߬ ߞߊ߲ߡߊߛߙߋߡߊ ߟߎ߬ ";
-        if(matiere_index === 3) a_apprendre = "ߖߊ߰ߕߋ߬ߘߋ߲߫ ߠߎ߬ ";
-
-        let message = a_apprendre+" ߞߘߐߓߐߟߌ ߞߐߝߟߌ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬";
-
-        $('#evaluation_fiche_body').html("<p id='evaluation_tbody_default_content'></div>");
-        
-        setTimeout(() => {
-
-            let longueur = message.length;
-            let indice = 0;
-
-            setTimeout(() => { write(); }, 10);
-            function write() {
-                indice++;
-                $('#evaluation_tbody_default_content').html(message.substr(0,indice));
-                if(indice<longueur) setTimeout(() => { write(); }, 10);
-            }
-        }, 10);
-    }
-    function chargerPanneauDesCaracteres() {
-        
-        var panneaux_des_caracteres_html = panneauxDesCaracteresHTML();
-
-        $('#panneaux').html(panneaux_des_caracteres_html);
-        if(matiere_nom == "ߜߋ߲߭") {
-            cocherToutesLesVoyelles();
-            $("#afficheur_de_panneau").html("<p>ߛߌ߬ߙߕߊ߬ ߥߟߊ ߦߌ߬ߘߊ߬</p>");
-        }
-
-        function panneauxDesCaracteresHTML() {
-
-            var voyelles = caracteres[0];
-            var consonnes = caracteres[1];
-            var nasalisations = caracteres[4];
-            var tons = caracteres[5];
-
-            var html_2 = '<div id="caracteres_cadre">\n';
-                html_2 += '<div id="caracteres_container">\n';
-
-                    // html_2 += '<div id="panneau_submit_btn_container">\n';
-                    //     html_2 += '<button id="panneau_submit"></button>\n';
-                    // html_2 += '</div>\n';
-                
-                    html_2 += "<div id='consonnes_container'>\n";
-                    for (var i = 0; i < 18; i += 6) {
-                        html_2 += "<div>\n";
-                        for (var j = 0; j < 6; j++) {
-                            html_2 += "<span>" + consonnes[i + j] + "</span>";
-                        }
-                        html_2 += "</div>\n";
-                    }
-                    html_2 += "</div>\n";
-
-                    html_2 += "<div id='voyelles_container'>\n";
-                        html_2 += "<div>\n";
-                        for (var i = 0; i < 7; i++) {
-                            html_2 += "<span>" + voyelles[i] + "</span>";
-                        }
-                        html_2 += "</div>\n";
-                    html_2 += "</div>\n";
-
-                    html_2 += "<div id='nasalisations_container'>\n";
-                        html_2 += "<div>\n";
-                        for (var i = 0; i < 2; i++) {
-                            html_2 += "<span>" + nasalisations[i] + "</span>";
-                        }
-                        html_2 += "</div>\n";
-                    html_2 += "</div>\n";
-
-                    html_2 += "<div id='tons_container'>\n";
-                        html_2 += "<div>\n";
-                        for (var i = 0; i < 8; i++) {
-                            html_2 += "<span>" + tons[i] + "</span>";
-                        }
-                        html_2 += "</div>\n";
-                    html_2 += "</div>\n";
-                    
-                html_2 += '</div>\n';
-            html_2 += '</div>\n';
-
-            return html_2;
-        }
-    }
-    function clearStorage() {
-        sessionStorage.clear();
-        localStorage.clear();
-    }
-    function clignoterUneFois(element) {
-        element.css('display','none');
-        setTimeout(() => { element.css('display','block'); }, 250);
-    }
-    function clignotage(reponse_ratee) {
-        $.each($('.table_parlante td, .table_muette td'), function() {
+}
+function affichageAnimeDesSyllabes(caracteres_selectionnees = [], caractere = "") {
+    $.each($(".table_parlante td"), function (e) {
+        let matiere_nom = JSON.parse(sessionStorage.getItem("matiere_nom"));
+
+        if (matiere_nom == "ߜߋ߲߭") {
             let td = $(this);
-            if(td.text() == reponse_ratee) {
-                td.css('background-color','#666');
-                setTimeout((function() { td.css('background-color','transparent'); }), 200);
-                setTimeout((function() { td.css('background-color','#666');        }), 325);
-                setTimeout((function() { td.css('background-color','transparent'); }), 450);
-                setTimeout((function() { td.css('background-color','#666');        }), 575);
-                setTimeout((function() { td.css('background-color','transparent'); }), 700);
-                setTimeout((function() { td.css('background-color','#666');        }), 825);
-                setTimeout((function() { td.css('background-color','transparent'); }), 950);
-                setTimeout((function() { td.css('background-color','#666');        }), 1075);
-                setTimeout((function() { td.css('background-color','transparent'); }), 1200);
-                setTimeout((function() { td.css('background-color','#666');        }), 1325);
-                setTimeout((function() { td.css('background-color','transparent'); }), 1450);
-                setTimeout((function() { td.css('background-color','#666');        }), 1575);
-                setTimeout((function() { td.css('background-color','transparent'); }), 1700);
-                setTimeout((function() { td.css('background-color','#666');        }), 1825);
-                setTimeout((function() { td.css('background-color','transparent'); }), 1950);
-            }  
-        });
-    }
-    function clignoter(element) { 
-        element.addClass('clignotant'); 
-        setTimeout(function() { element.removeClass('clignotant'); }, 1200);
-    }
-    function cocherLeCaractereCorrespondantDeParametre(caractere) {
+            let caractere_du_tableau = td.text().split("")[0];
 
-        let caracteres_selectionnees = JSON.parse(sessionStorage.getItem("caracteres_selectionnees"));
-
-        for (let i = 0; i < $(".parametres_container input").length; i++) {
-            let caractere_de_parametre = $(".parametres_container input")[i].value;
-
-            if(caractere == caractere_de_parametre) {
-                $(".parametres_container input")[i].click();
-                if(matiere_nom == "ߜߋ߲߭") {
-                    if($.inArray(caractere, caracteres_selectionnees) == -1) {
-                        setTimeout(() => { $(".parametres_container #submit_btn").click(); }, 800); }else{
-                        $(".parametres_container #submit_btn").click();
-                    }
+            if (caracteres_selectionnees.indexOf(caractere) != -1) {
+                if (caractere == caractere_du_tableau) {
+                    td.css("opacity", 0);
+                    setTimeout(() => { td.css("opacity", 1); }, 100 * td.index());
+                }
+            }
+            if (caracteres_selectionnees.indexOf(caractere) == -1) {
+                if (caractere == caractere_du_tableau) {
+                    td.css("opacity", 1);
+                    setTimeout(() => { td.css("opacity", 0); }, 100 * (7 - td.index()));
                 }
             }
         }
-        affichageAnimeDesSyllabes(caracteres_selectionnees,caractere);
-    }
-    function cocherLeTonCorrespondantDeParametre(ton) {
+    });
+}
+function affichageAnimeDeTableTd(table) {
 
-        let caracteres_selectionnees = JSON.parse(sessionStorage.getItem("caracteres_selectionnees"));
+    let tr = $('tr', table);
 
-        for (let i = 0; i < $("#tons_checker input").length; i++) {
-            let ton_de_parametre = $("#tons_checker input")[i].value;
+    tr.css('opacity', 0);
+    $('td', table).css({ 'transition': '0.2s', 'opacity': 0 });
 
-            if(ton == ton_de_parametre) {
-                $("#tons_checker input")[i].click();
-                if(matiere_nom == "ߜߋ߲߭") {
-                    if($.inArray(ton, caracteres_selectionnees) == -1) {
-                        setTimeout(() => { $(".parametres_container #submit_btn").click(); }, 800); }else{
-                        $(".parametres_container #submit_btn").click();
-                    }
-                }
-            }
-        }
-        affichageAnimeDesSyllabes(caracteres_selectionnees,ton);
-    }
-    function cocherLesTonsCorrespondantsDeParametre(tons) {
-        for (let i = 0; i < $("#tons_checker input").length; i++) {
-            let ton_de_parametre = $("#tons_checker input")[i].value;
-            if(tons.indexOf(ton_de_parametre) != -1) $("#tons_checker input")[i].click();
-        }
-    }
-    function cocherLesVoyellesCorrespondantesDeParametre(voyelle) {
+    setTimeout(() => {
+        tr.css('opacity', 1);
+        $.each(tr, function () {
 
-        let caracteres_selectionnees = JSON.parse(sessionStorage.getItem("caracteres_selectionnees"));                               
+            let tr_index = $(this).index();
+            let td = $('td', this);
+            let td_length = td.length;
 
-        for (let i = 0; i < $("#voyelles_checker input").length; i++) {
-            let voyelle_de_parametre = $("#voyelles_checker input")[i].value;
-
-            if(voyelle == voyelle_de_parametre) {
-                $("#voyelles_checker input")[i].click();
-                if(matiere_nom == "ߜߋ߲߭") {
-                    if($.inArray(voyelle, caracteres_selectionnees) == -1) {
-                        setTimeout(() => { $(".parametres_container #submit_btn").click(); }, 800); }else{
-                        $(".parametres_container #submit_btn").click();
-                    }
-                }
-            }
-        }
-        affichageAnimeDesSyllabes(caracteres_selectionnees,voyelle);
-    }
-    function cocherLeTedo() {
-        $.each($('#tedo_checker .checkbox_parent'), function(){ 
-            if($(this).prop('checked')==false) $(this).click(); 
-        });
-    }
-    function cocherToutesLesConsonnes() {
-        $.each($('#consonnes_checker .checkbox_parent'), function(){ 
-            if($(this).prop('checked')==false) $(this).click(); 
-        });
-    }
-    function cocherToutesLesNasalisations() {
-        $.each($('#nasalisation_checker .checkbox_parent'), function(){ 
-            if($(this).prop('checked')==false) $(this).click(); 
-        });
-    }
-    function cocherToutesLesVoyelles() {
-        $.each($('#voyelles_checker .checkbox_parent'), function(){ 
-            if($(this).prop('checked')==false) $(this).click(); 
-        });
-    }
-    function cocherTousLesCaracteres() {
-        $.each($('.checkbox_parent'), function(){ 
-            if($(this).prop('checked')==false) $(this).click(); 
-        });
-    }
-    function cocherTousLesTons() {
-        $.each($('#tons_checker .checkbox_parent'), function(){ 
-            if($(this).prop('checked')==false) $(this).click(); 
-        });
-    }
-	function compteur(){
-	    var i=0;
-	    return function(){ return i += 1; };
-	}
-    function conversionDeDateEnNko(timestamp){
-       var timestamp = timestamp.split(' ');
-       timestamp = timestamp[0].split('-');
-       
-       var annee = 'ߛߊ߲߭ '+parseIntNko(timestamp[0]);
-       var moi = mois[timestamp[1][1]];
-       var jour = 'ߕߟߋ߬ '+parseIntNko(timestamp[2]);
-       
-       timestamp = moi+' '+jour+' '+annee; 
-       return timestamp;
-    }
-    function consonnesDeSyllabeApprisesDuServeur(datas) {
-        let consonnes_apprises = [];
-        if (datas[1].length != 0) {
-            for (let i = 0; i < datas[1].length; i++) {
-                if(datas[1][i] != undefined) if(datas[1][i].phase == "syllabes_apprentissage") if(datas[1][i].lesson != undefined) {
-                    JSON.parse(datas[1][i].lesson).forEach(element => {
-                        let consonne = element[0].split('')[0];
-                        if ($.inArray(consonne, consonnes_apprises) === -1) { consonnes_apprises.push(consonne); }
-                    });
-                }
-            }
-        }
-        return consonnes_apprises
-    }
-    function consonnesDeSyllabeExerceesDuServeur(datas) {
-
-        let consonnes_exercees = [];
-
-        if (datas[1].length != 0) {
-            for (let i = 0; i < datas[1].length; i++) {
-                if(datas[1][i] != undefined) if(datas[1][i].phase == "syllabes_exercice") if(datas[1][i].lesson != undefined) {
-                    JSON.parse(datas[1][i].lesson).forEach(element => {
-                        let consonne = element[0].split('')[0];
-                        if ($.inArray(consonne, consonnes_exercees) === -1) { consonnes_exercees.push(consonne); }
-                    });
-                }
-            }
-        }
-
-        return consonnes_exercees
-    }
-    function consonnesChoisiesDuServeur(datas) {
-   
-        let niveau = JSON.parse(sessionStorage.getItem("niveau"));
-        let cs = [];
-        let lesson = [];
-
-        if (datas[niveau-1][0] != undefined)  lesson = JSON.parse(datas[niveau-1][0].lesson);
-        lesson.forEach(element => {
-            let consonne = element[0].split('')[0];
-            if ($.inArray(consonne, cs) === -1) { cs.push(consonne); }
-        });
-        return cs;
-    }
-    function consonnesEtudiees(lesson_d_apprentissage_syllabes) {
-        let consonnes_etudiees = [];
-        if(lesson_d_apprentissage_syllabes != undefined) {
-            lesson_d_apprentissage_syllabes.forEach(element => { 
-                if(consonnes_etudiees.indexOf(element[0].split("")[0]) == "-1") consonnes_etudiees.push(element[0].split("")[0]); 
+            $.each(td, function () {
+                let td_index = $(this).index();
+                setTimeout(() => {
+                    $(this).css({ 'opacity': 1 });
+                }, 80 * ((tr_index * td_length) + td_index));
             });
-            return consonnes_etudiees;
-        }
-    }
-    function contenuVide() {
-        let contenu_vide = "<div class='contenu_vide'>ߝߏߦߊ߲߫ ߹</div>";
-        return contenu_vide;
-    }
-    function convertirDateEnNko(date){
-        
-        let annee = 'ߛߊ߲߭ '+parseIntNko(date.split(' ')[0].split('-')[0]);
-        let moi = mois[parseInt(date.split(' ')[0].split('-')[1]) - 1];
-        let jour = 'ߕߟߋ߬ '+parseIntNko(date.split(' ')[0].split('-')[2]);
-        
-        date = moi+' '+jour+' '+annee; 
-        return date;
-    }
-    function couleurDeFond(element,couleur)	{ element.css('backgroundColor', couleur); }
-    function couleurDeFont(element,couleur)	{ element.css('color', couleur); }
-
-/*-------------------------------------------------------------------------------------------------------------------------------------*/
-
-    function dateAcuelle() {
-
-        let d = new Date();
-        let an = d.getFullYear();
-        let lune = d.getMonth();
-        let date = d.getDate();
-        let nom_du_jour = d.getDay();
-        let heure = d.getHours();
-        let minute = d.getMinutes();
-        let temps = [heure+':'+minute];
-        let date_actuelle = an+'-'+lune+'-'+date+' '+temps+' '+nom_du_jour;
-
-        return date_actuelle;
-    }
-    function dateDApprentissageAlphabetDuServeur(datas) {
-        let date = "";
-        if(datas != null) if(datas.length != 0) date = (datas[0][0] == undefined) ? dateAcuelle() : datas[0][0].date;
-        return date;
-    }
-    function dateEnNko(date_a_convertir) {
-
-        let d = date_a_convertir;
-
-        let an = parseIntNko(d.split('-')[0]);
-        let lune = mois[parseInt(d.split('-')[1])];
-        let date = parseIntNko(parseInt(d.split('-')[2]));
-        let heure = parseIntNko(parseInt(d.split(' ')[1].split(':')[0]));
-        let minute = parseIntNko(parseInt(d.split(' ')[1].split(':')[1]));
-        let temps = [heure+':'+minute];
-        let date_actuelle = temps+' '+lune+' ߕߟߋ߬ '+date+' ߛߊ߲߭ '+an;
-
-        return date_actuelle;
-    }
-    function dateEnNko1(date_a_convertir) {
-
-        let d = date_a_convertir;
-
-        let an = parseIntNko(d.split('-')[0]);
-        let lune = mois[parseInt(d.split('-')[1] - 1)];
-        let date = parseIntNko(parseInt(d.split('-')[2]));
-        let heure = parseIntNko(parseInt(d.split(' ')[1].split(':')[0]));
-        let minute = parseIntNko(parseInt(d.split(' ')[1].split(':')[1]));
-        let temps = [heure+':'+minute];
-        let date_actuelle = temps+' '+lune+' ߕߟߋ߬ '+date+' ߛߊ߲߭ '+an;
-
-        return date_actuelle;
-    }
-    function decocherLeTedo() {
-        $.each($('#tedo_checker .checkbox_parent'), function(){ 
-            if($(this).prop('checked')==true) $(this).click(); 
         });
-    }
-    function decocherLesCaracteresNonConcernes() {
+    }, 250);
 
-        deSelectionnerLesConsonnesDuPanneau();
-        deSelectionnerLesVoyellesDuPanneau();
-        decocherLaNasalisation();
-        decocherLeTedo();
-        decocherLesTons();
+}
+function affichageAnimeDeTableTr(table) {
 
-        function deSelectionnerLesConsonnesDuPanneau() {
-            if ($('#consonnes_checker').find('.checkbox_parent').prop("checked") == true) { $('#consonnes_checker').find('.checkbox_parent').next().click(); }
-        }
-        function deSelectionnerLesVoyellesDuPanneau() {
-            if ($('#voyelles_checker').find('.checkbox_parent').prop("checked") == true) { $('#voyelles_checker').find('.checkbox_parent').next().click(); }
-        }
-        function decocherLaNasalisation() {
-            if ($('#nasalisation_checker').find('.checkbox_parent').prop("checked") == true) { $('#nasalisation_checker').find('.checkbox_parent').next().click(); }
-        }
-        function decocherLeTedo() {
-            if ($('#tedo_checker').find('.checkbox_parent').prop("checked") == true) { $('#tedo_checker').find('.checkbox_parent').next().click(); }
-        }
-        function decocherLesTons() {
-            if ($('#tons_checker').find('.checkbox_parent').prop("checked") == true) { $('#tons_checker').find('.checkbox_parent').next().click(); }
-        }
-    }
-    function decocherLesCaracteres(caracteres) {
-        $.each(caracteres, function(){ 
-            if($(this).prop('checked')==true) $(this).click(); 
+    $('td', table).css({ 'opacity': 1, 'transform': 'scale(1)' });
+    let tr = $('tr', table);
+    tr.css('opacity', 0);
+
+    setTimeout(() => {
+        $.each(tr, function () {
+            let tr_index = $(this).index();
+            setTimeout(() => { $(this).css({ 'opacity': 1 }); }, 200 * tr_index);
         });
-    }
-    function decocherToutesLesConsonnes() {
-        $.each($("#consonnes_checker input"), function(){ 
-            if($(this).prop('checked')==true) $(this).click(); 
-        });
-    }
-    function decocherToutesLesNasalisations() {
-        $.each($('#nasalisation_checker .checkbox_parent'), function(){ 
-            if($(this).prop('checked')==true) $(this).click(); 
-        });
-    }
-    function decocherToutesLesVoyelles() {
-        $.each($('#voyelles_checker .checkbox_parent'), function(){ 
-            if($(this).prop('checked')==true) $(this).click(); 
-        });
-    }
-    function decocherTousLesTons() {
-        $.each($('#tons_checker .checkbox_parent'), function(){ 
-            if($(this).prop('checked')==true) $(this).click(); 
-        });
-    }
-    function decocherTousLesCaracteres() {
-        $.each($('.checkbox_parent'), function(){ 
-            if($(this).prop('checked')==true) $(this).click(); 
-        });
-    }
-    function defilementDuContenuVersLeHaut(container) {
-        container.animate({ scrollTop:container[0].scrollHeight }, 1000);
-    }
-    function demarquer(element) {
-        element.css('background-color','#aaa').siblings().css('background-color','rgba(85,85,85,0.25)');
-    }
-    function deSelectionnerTous(spans) {
-        spans.each(function() {
-            let span = $(this);
-            if(span.css("background-color") == "rgb(170, 170, 170)") span.click();
-        });
-    }
-    function display(element) {
-        element.css({
-            'display':'block',
-            'opacity':1, 
-            'transform':'scale(1)'
-        });
-    }
-    function displayv(element) {
-        element.css({
-            'display':'block',
-            'opacity':0, 
-            'transition':'0.25s', 
-            'transform-origin':'0 0',
-            'transform':'scaleY(0.75)'
-        });
-        setTimeout(() => { element.css({'opacity':1, 'transform':'scaleY(1)'}); }, 50);
-    }   
-    function ducourage() {
-        let nom = nomDEtudiant();
-        let sexe = sexeDEtudiant();
-        return "<b>ߌ ߘߐߖߊ߬ "+nom+" "+sexe+"</b><br>";
-    }
+    }, 200);
 
-/*-------------------------------------------------------------------------------------------------------------------------------------*/
+}
+function afficher(element) {
+    masquer(element);
+    element.css({
+        'display': 'block',
+        'transform': 'scale(1)',
+        'opacity': 1,
+        'transition': '0.2s'
+    });
+}
+function afficherApprentissage(datas) {
 
-    function ecris(element_id,message) {
-        let longueur = message.length;
-        let indice = 0;
+    afficherApprentissageContainer();
+    afficherPanneauDesCaracteres(datas);
 
-        afficherNotification();
-        setTimeout(() => { write(); }, 400);
-        function write() {
-            indice++;
-            $('#'+element_id).html(message.substr(0,indice));
-            if(indice<longueur) setTimeout(() => { write(); }, 5);
-        }
-    }
-    function ecris(element_id,message) {
-        let longueur = message.length;
-        let indice = 0;
+    function afficherApprentissageContainer() {
+        display($("#apprentissage_container"));
+        masquer($('#apprentissage_container > div:not(#apprentissage_head)'));
+        setTimeout(() => { afficher($('#apprentissage_container > div:not(#apprentissage_head)')); }, 400);
 
-        afficherNotification();
-        setTimeout(() => { write(); }, 400);
-        function write() {
-            indice++;
-            $('#'+element_id).html(message.substr(0,indice));
-            if(indice<longueur) setTimeout(() => { write(); }, 5);
-        }
+        rendreActif($('#afficheur_de_panneau'));
+        indexer($('#afficheur_de_panneau p'));
+        masquer($('#apprentissage_redirection_btns'));
     }
-    function ecrire(element_class,message) {
-        let longueur = message.length;
-        let indice = 0;
+    function afficherPanneauDesCaracteres(datas) {
+        let consonnes_apprises_du_serveur = consonnesDeSyllabeApprisesDuServeur(datas);
+        togglePanneauDesConsonnes();
+        panneauxStyle(consonnes_apprises_du_serveur);
+    }
+}
+function afficherBoutonDeCorrection() {
+    display($('.dialogue_btns'));
+    masquer($('.redirection_btns'));
+    masquer($(".dialogue_btns > div"));
 
-        afficherNotification();
-        setTimeout(() => { write(); }, 400);
-        function write() {
-            indice++;
-            $('.'+element_class).html(message.substr(0,indice));
-            if(indice<longueur) setTimeout(() => { write(); }, 10);
-        }
-    }
-    function effacerLeTableau() {
-        $('.course_body').html("<p id='contenu_par_defaut_du_tableau'>ߥߟߊ߬ߓߊ ߓߘߊ߫ ߖߐ߬ߛߌ߬ ߹</p>");
-    } 
-    function enregistrerLeCaractere(caracteres_selectionnees,caractere) {
-        let caractere_index = caracteres_selectionnees.indexOf(caractere);
-        if(caractere_index === -1) { caracteres_selectionnees.push(caractere); }
-    } 
-    function enregistrerLesCaracteres(caracteres_selectionnees,caracteres) {
-        caracteres.forEach(element => {
-            if(caracteres_selectionnees.indexOf(element) === -1) caracteres_selectionnees.push(element);
-        });
-    } 
-    function enregistrerLesConsonnes(caracteres_selectionnees,caractere) {
-        if(caracteres_selectionnees[0].indexOf(caractere) === -1) {
-            if(caracteres[1].indexOf(caractere) !== -1) { caracteres_selectionnees[0].push(caractere); }
-        }else{ 
-            let consonne_index = caracteres_selectionnees[0].indexOf(caractere);
-            caracteres_selectionnees[0].splice(consonne_index,1); 
-        }
-        sessionStorage.setItem("tons_selectionnes", JSON.stringify(caracteres_selectionnees));
-    }
-    function enregistrerLesVoyelles(caracteres_selectionnees,caractere) {
-        if(caracteres_selectionnees[1].indexOf(caractere) === -1) {
-            if(caracteres[0].indexOf(caractere) !== -1) { caracteres_selectionnees[1].push(caractere); }
-        }else{ 
-            let voyelle_index = caracteres_selectionnees[1].indexOf(caractere);
-            caracteres_selectionnees[1].splice(voyelle_index,1); 
-        }
-        sessionStorage.setItem("tons_selectionnes", JSON.stringify(caracteres_selectionnees));
-    }
-    function enregistrerLesTons(caracteres_selectionnees,caractere) {
-        if(caracteres_selectionnees[2].indexOf(caractere) === -1) {
-            if(caracteres[5].indexOf(caractere) !== -1) { caracteres_selectionnees[2].push(caractere); }
-        }else{ 
-            let ton_index = caracteres_selectionnees[2].indexOf(caractere);
-            caracteres_selectionnees[2].splice(ton_index,1); 
-        }
-        sessionStorage.setItem("tons_selectionnes", JSON.stringify(caracteres_selectionnees));
-    }
-    function enregistrerLaNasalisation(caracteres_selectionnees,caractere) {
-        if(caracteres_selectionnees[3].indexOf(caractere) === -1) {
-            if(caracteres[4].indexOf(caractere) !== -1) { caracteres_selectionnees[3].push(caractere); }
-        }else{ 
-            let nasalisation_index = caracteres_selectionnees[3].indexOf(caractere);
-            caracteres_selectionnees[3].splice(nasalisation_index,1); 
-        }
-        sessionStorage.setItem("tons_selectionnes", JSON.stringify(caracteres_selectionnees));
-    }
-    function enregistrerLeTedo(caracteres_selectionnees,caractere) {
-        if(caracteres_selectionnees[4].indexOf(caractere) === -1) {
-            if(caracteres[3].indexOf(caractere) !== -1) { caracteres_selectionnees[4].push(caractere); }
-        }else{ 
-            let tedo_index = caracteres_selectionnees[4].indexOf(caractere);
-            caracteres_selectionnees[4].splice(tedo_index,1); 
-        }
-        sessionStorage.setItem("tons_selectionnes", JSON.stringify(caracteres_selectionnees));
-    }
+    afficher($(".correction_btn"));
+    rendreActif($(".correction_btn"));
+}
+function afficherBoutonDeQuestion() {
+    display($('.dialogue_btns'));
+    masquer($('.redirection_btns'));
+    masquer($(".dialogue_btns > div"));
 
-/*-------------------------------------------------------------------------------------------------------------------------------------*/
-        
-    function felicitation() {
-        let nom = nomDEtudiant();
-        let sexe = sexeDEtudiant();
-        return "<b>ߌ ߞߎߟߎ߲ߖߋ߫ "+nom+" "+sexe+"</b><br>";
-    }
-    function fermer(element) {
-        element.animate({ 'height':0 }, 200);
-        setTimeout((function(){ element.css({ 'display':'none' }) }),180);
-    }
-    function fermerLaPage() {
-        $(".fermeture").click(() => { history.back(); });
-    }
-    function formatParDefautDuResultat() {
+    masquer($('.dialogue_btns > div'));
+    rendreActif($('.question_btn'));
+    afficherRapidement($('.question_btn'));
+}
+function afficherBoutonDeRepetition() {
+    display($('.dialogue_btns'));
+    masquer($('.redirection_btns'));
+    masquer($(".dialogue_btns > div"));
 
-        $('.table_head tr:nth-child(2) td').text('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ');
-        $('.table_head tr:nth-child(3) td').text('ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ');
+    masquer($('.dialogue_btns > div'));
+    rendreActif($('.repetition_btn'));
+    afficher($('.repetition_btn'));
+}
+function afficherBoutonPourLaMatiereSuivante() {
+    let matiere = nomDeLaMatiereSuivante();
 
-        $.each($('.table_body tr:nth-child(3) td, .table_body tr:nth-child(4) td'), function() {
-            $(this).html('');
-        });
+    masquer($('.dialogue_btns'));
+    display($('.redirection_btns'));
+    masquer($('.redirection_btns > div'));
 
-        $('#total_reponse').text('');
-        $('#total_point_1').text('');
+    setTimeout(() => {
+        afficher($('.lesson_suivante'));
+        rendreActif($('.lesson_suivante'));
+        $('.lesson_suivante a').text(matiere + ' ߘߋ߰ߟߌ ߘߊߡߌ߬ߘߊ߬');
+        indexer($('.lesson_suivante p'));
+    }, 400);
+}
+function afficherBoutonDExercice() {
+    let matiere = JSON.parse(sessionStorage.getItem("matiere_nom"));
 
-        $('#resultat_pied > div > div:nth-child(1) span:first-child').text('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߡߎ߬ߡߍ');
-        $('#resultat_pied > div > div:nth-child(2) span:first-child').text('ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ߫ ߢߊ߬ߣߍ߲');
-        $('#resultat_pied > div > div:nth-child(3)').css('display','block');
+    masquer($(".dialogue_btns"));
+    display($(".redirection_btns"));
+    masquer($(".redirection_btns > div"));
 
-        $('#total_bonne_reponse').text('');
-        $('#total_point_2').text('');
-    }
+    setTimeout(() => {
+        afficher($(".exercice_btn"));
+        rendreActif($(".exercice_btn"));
+        $(".exercice_btn").html("<p>" + matiere + " ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫</p>");
+        indexer($(".exercice_btn p"));
+    }, 400);
+}
+function afficherBoutonDeRevision() {
+    let matiere = JSON.parse(sessionStorage.getItem("matiere_nom"));
 
-/*-------------------------------------------------------------------------------------------------------------------------------------*/
+    masquer($('.dialogue_btns'));
+    display($('.redirection_btns'));
+    masquer($('.redirection_btns > div'));
 
-    function gestionDeExerciceFootBtn(total_questions) {
-        let i = 0;
-        
-        if(i <= total_questions) { 
+    setTimeout(() => {
+        afficher($('.revision_btn'));
+        rendreActif($('.revision_btn'));
+        $('.revision_btn').html("<p>" + matiere + " ߞߘߐߓߐߟߌ ߞߍ߫</p>");
+        indexer($('.revision_btn p'));
+    }, 400);
+}
+function afficherBoutonDeReprise() {
+    let matiere = JSON.parse(sessionStorage.getItem("matiere_nom"));
+
+    masquer($('.dialogue_btns'));
+    display($('.redirection_btns'));
+    masquer($('.redirection_btns > div'));
+
+    setTimeout(() => {
+        afficher($('.reprendre_btn'));
+        rendreActif($('.reprendre_btn'));
+        $('.reprendre_btn').html("<p>" + matiere + " ߞߘߐߓߐߟߌ ߞߍ߫ ߕߎ߲߯</p>");
+        indexer($('.reprendre_btn p'));
+    }, 400);
+}
+function afficherBoutonDApprentissage() {
+    let matiere = JSON.parse(sessionStorage.getItem("matiere_nom"));
+
+    masquer($('.dialogue_btns'));
+    display($('.redirection_btns'));
+    masquer($('.redirection_btns > div'));
+
+    setTimeout(() => {
+        afficher($('.apprentissage_btn'));
+        rendreActif($('.apprentissage_btn'));
+        $('.apprentissage_btn').html("<p>ߥߊ߫ " + matiere + "ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߡߊ߬ </p>");
+        indexer($('.apprentissage_btn p'));
+    }, 400);
+}
+function afficherElement(element_jAuery) {
+    element_jAuery.css({ "transform": "scale(0.8)", "opacity": 0 });
+    setTimeout(() => { element_jAuery.css({ "transition": "1s", "transform": "scale(1)", "opacity": 1 }); }, 50);
+}
+function afficherEvaluation() {
+
+    masquer($(".direction"));
+    display($(".salle_de_classe"));
+    display($(".course"));
+    masquer($(".course > div"));
+    display($("#evaluation_container"));
+    masquer($('#evaluation_container > div:not(#evaluation_head)'));
+
+    afficher($('#evaluation_container > div:not(#evaluation_head)'));
+    afficherParDefautDEvaluationDialogueBtns();
+}
+function afficherExercice() {
+    masquer($(".direction"));
+    display($(".salle_de_classe"));
+    display($(".course"));
+    masquer($(".course > div:not(#exercice_container)"));
+    display($("#exercice_container"));
+    masquer($('#exercice_container > div:not(#exercice_head)'));
+
+    $('#exercice_body table td').css("opacity", 0);
+
+    setTimeout(() => {
+        afficher($('#exercice_container > div:not(#exercice_head)'));
+        afficherParDefautDExerciceDialogueBtns();
+        setTimeout(() => { affichageAnimeDeTableTd($('#exercice_body table')); }, 400);
+
+        styleResponsiveDuTableauParlante();
+
+        function afficherParDefautDExerciceDialogueBtns() {
+            masquer($('#exercice_redirection_btns'));
+            afficher($('#exercice_dialogue_btns'));
 
             masquer($('#exercice_dialogue_btns > div'));
             afficherRapidement($('#exercice_question_btn'));
-            indexer($('#exercice_question_btn p'));
+            rendreActif($('#exercice_question_btn'));
+        }
+    }, 200);
+}
+function afficherLentement(element) {
+    masquer(element);
+    element.css({
+        'display': 'block',
+        'transform': 'scale(1)',
+        'opacity': 1,
+        'transition': '0.8s'
+    });
+}
+function afficherNotification() {
+    $('.notification_corps').css({ "top": 0 });
+}
+function afficherRapidement(element) {
+    masquer(element);
+    element.css({
+        'display': 'block',
+        'transform': 'scale(1)',
+        'opacity': 1,
+        'transition': '0.1s'
+    });
+}
+function afficher_en_jailli(element, largeur, hauteur, temps) {
+    element.css({ 'display': 'block', 'width': 0, 'height': 0 });
+    element.animate({ 'width': largeur, 'height': hauteur }, temps);
+}
+function afficherList(ul) {
+    let li = $('li', ul);
+    li.css({ 'opacity': 0, 'transform': 'scale(0.75)' });
+    $.each(li, function () {
+        let li_actif = $(this);
+        let index = li_actif.index();
 
-            $('#exercice_question_btn').click(function() { 
-                masquer($('#exercice_dialogue_btns > div'));
-                rendreActif($('#exercice_repetition_btn'));
-                afficherRapidement($('#exercice_repetition_btn')); 
+        setTimeout(() => { displayv(li_actif); }, 200 * index);
+    });
+}
+function afficherParDefautDEvaluationDialogueBtns() {
+
+    afficher($('#evaluation_foot'));
+
+    masquer($('#evaluation_redirection_btns'));
+    afficher($('#evaluation_dialogue_btns'));
+
+    masquer($('#evaluation_dialogue_btns > div'));
+    afficherRapidement($('#evaluation_question_btn'));
+    rendreActif($('#evaluation_question_btn'));
+    indexer($('#evaluation_question_btn p'));
+}
+function afficherRevision() {
+
+    masquer($(".direction"));
+    display($(".salle_de_classe"));
+    masquer($('.course'));
+    display($(".course"));
+    masquer($(".course > div"));
+    display($("#revision_container"));
+    masquer($('#revision_container > div:not(#revision_head)'));
+
+    $('#revision_body table td').css("opacity", 0);
+
+    setTimeout(() => {
+
+        $('.fermeture').attr('id', 'fermer_revision');
+
+        afficher($('#pratique_options'));
+        afficher($('#revision_container > div:not(#revision_head)'));
+        afficherParDefautDeRevisionDialogueBtns();
+
+        styleResponsiveDuTableauParlante();
+        setTimeout(() => { affichageAnimeDeTableTd($('#revision_body table')); }, 400);
+
+        function afficherParDefautDeRevisionDialogueBtns() {
+
+            afficher($('#revision_foot'));
+            masquer($('#revision_redirection_btns'));
+            afficher($('#revision_dialogue_btns'));
+
+            masquer($('#revision_dialogue_btns > div'));
+            afficherRapidement($('#revision_question_btn'));
+            rendreActif($('#revision_question_btn'));
+
+            rendreActif($('#revision_question_btn'));
+            indexer($('#revision_question_btn p'));
+        }
+    }, 200);
+}
+function afficherTesteContainer() { $('#teste_container').css({ 'top': '-6.25rem' }); }
+function aggrandir_caractere_de(element) { element.css('font-size', '+=32px'); }
+function appetir_caractere_de(element) { element.css('font-size', '-=32px'); }
+function approuver(bonne_reponse) {
+    $.each($('.table_parlante td, .table_muette td'), function () {
+        var td = $(this);
+        if (td.text() == bonne_reponse) {
+
+            td.html(bonne_reponse + "<p id='coche'>✓</p><p id='coche_couvercle'></p>");
+            td.addClass('ombrage');
+
+            $('#coche').css({
+                'position': 'absolute',
+                'display': 'block',
+                'margin': 0,
+                'padding': 0,
+                'width': '40%',
+                'height': '40%',
+                'line-height': '100%',
+                'top': 0,
+                'left': 0,
+                'font-size': '1.5rem',
+                'textAlign': 'center',
+                'boxSizing': 'border-box',
+                'color': 'blue',
+                'rotate': 'y 180deg',
+                'z-index': 0,
+                'transition': 'transform 0.6s'
             });
-
-            $('#exercice_body td').click(function() {
-                masquer($('#exercice_dialogue_btns > div'));
-                rendreActif($('#exercice_correction_btn'));
-                afficherRapidement($('#exercice_correction_btn')); 
+            $('#coche_couvercle').css({
+                'position': 'absolute',
+                'display': 'block',
+                'background-color': '#fff',
+                'margin': 0,
+                'padding': 0,
+                'width': '40%',
+                'height': '40%',
+                'top': 0,
+                'left': 0,
+                'border-radius': '0.5rem',
+                'z-index': 1,
+                'transition': '1200ms'
             });
+        }
+    });
 
-            $('#exercice_correction_btn').click(function() { 
-                masquer($('#exercice_dialogue_btns > div'));
- 
-                if(i < total_questions - 1) { rendreActif($('#exercice_question_btn')); }
-                if(i === total_questions - 1) { 
-                    $('#exercice_question_btn').text('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߓߘߊ߫ ߓߊ߲߫').removeClass('actif').off('click');
+    setTimeout(function () { $('#coche_couvercle').css({ 'left': '-40%' }); }, 10);
+    setTimeout(function () { td.html(bonne_reponse).removeClass('ombrage'); }, 1200);
+}
+function arreterLecture() {
+    $('.stop_icon').parent().on('click', function () {
+        return;
+    });
+}
+
+/*-------------------------------------------------------------------------------------------------------------------------------------*/
+
+function barrer(td) {
+
+    var fausse_reponse = td.html();
+    td.html(fausse_reponse + "<p id='croix'>&#10060;</p>");
+
+    $('#croix').css({
+        'position': 'absolute',
+        'display': 'block',
+        'margin': 0,
+        'padding': '8px 0',
+        'width': '100%',
+        'height': '100%',
+        'top': '5%',
+        'left': 0,
+        'font-size': '32px',
+        'textAlign': 'center',
+        'boxSizing': 'border-box',
+        'transform': 'scale(0)',
+        'opacity': 0,
+        'transition': 'transform 0.6s'
+    });
+
+    setTimeout(function () { $('#croix').css({ 'transform': 'scale(1.5)', 'opacity': 0.5, 'color': 'red' }); }, 50);
+    setTimeout(function () { td.html(fausse_reponse); }, 2000);
+}
+
+/*-------------------------------------------------------------------------------------------------------------------------------------*/
+
+function cacherPanneauDesCaracteres() {
+    $("#caracteres_container").animate({ "top": "22rem" }, 250);
+    setTimeout(() => { $("#panneaux, #caracteres_cadre").css({ "height": 0 }); }, 250);
+
+    setTimeout(() => {
+        $('#afficheur_de_panneau').html("<p>ߛߓߍߘߋ߲߫ ߥߟߊ ߦߌ߬ߘߊ߬</p>");
+        if (matiere_nom == "ߜߋ߲߭") { $("#afficheur_de_panneau").html("<p>ߛߌ߬ߙߕߊ߬ ߥߟߊ ߦߌ߬ߘߊ߬</p>"); }
+        clignoterUneFois($('#afficheur_de_panneau'));
+    }, 400);
+
+    if ($('.table_parlante tr').length == 0) {
+        if ($('#afficheur_de_panneau').text() == "ߛߌ߬ߙߕߊ߬ ߥߟߊ ߘߏ߲߰") {
+            ecris("apprentissage_notification_corps", "ߞߏ߰ߙߌ߫ ߣߘߍ߬ߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬ ߞߊ߬ ߛߌ߬ߙߕߊ߬ ߥߟߊߟߋ߲ ߦߌ߬ߘߊ߬.");
+        }
+        if ($('#afficheur_de_panneau').text() == "ߛߌ߬ߙߕߊ߬ ߥߟߊ ߦߌ߬ߘߊ߬") {
+            ecris("apprentissage_notification_corps", "ߛߌ߬ߙߕߊ߬ ߞߋߟߋ߲߫ ߥߟߊ ߛߌߦߊߡߊ߲߫ ߛߎߥߊ߲ߘߌ߫߸ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߡߍ߲ ߠߎ߬ ߜߋ߲߭ ߠߎ߬ ߘߋ߲߰");
+        }
+    }
+    if ($('.table_parlante tr').length != 0) ecris("apprentissage_notification_corps", "ߜߋ߲߭ ߢߌ߲߬ ߠߎ߫ ߞߋ߬ߟߋ߲߬ ߞߋ߬ߟߋ߲߬ ߘߋ߲߯ ߤߊ߲߯ ߊ߬ߟߎ߬ ߦߋ߫ ߕߴߌ ߞߣߐ߫.");
+}
+function calculDeNote(array_2D) {
+    let note = 0;
+    let n_questionnaire = 0;
+    for (let i = 0; i < array_2D.length; i++) {
+        for (let j = 0; j < array_2D[i].length; j++) {
+            note += array_2D[i][j][2];
+            n_questionnaire++;
+        }
+    }
+    return note * 100 / n_questionnaire;
+}
+function calculDePoint(arrayy_2D) {
+    let point = 0;
+    for (let i = 0; i < arrayy_2D.length; i++) {
+        for (let j = 0; j < arrayy_2D[i].length; j++) {
+            point += arrayy_2D[i][j][2];
+        }
+    }
+    return point;
+}
+function calculerNote(array) {
+    var point = 0;
+    for (var i = 0; i < array.length; i++) {
+        if (array[i] != undefined) {
+            if (array[i][2] == 1) { point++; }
+        }
+    }
+    var note = Math.floor((point * 100) / array.length);
+    return note;
+}
+function calculerPoint(data) {
+    var point = 0;
+    if (data != undefined) {
+        for (var i = 0; i < data.length; i++) {
+            if (data[i] != undefined) {
+                if (data[i][2] == 1) { point++; }
+            }
+        }
+    }
+    return point;
+}
+function caracteresCoches(caracteres_actifs) {
+    let caracteres_coches = [[], [], [], [], [], []];
+
+    for (let i = 0; i < caracteres_actifs.length; i++) {
+        let element = caracteres_actifs[i];
+        for (let j = 0; j < caracteres_coches.length; j++) {
+            let index = caracteres_coches[j].indexOf(element);
+            if (caracteres[j].indexOf(element) != -1) if (index === -1) caracteres_coches[j].push(element);
+        }
+    }
+
+    return caracteres_coches;
+}
+function caracteresSelectionnees() {
+    let caracteres_selectionnees_du_serveur = caracteresSelectionneesDuServeur();
+    let caracteres_selectionnees = JSON.parse(sessionStorage.getItem("caracteres_selectionnees"));
+
+    caracteres_selectionnees = (caracteres_selectionnees == null) ? [] : caracteres_selectionnees;
+    caracteres_selectionnees = (caracteres_selectionnees.length == 0) ? caracteres_selectionnees_du_serveur : caracteres_selectionnees;
+    return caracteres_selectionnees;
+
+    function caracteresSelectionneesDuServeur() {
+        let caracteres_du_serveur = [];
+
+
+        return caracteres_du_serveur;
+    }
+}
+function centrerHorizontalement(element) {
+    var largeur_element = element.width();
+    var largeur_ecran = window.screen.width;
+
+    element.css({ 'right': (largeur_ecran - largeur_element) / 2 + 'px' });
+}
+function changerPhaseActive(phase_active_index) {
+    if (phase_active_index != -1) {
+        let total_phase = $('#phases_list li').length;
+
+        phase_active_index++;
+
+        $.each($('#phases_list li'), function () {
+
+            var phase_index = $(this).index();
+            if (total_phase > phase_active_index) {
+                if (phase_index <= phase_active_index - 1) $(this).removeClass('active').addClass('apprises');
+                if (phase_index == phase_active_index) {
+                    $(this).removeClass('a_apprendre').addClass('active');
+                    indexer($(this));
                 }
-                afficherRapidement($('#exercice_question_btn')); 
-                i++;
+                if (phase_index > phase_active_index) $(this).addClass('a_apprendre');
+            }
+            if (total_phase == phase_active_index) $(this).removeClass('active a_apprendre').addClass('apprises');
+        });
+        sessionStorage.setItem('phase_active_index', JSON.stringify(phase_active_index));
+    }
+}
+function chargerLessonDeSyllabeApprentissage() {
+
+    cocherLesCaracteres();
+    stylesDesCaracteres();
+
+    function cocherLesCaracteres() {
+        let caracteres_choisis_du_panneau = [];
+        let memoire_des_caracteres_choisis = [[], [], []];
+
+        cocherLesCaracteresDuPanneau();
+        cocherLeCaractereCorrespondantDeParametre();
+
+        function cocherLesCaracteresDuPanneau() {
+
+            cocherLesConsonnes();
+            cocherLesVoyelles();
+            cocherLesTons();
+
+            function cocherLesConsonnes() {
+                $("#consonnes_container span").click((e) => {
+
+                    let span = e.target;
+                    let caractere = span.textContent;
+
+                    memoire_des_caracteres_choisis[0].push(caractere);
+                    if ($("#panneau_submit_btn_1").html() == "ߌ ߢߣߊߕߊ߬ ߛߌ߬ߙߊ߬ߕߊ ߟߎ߬ ߘߐ߬") {
+                        masquer($("#panneau_submit_btn_container > button"));
+                        $("#panneau_submit_btn_1").html("ߣߴߌ ߓߊ߲߫ ߘߊ߫߸ ߦߋ߫ ߛߌ߬ߙߊ߬ߟߊ߲ ߠߎ߬ ߦߌ߬ߘߊ߬");
+                        setTimeout(() => { afficher($("#panneau_submit_btn_1")); }, 100);
+                    }
+                });
+                $("#panneau_submit_btn_1").click((e) => {
+                    e.stopImmediatePropagation();
+                    if (memoire_des_caracteres_choisis[0].length === 0) {
+                        alert("ߛߌ߬ߙߕߊ߬ ߞߋߟߋ߲߫ ߥߟߊ ߛߌߦߊߡߊ߲߫ ߛߎߥߊ߲ߘߌ߫ ߝߟߐ߫");
+                        return;
+                    }
+                    masquer($("#caracteres_container > div:not(#panneau_submit_btn_container)"));
+                    afficher($("#voyelles_container"));
+
+                    masquer($("#panneau_submit_btn_container > button"));
+                    $("#panneau_submit_btn_2").html("ߌ ߢߣߊߕߊ߬ ߛߌ߬ߙߊ߬ߟߊ߲ ߠߎ߬ ߘߐ߬");
+                    setTimeout(() => { afficher($("#panneau_submit_btn_2")); }, 100);
+                });
+            }
+            function cocherLesVoyelles() {
+                $("#voyelles_container span").click((e) => {
+
+                    let span = e.target;
+                    let caractere = span.textContent;
+
+                    memoire_des_caracteres_choisis[1].push(caractere);
+                    if ($("#panneau_submit_btn_2").html() == "ߌ ߢߣߊߕߊ߬ ߛߌ߬ߙߊ߬ߟߊ߲ ߠߎ߬ ߘߐ߬") {
+                        masquer($("#panneau_submit_btn_container > button"));
+                        $("#panneau_submit_btn_2").html("ߣߴߌ ߓߊ߲߫ ߘߊ߫߸ ߦߋ߫ ߞߊ߲ߡߊߛߙߋ ߟߎ߬ ߦߌ߬ߘߊ߬");
+                        setTimeout(() => { afficher($("#panneau_submit_btn_2")); }, 100);
+                    }
+                });
+                $("#panneau_submit_btn_2").click((e) => {
+                    e.stopImmediatePropagation();
+                    if (memoire_des_caracteres_choisis[1].length === 0) {
+                        alert("ߛߌ߬ߙߊ߬ߟߊ߲߬ ߞߋߟߋ߲߫ ߥߟߊ ߛߌߦߊߡߊ߲߫ ߛߎߥߊ߲ߘߌ߫ ߝߟߐ߫");
+                        return;
+                    }
+                    masquer($("#caracteres_container > div:not(#panneau_submit_btn_container)"));
+                    afficher($("#tons_container"));
+
+                    masquer($("#panneau_submit_btn_container > button"));
+                    $("#panneau_submit_btn_3").html("ߌ ߢߣߊߕߊ߬ ߞߊ߲ߡߊߛߙߋ ߟߎ߬ ߘߐ߬");
+                    setTimeout(() => { afficher($("#panneau_submit_btn_3")); }, 100);
+                });
+            }
+            function cocherLesTons() {
+                $("#tons_container span").click((e) => {
+
+                    let span = e.target;
+                    let caractere = span.textContent;
+
+                    memoire_des_caracteres_choisis[2].push(caractere);
+                    if ($("#panneau_submit_btn_3").html() == "ߌ ߢߣߊߕߊ߬ ߞߊ߲ߡߊߛߙߋ ߟߎ߬ ߘߐ߬") {
+                        masquer($("#panneau_submit_btn_container > button"));
+                        $("#panneau_submit_btn_3").html("ߣߴߌ ߓߊ߲߫ ߘߊ߫߸ ߦߋ߫ ߢߣߊߕߊ߬ߣߍ߲ ߠߎ߬ ߛߓߍ߫ ߥߟߊ߬ߓߊ ߞߊ߲߬");
+                        setTimeout(() => { afficher($("#panneau_submit_btn_3")); }, 100);
+                    }
+                });
+
+                $("#panneau_submit_btn_3").click(() => {
+                    $(".parametres_popup #submit_btn").click();
+                    if (memoire_des_caracteres_choisis[2].length === 0) {
+                        alert("ߞߊ߲ߡߊߛߙߋ߫ ߞߋߟߋ߲߫ ߥߟߊ ߛߌߦߊߡߊ߲߫ ߛߎߥߊ߲ߘߌ߫ ߝߟߐ߫");
+                        return;
+                    }
+                });
+                togglePanneauDesConsonnes();
+            }
+        }
+        function cocherLeCaractereCorrespondantDeParametre() {
+            $("#consonnes_container span, #voyelles_container span, #tons_container span").click((e) => {
+
+                let span = e.target;
+                let caractere_du_panneau = span.textContent;
+
+                if (span.style.color == "orange") {
+                    alert('ߛߌ߬ߙߊ߬ߕߊ ߏ߬ ߜߋ߲߭ ߠߎ߬ ߘߋ߲߰ߣߍ߲߬ ߞߘߐ ߟߋ߬߹');
+                    return false;
+                }
+
+                if ($.inArray(caractere_du_panneau, caracteres_choisis_du_panneau) == -1) {
+                    caracteres_choisis_du_panneau.push(caractere_du_panneau);
+                } else {
+                    caracteres_choisis_du_panneau.splice(caracteres_choisis_du_panneau.indexOf(caractere_du_panneau), 1);
+                }
+
+                for (let x = 0; x < $(".parametres_container input").length; x++) {
+                    let caractere_de_parametre = $(".parametres_container input")[x].value;
+
+                    if (caractere_du_panneau == caractere_de_parametre) {
+                        $(".parametres_container input")[x].click();
+                        if (matiere_nom == "ߜߋ߲߭") {
+                            if ($.inArray(caractere_du_panneau, caracteres_choisis_du_panneau) == -1) {
+                                setTimeout(() => { $(".parametres_container #submit_btn").click(); }, 800);
+                            } else {
+                                $(".parametres_container #submit_btn").click();
+                            }
+                        }
+                    }
+                }
+                affichageAnimeDesSyllabes();
             });
         }
     }
-    function gestionDeExerciceDialogueBtns2() {
+    function stylesDesCaracteres() {
+        let consonnes_etudiees = memoireConsonnesChoisies();
 
-        $('#exercices_player').css('display','block');
-        $('.oreille_icon_container').css('display','none');
-  
-        zoomUp($('#exercice_dialogue_btn'));
-        
-        $('#exercices_player').click(function(){
-            zoomDown($('#exercices_player'));
-            setTimeout(() => {
-                $('.oreille_icon_container').css('display','block');
-                zoomUp($('.oreille_icon_container'));
-            }, 200);
-        });
-
-        $('.table_muette td, .table_parlante td').click(function(){
-            zoomDown($('.oreille_icon_container'));
-            setTimeout(() => {
-                $('#exercices_player').css('display','block');
-                $('.oreille_icon_container').css('display','none');
-                
-                zoomUp($('#exercices_player'));
-            }, 200);
+        $.each($("#panneaux span"), function () {
+            let caractere_container = $(this);
+            let caractere = caractere_container.text();
+            if (consonnes_etudiees.indexOf(caractere) != "-1") { caractere_container.css({ "color": "orange", "font-weight": "bold" }); }
+            caractere_container.click(function () { marquerLaConsonneChoisie(caractere_container); });
         });
     }
-    function gestionDeDialogueBtns() {
+}
+function chargementParDefautDuTableauNoir() {
 
-        let question_status = 'repondue';
+    let matiere_index = JSON.parse(sessionStorage.getItem("matiere_index"));
+    let a_apprendre = "";
 
-        rendreActif($('.question_btn'));
+    if (matiere_index === 0) a_apprendre = "ߛߓߍߛߎ߲߫ ";
+    if (matiere_index === 1) a_apprendre = "ߜߋ߲߭";
+    if (matiere_index === 2) a_apprendre = "ߜߋ߲߬ ߞߊ߲ߡߊߛߙߋߡߊ߫";
+    if (matiere_index === 3) a_apprendre = "ߖߊ߰ߕߋ߬ߘߋ߲߫";
 
-        $('.question_btn').click(function() { 
-            question_status = 'posee';
-            $(this).css('display','none');
-            $('.correction_btn').css('display','none');
-            setTimeout(() => { 
-                $('.repetition_btn').css('display','block'); 
-                rendreActif($('.repetition_btn'));
-            }, 200);
-        });
+    let message = a_apprendre + " ߘߋ߲߰ߕߊ ߟߎ߬ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬";
 
-        $('.table_parlante td').click(function() {
-            if(question_status == 'repondue') {
-                secouer($('.question_btn'));
-                return;
+    $('#apprentissage_body').html("<table id='table_syllabes_apprentissage'><div id='texte'></div></table>");
+
+    setTimeout(() => {
+
+        let longueur = message.length;
+        let indice = 0;
+
+        setTimeout(() => { write(); }, 10);
+        function write() {
+            indice++;
+            $('#texte').html(message.substr(0, indice));
+            if (indice < longueur) setTimeout(() => { write(); }, 5);
+        }
+    }, 10);
+}
+function chargementParDefautDEvaluationFicheBody() {
+    let matiere_index = JSON.parse(sessionStorage.getItem("matiere_index"));
+    let a_apprendre = "";
+
+    if (matiere_index === 0) a_apprendre = "ߛߓߍߛߎ߲ ";
+    if (matiere_index === 1) a_apprendre = "ߜߋ߲߭ ߠߎ߬ ";
+    if (matiere_index === 2) a_apprendre = "ߜߋ߲߬ ߞߊ߲ߡߊߛߙߋߡߊ ߟߎ߬ ";
+    if (matiere_index === 3) a_apprendre = "ߖߊ߰ߕߋ߬ߘߋ߲߫ ߠߎ߬ ";
+
+    let message = a_apprendre + " ߞߘߐߓߐߟߌ ߞߐߝߟߌ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬";
+
+    $('#evaluation_fiche_body').html("<p id='evaluation_tbody_default_content'></div>");
+
+    setTimeout(() => {
+
+        let longueur = message.length;
+        let indice = 0;
+
+        setTimeout(() => { write(); }, 10);
+        function write() {
+            indice++;
+            $('#evaluation_tbody_default_content').html(message.substr(0, indice));
+            if (indice < longueur) setTimeout(() => { write(); }, 10);
+        }
+    }, 10);
+}
+function chargerPanneauDesCaracteres() {
+
+    var panneaux_des_caracteres_html = panneauxDesCaracteresHTML();
+
+    $('#panneaux').html(panneaux_des_caracteres_html);
+    if (matiere_nom == "ߜߋ߲߭") {
+        cocherToutesLesVoyelles();
+        $("#afficheur_de_panneau").html("<p>ߛߌ߬ߙߕߊ߬ ߥߟߊ ߦߌ߬ߘߊ߬</p>");
+    }
+
+    function panneauxDesCaracteresHTML() {
+
+        var voyelles = caracteres[0];
+        var consonnes = caracteres[1];
+        var nasalisations = caracteres[4];
+        var tons = caracteres[5];
+
+        var html_2 = '<div id="caracteres_cadre">\n';
+        html_2 += '<div id="caracteres_container">\n';
+
+        // html_2 += '<div id="panneau_submit_btn_container">\n';
+        //     html_2 += '<button id="panneau_submit"></button>\n';
+        // html_2 += '</div>\n';
+
+        html_2 += "<div id='consonnes_container'>\n";
+        for (var i = 0; i < 18; i += 6) {
+            html_2 += "<div>\n";
+            for (var j = 0; j < 6; j++) {
+                html_2 += "<span>" + consonnes[i + j] + "</span>";
             }
+            html_2 += "</div>\n";
+        }
+        html_2 += "</div>\n";
 
-            $('.question_btn').css('display','none');
-            $('.repetition_btn').css('display','none');
-            setTimeout(() => { 
-                $('.correction_btn').css('display','block'); 
-                rendreActif($('.correction_btn'));
-            }, 200);
-        });
+        html_2 += "<div id='voyelles_container'>\n";
+        html_2 += "<div>\n";
+        for (var i = 0; i < 7; i++) {
+            html_2 += "<span>" + voyelles[i] + "</span>";
+        }
+        html_2 += "</div>\n";
+        html_2 += "</div>\n";
 
-        $('.correction_btn').click(function() { 
-            question_status = 'repondue';
-            $('.repetition_btn').css('display','none');
-            $('.correction_btn').css('display','none');
-            setTimeout(() => { 
-                $('.question_btn').css('display','block'); 
-                rendreActif($('.question_btn'));
-            }, 200);
-        });               
+        html_2 += "<div id='nasalisations_container'>\n";
+        html_2 += "<div>\n";
+        for (var i = 0; i < 2; i++) {
+            html_2 += "<span>" + nasalisations[i] + "</span>";
+        }
+        html_2 += "</div>\n";
+        html_2 += "</div>\n";
+
+        html_2 += "<div id='tons_container'>\n";
+        html_2 += "<div>\n";
+        for (var i = 0; i < 8; i++) {
+            html_2 += "<span>" + tons[i] + "</span>";
+        }
+        html_2 += "</div>\n";
+        html_2 += "</div>\n";
+
+        html_2 += '</div>\n';
+        html_2 += '</div>\n';
+
+        return html_2;
     }
-    function gestionDeExerciceBtns() {
+}
+function clearStorage() {
+    sessionStorage.clear();
+    localStorage.clear();
+}
+function clignoterUneFois(element) {
+    element.css('display', 'none');
+    setTimeout(() => { element.css('display', 'block'); }, 250);
+}
+function clignotage(reponse_ratee) {
+    $.each($('.table_parlante td, .table_muette td'), function () {
+        let td = $(this);
+        if (td.text() == reponse_ratee) {
+            td.css('background-color', '#666');
+            setTimeout((function () { td.css('background-color', 'transparent'); }), 200);
+            setTimeout((function () { td.css('background-color', '#666'); }), 325);
+            setTimeout((function () { td.css('background-color', 'transparent'); }), 450);
+            setTimeout((function () { td.css('background-color', '#666'); }), 575);
+            setTimeout((function () { td.css('background-color', 'transparent'); }), 700);
+            setTimeout((function () { td.css('background-color', '#666'); }), 825);
+            setTimeout((function () { td.css('background-color', 'transparent'); }), 950);
+            setTimeout((function () { td.css('background-color', '#666'); }), 1075);
+            setTimeout((function () { td.css('background-color', 'transparent'); }), 1200);
+            setTimeout((function () { td.css('background-color', '#666'); }), 1325);
+            setTimeout((function () { td.css('background-color', 'transparent'); }), 1450);
+            setTimeout((function () { td.css('background-color', '#666'); }), 1575);
+            setTimeout((function () { td.css('background-color', 'transparent'); }), 1700);
+            setTimeout((function () { td.css('background-color', '#666'); }), 1825);
+            setTimeout((function () { td.css('background-color', 'transparent'); }), 1950);
+        }
+    });
+}
+function clignoter(element) {
+    element.addClass('clignotant');
+    setTimeout(function () { element.removeClass('clignotant'); }, 1200);
+}
+function cocherLeCaractereCorrespondantDeParametre(caractere) {
 
-        let question_status = 'repondue';
+    let caracteres_selectionnees = JSON.parse(sessionStorage.getItem("caracteres_selectionnees"));
 
-        rendreActif($('#exercice_question_btn'));
+    for (let i = 0; i < $(".parametres_container input").length; i++) {
+        let caractere_de_parametre = $(".parametres_container input")[i].value;
+
+        if (caractere == caractere_de_parametre) {
+            $(".parametres_container input")[i].click();
+            if (matiere_nom == "ߜߋ߲߭") {
+                if ($.inArray(caractere, caracteres_selectionnees) == -1) {
+                    setTimeout(() => { $(".parametres_container #submit_btn").click(); }, 800);
+                } else {
+                    $(".parametres_container #submit_btn").click();
+                }
+            }
+        }
+    }
+    affichageAnimeDesSyllabes(caracteres_selectionnees, caractere);
+}
+function cocherLeTonCorrespondantDeParametre(ton) {
+
+    let caracteres_selectionnees = JSON.parse(sessionStorage.getItem("caracteres_selectionnees"));
+
+    for (let i = 0; i < $("#tons_checker input").length; i++) {
+        let ton_de_parametre = $("#tons_checker input")[i].value;
+
+        if (ton == ton_de_parametre) {
+            $("#tons_checker input")[i].click();
+            if (matiere_nom == "ߜߋ߲߭") {
+                if ($.inArray(ton, caracteres_selectionnees) == -1) {
+                    setTimeout(() => { $(".parametres_container #submit_btn").click(); }, 800);
+                } else {
+                    $(".parametres_container #submit_btn").click();
+                }
+            }
+        }
+    }
+    affichageAnimeDesSyllabes(caracteres_selectionnees, ton);
+}
+function cocherLesTonsCorrespondantsDeParametre(tons) {
+    for (let i = 0; i < $("#tons_checker input").length; i++) {
+        let ton_de_parametre = $("#tons_checker input")[i].value;
+        if (tons.indexOf(ton_de_parametre) != -1) $("#tons_checker input")[i].click();
+    }
+}
+function cocherLesVoyellesCorrespondantesDeParametre(voyelle) {
+
+    let caracteres_selectionnees = JSON.parse(sessionStorage.getItem("caracteres_selectionnees"));
+
+    for (let i = 0; i < $("#voyelles_checker input").length; i++) {
+        let voyelle_de_parametre = $("#voyelles_checker input")[i].value;
+
+        if (voyelle == voyelle_de_parametre) {
+            $("#voyelles_checker input")[i].click();
+            if (matiere_nom == "ߜߋ߲߭") {
+                if ($.inArray(voyelle, caracteres_selectionnees) == -1) {
+                    setTimeout(() => { $(".parametres_container #submit_btn").click(); }, 800);
+                } else {
+                    $(".parametres_container #submit_btn").click();
+                }
+            }
+        }
+    }
+    affichageAnimeDesSyllabes(caracteres_selectionnees, voyelle);
+}
+function cocherLeTedo() {
+    $.each($('#tedo_checker .checkbox_parent'), function () {
+        if ($(this).prop('checked') == false) $(this).click();
+    });
+}
+function cocherToutesLesConsonnes() {
+    $.each($('#consonnes_checker .checkbox_parent'), function () {
+        if ($(this).prop('checked') == false) $(this).click();
+    });
+}
+function cocherToutesLesNasalisations() {
+    $.each($('#nasalisation_checker .checkbox_parent'), function () {
+        if ($(this).prop('checked') == false) $(this).click();
+    });
+}
+function cocherToutesLesVoyelles() {
+    $.each($('#voyelles_checker .checkbox_parent'), function () {
+        if ($(this).prop('checked') == false) $(this).click();
+    });
+}
+function cocherTousLesCaracteres() {
+    $.each($('.checkbox_parent'), function () {
+        if ($(this).prop('checked') == false) $(this).click();
+    });
+}
+function cocherTousLesTons() {
+    $.each($('#tons_checker .checkbox_parent'), function () {
+        if ($(this).prop('checked') == false) $(this).click();
+    });
+}
+function compteur() {
+    var i = 0;
+    return function () { return i += 1; };
+}
+function conversionDeDateEnNko(timestamp) {
+    var timestamp = timestamp.split(' ');
+    timestamp = timestamp[0].split('-');
+
+    var annee = 'ߛߊ߲߭ ' + parseIntNko(timestamp[0]);
+    var moi = mois[timestamp[1][1]];
+    var jour = 'ߕߟߋ߬ ' + parseIntNko(timestamp[2]);
+
+    timestamp = moi + ' ' + jour + ' ' + annee;
+    return timestamp;
+}
+function consonnesDeSyllabeApprisesDuServeur(datas) {
+    let consonnes_apprises = [];
+    if (datas[1].length != 0) {
+        for (let i = 0; i < datas[1].length; i++) {
+            if (datas[1][i] != undefined) if (datas[1][i].phase == "syllabes_apprentissage") if (datas[1][i].lesson != undefined) {
+                JSON.parse(datas[1][i].lesson).forEach(element => {
+                    let consonne = element[0].split('')[0];
+                    if ($.inArray(consonne, consonnes_apprises) === -1) { consonnes_apprises.push(consonne); }
+                });
+            }
+        }
+    }
+    return consonnes_apprises
+}
+function consonnesDeSyllabeExerceesDuServeur(datas) {
+
+    let consonnes_exercees = [];
+
+    if (datas[1].length != 0) {
+        for (let i = 0; i < datas[1].length; i++) {
+            if (datas[1][i] != undefined) if (datas[1][i].phase == "syllabes_exercice") if (datas[1][i].lesson != undefined) {
+                JSON.parse(datas[1][i].lesson).forEach(element => {
+                    let consonne = element[0].split('')[0];
+                    if ($.inArray(consonne, consonnes_exercees) === -1) { consonnes_exercees.push(consonne); }
+                });
+            }
+        }
+    }
+
+    return consonnes_exercees
+}
+function consonnesChoisiesDuServeur(datas) {
+
+    let niveau = JSON.parse(sessionStorage.getItem("niveau"));
+    let cs = [];
+    let lesson = [];
+
+    if (datas[niveau - 1][0] != undefined) lesson = JSON.parse(datas[niveau - 1][0].lesson);
+    lesson.forEach(element => {
+        let consonne = element[0].split('')[0];
+        if ($.inArray(consonne, cs) === -1) { cs.push(consonne); }
+    });
+    return cs;
+}
+function consonnesEtudiees(lesson_d_apprentissage_syllabes) {
+    let consonnes_etudiees = [];
+    if (lesson_d_apprentissage_syllabes != undefined) {
+        lesson_d_apprentissage_syllabes.forEach(element => {
+            if (consonnes_etudiees.indexOf(element[0].split("")[0]) == "-1") consonnes_etudiees.push(element[0].split("")[0]);
+        });
+        return consonnes_etudiees;
+    }
+}
+function contenuVide() {
+    let contenu_vide = "<div class='contenu_vide'>ߝߏߦߊ߲߫ ߹</div>";
+    return contenu_vide;
+}
+function convertirDateEnNko(date) {
+
+    let annee = 'ߛߊ߲߭ ' + parseIntNko(date.split(' ')[0].split('-')[0]);
+    let moi = mois[parseInt(date.split(' ')[0].split('-')[1]) - 1];
+    let jour = 'ߕߟߋ߬ ' + parseIntNko(date.split(' ')[0].split('-')[2]);
+
+    date = moi + ' ' + jour + ' ' + annee;
+    return date;
+}
+function couleurDeFond(element, couleur) { element.css('backgroundColor', couleur); }
+function couleurDeFont(element, couleur) { element.css('color', couleur); }
+
+/*-------------------------------------------------------------------------------------------------------------------------------------*/
+
+function dateAcuelle() {
+
+    let d = new Date();
+    let an = d.getFullYear();
+    let lune = d.getMonth();
+    let date = d.getDate();
+    let nom_du_jour = d.getDay();
+    let heure = d.getHours();
+    let minute = d.getMinutes();
+    let temps = [heure + ':' + minute];
+    let date_actuelle = an + '-' + lune + '-' + date + ' ' + temps + ' ' + nom_du_jour;
+
+    return date_actuelle;
+}
+function dateDApprentissageAlphabetDuServeur(datas) {
+    let date = "";
+    if (datas != null) if (datas.length != 0) date = (datas[0][0] == undefined) ? dateAcuelle() : datas[0][0].date;
+    return date;
+}
+function dateEnNko(date_a_convertir) {
+
+    let d = date_a_convertir;
+
+    let an = parseIntNko(d.split('-')[0]);
+    let lune = mois[parseInt(d.split('-')[1])];
+    let date = parseIntNko(parseInt(d.split('-')[2]));
+    let heure = parseIntNko(parseInt(d.split(' ')[1].split(':')[0]));
+    let minute = parseIntNko(parseInt(d.split(' ')[1].split(':')[1]));
+    let temps = [heure + ':' + minute];
+    let date_actuelle = temps + ' ' + lune + ' ߕߟߋ߬ ' + date + ' ߛߊ߲߭ ' + an;
+
+    return date_actuelle;
+}
+function dateEnNko1(date_a_convertir) {
+
+    let d = date_a_convertir;
+
+    let an = parseIntNko(d.split('-')[0]);
+    let lune = mois[parseInt(d.split('-')[1] - 1)];
+    let date = parseIntNko(parseInt(d.split('-')[2]));
+    let heure = parseIntNko(parseInt(d.split(' ')[1].split(':')[0]));
+    let minute = parseIntNko(parseInt(d.split(' ')[1].split(':')[1]));
+    let temps = [heure + ':' + minute];
+    let date_actuelle = temps + ' ' + lune + ' ߕߟߋ߬ ' + date + ' ߛߊ߲߭ ' + an;
+
+    return date_actuelle;
+}
+function decocherLeTedo() {
+    $.each($('#tedo_checker .checkbox_parent'), function () {
+        if ($(this).prop('checked') == true) $(this).click();
+    });
+}
+function decocherLesCaracteresNonConcernes() {
+
+    deSelectionnerLesConsonnesDuPanneau();
+    deSelectionnerLesVoyellesDuPanneau();
+    decocherLaNasalisation();
+    decocherLeTedo();
+    decocherLesTons();
+
+    function deSelectionnerLesConsonnesDuPanneau() {
+        if ($('#consonnes_checker').find('.checkbox_parent').prop("checked") == true) { $('#consonnes_checker').find('.checkbox_parent').next().click(); }
+    }
+    function deSelectionnerLesVoyellesDuPanneau() {
+        if ($('#voyelles_checker').find('.checkbox_parent').prop("checked") == true) { $('#voyelles_checker').find('.checkbox_parent').next().click(); }
+    }
+    function decocherLaNasalisation() {
+        if ($('#nasalisation_checker').find('.checkbox_parent').prop("checked") == true) { $('#nasalisation_checker').find('.checkbox_parent').next().click(); }
+    }
+    function decocherLeTedo() {
+        if ($('#tedo_checker').find('.checkbox_parent').prop("checked") == true) { $('#tedo_checker').find('.checkbox_parent').next().click(); }
+    }
+    function decocherLesTons() {
+        if ($('#tons_checker').find('.checkbox_parent').prop("checked") == true) { $('#tons_checker').find('.checkbox_parent').next().click(); }
+    }
+}
+function decocherLesCaracteres(caracteres) {
+    $.each(caracteres, function () {
+        if ($(this).prop('checked') == true) $(this).click();
+    });
+}
+function decocherToutesLesConsonnes() {
+    $.each($("#consonnes_checker input"), function () {
+        if ($(this).prop('checked') == true) $(this).click();
+    });
+}
+function decocherToutesLesNasalisations() {
+    $.each($('#nasalisation_checker .checkbox_parent'), function () {
+        if ($(this).prop('checked') == true) $(this).click();
+    });
+}
+function decocherToutesLesVoyelles() {
+    $.each($('#voyelles_checker .checkbox_parent'), function () {
+        if ($(this).prop('checked') == true) $(this).click();
+    });
+}
+function decocherTousLesTons() {
+    $.each($('#tons_checker .checkbox_parent'), function () {
+        if ($(this).prop('checked') == true) $(this).click();
+    });
+}
+function decocherTousLesCaracteres() {
+    $.each($('.checkbox_parent'), function () {
+        if ($(this).prop('checked') == true) $(this).click();
+    });
+}
+function defilementDuContenuVersLeHaut(container) {
+    container.animate({ scrollTop: container[0].scrollHeight }, 1000);
+}
+function demarquer(element) {
+    element.css('background-color', '#aaa').siblings().css('background-color', 'rgba(85,85,85,0.25)');
+}
+function deSelectionnerTous(spans) {
+    spans.each(function () {
+        let span = $(this);
+        if (span.css("background-color") == "rgb(170, 170, 170)") span.click();
+    });
+}
+function display(element) {
+    element.css({
+        'display': 'block',
+        'opacity': 1,
+        'transform': 'scale(1)'
+    });
+}
+function displayv(element) {
+    element.css({
+        'display': 'block',
+        'opacity': 0,
+        'transition': '0.25s',
+        'transform-origin': '0 0',
+        'transform': 'scaleY(0.75)'
+    });
+    setTimeout(() => { element.css({ 'opacity': 1, 'transform': 'scaleY(1)' }); }, 50);
+}
+function ducourage() {
+    let nom = nomDEtudiant();
+    let sexe = sexeDEtudiant();
+    return "<b>ߌ ߘߐߖߊ߬ " + nom + " " + sexe + "</b><br>";
+}
+
+/*-------------------------------------------------------------------------------------------------------------------------------------*/
+
+function ecris(element_id, message) {
+    let longueur = message.length;
+    let indice = 0;
+
+    afficherNotification();
+    setTimeout(() => { write(); }, 400);
+    function write() {
+        indice++;
+        $('#' + element_id).html(message.substr(0, indice));
+        if (indice < longueur) setTimeout(() => { write(); }, 5);
+    }
+}
+function ecris(element_id, message) {
+    let longueur = message.length;
+    let indice = 0;
+
+    afficherNotification();
+    setTimeout(() => { write(); }, 400);
+    function write() {
+        indice++;
+        $('#' + element_id).html(message.substr(0, indice));
+        if (indice < longueur) setTimeout(() => { write(); }, 5);
+    }
+}
+function ecrire(element_class, message) {
+    let longueur = message.length;
+    let indice = 0;
+
+    afficherNotification();
+    setTimeout(() => { write(); }, 400);
+    function write() {
+        indice++;
+        $('.' + element_class).html(message.substr(0, indice));
+        if (indice < longueur) setTimeout(() => { write(); }, 10);
+    }
+}
+function effacerLeTableau() {
+    $('.course_body').html("<p id='contenu_par_defaut_du_tableau'>ߥߟߊ߬ߓߊ ߓߘߊ߫ ߖߐ߬ߛߌ߬ ߹</p>");
+}
+function enregistrerLeCaractere(caracteres_selectionnees, caractere) {
+    let caractere_index = caracteres_selectionnees.indexOf(caractere);
+    if (caractere_index === -1) { caracteres_selectionnees.push(caractere); }
+}
+function enregistrerLesCaracteres(caracteres_selectionnees, caracteres) {
+    caracteres.forEach(element => {
+        if (caracteres_selectionnees.indexOf(element) === -1) caracteres_selectionnees.push(element);
+    });
+}
+function enregistrerLesConsonnes(caracteres_selectionnees, caractere) {
+    if (caracteres_selectionnees[0].indexOf(caractere) === -1) {
+        if (caracteres[1].indexOf(caractere) !== -1) { caracteres_selectionnees[0].push(caractere); }
+    } else {
+        let consonne_index = caracteres_selectionnees[0].indexOf(caractere);
+        caracteres_selectionnees[0].splice(consonne_index, 1);
+    }
+    sessionStorage.setItem("tons_selectionnes", JSON.stringify(caracteres_selectionnees));
+}
+function enregistrerLesVoyelles(caracteres_selectionnees, caractere) {
+    if (caracteres_selectionnees[1].indexOf(caractere) === -1) {
+        if (caracteres[0].indexOf(caractere) !== -1) { caracteres_selectionnees[1].push(caractere); }
+    } else {
+        let voyelle_index = caracteres_selectionnees[1].indexOf(caractere);
+        caracteres_selectionnees[1].splice(voyelle_index, 1);
+    }
+    sessionStorage.setItem("tons_selectionnes", JSON.stringify(caracteres_selectionnees));
+}
+function enregistrerLesTons(caracteres_selectionnees, caractere) {
+    if (caracteres_selectionnees[2].indexOf(caractere) === -1) {
+        if (caracteres[5].indexOf(caractere) !== -1) { caracteres_selectionnees[2].push(caractere); }
+    } else {
+        let ton_index = caracteres_selectionnees[2].indexOf(caractere);
+        caracteres_selectionnees[2].splice(ton_index, 1);
+    }
+    sessionStorage.setItem("tons_selectionnes", JSON.stringify(caracteres_selectionnees));
+}
+function enregistrerLaNasalisation(caracteres_selectionnees, caractere) {
+    if (caracteres_selectionnees[3].indexOf(caractere) === -1) {
+        if (caracteres[4].indexOf(caractere) !== -1) { caracteres_selectionnees[3].push(caractere); }
+    } else {
+        let nasalisation_index = caracteres_selectionnees[3].indexOf(caractere);
+        caracteres_selectionnees[3].splice(nasalisation_index, 1);
+    }
+    sessionStorage.setItem("tons_selectionnes", JSON.stringify(caracteres_selectionnees));
+}
+function enregistrerLeTedo(caracteres_selectionnees, caractere) {
+    if (caracteres_selectionnees[4].indexOf(caractere) === -1) {
+        if (caracteres[3].indexOf(caractere) !== -1) { caracteres_selectionnees[4].push(caractere); }
+    } else {
+        let tedo_index = caracteres_selectionnees[4].indexOf(caractere);
+        caracteres_selectionnees[4].splice(tedo_index, 1);
+    }
+    sessionStorage.setItem("tons_selectionnes", JSON.stringify(caracteres_selectionnees));
+}
+
+/*-------------------------------------------------------------------------------------------------------------------------------------*/
+
+function felicitation() {
+    let nom = nomDEtudiant();
+    let sexe = sexeDEtudiant();
+    return "<b>ߌ ߞߎߟߎ߲ߖߋ߫ " + nom + " " + sexe + "</b><br>";
+}
+function fermer(element) {
+    element.animate({ 'height': 0 }, 200);
+    setTimeout((function () { element.css({ 'display': 'none' }) }), 180);
+}
+function fermerLaPage() {
+    $(".fermeture").click(() => { history.back(); });
+}
+function formatParDefautDuResultat() {
+
+    $('.table_head tr:nth-child(2) td').text('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ');
+    $('.table_head tr:nth-child(3) td').text('ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ');
+
+    $.each($('.table_body tr:nth-child(3) td, .table_body tr:nth-child(4) td'), function () {
+        $(this).html('');
+    });
+
+    $('#total_reponse').text('');
+    $('#total_point_1').text('');
+
+    $('#resultat_pied > div > div:nth-child(1) span:first-child').text('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߡߎ߬ߡߍ');
+    $('#resultat_pied > div > div:nth-child(2) span:first-child').text('ߟߊ߬ߡߌ߬ߘߊ߬ߟߌ߫ ߢߊ߬ߣߍ߲');
+    $('#resultat_pied > div > div:nth-child(3)').css('display', 'block');
+
+    $('#total_bonne_reponse').text('');
+    $('#total_point_2').text('');
+}
+
+/*-------------------------------------------------------------------------------------------------------------------------------------*/
+
+function gestionDeExerciceFootBtn(total_questions) {
+    let i = 0;
+
+    if (i <= total_questions) {
+
+        masquer($('#exercice_dialogue_btns > div'));
+        afficherRapidement($('#exercice_question_btn'));
         indexer($('#exercice_question_btn p'));
 
-        $('#exercice_question_btn').click(function() { 
-            question_status = 'posee';
-            $(this).css('display','none');
-            $('#exercice_correction_btn').css('display','none');
-            setTimeout(() => { 
-                $('#exercice_repetition_btn').css('display','block'); 
-                rendreActif($('#exercice_repetition_btn'));
-            }, 200);
+        $('#exercice_question_btn').click(function () {
+            masquer($('#exercice_dialogue_btns > div'));
+            rendreActif($('#exercice_repetition_btn'));
+            afficherRapidement($('#exercice_repetition_btn'));
         });
 
-        $('#exercice_body td').click(function() {
-            if(question_status == 'repondue') {
-                secouer($('#exercice_question_btn'));
-                return;
+        $('#exercice_body td').click(function () {
+            masquer($('#exercice_dialogue_btns > div'));
+            rendreActif($('#exercice_correction_btn'));
+            afficherRapidement($('#exercice_correction_btn'));
+        });
+
+        $('#exercice_correction_btn').click(function () {
+            masquer($('#exercice_dialogue_btns > div'));
+
+            if (i < total_questions - 1) { rendreActif($('#exercice_question_btn')); }
+            if (i === total_questions - 1) {
+                $('#exercice_question_btn').text('ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߓߘߊ߫ ߓߊ߲߫').removeClass('actif').off('click');
             }
-
-            $('#exercice_question_btn').css('display','none');
-            $('#exercice_repetition_btn').css('display','none');
-            setTimeout(() => { 
-                $('#exercice_correction_btn').css('display','block'); 
-                rendreActif($('#exercice_correction_btn'));
-            }, 200);
+            afficherRapidement($('#exercice_question_btn'));
+            i++;
         });
-
-        $('#exercice_correction_btn').click(function() { 
-            question_status = 'repondue';
-            $('#exercice_repetition_btn').css('display','none');
-            $('#exercice_correction_btn').css('display','none');
-            setTimeout(() => { 
-                $('#exercice_question_btn').css('display','block'); 
-                rendreActif($('#exercice_question_btn'));
-            }, 200);
-        });               
     }
-    function goDown(element) {
-        
-        element.wrap('<div id="envelope"></div>');
+}
+function gestionDeExerciceDialogueBtns2() {
+
+    $('#exercices_player').css('display', 'block');
+    $('.oreille_icon_container').css('display', 'none');
+
+    zoomUp($('#exercice_dialogue_btn'));
+
+    $('#exercices_player').click(function () {
+        zoomDown($('#exercices_player'));
+        setTimeout(() => {
+            $('.oreille_icon_container').css('display', 'block');
+            zoomUp($('.oreille_icon_container'));
+        }, 200);
+    });
+
+    $('.table_muette td, .table_parlante td').click(function () {
+        zoomDown($('.oreille_icon_container'));
+        setTimeout(() => {
+            $('#exercices_player').css('display', 'block');
+            $('.oreille_icon_container').css('display', 'none');
+
+            zoomUp($('#exercices_player'));
+        }, 200);
+    });
+}
+function gestionDeDialogueBtns() {
+
+    let question_status = 'repondue';
+
+    rendreActif($('.question_btn'));
+
+    $('.question_btn').click(function () {
+        question_status = 'posee';
+        $(this).css('display', 'none');
+        $('.correction_btn').css('display', 'none');
+        setTimeout(() => {
+            $('.repetition_btn').css('display', 'block');
+            rendreActif($('.repetition_btn'));
+        }, 200);
+    });
+
+    $('.table_parlante td').click(function () {
+        if (question_status == 'repondue') {
+            secouer($('.question_btn'));
+            return;
+        }
+
+        $('.question_btn').css('display', 'none');
+        $('.repetition_btn').css('display', 'none');
+        setTimeout(() => {
+            $('.correction_btn').css('display', 'block');
+            rendreActif($('.correction_btn'));
+        }, 200);
+    });
+
+    $('.correction_btn').click(function () {
+        question_status = 'repondue';
+        $('.repetition_btn').css('display', 'none');
+        $('.correction_btn').css('display', 'none');
+        setTimeout(() => {
+            $('.question_btn').css('display', 'block');
+            rendreActif($('.question_btn'));
+        }, 200);
+    });
+}
+function gestionDeExerciceBtns() {
+
+    let question_status = 'repondue';
+
+    rendreActif($('#exercice_question_btn'));
+    indexer($('#exercice_question_btn p'));
+
+    $('#exercice_question_btn').click(function () {
+        question_status = 'posee';
+        $(this).css('display', 'none');
+        $('#exercice_correction_btn').css('display', 'none');
+        setTimeout(() => {
+            $('#exercice_repetition_btn').css('display', 'block');
+            rendreActif($('#exercice_repetition_btn'));
+        }, 200);
+    });
+
+    $('#exercice_body td').click(function () {
+        if (question_status == 'repondue') {
+            secouer($('#exercice_question_btn'));
+            return;
+        }
+
+        $('#exercice_question_btn').css('display', 'none');
+        $('#exercice_repetition_btn').css('display', 'none');
+        setTimeout(() => {
+            $('#exercice_correction_btn').css('display', 'block');
+            rendreActif($('#exercice_correction_btn'));
+        }, 200);
+    });
+
+    $('#exercice_correction_btn').click(function () {
+        question_status = 'repondue';
+        $('#exercice_repetition_btn').css('display', 'none');
+        $('#exercice_correction_btn').css('display', 'none');
+        setTimeout(() => {
+            $('#exercice_question_btn').css('display', 'block');
+            rendreActif($('#exercice_question_btn'));
+        }, 200);
+    });
+}
+function goDown(element) {
+
+    element.wrap('<div id="envelope"></div>');
+
+    $('#envelope').css({
+        'position': 'absolute',
+        'display': 'block',
+        'top': '3.5rem',
+        'left': '2%',
+        'height': 'calc(100% - 3.5rem)',
+        'width': '96%',
+        'margin': 'auto',
+        'overflow': 'hidden',
+        'z-index': 1
+    });
+
+    element.css('display', 'block');
+    element.animate({ 'top': 0 }, 400);
+}
+function goUp(element) {
+    element.css('display', 'none');
+    element.animate({ 'top': '-100%' }, 400);
+    setTimeout(() => {
+        element.unwrap();
 
         $('#envelope').css({
-            'position':'absolute',
-            'display':'block',
-            'top':'3.5rem',
-            'left':'2%',
-            'height':'calc(100% - 3.5rem)',
-            'width':'96%',
-            'margin':'auto',
-            'overflow':'hidden',
-            'z-index': 1
+            'display': 'none',
+            'height': 0,
+            'z-index': 0
         });
+    }, 600);
+}
 
-        element.css('display','block');
-        element.animate({'top':0}, 400);
+/*-------------------------------------------------------------------------------------------------------------------------------------*/
+
+function incrementer() {
+    var i = 0;
+    return function () { return i += 1; };
+}
+function indexer(element) {
+    let r = setInterval(function () {
+        element.addClass('indicateur');
+    }, 400);
+    element.click(function () { clearInterval(r); $(this).removeClass('indicateur'); });
+}
+function initialiserData(tableau) {
+    let data = [];
+    for (let i = 0; i < tableau.length; i++) {
+        let q = tableau[i];
+        let r = "";
+        let p = 0;
+        data.push([q, r, p]);
     }
-    function goUp(element) {
-        element.css('display','none'); 
-        element.animate({'top':'-100%'}, 400);
-        setTimeout(() => { 
-            element.unwrap();
+    return data;
+}
+function initialiserData1(tableau) {
+    let data = [];
+    for (let i = 0; i < tableau.length; i++) {
+        let q = tableau[i];
+        let r = 0;
+        let p = 0;
+        data.push([q, r, p]);
+    }
+    return data;
+}
+function initialiserProgressBar() {
+    $('.progress_bar').css({ 'display': 'none' });
+    $('.progress_bonne_reponse_bar, .progress_mauvaise_reponse_bar').css({ 'width': 0 });
+    setTimeout(() => { $('.progress_bar').css({ 'display': 'block' }); }, 400);
+}
+function initialiserProgressBarr() {
+    $('.parametres_popup td').on('click', function () {
+        setTimeout(() => {
+            $('.progress_bar').css('display', 'none');
+            $('.progress_question_bar, .progress_bonne_reponse_bar').css('width', 0);
+        }, 450);
+    });
+}
 
-            $('#envelope').css({
-                'display':'none',
-                'height':0,
-                'z-index': 0
-            });
+/*-------------------------------------------------------------------------------------------------------------------------------------*/
+
+function lecturePersonnalisee(ton) {
+    $('.table_parlante').on('click', function (e) {
+        var td_actif = e.target;
+        var td_actif_value = td_actif.textContent;
+
+        $('#audio').attr({ src: '../son/mp3/' + ton + '/' + td_actif_value + '.mp3', autoplay: 'on' });
+
+        // $(td_actif).addClass('ombrage');
+        // setTimeout(function() { $(td_actif).removeClass('ombrage'); }, 600);
+    });
+}
+function lectureSemiAutomatique() {
+    let play = false;
+    $(".play_icon").parent().on('click', function () {
+
+        if (play == true) return;
+
+        let lecture = setTimeout(function () {
+            var td = $('.table_parlante td');
+
+            var read_events = [];
+            var td_delay = "";
+            var td_index = -1;
+            var td_length = td.length;
+
+            for (let i = 0; i <= td_length; i++) {
+                td_delay = 0;
+                read_events[read_events.length] = setTimeout((function () {
+                    if (td_index < td_length) {
+                        td[td_index++].click();
+                    }
+                }), td_delay += i * 2000) + '\n';
+
+                play = true;
+            }
         }, 600);
+    });
+}
+function lessonHTML1(array, table_id = '#') {
+
+    var table = "<table class = 'table_parlante' id='" + table_id + "'>\n";
+
+    for (var i = 0; i < array.length - array.length % 7; i += 7) {
+        table += "<tr>\n";
+        for (var j = 0; j < 7; j++) table += "<td>" + array[i + j] + "</td>\n";
+        table += "</tr>\n";
     }
-
-/*-------------------------------------------------------------------------------------------------------------------------------------*/
-	
-	function incrementer(){
-	    var i=0;
-	    return function(){ return i += 1; };
-	}   
-    function indexer(element) { 
-        let r = setInterval(function(){
-            element.addClass('indicateur'); 
-        },400);
-        element.click(function() { clearInterval(r); $(this).removeClass('indicateur'); });
+    for (var k = array.length - array.length % 7; k < array.length; k += array.length % 7) {
+        table += "<tr>\n";
+        for (var l = 0; l < array.length % 7; l++) table += "<td>" + array[k + l] + "</td>\n";
+        table += "</tr>\n";
     }
-    function initialiserData(tableau) {
-        let data = [];
-        for(let i=0; i<tableau.length; i++) {
-            let q = tableau[i];
-            let r = "";
-            let p = 0;
-            data.push([q, r, p]);
-        }
-        return data;
-    }
-    function initialiserData1(tableau) {
-        let data = [];
-        for(let i=0; i<tableau.length; i++) {
-            let q = tableau[i];
-            let r = 0;
-            let p = 0;
-            data.push([q, r, p]);
-        }
-        return data;
-    }
-    function initialiserProgressBar() { 
-        $('.progress_bar').css({'display':'none'});
-        $('.progress_bonne_reponse_bar, .progress_mauvaise_reponse_bar').css({'width':0});
-        setTimeout(() => { $('.progress_bar').css({'display':'block'}); }, 400);
-    }
-    function initialiserProgressBarr() { 
-        $('.parametres_popup td').on('click', function() {
-            setTimeout(() => { 
-                $('.progress_bar').css('display','none');
-                $('.progress_question_bar, .progress_bonne_reponse_bar').css('width',0); 
-            }, 450);
-        });
-    } 
+    table += "</table>";
 
-/*-------------------------------------------------------------------------------------------------------------------------------------*/
-	
-    function lecturePersonnalisee(ton) {
-        $('.table_parlante').on('click', function(e) {
-            var td_actif = e.target;
-            var td_actif_value = td_actif.textContent;
-    
-            $('#audio').attr({ src: '../son/mp3/'+ton+'/'+td_actif_value+'.mp3', autoplay:'on' });
-    
-            // $(td_actif).addClass('ombrage');
-            // setTimeout(function() { $(td_actif).removeClass('ombrage'); }, 600);
-        });
-    }
-    function lectureSemiAutomatique() {
-        let play = false;
-        $(".play_icon").parent().on('click',function(){
+    return table;
+}
+function lessonHTML2() {
 
-            if(play == true) return;
+    let tons_apprentissage_html = "";
+    let caracteres_actifs = JSON.parse(sessionStorage.getItem("caracteres_coches"));
+    let caracteres_coches = caracteresCoches(caracteres_actifs);
+    let nbr_aleatoire_0 = Math.floor(Math.random() * caracteres_coches[0].length);
+    let nbr_aleatoire_1 = Math.floor(Math.random() * caracteres_coches[1].length);
+    let nbr_aleatoire_4 = Math.floor(Math.random() * caracteres_coches[4].length);
+    let nbr_aleatoire_5 = Math.floor(Math.random() * caracteres_coches[5].length);
 
-            let lecture = setTimeout(function(){
-                var td = $('.table_parlante td');
-            
-                var read_events = [];
-                var td_delay = "";
-                var td_index = -1;
-                var td_length = td.length;
-            
-                for (let i = 0; i <= td_length; i++) {
-                    td_delay = 0;
-                    read_events[read_events.length] = setTimeout((function() {
-                        if(td_index < td_length) {
-                            td[td_index++].click();
-                        }
-                    }), td_delay += i*2000)+'\n';
+    let tons_coches = caracteres_coches[5];
 
-                    play = true;
-                }
-            },600);
-         });
-    }
-    function lessonHTML1(array, table_id = '#') {
+    if (caracteres_coches[0].length != 0) {
 
-        var table = "<table class = 'table_parlante' id='"+table_id+"'>\n";
-
-        for(var i=0;i<array.length-array.length%7;i+=7) {
-            table += "<tr>\n";
-            for(var j=0;j<7;j++) table += "<td>"+array[i+j]+"</td>\n";
-            table += "</tr>\n";
-        }
-        for(var k=array.length-array.length%7;k<array.length;k+=array.length%7){
-            table += "<tr>\n";
-            for(var l=0;l<array.length%7;l++) table += "<td>"+array[k+l]+"</td>\n";
-            table += "</tr>\n";
-        }
-        table += "</table>";
-                
-        return table;
-    }
-    function lessonHTML2() {
-
-        let tons_apprentissage_html = "";
-        let caracteres_actifs = JSON.parse(sessionStorage.getItem("caracteres_coches"));
-        let caracteres_coches = caracteresCoches(caracteres_actifs);
-        let nbr_aleatoire_0 = Math.floor(Math.random()*caracteres_coches[0].length);
-        let nbr_aleatoire_1 = Math.floor(Math.random()*caracteres_coches[1].length);
-        let nbr_aleatoire_4 = Math.floor(Math.random()*caracteres_coches[4].length);
-        let nbr_aleatoire_5 = Math.floor(Math.random()*caracteres_coches[5].length);
-
-        let tons_coches = caracteres_coches[5];
-     
-        if(caracteres_coches[0].length != 0) {
-
-            tons_apprentissage_html += " \
+        tons_apprentissage_html += " \
                 <div class='tables_de_tons'> \
                     <div class='table_titre_container'> \
                         <div><p class='table_titre'>ߝߐߢߊ</p></div>\
                         <div><p class='table_titre'>ߛߓߍߢߊ</p></div>\
                     </div>\
                     <div class='table_tons_container'> \
-                        <div class='table_ligne' id='ligne_1'>"+ligne1HTML()+"</div>\
-                        <div class='table_ligne' id='ligne_2'>"+ligne2HTML()+"</div>\
-                        <div class='table_ligne' id='ligne_3'>"+ligne3HTML()+"</div> \
-                        <div class='table_ligne' id='ligne_4'>"+ligne4HTML()+"</div>\
+                        <div class='table_ligne' id='ligne_1'>"+ ligne1HTML() + "</div>\
+                        <div class='table_ligne' id='ligne_2'>"+ ligne2HTML() + "</div>\
+                        <div class='table_ligne' id='ligne_3'>"+ ligne3HTML() + "</div> \
+                        <div class='table_ligne' id='ligne_4'>"+ ligne4HTML() + "</div>\
                     </div>\
                 </div>\
             ";
 
 
-            function ligne1HTML() {
-                let table_html = "";
-                
-                if(tons_coches.length === 2) {
-                    table_html += "<div>";
-                    table_html += "<p class='syllabe_container'>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][0]+"</p>";
-                    table_html += "<p class='syllabe_container'>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0] + "</p>";
-                    table_html += "</div>";
-                    
-                    table_html += "<div>";
-                    table_html += "<p>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0]+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0]+"</p>";
-                    table_html += "</div>";
-                }
+        function ligne1HTML() {
+            let table_html = "";
 
-                if(tons_coches.length === 3) {
-                    table_html += "<div>";
-                    table_html += "<p class='syllabe_container'>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][1]+"</p>";
-                    table_html += "<p class='syllabe_container'>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0] + "</p>";
-                    table_html += "</div>";
-                    
-                    table_html += "<div>";
-                    table_html += "<p>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0]+caracteres_coches[5][1] + caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0]+"</p>";
-                    table_html += "</div>";
-                }
-                
-                // if(tons_coches.length === 4) {}
-                
-                return table_html;
+            if (tons_coches.length === 2) {
+                table_html += "<div>";
+                table_html += "<p class='syllabe_container'>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][0] + "</p>";
+                table_html += "<p class='syllabe_container'>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + "</p>";
+                table_html += "</div>";
+
+                table_html += "<div>";
+                table_html += "<p>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + "</p>";
+                table_html += "</div>";
             }
-            function ligne2HTML() {
-                let table_html = "";
-                
-                if(tons_coches.length === 2) {
-                    table_html += "<div>";
-                    table_html += "<p class='syllabe_container'>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][0]+"</p>";
-                    table_html += "<p class='syllabe_container'>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][0]+"</p>";
-                    table_html += "</div>";
 
-                    table_html += "<div>";
-                    table_html += "<p>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0]+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0]+caracteres_coches[5][0]+"</p>";
-                    table_html += "</div>";
-                }
-                
-                if(tons_coches.length === 3) {
-                    table_html += "<div>";
-                    table_html += "<p class='syllabe_container'>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][1]+"</p>";
-                    table_html += "<p class='syllabe_container'>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][0]+"</p>";
-                    table_html += "</div>";
+            if (tons_coches.length === 3) {
+                table_html += "<div>";
+                table_html += "<p class='syllabe_container'>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][1] + "</p>";
+                table_html += "<p class='syllabe_container'>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + "</p>";
+                table_html += "</div>";
 
-                    table_html += "<div>";
-                    table_html += "<p>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0]+caracteres_coches[5][1] + caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0]+caracteres_coches[5][0]+"</p>";
-                    table_html += "</div>";
-                }
-                if(tons_coches.length === 4) {}
-                
-                return table_html;
+                table_html += "<div>";
+                table_html += "<p>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][1] + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + "</p>";
+                table_html += "</div>";
             }
-            function ligne3HTML() {
-                let table_html = "";
-                
-                if(tons_coches.length === 3) {
-                    table_html += "<div>";
-                    table_html += "<p class='syllabe_container'>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][0]+"</p>";
-                    table_html += "<p class='syllabe_container'>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][1]+"</p>";
-                    table_html += "</div>";
 
-                    table_html += "<div>";
-                    table_html += "<p>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0]+caracteres_coches[5][1]+"</p>";
-                    table_html += "</div>";
-                }
-                if(tons_coches.length === 4) {}
-                
-                return table_html;
+            // if(tons_coches.length === 4) {}
+
+            return table_html;
+        }
+        function ligne2HTML() {
+            let table_html = "";
+
+            if (tons_coches.length === 2) {
+                table_html += "<div>";
+                table_html += "<p class='syllabe_container'>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][0] + "</p>";
+                table_html += "<p class='syllabe_container'>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][0] + "</p>";
+                table_html += "</div>";
+
+                table_html += "<div>";
+                table_html += "<p>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][0] + "</p>";
+                table_html += "</div>";
             }
-            function ligne4HTML() {
-                let table_html = "";
-                
-                if(tons_coches.length === 3) {
-                    table_html += "<div>";
-                    table_html += "<p class='syllabe_container'>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][1]+"</p>";
-                    table_html += "<p class='syllabe_container'>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][1]+"</p>";
-                    table_html += "</div>";
 
-                    table_html += "<div>";
-                    table_html += "<p>"+caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0]+caracteres_coches[5][1] + caracteres_coches[1][nbr_aleatoire_1]+caracteres_coches[0][nbr_aleatoire_0]+caracteres_coches[5][1]+"</p>";
-                    table_html += "</div>";
-                }
-                if(tons_coches.length === 4) {}
-                
-                return table_html;
+            if (tons_coches.length === 3) {
+                table_html += "<div>";
+                table_html += "<p class='syllabe_container'>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][1] + "</p>";
+                table_html += "<p class='syllabe_container'>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][0] + "</p>";
+                table_html += "</div>";
+
+                table_html += "<div>";
+                table_html += "<p>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][1] + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][0] + "</p>";
+                table_html += "</div>";
             }
-        }else{
-            tons_apprentissage_html += "";                
-        }
-                  
-        return tons_apprentissage_html;
-    }
-    function lessonHTML3(array, table_id = '#') {
+            if (tons_coches.length === 4) { }
 
-        var table = "<table class = 'table_parlante' id='"+table_id+"'>\n";
-        for(var i=0;i<array.length-array.length%7;i+=7) {
-            table += "<tr>\n";
-            for(var j=0;j<7;j++) table += "<td>"+array[i+j][0]+"</td>\n";
-            table += "</tr>\n";
+            return table_html;
         }
-        for(var k=array.length-array.length%7;k<array.length;k+=array.length%7){
-            table += "<tr>\n";
-            for(var l=0;l<array.length%7;l++) table += "<td>"+array[k+l][0]+"</td>\n";
-            table += "</tr>\n";
-        }
-        table += "</table>";
-                
-        return table;
-    }
-    function lessonDExerciceHTML(array, table_id = '#') {
+        function ligne3HTML() {
+            let table_html = "";
 
-        var table = "<table class = 'table_muette' id='"+table_id+"'>\n";
-        for(var i=0;i<array.length-array.length%7;i+=7) {
-            table += "<tr>\n";
-            for(var j=0;j<7;j++) table += "<td>"+array[i+j]+"</td>\n";
-            table += "</tr>\n";
-        }
-        for(var k=array.length-array.length%7;k<array.length;k+=array.length%7){
-            table += "<tr>\n";
-            for(var l=0;l<array.length%7;l++) table += "<td>"+array[k+l]+"</td>\n";
-            table += "</tr>\n";
-        }
-        table += "</table>";
-                
-        return table;
-    }
-    function lessonSuivante(lesson_en_cours) {
-        let ls = "";
-        switch(lesson_en_cours) {
-            case 'ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ' : ls = 'ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫'; break;
-            case 'ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ' : ls = 'ߛߓߍߛߎ߲ ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫'; break;
-            case 'ߛߓߍߛߎ߲ ߣߐ߰ߡߊ߬ߛߍߦߌ' : ls = 'ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߥߴߊ߬ ߡߊ߬'; break;
-            case 'ߛߓߍߛߎ߲ ߞߘߐߓߐߟߌ' : ls = 'ߜߋ߲߭ ߘߋ߰ߟߌ ߘߊߡߌ߬ߘߊ߬'; break;
+            if (tons_coches.length === 3) {
+                table_html += "<div>";
+                table_html += "<p class='syllabe_container'>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][0] + "</p>";
+                table_html += "<p class='syllabe_container'>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][1] + "</p>";
+                table_html += "</div>";
 
-            case 'ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ' : ls = 'ߜߋ߲߭ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫'; break;
-            case 'ߜߋ߲߭ ߡߊ߬ߞߟߏ߬ߟߌ' : ls = 'ߜߋ߲߭ ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫'; break;
-            case 'ߜߋ߲߭ ߣߐ߰ߡߊ߬ߛߍߦߌ' : ls = 'ߜߋ߲߭ ߞߘߐߓߐߟߌ ߞߍ߫'; break;
-            case 'ߜߋ߲߭ ߞߘߐߓߐߟߌ' : ls = 'ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߥߴߊ߬ ߡߊ߬'; break;
-        }
-        return ls;
-    }
-    function lessonDApprentissageDuServeur(datas) {
-        let niveau = JSON.parse(sessionStorage.getItem("niveau")) - 1;
-        let lesson_d_apprentissage_du_serveur = [];
-
-        if (datas[niveau].length != 0) {
-            for (let i = 0; i < datas[niveau].length; i++) {
-                if(datas[niveau][i] != undefined) 
-                if(datas[niveau][i].phase != undefined) 
-                if(datas[niveau][i].phase.split("_")[1] == "apprentissage") 
-                lesson_d_apprentissage_du_serveur = JSON.parse(datas[niveau][i].lesson);
+                table_html += "<div>";
+                table_html += "<p>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][1] + "</p>";
+                table_html += "</div>";
             }
+            if (tons_coches.length === 4) { }
+
+            return table_html;
         }
-        lesson_d_apprentissage_du_serveur = (lesson_d_apprentissage_du_serveur == undefined) ? [] : lesson_d_apprentissage_du_serveur;
-        return lesson_d_apprentissage_du_serveur;
-    }
-    function lessonDApprentissagePreAlphabetDuServeur(datas) {
+        function ligne4HTML() {
+            let table_html = "";
 
-        let lesson_d_apprentissage = [];
+            if (tons_coches.length === 3) {
+                table_html += "<div>";
+                table_html += "<p class='syllabe_container'>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][1] + "</p>";
+                table_html += "<p class='syllabe_container'>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][1] + "</p>";
+                table_html += "</div>";
 
-        if(datas.length === 0) { console.log("La variable datas est vide !"); }
-        if(datas.length != 0) {
-            for (let i = 0; i < datas[0].length; i++) {
-                if(datas[0][i] != undefined) {
-                    let phase = datas[0][i].phase;
-                    if(phase == "alphabet_apprentissage") { lesson_d_apprentissage = JSON.parse(datas[0][i].lesson); }
-                }
+                table_html += "<div>";
+                table_html += "<p>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][1] + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][1] + "</p>";
+                table_html += "</div>";
             }
+            if (tons_coches.length === 4) { }
+
+            return table_html;
         }
-
-        return lesson_d_apprentissage;
-    }
-    function lessonDExerciceDuServeur(datas) {
-        let niveau = JSON.parse(sessionStorage.getItem("niveau")) - 1;
-        let lesson_d_exercice_du_serveur = [];
-
-        if (datas[niveau].length != 0) {
-            for (let i = 0; i < datas[niveau].length; i++) {
-                if(datas[niveau][i] != undefined) if(datas[niveau][i].phase != undefined) if(datas[niveau][i].phase.split("_")[1] == "exercice") lesson_d_exercice_du_serveur = JSON.parse(datas[niveau][i].lesson);
-            }
-        }
-        lesson_d_exercice_du_serveur = (lesson_d_exercice_du_serveur == undefined) ? [] : lesson_d_exercice_du_serveur;
-        return lesson_d_exercice_du_serveur;
-    }
-    function lessonDExercicePreAlphabetDuServeur(datas) {
-        
-        let lesson_d_exercice = [];
-
-        if(datas.length === 0) { console.log("La variable datas est vide !"); }
-        if(datas.length != 0) {
-            for (let j = 0; j < datas[0].length; j++) {
-                if(datas[0][j] != undefined) {
-                    let phase = datas[0][j].phase;
-                    if(phase == "alphabet_exercice") { lesson_d_exercice = JSON.parse(datas[0][j].lesson); }
-                } 
-            }
-        }
-
-        return lesson_d_exercice;
-    }
-    function lessonDEvaluationDuServeur(datas) {
-        let niveau = JSON.parse(sessionStorage.getItem("niveau")) - 1;
-        let lesson_d_evaluation_du_serveur = [];
-
-        if (datas[niveau].length != 0) {
-            for (let i = 0; i < datas[niveau].length; i++) {
-                if(datas[niveau][i] != undefined) if(datas[niveau][i].phase != undefined) if(datas[niveau][i].phase.split("_")[1] == "evaluation") lesson_d_evaluation_du_serveur = JSON.parse(datas[niveau][i].lesson);
-            }
-        }
-        lesson_d_evaluation_du_serveur = (lesson_d_evaluation_du_serveur == undefined) ? [] : lesson_d_evaluation_du_serveur;
-        return lesson_d_evaluation_du_serveur;
-    }
-    function lessonDEvaluationPreAlphabetDuServeur(datas) {
-        
-        let lesson_d_evaluation = [];
-
-        if(datas.length === 0) { console.log("La variable datas est vide !"); }
-        if(datas.length != 0) {
-            for (let k = 0; k < datas[0].length; k++) {
-                if(datas[0][k] != undefined) {
-                    let phase = datas[0][k].phase;
-                    if(phase == "alphabet_evaluation") { lesson_d_evaluation = JSON.parse(datas[0][k].lesson); }
-                }
-            }
-        }
-        
-        return lesson_d_evaluation;
-    }
-    function lettresEtudiees(lesson_d_apprentissage_alphabet) {
-        let lettres_etudiees = [];
-        if(lesson_d_apprentissage_alphabet != undefined) {
-            lesson_d_apprentissage_alphabet.forEach(element => { 
-                if(lettres_etudiees.indexOf(element[0]) == "-1") lettres_etudiees.push(element[0]); 
-            });
-            return lettres_etudiees;
-        }
-    }
-    function lire_mot() {
-	   for(var i=0; i<texte_memoire.length; i++) {
-           
-            var mot = texte_memoire[i];
-            var lecture = setInterval(lire, 800);
-            var r = 0;
-            
-            function lire() {
-                $('#audio').attr({ src:'../son/m4a/'+tons+'/'+lettre+'.m4a', autoplay:'on' }); 
-
-                // $('#audio').attr({ src:'../son/aac/'+lettre+'.aac', autoplay:'on' }); 
-                // $('#audio').attr({ src:'../son/amr/'+lettre+'.amr', autoplay:'on' }); 
-                // $('#audio').attr({ src:'../son/flac/'+lettre+'.flac', autoplay:'on' }); 
-                // $('#audio').attr({ src:'../son/ogg/'+lettre+'.ogg', autoplay:'on' }); 
-                // $('#audio').attr({ src:'../son/wav/'+lettre+'.wav', autoplay:'on' }); 
-                // $('#audio').attr({ src:'../son/m4a/'+lettre+'.m4a', autoplay:'on' }); 
-                // $('#audio').attr({ src:'../son/mp3/'+lettre+'.mp3', autoplay:'on' }); 
-
-                r++;
-                if( r>mot.length ) { clearInterval( lecture ); }
-	        }
-	   }
-    }
-    function lire(parent_direct,son) { 
-         //$('#audio').attr({ src:'../son/m4a/'+parent_direct+'/'+son+'.m4a', autoplay:'on' }); 
-        // $('#audio').attr({ src:'../son/aac/'+'+parent_direct+'/'lettre+'.aac', autoplay:'on' }); 
-        // $('#audio').attr({ src:'../son/amr/'+'+parent_direct+'/'lettre+'.amr', autoplay:'on' }); 
-        // $('#audio').attr({ src:'../son/flac/'+'+parent_direct+'/'lettre+'.flac', autoplay:'on' }); 
-        // $('#audio').attr({ src:'../son/ogg/'+'+parent_direct+'/'lettre+'.ogg', autoplay:'on' }); 
-        // $('#audio').attr({ src:'../son/wav/'+'+parent_direct+'/'lettre+'.wav', autoplay:'on' }); 
-        // $('#audio').attr({ src:'../son/m4a/'+'+parent_direct+'/'lettre+'.m4a', autoplay:'on' }); 
-        $('#audio').attr({ src:'../son/mp3/'+parent_direct+'/'+son+'.mp3', autoplay:'on' });  
-    }
-    function lectureSyllabe(syllabe) {
-        let terminaison = terminaisonDeSyllabe(syllabe);
-        $("#audio").attr({ src: "../son/mp3/tons/"+terminaison+"/"+syllabe+".mp3", autoplay:"on" });
+    } else {
+        tons_apprentissage_html += "";
     }
 
-/*-------------------------------------------------------------------------------------------------------------------------------------*/
-    
-    function malaxer(tableau,n=tableau.length){  // Le deuxieme parametre est facultatif et precise la longueur du tableau retourné.
-        var mixted_table = [];
+    return tons_apprentissage_html;
+}
+function lessonHTML3(array_2D) {
 
-        for(var i=0; mixted_table.length<tableau.length;i++){
-            tableau.forEach(() => {
-                var nbr_aleatoire = Math.floor(Math.random()*tableau.length);
-                var element_aleatoire = tableau[nbr_aleatoire];
-                if($.inArray(element_aleatoire, mixted_table) == -1) mixted_table.push(element_aleatoire);
-            });
-            if(n>0) if(i==n) break;
-        }
-    
-        return mixted_table;
-    }
-    function marquerLeCaractereChoisi(clicked_caractere_container) {
-        if(clicked_caractere_container.css("color") != "rgb(255, 165, 0)") {
-            var bc = clicked_caractere_container.css('background-color');
-            var consonne_background = (bc == 'rgb(170, 170, 170)') ? 'rgb(255, 255, 255)' : 'rgb(170, 170, 170)';
-            clicked_caractere_container.css('background-color',consonne_background);
-        }
-    }
-    function marquerReponse(td_actif,question) {
-        let reponse = td_actif.text();
-        $('.table_parlante td').css('background-color','rgba(85,85,85,0.25)');
-        if(question == reponse) { valider(td_actif); }
-        if(question != reponse) { barrer(td_actif); }
-    } 
-    function marquerLaConsonneChoisie(clicked_consonne_container) {
-        if(clicked_consonne_container.css("color") != "rgb(255, 165, 0)") {
-            var bc = clicked_consonne_container.css('background-color');
-            var consonne_background = (bc == 'rgb(170, 170, 170)') ? 'rgb(255, 255, 255)' : 'rgb(170, 170, 170)';
-            clicked_consonne_container.css('background-color',consonne_background);
-        }
-    }
-    function masquer(element) {
-        element.css({
-            'display':'none',
-            'transform':'scale(0.75)', 
-            'opacity':'0'
+    let array_1 = syllabesDeTonActif(array_2D);
+    let array_2 = motsCorrespondantsA(array_1[0]);
+    let html = "<div class='tables_de_tons_container'>" + lessonHTML4(array_1) + lessonHTML5(array_2) + "</div>";
+    return html;
+
+    function syllabesDeTonActif(array_2D) {
+        let syllabes = [];
+        array_2D.forEach(element => {
+            element.forEach(element => { syllabes.push(element[0]); });
         });
+        syllabes = malaxer(syllabes);
+        return syllabes;
     }
-    function masquerNotification() {
-        $(".notification_corps").text("");
-        $(".notification_corps").css({"top":"5.25rem"});
-    }
-    function masquerPanneauDesCaracteres() { $('#caracteres_container').css({"top":"22rem", "height":0}); }
-    function matiereNom(matiere) { 
-        let matiere_nom = "";
-        if(matiere[0] != undefined) matiere_nom = matiere[0].phase.split("_")[0];
-        return matiere_nom;
-    }
-    function matiereNomEnNko(matiere) { 
-        let matiere_nom = "";
-        
-        if(matiere[0] != undefined) if( matiere[0].phase.split("_")[0] == "alphabet")  matiere_nom = "ߛߓߍߛߎ߲";
-        if(matiere[1] != undefined) if( matiere[1].phase.split("_")[0] == "syllabes")  matiere_nom = "ߜߋ߲߭";
-        if(matiere[2] != undefined) if( matiere[2].phase.split("_")[0] == "tons"    )  matiere_nom = "ߞߊ߲ߡߊߛߙߋ";
-        if(matiere[3] != undefined) if( matiere[3].phase.split("_")[0] == "chiffres")  matiere_nom = "ߖߊ߰ߕߋ߬ߘߋ߲";
-        
-        return matiere_nom;
-    }
-    function masquerTesteContainer() { setTimeout(() => { $("#teste_container").css({"top":"0.5rem"}); }, 800); }
-    function memoireConsonnesChoisies() {
+    function motsCorrespondantsA(syllabe_repere) {
 
-        let datas = JSON.parse(sessionStorage.getItem("datas"));
-        let consonnes_choisies_du_serveur = consonnesChoisiesDuServeur(datas);
-        let memoire_consonnes_choisies = JSON.parse(localStorage.getItem("memoire_consonnes_choisies"));
+        let groupes = [];
+        let mot_groupe = [];
+        let consonne_index = caracteres[1].indexOf(syllabe_repere[0]);
+        let ton_index = caracteres[5].indexOf(syllabe_repere[2]);
 
-        consonnes_choisies_du_serveur = (consonnes_choisies_du_serveur == null) ? [] : consonnes_choisies_du_serveur;
-        memoire_consonnes_choisies = (memoire_consonnes_choisies == null) ? [] : memoire_consonnes_choisies;
-        
-        if(consonnes_choisies_du_serveur.length != 0) {
-            consonnes_choisies_du_serveur.forEach(element => {
-                if($.inArray(element,memoire_consonnes_choisies) === -1) memoire_consonnes_choisies.push(element);
-            });
-        }
-
-        return memoire_consonnes_choisies;
-    }
-    function memoriserClicks(table,elements){
-
-        let id = table.attr('id');
-        let td = $('#'+id+' td');
-        
-        elements = [];
-        td.css({'background-color':'rgb(85, 85, 85)', 'color':'yellow'});
-
-        initialiserMemoire();
-        memorisation();
-
-        
-        function initialiserMemoire() {
-            for(i=0; i<td.length; i++) { 
-                let clicked_syllabes = td[i].textContent;
-                elements.push([clicked_syllabes,0]); 
-            }
-        }
-        function memorisation() {
-            $.each(td, function(){
-
-                let compteur = 1;
-                let syllabes_clique = $(this).text();
-                let td_index = $(this).index();
-                
-                $(this).click(function(){
-                    let n = compteur++;
-                    elements.splice(td_index,1,[syllabes_clique,n]);
-                });
-            });
-        }
-    }
-    function mettreEnSurbrillance(element) {
-        element.addClass('surbrillance');
-        element.siblings().removeClass('surbrillance');
-    }
-    function mmettreLeFocusSur(selecteur) { 
-        let selection = document.querySelector(selecteur);
-        if(selection != null) selection.focus(); 
-    }
-    function mix2D(tableau){
-        var mixted_table = [];
-        for(var i=0; mixted_table.length<tableau[0].length*tableau[1].length;i++){
-            var nbr_aleatoire0 = Math.floor(Math.random()*tableau[0].length);
-            var nbr_aleatoire1 = Math.floor(Math.random()*tableau[1].length);
-            
-            var element_aleatoire0 = tableau[0][nbr_aleatoire0];
-            var element_aleatoire1 = tableau[1][nbr_aleatoire1];
-            
-            var element_aleatoire = element_aleatoire1+element_aleatoire0;
-            if($.inArray(element_aleatoire, mixted_table)==-1){ mixted_table[mixted_table.length] = element_aleatoire; }
-        }
-        return mixted_table;
-    }
-    function mix3D(tableau){
-        var mixted_table = [];
-        for(var i=0; mixted_table.length<tableau[0].length*tableau[1].length*tableau[4].length;i++){
-            var nbr_aleatoire0 = Math.floor(Math.random()*tableau[0].length);
-            var nbr_aleatoire1 = Math.floor(Math.random()*tableau[1].length);
-            var nbr_aleatoire4 = Math.floor(Math.random()*tableau[4].length);
-            
-            var element_aleatoire0 = tableau[0][nbr_aleatoire0];
-            var element_aleatoire1 = tableau[1][nbr_aleatoire1];
-            var element_aleatoire4 = tableau[4][nbr_aleatoire4];
-            
-            var element_aleatoire = element_aleatoire1+element_aleatoire0+element_aleatoire4;
-            if($.inArray(element_aleatoire, mixted_table)==-1){ mixted_table[mixted_table.length] = element_aleatoire; }
-        }
-        return mixted_table;
-    }
-    function mix4D(tableau){
-        var mixted_table = [];
-        for(var i=0; mixted_table.length<tableau[0].length*tableau[1].length*tableau[4].length*tableau[5].length;i++){
-            var nbr_aleatoire0 = Math.floor(Math.random()*tableau[0].length);
-            var nbr_aleatoire1 = Math.floor(Math.random()*tableau[1].length);
-            var nbr_aleatoire4 = Math.floor(Math.random()*tableau[4].length);
-            var nbr_aleatoire5 = Math.floor(Math.random()*tableau[5].length);
-            
-            var element_aleatoire0 = tableau[0][nbr_aleatoire0];
-            var element_aleatoire1 = tableau[1][nbr_aleatoire1];
-            var element_aleatoire4 = tableau[4][nbr_aleatoire4];
-            var element_aleatoire5 = tableau[5][nbr_aleatoire5];
-            
-            var element_aleatoire = element_aleatoire1+element_aleatoire0+element_aleatoire5+element_aleatoire4;
-            if($.inArray(element_aleatoire, mixted_table)==-1){ mixted_table[mixted_table.length] = element_aleatoire; }
-        }
-        return mixted_table;
-    }
-    function montrerPanneauDesCaracteres() {
-
-     /*Par defaut, voyelles_container, nasalisations_container et tons_container sont masqués*/
-        if(matiere_nom == "ߜߋ߲߭") {
-            masquer($("#caracteres_container > div"));
-            afficher($("#consonnes_container"));
-
-            setTimeout(() => {
-                $('#afficheur_de_panneau').html("<p>ߛߌ߬ߙߕߊ߬ ߥߟߊ ߘߏ߲߰</p>");
-                clignoterUneFois($('#afficheur_de_panneau'));
-            }, 400); 
-        }
-        
-        $('#panneaux').css({ "height":"calc(100vh - 18rem)" });
-        $('#caracteres_cadre').css({ "height":"max-content" });
-        $("#caracteres_container").css("height","max-content");
-        $('#caracteres_container').animate({"top":0}, 250);
-    }
-    function montrerReponse(question,element_correspondant) {
-        $.each(element_correspondant, function () {
-            let reponse = $(this);
-            if(question == reponse.text()) {
-                reponse.css("border-color","orange");
-                setTimeout(() => { reponse.css("border-color","rgb(85,85,85)"); }, 600);
-            }
+        tons_syllabes[consonne_index][ton_index].forEach(element => {
+            if(element[0] == syllabe_repere) groupes = element;
         });
+
+        for (let i = 0; i < groupes.length; i++) {
+            if(groupes[i][2] == caracteres[5][1]) continue;
+          /*Suppression de kanmayèlè labranèn, au début et au milieu de mot */
+            if(groupes[0][2] == caracteres[5][0]) groupes[0] = groupes[0][0]+groupes[0][1];
+            mot_groupe.push(groupes[0]+groupes[i]);
+        }     
+        mot_groupe = malaxer(mot_groupe);
+        return mot_groupe;
+
     }
+    function lessonHTML4(array) {
+        let html = "<div class = 'table_parlante' id='table_parlante_1'>";
+  
+        for (var i = 0; i < 6; i += 2) {
+            html += "<div>\n";
+            for (var j = 0; j < 2; j++) {
+                if((i+j) < array.length) html += "<span class='ton_syllabe'>" + array[i+j] + "</span>\n";
+            }
+            html += "</div>\n";
+        }
+        html += "</div>";
+
+        return html;
+    }
+    function lessonHTML5(array) {
+        let html = "<div class = 'table_parlante' id='table_parlante_2'>";
+        for (var i = 0; i < 8; i += 2) {
+            html += "<div>\n";
+            for (var j = 0; j < 2; j++) {
+                if((i+j) < array.length) html += "<span class='ton_mot'>" + array[i+j] + "</span>\n";
+            }
+            html += "</div>\n";
+        }
+        html += "</div>";
+
+        return html;
+    }
+}
+function lessonDExerciceHTML(array, table_id = '#') {
+
+    var table = "<table class = 'table_muette' id='" + table_id + "'>\n";
+    for (var i = 0; i < array.length - array.length % 7; i += 7) {
+        table += "<tr>\n";
+        for (var j = 0; j < 7; j++) table += "<td>" + array[i + j] + "</td>\n";
+        table += "</tr>\n";
+    }
+    for (var k = array.length - array.length % 7; k < array.length; k += array.length % 7) {
+        table += "<tr>\n";
+        for (var l = 0; l < array.length % 7; l++) table += "<td>" + array[k + l] + "</td>\n";
+        table += "</tr>\n";
+    }
+    table += "</table>";
+
+    return table;
+}
+function lessonSuivante(lesson_en_cours) {
+    let ls = "";
+    switch (lesson_en_cours) {
+        case 'ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ': ls = 'ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫'; break;
+        case 'ߛߓߍߛߎ߲ ߡߊ߬ߞߟߏ߬ߟߌ': ls = 'ߛߓߍߛߎ߲ ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫'; break;
+        case 'ߛߓߍߛߎ߲ ߣߐ߰ߡߊ߬ߛߍߦߌ': ls = 'ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߥߴߊ߬ ߡߊ߬'; break;
+        case 'ߛߓߍߛߎ߲ ߞߘߐߓߐߟߌ': ls = 'ߜߋ߲߭ ߘߋ߰ߟߌ ߘߊߡߌ߬ߘߊ߬'; break;
+
+        case 'ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ': ls = 'ߜߋ߲߭ ߡߊ߬ߞߟߏ߬ߟߌ ߞߍ߫'; break;
+        case 'ߜߋ߲߭ ߡߊ߬ߞߟߏ߬ߟߌ': ls = 'ߜߋ߲߭ ߣߐ߰ߡߊ߬ߛߍߦߌ ߞߍ߫'; break;
+        case 'ߜߋ߲߭ ߣߐ߰ߡߊ߬ߛߍߦߌ': ls = 'ߜߋ߲߭ ߞߘߐߓߐߟߌ ߞߍ߫'; break;
+        case 'ߜߋ߲߭ ߞߘߐߓߐߟߌ': ls = 'ߜߋ߲߭ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ ߥߴߊ߬ ߡߊ߬'; break;
+    }
+    return ls;
+}
+function lessonDApprentissageDuServeur(datas) {
+    let niveau = JSON.parse(sessionStorage.getItem("niveau")) - 1;
+    let lesson_d_apprentissage_du_serveur = [[],[],[],[],[],[],[]];
+
+    if (datas[niveau].length != 0) {
+        for (let i = 0; i < datas[niveau].length; i++) {
+            if (datas[niveau][i] != undefined)
+            if (datas[niveau][i].phase != undefined)
+            if (datas[niveau][i].phase.split("_")[1] == "apprentissage") {
+                let lesson = JSON.parse(datas[niveau][i].lesson);
+                for (let j = 0; j < lesson.length; j++) lesson_d_apprentissage_du_serveur[j] = lesson[j];
+            }
+        }
+    }
+    lesson_d_apprentissage_du_serveur = (lesson_d_apprentissage_du_serveur == undefined) ? [[],[],[],[],[],[],[]] : lesson_d_apprentissage_du_serveur;
+    return lesson_d_apprentissage_du_serveur;
+}
+function lessonDApprentissagePreAlphabetDuServeur(datas) {
+
+    let lesson_d_apprentissage = [];
+
+    if (datas.length === 0) { console.log("La variable datas est vide !"); }
+    if (datas.length != 0) {
+        for (let i = 0; i < datas[0].length; i++) {
+            if (datas[0][i] != undefined) {
+                let phase = datas[0][i].phase;
+                if (phase == "alphabet_apprentissage") { lesson_d_apprentissage = JSON.parse(datas[0][i].lesson); }
+            }
+        }
+    }
+
+    return lesson_d_apprentissage;
+}
+function lessonDExerciceDuServeur(datas) {
+    let niveau = JSON.parse(sessionStorage.getItem("niveau")) - 1;
+    let lesson_d_exercice_du_serveur = [];
+
+    if (datas[niveau].length != 0) {
+        for (let i = 0; i < datas[niveau].length; i++) {
+            if (datas[niveau][i] != undefined) if (datas[niveau][i].phase != undefined) if (datas[niveau][i].phase.split("_")[1] == "exercice") lesson_d_exercice_du_serveur = JSON.parse(datas[niveau][i].lesson);
+        }
+    }
+    lesson_d_exercice_du_serveur = (lesson_d_exercice_du_serveur == undefined) ? [] : lesson_d_exercice_du_serveur;
+    return lesson_d_exercice_du_serveur;
+}
+function lessonDExercicePreAlphabetDuServeur(datas) {
+
+    let lesson_d_exercice = [];
+
+    if (datas.length === 0) { console.log("La variable datas est vide !"); }
+    if (datas.length != 0) {
+        for (let j = 0; j < datas[0].length; j++) {
+            if (datas[0][j] != undefined) {
+                let phase = datas[0][j].phase;
+                if (phase == "alphabet_exercice") { lesson_d_exercice = JSON.parse(datas[0][j].lesson); }
+            }
+        }
+    }
+
+    return lesson_d_exercice;
+}
+function lessonDEvaluationDuServeur(datas) {
+    let niveau = JSON.parse(sessionStorage.getItem("niveau")) - 1;
+    let lesson_d_evaluation_du_serveur = [];
+
+    if (datas[niveau].length != 0) {
+        for (let i = 0; i < datas[niveau].length; i++) {
+            if (datas[niveau][i] != undefined) if (datas[niveau][i].phase != undefined) if (datas[niveau][i].phase.split("_")[1] == "evaluation") lesson_d_evaluation_du_serveur = JSON.parse(datas[niveau][i].lesson);
+        }
+    }
+    lesson_d_evaluation_du_serveur = (lesson_d_evaluation_du_serveur == undefined) ? [] : lesson_d_evaluation_du_serveur;
+    return lesson_d_evaluation_du_serveur;
+}
+function lessonDEvaluationPreAlphabetDuServeur(datas) {
+
+    let lesson_d_evaluation = [];
+
+    if (datas.length === 0) { console.log("La variable datas est vide !"); }
+    if (datas.length != 0) {
+        for (let k = 0; k < datas[0].length; k++) {
+            if (datas[0][k] != undefined) {
+                let phase = datas[0][k].phase;
+                if (phase == "alphabet_evaluation") { lesson_d_evaluation = JSON.parse(datas[0][k].lesson); }
+            }
+        }
+    }
+
+    return lesson_d_evaluation;
+}
+function lettresEtudiees(lesson_d_apprentissage_alphabet) {
+    let lettres_etudiees = [];
+    if (lesson_d_apprentissage_alphabet != undefined) {
+        lesson_d_apprentissage_alphabet.forEach(element => {
+            if (lettres_etudiees.indexOf(element[0]) == "-1") lettres_etudiees.push(element[0]);
+        });
+        return lettres_etudiees;
+    }
+}
+function lire_mot() {
+    for (var i = 0; i < texte_memoire.length; i++) {
+
+        var mot = texte_memoire[i];
+        var lecture = setInterval(lire, 800);
+        var r = 0;
+
+        function lire() {
+            $('#audio').attr({ src: '../son/m4a/' + tons + '/' + lettre + '.m4a', autoplay: 'on' });
+
+            // $('#audio').attr({ src:'../son/aac/'+lettre+'.aac', autoplay:'on' }); 
+            // $('#audio').attr({ src:'../son/amr/'+lettre+'.amr', autoplay:'on' }); 
+            // $('#audio').attr({ src:'../son/flac/'+lettre+'.flac', autoplay:'on' }); 
+            // $('#audio').attr({ src:'../son/ogg/'+lettre+'.ogg', autoplay:'on' }); 
+            // $('#audio').attr({ src:'../son/wav/'+lettre+'.wav', autoplay:'on' }); 
+            // $('#audio').attr({ src:'../son/m4a/'+lettre+'.m4a', autoplay:'on' }); 
+            // $('#audio').attr({ src:'../son/mp3/'+lettre+'.mp3', autoplay:'on' }); 
+
+            r++;
+            if (r > mot.length) { clearInterval(lecture); }
+        }
+    }
+}
+function lire(parent_direct, son) {
+    //$('#audio').attr({ src:'../son/m4a/'+parent_direct+'/'+son+'.m4a', autoplay:'on' }); 
+    // $('#audio').attr({ src:'../son/aac/'+'+parent_direct+'/'lettre+'.aac', autoplay:'on' }); 
+    // $('#audio').attr({ src:'../son/amr/'+'+parent_direct+'/'lettre+'.amr', autoplay:'on' }); 
+    // $('#audio').attr({ src:'../son/flac/'+'+parent_direct+'/'lettre+'.flac', autoplay:'on' }); 
+    // $('#audio').attr({ src:'../son/ogg/'+'+parent_direct+'/'lettre+'.ogg', autoplay:'on' }); 
+    // $('#audio').attr({ src:'../son/wav/'+'+parent_direct+'/'lettre+'.wav', autoplay:'on' }); 
+    // $('#audio').attr({ src:'../son/m4a/'+'+parent_direct+'/'lettre+'.m4a', autoplay:'on' }); 
+    $('#audio').attr({ src: '../son/mp3/' + parent_direct + '/' + son + '.mp3', autoplay: 'on' });
+}
+function lectureSyllabe(syllabe) {
+    let terminaison = terminaisonDeSyllabe(syllabe);
+    $("#audio").attr({ src: "../son/mp3/tons/" + terminaison + "/" + syllabe + ".mp3", autoplay: "on" });
+}
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
 
-    function nombreDeSyllabe(syllabe) {
-        nombre = 0;
-        for(i=0; i<syllabe.length; i++) if(consonnes.indexOf(syllabe[i]) != -1) nombre++;
-        return nombre;
+function malaxer(tableau, n = tableau.length) {  // Le deuxieme parametre est facultatif et precise la longueur du tableau retourné.
+    var mixted_table = [];
+
+    for (var i = 0; mixted_table.length < tableau.length; i++) {
+        tableau.forEach(() => {
+            var nbr_aleatoire = Math.floor(Math.random() * tableau.length);
+            var element_aleatoire = tableau[nbr_aleatoire];
+            if ($.inArray(element_aleatoire, mixted_table) == -1) mixted_table.push(element_aleatoire);
+        });
+        if (n > 0) if (i == n) break;
     }
-    function nomComplet() {
-        let prenom = JSON.parse(sessionStorage.getItem("prenom")); 
-        let nom = JSON.parse(sessionStorage.getItem("nom")); 
-        return prenom+" "+nom;
+
+    return mixted_table;
+}
+function marquerLeCaractereChoisi(clicked_caractere_container) {
+    if (clicked_caractere_container.css("color") != "rgb(255, 165, 0)") {
+        var bc = clicked_caractere_container.css('background-color');
+        var consonne_background = (bc == 'rgb(170, 170, 170)') ? 'rgb(255, 255, 255)' : 'rgb(170, 170, 170)';
+        clicked_caractere_container.css('background-color', consonne_background);
     }
-    function nomDEtudiant() { 
+}
+function marquerReponse(td_actif, question) {
+    let reponse = td_actif.text();
+    $('.table_parlante td').css('background-color', 'rgba(85,85,85,0.25)');
+    if (question == reponse) { valider(td_actif); }
+    if (question != reponse) { barrer(td_actif); }
+}
+function marquerLaConsonneChoisie(clicked_consonne_container) {
+    if (clicked_consonne_container.css("color") != "rgb(255, 165, 0)") {
+        var bc = clicked_consonne_container.css('background-color');
+        var consonne_background = (bc == 'rgb(170, 170, 170)') ? 'rgb(255, 255, 255)' : 'rgb(170, 170, 170)';
+        clicked_consonne_container.css('background-color', consonne_background);
+    }
+}
+function masquer(element) {
+    element.css({
+        'display': 'none',
+        'transform': 'scale(0.75)',
+        'opacity': '0'
+    });
+}
+function masquerNotification() {
+    $(".notification_corps").text("");
+    $(".notification_corps").css({ "top": "5.25rem" });
+}
+function masquerPanneauDesCaracteres() { $('#caracteres_container').css({ "top": "22rem", "height": 0 }); }
+function matiereNom(matiere) {
+    let matiere_nom = "";
+    if (matiere[0] != undefined) matiere_nom = matiere[0].phase.split("_")[0];
+    return matiere_nom;
+}
+function matiereNomEnNko(matiere) {
+    let matiere_nom = "";
 
-     /*Recuperation du nom*/
-        let nom = JSON.parse(sessionStorage.getItem("nom")); 
-        let nom_sans_tons = "";
-        let nouveau_nom = "";
+    if (matiere[0] != undefined) if (matiere[0].phase.split("_")[0] == "alphabet") matiere_nom = "ߛߓߍߛߎ߲";
+    if (matiere[1] != undefined) if (matiere[1].phase.split("_")[0] == "syllabes") matiere_nom = "ߜߋ߲߭";
+    if (matiere[2] != undefined) if (matiere[2].phase.split("_")[0] == "tons") matiere_nom = "ߞߊ߲ߡߊߛߙߋ";
+    if (matiere[3] != undefined) if (matiere[3].phase.split("_")[0] == "chiffres") matiere_nom = "ߖߊ߰ߕߋ߬ߘߋ߲";
 
-     /*Determination de la nature du mot*/
-        let nature_du_mot = "";
+    return matiere_nom;
+}
+function masquerTesteContainer() { setTimeout(() => { $("#teste_container").css({ "top": "0.5rem" }); }, 800); }
+function memoireConsonnesChoisies() {
 
-        if(consonnes.indexOf(nom[0]) != "-1") {
-        if(voyelles.indexOf(nom[1]) != "-1") {
-        if(consonnes.indexOf(nom[2]) != "-1") {
-            nature_du_mot = "samma_kuma";
-        }}}
-        if(consonnes.indexOf(nom[0]) != "-1") {
-        if(consonnes.indexOf(nom[1]) != "-1") {
-        if(voyelles.indexOf(nom[2]) != "-1") {
-        if(consonnes.indexOf(nom[3]) != "-1") {
-            nature_du_mot = "samma_kuma";
-        }}}}
+    let datas = JSON.parse(sessionStorage.getItem("datas"));
+    let consonnes_choisies_du_serveur = consonnesChoisiesDuServeur(datas);
+    let memoire_consonnes_choisies = JSON.parse(localStorage.getItem("memoire_consonnes_choisies"));
 
-        if(consonnes.indexOf(nom[0]) != "-1") {
-        if(voyelles.indexOf(nom[1]) != "-1") {
-        if(tons.indexOf(nom[2]) != "-1") {
-            nature_du_mot = "duma_kuma";
-        }}}
-        if(consonnes.indexOf(nom[0]) != "-1") {
-        if(consonnes.indexOf(nom[1]) != "-1") {
-        if(voyelles.indexOf(nom[2]) != "-1") {
-        if(tons.indexOf(nom[3]) != "-1") {
-            nature_du_mot = "duma_kuma";
-        }}}}
+    consonnes_choisies_du_serveur = (consonnes_choisies_du_serveur == null) ? [] : consonnes_choisies_du_serveur;
+    memoire_consonnes_choisies = (memoire_consonnes_choisies == null) ? [] : memoire_consonnes_choisies;
 
-     /*Suppression de tous les tons*/
+    if (consonnes_choisies_du_serveur.length != 0) {
+        consonnes_choisies_du_serveur.forEach(element => {
+            if ($.inArray(element, memoire_consonnes_choisies) === -1) memoire_consonnes_choisies.push(element);
+        });
+    }
+
+    return memoire_consonnes_choisies;
+}
+function memoriserClicks(table, elements) {
+
+    let id = table.attr('id');
+    let td = $('#' + id + ' td');
+
+    elements = [];
+    td.css({ 'background-color': 'rgb(85, 85, 85)', 'color': 'yellow' });
+
+    initialiserMemoire();
+    memorisation();
+
+
+    function initialiserMemoire() {
+        for (i = 0; i < td.length; i++) {
+            let clicked_syllabes = td[i].textContent;
+            elements.push([clicked_syllabes, 0]);
+        }
+    }
+    function memorisation() {
+        $.each(td, function () {
+
+            let compteur = 1;
+            let syllabes_clique = $(this).text();
+            let td_index = $(this).index();
+
+            $(this).click(function () {
+                let n = compteur++;
+                elements.splice(td_index, 1, [syllabes_clique, n]);
+            });
+        });
+    }
+}
+function mettreEnSurbrillance(element) {
+    element.addClass('surbrillance');
+    element.siblings().removeClass('surbrillance');
+}
+function mmettreLeFocusSur(selecteur) {
+    let selection = document.querySelector(selecteur);
+    if (selection != null) selection.focus();
+}
+function mix2D(tableau) {
+    var mixted_table = [];
+    for (var i = 0; mixted_table.length < tableau[0].length * tableau[1].length; i++) {
+        var nbr_aleatoire0 = Math.floor(Math.random() * tableau[0].length);
+        var nbr_aleatoire1 = Math.floor(Math.random() * tableau[1].length);
+
+        var element_aleatoire0 = tableau[0][nbr_aleatoire0];
+        var element_aleatoire1 = tableau[1][nbr_aleatoire1];
+
+        var element_aleatoire = element_aleatoire1 + element_aleatoire0;
+        if ($.inArray(element_aleatoire, mixted_table) == -1) { mixted_table[mixted_table.length] = element_aleatoire; }
+    }
+    return mixted_table;
+}
+function mix3D(tableau) {
+    var mixted_table = [];
+    for (var i = 0; mixted_table.length < tableau[0].length * tableau[1].length * tableau[4].length; i++) {
+        var nbr_aleatoire0 = Math.floor(Math.random() * tableau[0].length);
+        var nbr_aleatoire1 = Math.floor(Math.random() * tableau[1].length);
+        var nbr_aleatoire4 = Math.floor(Math.random() * tableau[4].length);
+
+        var element_aleatoire0 = tableau[0][nbr_aleatoire0];
+        var element_aleatoire1 = tableau[1][nbr_aleatoire1];
+        var element_aleatoire4 = tableau[4][nbr_aleatoire4];
+
+        var element_aleatoire = element_aleatoire1 + element_aleatoire0 + element_aleatoire4;
+        if ($.inArray(element_aleatoire, mixted_table) == -1) { mixted_table[mixted_table.length] = element_aleatoire; }
+    }
+    return mixted_table;
+}
+function mix4D(tableau) {
+    var mixted_table = [];
+    for (var i = 0; mixted_table.length < tableau[0].length * tableau[1].length * tableau[4].length * tableau[5].length; i++) {
+        var nbr_aleatoire0 = Math.floor(Math.random() * tableau[0].length);
+        var nbr_aleatoire1 = Math.floor(Math.random() * tableau[1].length);
+        var nbr_aleatoire4 = Math.floor(Math.random() * tableau[4].length);
+        var nbr_aleatoire5 = Math.floor(Math.random() * tableau[5].length);
+
+        var element_aleatoire0 = tableau[0][nbr_aleatoire0];
+        var element_aleatoire1 = tableau[1][nbr_aleatoire1];
+        var element_aleatoire4 = tableau[4][nbr_aleatoire4];
+        var element_aleatoire5 = tableau[5][nbr_aleatoire5];
+
+        var element_aleatoire = element_aleatoire1 + element_aleatoire0 + element_aleatoire5 + element_aleatoire4;
+        if ($.inArray(element_aleatoire, mixted_table) == -1) { mixted_table[mixted_table.length] = element_aleatoire; }
+    }
+    return mixted_table;
+}
+function montrerPanneauDesCaracteres() {
+
+    /*Par defaut, voyelles_container, nasalisations_container et tons_container sont masqués*/
+    if (matiere_nom == "ߜߋ߲߭") {
+        masquer($("#caracteres_container > div"));
+        afficher($("#consonnes_container"));
+
+        setTimeout(() => {
+            $('#afficheur_de_panneau').html("<p>ߛߌ߬ߙߕߊ߬ ߥߟߊ ߘߏ߲߰</p>");
+            clignoterUneFois($('#afficheur_de_panneau'));
+        }, 400);
+    }
+
+    $('#panneaux').css({ "height": "calc(100vh - 18rem)" });
+    $('#caracteres_cadre').css({ "height": "max-content" });
+    $("#caracteres_container").css("height", "max-content");
+    $('#caracteres_container').animate({ "top": 0 }, 250);
+}
+function montrerReponse(question, element_correspondant) {
+    $.each(element_correspondant, function () {
+        let reponse = $(this);
+        if (question == reponse.text()) {
+            reponse.css("border-color", "orange");
+            setTimeout(() => { reponse.css("border-color", "rgb(85,85,85)"); }, 600);
+        }
+    });
+}
+
+/*-------------------------------------------------------------------------------------------------------------------------------------*/
+
+function nombreDeSyllabe(syllabe) {
+    nombre = 0;
+    for (i = 0; i < syllabe.length; i++) if (consonnes.indexOf(syllabe[i]) != -1) nombre++;
+    return nombre;
+}
+function nomComplet() {
+    let prenom = JSON.parse(sessionStorage.getItem("prenom"));
+    let nom = JSON.parse(sessionStorage.getItem("nom"));
+    return prenom + " " + nom;
+}
+function nomDEtudiant() {
+
+    /*Recuperation du nom*/
+    let nom = JSON.parse(sessionStorage.getItem("nom"));
+    let nom_sans_tons = "";
+    let nouveau_nom = "";
+
+    /*Determination de la nature du mot*/
+    let nature_du_mot = "";
+
+    if (consonnes.indexOf(nom[0]) != "-1") {
+        if (voyelles.indexOf(nom[1]) != "-1") {
+            if (consonnes.indexOf(nom[2]) != "-1") {
+                nature_du_mot = "samma_kuma";
+            }
+        }
+    }
+    if (consonnes.indexOf(nom[0]) != "-1") {
+        if (consonnes.indexOf(nom[1]) != "-1") {
+            if (voyelles.indexOf(nom[2]) != "-1") {
+                if (consonnes.indexOf(nom[3]) != "-1") {
+                    nature_du_mot = "samma_kuma";
+                }
+            }
+        }
+    }
+
+    if (consonnes.indexOf(nom[0]) != "-1") {
+        if (voyelles.indexOf(nom[1]) != "-1") {
+            if (tons.indexOf(nom[2]) != "-1") {
+                nature_du_mot = "duma_kuma";
+            }
+        }
+    }
+    if (consonnes.indexOf(nom[0]) != "-1") {
+        if (consonnes.indexOf(nom[1]) != "-1") {
+            if (voyelles.indexOf(nom[2]) != "-1") {
+                if (tons.indexOf(nom[3]) != "-1") {
+                    nature_du_mot = "duma_kuma";
+                }
+            }
+        }
+    }
+
+    /*Suppression de tous les tons*/
+    for (let i = 0; i < nom.length; i++) {
+        let caractere = nom[i];
+        if (tons.indexOf(caractere) == "-1") nom_sans_tons += caractere;
+    }
+    nom = nom_sans_tons;
+
+    /*Renomination du nom*/
+    if (nature_du_mot == "samma_kuma") nom = nom + "߫";
+    if (nature_du_mot == "duma_kuma") {
         for (let i = 0; i < nom.length; i++) {
             let caractere = nom[i];
-            if(tons.indexOf(caractere) == "-1") nom_sans_tons += caractere;
+            if (voyelles.indexOf(caractere) != "-1") caractere = caractere + "߬";
+            nouveau_nom += caractere;
         }
-        nom = nom_sans_tons;
-        
-     /*Renomination du nom*/
-        if(nature_du_mot == "samma_kuma") nom = nom+"߫";
-        if(nature_du_mot == "duma_kuma") {
-            for (let i = 0; i < nom.length; i++) {
-                let caractere = nom[i];
-                if(voyelles.indexOf(caractere) != "-1") caractere = caractere+"߬";
-                nouveau_nom += caractere;
-            }
-            nom = nouveau_nom;
-        }
-        
-        return nom;
+        nom = nouveau_nom;
     }
-    function nomDeLaMatiereSuivante() {
-        let ms = "";
-        let niveau = JSON.parse(sessionStorage.getItem("niveau"));
 
-        if(niveau == 1) ms = "ߜߋ߲߲߭";
-        if(niveau == 2) ms = "ߞߊ߲ߡߊߛߙߋ";
-        if(niveau == 3) ms = "ߖߊ߰ߕߋ߬ߘߋ߲";
+    return nom;
+}
+function nomDeLaMatiereSuivante() {
+    let ms = "";
+    let niveau = JSON.parse(sessionStorage.getItem("niveau"));
 
-        return ms;
-    }
+    if (niveau == 1) ms = "ߜߋ߲߲߭";
+    if (niveau == 2) ms = "ߞߊ߲ߡߊߛߙߋ";
+    if (niveau == 3) ms = "ߖߊ߰ߕߋ߬ߘߋ߲";
+
+    return ms;
+}
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
-    
-    function paire(nombre) {
-        let test = (nombre%2 === 0) ? true : false;
-        return test;
-    }
-    function panneauxStyle(consonnes) {
 
-        $.each($(".parametres_container input"), function() {
-            if($(this).prop("checked") == true) {
-                let caractere_de_parametre = $(this).prop("value");
-                
-                $.each($('#panneaux span'), function () {
-                    let panneaux_span = $(this);
-                    let panneaux_consonne = ($(this).text());
-                    if (caractere_de_parametre == panneaux_consonne) panneaux_span.css("background-color","rgb(170, 170, 170)");
-                });
-            }
-        });
-            
-        $.each($('#panneaux span'), function () {
+function paire(nombre) {
+    let test = (nombre % 2 === 0) ? true : false;
+    return test;
+}
+function panneauxStyle(consonnes) {
 
-            let panneaux_span = $(this);
-            let panneaux_consonne = ($(this).text());
+    $.each($(".parametres_container input"), function () {
+        if ($(this).prop("checked") == true) {
+            let caractere_de_parametre = $(this).prop("value");
 
-            if (consonnes.length > 0) {
-                consonnes.forEach(element => {
-                    if (element == panneaux_consonne)  panneaux_span.css({ 'color':'orange', 'font-weight':'bold', 'box-shadow':'none' }); 
-                });
-            }
-        });
-    }
-    function parseIntNko(nombre_a_convertir){
-        var numberToString = String(nombre_a_convertir);
-        var stringToTable = numberToString.split('');
-        var nombre_converti = [];
-        
-        for(i=0;i<stringToTable.length;i++){
-            nombre_converti[nombre_converti.length] = chiffres[stringToTable[i]];
+            $.each($('#panneaux span'), function () {
+                let panneaux_span = $(this);
+                let panneaux_consonne = ($(this).text());
+                if (caractere_de_parametre == panneaux_consonne) panneaux_span.css("background-color", "rgb(170, 170, 170)");
+            });
         }
-        
-        return nombre_converti.join('');
-    }
-    function phasesEtudieesDuServeur(datas) {
+    });
 
-        datas = (datas == undefined) ? [[],[],[],[]] : datas;
-        let niveau = JSON.parse(sessionStorage.getItem('niveau'));
-        niveau = (niveau == null) ? 1 : niveau;
-        let peds = [];
-        
-        let matiere = datas[niveau-1];
+    $.each($('#panneaux span'), function () {
 
-        if(matiere != undefined) {
-            if(matiere.length == 0) peds = [];
-            if(matiere.length != 0) {
-                for (let i = 0; i < datas[niveau-1].length; i++) if(datas[niveau-1][i] != undefined) peds.push(datas[niveau-1][i].phase);
-            }
+        let panneaux_span = $(this);
+        let panneaux_consonne = ($(this).text());
+
+        if (consonnes.length > 0) {
+            consonnes.forEach(element => {
+                if (element == panneaux_consonne) panneaux_span.css({ 'color': 'orange', 'font-weight': 'bold', 'box-shadow': 'none' });
+            });
         }
-        
-        return peds;
-    }
-    function pourcentagePoint(lesson_data) {
+    });
+}
+function parseIntNko(nombre_a_convertir) {
+    var numberToString = String(nombre_a_convertir);
+    var stringToTable = numberToString.split('');
+    var nombre_converti = [];
 
-        var niveau = JSON.parse(sessionStorage.getItem("niveau"));          
-        if(typeof(lesson_data) == "string") lesson_data = JSON.parse(lesson_data);  
-  
-        if(lesson_data != null) {
-            let tp = 0;
-            let pourcentage = 0;
-            let data_length = 0;
-            
-            if(niveau === 3) {
-                for (let i = 0; i < lesson_data.length; i++) {
+    for (i = 0; i < stringToTable.length; i++) {
+        nombre_converti[nombre_converti.length] = chiffres[stringToTable[i]];
+    }
+
+    return nombre_converti.join('');
+}
+function phasesEtudieesDuServeur(datas) {
+
+    datas = (datas == undefined) ? [[], [], [], []] : datas;
+    let niveau = JSON.parse(sessionStorage.getItem('niveau'));
+    niveau = (niveau == null) ? 1 : niveau;
+    let peds = [];
+
+    let matiere = datas[niveau - 1];
+
+    if (matiere != undefined) {
+        if (matiere.length == 0) peds = [];
+        if (matiere.length != 0) {
+            for (let i = 0; i < datas[niveau - 1].length; i++) if (datas[niveau - 1][i] != undefined) peds.push(datas[niveau - 1][i].phase);
+        }
+    }
+
+    return peds;
+}
+function pourcentagePoint(lesson_data) {
+
+    var niveau = JSON.parse(sessionStorage.getItem("niveau"));
+    if (typeof (lesson_data) == "string") lesson_data = JSON.parse(lesson_data);
+
+    if (lesson_data != null) {
+        let tp = 0;
+        let pourcentage = 0;
+        let data_length = 0;
+
+        if (niveau === 3) {
+            for (let i = 0; i < lesson_data.length; i++) {
                 for (let j = 0; j < lesson_data[i].length; j++) {
                     tp += lesson_data[i][j][2];
                     data_length++;
-                }}                 
-                pourcentage = Math.floor(tp*100/data_length);
-            }
-            if(niveau !== 3) {
-                for(let i=0; i<lesson_data.length; i++) { 
-                    tp += lesson_data[i][2];
-                    data_length++; 
                 }
-                pourcentage = Math.floor(tp*100/data_length);
             }
-  
-            return pourcentage;
+            pourcentage = Math.floor(tp * 100 / data_length);
         }
+        if (niveau !== 3) {
+            for (let i = 0; i < lesson_data.length; i++) {
+                tp += lesson_data[i][2];
+                data_length++;
+            }
+            pourcentage = Math.floor(tp * 100 / data_length);
+        }
+
+        return pourcentage;
     }
-    function progressBarDApprentissage(td,qtite_click) {
-        /*
-        td est les td de la table à cliquer.
-        qtite_click est le nombre de fois qu'un td doit être cliquer.
-        */
+}
+function progressBarDApprentissage(td, qtite_click) {
+    /*
+    td est les td de la table à cliquer.
+    qtite_click est le nombre de fois qu'un td doit être cliquer.
+    */
 
-        let progress_unity = 100 / [td.length * qtite_click];
-        let good_response_width = 0;
-        let total_des_clicks = 0;
+    let progress_unity = 100 / [td.length * qtite_click];
+    let good_response_width = 0;
+    let total_des_clicks = 0;
 
-        initialiserProgressBar();
+    initialiserProgressBar();
 
-        $.each(td, function () {
-            let compteur_td_click = 0;
+    $.each(td, function () {
+        let compteur_td_click = 0;
 
-            $(this).click(function () {
-                if (compteur_td_click < qtite_click) {
-                    compteur_td_click++;
-                    total_des_clicks++;
-                    good_response_width += progress_unity;
-                    $('.progress_bonne_reponse_bar').css('width', good_response_width + '%');
-                }
+        $(this).click(function () {
+            if (compteur_td_click < qtite_click) {
+                compteur_td_click++;
+                total_des_clicks++;
+                good_response_width += progress_unity;
+                $('.progress_bonne_reponse_bar').css('width', good_response_width + '%');
+            }
 
-                if (total_des_clicks / qtite_click == td.length) return false;
-             
-                // if (total_des_clicks / qtite_click == td.length) {
-                //     compteur_td_click = 0;
-                //     good_response_width = 0;
-                //     total_des_clicks = 0;
-                // }
-            });
+            if (total_des_clicks / qtite_click == td.length) return false;
+
+            // if (total_des_clicks / qtite_click == td.length) {
+            //     compteur_td_click = 0;
+            //     good_response_width = 0;
+            //     total_des_clicks = 0;
+            // }
         });
-    }
-	function prononcer(){
-		id=this.id;
-	
-		son.src = "son/mp3"+id+".mp3";
-		son.src = "son/ogg"+id+".ogg";
-		son.src = "son/mp4"+id+".mp4";
-		
-		son.play();
-	}
+    });
+}
+function prononcer() {
+    id = this.id;
+
+    son.src = "son/mp3" + id + ".mp3";
+    son.src = "son/ogg" + id + ".ogg";
+    son.src = "son/mp4" + id + ".mp4";
+
+    son.play();
+}
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
 
-    function questions(tableau) {
-        let qr = [];
-        for(let i=0; i<tableau.length; i++) {
-            qr.push(tableau[i][0]);
-        }
-        qr = malaxer(qr);
-        return qr;
+function questions(tableau) {
+    let qr = [];
+    for (let i = 0; i < tableau.length; i++) {
+        qr.push(tableau[i][0]);
     }
-    
+    qr = malaxer(qr);
+    return qr;
+}
+
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
 
-    function raffraichirLaPage() { location = location; }
-    function rappel(button) {
-        setTimeout(() => { button.css('box-shadow','none'); }, 100);
-        setTimeout(() => { button.css('box-shadow','0 0 3rem #000'); }, 200);
-        setTimeout(() => { button.css('box-shadow','none'); }, 300);
-        setTimeout(() => { button.css('box-shadow','0 0 3rem #000'); }, 400);
-        setTimeout(() => { button.css('box-shadow','none'); }, 500);
-        setTimeout(() => { button.css('box-shadow','0 0 3rem #000'); }, 600);
-        setTimeout(() => { button.css('box-shadow','none'); }, 700);
-        setTimeout(() => { button.css('box-shadow','0 0 3rem #000'); }, 800);
-        setTimeout(() => { button.css('box-shadow','none'); }, 900);
-        setTimeout(() => { button.css('box-shadow','0 0 1rem #666'); }, 1000);
+function raffraichirLaPage() { location = location; }
+function rappel(button) {
+    setTimeout(() => { button.css('box-shadow', 'none'); }, 100);
+    setTimeout(() => { button.css('box-shadow', '0 0 3rem #000'); }, 200);
+    setTimeout(() => { button.css('box-shadow', 'none'); }, 300);
+    setTimeout(() => { button.css('box-shadow', '0 0 3rem #000'); }, 400);
+    setTimeout(() => { button.css('box-shadow', 'none'); }, 500);
+    setTimeout(() => { button.css('box-shadow', '0 0 3rem #000'); }, 600);
+    setTimeout(() => { button.css('box-shadow', 'none'); }, 700);
+    setTimeout(() => { button.css('box-shadow', '0 0 3rem #000'); }, 800);
+    setTimeout(() => { button.css('box-shadow', 'none'); }, 900);
+    setTimeout(() => { button.css('box-shadow', '0 0 1rem #666'); }, 1000);
+}
+function reagirAuClickDeDialogueBtns() {
+    $.each($('.dialogue_btns > div'), function () {
+        $(this).click(function () {
+            $('.dialogue_btns').css('box-shadow', 'none');
+        });
+    });
+}
+function rectificationDeReponse(text_container, texte) {
+    $('.correcteur').on('click', function () {
+        texte.pop();
+        text_container.html(texte);
+    });
+}
+function recapitulatifDuResultat1(ligne1_td, ligne2_td, ligne3_td, matiere) {
+
+    let lesson_1 = (matiere[0] == undefined) ? {} : JSON.parse(matiere[0].lesson);
+    let lesson_2 = (matiere[1] == undefined) ? {} : JSON.parse(matiere[1].lesson);
+    let lesson_3 = (matiere[2] == undefined) ? {} : JSON.parse(matiere[2].lesson);
+
+    let question_total_1 = lesson_1.length;
+    let question_total_2 = lesson_2.length;
+    let question_total_3 = lesson_3.length;
+
+    let vrais_reponses_1 = calculerPoint(lesson_1);
+    let vrais_reponses_2 = calculerPoint(lesson_2);
+    let vrais_reponses_3 = calculerPoint(lesson_3);
+
+    let fausses_reponses_1 = question_total_1 - vrais_reponses_1;
+    let fausses_reponses_2 = question_total_1 - vrais_reponses_2;
+    let fausses_reponses_3 = question_total_1 - vrais_reponses_3;
+
+    ligne1_td[2].innerHTML = parseIntNko(question_total_1);
+    ligne1_td[3].innerHTML = parseIntNko(vrais_reponses_1);
+    ligne1_td[4].innerHTML = parseIntNko(fausses_reponses_1);
+    ligne1_td[5].innerHTML = parseIntNko(vrais_reponses_1);
+
+    ligne2_td[1].innerHTML = parseIntNko(question_total_2);
+    ligne2_td[2].innerHTML = parseIntNko(vrais_reponses_2);
+    ligne2_td[3].innerHTML = parseIntNko(fausses_reponses_2);
+    ligne2_td[4].innerHTML = parseIntNko(vrais_reponses_2);
+
+    ligne3_td[1].innerHTML = parseIntNko(question_total_3);
+    ligne3_td[2].innerHTML = parseIntNko(vrais_reponses_3);
+    ligne3_td[3].innerHTML = parseIntNko(fausses_reponses_3);
+    ligne3_td[4].innerHTML = parseIntNko(vrais_reponses_3);
+}
+function recapitulatifDuResultat2(ligne1_td, ligne2_td, ligne3_td, ligne4_td, matiere) {
+
+    let lesson_1 = (matiere[0] == undefined) ? {} : JSON.parse(matiere[0].lesson);
+    let lesson_2 = (matiere[1] == undefined) ? {} : JSON.parse(matiere[1].lesson);
+    let lesson_3 = (matiere[2] == undefined) ? {} : JSON.parse(matiere[2].lesson);
+    let lesson_4 = (matiere[3] == undefined) ? {} : JSON.parse(matiere[3].lesson);
+
+    let question_total_1 = lesson_1.length;
+    let question_total_2 = lesson_2.length;
+    let question_total_3 = lesson_3.length;
+    let question_total_4 = lesson_4.length;
+
+    let vrais_reponses_1 = calculerPoint(lesson_1);
+    let vrais_reponses_2 = calculerPoint(lesson_2);
+    let vrais_reponses_3 = calculerPoint(lesson_3);
+    let vrais_reponses_4 = calculerPoint(lesson_4);
+
+    let fausses_reponses_1 = question_total_1 - vrais_reponses_1;
+    let fausses_reponses_2 = question_total_2 - vrais_reponses_2;
+    let fausses_reponses_3 = question_total_3 - vrais_reponses_3;
+    let fausses_reponses_4 = question_total_4 - vrais_reponses_4;
+
+    ligne1_td[2].innerHTML = parseIntNko(question_total_1);
+    ligne1_td[3].innerHTML = parseIntNko(vrais_reponses_1);
+    ligne1_td[4].innerHTML = parseIntNko(fausses_reponses_1);
+    ligne1_td[5].innerHTML = parseIntNko(vrais_reponses_1);
+
+    ligne2_td[1].innerHTML = parseIntNko(question_total_2);
+    ligne2_td[2].innerHTML = parseIntNko(vrais_reponses_2);
+    ligne2_td[3].innerHTML = parseIntNko(fausses_reponses_2);
+    ligne2_td[4].innerHTML = parseIntNko(vrais_reponses_2);
+
+    ligne3_td[1].innerHTML = parseIntNko(question_total_3);
+    ligne3_td[2].innerHTML = parseIntNko(vrais_reponses_3);
+    ligne3_td[3].innerHTML = parseIntNko(fausses_reponses_3);
+    ligne3_td[4].innerHTML = parseIntNko(vrais_reponses_3);
+
+    ligne4_td[1].innerHTML = parseIntNko(question_total_4);
+    ligne4_td[2].innerHTML = parseIntNko(vrais_reponses_4);
+    ligne4_td[3].innerHTML = parseIntNko(fausses_reponses_4);
+    ligne4_td[4].innerHTML = parseIntNko(vrais_reponses_4);
+}
+function recupererDeLocalStorage(data) { return (JSON.parse(localStorage.getItem(data))); }
+function recupererDeSessionStorage(data) { return (JSON.parse(sessionStorage.getItem(data))); }
+function refuser(element) {
+
+    $(element).addClass('faux');
+
+    setTimeout(function () { $('.faux').addClass('croix'); }, 100);
+    setTimeout(function () { $('.faux').removeClass('croix'); }, 600);
+    setTimeout(function () { $(element).removeClass('faux'); }, 600);
+}
+function relire(question, repetition_btn) {
+    repetition_btn.click(function () {
+        lire('ߊ', question);
+        clignoterUneFois(repetition_btn);
+    });
+}
+function rendreActif(element) {
+    if (element.attr('class') != "cercle shadow") {
+        element.siblings().removeClass("actif").css("display", "none");
+        element.addClass('actif');
+    } else {
+        element.addClass('actif');
     }
-    function reagirAuClickDeDialogueBtns() {
-        $.each($('.dialogue_btns > div'), function(){
-            $(this).click(function() {
-                $('.dialogue_btns').css('box-shadow','none');
-            });
+}
+function resultat(memoire) {
+
+    let nom = JSON.parse(sessionStorage.getItem('nom'));
+    let prenom = JSON.parse(sessionStorage.getItem('prenom'));
+    let etudiant = '<h1>' + prenom + ' ' + nom + '<h1>';
+    let lesson_en_cours = $('.notification_titre').html();
+    let lesson_suivante = lessonSuivante(lesson_en_cours);
+    let total_question = memoire.length;
+    let total_bonne_reponse = totalPoint(memoire);
+    let total_fausse_reponse = total_question - total_bonne_reponse;
+    let taux_de_vraie_reponse = '%' + parseIntNko(Math.floor(total_bonne_reponse * 100 / total_question));
+    let taux_acceptable_de_vraie_reponse = (lesson_active = 'pre_exercice') ? 100 : 92;
+    let continu_sur_l_etape_suivante = '<b id="avance">' + lesson_suivante + '</b>';
+
+    if (lesson_suivante == 'ߥߊ߫ ' + lesson_en_cours + ' ߡߊ߬') { $('.notification_titre').html('ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ'); }
+
+    chargerResultatEntete();
+    chargerResultatHead();
+    chargerResultatBody();
+    chargementDuResultatFoot();
+    chargerDeliberation();
+
+    function chargerResultatEntete() {
+        $('#resultat_titre').html('<h3>ߒߞߏ߫ ߛߓߍ ߘߋ߰ߟߌ ߝߏ߲߬ߝߏ߲</h3>');
+        $('#etudiant').html(etudiant + ' ߓߟߏ߫');
+    }
+    function chargerResultatHead() {
+
+        let d = new Date();
+
+        let an = d.getFullYear();
+        let lune = d.getMonth();
+        let date = d.getDate();
+        let jour = d.getDay();
+        let heure = d.getHours();
+        let minute = d.getMinutes();
+
+        $('#resultat_date').text(jours[jour] + ' ' + mois[lune] + ' ߕߟߋ߬ ' + parseIntNko(date) + ' ߛߊ߲߭ ' + parseIntNko(an));
+        $('#resultat_heure').text(parseIntNko(heure) + ' : ' + parseIntNko(minute));
+    }
+    function chargerResultatBody() {
+
+        let table_body_html = resultatTableBodyHTML(memoire);
+        let total_point = totalPoint(memoire);
+
+        $('.table_body').html(table_body_html);
+        $('#total_question_1').html(parseIntNko(memoire.length));
+        $('#total_reponse').html(parseIntNko(memoire.length));
+        $('#total_point_1').html(parseIntNko(total_point));
+    }
+    function chargementDuResultatFoot() {
+        $('#total_question_2').text(parseIntNko(total_question));
+        $('#total_bonne_reponse').text(parseIntNko(total_bonne_reponse));
+        $('#total_fausse_reponse').text(parseIntNko(total_fausse_reponse));
+        $('#total_point_2').text(parseIntNko(total_bonne_reponse));
+        $('#pourcentage_point').text(taux_de_vraie_reponse);
+    }
+    function chargerDeliberation() {
+        if (taux_de_vraie_reponse < taux_acceptable_de_vraie_reponse) {
+            $('#deliberation').html('ߌ ߖߌߖߊ߬ <b>' + prenom + '</b>߸ ߌ ߟߊ߫ ' + lesson_en_cours + ' ߓߍ߬ߙߍ ߡߊ߫ ߤߊߟߌ߬ ߁߈ ߓߐ߫. ߏ߬ߘߐ߬߸ ߌ ߞߐߛߍ߬ߦߌ߬ ߦߊ߲߬ ߡߊ߫. <b id="reprendre">' + lesson_en_cours + ' ߞߍ߫ ߕߎ߲߯</b>');
+        } else {
+            $('#deliberation').html(
+                'ߌ ߞߎߟߎ߲ߖߋ߫ <b>' + prenom + '</b>߸ ߌ ߟߊ߫ ߘߐ߬ߖߊ ߟߊ߫ ' + lesson_en_cours + ' ߟߐ߲ ߠߊ߫ ߤߊ߲߯ ' + $('#pourcentage_point').text() +
+                '</b> ߟߊ߫. ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ ' + lesson_suivante + '.<br/>' +
+                'ߣߴߌ ߟߊ߫ ߓߍ߬ߙߍ ߡߴߌ ߥߛߊ߬߸ <b id="reprendre">' + lesson_en_cours + ' ߞߍ߫ ߕߎ߲߯</b><br/>' +
+                'ߣߴߌ ߟߊ߫ ߓߍ߬ߙߍ ߞߵߌ ߥߛߊ߬߸ ' + continu_sur_l_etape_suivante
+            );
+        }
+    }
+}
+function resultatDeLaMatiere(matiere) {
+
+    let matieres = ["alphabet", "syllabes", "tons", "chiffres"];
+    let matiere_nom_en_nko = matiereNomEnNko(matiere);
+    let matiere_nom = matiereNom(matiere);
+    let niveau = matieres.indexOf(matiere_nom) + 1;
+    let lesson_1 = {}, lesson_2 = {}, lesson_3 = {}, lesson_4 = {};
+
+    if (matiere.length > 0) {
+        matiere.forEach(element => {
+            if (element != undefined) {
+                let element_index = matiere.indexOf(element);
+
+                if (element.phase.split("_")[1] == "apprentissage") lesson_1 = matiere[element_index];
+                if (element.phase.split("_")[1] == "exercice") lesson_2 = matiere[element_index];
+                if (element.phase.split("_")[1] == "pratique") lesson_3 = matiere[element_index];
+                if (element.phase.split("_")[1] == "evaluation") lesson_4 = matiere[element_index];
+            }
         });
     }
-    function rectificationDeReponse(text_container,texte) {
-        $('.correcteur').on('click',function() {
-            texte.pop();
-            text_container.html(texte);
-        });
+
+
+    let nom = JSON.parse(sessionStorage.getItem('nom'));
+    let prenom = JSON.parse(sessionStorage.getItem('prenom'));
+    let lesson_en_cours = $('.notification_titre').html();
+    let moyenne_d_evaluation = 1;
+    let lesson_suivante = lessonSuivante(lesson_en_cours);
+    let continu_sur_l_etape_suivante = '<b id="avance"><a href="/php/programmes.php">' + lesson_suivante + '</a></b>';
+
+
+    chargerResultatDeLaMatiereEntete();
+    chargerResultatDeLaMatiereCorps();
+    chargerResultatDeLaMatierePied();
+    // chargerDeliberation();
+    afficherResultatDeLaMatiere();
+    // reprendreLesson();
+
+    $('#fermer_resultat').click(function () { masquerResultatDeLaMatiere(); });
+
+
+    function chargerResultatDeLaMatiereEntete() {
+        $('#etudiant').html('<h1>' + prenom + ' ' + nom + '</h1> <span>ߟߊ߫</span>');
+        $('#resultat_titre').html('<h3>ߒߞߏ߫ ߛߓߍ ߘߋ߰ߟߌ ߝߏ߲߬ߝߏ߲</h3>');
     }
-    function recapitulatifDuResultat1(ligne1_td, ligne2_td, ligne3_td, matiere) {
+    function chargerResultatDeLaMatiereCorps() {
 
-        let lesson_1 = (matiere[0] == undefined) ? {} : JSON.parse(matiere[0].lesson);
-        let lesson_2 = (matiere[1] == undefined) ? {} : JSON.parse(matiere[1].lesson);
-        let lesson_3 = (matiere[2] == undefined) ? {} : JSON.parse(matiere[2].lesson);
+        chargerResultatDApprentissageCorps();
+        chargerResultatDExerciceCorps();
+        chargerResultatDePratiqueCorps();
+        chargerResultatDEvaluationCorps();
 
-        let question_total_1 = lesson_1.length;
-        let question_total_2 = lesson_2.length;
-        let question_total_3 = lesson_3.length;
+        function chargerResultatDApprentissageCorps() {
+            if (lesson_1 != undefined) {
 
-        let vrais_reponses_1 = calculerPoint(lesson_1);
-        let vrais_reponses_2 = calculerPoint(lesson_2);
-        let vrais_reponses_3 = calculerPoint(lesson_3);
+                chargerResultatHead();
+                chargerResultatBody();
+                chargerResultatFoot();
 
-        let fausses_reponses_1 = question_total_1 - vrais_reponses_1;
-        let fausses_reponses_2 = question_total_1 - vrais_reponses_2;
-        let fausses_reponses_3 = question_total_1 - vrais_reponses_3;
-
-        ligne1_td[2].innerHTML = parseIntNko(question_total_1);
-        ligne1_td[3].innerHTML = parseIntNko(vrais_reponses_1);
-        ligne1_td[4].innerHTML = parseIntNko(fausses_reponses_1);
-        ligne1_td[5].innerHTML = parseIntNko(vrais_reponses_1);
-
-        ligne2_td[1].innerHTML = parseIntNko(question_total_2);
-        ligne2_td[2].innerHTML = parseIntNko(vrais_reponses_2);
-        ligne2_td[3].innerHTML = parseIntNko(fausses_reponses_2);
-        ligne2_td[4].innerHTML = parseIntNko(vrais_reponses_2);
-
-        ligne3_td[1].innerHTML = parseIntNko(question_total_3);
-        ligne3_td[2].innerHTML = parseIntNko(vrais_reponses_3);
-        ligne3_td[3].innerHTML = parseIntNko(fausses_reponses_3);
-        ligne3_td[4].innerHTML = parseIntNko(vrais_reponses_3);
-    }
-    function recapitulatifDuResultat2(ligne1_td, ligne2_td, ligne3_td, ligne4_td, matiere) {
-
-        let lesson_1 = (matiere[0] == undefined) ? {} : JSON.parse(matiere[0].lesson);
-        let lesson_2 = (matiere[1] == undefined) ? {} : JSON.parse(matiere[1].lesson);
-        let lesson_3 = (matiere[2] == undefined) ? {} : JSON.parse(matiere[2].lesson);
-        let lesson_4 = (matiere[3] == undefined) ? {} : JSON.parse(matiere[3].lesson);
-
-        let question_total_1 = lesson_1.length;
-        let question_total_2 = lesson_2.length;
-        let question_total_3 = lesson_3.length;
-        let question_total_4 = lesson_4.length;
-
-        let vrais_reponses_1 = calculerPoint(lesson_1);
-        let vrais_reponses_2 = calculerPoint(lesson_2);
-        let vrais_reponses_3 = calculerPoint(lesson_3);
-        let vrais_reponses_4 = calculerPoint(lesson_4);
-
-        let fausses_reponses_1 = question_total_1 - vrais_reponses_1;
-        let fausses_reponses_2 = question_total_2 - vrais_reponses_2;
-        let fausses_reponses_3 = question_total_3 - vrais_reponses_3;
-        let fausses_reponses_4 = question_total_4 - vrais_reponses_4;
-
-        ligne1_td[2].innerHTML = parseIntNko(question_total_1);
-        ligne1_td[3].innerHTML = parseIntNko(vrais_reponses_1);
-        ligne1_td[4].innerHTML = parseIntNko(fausses_reponses_1);
-        ligne1_td[5].innerHTML = parseIntNko(vrais_reponses_1);
-
-        ligne2_td[1].innerHTML = parseIntNko(question_total_2);
-        ligne2_td[2].innerHTML = parseIntNko(vrais_reponses_2);
-        ligne2_td[3].innerHTML = parseIntNko(fausses_reponses_2);
-        ligne2_td[4].innerHTML = parseIntNko(vrais_reponses_2);
-
-        ligne3_td[1].innerHTML = parseIntNko(question_total_3);
-        ligne3_td[2].innerHTML = parseIntNko(vrais_reponses_3);
-        ligne3_td[3].innerHTML = parseIntNko(fausses_reponses_3);
-        ligne3_td[4].innerHTML = parseIntNko(vrais_reponses_3);
-
-        ligne4_td[1].innerHTML = parseIntNko(question_total_4);
-        ligne4_td[2].innerHTML = parseIntNko(vrais_reponses_4);
-        ligne4_td[3].innerHTML = parseIntNko(fausses_reponses_4);
-        ligne4_td[4].innerHTML = parseIntNko(vrais_reponses_4);
-    }
-    function recupererDeLocalStorage(data) {return(JSON.parse(localStorage.getItem(data)));}
-    function recupererDeSessionStorage(data) {return(JSON.parse(sessionStorage.getItem(data)));}
-    function refuser(element) {
-        
-        $(element).addClass('faux');
-
-        setTimeout(function(){ $('.faux').addClass('croix'); }, 100);
-        setTimeout(function(){ $('.faux').removeClass('croix'); }, 600);
-        setTimeout(function(){ $(element).removeClass('faux'); }, 600);
-    }
-    function relire(question, repetition_btn) { 
-        repetition_btn.click(function () { 
-            lire('ߊ', question); 
-            clignoterUneFois(repetition_btn); 
-        });
-    }
-    function rendreActif(element) {
-        if(element.attr('class') != "cercle shadow") {
-            element.siblings().removeClass("actif").css("display","none");
-            element.addClass('actif'); 
-        }else{
-            element.addClass('actif'); 
-        }
-    }
-    function resultat(memoire) {
-        
-        let nom = JSON.parse(sessionStorage.getItem('nom'));
-        let prenom = JSON.parse(sessionStorage.getItem('prenom'));
-        let etudiant = '<h1>'+prenom+' '+nom+'<h1>';
-        let lesson_en_cours = $('.notification_titre').html();
-        let lesson_suivante = lessonSuivante(lesson_en_cours);
-        let total_question = memoire.length;
-        let total_bonne_reponse = totalPoint(memoire);
-        let total_fausse_reponse = total_question - total_bonne_reponse;
-        let taux_de_vraie_reponse = '%'+parseIntNko(Math.floor(total_bonne_reponse*100/total_question));
-        let taux_acceptable_de_vraie_reponse = (lesson_active = 'pre_exercice') ? 100 : 92;
-        let continu_sur_l_etape_suivante = '<b id="avance">'+lesson_suivante+'</b>';
-
-        if(lesson_suivante == 'ߥߊ߫ '+lesson_en_cours+' ߡߊ߬') { $('.notification_titre').html('ߛߓߍߛߎ߲ ߟߊ߬ߓߌ߬ߟߊ߬ߟߌ'); }
-
-        chargerResultatEntete();
-        chargerResultatHead();
-        chargerResultatBody();
-        chargementDuResultatFoot();
-        chargerDeliberation();
-        
-        function chargerResultatEntete() {
-            $('#resultat_titre').html('<h3>ߒߞߏ߫ ߛߓߍ ߘߋ߰ߟߌ ߝߏ߲߬ߝߏ߲</h3>'); 
-            $('#etudiant').html(etudiant+' ߓߟߏ߫');
-        }
-        function chargerResultatHead() {
-
-            let d = new Date();
-    
-            let an = d.getFullYear();
-            let lune = d.getMonth();
-            let date = d.getDate();
-            let jour = d.getDay();
-            let heure = d.getHours();
-            let minute = d.getMinutes();
-
-            $('#resultat_date').text(jours[jour]+' '+mois[lune]+' ߕߟߋ߬ '+parseIntNko(date)+' ߛߊ߲߭ '+parseIntNko(an));
-            $('#resultat_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
-        }
-        function chargerResultatBody() {
-
-            let table_body_html = resultatTableBodyHTML(memoire);
-            let total_point = totalPoint(memoire);
-                
-            $('.table_body').html(table_body_html);
-            $('#total_question_1').html(parseIntNko(memoire.length));
-            $('#total_reponse').html(parseIntNko(memoire.length));
-            $('#total_point_1').html(parseIntNko(total_point));
-        }
-        function chargementDuResultatFoot() {
-            $('#total_question_2').text(parseIntNko(total_question));
-            $('#total_bonne_reponse').text(parseIntNko(total_bonne_reponse));
-            $('#total_fausse_reponse').text(parseIntNko(total_fausse_reponse));
-            $('#total_point_2').text(parseIntNko(total_bonne_reponse));
-            $('#pourcentage_point').text(taux_de_vraie_reponse);
-        }
-        function chargerDeliberation() {
-            if(taux_de_vraie_reponse < taux_acceptable_de_vraie_reponse) {
-                $('#deliberation').html('ߌ ߖߌߖߊ߬ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ '+lesson_en_cours+' ߓߍ߬ߙߍ ߡߊ߫ ߤߊߟߌ߬ ߁߈ ߓߐ߫. ߏ߬ߘߐ߬߸ ߌ ߞߐߛߍ߬ߦߌ߬ ߦߊ߲߬ ߡߊ߫. <b id="reprendre">'+lesson_en_cours+' ߞߍ߫ ߕߎ߲߯</b>');
-            }else{
-                $('#deliberation').html(
-                    'ߌ ߞߎߟߎ߲ߖߋ߫ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ ߘߐ߬ߖߊ ߟߊ߫ '+lesson_en_cours+' ߟߐ߲ ߠߊ߫ ߤߊ߲߯ '+$('#pourcentage_point').text()+
-                    '</b> ߟߊ߫. ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ '+lesson_suivante+'.<br/>'+
-                    'ߣߴߌ ߟߊ߫ ߓߍ߬ߙߍ ߡߴߌ ߥߛߊ߬߸ <b id="reprendre">'+lesson_en_cours+' ߞߍ߫ ߕߎ߲߯</b><br/>'+
-                    'ߣߴߌ ߟߊ߫ ߓߍ߬ߙߍ ߞߵߌ ߥߛߊ߬߸ '+continu_sur_l_etape_suivante
-                );
-            }
-        }
-    }
-    function resultatDeLaMatiere(matiere) {
-
-        let matieres = ["alphabet","syllabes","tons","chiffres"];
-        let matiere_nom_en_nko = matiereNomEnNko(matiere);
-        let matiere_nom = matiereNom(matiere);
-        let niveau = matieres.indexOf(matiere_nom)+1;
-        let lesson_1={}, lesson_2={}, lesson_3={}, lesson_4={};
-        
-        if(matiere.length > 0) {
-            matiere.forEach(element => {
-                if(element != undefined) {
-                    let element_index = matiere.indexOf(element);
-                    
-                    if(element.phase.split("_")[1] == "apprentissage") lesson_1 = matiere[element_index];
-                    if(element.phase.split("_")[1] == "exercice"     ) lesson_2 = matiere[element_index];
-                    if(element.phase.split("_")[1] == "pratique"     ) lesson_3 = matiere[element_index];
-                    if(element.phase.split("_")[1] == "evaluation"   ) lesson_4 = matiere[element_index];
-                }
-            });
-        }
-
-
-        let nom = JSON.parse(sessionStorage.getItem('nom'));
-        let prenom = JSON.parse(sessionStorage.getItem('prenom'));
-        let lesson_en_cours = $('.notification_titre').html();
-        let moyenne_d_evaluation = 1;
-        let lesson_suivante = lessonSuivante(lesson_en_cours);
-        let continu_sur_l_etape_suivante = '<b id="avance"><a href="/php/programmes.php">'+lesson_suivante+'</a></b>';
-
-
-        chargerResultatDeLaMatiereEntete();
-        chargerResultatDeLaMatiereCorps();
-        chargerResultatDeLaMatierePied();
-        // chargerDeliberation();
-        afficherResultatDeLaMatiere();
-        // reprendreLesson();
-    
-        $('#fermer_resultat').click(function() { masquerResultatDeLaMatiere(); });
-
-
-        function chargerResultatDeLaMatiereEntete() { 
-            $('#etudiant').html('<h1>'+prenom+' '+nom+'</h1> <span>ߟߊ߫</span>');
-            $('#resultat_titre').html('<h3>ߒߞߏ߫ ߛߓߍ ߘߋ߰ߟߌ ߝߏ߲߬ߝߏ߲</h3>'); 
-        }
-        function chargerResultatDeLaMatiereCorps() {
-
-            chargerResultatDApprentissageCorps();
-            chargerResultatDExerciceCorps();
-            chargerResultatDePratiqueCorps();
-            chargerResultatDEvaluationCorps();
-                
-            function chargerResultatDApprentissageCorps() {
-                if(lesson_1 != undefined) {
-
-                    chargerResultatHead();
-                    chargerResultatBody();
-                    chargerResultatFoot();
-                
-                    function chargerResultatHead() {
-                        if(Object.keys(lesson_1).length === 0) {
-                            $('#phase_d_apprentissage').text(matiere_nom_en_nko+' '+liste_de_phases[0][1]);
-                            $('#apprentissage_date').text(" - ");
-                            $('#apprentissage_heure').text(" - ");
-                        }
-                        if(Object.keys(lesson_1).length > 0) {
-
-                            let d = lesson_1.date;
-                            let an = d.split("-")[0];
-                            let lune = d.split("-")[1];
-                            let date = d.split("-")[2];
-                            let jour = date.split(" ")[0];
-                            let temps = date.split(" ")[1];
-                            let heure = temps.split(":")[0];
-                            let minute = temps.split(":")[1];
-                            
-                            $('#phase_d_apprentissage').text(matiere_nom_en_nko+' '+liste_de_phases[0][1]);
-                            $('#apprentissage_date').text(mois[parseInt(lune-1)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
-                            $('#apprentissage_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
-                        }
+                function chargerResultatHead() {
+                    if (Object.keys(lesson_1).length === 0) {
+                        $('#phase_d_apprentissage').text(matiere_nom_en_nko + ' ' + liste_de_phases[0][1]);
+                        $('#apprentissage_date').text(" - ");
+                        $('#apprentissage_heure').text(" - ");
                     }
-                    function chargerResultatBody() {
+                    if (Object.keys(lesson_1).length > 0) {
 
-                        if(Object.keys(lesson_1).length === 0) {
-                            $('#apprentissage_resultat_body').html(contenuVide()); 
-                            $('#total_d_apprentissage_question').html("");
-                            $('#total_d_apprentissage_reponse').html("");
-                            $('#total_d_apprentissage_point').html("");
-                        } 
-                        if(Object.keys(lesson_1).length > 0) {
-                            $("#resultat_d_apprentissage_corps").css("display","block");
+                        let d = lesson_1.date;
+                        let an = d.split("-")[0];
+                        let lune = d.split("-")[1];
+                        let date = d.split("-")[2];
+                        let jour = date.split(" ")[0];
+                        let temps = date.split(" ")[1];
+                        let heure = temps.split(":")[0];
+                        let minute = temps.split(":")[1];
 
-                            let lesson = JSON.parse(lesson_1.lesson);
-                            let apprentissage_resultat_body_html = resultatTableBodyHTML(lesson);
-
-                            $('#apprentissage_resultat_body').html(apprentissage_resultat_body_html);
-                            $('#total_d_apprentissage_question').html(parseIntNko(lesson.length));
-                            $('#total_d_apprentissage_reponse').html(parseIntNko(lesson.length));
-                            $('#total_d_apprentissage_point').html(parseIntNko(sommePoint(lesson)));
-                        }
-                    }
-                    function chargerResultatFoot() {
-                        if(Object.keys(lesson_1).length === 0) {
-                            $('#total_general_des_questions').text("");
-                            $('#total_general_des_bonnes_reponses').text("");
-                            $('#pourcentage_point').text("");
-                        }
-                        if(Object.keys(lesson_1).length > 0) {
-                        
-                            let lesson = JSON.parse(lesson_1.lesson);
-            
-                            let total_des_questions = parseIntNko(lesson.length);
-                            let total_des_points = parseIntNko(sommePoint(lesson));
-                            let pourcentage_des_points = '%'+parseIntNko(Math.floor(reverseIntNko(total_des_points)*100/reverseIntNko(total_des_questions)));
-                            
-                            $('#total_general_des_questions').text(total_des_questions);
-                            $('#total_general_des_bonnes_reponses').text(total_des_points);
-                            $('#pourcentage_point').text(pourcentage_des_points);
-                        }
+                        $('#phase_d_apprentissage').text(matiere_nom_en_nko + ' ' + liste_de_phases[0][1]);
+                        $('#apprentissage_date').text(mois[parseInt(lune - 1)] + ' ߕߟߋ߬ ' + parseIntNko(jour) + ' ߛߊ߲߭ ' + parseIntNko(an));
+                        $('#apprentissage_heure').text(parseIntNko(heure) + ' : ' + parseIntNko(minute));
                     }
                 }
-            }
-            function chargerResultatDExerciceCorps() {
-                if(lesson_2 != undefined) {
+                function chargerResultatBody() {
 
-                    chargerResultatHead();
-                    chargerResultatBody();
-
-                    function chargerResultatHead() {
-                        if(Object.keys(lesson_2).length === 0) {
-                            $('#phase_d_exercice').text(matiere_nom_en_nko+' '+liste_de_phases[1][1]);
-                            $('#exercice_date').text(" - ");
-                            $('#exercice_heure').text(" - ");
-                        }
-                        if(Object.keys(lesson_2).length != 0) {
-
-                            let d = lesson_2.date;
-                            let an = d.split("-")[0];
-                            let lune = d.split("-")[1];
-                            let date = d.split("-")[2];
-                            let jour = date.split(" ")[0];
-                            let temps = date.split(" ")[1];
-                            let heure = temps.split(":")[0];
-                            let minute = temps.split(":")[1];
-                            
-                            $('#phase_d_exercice').text(matiere_nom_en_nko+' '+liste_de_phases[1][1]);
-                            $('#exercice_date').text(mois[parseInt(lune-1)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
-                            $('#exercice_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
-                        }
+                    if (Object.keys(lesson_1).length === 0) {
+                        $('#apprentissage_resultat_body').html(contenuVide());
+                        $('#total_d_apprentissage_question').html("");
+                        $('#total_d_apprentissage_reponse').html("");
+                        $('#total_d_apprentissage_point').html("");
                     }
-                    function chargerResultatBody() {
-                        if(Object.keys(lesson_2).length === 0) {
-                            $('#exercice_resultat_body').html(contenuVide()); 
-                            $('#total_d_exercice_question').html("");
-                            $('#total_d_exercice_reponse').html("");
-                            $('#total_d_exercice_point').html("");
-                        }
-                        if(Object.keys(lesson_2).length != 0) {
-                                
-                            $("#resultat_d_exercice_corps").css("display","block");
+                    if (Object.keys(lesson_1).length > 0) {
+                        $("#resultat_d_apprentissage_corps").css("display", "block");
 
-                            let lesson = JSON.parse(lesson_2.lesson);
-                            let exercice_resultat_body_html = resultatTableBodyHTML(lesson);
+                        let lesson = JSON.parse(lesson_1.lesson);
+                        let apprentissage_resultat_body_html = resultatTableBodyHTML(lesson);
 
-                            $('#exercice_resultat_body').html(exercice_resultat_body_html);
-                            $('#total_d_exercice_question').html(parseIntNko(lesson.length));
-                            $('#total_d_exercice_reponse').html(parseIntNko(lesson.length));
-                            $('#total_d_exercice_point').html(parseIntNko(sommePoint(lesson)));
-                        }
+                        $('#apprentissage_resultat_body').html(apprentissage_resultat_body_html);
+                        $('#total_d_apprentissage_question').html(parseIntNko(lesson.length));
+                        $('#total_d_apprentissage_reponse').html(parseIntNko(lesson.length));
+                        $('#total_d_apprentissage_point').html(parseIntNko(sommePoint(lesson)));
                     }
                 }
-            }
-            function chargerResultatDePratiqueCorps() {
-                if(lesson_3 != undefined) {
-
-                    chargerResultatHead();
-                    chargerResultatBody();
-
-                    function chargerResultatHead() {
-                        if(Object.keys(lesson_3).length === 0) {
-                            $('#phase_de_revision').text(matiere_nom_en_nko+' '+liste_de_phases[2][1]);
-                            $('#revision_date').text(" - ");
-                            $('#revision_heure').text(" - ");
-                        }
-                        if(Object.keys(lesson_3).length != 0) {
-
-                            let d = lesson_3.date;
-                            let an = d.split("-")[0];
-                            let lune = d.split("-")[1];
-                            let date = d.split("-")[2];
-                            let jour = date.split(" ")[0];
-                            let temps = date.split(" ")[1];
-                            let heure = temps.split(":")[0];
-                            let minute = temps.split(":")[1];
-                        
-                            $('#phase_de_revision').text(matiere_nom_en_nko+' '+liste_de_phases[2][1]);
-                            $('#revision_date').text(mois[parseInt(lune-1)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
-                            $('#revision_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute));
-                        }
+                function chargerResultatFoot() {
+                    if (Object.keys(lesson_1).length === 0) {
+                        $('#total_general_des_questions').text("");
+                        $('#total_general_des_bonnes_reponses').text("");
+                        $('#pourcentage_point').text("");
                     }
-                    function chargerResultatBody() {
-                        
-                        if(Object.keys(lesson_3).length === 0) {
-                            $('#revision_resultat_body').html(contenuVide()); 
-                            $('#total_de_revision_question').html("");
-                            $('#total_de_revision_reponse').html("");
-                            $('#total_de_revision_point').html("");
-                        }
-                        if(Object.keys(lesson_3).length != 0) {
-                                
-                            $("#resultat_de_revision_corps").css("display","block");
+                    if (Object.keys(lesson_1).length > 0) {
 
-                            let lesson = JSON.parse(lesson_3.lesson);
-                            let revision_resultat_body_html = resultatTableBodyHTML(lesson);
+                        let lesson = JSON.parse(lesson_1.lesson);
 
-                            $('#revision_resultat_body').html(revision_resultat_body_html);
-                            $('#total_de_revision_question').html(parseIntNko(lesson.length));
-                            $('#total_de_revision_reponse').html(parseIntNko(lesson.length));
-                            $('#total_de_revision_point').html(parseIntNko(sommePoint(lesson))); 
-                        }
-                    }
-                }
-            }
-            function chargerResultatDEvaluationCorps() {
-                if(lesson_4 != undefined) {
+                        let total_des_questions = parseIntNko(lesson.length);
+                        let total_des_points = parseIntNko(sommePoint(lesson));
+                        let pourcentage_des_points = '%' + parseIntNko(Math.floor(reverseIntNko(total_des_points) * 100 / reverseIntNko(total_des_questions)));
 
-                    chargerResultatHead();
-                    chargerResultatBody();
-
-                    function chargerResultatHead() {
-                        if(Object.keys(lesson_4).length === 0) {
-                            $('#phase_d_evaluation').text(matiere_nom_en_nko+' '+liste_de_phases[3][1]);
-                            $('#evaluation_date').text(" - ");
-                            $('#evaluation_heure').text(" - ");
-                        }
-                        if(Object.keys(lesson_4).length != 0) {
-                        
-                            let d = lesson_4.date;
-                            let an = d.split("-")[0];
-                            let lune = d.split("-")[1];
-                            let date = d.split("-")[2];
-                            let jour = date.split(" ")[0];
-                            let temps = date.split(" ")[1];
-                            let heure = temps.split(":")[0];
-                            let minute = temps.split(":")[1];
-                            
-                            $('#phase_d_evaluation').text(matiere_nom_en_nko+' '+liste_de_phases[3][1]);
-                            $('#evaluation_date').text(mois[parseInt(lune-1)]+' ߕߟߋ߬ '+parseIntNko(jour)+' ߛߊ߲߭ '+parseIntNko(an));
-                            $('#evaluation_heure').text(parseIntNko(heure)+' : '+parseIntNko(minute)); 
-                        }
-                    }
-                    function chargerResultatBody() {
-                        if(Object.keys(lesson_4).length === 0) {
-                            $('#evaluation_resultat_body').html(contenuVide());
-                            $('#total_d_evaluation_question').html("");
-                            $('#total_d_evaluation_reponse').html("");
-                            $('#total_d_evaluation_point').html("");
-                        }
-                        if(Object.keys(lesson_4).length != 0) {
-                                
-                            $("#resultat_d_evaluation_corps").css("display","block");
-
-                            let lesson = JSON.parse(lesson_4.lesson);
-                            let evaluation_resultat_body_html = resultatTableBodyHTML(lesson);
-                            
-                            $('#evaluation_resultat_body').html(evaluation_resultat_body_html);
-                            $('#total_d_evaluation_question').html(parseIntNko(lesson.length));
-                            $('#total_d_evaluation_reponse').html(parseIntNko(lesson.length));
-                            $('#total_d_evaluation_point').html(parseIntNko(sommePoint(lesson))); 
-                        }
+                        $('#total_general_des_questions').text(total_des_questions);
+                        $('#total_general_des_bonnes_reponses').text(total_des_points);
+                        $('#pourcentage_point').text(pourcentage_des_points);
                     }
                 }
             }
         }
-        function chargerResultatDeLaMatierePied() {
- 
-            if(lesson_1 != undefined) lesson_1 = (Object.keys(lesson_1).length != 0) ? JSON.parse(lesson_1.lesson) : {};
-            if(lesson_2 != undefined) lesson_2 = (Object.keys(lesson_2).length != 0) ? JSON.parse(lesson_2.lesson) : {};
-            if(lesson_3 != undefined) lesson_3 = (Object.keys(lesson_3).length != 0) ? JSON.parse(lesson_3.lesson) : {};
-            if(lesson_4 != undefined) lesson_4 = (Object.keys(lesson_4).length != 0) ? JSON.parse(lesson_4.lesson) : {};
-            
-            let total_des_questions = totalDesQuestions();
-            let total_general_des_points = totalDesPoints();
-            let pourcentage_general_des_points = pourcentagePoint();
-       
-            $('#total_general_des_questions').text(total_des_questions);
-            $('#total_general_des_bonnes_reponses').text(total_general_des_points);
-            $('#pourcentage_general_des_points').text(pourcentage_general_des_points);
+        function chargerResultatDExerciceCorps() {
+            if (lesson_2 != undefined) {
 
-            function totalDesQuestions() {
-                let total_question = 0;  
-                let total_1 = (lesson_1.length == undefined) ? 0 : lesson_1.length;
-                let total_2 = (lesson_2.length == undefined) ? 0 : lesson_2.length;
-                let total_3 = (lesson_3.length == undefined) ? 0 : lesson_3.length;
-                let total_4 = (lesson_4.length == undefined) ? 0 : lesson_4.length;
+                chargerResultatHead();
+                chargerResultatBody();
 
-                total_question = total_1 + total_2 + total_3 + total_4;
-                total_question = (total_question === 0) ? "" : parseIntNko(total_question);
-                return total_question;
-            }
-            function totalDesPoints() {
-                let total_point = 0;
-                if(lesson_4 == undefined) total_point = sommePoint(lesson_1) + sommePoint(lesson_2) + sommePoint(lesson_3);
-                if(lesson_4 != undefined) total_point = sommePoint(lesson_1) + sommePoint(lesson_2) + sommePoint(lesson_3) + sommePoint(lesson_4); 
-                total_point = (total_point === 0) ? "" : parseIntNko(total_point);
-                return total_point;
-            }
-            function pourcentagePoint() {
-                let pourcentage_general_des_points = (total_general_des_points == "") ? "" : "%"+parseIntNko(Math.floor(reverseIntNko(total_general_des_points)*100/reverseIntNko(total_des_questions)));
-                return pourcentage_general_des_points;
+                function chargerResultatHead() {
+                    if (Object.keys(lesson_2).length === 0) {
+                        $('#phase_d_exercice').text(matiere_nom_en_nko + ' ' + liste_de_phases[1][1]);
+                        $('#exercice_date').text(" - ");
+                        $('#exercice_heure').text(" - ");
+                    }
+                    if (Object.keys(lesson_2).length != 0) {
+
+                        let d = lesson_2.date;
+                        let an = d.split("-")[0];
+                        let lune = d.split("-")[1];
+                        let date = d.split("-")[2];
+                        let jour = date.split(" ")[0];
+                        let temps = date.split(" ")[1];
+                        let heure = temps.split(":")[0];
+                        let minute = temps.split(":")[1];
+
+                        $('#phase_d_exercice').text(matiere_nom_en_nko + ' ' + liste_de_phases[1][1]);
+                        $('#exercice_date').text(mois[parseInt(lune - 1)] + ' ߕߟߋ߬ ' + parseIntNko(jour) + ' ߛߊ߲߭ ' + parseIntNko(an));
+                        $('#exercice_heure').text(parseIntNko(heure) + ' : ' + parseIntNko(minute));
+                    }
+                }
+                function chargerResultatBody() {
+                    if (Object.keys(lesson_2).length === 0) {
+                        $('#exercice_resultat_body').html(contenuVide());
+                        $('#total_d_exercice_question').html("");
+                        $('#total_d_exercice_reponse').html("");
+                        $('#total_d_exercice_point').html("");
+                    }
+                    if (Object.keys(lesson_2).length != 0) {
+
+                        $("#resultat_d_exercice_corps").css("display", "block");
+
+                        let lesson = JSON.parse(lesson_2.lesson);
+                        let exercice_resultat_body_html = resultatTableBodyHTML(lesson);
+
+                        $('#exercice_resultat_body').html(exercice_resultat_body_html);
+                        $('#total_d_exercice_question').html(parseIntNko(lesson.length));
+                        $('#total_d_exercice_reponse').html(parseIntNko(lesson.length));
+                        $('#total_d_exercice_point').html(parseIntNko(sommePoint(lesson)));
+                    }
+                }
             }
         }
-        function chargerDeliberation() {
-            matiere_nom_en_nko = $('#resultat_corps h3').text().split(" ")[0];
-            if(total_point < moyenne_d_evaluation) {
-                $('#deliberation').html('ߌ ߖߌߖߊ߬ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ '+matiere_nom_en_nko+' ߓߍ߬ߙߍ ߡߊ߫ ߤߊߟߌ߬ ߁߈ ߓߐ߫. ߏ߬ߘߐ߬߸ ߌ ߞߐߛߍ߬ߦߌ߬ ߦߊ߲߬ ߡߊ߫. <b id="reprendre">'+matiere_nom_en_nko+' ߞߍ߫ ߕߎ߲߯</b>');
-            }else{
-                $('#deliberation').html(
-                    'ߌ ߞߎߟߎ߲ߖߋ߫ <b>'+prenom+'</b>߸ ߌ ߟߊ߫ ߘߐ߬ߖߊ ߟߊ߫ '+matiere_nom_en_nko+' ߟߐ߲ ߠߊ߫ ߤߊ߲߯ '+$('#pourcentage_point').text()+
-                    '</b> ߟߊ߫. ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ '+lesson_suivante+'.<br/>'+
-                    'ߣߴߌ ߟߊ߫ ߓߍ߬ߙߍ ߡߴߌ ߥߛߊ߬߸ <b id="reprendre">'+matiere_nom_en_nko+' ߞߍ߫ ߕߎ߲߯</b><br/>'+
-                    'ߣߴߌ ߟߊ߫ ߓߍ߬ߙߍ ߞߵߌ ߥߛߊ߬߸ '+continu_sur_l_etape_suivante
-                );
+        function chargerResultatDePratiqueCorps() {
+            if (lesson_3 != undefined) {
+
+                chargerResultatHead();
+                chargerResultatBody();
+
+                function chargerResultatHead() {
+                    if (Object.keys(lesson_3).length === 0) {
+                        $('#phase_de_revision').text(matiere_nom_en_nko + ' ' + liste_de_phases[2][1]);
+                        $('#revision_date').text(" - ");
+                        $('#revision_heure').text(" - ");
+                    }
+                    if (Object.keys(lesson_3).length != 0) {
+
+                        let d = lesson_3.date;
+                        let an = d.split("-")[0];
+                        let lune = d.split("-")[1];
+                        let date = d.split("-")[2];
+                        let jour = date.split(" ")[0];
+                        let temps = date.split(" ")[1];
+                        let heure = temps.split(":")[0];
+                        let minute = temps.split(":")[1];
+
+                        $('#phase_de_revision').text(matiere_nom_en_nko + ' ' + liste_de_phases[2][1]);
+                        $('#revision_date').text(mois[parseInt(lune - 1)] + ' ߕߟߋ߬ ' + parseIntNko(jour) + ' ߛߊ߲߭ ' + parseIntNko(an));
+                        $('#revision_heure').text(parseIntNko(heure) + ' : ' + parseIntNko(minute));
+                    }
+                }
+                function chargerResultatBody() {
+
+                    if (Object.keys(lesson_3).length === 0) {
+                        $('#revision_resultat_body').html(contenuVide());
+                        $('#total_de_revision_question').html("");
+                        $('#total_de_revision_reponse').html("");
+                        $('#total_de_revision_point').html("");
+                    }
+                    if (Object.keys(lesson_3).length != 0) {
+
+                        $("#resultat_de_revision_corps").css("display", "block");
+
+                        let lesson = JSON.parse(lesson_3.lesson);
+                        let revision_resultat_body_html = resultatTableBodyHTML(lesson);
+
+                        $('#revision_resultat_body').html(revision_resultat_body_html);
+                        $('#total_de_revision_question').html(parseIntNko(lesson.length));
+                        $('#total_de_revision_reponse').html(parseIntNko(lesson.length));
+                        $('#total_de_revision_point').html(parseIntNko(sommePoint(lesson)));
+                    }
+                }
             }
         }
-        function masquerResultatDeLaMatiere() { masquer($('.resultat_container')); }
-        function afficherResultatDeLaMatiere() { 
-            if(niveau < 3) $("#resultat_de_revision_corps").css("display","none");
-            else $("#resultat_de_revision_corps").css("display","block");
-            setTimeout(() => { afficher($('.resultat_container')); }, 3000);
+        function chargerResultatDEvaluationCorps() {
+            if (lesson_4 != undefined) {
+
+                chargerResultatHead();
+                chargerResultatBody();
+
+                function chargerResultatHead() {
+                    if (Object.keys(lesson_4).length === 0) {
+                        $('#phase_d_evaluation').text(matiere_nom_en_nko + ' ' + liste_de_phases[3][1]);
+                        $('#evaluation_date').text(" - ");
+                        $('#evaluation_heure').text(" - ");
+                    }
+                    if (Object.keys(lesson_4).length != 0) {
+
+                        let d = lesson_4.date;
+                        let an = d.split("-")[0];
+                        let lune = d.split("-")[1];
+                        let date = d.split("-")[2];
+                        let jour = date.split(" ")[0];
+                        let temps = date.split(" ")[1];
+                        let heure = temps.split(":")[0];
+                        let minute = temps.split(":")[1];
+
+                        $('#phase_d_evaluation').text(matiere_nom_en_nko + ' ' + liste_de_phases[3][1]);
+                        $('#evaluation_date').text(mois[parseInt(lune - 1)] + ' ߕߟߋ߬ ' + parseIntNko(jour) + ' ߛߊ߲߭ ' + parseIntNko(an));
+                        $('#evaluation_heure').text(parseIntNko(heure) + ' : ' + parseIntNko(minute));
+                    }
+                }
+                function chargerResultatBody() {
+                    if (Object.keys(lesson_4).length === 0) {
+                        $('#evaluation_resultat_body').html(contenuVide());
+                        $('#total_d_evaluation_question').html("");
+                        $('#total_d_evaluation_reponse').html("");
+                        $('#total_d_evaluation_point').html("");
+                    }
+                    if (Object.keys(lesson_4).length != 0) {
+
+                        $("#resultat_d_evaluation_corps").css("display", "block");
+
+                        let lesson = JSON.parse(lesson_4.lesson);
+                        let evaluation_resultat_body_html = resultatTableBodyHTML(lesson);
+
+                        $('#evaluation_resultat_body').html(evaluation_resultat_body_html);
+                        $('#total_d_evaluation_question').html(parseIntNko(lesson.length));
+                        $('#total_d_evaluation_reponse').html(parseIntNko(lesson.length));
+                        $('#total_d_evaluation_point').html(parseIntNko(sommePoint(lesson)));
+                    }
+                }
+            }
         }
-        function reprendreLesson() { $('#reprendre').click(() => { raffraichirLaPage(); }); }
     }
-    function resultatGeneral(datas) {
+    function chargerResultatDeLaMatierePied() {
 
-        let matiere_1=datas[0], matiere_2=datas[1], matiere_3=datas[2], matiere_4=datas[3];
+        if (lesson_1 != undefined) lesson_1 = (Object.keys(lesson_1).length != 0) ? JSON.parse(lesson_1.lesson) : {};
+        if (lesson_2 != undefined) lesson_2 = (Object.keys(lesson_2).length != 0) ? JSON.parse(lesson_2.lesson) : {};
+        if (lesson_3 != undefined) lesson_3 = (Object.keys(lesson_3).length != 0) ? JSON.parse(lesson_3.lesson) : {};
+        if (lesson_4 != undefined) lesson_4 = (Object.keys(lesson_4).length != 0) ? JSON.parse(lesson_4.lesson) : {};
 
-     /* Affichage par défaut */
-        $("#details_du_resultat").css("display","block"); 
-        $("#recapitulatif_du_resultat").css("display","none"); 
-        
-     /* Affichage par défaut */
+        let total_des_questions = totalDesQuestions();
+        let total_general_des_points = totalDesPoints();
+        let pourcentage_general_des_points = pourcentagePoint();
+
+        $('#total_general_des_questions').text(total_des_questions);
+        $('#total_general_des_bonnes_reponses').text(total_general_des_points);
+        $('#pourcentage_general_des_points').text(pourcentage_general_des_points);
+
+        function totalDesQuestions() {
+            let total_question = 0;
+            let total_1 = (lesson_1.length == undefined) ? 0 : lesson_1.length;
+            let total_2 = (lesson_2.length == undefined) ? 0 : lesson_2.length;
+            let total_3 = (lesson_3.length == undefined) ? 0 : lesson_3.length;
+            let total_4 = (lesson_4.length == undefined) ? 0 : lesson_4.length;
+
+            total_question = total_1 + total_2 + total_3 + total_4;
+            total_question = (total_question === 0) ? "" : parseIntNko(total_question);
+            return total_question;
+        }
+        function totalDesPoints() {
+            let total_point = 0;
+            if (lesson_4 == undefined) total_point = sommePoint(lesson_1) + sommePoint(lesson_2) + sommePoint(lesson_3);
+            if (lesson_4 != undefined) total_point = sommePoint(lesson_1) + sommePoint(lesson_2) + sommePoint(lesson_3) + sommePoint(lesson_4);
+            total_point = (total_point === 0) ? "" : parseIntNko(total_point);
+            return total_point;
+        }
+        function pourcentagePoint() {
+            let pourcentage_general_des_points = (total_general_des_points == "") ? "" : "%" + parseIntNko(Math.floor(reverseIntNko(total_general_des_points) * 100 / reverseIntNko(total_des_questions)));
+            return pourcentage_general_des_points;
+        }
+    }
+    function chargerDeliberation() {
+        matiere_nom_en_nko = $('#resultat_corps h3').text().split(" ")[0];
+        if (total_point < moyenne_d_evaluation) {
+            $('#deliberation').html('ߌ ߖߌߖߊ߬ <b>' + prenom + '</b>߸ ߌ ߟߊ߫ ' + matiere_nom_en_nko + ' ߓߍ߬ߙߍ ߡߊ߫ ߤߊߟߌ߬ ߁߈ ߓߐ߫. ߏ߬ߘߐ߬߸ ߌ ߞߐߛߍ߬ߦߌ߬ ߦߊ߲߬ ߡߊ߫. <b id="reprendre">' + matiere_nom_en_nko + ' ߞߍ߫ ߕߎ߲߯</b>');
+        } else {
+            $('#deliberation').html(
+                'ߌ ߞߎߟߎ߲ߖߋ߫ <b>' + prenom + '</b>߸ ߌ ߟߊ߫ ߘߐ߬ߖߊ ߟߊ߫ ' + matiere_nom_en_nko + ' ߟߐ߲ ߠߊ߫ ߤߊ߲߯ ' + $('#pourcentage_point').text() +
+                '</b> ߟߊ߫. ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ ' + lesson_suivante + '.<br/>' +
+                'ߣߴߌ ߟߊ߫ ߓߍ߬ߙߍ ߡߴߌ ߥߛߊ߬߸ <b id="reprendre">' + matiere_nom_en_nko + ' ߞߍ߫ ߕߎ߲߯</b><br/>' +
+                'ߣߴߌ ߟߊ߫ ߓߍ߬ߙߍ ߞߵߌ ߥߛߊ߬߸ ' + continu_sur_l_etape_suivante
+            );
+        }
+    }
+    function masquerResultatDeLaMatiere() { masquer($('.resultat_container')); }
+    function afficherResultatDeLaMatiere() {
+        if (niveau < 3) $("#resultat_de_revision_corps").css("display", "none");
+        else $("#resultat_de_revision_corps").css("display", "block");
+        setTimeout(() => { afficher($('.resultat_container')); }, 3000);
+    }
+    function reprendreLesson() { $('#reprendre').click(() => { raffraichirLaPage(); }); }
+}
+function resultatGeneral(datas) {
+
+    let matiere_1 = datas[0], matiere_2 = datas[1], matiere_3 = datas[2], matiere_4 = datas[3];
+
+    /* Affichage par défaut */
+    $("#details_du_resultat").css("display", "block");
+    $("#recapitulatif_du_resultat").css("display", "none");
+
+    /* Affichage par défaut */
+    resultatDeLaMatiere(matiere_1);
+    $("#resultat_matieres_liste ul li").removeClass("li_actif");
+    $("#resultat_matieres_liste ul li:nth-child(1)").addClass("li_actif");
+
+    /* Affichage presonnalisé */
+    $("#resultat_matieres_liste ul li:nth-child(1)").click(() => {
+        $("#details_du_resultat").css("display", "block");
+        $("#recapitulatif_du_resultat").css("display", "none");
+
         resultatDeLaMatiere(matiere_1);
         $("#resultat_matieres_liste ul li").removeClass("li_actif");
         $("#resultat_matieres_liste ul li:nth-child(1)").addClass("li_actif");
+    });
 
-     /* Affichage presonnalisé */
-        $("#resultat_matieres_liste ul li:nth-child(1)").click(() => { 
-            $("#details_du_resultat").css("display","block"); 
-            $("#recapitulatif_du_resultat").css("display","none"); 
+    $("#resultat_matieres_liste ul li:nth-child(2)").click(() => {
+        $("#details_du_resultat").css("display", "block");
+        $("#recapitulatif_du_resultat").css("display", "none");
 
-            resultatDeLaMatiere(matiere_1); 
-            $("#resultat_matieres_liste ul li").removeClass("li_actif");
-            $("#resultat_matieres_liste ul li:nth-child(1)").addClass("li_actif"); 
-        });
+        resultatDeLaMatiere(matiere_2);
+        $("#resultat_matieres_liste ul li").removeClass("li_actif");
+        $("#resultat_matieres_liste ul li:nth-child(2)").addClass("li_actif");
+    });
 
-        $("#resultat_matieres_liste ul li:nth-child(2)").click(() => { 
-            $("#details_du_resultat").css("display","block"); 
-            $("#recapitulatif_du_resultat").css("display","none"); 
+    $("#resultat_matieres_liste ul li:nth-child(3)").click(() => {
+        $("#details_du_resultat").css("display", "block");
+        $("#recapitulatif_du_resultat").css("display", "none");
 
-            resultatDeLaMatiere(matiere_2); 
-            $("#resultat_matieres_liste ul li").removeClass("li_actif");
-            $("#resultat_matieres_liste ul li:nth-child(2)").addClass("li_actif"); 
-        });
+        resultatDeLaMatiere(matiere_3);
+        $("#resultat_matieres_liste ul li").removeClass("li_actif");
+        $("#resultat_matieres_liste ul li:nth-child(3)").addClass("li_actif");
+    });
 
-        $("#resultat_matieres_liste ul li:nth-child(3)").click(() => { 
-            $("#details_du_resultat").css("display","block"); 
-            $("#recapitulatif_du_resultat").css("display","none"); 
+    $("#resultat_matieres_liste ul li:nth-child(4)").click(() => {
+        $("#details_du_resultat").css("display", "block");
+        $("#recapitulatif_du_resultat").css("display", "none");
 
-            resultatDeLaMatiere(matiere_3); 
-            $("#resultat_matieres_liste ul li").removeClass("li_actif");
-            $("#resultat_matieres_liste ul li:nth-child(3)").addClass("li_actif"); 
-        });
+        resultatDeLaMatiere(matiere_4);
+        $("#resultat_matieres_liste ul li").removeClass("li_actif");
+        $("#resultat_matieres_liste ul li:nth-child(4)").addClass("li_actif");
+    });
 
-        $("#resultat_matieres_liste ul li:nth-child(4)").click(() => { 
-            $("#details_du_resultat").css("display","block"); 
-            $("#recapitulatif_du_resultat").css("display","none"); 
+    $("#resultat_matieres_liste ul li:nth-child(5)").click(() => {
+        chargerRecapitulatifDuResultat();
+        afficherRecapitulatifDuResultat();
+    });
 
-            resultatDeLaMatiere(matiere_4); 
-            $("#resultat_matieres_liste ul li").removeClass("li_actif");
-            $("#resultat_matieres_liste ul li:nth-child(4)").addClass("li_actif"); 
-        });
+    function chargerRecapitulatifDuResultat() {
 
-        $("#resultat_matieres_liste ul li:nth-child(5)").click(() => { 
-            chargerRecapitulatifDuResultat();
-            afficherRecapitulatifDuResultat();
-        });
+        let tr2_td = $("#recapitulatif_du_resultat tr:nth-child(2) td");
+        let tr3_td = $("#recapitulatif_du_resultat tr:nth-child(3) td");
+        let tr4_td = $("#recapitulatif_du_resultat tr:nth-child(4) td");
 
-        function chargerRecapitulatifDuResultat() {
-                
-            let tr2_td = $("#recapitulatif_du_resultat tr:nth-child(2) td");
-            let tr3_td = $("#recapitulatif_du_resultat tr:nth-child(3) td");
-            let tr4_td = $("#recapitulatif_du_resultat tr:nth-child(4) td");
-            
-            let tr5_td = $("#recapitulatif_du_resultat tr:nth-child(5) td");
-            let tr6_td = $("#recapitulatif_du_resultat tr:nth-child(6) td");
-            let tr7_td = $("#recapitulatif_du_resultat tr:nth-child(7) td");
-            let tr8_td = $("#recapitulatif_du_resultat tr:nth-child(8) td");
-            
-            let tr9_td = $("#recapitulatif_du_resultat tr:nth-child(9) td");
-            let tr10_td = $("#recapitulatif_du_resultat tr:nth-child(10) td");
-            let tr11_td = $("#recapitulatif_du_resultat tr:nth-child(11) td");
-            let tr12_td = $("#recapitulatif_du_resultat tr:nth-child(12) td");
-            
-            let tr13_td = $("#recapitulatif_du_resultat tr:nth-child(13) td");
-            let tr14_td = $("#recapitulatif_du_resultat tr:nth-child(14) td");
-            let tr15_td = $("#recapitulatif_du_resultat tr:nth-child(15) td");
-            let tr16_td = $("#recapitulatif_du_resultat tr:nth-child(16) td");
+        let tr5_td = $("#recapitulatif_du_resultat tr:nth-child(5) td");
+        let tr6_td = $("#recapitulatif_du_resultat tr:nth-child(6) td");
+        let tr7_td = $("#recapitulatif_du_resultat tr:nth-child(7) td");
+        let tr8_td = $("#recapitulatif_du_resultat tr:nth-child(8) td");
 
-            recapitulatifDuResultat1(tr2_td, tr3_td, tr4_td, matiere_1);
-            recapitulatifDuResultat1(tr5_td, tr6_td, tr7_td, matiere_2);
-            recapitulatifDuResultat2(tr8_td, tr9_td, tr10_td, tr11_td, matiere_3);
-            recapitulatifDuResultat2(tr12_td, tr13_td, tr14_td, tr15_td, matiere_4);
-        }
-        function afficherRecapitulatifDuResultat() {
-            $("#details_du_resultat").css("display","none"); 
-            $("#recapitulatif_du_resultat").css("display","block"); 
+        let tr9_td = $("#recapitulatif_du_resultat tr:nth-child(9) td");
+        let tr10_td = $("#recapitulatif_du_resultat tr:nth-child(10) td");
+        let tr11_td = $("#recapitulatif_du_resultat tr:nth-child(11) td");
+        let tr12_td = $("#recapitulatif_du_resultat tr:nth-child(12) td");
 
-            $("#resultat_matieres_liste ul li").removeClass("li_actif");
-            $("#resultat_matieres_liste ul li:nth-child(5)").addClass("li_actif"); 
-        }
+        let tr13_td = $("#recapitulatif_du_resultat tr:nth-child(13) td");
+        let tr14_td = $("#recapitulatif_du_resultat tr:nth-child(14) td");
+        let tr15_td = $("#recapitulatif_du_resultat tr:nth-child(15) td");
+        let tr16_td = $("#recapitulatif_du_resultat tr:nth-child(16) td");
+
+        recapitulatifDuResultat1(tr2_td, tr3_td, tr4_td, matiere_1);
+        recapitulatifDuResultat1(tr5_td, tr6_td, tr7_td, matiere_2);
+        recapitulatifDuResultat2(tr8_td, tr9_td, tr10_td, tr11_td, matiere_3);
+        recapitulatifDuResultat2(tr12_td, tr13_td, tr14_td, tr15_td, matiere_4);
     }
-    function resultatTableBodyHTML(memoire) {
+    function afficherRecapitulatifDuResultat() {
+        $("#details_du_resultat").css("display", "none");
+        $("#recapitulatif_du_resultat").css("display", "block");
 
-        let html = "";
-        if(memoire != undefined) {
-            html +=  '<tr class="thin">';
-            for(let j=0; j<memoire.length; j++) {
-                let ordre = (j === 0) ? parseIntNko(j+1)+'߭' : parseIntNko(j+1)+'߲';
-                html += '<td>'+ordre+'</td>';
-            }
-            html +=  '</tr>';
+        $("#resultat_matieres_liste ul li").removeClass("li_actif");
+        $("#resultat_matieres_liste ul li:nth-child(5)").addClass("li_actif");
+    }
+}
+function resultatTableBodyHTML(memoire) {
 
-            html +=  '<tr class="bold">';
-            for(let k=0; k<memoire.length; k++) { 
-                if(memoire[k][0][0].length >= 3) html += '<td>'+memoire[k][0][0]+'</td>';
-                if(memoire[k][0][0].length == 1) html += '<td>'+memoire[k][0]+'</td>';
-            }
-            html +=  '</tr>';
-
-            html +=  '<tr class="bold">';
-            for(let l=0; l<memoire.length; l++) { 
-                if(memoire[l][0][0].length >= 2) {
-                    let td_1_value = (typeof(memoire[l][1][1]) == "number") ? parseIntNko(memoire[l][1][1]) : memoire[l][1][1];
-                    html += '<td>'+td_1_value+'</td>'; 
-                }
-                if(memoire[l][0][0].length == 1) {
-                    let td_2_value = (typeof(memoire[l][1]) == "number") ? parseIntNko(memoire[l][1]) : memoire[l][1];
-                    html += '<td>'+td_2_value+'</td>'; 
-                }
-            }
-            html +=  '</tr>';
-
-            html +=  '<tr class="bold">';
-            for(let m=0; m<memoire.length; m++) { 
-                if(memoire[m][0][0].length >= 2) { html += '<td>'+parseIntNko(memoire[m][1][2])+'</td>'; }
-                if(memoire[m][0][0].length == 1) { html += '<td>'+parseIntNko(memoire[m][2])+'</td>'; }
-            }
-            html +=  '</tr>';
+    let html = "";
+    if (memoire != undefined) {
+        html += '<tr class="thin">';
+        for (let j = 0; j < memoire.length; j++) {
+            let ordre = (j === 0) ? parseIntNko(j + 1) + '߭' : parseIntNko(j + 1) + '߲';
+            html += '<td>' + ordre + '</td>';
         }
+        html += '</tr>';
 
-        return html;
-    }
-    function retirerLeCaractere(caracteres_selectionnees,caractere) {
-        let caractere_index = caracteres_selectionnees.indexOf(caractere);
-        if(caractere_index != -1) { caracteres_selectionnees.splice(caractere_index,1); }
-    }
-    function retourALaPageDAccueil() { window.location.replace("/kouroukan/index.php"); }
-    function reverseIntNko(nombre_a_convertir){
-        var nombre_converti = [];
-        
-        for(i=0;i<nombre_a_convertir.length;i++){
-            nombre_converti[nombre_converti.length] = chiffres_latins[ chiffres.indexOf(nombre_a_convertir[i]) ];
+        html += '<tr class="bold">';
+        for (let k = 0; k < memoire.length; k++) {
+            if (memoire[k][0][0].length >= 3) html += '<td>' + memoire[k][0][0] + '</td>';
+            if (memoire[k][0][0].length == 1) html += '<td>' + memoire[k][0] + '</td>';
         }
-        nombre_converti = nombre_converti.join('');
-        nombre_converti = parseInt(nombre_converti);
-        
-        return nombre_converti;
+        html += '</tr>';
+
+        html += '<tr class="bold">';
+        for (let l = 0; l < memoire.length; l++) {
+            if (memoire[l][0][0].length >= 2) {
+                let td_1_value = (typeof (memoire[l][1][1]) == "number") ? parseIntNko(memoire[l][1][1]) : memoire[l][1][1];
+                html += '<td>' + td_1_value + '</td>';
+            }
+            if (memoire[l][0][0].length == 1) {
+                let td_2_value = (typeof (memoire[l][1]) == "number") ? parseIntNko(memoire[l][1]) : memoire[l][1];
+                html += '<td>' + td_2_value + '</td>';
+            }
+        }
+        html += '</tr>';
+
+        html += '<tr class="bold">';
+        for (let m = 0; m < memoire.length; m++) {
+            if (memoire[m][0][0].length >= 2) { html += '<td>' + parseIntNko(memoire[m][1][2]) + '</td>'; }
+            if (memoire[m][0][0].length == 1) { html += '<td>' + parseIntNko(memoire[m][2]) + '</td>'; }
+        }
+        html += '</tr>';
     }
+
+    return html;
+}
+function retirerLeCaractere(caracteres_selectionnees, caractere) {
+    let caractere_index = caracteres_selectionnees.indexOf(caractere);
+    if (caractere_index != -1) { caracteres_selectionnees.splice(caractere_index, 1); }
+}
+function retourALaPageDAccueil() { window.location.replace("/kouroukan/index.php"); }
+function reverseIntNko(nombre_a_convertir) {
+    var nombre_converti = [];
+
+    for (i = 0; i < nombre_a_convertir.length; i++) {
+        nombre_converti[nombre_converti.length] = chiffres_latins[chiffres.indexOf(nombre_a_convertir[i])];
+    }
+    nombre_converti = nombre_converti.join('');
+    nombre_converti = parseInt(nombre_converti);
+
+    return nombre_converti;
+}
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
-	
-    
-    function secouer(element) { 
-        element.addClass('clignotant'); 
-        setTimeout(function() { 
-            element.removeClass('clignotant');
-            indexer($('p:nth-child(1)',element));
-        }, 1200);
-    }
-    function selectionDeTr(tr) {
-        tr.siblings().unwrap();
-        $('#traducteur').remove();
-        tr.wrap('<div id="tr_actif"></div>');
-    }
-    function selectionnerLeCaractere(caractere) {
-        $.each($("#caracteres_container span"), function() {
-            let caractere_actif = $(this).text();
-            if(caractere == caractere_actif) { $(this).click(); }
-        });
-    }
-    function selectionnerLesConsonnes(consonne) {
-        $.each($("#consonnes_container span"), function() {
-            let consonne_actif = $(this).text();
-            if(consonne == consonne_actif) { $(this).click(); }
-        });
-    }
-    function selectionnerLesTons(ton) {
-        $.each($("#tons_container span"), function() {
-            let ton_actif = $(this).text();
-            if(ton == ton_actif) { $(this).click(); }
-        });
-    }
-    function selectionnerLesVoyelles(voyelle) {
-        $.each($("#voyelles_container span"), function() {
-            let voyelle_active = $(this).text();
-            if(voyelle == voyelle_active) $(this).click();
-        });
-    }
-    function sendLessonDataToDB(lesson_phase,lesson_data) {
 
-        var id_client = JSON.parse(sessionStorage.getItem('id_client'));
-        var matiere = lesson_phase.split("_")[0];
-        var niveau = JSON.parse(sessionStorage.getItem('niveau'));
-        var phase = lesson_phase;
-        var lesson = JSON.stringify(lesson_data);
-        var note = pourcentagePoint(lesson_data);
 
-        const data_to_send = new URLSearchParams({
-            id_client : id_client,
-            matiere : matiere,
-            niveau : niveau,
-            phase : phase,
-            lesson : lesson,
-            note : note
-        }); 
+function secouer(element) {
+    element.addClass('clignotant');
+    setTimeout(function () {
+        element.removeClass('clignotant');
+        indexer($('p:nth-child(1)', element));
+    }, 1200);
+}
+function selectionDeTr(tr) {
+    tr.siblings().unwrap();
+    $('#traducteur').remove();
+    tr.wrap('<div id="tr_actif"></div>');
+}
+function selectionnerLeCaractere(caractere) {
+    $.each($("#caracteres_container span"), function () {
+        let caractere_actif = $(this).text();
+        if (caractere == caractere_actif) { $(this).click(); }
+    });
+}
+function selectionnerLesConsonnes(consonne) {
+    $.each($("#consonnes_container span"), function () {
+        let consonne_actif = $(this).text();
+        if (consonne == consonne_actif) { $(this).click(); }
+    });
+}
+function selectionnerLesTons(ton) {
+    $.each($("#tons_container span"), function () {
+        let ton_actif = $(this).text();
+        if (ton == ton_actif) { $(this).click(); }
+    });
+}
+function selectionnerLesVoyelles(voyelle) {
+    $.each($("#voyelles_container span"), function () {
+        let voyelle_active = $(this).text();
+        if (voyelle == voyelle_active) $(this).click();
+    });
+}
+function sendLessonDataToDB(lesson_phase, lesson_data) {
 
-        fetch("/kouroukan/php/actions.php", {
-            method: "POST",
-            body: data_to_send
-        })
+    var id_client = JSON.parse(sessionStorage.getItem('id_client'));
+    var matiere = lesson_phase.split("_")[0];
+    var niveau = JSON.parse(sessionStorage.getItem('niveau'));
+    var phase = lesson_phase;
+    var lesson = JSON.stringify(lesson_data);
+    var note = pourcentagePoint(lesson_data);
+
+    const data_to_send = new URLSearchParams({
+        id_client: id_client,
+        matiere: matiere,
+        niveau: niveau,
+        phase: phase,
+        lesson: lesson,
+        note: note
+    });
+
+    fetch("/kouroukan/php/actions.php", {
+        method: "POST",
+        body: data_to_send
+    })
         .then(response => response.text())
-        .catch(error => console.log(error));  
+        .catch(error => console.log(error));
+}
+function sexeDEtudiant() {
+    let sexe = JSON.parse(sessionStorage.getItem("sexe"));
+    switch (sexe) {
+        case "ߗߍ߭": sexe = "ߗߍ"; break;
+        case "ߡߎ߬ߛߏ": sexe = "ߡߎߛߏ"; break;
     }
-    function sexeDEtudiant() {
-        let sexe = JSON.parse(sessionStorage.getItem("sexe"));
-        switch(sexe) {
-            case "ߗߍ߭" : sexe = "ߗߍ"; break;
-            case "ߡߎ߬ߛߏ" : sexe = "ߡߎߛߏ"; break;
-        }
-        return sexe;
-    }
-    function sommePoint(memoire) {
-        let html = 0;
-        if(memoire != undefined) {
-            for(let i=0; i<memoire.length; i++) {
-                if(memoire[i][0][0].length == 1) html += memoire[i][2];
-                if(memoire[i][0][0].length >= 2) html += memoire[i][1][2];
-            }
-        } 
-        return html;
-    }
-	function softDisplay() {
-	    var element = $('.soft_display');
-	    var elements_secondaires = element.children();
-	    
-	   // alert( elements_secondaires ); 
-	}
-    function styleResponsiveDuTableauParlante() {
-        let niveau = JSON.parse(sessionStorage.getItem("niveau"));
-        if(niveau == 2) {
-            if($(".table_parlante").height() < 112) {
-                let m = 96 - ($(".table_parlante").height())/2;
-                $(".table_parlante").css({"margin":m+"px auto"});
-            }
+    return sexe;
+}
+function sommePoint(memoire) {
+    let html = 0;
+    if (memoire != undefined) {
+        for (let i = 0; i < memoire.length; i++) {
+            if (memoire[i][0][0].length == 1) html += memoire[i][2];
+            if (memoire[i][0][0].length >= 2) html += memoire[i][1][2];
         }
     }
-    function syllabesApprentisageDataMemo(datas) {
+    return html;
+}
+function softDisplay() {
+    var element = $('.soft_display');
+    var elements_secondaires = element.children();
 
-        if(datas.length === 0) return;
-        let sad = [];
+    // alert( elements_secondaires ); 
+}
+function syllabesApprentisageDataMemo(datas) {
 
-        for (let i = 0; i < datas[0].length; i++) {
-            let phase = datas[0][i].phase;
-            if(phase == "syllabes_apprentissage") { sad = JSON.parse(datas[0][i].lesson); }
-        }
+    if (datas.length === 0) return;
+    let sad = [];
 
-        return sad;
+    for (let i = 0; i < datas[0].length; i++) {
+        let phase = datas[0][i].phase;
+        if (phase == "syllabes_apprentissage") { sad = JSON.parse(datas[0][i].lesson); }
     }
-    function syllabesExerciceDataMemo(datas) {
-        
-        if(datas.length === 0) return;
-        let sed = [];
 
-        for (let j = 0; j < datas[0].length; j++) {
-            let phase = datas[0][j].phase;
-            if(phase == "syllabes_exercice") { sedpedm = JSON.parse(datas[0][j].lesson); }
-        }
+    return sad;
+}
+function syllabesExerciceDataMemo(datas) {
 
-        return sed;
+    if (datas.length === 0) return;
+    let sed = [];
+
+    for (let j = 0; j < datas[0].length; j++) {
+        let phase = datas[0][j].phase;
+        if (phase == "syllabes_exercice") { sedpedm = JSON.parse(datas[0][j].lesson); }
     }
-    function syllabesEvaluationDataMemo(datas) {
-        
-        if(datas.length === 0) return;
-        let s_e_d = [];
 
-        for (let k = 0; k < datas[0].length; k++) {
-            let phase = datas[0][k].phase;
-            if(phase == "syllabes_revision") { s_e_d = JSON.parse(datas[0][k].lesson); }
-            
-        }
-        
-        return s_e_d;;
+    return sed;
+}
+function syllabesEvaluationDataMemo(datas) {
+
+    if (datas.length === 0) return;
+    let s_e_d = [];
+
+    for (let k = 0; k < datas[0].length; k++) {
+        let phase = datas[0][k].phase;
+        if (phase == "syllabes_revision") { s_e_d = JSON.parse(datas[0][k].lesson); }
+
     }
+
+    return s_e_d;;
+}
+function syllabesMelanges(syllabes) {
+    let melange = [];
+    syllabes.forEach(element => {
+        let syllabe_tonifie = element;
+        let syllabe_non_tonifie = element[0]+element[1];
+        melange.push(syllabe_tonifie);
+        melange.push(syllabe_non_tonifie);
+    });
+    melange = malaxer(melange);
+    return melange;
+}
+function styleResponsiveDuTableauParlante() {
+    let niveau = JSON.parse(sessionStorage.getItem("niveau"));
+    if (niveau == 2) {
+        if ($(".table_parlante").height() < 112) {
+            let m = 96 - ($(".table_parlante").height()) / 2;
+            $(".table_parlante").css({ "margin": m + "px auto" });
+        }
+    }
+}
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
 
-    function tableau2DVide(tableau) {
+function tableau2DVide(tableau) {
 
-        let element_ln = 0;
-        tableau.forEach(element => {
-            if(element != undefined) element_ln += element.length;
-        });
-        if(element_ln === 0) { return true; }else{ return false; }
+    let element_ln = 0;
+    tableau.forEach(element => {
+        if (element != undefined) element_ln += element.length;
+    });
+    if (element_ln === 0) { return true; } else { return false; }
+}
+function terminaisonDeSyllabe(syllabe) {
+
+    if (syllabe == undefined) return false;
+    let terminaison = "";
+
+    if (tons.indexOf(syllabe[syllabe.length - 1]) != -1) if (voyelles.indexOf(syllabe[syllabe.length - 2]) != -1) {
+        terminaison = syllabe[syllabe.length - 2] + syllabe[syllabe.length - 1]
     }
-    function terminaisonDeSyllabe(syllabe) {
+    if (voyelles.indexOf(syllabe[syllabe.length - 1]) != -1) if (consonnes.indexOf(syllabe[syllabe.length - 2]) != -1) {
+        terminaison = syllabe[syllabe.length - 1]
+    }
+    if (nasalisations.indexOf(syllabe[syllabe.length - 1]) != -1) if (voyelles.indexOf(syllabe[syllabe.length - 2]) != -2) if (consonnes.indexOf(syllabe[syllabe.length - 3]) != -1) {
+        terminaison = syllabe[syllabe.length - 2] + syllabe[syllabe.length - 1]
+    }
+    if (nasalisations.indexOf(syllabe[syllabe.length - 1]) != -1) if (tons.indexOf(syllabe[syllabe.length - 2]) != -2) if (voyelles.indexOf(syllabe[syllabe.length - 3]) != -1) {
+        terminaison = syllabe[syllabe.length - 3] + syllabe[syllabe.length - 2] + syllabe[syllabe.length - 1]
+    }
 
-        if(syllabe == undefined) return false;
-        let terminaison = "";
+    return terminaison;
+}
+function togglePanneauDesConsonnes() {
 
-        if(tons.indexOf(syllabe[syllabe.length-1]) != -1) if(voyelles.indexOf(syllabe[syllabe.length-2]) != -1) {
-            terminaison = syllabe[syllabe.length-2]+syllabe[syllabe.length-1]
+    let panneau_height = $("#panneaux").height();
+
+    $("#afficheur_de_panneau").click(function (e) {
+        e.stopImmediatePropagation();
+        $(this).removeClass('indicateur');
+        masquerNotification();
+        if (panneau_height == 0) {
+            montrerPanneauDesCaracteres();
+            ecris("apprentissage_notification_corps", "ߛߌ߬ߙߕߊ߬ ߞߋߟߋ߲߫ ߥߟߊ ߛߌߦߊߡߊ߲߫ ߛߎߥߊ߲ߘߌ߫߸ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߡߍ߲ ߠߎ߬ ߜߋ߲߭ ߠߎ߬ ߘߋ߲߰");
+            panneau_height = 352;
+
+        } else {
+            cacherPanneauDesCaracteres();
+            panneau_height = 0;
         }
-        if(voyelles.indexOf(syllabe[syllabe.length-1]) != -1) if(consonnes.indexOf(syllabe[syllabe.length-2]) != -1) {
-            terminaison = syllabe[syllabe.length-1]
-        }
-        if(nasalisations.indexOf(syllabe[syllabe.length-1]) != -1) if(voyelles.indexOf(syllabe[syllabe.length-2]) != -2) if(consonnes.indexOf(syllabe[syllabe.length-3]) != -1) {
-            terminaison = syllabe[syllabe.length-2]+syllabe[syllabe.length-1]
-        }
-        if(nasalisations.indexOf(syllabe[syllabe.length-1]) != -1) if(tons.indexOf(syllabe[syllabe.length-2]) != -2) if(voyelles.indexOf(syllabe[syllabe.length-3]) != -1) {
-            terminaison = syllabe[syllabe.length-3]+syllabe[syllabe.length-2]+syllabe[syllabe.length-1]
-        }
+    });
+}
+function toggleElement(btn, container) {
+    btn.click(() => { container.slideToggle("fast"); });
+}
+function tonsMots(syllabe,nbr=0) {
 
-        return terminaison;
+    let consonne = syllabe[0];
+    let ton = syllabe[2];
+    let consonne_index = caracteres[1].indexOf(consonne);
+    let ton_index = caracteres[5].indexOf(ton);
+    let tons_syllab = [];
+    let tons_mots = [];
+    let tons_mots_2 = [];
+    let melange = [];
+    let melange_2 = [];
+
+    tons_syllabes[consonne_index][ton_index].forEach(element => {
+        if(element[0] == syllabe) element.forEach(element => { tons_syllab.push(element); });
+    }); 
+             
+    for (let i = 0; i < tons_syllab.length; i++) {                     
+        if(tons_syllab[i].split("")[2] == caracteres[5][1]) continue;
+        if(tons_syllab[0] != tons_syllab[i]) 
+        tons_mots.push(tons_syllab[0]+tons_syllab[i]);
     }
-    function togglePanneauDesConsonnes() {
+    melange = malaxer(tons_mots);
 
-        let panneau_height = $("#panneaux").height();
+    let ln = (nbr === 0) ? melange.length : nbr;
+    if(ln <= tons_mots.length) for (let i = 0; i < ln; i++) melange_2.push(tons_mots[i]);
+    if(ln > tons_mots.length) for (let i = 0; i < tons_mots.length; i++) melange_2.push(tons_mots[i]);
 
-        $("#afficheur_de_panneau").click(function (e) {
-            e.stopImmediatePropagation();
-            $(this).removeClass('indicateur');
-            masquerNotification();
-            if (panneau_height == 0) { 
-                montrerPanneauDesCaracteres(); 
-                ecris("apprentissage_notification_corps", "ߛߌ߬ߙߕߊ߬ ߞߋߟߋ߲߫ ߥߟߊ ߛߌߦߊߡߊ߲߫ ߛߎߥߊ߲ߘߌ߫߸ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߡߍ߲ ߠߎ߬ ߜߋ߲߭ ߠߎ߬ ߘߋ߲߰");
-                panneau_height = 352; 
-
-            } else { 
-                cacherPanneauDesCaracteres(); 
-                panneau_height = 0; 
-            }
-        }); 
-    }
-    function toggleElement(btn,container) {
-        btn.click(() => { container.slideToggle("fast"); });
-    }
-    function totalPoint(data) {
-        let point = 0;
-        for(let i=0; i<data.length; i++) { point += data[i][2]; }
-        return point;
-    }
-    function triDuTableauParOrdreAlphabetique(table) {
-        let elements_tries = [];
-
-            table.forEach(function(element) {
-                if(alphabet_nko[0][i] = element[0]) {
-                    elements_tries.push(element);
-                }
-            });
-
-        return elements_tries;
-    }
-
-
-/*-------------------------------------------------------------------------------------------------------------------------------------*/
-
-    function updateLessonData(id,lesson) {
-        
-        var action = "modifier_matiere_en_cours";
-        var matiere = JSON.parse(sessionStorage.getItem('matiere')); 
-        var lesson = JSON.stringify(lesson);
-        var note = pourcentagePoint(lesson);
-        
-        const data_to_send = new URLSearchParams({
-            id : id,
-            action : action,
-            matiere: matiere,
-            lesson : lesson,
-            note : note
-        }); 
-
-        fetch("/kouroukan/php/actions.php", {
-            method: "POST",
-            body: data_to_send
-        })
-        .then(response => response.text())
-        .catch(error => console.log(error));  
-    }
-    function user(id_client,lesson_name,option) {
-        user.id = id_client;
-        user.lesson_name = lesson_name;
-        user.option = option;
-    }
-
-/*-------------------------------------------------------------------------------------------------------------------------------------*/
-      
-    function valider(td) {
-        
-        var vraie_reponse = td.html();
-        td.html(vraie_reponse+"<div id='coche_container'><p id='coche'>✓</p><p id='coche_couvercle'></p></div>");
-        td.addClass('ombrage');
-       
-        $('#coche_container').css({
-            'position':'absolute',
-            'background-color':'#fff',
-            'overflow':'hidden',
-            'margin':0,
-            'padding':0,
-            'top':'-2rem',
-            'left':'-2rem',
-            'width':'2.5rem',
-            'height':'2.5rem',
-            'border-radius':'2.5rem',
-            'z-index':1
-        });
-        $('#coche').css({
-            'position':'absolute', 
-            'display':'block',
-            'margin':0,
-            'padding':0,
-            'width':'2.5rem', 
-            'height':'2.5rem', 
-            'line-height':'2.5rem', 
-            'top':0,
-            'left':0,
-            'font-size':'1.75rem',
-            'textAlign':'center', 
-            'boxSizing':'border-box',
-            'background-color':'#fff',
-            'color':'blue',
-            'rotate':'y 180deg',
-            'z-index':0,
-            'transition':'transform 0.6s'
-        });
-        $('#coche_couvercle').css({
-            'position':'absolute', 
-            'display':'block',
-            'background-color':'#fff',
-            'margin':0,
-            'padding':0,
-            'width':'2.5rem', 
-            'height':'2.5rem',  
-            'top':0,
-            'left':0,
-            'border-radius':'0.5rem',
-            'z-index':1,
-            'transition':'1200ms'
-        });
-        
-        setTimeout(function() { $('#coche_couvercle').css({'left':'-100%' }); }, 10);
-        setTimeout(function() { td.html(vraie_reponse).removeClass('ombrage'); }, 1200);
-    }
-    function viderLeTableau(array) { array.splice(0,array.length); }
+    return melange_2;
+}
+function tonsMotsMelanges(array,nbr=0) {
+    let a_melanger = [];
+    let melange_2 = [];
+    array.forEach(element => { a_melanger = a_melanger.concat(tonsMots(element,3)); });
     
+    let melange = malaxer(a_melanger);
+    let ln = (nbr === 0) ? melange.length : nbr;
+    for (let i = 0; i < ln; i++) melange_2.push(melange[i]);
+    
+    return melange_2;
+}
+function totalPoint(data) {
+    let point = 0;
+    for (let i = 0; i < data.length; i++) { point += data[i][2]; }
+    return point;
+}
+function triDuTableauParOrdreAlphabetique(table) {
+    let elements_tries = [];
+
+    table.forEach(function (element) {
+        if (alphabet_nko[0][i] = element[0]) {
+            elements_tries.push(element);
+        }
+    });
+
+    return elements_tries;
+}
+
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
 
-    function zoomArriere(element) { element.css('fontSize','-=16px'); }
-    function zoomAvant(element)	{ element.css('fontSize','+=16px'); }
-    function zoomer(element) { element.addClass("zoom"); }
-    function zoomDown(element) {
-        element.css({ 
-            'opacity':0,
-            'transform':'scale(0.75)'
-        });
-        setTimeout(() => { element.css('display','none'); }, 200);
-    }
-    function zoomUp(element) {
+function updateLessonData(id, lesson) {
+
+    var action = "modifier_matiere_en_cours";
+    var matiere = JSON.parse(sessionStorage.getItem('matiere'));
+    var lesson = JSON.stringify(lesson);
+    var note = pourcentagePoint(lesson);
+
+    const data_to_send = new URLSearchParams({
+        id: id,
+        action: action,
+        matiere: matiere,
+        lesson: lesson,
+        note: note
+    });
+
+    fetch("/kouroukan/php/actions.php", {
+        method: "POST",
+        body: data_to_send
+    })
+        .then(response => response.text())
+        .catch(error => console.log(error));
+}
+function user(id_client, lesson_name, option) {
+    user.id = id_client;
+    user.lesson_name = lesson_name;
+    user.option = option;
+}
+
+/*-------------------------------------------------------------------------------------------------------------------------------------*/
+
+function valider(td) {
+
+    var vraie_reponse = td.html();
+    td.html(vraie_reponse + "<div id='coche_container'><p id='coche'>✓</p><p id='coche_couvercle'></p></div>");
+    td.addClass('ombrage');
+
+    $('#coche_container').css({
+        'position': 'absolute',
+        'background-color': '#fff',
+        'overflow': 'hidden',
+        'margin': 0,
+        'padding': 0,
+        'top': '-2rem',
+        'left': '-2rem',
+        'width': '2.5rem',
+        'height': '2.5rem',
+        'border-radius': '2.5rem',
+        'z-index': 1
+    });
+    $('#coche').css({
+        'position': 'absolute',
+        'display': 'block',
+        'margin': 0,
+        'padding': 0,
+        'width': '2.5rem',
+        'height': '2.5rem',
+        'line-height': '2.5rem',
+        'top': 0,
+        'left': 0,
+        'font-size': '1.75rem',
+        'textAlign': 'center',
+        'boxSizing': 'border-box',
+        'background-color': '#fff',
+        'color': 'blue',
+        'rotate': 'y 180deg',
+        'z-index': 0,
+        'transition': 'transform 0.6s'
+    });
+    $('#coche_couvercle').css({
+        'position': 'absolute',
+        'display': 'block',
+        'background-color': '#fff',
+        'margin': 0,
+        'padding': 0,
+        'width': '2.5rem',
+        'height': '2.5rem',
+        'top': 0,
+        'left': 0,
+        'border-radius': '0.5rem',
+        'z-index': 1,
+        'transition': '1200ms'
+    });
+
+    setTimeout(function () { $('#coche_couvercle').css({ 'left': '-100%' }); }, 10);
+    setTimeout(function () { td.html(vraie_reponse).removeClass('ombrage'); }, 1200);
+}
+function viderLeTableau(array) { array.splice(0, array.length); }
+
+
+/*-------------------------------------------------------------------------------------------------------------------------------------*/
+
+function zoomArriere(element) { element.css('fontSize', '-=16px'); }
+function zoomAvant(element) { element.css('fontSize', '+=16px'); }
+function zoomer(element) { element.addClass("zoom"); }
+function zoomDown(element) {
+    element.css({
+        'opacity': 0,
+        'transform': 'scale(0.75)'
+    });
+    setTimeout(() => { element.css('display', 'none'); }, 200);
+}
+function zoomUp(element) {
+    element.css({
+        'display': 'none',
+        'opacity': 0,
+        'transform': 'scale(0.75)'
+    });
+    setTimeout(() => {
         element.css({
-            'display':'none',
-            'opacity':0,
-            'transform':'scale(0.75)'
+            'display': 'block',
+            'opacity': 1,
+            'transform': 'scale(1)',
+            'transition': '0.15s'
         });
-        setTimeout(() => {
-            element.css({
-                'display':'block',
-                'opacity':1,
-                'transform':'scale(1)', 
-                'transition':'0.15s'
-            });
-        }, 250);
-    }
+    }, 250);
+}

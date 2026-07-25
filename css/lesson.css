@@ -14,7 +14,21 @@ h4, .lesson_title { display: inline-block; }
     font-size: 3rem;
     color: #555;
 }
-
+#table_parlante_1, #table_parlante_2 {
+    display: inline-block;
+    width: max-content;
+    border-radius: 0;
+}
+#table_parlante_1 {
+    border-left: 1px solid #555;
+    float: right;
+}
+#table_parlante_1 span {
+    min-width: 4rem;
+}
+#table_parlante_2 span {
+    min-width: 5rem;
+}
 
 @media(orientation: portrait) {
     .table_titre { display: none; }

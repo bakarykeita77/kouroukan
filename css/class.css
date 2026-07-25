@@ -1166,6 +1166,10 @@ del {
 .table_ligne > div > div {
     display: inline-block;
 }
+.tables_de_tons_container {
+    width: max-content;
+    margin: auto;
+}
 .tables_de_tons p:not(.table_titre) {
     display: inline-block;
     padding: 0.5rem;
@@ -1195,11 +1199,10 @@ del {
 }
 .table_parlante td, .table_muette td {
     position: relative;
-    width: 3rem;
     height: 3rem;
     line-height: 3rem;
     font-weight: 900;
-    text-align: center;
+    padding-right: 0.5rem;
     border: 1px solid rgb(85,85,85);
     border-radius: 0.5rem;
     color: #fff;
@@ -1209,6 +1212,10 @@ del {
 .table_parlante td {  
     min-width: 2rem;
     background-color: rgba(85,85,85,0.25); 
+}
+.table_parlante > div {  
+    width: max-content;
+    margin: 0.5rem;
 }
 .tables_container {
     position: relative;
@@ -1233,6 +1240,18 @@ del {
     cursor: pointer;
     text-align: center;
     transition: 0.25s;
+}
+.ton_syllabe, .ton_mot {
+    display: inline-block;
+    min-height: 3rem;
+    line-height: 3rem;
+    text-align: center;
+    font-weight: bold;
+    font-size: 2rem;
+    margin: 0.5rem;
+    border: 1px solid #555;
+    border-radius: 0.5rem;
+    background-color: rgba(85,85,85,0.25);
 }
 .transparent { animation: transperer; }
 .travaux { 
@@ -1400,7 +1419,7 @@ del {
         max-width: 45rem;
         font-size: 1.5rem; 
     }
-    .table_parlante td, .table_muette td { font-size: 2rem; padding: 1rem; }
+    .table_parlante td, .table_muette td { font-size: 2rem; padding: 0.5rem; }
     .phases li {
         display: inline-block;
         width: 30%;

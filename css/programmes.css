@@ -47,6 +47,7 @@
     height: 4rem; 
     margin: 0.125rem auto;
     font-weight: bold;
+    border-radius: 0.5rem;
     cursor: pointer;
     overflow: visible;
 }

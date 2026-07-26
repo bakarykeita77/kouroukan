@@ -1168,7 +1168,7 @@ del {
 }
 .tables_de_tons_container {
     width: max-content;
-    margin: auto;
+    margin-right: 1rem;
 }
 .tables_de_tons p:not(.table_titre) {
     display: inline-block;
@@ -1187,7 +1187,6 @@ del {
 }
 .table_parlante, .table_muette {
     position: relative;
-    min-width: 8rem;
     margin: 1rem auto;
     border-radius: 0.5rem;
     padding: 0.5rem;
@@ -1214,7 +1213,6 @@ del {
     background-color: rgba(85,85,85,0.25); 
 }
 .table_parlante > div {  
-    width: max-content;
     margin: 0.5rem;
 }
 .tables_container {
@@ -1222,6 +1220,19 @@ del {
     top: 2rem;
     width: max-content;
     margin: auto;
+}
+.texte_par_defaut {
+    height: 8rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #555;
+    max-width: 11rem;
+    text-align: initial;
+    overflow-wrap: break-word;
+    position: relative;
+    top: 50%;
+    transform: translateY(-75%);
+    opacity: 0.25;
 }
 .tons_symboles_container {
     height: 2.75rem;

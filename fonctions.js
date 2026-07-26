@@ -1708,65 +1708,25 @@ function lessonHTML2() {
 
     return tons_apprentissage_html;
 }
-function lessonHTML3(array_2D) {
+function lessonHTML3(array) {
 
-    let array_1 = syllabesDeTonActif(array_2D);
-    let array_2 = motsCorrespondantsA(array_1[0]);
-    let html = "<div class='tables_de_tons_container'>" + lessonHTML4(array_1) + lessonHTML5(array_2) + "</div>";
+    let array_1 = syllabesDeTableau1D(array);
+    // let array_2 = syllabesDeTableau2D(array_2D);
+    // let array_3 = motsCorrespondantsA(array_2[0]);
+    // let html = "<div class='tables_de_tons_container'>" + tableParlante1HTML(array_1) + tableParlante2HTML(array_2) + tableParlante3HTML(array_3) + "</div>";
+    let html = "<div class='tables_de_tons_container'>" + tableParlante1HTML(array_1) + tableParlante2HTMLParDefaut() + tableParlante3HTMLParDefaut() + "</div>";
     return html;
-
-    function syllabesDeTonActif(array_2D) {
-        let syllabes = [];
-        array_2D.forEach(element => {
-            element.forEach(element => { syllabes.push(element[0]); });
-        });
-        syllabes = malaxer(syllabes);
-        return syllabes;
-    }
-    function motsCorrespondantsA(syllabe_repere) {
-
-        let groupes = [];
-        let mot_groupe = [];
-        let consonne_index = caracteres[1].indexOf(syllabe_repere[0]);
-        let ton_index = caracteres[5].indexOf(syllabe_repere[2]);
-
-        tons_syllabes[consonne_index][ton_index].forEach(element => {
-            if(element[0] == syllabe_repere) groupes = element;
-        });
-
-        for (let i = 0; i < groupes.length; i++) {
-            if(groupes[i][2] == caracteres[5][1]) continue;
-          /*Suppression de kanmayèlè labranèn, au début et au milieu de mot */
-            if(groupes[0][2] == caracteres[5][0]) groupes[0] = groupes[0][0]+groupes[0][1];
-            mot_groupe.push(groupes[0]+groupes[i]);
-        }     
-        mot_groupe = malaxer(mot_groupe);
-        return mot_groupe;
-
-    }
-    function lessonHTML4(array) {
-        let html = "<div class = 'table_parlante' id='table_parlante_1'>";
-  
-        for (var i = 0; i < 6; i += 2) {
-            html += "<div>\n";
-            for (var j = 0; j < 2; j++) {
-                if((i+j) < array.length) html += "<span class='ton_syllabe'>" + array[i+j] + "</span>\n";
-            }
-            html += "</div>\n";
-        }
+    
+    function tableParlante2HTMLParDefaut() {
+        let html = "<div class = 'table_parlante' id='table_parlante_2'>";
+        html += "<div class='texte_par_defaut'>ߜߋ߲߭ ߛߌ߬ߙߊ߬ߡߊ ߟߎ߬ ߢߊ߯ߡߌߣߍ߲ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬</div>\n";
         html += "</div>";
 
         return html;
     }
-    function lessonHTML5(array) {
-        let html = "<div class = 'table_parlante' id='table_parlante_2'>";
-        for (var i = 0; i < 8; i += 2) {
-            html += "<div>\n";
-            for (var j = 0; j < 2; j++) {
-                if((i+j) < array.length) html += "<span class='ton_mot'>" + array[i+j] + "</span>\n";
-            }
-            html += "</div>\n";
-        }
+    function tableParlante3HTMLParDefaut() {
+        let html = "<div class = 'table_parlante' id='table_parlante_3'>";
+        html += "<div class='texte_par_defaut'>ߞߎߡߊߘߋ߲߫ ߛߌ߬ߙߊ߬ߡߊ ߟߎ߬ ߢߊ߯ߡߌߣߍ߲ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬</div>\n";
         html += "</div>";
 
         return html;
@@ -2135,6 +2095,27 @@ function montrerReponse(question, element_correspondant) {
             setTimeout(() => { reponse.css("border-color", "rgb(85,85,85)"); }, 600);
         }
     });
+}
+function motsCorrespondantsA(syllabe_repere) {
+
+    let groupes = [];
+    let mot_groupe = [];
+    let consonne_index = caracteres[1].indexOf(syllabe_repere[0]);
+    let ton_index = caracteres[5].indexOf(syllabe_repere[2]);
+
+    tons_syllabes[consonne_index][ton_index].forEach(element => {
+        if(element[0] == syllabe_repere) groupes = element;
+    });
+
+    for (let i = 0; i < groupes.length; i++) {
+        if(groupes[i][2] == caracteres[5][1]) continue;
+      /*Suppression de kanmayèlè labranèn, au début et au milieu de mot */
+        if(groupes[0][2] == caracteres[5][0]) groupes[0] = groupes[0][0]+groupes[0][1];
+        mot_groupe.push(groupes[0]+groupes[i]);
+    }     
+    mot_groupe = malaxer(mot_groupe);
+    return mot_groupe;
+
 }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
@@ -3181,6 +3162,50 @@ function syllabesMelanges(syllabes) {
     });
     melange = malaxer(melange);
     return melange;
+}
+function syllabesDeTableau1D(array) {
+    let syllabes = [];
+    array.forEach(element => { syllabes.push(element[0]); });
+    return syllabes
+}
+function syllabesDeTableau2D(array_2D) {
+    let syllabes = [];
+    array_2D.forEach(element => {
+        element.forEach(element => { syllabes.push(element[0]); });
+    });
+    syllabes = malaxer(syllabes);
+    return syllabes;
+}
+function tableParlante1HTML(array) {
+    let html = "<div class = 'table_parlante' id='table_parlante_1'>";
+    for (var i = 0; i < array.length; i++) html += "<div>"+array[i]+"</div>\n";
+    html += "</div>";
+    return html;
+}
+function tableParlante2HTML(array) {
+    let html = "";
+
+    for (var i = 0; i < 6; i += 2) {
+        html += "<div>\n";
+        for (var j = 0; j < 2; j++) {
+            if((i+j) < array.length) html += "<span class='ton_syllabe'>" + array[i+j] + "</span>\n";
+        }
+        html += "</div>\n";
+    }
+
+    return html;
+}
+function tableParlante3HTML(array) {
+    let html = "";
+    for (var i = 0; i < 8; i += 2) {
+        html += "<div>\n";
+        for (var j = 0; j < 2; j++) {
+            if((i+j) < array.length) html += "<span class='ton_mot'>" + array[i+j] + "</span>\n";
+        }
+        html += "</div>\n";
+    }
+
+    return html;
 }
 function styleResponsiveDuTableauParlante() {
     let niveau = JSON.parse(sessionStorage.getItem("niveau"));

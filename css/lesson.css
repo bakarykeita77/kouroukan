@@ -14,17 +14,28 @@ h4, .lesson_title { display: inline-block; }
     font-size: 3rem;
     color: #555;
 }
-#table_parlante_1, #table_parlante_2 {
+#table_parlante_1, #table_parlante_2, #table_parlante_3 {
     display: inline-block;
     width: max-content;
+    height: calc(100vh - 22rem);
     border-radius: 0;
+    vertical-align: top;
+    overflow: auto;
 }
-#table_parlante_1 {
+#table_parlante_2 {
     border-left: 1px solid #555;
-    float: right;
+    border-right: 1px solid #555;
 }
-#table_parlante_1 span {
-    min-width: 4rem;
+#table_parlante_1 div {
+    height: 1rem;
+    width: 1rem;
+    line-height: 1rem;
+    text-align: center;
+    background-color: #555;
+    border-radius: 50%;
+    padding: 0.75rem;
+    margin: 0.125rem;
+    box-shadow: 0 0 0.25rem #000;
 }
 #table_parlante_2 span {
     min-width: 5rem;

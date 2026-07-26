@@ -30,6 +30,7 @@ function ton() {
                     let lesson_d_apprentissage_tons_du_serveur = (lessonDApprentissageDuServeur(datas).length === 0) ? [[],[],[],[],[],[],[]] : lessonDApprentissageDuServeur(datas);
                     let lesson_d_exercice_tons_du_serveur = lessonDExerciceDuServeur(datas);
                     let lesson_d_evaluation_tons = lessonDEvaluationDuServeur(datas);
+                    
                     let lesson_d_apprentissage_tons_du_jour = [];
                     let lesson_d_exercice_tons_du_jour = [];
                     let lesson_de_revision_tons_du_jour = [];
@@ -41,8 +42,10 @@ function ton() {
 
                     let tons_appris = tonsAppris(datas);
 
-                    let lesson_derniere_partie = lessonDApprentissageDuServeurDeTonsPartiel(lesson_d_apprentissage_tons_du_serveur);
-                    lesson_derniere_partie = (lesson_derniere_partie.length === 7) ? [] : lesson_derniere_partie;
+                    let avant_derniere_partie_de_lesson = avantDernierePartieDeLesson(lesson_d_apprentissage_tons_du_serveur);
+                    let derniere_partie_de_lesson = lessonDApprentissageDuServeurDeTonsPartiel(lesson_d_apprentissage_tons_du_serveur);
+                    derniere_partie_de_lesson = (derniere_partie_de_lesson.length === 7) ? [] : derniere_partie_de_lesson;
+                    
                     let lesson_d_apprentissage_tons_partiel = lesson_d_apprentissage_tons_du_serveur;
                     let lesson_d_exercice_tons_partiel = [];
                     let lesson_de_revision_tons_partiel = [];
@@ -117,6 +120,20 @@ function ton() {
                         lesson_partiel = lesson[n-1];       
 
                         return lesson_partiel;          
+                    }
+                    function avantDernierePartieDeLesson(lesson) {
+                        let derniere_partie = [];
+                        let avant_derniere_partie = [];
+                        let compteur_d_element_vide = 0;
+
+                        for (let i = lesson.length-1; i >= 0; i--) if(lesson[i].length === 0) compteur_d_element_vide++; 
+                        let n = lesson.length - compteur_d_element_vide;
+
+                        derniere_partie = lesson[n-1];                       
+                        if(derniere_partie.length < 7) avant_derniere_partie = lesson[n-2];       
+                        if(derniere_partie.length === 7) avant_derniere_partie = lesson[n-1];       
+
+                        return avant_derniere_partie; 
                     }
                     function apprentissageTon() {
                         
@@ -320,7 +337,7 @@ function ton() {
                                                             if(compteur_par_td < nbr_normal_de_click) { compteur_par_td++; compteur_pour_td++; } 
                                                             if(compteur_pour_td === nbr_normal_de_click*nbr_de_syllabe) {
   
-                                                                lesson_derniere_partie.push(lesson_d_apprentissage_tons_du_jour);
+                                                                derniere_partie_de_lesson.push(lesson_d_apprentissage_tons_du_jour);
                                                                 lesson_d_apprentissage_tons_partiel[ton_index].push(lesson_d_apprentissage_tons_du_jour);
                                                                 lesson_d_apprentissage_tons_du_serveur[ton_index].push(lesson_d_apprentissage_tons_du_jour);
 
@@ -398,7 +415,7 @@ function ton() {
                                                                     compteur_par_td++;
                                                                 }
                                                                 function changementDePhasePourExerciceDeTons() {
-                                                                    if(lesson_derniere_partie.length === 7) {
+                                                                    if(derniere_partie_de_lesson.length === 7) {
                                                                         afficherBoutonDExercice();
                                                                     }
                                                                 }
@@ -656,9 +673,9 @@ function ton() {
                                     }
                                 }
                                 function initialiserLaLessonDApprentissageDeTons() {
-                                    if (lesson_derniere_partie.length === 7) {
+                                    if (derniere_partie_de_lesson.length === 7) {
                                         caracteres_selectionnees_du_panneau.splice(0,caracteres_selectionnees_du_panneau.length);
-                                        lesson_derniere_partie.splice(0,lesson_derniere_partie.length);
+                                        derniere_partie_de_lesson.splice(0,derniere_partie_de_lesson.length);
                                         voyelles_etudiees.splice(0,voyelles_etudiees.length);
                                     }
                                 }
@@ -730,7 +747,7 @@ function ton() {
                             lesson_active = "exercice";
                             sessionStorage.setItem("lesson_active", JSON.stringify(lesson_active));
 
-                            let exercice_tons_questions = malaxer(malaxer(syllabesDeLesson(lesson_derniere_partie)));
+                            let exercice_tons_questions = malaxer(malaxer(syllabesDeLesson(derniere_partie_de_lesson)));
                             let ordre_de_question = "";
                             let total_exercice_tons_questions = 0;
                             let exercice_tons_questions_posees = [];
@@ -757,18 +774,58 @@ function ton() {
                                     $(".notification_titre").html("ߞߊ߲ߡߊߛߙߋ ߡߊ߬ߞߟߏ߬ߟߌ");
                                 }
                                 function chargerCorpsDExerciceDeTons() {
-                                    let exercice_body_html = exerciceBodyHTML();
-                                    $("#exercice_body").html(exercice_body_html);
-                                        
-                                    function exerciceBodyHTML() {
 
-                                        let html = "";
-                                        let syllabes = syllabesDeLesson(lesson_d_apprentissage_tons_partiel);
-                                        let syllabes_melanges = syllabesMelanges(syllabes);
-                                        let mots_melanges = tonsMotsMelanges(syllabes);
-                   
-                                        html = lessonHTML3(lesson_d_apprentissage_tons_partiel);
-                                        return html;
+                                    chargementParDefautDuCorpsDExercice();
+                                    chargementDuCorpsDExercice();
+
+                                    function chargementParDefautDuCorpsDExercice() {
+
+                                        let exercice_body_html = exerciceBodyHTML();
+                                        $("#exercice_body").html(exercice_body_html);
+                                            
+                                        function exerciceBodyHTML() {
+    
+                                            let html = "";
+                                            let syllabes = syllabesDeLesson(lesson_d_apprentissage_tons_partiel);
+                                            let syllabes_melanges = syllabesMelanges(syllabes);
+                                            let mots_melanges = tonsMotsMelanges(syllabes);
+                       
+                                            html = chargementParDefautHTML(avant_derniere_partie_de_lesson);
+                                            return html;
+                                            
+                                            function chargementParDefautHTML(array) {
+
+                                                let array_1 = syllabesDeTableau1D(array);
+                                                let html = "<div class='tables_de_tons_container'>" + tableParlante1HTML(array_1) + tableParlante2HTMLParDefaut() + tableParlante3HTMLParDefaut() + "</div>";
+                                                return html;
+                                                
+                                                function tableParlante2HTMLParDefaut() {
+                                                    let html = "<div class = 'table_parlante' id='table_parlante_2'>";
+                                                    html += "<div class='texte_par_defaut'>ߜߋ߲߭ ߛߌ߬ߙߊ߬ߡߊ ߟߎ߬ ߢߊ߯ߡߌߣߍ߲ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬</div>\n";
+                                                    html += "</div>";
+
+                                                    return html;
+                                                }
+                                                function tableParlante3HTMLParDefaut() {
+                                                    let html = "<div class = 'table_parlante' id='table_parlante_3'>";
+                                                    html += "<div class='texte_par_defaut'>ߞߎߡߊߘߋ߲߫ ߛߌ߬ߙߊ߬ߡߊ ߟߎ߬ ߢߊ߯ߡߌߣߍ߲ ߛߓߍߣߍ߲ ߓߕߐ߫ ߦߊ߲߬ ߠߋ߬</div>\n";
+                                                    html += "</div>";
+
+                                                    return html;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    function chargementDuCorpsDExercice() {
+                                        $("#table_parlante_1 div").click(function() {
+                                            
+                                            let syllabe_de_reference = $(this).text();
+                                            let array_2 = syllabesDeTableau2D(lesson_d_apprentissage_tons_partiel);
+                                            let array_3 = motsCorrespondantsA(syllabe_de_reference);
+                                            
+                                            $("#table_parlante_2").html(tableParlante2HTML(array_2));
+                                            $("#table_parlante_3").html(tableParlante3HTML(array_3));
+                                        });
                                     }
                                 }
                                 function chargerPiedDExerciceDeTons() {
@@ -1119,7 +1176,6 @@ function ton() {
                         $("#continu_sur_revision_btn").click();
 
                     }
-
                     function evaluationTon() {}
                 }
             } else {

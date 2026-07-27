@@ -18,6 +18,7 @@ h4, .lesson_title { display: inline-block; }
     display: inline-block;
     width: max-content;
     height: calc(100vh - 22rem);
+    padding: 0.5rem 1rem;
     border-radius: 0;
     vertical-align: top;
     overflow: auto;
@@ -39,6 +40,9 @@ h4, .lesson_title { display: inline-block; }
 }
 #table_parlante_2 span {
     min-width: 5rem;
+}
+#table_parlante_3 span {
+    min-width: 8rem;
 }
 
 @media(orientation: portrait) {

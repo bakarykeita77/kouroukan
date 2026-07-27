@@ -784,19 +784,13 @@ function ton() {
                                         $("#exercice_body").html(exercice_body_html);
                                             
                                         function exerciceBodyHTML() {
-    
-                                            let html = "";
-                                            let syllabes = syllabesDeLesson(lesson_d_apprentissage_tons_partiel);
-                                            let syllabes_melanges = syllabesMelanges(syllabes);
-                                            let mots_melanges = tonsMotsMelanges(syllabes);
-                       
-                                            html = chargementParDefautHTML(avant_derniere_partie_de_lesson);
+                                            let html = chargementParDefautHTML(avant_derniere_partie_de_lesson);
                                             return html;
                                             
-                                            function chargementParDefautHTML(array) {
+                                            function chargementParDefautHTML(table) {
 
-                                                let array_1 = syllabesDeTableau1D(array);
-                                                let html = "<div class='tables_de_tons_container'>" + tableParlante1HTML(array_1) + tableParlante2HTMLParDefaut() + tableParlante3HTMLParDefaut() + "</div>";
+                                                let table_1 = syllabesDeTableau1D(table);
+                                                let html = "<div class='tables_de_tons_container'>" + tableParlante1HTML(table_1) + tableParlante2HTMLParDefaut() + tableParlante3HTMLParDefaut() + "</div>";
                                                 return html;
                                                 
                                                 function tableParlante2HTMLParDefaut() {
@@ -818,13 +812,13 @@ function ton() {
                                     }
                                     function chargementDuCorpsDExercice() {
                                         $("#table_parlante_1 div").click(function() {
-                                            
+                                         
                                             let syllabe_de_reference = $(this).text();
-                                            let array_2 = syllabesDeTableau2D(lesson_d_apprentissage_tons_partiel);
-                                            let array_3 = motsCorrespondantsA(syllabe_de_reference);
-                                            
-                                            $("#table_parlante_2").html(tableParlante2HTML(array_2));
-                                            $("#table_parlante_3").html(tableParlante3HTML(array_3));
+                                            let table_2 = syllabesCorrespondantsA(syllabe_de_reference);
+                                            let table_3 = motsCorrespondantsA(syllabe_de_reference);
+                           
+                                            $("#table_parlante_2").html(tableParlante2HTML(table_2));
+                                            $("#table_parlante_3").html(tableParlante3HTML(table_3));
                                         });
                                     }
                                 }

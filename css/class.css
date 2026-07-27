@@ -1212,9 +1212,6 @@ del {
     min-width: 2rem;
     background-color: rgba(85,85,85,0.25); 
 }
-.table_parlante > div {  
-    margin: 0.5rem;
-}
 .tables_container {
     position: relative;
     top: 2rem;
@@ -1259,7 +1256,7 @@ del {
     text-align: center;
     font-weight: bold;
     font-size: 2rem;
-    margin: 0.5rem;
+    margin: 0.25rem;
     border: 1px solid #555;
     border-radius: 0.5rem;
     background-color: rgba(85,85,85,0.25);

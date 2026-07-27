@@ -479,14 +479,14 @@ function calculDePoint(arrayy_2D) {
     }
     return point;
 }
-function calculerNote(array) {
+function calculerNote(table) {
     var point = 0;
-    for (var i = 0; i < array.length; i++) {
-        if (array[i] != undefined) {
-            if (array[i][2] == 1) { point++; }
+    for (var i = 0; i < table.length; i++) {
+        if (table[i] != undefined) {
+            if (table[i][2] == 1) { point++; }
         }
     }
-    var note = Math.floor((point * 100) / array.length);
+    var note = Math.floor((point * 100) / table.length);
     return note;
 }
 function calculerPoint(data) {
@@ -1563,18 +1563,18 @@ function lectureSemiAutomatique() {
         }, 600);
     });
 }
-function lessonHTML1(array, table_id = '#') {
+function lessonHTML1(table, table_id = '#') {
 
     var table = "<table class = 'table_parlante' id='" + table_id + "'>\n";
 
-    for (var i = 0; i < array.length - array.length % 7; i += 7) {
+    for (var i = 0; i < table.length - table.length % 7; i += 7) {
         table += "<tr>\n";
-        for (var j = 0; j < 7; j++) table += "<td>" + array[i + j] + "</td>\n";
+        for (var j = 0; j < 7; j++) table += "<td>" + table[i + j] + "</td>\n";
         table += "</tr>\n";
     }
-    for (var k = array.length - array.length % 7; k < array.length; k += array.length % 7) {
+    for (var k = table.length - table.length % 7; k < table.length; k += table.length % 7) {
         table += "<tr>\n";
-        for (var l = 0; l < array.length % 7; l++) table += "<td>" + array[k + l] + "</td>\n";
+        for (var l = 0; l < table.length % 7; l++) table += "<td>" + table[k + l] + "</td>\n";
         table += "</tr>\n";
     }
     table += "</table>";
@@ -1708,12 +1708,9 @@ function lessonHTML2() {
 
     return tons_apprentissage_html;
 }
-function lessonHTML3(array) {
+function lessonHTML3(table) {
 
-    let array_1 = syllabesDeTableau1D(array);
-    // let array_2 = syllabesDeTableau2D(array_2D);
-    // let array_3 = motsCorrespondantsA(array_2[0]);
-    // let html = "<div class='tables_de_tons_container'>" + tableParlante1HTML(array_1) + tableParlante2HTML(array_2) + tableParlante3HTML(array_3) + "</div>";
+    let array_1 = syllabesDeTableau1D(table);
     let html = "<div class='tables_de_tons_container'>" + tableParlante1HTML(array_1) + tableParlante2HTMLParDefaut() + tableParlante3HTMLParDefaut() + "</div>";
     return html;
     
@@ -1732,17 +1729,17 @@ function lessonHTML3(array) {
         return html;
     }
 }
-function lessonDExerciceHTML(array, table_id = '#') {
+function lessonDExerciceHTML(table, table_id = '#') {
 
     var table = "<table class = 'table_muette' id='" + table_id + "'>\n";
-    for (var i = 0; i < array.length - array.length % 7; i += 7) {
+    for (var i = 0; i < table.length - table.length % 7; i += 7) {
         table += "<tr>\n";
-        for (var j = 0; j < 7; j++) table += "<td>" + array[i + j] + "</td>\n";
+        for (var j = 0; j < 7; j++) table += "<td>" + table[i + j] + "</td>\n";
         table += "</tr>\n";
     }
-    for (var k = array.length - array.length % 7; k < array.length; k += array.length % 7) {
+    for (var k = table.length - table.length % 7; k < table.length; k += table.length % 7) {
         table += "<tr>\n";
-        for (var l = 0; l < array.length % 7; l++) table += "<td>" + array[k + l] + "</td>\n";
+        for (var l = 0; l < table.length % 7; l++) table += "<td>" + table[k + l] + "</td>\n";
         table += "</tr>\n";
     }
     table += "</table>";
@@ -1904,7 +1901,7 @@ function lectureSyllabe(syllabe) {
 
 function malaxer(tableau, n = tableau.length) {  // Le deuxieme parametre est facultatif et precise la longueur du tableau retourné.
     var mixted_table = [];
-
+    
     for (var i = 0; mixted_table.length < tableau.length; i++) {
         tableau.forEach(() => {
             var nbr_aleatoire = Math.floor(Math.random() * tableau.length);
@@ -2104,7 +2101,7 @@ function motsCorrespondantsA(syllabe_repere) {
     let ton_index = caracteres[5].indexOf(syllabe_repere[2]);
 
     tons_syllabes[consonne_index][ton_index].forEach(element => {
-        if(element[0] == syllabe_repere) groupes = element;
+        if(element[0] == syllabe_repere) groupes = element.slice();
     });
 
     for (let i = 0; i < groupes.length; i++) {
@@ -3152,6 +3149,24 @@ function syllabesEvaluationDataMemo(datas) {
 
     return s_e_d;;
 }
+function syllabesCorrespondantsA(syllabe_repere) {
+
+    let groupes = [];
+    let syllabe_groupe = [];
+    let syllabes_de_tri = [];
+    let consonne_index = caracteres[1].indexOf(syllabe_repere[0]);
+    let ton_index = caracteres[5].indexOf(syllabe_repere[2]);
+
+    tons_syllabes[consonne_index][ton_index].forEach(element => {
+        if(element[0] == syllabe_repere) groupes = element;
+    }); 
+    for (let i = 0; i < groupes.length; i++) {
+        if(groupes[i][2] == caracteres[5][1]) continue;
+        syllabes_de_tri.push(groupes[i]);
+    } 
+    syllabe_groupe = malaxer(syllabes_de_tri);
+    return syllabe_groupe;
+}
 function syllabesMelanges(syllabes) {
     let melange = [];
     syllabes.forEach(element => {
@@ -3163,9 +3178,9 @@ function syllabesMelanges(syllabes) {
     melange = malaxer(melange);
     return melange;
 }
-function syllabesDeTableau1D(array) {
+function syllabesDeTableau1D(table) {
     let syllabes = [];
-    array.forEach(element => { syllabes.push(element[0]); });
+    table.forEach(element => { syllabes.push(element[0]); });
     return syllabes
 }
 function syllabesDeTableau2D(array_2D) {
@@ -3176,35 +3191,32 @@ function syllabesDeTableau2D(array_2D) {
     syllabes = malaxer(syllabes);
     return syllabes;
 }
-function tableParlante1HTML(array) {
+function tableParlante1HTML(table) {
     let html = "<div class = 'table_parlante' id='table_parlante_1'>";
-    for (var i = 0; i < array.length; i++) html += "<div>"+array[i]+"</div>\n";
+    for (var i = 0; i < table.length; i++) html += "<div>"+table[i]+"</div>\n";
     html += "</div>";
     return html;
 }
-function tableParlante2HTML(array) {
+function tableParlante2HTML(table) {
     let html = "";
-
-    for (var i = 0; i < 6; i += 2) {
+    for (var i = 0; i < 10; i += 2) {
         html += "<div>\n";
         for (var j = 0; j < 2; j++) {
-            if((i+j) < array.length) html += "<span class='ton_syllabe'>" + array[i+j] + "</span>\n";
+            if((i+j) < table.length) html += "<span class='ton_syllabe'>" + table[i+j] + "</span>\n";
         }
         html += "</div>\n";
     }
-
     return html;
 }
-function tableParlante3HTML(array) {
+function tableParlante3HTML(table) {
     let html = "";
-    for (var i = 0; i < 8; i += 2) {
+    for (var i = 0; i < 10; i += 2) {
         html += "<div>\n";
         for (var j = 0; j < 2; j++) {
-            if((i+j) < array.length) html += "<span class='ton_mot'>" + array[i+j] + "</span>\n";
+            if((i+j) < table.length) html += "<span class='ton_mot'>" + table[i+j] + "</span>\n";
         }
         html += "</div>\n";
     }
-
     return html;
 }
 function styleResponsiveDuTableauParlante() {
@@ -3298,10 +3310,10 @@ function tonsMots(syllabe,nbr=0) {
 
     return melange_2;
 }
-function tonsMotsMelanges(array,nbr=0) {
+function tonsMotsMelanges(table,nbr=0) {
     let a_melanger = [];
     let melange_2 = [];
-    array.forEach(element => { a_melanger = a_melanger.concat(tonsMots(element,3)); });
+    table.forEach(element => { a_melanger = a_melanger.concat(tonsMots(element,3)); });
     
     let melange = malaxer(a_melanger);
     let ln = (nbr === 0) ? melange.length : nbr;
@@ -3415,7 +3427,7 @@ function valider(td) {
     setTimeout(function () { $('#coche_couvercle').css({ 'left': '-100%' }); }, 10);
     setTimeout(function () { td.html(vraie_reponse).removeClass('ombrage'); }, 1200);
 }
-function viderLeTableau(array) { array.splice(0, array.length); }
+function viderLeTableau(table) { table.splice(0, table.length); }
 
 
 /*-------------------------------------------------------------------------------------------------------------------------------------*/

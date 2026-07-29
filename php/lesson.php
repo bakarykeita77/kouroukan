@@ -151,7 +151,10 @@ if(isset($_SESSION["id_client"])) {
 
                          <!--Course body ------------------------------------------------------------------ -->
                             <div class="body_cadre" id="exercice_body_cadre">
-                                <div class="course_body" id="exercice_body"></div>   <!--Cette division est chargé par la fonction chargerExercice() dans exeercice.js-->
+                                <div>
+                                    <div id='zone_active'></div>
+                                    <div class="course_body" id="exercice_body"></div>   <!--Cette division est chargé par la fonction chargerExercice() dans exeercice.js-->
+                                </div>
                             </div>
 
                          <!--Course foot ------------------------------------------------------------------ -->
@@ -305,8 +308,8 @@ if(isset($_SESSION["id_client"])) {
 
                             </div>
                         </div>
+                    
                     </div>
-
                  <!--Resultat------------------------------------------------------------------------------------------------------------------------>
                     <div class="resultat_container"><?php include("resultat.php"); ?></div>
 

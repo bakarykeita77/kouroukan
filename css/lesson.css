@@ -23,6 +23,9 @@ h4, .lesson_title { display: inline-block; }
     vertical-align: top;
     overflow: auto;
 }
+#exercice_body, #zone_active { 
+    vertical-align: middle;
+}
 #table_parlante_2 {
     border-left: 1px solid #555;
     border-right: 1px solid #555;
@@ -43,6 +46,18 @@ h4, .lesson_title { display: inline-block; }
 }
 #table_parlante_3 span {
     min-width: 8rem;
+}
+#zone_active {
+    position: absolute;
+    top: -14px;
+    right: 3rem;
+    width: 5rem;
+    height: calc(100vh - 19rem);
+    border-top: 16px solid black;
+    border-bottom: 16px solid black;
+    border-radius: 0.5rem;
+    background-color: black;
+    transition: 0.3s;
 }
 
 @media(orientation: portrait) {

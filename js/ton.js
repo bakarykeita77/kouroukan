@@ -818,7 +818,10 @@ function ton() {
                                             let table_3 = motsCorrespondantsA(syllabe_de_reference);
                            
                                             $("#table_parlante_2").html(tableParlante2HTML(table_2));
-                                            $("#table_parlante_3").html(tableParlante3HTML(table_3));
+
+                                            $("#table_parlante_2 div").click(function() {
+                                                $("#table_parlante_3").html(tableParlante3HTML(table_3));
+                                            });
                                         });
                                     }
                                 }
@@ -843,6 +846,7 @@ function ton() {
                             function afficherExerciceDeTons() {
                                 afficherExercice();
                                 masquerNotification();
+                                $("#exercice_body").css("background-color","rgba(0,0,0,0.5)");
                                 setTimeout(() => {
                                     let delay = 650+80*$("#exercice_body .table_parlante td").length;   // 650 est la somme des delay de setTimeout des fonctions afficherApprentissageContainer() et affichageAnimeDeTableTd()                            
                                     setTimeout(() => {
@@ -856,6 +860,7 @@ function ton() {
 
                                 initialiserExerciceSyllabe();
                                 initialiserProgressBar();
+                                gestionDeZoneActive();
                                 ecouterLaQuestionDExerciceSyllabe();
                                 repeterLaQuestionDExerciceSyllabe();
                                 repondreLaQuestionDExerciceSyllabe();
@@ -864,6 +869,24 @@ function ton() {
 
                                 function initialiserExerciceSyllabe() {
                                     lesson_d_exercice_tons_du_jour = initialiserData(exercice_tons_questions);
+                                }
+                                function gestionDeZoneActive() {
+                                    $("#table_parlante_1 > div").click(function() { 
+
+                                        let width_1 = ($("#table_parlante_1").width()+96)+"px";
+                                        let width_2 = ($("#table_parlante_2").width()+16)+"px";
+                                        let right_2 = width_1;
+
+                                        $("#zone_active").css({"width":width_2, "right":right_2});
+
+                                        $(".ton_syllabe").click(function() { 
+   
+                                            let width_3 = ($("#table_parlante_3").width()+16)+"px";
+                                            let right_3 = ($("#table_parlante_1").width()+96+$("#table_parlante_2").width()+16)+"px";
+    console.log(width_3);
+                                            $("#zone_active").css({"width":width_3, "right":right_3});
+                                        });
+                                    });
                                 }
                                 function ecouterLaQuestionDExerciceSyllabe() {
 

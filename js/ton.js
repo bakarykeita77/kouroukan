@@ -762,6 +762,7 @@ function ton() {
                             console.log("Début d'exercce");
                             chargerExerciceDeTons();
                             afficherExerciceDeTons();
+                            tableauNoirStyle();
                             exercice();
 
                             function chargerExerciceDeTons() {
@@ -846,13 +847,29 @@ function ton() {
                             function afficherExerciceDeTons() {
                                 afficherExercice();
                                 masquerNotification();
-                                $("#exercice_body").css("background-color","rgba(0,0,0,0.5)");
                                 setTimeout(() => {
                                     let delay = 650+80*$("#exercice_body .table_parlante td").length;   // 650 est la somme des delay de setTimeout des fonctions afficherApprentissageContainer() et affichageAnimeDeTableTd()                            
                                     setTimeout(() => {
                                         ecris("exercice_notification_corps", "ߘߋ߰ߣߍ߲߬ ߞߎߘߊ ߟߎ߫ ߟߋ߬ ߢߊ߯ߡߌߣߍ߲߫ ߢߐ߲ ߘߐ߫ ߣߌ߲߬ .ߣߴߌ ߛߋ߫ ߘߊ߫ ߞߵߊ߬ߟߎ߬ ߓߍ߯ ߢߊߓߐ߫ ߗߡߍ߬ߘߐ߬ߦߊ߫ ߗߍ߬ߡߍ ߟߊ߫ ߏ߬ߘߐ߬ ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ .ߢߌ߬ߣߌ߲߬ߞߊߟߌ߬ ߞߘߎ ߘߌ߯߭ ߘߎ߭ߡߊ߬߸ ߦߴߌ ߕߟߏߡߊߟߐ߬ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߎ߬ ߟߊ߫ ߞߋߟߋ߲߫ ߞߋߟߋ߲߫߸ ߦߵߊ߬ߟߎ߫ ߦߌ߬ߘߊ߬߸ ߦߋ߫ ߓߊ߲߫ ߞߊ߬ ߛߊߞߍߟߌ߫ ߞߘߎ ߘߌ߲߯߸ ߞߵߊ߬ߟߎ߬ ߛߊߞߍ߫.");
                                     }, delay);
                                 }, 100);
+                            }
+                            function tableauNoirStyle() {
+                                let portrait = window.matchMedia("(orientation:portrait)");
+                                let landscape = window.matchMedia("(orientation:landscape)");
+
+                             /*Style au chargement de la page */
+                                if(portrait.matches) $("#exercice_body").css("background-color","rgba(0, 0, 0, 0.8)");
+                                if(landscape.matches) $("#exercice_body").css("background-color","rgba(0, 0, 0, 0.5)");
+
+                             /*Style au changement de l'orientation de l'écran, sans qu'on est besoin de recharger la page' */
+                                portrait.addEventListener("change", function(e) {
+                                    if(e.matches) {
+                                        $("#exercice_body").css("background-color","rgba(0, 0, 0, 0.8)");
+                                    }else{
+                                       $("#exercice_body").css("background-color","rgba(0, 0, 0, 0.5)");
+                                    }
+                                });
                             }
                             function exercice() {
                                 
@@ -871,20 +888,20 @@ function ton() {
                                     lesson_d_exercice_tons_du_jour = initialiserData(exercice_tons_questions);
                                 }
                                 function gestionDeZoneActive() {
+
+                                    let width_1 = $("#table_parlante_1").width();
+
+                                    $("#zone_active").css({"width":"5rem"});
                                     $("#table_parlante_1 > div").click(function() { 
 
-                                        let width_1 = ($("#table_parlante_1").width()+96)+"px";
-                                        let width_2 = ($("#table_parlante_2").width()+16)+"px";
-                                        let right_2 = width_1;
+                                        $("#zone_active").css({"width":"214px", "right":"94px"});
+    
+                                        $("#table_parlante_2").click(function() { 
+                                            $("#zone_active").css({"width":"320px", "right":"320px"});
+                                        });
 
-                                        $("#zone_active").css({"width":width_2, "right":right_2});
-
-                                        $(".ton_syllabe").click(function() { 
-   
-                                            let width_3 = ($("#table_parlante_3").width()+16)+"px";
-                                            let right_3 = ($("#table_parlante_1").width()+96+$("#table_parlante_2").width()+16)+"px";
-    console.log(width_3);
-                                            $("#zone_active").css({"width":width_3, "right":right_3});
+                                        $("#table_parlante_3").click(function() {
+                                            $("#zone_active").css({"width":"5rem", "right":0});
                                         });
                                     });
                                 }

@@ -3198,15 +3198,38 @@ function tableParlante1HTML(table) {
     return html;
 }
 function tableParlante2HTML(table) {
+
     let html = "";
-    for (var i = 0; i < 10; i += 2) {
-        html += "<div>\n";
-        for (var j = 0; j < 2; j++) {
-            if((i+j) < table.length) html += "<span class='ton_syllabe'>" + table[i+j] + "</span>\n";
-        }
-        html += "</div>\n";
-    }
+    let portrait = window.matchMedia("(orientation:portrait)");
+    let landscape = window.matchMedia("(orientation:landscape)");
+
+ /*Style au chargement de la page */
+    if(portrait.matches) html = html2();
+    if(landscape.matches) html = html1();
+
     return html;
+
+    function html1() {
+        let html = "";
+        for (var i = 0; i < 10; i += 2) {
+            html += "<div>\n";
+            for (var j = 0; j < 2; j++) {
+                if((i+j) < table.length) html += "<span class='ton_syllabe'>" + table[i+j] + "</span>\n";
+            }
+            html += "</div>\n";
+        }
+        return html;
+    }
+    function html2() {
+        for (var i = 0; i < 9; i += 3) {
+            html += "<div>\n";
+            for (var j = 0; j < 3; j++) {
+                if((i+j) < table.length) html += "<span class='ton_syllabe'>" + table[i+j] + "</span>\n";
+            }
+            html += "</div>\n";
+        }
+        return html;
+    }
 }
 function tableParlante3HTML(table) {
     let html = "";

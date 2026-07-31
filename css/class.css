@@ -266,14 +266,25 @@ a:focus {
     overflow: visible;
     z-index: 0;
 }
-.course_body { 
-    position: relative;
+.course_body, .zone_active_cadre { 
     max-height: 55vh;
     max-width: 45rem;
-    margin: 1rem auto;
     border-radius: 0.5rem;
-    overflow: auto;
+    vertical-align: middle;
     z-index: 1;
+}
+.course_body { 
+    position: relative;
+    margin: 1rem auto;
+    overflow: auto;
+}
+.zone_active_cadre { 
+    position: absolute;
+    overflow: visible;
+    width: 90%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
 }
 .course_body:not(#evaluation_body) { 
     color: white;
@@ -1168,8 +1179,9 @@ del {
     display: inline-block;
 }
 .tables_de_tons_container {
-    width: max-content;
     margin-right: 1rem;
+    height: calc(100% - 1rem);
+    width: max-content;
 }
 .tables_de_tons p:not(.table_titre) {
     display: inline-block;
@@ -1220,7 +1232,6 @@ del {
     margin: auto;
 }
 .texte_par_defaut {
-    height: 8rem;
     font-size: 1.5rem;
     font-weight: bold;
     color: #555;
@@ -1228,8 +1239,6 @@ del {
     text-align: initial;
     overflow-wrap: break-word;
     position: relative;
-    top: 50%;
-    transform: translateY(-75%);
     opacity: 0.25;
 }
 .tons_symboles_container {
@@ -1257,10 +1266,11 @@ del {
     text-align: center;
     font-weight: bold;
     font-size: 2rem;
-    margin: 0.25rem;
+    margin: 0.25rem 0;
     border: 1px solid #555;
     border-radius: 0.5rem;
     background-color: rgba(85,85,85,0.25);
+    cursor: pointer;
 }
 .transparent { animation: transperer; }
 .travaux { 
@@ -1394,6 +1404,9 @@ del {
 
 @media(orientation: portrait) {
     .course_body { width: 100%; height: calc(100vh - 20rem); }
+    .tables_de_tons_container {
+        width: calc(100% - 2rem);
+    }
     .tables_de_tons {  margin: 0 0.25rem; }
     .cover { background-color: none; }
     .lesson_title { width: 96vw; margin: auto; }
@@ -1411,6 +1424,7 @@ del {
     .table_parlante td, .table_muette td { font-size: 1.5rem; }
     .phases li { width: 80%; }
     .travaux { display: none; }
+    .zone_active_cadre { display: none; }
 }
 @media(orientation: landscape) {
     .course_body { width: 90%; height: calc(100vh - 18rem); }
@@ -1435,4 +1449,10 @@ del {
         min-width: 5rem;
     }
     .travaux { display: block; }
+    .zone_active_cadre { display: block; }
+    .texte_par_defaut {
+        height: 8rem;
+        top: 50%;
+        transform: translateY(-75%);
+    }
 }

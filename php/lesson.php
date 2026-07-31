@@ -151,10 +151,10 @@ if(isset($_SESSION["id_client"])) {
 
                          <!--Course body ------------------------------------------------------------------ -->
                             <div class="body_cadre" id="exercice_body_cadre">
-                                <div>
+                                <div class="zone_active_cadre">
                                     <div id='zone_active'></div>
-                                    <div class="course_body" id="exercice_body"></div>   <!--Cette division est chargé par la fonction chargerExercice() dans exeercice.js-->
                                 </div>
+                                <div class="course_body" id="exercice_body"></div>   <!--Cette division est chargé par la fonction chargerExercice() dans exeercice.js-->
                             </div>
 
                          <!--Course foot ------------------------------------------------------------------ -->

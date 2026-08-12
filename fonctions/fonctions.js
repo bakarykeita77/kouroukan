@@ -33,9 +33,9 @@
             'opacity':0,
             'transition':'transform 0.6s'
         });
-        setTimeout(function() { $('#croix').css({'transform': 'scale(1.5)' });}, 50);
-        setTimeout(function() { $('#croix').css({'opacity': 0.6 });}, 50);
-        setTimeout(function() {td.html(fausse_reponse);}, 2000);
+        attendre(50,function() { $('#croix').css({'transform': 'scale(1.5)' });});
+        attendre(50,function() { $('#croix').css({'opacity': 0.6 });});
+        attendre(2000,function() {td.html(fausse_reponse);});
     }
 	
     function clignotage(reponse_ratee) {
@@ -44,19 +44,19 @@
                 var td = $(this);
 
                 td.addClass('fond_blanc_casse');
-                setTimeout((function() { td.removeClass('fond_blanc_casse'); }), 200);
-                setTimeout((function() { td.addClass('fond_blanc_casse');    }), 350);
-                setTimeout((function() { td.removeClass('fond_blanc_casse'); }), 500);
-                setTimeout((function() { td.addClass('fond_blanc_casse');    }), 650);
-                setTimeout((function() { td.removeClass('fond_blanc_casse'); }), 800);
-                setTimeout((function() { td.addClass('fond_blanc_casse');    }), 950);
-                setTimeout((function() { td.removeClass('fond_blanc_casse'); }), 1100);
-                setTimeout((function() { td.addClass('fond_blanc_casse');    }), 1250);
-                setTimeout((function() { td.removeClass('fond_blanc_casse'); }), 1400);
-                setTimeout((function() { td.addClass('fond_blanc_casse');    }), 1550);
-                setTimeout((function() { td.removeClass('fond_blanc_casse'); }), 1700);
-                setTimeout((function() { td.addClass('fond_blanc_casse');    }), 1850);
-                setTimeout((function() { td.removeClass('fond_blanc_casse'); }), 2000);
+                attendre(200, (function() { td.removeClass('fond_blanc_casse'); }));
+                attendre(350, (function() { td.addClass('fond_blanc_casse');    }));
+                attendre(500, (function() { td.removeClass('fond_blanc_casse'); }));
+                attendre(650, (function() { td.addClass('fond_blanc_casse');    }));
+                attendre(800, (function() { td.removeClass('fond_blanc_casse'); }));
+                attendre(950, (function() { td.addClass('fond_blanc_casse');    }));
+                attendre(1100,(function() { td.removeClass('fond_blanc_casse'); }));
+                attendre(1250,(function() { td.addClass('fond_blanc_casse');    }));
+                attendre(1400,(function() { td.removeClass('fond_blanc_casse'); }));
+                attendre(1550,(function() { td.addClass('fond_blanc_casse');    }));
+                attendre(1700,(function() { td.removeClass('fond_blanc_casse'); }));
+                attendre(1850,(function() { td.addClass('fond_blanc_casse');    }));
+                attendre(2000,(function() { td.removeClass('fond_blanc_casse'); }));
             }
         });
     }
@@ -81,17 +81,17 @@
 	
 	function fermer(element) {
 	    element.animate({ 'height':0 }, 200);
-	    setTimeout((function(){ element.css({ 'display':'none' }) }),180);
+	    attendre(180,(function(){ element.css({ 'display':'none' }) }));
 	}
 	
     function guiderClient(){
 
         $('.hand').css({ 'display':'block' });
-        setTimeout(function(){ $('.hand').addClass('clicker'); }, 100);
-        setTimeout(function() { $('.course_head').addClass('fond_noir_clair'); }, 300);
-        setTimeout(function() { $('.course_head').removeClass('fond_noir_clair'); }, 800);
-        setTimeout(function() { $('.hand').removeClass('clicker'); }, 1600);
-        setTimeout(function() { $('.hand').css('display','none'); }, 1600);
+        attendre(100,function(){ $('.hand').addClass('clicker'); });
+        attendre(300,function() { $('.course_head').addClass('fond_noir_clair'); });
+        attendre(800,function() { $('.course_head').removeClass('fond_noir_clair'); });
+        attendre(1600,function() { $('.hand').removeClass('clicker'); });
+        attendre(1600,function() { $('.hand').css('display','none'); });
         
         return;
     }
@@ -106,13 +106,13 @@
     
             /*Animation de td lors de lecture*/
             $(td_actif).addClass('ombrage');
-            setTimeout(function() { $(td_actif).removeClass('ombrage'); }, 600);
+            attendre(600,function() { $(td_actif).removeClass('ombrage'); });
         });
      };
     function lectureSemiAutomatique() {
         $(".play_icon").parent().on('click',function(){
 
-            setTimeout(function(){
+            attendre(600,function(){
             var td = $('.table_parlante td');
         
             var read_events = [];
@@ -121,27 +121,13 @@
         
             for (i = 0; i < td.length; i++) {
                 td_delay = 0;
-                read_events[read_events.length] = setTimeout((function() {
+                read_events[read_events.length] = attendre(td_delay += i*2000,(function() {
                     td[td_index += 1].click();
-                }), td_delay += i*2000)+'\n';
+                }))+'\n';
             }
-            },600);
+            });
          });
      }
-    function lire_mot() {
-	   for(var i=0; i<texte_memoire.length; i++) {
-	       var mot = texte_memoire[i];
-	   
-	   	        var lecture = setInterval(lire, 800);
-	   	        var r = 0;
-	   	        function lire() {
-	   	            audio.attr({ src:'../son/mp3/tons/ߊ/'+mot[r]+'.mp3', autoplay:'on' });
-	   	            r++;
-	   	            if( r>mot.length ) { clearInterval( lecture ); }
-	       }
-	   
-	   }
-    }
     
     function mix1D(tableau){
         var mixted_table = [];

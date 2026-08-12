@@ -202,16 +202,16 @@ Les fonctions */
 	     function lecture8() { audio8.attr({ src:'son/mp3/'+mot[8]+'.mp3', autoplay:'on' }); }
 	     function lecture9() { audio9.attr({ src:'son/mp3/'+mot[9]+'.mp3', autoplay:'on' }); }
 
-	     function lire_mot() {
+	     function lis() {
 		     var p = 200;
-		     setTimeout( lecture0, 0*p );
-		     setTimeout( lecture1, 1*p );
-		     setTimeout( lecture2, 2*p );
-		     setTimeout( lecture3, 3*p );
-		     setTimeout( lecture4, 4*p );
+		     attendre(0*p,lecture0);
+		     attendre(1*p,lecture1);
+		     attendre(2*p,lecture2);
+		     attendre(3*p,lecture3);
+		     attendre(4*p,lecture4);
 	     }
 	     
-	     lire_mot();
+	     lis();
 	 }
 	 function lire_dernier_mot() {
 	     mot_courant = texte_memoire[texte_memoire.length-2];	 
@@ -235,9 +235,9 @@ Les fonctions */
 		 for(var i=0;i<discours.length;i++) {
 			 e += discours[i-1].length*200;
 
-			 setTimeout(l0,  e);
-			 setTimeout(l1,  e);
-			 setTimeout(l2,  e);
+			 attendre(e,l0);
+			 attendre(e,l1);
+			 attendre(e,l2);
 		 }
 		 
 		 function l0() { lire(discours[0]); }
@@ -779,9 +779,9 @@ Lorsqu'on appuie une touche du clavier, il se passe ce qui suit: */
     
 
     function lire_textes() {
-        setTimeout(lecture1,   0);
-        setTimeout(lecture2, 400);
-        setTimeout(lecture3, 800);
+        attendre(  0,lecture1);
+        attendre(400,lecture2);
+        attendre(800,lecture3);
     }
     
     function lecture1() { var m = texte_memoire; audio.attr({ src:"son/mp3/"+m[m.length-2][0]+".mp3", autoplay:"on" }); }

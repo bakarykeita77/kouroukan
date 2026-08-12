@@ -3,5 +3,5 @@ afficher($('#connexion_container'));
 mettreFocusDansClientEmail();
 
 function mettreFocusDansClientEmail() { 
-    setTimeout(() => { document.getElementById("client_email").focus(); }, 1000);
+    attendre(1000,() => { document.getElementById("client_email").focus(); });
 }

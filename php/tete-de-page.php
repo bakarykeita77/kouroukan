@@ -31,11 +31,11 @@
 								<div id="modifier_avatar"><a href="../php/upload-avatar.php">ߖߌ߬ߦߊ߬ߓߍ ߡߊߝߊ߬ߟߋ߲߬</a></div>
 							</div>
 							<div id="profile_utilisateur_renseignements">
-								<div> <span>ߕߐ߮ </span>    <span id="prenom"   ><?=$_SESSION['prenom'];?></span></div>
-								<div> <span>ߖߊ߬ߡߎ߲ </span>   <span id="nom"      ><?=$_SESSION['nom'];?></span></div>
+								<div> <span>ߕߐ߮    </span> <span id="prenom"   ><?=$_SESSION['prenom'];   ?></span></div>
+								<div> <span>ߖߊ߬ߡߎ߲   </span> <span id="nom"      ><?=$_SESSION['nom'];      ?></span></div>
 								<div> <span>ߡߐߦߌߛߊ߲ </span> <span id="naissance"><?=$_SESSION['naissance'];?></span></div>
-								<div> <span>ߖߊ߲߭ </span>     <span id="sexe"     ><?=$_SESSION['sexe'];?></span></div>
-								<div> <span>ߛߊ߲߬ߓߊ߬ߕߐ߮ </span> <span id="adresse"  ><?=$_SESSION['adresse'];?></span></div>
+								<div> <span>ߖߊ߲߭     </span> <span id="sexe"     ><?=$_SESSION['sexe'];      ?></span></div>
+								<div> <span>ߛߊ߲߬ߓߊ߬ߕߐ߮ </span> <span id="adresse"  ><?=$_SESSION['adresse'];   ?></span></div>
 								<div> <table><tr><td><span>Mail</span></td><td><span id="email"><?=$_SESSION['email'];?></span></td></tr></table></div>
 							</div>
 						</div>

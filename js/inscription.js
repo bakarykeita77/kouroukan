@@ -2,5 +2,5 @@
 mettreFocusDansInscriptionPrenom();
 
 function mettreFocusDansInscriptionPrenom() { 
-    setTimeout(() => { document.getElementById("prenom").focus(); }, 1000);
+    attendre(1000,() => { document.getElementById("prenom").focus(); });
 }

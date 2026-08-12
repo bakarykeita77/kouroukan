@@ -9,9 +9,8 @@ a:focus {
     outline: 2px solid transparent;
 }
 .a_apprendre { 
-    border: 1px solid #bbb; 
-    background-color: #ccc; 
-    color: #aaa; 
+    background-color: #555; 
+    color: #fff; 
 }
 .a_apprendre:hover { background-color: #bbb; }
 .a_apprendre:hover a { color: black; }
@@ -1128,7 +1127,7 @@ del {
     z-index: 0;
 }
 .shadow { box-shadow: 0 0 0.5rem #555; }
-.surbrillance { border: 1px solid yellow; color: yellow; }
+.surbrillance { background-color: white; color: blue; }
 
 
 /* --------------------------------------------------------------------------------------------------------- */
@@ -1203,7 +1202,7 @@ del {
     margin: 1rem auto;
     border-radius: 0.5rem;
     padding: 0.5rem;
-    overflow: auto;
+    vertical-align: top;
 }
 .table_parlante tr, .table_muette tr { 
     width: 100%; 
@@ -1260,16 +1259,17 @@ del {
     transition: 0.25s;
 }
 .ton_syllabe, .ton_mot {
+    position: relative;
     display: inline-block;
+    width: 45%;
     min-height: 3rem;
     line-height: 3rem;
     text-align: center;
     font-weight: bold;
     font-size: 2rem;
-    margin: 0.25rem 0;
+    margin: 0.25rem 0.125rem;
     border: 1px solid #555;
     border-radius: 0.5rem;
-    background-color: rgba(85,85,85,0.25);
     cursor: pointer;
 }
 .transparent { animation: transperer; }

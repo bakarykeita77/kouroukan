@@ -19,15 +19,18 @@ h4, .lesson_title { display: inline-block; }
     width: 1rem;
     line-height: 1rem;
     text-align: center;
-    background-color: #555;
     border-radius: 50%;
     box-shadow: 0 0 0.25rem #000;
     cursor: pointer;
 }
-#table_parlante_2 div {
+#table_parlante_1 .apprise {
+    background-color: white;
+    color: black;
+}
+#table_parlante_2 div, #table_parlante_3 div {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: right;
 }
 #table_parlante_2 span {
     min-width: 5rem;
@@ -42,7 +45,7 @@ h4, .lesson_title { display: inline-block; }
     height: calc(100vh - 21rem);
     border-radius: 0.5rem;
     background-color: black;
-    transition: 0.5s;
+    opacity: 0.5;
 }
 
 @media(orientation: portrait) {
@@ -81,13 +84,10 @@ h4, .lesson_title { display: inline-block; }
         height: calc(100vh - 22rem);
         padding: 0.5rem 1rem;
     }
-    #table_parlante_1 { 
-        width: 3rem;
-    }
+    #table_parlante_1 { width: 3rem; }
     #table_parlante_1 div { 
         display: block; 
         padding: 0.75rem;
-        margin: 0.125rem;
     }
     #table_parlante_2 {
         width: 12rem;
@@ -95,7 +95,5 @@ h4, .lesson_title { display: inline-block; }
         border-right: 1px solid #555;
         border-radius: 0;
     }
-    #table_parlante_3 { 
-        width: 20rem;
-    }
+    #table_parlante_3 { width: 20rem; }
 }

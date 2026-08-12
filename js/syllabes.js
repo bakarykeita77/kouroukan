@@ -94,14 +94,14 @@ function syllabes() {
                         }
                     }
                     function chargerCorpsDApprentissageSyllabe() {
-                        setTimeout(() => { chargementParDefautDuTableauNoir(); }, 800);
+                        attendre(800,() => { chargementParDefautDuTableauNoir(); });
                         chargerLessonDeSyllabeApprentissage();
                     }
                 }
                 function afficherApprentissageSyllabe() {
                     afficherApprentissage(datas);
                     masquerNotification();
-                    setTimeout(() => { ecris("apprentissage_notification_corps", "ߞߎ߬ߘߎ߫ ߣߘߍ߬ߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬ ߞߊ߬ ߛߌ߬ߙߕߊ߬ ߥߟߊߟߋ߲ ߦߌ߬ߘߊ߬."); }, 1600);
+                    attendre(1600,() => { ecris("apprentissage_notification_corps", "ߞߎ߬ߘߎ߫ ߣߘߍ߬ߡߊ ߘߌ߲߯ ߘߎ߭ߡߊ߬ ߞߊ߬ ߛߌ߬ߙߕߊ߬ ߥߟߊߟߋ߲ ߦߌ߬ߘߊ߬."); });
                 }
                 function apprendreSyllabe() {
 
@@ -154,7 +154,7 @@ function syllabes() {
                                 if(nouvelle_consonne_index != "-1")  nouvelles_consonnes.splice(nouvelle_consonne_index,1);
                                 consonnes_choisies = consonnes_etudiees.concat(nouvelles_consonnes);
         
-                                if(nouvelles_consonnes.length == 0) { setTimeout(() => { $("#table_syllabes_apprentissage").css("display","none"); }, 800); }
+                                if(nouvelles_consonnes.length == 0) { attendre(800,() => { $("#table_syllabes_apprentissage").css("display","none"); }); }
                                     
                                 $("#afficheur_de_panneau p").click(() => { 
                                     if($(this).text() == "ߛߌ߬ߙߕߊ߬ ߥߟߊ ߘߏ߲߰") {
@@ -168,7 +168,7 @@ function syllabes() {
                             function suivreLApprentissage() {
 
                                 initialiserApprentissageSyllabe();
-                                setTimeout(() => {
+                                attendre(800,() => {
 
                                     td = $("#table_syllabes_apprentissage td");
                                     let progress_unity = 100 / [td.length * quantite_normale_de_click];  
@@ -178,7 +178,7 @@ function syllabes() {
                                         $(this).click(function () {
                                             
                                             if($("#caracteres_container").css("top") == "0px") secouer($("#apprentissage_dialogue_btns"));
-                                            setTimeout(() => { if(compteur_de_syllabes == 1) masquerNotification(); }, 250);
+                                            attendre(250,() => { if(compteur_de_syllabes == 1) masquerNotification(); });
 
                                             if($("#apprentissage_dialogue_btns").css("display") == "flex") {
                                                 if($("#afficheur_de_panneau p").text() == "ߛߌ߬ߙߕߊ߬ ߥߟߊ ߦߌ߬ߘߊ߬") {
@@ -258,7 +258,7 @@ function syllabes() {
                                             }
                                         });
                                     });  
-                                }, 800);
+                                });
                             }
                             function initialiserApprentissageSyllabe() {
                                 let td_to_click = $("#table_syllabes_apprentissage td");
@@ -266,7 +266,7 @@ function syllabes() {
                                 lesson_d_apprentissage_syllabes_du_jour = initialiserData(td_to_click);
                             }
                             function actualiserApprentissageSyllabe() {
-                                setTimeout(() => { initialiserApprentissageSyllabe(); }, 1000);
+                                attendre(1000,() => { initialiserApprentissageSyllabe(); });
                             }
                         });
                     }
@@ -338,12 +338,12 @@ function syllabes() {
                     function afficherExerciceSyllabe() {
                         afficherExercice();
                         masquerNotification();
-                        setTimeout(() => {
-                            let delay = 650+80*$("#exercice_body .table_parlante td").length;   // 650 est la somme des delay de setTimeout des fonctions afficherApprentissageContainer() et affichageAnimeDeTableTd()                            
-                            setTimeout(() => {
+                        sattendre(100,() => {
+                            let delay = 650+80*$("#exercice_body .table_parlante td").length;
+                            attendre(delay,() => {
                                 ecris("exercice_notification_corps", "ߘߋ߰ߣߍ߲߬ ߞߎߘߊ ߟߎ߫ ߟߋ߬ ߢߊ߯ߡߌߣߍ߲߫ ߢߐ߲ ߘߐ߫ ߣߌ߲߬ .ߣߴߌ ߛߋ߫ ߘߊ߫ ߞߵߊ߬ߟߎ߬ ߓߍ߯ ߢߊߓߐ߫ ߗߡߍ߬ߘߐ߬ߦߊ߫ ߗߍ߬ߡߍ ߟߊ߫ ߏ߬ߘߐ߬ ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ .ߢߌ߬ߣߌ߲߬ߞߊߟߌ߬ ߞߘߎ ߘߌ߯߭ ߘߎ߭ߡߊ߬߸ ߦߴߌ ߕߟߏߡߊߟߐ߬ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߎ߬ ߟߊ߫ ߞߋߟߋ߲߫ ߞߋߟߋ߲߫߸ ߦߵߊ߬ߟߎ߫ ߦߌ߬ߘߊ߬߸ ߦߋ߫ ߓߊ߲߫ ߞߊ߬ ߛߊߞߍߟߌ߫ ߞߘߎ ߘߌ߲߯߸ ߞߵߊ߬ߟߎ߬ ߛߊߞߍ߫.");
-                            }, delay);
-                        }, 100);
+                            });
+                        });
                     }
                     function exercice() {
 
@@ -429,10 +429,10 @@ function syllabes() {
                             masquer($("#exercice_repetition_btn"));
                             masquer($("#exercice_correction_btn"));
 
-                            setTimeout(() => { 
+                            attendre(100,() => { 
                                 display($("#exercice_repetition_btn")); 
                                 rendreActif($("#exercice_repetition_btn"));
-                            }, 100);
+                            });
                         }
                         function repondreLaQuestionDExerciceSyllabe() {
                             $.each($("#exercice_body td"), function () {
@@ -443,7 +443,7 @@ function syllabes() {
                                     if(question_status == "repondue") secouer($("#exercice_question_btn"));
                                     if(exercice_syllabe_question != "") {
 
-                                        demarquer($(element_actif));
+                                        mettreEnSurbrillance($(element_actif));
                                         enregistrerExerciceSyllabeReponse();
                                         marquageDeLaConsonneChoisie();
                                         afficherExerciceCorrectionBtn();
@@ -459,10 +459,10 @@ function syllabes() {
                                             masquer($("#exercice_question_btn"));
                                             masquer($("#exercice_repetition_btn"));
                                             
-                                            setTimeout(() => { 
+                                            attendre(100,() => { 
                                                 display($("#exercice_correction_btn")); 
                                                 rendreActif($("#exercice_correction_btn"));
-                                            }, 100);
+                                            });
                                         }
                                     }
 
@@ -512,7 +512,7 @@ function syllabes() {
                                         let exercice_width = total_exercice_syllabe_questions;
                                         let diagramm_unity = 100 / exercice_width;
 
-                                        setTimeout(() => { display($(".progress_bar")); }, 400);
+                                        attendre(400,() => { display($(".progress_bar")); });
 
                                         question_counter++;
 
@@ -530,10 +530,10 @@ function syllabes() {
                                         masquer($("#exercice_repetition_btn"));
                                         masquer($("#exercice_correction_btn"));
 
-                                        setTimeout(() => { 
+                                        attendre(100,() => { 
                                             display($("#exercice_question_btn")); 
                                             rendreActif($("#exercice_question_btn"));
-                                        }, 100);
+                                        });
                                     }
                                     function finDeExerciceSyllabe() {
                                         if (exercice_syllabe_questions_posees.length === total_exercice_syllabe_questions) {
@@ -545,7 +545,7 @@ function syllabes() {
 
                                             let note_d_exercice_syllabes = calculerNote(lesson_de_syllabes_exercice_du_jour);
 
-                                            // setTimeout(() => { preExerciceResultat(); }, 300);
+                                            // attendre(300,() => { preExerciceResultat(); });
 
                                             if (note_d_exercice_syllabes < 100) {
 
@@ -554,14 +554,14 @@ function syllabes() {
                                                 viderLeTableau(lesson_de_syllabes_exercice_du_jour);
 
                                                 function notificationDeRepriseDExercice() {
-                                                    setTimeout(() => {
+                                                    attendre(300,() => {
                                                         let notification = liste_de_matieres[0][1] + " ߡߊ߬ߞߟߏ߬ߟߌ ߡߊ߫ ߢߊ߬ .ߌ ߓߘߊ߫ ߗߌߙߏ߲߫ ߡߊ߬ߞߟߏ߬ߟߌ ߢߌ߲߬ ߘߐ߫\n .<span class='exercice_resultat_affiche'>ߞߐߝߟߌ ߝߟߍ߫ ߦߊ߲߬</span> .ߘߊߕߎ߲ߠߊ߲߫ ߞߘߎ ߘߌ߲߯ ߞߊ߬ ߓߐ߫ (ߓߌ߬ߢߍ߬ ߓߊ߯ߡߊ ߝߟߍ߫)";
                                                         ecris("exercice_notification_corps", notification);
-                                                    }, 300); 
+                                                    }); 
                                                 }
                                                 function affichageDeRepriseDExerciceBtn() {
-                                                    setTimeout(() => { masquer($("#exercice_dialogue_btns")); }, 1800);
-                                                    setTimeout(() => {
+                                                    attendre(1800,() => { masquer($("#exercice_dialogue_btns")); });
+                                                    attendre(2000,() => {
                                                         afficher($("#exercice_redirection_btns"));
 
                                                         afficher($("#reprendre_exercice_btn"));
@@ -570,7 +570,7 @@ function syllabes() {
                                                         indexer($("#reprendre_exercice_btn p"));   //L'évenement click est attaché à ce bouton dès le début de la fonction  exerciceSyllabe().
                                                         
                                                         console.log("Echec d'exercice");
-                                                    }, 2000);
+                                                    });
                                                 }
                                             }
                                             if (note_d_exercice_syllabes == 100) {
@@ -579,14 +579,14 @@ function syllabes() {
                                                 affichageDeRevisionBtn();
 
                                                 function notificationDeReussiteDExercice() {
-                                                    setTimeout(() => {
+                                                    attendre(300,() => {
                                                         let notification = felicitation() + liste_de_matieres[1][1] + " ߡߊ߬ߞߟߏ߬ߟߌ ߢߊ߬ߣߍ߲߬ .ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ ߞߊ߬ ߕߊ߯ ߣߐ߰ߡߊ߬ߛߍߦߌ ߦߙߐ. \n .<span class='exercice_resultat_affiche'>ߞߐߝߟߌ ߝߟߍ߫ ߦߊ߲߬</span> .";
                                                         ecris("exercice_notification_corps", notification);
-                                                    }, 300); 
+                                                    }); 
                                                 }
                                                 function affichageDeRevisionBtn() {
-                                                    setTimeout(() => { masquer($("#exercice_dialogue_btns")); }, 1700);
-                                                    setTimeout(() => {
+                                                    attendre(1700,() => { masquer($("#exercice_dialogue_btns")); });
+                                                    attendre(2000,() => {
                                                         display($("#exercice_redirection_btns"));
 
                                                         masquer($("#reprendre_exercice_btn"));
@@ -595,7 +595,7 @@ function syllabes() {
                                                         indexer($("#continu_sur_revision_btn p"));   //L'évenement click est attaché à ce bouton dès le début de la fonction  exerciceSyllabe().
                                                         
                                                         console.log("Fin d'exercice");
-                                                    }, 2000);
+                                                    });
                                                 }
                                             }
 
@@ -758,12 +758,12 @@ function syllabes() {
                     function afficherRevisionSyllabe() {
                         afficherRevision();
                         masquerNotification();
-                        setTimeout(() => {
-                            let delay = 650+80*$("#revision_body .table_parlante td").length;   // 650 est la somme des delay de setTimeout des fonctions afficherApprentissageContainer() et affichageAnimeDeTableTd()                            
-                            setTimeout(() => {
+                        attendre(100,() => {
+                            let delay = 650+80*$("#revision_body .table_parlante td").length;  
+                            attendre(delay,() => {
                                 ecris("revision_notification_corps", "ߘߋ߰ߣߍ߲߬ ߞߎߘߊ ߣߌ߫ ߞߘߐ߬ߡߊ߲ ߘߏ߫ ߟߎ߫ ߟߋ߬ ߢߊ߯ߡߌߣߍ߲߫ ߢߐ߲ ߘߐ߫ ߣߌ߲߬ .ߣߴߌ ߛߋ߫ ߘߊ߫ ߞߵߊ߬ߟߎ߬ ߓߍ߯ ߢߊߓߐ߫ ߗߡߍ߬ߘߐ߬ߦߊ߫ ߗߍ߬ߡߍ ߟߊ߫ ߏ߬ߘߐ߬ ߌ ߓߘߊ߫ ߛߎߘߊ߲߫ . ߢߌ߬ߣߌ߲߬ߞߊߟߌ߬ ߞߘߎ ߘߌ߯߭ ߘߎ߭ߡߊ߬߸ ߦߴߌ ߕߟߏߡߊߟߐ߬ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߎ߬ ߟߊ߫ ߞߋߟߋ߲߫ ߞߋߟߋ߲߫߸ ߦߴߊߟߎ߬ ߛߓߍ߫߸ ߦߋ߫ ߓߊ߲߫ ߞߊ߬ ߛߊߞߍߟߌ߫ ߞߘߎ ߘߌ߲߯߸ ߞߵߊ߬ߟߎ߬ ߛߊߞߍ߫.");
-                            }, delay);
-                        }, 100);
+                            });
+                        });
                     }
                     function reviserSyllabe() {
 
@@ -794,7 +794,7 @@ function syllabes() {
                                 e.stopImmediatePropagation();
 
                                 let revision_question_btn = $(this);
-                                setTimeout(() => { masquerNotification(); }, 250);
+                                attendre(250,() => { masquerNotification(); });
                                 question_de_revision_syllabes = revision_syllabes_questions[compteur_de_question];
                                 question_status = "posee";
                                 montrerReponse(question_de_revision_syllabes,$("#revision_body table td"));
@@ -841,7 +841,7 @@ function syllabes() {
                                 if (question_de_revision_syllabes != "") {
                                     reponse_de_revision_syllabes = $(this).text();
                                     $("#revision_body table td").css({ "background-color": "rgba(85,85,85,0.25)", "color": "white" });
-                                    demarquer($(clicked_response_element));
+                                    mettreEnSurbrillance($(clicked_response_element));
                                     afficherRevisionCorrectionBtn();
                                 }
                                 
@@ -849,10 +849,10 @@ function syllabes() {
                                     masquer($("#revision_question_btn"));
                                     masquer($("#revision_repetition_btn"));
                                     
-                                    setTimeout(() => { 
+                                    attendre(100,() => { 
                                         display($("#revision_correction_btn")); 
                                         rendreActif($("#revision_correction_btn"));
-                                    }, 100);
+                                    });
                                 }
                             });
                         }
@@ -904,10 +904,10 @@ function syllabes() {
                                             masquer($("#revision_repetition_btn"));
                                             masquer($("#revision_correction_btn"));
 
-                                            setTimeout(() => { 
+                                            attendre(100,() => { 
                                                 display($("#revision_question_btn")); 
                                                 rendreActif($("#revision_question_btn"));
-                                            }, 100);
+                                            });
                                         }
                                         function finDeRevisionSyllabe() {
                                             if (compteur_de_question === revision_syllabes_questions.length) {
@@ -941,7 +941,7 @@ function syllabes() {
                                                 }
                                                 function afficherRedirectionBtns() {
                                                     if (note_de_syllabes_revision === 100) {
-                                                        setTimeout(() => {
+                                                        attendre(400,() => {
                                                             masquer($("#revision_dialogue_btns"));
                                                             display($("#revision_redirection_btns"));
                                                             masquer($("#revision_redirection_btns > div"));
@@ -968,7 +968,7 @@ function syllabes() {
                                                             function continuSurApprentissageSyllabe() {
                                                                 $("#continu_sur_apprentissage_btn").click(() => { raffraichirLaPage(); });
                                                             }
-                                                        }, 400);
+                                                        });
                                                     }
                                                 }
                                                 function stockerLesLessonsDApprentissageEtExerciceSyllabe() {
@@ -1071,10 +1071,10 @@ function syllabes() {
                             masquer($("#revision_correction_btn"));
                             masquer($("#revision_repetition_btn"));
                             
-                            setTimeout(() => { 
+                            attendre(100,() => { 
                                 display($("#revision_repetition_btn")); 
                                 rendreActif($("#revision_repetition_btn"));
-                            }, 100);
+                            });
                         }
                     }
                 });
@@ -1271,7 +1271,7 @@ function syllabes() {
                                             
 
                                     function chargerFicheDEvaluation() {
-                                        setTimeout(() => {
+                                        attendre(1400,() => {
                                             chargerInstantannementEvaluationTbody();
                                             defilementDuContenuVersLeHaut($("#evaluation_fiche_body"));
 
@@ -1289,7 +1289,7 @@ function syllabes() {
                                                 $("#total_point_d_evaluation").html(total_point_d_evaluation);
                                                 $("#pourcentage_point_d_evaluation").html(pourcentage_point_d_evaluation);
                                             }
-                                        }, 1400);
+                                        });
                                     }
                                     function marquerReponseDEvaluationSyllabe() {
                                         if (reponse_d_evaluation_syllabes.join("") == question_d_evaluation_syllabes) {
@@ -1298,22 +1298,22 @@ function syllabes() {
                                             $("#check_mark_container").css({ "display": "inline-block", "margin-right": "4px" });
                                             $("#check_mark_cover").css({ "right": "0.25rem" });
                                             $("#check_mark").html("&#10003;");
-                                            setTimeout(function () { $("#check_mark_cover").css({ "right": "2rem" }); }, 100);
-                                            setTimeout(function () { $("#check_mark_container").css({ "display": "none" }); }, 1000);
+                                            attendre(100,function () { $("#check_mark_cover").css({ "right": "2rem" }); });
+                                            attendre(1000,function () { $("#check_mark_container").css({ "display": "none" }); });
                                         } else {
                                             $("#evaluation_reponse").html("<p id='mauvaise_reponse'>" + reponse_d_evaluation_syllabes.join('') + "</p><p id='evaluation_cross'>&#10060;</p>");
                                             $("#evaluation_cross").css({ "display": "block", "right": reponse_d_evaluation_syllabes.join("").length / 2 + "rem", "transform": "scale(0.5)", "opacity": 0 });
-                                            setTimeout(function () { $("#evaluation_cross").css({ "transform": "scale(1)", "opacity": 0.75 }); }, 100);
+                                            attendre(100,function () { $("#evaluation_cross").css({ "transform": "scale(1)", "opacity": 0.75 }); });
                                         }
 
-                                        setTimeout(() => {
+                                        attendre(2000,() => {
                                             $("#evaluation_reponse p").html("");
-                                        }, 2000);
+                                        });
                                     }
                                     function effacerCheckMark() {
-                                        setTimeout(function () {
+                                        attendre(1000,function () {
                                             $("#check_mark").empty();
-                                        }, 1000);
+                                        });
                                     }
                                     function enregistrerEvaluationSyllabe() {
                                         lesson_de_syllabes_evaluation_du_jour.splice(evaluation_counter-1, 1, question_reponse);
@@ -1351,10 +1351,10 @@ function syllabes() {
                                             masquer($("#evaluation_repetition_btn"));
                                             masquer($("#evaluation_correction_btn"));
     
-                                            setTimeout(() => { 
+                                            attendre(100,() => { 
                                                 display($("#evaluation_question_btn")); 
                                                 rendreActif($("#evaluation_question_btn"));
-                                            }, 100);
+                                            });
                                         }
                                     }
                                     function finDEvaluationSyllabe() {
@@ -1431,7 +1431,7 @@ function syllabes() {
                                             }
 
                                             viderLeTableau(evaluation_syllabes_questions);
-                                            setTimeout(() => { evaluation_counter = 0; }, 1500);
+                                            attendre(1500,() => { evaluation_counter = 0; });
                                             
                                             /* Suppression d'effet des clicks précédents sur les dialogue_btns */
                                             $("#evaluation_question_btn").unbind("click");

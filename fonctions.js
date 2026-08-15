@@ -1169,8 +1169,9 @@ function deSelectionnerTous(spans) {
 function display(element) {
     element.css({
         'display': 'block',
+        'transform': 'scale(1)',
         'opacity': 1,
-        'transform': 'scale(1)'
+        'transition': '0.2s'
     });
 }
 function displayv(element) {

@@ -1231,6 +1231,25 @@ function ecrire(element_class, message) {
 function effacerLeTableau() {
     $('.course_body').html("<p id='contenu_par_defaut_du_tableau'>ߥߟߊ߬ߓߊ ߓߘߊ߫ ߖߐ߬ߛߌ߬ ߹</p>");
 }
+function elementsDuTableau1D(tableau1D) {
+    let syllabes = [];
+    if(tableau1D != undefined) {
+        for (let i = 0; i < tableau1D.length; i++) {
+            syllabes.push(tableau1D[i][0]);
+        }
+    }
+    return syllabes;
+}
+function elementsDuTableau2D(tableau2D) {
+    let syllabes = [];
+    if(tableau2D != undefined) {
+        for (let i = 0; i < tableau2D.length; i++) {
+        for (let j = 0; j < tableau2D[i].length; j++) {
+            syllabes.push(tableau2D[i][j][0]);
+        }}
+    }
+    return syllabes;
+}
 function enregistrerLeCaractere(caracteres_selectionnees, caractere) {
     let caractere_index = caracteres_selectionnees.indexOf(caractere);
     if (caractere_index === -1) { caracteres_selectionnees.push(caractere); }

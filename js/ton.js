@@ -106,7 +106,7 @@ function ton() {
                                     // });
                                 }
                             });  
-                            if(tons_temoins.length === 3) if(tons_appris.indexOf(ton_de_reference) === -1) tons_appris.push(ton_de_reference);
+                            if(tons_temoins.length === syllabes_tonifies.length) if(tons_appris.indexOf(ton_de_reference) === -1) tons_appris.push(ton_de_reference);
                         });  
            
                         return tons_appris;
@@ -780,7 +780,6 @@ function ton() {
                             let element_actif = "";
                             let question_syllabe_counter = 0;
                             let question_mot_counter = 0;
-                            let total_question = 6;
 
 
                             console.log("Début d'exercice");
@@ -928,7 +927,7 @@ function ton() {
                                         }
                                     }
                                     function chargementDeTableParlante3() {
-                                        if(question_counter === 3)
+                                        if(question_counter === syllabes_tonifies.length)
                                         if(chargeur_de_tables.text() == "ߞߎߡߊߘߋ߲߫ ߛߌ߬ߙߊ߬ߡߊ ߟߎ߬ ߢߊ߯ߡߌߣߍ߲ ߦߌ߬ߘߊ߬") 
                                         $("#table_parlante_3").html(tableParlante3HTML(mots_tonifies));
                                     }
@@ -942,9 +941,9 @@ function ton() {
 
                                             let exercice_question_btn = $(this);
                               
-                                            if(question_counter === 6) question_counter = 0;
-                                            if (question_counter < 3) exercice_tons_question = syllabes_tonifies[question_syllabe_counter];
-                                            if (question_counter >= 3) exercice_tons_question = mots_tonifies[question_mot_counter];
+                                            if(question_counter === tonifies.length) question_counter = 0;
+                                            if (question_counter < syllabes_tonifies.length) exercice_tons_question = syllabes_tonifies[question_syllabe_counter];
+                                            if (question_counter >= syllabes_tonifies.length) exercice_tons_question = mots_tonifies[question_mot_counter];
                     
                                             montrerReponse(exercice_tons_question,$(".table_parlante span"));
                                             masquerNotification();
@@ -958,14 +957,14 @@ function ton() {
                                             function lireExerciceSyllabeQuestion() {
                                                 // if (question_counter < syllabes_tonifies.length) lectureSyllabe(exercice_tons_question);
                                                 // if (question_counter >= syllabes_tonifies.length) lireMot(exercice_tons_question);
-                                                if (question_counter < 3) lectureSyllabe(exercice_tons_question);
-                                                if (question_counter >= 3) console.log(exercice_tons_question); /*lireMot(exercice_tons_question);*/
+                                                if (question_counter < syllabes_tonifies.length) lectureSyllabe(exercice_tons_question);
+                                                if (question_counter >= syllabes_tonifies.length) console.log(exercice_tons_question); /*lireMot(exercice_tons_question);*/
                                             }
                                             function enregistrerExerciceSyllabeQuestion() { 
                                                 // if (question_counter < syllabes_tonifies.length) syllabes_tonifies_questions_posees.push(exercice_tons_question);
                                                 // if (question_counter >= syllabes_tonifies.length) mots_tonifies_questions_posees.push(exercice_tons_question);
-                                                if (question_counter < 3) syllabes_tonifies_questions_posees.push(exercice_tons_question);
-                                                if (question_counter >= 3) mots_tonifies_questions_posees.push(exercice_tons_question);
+                                                if (question_counter < syllabes_tonifies.length) syllabes_tonifies_questions_posees.push(exercice_tons_question);
+                                                if (question_counter >= syllabes_tonifies.length) mots_tonifies_questions_posees.push(exercice_tons_question);
                                             }
                                         });
                                     }
@@ -1071,10 +1070,10 @@ function ton() {
                                                 exercice_tons_reponse = "";
                                             }
                                             function incrementerLesCompteurs() {
-                                                if(question_counter <= total_question) {
+                                                if(question_counter <= tonifies.length) {
                                                     question_counter++;
-                                                    if(question_counter < 3) question_syllabe_counter++;
-                                                    if(question_counter > 3) question_mot_counter++;
+                                                    if(question_counter < syllabes_tonifies.length) question_syllabe_counter++;
+                                                    if(question_counter > syllabes_tonifies.length) question_mot_counter++;
                                                 }
                                             }
                                             function progressBarExerciceDeTons() {
@@ -1095,13 +1094,12 @@ function ton() {
                                                 }
                                             }  
                                             function rechargerExerciceDeTonsDialogueBtns() {
-                                            // if(question_counter === syllabes_tonifies.length) {
-                                                if(question_counter === 3) {
+                                                if(question_counter === syllabes_tonifies.length) {
                                                     $("#chargeur_de_tables_parlantes").text("ߞߎߡߊߘߋ߲߫ ߛߌ߬ߙߊ߬ߡߊ ߟߎ߬ ߢߊ߯ߡߌߣߍ߲ ߦߌ߬ߘߊ߬");
                                                     $("#exercice_question_btn").text("<p>ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ " + parseIntNko(mots_tonifies.length) + " \\ ߁߭ ߟߊߡߍ߲߫</p>");
                                                     $("#exercice_repetition_btn").text("ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ " + parseIntNko(1)+"߭ ߟߊߡߍ߲߫ ߕߎ߲߯");
                                                 }
-                                                if(question_counter === 6) $("#chargeur_de_tables_parlantes").text("ߥߊ߫ ߞߊ߲ߡߊߛߙߋ ߡߊ߬ߞߟߏ߬ߟߌ ߡߊ߬");
+                                                if(question_counter === tonifies.length) $("#chargeur_de_tables_parlantes").text("ߥߊ߫ ߞߊ߲ߡߊߛߙߋ ߡߊ߬ߞߟߏ߬ߟߌ ߡߊ߬");
                                             }
                                             function rechargerExerciceQuestionBtnEtRepetitionBtn() {
                                                 
@@ -1110,15 +1108,15 @@ function ton() {
                                                 question_status = "posee";
                                     
                                                 if(question_counter > 0) {
-                                                    if(question_counter < 3) {
+                                                    if(question_counter < syllabes_tonifies.length) {
                                                         // if (question_counter < syllabes_tonifies.length) ordre_de_question = (question_syllabe_counter + 1 == syllabes_tonifies.length) ? "ߟߊߓߊ߲" : parseIntNko(question_syllabe_counter + 2)+rang;
                                                         // if (question_counter >= syllabes_tonifies.length) ordre_de_question = (question_mot_counter + 1 == mots_tonifies.length) ? "ߟߊߓߊ߲" : parseIntNko(question_mot_counter + 2)+rang;
-                                                        ordre_de_question = (question_syllabe_counter + 1 == 3) ? "ߟߊߓߊ߲" : parseIntNko(question_syllabe_counter+1)+rang;
+                                                        ordre_de_question = (question_syllabe_counter + 1 == syllabes_tonifies.length) ? "ߟߊߓߊ߲" : parseIntNko(question_syllabe_counter+1)+rang;
 
                                                         $("#exercice_question_btn").text("ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ " + parseIntNko(syllabes_tonifies.length) + " \\ " + ordre_de_question + " "+action);
                                                         $("#exercice_repetition_btn").text("ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ " +ordre_de_question+" ߠߊߡߍ߲߫ ߕߎ߲߯");
                                                     }        
-                                                    if(question_counter >= 3) {
+                                                    if(question_counter >= syllabes_tonifies.length) {
                                                         // if (question_counter < syllabes_tonifies.length) ordre_de_question = (question_syllabe_counter + 1 == syllabes_tonifies.length) ? "ߟߊߓߊ߲" : parseIntNko(question_syllabe_counter + 2)+rang;
                                                         // if (question_counter >= syllabes_tonifies.length) ordre_de_question = (question_mot_counter + 1 == mots_tonifies.length) ? "ߟߊߓߊ߲" : parseIntNko(question_mot_counter + 2)+rang;
                                                         ordre_de_question = (question_mot_counter + 1 == mots_tonifies.length) ? "ߟߊߓߊ߲" : parseIntNko(mots_tonifies_questions_posees+1)+rang;
@@ -1136,12 +1134,12 @@ function ton() {
                                                 rendreActif($("#exercice_question_btn"));
                                             }
                                             function afficherChargeurDeTablesParlantes() {
-                                                if(question_counter === 3) affiche($("#chargeur_de_tables_parlantes"));
-                                                if(question_counter === 6) affiche($("#chargeur_de_tables_parlantes"));
+                                                if(question_counter === syllabes_tonifies.length) affiche($("#chargeur_de_tables_parlantes"));
+                                                if(question_counter === tonifies.length) affiche($("#chargeur_de_tables_parlantes"));
                                             }
                                             function finDeExerciceSyllabe() {
                                                 // if (question_counter === syllabes_tonifies.length) {
-                                                if (question_counter === 6) {
+                                                if (question_counter === tonifies.length) {
 
                                                     $.each($("#exercice_body td"), function () { $(this).click(function () { secouer($("#continu_sur_revision_btn")); }); });
 
@@ -1233,12 +1231,12 @@ function ton() {
                                                 }
                                             }
                                             function suppressinonDeLEffetDeClickSurLesDialoguesBtns() {
-                                                if (question_counter === 3) { 
+                                                if (question_counter === syllabes_tonifies.length) { 
                                                     $("#exercice_question_btn").unbind("click");
                                                     $("#exercice_repetition_btn").unbind("click");
                                                     $("#exercice_correction_btn").unbind("click");
                                                 }
-                                                if (question_counter === 6) { 
+                                                if (question_counter === tonifies.length) { 
                                                     $("#exercice_question_btn").unbind("click");
                                                     $("#exercice_repetition_btn").unbind("click");
                                                     $("#exercice_correction_btn").unbind("click");
@@ -1257,15 +1255,15 @@ function ton() {
                                         if(chargeur_de_tables.text() == "ߥߊ߫ ߞߊ߲ߡߊߛߙߋ ߡߊ߬ߞߟߏ߬ߟߌ ߡߊ߬") $("#zone_active").animate({"width":"5rem", "right":0}, 250);
                                     }
                                     function intialiserLesCompeurs() {
-                                        if(question_syllabe_counter === 3) {
+                                        if(question_syllabe_counter === syllabes_tonifies.length) {
                                             question_syllabe_counter = 0;
                                             viderLeTableau(syllabes_tonifies);
                                         }
-                                        if(question_mot_counter === 3) {
+                                        if(question_mot_counter === syllabes_tonifies.length) {
                                             question_mot_counter = 0;
                                             viderLeTableau(mots_tonifies);
                                         }
-                                        if(question_counter == total_question) {
+                                        if(question_counter == tonifies.length) {
                                             question_counter = 0;
                                             question_syllabe_counter = 0;
                                             question_mot_counter = 0;

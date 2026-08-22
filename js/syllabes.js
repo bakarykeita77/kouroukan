@@ -453,7 +453,7 @@ function syllabes() {
                                         }
                                         function marquageDeLaConsonneChoisie() {
                                             $("#exercice_body table td").css({ "background-color": "rgba(85,85,85,0.25)", "color": "white" });
-                                            marquerLeCaractereChoisi(element_actif);
+                                            marquerLeCaractere(element_actif);
                                         }
                                         function afficherExerciceCorrectionBtn() {
                                             masquer($("#exercice_question_btn"));

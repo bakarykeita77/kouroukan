@@ -1317,7 +1317,7 @@ function alphabet() {
                         function chargerCorpsDeApprentissageAlphabet() { 
                             parametrageDeLesson(datas);
                             cocherTousLesCaracteres();
-                            $(".parametres_popup #submit_btn").click(); 
+                            $("#parametres_submit_btn").click(); 
                         }
                     }
                     function afficherApprentissageAlphabet() { 
@@ -1639,7 +1639,7 @@ function alphabet() {
                             function chargerCorpsDeExerciceAlphabet() { 
                                 parametrageDeLesson(datas);
                                 cocherTousLesCaracteres();
-                                $(".parametres_popup #submit_btn").click(); 
+                                $("#parametres_submit_btn").click(); 
                                 reductionDesElementsDeExerciceCouranteA49(); // Réduction du nombre de questions à une quantité raisonable
                             }
                             function chargerPiedDeExerciceAlphabet() {

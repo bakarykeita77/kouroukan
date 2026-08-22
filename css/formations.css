@@ -199,7 +199,7 @@ body{
     overflow: hidden;
     background-color: #ddd;
 }
-#submit_btn{ 
+#parametres_submit_btn{ 
     position:absolute;
     background-color: #ddd;
     top: 120px;

@@ -224,7 +224,7 @@
     margin: auto;
     top: 22rem; 
 }
-#caracteres_container span:hover { background-color: #ddd; }
+/* #caracteres_container span:hover { background-color: #ddd; } */
 #caracteres_cadre {
     position: absolute;
     left: 50%;

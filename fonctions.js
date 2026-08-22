@@ -42,7 +42,6 @@ function actualiserLesson(lesson, lesson_du_jour) {
 function affichageAnimeDesSyllabes(caracteres_selectionnees = [], caractere = "") {
     $.each($(".table_parlante td"), function (e) {
         let matiere_nom = JSON.parse(sessionStorage.getItem("matiere_nom"));
-
         if (matiere_nom == "ߜߋ߲߭") {
             let td = $(this);
             let caractere_du_tableau = td.text().split("")[0];
@@ -656,7 +655,7 @@ function chargerLessonDeSyllabeApprentissage() {
                 });
 
                 $("#panneau_submit_btn_3").click(() => {
-                    $(".parametres_popup #submit_btn").click();
+                    $("#parametres_submit_btn").click();
                     if (memoire_des_caracteres_choisis[2].length === 0) {
                         alert("ߞߊ߲ߡߊߛߙߋ߫ ߞߋߟߋ߲߫ ߥߟߊ ߛߌߦߊߡߊ߲߫ ߛߎߥߊ߲ߘߌ߫ ߝߟߐ߫");
                         return;
@@ -689,9 +688,9 @@ function chargerLessonDeSyllabeApprentissage() {
                         $(".parametres_container input")[x].click();
                         if (matiere_nom == "ߜߋ߲߭") {
                             if ($.inArray(caractere_du_panneau, caracteres_choisis_du_panneau) == -1) {
-                                attendre(800,() => { $(".parametres_container #submit_btn").click(); });
+                                attendre(800,() => { $("#parametres_submit_btn").click(); });
                             } else {
-                                $(".parametres_container #submit_btn").click();
+                                $("#parametres_submit_btn").click();
                             }
                         }
                     }
@@ -880,9 +879,9 @@ function cocherLeCaractereCorrespondantDeParametre(caractere) {
             $(".parametres_container input")[i].click();
             if (matiere_nom == "ߜߋ߲߭") {
                 if ($.inArray(caractere, caracteres_selectionnees) == -1) {
-                    attendre(800,() => { $(".parametres_container #submit_btn").click(); });
+                    attendre(800,() => { $("#parametres_submit_btn").click(); });
                 } else {
-                    $(".parametres_container #submit_btn").click();
+                    $("#parametres_submit_btn").click();
                 }
             }
         }
@@ -900,40 +899,14 @@ function cocherLeTonCorrespondantDeParametre(ton) {
             $("#tons_checker input")[i].click();
             if (matiere_nom == "ߜߋ߲߭") {
                 if ($.inArray(ton, caracteres_selectionnees) == -1) {
-                    attendre(800,() => { $(".parametres_container #submit_btn").click(); });
+                    attendre(800,() => { $("#parametres_submit_btn").click(); });
                 } else {
-                    $(".parametres_container #submit_btn").click();
+                    $("#parametres_submit_btn").click();
                 }
             }
         }
     }
     affichageAnimeDesSyllabes(caracteres_selectionnees, ton);
-}
-function cocherLesTonsCorrespondantsDeParametre(tons) {
-    for (let i = 0; i < $("#tons_checker input").length; i++) {
-        let ton_de_parametre = $("#tons_checker input")[i].value;
-        if (tons.indexOf(ton_de_parametre) != -1) $("#tons_checker input")[i].click();
-    }
-}
-function cocherLesVoyellesCorrespondantesDeParametre(voyelle) {
-
-    let caracteres_selectionnees = JSON.parse(sessionStorage.getItem("caracteres_selectionnees"));
-
-    for (let i = 0; i < $("#voyelles_checker input").length; i++) {
-        let voyelle_de_parametre = $("#voyelles_checker input")[i].value;
-
-        if (voyelle == voyelle_de_parametre) {
-            $("#voyelles_checker input")[i].click();
-            if (matiere_nom == "ߜߋ߲߭") {
-                if ($.inArray(voyelle, caracteres_selectionnees) == -1) {
-                    attendre(800,() => { $(".parametres_container #submit_btn").click(); });
-                } else {
-                    $(".parametres_container #submit_btn").click();
-                }
-            }
-        }
-    }
-    affichageAnimeDesSyllabes(caracteres_selectionnees, voyelle);
 }
 function cocherLeTedo() {
     $.each($('#tedo_checker .checkbox_parent'), function () {
@@ -1620,8 +1593,7 @@ function lessonHTML1(table, table_id = '#') {
 function lessonHTML2() {
 
     let tons_apprentissage_html = "";
-    let caracteres_actifs = JSON.parse(sessionStorage.getItem("caracteres_coches"));
-    let caracteres_coches = caracteresCoches(caracteres_actifs);
+    let caracteres_coches = JSON.parse(sessionStorage.getItem("caracteres_coches"));    // Voir parametres.js, fonction chargementDeLesson()
     let nbr_aleatoire_0 = Math.floor(Math.random() * caracteres_coches[0].length);
     let nbr_aleatoire_1 = Math.floor(Math.random() * caracteres_coches[1].length);
     let nbr_aleatoire_4 = Math.floor(Math.random() * caracteres_coches[4].length);
@@ -1632,19 +1604,19 @@ function lessonHTML2() {
     if (caracteres_coches[0].length != 0) {
 
         tons_apprentissage_html += " \
-                <div class='tables_de_tons'> \
-                    <div class='table_titre_container'> \
-                        <div><p class='table_titre'>ߝߐߢߊ</p></div>\
-                        <div><p class='table_titre'>ߛߓߍߢߊ</p></div>\
-                    </div>\
-                    <div class='table_tons_container'> \
-                        <div class='table_ligne' id='ligne_1'>"+ ligne1HTML() + "</div>\
-                        <div class='table_ligne' id='ligne_2'>"+ ligne2HTML() + "</div>\
-                        <div class='table_ligne' id='ligne_3'>"+ ligne3HTML() + "</div> \
-                        <div class='table_ligne' id='ligne_4'>"+ ligne4HTML() + "</div>\
-                    </div>\
+            <div class='tables_de_tons'> \
+                <div class='table_titre_container'> \
+                    <div><p class='table_titre'>ߝߐߢߊ</p></div>\
+                    <div><p class='table_titre'>ߛߓߍߢߊ</p></div>\
                 </div>\
-            ";
+                <div class='table_tons_container'> \
+                    <div class='table_ligne' id='ligne_1'>"+ ligne1HTML() + "</div>\
+                    <div class='table_ligne' id='ligne_2'>"+ ligne2HTML() + "</div>\
+                    <div class='table_ligne' id='ligne_3'>"+ ligne3HTML() + "</div> \
+                    <div class='table_ligne' id='ligne_4'>"+ ligne4HTML() + "</div>\
+                </div>\
+            </div>\
+        ";
 
 
         function ligne1HTML() {
@@ -1673,7 +1645,7 @@ function lessonHTML2() {
             }
 
             // if(tons_coches.length === 4) {}
-
+                  
             return table_html;
         }
         function ligne2HTML() {
@@ -1767,20 +1739,20 @@ function lessonHTML3(table) {
 }
 function lessonDExerciceHTML(table, table_id = '#') {
 
-    var table = "<table class = 'table_muette' id='" + table_id + "'>\n";
+    var html = "<table class = 'table_muette' id='" + table_id + "'>\n";
     for (var i = 0; i < table.length - table.length % 7; i += 7) {
-        table += "<tr>\n";
-        for (var j = 0; j < 7; j++) table += "<td>" + table[i + j] + "</td>\n";
-        table += "</tr>\n";
+        html += "<tr>\n";
+        for (var j = 0; j < 7; j++) html += "<td>" + table[i + j] + "</td>\n";
+        html += "</tr>\n";
     }
     for (var k = table.length - table.length % 7; k < table.length; k += table.length % 7) {
-        table += "<tr>\n";
-        for (var l = 0; l < table.length % 7; l++) table += "<td>" + table[k + l] + "</td>\n";
-        table += "</tr>\n";
+        html += "<tr>\n";
+        for (var l = 0; l < table.length % 7; l++) html += "<td>" + table[k + l] + "</td>\n";
+        html += "</tr>\n";
     }
-    table += "</table>";
+    html += "</table>";
 
-    return table;
+    return html;
 }
 function lessonSuivante(lesson_en_cours) {
     let ls = "";
@@ -1949,11 +1921,15 @@ function malaxer(tableau, n = tableau.length) {  // Le deuxieme parametre est fa
 
     return mixted_table;
 }
-function marquerLeCaractereChoisi(clicked_caractere_container) {
-    if (clicked_caractere_container.css("color") != "rgb(255, 165, 0)") {
-        var bc = clicked_caractere_container.css('background-color');
+function marquerLeCaractere(caractere_container) {
+
+console.log(caractere_container.css("color"));
+console.log(caractere_container.text());
+
+    if (caractere_container.css("color") != "rgb(255, 165, 0)") {
+        var bc = caractere_container.css('background-color');
         var consonne_background = (bc == 'rgb(170, 170, 170)') ? 'rgb(255, 255, 255)' : 'rgb(170, 170, 170)';
-        clicked_caractere_container.css('background-color', consonne_background);
+        caractere_container.css('background-color', consonne_background);
     }
 }
 function marquerReponse(td_actif, question) {

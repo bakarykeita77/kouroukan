@@ -125,7 +125,7 @@
 		width: 100%;
 		margin: auto; 
 	}
-	#connexion_form { box-shadow: 0 0 3rem #aaa; }
+	#connexion_form { box-shadow: 0 0 3rem #000; }
 	#connexion_note { display: none; }
 	
 }

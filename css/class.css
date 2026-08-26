@@ -513,7 +513,7 @@ del {
     position: absolute;
     margin: 0;
     padding: 0;
-    content: "➜";
+    content: "\279c";
     font-size: 2rem;
     color: blue;
     transform: rotate(155deg) scale(1.5);
@@ -717,6 +717,19 @@ del {
     position: absolute;
     z-index: 2;
 }
+.mot_decouper {
+    position: relative;
+    margin-left: 3rem;
+}
+.mot_decouper::after {
+    position: absolute;
+    top: 1.5rem;
+    margin-right: 1rem;
+    content: "\279c";
+    font-size: 2rem;
+    color: #555;
+    transform: rotate(180deg);
+}
 
 /* --------------------------------------------------------------------------------------------------------- */
 
@@ -797,6 +810,10 @@ del {
     color: black; 
     z-index: 1;
 }
+.opacity0050 {opacity: 0.050;}
+.opacity0075 {opacity: 0.075;}
+.opacity0150 {opacity: 0.150;}
+.opacity1000 {opacity: 1;}
 .opaque { animation: opacir0.6s 1; }
 .oreille_icon_container {
     height: 1.5rem;
@@ -1136,7 +1153,7 @@ del {
     position: relative;
     height: max-content;
     width: max-content;
-    margin: 2rem auto;
+    margin: auto;
     text-align: center;
 }
 .table_titre_container {
@@ -1144,8 +1161,7 @@ del {
     top: 0;
     background-color: #444;
     border-top: 0.5rem solid #333;
-    border-bottom: 1px solid #555;
-    box-shadow: 0 0.5rem 1rem #222;
+    z-index: 1;
 }
 .table_titre_container > div {
     display: inline-block;
@@ -1161,31 +1177,40 @@ del {
     color: #aaa;
 }
 .table_ligne {
-    border: 1px solid transparent;
-    border-bottom-color: #555;
-    padding: 1rem;
+    padding: 0;
+}
+.table_ligne_active {
+    opacity: 1;
 }
 .table_ligne > div {
     display: inline-block;
     border: 1px solid #555;
     border-radius: 0.5rem;
-    margin: 0 1rem;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem;
     width: max-content;
     text-align: center;
 }
 .table_ligne > div > div {
     display: inline-block;
 }
+.table_tons_container {
+    position: relative;    
+    top: 0.5rem;
+}
 .tables_de_tons_container {
     margin-right: 1rem;
     height: calc(100% - 1rem);
     width: max-content;
 }
+.tables_de_tons {
+    position: relative;
+    margin: 0 0.25rem;
+    height: calc(100% - 3rem);
+}
 .tables_de_tons p:not(.table_titre) {
     display: inline-block;
     padding: 0.5rem;
-    margin: 0 0.5rem;
+    margin: 0 1rem;
     background-color: #555;
     box-shadow: 0 0 0.5rem #222;
     font-size: 2rem;
@@ -1193,6 +1218,15 @@ del {
     border-radius: 0.5rem;
     cursor: pointer;
     transition: 0.25s;
+}
+.table_ligne div p:nth-child(1)::after {
+    position: absolute;
+    top: 2rem;
+    content: "+";
+    color: #555;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-right: 1rem;
 }
 .tables_de_tons p:active {
     text-shadow: none;
@@ -1406,7 +1440,6 @@ del {
     .tables_de_tons_container {
         width: calc(100% - 2rem);
     }
-    .tables_de_tons {  margin: 0 0.25rem; }
     .cover { background-color: none; }
     .lesson_title { width: 96vw; margin: auto; }
     .parametres_popup { width: 80vw; }
@@ -1427,7 +1460,6 @@ del {
 }
 @media(orientation: landscape) {
     .course_body { width: 90%; height: calc(100vh - 18rem); }
-    .tables_de_tons {  margin: 0.5rem 1rem; }
     .cover { background-color: rgba(0, 0, 0, 0.85); }
     .parametres_popup { width: auto; }
     .phases { 

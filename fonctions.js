@@ -1610,6 +1610,7 @@ function lessonHTML2() {
                     <div><p class='table_titre'>ߛߓߍߢߊ</p></div>\
                 </div>\
                 <div class='table_tons_container'> \
+                    <div id='cadre_active'></div>\
                     <div class='table_ligne' id='ligne_1'>"+ ligne1HTML() + "</div>\
                     <div class='table_ligne' id='ligne_2'>"+ ligne2HTML() + "</div>\
                     <div class='table_ligne' id='ligne_3'>"+ ligne3HTML() + "</div> \
@@ -1623,24 +1624,24 @@ function lessonHTML2() {
             let table_html = "";
 
             if (tons_coches.length === 2) {
-                table_html += "<div>";
+                table_html += "<div class='mot_decouper'>";
                 table_html += "<p class='syllabe_container'>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][0] + "</p>";
                 table_html += "<p class='syllabe_container'>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + "</p>";
                 table_html += "</div>";
 
-                table_html += "<div>";
-                table_html += "<p>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + "</p>";
+                table_html += "<div class='mot_entier'>";
+                table_html += "<p class='mot_container'>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + "</p>";
                 table_html += "</div>";
             }
 
             if (tons_coches.length === 3) {
-                table_html += "<div>";
+                table_html += "<div class='mot_decouper'>";
                 table_html += "<p class='syllabe_container'>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][1] + "</p>";
                 table_html += "<p class='syllabe_container'>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + "</p>";
                 table_html += "</div>";
 
-                table_html += "<div>";
-                table_html += "<p>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][1] + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + "</p>";
+                table_html += "<div class='mot_entier'>";
+                table_html += "<p class='mot_container'>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][1] + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + "</p>";
                 table_html += "</div>";
             }
 
@@ -1652,24 +1653,24 @@ function lessonHTML2() {
             let table_html = "";
 
             if (tons_coches.length === 2) {
-                table_html += "<div>";
+                table_html += "<div class='mot_decouper'>";
                 table_html += "<p class='syllabe_container'>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][0] + "</p>";
                 table_html += "<p class='syllabe_container'>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][0] + "</p>";
                 table_html += "</div>";
 
-                table_html += "<div>";
-                table_html += "<p>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][0] + "</p>";
+                table_html += "<div class='mot_entier'>";
+                table_html += "<p class='mot_container'>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][0] + "</p>";
                 table_html += "</div>";
             }
 
             if (tons_coches.length === 3) {
-                table_html += "<div>";
+                table_html += "<div class='mot_decouper'>";
                 table_html += "<p class='syllabe_container'>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][1] + "</p>";
                 table_html += "<p class='syllabe_container'>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][0] + "</p>";
                 table_html += "</div>";
 
-                table_html += "<div>";
-                table_html += "<p>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][1] + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][0] + "</p>";
+                table_html += "<div class='mot_entier'>";
+                table_html += "<p class='mot_container'>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][1] + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][0] + "</p>";
                 table_html += "</div>";
             }
             if (tons_coches.length === 4) { }
@@ -1679,14 +1680,25 @@ function lessonHTML2() {
         function ligne3HTML() {
             let table_html = "";
 
+            if (tons_coches.length === 2) {
+                table_html += "<div class='mot_decouper'>";
+                table_html += "<p class='syllabe_container'>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][0] + "</p>";
+                table_html += "<p class='syllabe_container'>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][0] + "</p>";
+                table_html += "</div>";
+
+                table_html += "<div class='mot_entier'>";
+                table_html += "<p class='mot_container'>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][0] + "</p>";
+                table_html += "</div>";
+            }
+
             if (tons_coches.length === 3) {
-                table_html += "<div>";
+                table_html += "<div class='mot_decouper'>";
                 table_html += "<p class='syllabe_container'>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][0] + "</p>";
                 table_html += "<p class='syllabe_container'>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][1] + "</p>";
                 table_html += "</div>";
 
-                table_html += "<div>";
-                table_html += "<p>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][1] + "</p>";
+                table_html += "<div class='mot_entier'>";
+                table_html += "<p class='mot_container'>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][1] + "</p>";
                 table_html += "</div>";
             }
             if (tons_coches.length === 4) { }
@@ -1697,13 +1709,13 @@ function lessonHTML2() {
             let table_html = "";
 
             if (tons_coches.length === 3) {
-                table_html += "<div>";
+                table_html += "<div class='mot_decouper'>";
                 table_html += "<p class='syllabe_container'>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][1] + "</p>";
                 table_html += "<p class='syllabe_container'>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][1] + "</p>";
                 table_html += "</div>";
 
-                table_html += "<div>";
-                table_html += "<p>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][1] + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][1] + "</p>";
+                table_html += "<div class='mot_entier'>";
+                table_html += "<p class='mot_container'>" + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][1] + caracteres_coches[1][nbr_aleatoire_1] + caracteres_coches[0][nbr_aleatoire_0] + caracteres_coches[5][1] + "</p>";
                 table_html += "</div>";
             }
             if (tons_coches.length === 4) { }

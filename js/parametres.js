@@ -11,7 +11,6 @@ function parametrageDeLesson() {
     var submit_btn = "";
     let option_retenue = JSON.parse(localStorage.getItem('option_retenue')); // Voir programmes.js : lessonOptions()
 
-    console.log(phase_id);
   
  /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/    
 
@@ -285,7 +284,6 @@ function parametrageDeLesson() {
 
             let phase = phase_id.split('_')[1];
 
-            console.log(phase);
          /* Rechargement du tableau noir avec les caractères cochés */
             switch(phase) {
                 case 'apprentissage' : $('#apprentissage_body').html("<div class='table_container'>"+apprentissage_html+"</div>"); break;

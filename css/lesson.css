@@ -23,6 +23,18 @@ h4, .lesson_title { display: inline-block; }
     box-shadow: 0 0 0.25rem #000;
     cursor: pointer;
 }
+#cadre_active {
+    position: absolute;
+    top: -0.25rem;
+    border: 0.25rem solid yellow;
+    border-radius: 0.25rem;
+    width: 110%;
+    height: 5rem;
+    margin: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+}
 #table_parlante_1 .apprise {
     background-color: white;
     color: black;

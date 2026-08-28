@@ -532,27 +532,58 @@ function ton() {
                                                     }
                                                     function actualiserLesStylesDesLignes() {
 
-                                                        $.each($(".table_ligne_active .syllabe_container"), function() {
-                                                            let compteur_1 = 0;
-                                                            let syllabe_active = $(this);
-                                                            syllabe_active.click(function() {
-                                                                compteur_1++;
-                                                                if(compteur_1 === 2) compteur_1 = 0;
-                                                            });
+                                                        
+                                                        $(".table_ligne").click(function() {
+                                                            if($(this).css("opacity") == "0.075") {
+                                                                secouer($(".table_ligne_active"));
+                                                                return false;
+                                                            }
                                                         });
+
+                                                        attendre(600,  () => { $(".table_ligne_active .syllabe_container:nth-child(1)").addClass("shadow"); });
+                                                        
+                                                        $(".syllabe_container:nth-child(1)").click(function() { 
+                                                            if(!$(this).hasClass("shadow")) secouer($(".table_ligne .shadow"));
+                                                            if($(this).hasClass("shadow")) attendre(600,  () => { $(this).removeClass("shadow").next().addClass("shadow"); }); 
+                                                        });
+                                                        $(".syllabe_container:nth-child(2)").click(function() { 
+                                                            if(!$(this).hasClass("shadow")) secouer($(".table_ligne .shadow"));
+                                                            if($(this).hasClass("shadow")) attendre(600,  () => { $(this).removeClass("shadow").parent().next().find("p").addClass("shadow"); }); 
+                                                        });
+                         
                                                         $.each($(".mot_container"), function() {
-                                                            let compteur_2 = 0;
                                                             let mot_actif = $(this);
+                                                            let compteur_2 = 0;
 
                                                             mot_actif.click(function() {
-                                                                compteur_2++; 
-                                                                if(compteur_2 === 2) {           
-                                                                    let ligne_active = mot_actif.parent().parent().next();
-                                                                    
-                                                                    if(ligne_active.html() != undefined) {
-                                                                        ligne_active.removeClass("opacity0075").addClass("table_ligne_active");
-                                                                        ligne_active.prev().removeClass("table_ligne_active").addClass("opacity0075");
-                                                                    } 
+                                                                
+                                                                if(!$(this).hasClass("shadow")) secouer($(".table_ligne .shadow"));
+
+                                                                if($(this).hasClass("shadow")) {
+                                                                    compteur_2++; 
+
+                                                                    attendre(800, () => { 
+                                                                        mot_actif.removeClass("shadow");
+                                                                        if(compteur_2 < 2) {
+                                                                            mot_actif.parent().prev().find(".syllabe_container:nth-child(1)").addClass("shadow"); 
+                                                                        }
+
+                                                                        if(compteur_2 === 2) { 
+
+                                                                            let ligne_active = mot_actif.parent().parent().next();
+                                                                            let pos = ligne_active.position();
+                                                                            let top = pos.top - 2;
+                                                                        
+                                                                            mot_actif.parent().prev().find(".syllabe_container:nth-child(1)").removeClass("shadow");
+                                                                            
+                                                                            if(ligne_active.html() != undefined) {
+                                                                                ligne_active.prev().removeClass("table_ligne_active").addClass("opacity1000");
+                                                                                $("#cadre_active").animate({"top":top+"px"}, 300);
+                                                                                attendre(600, () => { ligne_active.removeClass("opacity0075").addClass("table_ligne_active"); });
+                                                                                attendre(1200,  () => { $(".table_ligne_active .syllabe_container:nth-child(1)").addClass("shadow"); });
+                                                                            } 
+                                                                        }
+                                                                    }); 
                                                                 }
                                                             });
                                                         });
@@ -565,14 +596,15 @@ function ton() {
                                                 }
                                                 function lectureDuTon() {
                                                     let p = $(".tables_de_tons .table_ligne_active p");
-
+                                                    
                                                     $.each(p, function () {
                                                         $(this).click(() => {
-
+                                                            
                                                             let p_actif = $(this);
                                                             let syllabe_tonifiee = p_actif.text();
                                                             let terminaison = terminaisonDeSyllabe(syllabe_tonifiee);
-
+                                                console.log(syllabe_tonifiee);            
+                                                            if(!p_actif.hasClass("shadow")) return;
                                                             $('#audio').attr({ src: "../son/mp3/tons/" + terminaison + "/" + syllabe_tonifiee + ".mp3", autoplay: "on" });
                                                             attendre(250, () => { masquerNotification(); });
                                                         });
